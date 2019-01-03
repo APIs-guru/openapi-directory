@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://dataflow.googleapis.com/$discovery/rest?version=v1b3'
       version: v1
@@ -61,11 +61,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -86,12 +81,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -121,12 +110,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -225,12 +212,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -329,12 +314,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -382,12 +365,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -431,12 +412,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -551,12 +530,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -606,12 +583,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -621,12 +596,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -670,12 +643,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -703,6 +674,53 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ReportWorkItemStatusResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/jobs/{jobId}:snapshot':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Snapshot the state of a streaming job.
+      operationId: dataflow.projects.jobs.snapshot
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SnapshotJobRequest'
+        - description: The job to be snapshotted.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: The project which owns the job to be snapshotted.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Snapshot'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -779,12 +797,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -794,12 +810,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -904,12 +918,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1010,12 +1022,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1064,12 +1074,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1118,12 +1126,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1244,12 +1250,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1300,12 +1304,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1315,12 +1317,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1369,12 +1369,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1418,17 +1416,67 @@ paths:
             - 'https://www.googleapis.com/auth/userinfo.email'
       tags:
         - projects
+  '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}:snapshot':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Snapshot the state of a streaming job.
+      operationId: dataflow.projects.locations.jobs.snapshot
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SnapshotJobRequest'
+        - description: The job to be snapshotted.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: The location that contains this job.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: The project which owns the job to be snapshotted.
+          in: path
+          name: projectId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Snapshot'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
   '/v1b3/projects/{projectId}/locations/{location}/templates':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1475,7 +1523,7 @@ paths:
         - description: |-
             Required. A Cloud Storage path to the template from which to
             create the job.
-            Must be a valid Cloud Storage URL, beginning with `gs://`.
+            Must be valid Cloud Storage URL, beginning with 'gs://'.
           in: query
           name: gcsPath
           type: string
@@ -1515,12 +1563,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1530,12 +1576,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1549,7 +1593,19 @@ paths:
           schema:
             $ref: '#/definitions/LaunchTemplateParameters'
         - description: |-
-            Required. A Cloud Storage path to the template from which to create
+            Path to dynamic template spec file on GCS.
+            The file must be a Json serialized DynamicTemplateFieSpec object.
+          in: query
+          name: dynamicTemplate.gcsPath
+          type: string
+        - description: |-
+            Cloud Storage path for staging dependencies.
+            Must be a valid Cloud Storage URL, beginning with `gs://`.
+          in: query
+          name: dynamicTemplate.stagingLocation
+          type: string
+        - description: |-
+            A Cloud Storage path to the template from which to create
             the job.
             Must be valid Cloud Storage URL, beginning with 'gs://'.
           in: query
@@ -1592,12 +1648,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1639,7 +1693,7 @@ paths:
         - description: |-
             Required. A Cloud Storage path to the template from which to
             create the job.
-            Must be a valid Cloud Storage URL, beginning with `gs://`.
+            Must be valid Cloud Storage URL, beginning with 'gs://'.
           in: query
           name: gcsPath
           type: string
@@ -1678,12 +1732,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1693,12 +1745,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1712,7 +1762,19 @@ paths:
           schema:
             $ref: '#/definitions/LaunchTemplateParameters'
         - description: |-
-            Required. A Cloud Storage path to the template from which to create
+            Path to dynamic template spec file on GCS.
+            The file must be a Json serialized DynamicTemplateFieSpec object.
+          in: query
+          name: dynamicTemplate.gcsPath
+          type: string
+        - description: |-
+            Cloud Storage path for staging dependencies.
+            Must be a valid Cloud Storage URL, beginning with `gs://`.
+          in: query
+          name: dynamicTemplate.stagingLocation
+          type: string
+        - description: |-
+            A Cloud Storage path to the template from which to create
             the job.
             Must be valid Cloud Storage URL, beginning with 'gs://'.
           in: query
@@ -1824,6 +1886,12 @@ definitions:
           input) to 1.0 (end of the input).
         format: double
         type: number
+      fractionOfRemainder:
+        description: |-
+          The fraction of the remainder of work to split the work item at, from 0.0
+          (split at the current position) to 1.0 (end of the input).
+        format: double
+        type: number
       position:
         $ref: '#/definitions/Position'
         description: A Position at which to split the work item.
@@ -1882,6 +1950,35 @@ definitions:
         description: The maximum number of workers to cap scaling at.
         format: int32
         type: integer
+    type: object
+  BigQueryIODetails:
+    description: Metadata for a BigQuery connector used by the job.
+    properties:
+      dataset:
+        description: Dataset accessed in the connection.
+        type: string
+      projectId:
+        description: Project accessed in the connection.
+        type: string
+      query:
+        description: Query used to access data in the connection.
+        type: string
+      table:
+        description: Table accessed in the connection.
+        type: string
+    type: object
+  BigTableIODetails:
+    description: Metadata for a BigTable connector used by the job.
+    properties:
+      instanceId:
+        description: InstanceId accessed in the connection.
+        type: string
+      projectId:
+        description: ProjectId accessed in the connection.
+        type: string
+      tableId:
+        description: TableId accessed in the connection.
+        type: string
     type: object
   CPUTime:
     description: Modeled after information exposed by /proc/stat.
@@ -2191,6 +2288,16 @@ definitions:
           "myproject-1014-104817-4c2-harness-0".
         type: string
     type: object
+  DatastoreIODetails:
+    description: Metadata for a Datastore connector used by the job.
+    properties:
+      namespace:
+        description: Namespace used in the connection.
+        type: string
+      projectId:
+        description: ProjectId accessed in the connection.
+        type: string
+    type: object
   DerivedSource:
     description: |-
       Specification of one of the bundles produced as a result of splitting
@@ -2446,6 +2553,7 @@ definitions:
           - JOB_STATE_DRAINED
           - JOB_STATE_PENDING
           - JOB_STATE_CANCELLING
+          - JOB_STATE_QUEUED
         type: string
     type: object
   ExecutionStageSummary:
@@ -2499,6 +2607,13 @@ definitions:
     properties:
       name:
         description: The name of the failed location.
+        type: string
+    type: object
+  FileIODetails:
+    description: Metadata for a File connector used by the job.
+    properties:
+      filePattern:
+        description: File Pattern used to access files by the connector.
         type: string
     type: object
   FlattenInstruction:
@@ -2694,6 +2809,11 @@ definitions:
           Cloud Dataflow service.
         format: google-datetime
         type: string
+      createdFromSnapshotId:
+        description: |-
+          If this is specified, the job's initial state is populated from the given
+          snapshot.
+        type: string
       currentState:
         description: |-
           The current state of the job.
@@ -2719,6 +2839,7 @@ definitions:
           - JOB_STATE_DRAINED
           - JOB_STATE_PENDING
           - JOB_STATE_CANCELLING
+          - JOB_STATE_QUEUED
         type: string
       currentStateTime:
         description: The timestamp associated with the current state.
@@ -2737,6 +2858,12 @@ definitions:
           This field is set by the Cloud Dataflow service when the Job is
           created, and is immutable for the life of the job.
         type: string
+      jobMetadata:
+        $ref: '#/definitions/JobMetadata'
+        description: |-
+          This field is populated by the Dataflow service to support filtering jobs
+          by the metadata values provided here. Populated for ListJobs and all GetJob
+          views SUMMARY and higher.
       labels:
         additionalProperties:
           type: string
@@ -2811,6 +2938,7 @@ definitions:
           - JOB_STATE_DRAINED
           - JOB_STATE_PENDING
           - JOB_STATE_CANCELLING
+          - JOB_STATE_QUEUED
         type: string
       stageStates:
         description: |-
@@ -2819,11 +2947,27 @@ definitions:
         items:
           $ref: '#/definitions/ExecutionStageState'
         type: array
+      startTime:
+        description: |-
+          The timestamp when the job was started (transitioned to JOB_STATE_PENDING).
+          Flexible resource scheduling jobs are started with some delay after job
+          creation, so start_time is unset before start and is updated when the
+          job is started by the Cloud Dataflow service. For other jobs, start_time
+          always equals to create_time and is immutable and set by the Cloud Dataflow
+          service.
+        format: google-datetime
+        type: string
       steps:
-        description: The top-level steps that constitute the entire job.
+        description: |-
+          Exactly one of step or steps_location should be specified.
+
+          The top-level steps that constitute the entire job.
         items:
           $ref: '#/definitions/Step'
         type: array
+      stepsLocation:
+        description: The GCS location where the steps are stored.
+        type: string
       tempFiles:
         description: |-
           A set of files the system should be aware of that are used
@@ -2904,6 +3048,45 @@ definitions:
         description: The timestamp of the message.
         format: google-datetime
         type: string
+    type: object
+  JobMetadata:
+    description: |-
+      Metadata available primarily for filtering jobs. Will be included in the
+      ListJob response and Job SUMMARY view+.
+    properties:
+      bigTableDetails:
+        description: Identification of a BigTable source used in the Dataflow job.
+        items:
+          $ref: '#/definitions/BigTableIODetails'
+        type: array
+      bigqueryDetails:
+        description: Identification of a BigQuery source used in the Dataflow job.
+        items:
+          $ref: '#/definitions/BigQueryIODetails'
+        type: array
+      datastoreDetails:
+        description: Identification of a Datastore source used in the Dataflow job.
+        items:
+          $ref: '#/definitions/DatastoreIODetails'
+        type: array
+      fileDetails:
+        description: Identification of a File source used in the Dataflow job.
+        items:
+          $ref: '#/definitions/FileIODetails'
+        type: array
+      pubsubDetails:
+        description: Identification of a PubSub source used in the Dataflow job.
+        items:
+          $ref: '#/definitions/PubSubIODetails'
+        type: array
+      sdkVersion:
+        $ref: '#/definitions/SdkVersion'
+        description: The SDK version used to run the job.
+      spannerDetails:
+        description: Identification of a Spanner source used in the Dataflow job.
+        items:
+          $ref: '#/definitions/SpannerIODetails'
+        type: array
     type: object
   JobMetrics:
     description: |-
@@ -3086,6 +3269,11 @@ definitions:
       Each instruction must appear in the list before any instructions which
       depends on its output.
     properties:
+      counterPrefix:
+        description: |-
+          Counter prefix that can be used to prefix counters. Not currently used in
+          Dataflow.
+        type: string
       instructions:
         description: The instructions in the MapTask.
         items:
@@ -3454,6 +3642,16 @@ definitions:
           sharding).
         type: string
     type: object
+  PubSubIODetails:
+    description: Metadata for a PubSub connector used by the job.
+    properties:
+      subscription:
+        description: Subscription used in the connection.
+        type: string
+      topic:
+        description: Topic accessed in the connection.
+        type: string
+    type: object
   PubsubLocation:
     description: |-
       Identifies a pubsub location to use for transferring data into or
@@ -3582,6 +3780,11 @@ definitions:
         items:
           type: string
         type: array
+      additionalUserLabels:
+        additionalProperties:
+          type: string
+        description: Additional user labels attached to the job.
+        type: object
       bypassTempDirValidation:
         description: |-
           Whether to bypass the safety checks for the job's temporary directory.
@@ -3603,6 +3806,10 @@ definitions:
           Network to which VMs will be assigned.  If empty or unspecified,
           the service will use the network "default".
         type: string
+      numWorkers:
+        description: The initial number of Google Compute Engine instnaces for the job.
+        format: int32
+        type: integer
       serviceAccountEmail:
         description: The email address of the service account to run the job as.
         type: string
@@ -3621,6 +3828,25 @@ definitions:
           The Compute Engine [availability
           zone](https://cloud.google.com/compute/docs/regions-zones/regions-zones)
           for launching worker instances to run your pipeline.
+        type: string
+    type: object
+  SdkVersion:
+    description: The version of the SDK used to run the jobl
+    properties:
+      sdkSupportStatus:
+        description: The support status for this SDK version.
+        enum:
+          - UNKNOWN
+          - SUPPORTED
+          - STALE
+          - DEPRECATED
+          - UNSUPPORTED
+        type: string
+      version:
+        description: The version of the SDK used to run the job.
+        type: string
+      versionDisplayName:
+        description: A readable string describing the version of the sdk.
         type: string
     type: object
   SendDebugCaptureRequest:
@@ -3755,6 +3981,38 @@ definitions:
           description: Properties of the object.
         description: 'The sink to write to, plus its parameters.'
         type: object
+    type: object
+  Snapshot:
+    description: Represents a snapshot of a job.
+    properties:
+      creationTime:
+        description: The time this snapshot was created.
+        format: google-datetime
+        type: string
+      id:
+        description: The unique ID of this snapshot.
+        type: string
+      projectId:
+        description: The project this snapshot belongs to.
+        type: string
+      sourceJobId:
+        description: The job this snapshot was created from.
+        type: string
+      ttl:
+        description: The time after which this snapshot will be automatically deleted.
+        format: google-duration
+        type: string
+    type: object
+  SnapshotJobRequest:
+    description: Request to create a snapshot of a job.
+    properties:
+      location:
+        description: The location that contains this job.
+        type: string
+      ttl:
+        description: TTL for the snapshot.
+        format: google-duration
+        type: string
     type: object
   Source:
     description: A source that records can be read and decoded from.
@@ -3995,6 +4253,19 @@ definitions:
         $ref: '#/definitions/Source'
         description: DEPRECATED
     type: object
+  SpannerIODetails:
+    description: Metadata for a Spanner connector used by the job.
+    properties:
+      databaseId:
+        description: DatabaseId accessed in the connection.
+        type: string
+      instanceId:
+        description: InstanceId accessed in the connection.
+        type: string
+      projectId:
+        description: ProjectId accessed in the connection.
+        type: string
+    type: object
   SplitInt64:
     description: |-
       A representation of an int64, n, that is immune to precision loss when
@@ -4178,6 +4449,16 @@ definitions:
           The stream is part of another computation within the current
           streaming Dataflow job.
     type: object
+  StreamingApplianceSnapshotConfig:
+    description: Streaming appliance snapshot configuration.
+    properties:
+      importStateEndpoint:
+        description: Indicates which endpoint is used to import appliance state.
+        type: string
+      snapshotId:
+        description: 'If set, indicates the snapshot id for the snapshot being performed.'
+        type: string
+    type: object
   StreamingComputationConfig:
     description: Configuration information for a single streaming computation.
     properties:
@@ -4272,6 +4553,9 @@ definitions:
           other streaming computation workers.
         format: int32
         type: integer
+      snapshotConfig:
+        $ref: '#/definitions/StreamingApplianceSnapshotConfig'
+        description: Configures streaming appliance snapshot.
       streamingComputationTopology:
         $ref: '#/definitions/TopologyConfig'
         description: The global topology of the streaming Dataflow job.

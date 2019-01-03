@@ -1477,7 +1477,7 @@ definitions:
         readOnly: true
         type: string
       iotHubs:
-        description: List of IoT hubs assosciated with this provisioning service.
+        description: List of IoT hubs associated with this provisioning service.
         items:
           $ref: '#/definitions/IotHubDefinitionDescription'
         type: array
@@ -1531,7 +1531,7 @@ definitions:
         type: array
     type: object
   IotDpsSkuInfo:
-    description: List of possible provisoning service SKUs.
+    description: List of possible provisioning service SKUs.
     properties:
       capacity:
         description: The number of services of the selected tier allowed in the subscription.

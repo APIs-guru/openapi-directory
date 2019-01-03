@@ -103,7 +103,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of diagnostics.
+          description: Paged Result response of diagnostics.
           schema:
             $ref: '#/definitions/DiagnosticCollection'
         default:
@@ -821,13 +821,13 @@ definitions:
               value: allErrors
       backend:
         $ref: '#/definitions/PipelineDiagnosticSettings'
-        description: Diagnostic settings for incoming/outcoming HTTP messages to the Backend
+        description: Diagnostic settings for incoming/outgoing HTTP messages to the Backend
       enableHttpCorrelationHeaders:
         description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
         type: boolean
       frontend:
         $ref: '#/definitions/PipelineDiagnosticSettings'
-        description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+        description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
       loggerId:
         description: Resource Id of a target logger.
         type: string
@@ -848,7 +848,7 @@ definitions:
           type: string
         type: array
   PipelineDiagnosticSettings:
-    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
     properties:
       request:
         $ref: '#/definitions/HttpMessageDiagnostic'

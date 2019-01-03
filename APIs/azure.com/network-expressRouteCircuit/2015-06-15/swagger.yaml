@@ -76,7 +76,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Request successful. The operation returns a list of ExpressRouteServiceProdiver resources.
+          description: Request successful. The operation returns a list of ExpressRouteServiceProvider resources.
           schema:
             $ref: '#/definitions/ExpressRouteServiceProviderListResult'
       tags:
@@ -190,7 +190,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/arpTable':
     get:
-      description: The ListArpTable from ExpressRouteCircuit opertion retrieves the currently advertised arp table associated with the ExpressRouteCircuits in a resource group.
+      description: The ListArpTable from ExpressRouteCircuit operation retrieves the currently advertised arp table associated with the ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_ListArpTable
       parameters:
         - description: The name of the resource group.
@@ -466,7 +466,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/routesTable':
     get:
-      description: The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
+      description: The ListRoutesTable from ExpressRouteCircuit operation retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_ListRoutesTable
       parameters:
         - description: The name of the resource group.
@@ -492,7 +492,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/stats':
     get:
-      description: The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.
+      description: The ListStats ExpressRouteCircuit operation retrieves all the stats from a ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_ListStats
       parameters:
         - description: The name of the resource group.

@@ -2780,7 +2780,7 @@ paths:
                 value: dvDmrSBpjRjtYg
   '/keys/{key-name}/{key-version}/encrypt':
     post:
-      description: 'The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encypt permission.'
+      description: 'The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encrypt permission.'
       operationId: encrypt
       parameters:
         - description: The name of the key.
@@ -3180,7 +3180,7 @@ paths:
       tags:
         - Secrets
       x-ms-examples:
-        Setsecret:
+        SetSecret:
           parameters:
             api-version: 7.0-preview
             parameters:
@@ -4089,7 +4089,7 @@ definitions:
     description: Details of the organization administrator of the certificate issuer.
     properties:
       email:
-        description: Email addresss.
+        description: Email address.
         type: string
         x-ms-client-name: EmailAddress
       first_name:
@@ -4470,7 +4470,7 @@ definitions:
     description: The contact information for the vault certificates.
     properties:
       email:
-        description: Email addresss.
+        description: Email address.
         type: string
         x-ms-client-name: EmailAddress
       name:
@@ -5423,7 +5423,7 @@ definitions:
     description: The storage account SAS definition list result.
     properties:
       nextLink:
-        description: The URL to get the next set of SAS defintions.
+        description: The URL to get the next set of SAS definitions.
         readOnly: true
         type: string
       value:
@@ -5818,7 +5818,7 @@ definitions:
         description: The subject name. Should be a valid X509 distinguished Name.
         type: string
       validity_months:
-        description: The duration that the ceritifcate is valid in months.
+        description: The duration that the certificate is valid in months.
         format: int32
         minimum: 0
         type: integer

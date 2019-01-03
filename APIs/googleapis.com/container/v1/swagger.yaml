@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'The Google Kubernetes Engine API is used for building and managing container based applications, powered by the open source Kubernetes technology.'
+  description: 'Builds and manages container-based applications, powered by the open source Kubernetes technology.'
   title: Kubernetes Engine
   version: v1
   x-apiClientRegistration:
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://container.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -58,11 +58,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -83,12 +78,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -158,12 +147,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -318,12 +305,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -375,12 +360,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -432,12 +415,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -489,12 +470,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -546,12 +525,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -603,12 +580,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -660,12 +635,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -761,12 +734,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -922,12 +893,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -937,12 +906,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1001,12 +968,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1065,12 +1030,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1129,12 +1092,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1193,12 +1154,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1259,12 +1218,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1316,12 +1273,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1373,12 +1328,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1426,12 +1379,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1486,12 +1437,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1543,12 +1492,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1637,12 +1584,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1696,12 +1641,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1711,12 +1654,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1803,12 +1744,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1869,12 +1808,6 @@ paths:
       operationId: container.projects.locations.operations.get
       parameters:
         - description: |-
-            Deprecated. The name of the cluster.
-            This field has been deprecated and replaced by the name field.
-          in: query
-          name: clusterId
-          type: string
-        - description: |-
             The name (project, location, operation id) of the operation to get.
             Specified in the format 'projects/*/locations/*/operations/*'.
           in: path
@@ -1882,6 +1815,12 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: |-
+            Deprecated. The name of the node pool.
+            This field has been deprecated and replaced by the name field.
+          in: query
+          name: nodePoolId
+          type: string
         - description: |-
             Deprecated. The server-assigned `name` of the operation.
             This field has been deprecated and replaced by the name field.
@@ -1917,12 +1856,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1995,12 +1932,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2010,12 +1945,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2051,12 +1984,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2092,12 +2023,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2136,12 +2065,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2177,12 +2104,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2219,12 +2144,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2260,12 +2183,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2301,12 +2222,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2342,12 +2261,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2384,12 +2301,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2426,12 +2341,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2470,12 +2383,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2511,12 +2422,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2552,12 +2461,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2593,12 +2500,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2635,12 +2540,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2676,12 +2579,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2757,12 +2658,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2854,12 +2753,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -2875,7 +2772,7 @@ paths:
         - description: |-
             The parent (project, location, cluster id) where the node pool will be
             created. Specified in the format
-            'projects/*/locations/*/clusters/*/nodePools/*'.
+            'projects/*/locations/*/clusters/*'.
           in: path
           name: parent
           required: true
@@ -2933,12 +2830,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -3056,6 +2951,11 @@ definitions:
           notation (e.g. `10.96.0.0/14`). Leave blank to have
           one automatically chosen or specify a `/14` block in `10.0.0.0/8`.
         type: string
+      conditions:
+        description: Which conditions caused the current cluster state.
+        items:
+          $ref: '#/definitions/StatusCondition'
+        type: array
       createTime:
         description: |-
           [Output only] The time the cluster was created, in
@@ -3065,14 +2965,18 @@ definitions:
         description: '[Output only] The current software version of the master endpoint.'
         type: string
       currentNodeCount:
-        description: '[Output only] The number of nodes currently in the cluster.'
+        description: |-
+          [Output only]  The number of nodes currently in the cluster. Deprecated.
+          Call Kubernetes API directly to retrieve node information.
         format: int32
         type: integer
       currentNodeVersion:
         description: |-
-          [Output only] The current version of the node software components.
-          If they are currently at multiple versions because they're in the process
-          of being upgraded, this reflects the minimum version of all nodes.
+          [Output only] Deprecated, use
+          [NodePool.version](/kubernetes-engine/docs/reference/rest/v1/projects.zones.clusters.nodePool)
+          instead. The current version of the node software components. If they are
+          currently at multiple versions because they're in the process of being
+          upgraded, this reflects the minimum version of all nodes.
         type: string
       description:
         description: An optional description of this cluster.
@@ -3152,7 +3056,7 @@ definitions:
       locations:
         description: |-
           The list of Google Compute Engine
-          [locations](/compute/docs/zones#available) in which the cluster's nodes
+          [zones](/compute/docs/zones#available) in which the cluster's nodes
           should be located.
         items:
           type: string
@@ -3171,7 +3075,12 @@ definitions:
         description: Configure the maintenance policy for this cluster.
       masterAuth:
         $ref: '#/definitions/MasterAuth'
-        description: The authentication information for accessing the master endpoint.
+        description: |-
+          The authentication information for accessing the master endpoint.
+          If unspecified, the defaults are used:
+          For clusters before v1.12, if master_auth is unspecified, `username` will
+          be set to "admin", a random password will be generated, and a client
+          certificate will be issued.
       masterAuthorizedNetworksConfig:
         $ref: '#/definitions/MasterAuthorizedNetworksConfig'
         description: The configuration options for master authorized networks feature.
@@ -3200,6 +3109,9 @@ definitions:
           cluster is connected. If left unspecified, the `default` network
           will be used.
         type: string
+      networkConfig:
+        $ref: '#/definitions/NetworkConfig'
+        description: Configuration for cluster networking.
       networkPolicy:
         $ref: '#/definitions/NetworkPolicy'
         description: Configuration options for the NetworkPolicy feature.
@@ -3231,6 +3143,9 @@ definitions:
         items:
           $ref: '#/definitions/NodePool'
         type: array
+      privateClusterConfig:
+        $ref: '#/definitions/PrivateClusterConfig'
+        description: Configuration for private cluster.
       resourceLabels:
         additionalProperties:
           type: string
@@ -3296,7 +3211,7 @@ definitions:
       desiredLocations:
         description: |-
           The desired list of Google Compute Engine
-          [locations](/compute/docs/zones#available) in which the cluster's nodes
+          [zones](/compute/docs/zones#available) in which the cluster's nodes
           should be located. Changing the locations a cluster is in will result
           in nodes being either created or removed from the cluster, depending on
           whether locations are being added or removed.
@@ -3427,7 +3342,7 @@ definitions:
         description: |-
           The parent (project, location, cluster id) where the node pool will be
           created. Specified in the format
-          'projects/*/locations/*/clusters/*/nodePools/*'.
+          'projects/*/locations/*/clusters/*'.
         type: string
       projectId:
         description: |-
@@ -3690,8 +3605,9 @@ definitions:
       clientCertificateConfig:
         $ref: '#/definitions/ClientCertificateConfig'
         description: |-
-          Configuration for client certificate authentication on the cluster.  If no
-          configuration is specified, a client certificate is issued.
+          Configuration for client certificate authentication on the cluster. For
+          clusters before v1.12, if no configuration is specified, a client
+          certificate is issued.
       clientKey:
         description: |-
           [Output only] Base64-encoded private key used by clients to authenticate
@@ -3712,8 +3628,8 @@ definitions:
       username:
         description: |-
           The username to use for HTTP basic authentication to the master endpoint.
-          For clusters v1.6.0 and later, you can disable basic authentication by
-          providing an empty username.
+          For clusters v1.6.0 and later, basic authentication can be disabled by
+          leaving username unspecified (or setting it to the empty string).
         type: string
     type: object
   MasterAuthorizedNetworksConfig:
@@ -3733,6 +3649,23 @@ definitions:
       enabled:
         description: Whether or not master authorized networks is enabled.
         type: boolean
+    type: object
+  NetworkConfig:
+    description: NetworkConfig reports the relative names of network & subnetwork.
+    properties:
+      network:
+        description: |-
+          Output only. The relative name of the Google Compute Engine
+          network(/compute/docs/networks-and-firewalls#networks) to which
+          the cluster is connected.
+          Example: projects/my-project/global/networks/my-network
+        type: string
+      subnetwork:
+        description: |-
+          Output only. The relative name of the Google Compute Engine
+          [subnetwork](/compute/docs/vpc) to which the cluster is connected.
+          Example: projects/my-project/regions/us-central1/subnetworks/my-subnet
+        type: string
     type: object
   NetworkPolicy:
     description: |-
@@ -3778,6 +3711,12 @@ definitions:
           If unspecified, the default disk size is 100GB.
         format: int32
         type: integer
+      diskType:
+        description: |-
+          Type of the disk attached to each node (e.g. 'pd-standard' or 'pd-ssd')
+
+          If unspecified, the default disk type is 'pd-standard'
+        type: string
       imageType:
         description: |-
           The image type to use for this node. Note that for a given image type,
@@ -3829,6 +3768,7 @@ definitions:
            "cluster-name"
            "cluster-uid"
            "configure-sh"
+           "enable-os-login"
            "gci-update-strategy"
            "gci-ensure-gke-docker"
            "instance-template"
@@ -3891,6 +3831,15 @@ definitions:
         items:
           type: string
         type: array
+      taints:
+        description: |-
+          List of kubernetes taints to be applied to each node.
+
+          For more information, including usage and the valid values, see:
+          https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+        items:
+          $ref: '#/definitions/NodeTaint'
+        type: array
     type: object
   NodeManagement:
     description: |-
@@ -3928,6 +3877,11 @@ definitions:
         description: |-
           Autoscaler configuration for this NodePool. Autoscaler is enabled
           only if a valid configuration is present.
+      conditions:
+        description: Which conditions caused the current node pool state.
+        items:
+          $ref: '#/definitions/StatusCondition'
+        type: array
       config:
         $ref: '#/definitions/NodeConfig'
         description: The node configuration of the pool.
@@ -3997,11 +3951,39 @@ definitions:
         format: int32
         type: integer
     type: object
+  NodeTaint:
+    description: |-
+      Kubernetes taint is comprised of three fields: key, value, and effect. Effect
+      can only be one of three types:  NoSchedule, PreferNoSchedule or NoExecute.
+
+      For more information, including usage and the valid values, see:
+      https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+    properties:
+      effect:
+        description: Effect for taint.
+        enum:
+          - EFFECT_UNSPECIFIED
+          - NO_SCHEDULE
+          - PREFER_NO_SCHEDULE
+          - NO_EXECUTE
+        type: string
+      key:
+        description: Key for taint.
+        type: string
+      value:
+        description: Value for taint.
+        type: string
+    type: object
   Operation:
     description: |-
       This operation resource represents operations that may have happened or are
       happening on the cluster. All fields are output only.
     properties:
+      clusterConditions:
+        description: Which conditions caused the current cluster state.
+        items:
+          $ref: '#/definitions/StatusCondition'
+        type: array
       detail:
         description: 'Detailed operation progress, if available.'
         type: string
@@ -4020,6 +4002,11 @@ definitions:
       name:
         description: The server-assigned ID for the operation.
         type: string
+      nodepoolConditions:
+        description: Which conditions caused the current node pool state.
+        items:
+          $ref: '#/definitions/StatusCondition'
+        type: array
       operationType:
         description: The operation type.
         enum:
@@ -4070,6 +4057,32 @@ definitions:
           [zone](/compute/docs/zones#available) in which the operation
           is taking place.
           This field is deprecated, use location instead.
+        type: string
+    type: object
+  PrivateClusterConfig:
+    description: Configuration options for private clusters.
+    properties:
+      enablePrivateEndpoint:
+        description: Whether the master's internal IP address is used as the cluster endpoint.
+        type: boolean
+      enablePrivateNodes:
+        description: |-
+          Whether nodes have internal IP addresses only. If enabled, all nodes are
+          given only RFC 1918 private addresses and communicate with the master via
+          private networking.
+        type: boolean
+      masterIpv4CidrBlock:
+        description: |-
+          The IP range in CIDR notation to use for the hosted master network. This
+          range will be used for assigning internal IP addresses to the master or
+          set of masters, as well as the ILB VIP. This range must not overlap with
+          any other ranges in use within the cluster's network.
+        type: string
+      privateEndpoint:
+        description: Output only. The internal IP address of this cluster's master endpoint.
+        type: string
+      publicEndpoint:
+        description: Output only. The external IP address of this cluster's master endpoint.
         type: string
     type: object
   RollbackNodePoolUpgradeRequest:
@@ -4252,7 +4265,7 @@ definitions:
       locations:
         description: |-
           The desired list of Google Compute Engine
-          [locations](/compute/docs/zones#available) in which the cluster's nodes
+          [zones](/compute/docs/zones#available) in which the cluster's nodes
           should be located. Changing the locations a cluster is in will result
           in nodes being either created or removed from the cluster, depending on
           whether locations are being added or removed.
@@ -4590,6 +4603,24 @@ definitions:
           [zone](/compute/docs/zones#available) in which the cluster
           resides.
           This field has been deprecated and replaced by the name field.
+        type: string
+    type: object
+  StatusCondition:
+    description: |-
+      StatusCondition describes why a cluster or a node pool has a certain status
+      (e.g., ERROR or DEGRADED).
+    properties:
+      code:
+        description: Machine-friendly representation of the condition
+        enum:
+          - UNKNOWN
+          - GCE_STOCKOUT
+          - GKE_SERVICE_ACCOUNT_DELETED
+          - GCE_QUOTA_EXCEEDED
+          - SET_BY_OPERATOR
+        type: string
+      message:
+        description: Human-friendly representation of the condition
         type: string
     type: object
   UpdateClusterRequest:

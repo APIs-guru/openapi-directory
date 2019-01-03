@@ -2656,170 +2656,6 @@ paths:
                   name: Standard_D1_v2
                   tier: Standard
                 type: Microsoft.Compute/virtualMachineScaleSets
-        Create a scale set with differencing os disks.:
-          parameters:
-            api-version: '2018-06-01'
-            parameters:
-              location: westus
-              plan:
-                name: windows2016
-                product: windows-data-science-vm
-                publisher: microsoft-ads
-              properties:
-                overprovision: true
-                upgradePolicy:
-                  mode: Manual
-                virtualMachineProfile:
-                  networkProfile:
-                    networkInterfaceConfigurations:
-                      - name: '{vmss-name}'
-                        properties:
-                          enableIPForwarding: true
-                          ipConfigurations:
-                            - name: '{vmss-name}'
-                              properties:
-                                subnet:
-                                  id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}'
-                          primary: true
-                  osProfile:
-                    adminPassword: '{your-password}'
-                    adminUsername: '{your-username}'
-                    computerNamePrefix: '{vmss-name}'
-                  storageProfile:
-                    imageReference:
-                      offer: windows-data-science-vm
-                      publisher: microsoft-ads
-                      sku: windows2016
-                      version: latest
-                    osDisk:
-                      caching: ReadOnly
-                      createOption: FromImage
-                      diffDiskSettings:
-                        option: Local
-                      managedDisk:
-                        storageAccountType: Standard_LRS
-              sku:
-                capacity: 3
-                name: Standard_DS1_v2
-                tier: Standard
-            resourceGroupName: myResourceGroup
-            subscriptionId: '{subscription-id}'
-            vmScaleSetName: '{vmss-name}'
-          responses:
-            '200':
-              body:
-                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
-                location: westus
-                name: '{vmss-name}'
-                plan:
-                  name: standard-data-science-vm
-                  product: standard-data-science-vm
-                  publisher: microsoft-ads
-                properties:
-                  overprovision: true
-                  provisioningState: Creating
-                  singlePlacementGroup: true
-                  uniqueId: b9e23088-6ffc-46e0-9e02-b0a6eeef47db
-                  upgradePolicy:
-                    mode: Manual
-                  virtualMachineProfile:
-                    networkProfile:
-                      networkInterfaceConfigurations:
-                        - name: '{vmss-name}'
-                          properties:
-                            dnsSettings:
-                              dnsServers: []
-                            enableAcceleratedNetworking: false
-                            enableIPForwarding: true
-                            ipConfigurations:
-                              - name: '{vmss-name}'
-                                properties:
-                                  privateIPAddressVersion: IPv4
-                                  subnet:
-                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
-                            primary: true
-                    osProfile:
-                      adminUsername: '{your-username}'
-                      computerNamePrefix: '{vmss-name}'
-                      secrets: []
-                      windowsConfiguration:
-                        enableAutomaticUpdates: true
-                        provisionVMAgent: true
-                    storageProfile:
-                      imageReference:
-                        offer: standard-data-science-vm
-                        publisher: microsoft-ads
-                        sku: standard-data-science-vm
-                        version: latest
-                      osDisk:
-                        caching: ReadOnly
-                        createOption: FromImage
-                        diffDiskSettings:
-                          option: Local
-                        managedDisk:
-                          storageAccountType: Standard_LRS
-                sku:
-                  capacity: 3
-                  name: Standard_DS1_v2
-                  tier: Standard
-                type: Microsoft.Compute/virtualMachineScaleSets
-            '201':
-              body:
-                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
-                location: westus
-                name: '{vmss-name}'
-                plan:
-                  name: standard-data-science-vm
-                  product: standard-data-science-vm
-                  publisher: microsoft-ads
-                properties:
-                  overprovision: true
-                  provisioningState: Creating
-                  singlePlacementGroup: true
-                  uniqueId: b9e23088-6ffc-46e0-9e02-b0a6eeef47db
-                  upgradePolicy:
-                    mode: Manual
-                  virtualMachineProfile:
-                    networkProfile:
-                      networkInterfaceConfigurations:
-                        - name: '{vmss-name}'
-                          properties:
-                            dnsSettings:
-                              dnsServers: []
-                            enableAcceleratedNetworking: false
-                            enableIPForwarding: true
-                            ipConfigurations:
-                              - name: '{vmss-name}'
-                                properties:
-                                  privateIPAddressVersion: IPv4
-                                  subnet:
-                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
-                            primary: true
-                    osProfile:
-                      adminUsername: '{your-username}'
-                      computerNamePrefix: '{vmss-name}'
-                      secrets: []
-                      windowsConfiguration:
-                        enableAutomaticUpdates: true
-                        provisionVMAgent: true
-                    storageProfile:
-                      imageReference:
-                        offer: standard-data-science-vm
-                        publisher: microsoft-ads
-                        sku: standard-data-science-vm
-                        version: latest
-                      osDisk:
-                        caching: ReadOnly
-                        createOption: FromImage
-                        diffDiskSettings:
-                          option: Local
-                        managedDisk:
-                          storageAccountType: Standard_LRS
-                sku:
-                  capacity: 3
-                  name: Standard_DS1_v2
-                  tier: Standard
-                type: Microsoft.Compute/virtualMachineScaleSets
         Create a scale set with empty data disks on each vm.:
           parameters:
             api-version: '2018-06-01'
@@ -3000,6 +2836,170 @@ paths:
                 sku:
                   capacity: 3
                   name: Standard_D2_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
+        Create a scale set with ephemeral os disks.:
+          parameters:
+            api-version: '2018-06-01'
+            parameters:
+              location: westus
+              plan:
+                name: windows2016
+                product: windows-data-science-vm
+                publisher: microsoft-ads
+              properties:
+                overprovision: true
+                upgradePolicy:
+                  mode: Manual
+                virtualMachineProfile:
+                  networkProfile:
+                    networkInterfaceConfigurations:
+                      - name: '{vmss-name}'
+                        properties:
+                          enableIPForwarding: true
+                          ipConfigurations:
+                            - name: '{vmss-name}'
+                              properties:
+                                subnet:
+                                  id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}'
+                          primary: true
+                  osProfile:
+                    adminPassword: '{your-password}'
+                    adminUsername: '{your-username}'
+                    computerNamePrefix: '{vmss-name}'
+                  storageProfile:
+                    imageReference:
+                      offer: windows-data-science-vm
+                      publisher: microsoft-ads
+                      sku: windows2016
+                      version: latest
+                    osDisk:
+                      caching: ReadOnly
+                      createOption: FromImage
+                      diffDiskSettings:
+                        option: Local
+                      managedDisk:
+                        storageAccountType: Standard_LRS
+              sku:
+                capacity: 3
+                name: Standard_DS1_v2
+                tier: Standard
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+            vmScaleSetName: '{vmss-name}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                plan:
+                  name: standard-data-science-vm
+                  product: standard-data-science-vm
+                  publisher: microsoft-ads
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: b9e23088-6ffc-46e0-9e02-b0a6eeef47db
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: standard-data-science-vm
+                        publisher: microsoft-ads
+                        sku: standard-data-science-vm
+                        version: latest
+                      osDisk:
+                        caching: ReadOnly
+                        createOption: FromImage
+                        diffDiskSettings:
+                          option: Local
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_DS1_v2
+                  tier: Standard
+                type: Microsoft.Compute/virtualMachineScaleSets
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}'
+                location: westus
+                name: '{vmss-name}'
+                plan:
+                  name: standard-data-science-vm
+                  product: standard-data-science-vm
+                  publisher: microsoft-ads
+                properties:
+                  overprovision: true
+                  provisioningState: Creating
+                  singlePlacementGroup: true
+                  uniqueId: b9e23088-6ffc-46e0-9e02-b0a6eeef47db
+                  upgradePolicy:
+                    mode: Manual
+                  virtualMachineProfile:
+                    networkProfile:
+                      networkInterfaceConfigurations:
+                        - name: '{vmss-name}'
+                          properties:
+                            dnsSettings:
+                              dnsServers: []
+                            enableAcceleratedNetworking: false
+                            enableIPForwarding: true
+                            ipConfigurations:
+                              - name: '{vmss-name}'
+                                properties:
+                                  privateIPAddressVersion: IPv4
+                                  subnet:
+                                    id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet'
+                            primary: true
+                    osProfile:
+                      adminUsername: '{your-username}'
+                      computerNamePrefix: '{vmss-name}'
+                      secrets: []
+                      windowsConfiguration:
+                        enableAutomaticUpdates: true
+                        provisionVMAgent: true
+                    storageProfile:
+                      imageReference:
+                        offer: standard-data-science-vm
+                        publisher: microsoft-ads
+                        sku: standard-data-science-vm
+                        version: latest
+                      osDisk:
+                        caching: ReadOnly
+                        createOption: FromImage
+                        diffDiskSettings:
+                          option: Local
+                        managedDisk:
+                          storageAccountType: Standard_LRS
+                sku:
+                  capacity: 3
+                  name: Standard_DS1_v2
                   tier: Standard
                 type: Microsoft.Compute/virtualMachineScaleSets
         Create a scale set with password authentication.:
@@ -4102,7 +4102,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reimage':
     post:
-      description: Reimages (upgrade the operating system) one or more virtual machines in a VM scale set.
+      description: 'Reimages (upgrade the operating system) one or more virtual machines in a VM scale set which don''t have a ephemeral OS disk, for virtual machines who have a ephemeral OS disk the virtual machine is reset to initial state.'
       operationId: VirtualMachineScaleSets_Reimage
       parameters:
         - description: The name of the resource group.
@@ -5522,132 +5522,6 @@ paths:
                       osType: Windows
                   vmId: 676420ba-7a24-4bfe-80bd-9c841ee184fa
                 type: Microsoft.Compute/virtualMachines
-        Create a vm with differencing os disk.:
-          parameters:
-            api-version: '2018-06-01'
-            parameters:
-              location: westus
-              name: myVM
-              plan:
-                name: windows2016
-                product: windows-data-science-vm
-                publisher: microsoft-ads
-              properties:
-                hardwareProfile:
-                  vmSize: Standard_DS1_v2
-                networkProfile:
-                  networkInterfaces:
-                    - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}'
-                      properties:
-                        primary: true
-                osProfile:
-                  adminPassword: '{your-password}'
-                  adminUsername: '{your-username}'
-                  computerName: myVM
-                storageProfile:
-                  imageReference:
-                    offer: windows-data-science-vm
-                    publisher: microsoft-ads
-                    sku: windows2016
-                    version: latest
-                  osDisk:
-                    caching: ReadOnly
-                    createOption: FromImage
-                    diffDiskSettings:
-                      option: Local
-                    managedDisk:
-                      storageAccountType: Standard_LRS
-                    name: myVMosdisk
-            resourceGroupName: myResourceGroup
-            subscriptionId: '{subscription-id}'
-            vmName: myVM
-          responses:
-            '200':
-              body:
-                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM'
-                location: westus
-                name: myVM
-                plan:
-                  name: standard-data-science-vm
-                  product: standard-data-science-vm
-                  publisher: microsoft-ads
-                properties:
-                  hardwareProfile:
-                    vmSize: Standard_DS1_v2
-                  networkProfile:
-                    networkInterfaces:
-                      - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic'
-                        properties:
-                          primary: true
-                  osProfile:
-                    adminUsername: '{your-username}'
-                    computerName: myVM
-                    secrets: []
-                    windowsConfiguration:
-                      enableAutomaticUpdates: true
-                      provisionVMAgent: true
-                  provisioningState: Creating
-                  storageProfile:
-                    dataDisks: []
-                    imageReference:
-                      offer: standard-data-science-vm
-                      publisher: microsoft-ads
-                      sku: standard-data-science-vm
-                      version: latest
-                    osDisk:
-                      caching: ReadOnly
-                      createOption: FromImage
-                      diffDiskSettings:
-                        option: Local
-                      managedDisk:
-                        storageAccountType: Standard_LRS
-                      name: myVMosdisk
-                      osType: Windows
-                  vmId: 5c0d55a7-c407-4ed6-bf7d-ddb810267c85
-                type: Microsoft.Compute/virtualMachines
-            '201':
-              body:
-                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM'
-                location: westus
-                name: myVM
-                plan:
-                  name: standard-data-science-vm
-                  product: standard-data-science-vm
-                  publisher: microsoft-ads
-                properties:
-                  hardwareProfile:
-                    vmSize: Standard_DS1_v2
-                  networkProfile:
-                    networkInterfaces:
-                      - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic'
-                        properties:
-                          primary: true
-                  osProfile:
-                    adminUsername: '{your-username}'
-                    computerName: myVM
-                    secrets: []
-                    windowsConfiguration:
-                      enableAutomaticUpdates: true
-                      provisionVMAgent: true
-                  provisioningState: Creating
-                  storageProfile:
-                    dataDisks: []
-                    imageReference:
-                      offer: standard-data-science-vm
-                      publisher: microsoft-ads
-                      sku: standard-data-science-vm
-                      version: latest
-                    osDisk:
-                      caching: ReadOnly
-                      createOption: FromImage
-                      diffDiskSettings:
-                        option: Local
-                      managedDisk:
-                        storageAccountType: Standard_LRS
-                      name: myVMosdisk
-                      osType: Windows
-                  vmId: 5c0d55a7-c407-4ed6-bf7d-ddb810267c85
-                type: Microsoft.Compute/virtualMachines
         Create a vm with empty data disks.:
           parameters:
             api-version: '2018-06-01'
@@ -5786,6 +5660,132 @@ paths:
                       name: myVMosdisk
                       osType: Windows
                   vmId: 3906fef9-a1e5-4b83-a8a8-540858b41df0
+                type: Microsoft.Compute/virtualMachines
+        Create a vm with ephemeral os disk.:
+          parameters:
+            api-version: '2018-06-01'
+            parameters:
+              location: westus
+              name: myVM
+              plan:
+                name: windows2016
+                product: windows-data-science-vm
+                publisher: microsoft-ads
+              properties:
+                hardwareProfile:
+                  vmSize: Standard_DS1_v2
+                networkProfile:
+                  networkInterfaces:
+                    - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{existing-nic-name}'
+                      properties:
+                        primary: true
+                osProfile:
+                  adminPassword: '{your-password}'
+                  adminUsername: '{your-username}'
+                  computerName: myVM
+                storageProfile:
+                  imageReference:
+                    offer: windows-data-science-vm
+                    publisher: microsoft-ads
+                    sku: windows2016
+                    version: latest
+                  osDisk:
+                    caching: ReadOnly
+                    createOption: FromImage
+                    diffDiskSettings:
+                      option: Local
+                    managedDisk:
+                      storageAccountType: Standard_LRS
+                    name: myVMosdisk
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+            vmName: myVM
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM'
+                location: westus
+                name: myVM
+                plan:
+                  name: standard-data-science-vm
+                  product: standard-data-science-vm
+                  publisher: microsoft-ads
+                properties:
+                  hardwareProfile:
+                    vmSize: Standard_DS1_v2
+                  networkProfile:
+                    networkInterfaces:
+                      - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic'
+                        properties:
+                          primary: true
+                  osProfile:
+                    adminUsername: '{your-username}'
+                    computerName: myVM
+                    secrets: []
+                    windowsConfiguration:
+                      enableAutomaticUpdates: true
+                      provisionVMAgent: true
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    imageReference:
+                      offer: standard-data-science-vm
+                      publisher: microsoft-ads
+                      sku: standard-data-science-vm
+                      version: latest
+                    osDisk:
+                      caching: ReadOnly
+                      createOption: FromImage
+                      diffDiskSettings:
+                        option: Local
+                      managedDisk:
+                        storageAccountType: Standard_LRS
+                      name: myVMosdisk
+                      osType: Windows
+                  vmId: 5c0d55a7-c407-4ed6-bf7d-ddb810267c85
+                type: Microsoft.Compute/virtualMachines
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM'
+                location: westus
+                name: myVM
+                plan:
+                  name: standard-data-science-vm
+                  product: standard-data-science-vm
+                  publisher: microsoft-ads
+                properties:
+                  hardwareProfile:
+                    vmSize: Standard_DS1_v2
+                  networkProfile:
+                    networkInterfaces:
+                      - id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/nsgExistingNic'
+                        properties:
+                          primary: true
+                  osProfile:
+                    adminUsername: '{your-username}'
+                    computerName: myVM
+                    secrets: []
+                    windowsConfiguration:
+                      enableAutomaticUpdates: true
+                      provisionVMAgent: true
+                  provisioningState: Creating
+                  storageProfile:
+                    dataDisks: []
+                    imageReference:
+                      offer: standard-data-science-vm
+                      publisher: microsoft-ads
+                      sku: standard-data-science-vm
+                      version: latest
+                    osDisk:
+                      caching: ReadOnly
+                      createOption: FromImage
+                      diffDiskSettings:
+                        option: Local
+                      managedDisk:
+                        storageAccountType: Standard_LRS
+                      name: myVMosdisk
+                      osType: Windows
+                  vmId: 5c0d55a7-c407-4ed6-bf7d-ddb810267c85
                 type: Microsoft.Compute/virtualMachines
         Create a vm with password authentication.:
           parameters:
@@ -6499,7 +6499,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reimage':
     post:
-      description: Reimages (upgrade the operating system) virtual machine. This operation is only supported for differencing OS disks.
+      description: Reimages the virtual machine which has an ephemeral OS disk back to its initial state.
       operationId: VirtualMachines_Reimage
       parameters:
         - description: The name of the resource group.
@@ -6657,7 +6657,7 @@ definitions:
     description: The API entity reference.
     properties:
       id:
-        description: 'The ARM resource id in the form of /subscriptions/{SubcriptionId}/resourceGroups/{ResourceGroupName}/...'
+        description: 'The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/...'
         type: string
   ApiError:
     description: Api error.
@@ -6700,7 +6700,7 @@ definitions:
   AvailabilitySet:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
+    description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
     properties:
       properties:
         $ref: '#/definitions/AvailabilitySetProperties'
@@ -6899,7 +6899,7 @@ definitions:
         $ref: '#/definitions/BootDiagnostics'
         description: Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor.
   DiffDiskOption:
-    description: Specifies the differencing disk option for operating system disk.
+    description: Specifies the ephemeral disk option for operating system disk.
     enum:
       - Local
     type: string
@@ -6907,11 +6907,11 @@ definitions:
       modelAsString: true
       name: DiffDiskOptions
   DiffDiskSettings:
-    description: 'Describes the parameters of differencing disk settings that can be be specified for operating system disk. <br><br> NOTE: The differencing disk settings can only be specified for managed disk.'
+    description: 'Describes the parameters of ephemeral disk settings that can be specified for operating system disk. <br><br> NOTE: The ephemeral disk settings can only be specified for managed disk.'
     properties:
       option:
         $ref: '#/definitions/DiffDiskOption'
-        description: Specifies the differencing disk settings for operating system disk.
+        description: Specifies the ephemeral disk settings for operating system disk.
   DiskEncryptionSettings:
     description: Describes a Encryption Settings for a Disk
     properties:
@@ -7369,7 +7369,7 @@ definitions:
         format: date-time
         type: string
       groupByOperationName:
-        description: Group query result by  by Operation Name.
+        description: Group query result by Operation Name.
         type: boolean
       groupByResourceName:
         description: Group query result by Resource Name.
@@ -7476,7 +7476,7 @@ definitions:
         description: 'Specifies how the virtual machine should be created.<br><br> Possible values are:<br><br> **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.<br><br> **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       diffDiskSettings:
         $ref: '#/definitions/DiffDiskSettings'
-        description: Specifies the differencing Disk Settings for the operating system disk used by the virtual machine.
+        description: Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
       diskSizeGB:
         description: Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB
         format: int32
@@ -7870,7 +7870,7 @@ definitions:
         readOnly: true
       progress:
         $ref: '#/definitions/RollingUpgradeProgressInfo'
-        description: Counts of the VM's in each state.
+        description: Counts of the VMs in each state.
         readOnly: true
       rollbackInfo:
         $ref: '#/definitions/RollbackStatusInfo'
@@ -7982,7 +7982,7 @@ definitions:
     description: 'Describes a single certificate reference in a Key Vault, and where the certificate should reside on the VM.'
     properties:
       certificateStore:
-        description: 'For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for the X509 certificate file and <UppercaseThumbpring>.prv for private key. Both of these files are .pem formatted.'
+        description: 'For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. <br><br>For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name <UppercaseThumbprint>.crt for the X509 certificate file and <UppercaseThumbprint>.prv for private key. Both of these files are .pem formatted.'
         type: string
       certificateUrl:
         description: 'This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: <br><br> {<br>  "data":"<Base64-encoded-certificate>",<br>  "dataType":"pfx",<br>  "password":"<pfx-file-password>"<br>}'
@@ -8383,7 +8383,7 @@ definitions:
         description: Specifies additional capabilities enabled or disabled on the virtual machine.
       availabilitySet:
         $ref: '#/definitions/SubResource'
-        description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
+        description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
         description: 'Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.'
@@ -8415,10 +8415,10 @@ definitions:
         readOnly: true
         type: string
   VirtualMachineReimageParameters:
-    description: 'Paramaters for Reimaging Virtual Machine. Default value for OSDisk : true.'
+    description: 'Parameters for Reimaging Virtual Machine. Default value for OSDisk : true.'
     properties:
       tempDisk:
-        description: 'Specified whether to reimage temp disk. Default value: false.'
+        description: 'Specifies whether to reimage temp disk. Default value: false.'
         type: boolean
   VirtualMachineScaleSet:
     allOf:
@@ -8515,6 +8515,11 @@ definitions:
       protectedSettings:
         description: The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
         type: object
+      provisionAfterExtensions:
+        description: Collection of extension names after which this extension needs to be provisioned.
+        items:
+          type: string
+        type: array
       provisioningState:
         description: 'The provisioning state, which only appears in the response.'
         readOnly: true
@@ -8783,7 +8788,7 @@ definitions:
         description: 'Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.'
       diffDiskSettings:
         $ref: '#/definitions/DiffDiskSettings'
-        description: Specifies the differencing Disk Settings for the operating system disk used by the virtual machine scale set.
+        description: Specifies the ephemeral disk Settings for the operating system disk used by the virtual machine scale set.
       diskSizeGB:
         description: Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> This value cannot be larger than 1023 GB
         format: int32
@@ -8870,7 +8875,7 @@ definitions:
         $ref: '#/definitions/VirtualMachineScaleSetVMProfile'
         description: The virtual machine profile.
       zoneBalance:
-        description: Whether to force stictly even Virtual Machine distribution cross x-zones in case there is zone outage.
+        description: Whether to force strictly even Virtual Machine distribution cross x-zones in case there is zone outage.
         type: boolean
   VirtualMachineScaleSetPublicIPAddressConfiguration:
     description: Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
@@ -9367,7 +9372,7 @@ definitions:
         description: 'Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type.'
       availabilitySet:
         $ref: '#/definitions/SubResource'
-        description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintainance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
+        description: 'Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.'
       diagnosticsProfile:
         $ref: '#/definitions/DiagnosticsProfile'
         description: 'Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15.'

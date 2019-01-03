@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/gamesManagement/v1management/rest'
       version: v1
@@ -35,7 +35,6 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/games': Share your Google+ profile information and view and manage your game activity
-      'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
     type: oauth2
 parameters:
   alt:
@@ -107,8 +106,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   /achievements/resetAllForAllPlayers:
@@ -129,8 +126,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   /achievements/resetMultipleForAllPlayers:
@@ -156,8 +151,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   '/achievements/{achievementId}/reset':
@@ -186,8 +179,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   '/achievements/{achievementId}/resetForAllPlayers':
@@ -214,8 +205,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   '/applications/{applicationId}/players/hidden':
@@ -246,8 +235,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - applications
     parameters:
@@ -279,8 +266,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - players
     parameters:
@@ -311,8 +296,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - players
   /events/reset:
@@ -333,8 +316,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - events
   /events/resetAllForAllPlayers:
@@ -355,8 +336,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - events
   /events/resetMultipleForAllPlayers:
@@ -382,8 +361,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - events
   '/events/{eventId}/reset':
@@ -410,8 +387,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - events
   '/events/{eventId}/resetForAllPlayers':
@@ -438,8 +413,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - events
   '/leaderboards/{leaderboardId}/scores/reset':
@@ -468,8 +441,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
   '/leaderboards/{leaderboardId}/scores/resetForAllPlayers':
@@ -496,8 +467,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
   /quests/reset:
@@ -518,8 +487,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - quests
   /quests/resetAllForAllPlayers:
@@ -540,8 +507,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - quests
   /quests/resetMultipleForAllPlayers:
@@ -567,8 +532,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - quests
   '/quests/{questId}/reset':
@@ -595,8 +558,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - quests
   '/quests/{questId}/resetForAllPlayers':
@@ -623,8 +584,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - quests
   /rooms/reset:
@@ -645,8 +604,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
   /rooms/resetForAllPlayers:
@@ -667,8 +624,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
   /scores/reset:
@@ -691,8 +646,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
   /scores/resetAllForAllPlayers:
@@ -713,8 +666,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
   /scores/resetMultipleForAllPlayers:
@@ -740,8 +691,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
   /turnbasedmatches/reset:
@@ -762,8 +711,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   /turnbasedmatches/resetForAllPlayers:
@@ -784,8 +731,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
 definitions:

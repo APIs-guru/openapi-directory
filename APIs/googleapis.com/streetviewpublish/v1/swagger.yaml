@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://streetviewpublish.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -62,11 +62,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -87,12 +82,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -123,12 +112,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -176,12 +163,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -303,6 +288,15 @@ paths:
         Photo is still being indexed.
       operationId: streetviewpublish.photo.get
       parameters:
+        - description: |-
+            The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+            information, see
+            http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+            If language_code is unspecified, the user's language preference for Google
+            services will be used.
+          in: query
+          name: languageCode
+          type: string
         - description: Required. ID of the Photo.
           in: path
           name: photoId
@@ -331,12 +325,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -346,12 +338,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -411,6 +401,15 @@ paths:
           name: filter
           type: string
         - description: |-
+            The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+            information, see
+            http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+            If language_code is unspecified, the user's language preference for Google
+            services will be used.
+          in: query
+          name: languageCode
+          type: string
+        - description: |-
             The maximum number of photos to return.
             `pageSize` must be non-negative. If `pageSize` is zero or is not provided,
             the default page size of 100 will be used.
@@ -451,12 +450,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -466,12 +463,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -531,6 +526,15 @@ paths:
         for specific failures that can occur per photo.
       operationId: streetviewpublish.photos.batchGet
       parameters:
+        - description: |-
+            The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+            information, see
+            http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+            If language_code is unspecified, the user's language preference for Google
+            services will be used.
+          in: query
+          name: languageCode
+          type: string
         - collectionFormat: multi
           description: |-
             Required. IDs of the Photos. For HTTP
@@ -564,12 +568,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -579,12 +581,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -613,6 +613,12 @@ paths:
         updateMask
         field are used. If `updateMask` is not present, the update applies to all
         fields.
+
+        The number of
+        UpdatePhotoRequest
+        messages in a
+        BatchUpdatePhotosRequest
+        must not exceed 20.
 
         <aside class="note"><b>Note:</b> To update
         Pose.altitude,
@@ -841,6 +847,15 @@ definitions:
           is set to
           PhotoView.INCLUDE_DOWNLOAD_URL.
         type: string
+      mapsPublishStatus:
+        description: |-
+          Output only. Status in Google Maps, whether this photo was published, or
+          rejected for a possibly specified reason.
+        enum:
+          - UNSPECIFIED_MAPS_PUBLISH_STATUS
+          - PUBLISHED
+          - REJECTED_UNKNOWN
+        type: string
       photoId:
         $ref: '#/definitions/PhotoId'
         description: |-
@@ -860,6 +875,18 @@ definitions:
         type: string
       thumbnailUrl:
         description: Output only. The thumbnail URL for showing a preview of the given photo.
+        type: string
+      transferStatus:
+        description: Output only. Status of rights transfer on this photo.
+        enum:
+          - TRANSFER_STATUS_UNKNOWN
+          - NEVER_TRANSFERRED
+          - PENDING
+          - COMPLETED
+          - REJECTED
+          - EXPIRED
+          - CANCELLED
+          - RECEIVED_VIA_TRANSFER
         type: string
       uploadReference:
         $ref: '#/definitions/UploadRef'
@@ -901,6 +928,14 @@ definitions:
   Place:
     description: Place metadata for an entity.
     properties:
+      languageCode:
+        description: |-
+          Output-only. The language_code that the name is localized with. This should
+          be the language_code specified in the request, but may be a fallback.
+        type: string
+      name:
+        description: 'Output-only. The name of the place, localized to the language_code.'
+        type: string
       placeId:
         description: |-
           Place identifier, as described in
@@ -910,6 +945,16 @@ definitions:
   Pose:
     description: Raw pose measurement for an entity.
     properties:
+      accuracyMeters:
+        description: |-
+          The estimated horizontal accuracy of this pose in meters with 68%
+          confidence (one standard deviation). For example, on Android, this value is
+          available from this method:
+          https://developer.android.com/reference/android/location/Location#getAccuracy().
+          Other platforms have different methods of obtaining similar accuracy
+          estimations.
+        format: float
+        type: number
       altitude:
         description: |-
           Altitude of the pose in meters above WGS84 ellipsoid.

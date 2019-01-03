@@ -2334,7 +2334,7 @@ paths:
           name: resource_doi
           required: false
           type: string
-        - description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 12 - Preprint'
+        - description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
           format: int64
           in: query
           maximum: 12
@@ -3507,7 +3507,7 @@ paths:
           name: resource_doi
           required: false
           type: string
-        - description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 12 - Preprint'
+        - description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
           format: int64
           in: query
           maximum: 12
@@ -4538,7 +4538,7 @@ definitions:
   Article:
     properties:
       defined_type:
-        description: Type of article identificator
+        description: 'Integer which is mapped to item types as: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
         example: 3
         format: int64
         type: integer
@@ -4688,7 +4688,7 @@ definitions:
           defined_key: value for it
         type: object
       defined_type:
-        description: Article type
+        description: 'Article type. In responses this will be an integer which is mapped to item types as: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
         enum:
           - figure
           - media
@@ -4837,7 +4837,7 @@ definitions:
         example: 10.6084/m9.figshare.1407024
         type: string
       item_type:
-        description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 12 - Preprint'
+        description: 'Only return collections with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
         example: 1
         format: int64
         maximum: 12
@@ -4877,7 +4877,7 @@ definitions:
           defined_key: value for it
         type: object
       defined_type:
-        description: Article type
+        description: 'Article type. In responses this will be an integer which is mapped to item types as: 1 - Figure, 2 - Media, 3 - Dataset, 4 - Fileset, 5 - Poster, 6 - Paper, 7 - Presentation, 8 - Thesis, 9 - Code, 11 - Metadata, 12 - Preprint'
         enum:
           - figure
           - media

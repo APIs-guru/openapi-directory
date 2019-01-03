@@ -107,7 +107,7 @@ paths:
                     name: Microsoft.Blueprint/blueprints/read
   '/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.Blueprint/blueprints':
     get:
-      description: Create or update blueprint definition.
+      description: List Blueprint definitions within a Management Group.
       operationId: Blueprints_List
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -166,7 +166,7 @@ paths:
         - $ref: '#/parameters/BlueprintNameParameter'
       responses:
         '200':
-          description: OK -- blueprint deinition deleted
+          description: OK -- blueprint definition deleted
           schema:
             $ref: '#/definitions/Blueprint'
         '204':
@@ -1416,7 +1416,7 @@ definitions:
   ParameterValueCollection:
     additionalProperties:
       $ref: '#/definitions/ParameterValueBase'
-      description: keyValue pair of parameter fullfillment.
+      description: keyValue pair of parameter fulfillment.
     description: A dictionary for parameters and their corresponding values.
     properties: {}
     type: object
@@ -1427,7 +1427,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/PolicyAssignmentArtifactProperties'
-        description: properties for policyAssginment Artifact
+        description: properties for policyAssignment Artifact
         x-ms-client-flatten: true
     required:
       - properties

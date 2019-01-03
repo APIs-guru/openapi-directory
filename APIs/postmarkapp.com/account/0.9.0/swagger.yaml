@@ -5,9 +5,9 @@ host: api.postmarkapp.com
 basePath: /
 info:
   description: |
-    Postmark makes sending and receiving email 
+    Postmark makes sending and receiving email
     incredibly easy. The Account-level API allows users to
-    configure all Servers, Domains, and Sender Signatures associated 
+    configure all Servers, Domains, and Sender Signatures associated
     with an Account.
   title: Postmark Account-level
   version: 0.9.0
@@ -174,10 +174,10 @@ paths:
   '/domains/{domainid}/rotatedkim':
     post:
       description: |
-        Creates a new DKIM key to replace your current key. Until the DNS entries are confirmed, 
-        the new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields. 
-        After the new DKIM value is verified in DNS, the pending values will migrate to 
-        `DKIMTextValue` and `DKIMPendingTextValue` and Postmark will begin to sign emails 
+        Creates a new DKIM key to replace your current key. Until the DNS entries are confirmed,
+        the new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields.
+        After the new DKIM value is verified in DNS, the pending values will migrate to
+        `DKIMTextValue` and `DKIMPendingTextValue` and Postmark will begin to sign emails
         with the new DKIM key.
       operationId: rotateDKIMKeyForDomain
       parameters:
@@ -422,10 +422,10 @@ paths:
   '/senders/{signatureid}/requestnewdkim':
     post:
       description: |
-        Requests a new DKIM key to be created. Until the DNS entries are confirmed, 
-        the new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields. 
-        After the new DKIM value is verified in DNS, the pending values will migrate to 
-        `DKIMTextValue` and `DKIMPendingTextValue` and Postmark will begin to sign emails 
+        Requests a new DKIM key to be created. Until the DNS entries are confirmed,
+        the new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields.
+        After the new DKIM value is verified in DNS, the pending values will migrate to
+        `DKIMTextValue` and `DKIMPendingTextValue` and Postmark will begin to sign emails
         with the new DKIM key.
       operationId: requestNewDKIMKeyForSenderSignature
       parameters:
@@ -640,6 +640,32 @@ paths:
       summary: Edit a Server
       tags:
         - Server Management API
+  /templates/push:
+    put:
+      operationId: pushTemplates
+      parameters:
+        - description: The token associated with the Account on which this request will operate.
+          in: header
+          name: X-Postmark-Account-Token
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/TemplatesPushModel'
+      responses:
+        '200':
+          description: ok
+          schema:
+            $ref: '#/definitions/TemplatesPushResponse'
+        '422':
+          $ref: '#/responses/422'
+        '500':
+          $ref: '#/responses/500'
+      summary: Push templates from one server to another
+      tags:
+        - Templates API
 definitions:
   CreateServerPayload:
     description: ''
@@ -991,3 +1017,29 @@ definitions:
         type: integer
       Message:
         type: string
+  TemplatesPushModel:
+    description: ''
+    properties:
+      DestinationServerId:
+        type: integer
+      PerformChanges:
+        type: boolean
+      SourceServerId:
+        type: integer
+  TemplatesPushResponse:
+    description: ''
+    properties:
+      Templates:
+        items:
+          properties:
+            Action:
+              type: string
+            Alias:
+              type: string
+            Name:
+              type: string
+            TemplateId:
+              type: integer
+        type: array
+      TotalCount:
+        type: integer

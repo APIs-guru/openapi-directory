@@ -208,9 +208,7 @@ paths:
         '200':
           description: ''
           schema:
-            items:
-              $ref: '#/definitions/Season'
-            type: array
+            $ref: '#/definitions/Season'
       summary: Current Season
   '/{format}/DfsSlatesByDate/{date}':
     get:
@@ -562,7 +560,7 @@ paths:
           type: string
         - description: |-
             The abbreviation of the requested team.
-            <br>Examples: <code>SF</code>, <code>NYY</code>.
+            <br>Examples: <code>MIA</code>, <code>PHI</code>.
           in: path
           name: team
           required: true
@@ -884,6 +882,8 @@ definitions:
       DateTime:
         type: string
       Day:
+        type: string
+      GameEndDateTime:
         type: string
       GameID:
         type: integer

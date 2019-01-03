@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/doubleclicksearch/v2/rest'
       version: v1
@@ -811,7 +811,7 @@ definitions:
         type: string
       rowCount:
         default: 10000
-        description: 'Synchronous report only. The maxinum number of rows to return; additional rows are dropped. Acceptable values are 0 to 10000, inclusive. Defaults to 10000.'
+        description: 'Synchronous report only. The maximum number of rows to return; additional rows are dropped. Acceptable values are 0 to 10000, inclusive. Defaults to 10000.'
         format: int32
         maximum: 10000
         minimum: 0

@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'The Google Cloud Resource Manager API provides methods for creating, reading, and updating project metadata.'
+  description: 'Creates, reads, and updates metadata for Google Cloud Platform resource containers.'
   title: Cloud Resource Manager
   version: v1beta1
   x-apiClientRegistration:
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -1330,7 +1330,8 @@ definitions:
           to the following regular expression: \[a-z\](\[-a-z0-9\]*\[a-z0-9\])?.
 
           Label values must be between 0 and 63 characters long and must conform
-          to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?.
+          to the regular expression (\[a-z\](\[-a-z0-9\]*\[a-z0-9\])?)?. A label
+          value can be empty.
 
           No more than 256 labels can be associated with a given resource.
 

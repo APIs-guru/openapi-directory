@@ -24,7 +24,19 @@ info:
     }
     ```
 
-    Similar to above, but sent from a specific number
+
+    You can send unicode automatically using the `auto-unicode` query parameter. 
+    Alternatively, you can specify UNICODE in the request body. Here is an example that sets the `encoding` explicitly
+
+    ```
+    {
+      "to": "+27001234567",
+      "body": "Dobrá práce! Jak se máš?",
+      "encoding": "UNICODE"
+    }
+    ```
+
+    You can also specify a from number
 
     ```
     {
@@ -275,6 +287,22 @@ paths:
       description: |
         Send messages to one or more recipients.
 
+        #### Repliability
+
+        When a sent message is _repliable_,  the BulkSMS system can process an SMS response sent by your recipient.
+
+        The message sent by your customer is called a mobile originating (MO) message and would be available under `RECEIVED` messages. 
+        You can obtain a list of MOs using the [retrieve messages API call](#tag/Message%2Fpaths%2F~1messages%2Fget).
+        In addition you can also get a list of the MOs that are associated with a specific sent message (see the [list related messages API call](#tag/Message%2Fpaths%2F~1messages~1%7Bid%7D~1relatedReceivedMessages%2Fget)).
+
+        If you use a specific _sender id_ in the `from` property of the send message, the message will not be repliable.
+        If you want a message to be repliable, you need to specify `REPLIABLE` in the `from.type` property.
+
+        If you do not set the `from` property, your account settings are considered to determine whether or not the message is repliable.
+        If the _default repliable_ setting on your account is _yes_ then the message will be repliable. 
+        If this setting is _no_, the message will not be repliable.
+
+
         #### Body templates
 
         When sending a message you can use template fields to customise the message text.
@@ -501,7 +529,10 @@ paths:
                 String myPassword = "password";
 
                 // the details of the message we want to send
-                String myData = "{to: \"1111111\", body: \"Hello Mr. Smith!\"}";
+                String myData = "{to: \"1111111\", encoding: \"UNICODE\", body: \"Dobrá práce! Jak se máš?\"}";
+
+                // if your message does not contain unicode, the "encoding" is not required:
+                // String myData = "{to: \"1111111\", body: \"Hello Mr. Smith!\"}";
 
                 // build the request based on the supplied settings
                 URL url = new URL(myURI);
@@ -1061,8 +1092,8 @@ definitions:
         description: |
           Identifies the sender.
 
-          The value of this property is ignored if your account profile does not allow you to specify the sender.
-          Instead of a structured object, you can supply a string value here.  If you do this, the `type` of the sender is derived to be either INTERNATIONAL or ALPHANUMERIC.  If the value does not begin with a `+` and it contains at least one character that is not a digit, the type is detected as ALPHANUMERIC. Otherwise, the type is detected as INTERNATIONAL.
+          Instead of a structured object, you can supply a string value here. 
+          If you do this, the `type` of the sender is derived to be either INTERNATIONAL or ALPHANUMERIC.  If the value does not begin with a `+` and it contains at least one character that is not a digit, the type is detected as ALPHANUMERIC. Otherwise, the type is detected as INTERNATIONAL.
         properties:
           address:
             description: |

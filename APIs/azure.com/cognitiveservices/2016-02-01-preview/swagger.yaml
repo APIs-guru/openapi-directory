@@ -182,7 +182,7 @@ paths:
         '200':
           description: "The resource provider should return 200 (OK) to indicate that the operation completed successfully.\nFor a detailed explanation of each field in the response body, please refer to the request body description in the PUT resource section. The only GET specific properties are \"name,\" \"type\" and \"id.\"\nField\tDescription\nKind\trequired.  String.\n\tThe API set for this API account. It can be \n\t· a single API, for example: Face API, Vision API, Speech API. \n\ta bundle of APIs:  Face + Speech, Vision + Emotion, etc.\nsku.name\tRequired.\n\tThe pricing tier/plan of this API. Could be: \n\tF0 - Free\n\tB0 - Basic\n\tS0 - Standard\n\tP0 - Premium\n"
           examples:
-            application/json: "{\n  \"id\": \"/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}\",\n  \"name\": \"{name}\",\n  \"type\": \"Microsoft.CognitiveSerices/accounts\",\n  \"location\": \"North US\",\n  \"tags\": {\n    \"key1\": \"value 1\",\n    \"key2\": \"value 2\"\n   },\n  \"kind\" : \"resource kind\",\n   \"sku\": {\n\t    \"name\": \"sku code\"\n\t} \n  \"etag\": \"00000000-0000-0000-0000-000000000000\",\n  \"properties\": { }\n}"
+            application/json: "{\n  \"id\": \"/subscriptions/{id}/resourceGroups/{group}/providers/{rpns}/{type}/{name}\",\n  \"name\": \"{name}\",\n  \"type\": \"Microsoft.CognitiveServices/accounts\",\n  \"location\": \"North US\",\n  \"tags\": {\n    \"key1\": \"value 1\",\n    \"key2\": \"value 2\"\n   },\n  \"kind\" : \"resource kind\",\n   \"sku\": {\n\t    \"name\": \"sku code\"\n\t} \n  \"etag\": \"00000000-0000-0000-0000-000000000000\",\n  \"properties\": { }\n}"
           schema:
             $ref: '#/definitions/CognitiveServicesAccount'
         default:
@@ -278,7 +278,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: 'The name of the cognitive services account within the specified resource group. Congitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  '
+        - description: 'The name of the cognitive services account within the specified resource group. Cognitive Services account names must be between 3 and 24 characters in length and use numbers and lower-case letters only.  '
           in: path
           maxLength: 24
           minLength: 3
@@ -522,7 +522,7 @@ definitions:
           modelAsString: false
           name: ProvisioningState
   CognitiveServicesAccountPropertiesCreateParameters:
-    description: 'required empty proprties object. Must be an empty object, and must exist in the request.'
+    description: 'required empty properties object. Must be an empty object, and must exist in the request.'
   CognitiveServicesAccountUpdateParameters:
     description: The parameters to provide for the account.
     properties:

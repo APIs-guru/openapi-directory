@@ -34,6 +34,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  BearerAuthPath:
+    description: The bearer authorization header to use; containing the user's ARM token used to validate azure accounts information.
+    in: header
+    name: Authorization
+    required: true
+    type: string
+    x-ms-parameter-location: method
   CEntityIdInPath:
     description: The composite entity extractor ID.
     format: uuid
@@ -50,6 +57,13 @@ parameters:
     type: string
     x-ms-parameter-location: client
     x-ms-skip-url-encoding: true
+  ForcePath:
+    default: false
+    description: A flag to indicate whether to force an operation.
+    in: query
+    name: force
+    type: boolean
+    x-ms-parameter-location: method
   HEntityIdInPath:
     description: The hierarchical entity extractor ID.
     format: uuid
@@ -73,6 +87,14 @@ parameters:
     minimum: 0
     name: skip
     type: integer
+    x-ms-parameter-location: method
+  SlotNameInPath:
+    description: The publishing slot name.
+    format: uuid
+    in: path
+    name: slotName
+    required: true
+    type: string
     x-ms-parameter-location: method
   TakeInPath:
     default: 100
@@ -114,8 +136,8 @@ paths:
           parameters:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
-            skip: '0'
-            take: '100'
+            skip: 0
+            take: 100
           responses:
             '200':
               body:
@@ -472,7 +494,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Imports an application to LUIS, the application''s structure should be included in in the request body.'
+      description: 'Imports an application to LUIS, the application''s structure should be included in the request body.'
       operationId: Apps_Import
       parameters:
         - description: 'The application name to create. If not specified, the application name will be read from the imported object.'
@@ -706,6 +728,7 @@ paths:
       operationId: Apps_Delete
       parameters:
         - $ref: '#/parameters/AppIdInPath'
+        - $ref: '#/parameters/ForcePath'
       produces:
         - application/json
       responses:
@@ -807,6 +830,123 @@ paths:
               name: LUIS App name updated
           responses:
             '200':
+              body:
+                code: Success
+                message: Operation Successful
+              headers: {}
+  '/apps/{appId}/azureaccounts':
+    delete:
+      consumes:
+        - application/json
+      description: Removes assigned azure account from the application.
+      operationId: AzureAccounts_RemoveFromApp
+      parameters:
+        - $ref: '#/parameters/AppIdInPath'
+        - $ref: '#/parameters/BearerAuthPath'
+        - description: The azure account information object.
+          in: body
+          name: azureAccountInfoObject
+          schema:
+            $ref: '#/definitions/AzureAccountInfoObject'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/OperationStatus'
+        default:
+          description: Error Response.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: apps - Removes an assigned LUIS azure account from an application
+      x-ms-examples:
+        Successful delete assigned azure account request:
+          parameters:
+            Authorization: 'Bearer {ARM Token}'
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
+            appId: 363187f1-c573-46b3-bc4c-ae01d686e68e
+            azureAccountInfoObject:
+              accountName: '{account_name}'
+              azureSubscriptionId: '{azure_subscription_id}'
+              resourceGroup: '{resource_group_name}'
+          responses:
+            '200':
+              body:
+                code: Success
+                message: Operation Successful
+              headers: {}
+    get:
+      description: Gets the LUIS azure accounts assigned to the application for the user using his ARM token.
+      operationId: AzureAccounts_GetAssigned
+      parameters:
+        - $ref: '#/parameters/AppIdInPath'
+        - $ref: '#/parameters/BearerAuthPath'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A list of azure account information objects.
+          schema:
+            $ref: '#/definitions/AzureAccountInfoList'
+        default:
+          description: Error Response.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: apps - Get LUIS azure accounts assigned to the application
+      x-ms-examples:
+        Successful Get assigned azure accounts request:
+          parameters:
+            Authorization: 'Bearer {ARM Token}'
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
+            appId: 363187f1-c573-46b3-bc4c-ae01d686e68e
+          responses:
+            '200':
+              body:
+                - accountName: '{account_name}'
+                  azureSubscriptionId: '{azure_subscription_id}'
+                  resourceGroup: '{resource_group_name}'
+              headers: {}
+    post:
+      consumes:
+        - application/json
+      description: Assigns an azure account to the application.
+      operationId: AzureAccounts_AssignToApp
+      parameters:
+        - $ref: '#/parameters/AppIdInPath'
+        - $ref: '#/parameters/BearerAuthPath'
+        - description: The azure account information object.
+          in: body
+          name: azureAccountInfoObject
+          schema:
+            $ref: '#/definitions/AzureAccountInfoObject'
+      produces:
+        - application/json
+      responses:
+        '201':
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/OperationStatus'
+        default:
+          description: Error Response.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: apps - Assign a LUIS azure account to an application
+      x-ms-examples:
+        Successful Assign azure account request:
+          parameters:
+            Authorization: 'Bearer {ARM Token}'
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
+            appId: 363187f1-c573-46b3-bc4c-ae01d686e68e
+            azureAccountInfoObject:
+              accountName: '{account_name}'
+              azureSubscriptionId: '{azure_subscription_id}'
+              resourceGroup: '{resource_group_name}'
+          responses:
+            '201':
               body:
                 code: Success
                 message: Operation Successful
@@ -1006,7 +1146,11 @@ paths:
         - application/json
       responses:
         '201':
-          description: An object containing the application endpoint URL and its assigned endpoint key.
+          description: 'An object containing the application endpoint URL, its assigned endpoint key and publishing status.'
+          schema:
+            $ref: '#/definitions/ProductionOrStagingEndpointInfo'
+        '207':
+          description: 'An object containing the application endpoint URL, its assigned endpoint key and publishing status in case that publishing one or more regions failed.'
           schema:
             $ref: '#/definitions/ProductionOrStagingEndpointInfo'
         default:
@@ -1026,8 +1170,18 @@ paths:
             '201':
               body:
                 assignedEndpointKey: 11be6373fca44ded80fbe2afa8597c18
-                endpointRegion: westus
+                endpointRegion: 'westus, cus'
                 endpointUrl: 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/11be6373fca44ded80fbe2afa8597c18'
+                failedRegions: null
+                isStaging: false
+                publishedDateTime: '2017-11-28T19:20:28Z'
+              headers: {}
+            '207':
+              body:
+                assignedEndpointKey: 11be6373fca44ded80fbe2afa8597c18
+                endpointRegion: 'westus, cus'
+                endpointUrl: 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/11be6373fca44ded80fbe2afa8597c18'
+                failedRegions: cus
                 isStaging: false
                 publishedDateTime: '2017-11-28T19:20:28Z'
               headers: {}
@@ -1226,8 +1380,8 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
             appId: 363187f1-c573-46b3-bc4c-ae01d686e68e
-            skip: '0'
-            take: '100'
+            skip: 0
+            take: 100
           responses:
             '200':
               body:
@@ -1630,8 +1784,8 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
             appId: 11be6373fca44ded80fbe2afa8597c18
-            skip: '0'
-            take: '100'
+            skip: 0
+            take: 100
             versionId: '0.1'
           responses:
             '200':
@@ -3336,8 +3490,8 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
             appId: 86226c53-b7a6-416f-876b-226b2b5ab07b
-            skip: '0'
-            take: '100'
+            skip: 0
+            take: 100
             versionId: '0.1'
           responses:
             '200':
@@ -6388,8 +6542,8 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
             appId: 86226c53-b7a6-416f-876b-226b2b5ab07b
-            skip: '0'
-            take: '100'
+            skip: 0
+            take: 100
             versionId: '0.1'
           responses:
             '200':
@@ -6764,8 +6918,8 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
             appId: 86226c53-b7a6-416f-876b-226b2b5ab07b
-            skip: '0'
-            take: '100'
+            skip: 0
+            take: 100
             versionId: '0.1'
           responses:
             '200':
@@ -6812,8 +6966,8 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
             appId: 86226c53-b7a6-416f-876b-226b2b5ab07b
-            skip: '0'
-            take: '100'
+            skip: 0
+            take: 100
             versionId: '0.1'
           responses:
             '200':
@@ -7209,7 +7363,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: A list of the explict list items
+          description: A list of the explicit list items
           schema:
             $ref: '#/definitions/ExplicitListItemList'
         default:
@@ -8397,8 +8551,8 @@ paths:
             Endpoint: '{Endpoint}'
             Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
             appId: 86226c53-b7a6-416f-876b-226b2b5ab07b
-            skip: '0'
-            take: '100'
+            skip: 0
+            take: 100
             versionId: '0.1'
           responses:
             '200':
@@ -9424,6 +9578,103 @@ paths:
                 status: Queued
                 statusId: 9
               headers: {}
+  /azureaccounts:
+    get:
+      description: Gets the LUIS azure accounts for the user using his ARM token.
+      operationId: AzureAccounts_GetUserLUISAccounts
+      parameters:
+        - $ref: '#/parameters/BearerAuthPath'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A list of azure account information objects.
+          schema:
+            $ref: '#/definitions/AzureAccountInfoList'
+        default:
+          description: Error Response.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: user - Get LUIS azure accounts
+      x-ms-examples:
+        Successful Get azure accounts request:
+          parameters:
+            Authorization: 'Bearer {ARM Token}'
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
+          responses:
+            '200':
+              body:
+                - accountName: '{account_name}'
+                  azureSubscriptionId: '{azure_subscription_id}'
+                  resourceGroup: '{resource_group_name}'
+              headers: {}
+  '/package/{appId}/slot/{slotName}/gzip':
+    get:
+      description: Packages published LUIS application as GZip.
+      operationId: Apps_PackagePublishedApplicationAsGzip
+      parameters:
+        - $ref: '#/parameters/AppIdInPath'
+        - $ref: '#/parameters/SlotNameInPath'
+      produces:
+        - application/octet-stream
+        - application/json
+      responses:
+        '200':
+          description: The GZip binary stream of the published application package.
+          schema:
+            type: file
+        default:
+          description: Error Response.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: package - Gets published LUIS application package in binary stream GZip format
+      x-ms-examples:
+        Successful Get published application package request:
+          parameters:
+            Content-Type: application/octet-stream
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
+            appId: 363187f1-c573-46b3-bc4c-ae01d686e68e
+            slotName: PRODUCTION
+            versionId: '0.1'
+          responses:
+            '200':
+              body: '{binary}'
+              headers: {}
+  '/package/{appId}/versions/{versionId}/gzip':
+    get:
+      description: Packages trained LUIS application as GZip.
+      operationId: Apps_PackageTrainedApplicationAsGzip
+      parameters:
+        - $ref: '#/parameters/AppIdInPath'
+        - $ref: '#/parameters/VersionIdInPath'
+      produces:
+        - application/octet-stream
+        - application/json
+      responses:
+        '200':
+          description: The GZip binary stream of the trained application package.
+          schema:
+            type: file
+        default:
+          description: Error Response.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: package - Gets trained LUIS application package in binary stream GZip format
+      x-ms-examples:
+        Successful Get published application package request:
+          parameters:
+            Content-Type: application/octet-stream
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '00000000000000000000000000000000'
+            appId: 363187f1-c573-46b3-bc4c-ae01d686e68e
+            slotName: PRODUCTION
+            versionId: '0.1'
+          responses:
+            '200':
+              body: '{binary}'
+              headers: {}
 definitions:
   AppVersionSettingObject:
     description: Object model of an application version setting.
@@ -9596,6 +9847,28 @@ definitions:
     items:
       $ref: '#/definitions/AvailablePrebuiltEntityModel'
     type: array
+  AzureAccountInfoList:
+    description: List of Azure account info objects.
+    items:
+      $ref: '#/definitions/AzureAccountInfoObject'
+    type: array
+  AzureAccountInfoObject:
+    description: Defines the azure account information object.
+    properties:
+      accountName:
+        description: The azure account name.
+        type: string
+      azureSubscriptionId:
+        description: The id for the azure subscription.
+        type: string
+      resourceGroup:
+        description: The azure resource group name.
+        type: string
+    required:
+      - azureSubscriptionId
+      - resourceGroup
+      - accountName
+    type: object
   BatchLabelExample:
     description: Response when adding a batch of labeled examples.
     properties:
@@ -9755,6 +10028,9 @@ definitions:
         type: string
       endpointUrl:
         description: The Runtime endpoint URL for this model version.
+        type: string
+      failedRegions:
+        description: Regions where publishing failed.
         type: string
       isStaging:
         description: 'Indicates if the staging slot should be used, instead of the Production one.'
@@ -9935,13 +10211,13 @@ definitions:
     description: A labeled example.
     properties:
       entityLabels:
-        description: The idenfied entities within the utterance.
+        description: The identified entities within the utterance.
         items:
           $ref: '#/definitions/EntityLabelObject'
           type: object
         type: array
       intentName:
-        description: The idenfitied intent representing the utterance.
+        description: The identified intent representing the utterance.
         type: string
       text:
         description: The sample's utterance.
@@ -10762,7 +11038,7 @@ definitions:
       $ref: '#/definitions/PrebuiltEntityExtractor'
     type: array
   PrebuiltExtractorNames:
-    description: Objet model for adding a prebuilt entity to the application.
+    description: Object model for adding a prebuilt entity to the application.
     items:
       type: string
     type: array
@@ -10774,7 +11050,7 @@ definitions:
     description: Object model for updating an application's publish settings.
     properties:
       sentimentAnalysis:
-        description: Setting sentiment analysis as true returns the Sentiment of the input utterance along with the resopnse
+        description: Setting sentiment analysis as true returns the Sentiment of the input utterance along with the response
         type: boolean
         x-nullable: false
       speech:
@@ -10794,7 +11070,7 @@ definitions:
         format: uuid
         type: string
       sentimentAnalysis:
-        description: Setting sentiment analysis as true returns the Sentiment of the input utterance along with the resopnse
+        description: Setting sentiment analysis as true returns the Sentiment of the input utterance along with the response
         type: boolean
         x-ms-client-name: IsSentimentAnalysisEnabled
         x-nullable: false

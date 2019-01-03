@@ -32,6 +32,13 @@ securityDefinitions:
     type: basic
 security:
   - basicAuth: []
+parameters:
+  AsAccountParameter:
+    description: 'An account name to change the resource scope of the request to that account, if permissions allow (admin only)'
+    in: header
+    name: x-anchore-account
+    required: false
+    type: string
 tags:
   - description: Subscription Management
     name: Subscriptions
@@ -59,6 +66,10 @@ tags:
     name: Events
   - description: Resource Queries
     name: Queries
+  - description: 'Manage Accounts, Users, and Credentials'
+    name: User Management
+  - description: Get and operate on the authenticated user's identity
+    name: Identity
 paths:
   /:
     get:
@@ -66,8 +77,336 @@ paths:
       operationId: ping
       responses:
         '200':
-          description: Version check response
+          description: 'Version check response, returns the api version prefix (e.g. ''v1'')'
+          schema:
+            type: string
+      x-anchore-authz-action: None
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
+  /account:
+    get:
+      operationId: get_users_account
+      responses:
+        '200':
+          description: User details for caller's user
+          schema:
+            $ref: '#/definitions/Account'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: List the account for the authenticated user
+      tags:
+        - Identity
+      x-anchore-authz-action: None
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+  /accounts:
+    get:
+      operationId: list_accounts
+      parameters:
+        - description: Filter accounts by state
+          enum:
+            - active
+            - disabled
+            - deleting
+          in: query
+          name: state
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Accound summary listing
+          schema:
+            $ref: '#/definitions/AccountList'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: List user summaries. Only available to the system admin user.
+      tags:
+        - User Management
+      x-anchore-authz-action: listAccounts
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+    post:
+      operationId: create_account
+      parameters:
+        - in: body
+          name: account
+          required: true
+          schema:
+            $ref: '#/definitions/AccountCreationRequest'
+      responses:
+        '200':
+          description: Account Record
+          schema:
+            $ref: '#/definitions/Account'
+        '409':
+          description: Conflicting user information. User already exists.
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: Create a new user. Only avaialble to admin user.
+      tags:
+        - User Management
+      x-anchore-authz-action: createAccount
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+  '/accounts/{accountname}':
+    delete:
+      operationId: delete_account
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Successful deletion
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: 'Delete the specified account, only allowed if the account is in the disabled state. All users will be deleted along with the account and all resources will be garbage collected'
+      tags:
+        - User Management
+      x-anchore-authz-action: deleteAccount
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+    get:
+      operationId: get_account
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Get user information
+          schema:
+            $ref: '#/definitions/Account'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: 'Get info about an user. Only available to admin user. Uses the main user Id, not a username.'
+      tags:
+        - User Management
+      x-anchore-authz-action: getAccount
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+  '/accounts/{accountname}/state':
+    put:
+      operationId: update_account_state
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+        - in: body
+          name: desired_state
+          required: true
+          schema:
+            $ref: '#/definitions/AccountStatus'
+      responses:
+        '200':
+          description: Updated state of the account
+          schema:
+            $ref: '#/definitions/AccountStatus'
+        '400':
+          description: State requested is invalid based on current state of the account
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: Update the state of an account to either enabled or disabled. For deletion use the DELETE route
+      tags:
+        - User Management
+      x-anchore-authz-action: updateAccount
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+  '/accounts/{accountname}/users':
+    get:
+      operationId: list_users
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User listing
+          schema:
+            description: List of user credential records
+            items:
+              $ref: '#/definitions/User'
+            type: array
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: List accounts for the user
+      tags:
+        - User Management
+      x-anchore-authz-action: listUsers
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+    post:
+      operationId: create_user
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+        - in: body
+          name: user
+          required: true
+          schema:
+            $ref: '#/definitions/UserCreationRequest'
+      responses:
+        '200':
+          description: Credential summary
+          schema:
+            $ref: '#/definitions/User'
+      summary: Create a new user
+      tags:
+        - User Management
+      x-anchore-authz-action: createUser
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+  '/accounts/{accountname}/users/{username}':
+    delete:
+      operationId: delete_user
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+        - in: path
+          name: username
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Deleted credential
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: Delete a specific user credential by username of the credential. Cannot be the credential used to authenticate the request.
+      tags:
+        - User Management
+      x-anchore-authz-action: deleteUser
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+    get:
+      operationId: get_account_user
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+        - in: path
+          name: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User record
+          schema:
+            $ref: '#/definitions/User'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: Get a specific user in the specified account
+      tags:
+        - User Management
+      x-anchore-authz-action: getUser
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+  '/accounts/{accountname}/users/{username}/credentials':
+    delete:
+      operationId: delete_user_credential
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+        - in: path
+          name: username
+          required: true
+          type: string
+        - enum:
+            - password
+          in: query
+          name: credential_type
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Successful deletion
+        '400':
+          description: 'Conflict, cannot delete the credential used to authenticate this request'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: Delete a credential by type
+      tags:
+        - User Management
+      x-anchore-authz-action: updateUser
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+    get:
+      operationId: list_user_credentials
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+        - in: path
+          name: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: User credential listing
+          schema:
+            $ref: '#/definitions/CredentialList'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: Get current credential summary
+      tags:
+        - User Management
+      x-anchore-authz-action: getUser
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
+    post:
+      operationId: create_user_credential
+      parameters:
+        - in: path
+          name: accountname
+          required: true
+          type: string
+        - in: path
+          name: username
+          required: true
+          type: string
+        - in: body
+          name: credential
+          required: true
+          schema:
+            $ref: '#/definitions/AccessCredential'
+      responses:
+        '200':
+          description: 'Add a credential, overwritting if already exists'
+          schema:
+            $ref: '#/definitions/User'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: add/replace credential
+      tags:
+        - User Management
+      x-anchore-authz-action: updateUser
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.accounts
   /events:
     delete:
       description: Delete all or a subset of events filtered using the optional query parameters
@@ -88,6 +427,7 @@ paths:
           name: level
           required: false
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: List of deleted event IDs
@@ -102,6 +442,7 @@ paths:
       summary: Delete Events
       tags:
         - Events
+      x-anchore-authz-action: deleteEvents
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.events
     get:
       description: Returns a paginated list of events in the descending order of their occurrence. Optional query parameters may be used for filtering results
@@ -154,6 +495,7 @@ paths:
           name: limit
           required: false
           type: integer
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Paginated list of event records and the next token
@@ -162,6 +504,7 @@ paths:
       summary: List Events
       tags:
         - Events
+      x-anchore-authz-action: listEvents
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.events
   '/events/{eventId}':
     delete:
@@ -173,12 +516,14 @@ paths:
           name: eventId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Delete success
       summary: Delete Event
       tags:
         - Events
+      x-anchore-authz-action: getEvent
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.events
     get:
       description: Lookup an event by its event ID
@@ -189,6 +534,7 @@ paths:
           name: eventId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Single event record
@@ -197,7 +543,17 @@ paths:
       summary: Get Event
       tags:
         - Events
+      x-anchore-authz-action: getEvent
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.events
+  /health:
+    get:
+      description: 'Health check, returns 200 and no body if service is running'
+      operationId: health_noop
+      responses:
+        '200':
+          description: Empty body on success
+      x-anchore-authz-action: None
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   /imageimport:
     post:
       operationId: import_image
@@ -207,6 +563,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ImageAnalysisReport'
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Import task accepted
@@ -219,6 +576,7 @@ paths:
       summary: Import and image analysis directly
       tags:
         - Images
+      x-anchore-authz-action: importImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   /images:
     get:
@@ -241,6 +599,7 @@ paths:
           name: fulltag
           required: false
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: successful operation
@@ -253,6 +612,7 @@ paths:
       summary: List all visible images
       tags:
         - Images
+      x-anchore-authz-action: listImages
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
     post:
       description: Creates a new analysis task that is executed asynchronously
@@ -273,6 +633,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ImageAnalysisRequest'
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Successfully added image to analysis queue
@@ -285,6 +646,7 @@ paths:
       summary: Submit a new image for analysis by the engine
       tags:
         - Images
+      x-anchore-authz-action: createImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/by_id/{imageId}':
     delete:
@@ -298,6 +660,7 @@ paths:
           name: force
           required: false
           type: boolean
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Image deletion success
@@ -308,6 +671,7 @@ paths:
       summary: Delete image by docker imageId
       tags:
         - Images
+      x-anchore-authz-action: deleteImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
     get:
       operationId: get_image_by_imageId
@@ -316,6 +680,7 @@ paths:
           name: imageId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Image lookup success
@@ -328,6 +693,7 @@ paths:
       summary: Lookup image by docker imageId
       tags:
         - Images
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/by_id/{imageId}/check':
     get:
@@ -354,6 +720,7 @@ paths:
           name: history
           required: false
           type: boolean
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Policy evaluation success
@@ -367,6 +734,7 @@ paths:
       tags:
         - Images
         - Policy Evaluation
+      x-anchore-authz-action: getImageEvaluation
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/by_id/{imageId}/content':
     get:
@@ -376,6 +744,7 @@ paths:
           name: imageId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Content of specified type from the image
@@ -392,6 +761,7 @@ paths:
         - Images
         - Image Content
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/by_id/{imageId}/content/files':
     get:
@@ -401,6 +771,7 @@ paths:
           name: imageId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Content of specified type from the image
@@ -415,6 +786,7 @@ paths:
         - Images
         - Image Content
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/by_id/{imageId}/content/java':
     get:
@@ -424,6 +796,7 @@ paths:
           name: imageId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Content of specified type from the image
@@ -438,6 +811,7 @@ paths:
         - Images
         - Image Content
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/by_id/{imageId}/content/{ctype}':
     get:
@@ -451,6 +825,7 @@ paths:
           name: ctype
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Content of specified type from the image
@@ -465,6 +840,7 @@ paths:
         - Images
         - Image Content
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/by_id/{imageId}/vuln':
     get:
@@ -474,6 +850,7 @@ paths:
           name: imageId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Vulnerability listing for the image
@@ -494,6 +871,7 @@ paths:
         - Images
         - Vulnerabilities
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/by_id/{imageId}/vuln/{vtype}':
     get:
@@ -507,6 +885,7 @@ paths:
           name: vtype
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Vulnerability listing for the image
@@ -521,6 +900,7 @@ paths:
         - Images
         - Vulnerabilities
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}':
     delete:
@@ -534,12 +914,14 @@ paths:
           name: force
           required: false
           type: boolean
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Image deletion success
       summary: Delete an image analysis
       tags:
         - Images
+      x-anchore-authz-action: deleteImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
     get:
       operationId: get_image
@@ -548,6 +930,7 @@ paths:
           name: imageDigest
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Image lookup success
@@ -560,6 +943,7 @@ paths:
       summary: Get image metadata
       tags:
         - Images
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}/check':
     get:
@@ -586,6 +970,11 @@ paths:
           name: history
           required: false
           type: boolean
+        - in: query
+          name: interactive
+          required: false
+          type: boolean
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Policy evaluation success
@@ -599,6 +988,7 @@ paths:
       tags:
         - Images
         - Policy Evaluation
+      x-anchore-authz-action: getImageEvaluation
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}/content':
     get:
@@ -608,6 +998,7 @@ paths:
           name: imageDigest
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Content listing for the image
@@ -624,6 +1015,7 @@ paths:
         - Images
         - Image Content
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}/content/files':
     get:
@@ -633,6 +1025,7 @@ paths:
           name: imageDigest
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Content of specified type from the image
@@ -647,6 +1040,7 @@ paths:
         - Images
         - Image Content
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}/content/java':
     get:
@@ -656,6 +1050,7 @@ paths:
           name: imageDigest
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Content of specified type from the image
@@ -670,6 +1065,7 @@ paths:
         - Images
         - Image Content
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}/content/{ctype}':
     get:
@@ -683,6 +1079,7 @@ paths:
           name: ctype
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Content of specified type from the image
@@ -697,6 +1094,7 @@ paths:
         - Images
         - Image Content
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}/metadata':
     get:
@@ -706,6 +1104,7 @@ paths:
           name: imageDigest
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Metadata listing for the image
@@ -721,6 +1120,7 @@ paths:
       tags:
         - Images
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}/metadata/{mtype}':
     get:
@@ -734,6 +1134,7 @@ paths:
           name: mtype
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Metadata of specified type from the image
@@ -747,6 +1148,7 @@ paths:
       tags:
         - Images
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}/vuln':
     get:
@@ -756,6 +1158,7 @@ paths:
           name: imageDigest
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Vulnerability listing for the image
@@ -776,6 +1179,7 @@ paths:
         - Images
         - Vulnerabilities
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   '/images/{imageDigest}/vuln/{vtype}':
     get:
@@ -797,6 +1201,7 @@ paths:
           name: vendor_only
           required: false
           type: boolean
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Vulnerability listing for the image
@@ -811,6 +1216,7 @@ paths:
         - Images
         - Vulnerabilities
         - Queries
+      x-anchore-authz-action: getImage
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   /policies:
     get:
@@ -822,6 +1228,7 @@ paths:
           name: detail
           required: false
           type: boolean
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Policy listing
@@ -830,6 +1237,7 @@ paths:
       summary: List policies
       tags:
         - Policies
+      x-anchore-authz-action: listPolicies
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.policies
     post:
       description: Adds a new policy bundle to the system
@@ -840,6 +1248,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PolicyBundle'
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Saved bundle
@@ -852,6 +1261,7 @@ paths:
       summary: Add a new policy
       tags:
         - Policies
+      x-anchore-authz-action: createPolicy
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.policies
   '/policies/{policyId}':
     delete:
@@ -862,6 +1272,7 @@ paths:
           name: policyId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Delete success
@@ -876,6 +1287,7 @@ paths:
       summary: Delete policy
       tags:
         - Policies
+      x-anchore-authz-action: deletePolicy
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.policies
     get:
       description: Get the policy bundle content
@@ -890,6 +1302,7 @@ paths:
           name: detail
           required: false
           type: boolean
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: A list with a single fetched policy bundle record
@@ -902,6 +1315,7 @@ paths:
       summary: Get specific policy
       tags:
         - Policies
+      x-anchore-authz-action: getPolicy
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.policies
     put:
       description: Update/replace and existing policy
@@ -921,6 +1335,7 @@ paths:
           name: active
           required: false
           type: boolean
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: A list with a single updated policy bundle record
@@ -933,6 +1348,7 @@ paths:
       summary: Update policy
       tags:
         - Policies
+      x-anchore-authz-action: updatePolicy
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.policies
   /query/images/by_package:
     get:
@@ -964,6 +1380,7 @@ paths:
           name: limit
           required: false
           type: integer
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Image listing
@@ -976,6 +1393,7 @@ paths:
       summary: List of images containing given package
       tags:
         - Queries
+      x-anchore-authz-action: listImages
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.query
   /query/images/by_vulnerability:
     get:
@@ -1025,6 +1443,7 @@ paths:
           name: limit
           required: false
           type: integer
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Image lookup success
@@ -1038,6 +1457,7 @@ paths:
       tags:
         - Vulnerabilities
         - Queries
+      x-anchore-authz-action: listImages
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.query
   /query/vulnerabilities:
     get:
@@ -1083,11 +1503,14 @@ paths:
       tags:
         - Vulnerabilities
         - Queries
+      x-anchore-authz-action: None
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.query
   /registries:
     get:
       description: List all configured registries the system can/will watch
       operationId: list_registries
+      parameters:
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Registry listing
@@ -1096,6 +1519,7 @@ paths:
       summary: List configured registries
       tags:
         - Registries
+      x-anchore-authz-action: listRegistries
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.registries
     post:
       description: Adds a new registry to the system
@@ -1111,6 +1535,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RegistryConfigurationRequest'
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Saved registry configuration
@@ -1123,6 +1548,7 @@ paths:
       summary: Add a new registry
       tags:
         - Registries
+      x-anchore-authz-action: createRegistry
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.registries
   '/registries/{registry}':
     delete:
@@ -1133,6 +1559,7 @@ paths:
           name: registry
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Delete success
@@ -1143,6 +1570,7 @@ paths:
       summary: Delete a registry configuration
       tags:
         - Registries
+      x-anchore-authz-action: deleteRegistry
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.registries
     get:
       description: Get information on a specific registry
@@ -1152,6 +1580,7 @@ paths:
           name: registry
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Registry configuration
@@ -1160,6 +1589,7 @@ paths:
       summary: Get a specific registry configuration
       tags:
         - Registries
+      x-anchore-authz-action: getRegistry
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.registries
     put:
       description: Replaces an existing registry record with the given record
@@ -1179,6 +1609,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RegistryConfigurationRequest'
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Updated registry configuration
@@ -1191,6 +1622,7 @@ paths:
       summary: Update/replace a registry configuration
       tags:
         - Registries
+      x-anchore-authz-action: updateRegistry
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.registries
   /repositories:
     post:
@@ -1212,6 +1644,7 @@ paths:
           name: lookuptag
           required: false
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Repository and discovered tags added
@@ -1220,6 +1653,7 @@ paths:
       summary: Add repository to watch
       tags:
         - Repository Credentials
+      x-anchore-authz-action: createRepository
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   /status:
     get:
@@ -1237,6 +1671,7 @@ paths:
       summary: Service status
       tags:
         - System
+      x-anchore-authz-action: None
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   /subscriptions:
     get:
@@ -1252,6 +1687,7 @@ paths:
           name: subscription_type
           required: false
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Subscription listing
@@ -1264,6 +1700,7 @@ paths:
       summary: List all subscriptions
       tags:
         - Subscriptions
+      x-anchore-authz-action: listSubscriptions
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.subscriptions
     post:
       description: Create a new subscription to watch a tag and get notifications of changes
@@ -1274,6 +1711,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SubscriptionRequest'
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Subscription add success
@@ -1282,6 +1720,7 @@ paths:
       summary: Add a subscription of a specific type
       tags:
         - Subscriptions
+      x-anchore-authz-action: createSubscription
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.subscriptions
   '/subscriptions/{subscriptionId}':
     delete:
@@ -1291,6 +1730,7 @@ paths:
           name: subscriptionId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Delete success
@@ -1301,6 +1741,7 @@ paths:
       summary: Delete subscriptions of a specific type
       tags:
         - Subscriptions
+      x-anchore-authz-action: deleteSubscription
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.subscriptions
     get:
       operationId: get_subscription
@@ -1309,6 +1750,7 @@ paths:
           name: subscriptionId
           required: true
           type: string
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Filtered subscription list by type
@@ -1321,6 +1763,7 @@ paths:
       summary: Get a specific subscription set
       tags:
         - Subscriptions
+      x-anchore-authz-action: getSubscription
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.subscriptions
     put:
       operationId: update_subscription
@@ -1334,6 +1777,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SubscriptionUpdate'
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: Subscription add success
@@ -1342,11 +1786,14 @@ paths:
       summary: Update an existing and specific subscription
       tags:
         - Subscriptions
+      x-anchore-authz-action: updateSubscription
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.subscriptions
   /summaries/imagetags:
     get:
       description: List all image tags visible to the user
       operationId: list_imagetags
+      parameters:
+        - $ref: '#/parameters/AsAccountParameter'
       responses:
         '200':
           description: successful operation
@@ -1359,6 +1806,7 @@ paths:
       summary: List all visible image digests and tags
       tags:
         - Summaries
+      x-anchore-authz-action: listImages
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.images
   /system:
     get:
@@ -1376,6 +1824,7 @@ paths:
       summary: System status
       tags:
         - System
+      x-anchore-authz-action: None
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   /system/feeds:
     get:
@@ -1395,6 +1844,7 @@ paths:
       summary: list feeds operations and information
       tags:
         - System
+      x-anchore-authz-action: listFeeds
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
     post:
       description: ''
@@ -1420,6 +1870,7 @@ paths:
       summary: trigger feeds operations
       tags:
         - System
+      x-anchore-authz-action: updateFeeds
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   /system/policy_spec:
     get:
@@ -1436,86 +1887,8 @@ paths:
       summary: Describe the policy language spec implemented by this service.
       tags:
         - System
-      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
-  /system/prune:
-    get:
-      description: ''
-      operationId: get_system_prune_resourcetypes
-      responses:
-        '200':
-          description: success
-          schema:
-            items:
-              type: string
-            type: array
-        '500':
-          description: Internal Error
-          schema:
-            $ref: '#/definitions/ApiErrorResponse'
-      summary: Get list of resources that can be pruned
-      tags:
-        - System
-      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
-  '/system/prune/{resourcetype}':
-    get:
-      description: ''
-      operationId: get_system_prune_candidates
-      parameters:
-        - description: resource type
-          in: path
-          name: resourcetype
-          required: true
-          type: string
-        - description: filter only disconnected resources
-          in: query
-          name: dangling
-          required: false
-          type: boolean
-        - description: filter only resources older than specified number of seconds
-          in: query
-          name: olderthan
-          required: false
-          type: integer
-      responses:
-        '200':
-          description: success
-          schema:
-            $ref: '#/definitions/PruneCandidateList'
-        '500':
-          description: Internal Error
-          schema:
-            $ref: '#/definitions/ApiErrorResponse'
-      summary: Get list of candidates for pruning
-      tags:
-        - System
-      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
-    post:
-      description: ''
-      operationId: post_system_prune_candidates
-      parameters:
-        - description: resource type
-          in: path
-          name: resourcetype
-          required: true
-          type: string
-        - description: resource objects to prune
-          in: body
-          name: bodycontent
-          required: true
-          schema:
-            $ref: '#/definitions/PruneCandidate'
-      responses:
-        '200':
-          description: success
-          schema:
-            $ref: '#/definitions/PruneCandidateList'
-        '500':
-          description: Internal Error
-          schema:
-            $ref: '#/definitions/ApiErrorResponse'
-      summary: Perform pruning on input resource name
-      tags:
-        - System
+        - Policy
+      x-anchore-authz-action: None
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   /system/services:
     get:
@@ -1533,6 +1906,7 @@ paths:
       tags:
         - System
         - Services
+      x-anchore-authz-action: listServices
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   '/system/services/{servicename}':
     get:
@@ -1555,6 +1929,7 @@ paths:
       tags:
         - System
         - Services
+      x-anchore-authz-action: getService
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
   '/system/services/{servicename}/{hostid}':
     delete:
@@ -1579,6 +1954,7 @@ paths:
       tags:
         - System
         - Services
+      x-anchore-authz-action: deleteService
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
     get:
       operationId: get_services_by_name_and_host
@@ -1604,8 +1980,156 @@ paths:
       tags:
         - System
         - Services
+      x-anchore-authz-action: getService
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
+  /user:
+    get:
+      operationId: get_user
+      responses:
+        '200':
+          description: User details for caller's user
+          schema:
+            $ref: '#/definitions/User'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: List authenticated user info
+      tags:
+        - Identity
+      x-anchore-authz-action: None
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.user
+  /user/credentials:
+    get:
+      operationId: get_credentials
+      responses:
+        '200':
+          description: User credential listing
+          schema:
+            $ref: '#/definitions/CredentialList'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: Get current credential summary
+      tags:
+        - Identity
+      x-anchore-authz-action: None
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.user
+    post:
+      operationId: add_credential
+      parameters:
+        - in: body
+          name: credential
+          required: true
+          schema:
+            $ref: '#/definitions/AccessCredential'
+      responses:
+        '200':
+          description: 'Add a credential, overwritting if already exists'
+          schema:
+            $ref: '#/definitions/User'
+        '500':
+          description: Internal error
+          schema:
+            $ref: '#/definitions/ApiErrorResponse'
+      summary: add/replace credential
+      tags:
+        - Identity
+      x-anchore-authz-action: None
+      x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.user
+  /version:
+    get:
+      description: 'Returns the version object for the service, including db schema version info'
+      operationId: version_noop
+      responses:
+        '200':
+          description: Version object describing version state
+          schema:
+            $ref: '#/definitions/ServiceVersion'
+      x-anchore-authz-action: None
       x-swagger-router-controller: anchore_engine.services.apiext.api.controllers.system
 definitions:
+  AccessCredential:
+    description: 'A login credential mapped to a user identity. For password credentials, the username to present for Basic auth is the user''s username from the user record'
+    properties:
+      created_at:
+        description: The timestamp of creation of the credential
+        type: string
+      type:
+        description: The type of credential
+        enum:
+          - password
+        type: string
+      value:
+        description: The credential value (e.g. the password)
+        type: string
+    required:
+      - type
+      - value
+    type: object
+  Account:
+    description: Account information
+    properties:
+      created_at:
+        description: The timestamp when the account was created
+        format: date-time
+        type: string
+      email:
+        description: Optional email address associated with the account
+        type: string
+      last_updated:
+        description: The timestamp of the last update to the account metadata itself (not users or creds)
+        format: date-time
+        type: string
+      name:
+        description: 'The account identifier, not updatable after creation'
+        type: string
+      state:
+        description: 'State of the account. Disabled accounts prevent member users from logging in, deleting accounts are disabled and pending deletion and will be removed once all owned resources are garbage collected by the system'
+        enum:
+          - enabled
+          - disabled
+          - deleting
+        type: string
+      type:
+        description: 'The user type (admin vs user). If not specified in a POST request, ''user'' is default'
+        enum:
+          - user
+          - admin
+          - service
+        type: string
+    required:
+      - name
+    type: object
+  AccountCreationRequest:
+    description: An account to create/add to the system. If already exists will return 400.
+    properties:
+      email:
+        description: An optional email to associate with the account for contact purposes
+        pattern: '[a-z0-9!#$%&''*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&''*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?'
+        type: string
+      name:
+        description: The account name to use. This will identify the account and must be globally unique in the system.
+        pattern: '^[a-z0-9][a-z0-9_-]{1,126}[a-z0-9]$'
+        type: string
+    required:
+      - name
+    type: object
+  AccountList:
+    items:
+      $ref: '#/definitions/Account'
+    type: array
+  AccountStatus:
+    description: A summary of account status
+    properties:
+      state:
+        description: The status of the account
+        enum:
+          - enabled
+          - disabled
+        type: string
+    type: object
   AnchoreImage:
     description: A unique image in the engine. May have multiple tags or references. Unique to an image content across registries or repositories.
     properties:
@@ -1781,6 +2305,10 @@ definitions:
       imageDigest:
         type: string
     type: object
+  CredentialList:
+    items:
+      $ref: '#/definitions/AccessCredential'
+    type: array
   EventResponse:
     description: A record of occurance of an asynchronous event triggered either by system or by user activity
     properties:
@@ -1912,6 +2440,10 @@ definitions:
       annotations:
         description: Annotations to be associated with the added image in key/value form
         type: object
+      created_at:
+        description: 'Optional override of the image creation time, only honored when both tag and digest are also supplied  e.g. 2018-10-17T18:14:00Z'
+        format: date-time
+        type: string
       digest:
         description: 'A full pullable digest reference for an image. e.g. docker.io/nginx@sha256:abc123'
         type: string
@@ -2257,14 +2789,6 @@ definitions:
       - trigger
       - action
     type: object
-  PruneCandidate:
-    description: A resource that can be pruned
-    type: object
-  PruneCandidateList:
-    description: A list of prune candidate resources
-    items:
-      $ref: '#/definitions/PruneCandidate'
-    type: array
   RegistryConfiguration:
     description: A registry entry describing the endpoint and credentials for a registry to pull images from
     properties:
@@ -2347,6 +2871,29 @@ definitions:
     items:
       $ref: '#/definitions/Service'
     type: array
+  ServiceVersion:
+    description: Version information for a service
+    properties:
+      api:
+        description: Api Version string
+        properties:
+          version:
+            description: Semantic version of the api
+            type: string
+        type: object
+      db:
+        properties:
+          schema_version:
+            description: Semantic version of the db schema
+            type: string
+        type: object
+      service:
+        properties:
+          version:
+            description: Semantic Version string of the service implementation
+            type: string
+        type: object
+    type: object
   StandaloneVulnerability:
     description: 'A single vulnerability record in a single namespace, the unique key is the combinatino of the id and namespace'
     properties:
@@ -2536,6 +3083,42 @@ definitions:
         type: string
         x-nullable: true
     type: object
+  User:
+    description: 'A username, password pair that can be used to authenticate with the service as a specific user'
+    properties:
+      created_at:
+        description: The timestampt the user record was created
+        format: date-time
+        type: string
+      last_updated:
+        description: The timestamp of the last update to this record
+        format: date-time
+        type: string
+      username:
+        description: The username to authenticate with
+        type: string
+    required:
+      - username
+    type: object
+  UserCreationRequest:
+    description: 'A payload for creating a new user, includes the username and password in a single request'
+    properties:
+      password:
+        description: 'The initial password for the user, must be at least 6 characters, up to 128'
+        pattern: '.{6,128}$'
+        type: string
+      username:
+        description: The username to create
+        pattern: '^[a-z0-9][a-z0-9_-]{1,126}[a-z0-9]$'
+        type: string
+    required:
+      - username
+      - password
+    type: object
+  UserList:
+    items:
+      $ref: '#/definitions/User'
+    type: array
   Vulnerability:
     properties:
       feed:

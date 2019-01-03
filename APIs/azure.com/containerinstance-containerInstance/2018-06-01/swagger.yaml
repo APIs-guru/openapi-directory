@@ -786,7 +786,7 @@ paths:
                 content: log content
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/restart':
     post:
-      description: 'Restarts all containers in a contaienr group in place. If container image has updates, new image will be downloaded.'
+      description: 'Restarts all containers in a container group in place. If container image has updates, new image will be downloaded.'
       operationId: ContainerGroups_Restart
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -809,7 +809,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroups/{containerGroupName}/stop':
     post:
-      description: Stops all containers in a contaienr group. Compute resources will be deallocated and billing will stop.
+      description: Stops all containers in a container group. Compute resources will be deallocated and billing will stop.
       operationId: ContainerGroups_Stop
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'

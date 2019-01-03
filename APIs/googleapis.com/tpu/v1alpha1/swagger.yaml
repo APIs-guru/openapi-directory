@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://tpu.googleapis.com/$discovery/rest?version=v1alpha1'
       version: v1
@@ -335,43 +335,6 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/v1alpha1/{name}:reset':
-    parameters:
-      - $ref: '#/parameters/$.xgafv'
-      - $ref: '#/parameters/access_token'
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/callback'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/uploadType'
-      - $ref: '#/parameters/upload_protocol'
-    post:
-      description: 'Resets a node, which stops and starts the VM.'
-      operationId: tpu.projects.locations.nodes.reset
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ResetNodeRequest'
-        - description: The resource name.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
   '/v1alpha1/{name}:start':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -672,6 +635,11 @@ definitions:
         items:
           $ref: '#/definitions/Node'
         type: array
+      unreachable:
+        description: Locations that could not be reached.
+        items:
+          type: string
+        type: array
     type: object
   ListOperationsResponse:
     description: The response message for Operations.ListOperations.
@@ -820,6 +788,8 @@ definitions:
           DEPRECATED! Use network_endpoints instead.
           The network port for the TPU Node as visible to Compute Engine instances.
         type: string
+      schedulingConfig:
+        $ref: '#/definitions/SchedulingConfig'
       serviceAccount:
         description: |-
           Output only.
@@ -843,6 +813,8 @@ definitions:
           - STOPPED
           - STOPPING
           - STARTING
+          - PREEMPTED
+          - TERMINATED
         type: string
       tensorflowVersion:
         description: |-
@@ -931,9 +903,10 @@ definitions:
         description: The version for reimage to create.
         type: string
     type: object
-  ResetNodeRequest:
-    description: Request for ResetNode.
-    properties: {}
+  SchedulingConfig:
+    properties:
+      preemptible:
+        type: boolean
     type: object
   StartNodeRequest:
     description: Request for StartNode.

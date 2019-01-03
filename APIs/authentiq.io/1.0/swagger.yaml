@@ -11,7 +11,7 @@ info:
   description: |
     Authentiq Connect OAuth 2.0 and OpenID Connect API reference.
     Learn about [Authentiq ID](https://www.authentiq.com/) or check out the [Authentiq Connect](https://developers.authentiq.com) developer documentation.
-  termsOfService: 'https://www.authentiq.com/tos/'
+  termsOfService: 'https://www.authentiq.com/terms'
   title: Authentiq Connect
   version: '1.0'
   x-apisguru-categories:
@@ -117,23 +117,15 @@ paths:
   /authorize:
     get:
       description: |
-        Start a session with Authentiq Connect and authenticate a user.
-
-        Example:
+        Start a session with Authentiq Connect to authenticate a user.
 
         ```
         GET https://connect.authentiq.io/authorize?client_id=<your-client-id>&response_type=code+id_token&scope=openid+email&redirect_uri=<your-redirect-uri>&state=0123456789
         ```
 
-        This endpoint is compatible with OpenID Connect and also supports the POST method, in which case the parameters are passed as a form post.
-
-        See also:
-          - [OAuth 2.0 Authorization Endpoint](http://tools.ietf.org/html/rfc6749#section-3.1)
-          - [OIDC Authentication request](http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest)
-          - [OIDC Successful Authentication response](http://openid.net/specs/openid-connect-core-1_0.html#AuthResponse)
-          - [OIDC Error Authentication response](http://openid.net/specs/openid-connect-core-1_0.html#AuthError)
+        This endpoint also supports the POST method.
       externalDocs:
-        description: OpenID Authorization Endpoint
+        description: OIDC Authorization Endpoint
         url: 'http://openid.net/specs/openid-connect-core-1_0.html#AuthorizationEndpoint'
       operationId: authorize
       parameters:
@@ -249,9 +241,9 @@ paths:
         Register a new client with this Authentiq Connect provider.
 
         This endpoint is compatible with [OIDC's Client Registration](http://openid.net/specs/openid-connect-registration-1_0.html) extension.
-
-        See also:
-        - [OIDC Client Registration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientRegistration)
+      externalDocs:
+        description: OIDC Client Registration Endpoint
+        url: 'http://openid.net/specs/openid-connect-registration-1_0.html#ClientRegistration'
       operationId: createClient
       parameters:
         - $ref: '#/parameters/Client'
@@ -275,6 +267,9 @@ paths:
     delete:
       description: |
         Delete a previously registered client.
+      externalDocs:
+        description: OIDC Client Configuration Endpoint
+        url: 'http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint'
       operationId: clientClient_id
       parameters:
         - $ref: '#/parameters/client_id'
@@ -293,9 +288,9 @@ paths:
     get:
       description: |
         Retrieve the configuration of a previously registered client.
-
-        See also:
-        - [OIDC Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+      externalDocs:
+        description: OIDC Client Configuration Endpoint
+        url: 'http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint'
       operationId: getClient
       parameters:
         - $ref: '#/parameters/client_id'
@@ -321,9 +316,9 @@ paths:
         - multipart/form-data
       description: |
         Update the configuration of a previously registered client.
-
-        See also:
-        - [OIDC Client Configuration Endpoint](http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint)
+      externalDocs:
+        description: OIDC Client Configuration Endpoint
+        url: 'http://openid.net/specs/openid-connect-registration-1_0.html#ClientConfigurationEndpoint'
       operationId: updateClient
       parameters:
         - $ref: '#/parameters/client_id'
@@ -351,14 +346,9 @@ paths:
       description: |
         Exchange en authorization code for an ID Token or Access Token.
 
-        This endpoint supports both `client_secret_post` and `client_secret_basic` authenticatino methods, as specified by the client's `token_endpoint_auth_method`.
-
-        See also:
-          - [OIDC Token Endpoint](http://openid.net/specs/openid-connect-core-1_0.html#TokenRequest)
-          - [OIDC Successful Token response](http://openid.net/specs/openid-connect-core-1_0.html#TokenResponse)
-          - [OIDC Token Error response](http://openid.net/specs/openid-connect-core-1_0.html#TokenError)
+        This endpoint supports both `client_secret_basic` (default) and `client_secret_basic` authentication methods, as specified by the client's `token_endpoint_auth_method`.
       externalDocs:
-        description: OpenID Token Endpoint
+        description: OIDC Token Endpoint
         url: 'http://openid.net/specs/openid-connect-core-1_0.html#TokenEndpoint'
       operationId: token
       parameters:
@@ -414,9 +404,10 @@ paths:
   /userinfo:
     get:
       description: |
-        Use this endpoint to retrieve a user's profile in case you've not already obtained enough details from the ID Token via the Token Endpoint.
-         See also:
-         - [OIDC UserInfo endpoint](http://openid.net/specs/openid-connect-core-1_0.html#UserInfo)
+        Use this endpoint to retrieve a user's profile in case you are unable to parse an ID Token or you've not already obtained enough details from the ID Token via the Token Endpoint.
+      externalDocs:
+        description: OIDC UserInfo Endpoint
+        url: 'http://openid.net/specs/openid-connect-core-1_0.html#UserInfo'
       operationId: userInfo
       produces:
         - application/json
@@ -444,7 +435,7 @@ paths:
             - 'aq:location'
             - 'aq:name'
             - 'aq:push'
-      summary: Retrieve their user profile
+      summary: Retrieve a user profile
       tags:
         - Authentication
   '/{client_id}/iframe':
@@ -453,9 +444,9 @@ paths:
         An OpenID Connect Session Management iframe to facilitate e.g. single sign-on or remote logouts.
 
         The iframe implements the OIDC postMessage-based [change notification protocol](http://openid.net/specs/openid-connect-session-1_0.html#ChangeNotification) via which a client can receive notifications about session state changes.
-
-        See also:
-        - [OIDC OP iframe](http://openid.net/specs/openid-connect-session-1_0.html#OPiframe)
+      externalDocs:
+        description: OIDC OP Session Management Iframe
+        url: 'http://openid.net/specs/openid-connect-session-1_0.html#OPiframe'
       operationId: authorizeIframe
       parameters:
         - $ref: '#/parameters/client_id'

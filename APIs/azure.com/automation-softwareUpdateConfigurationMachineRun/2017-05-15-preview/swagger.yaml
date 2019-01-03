@@ -129,6 +129,7 @@ paths:
                       correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
                       creationTime: '2017-10-23T02:33:30.7484961+00:00'
                       endTime: '2017-10-23T02:33:36.4166667+00:00'
+                      error: {}
                       job: {}
                       lastModifiedBy: ''
                       lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
@@ -147,6 +148,7 @@ paths:
                       correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
                       creationTime: '2017-10-23T02:33:30.7484961+00:00'
                       endTime: '2017-10-23T02:33:36.4166667+00:00'
+                      error: {}
                       job: {}
                       lastModifiedBy: ''
                       lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
@@ -178,6 +180,7 @@ paths:
                       correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
                       creationTime: '2017-10-23T02:33:30.7484961+00:00'
                       endTime: '2017-10-23T02:33:36.4166667+00:00'
+                      error: {}
                       job: {}
                       lastModifiedBy: ''
                       lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
@@ -196,6 +199,7 @@ paths:
                       correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
                       creationTime: '2017-10-23T02:33:30.7484961+00:00'
                       endTime: '2017-10-23T02:33:36.4166667+00:00'
+                      error: {}
                       job: {}
                       lastModifiedBy: ''
                       lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
@@ -289,6 +293,7 @@ paths:
                   correlationId: 0b943e57-44d3-4f05-898c-6e92aa617e59
                   creationTime: '2017-10-23T02:33:30.7484961+00:00'
                   endTime: '2017-10-23T02:33:36.4166667+00:00'
+                  error: {}
                   job: {}
                   lastModifiedBy: ''
                   lastModifiedTime: '2017-10-23T02:34:32.4366667+00:00'
@@ -355,7 +360,7 @@ definitions:
         readOnly: true
         type: string
       creationTime:
-        description: 'Creation time of theresource, which only appears in the response.'
+        description: 'Creation time of the resource, which only appears in the response.'
         format: date-time
         readOnly: true
         type: string
@@ -366,6 +371,16 @@ definitions:
         readOnly: true
         type: string
         x-nullable: true
+      error:
+        description: Error response of an operation failure
+        properties:
+          code:
+            description: Error code
+            type: string
+          message:
+            description: Error message indicating why the operation failed.
+            type: string
+        type: object
       job:
         $ref: '#/definitions/jobNavigation'
         description: Job associated with the software update configuration machine run

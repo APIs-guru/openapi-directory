@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2016-10-10/apimsubscriptions.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimsubscriptions
   x-tags:
@@ -278,7 +278,7 @@ paths:
       tags:
         - Subscriptions
     patch:
-      description: Updates the details of a subscription specificied by its identifier.
+      description: Updates the details of a subscription specified by its identifier.
       operationId: Subscriptions_Update
       parameters:
         - description: The name of the resource group.
@@ -642,7 +642,7 @@ definitions:
         minLength: 1
         type: string
       productId:
-        description: 'Product (product id path) for which subscription is being created in form /products/{productid}'
+        description: 'Product (product id path) for which subscription is being created in form /products/{productId}'
         type: string
       secondaryKey:
         description: Secondary subscription key. If not specified during request key will be generated automatically.

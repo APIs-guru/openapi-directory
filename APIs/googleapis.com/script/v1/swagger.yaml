@@ -8,7 +8,7 @@ info:
     name: Google
     url: 'https://google.com'
   description: |
-    An API for managing and executing Google Apps Script projects. <aside class="note"><b>Note</b>: In order to use this API in your apps, you must <a href="/apps-script/api/how-tos/enable#using_the_apps_script_api_in_your_app"> enable it for use</a>. To allow other apps to manage your scripts, you must <a href="/apps-script/api/how-tos/enable#granting_third-party_applications_access_to_your_script_projects"> grant them access</a>.</aside>
+    Manages and executes Google Apps Script projects.
   title: Apps Script
   version: v1
   x-apiClientRegistration:
@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://script.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -35,16 +35,23 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
-      'https://mail.google.com/': 'Read, send, delete, and manage your email'
-      'https://www.google.com/calendar/feeds': Manage your calendars
-      'https://www.google.com/m8/feeds': Manage your contacts
+      'https://mail.google.com/': 'Read, compose, send, and permanently delete all your email from Gmail'
+      'https://www.google.com/calendar/feeds': 'See, edit, share, and permanently delete all the calendars you can access using Google Calendar'
+      'https://www.google.com/m8/feeds': 'See, edit, download, and permanently delete your contacts'
       'https://www.googleapis.com/auth/admin.directory.group': View and manage the provisioning of groups on your domain
       'https://www.googleapis.com/auth/admin.directory.user': View and manage the provisioning of users on your domain
-      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/documents': View and manage your Google Docs documents
+      'https://www.googleapis.com/auth/drive': 'See, edit, create, and delete all of your Google Drive files'
       'https://www.googleapis.com/auth/forms': View and manage your forms in Google Drive
       'https://www.googleapis.com/auth/forms.currentonly': View and manage forms that this application has been installed in
       'https://www.googleapis.com/auth/groups': View and manage your Google Groups
-      'https://www.googleapis.com/auth/spreadsheets': View and manage your spreadsheets in Google Drive
+      'https://www.googleapis.com/auth/script.deployments': Create and update Google Apps Script deployments
+      'https://www.googleapis.com/auth/script.deployments.readonly': View Google Apps Script deployments
+      'https://www.googleapis.com/auth/script.metrics': View Google Apps Script project's metrics
+      'https://www.googleapis.com/auth/script.processes': View Google Apps Script processes
+      'https://www.googleapis.com/auth/script.projects': Create and update Google Apps Script projects
+      'https://www.googleapis.com/auth/script.projects.readonly': View Google Apps Script projects
+      'https://www.googleapis.com/auth/spreadsheets': 'See, edit, create, and delete your spreadsheets in Google Drive'
       'https://www.googleapis.com/auth/userinfo.email': View your email address
     type: oauth2
 parameters:
@@ -71,11 +78,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -96,12 +98,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -218,6 +214,7 @@ paths:
               - EDITOR
               - SIMPLE_TRIGGER
               - MENU
+              - BATCH_TASK
             type: string
           name: userProcessFilter.types
           type: array
@@ -241,18 +238,19 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListUserProcessesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.processes'
       tags:
         - processes
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -339,6 +337,7 @@ paths:
               - EDITOR
               - SIMPLE_TRIGGER
               - MENU
+              - BATCH_TASK
             type: string
           name: scriptProcessFilter.types
           type: array
@@ -362,18 +361,19 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListScriptProcessesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.processes'
       tags:
         - processes
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -383,12 +383,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -408,6 +406,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Project'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects'
       tags:
         - projects
   '/v1/projects/{scriptId}':
@@ -425,18 +426,21 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Project'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects.readonly'
       tags:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -464,18 +468,21 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Content'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects.readonly'
       tags:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -503,6 +510,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Content'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects'
       tags:
         - projects
   '/v1/projects/{scriptId}/deployments':
@@ -530,18 +540,21 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListDeploymentsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.deployments'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.deployments.readonly'
       tags:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -564,6 +577,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Deployment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.deployments'
       tags:
         - projects
   '/v1/projects/{scriptId}/deployments/{deploymentId}':
@@ -586,6 +602,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.deployments'
       tags:
         - projects
     get:
@@ -607,18 +626,21 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Deployment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.deployments'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.deployments.readonly'
       tags:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -646,6 +668,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Deployment'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.deployments'
       tags:
         - projects
   '/v1/projects/{scriptId}/metrics':
@@ -677,18 +702,19 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Metrics'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.metrics'
       tags:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -718,18 +744,21 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListVersionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects.readonly'
       tags:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -754,6 +783,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Version'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects'
       tags:
         - projects
   '/v1/projects/{scriptId}/versions/{versionNumber}':
@@ -776,18 +808,21 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Version'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/script.projects.readonly'
       tags:
         - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -797,20 +832,19 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Runs a function in an Apps Script project. The project must be deployed
-        for use with the Apps Script API.
+        Runs a function in an Apps Script project. The script project must be
+        deployed for use with the Apps Script API and the calling application must
+        share the same Cloud Platform project.
 
         This method requires authorization with an OAuth 2.0 token that includes at
         least one of the scopes listed in the [Authorization](#authorization)
@@ -818,6 +852,10 @@ paths:
         executed through this API. To find the correct scopes to include in the
         authentication token, open the project in the script editor, then select
         **File > Project properties** and click the **Scopes** tab.
+
+        The error `403, PERMISSION_DENIED: The caller does not have permission`
+        indicates that the Cloud Platform project used to authorize the request is
+        not the same as the one used by the script.
       operationId: script.scripts.run
       parameters:
         - in: body
@@ -847,6 +885,8 @@ paths:
             - 'https://www.googleapis.com/auth/admin.directory.group'
         - Oauth2:
             - 'https://www.googleapis.com/auth/admin.directory.user'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/documents'
         - Oauth2:
             - 'https://www.googleapis.com/auth/drive'
         - Oauth2:
@@ -905,12 +945,6 @@ definitions:
         items:
           $ref: '#/definitions/EntryPoint'
         type: array
-      functionSet:
-        $ref: '#/definitions/GoogleAppsScriptTypeFunctionSet'
-        description: Script's defined set of functions.
-      scopeSet:
-        $ref: '#/definitions/GoogleAppsScriptTypeScopeSet'
-        description: Set of scopes required by the deployment.
       updateTime:
         description: Last modified date time stamp.
         format: google-datetime
@@ -1166,7 +1200,7 @@ definitions:
       Representation of a single script process execution that was started from
       the script editor, a trigger, an application, or using the Apps Script API.
       This is distinct from the `Operation`
-      resource, which only represents exeuctions started via the Apps Script API.
+      resource, which only represents executions started via the Apps Script API.
     properties:
       duration:
         description: Duration the execution spent executing.
@@ -1203,6 +1237,7 @@ definitions:
           - EDITOR
           - SIMPLE_TRIGGER
           - MENU
+          - BATCH_TASK
         type: string
       projectName:
         description: Name of the script being executed.
@@ -1220,29 +1255,6 @@ definitions:
           - WRITE
           - OWNER
         type: string
-    type: object
-  GoogleAppsScriptTypeScope:
-    description: Represents an authorization scope.
-    properties:
-      authorizer:
-        description: Who authorized the scope.
-        enum:
-          - SCOPE_AUTHORIZER_UNSPECIFIED
-          - AUTHORIZED_BY_DEVELOPER
-          - AUTHORIZED_BY_END_USER
-        type: string
-      name:
-        description: The scope's identifying string.
-        type: string
-    type: object
-  GoogleAppsScriptTypeScopeSet:
-    description: A set of scopes. No duplicates are permitted.
-    properties:
-      values:
-        description: List of scope values in the set.
-        items:
-          $ref: '#/definitions/GoogleAppsScriptTypeScope'
-        type: array
     type: object
   GoogleAppsScriptTypeUser:
     description: A simple user profile resource.
@@ -1389,7 +1401,7 @@ definitions:
     type: object
   Operation:
     description: |-
-      A representation of a execution of an Apps Script function that is started using run. The execution response does not arrive until the function finishes executing. The maximum execution runtime is listed in the [Apps Script quotas guide](/apps-script/guides/services/quotas#current_limitations). <p>After the execution is started, it can have one of four outcomes:</p> <ul> <li> If the script function returns successfully, the
+      A representation of an execution of an Apps Script function started with run. The execution response does not arrive until the function finishes executing. The maximum execution runtime is listed in the [Apps Script quotas guide](/apps-script/guides/services/quotas#current_limitations). <p>After execution has started, it can have one of four outcomes:</p> <ul> <li> If the script function returns successfully, the
         response field contains an
         ExecutionResponse object
         with the function's return value in the object's `result` field.</li>
@@ -1477,7 +1489,7 @@ definitions:
           type: object
         type: array
       message:
-        description: 'A developer-facing error message, which is in English. Any user-facing error message is localized and sent in the [google.rpc.Status.details](google.rpc.Status.details) field, or localized by the client.'
+        description: 'A developer-facing error message, which is in English. Any user-facing error message is localized and sent in the details field, or localized by the client.'
         type: string
     type: object
   UpdateDeploymentRequest:

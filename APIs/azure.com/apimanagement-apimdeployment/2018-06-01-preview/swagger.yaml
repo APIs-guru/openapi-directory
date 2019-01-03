@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimdeployment.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimdeployment
   x-tags:
@@ -1764,6 +1764,105 @@ paths:
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2018-06-01-preview'
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/skus':
+    get:
+      description: Gets all available SKU for a given API Management service
+      operationId: ApiManagementServiceSkus_ListAvailableServiceSkus
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success. The response describes the list of SKUs.
+          schema:
+            $ref: '#/definitions/ResourceSkuResults'
+      summary: Gets available SKUs for API Management service
+      tags:
+        - ApiManagementServiceSkus
+      x-ms-examples:
+        ApiManagementListSKUs-Consumption:
+          parameters:
+            api-version: 2018-06-01-preview
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value:
+                  - capacity: null
+                    resourceType: Microsoft.ApiManagement/service
+                    sku:
+                      name: Consumption
+        ApiManagementListSKUs-Dedicated:
+          parameters:
+            api-version: 2018-06-01-preview
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                nextLink: null
+                value:
+                  - capacity:
+                      default: 1
+                      maximum: 1
+                      minimum: 1
+                      scaleType: none
+                    resourceType: Microsoft.ApiManagement/service
+                    sku:
+                      name: Developer
+                  - capacity:
+                      default: 1
+                      maximum: 2
+                      minimum: 1
+                      scaleType: manual
+                    resourceType: Microsoft.ApiManagement/service
+                    sku:
+                      name: Basic
+                  - capacity:
+                      default: 1
+                      maximum: 4
+                      minimum: 1
+                      scaleType: automatic
+                    resourceType: Microsoft.ApiManagement/service
+                    sku:
+                      name: Standard
+                  - capacity:
+                      default: 1
+                      maximum: 10
+                      minimum: 1
+                      scaleType: automatic
+                    resourceType: Microsoft.ApiManagement/service
+                    sku:
+                      name: Premium
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/updatecertificate':
     post:
       description: Upload Custom Domain SSL certificate for an API Management service. This operation will be deprecated in future releases.
@@ -2140,7 +2239,7 @@ definitions:
         description: Virtual network configuration of the API Management service.
       virtualNetworkType:
         default: None
-        description: 'The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.'
+        description: 'The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.'
         enum:
           - None
           - External
@@ -2287,6 +2386,7 @@ definitions:
           - Standard
           - Premium
           - Basic
+          - Consumption
         externalDocs:
           url: 'https://azure.microsoft.com/en-us/pricing/details/api-management/'
         type: string
@@ -2302,6 +2402,8 @@ definitions:
               value: Premium
             - description: Basic SKU of Api Management.
               value: Basic
+            - description: Consumption SKU of Api Management.
+              value: Consumption
     required:
       - name
   ApiManagementServiceUpdateHostnameParameters:
@@ -2415,7 +2517,7 @@ definitions:
         description: Base64 Encoded certificate.
         type: string
       storeName:
-        description: The System.Security.Cryptography.x509certificates.Storename certificate store location. Only Root and CertificateAuthority are valid locations.
+        description: The System.Security.Cryptography.x509certificates.StoreName certificate store location. Only Root and CertificateAuthority are valid locations.
         enum:
           - CertificateAuthority
           - Root
@@ -2543,6 +2645,98 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
+  ResourceSku:
+    description: Describes an available API Management SKU.
+    properties:
+      name:
+        description: Name of the Sku.
+        enum:
+          - Developer
+          - Standard
+          - Premium
+          - Basic
+          - Consumption
+        externalDocs:
+          url: 'https://azure.microsoft.com/en-us/pricing/details/api-management/'
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SkuType
+          values:
+            - description: Developer SKU of Api Management.
+              value: Developer
+            - description: Standard SKU of Api Management.
+              value: Standard
+            - description: Premium SKU of Api Management.
+              value: Premium
+            - description: Basic SKU of Api Management.
+              value: Basic
+            - description: Consumption SKU of Api Management.
+              value: Consumption
+  ResourceSkuCapacity:
+    description: Describes scaling information of a SKU.
+    properties:
+      default:
+        description: The default capacity.
+        format: int32
+        readOnly: true
+        type: integer
+      maximum:
+        description: The maximum capacity that can be set.
+        format: int32
+        readOnly: true
+        type: integer
+      minimum:
+        description: The minimum capacity.
+        format: int32
+        readOnly: true
+        type: integer
+      scaleType:
+        description: The scale type applicable to the sku.
+        enum:
+          - automatic
+          - manual
+          - none
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ResourceSkuCapacityScaleType
+          values:
+            - description: Supported scale type automatic.
+              value: automatic
+            - description: Supported scale type manual.
+              value: manual
+            - description: Scaling not supported.
+              value: none
+  ResourceSkuResult:
+    description: Describes an available API Management service SKU.
+    properties:
+      capacity:
+        $ref: '#/definitions/ResourceSkuCapacity'
+        description: Specifies the number of API Management units.
+        readOnly: true
+      resourceType:
+        description: The type of resource the SKU applies to.
+        readOnly: true
+        type: string
+      sku:
+        $ref: '#/definitions/ResourceSku'
+        description: Specifies API Management SKU.
+        readOnly: true
+  ResourceSkuResults:
+    description: The API Management service SKUs operation response.
+    properties:
+      nextLink:
+        description: The uri to fetch the next page of API Management service Skus.
+        type: string
+      value:
+        description: The list of skus available for the service.
+        items:
+          $ref: '#/definitions/ResourceSkuResult'
+        type: array
+    required:
+      - value
   VirtualNetworkConfiguration:
     description: Configuration of a virtual network to which API Management service is deployed.
     properties:

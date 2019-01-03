@@ -69,6 +69,20 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  enrollmentAccountIdParameter:
+    description: Enrollment Account Id
+    in: path
+    name: enrollmentAccountId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  managementGroupIdParameter:
+    description: Management Group ID
+    in: path
+    name: managementGroupId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   reportNameParameter:
     description: Report Name.
     in: path
@@ -90,6 +104,398 @@ parameters:
     required: true
     type: string
 paths:
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/alerts':
+    get:
+      description: List all alerts for a department.
+      operationId: Alerts_ListByDepartment
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/departmentIdParameter'
+        - description: 'May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/costEntityId, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are ''eq'',''lt'', ''gt'', ''le'', ''ge''.'
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: 'Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.'
+          in: query
+          name: $skiptoken
+          required: false
+          type: string
+        - description: May be used to limit the number of results to the most recent N alerts.
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/AlertListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert_List:
+          parameters:
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                    name: 0e1d6ee7-0052-4996-89e2-023263106885
+                    properties:
+                      closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                      costEntityId: '123'
+                      creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                      definition:
+                        category: Cost
+                        criteria: CostThresholdExceeded
+                        type: Budget
+                      description: This is an example alert
+                      details:
+                        amountDue: '500.0'
+                        billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
+                      source: User
+                      status: Resolved
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
+                    type: Microsoft.CostManagement/alerts
+                  - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106454
+                    name: 0e1d6ee7-0052-4996-89e2-023263106454
+                    properties:
+                      closeTime: '1970-01-01T00:00:00.0000000+00:00'
+                      costEntityId: abc
+                      creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                      definition:
+                        category: Billing
+                        criteria: CreditThresholdReached
+                        type: Credit
+                      description: This is another example alert
+                      details:
+                        amountDue: '500.0'
+                        billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
+                      source: Preset
+                      status: Active
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
+                    type: Microsoft.CostManagement/alerts
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/alerts/{alertId}':
+    get:
+      description: Gets the alert for a department by alert ID.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Alerts_GetByDepartment
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/departmentIdParameter'
+        - $ref: '#/parameters/alertIdParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/alerts/{alertId}/updateStatus':
+    patch:
+      description: Update alerts status for a department.
+      operationId: Alerts_UpdateDepartmentsAlertStatus
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/departmentIdParameter'
+        - $ref: '#/parameters/alertIdParameter'
+        - description: Parameters supplied to the update alerts status operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Alert'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts':
+    get:
+      description: List all alerts for an account.
+      operationId: Alerts_ListByAccount
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/enrollmentAccountIdParameter'
+        - description: 'May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/costEntityId, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are ''eq'',''lt'', ''gt'', ''le'', ''ge''.'
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: 'Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.'
+          in: query
+          name: $skiptoken
+          required: false
+          type: string
+        - description: May be used to limit the number of results to the most recent N alerts.
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/AlertListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert_List:
+          parameters:
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                    name: 0e1d6ee7-0052-4996-89e2-023263106885
+                    properties:
+                      closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                      costEntityId: '123'
+                      creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                      definition:
+                        category: Cost
+                        criteria: CostThresholdExceeded
+                        type: Budget
+                      description: This is an example alert
+                      details:
+                        amountDue: '500.0'
+                        billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
+                      source: User
+                      status: Resolved
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
+                    type: Microsoft.CostManagement/alerts
+                  - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106454
+                    name: 0e1d6ee7-0052-4996-89e2-023263106454
+                    properties:
+                      closeTime: '1970-01-01T00:00:00.0000000+00:00'
+                      costEntityId: abc
+                      creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                      definition:
+                        category: Billing
+                        criteria: CreditThresholdReached
+                        type: Credit
+                      description: This is another example alert
+                      details:
+                        amountDue: '500.0'
+                        billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
+                      source: Preset
+                      status: Active
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
+                    type: Microsoft.CostManagement/alerts
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts/{alertId}':
+    get:
+      description: Gets the alert for an account by alert ID.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Alerts_GetByAccount
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/enrollmentAccountIdParameter'
+        - $ref: '#/parameters/alertIdParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/alerts/{alertId}/updateStatus':
+    patch:
+      description: Update alerts status for an enrollment account.
+      operationId: Alerts_UpdateEnrollmentAccountAlertStatus
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/enrollmentAccountIdParameter'
+        - $ref: '#/parameters/alertIdParameter'
+        - description: Parameters supplied to the update alerts status operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Alert'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Lists the usage data for billing account.
@@ -181,6 +587,199 @@ paths:
                           - 20180331
                     type: microsoft.costmanagement/Query
       x-ms-pageable: {}
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/alerts':
+    get:
+      description: List all alerts for an enrollment.
+      operationId: Alerts_ListByEnrollment
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - description: 'May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/costEntityId, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are ''eq'',''lt'', ''gt'', ''le'', ''ge''.'
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: 'Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.'
+          in: query
+          name: $skiptoken
+          required: false
+          type: string
+        - description: May be used to limit the number of results to the most recent N alerts.
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/AlertListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert_List:
+          parameters:
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                    name: 0e1d6ee7-0052-4996-89e2-023263106885
+                    properties:
+                      closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                      costEntityId: '123'
+                      creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                      definition:
+                        category: Cost
+                        criteria: CostThresholdExceeded
+                        type: Budget
+                      description: This is an example alert
+                      details:
+                        amountDue: '500.0'
+                        billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
+                      source: User
+                      status: Resolved
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
+                    type: Microsoft.CostManagement/alerts
+                  - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106454
+                    name: 0e1d6ee7-0052-4996-89e2-023263106454
+                    properties:
+                      closeTime: '1970-01-01T00:00:00.0000000+00:00'
+                      costEntityId: abc
+                      creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                      definition:
+                        category: Billing
+                        criteria: CreditThresholdReached
+                        type: Credit
+                      description: This is another example alert
+                      details:
+                        amountDue: '500.0'
+                        billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
+                      source: Preset
+                      status: Active
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
+                    type: Microsoft.CostManagement/alerts
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/alerts/{alertId}':
+    get:
+      description: Gets the alert for an enrollment by alert ID.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Alerts_GetByEnrollment
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/alertIdParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/alerts/{alertId}/updateStatus':
+    patch:
+      description: Update alerts status for billing account.
+      operationId: Alerts_UpdateBillingAccountAlertStatus
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/alertIdParameter'
+        - description: Parameters supplied to the update alerts status operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Alert'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/dimensions':
     get:
       description: Lists the dimensions by billingAccount Id.
@@ -195,7 +794,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: 'May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.'
+        - description: 'May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.'
           in: query
           name: $expand
           required: false
@@ -474,7 +1073,7 @@ paths:
           responses:
             '200': {}
     get:
-      description: Gets the report for a billing acount by report name.
+      description: Gets the report for a billing account by report name.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
       operationId: Reports_GetByBillingAccount
@@ -1571,6 +2170,199 @@ paths:
         - Operations
       x-ms-pageable:
         nextLinkName: nextLink
+  '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/alerts':
+    get:
+      description: List all alerts for Management Groups.
+      operationId: Alerts_ListByManagementGroups
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/managementGroupIdParameter'
+        - description: 'May be used to filter alerts by properties/definition/type, properties/definition/category, properties/definition/criteria, properties/costEntityId, properties/creationTime, properties/closeTime, properties/status, properties/source. Supported operators are ''eq'',''lt'', ''gt'', ''le'', ''ge''.'
+          in: query
+          name: $filter
+          required: false
+          type: string
+        - description: 'Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.'
+          in: query
+          name: $skiptoken
+          required: false
+          type: string
+        - description: May be used to limit the number of results to the most recent N alerts.
+          in: query
+          maximum: 1000
+          minimum: 1
+          name: $top
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/AlertListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert_List:
+          parameters:
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                    name: 0e1d6ee7-0052-4996-89e2-023263106885
+                    properties:
+                      closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                      costEntityId: '123'
+                      creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                      definition:
+                        category: Cost
+                        criteria: CostThresholdExceeded
+                        type: Budget
+                      description: This is an example alert
+                      details:
+                        amountDue: '500.0'
+                        billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
+                      source: User
+                      status: Resolved
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
+                    type: Microsoft.CostManagement/alerts
+                  - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106454
+                    name: 0e1d6ee7-0052-4996-89e2-023263106454
+                    properties:
+                      closeTime: '1970-01-01T00:00:00.0000000+00:00'
+                      costEntityId: abc
+                      creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                      definition:
+                        category: Billing
+                        criteria: CreditThresholdReached
+                        type: Credit
+                      description: This is another example alert
+                      details:
+                        amountDue: '500.0'
+                        billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
+                      source: Preset
+                      status: Active
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
+                    type: Microsoft.CostManagement/alerts
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/alerts/{alertId}':
+    get:
+      description: Gets an alert for Management Groups by alert ID.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Alerts_GetAlertByManagementGroups
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/managementGroupIdParameter'
+        - $ref: '#/parameters/alertIdParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
+  '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/alerts/{alertId}/UpdateStatus':
+    patch:
+      description: Update alerts status for management group.
+      operationId: Alerts_UpdateManagementGroupAlertStatus
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/managementGroupIdParameter'
+        - $ref: '#/parameters/alertIdParameter'
+        - description: Parameters supplied to the update alerts status operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Alert'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Lists the usage data for subscriptionId.
@@ -1721,8 +2513,11 @@ paths:
                       details:
                         amountDue: '500.0'
                         billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
                       source: User
                       status: Resolved
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
                     type: Microsoft.CostManagement/alerts
                   - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106454
                     name: 0e1d6ee7-0052-4996-89e2-023263106454
@@ -1738,8 +2533,11 @@ paths:
                       details:
                         amountDue: '500.0'
                         billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
                       source: Preset
                       status: Active
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
                     type: Microsoft.CostManagement/alerts
       x-ms-pageable:
         nextLinkName: nextLink
@@ -1788,8 +2586,66 @@ paths:
                   details:
                     amountDue: '500.0'
                     billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
                   source: User
                   status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
+  '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/alerts/{alertId}/updateStatus':
+    patch:
+      description: Update alerts status for a subscription.
+      operationId: Alerts_UpdateSubscriptionAlertStatus
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/alertIdParameter'
+        - description: Parameters supplied to the update alerts status operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Alert'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
                 type: Microsoft.CostManagement/alerts
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/connectors':
     get:
@@ -1860,7 +2716,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: 'May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.'
+        - description: 'May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.'
           in: query
           name: $expand
           required: false
@@ -2612,8 +3468,11 @@ paths:
                       details:
                         amountDue: '500.0'
                         billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
                       source: User
                       status: Resolved
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
                     type: Microsoft.CostManagement/alerts
                   - id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106454
                     name: 0e1d6ee7-0052-4996-89e2-023263106454
@@ -2629,8 +3488,11 @@ paths:
                       details:
                         amountDue: '500.0'
                         billedAmount: '680.36'
+                      modificationTime: '2018-12-05T10:04:36.0321998Z'
                       source: Preset
                       status: Active
+                      statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                      statusModificationUserName: Ido Ben
                     type: Microsoft.CostManagement/alerts
       x-ms-pageable:
         nextLinkName: nextLink
@@ -2680,8 +3542,67 @@ paths:
                   details:
                     amountDue: '500.0'
                     billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
                   source: User
                   status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
+                type: Microsoft.CostManagement/alerts
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/alerts/{alertId}/updateStatus':
+    patch:
+      description: Update alerts status for a resource group under a subscription.
+      operationId: Alerts_UpdateResourceGroupNameAlertStatus
+      parameters:
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/alertIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: Parameters supplied to the update alerts status operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/Alert'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/Alert'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Alerts
+      x-ms-examples:
+        Alert:
+          parameters:
+            alertId: 0e1d6ee7-0052-4996-89e2-023263106885
+            api-version: 2018-08-01-preview
+            resourceGroupName: rg1
+            subscriptionId: 01234567-89ab-cdef-0123-456789abcdef
+          responses:
+            '200':
+              body:
+                id: /subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/alerts/0e1d6ee7-0052-4996-89e2-023263106885
+                name: 0e1d6ee7-0052-4996-89e2-023263106885
+                properties:
+                  closeTime: '2018-09-10T11:21:43.3495582+03:00'
+                  costEntityId: '123'
+                  creationTime: '2018-09-03T11:21:43.3495582+03:00'
+                  definition:
+                    category: Cost
+                    criteria: CostThresholdExceeded
+                    type: Budget
+                  description: This is an example alert
+                  details:
+                    amountDue: '500.0'
+                    billedAmount: '680.36'
+                  modificationTime: '2018-12-05T10:04:36.0321998Z'
+                  source: User
+                  status: Active
+                  statusModificationTime: '2018-12-05T10:04:36.0321998Z'
+                  statusModificationUserName: Ido Ben
                 type: Microsoft.CostManagement/alerts
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/dimensions':
     get:
@@ -2698,7 +3619,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: 'May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.'
+        - description: 'May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.'
           in: query
           name: $expand
           required: false
@@ -3801,6 +4722,7 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: AlertType
+    readOnly: true
     type: object
   AlertListResult:
     description: Result of listing alerts. It contains a list of available alerts in the scope provided.
@@ -3819,7 +4741,7 @@ definitions:
     description: The properties of an Alert.
     properties:
       closeTime:
-        description: The time when the alert was closed (resolved / overriden).
+        description: The time when the alert was closed (resolved / overridden).
         format: date-time
         readOnly: true
         type: string
@@ -3844,8 +4766,18 @@ definitions:
         additionalProperties:
           type: string
         description: Specific details of an alert - key-value dictionary.
+        readOnly: true
         type: object
         x-ms-client-flatten: true
+      modificationTime:
+        description: The current status when alert was modified.
+        format: date-time
+        readOnly: true
+        type: string
+      modificationUsername:
+        description: The username who modified the alert.
+        readOnly: true
+        type: string
       scope:
         description: The scope of an alert.
         readOnly: true
@@ -3867,11 +4799,15 @@ definitions:
           - Overridden
           - Resolved
           - Dismissed
-        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: AlertStatus
+      statusModificationTime:
+        description: The current status when alert status was modified.
+        format: date-time
+        readOnly: true
+        type: string
   CommonReportProperties:
     description: The common properties of the report.
     properties:
@@ -3904,7 +4840,7 @@ definitions:
         readOnly: true
         type: string
       errorStartTime:
-        description: Time the error started occuring (Last time error occurred in lastRun)
+        description: Time the error started occurring (Last time error occurred in lastRun)
         format: date-time
         readOnly: true
         type: string
@@ -4251,7 +5187,7 @@ definitions:
     description: The comparison expression to be used in the report.
     properties:
       name:
-        description: The name of the column to use in comaprison.
+        description: The name of the column to use in comparison.
         type: string
       operator:
         description: The operator to use for comparison.
@@ -4278,7 +5214,7 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/ReportAggregation'
           type: object
-        description: Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have upto 2 aggregation clauses.
+        description: Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.
         maxItems: 2
         type: object
       configuration:
@@ -4297,7 +5233,7 @@ definitions:
           modelAsString: true
           name: GranularityType
       grouping:
-        description: Array of group by expression to use in the report. Report can have upto 2 group by clauses.
+        description: Array of group by expression to use in the report. Report can have up to 2 group by clauses.
         items:
           $ref: '#/definitions/ReportGrouping'
         maxItems: 2
@@ -4366,7 +5302,7 @@ definitions:
   ReportExecution:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: A report exeuction.
+    description: A report execution.
     properties:
       properties:
         $ref: '#/definitions/ReportExecutionProperties'
@@ -4430,7 +5366,7 @@ definitions:
     description: The filter expression to be used in the report.
     properties:
       and:
-        description: The logical "AND" expression. Must have atleast 2 items.
+        description: The logical "AND" expression. Must have at least 2 items.
         items:
           $ref: '#/definitions/ReportFilter'
         minItems: 2
@@ -4442,7 +5378,7 @@ definitions:
         $ref: '#/definitions/ReportFilter'
         description: The logical "NOT" expression.
       or:
-        description: The logical "OR" expression. Must have atleast 2 items.
+        description: The logical "OR" expression. Must have at least 2 items.
         items:
           $ref: '#/definitions/ReportFilter'
         minItems: 2

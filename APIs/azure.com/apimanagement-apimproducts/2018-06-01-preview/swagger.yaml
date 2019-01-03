@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimproducts.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimproducts
   x-tags:
@@ -496,7 +496,7 @@ paths:
           type: string
       responses:
         '204':
-          description: No Content in case of Update Successfull.
+          description: No Content in case of Update Successful.
         default:
           description: Error response describing why the operation failed.
           schema:

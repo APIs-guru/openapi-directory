@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'View Ad Experience Report data, and get a list of sites that have a significant number of annoying ads.'
+  description: 'Views Ad Experience Report data, and gets a list of sites that have a significant number of annoying ads.'
   title: Ad Experience Report
   version: v1
   x-apiClientRegistration:
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://adexperiencereport.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -216,9 +216,7 @@ definitions:
         type: boolean
     type: object
   SiteSummaryResponse:
-    description: |-
-      Response message for GetSiteSummary.
-      Do not confuse with same message in google.chrome.abusiveexperiencereport.v1
+    description: Response message for GetSiteSummary.
     properties:
       desktopSummary:
         $ref: '#/definitions/PlatformSummary'

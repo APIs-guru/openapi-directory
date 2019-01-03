@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://cloudasset.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -180,20 +180,13 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - collectionFormat: multi
-          description: |-
+        - description: |-
             End time of the time window (inclusive).
             Current timestamp if not specified.
           in: query
-          items:
-            type: string
           name: readTimeWindow.endTime
           type: string
         - description: Start time of the time window (exclusive).
-          enum:
-            - CONTENT_TYPE_UNSPECIFIED
-            - RESOURCE
-            - IAM_POLICY
           in: query
           name: readTimeWindow.startTime
           type: string
@@ -270,7 +263,7 @@ definitions:
       Cloud IAM policies, and other non-GCP assets.
     properties:
       assetType:
-        description: 'Type of the asset. Example: "google.compute.disk".'
+        description: 'Type of the asset. Example: "google.compute.Disk".'
         type: string
       iamPolicy:
         $ref: '#/definitions/Policy'
@@ -451,7 +444,7 @@ definitions:
       assetTypes:
         description: |-
           A list of asset types of which to take a snapshot for. For example:
-          "google.compute.disk". If specified, only matching assets will be returned.
+          "google.compute.Disk". If specified, only matching assets will be returned.
           See [Introduction to Cloud Asset
           Inventory](https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview)
           for all supported asset types.

@@ -1934,7 +1934,7 @@ definitions:
         $ref: '#/definitions/PlatformProperties'
         description: The platform properties against which the build will happen.
       sourceLocation:
-        description: "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repoistory as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API."
+        description: "The URL(absolute or relative) of the source that needs to be built. For Docker build, it can be an URL to a tar or github repository as supported by Docker.\r\nIf it is relative URL, the relative path should be obtained from calling getSourceUploadUrl API."
         type: string
       timeout:
         default: 3600
@@ -2019,7 +2019,7 @@ definitions:
         description: The value of this property indicates whether the source control commit trigger is enabled or not.
         type: boolean
       repositoryUrl:
-        description: The full URL to the source code respository
+        description: The full URL to the source code repository
         type: string
       sourceControlAuthProperties:
         $ref: '#/definitions/SourceControlAuthInfo'

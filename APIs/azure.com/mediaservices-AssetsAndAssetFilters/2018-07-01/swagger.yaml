@@ -1247,7 +1247,7 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: AssetStorageEncryptionFormat
           values:
             - description: The Asset does not use client-side storage encryption (this is the only allowed value for new Assets).
@@ -1310,7 +1310,7 @@ definitions:
           - NotEqual
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: FilterTrackPropertyCompareOperation
           values:
             - description: The equal operation.
@@ -1328,7 +1328,7 @@ definitions:
           - Bitrate
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: FilterTrackPropertyType
           values:
             - description: The unknown track property type.
@@ -1387,7 +1387,7 @@ definitions:
           - ReadWriteDelete
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: AssetContainerPermission
           values:
             - description: The SAS URL will allow read access to the container.
@@ -1466,13 +1466,6 @@ definitions:
         description: The time scale of time stamps.
         format: int64
         type: integer
-    required:
-      - startTimestamp
-      - endTimestamp
-      - presentationWindowDuration
-      - liveBackoffDuration
-      - timescale
-      - forceEndTimestamp
     type: object
   StorageEncryptedAssetDecryptionData:
     description: Data needed to decrypt asset files encrypted with legacy storage encryption.

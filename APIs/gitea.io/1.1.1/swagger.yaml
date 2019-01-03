@@ -207,6 +207,16 @@ responses:
       items:
         $ref: '#/definitions/PullRequest'
       type: array
+  Reference:
+    description: Reference
+    schema:
+      $ref: '#/definitions/Reference'
+  ReferenceList:
+    description: ReferenceList
+    schema:
+      items:
+        $ref: '#/definitions/Reference'
+      type: array
   Release:
     description: Release
     schema:
@@ -269,6 +279,12 @@ responses:
     description: User
     schema:
       $ref: '#/definitions/User'
+  UserHeatmapData:
+    description: UserHeatmapData
+    schema:
+      items:
+        $ref: '#/definitions/UserHeatmapData'
+      type: array
   UserList:
     description: UserList
     schema:
@@ -559,7 +575,46 @@ paths:
       summary: Create a repository in an organization
       tags:
         - organization
+  /orgs:
+    post:
+      consumes:
+        - application/json
+      operationId: orgCreate
+      parameters:
+        - in: body
+          name: organization
+          required: true
+          schema:
+            $ref: '#/definitions/CreateOrgOption'
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/Organization'
+        '403':
+          $ref: '#/responses/forbidden'
+        '422':
+          $ref: '#/responses/validationError'
+      summary: Create an organization
+      tags:
+        - organization
   '/orgs/{org}':
+    delete:
+      operationId: orgDelete
+      parameters:
+        - description: organization that is to be deleted
+          in: path
+          name: org
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '204':
+          $ref: '#/responses/empty'
+      summary: Delete an organization
+      tags:
+        - organization
     get:
       operationId: orgGet
       parameters:
@@ -1303,6 +1358,59 @@ paths:
       summary: Fork a repository
       tags:
         - repository
+  '/repos/{owner}/{repo}/git/refs':
+    get:
+      operationId: repoListAllGitRefs
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/ReferenceList'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get specified ref or filtered repository's refs
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/git/refs/{ref}':
+    get:
+      operationId: repoListGitRefs
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: part or full name of the ref
+          in: path
+          name: ref
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/ReferenceList'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get specified ref or filtered repository's refs
+      tags:
+        - repository
   '/repos/{owner}/{repo}/hooks':
     get:
       operationId: repoListHooks
@@ -1526,7 +1634,7 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Issue'
-      summary: Create an issue
+      summary: 'Create an issue. If using deadline only the date will be taken into account, and time of day ignored.'
       tags:
         - issue
   '/repos/{owner}/{repo}/issues/comments':
@@ -1737,7 +1845,7 @@ paths:
       responses:
         '201':
           $ref: '#/responses/Issue'
-      summary: Edit an issue
+      summary: 'Edit an issue. If using deadline only the date will be taken into account, and time of day ignored.'
       tags:
         - issue
   '/repos/{owner}/{repo}/issues/{index}/comments':
@@ -1911,7 +2019,7 @@ paths:
           description: Not repo writer
         '404':
           description: Issue not found
-      summary: 'Set an issue deadline. If set to null, the deadline is deleted.'
+      summary: 'Set an issue deadline. If set to null, the deadline is deleted. If using deadline only the date will be taken into account, and time of day ignored.'
       tags:
         - issue
   '/repos/{owner}/{repo}/issues/{index}/labels':
@@ -2084,6 +2192,14 @@ paths:
           in: path
           name: repo
           required: true
+          type: string
+        - description: the key_id to search for
+          in: query
+          name: key_id
+          type: integer
+        - description: fingerprint of the key
+          in: query
+          name: fingerprint
           type: string
       produces:
         - application/json
@@ -2327,7 +2443,7 @@ paths:
       responses:
         '200':
           $ref: '#/responses/MilestoneList'
-      summary: Get all of a repository's milestones
+      summary: Get all of a repository's opened milestones
       tags:
         - issue
     post:
@@ -3630,6 +3746,11 @@ paths:
   /user/keys:
     get:
       operationId: userCurrentListKeys
+      parameters:
+        - description: fingerprint of the key
+          in: query
+          name: fingerprint
+          type: string
       produces:
         - application/json
       responses:
@@ -3831,23 +3952,6 @@ paths:
       summary: List the current user's tracked times
       tags:
         - user
-  '/user/{username}/orgs':
-    get:
-      operationId: orgListUserOrgs
-      parameters:
-        - description: username of user
-          in: path
-          name: username
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          $ref: '#/responses/OrganizationList'
-      summary: List a user's organizations
-      tags:
-        - organization
   /users/search:
     get:
       operationId: userSearch
@@ -3974,9 +4078,49 @@ paths:
       summary: List the given user's GPG keys
       tags:
         - user
+  '/users/{username}/heatmap':
+    get:
+      operationId: userGetHeatmapData
+      parameters:
+        - description: username of user to get
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserHeatmapData'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get a user's heatmap
+      tags:
+        - user
   '/users/{username}/keys':
     get:
       operationId: userListKeys
+      parameters:
+        - description: username of user
+          in: path
+          name: username
+          required: true
+          type: string
+        - description: fingerprint of the key
+          in: query
+          name: fingerprint
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/PublicKeyList'
+      summary: List the given user's public keys
+      tags:
+        - user
+  '/users/{username}/orgs':
+    get:
+      operationId: orgListUserOrgs
       parameters:
         - description: username of user
           in: path
@@ -3987,10 +4131,10 @@ paths:
         - application/json
       responses:
         '200':
-          $ref: '#/responses/PublicKeyList'
-      summary: List the given user's public keys
+          $ref: '#/responses/OrganizationList'
+      summary: List a user's organizations
       tags:
-        - user
+        - organization
   '/users/{username}/repos':
     get:
       operationId: userListRepos
@@ -4532,6 +4676,19 @@ definitions:
           - admin
         type: string
         x-go-name: Permission
+      units:
+        enum:
+          - repo.code
+          - repo.issues
+          - repo.ext_issues
+          - repo.wiki
+          - repo.pulls
+          - repo.releases
+          - repo.ext_wiki
+        items:
+          type: string
+        type: array
+        x-go-name: Units
     required:
       - name
     type: object
@@ -4586,6 +4743,9 @@ definitions:
         format: date-time
         type: string
         x-go-name: Created
+      fingerprint:
+        type: string
+        x-go-name: Fingerprint
       id:
         format: int64
         type: integer
@@ -4593,9 +4753,15 @@ definitions:
       key:
         type: string
         x-go-name: Key
+      key_id:
+        format: int64
+        type: integer
+        x-go-name: KeyID
       read_only:
         type: boolean
         x-go-name: ReadOnly
+      repository:
+        $ref: '#/definitions/Repository'
       title:
         type: string
         x-go-name: Title
@@ -4802,6 +4968,19 @@ definitions:
           - admin
         type: string
         x-go-name: Permission
+      units:
+        enum:
+          - repo.code
+          - repo.issues
+          - repo.ext_issues
+          - repo.wiki
+          - repo.pulls
+          - repo.releases
+          - repo.ext_wiki
+        items:
+          type: string
+        type: array
+        x-go-name: Units
     required:
       - name
     type: object
@@ -4930,6 +5109,20 @@ definitions:
       verified:
         type: boolean
         x-go-name: Verified
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  GitObject:
+    properties:
+      sha:
+        type: string
+        x-go-name: SHA
+      type:
+        type: string
+        x-go-name: Type
+      url:
+        type: string
+        x-go-name: URL
+    title: GitObject represents a Git object.
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
   Issue:
@@ -5266,12 +5459,20 @@ definitions:
       key:
         type: string
         x-go-name: Key
+      key_type:
+        type: string
+        x-go-name: KeyType
+      read_only:
+        type: boolean
+        x-go-name: ReadOnly
       title:
         type: string
         x-go-name: Title
       url:
         type: string
         x-go-name: URL
+      user:
+        $ref: '#/definitions/User'
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
   PullRequest:
@@ -5377,6 +5578,19 @@ definitions:
         x-go-name: Merged
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Reference:
+    properties:
+      object:
+        $ref: '#/definitions/GitObject'
+      ref:
+        type: string
+        x-go-name: Ref
+      url:
+        type: string
+        x-go-name: URL
+    title: Reference represents a Git reference.
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
   Release:
     description: Release represents a repository release
     properties:
@@ -5431,6 +5645,9 @@ definitions:
   Repository:
     description: Repository represents a repository
     properties:
+      archived:
+        type: boolean
+        x-go-name: Archived
       clone_url:
         type: string
         x-go-name: CloneURL
@@ -5593,8 +5810,26 @@ definitions:
           - owner
         type: string
         x-go-name: Permission
+      units:
+        enum:
+          - repo.code
+          - repo.issues
+          - repo.ext_issues
+          - repo.wiki
+          - repo.pulls
+          - repo.releases
+          - repo.ext_wiki
+        items:
+          type: string
+        type: array
+        x-go-name: Units
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  TimeStamp:
+    description: TimeStamp defines a timestamp
+    format: int64
+    type: integer
+    x-go-package: code.gitea.io/gitea/modules/util
   TrackedTime:
     description: TrackedTime worked time for an issue / pr
     properties:
@@ -5651,6 +5886,17 @@ definitions:
         x-go-name: UserName
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  UserHeatmapData:
+    description: UserHeatmapData represents the data needed to create a heatmap
+    properties:
+      contributions:
+        format: int64
+        type: integer
+        x-go-name: Contributions
+      timestamp:
+        $ref: '#/definitions/TimeStamp'
+    type: object
+    x-go-package: code.gitea.io/gitea/models
   WatchInfo:
     description: WatchInfo represents an API watch status of one repository
     properties:

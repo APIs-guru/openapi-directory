@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Provides management methods for configuring service producer resources on Google Cloud.
+  description: Manages the service consumers of a Service Infrastructure service.
   title: Service Consumer Management
   version: v1
   x-apiClientRegistration:
@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://serviceconsumermanagement.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -33,7 +33,6 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-      'https://www.googleapis.com/auth/service.management': Manage your Google API service configuration
     type: oauth2
 parameters:
   $.xgafv:
@@ -59,11 +58,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -84,12 +78,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -118,12 +106,13 @@ paths:
   '/v1/{name}':
     delete:
       description: |-
-        Delete a tenancy unit.  Before the tenancy unit is deleted, there should be
-        no tenant resources in it.
-        Operation<response: Empty>.
-      operationId: serviceconsumermanagement.services.tenancyUnits.delete
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: serviceconsumermanagement.operations.delete
       parameters:
-        - description: Name of the tenancy unit to be deleted.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -133,14 +122,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Empty'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
       tags:
-        - services
+        - operations
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
@@ -162,35 +149,128 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v1/{name}:applyProjectConfig':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Apply configuration to an existing tenant project.
+        This project must exist in active state and have the original owner
+        account. Caller must have the permission to add a project to the given
+        tenancy unit. Configuration will be applied, but any existing settings on
+        the project will not be modified.
+        Specified policy bindings will be applied. Existing binding will not be
+        modified.
+        Specified services will be activated.   No service will be deactivated.
+        New billing configuration will be applied if specified.
+        Omit billing configuration to keep the existing one.
+        Service account in the project will be created if previously non existing.
+        Operation fails if any of the steps fail, but no rollback of already
+        applied configuration changes is attempted.
+        Operation<response: Empty>.
+      operationId: serviceconsumermanagement.services.tenancyUnits.applyProjectConfig
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ApplyTenantProjectConfigRequest'
+        - description: Name of the tenancy unit.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - services
+  '/v1/{name}:attachProject':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Attach an existing project to the tenancy unit as a new tenant
+        resource. The project could be either the tenant project reserved by
+        calling AddTenantProject under tenancy unit for the producer project of
+        service, or from outside.
+        Caller will be checked against the permission as if calling
+        AddTenantProject on the same consumer.
+        To trigger the attachement, the targeted tenant project must be in a
+        folder. Please also make sure ServiceConsumerManagement service account is
+        the owner of that project. Note that these two requirements are already met
+        if the project is reserved through AddTenantProject.
+        Operation<response: Empty>.
+      operationId: serviceconsumermanagement.services.tenancyUnits.attachProject
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AttachTenantProjectRequest'
+        - description: Name of the tenancy unit that project will be attached to.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - services
   '/v1/{name}:cancel':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -227,8 +307,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
       tags:
         - operations
   '/v1/{name}:removeProject':
@@ -236,12 +314,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -250,8 +326,10 @@ paths:
       description: |-
         Removes specified project resource identified by tenant resource tag.
         It will remove project lien with 'TenantManager' origin if that was added.
-        It will then attempt to delete the project.
-        If that operation fails, this method fails.
+        It will then attempt to delete the project. If that operation fails, this
+        method fails.
+        After the project has been deleted, or if was already in DELETED state,
+        resource metadata is permanently removed from the tenancy unit.
         Operation<response: Empty>.
       operationId: serviceconsumermanagement.services.tenancyUnits.removeProject
       parameters:
@@ -327,12 +405,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -372,12 +448,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -479,12 +553,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -570,6 +642,38 @@ definitions:
           experimental, non-GA interfaces.
         type: string
     type: object
+  ApplyTenantProjectConfigRequest:
+    description: Request to apply configuration to an existing tenant project.
+    properties:
+      projectConfig:
+        $ref: '#/definitions/TenantProjectConfig'
+        description: Configuration that should be applied to the existing tenant project.
+      tag:
+        description: Tag of the project. Must be less than 128 characters. Required.
+        type: string
+    type: object
+  AttachTenantProjectRequest:
+    description: |-
+      Request to attach an existing project to the tenancy unit as a new tenant
+      resource.
+    properties:
+      externalResource:
+        description: |-
+          When attaching an external project, this is in the format of
+          `projects/{project_number}’.
+        type: string
+      reservedResource:
+        description: |-
+          When attaching a reserved project already in Tenancy Units, this is the
+          tag of tenant resource under the tenancy unit for the service's producer
+          project. The reserved tenant resource must be in active state.
+        type: string
+      tag:
+        description: |-
+          Tag of the tenant resource after attachment.
+          Must be less than 128 characters. Required.
+        type: string
+    type: object
   AuthProvider:
     description: |-
       Configuration for an anthentication provider, including support for
@@ -593,7 +697,7 @@ definitions:
         type: string
       authorizationUrl:
         description: |-
-          Redirect URL if JWT token is required but no present or is expired.
+          Redirect URL if JWT token is required but not present or is expired.
           Implement authorizationUrl of securityDefinitions in OpenAPI spec.
         type: string
       id:
@@ -738,43 +842,6 @@ definitions:
           firebaserules.googleapis.com.
         type: string
     type: object
-  AuthorizationRule:
-    description: |-
-      Authorization rule for API services.
-
-      It specifies the permission(s) required for an API element for the overall
-      API request to succeed. It is typically used to mark request message fields
-      that contain the name of the resource and indicates the permissions that
-      will be checked on that resource.
-
-      For example:
-
-          package google.storage.v1;
-
-          message CopyObjectRequest {
-            string source = 1 [
-              (google.api.authz).permissions = "storage.objects.get"];
-
-            string destination = 2 [
-              (google.api.authz).permissions =
-                  "storage.objects.create,storage.objects.update"];
-          }
-    properties:
-      permissions:
-        description: |-
-          The required permissions. The acceptable values vary depend on the
-          authorization system used. For Google APIs, it should be a comma-separated
-          Google IAM permission values. When multiple permissions are listed, the
-          semantics is not defined by the system. Additional documentation must
-          be provided manually.
-        type: string
-      selector:
-        description: |-
-          Selects the API elements to which this rule applies.
-
-          Refer to selector for syntax details.
-        type: string
-    type: object
   Backend:
     description: '`Backend` defines the backend configuration for a service.'
     properties:
@@ -803,6 +870,12 @@ definitions:
         description: |-
           Minimum deadline in seconds needed for this method. Calls having deadline
           value lower than this will be rejected.
+        format: double
+        type: number
+      operationDeadline:
+        description: |-
+          The number of seconds to wait for the completion of a long running
+          operation. The default is no deadline.
         format: double
         type: number
       selector:
@@ -1367,94 +1440,92 @@ definitions:
     type: object
   HttpRule:
     description: |-
-      `HttpRule` defines the mapping of an RPC method to one or more HTTP
-      REST API methods. The mapping specifies how different portions of the RPC
-      request message are mapped to URL path, URL query parameters, and
-      HTTP request body. The mapping is typically specified as an
-      `google.api.http` annotation on the RPC method,
-      see "google/api/annotations.proto" for details.
+      # gRPC Transcoding
 
-      The mapping consists of a field specifying the path template and
-      method kind.  The path template can refer to fields in the request
-      message, as in the example below which describes a REST GET
-      operation on a resource collection of messages:
+      gRPC Transcoding is a feature for mapping between a gRPC method and one or
+      more HTTP REST endpoints. It allows developers to build a single API service
+      that supports both gRPC APIs and REST APIs. Many systems, including [Google
+      APIs](https://github.com/googleapis/googleapis),
+      [Cloud Endpoints](https://cloud.google.com/endpoints), [gRPC
+      Gateway](https://github.com/grpc-ecosystem/grpc-gateway),
+      and [Envoy](https://github.com/envoyproxy/envoy) proxy support this feature
+      and use it for large scale production services.
 
+      `HttpRule` defines the schema of the gRPC/REST mapping. The mapping specifies
+      how different portions of the gRPC request message are mapped to the URL
+      path, URL query parameters, and HTTP request body. It also controls how the
+      gRPC response message is mapped to the HTTP response body. `HttpRule` is
+      typically specified as an `google.api.http` annotation on the gRPC method.
+
+      Each mapping specifies a URL path template and an HTTP method. The path
+      template may refer to one or more fields in the gRPC request message, as long
+      as each field is a non-repeated field with a primitive (non-message) type.
+      The path template controls how fields of the request message are mapped to
+      the URL path.
+
+      Example:
 
           service Messaging {
             rpc GetMessage(GetMessageRequest) returns (Message) {
-              option (google.api.http).get = "/v1/messages/{message_id}/{sub.subfield}";
+              option (google.api.http) = {
+                  get: "/v1/{name=messages/*}"
+              };
             }
           }
           message GetMessageRequest {
-            message SubMessage {
-              string subfield = 1;
-            }
-            string message_id = 1; // mapped to the URL
-            SubMessage sub = 2;    // `sub.subfield` is url-mapped
+            string name = 1; // Mapped to URL path.
           }
           message Message {
-            string text = 1; // content of the resource
+            string text = 1; // The resource content.
           }
 
-      The same http annotation can alternatively be expressed inside the
-      `GRPC API Configuration` YAML file.
+      This enables an HTTP REST to gRPC mapping as below:
 
-          http:
-            rules:
-              - selector: <proto_package_name>.Messaging.GetMessage
-                get: /v1/messages/{message_id}/{sub.subfield}
-
-      This definition enables an automatic, bidrectional mapping of HTTP
-      JSON to RPC. Example:
-
-      HTTP | RPC
+      HTTP | gRPC
       -----|-----
-      `GET /v1/messages/123456/foo`  | `GetMessage(message_id: "123456" sub: SubMessage(subfield: "foo"))`
+      `GET /v1/messages/123456`  | `GetMessage(name: "messages/123456")`
 
-      In general, not only fields but also field paths can be referenced
-      from a path pattern. Fields mapped to the path pattern cannot be
-      repeated and must have a primitive (non-message) type.
-
-      Any fields in the request message which are not bound by the path
-      pattern automatically become (optional) HTTP query
-      parameters. Assume the following definition of the request message:
-
+      Any fields in the request message which are not bound by the path template
+      automatically become HTTP query parameters if there is no HTTP request body.
+      For example:
 
           service Messaging {
             rpc GetMessage(GetMessageRequest) returns (Message) {
-              option (google.api.http).get = "/v1/messages/{message_id}";
+              option (google.api.http) = {
+                  get:"/v1/messages/{message_id}"
+              };
             }
           }
           message GetMessageRequest {
             message SubMessage {
               string subfield = 1;
             }
-            string message_id = 1; // mapped to the URL
-            int64 revision = 2;    // becomes a parameter
-            SubMessage sub = 3;    // `sub.subfield` becomes a parameter
+            string message_id = 1; // Mapped to URL path.
+            int64 revision = 2;    // Mapped to URL query parameter `revision`.
+            SubMessage sub = 3;    // Mapped to URL query parameter `sub.subfield`.
           }
-
 
       This enables a HTTP JSON to RPC mapping as below:
 
-      HTTP | RPC
+      HTTP | gRPC
       -----|-----
       `GET /v1/messages/123456?revision=2&sub.subfield=foo` | `GetMessage(message_id: "123456" revision: 2 sub: SubMessage(subfield: "foo"))`
 
-      Note that fields which are mapped to HTTP parameters must have a
-      primitive type or a repeated primitive type. Message types are not
-      allowed. In the case of a repeated type, the parameter can be
-      repeated in the URL, as in `...?param=A&param=B`.
+      Note that fields which are mapped to URL query parameters must have a
+      primitive type or a repeated primitive type or a non-repeated message type.
+      In the case of a repeated type, the parameter can be repeated in the URL
+      as `...?param=A&param=B`. In the case of a message type, each field of the
+      message is mapped to a separate parameter, such as
+      `...?foo.a=A&foo.b=B&foo.c=C`.
 
-      For HTTP method kinds which allow a request body, the `body` field
+      For HTTP methods that allow a request body, the `body` field
       specifies the mapping. Consider a REST update method on the
       message resource collection:
-
 
           service Messaging {
             rpc UpdateMessage(UpdateMessageRequest) returns (Message) {
               option (google.api.http) = {
-                put: "/v1/messages/{message_id}"
+                patch: "/v1/messages/{message_id}"
                 body: "message"
               };
             }
@@ -1464,14 +1535,13 @@ definitions:
             Message message = 2;   // mapped to the body
           }
 
-
       The following HTTP JSON to RPC mapping is enabled, where the
       representation of the JSON in the request body is determined by
       protos JSON encoding:
 
-      HTTP | RPC
+      HTTP | gRPC
       -----|-----
-      `PUT /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id: "123456" message { text: "Hi!" })`
+      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id: "123456" message { text: "Hi!" })`
 
       The special name `*` can be used in the body mapping to define that
       every field not bound by the path template should be mapped to the
@@ -1481,7 +1551,7 @@ definitions:
           service Messaging {
             rpc UpdateMessage(Message) returns (Message) {
               option (google.api.http) = {
-                put: "/v1/messages/{message_id}"
+                patch: "/v1/messages/{message_id}"
                 body: "*"
               };
             }
@@ -1494,13 +1564,13 @@ definitions:
 
       The following HTTP JSON to RPC mapping is enabled:
 
-      HTTP | RPC
+      HTTP | gRPC
       -----|-----
-      `PUT /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id: "123456" text: "Hi!")`
+      `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id: "123456" text: "Hi!")`
 
       Note that when using `*` in the body mapping, it is not possible to
       have HTTP parameters, as all fields not bound by the path end in
-      the body. This makes this option more rarely used in practice of
+      the body. This makes this option more rarely used in practice when
       defining REST APIs. The common usage of `*` is in custom methods
       which don't use the URL at all for transferring data.
 
@@ -1522,32 +1592,30 @@ definitions:
             string user_id = 2;
           }
 
+      This enables the following two alternative HTTP JSON to RPC mappings:
 
-      This enables the following two alternative HTTP JSON to RPC
-      mappings:
-
-      HTTP | RPC
+      HTTP | gRPC
       -----|-----
       `GET /v1/messages/123456` | `GetMessage(message_id: "123456")`
       `GET /v1/users/me/messages/123456` | `GetMessage(user_id: "me" message_id: "123456")`
 
-      # Rules for HTTP mapping
+      ## Rules for HTTP mapping
 
-      The rules for mapping HTTP path, query parameters, and body fields
-      to the request message are as follows:
+      1. Leaf request fields (recursive expansion nested messages in the request
+         message) are classified into three categories:
+         - Fields referred by the path template. They are passed via the URL path.
+         - Fields referred by the HttpRule.body. They are passed via the HTTP
+           request body.
+         - All other fields are passed via the URL query parameters, and the
+           parameter name is the field path in the request message. A repeated
+           field can be represented as multiple query parameters under the same
+           name.
+       2. If HttpRule.body is "*", there is no URL query parameter, all fields
+          are passed via URL path and HTTP request body.
+       3. If HttpRule.body is omitted, there is no HTTP request body, all
+          fields are passed via URL path and URL query parameters.
 
-      1. The `body` field specifies either `*` or a field path, or is
-         omitted. If omitted, it indicates there is no HTTP request body.
-      2. Leaf fields (recursive expansion of nested messages in the
-         request) can be classified into three types:
-          (a) Matched in the URL template.
-          (b) Covered by body (if body is `*`, everything except (a) fields;
-              else everything under the body field)
-          (c) All other fields.
-      3. URL query parameters found in the HTTP request are mapped to (c) fields.
-      4. Any body sent with an HTTP request can contain only (b) fields.
-
-      The syntax of the path template is as follows:
+      ### Path template syntax
 
           Template = "/" Segments [ Verb ] ;
           Segments = Segment { "/" Segment } ;
@@ -1556,34 +1624,84 @@ definitions:
           FieldPath = IDENT { "." IDENT } ;
           Verb     = ":" LITERAL ;
 
-      The syntax `*` matches a single path segment. The syntax `**` matches zero
-      or more path segments, which must be the last part of the path except the
-      `Verb`. The syntax `LITERAL` matches literal text in the path.
+      The syntax `*` matches a single URL path segment. The syntax `**` matches
+      zero or more URL path segments, which must be the last part of the URL path
+      except the `Verb`.
 
       The syntax `Variable` matches part of the URL path as specified by its
       template. A variable template must not contain other variables. If a variable
       matches a single path segment, its template may be omitted, e.g. `{var}`
       is equivalent to `{var=*}`.
 
+      The syntax `LITERAL` matches literal text in the URL path. If the `LITERAL`
+      contains any reserved character, such characters should be percent-encoded
+      before the matching.
+
       If a variable contains exactly one path segment, such as `"{var}"` or
-      `"{var=*}"`, when such a variable is expanded into a URL path, all characters
-      except `[-_.~0-9a-zA-Z]` are percent-encoded. Such variables show up in the
-      Discovery Document as `{var}`.
+      `"{var=*}"`, when such a variable is expanded into a URL path on the client
+      side, all characters except `[-_.~0-9a-zA-Z]` are percent-encoded. The
+      server side does the reverse decoding. Such variables show up in the
+      [Discovery Document](https://developers.google.com/discovery/v1/reference/apis)
+      as `{var}`.
 
-      If a variable contains one or more path segments, such as `"{var=foo/*}"`
-      or `"{var=**}"`, when such a variable is expanded into a URL path, all
-      characters except `[-_.~/0-9a-zA-Z]` are percent-encoded. Such variables
-      show up in the Discovery Document as `{+var}`.
+      If a variable contains multiple path segments, such as `"{var=foo/*}"`
+      or `"{var=**}"`, when such a variable is expanded into a URL path on the
+      client side, all characters except `[-_.~/0-9a-zA-Z]` are percent-encoded.
+      The server side does the reverse decoding, except "%2F" and "%2f" are left
+      unchanged. Such variables show up in the
+      [Discovery Document](https://developers.google.com/discovery/v1/reference/apis)
+      as `{+var}`.
 
-      NOTE: While the single segment variable matches the semantics of
-      [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2
-      Simple String Expansion, the multi segment variable **does not** match
-      RFC 6570 Reserved Expansion. The reason is that the Reserved Expansion
+      ## Using gRPC API Service Configuration
+
+      gRPC API Service Configuration (service config) is a configuration language
+      for configuring a gRPC service to become a user-facing product. The
+      service config is simply the YAML representation of the `google.api.Service`
+      proto message.
+
+      As an alternative to annotating your proto file, you can configure gRPC
+      transcoding in your service config YAML files. You do this by specifying a
+      `HttpRule` that maps the gRPC method to a REST endpoint, achieving the same
+      effect as the proto annotation. This can be particularly useful if you
+      have a proto that is reused in multiple services. Note that any transcoding
+      specified in the service config will override any matching transcoding
+      configuration in the proto.
+
+      Example:
+
+          http:
+            rules:
+              # Selects a gRPC method and applies HttpRule to it.
+              - selector: example.v1.Messaging.GetMessage
+                get: /v1/messages/{message_id}/{sub.subfield}
+
+      ## Special notes
+
+      When gRPC Transcoding is used to map a gRPC to JSON REST endpoints, the
+      proto to JSON conversion must follow the [proto3
+      specification](https://developers.google.com/protocol-buffers/docs/proto3#json).
+
+      While the single segment variable follows the semantics of
+      [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2 Simple String
+      Expansion, the multi segment variable **does not** follow RFC 6570 Section
+      3.2.3 Reserved Expansion. The reason is that the Reserved Expansion
       does not expand special characters like `?` and `#`, which would lead
-      to invalid URLs.
+      to invalid URLs. As the result, gRPC Transcoding uses a custom encoding
+      for multi segment variables.
 
-      NOTE: the field paths in variables and in the `body` must not refer to
-      repeated fields or map fields.
+      The path variables **must not** refer to any repeated or mapped field,
+      because client libraries are not capable of handling such variable expansion.
+
+      The path variables **must not** capture the leading "/" character. The reason
+      is that the most common use case "{var}" does not capture the leading "/"
+      character. For consistency, all path variables must share the same behavior.
+
+      Repeated message fields must not be mapped to URL query parameters, because
+      no client library can support such complicated mapping.
+
+      If an API needs to use a JSON array for request or response body, it can map
+      the request or response body to a repeated field. However, some gRPC
+      Transcoding implementations may not support this feature.
     properties:
       additionalBindings:
         description: |-
@@ -1593,21 +1711,14 @@ definitions:
         items:
           $ref: '#/definitions/HttpRule'
         type: array
-      authorizations:
-        description: |-
-          Specifies the permission(s) required for an API element for the overall
-          API request to succeed. It is typically used to mark request message fields
-          that contain the name of the resource and indicates the permissions that
-          will be checked on that resource.
-        items:
-          $ref: '#/definitions/AuthorizationRule'
-        type: array
       body:
         description: |-
-          The name of the request field whose value is mapped to the HTTP body, or
-          `*` for mapping all fields not captured by the path pattern to the HTTP
-          body. NOTE: the referred field must not be a repeated field and must be
-          present at the top-level of request message type.
+          The name of the request field whose value is mapped to the HTTP request
+          body, or `*` for mapping all request fields not captured by the path
+          pattern to the HTTP body, or omitted for not having any HTTP request body.
+
+          NOTE: the referred field must be present at the top-level of the request
+          message type.
         type: string
       custom:
         $ref: '#/definitions/CustomHttpPattern'
@@ -1617,78 +1728,34 @@ definitions:
           HTTP method unspecified for this rule. The wild-card rule is useful
           for services that provide content to Web (HTML) clients.
       delete:
-        description: Used for deleting a resource.
+        description: Maps to HTTP DELETE. Used for deleting a resource.
         type: string
       get:
-        description: Used for listing and getting information about resources.
+        description: |-
+          Maps to HTTP GET. Used for listing and getting information about
+          resources.
         type: string
-      mediaDownload:
-        $ref: '#/definitions/MediaDownload'
-        description: |-
-          Use this only for Scotty Requests. Do not use this for bytestream methods.
-          For media support, add instead [][google.bytestream.RestByteStream] as an
-          API to your configuration.
-      mediaUpload:
-        $ref: '#/definitions/MediaUpload'
-        description: |-
-          Use this only for Scotty Requests. Do not use this for media support using
-          Bytestream, add instead
-          [][google.bytestream.RestByteStream] as an API to your
-          configuration for Bytestream methods.
       patch:
-        description: Used for updating a resource.
+        description: Maps to HTTP PATCH. Used for updating a resource.
         type: string
       post:
-        description: Used for creating a resource.
+        description: Maps to HTTP POST. Used for creating a resource or performing an action.
         type: string
       put:
-        description: Used for updating a resource.
+        description: Maps to HTTP PUT. Used for replacing a resource.
         type: string
-      restCollection:
+      responseBody:
         description: |-
-          DO NOT USE. This is an experimental field.
+          Optional. The name of the response field whose value is mapped to the HTTP
+          response body. When omitted, the entire response message will be used
+          as the HTTP response body.
 
-          Optional. The REST collection name is by default derived from the URL
-          pattern. If specified, this field overrides the default collection name.
-          Example:
-
-              rpc AddressesAggregatedList(AddressesAggregatedListRequest)
-                  returns (AddressesAggregatedListResponse) {
-                option (google.api.http) = {
-                  get: "/v1/projects/{project_id}/aggregated/addresses"
-                  rest_collection: "projects.addresses"
-                };
-              }
-
-          This method has the automatically derived collection name
-          "projects.aggregated". Because, semantically, this rpc is actually an
-          operation on the "projects.addresses" collection, the `rest_collection`
-          field is configured to override the derived collection name.
-        type: string
-      restMethodName:
-        description: |-
-          DO NOT USE. This is an experimental field.
-
-          Optional. The rest method name is by default derived from the URL
-          pattern. If specified, this field overrides the default method name.
-          Example:
-
-              rpc CreateResource(CreateResourceRequest)
-                  returns (CreateResourceResponse) {
-                option (google.api.http) = {
-                  post: "/v1/resources",
-                  body: "resource",
-                  rest_method_name: "insert"
-                };
-              }
-
-          This method has the automatically derived rest method name
-          "create", but for backwards compatibility with apiary, it is specified as
-          insert.
+          NOTE: The referred field must be present at the top-level of the response
+          message type.
         type: string
       selector:
         description: |-
-          Selects methods to which this rule applies.
+          Selects a method to which this rule applies.
 
           Refer to selector for syntax details.
         type: string
@@ -1842,87 +1909,6 @@ definitions:
           Service.monitored_resources section.
         type: string
     type: object
-  MediaDownload:
-    description: |-
-      Defines the Media configuration for a service in case of a download.
-      Use this only for Scotty Requests. Do not use this for media support using
-      Bytestream, add instead [][google.bytestream.RestByteStream] as an API to
-      your configuration for Bytestream methods.
-    properties:
-      completeNotification:
-        description: |-
-          A boolean that determines whether a notification for the completion of a
-          download should be sent to the backend.
-        type: boolean
-      downloadService:
-        description: |-
-          DO NOT USE FIELDS BELOW THIS LINE UNTIL THIS WARNING IS REMOVED.
-
-          Specify name of the download service if one is used for download.
-        type: string
-      dropzone:
-        description: Name of the Scotty dropzone to use for the current API.
-        type: string
-      enabled:
-        description: Whether download is enabled.
-        type: boolean
-      maxDirectDownloadSize:
-        description: |-
-          Optional maximum acceptable size for direct download.
-          The size is specified in bytes.
-        format: int64
-        type: string
-      useDirectDownload:
-        description: |-
-          A boolean that determines if direct download from ESF should be used for
-          download of this media.
-        type: boolean
-    type: object
-  MediaUpload:
-    description: |-
-      Defines the Media configuration for a service in case of an upload.
-      Use this only for Scotty Requests. Do not use this for media support using
-      Bytestream, add instead [][google.bytestream.RestByteStream] as an API to
-      your configuration for Bytestream methods.
-    properties:
-      completeNotification:
-        description: |-
-          A boolean that determines whether a notification for the completion of an
-          upload should be sent to the backend. These notifications will not be seen
-          by the client and will not consume quota.
-        type: boolean
-      dropzone:
-        description: Name of the Scotty dropzone to use for the current API.
-        type: string
-      enabled:
-        description: Whether upload is enabled.
-        type: boolean
-      maxSize:
-        description: |-
-          Optional maximum acceptable size for an upload.
-          The size is specified in bytes.
-        format: int64
-        type: string
-      mimeTypes:
-        description: |-
-          An array of mimetype patterns. Esf will only accept uploads that match one
-          of the given patterns.
-        items:
-          type: string
-        type: array
-      progressNotification:
-        description: Whether to receive a notification for progress changes of media upload.
-        type: boolean
-      startNotification:
-        description: Whether to receive a notification on the start of media upload.
-        type: boolean
-      uploadService:
-        description: |-
-          DO NOT USE FIELDS BELOW THIS LINE UNTIL THIS WARNING IS REMOVED.
-
-          Specify name of the upload service if one is used for upload.
-        type: string
-    type: object
   Method:
     description: Method represents a method of an API interface.
     properties:
@@ -1980,6 +1966,9 @@ definitions:
         items:
           $ref: '#/definitions/LabelDescriptor'
         type: array
+      metadata:
+        $ref: '#/definitions/MetricDescriptorMetadata'
+        description: Optional. Metadata which can be used to guide usage of the metric.
       metricKind:
         description: |-
           Whether the metric records instantaneous values, changes to a value, etc.
@@ -1996,11 +1985,12 @@ definitions:
       type:
         description: |-
           The metric type, including its DNS name prefix. The type is not
-          URL-encoded.  All user-defined custom metric types have the DNS name
-          `custom.googleapis.com`.  Metric types should use a natural hierarchical
-          grouping. For example:
+          URL-encoded.  All user-defined metric types have the DNS name
+          `custom.googleapis.com` or `external.googleapis.com`.  Metric types should
+          use a natural hierarchical grouping. For example:
 
               "custom.googleapis.com/invoice/paid/amount"
+              "external.googleapis.com/prometheus/up"
               "appengine.googleapis.com/http/server/response_latencies"
         type: string
       unit:
@@ -2083,6 +2073,35 @@ definitions:
           - STRING
           - DISTRIBUTION
           - MONEY
+        type: string
+    type: object
+  MetricDescriptorMetadata:
+    description: Additional annotations that can be used to guide the usage of a metric.
+    properties:
+      ingestDelay:
+        description: |-
+          The delay of data points caused by ingestion. Data points older than this
+          age are guaranteed to be ingested and available to be read, excluding
+          data loss due to errors.
+        format: google-duration
+        type: string
+      launchStage:
+        description: The launch stage of the metric definition.
+        enum:
+          - LAUNCH_STAGE_UNSPECIFIED
+          - EARLY_ACCESS
+          - ALPHA
+          - BETA
+          - GA
+          - DEPRECATED
+        type: string
+      samplePeriod:
+        description: |-
+          The sampling period of metric data points. For metrics which are written
+          periodically, consecutive data points are stored at this time interval,
+          excluding data loss due to errors. Metrics with a higher granularity have
+          a smaller sampling period.
+        format: google-duration
         type: string
     type: object
   MetricRule:
@@ -2290,18 +2309,22 @@ definitions:
       consumerDestinations:
         description: |-
           Monitoring configurations for sending metrics to the consumer project.
-          There can be multiple consumer destinations, each one must have a
-          different monitored resource type. A metric can be used in at most
-          one consumer destination.
+          There can be multiple consumer destinations. A monitored resouce type may
+          appear in multiple monitoring destinations if different aggregations are
+          needed for different sets of metrics associated with that monitored
+          resource type. A monitored resource and metric pair may only be used once
+          in the Monitoring configuration.
         items:
           $ref: '#/definitions/MonitoringDestination'
         type: array
       producerDestinations:
         description: |-
           Monitoring configurations for sending metrics to the producer project.
-          There can be multiple producer destinations, each one must have a
-          different monitored resource type. A metric can be used in at most
-          one producer destination.
+          There can be multiple producer destinations. A monitored resouce type may
+          appear in multiple monitoring destinations if different aggregations are
+          needed for different sets of metrics associated with that monitored
+          resource type. A monitored resource and metric pair may only be used once
+          in the Monitoring configuration.
         items:
           $ref: '#/definitions/MonitoringDestination'
         type: array
@@ -2313,8 +2336,8 @@ definitions:
     properties:
       metrics:
         description: |-
-          Names of the metrics to report to this monitoring destination.
-          Each name must be defined in Service.metrics section.
+          Types of the metrics to report to this monitoring destination.
+          Each type must be defined in Service.metrics section.
         items:
           type: string
         type: array
@@ -2488,6 +2511,7 @@ definitions:
       An example quota configuration in yaml format:
 
          quota:
+           limits:
 
            - name: apiWriteQpsPerProject
              metric: library.googleapis.com/write_calls
@@ -2755,7 +2779,7 @@ definitions:
         description: |-
           A unique ID for a specific instance of this message, typically assigned
           by the client for tracking purpose. If empty, the server may choose to
-          generate one instead.
+          generate one instead. Must be no longer than 60 characters.
         type: string
       logging:
         $ref: '#/definitions/Logging'
@@ -2782,8 +2806,10 @@ definitions:
         description: Monitoring configuration.
       name:
         description: |-
-          The DNS address at which this service is available,
-          e.g. `calendar.googleapis.com`.
+          The service name, which is a DNS-like logical identifier for the
+          service, such as `calendar.googleapis.com`. The service name
+          typically goes through DNS verification to make sure the owner
+          of the service also owns the DNS name.
         type: string
       producerProjectId:
         description: The Google project that owns this service.
@@ -3069,10 +3095,7 @@ definitions:
     properties:
       billingConfig:
         $ref: '#/definitions/BillingConfig'
-        description: |-
-          Billing account properties.
-          It might be specified explicitly, or created from the specified group
-          during provisioning
+        description: Billing account properties.  Billing account must be specified.
       folder:
         description: |-
           Folder where project in this tenancy unit must be located
@@ -3136,6 +3159,7 @@ definitions:
           - ACTIVE
           - PENDING_DELETE
           - FAILED
+          - DELETED
         type: string
       tag:
         description: Unique per single tenancy unit.

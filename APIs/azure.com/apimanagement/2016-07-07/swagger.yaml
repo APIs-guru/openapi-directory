@@ -201,7 +201,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Paged Result reponse of Apis.
+          description: Paged Result response of Apis.
           schema:
             $ref: '#/definitions/ApiCollection'
         default:
@@ -1069,7 +1069,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '201':
-          description: Group was created succesfully.
+          description: Group was created successfully.
         '204':
           description: Group already exists.
         default:
@@ -1753,7 +1753,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '204':
-          description: No Content in case of Update Successfull.
+          description: No Content in case of Update Successful.
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -2020,7 +2020,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}':
     delete:
-      description: Deletes specific property from the the API Management service instance.
+      description: Deletes specific property from the API Management service instance.
       operationId: Property_Delete
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -2288,7 +2288,7 @@ paths:
           type: string
         - $ref: '#/parameters/TopQueryParameter'
         - $ref: '#/parameters/SkipQueryParameter'
-        - description: 'By time interval. This value is only applicable to ByTime aggregation. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, secconds))'
+        - description: 'By time interval. This value is only applicable to ByTime aggregation. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, seconds))'
           in: query
           name: interval
           required: false
@@ -2402,7 +2402,7 @@ paths:
       tags:
         - Subscriptions
     patch:
-      description: Updates the details of a subscription specificied by its identifier.
+      description: Updates the details of a subscription specified by its identifier.
       operationId: Subscriptions_Update
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -2677,7 +2677,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Result of appplying changes from Git branch to database.
+          description: Result of applying changes from Git branch to database.
           schema:
             $ref: '#/definitions/OperationResultContract'
         default:
@@ -3346,7 +3346,7 @@ definitions:
         readOnly: true
         type: string
       id:
-        description: 'Uniquely identifies the group within the current API Management service instance. The value is a valid relative URL in the format of /groups/{groupid} where {groupid} is a group identifier.'
+        description: 'Uniquely identifies the group within the current API Management service instance. The value is a valid relative URL in the format of /groups/{groupId} where {groupId} is a group identifier.'
         readOnly: true
         type: string
       name:
@@ -4382,7 +4382,7 @@ definitions:
         format: int32
         type: integer
       callCountSuccess:
-        description: Number of succesful calls.
+        description: Number of successful calls.
         format: int32
         type: integer
       callCountTotal:
@@ -4393,7 +4393,7 @@ definitions:
         description: Country to which this record data is related.
         type: string
       interval:
-        description: Length of agregation period.
+        description: Length of aggregation period.
         format: int64
         type: integer
       name:
@@ -4499,7 +4499,7 @@ definitions:
     required:
       - branch
   SubscriptionCollection:
-    description: Paged Subsctions list representation.
+    description: Paged Subscriptions list representation.
     properties:
       count:
         description: Total records count number.
@@ -4597,7 +4597,7 @@ definitions:
         minLength: 1
         type: string
       productId:
-        description: 'Product (product id path) for which subscription is being created in form /products/{productid}'
+        description: 'Product (product id path) for which subscription is being created in form /products/{productId}'
         type: string
       secondaryKey:
         description: Secondary subscription key. If not specified during request key will be generated automatically.

@@ -198,14 +198,14 @@ parameters:
     type: integer
     x-ms-parameter-location: method
   select:
-    description: This filter allows to selection of the fields(comma seperated) which would  be part of the the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.
+    description: This filter allows to selection of the fields(comma separated) which would  be part of the essential section. This would allow to project only the  required fields rather than getting entire content.  Default is to fetch all the fields in the essentials section.
     in: query
     name: select
     required: false
     type: string
     x-ms-parameter-location: method
   severity:
-    description: Filter by severity.  Defaut value is select all.
+    description: Filter by severity.  Default value is select all.
     enum:
       - Sev0
       - Sev1
@@ -325,7 +325,7 @@ paths:
         - $ref: '#/parameters/api-version'
       responses:
         '200':
-          description: OK. Succesfully retrieved operations list.
+          description: OK. Successfully retrieved operations list.
           schema:
             $ref: '#/definitions/operationsList'
       x-ms-pageable:
@@ -356,7 +356,7 @@ paths:
         - $ref: '#/parameters/api-version'
       responses:
         '200':
-          description: OK. Succesfully listed alert objects.
+          description: OK. Successfully listed alert objects.
           schema:
             $ref: '#/definitions/alertsList'
         default:

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/storage/v1/rest'
       version: v1
@@ -299,7 +299,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     patch:
-      description: 'Updates a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate. This method supports patch semantics.'
+      description: 'Patches a bucket. Changes to the bucket will be readable immediately after writing, but configuration changes may take time to propagate.'
       operationId: storage.buckets.patch
       parameters:
         - in: body
@@ -1246,7 +1246,7 @@ paths:
           in: query
           name: ifMetagenerationNotMatch
           type: string
-        - description: 'Resource name of the Cloud KMS key, of the form projects/my-project/locations/global/keyRings/my-kr/cryptoKeys/my-key, that will be used to encrypt the object. Overrides the object metadata''s kms_key_name value, if any. Limited availability; usable only by enabled projects.'
+        - description: 'Resource name of the Cloud KMS key, of the form projects/my-project/locations/global/keyRings/my-kr/cryptoKeys/my-key, that will be used to encrypt the object. Overrides the object metadata''s kms_key_name value, if any.'
           in: query
           name: kmsKeyName
           type: string
@@ -2048,7 +2048,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ComposeRequest'
-        - description: Name of the bucket in which to store the new object.
+        - description: Name of the bucket containing the source objects. The destination object is stored in this bucket.
           in: path
           name: destinationBucket
           required: true
@@ -2461,6 +2461,20 @@ definitions:
       etag:
         description: HTTP 1.1 Entity tag for the bucket.
         type: string
+      iamConfiguration:
+        description: The bucket's IAM configuration.
+        properties:
+          bucketPolicyOnly:
+            properties:
+              enabled:
+                description: 'If set, access checks only use bucket-level IAM policies or above.'
+                type: boolean
+              lockedTime:
+                description: 'The deadline time for changing iamConfiguration.bucketPolicyOnly.enabled from true to false in RFC 3339 format. iamConfiguration.bucketPolicyOnly.enabled may be changed from true to false until the locked time, after which the field is immutable.'
+                format: date-time
+                type: string
+            type: object
+        type: object
       id:
         description: 'The ID of the bucket. For buckets, the id and name properties are the same.'
         type: string
@@ -2505,6 +2519,9 @@ definitions:
                     isLive:
                       description: 'Relevant only for versioned objects. If the value is true, this condition matches live objects; if the value is false, it matches archived objects.'
                       type: boolean
+                    matchesPattern:
+                      description: 'A regular expression that satisfies the RE2 syntax. This condition is satisfied when the name of the object matches the RE2 pattern. Note: This feature is currently in the "Early Access" launch stage and is only available to a whitelisted set of users; that means that this feature may be changed in backward-incompatible ways and that it is not guaranteed to be released.'
+                      type: string
                     matchesStorageClass:
                       description: 'Objects having any of the storage classes specified by this condition will be matched. Values include MULTI_REGIONAL, REGIONAL, NEARLINE, COLDLINE, STANDARD, and DURABLE_REDUCED_AVAILABILITY.'
                       items:
@@ -2743,7 +2760,7 @@ definitions:
               format: int64
               type: string
             name:
-              description: The source object's name. The source object's bucket is implicitly the destination bucket.
+              description: The source object's name. All source objects must reside in the same bucket.
               type: string
             objectPreconditions:
               description: Conditions that must be met for this operation to execute.
@@ -2867,7 +2884,7 @@ definitions:
         description: 'The kind of item this is. For objects, this is always storage#object.'
         type: string
       kmsKeyName:
-        description: 'Cloud KMS Key used to encrypt this object, if the object is encrypted by such a key. Limited availability; usable only by enabled projects.'
+        description: 'Cloud KMS Key used to encrypt this object, if the object is encrypted by such a key.'
         type: string
       md5Hash:
         description: 'MD5 hash of the data; encoded using base64. For more information about using the MD5 hash, see Hashes and ETags: Best Practices.'

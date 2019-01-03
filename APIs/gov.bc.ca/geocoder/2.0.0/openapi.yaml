@@ -12,11 +12,19 @@ info:
     name: DataBC
     url: 'https://data.gov.bc.ca/'
   description: |-
-    This API represents address cleaning, correction, completion, geocoding, reverse geocoding, and proximity resources for intersection addresses, physical addresses and their occupants in British Columbia. Two endpoints are provided for this API: one is public (apps.gov.bc.ca/pub/geocoder), the other is restricted (geocoder.api.gov.bc.ca) and requires an API key. For the public endpoint CORS is only enabled for gov.bc.ca, whereas the restricted endpoint allows CORS for all domains. Please read our [data collection notice](https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice).  
+    This API represents address cleaning, correction, completion, geocoding, reverse geocoding, and proximity resources for intersection addresses, physical addresses and their occupants in British Columbia. Please read our [data collection notice](https://github.com/bcgov/api-specs/blob/master/COLLECTION_NOTICE.md#collection-notice).  
 
     Please note that you may experience issues when submitting requests to the delivery or test environment if using this [OpenAPI specification](https://github.com/bcgov/api-specs) in other API console viewers. 
 
     [Developer API keys](https://github.com/bcgov/gwa/wiki/Developer-Guide#developer-api-keys) are unique and provide the ability to make up to 2 requests per second. Production government applications may use organization API keys which are further described in [the Developer guide](https://github.com/bcgov/gwa/wiki/Developer-Guide#developer-api-keys).
+
+     **Notification: If you have applications or web pages that link to the public geocoder at one of the following URLs, please note that they are now deprecated [More Details](https://www2.gov.bc.ca/gov/content?id=103ADC5A956842828554238DEF28D6E5).  
+     - http://apps.gov.bc.ca/pub/geocoder 
+     - https://apps.gov.bc.ca/pub/geocoder
+     
+     
+     **To acquire an API key please visit the [API Key Request](https://kq.apps.gov.bc.ca/) application.**
+     
   license:
     name: Open Government License - British Columbia
     url: 'https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61'
@@ -30,7 +38,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: openapi
       url: 'https://raw.githubusercontent.com/bcgov/api-specs/master/geocoder/geocoder-combined.json'
       version: '3.0'
@@ -603,8 +611,8 @@ paths:
               - csv
               - shpz
             type: string
-        - description: Occupant name followed by a frontGate delimiter ('--') followed by an optional address
-          example: Redfish Elementary --
+        - description: Occupant name OR Occupant name ** address
+          example: Sir James Douglas Elementary
           in: query
           name: addressString
           required: false

@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: test-api.osf.io
+host: api.test.osf.io
 basePath: /v2
 info:
   contact:
@@ -71,7 +71,7 @@ tags:
 
       https://test.osf.io/
 
-      https://test-api.osf.io/v2/
+      https://api.test.osf.io/v2/
 
       ##### Ephemerality Notice
 
@@ -299,6 +299,27 @@ tags:
 
       Some endpoints are automatically embedded, such as the [node contributors](#operation/nodes_contributors_list) endpoint, which automatically embeds user information.
     name: Embedding
+    x-traitTag: true
+  - description: |-
+      All related resources that appear in the `relationships` attribute can have a count associated with them, this allows you to see number of resources associated with a queried object before you query them. The count will appear in the `count` variable of the field’s `links.related.meta` object.
+
+      To view the count of objects in the relationship field add the query parameter `?related_counts=<field_name>`, for multiple fields use a comma separated list like `?related_counts=<field_name1>,<field_name2>` for all related fields use `?related_counts=True`.
+
+
+      For example using the the url `/v2/users/<user_id>/?related_counts=nodes` for a user with 4 nodes will return the following for the node field of the user object.
+
+          GET /v2/users/<user_id>/?related_counts=nodes/
+          "nodes": {
+            "links": {
+              "related": {
+                "href": "https://api.osf.io/v2/users/<user_id>/nodes/",
+                "meta": {
+                  "count": 4
+                }
+              }
+            }
+          },
+    name: Related Counts
     x-traitTag: true
   - description: |-
       ## Attribute Validation
@@ -548,6 +569,27 @@ tags:
   - description: |-
 
 
+      #### 2.11
+
+      + Only return the permissions explicitly assigned to the current user in `current_user_permissions`.
+          + No longer automatically return `read` for all public nodes.
+
+
+      #### 2.10
+
+      + Return and require lists for the following `social` fields:
+          + `github`
+          + `twitter`
+          + `linkedIn`
+          + `profileWebsites`
+
+
+      #### 2.9
+
+      + Return `null` for all empty relationships instead of ommitting them entirely.
+
+      + Deprecate the `metaschemas/registrations` endpoint in favor of `schemas/registrations`.
+
       #### 2.8
 
       + Deprecate the `preprint_providers` endpoint in favor of `providers/preprints`.
@@ -746,11 +788,11 @@ paths:
         * `registration_cancelled`: A proposed Registration is cancelled
         ---
 
-        * `preprint_initiated`: A preprint is made from the node
+        * `preprint_initiated`: A preprint is made from the node (deprecated log, preprints are no longer made from nodes)
 
-        * `preprint_license_updated`: A license is added or updated to the preprint
+        * `preprint_license_updated`: A license is added or updated to the preprint (deprecated log, preprint actions are no longer logged on the node)
 
-        * `preprint_file_updated`: The primary file of a preprint is updated
+        * `preprint_file_updated`: The primary file of a preprint is updated (deprecated log, this action is now logged on the preprint)
       operationId: logs_actions
       responses:
         '200':
@@ -1898,6 +1940,11 @@ paths:
                 links:
                   description: URLs to alternative representations of the institutions entity.
                   properties:
+                    html:
+                      description: A link to the detail page for the institution on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     self:
                       description: A link to the detail page for the institution.
                       format: URL
@@ -1967,6 +2014,7 @@ paths:
                   name: Center For Open Science
                 id: cos
                 links:
+                  html: 'https://osf.io/institutions/cos/'
                   self: 'https://api.osf.io/v2/institutions/cos/'
                 relationships:
                   nodes:
@@ -2017,6 +2065,11 @@ paths:
                 links:
                   description: URLs to alternative representations of the institutions entity.
                   properties:
+                    html:
+                      description: A link to the detail page for the institution on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     self:
                       description: A link to the detail page for the institution.
                       format: URL
@@ -2292,7 +2345,7 @@ paths:
                       readOnly: false
                       type: string
                     preprint:
-                      description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                      description: Whether or not the node contains supplemental material for a preprint.
                       readOnly: true
                       type: boolean
                     public:
@@ -2317,6 +2370,10 @@ paths:
                       description: The title of the node.
                       readOnly: false
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the node has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                   readOnly: false
                   required:
                     - title
@@ -2407,7 +2464,7 @@ paths:
                       readOnly: true
                       type: string
                     preprints:
-                      description: A link to the list of preprints that this node relates to.
+                      description: A link to the list of preprints for which this node contains supplemental materials.
                       readOnly: true
                       type: string
                     registrations:
@@ -2678,6 +2735,9 @@ paths:
                   attributes:
                     full_name: Casey M. Rollins
                     middle_names: Marie
+                    social:
+                      github:
+                        - caseyrollins
                   id: '{user_id}'
                   type: users
               properties:
@@ -2713,6 +2773,55 @@ paths:
                       description: 'The middle names of the user, used for bibliographic citations.'
                       readOnly: false
                       type: string
+                    social:
+                      description: The social fields associated with a user.
+                      properties:
+                        academiaProfileID:
+                          description: The academiaProfileID for the given user.
+                          type: string
+                        baiduScholar:
+                          description: The baiduScholar for the given user.
+                          type: string
+                        github:
+                          description: The github usernames for the given user.
+                          items:
+                            type: string
+                          type: array
+                        impactStory:
+                          description: The impactStory for the given user.
+                          type: string
+                        linkedIn:
+                          description: The linkedIn profiles for the given user.
+                          items:
+                            type: string
+                          type: array
+                        orcid:
+                          description: The orcid for the given user.
+                          type: string
+                        profileWebsites:
+                          description: The profileWebsites for the given user.
+                          items:
+                            type: string
+                          type: array
+                        researchGate:
+                          description: The researchGate for the given user.
+                          type: string
+                        researcherId:
+                          description: The researcherId for the given user.
+                          type: string
+                        scholar:
+                          description: The google scholar for the given user.
+                          type: string
+                        ssrn:
+                          description: The ssrn for the given user.
+                          type: string
+                        twitter:
+                          description: The twitter handles for the given user.
+                          items:
+                            type: string
+                          type: array
+                      readOnly: false
+                      type: object
                     suffix:
                       description: 'The suffix of the user, used for bibliographic citations.'
                       readOnly: false
@@ -3414,6 +3523,14 @@ paths:
         The `links` key contains a dictionary of links that can be used for [pagination](#tag/Pagination).
 
         This request should never return an error.
+
+        #### Filtering
+
+        You can optionally request that the response only include schemas that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/schemas/registrations/?filter[active]=true.
+
+        Schemas may be filtered by their `active` attribute only.
+
+        You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registration_metaschemas_list
       responses:
         '200':
@@ -3988,7 +4105,7 @@ paths:
                       readOnly: false
                       type: string
                     preprint:
-                      description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                      description: Whether or not the node contains supplemental material for a preprint.
                       readOnly: true
                       type: boolean
                     public:
@@ -4013,6 +4130,10 @@ paths:
                       description: The title of the node.
                       readOnly: false
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the node has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                   readOnly: false
                   required:
                     - title
@@ -4103,7 +4224,7 @@ paths:
                       readOnly: true
                       type: string
                     preprints:
-                      description: A link to the list of preprints that this node relates to.
+                      description: A link to the list of preprints for which this node contains supplemental materials.
                       readOnly: true
                       type: string
                     registrations:
@@ -4237,7 +4358,7 @@ paths:
                     readOnly: false
                     type: string
                   preprint:
-                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                    description: Whether or not the node contains supplemental material for a preprint.
                     readOnly: true
                     type: boolean
                   public:
@@ -4262,6 +4383,10 @@ paths:
                     description: The title of the node.
                     readOnly: false
                     type: string
+                  wiki_enabled:
+                    description: Whether or not the node has its wiki enabled.
+                    readOnly: true
+                    type: boolean
                 readOnly: false
                 required:
                   - title
@@ -4352,7 +4477,7 @@ paths:
                     readOnly: true
                     type: string
                   preprints:
-                    description: A link to the list of preprints that this node relates to.
+                    description: A link to the list of preprints for which this node contains supplemental materials.
                     readOnly: true
                     type: string
                   registrations:
@@ -4633,7 +4758,7 @@ paths:
                     readOnly: false
                     type: string
                   preprint:
-                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                    description: Whether or not the node contains supplemental material for a preprint.
                     readOnly: true
                     type: boolean
                   public:
@@ -4658,6 +4783,10 @@ paths:
                     description: The title of the node.
                     readOnly: false
                     type: string
+                  wiki_enabled:
+                    description: Whether or not the node has its wiki enabled.
+                    readOnly: true
+                    type: boolean
                 readOnly: false
                 required:
                   - title
@@ -4748,7 +4877,7 @@ paths:
                     readOnly: true
                     type: string
                   preprints:
-                    description: A link to the list of preprints that this node relates to.
+                    description: A link to the list of preprints for which this node contains supplemental materials.
                     readOnly: true
                     type: string
                   registrations:
@@ -5423,7 +5552,7 @@ paths:
                       readOnly: false
                       type: string
                     preprint:
-                      description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                      description: Whether or not the node contains supplemental material for a preprint.
                       readOnly: true
                       type: boolean
                     public:
@@ -5448,6 +5577,10 @@ paths:
                       description: The title of the node.
                       readOnly: false
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the node has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                   readOnly: false
                   required:
                     - title
@@ -5538,7 +5671,7 @@ paths:
                       readOnly: true
                       type: string
                     preprints:
-                      description: A link to the list of preprints that this node relates to.
+                      description: A link to the list of preprints for which this node contains supplemental materials.
                       readOnly: true
                       type: string
                     registrations:
@@ -5683,7 +5816,7 @@ paths:
                     readOnly: false
                     type: string
                   preprint:
-                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                    description: Whether or not the node contains supplemental material for a preprint.
                     readOnly: true
                     type: boolean
                   public:
@@ -5708,6 +5841,10 @@ paths:
                     description: The title of the node.
                     readOnly: false
                     type: string
+                  wiki_enabled:
+                    description: Whether or not the node has its wiki enabled.
+                    readOnly: true
+                    type: boolean
                 readOnly: false
                 required:
                   - title
@@ -5798,7 +5935,7 @@ paths:
                     readOnly: true
                     type: string
                   preprints:
-                    description: A link to the list of preprints that this node relates to.
+                    description: A link to the list of preprints for which this node contains supplemental materials.
                     readOnly: true
                     type: string
                   registrations:
@@ -6064,7 +6201,7 @@ paths:
                     readOnly: false
                     type: string
                   preprint:
-                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                    description: Whether or not the node contains supplemental material for a preprint.
                     readOnly: true
                     type: boolean
                   public:
@@ -6089,6 +6226,10 @@ paths:
                     description: The title of the node.
                     readOnly: false
                     type: string
+                  wiki_enabled:
+                    description: Whether or not the node has its wiki enabled.
+                    readOnly: true
+                    type: boolean
                 readOnly: false
                 required:
                   - title
@@ -6179,7 +6320,7 @@ paths:
                     readOnly: true
                     type: string
                   preprints:
-                    description: A link to the list of preprints that this node relates to.
+                    description: A link to the list of preprints for which this node contains supplemental materials.
                     readOnly: true
                     type: string
                   registrations:
@@ -7426,7 +7567,6 @@ paths:
                     datetime_initiated: ''
                     datetime_updated: ''
                     registration_metadata: {}
-                    registration_supplement: ''
                   id: ''
                   links:
                     html: ''
@@ -7459,8 +7599,11 @@ paths:
             items:
               example:
                 data:
-                  attributes:
-                    registration_supplement: '{schema_id}'
+                  relationships:
+                    registration_schema:
+                      data:
+                        id: '{schema_id}'
+                        type: registration_schemas
                   type: draft_registrations
               properties:
                 attributes:
@@ -7480,15 +7623,10 @@ paths:
                       description: A dictionary of question IDs and responses from the registration schema.
                       readOnly: false
                       type: string
-                    registration_supplement:
-                      description: The ID of an active registration schema that this registration will conform to.
-                      readOnly: false
-                      type: string
                   readOnly: false
                   required:
                     - datetime_initiated
                     - datetime_updated
-                    - registration_supplement
                   title: Attributes
                   type: object
                 id:
@@ -7521,9 +7659,9 @@ paths:
                       type: string
                     registration_schema:
                       description: A link to the detailed registration schema that this draft conforms to.
-                      readOnly: true
+                      readOnly: false
                       type: string
-                  readOnly: true
+                  readOnly: false
                   required:
                     - branched_from
                     - initiator
@@ -7564,7 +7702,7 @@ paths:
         #### Required
         Required fields for creating a draft registration include:
 
-        &nbsp;&nbsp;&nbsp;&nbsp;`registration_supplement`
+        &nbsp;&nbsp;&nbsp;&nbsp;`registration_schema`
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the created draft registration, if the request is successful.
 
@@ -7582,8 +7720,11 @@ paths:
           schema:
             example:
               data:
-                attributes:
-                  registration_supplement: '{schema_id}'
+                relationships:
+                  registration_schema:
+                    data:
+                      id: '{schema_id}'
+                      type: registration_schemas
                 type: draft_registrations
             properties:
               attributes:
@@ -7603,15 +7744,10 @@ paths:
                     description: A dictionary of question IDs and responses from the registration schema.
                     readOnly: false
                     type: string
-                  registration_supplement:
-                    description: The ID of an active registration schema that this registration will conform to.
-                    readOnly: false
-                    type: string
                 readOnly: false
                 required:
                   - datetime_initiated
                   - datetime_updated
-                  - registration_supplement
                 title: Attributes
                 type: object
               id:
@@ -7644,9 +7780,9 @@ paths:
                     type: string
                   registration_schema:
                     description: A link to the detailed registration schema that this draft conforms to.
-                    readOnly: true
+                    readOnly: false
                     type: string
-                readOnly: true
+                readOnly: false
                 required:
                   - branched_from
                   - initiator
@@ -7739,7 +7875,6 @@ paths:
                     datetime_initiated: ''
                     datetime_updated: ''
                     registration_metadata: {}
-                    registration_supplement: ''
                   id: ''
                   links:
                     html: ''
@@ -7771,8 +7906,11 @@ paths:
           schema:
             example:
               data:
-                attributes:
-                  registration_supplement: '{schema_id}'
+                relationships:
+                  registration_schema:
+                    data:
+                      id: '{schema_id}'
+                      type: registration_schemas
                 type: draft_registrations
             properties:
               attributes:
@@ -7792,15 +7930,10 @@ paths:
                     description: A dictionary of question IDs and responses from the registration schema.
                     readOnly: false
                     type: string
-                  registration_supplement:
-                    description: The ID of an active registration schema that this registration will conform to.
-                    readOnly: false
-                    type: string
                 readOnly: false
                 required:
                   - datetime_initiated
                   - datetime_updated
-                  - registration_supplement
                 title: Attributes
                 type: object
               id:
@@ -7833,9 +7966,9 @@ paths:
                     type: string
                   registration_schema:
                     description: A link to the detailed registration schema that this draft conforms to.
-                    readOnly: true
+                    readOnly: false
                     type: string
-                readOnly: true
+                readOnly: false
                 required:
                   - branched_from
                   - initiator
@@ -7906,7 +8039,7 @@ paths:
                       value: 'No, data collection has not begun'
                     looked:
                       value: 'No'
-                id: '{registration_supplement_id}'
+                id: '{draft_registration_id}'
                 type: draft_registrations
             properties:
               attributes:
@@ -7916,13 +8049,7 @@ paths:
                     description: A dictionary of question IDs and responses from the registration schema.
                     readOnly: false
                     type: string
-                  registration_supplement:
-                    description: The ID of an active registration schema that this registration will conform to.
-                    readOnly: false
-                    type: string
                 readOnly: false
-                required:
-                  - registration_supplement
                 title: Attributes
                 type: object
               id:
@@ -8379,7 +8506,7 @@ paths:
 
         You can optionally request that the response only include files that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/nodes/ezcuj/files/osfstorage/?filter[kind]=file
 
-        Node files may be filtered by `id`, `name`, `node`, `kind`, `path`, `provider`, `size`, and `last_touched`.
+        Node files may be filtered by `id`, `name`, `kind`, `path`, `provider`, `size`, and `last_touched`.
 
         You can learn more about advanced filtering features [here](#tag/Filtering).
 
@@ -9078,7 +9205,7 @@ paths:
                       readOnly: false
                       type: string
                     preprint:
-                      description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                      description: Whether or not the node contains supplemental material for a preprint.
                       readOnly: true
                       type: boolean
                     public:
@@ -9103,6 +9230,10 @@ paths:
                       description: The title of the node.
                       readOnly: false
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the node has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                   readOnly: false
                   required:
                     - title
@@ -9193,7 +9324,7 @@ paths:
                       readOnly: true
                       type: string
                     preprints:
-                      description: A link to the list of preprints that this node relates to.
+                      description: A link to the list of preprints for which this node contains supplemental materials.
                       readOnly: true
                       type: string
                     registrations:
@@ -9334,7 +9465,7 @@ paths:
                     readOnly: false
                     type: string
                   preprint:
-                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                    description: Whether or not the node contains supplemental material for a preprint.
                     readOnly: true
                     type: boolean
                   public:
@@ -9359,6 +9490,10 @@ paths:
                     description: The title of the node.
                     readOnly: false
                     type: string
+                  wiki_enabled:
+                    description: Whether or not the node has its wiki enabled.
+                    readOnly: true
+                    type: boolean
                 readOnly: false
                 required:
                   - title
@@ -9449,7 +9584,7 @@ paths:
                     readOnly: true
                     type: string
                   preprints:
-                    description: A link to the list of preprints that this node relates to.
+                    description: A link to the list of preprints for which this node contains supplemental materials.
                     readOnly: true
                     type: string
                   registrations:
@@ -9707,6 +9842,11 @@ paths:
                 links:
                   description: URLs to alternative representations of the institutions entity.
                   properties:
+                    html:
+                      description: A link to the detail page for the institution on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     self:
                       description: A link to the detail page for the institution.
                       format: URL
@@ -10095,7 +10235,7 @@ paths:
                       readOnly: false
                       type: string
                     preprint:
-                      description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                      description: Whether or not the node contains supplemental material for a preprint.
                       readOnly: true
                       type: boolean
                     public:
@@ -10120,6 +10260,10 @@ paths:
                       description: The title of the node.
                       readOnly: false
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the node has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                   readOnly: false
                   required:
                     - title
@@ -10210,7 +10354,7 @@ paths:
                       readOnly: true
                       type: string
                     preprints:
-                      description: A link to the list of preprints that this node relates to.
+                      description: A link to the list of preprints for which this node contains supplemental materials.
                       readOnly: true
                       type: string
                     registrations:
@@ -10643,7 +10787,7 @@ paths:
   '/nodes/{node_id}/preprints/':
     get:
       description: |-
-        A paginated list of preprints related to a given node. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
+        A paginated list of preprints for which the given node contains supplemental materials. The returned preprints are sorted by their creation date, with the most recent preprints appearing first.
 
         **Note: This API endpoint is under active development, and is subject to change in the future.**
 
@@ -10730,16 +10874,9 @@ paths:
             items:
               example:
                 data:
-                  attributes: {}
+                  attributes:
+                    title: A study of economics
                   relationships:
-                    node:
-                      data:
-                        id: '{node_id}'
-                        type: nodes
-                    primary_file:
-                      data:
-                        id: '{primary_file_id}'
-                        type: primary_files
                     provider:
                       data:
                         id: '{preprint_provider_id}'
@@ -10748,8 +10885,19 @@ paths:
                 attributes:
                   description: The properties of the preprint entity.
                   properties:
+                    current_user_permissions:
+                      description: The logged-in user's permissions to the preprint
+                      items:
+                        type: string
+                      readOnly: true
+                      type: array
                     date_created:
                       description: 'The time at which the preprint was created, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    date_last_transitioned:
+                      description: 'The time at which the preprint''s reviews state was last changed. For example, the time at which a preprint''s reviews state was moved from "pending" to "accepted".'
                       format: date-time
                       readOnly: true
                       type: string
@@ -10763,6 +10911,15 @@ paths:
                       format: date-time
                       readOnly: true
                       type: string
+                    date_withdrawn:
+                      description: The date when the preprint was withdrawn
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    description:
+                      description: The description of the preprint
+                      readOnly: false
+                      type: string
                     doi:
                       description: 'The DOI of the associated journal article, as entered by the user, if the preprint is published.'
                       readOnly: false
@@ -10771,9 +10928,31 @@ paths:
                       description: Whether or not the preprint is orphaned. A preprint can be orphaned if it's primary file was removed from the preprint node. This field may be deprecated in future versions.
                       readOnly: true
                       type: boolean
+                    is_published:
+                      description: Whether or not a preprint is published
+                      readOnly: false
+                      type: boolean
                     license_record:
                       description: 'The metadata (copyright year and holder) associated with a license, required for certain licenses.'
                       readOnly: false
+                      type: string
+                    original_publication_date:
+                      description: 'User-entered, the date when the preprint was originally published'
+                      format: date-time
+                      readOnly: false
+                      type: string
+                    preprint_doi_created:
+                      description: The date when the doi was minted for the preprint
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    public:
+                      description: Whether a preprint has been marked as public.  This is not a user-facing setting.  Legacy preprints or spammy preprints may be marked as private
+                      readOnly: false
+                      type: boolean
+                    reviews_state:
+                      description: 'The preprint''s review status, e.g. pending, accepted, rejected, etc.'
+                      readOnly: true
                       type: string
                     subjects:
                       description: 'A nested array structure that describe subjects related to the preprint, in the BePress taxonomy. Each dictionary contains the text and ID of a subject.'
@@ -10781,7 +10960,19 @@ paths:
                         type: string
                       readOnly: false
                       type: array
+                    tags:
+                      description: A list of the preprint's tags.
+                      items:
+                        type: string
+                      readOnly: false
+                      type: array
+                    title:
+                      description: The title of the preprint
+                      readOnly: false
+                      type: string
                   readOnly: false
+                  required:
+                    - title
                   title: Attributes
                   type: object
                 id:
@@ -10821,6 +11012,14 @@ paths:
                       description: A relationship to the citation of the preprint.
                       readOnly: true
                       type: string
+                    contributors:
+                      description: A relationship to the preprint authors
+                      readOnly: true
+                      type: string
+                    files:
+                      description: 'A relationship to the storage providers to the preprint - in this case, preprints are restricted to having just the OsfStorage provider.'
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A relationship to the identifiers associated with the preprint.
                       readOnly: true
@@ -10830,7 +11029,7 @@ paths:
                       readOnly: false
                       type: string
                     node:
-                      description: 'A relationship to the node that was created for the preprint, or from which the preprint was created.'
+                      description: A relationship to the project containing supplemental materials for the preprints.
                       readOnly: false
                       type: string
                     primary_file:
@@ -10843,8 +11042,6 @@ paths:
                       type: string
                   readOnly: false
                   required:
-                    - node
-                    - primary_file
                     - provider
                   title: Relationships
                   type: object
@@ -11028,6 +11225,9 @@ paths:
               example:
                 data:
                   attributes:
+                    children:
+                      - fsd2s
+                      - dwsa2
                     draft_registration: '{draft_registration_id}'
                     lift_embargo: '2017-05-10T20:44:03.185000'
                     registration_choice: embargo
@@ -11051,6 +11251,12 @@ paths:
                         - other
                       readOnly: true
                       type: string
+                    children:
+                      description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                      items:
+                        type: string
+                      readOnly: false
+                      type: array
                     collection:
                       description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
                       readOnly: true
@@ -11161,6 +11367,10 @@ paths:
                       description: The title of the registered node.
                       readOnly: true
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the registration has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                     withdrawal_justification:
                       description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
                       readOnly: true
@@ -11311,6 +11521,8 @@ paths:
         &nbsp;&nbsp;&nbsp;&nbsp;`registration_choice`
 
         &nbsp;&nbsp;&nbsp;&nbsp;`lift_embargo` (Only required when `registration_choice` is "embargo")
+        #### Optional
+        &nbsp;&nbsp;&nbsp;&nbsp;`children` (If left unspecified all children will be registered)
 
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the created registration, if the request is successful.
@@ -11330,6 +11542,9 @@ paths:
             example:
               data:
                 attributes:
+                  children:
+                    - fsd2s
+                    - dwsa2
                   draft_registration: '{draft_registration_id}'
                   lift_embargo: '2017-05-10T20:44:03.185000'
                   registration_choice: embargo
@@ -11353,6 +11568,12 @@ paths:
                       - other
                     readOnly: true
                     type: string
+                  children:
+                    description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                    items:
+                      type: string
+                    readOnly: false
+                    type: array
                   collection:
                     description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
                     readOnly: true
@@ -11463,6 +11684,10 @@ paths:
                     description: The title of the registered node.
                     readOnly: true
                     type: string
+                  wiki_enabled:
+                    description: Whether or not the registration has its wiki enabled.
+                    readOnly: true
+                    type: boolean
                   withdrawal_justification:
                     description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
                     readOnly: true
@@ -11608,6 +11833,7 @@ paths:
         #### Permissions
 
         Settings for a node are readable by users that are contributors on the node. Most fields are writeable only by users that are administrators on the node. The fields for determining redirect links are writable by a contributor who has read/write permissions on the node.
+      operationId: node_settings_detail
       parameters:
         - description: The unique identifier of the node.
           in: path
@@ -11722,6 +11948,7 @@ paths:
         #### Permissions
 
         Most fields on the node settings entity are writeable only by users that are administrators on the node. The fields for determining redirect links are writable by a contributor who has read/write permissions on the node.
+      operationId: node_settings_partial_update
       parameters:
         - description: The unique identifier of the node.
           in: path
@@ -12440,19 +12667,30 @@ paths:
             application/json:
               data:
                 - attributes:
+                    current_user_permissions:
+                      - read
                     date_created: '2017-02-03T06:16:57.129000'
+                    date_last_transitioned: '2018-10-15T13:44:09.478243'
                     date_modified: '2017-02-03T06:19:00.158000'
                     date_published: '2017-02-03T06:18:59.788000'
+                    description: A tale of two cities
                     is_preprint_orphan: false
                     is_published: true
                     license_record:
                       copyright_holders: []
                       year: '2017'
+                    public: true
+                    reviews_state: accepted
                     subjects:
                       - - id: 584240da54be81056cecac48
                           text: Social and Behavioral Sciences
                         - id: 584240da54be81056cecac1a
                           text: Political Science
+                    tags:
+                      - city
+                      - country
+                      - suburb
+                    title: A Study of Urban versus Rural
                   id: hqb2p
                   links:
                     html: 'https://osf.io/preprints/socarxiv/hqb2p/'
@@ -12463,6 +12701,16 @@ paths:
                       links:
                         related:
                           href: 'https://api.osf.io/v2/preprints/hqb2p/citation/'
+                          meta: {}
+                    contributors:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/preprints/hqb2p/contributors/'
+                          meta: {}
+                    files:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/preprints/hqb2p/files/'
                           meta: {}
                     identifiers:
                       links:
@@ -12479,6 +12727,9 @@ paths:
                         related:
                           href: 'https://api.osf.io/v2/nodes/5xuck/'
                           meta: {}
+                        self:
+                          href: 'https://api.osf.io/v2/preprints/hqb2p/relationships/node/'
+                          meta: {}
                     primary_file:
                       links:
                         related:
@@ -12488,6 +12739,16 @@ paths:
                       links:
                         related:
                           href: 'https://api.osf.io/v2/preprint_providers/socarxiv/'
+                          meta: {}
+                    requests:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/preprints/hqb2p/requests/'
+                          meta: {}
+                    review_actions:
+                      links:
+                        related:
+                          href: 'https://api.osf.io/v2/preprints/hqb2p/review_actions/'
                           meta: {}
                   type: preprints
               links:
@@ -12500,16 +12761,9 @@ paths:
             items:
               example:
                 data:
-                  attributes: {}
+                  attributes:
+                    title: A study of economics
                   relationships:
-                    node:
-                      data:
-                        id: '{node_id}'
-                        type: nodes
-                    primary_file:
-                      data:
-                        id: '{primary_file_id}'
-                        type: primary_files
                     provider:
                       data:
                         id: '{preprint_provider_id}'
@@ -12518,8 +12772,19 @@ paths:
                 attributes:
                   description: The properties of the preprint entity.
                   properties:
+                    current_user_permissions:
+                      description: The logged-in user's permissions to the preprint
+                      items:
+                        type: string
+                      readOnly: true
+                      type: array
                     date_created:
                       description: 'The time at which the preprint was created, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    date_last_transitioned:
+                      description: 'The time at which the preprint''s reviews state was last changed. For example, the time at which a preprint''s reviews state was moved from "pending" to "accepted".'
                       format: date-time
                       readOnly: true
                       type: string
@@ -12533,6 +12798,15 @@ paths:
                       format: date-time
                       readOnly: true
                       type: string
+                    date_withdrawn:
+                      description: The date when the preprint was withdrawn
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    description:
+                      description: The description of the preprint
+                      readOnly: false
+                      type: string
                     doi:
                       description: 'The DOI of the associated journal article, as entered by the user, if the preprint is published.'
                       readOnly: false
@@ -12541,9 +12815,31 @@ paths:
                       description: Whether or not the preprint is orphaned. A preprint can be orphaned if it's primary file was removed from the preprint node. This field may be deprecated in future versions.
                       readOnly: true
                       type: boolean
+                    is_published:
+                      description: Whether or not a preprint is published
+                      readOnly: false
+                      type: boolean
                     license_record:
                       description: 'The metadata (copyright year and holder) associated with a license, required for certain licenses.'
                       readOnly: false
+                      type: string
+                    original_publication_date:
+                      description: 'User-entered, the date when the preprint was originally published'
+                      format: date-time
+                      readOnly: false
+                      type: string
+                    preprint_doi_created:
+                      description: The date when the doi was minted for the preprint
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    public:
+                      description: Whether a preprint has been marked as public.  This is not a user-facing setting.  Legacy preprints or spammy preprints may be marked as private
+                      readOnly: false
+                      type: boolean
+                    reviews_state:
+                      description: 'The preprint''s review status, e.g. pending, accepted, rejected, etc.'
+                      readOnly: true
                       type: string
                     subjects:
                       description: 'A nested array structure that describe subjects related to the preprint, in the BePress taxonomy. Each dictionary contains the text and ID of a subject.'
@@ -12551,7 +12847,19 @@ paths:
                         type: string
                       readOnly: false
                       type: array
+                    tags:
+                      description: A list of the preprint's tags.
+                      items:
+                        type: string
+                      readOnly: false
+                      type: array
+                    title:
+                      description: The title of the preprint
+                      readOnly: false
+                      type: string
                   readOnly: false
+                  required:
+                    - title
                   title: Attributes
                   type: object
                 id:
@@ -12591,6 +12899,14 @@ paths:
                       description: A relationship to the citation of the preprint.
                       readOnly: true
                       type: string
+                    contributors:
+                      description: A relationship to the preprint authors
+                      readOnly: true
+                      type: string
+                    files:
+                      description: 'A relationship to the storage providers to the preprint - in this case, preprints are restricted to having just the OsfStorage provider.'
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A relationship to the identifiers associated with the preprint.
                       readOnly: true
@@ -12600,7 +12916,7 @@ paths:
                       readOnly: false
                       type: string
                     node:
-                      description: 'A relationship to the node that was created for the preprint, or from which the preprint was created.'
+                      description: A relationship to the project containing supplemental materials for the preprints.
                       readOnly: false
                       type: string
                     primary_file:
@@ -12613,8 +12929,6 @@ paths:
                       type: string
                   readOnly: false
                   required:
-                    - node
-                    - primary_file
                     - provider
                   title: Relationships
                   type: object
@@ -12636,7 +12950,34 @@ paths:
       consumes:
         - application/json
       description: |-
-        Creates a new preprint.
+        Creates a new preprint.  Initial request to start the preprint requires a title and a provider.
+
+        After you've created the preprint, you will need to upload a file to the preprint or copy a file from an existing OSF project, which will be a waterbutler request.
+
+        To upload a new file to the preprint -
+
+            1. Make a request to the preprint files' relationship to get the preprint's upload link.
+            2. Issue a PUT request to the preprint's upload link
+
+            curl -X "PUT" "https://files.us.osf.io/v1/resources/<preprint_id>/providers/osfstorage/?kind=file&name=my_preprint_file.txt" \
+                --
+                -H "Authorization: Bearer your-token-goes-here" \
+                -H "Content-Type: text/plain" \
+                -d "Contents of my preprint file go here"
+
+        To copy an existing file from a project to your preprint -
+
+            1. Make a request to the node file's list endpoint GET http://api.osf.io/v2/nodes/node_id/files/osfstorage/
+            2. Locate the "move" relationship link for the file you wish to copy from the node to the preprint
+            3. Issue a POST request to the file's move link, where the resource is the preprint id, the action is copy, and the provider is osfstorage.
+
+            curl -X "POST" "https://files.us.osf.io/v1/resources/<node_id>/providers/osfstorage/<file_id>" \
+                --
+                -H "Authorization: Bearer your-token-goes-here " \
+                -H "Content-Type: application/json" \
+                -d '{"action": "copy", "path": "/", "resource": "<preprint_id>", "provider": "osfstorage", "conflict": "replace"}'
+
+
         #### Returns
         Returns a JSON object with a `data` key containing the representation of the created preprint, if the request is successful.
 
@@ -12649,16 +12990,9 @@ paths:
           schema:
             example:
               data:
-                attributes: {}
+                attributes:
+                  title: A study of economics
                 relationships:
-                  node:
-                    data:
-                      id: '{node_id}'
-                      type: nodes
-                  primary_file:
-                    data:
-                      id: '{primary_file_id}'
-                      type: primary_files
                   provider:
                     data:
                       id: '{preprint_provider_id}'
@@ -12667,8 +13001,19 @@ paths:
               attributes:
                 description: The properties of the preprint entity.
                 properties:
+                  current_user_permissions:
+                    description: The logged-in user's permissions to the preprint
+                    items:
+                      type: string
+                    readOnly: true
+                    type: array
                   date_created:
                     description: 'The time at which the preprint was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_last_transitioned:
+                    description: 'The time at which the preprint''s reviews state was last changed. For example, the time at which a preprint''s reviews state was moved from "pending" to "accepted".'
                     format: date-time
                     readOnly: true
                     type: string
@@ -12682,6 +13027,15 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                  date_withdrawn:
+                    description: The date when the preprint was withdrawn
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: The description of the preprint
+                    readOnly: false
+                    type: string
                   doi:
                     description: 'The DOI of the associated journal article, as entered by the user, if the preprint is published.'
                     readOnly: false
@@ -12690,9 +13044,31 @@ paths:
                     description: Whether or not the preprint is orphaned. A preprint can be orphaned if it's primary file was removed from the preprint node. This field may be deprecated in future versions.
                     readOnly: true
                     type: boolean
+                  is_published:
+                    description: Whether or not a preprint is published
+                    readOnly: false
+                    type: boolean
                   license_record:
                     description: 'The metadata (copyright year and holder) associated with a license, required for certain licenses.'
                     readOnly: false
+                    type: string
+                  original_publication_date:
+                    description: 'User-entered, the date when the preprint was originally published'
+                    format: date-time
+                    readOnly: false
+                    type: string
+                  preprint_doi_created:
+                    description: The date when the doi was minted for the preprint
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  public:
+                    description: Whether a preprint has been marked as public.  This is not a user-facing setting.  Legacy preprints or spammy preprints may be marked as private
+                    readOnly: false
+                    type: boolean
+                  reviews_state:
+                    description: 'The preprint''s review status, e.g. pending, accepted, rejected, etc.'
+                    readOnly: true
                     type: string
                   subjects:
                     description: 'A nested array structure that describe subjects related to the preprint, in the BePress taxonomy. Each dictionary contains the text and ID of a subject.'
@@ -12700,7 +13076,19 @@ paths:
                       type: string
                     readOnly: false
                     type: array
+                  tags:
+                    description: A list of the preprint's tags.
+                    items:
+                      type: string
+                    readOnly: false
+                    type: array
+                  title:
+                    description: The title of the preprint
+                    readOnly: false
+                    type: string
                 readOnly: false
+                required:
+                  - title
                 title: Attributes
                 type: object
               id:
@@ -12740,6 +13128,14 @@ paths:
                     description: A relationship to the citation of the preprint.
                     readOnly: true
                     type: string
+                  contributors:
+                    description: A relationship to the preprint authors
+                    readOnly: true
+                    type: string
+                  files:
+                    description: 'A relationship to the storage providers to the preprint - in this case, preprints are restricted to having just the OsfStorage provider.'
+                    readOnly: true
+                    type: string
                   identifiers:
                     description: A relationship to the identifiers associated with the preprint.
                     readOnly: true
@@ -12749,7 +13145,7 @@ paths:
                     readOnly: false
                     type: string
                   node:
-                    description: 'A relationship to the node that was created for the preprint, or from which the preprint was created.'
+                    description: A relationship to the project containing supplemental materials for the preprints.
                     readOnly: false
                     type: string
                   primary_file:
@@ -12762,8 +13158,6 @@ paths:
                     type: string
                 readOnly: false
                 required:
-                  - node
-                  - primary_file
                   - provider
                 title: Relationships
                 type: object
@@ -12807,12 +13201,22 @@ paths:
             application/json:
               data:
                 attributes:
+                  current_user_permissions:
+                    - read
+                    - write
                   date_created: '2016-08-29T14:53:51.185000'
+                  date_last_transitioned: '2018-10-15T13:44:09.478243'
                   date_modified: '2016-08-29T14:53:51.185000'
                   date_published: '2016-08-29T14:53:51.185000'
+                  description: A study of Kale
                   doi: 10.1371/journal.pbio.1002456
                   is_preprint_orphan: false
                   is_published: true
+                  license_record:
+                    copyright_holders: []
+                    year: '2017'
+                  public: true
+                  reviews_state: accepted
                   subjects:
                     - - id: 584240da54be81056cecac48
                         text: Social and Behavioral Sciences
@@ -12834,6 +13238,10 @@ paths:
                         text: Social and Behavioral Sciences
                       - id: 584240da54be81056cecac68
                         text: Psychology
+                  tags:
+                    - vitamin a
+                    - vitamin k
+                  title: Kale contains vitamins
                 id: khbvy
                 links:
                   doi: 'https://dx.doi.org/10.1371/journal.pbio.1002456'
@@ -12846,15 +13254,32 @@ paths:
                       related:
                         href: 'https://api.osf.io/v2/preprints/khbvy/citation/'
                         meta: {}
+                  contributors:
+                    related:
+                      href: 'https://api.osf.io/v2/preprints/khbvy/contributors/'
+                      meta: {}
+                  files:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/files/'
+                        meta: {}
                   identifiers:
                     links:
                       related:
                         href: 'https://api.osf.io/v2/preprints/khbvy/identifiers/'
                         meta: {}
+                  license:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e96a/'
+                        meta: {}
                   node:
                     links:
                       related:
                         href: 'https://api.osf.io/v2/nodes/bnzx5/'
+                        meta: {}
+                      self:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/relationships/node/'
                         meta: {}
                   primary_file:
                     links:
@@ -12866,20 +13291,23 @@ paths:
                       related:
                         href: 'https://api.osf.io/v2/preprint_providers/osf/'
                         meta: {}
+                  requests:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/requests/'
+                        meta: {}
+                  review_actions:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/review_actions/'
+                        meta: {}
                 type: preprints
           schema:
             example:
               data:
-                attributes: {}
+                attributes:
+                  title: A study of economics
                 relationships:
-                  node:
-                    data:
-                      id: '{node_id}'
-                      type: nodes
-                  primary_file:
-                    data:
-                      id: '{primary_file_id}'
-                      type: primary_files
                   provider:
                     data:
                       id: '{preprint_provider_id}'
@@ -12888,8 +13316,19 @@ paths:
               attributes:
                 description: The properties of the preprint entity.
                 properties:
+                  current_user_permissions:
+                    description: The logged-in user's permissions to the preprint
+                    items:
+                      type: string
+                    readOnly: true
+                    type: array
                   date_created:
                     description: 'The time at which the preprint was created, as an iso8601 formatted timestamp.'
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  date_last_transitioned:
+                    description: 'The time at which the preprint''s reviews state was last changed. For example, the time at which a preprint''s reviews state was moved from "pending" to "accepted".'
                     format: date-time
                     readOnly: true
                     type: string
@@ -12903,6 +13342,15 @@ paths:
                     format: date-time
                     readOnly: true
                     type: string
+                  date_withdrawn:
+                    description: The date when the preprint was withdrawn
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  description:
+                    description: The description of the preprint
+                    readOnly: false
+                    type: string
                   doi:
                     description: 'The DOI of the associated journal article, as entered by the user, if the preprint is published.'
                     readOnly: false
@@ -12911,9 +13359,31 @@ paths:
                     description: Whether or not the preprint is orphaned. A preprint can be orphaned if it's primary file was removed from the preprint node. This field may be deprecated in future versions.
                     readOnly: true
                     type: boolean
+                  is_published:
+                    description: Whether or not a preprint is published
+                    readOnly: false
+                    type: boolean
                   license_record:
                     description: 'The metadata (copyright year and holder) associated with a license, required for certain licenses.'
                     readOnly: false
+                    type: string
+                  original_publication_date:
+                    description: 'User-entered, the date when the preprint was originally published'
+                    format: date-time
+                    readOnly: false
+                    type: string
+                  preprint_doi_created:
+                    description: The date when the doi was minted for the preprint
+                    format: date-time
+                    readOnly: true
+                    type: string
+                  public:
+                    description: Whether a preprint has been marked as public.  This is not a user-facing setting.  Legacy preprints or spammy preprints may be marked as private
+                    readOnly: false
+                    type: boolean
+                  reviews_state:
+                    description: 'The preprint''s review status, e.g. pending, accepted, rejected, etc.'
+                    readOnly: true
                     type: string
                   subjects:
                     description: 'A nested array structure that describe subjects related to the preprint, in the BePress taxonomy. Each dictionary contains the text and ID of a subject.'
@@ -12921,7 +13391,19 @@ paths:
                       type: string
                     readOnly: false
                     type: array
+                  tags:
+                    description: A list of the preprint's tags.
+                    items:
+                      type: string
+                    readOnly: false
+                    type: array
+                  title:
+                    description: The title of the preprint
+                    readOnly: false
+                    type: string
                 readOnly: false
+                required:
+                  - title
                 title: Attributes
                 type: object
               id:
@@ -12961,6 +13443,14 @@ paths:
                     description: A relationship to the citation of the preprint.
                     readOnly: true
                     type: string
+                  contributors:
+                    description: A relationship to the preprint authors
+                    readOnly: true
+                    type: string
+                  files:
+                    description: 'A relationship to the storage providers to the preprint - in this case, preprints are restricted to having just the OsfStorage provider.'
+                    readOnly: true
+                    type: string
                   identifiers:
                     description: A relationship to the identifiers associated with the preprint.
                     readOnly: true
@@ -12970,7 +13460,7 @@ paths:
                     readOnly: false
                     type: string
                   node:
-                    description: 'A relationship to the node that was created for the preprint, or from which the preprint was created.'
+                    description: A relationship to the project containing supplemental materials for the preprints.
                     readOnly: false
                     type: string
                   primary_file:
@@ -12983,8 +13473,6 @@ paths:
                     type: string
                 readOnly: false
                 required:
-                  - node
-                  - primary_file
                   - provider
                 title: Relationships
                 type: object
@@ -13006,6 +13494,15 @@ paths:
         - application/json
       description: |-
         Updates the specified preprint by setting the values of the parameters passed. Any parameters not provided will be left unchanged.
+
+        The file that you either uploaded to the preprint or copied from an OSF project to the preprint will need to be set as the primary file before the preprint can be published.
+
+        To remove a supplemental project from a preprint will be a separate PATCH request to the node self relationship link.
+
+        PATCH /v2/preprints/<preprint_id>/relationships/node/
+
+        {data: null}
+
         #### Returns
         Returns a JSON object with a `data` key containing the new representation of the updated preprint, if the request is successful.
 
@@ -13025,8 +13522,15 @@ paths:
               data:
                 attributes:
                   doi: '{doi}'
+                  is_published: true
+                  subjects:
+                    - - <subject_id>
                 id: '{preprint_id}'
                 relationships:
+                  node:
+                    data:
+                      id: '{node_id}'
+                      type: nodes
                   primary_file:
                     data:
                       id: '{file_id}'
@@ -13689,16 +14193,9 @@ paths:
             items:
               example:
                 data:
-                  attributes: {}
+                  attributes:
+                    title: A study of economics
                   relationships:
-                    node:
-                      data:
-                        id: '{node_id}'
-                        type: nodes
-                    primary_file:
-                      data:
-                        id: '{primary_file_id}'
-                        type: primary_files
                     provider:
                       data:
                         id: '{preprint_provider_id}'
@@ -13707,8 +14204,19 @@ paths:
                 attributes:
                   description: The properties of the preprint entity.
                   properties:
+                    current_user_permissions:
+                      description: The logged-in user's permissions to the preprint
+                      items:
+                        type: string
+                      readOnly: true
+                      type: array
                     date_created:
                       description: 'The time at which the preprint was created, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    date_last_transitioned:
+                      description: 'The time at which the preprint''s reviews state was last changed. For example, the time at which a preprint''s reviews state was moved from "pending" to "accepted".'
                       format: date-time
                       readOnly: true
                       type: string
@@ -13722,6 +14230,15 @@ paths:
                       format: date-time
                       readOnly: true
                       type: string
+                    date_withdrawn:
+                      description: The date when the preprint was withdrawn
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    description:
+                      description: The description of the preprint
+                      readOnly: false
+                      type: string
                     doi:
                       description: 'The DOI of the associated journal article, as entered by the user, if the preprint is published.'
                       readOnly: false
@@ -13730,9 +14247,31 @@ paths:
                       description: Whether or not the preprint is orphaned. A preprint can be orphaned if it's primary file was removed from the preprint node. This field may be deprecated in future versions.
                       readOnly: true
                       type: boolean
+                    is_published:
+                      description: Whether or not a preprint is published
+                      readOnly: false
+                      type: boolean
                     license_record:
                       description: 'The metadata (copyright year and holder) associated with a license, required for certain licenses.'
                       readOnly: false
+                      type: string
+                    original_publication_date:
+                      description: 'User-entered, the date when the preprint was originally published'
+                      format: date-time
+                      readOnly: false
+                      type: string
+                    preprint_doi_created:
+                      description: The date when the doi was minted for the preprint
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    public:
+                      description: Whether a preprint has been marked as public.  This is not a user-facing setting.  Legacy preprints or spammy preprints may be marked as private
+                      readOnly: false
+                      type: boolean
+                    reviews_state:
+                      description: 'The preprint''s review status, e.g. pending, accepted, rejected, etc.'
+                      readOnly: true
                       type: string
                     subjects:
                       description: 'A nested array structure that describe subjects related to the preprint, in the BePress taxonomy. Each dictionary contains the text and ID of a subject.'
@@ -13740,7 +14279,19 @@ paths:
                         type: string
                       readOnly: false
                       type: array
+                    tags:
+                      description: A list of the preprint's tags.
+                      items:
+                        type: string
+                      readOnly: false
+                      type: array
+                    title:
+                      description: The title of the preprint
+                      readOnly: false
+                      type: string
                   readOnly: false
+                  required:
+                    - title
                   title: Attributes
                   type: object
                 id:
@@ -13780,6 +14331,14 @@ paths:
                       description: A relationship to the citation of the preprint.
                       readOnly: true
                       type: string
+                    contributors:
+                      description: A relationship to the preprint authors
+                      readOnly: true
+                      type: string
+                    files:
+                      description: 'A relationship to the storage providers to the preprint - in this case, preprints are restricted to having just the OsfStorage provider.'
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A relationship to the identifiers associated with the preprint.
                       readOnly: true
@@ -13789,7 +14348,7 @@ paths:
                       readOnly: false
                       type: string
                     node:
-                      description: 'A relationship to the node that was created for the preprint, or from which the preprint was created.'
+                      description: A relationship to the project containing supplemental materials for the preprints.
                       readOnly: false
                       type: string
                     primary_file:
@@ -13802,8 +14361,6 @@ paths:
                       type: string
                   readOnly: false
                   required:
-                    - node
-                    - primary_file
                     - provider
                   title: Relationships
                   type: object
@@ -14102,6 +14659,9 @@ paths:
               example:
                 data:
                   attributes:
+                    children:
+                      - fsd2s
+                      - dwsa2
                     draft_registration: '{draft_registration_id}'
                     lift_embargo: '2017-05-10T20:44:03.185000'
                     registration_choice: embargo
@@ -14125,6 +14685,12 @@ paths:
                         - other
                       readOnly: true
                       type: string
+                    children:
+                      description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                      items:
+                        type: string
+                      readOnly: false
+                      type: array
                     collection:
                       description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
                       readOnly: true
@@ -14235,6 +14801,10 @@ paths:
                       description: The title of the registered node.
                       readOnly: true
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the registration has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                     withdrawal_justification:
                       description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
                       readOnly: true
@@ -14406,6 +14976,9 @@ paths:
             example:
               data:
                 attributes:
+                  children:
+                    - fsd2s
+                    - dwsa2
                   draft_registration: '{draft_registration_id}'
                   lift_embargo: '2017-05-10T20:44:03.185000'
                   registration_choice: embargo
@@ -14429,6 +15002,12 @@ paths:
                       - other
                     readOnly: true
                     type: string
+                  children:
+                    description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                    items:
+                      type: string
+                    readOnly: false
+                    type: array
                   collection:
                     description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
                     readOnly: true
@@ -14539,6 +15118,10 @@ paths:
                     description: The title of the registered node.
                     readOnly: true
                     type: string
+                  wiki_enabled:
+                    description: Whether or not the registration has its wiki enabled.
+                    readOnly: true
+                    type: boolean
                   withdrawal_justification:
                     description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
                     readOnly: true
@@ -14696,6 +15279,9 @@ paths:
             example:
               data:
                 attributes:
+                  children:
+                    - fsd2s
+                    - dwsa2
                   draft_registration: '{draft_registration_id}'
                   lift_embargo: '2017-05-10T20:44:03.185000'
                   registration_choice: embargo
@@ -14719,6 +15305,12 @@ paths:
                       - other
                     readOnly: true
                     type: string
+                  children:
+                    description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                    items:
+                      type: string
+                    readOnly: false
+                    type: array
                   collection:
                     description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
                     readOnly: true
@@ -14829,6 +15421,10 @@ paths:
                     description: The title of the registered node.
                     readOnly: true
                     type: string
+                  wiki_enabled:
+                    description: Whether or not the registration has its wiki enabled.
+                    readOnly: true
+                    type: boolean
                   withdrawal_justification:
                     description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
                     readOnly: true
@@ -15140,6 +15736,9 @@ paths:
               example:
                 data:
                   attributes:
+                    children:
+                      - fsd2s
+                      - dwsa2
                     draft_registration: '{draft_registration_id}'
                     lift_embargo: '2017-05-10T20:44:03.185000'
                     registration_choice: embargo
@@ -15163,6 +15762,12 @@ paths:
                         - other
                       readOnly: true
                       type: string
+                    children:
+                      description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                      items:
+                        type: string
+                      readOnly: false
+                      type: array
                     collection:
                       description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
                       readOnly: true
@@ -15273,6 +15878,10 @@ paths:
                       description: The title of the registered node.
                       readOnly: true
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the registration has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                     withdrawal_justification:
                       description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
                       readOnly: true
@@ -16426,7 +17035,7 @@ paths:
 
         You can optionally request that the response only include files that match your filters by utilizing the `filter` query parameter, e.g. https://api.osf.io/v2/registrations/wucr8/files/osfstorage/?filter[kind]=file
 
-        Files may be filtered by `id`, `name`, `node`, `kind`, `path`, `provider`, `size`, and `last_touched`.
+        Files may be filtered by `id`, `name`, `kind`, `path`, `provider`, `size`, and `last_touched`.
 
         You can learn more about advanced filtering features [here](#tag/Filtering).
       operationId: registrations_files_list
@@ -17063,6 +17672,9 @@ paths:
               example:
                 data:
                   attributes:
+                    children:
+                      - fsd2s
+                      - dwsa2
                     draft_registration: '{draft_registration_id}'
                     lift_embargo: '2017-05-10T20:44:03.185000'
                     registration_choice: embargo
@@ -17086,6 +17698,12 @@ paths:
                         - other
                       readOnly: true
                       type: string
+                    children:
+                      description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                      items:
+                        type: string
+                      readOnly: false
+                      type: array
                     collection:
                       description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
                       readOnly: true
@@ -17196,6 +17814,10 @@ paths:
                       description: The title of the registered node.
                       readOnly: true
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the registration has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                     withdrawal_justification:
                       description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
                       readOnly: true
@@ -17357,6 +17979,9 @@ paths:
             example:
               data:
                 attributes:
+                  children:
+                    - fsd2s
+                    - dwsa2
                   draft_registration: '{draft_registration_id}'
                   lift_embargo: '2017-05-10T20:44:03.185000'
                   registration_choice: embargo
@@ -17380,6 +18005,12 @@ paths:
                       - other
                     readOnly: true
                     type: string
+                  children:
+                    description: A list of guids for children of nodes to be registered. All children must have parents being registered.
+                    items:
+                      type: string
+                    readOnly: false
+                    type: array
                   collection:
                     description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
                     readOnly: true
@@ -17490,6 +18121,10 @@ paths:
                     description: The title of the registered node.
                     readOnly: true
                     type: string
+                  wiki_enabled:
+                    description: Whether or not the registration has its wiki enabled.
+                    readOnly: true
+                    type: boolean
                   withdrawal_justification:
                     description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
                     readOnly: true
@@ -17837,6 +18472,11 @@ paths:
                 links:
                   description: URLs to alternative representations of the institutions entity.
                   properties:
+                    html:
+                      description: A link to the detail page for the institution on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     self:
                       description: A link to the detail page for the institution.
                       format: URL
@@ -18225,7 +18865,7 @@ paths:
                       readOnly: false
                       type: string
                     preprint:
-                      description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                      description: Whether or not the node contains supplemental material for a preprint.
                       readOnly: true
                       type: boolean
                     public:
@@ -18250,6 +18890,10 @@ paths:
                       description: The title of the node.
                       readOnly: false
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the node has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                   readOnly: false
                   required:
                     - title
@@ -18340,7 +18984,7 @@ paths:
                       readOnly: true
                       type: string
                     preprints:
-                      description: A link to the list of preprints that this node relates to.
+                      description: A link to the list of preprints for which this node contains supplemental materials.
                       readOnly: true
                       type: string
                     registrations:
@@ -19613,6 +20257,9 @@ paths:
                   attributes:
                     full_name: Casey M. Rollins
                     middle_names: Marie
+                    social:
+                      github:
+                        - caseyrollins
                   id: '{user_id}'
                   type: users
               properties:
@@ -19648,6 +20295,55 @@ paths:
                       description: 'The middle names of the user, used for bibliographic citations.'
                       readOnly: false
                       type: string
+                    social:
+                      description: The social fields associated with a user.
+                      properties:
+                        academiaProfileID:
+                          description: The academiaProfileID for the given user.
+                          type: string
+                        baiduScholar:
+                          description: The baiduScholar for the given user.
+                          type: string
+                        github:
+                          description: The github usernames for the given user.
+                          items:
+                            type: string
+                          type: array
+                        impactStory:
+                          description: The impactStory for the given user.
+                          type: string
+                        linkedIn:
+                          description: The linkedIn profiles for the given user.
+                          items:
+                            type: string
+                          type: array
+                        orcid:
+                          description: The orcid for the given user.
+                          type: string
+                        profileWebsites:
+                          description: The profileWebsites for the given user.
+                          items:
+                            type: string
+                          type: array
+                        researchGate:
+                          description: The researchGate for the given user.
+                          type: string
+                        researcherId:
+                          description: The researcherId for the given user.
+                          type: string
+                        scholar:
+                          description: The google scholar for the given user.
+                          type: string
+                        ssrn:
+                          description: The ssrn for the given user.
+                          type: string
+                        twitter:
+                          description: The twitter handles for the given user.
+                          items:
+                            type: string
+                          type: array
+                      readOnly: false
+                      type: object
                     suffix:
                       description: 'The suffix of the user, used for bibliographic citations.'
                       readOnly: false
@@ -19779,6 +20475,9 @@ paths:
                 attributes:
                   full_name: Casey M. Rollins
                   middle_names: Marie
+                  social:
+                    github:
+                      - caseyrollins
                 id: '{user_id}'
                 type: users
             properties:
@@ -19814,6 +20513,55 @@ paths:
                     description: 'The middle names of the user, used for bibliographic citations.'
                     readOnly: false
                     type: string
+                  social:
+                    description: The social fields associated with a user.
+                    properties:
+                      academiaProfileID:
+                        description: The academiaProfileID for the given user.
+                        type: string
+                      baiduScholar:
+                        description: The baiduScholar for the given user.
+                        type: string
+                      github:
+                        description: The github usernames for the given user.
+                        items:
+                          type: string
+                        type: array
+                      impactStory:
+                        description: The impactStory for the given user.
+                        type: string
+                      linkedIn:
+                        description: The linkedIn profiles for the given user.
+                        items:
+                          type: string
+                        type: array
+                      orcid:
+                        description: The orcid for the given user.
+                        type: string
+                      profileWebsites:
+                        description: The profileWebsites for the given user.
+                        items:
+                          type: string
+                        type: array
+                      researchGate:
+                        description: The researchGate for the given user.
+                        type: string
+                      researcherId:
+                        description: The researcherId for the given user.
+                        type: string
+                      scholar:
+                        description: The google scholar for the given user.
+                        type: string
+                      ssrn:
+                        description: The ssrn for the given user.
+                        type: string
+                      twitter:
+                        description: The twitter handles for the given user.
+                        items:
+                          type: string
+                        type: array
+                    readOnly: false
+                    type: object
                   suffix:
                     description: 'The suffix of the user, used for bibliographic citations.'
                     readOnly: false
@@ -19908,6 +20656,9 @@ paths:
                 attributes:
                   full_name: Casey M. Rollins
                   middle_names: Marie
+                  social:
+                    github:
+                      - caseyrollins
                 id: '{user_id}'
                 type: users
             properties:
@@ -19943,6 +20694,55 @@ paths:
                     description: 'The middle names of the user, used for bibliographic citations.'
                     readOnly: false
                     type: string
+                  social:
+                    description: The social fields associated with a user.
+                    properties:
+                      academiaProfileID:
+                        description: The academiaProfileID for the given user.
+                        type: string
+                      baiduScholar:
+                        description: The baiduScholar for the given user.
+                        type: string
+                      github:
+                        description: The github usernames for the given user.
+                        items:
+                          type: string
+                        type: array
+                      impactStory:
+                        description: The impactStory for the given user.
+                        type: string
+                      linkedIn:
+                        description: The linkedIn profiles for the given user.
+                        items:
+                          type: string
+                        type: array
+                      orcid:
+                        description: The orcid for the given user.
+                        type: string
+                      profileWebsites:
+                        description: The profileWebsites for the given user.
+                        items:
+                          type: string
+                        type: array
+                      researchGate:
+                        description: The researchGate for the given user.
+                        type: string
+                      researcherId:
+                        description: The researcherId for the given user.
+                        type: string
+                      scholar:
+                        description: The google scholar for the given user.
+                        type: string
+                      ssrn:
+                        description: The ssrn for the given user.
+                        type: string
+                      twitter:
+                        description: The twitter handles for the given user.
+                        items:
+                          type: string
+                        type: array
+                    readOnly: false
+                    type: object
                   suffix:
                     description: 'The suffix of the user, used for bibliographic citations.'
                     readOnly: false
@@ -20447,6 +21247,7 @@ paths:
         If the request is successful, no content is returned.
 
         If the request is unsuccessful, a JSON object with an errors key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: external_identities_delete
       parameters:
         - description: The unique identifier of the user.
           in: path
@@ -20473,6 +21274,7 @@ paths:
         Returns a JSON object with a `data` key containing the representation of the requested external identities, if the request is successful.
 
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: external_identities_detail
       parameters:
         - description: The unique identifier of the user.
           in: path
@@ -20618,6 +21420,11 @@ paths:
                 links:
                   description: URLs to alternative representations of the institutions entity.
                   properties:
+                    html:
+                      description: A link to the detail page for the institution on the OSF.
+                      format: URL
+                      readOnly: true
+                      type: string
                     self:
                       description: A link to the detail page for the institution.
                       format: URL
@@ -20886,7 +21693,7 @@ paths:
                       readOnly: false
                       type: string
                     preprint:
-                      description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                      description: Whether or not the node contains supplemental material for a preprint.
                       readOnly: true
                       type: boolean
                     public:
@@ -20911,6 +21718,10 @@ paths:
                       description: The title of the node.
                       readOnly: false
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the node has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                   readOnly: false
                   required:
                     - title
@@ -21001,7 +21812,7 @@ paths:
                       readOnly: true
                       type: string
                     preprints:
-                      description: A link to the list of preprints that this node relates to.
+                      description: A link to the list of preprints for which this node contains supplemental materials.
                       readOnly: true
                       type: string
                     registrations:
@@ -21073,80 +21884,119 @@ paths:
           description: OK
           examples:
             application/json:
+              attributes:
+                current_user_permissions:
+                  - read
+                  - write
+                date_created: '2016-08-29T14:53:51.185000'
+                date_last_transitioned: '2018-10-15T13:44:09.478243'
+                date_modified: '2016-08-29T14:53:51.185000'
+                date_published: '2016-08-29T14:53:51.185000'
+                description: A study of Kale
+                doi: 10.1371/journal.pbio.1002456
+                is_preprint_orphan: false
+                is_published: true
+                license_record:
+                  copyright_holders: []
+                  year: '2017'
+                public: true
+                reviews_state: accepted
+                subjects:
+                  - - id: 584240da54be81056cecac48
+                      text: Social and Behavioral Sciences
+                    - id: 584240da54be81056cecaab8
+                      text: 'Public Affairs, Public Policy and Public Administration'
+                    - id: 584240d954be81056cecaa10
+                      text: Science and Technology Policy
+                  - - id: 584240da54be81056cecac48
+                      text: Social and Behavioral Sciences
+                    - id: 584240da54be81056cecab33
+                      text: Library and Information Science
+                    - id: 584240db54be81056cecacd2
+                      text: Scholarly Publishing
+                  - - id: 584240da54be81056cecac48
+                      text: Social and Behavioral Sciences
+                    - id: 584240da54be81056cecac68
+                      text: Psychology
+                  - - id: 584240da54be81056cecac48
+                      text: Social and Behavioral Sciences
+                    - id: 584240da54be81056cecac68
+                      text: Psychology
+                tags:
+                  - vitamin a
+                  - vitamin k
+                title: Kale contains vitamins
               data:
-                - attributes:
-                    date_created: '2016-08-29T14:53:51.185000'
-                    date_modified: '2016-08-29T14:53:51.185000'
-                    date_published: '2016-08-29T14:53:51.185000'
-                    doi: 10.1371/journal.pbio.1002456
-                    is_preprint_orphan: false
-                    is_published: true
-                    subjects:
-                      - - id: 584240da54be81056cecac48
-                          text: Social and Behavioral Sciences
-                        - id: 584240da54be81056cecaab8
-                          text: 'Public Affairs, Public Policy and Public Administration'
-                        - id: 584240d954be81056cecaa10
-                          text: Science and Technology Policy
-                      - - id: 584240da54be81056cecac48
-                          text: Social and Behavioral Sciences
-                        - id: 584240da54be81056cecab33
-                          text: Library and Information Science
-                        - id: 584240db54be81056cecacd2
-                          text: Scholarly Publishing
-                      - - id: 584240da54be81056cecac48
-                          text: Social and Behavioral Sciences
-                        - id: 584240da54be81056cecac68
-                          text: Psychology
-                      - - id: 584240da54be81056cecac48
-                          text: Social and Behavioral Sciences
-                        - id: 584240da54be81056cecac68
-                          text: Psychology
-                  id: khbvy
-                  links:
-                    doi: 'https://dx.doi.org/10.1371/journal.pbio.1002456'
-                    html: 'https://osf.io/khbvy/'
-                    self: 'https://api.osf.io/v2/preprints/khbvy/'
-                  relationships:
-                    citation:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/preprints/khbvy/citation/'
-                          meta: {}
-                    node:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/nodes/bnzx5/'
-                          meta: {}
-                    primary_file:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/files/57c44b1e594d90004a421ab1/'
-                          meta: {}
-                    provider:
-                      links:
-                        related:
-                          href: 'https://api.osf.io/v2/preprint_providers/osf/'
-                          meta: {}
-                  type: preprints
+                - citation:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/citation/'
+                        meta: {}
+                  contributors:
+                    related:
+                      href: 'https://api.osf.io/v2/preprints/khbvy/contributors/'
+                      meta: {}
+                  files:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/files/'
+                        meta: {}
+                  identifiers:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/identifiers/'
+                        meta: {}
+                  license:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e96a/'
+                        meta: {}
+                  node:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/nodes/bnzx5/'
+                        meta: {}
+                      self:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/relationships/node/'
+                        meta: {}
+                  primary_file:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/files/57c44b1e594d90004a421ab1/'
+                        meta: {}
+                  provider:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/preprint_providers/osf/'
+                        meta: {}
+                  requests:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/requests/'
+                        meta: {}
+                  review_actions:
+                    links:
+                      related:
+                        href: 'https://api.osf.io/v2/preprints/khbvy/review_actions/'
+                        meta: {}
+              id: khbvy
               links:
-                meta:
-                  per_page: 10
-                  total: 4
+                doi: 'https://dx.doi.org/10.1371/journal.pbio.1002456'
+                html: 'https://osf.io/khbvy/'
+                preprint_doi: 'https://dx.doi.org/10.5072/FK2OSF.IO/KHBVY'
+                self: 'https://api.osf.io/v2/preprints/khbvy/'
+              type: preprints
+            links:
+              meta:
+                per_page: 10
+                total: 4
           schema:
             items:
               example:
                 data:
-                  attributes: {}
+                  attributes:
+                    title: A study of economics
                   relationships:
-                    node:
-                      data:
-                        id: '{node_id}'
-                        type: nodes
-                    primary_file:
-                      data:
-                        id: '{primary_file_id}'
-                        type: primary_files
                     provider:
                       data:
                         id: '{preprint_provider_id}'
@@ -21155,8 +22005,19 @@ paths:
                 attributes:
                   description: The properties of the preprint entity.
                   properties:
+                    current_user_permissions:
+                      description: The logged-in user's permissions to the preprint
+                      items:
+                        type: string
+                      readOnly: true
+                      type: array
                     date_created:
                       description: 'The time at which the preprint was created, as an iso8601 formatted timestamp.'
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    date_last_transitioned:
+                      description: 'The time at which the preprint''s reviews state was last changed. For example, the time at which a preprint''s reviews state was moved from "pending" to "accepted".'
                       format: date-time
                       readOnly: true
                       type: string
@@ -21170,6 +22031,15 @@ paths:
                       format: date-time
                       readOnly: true
                       type: string
+                    date_withdrawn:
+                      description: The date when the preprint was withdrawn
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    description:
+                      description: The description of the preprint
+                      readOnly: false
+                      type: string
                     doi:
                       description: 'The DOI of the associated journal article, as entered by the user, if the preprint is published.'
                       readOnly: false
@@ -21178,9 +22048,31 @@ paths:
                       description: Whether or not the preprint is orphaned. A preprint can be orphaned if it's primary file was removed from the preprint node. This field may be deprecated in future versions.
                       readOnly: true
                       type: boolean
+                    is_published:
+                      description: Whether or not a preprint is published
+                      readOnly: false
+                      type: boolean
                     license_record:
                       description: 'The metadata (copyright year and holder) associated with a license, required for certain licenses.'
                       readOnly: false
+                      type: string
+                    original_publication_date:
+                      description: 'User-entered, the date when the preprint was originally published'
+                      format: date-time
+                      readOnly: false
+                      type: string
+                    preprint_doi_created:
+                      description: The date when the doi was minted for the preprint
+                      format: date-time
+                      readOnly: true
+                      type: string
+                    public:
+                      description: Whether a preprint has been marked as public.  This is not a user-facing setting.  Legacy preprints or spammy preprints may be marked as private
+                      readOnly: false
+                      type: boolean
+                    reviews_state:
+                      description: 'The preprint''s review status, e.g. pending, accepted, rejected, etc.'
+                      readOnly: true
                       type: string
                     subjects:
                       description: 'A nested array structure that describe subjects related to the preprint, in the BePress taxonomy. Each dictionary contains the text and ID of a subject.'
@@ -21188,7 +22080,19 @@ paths:
                         type: string
                       readOnly: false
                       type: array
+                    tags:
+                      description: A list of the preprint's tags.
+                      items:
+                        type: string
+                      readOnly: false
+                      type: array
+                    title:
+                      description: The title of the preprint
+                      readOnly: false
+                      type: string
                   readOnly: false
+                  required:
+                    - title
                   title: Attributes
                   type: object
                 id:
@@ -21228,6 +22132,14 @@ paths:
                       description: A relationship to the citation of the preprint.
                       readOnly: true
                       type: string
+                    contributors:
+                      description: A relationship to the preprint authors
+                      readOnly: true
+                      type: string
+                    files:
+                      description: 'A relationship to the storage providers to the preprint - in this case, preprints are restricted to having just the OsfStorage provider.'
+                      readOnly: true
+                      type: string
                     identifiers:
                       description: A relationship to the identifiers associated with the preprint.
                       readOnly: true
@@ -21237,7 +22149,7 @@ paths:
                       readOnly: false
                       type: string
                     node:
-                      description: 'A relationship to the node that was created for the preprint, or from which the preprint was created.'
+                      description: A relationship to the project containing supplemental materials for the preprints.
                       readOnly: false
                       type: string
                     primary_file:
@@ -21250,8 +22162,6 @@ paths:
                       type: string
                   readOnly: false
                   required:
-                    - node
-                    - primary_file
                     - provider
                   title: Relationships
                   type: object
@@ -21449,6 +22359,123 @@ paths:
       tags:
         - Users
       x-response-schema: Registration
+  '/users/{user_id}/settings/':
+    get:
+      description: |-
+        Retrieves a user's settings.
+
+        #### Permissions
+
+        A user's settings are only visible to that user.
+
+        #### Returns
+
+        Returns a JSON object with a `data` key containing the representation of the requested user addon, if the request was successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: users_settings_read
+      parameters:
+        - description: The unique identifier of the user.
+          in: path
+          name: user_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              data:
+                attributes:
+                  subscribe_osf_general_email: false
+                  subscribe_osf_help_email: true
+                  two_factor_enabled: true
+                id: abcde
+                links:
+                  self: 'https://api.osf.io/v2/users/abcde/settings/'
+                type: user-settings
+      summary: Retrieve user settings
+      tags:
+        - Users
+      x-response-schema: User Settings
+    patch:
+      consumes:
+        - application/json
+      description: |-
+        Updates a user's settings by setting the values of the attributes specified in the request body. Any unspecified attributes will be left unchanged.
+        User settings can be updated with either a **PUT** or **PATCH** request.
+
+        #### Permissions
+        Attempting to update any user settings but your own will result in a **403 Forbidden** response.
+
+        #### Returns
+        Returns a JSON object with a `data` key containing the new representation of the updated node, if the request is successful.
+
+        If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
+      operationId: user_settings_partial_update
+      parameters:
+        - description: The unique identifier of the user.
+          in: path
+          name: user_id
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: true
+          schema:
+            example:
+              data:
+                attributes:
+                  subscribe_osf_general_email: true
+                  subscribe_osf_help_email: false
+                  two_factor_enabled: true
+                  two_factor_verification: 123456
+                id: '{user_id}'
+                type: users
+            properties:
+              attributes:
+                description: The properties of the user settings
+                properties:
+                  subscribe_osf_general_email:
+                    description: Whether you are subscribed to general OSF notifications.
+                    readOnly: false
+                    type: boolean
+                  subscribe_osf_help_email:
+                    description: Whether you are subscribed to tips on how to make the most of the OSF.
+                    readOnly: false
+                    type: boolean
+                  two_factor_enabled:
+                    description: Whether or not two-factor authentication has been enabled.
+                    readOnly: false
+                    type: boolean
+                  two_factor_verification:
+                    description: 'Write only, enter 6 six-digit verification code.  two_factor_enabled must be set to true.'
+                    readOnly: false
+                    type: integer
+                readOnly: false
+                title: Attributes
+                type: object
+              id:
+                description: The unique identifier of the logged in user
+                readOnly: true
+                type: string
+              type:
+                description: The type identifier of the draft registration entity (`user-settings`).
+                readOnly: true
+                type: string
+            required:
+              - id
+              - type
+              - attributes
+            title: User Settings
+            type: object
+      responses:
+        '200':
+          description: OK
+      summary: Update a user's settings
+      tags:
+        - Users
+      x-response-schema: User Settings
   '/users/{user_id}/settings/identities/':
     get:
       description: |-
@@ -22089,7 +23116,7 @@ paths:
                       readOnly: false
                       type: string
                     preprint:
-                      description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
+                      description: Whether or not the node contains supplemental material for a preprint.
                       readOnly: true
                       type: boolean
                     public:
@@ -22114,6 +23141,10 @@ paths:
                       description: The title of the node.
                       readOnly: false
                       type: string
+                    wiki_enabled:
+                      description: Whether or not the node has its wiki enabled.
+                      readOnly: true
+                      type: boolean
                   readOnly: false
                   required:
                     - title
@@ -22204,7 +23235,7 @@ paths:
                       readOnly: true
                       type: string
                     preprints:
-                      description: A link to the list of preprints that this node relates to.
+                      description: A link to the list of preprints for which this node contains supplemental materials.
                       readOnly: true
                       type: string
                     registrations:
@@ -22932,6 +23963,7 @@ x-tagGroups:
       - Filtering
       - Sparse Fieldsets
       - Embedding
+      - Related Counts
       - Request Formatting
       - Errors & Error Codes
       - Entities & Entity Collections

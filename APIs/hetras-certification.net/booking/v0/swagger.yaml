@@ -613,6 +613,13 @@ paths:
           name: dateFilter
           required: false
           type: string
+        - description: To be able to request reservations without personal data based on GDPR.
+          enum:
+            - Customers
+          in: query
+          name: exclude
+          required: false
+          type: string
         - description: Amount of items to skip.
           format: int32
           in: query
@@ -884,6 +891,13 @@ paths:
           name: dateFilter
           required: false
           type: string
+        - description: To be able to request reservations without personal data based on GDPR.
+          enum:
+            - Customers
+          in: query
+          name: exclude
+          required: false
+          type: string
       responses:
         '200':
           description: The total booking count for a given filter criteria.
@@ -930,6 +944,14 @@ paths:
             - RoomRates
           in: query
           name: expand
+          required: false
+          type: string
+        - description: Specifies the exclude type.
+          enum:
+            - None
+            - Customers
+          in: query
+          name: exclude
           required: false
           type: string
       responses:
@@ -986,6 +1008,14 @@ paths:
             - RoomRates
           in: query
           name: expand
+          required: false
+          type: string
+        - description: Specifies the exclude type.
+          enum:
+            - None
+            - Customers
+          in: query
+          name: exclude
           required: false
           type: string
       responses:
@@ -1344,6 +1374,64 @@ paths:
         '503':
           description: The server is currently unavailable. Please try later.
       summary: Post a payment token for a reservation.
+      tags:
+        - Bookings
+  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/pre_authorize':
+    post:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      description: "With this call you can trigger a terminal authorization prompt for a reservation guest. \r\n            For more details on how the API responds to errors please check our documentation on \r\n            <a href=\"https://developer.hetras.com/docs/errors/\" onfocus=\"this.blur()\">Error Handling</a>."
+      operationId: Bookings_TerminalAuthorization
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: The confirmation id for the booking the reservation was made.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+        - description: Specifies the reservation number for the reservation to be checked in.
+          format: int32
+          in: path
+          name: reservationNumber
+          required: true
+          type: integer
+        - description: 'Specifies authorization details, such as amount and client identity.'
+          in: body
+          name: authorizationRequest
+          required: true
+          schema:
+            $ref: '#/definitions/TerminalAuthorizationRequest'
+      responses:
+        '200':
+          description: The operation was successful
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        '401':
+          description: 'You provided wrong credentials, or you reached your API limit.'
+        '403':
+          description: The application does not have access to the requested resource.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: 'The request failed to validate. The reason could be wrong room or reservation status, wrong start date of reservation etc.'
+        '500':
+          description: We caught an unexpected error on our side. Please report with providing the Hetras-Tracking-Id from the response headers and we will check the logfiles.
+        '503':
+          description: The server is currently unavailable. Please try later.
+      summary: Performs a chip and pin credit card authorization for a reservation.
       tags:
         - Bookings
   /api/booking/v0/daily_rates:
@@ -1989,6 +2077,11 @@ definitions:
           - CreationDate
           - ModificationDate
         type: string
+      exclude:
+        description: To be able to request reservations without personal data based on GDPR.
+        enum:
+          - Customers
+        type: string
       externalId:
         description: Return all bookings exactly matching the specified external id. This filter is case sensitive.
         type: string
@@ -2263,6 +2356,16 @@ definitions:
     type: object
   Customer:
     properties:
+      consent_subscribe:
+        description: The list of consents which the customer is subscribing
+        items:
+          type: string
+        type: array
+      consent_unsubscribe:
+        description: The list of consents which the customer is unsubscribing
+        items:
+          type: string
+        type: array
       customer_id:
         description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345"
         type: string
@@ -2336,6 +2439,11 @@ definitions:
       primary:
         description: Defines if the guest is the primary guest of the reservation
         type: boolean
+      subscribed_consents:
+        description: Gets or sets the list of consents subscribed by customer
+        items:
+          type: string
+        type: array
       title:
         description: Title of the guest. Needs to be taken from the available titles defined in the codes
         type: string
@@ -3679,6 +3787,16 @@ definitions:
         description: The gross rate of the service calculated for all rooms and all persons
         format: double
         type: number
+    type: object
+  TerminalAuthorizationRequest:
+    properties:
+      amount_to_authorize:
+        description: The amount to authorize
+        format: double
+        type: number
+      client_identity:
+        description: Client identity
+        type: string
     type: object
   Token:
     properties:

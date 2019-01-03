@@ -79,7 +79,7 @@ paths:
           name: $top
           required: false
           type: integer
-        - description: Specifies the the key by which the result collection should be ordered.
+        - description: Specifies the key by which the result collection should be ordered.
           in: query
           name: $orderby
           required: false
@@ -530,7 +530,7 @@ paths:
           name: $top
           required: false
           type: integer
-        - description: Specifies the the key by which the result collection should be ordered.
+        - description: Specifies the key by which the result collection should be ordered.
           in: query
           name: $orderby
           required: false
@@ -1200,7 +1200,7 @@ definitions:
         $ref: '#/definitions/StreamingPolicyContentKeys'
         description: Representing default content key for each encryption scheme and separate content keys for specific tracks
       customKeyAcquisitionUrlTemplate:
-        description: KeyAcquistionUrlTemplate is used to point to user specified service to delivery content keys
+        description: KeyAcquisitionUrlTemplate is used to point to user specified service to delivery content keys
         type: string
       enabledProtocols:
         $ref: '#/definitions/EnabledProtocols'
@@ -1320,7 +1320,7 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: StreamingLocatorContentKeyType
           values:
             - description: Common Encryption using CENC
@@ -1331,7 +1331,7 @@ definitions:
               value: EnvelopeEncryption
         x-nullable: false
       value:
-        description: Value of  of Content Key
+        description: Value of Content Key
         type: string
     required:
       - id
@@ -1390,7 +1390,7 @@ definitions:
           - CommonEncryptionCbcs
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: EncryptionScheme
           values:
             - description: NoEncryption scheme
@@ -1415,7 +1415,7 @@ definitions:
           - Download
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: StreamingPolicyStreamingProtocol
           values:
             - description: HLS protocol
@@ -1558,7 +1558,7 @@ definitions:
           - Equal
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: TrackPropertyCompareOperation
           values:
             - description: Unknown track property compare operation
@@ -1572,7 +1572,7 @@ definitions:
           - FourCC
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: TrackPropertyType
           values:
             - description: Unknown track property

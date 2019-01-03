@@ -457,7 +457,7 @@ definitions:
       - description: Base resource object.
         properties:
           etag:
-            description: The entity tag used for optimistic concurency when modifying the resource.
+            description: The entity tag used for optimistic concurrency when modifying the resource.
             type: string
           id:
             description: ID of the resource.
@@ -580,7 +580,7 @@ definitions:
     properties:
       computeRole:
         $ref: '#/definitions/ComputeRole'
-        description: Specifies kind of compute role inclided in the package.
+        description: Specifies kind of compute role included in the package.
         readOnly: true
       isSystemExtension:
         description: Specifies if product is a Virtual Machine Extension.

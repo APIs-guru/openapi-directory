@@ -570,7 +570,7 @@ paths:
                 persistedFaceId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA
   '/facelists/{faceListId}/persistedfaces/{persistedFaceId}':
     delete:
-      description: Delete an existing face from a face list (given by a persisitedFaceId and a faceListId). Persisted image related to the face will also be deleted.
+      description: Delete an existing face from a face list (given by a persistedFaceId and a faceListId). Persisted image related to the face will also be deleted.
       operationId: FaceList_DeleteFace
       parameters:
         - $ref: '#/parameters/faceListId'
@@ -713,7 +713,7 @@ paths:
           schema:
             $ref: '#/definitions/APIError'
       x-ms-examples:
-        Identiy example:
+        Identify example:
           parameters:
             Content-Type: application/json
             Endpoint: '{Endpoint}'
@@ -987,7 +987,7 @@ paths:
                 persistedFaceId: B8D802CF-DD8F-4E61-B15C-9E6C5844CCBA
   '/largefacelists/{largeFaceListId}/persistedfaces/{persistedFaceId}':
     delete:
-      description: Delete an existing face from a large face list (given by a persisitedFaceId and a largeFaceListId). Persisted image related to the face will also be deleted.
+      description: Delete an existing face from a large face list (given by a persistedFaceId and a largeFaceListId). Persisted image related to the face will also be deleted.
       operationId: LargeFaceList_DeleteFace
       parameters:
         - $ref: '#/parameters/largeFaceListId'

@@ -512,14 +512,14 @@ definitions:
         type: string
       insightsMetadata:
         $ref: '#/definitions/ImagesImageMetadata'
-        description: 'A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInisghtsToken in a subsequent Visual Search API call to get the list of shopping websites.'
+        description: 'A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInsightsToken in a subsequent Visual Search API call to get the list of shopping websites.'
         readOnly: true
       thumbnail:
         $ref: '#/definitions/ImageObject'
         description: The URL to a thumbnail of the image.
         readOnly: true
       visualWords:
-        description: For interal use only.
+        description: For internal use only.
         readOnly: true
         type: string
     type: object

@@ -182,6 +182,11 @@ parameters:
     in: query
     name: name
     type: string
+  slug:
+    description: 'Slug from site URL of series (https://www.thetvdb.com/series/$SLUG)'
+    in: query
+    name: slug
+    type: string
   subKey:
     description: 'Subkey for the above query keys. See /series/{id}/images/query/params for more information'
     in: query
@@ -318,6 +323,7 @@ paths:
         - $ref: '#/parameters/seriesSearchName'
         - $ref: '#/parameters/imdbId'
         - $ref: '#/parameters/zap2itId'
+        - $ref: '#/parameters/slug'
         - $ref: '#/parameters/Accept-Language'
       responses:
         '200':

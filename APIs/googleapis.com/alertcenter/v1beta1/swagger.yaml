@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://alertcenter.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -26,6 +26,14 @@ info:
   x-serviceName: alertcenter
 externalDocs:
   url: 'https://developers.google.com/admin-sdk/alertcenter/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/apps.alerts': 'See and delete your domain''s G Suite alerts, and send alert feedback'
+    type: oauth2
 parameters:
   $.xgafv:
     description: V1 error format.
@@ -93,6 +101,7 @@ parameters:
     type: string
 tags:
   - name: alerts
+  - name: v1beta1
 paths:
   /v1beta1/alerts:
     get:
@@ -142,6 +151,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListAlertsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
       tags:
         - alerts
     parameters:
@@ -183,6 +195,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
       tags:
         - alerts
     get:
@@ -208,6 +223,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Alert'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
       tags:
         - alerts
     parameters:
@@ -255,6 +273,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListAlertFeedbackResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
       tags:
         - alerts
     parameters:
@@ -296,8 +317,111 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/AlertFeedback'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
       tags:
         - alerts
+  '/v1beta1/alerts/{alertId}:undelete':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Restores, or "undeletes", an alert that was marked for deletion within the
+        past 30 days. Attempting to undelete an alert which was marked for deletion
+        over 30 days ago (which has been removed from the Alert Center database) or
+        a nonexistent alert returns a `NOT_FOUND` error. Attempting to
+        undelete an alert which has not been marked for deletion has no effect.
+      operationId: alertcenter.alerts.undelete
+      parameters:
+        - description: Required. The identifier of the alert to undelete.
+          in: path
+          name: alertId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UndeleteAlertRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Alert'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
+      tags:
+        - alerts
+  /v1beta1/settings:
+    get:
+      description: Returns customer-level settings.
+      operationId: alertcenter.getSettings
+      parameters:
+        - description: |-
+            Optional. The unique identifier of the G Suite organization account of the
+            customer the alert settings are associated with.
+            Inferred from the caller identity if not provided.
+          in: query
+          name: customerId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Settings'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
+      tags:
+        - v1beta1
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    patch:
+      description: Update the customer-level settings.
+      operationId: alertcenter.updateSettings
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Settings'
+        - description: |-
+            Optional. The unique identifier of the G Suite organization account of the
+            customer the alert settings are associated with.
+            Inferred from the caller identity if not provided.
+          in: query
+          name: customerId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Settings'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/apps.alerts'
+      tags:
+        - v1beta1
 definitions:
   AccountWarning:
     description: Alerts for user account warning events.
@@ -355,7 +479,7 @@ definitions:
         type: string
       source:
         description: |-
-          Required. A unique identifier for the system that is reported the alert.
+          Required. A unique identifier for the system that reported the alert.
 
           Supported sources are any of the following:
 
@@ -434,6 +558,28 @@ definitions:
         description: |-
           The source IP address of the malicious email, for example,
           `127.0.0.1`.
+        type: string
+    type: object
+  CloudPubsubTopic:
+    description: |-
+      A reference to a Cloud Pubsub topic.
+
+      To register for notifications, the owner of the topic must grant
+      `alerts-api-push-notifications@system.gserviceaccount.com` the
+       `projects.topics.publish` permission.
+    properties:
+      payloadFormat:
+        description: |-
+          Optional. The format of the payload that would be sent.
+          If not specified the format will be JSON.
+        enum:
+          - PAYLOAD_FORMAT_UNSPECIFIED
+          - JSON
+        type: string
+      topicName:
+        description: |-
+          The `name` field of a Cloud Pubsub [Topic]
+          (https://cloud.google.com/pubsub/docs/reference/rest/v1/projects.topics#Topic).
         type: string
     type: object
   Csv:
@@ -665,6 +811,16 @@ definitions:
         description: The sender email address.
         type: string
     type: object
+  Notification:
+    description: |-
+      Settings for callback notifications.
+      For more details see [G Suite Alert
+      Notification](/admin-sdk/alertcenter/guides/notifications).
+    properties:
+      cloudPubsubTopic:
+        $ref: '#/definitions/CloudPubsubTopic'
+        description: A Google Cloud Pub/sub topic destination.
+    type: object
   PhishingSpike:
     description: |-
       Alert for a spike in user reported phishing.
@@ -685,6 +841,15 @@ definitions:
         description: The list of messages contained by this alert.
         items:
           $ref: '#/definitions/GmailMessageInfo'
+        type: array
+    type: object
+  Settings:
+    description: Customer-level settings.
+    properties:
+      notifications:
+        description: The list of notifications.
+        items:
+          $ref: '#/definitions/Notification'
         type: array
     type: object
   StateSponsoredAttack:
@@ -735,5 +900,15 @@ definitions:
         type: string
       serialNumber:
         description: The serial number of the device.
+        type: string
+    type: object
+  UndeleteAlertRequest:
+    description: A request to undelete a specific alert that was marked for deletion.
+    properties:
+      customerId:
+        description: |-
+          Optional. The unique identifier of the G Suite organization account of the
+          customer the alert is associated with.
+          Inferred from the caller identity if not provided.
         type: string
     type: object

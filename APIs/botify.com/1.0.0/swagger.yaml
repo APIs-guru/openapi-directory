@@ -824,6 +824,65 @@ paths:
         name: source
         required: true
         type: string
+  '/analyses/{username}/{project_slug}/{analysis_slug}/segments':
+    get:
+      description: Get the segments feature public metadata of an analysis.
+      operationId: getAnalysisSegments
+      parameters:
+        - default: 1
+          description: Page Number
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: Page Size
+          in: query
+          name: size
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            properties:
+              count:
+                type: integer
+              next:
+                type: string
+              page:
+                type: integer
+              previous:
+                type: string
+              results:
+                items:
+                  $ref: '#/definitions/AnalysisSegments'
+                type: array
+              size:
+                type: integer
+            type: object
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: Get the segments feature public metadata of an analysis
+      tags:
+        - Analysis
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: Project's identifier
+        in: path
+        name: project_slug
+        required: true
+        type: string
+      - description: Analysis' identifier
+        in: path
+        name: analysis_slug
+        required: true
+        type: string
   '/analyses/{username}/{project_slug}/{analysis_slug}/staticfiles/robots-txt-indexes':
     get:
       description: Return a list of all robots.txt files found on the project's domains.
@@ -1106,6 +1165,11 @@ paths:
           name: area
           required: false
           type: string
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
+          required: false
+          type: string
       responses:
         '200':
           description: Successful operation
@@ -1150,6 +1214,11 @@ paths:
             - gsc_keywords_by_country
           in: query
           name: area
+          required: false
+          type: string
+        - description: Previous analysis identifier
+          in: query
+          name: previous_crawl
           required: false
           type: string
         - default: true
@@ -1626,7 +1695,7 @@ paths:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/Datasets'
+            $ref: '#/definitions/CollectionDatasets'
         default:
           description: error payload
           schema:
@@ -1769,6 +1838,29 @@ paths:
       summary: Project Query aggregator
       tags:
         - Project
+  '/users/{username}/projects':
+    get:
+      description: List all active projects for the user
+      operationId: getAllUserProjects
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Project'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/DefaultPayload'
+      summary: List all active projects for the user
+      tags:
+        - Project
+    parameters:
+      - description: User's identifier
+        in: path
+        name: username
+        required: true
+        type: string
 definitions:
   AdvancedExportStatus:
     properties:
@@ -2026,6 +2118,13 @@ definitions:
     required:
       - user
     type: object
+  AnalysisSegments:
+    description: Analysis Segments
+    properties:
+      segments:
+        readOnly: true
+        type: string
+    type: object
   AnalysisUpdate:
     description: Analysis Update
     properties:
@@ -2092,6 +2191,31 @@ definitions:
       - id
       - name
       - timestamped
+    type: object
+  CollectionDatasets:
+    properties:
+      datasets:
+        items:
+          $ref: '#/definitions/Dataset'
+        type: array
+      metadata:
+        $ref: '#/definitions/CollectionMetadata'
+    required:
+      - datasets
+    type: object
+  CollectionMetadata:
+    properties:
+      config:
+        type: object
+      date_end:
+        format: date
+        type: string
+      date_last_modified:
+        format: date-time
+        type: string
+      date_start:
+        format: date
+        type: string
     type: object
   CrawlOrphanURLs:
     properties:
@@ -2387,6 +2511,8 @@ definitions:
         type: string
       id:
         type: string
+      kind:
+        type: string
       meta:
         type: object
       multiple:
@@ -2412,6 +2538,7 @@ definitions:
       - name
       - subtype
       - type
+      - kind
       - id
       - permissions
       - optional
@@ -2438,6 +2565,9 @@ definitions:
         type: array
     required:
       - datasets
+    type: object
+  Datasource:
+    properties: {}
     type: object
   Default:
     properties: {}
@@ -2708,13 +2838,16 @@ definitions:
       date_created:
         readOnly: true
         type: string
-      has_log_analysis:
+      last_crawls_revisions:
         readOnly: true
-        type: boolean
-      last_analysis:
+        type: string
+      last_log_revision:
         readOnly: true
-        type: object
+        type: string
       name:
+        type: string
+      permissions:
+        readOnly: true
         type: string
       pins_balance:
         format: int64
@@ -2738,6 +2871,9 @@ definitions:
         description: Revenue per conversion on tablet
         format: float
         type: number
+      roles:
+        readOnly: true
+        type: string
       settings_url:
         readOnly: true
         type: string

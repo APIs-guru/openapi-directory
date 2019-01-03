@@ -365,7 +365,7 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/locationParameter'
-        - description: Check SKU Availablity POST body.
+        - description: Check SKU Availability POST body.
           in: body
           name: parameters
           required: true
@@ -2137,7 +2137,7 @@ paths:
       tags:
         - CognitiveServicesAccounts
       x-ms-examples:
-        Get Account:
+        Update Account:
           parameters:
             accountName: bingSearch
             api-version: '2017-04-18'
@@ -2202,7 +2202,7 @@ paths:
       tags:
         - CognitiveServicesAccounts
       x-ms-examples:
-        Get Account:
+        Create Account:
           parameters:
             accountName: testCreate1
             api-version: '2017-04-18'
@@ -2576,30 +2576,7 @@ definitions:
         type: string
   CognitiveServicesAccountKind:
     description: Required. Indicates the type of cognitive service account.
-    enum:
-      - Bing.Autosuggest.v7
-      - Bing.CustomSearch
-      - Bing.Search.v7
-      - Bing.Speech
-      - Bing.SpellCheck.v7
-      - ComputerVision
-      - ContentModerator
-      - CustomSpeech
-      - CustomVision.Prediction
-      - CustomVision.Training
-      - Emotion
-      - Face
-      - LUIS
-      - QnAMaker
-      - SpeakerRecognition
-      - SpeechTranslation
-      - TextAnalytics
-      - TextTranslation
-      - WebLM
     type: string
-    x-ms-enum:
-      modelAsString: true
-      name: Kind
   CognitiveServicesAccountListResult:
     description: The list of cognitive services accounts operation response.
     properties:
@@ -2854,22 +2831,7 @@ definitions:
       - name
   SkuName:
     description: The name of SKU.
-    enum:
-      - F0
-      - P0
-      - P1
-      - P2
-      - S0
-      - S1
-      - S2
-      - S3
-      - S4
-      - S5
-      - S6
     type: string
-    x-ms-enum:
-      modelAsString: true
-      name: SkuName
   UnitType:
     description: The unit of the metric.
     enum:

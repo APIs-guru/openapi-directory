@@ -1737,6 +1737,62 @@ paths:
                 x-ms-correlation-request-id: e2e7f6be-e7ee-4aae-943f-6ff799e034f2
                 x-ms-ratelimit-remaining-subscription-writes: '1193'
                 x-ms-request-id: e2e7f6be-e7ee-4aae-943f-6ff799e034f2
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getDataPlaneAccess':
+    post:
+      description: Get Data Plane access.
+      operationId: Factories_GetDataPlaneAccess
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/api-version'
+        - description: Data Plane user access policy definition.
+          in: body
+          name: policy
+          required: true
+          schema:
+            $ref: '#/definitions/UserAccessPolicy'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/AccessPolicyResponse'
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - factories
+      x-ms-examples:
+        Factories_GetDataPlaneAccess:
+          parameters:
+            api-version: '2018-06-01'
+            factoryName: exampleFactoryName
+            policy:
+              accessResourcePath: ''
+              expireTime: '2018-11-10T09:46:20.2659347Z'
+              permissions: r
+              profileName: DefaultProfile
+              startTime: '2018-11-10T02:46:20.2659347Z'
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                accessToken: '**********'
+                dataPlaneUrl: 'https://rpeastus.svc.datafactory.azure.com:4433'
+                policy:
+                  accessResourcePath: ''
+                  expireTime: '2018-11-10T09:46:20.2659347Z'
+                  permissions: r
+                  profileName: DefaultProfile
+                  startTime: '2018-11-10T02:46:20.2659347Z'
+              headers:
+                Date: 'Wed, 07 Nov 2018 03:41:57 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 82bc20d2-4bec-496d-a1c8-3f7746fed307
+                x-ms-ratelimit-remaining-subscription-reads: '11996'
+                x-ms-request-id: 82bc20d2-4bec-496d-a1c8-3f7746fed307
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getGitHubAccessToken':
     post:
       description: Get GitHub Access Token.
@@ -2113,6 +2169,292 @@ paths:
                 x-ms-correlation-request-id: 05774db5-e79b-4224-9097-46714b92fbd8
                 x-ms-ratelimit-remaining-subscription-reads: '14998'
                 x-ms-request-id: 05774db5-e79b-4224-9097-46714b92fbd8
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getObjectMetadata':
+    post:
+      description: Get a SSIS integration runtime object metadata by specified path. The return is pageable metadata list.
+      operationId: IntegrationRuntimeObjectMetadata_Get
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/integrationRuntimeName'
+        - description: The parameters for getting a SSIS object metadata.
+          in: body
+          name: getMetadataRequest
+          required: false
+          schema:
+            $ref: '#/definitions/GetSsisObjectMetadataRequest'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            description: A list of SSIS object metadata.
+            properties:
+              nextLink:
+                description: 'The link to the next page of results, if any remaining results exist.'
+                type: string
+              value:
+                description: List of SSIS object metadata.
+                items:
+                  description: SSIS object metadata.
+                  discriminator: type
+                  properties:
+                    description:
+                      description: Metadata description.
+                      type: string
+                    id:
+                      description: Metadata id.
+                      format: int64
+                      type: integer
+                    name:
+                      description: Metadata name.
+                      type: string
+                    type:
+                      description: The type of SSIS object metadata.
+                      enum:
+                        - Folder
+                        - Project
+                        - Package
+                        - Environment
+                      type: string
+                      x-ms-enum:
+                        modelAsString: true
+                        name: SsisObjectMetadataType
+                  type: object
+                type: array
+            type: object
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - integrationRuntimeObjectMetadata
+      x-ms-examples:
+        IntegrationRuntimeObjectMetadata_Get:
+          parameters:
+            api-version: '2018-06-01'
+            factoryName: exampleFactoryName
+            getMetadataRequest:
+              metadataPath: ssisFolders
+            integrationRuntimeName: testactivityv2
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                nextLink: 'https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/testactivityv2/getObjectMetadata?api-version=2018-06-01&%24skipToken=https%3a%2f%2fwcu.frontend.clouddatahub.net%2fsubscriptions%2f12345678-1234-1234-1234-12345678abc%2fdatafactories%2f6C8E7C90-FD45-4010-8B7C-B5227D0F0CB7%2fintegrationruntimes%2fTESTACTIVITYV2%2fgetSsisObjectMetadata%3f%24skipToken%3dc3Npc0ZvbGRlcnNAQDIwMTgtMTEtMjlUMDM6NTk6MzIuMDQ1Mzc1MiswMDowMEBAZm9sZGVyQEAwMDAwMDAwMDAwMDAwMDAwMTAx0%26api-version%3d1.0'
+                value:
+                  - description: ''
+                    id: 1
+                    name: TestFolder
+                  - description: ''
+                    id: 2
+                    name: EnvironmentFolder
+                  - description: ''
+                    id: 3
+                    name: ActivityTest
+                  - description: ''
+                    id: 4
+                    name: 这是文件夹
+                  - id: 5
+                    name: '1'
+                  - id: 6
+                    name: '2'
+                  - id: 7
+                    name: '3'
+                  - id: 8
+                    name: '4'
+                  - id: 9
+                    name: '5'
+                  - id: 10
+                    name: '6'
+                  - id: 11
+                    name: '7'
+                  - id: 12
+                    name: '8'
+                  - id: 13
+                    name: '9'
+                  - id: 14
+                    name: '10'
+                  - id: 15
+                    name: '11'
+                  - id: 16
+                    name: '12'
+                  - id: 17
+                    name: '13'
+                  - id: 18
+                    name: '14'
+                  - id: 19
+                    name: '15'
+                  - id: 20
+                    name: '16'
+                  - id: 21
+                    name: '17'
+                  - id: 22
+                    name: '18'
+                  - id: 23
+                    name: '19'
+                  - id: 24
+                    name: '20'
+                  - id: 25
+                    name: '21'
+                  - id: 26
+                    name: '22'
+                  - id: 27
+                    name: '23'
+                  - id: 28
+                    name: '24'
+                  - id: 29
+                    name: '25'
+                  - id: 30
+                    name: '26'
+                  - id: 31
+                    name: '27'
+                  - id: 32
+                    name: '28'
+                  - id: 33
+                    name: '29'
+                  - id: 34
+                    name: '30'
+                  - id: 35
+                    name: '31'
+                  - id: 36
+                    name: '32'
+                  - id: 37
+                    name: '33'
+                  - id: 38
+                    name: '34'
+                  - id: 39
+                    name: '35'
+                  - id: 40
+                    name: '36'
+                  - id: 41
+                    name: '37'
+                  - id: 42
+                    name: '38'
+                  - id: 43
+                    name: '39'
+                  - id: 44
+                    name: '40'
+                  - id: 45
+                    name: '41'
+                  - id: 46
+                    name: '42'
+                  - id: 47
+                    name: '43'
+                  - id: 48
+                    name: '44'
+                  - id: 49
+                    name: '45'
+                  - id: 50
+                    name: '46'
+                  - id: 51
+                    name: '47'
+                  - id: 52
+                    name: '48'
+                  - id: 53
+                    name: '49'
+                  - id: 54
+                    name: '50'
+                  - id: 55
+                    name: '51'
+                  - id: 56
+                    name: '52'
+                  - id: 57
+                    name: '53'
+                  - id: 58
+                    name: '54'
+                  - id: 59
+                    name: '55'
+                  - id: 60
+                    name: '56'
+                  - id: 61
+                    name: '57'
+                  - id: 62
+                    name: '58'
+                  - id: 63
+                    name: '59'
+                  - id: 64
+                    name: '60'
+                  - id: 65
+                    name: '61'
+                  - id: 66
+                    name: '62'
+                  - id: 67
+                    name: '63'
+                  - id: 68
+                    name: '64'
+                  - id: 69
+                    name: '65'
+                  - id: 70
+                    name: '66'
+                  - id: 71
+                    name: '67'
+                  - id: 72
+                    name: '68'
+                  - id: 73
+                    name: '69'
+                  - id: 74
+                    name: '70'
+                  - id: 75
+                    name: '71'
+                  - id: 76
+                    name: '72'
+                  - id: 77
+                    name: '73'
+                  - id: 78
+                    name: '74'
+                  - id: 79
+                    name: '75'
+                  - id: 80
+                    name: '76'
+                  - id: 81
+                    name: '77'
+                  - id: 82
+                    name: '78'
+                  - id: 83
+                    name: '79'
+                  - id: 84
+                    name: '80'
+                  - id: 85
+                    name: '81'
+                  - id: 86
+                    name: '82'
+                  - id: 87
+                    name: '83'
+                  - id: 88
+                    name: '84'
+                  - id: 89
+                    name: '85'
+                  - id: 90
+                    name: '86'
+                  - id: 91
+                    name: '87'
+                  - id: 92
+                    name: '88'
+                  - id: 93
+                    name: '89'
+                  - id: 94
+                    name: '90'
+                  - id: 95
+                    name: '91'
+                  - id: 96
+                    name: '92'
+                  - id: 97
+                    name: '93'
+                  - id: 98
+                    name: '94'
+                  - id: 99
+                    name: '95'
+                  - id: 100
+                    name: '96'
+              headers:
+                Date: 'Mon, 03 Dec 2018 06:24:54 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 0cbc67c4-60e7-4d49-97d9-e4bc4f9851cd
+                x-ms-ratelimit-remaining-subscription-writes: '1198'
+                x-ms-request-id: 0cbc67c4-60e7-4d49-97d9-e4bc4f9851cd
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/getStatus':
     post:
       description: Gets detailed status information for an integration runtime.
@@ -2855,6 +3197,62 @@ paths:
                 x-ms-correlation-request-id: f01265af-9f38-44b8-81a1-b67f567ea728
                 x-ms-ratelimit-remaining-subscription-writes: '1199'
                 x-ms-request-id: f01265af-9f38-44b8-81a1-b67f567ea728
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/refreshObjectMetadata':
+    post:
+      description: Refresh a SSIS integration runtime object metadata.
+      operationId: IntegrationRuntimeObjectMetadata_Refresh
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/resourceGroupName'
+        - $ref: '#/parameters/factoryName'
+        - $ref: '#/parameters/integrationRuntimeName'
+        - $ref: '#/parameters/api-version'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/SsisObjectMetadataStatusResponse'
+        '202':
+          description: Accepted.
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - integrationRuntimeObjectMetadata
+      x-ms-examples:
+        IntegrationRuntimeObjectMetadata_Refresh:
+          parameters:
+            api-version: '2018-06-01'
+            factoryName: exampleFactoryName
+            integrationRuntimeName: testactivityv2
+            resourceGroupName: exampleResourceGroup
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                error: null
+                name: ca63c855b72d44959653ffcc6eb0b96c
+                properties: null
+                status: Succeeded
+              headers:
+                Date: 'Mon, 03 Dec 2018 06:24:53 GMT'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: 20708242-215c-4101-9437-44590b27cdbf
+                x-ms-ratelimit-remaining-subscription-reads: '11999'
+                x-ms-request-id: 20708242-215c-4101-9437-44590b27cdbf
+            '202':
+              body: null
+              headers:
+                Azure-AsyncOperation: 'https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/testactivityv2/refreshObjectMetadata/operationstatuses/ca63c855b72d44959653ffcc6eb0b96c?api-version=2018-06-01'
+                Date: 'Mon, 03 Dec 2018 06:24:38 GMT'
+                Location: 'https://management.azure.com/subscriptions/12345678-1234-1234-1234-12345678abc/resourceGroups/exampleResourceGroup/providers/Microsoft.DataFactory/factories/exampleFactoryName/integrationRuntimes/testactivityv2/refreshObjectMetadata/operationresults/ca63c855b72d44959653ffcc6eb0b96c?api-version=2018-06-01'
+                Retry-After: '15'
+                X-Content-Type-Options: nosniff
+                x-ms-correlation-request-id: abf136ad-39c8-4ee8-9098-7866f9433d13
+                x-ms-ratelimit-remaining-subscription-writes: '1199'
+                x-ms-request-id: abf136ad-39c8-4ee8-9098-7866f9433d13
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/regenerateAuthKey':
     post:
       description: Regenerates the authentication key for an integration runtime.
@@ -3106,7 +3504,7 @@ paths:
                 x-ms-request-id: a991b4b4-e33a-4973-9088-200f9137fb84
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/upgrade':
     post:
-      description: Upgrade self-hosted integration runtime to latest version if availably.
+      description: Upgrade self-hosted integration runtime to latest version if availability.
       operationId: IntegrationRuntimes_Upgrade
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -4049,7 +4447,7 @@ paths:
         - $ref: '#/parameters/factoryName'
         - $ref: '#/parameters/pipelineName'
         - $ref: '#/parameters/api-version'
-        - description: The pipeline run identifier. If run ID is specified the parameters of the the specified run will be used to create a new run.
+        - description: The pipeline run identifier. If run ID is specified the parameters of the specified run will be used to create a new run.
           in: query
           name: referencePipelineRunId
           required: false
@@ -4858,6 +5256,18 @@ paths:
                 x-ms-request-id: 5aa854a5-7ac0-4c7e-9356-79c657f4e231
       x-ms-long-running-operation: true
 definitions:
+  AccessPolicyResponse:
+    description: Get Data Plane read only token response definition.
+    properties:
+      accessToken:
+        description: Data Plane read only access token.
+        type: string
+      dataPlaneUrl:
+        description: Data Plane service base URL.
+        type: string
+      policy:
+        $ref: '#/definitions/UserAccessPolicy'
+        description: The user access policy.
   ActivityRun:
     additionalProperties:
       type: object
@@ -5233,7 +5643,7 @@ definitions:
         description: Last commit id.
         type: string
       repositoryName:
-        description: Rrepository name.
+        description: Repository name.
         type: string
       rootFolder:
         description: Root folder.
@@ -5283,6 +5693,13 @@ definitions:
       - projectName
     type: object
     x-ms-discriminator-value: FactoryVSTSConfiguration
+  GetSsisObjectMetadataRequest:
+    description: The request payload of get SSIS object metadata.
+    properties:
+      metadataPath:
+        description: Metadata path.
+        type: string
+    type: object
   GitHubAccessTokenRequest:
     description: Get GitHub access token request definition.
     properties:
@@ -5823,10 +6240,10 @@ definitions:
                     description: User property.
                     properties:
                       name:
-                        description: User proprety name.
+                        description: User property name.
                         type: string
                       value:
-                        description: 'User proprety value. Type: string (or Expression with resultType string).'
+                        description: 'User property value. Type: string (or Expression with resultType string).'
                         type: object
                     required:
                       - name
@@ -6242,6 +6659,22 @@ definitions:
       - value
     type: object
     x-ms-discriminator-value: SecureString
+  SsisObjectMetadataStatusResponse:
+    description: The status of the operation.
+    properties:
+      error:
+        description: The operation error message.
+        type: string
+      name:
+        description: The operation name.
+        type: string
+      properties:
+        description: The operation properties.
+        type: string
+      status:
+        description: The status of the operation.
+        type: string
+    type: object
   SubResource:
     description: 'Azure Data Factory nested resource, which belongs to a factory.'
     properties:
@@ -6406,6 +6839,24 @@ definitions:
         description: 'The time offset (in hours) in the day, e.g., PT03H is 3 hours. The integration runtime auto update will happen on that time.'
         type: string
     type: object
+  UserAccessPolicy:
+    description: Get Data Plane read only token request definition.
+    properties:
+      accessResourcePath:
+        description: The resource path to get access relative to factory. Currently only empty string is supported which corresponds to the factory resource.
+        type: string
+      expireTime:
+        description: Expiration time for the token. Maximum duration for the token is eight hours and by default the token will expire in eight hours.
+        type: string
+      permissions:
+        description: The string with permissions for Data Plane access. Currently only 'r' is supported which grants read only access.
+        type: string
+      profileName:
+        description: The name of the profile. Currently only the default is supported. The default value is DefaultProfile.
+        type: string
+      startTime:
+        description: Start time for the token. If not specified the current time will be used.
+        type: string
   VariableDefinitionSpecification:
     additionalProperties:
       description: Definition of a single variable for a Pipeline.

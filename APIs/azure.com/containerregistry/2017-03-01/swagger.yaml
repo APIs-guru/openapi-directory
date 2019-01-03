@@ -54,6 +54,7 @@ parameters:
   ResourceGroupParameter:
     description: The name of the resource group to which the container registry belongs.
     in: path
+    minLength: 1
     name: resourceGroupName
     required: true
     type: string

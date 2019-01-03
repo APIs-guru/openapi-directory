@@ -499,7 +499,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly deleted.
+          description: Namespace successfully deleted.
         '202':
           description: Namespace delete request accepted.
         '204':
@@ -603,7 +603,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly updated.
+          description: Namespace successfully updated.
           schema:
             $ref: '#/definitions/NamespaceResource'
         '201':
@@ -672,7 +672,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly created.
+          description: Namespace successfully created.
           schema:
             $ref: '#/definitions/NamespaceResource'
         '201':
@@ -791,7 +791,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAutorizationRuleDelete:
+        NameSpaceAuthorizationRuleDelete:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules4867
@@ -818,7 +818,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAutorizationRuleGet:
+        NameSpaceAuthorizationRuleGet:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules4867
@@ -939,7 +939,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAuthorizationRuleRegenrateKey:
+        NameSpaceAuthorizationRuleRegenerateKey:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules5448
@@ -1148,7 +1148,7 @@ paths:
       tags:
         - EventHubs
       x-ms-examples:
-        EventHubAutorizationRuleListAll:
+        EventHubAuthorizationRuleListAll:
           parameters:
             api-version: '2015-08-01'
             eventHubName: sdk-EventHub8887
@@ -1187,7 +1187,7 @@ paths:
       tags:
         - EventHubs
       x-ms-examples:
-        EventHubAutorizationRuleDelete:
+        EventHubAuthorizationRuleDelete:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules9261
@@ -1218,7 +1218,7 @@ paths:
       tags:
         - EventHubs
       x-ms-examples:
-        EventHubAutorizationRuleGet:
+        EventHubAuthorizationRuleGet:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules9261
@@ -1256,7 +1256,7 @@ paths:
       tags:
         - EventHubs
       x-ms-examples:
-        EventHubAutorizationRuleGet:
+        EventHubAuthorizationRuleGet:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules9261
@@ -1387,7 +1387,7 @@ paths:
       tags:
         - EventHubs
       x-ms-examples:
-        EventHubAuthorizationRuleRegenrateKey:
+        EventHubAuthorizationRuleRegenerateKey:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules9261

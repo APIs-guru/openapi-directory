@@ -7,7 +7,7 @@ info:
   contact:
     x-twitter: microsoft
   description: 'The Web Search API lets you send a search query to Bing and get back search results that include links to webpages, images, and more.'
-  title: Web Search
+  title: Web Search Client
   version: '1.0'
   x-apisguru-categories:
     - cloud
@@ -1702,3 +1702,15 @@ definitions:
       - _type
     type: object
     x-ms-discriminator-value: Web/WebGrouping
+x-ms-parameterized-host:
+  hostTemplate: '{Endpoint}'
+  parameters:
+    - default: 'https://api.cognitive.microsoft.com'
+      description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: "https://westus.api.cognitive.microsoft.com", "https://api.cognitive.microsoft.com").'
+      in: path
+      name: Endpoint
+      required: true
+      type: string
+      x-ms-parameter-location: client
+      x-ms-skip-url-encoding: true
+  useSchemePrefix: false

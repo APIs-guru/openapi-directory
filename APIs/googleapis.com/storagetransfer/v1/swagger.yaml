@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://storagetransfer.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -61,11 +61,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -86,12 +81,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -153,12 +142,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -202,12 +189,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -263,12 +248,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -325,22 +308,41 @@ paths:
         - transferOperations
     get:
       description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: storagetransfer.transferOperations.get
+        Lists operations that match the specified filter in the request. If the
+        server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+        NOTE: the `name` binding allows API services to override the binding
+        to use different resource name schemes, such as `users/*/operations`. To
+        override the binding, API services can add a binding such as
+        `"/v1/{name=users/*}/operations"` to their service configuration.
+        For backwards compatibility, the default name includes the operations
+        collection id, however overriding users must ensure the name binding
+        is the parent resource, without the operations collection id.
+      operationId: storagetransfer.transferOperations.list
       parameters:
-        - description: The name of the operation resource.
+        - description: 'A list of query parameters specified as JSON text in the form of {\"project_id\" : \"my_project_id\", \"job_names\" : [\"jobid1\", \"jobid2\",...], \"operation_names\" : [\"opid1\", \"opid2\",...], \"transfer_statuses\":[\"status1\", \"status2\",...]}. Since `job_names`, `operation_names`, and `transfer_statuses` support multiple values, they must be specified with array notation. `job_names`, `operation_names`, and `transfer_statuses` are optional.'
+          in: query
+          name: filter
+          type: string
+        - description: The value `transferOperations`.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The list page size. The max allowed value is 256.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The list page token.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -350,12 +352,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -365,12 +365,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -400,12 +398,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -441,12 +437,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -515,24 +509,28 @@ definitions:
     type: object
   Date:
     description: |-
-      Represents a whole calendar date, e.g. date of birth. The time of day and
-      time zone are either specified elsewhere or are not significant. The date
-      is relative to the Proleptic Gregorian Calendar. The day may be 0 to
-      represent a year and month where the day is not significant, e.g. credit card
-      expiration date. The year may be 0 to represent a month and day independent
-      of year, e.g. anniversary date. Related types are google.type.TimeOfDay
-      and `google.protobuf.Timestamp`.
+      Represents a whole or partial calendar date, e.g. a birthday. The time of day
+      and time zone are either specified elsewhere or are not significant. The date
+      is relative to the Proleptic Gregorian Calendar. This can represent:
+
+      * A full date, with non-zero year, month and day values
+      * A month and day value, with a zero year, e.g. an anniversary
+      * A year on its own, with zero month and day values
+      * A year and month value, with a zero day, e.g. a credit card expiration date
+
+      Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`.
     properties:
       day:
         description: |-
           Day of month. Must be from 1 to 31 and valid for the year and month, or 0
-          if specifying a year/month where the day is not significant.
+          if specifying a year by itself or a year and month where the day is not
+          significant.
         format: int32
         type: integer
       month:
         description: |-
-          Month of year. Must be from 1 to 12, or 0 if specifying a date without a
-          month.
+          Month of year. Must be from 1 to 12, or 0 if specifying a year without a
+          month and day.
         format: int32
         type: integer
       year:

@@ -7,7 +7,7 @@ info:
   contact:
     x-twitter: microsoft
   description: 'The Entity Search API lets you send a search query to Bing and get back search results that include entities and places. Place results include restaurants, hotel, or other local businesses. For places, the query can specify the name of the local business or it can ask for a list (for example, restaurants near me). Entity results include persons, places, or things. Place in this context is tourist attractions, states, countries, etc.'
-  title: Entity Search
+  title: Entity Search Client
   version: '1.0'
   x-apisguru-categories:
     - cloud
@@ -684,7 +684,7 @@ definitions:
         readOnly: true
         type: string
       countryIso:
-        description: 'The two letter ISO code of this countr. For example, US.'
+        description: 'The two letter ISO code of this country. For example, US.'
         readOnly: true
         type: string
       neighborhood:
@@ -836,3 +836,15 @@ definitions:
     allOf:
       - $ref: '#/definitions/Place'
     type: object
+x-ms-parameterized-host:
+  hostTemplate: '{Endpoint}'
+  parameters:
+    - default: 'https://api.cognitive.microsoft.com'
+      description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: "https://westus.api.cognitive.microsoft.com", "https://api.cognitive.microsoft.com").'
+      in: path
+      name: Endpoint
+      required: true
+      type: string
+      x-ms-parameter-location: client
+      x-ms-skip-url-encoding: true
+  useSchemePrefix: false

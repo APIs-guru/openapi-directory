@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
       version: v1
@@ -36,7 +36,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/youtube': Manage your YouTube account
-      'https://www.googleapis.com/auth/youtube.force-ssl': Manage your YouTube account
+      'https://www.googleapis.com/auth/youtube.force-ssl': 'See, edit, and permanently delete your YouTube videos, ratings, comments and captions'
       'https://www.googleapis.com/auth/youtube.readonly': View your YouTube account
       'https://www.googleapis.com/auth/youtube.upload': Manage your YouTube videos
       'https://www.googleapis.com/auth/youtubepartner': View and manage your assets and associated content on YouTube

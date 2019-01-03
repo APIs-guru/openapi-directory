@@ -304,7 +304,7 @@ definitions:
       - description: Base resource object.
         properties:
           etag:
-            description: The entity tag used for optimistic concurency when modifying the resource.
+            description: The entity tag used for optimistic concurrency when modifying the resource.
             type: string
           id:
             description: ID of the resource.
@@ -320,7 +320,7 @@ definitions:
             type: string
         type: object
         x-ms-azure-resource: true
-    description: Customer subcription.
+    description: Customer subscription.
     properties:
       properties:
         $ref: '#/definitions/CustomerSubscriptionProperties'

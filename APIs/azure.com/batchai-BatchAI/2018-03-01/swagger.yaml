@@ -88,7 +88,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
   FilterParameter:
-    description: An OData $filter clause.. Used to filter results that are returned in the GET respnose.
+    description: An OData $filter clause. Used to filter results that are returned in the GET response.
     in: query
     name: $filter
     required: false
@@ -138,7 +138,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
   SelectParameter:
-    description: An OData $select clause. Used to select the properties to be returned in the GET respnose.
+    description: An OData $select clause. Used to select the properties to be returned in the GET response.
     in: query
     name: $select
     required: false
@@ -618,7 +618,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: The operation was successful. The response contains information abouth the cluster.
+          description: The operation was successful. The response contains information about the cluster.
           schema:
             $ref: '#/definitions/Cluster'
         default:
@@ -1558,7 +1558,7 @@ definitions:
         type: string
       instrumentationKeySecretReference:
         $ref: '#/definitions/KeyVaultSecretReference'
-        description: Specifies KeyVault Store and Secret which contains Azure Application Insights instrumentation key. One of instumentationKey or instrumentationKeySecretReference must be specified.
+        description: Specifies KeyVault Store and Secret which contains Azure Application Insights instrumentation key. One of instrumentationKey or instrumentationKeySecretReference must be specified.
         title: Specifies a KeyVault Secret containing Azure Application Insights instrumentation key.
     required:
       - component
@@ -1917,7 +1917,7 @@ definitions:
         title: Settings for OS image and mounted data volumes.
       vmPriority:
         default: dedicated
-        description: The default value is dedicated. The node can get preempted while the task is running if lowpriority is choosen. This is best suited if the workload is checkpointing and can be restarted.
+        description: The default value is dedicated. The node can get preempted while the task is running if lowpriority is chosen. This is best suited if the workload is checkpointing and can be restarted.
         enum:
           - dedicated
           - lowpriority
@@ -2196,7 +2196,7 @@ definitions:
         title: Specifies the mount options for File Server.
         type: string
       relativeMountPath:
-        description: Note that all cluster level file servers will be mounted under $AZ_BATCHAI_MOUNT_ROOT location and job level file servers will be mouted under $AZ_BATCHAI_JOB_MOUNT_ROOT.
+        description: Note that all cluster level file servers will be mounted under $AZ_BATCHAI_MOUNT_ROOT location and job level file servers will be mounted under $AZ_BATCHAI_JOB_MOUNT_ROOT.
         title: Specifies the relative path on the compute node where the File Server will be mounted.
         type: string
       sourceDirectory:
@@ -2319,7 +2319,7 @@ definitions:
         title: Specifies the command line to be executed before tool kit is launched.
       mountVolumes:
         $ref: '#/definitions/MountVolumes'
-        description: These volumes will be mounted before the job execution and will be unmouted after the job completion. The volumes will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.
+        description: These volumes will be mounted before the job execution and will be unmounted after the job completion. The volumes will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.
         title: Information on mount volumes to be used by the job.
       nodeCount:
         description: The job will be gang scheduled on that many compute nodes
@@ -2462,7 +2462,7 @@ definitions:
         required:
           - startTime
       executionState:
-        description: 'The current state of the job. Possible values are: queued - The job is queued and able to run. A job enters this state when it is created, or when it is awaiting a retry after a failed run. running - The job is running on a compute cluster. This includes job-level preparation such as downloading resource files or set up container specified on the job - it does not necessarily mean that the job command line has started executing. terminating - The job is terminated by the user, the terminate operation is in progress. succeeded - The job has completed running succesfully and exited with exit code 0. failed - The job has finished unsuccessfully (failed with a non-zero exit code) and has exhausted its retry limit. A job is also marked as failed if an error occurred launching the job.'
+        description: 'The current state of the job. Possible values are: queued - The job is queued and able to run. A job enters this state when it is created, or when it is awaiting a retry after a failed run. running - The job is running on a compute cluster. This includes job-level preparation such as downloading resource files or set up container specified on the job - it does not necessarily mean that the job command line has started executing. terminating - The job is terminated by the user, the terminate operation is in progress. succeeded - The job has completed running successfully and exited with exit code 0. failed - The job has finished unsuccessfully (failed with a non-zero exit code) and has exhausted its retry limit. A job is also marked as failed if an error occurred launching the job.'
         enum:
           - queued
           - running
@@ -2498,7 +2498,7 @@ definitions:
         title: Specifies the actions to be performed before tool kit is launched.
       mountVolumes:
         $ref: '#/definitions/MountVolumes'
-        description: These volumes will be mounted before the job execution and will be unmouted after the job completion. The volumes will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.
+        description: These volumes will be mounted before the job execution and will be unmounted after the job completion. The volumes will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.
         title: Information on mount volumes to be used by the job.
       nodeCount:
         description: The job will be gang scheduled on that many compute nodes
@@ -2686,7 +2686,7 @@ definitions:
         title: Specifies settings for performance counters collecting and uploading.
       setupTask:
         $ref: '#/definitions/SetupTask'
-        title: Specifies a setup task which can be used to customize the compute nodes of the cluster. The NodeSetup task runs everytime a VM is rebooted. For that reason the task code needs to be idempotent. Generally it is used to either download static data that is required for all jobs that run on the cluster VMs or to download/install software.
+        title: Specifies a setup task which can be used to customize the compute nodes of the cluster. The NodeSetup task runs every time a VM is rebooted. For that reason the task code needs to be idempotent. Generally it is used to either download static data that is required for all jobs that run on the cluster VMs or to download/install software.
   NodeStateCounts:
     description: Counts of various compute node states on the cluster.
     properties:
@@ -2942,7 +2942,7 @@ definitions:
         description: The prefix of a path where the Batch AI service will upload the stdout and stderr of the setup task.
         type: string
       stdOutErrPathSuffix:
-        description: Batch AI creates the setup task output directories under an unique path to avoid conflicts between different clusters. You can concatinate stdOutErrPathPrefix and stdOutErrPathSuffix to get the full path to the output directory.
+        description: Batch AI creates the setup task output directories under an unique path to avoid conflicts between different clusters. You can concatenate stdOutErrPathPrefix and stdOutErrPathSuffix to get the full path to the output directory.
         readOnly: true
         title: A path segment appended by Batch AI to stdOutErrPathPrefix to form a path where stdout and stderr of the setup task will be uploaded.
         type: string
@@ -2976,7 +2976,7 @@ definitions:
       parameterServerCount:
         description: 'If specified, the value must be less than or equal to nodeCount. If not specified, the default value is equal to 1 for distributed TensorFlow training (This property is not applicable for single machine training). This property can be specified only for distributed TensorFlow training.'
         format: int32
-        title: The number of parmeter server tasks.
+        title: The number of parameter server tasks.
         type: integer
       pythonInterpreterPath:
         title: The path to python interpreter.

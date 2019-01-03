@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://cloudsearch.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -116,11 +116,107 @@ tags:
   - name: settings
   - name: stats
 paths:
+  '/v1/debug/{name}/items:searchByViewUrl':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Fetches the item whose viewUrl exactly matches that of the URL provided
+        in the request.
+      operationId: cloudsearch.debug.datasources.items.searchByViewUrl
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SearchItemsByViewUrlRequest'
+        - description: |-
+            Source name, format:
+            datasources/{source_id}
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SearchItemsByViewUrlResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.debug'
+      tags:
+        - debug
+  '/v1/debug/{name}:checkAccess':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Checks whether an item is accessible by specified principal.
+      operationId: cloudsearch.debug.datasources.items.checkAccess
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Principal'
+        - description: |-
+            If set, the request will enable debugging features of Cloud Search.
+            Only turn on this field, if asked by Google to help with debugging.
+          in: query
+          name: debugOptions.enableDebugging
+          type: boolean
+        - description: |-
+            Item name, format:
+            datasources/{source_id}/items/{item_id}
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CheckAccessResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud_search.debug'
+      tags:
+        - debug
   '/v1/debug/{parent}/items:forunmappedidentity':
     get:
       description: Lists names of items associated with an unmapped identity.
       operationId: cloudsearch.debug.identitysources.items.listForunmappedidentity
       parameters:
+        - description: |-
+            If set, the request will enable debugging features of Cloud Search.
+            Only turn on this field, if asked by Google to help with debugging.
+          in: query
+          name: debugOptions.enableDebugging
+          type: boolean
         - in: query
           name: groupResourceName
           type: string
@@ -174,6 +270,12 @@ paths:
       description: Lists unmapped user identities for an identity source.
       operationId: cloudsearch.debug.identitysources.unmappedids.list
       parameters:
+        - description: |-
+            If set, the request will enable debugging features of Cloud Search.
+            Only turn on this field, if asked by Google to help with debugging.
+          in: query
+          name: debugOptions.enableDebugging
+          type: boolean
         - description: |-
             Maximum number of items to fetch in a request.
             Defaults to 100.
@@ -1132,8 +1234,8 @@ paths:
         - settings
   '/v1/settings/{name}':
     delete:
-      description: Deletes a data source.
-      operationId: cloudsearch.settings.datasources.delete
+      description: Deletes a search application.
+      operationId: cloudsearch.settings.searchapplications.delete
       parameters:
         - description: |-
             If set, the request will enable debugging features of Cloud Search.
@@ -1142,8 +1244,8 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the data source.
-            Format: datasources/{source_id}.
+            The name of the search application to be deleted.
+            <br />Format: applications/{application_id}.
           in: path
           name: name
           required: true
@@ -1160,12 +1262,12 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
     get:
-      description: Gets a data source.
-      operationId: cloudsearch.settings.datasources.get
+      description: Gets the specified search application.
+      operationId: cloudsearch.settings.searchapplications.get
       parameters:
         - description: |-
             If set, the request will enable debugging features of Cloud Search.
@@ -1174,8 +1276,8 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the data source resource.
-            Format: datasources/{source_id}.
+            Name of the search application.
+            <br />Format: applications/{application_id}.
           in: path
           name: name
           required: true
@@ -1185,14 +1287,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/DataSource'
+            $ref: '#/definitions/SearchApplication'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
     parameters:
@@ -1208,17 +1310,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates a data source.
-      operationId: cloudsearch.settings.datasources.update
+      description: Updates a search application.
+      operationId: cloudsearch.settings.searchapplications.update
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/UpdateDataSourceRequest'
+            $ref: '#/definitions/SearchApplication'
         - description: |-
-            Name of the data source resource.
-            Format: datasources/{source_id}.
-            <br />The name is ignored when creating a data source.
+            Name of the Search Application.
+            <br />Format: searchapplications/{application_id}.
           in: path
           name: name
           required: true
@@ -1235,7 +1336,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
   '/v1/settings/{name}:reset':
@@ -1474,6 +1575,12 @@ definitions:
       operatorOptions:
         $ref: '#/definitions/BooleanOperatorOptions'
         description: 'If set, describes how the boolean should be used as a search operator.'
+    type: object
+  CheckAccessResponse:
+    properties:
+      hasAccess:
+        description: Returns true if principal has access.  Returns false otherwise.
+        type: boolean
     type: object
   CompositeFilter:
     properties:
@@ -1780,6 +1887,7 @@ definitions:
           - VIDEO
           - FOLDER
           - ARCHIVE
+          - SITE
         type: string
     type: object
   DriveTimeSpanRestrict:
@@ -2048,7 +2156,7 @@ definitions:
         description: |-
           This property indicates the freshness level of the object in the index.
           If set, this property must be a top-level property within the
-          PropertyDefinitions
+          property definitions
           and it must be a
           timestamp type
           or
@@ -3496,6 +3604,32 @@ definitions:
         items:
           $ref: '#/definitions/SourceConfig'
         type: array
+    type: object
+  SearchItemsByViewUrlRequest:
+    properties:
+      debugOptions:
+        $ref: '#/definitions/DebugOptions'
+        description: Common debug options.
+      pageToken:
+        description: 'The next_page_token value returned from a previous request, if any.'
+        type: string
+      viewUrl:
+        description: |-
+          Specify the full view URL to find the corresponding item.
+          The maximum length is 2048 characters.
+        type: string
+    type: object
+  SearchItemsByViewUrlResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/Item'
+        type: array
+      nextPageToken:
+        description: |-
+          Token to retrieve the next page of results, or empty if there are no
+          more results in the list.
+        type: string
     type: object
   SearchQualityMetadata:
     description: Additional search quality metadata of the item.

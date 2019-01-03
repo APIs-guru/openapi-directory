@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimdeployment.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimdeployment
   x-tags:
@@ -864,6 +864,10 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/ApiManagementServiceResource'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/ApiManagementServiceResource'
       tags:
         - ApiManagementService
       x-ms-examples:
@@ -1016,6 +1020,63 @@ paths:
                 type: Microsoft.ApiManagement/service
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/bXVsdGlob3N0bmFtZW11bHRpcmVnaW9uc2VydmljZV9BY3RfZjFiOTZhMjc=?api-version=2017-03-01'
+            '202':
+              body:
+                etag: AAAAAAAXXwI=
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+                location: Central US
+                name: apimService1
+                properties:
+                  additionalLocations:
+                    - location: West US
+                      sku:
+                        capacity: 1
+                        name: Premium
+                      staticIps:
+                        - 104.210.41.234
+                      virtualNetworkConfiguration:
+                        subnetResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/westUsVirtualNetwork/subnets/apimSubnet
+                  createdAtUtc: '2017-05-30T19:00:47.1121713Z'
+                  gatewayUrl: 'https://apimService1.azure-api.net'
+                  hostnameConfigurations:
+                    - certificate:
+                        expiry: '2018-03-17T21:55:07+00:00'
+                        subject: CN=proxyhostname1.contoso.com
+                        thumbprint: 918D7785B926AC5AEE66322778A147BCE7237CF3
+                      hostName: proxyhostname1.contoso.com
+                      negotiateClientCertificate: false
+                      type: Proxy
+                    - certificate:
+                        expiry: '2018-03-17T21:55:07+00:00'
+                        subject: CN=proxyhostname2.contoso.com
+                        thumbprint: 918D7785B926AC5AEE66322778A147BCE7237CF3
+                      hostName: proxyhostname2.contoso.com
+                      negotiateClientCertificate: true
+                      type: Proxy
+                    - certificate:
+                        expiry: '2018-03-17T21:55:07+00:00'
+                        subject: CN=portalhostname1.contoso.com
+                        thumbprint: 918D7785B926AC5AEE66322778A147BCE7237CF3
+                      hostName: portalhostname1.contoso.com
+                      negotiateClientCertificate: false
+                      type: Portal
+                  managementApiUrl: 'https://apimService1.management.azure-api.net'
+                  portalUrl: 'https://apimService1.portal.azure-api.net'
+                  provisioningState: Succeeded
+                  publisherEmail: admin@live.com
+                  publisherName: contoso
+                  scmUrl: 'https://apimService1.scm.azure-api.net'
+                  staticIps:
+                    - 52.173.193.207
+                  targetProvisioningState: ''
+                  virtualNetworkConfiguration:
+                    subnetResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/centralUsVirtualNetwork/subnets/apimSubnet
+                  virtualNetworkType: External
+                sku:
+                  capacity: 1
+                  name: Premium
+                tags: {}
+                type: Microsoft.ApiManagement/service
         ApiManagementCreateService:
           parameters:
             api-version: '2017-03-01'
@@ -1077,6 +1138,30 @@ paths:
                 type: Microsoft.ApiManagement/service
               headers:
                 location: 'https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2017-03-01'
+            '202':
+              body:
+                etag: AAAAAAAV8XM=
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+                location: West US
+                name: apimService1
+                properties:
+                  createdAtUtc: '2015-09-22T01:52:02.4307221Z'
+                  gatewayUrl: 'https://apimService1.azure-api.net'
+                  managementApiUrl: 'https://apimService1.management.azure-api.net'
+                  portalUrl: 'https://apimService1.portal.azure-api.net'
+                  provisioningState: Succeeded
+                  publisherEmail: admin@live.com
+                  publisherName: Contoso
+                  scmUrl: 'https://apimService1.scm.azure-api.net'
+                  staticIps:
+                    - xx.xx.250.222
+                  targetProvisioningState: ''
+                  virtualNetworkType: None
+                sku:
+                  capacity: 1
+                  name: Premium
+                tags: {}
+                type: Microsoft.ApiManagement/service
         ApiManagementCreateServiceHavingMsi:
           parameters:
             api-version: '2017-03-01'
@@ -1122,6 +1207,29 @@ paths:
                 tags: {}
                 type: Microsoft.ApiManagement/service
             '201':
+              body:
+                etag: AAAAAAC268k=
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+                identity:
+                  principalId: f4b0f1c2-xxxx-43db-xxxx-ccd99e1afd22
+                  tenantId: 72f988bf-xxxx-41af-xxxx-2d7cd011db47
+                  type: SystemAssigned
+                location: Japan East
+                name: apimService1
+                properties:
+                  createdAtUtc: '2017-10-27T23:41:41.7231779Z'
+                  notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
+                  provisioningState: Created
+                  publisherEmail: admin@contoso.com
+                  publisherName: Contoso
+                  targetProvisioningState: Activating
+                sku:
+                  capacity: 1
+                  name: Developer
+                type: Microsoft.ApiManagement/service
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2017-03-01'
+            '202':
               body:
                 etag: AAAAAAC268k=
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
@@ -1821,7 +1929,7 @@ definitions:
         description: Virtual network configuration of the API Management service.
       virtualNetworkType:
         default: None
-        description: 'The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.'
+        description: 'The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.'
         enum:
           - None
           - External

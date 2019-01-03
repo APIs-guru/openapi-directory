@@ -1404,7 +1404,7 @@ paths:
                 type: Microsoft.Migrate/projects/groups/assessments
     put:
       description: |
-        Create a new assessment with the given name and the specified settings. Since name of an assessment in a project is a unique identiefier, if an assessment with the name provided already exists, then the existing assessment is updated.
+        Create a new assessment with the given name and the specified settings. Since name of an assessment in a project is a unique identifier, if an assessment with the name provided already exists, then the existing assessment is updated.
 
         Any PUT operation, resulting in either create or update on an assessment, will cause the assessment to go in a "InProgress" state. This will be indicated by the field 'computationState' on the Assessment object. During this time no other PUT operation will be allowed on that assessment object, nor will a Delete operation. Once the computation for the assessment is complete, the field 'computationState' will be updated to 'Ready', and then other PUT or DELETE operations can happen on the assessment.
 
@@ -1724,7 +1724,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/projects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}':
     get:
-      description: Get an assessed machine with its size & cost estimnate that was evaluated in the specified assessment.
+      description: Get an assessed machine with its size & cost estimate that was evaluated in the specified assessment.
       operationId: AssessedMachines_Get
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -3250,7 +3250,7 @@ definitions:
           modelAsString: true
           name: AssessmentStage
       status:
-        description: Wheter the assessment has been created and is valid.
+        description: Whether the assessment has been created and is valid.
         enum:
           - Created
           - Updated

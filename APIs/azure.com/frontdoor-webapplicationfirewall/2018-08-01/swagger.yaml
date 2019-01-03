@@ -281,7 +281,7 @@ paths:
                   key2: value2
                 type: Microsoft.Network/frontdoorwebapplicationfirewallpolicies
     put:
-      description: Creates or update policy with specified ruleset name within a resource group.
+      description: Creates or update policy with specified rule set name within a resource group.
       operationId: Policies_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -507,7 +507,7 @@ definitions:
           modelAsString: true
           name: action
       ruleGroupOverride:
-        description: Describes overrideruleGroup
+        description: Describes override rule group
         enum:
           - SqlInjection
           - XSS
@@ -563,7 +563,7 @@ definitions:
         description: Defines rate limit duration. Default - 1 minute
         type: integer
       rateLimitThreshold:
-        description: Defines rate limit thresold
+        description: Defines rate limit threshold
         type: integer
       ruleType:
         description: Describes type of rule
@@ -593,7 +593,7 @@ definitions:
           $ref: '#/definitions/CustomRule'
         type: array
   ErrorResponse:
-    description: Error reponse indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.
+    description: Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.
     properties:
       code:
         description: Error code.
@@ -615,7 +615,7 @@ definitions:
         description: RuleSetType - AzureManagedRuleSet or OWASP RuleSets.
         type: string
       version:
-        description: defines version of the ruleset
+        description: defines version of the rule set
         type: integer
     required:
       - ruleSetType
@@ -714,7 +714,7 @@ definitions:
         description: Properties of the web application firewall policy.
         x-ms-client-flatten: true
   WebApplicationFirewallPolicyListResult:
-    description: Result of the request to list WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the the next set of results.
+    description: Result of the request to list WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the next set of results.
     properties:
       nextLink:
         description: URL to get the next set of WebApplicationFirewallPolicy objects if there are any.

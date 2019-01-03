@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://firebaserules.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -63,11 +63,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -88,12 +83,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -120,13 +109,16 @@ tags:
 paths:
   '/v1/{name}':
     delete:
-      description: Delete a `Release` by resource name.
-      operationId: firebaserules.projects.releases.delete
+      description: |-
+        Delete a `Ruleset` by resource name.
+
+        If the `Ruleset` is referenced by a `Release` the operation will fail.
+      operationId: firebaserules.projects.rulesets.delete
       parameters:
         - description: |-
-            Resource name for the `Release` to delete.
+            Resource name for the ruleset to delete.
 
-            Format: `projects/{project_id}/releases/{release_id}`
+            Format: `projects/{project_id}/rulesets/{ruleset_id}`
           in: path
           name: name
           required: true
@@ -145,13 +137,13 @@ paths:
       tags:
         - projects
     get:
-      description: Get a `Release` by name.
-      operationId: firebaserules.projects.releases.get
+      description: Get a `Ruleset` by name including the full `Source` contents.
+      operationId: firebaserules.projects.rulesets.get
       parameters:
         - description: |-
-            Resource name of the `Release`.
+            Resource name for the ruleset to get.
 
-            Format: `projects/{project_id}/releases/{release_id}`
+            Format: `projects/{project_id}/rulesets/{ruleset_id}`
           in: path
           name: name
           required: true
@@ -161,7 +153,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Release'
+            $ref: '#/definitions/Ruleset'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -175,12 +167,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -295,12 +285,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -416,12 +404,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -468,7 +454,7 @@ paths:
       parameters:
         - description: |-
             The requested runtime executable version.
-            Defaults to FIREBASE_RULES_EXECUTABLE_V1
+            Defaults to FIREBASE_RULES_EXECUTABLE_V1.
           enum:
             - RELEASE_EXECUTABLE_VERSION_UNSPECIFIED
             - FIREBASE_RULES_EXECUTABLE_V1
@@ -503,12 +489,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -518,12 +502,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -689,6 +671,13 @@ definitions:
         type: string
       rulesetName:
         description: '`Ruleset` name associated with the `Release` executable.'
+        type: string
+      syncTime:
+        description: |-
+          Optional, indicates the freshness of the result. The response is
+          guaranteed to be the latest within an interval up to the
+          sync_time (inclusive).
+        format: google-datetime
         type: string
       updateTime:
         description: Timestamp for the most recent `Release.update_time`.
@@ -949,6 +938,13 @@ definitions:
           - SUCCESS
           - FAILURE
         type: string
+      visitedExpressions:
+        description: |-
+          The set of visited expressions for a given test. This returns positions
+          and evaluation results of all visited expressions.
+        items:
+          $ref: '#/definitions/VisitedExpression'
+        type: array
     type: object
   TestRulesetRequest:
     description: The request for FirebaseRulesService.TestRuleset.
@@ -1005,4 +1001,13 @@ definitions:
         description: Specifies which fields to update.
         format: google-fieldmask
         type: string
+    type: object
+  VisitedExpression:
+    description: Store the position and access outcome for an expression visited in rules.
+    properties:
+      sourcePosition:
+        $ref: '#/definitions/SourcePosition'
+        description: Position in the `Source` or `Ruleset` where an expression was visited.
+      value:
+        description: 'The evaluated value for the visited expression, e.g. true/false'
     type: object

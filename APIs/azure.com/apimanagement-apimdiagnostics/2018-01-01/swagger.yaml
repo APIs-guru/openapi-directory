@@ -103,7 +103,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of diagnostics.
+          description: Paged Result response of diagnostics.
           schema:
             $ref: '#/definitions/DiagnosticCollection'
         default:
@@ -608,7 +608,7 @@ paths:
                 type: Microsoft.ApiManagement/service/diagnostics
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}/loggers':
     get:
-      description: Lists all loggers assosiated with the specified Diagnostic of the API Management service instance.
+      description: Lists all loggers associated with the specified Diagnostic of the API Management service instance.
       operationId: DiagnosticLogger_ListByService
       parameters:
         - description: The name of the resource group.
@@ -664,7 +664,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of loggers assigned to the specified Diagnostic.
+          description: Paged Result response of loggers assigned to the specified Diagnostic.
           schema:
             description: Paged Logger list representation.
             properties:
@@ -965,7 +965,7 @@ paths:
             '204': {}
             '404': {}
     put:
-      description: Attaches a logger to a dignostic.
+      description: Attaches a logger to a diagnostic.
       operationId: DiagnosticLogger_CreateOrUpdate
       parameters:
         - description: The name of the resource group.

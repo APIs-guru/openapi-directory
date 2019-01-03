@@ -320,6 +320,7 @@ paths:
                   diagnostics:
                     level: None
                   exampleRequest:
+                    globalParameters: null
                     inputs:
                       input1:
                         - - age
@@ -478,6 +479,7 @@ paths:
                   diagnostics:
                     level: None
                   exampleRequest:
+                    globalParameters: null
                     inputs:
                       input1:
                         - - age
@@ -629,6 +631,7 @@ paths:
                 diagnostics:
                   level: None
                 exampleRequest:
+                  globalParameters: null
                   inputs:
                     input1:
                       - - age
@@ -753,6 +756,7 @@ paths:
                   diagnostics:
                     level: None
                   exampleRequest:
+                    globalParameters: null
                     inputs:
                       input1:
                         - - age
@@ -877,6 +881,7 @@ paths:
                   diagnostics:
                     level: None
                   exampleRequest:
+                    globalParameters: null
                     inputs:
                       input1:
                         - - age
@@ -1662,7 +1667,7 @@ definitions:
         type: boolean
       payloadsLocation:
         $ref: '#/definitions/BlobLocation'
-        description: The URI of the payload blob. This paramater contains a value only if the payloadsInBlobStorage parameter is set to true. Otherwise is set to null.
+        description: The URI of the payload blob. This parameter contains a value only if the payloadsInBlobStorage parameter is set to true. Otherwise is set to null.
       provisioningState:
         description: 'Read Only: The provision state of the web service. Valid values are Unknown, Provisioning, Succeeded, and Failed.'
         enum:

@@ -16,7 +16,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/deviceprovisioningservices/resource-manager/Microsoft.Devices/stable/2018-01-22/iotdps.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: deviceprovisioningservices-iotdps
   x-tags:
@@ -769,7 +769,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/provisioningServices/{provisioningServiceName}/certificates/{certificateName}':
     delete:
       consumes: []
-      description: Deletes the specified certificate assosciated with the Provisioning Service
+      description: Deletes the specified certificate associated with the Provisioning Service
       operationId: DpsCertificate_Delete
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1535,7 +1535,7 @@ definitions:
         type: string
     type: object
   IotDpsPropertiesDescription:
-    description: 'the service specific properties of a provisoning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope'
+    description: 'the service specific properties of a provisioning service, including keys, linked iot hubs, current state, and system generated properties such as hostname and idScope'
     properties:
       allocationPolicy:
         description: Allocation policy to be used by this provisioning service.
@@ -1561,7 +1561,7 @@ definitions:
         readOnly: true
         type: string
       iotHubs:
-        description: List of IoT hubs assosciated with this provisioning service.
+        description: List of IoT hubs associated with this provisioning service.
         items:
           $ref: '#/definitions/IotHubDefinitionDescription'
         type: array
@@ -1593,7 +1593,7 @@ definitions:
           name: state
     type: object
   IotDpsSkuDefinition:
-    description: Available Sku's of tier and units.
+    description: Available SKUs of tier and units.
     properties:
       name:
         description: Sku name.
@@ -1612,13 +1612,13 @@ definitions:
         readOnly: true
         type: string
       value:
-        description: The list of SKU's
+        description: The list of SKUs
         items:
           $ref: '#/definitions/IotDpsSkuDefinition'
         type: array
     type: object
   IotDpsSkuInfo:
-    description: List of possible provisoning service SKUs.
+    description: List of possible provisioning service SKUs.
     properties:
       capacity:
         description: The number of units to provision
@@ -1665,7 +1665,7 @@ definitions:
     description: Description of name availability.
     properties:
       message:
-        description: message containing a etailed reason name is unavailable
+        description: message containing a detailed reason name is unavailable
         type: string
       nameAvailable:
         description: specifies if a name is available or not

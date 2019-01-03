@@ -461,6 +461,45 @@ paths:
         - Users
       x-swagger-router-action: get
       x-swagger-router-controller: Users
+  '/webhooks/feed/:token':
+    post:
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      description: ''
+      operationId: createWebhookFeedData
+      parameters:
+        - description: Webhook payload containing data `value` parameter.
+          in: body
+          name: payload
+          required: true
+          schema:
+            properties:
+              value:
+                type: string
+            type: object
+      responses:
+        '200':
+          description: New feed data record
+          schema:
+            $ref: '#/definitions/Data'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Server Error
+      summary: Send data to a feed via webhook URL.
+      tags:
+        - Webhooks
+        - Data
+      x-code-samples:
+        - lang: curl
+          source: 'curl -F ''value=65.5'' https://io.adafruit.com/api/v2/webhooks/feed/12345thistoken'
+      x-swagger-router-action: create
+      x-swagger-router-controller: WebhookReceivers
   '/{username}/activities':
     delete:
       description: Delete all your activities.

@@ -857,7 +857,7 @@ paths:
         Alternate route: `/v1/alliances/{alliance_id}/icons/`
 
         ---
-        This route is cached for up to 3600 seconds
+        This route expires daily at 11:05
       operationId: get_alliances_alliance_id_icons
       parameters:
         - $ref: '#/parameters/alliance_id'
@@ -967,7 +967,6 @@ paths:
         - dev
         - legacy
         - v1
-      x-cached-seconds: 3600
   /characters/affiliation/:
     post:
       description: |-
@@ -8566,16 +8565,12 @@ paths:
         Return character notifications
 
         ---
-        Alternate route: `/v2/characters/{character_id}/notifications/`
+        Alternate route: `/dev/characters/{character_id}/notifications/`
+
+        Alternate route: `/v4/characters/{character_id}/notifications/`
 
         ---
         This route is cached for up to 600 seconds
-
-        ---
-        Warning: This route has an upgrade available
-
-        ---
-        [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/characters/{character_id}/notifications/)
       operationId: get_characters_character_id_notifications
       parameters:
         - $ref: '#/parameters/character_id'
@@ -8686,6 +8681,7 @@ paths:
                     - CloneMovedMsg
                     - CloneRevokedMsg1
                     - CloneRevokedMsg2
+                    - CombatOperationFinished
                     - ContactAdd
                     - ContactEdit
                     - ContainerPasswordMsg
@@ -8743,6 +8739,7 @@ paths:
                     - GiftReceived
                     - IHubDestroyedByBillFailure
                     - IncursionCompletedMsg
+                    - IndustryOperationFinished
                     - IndustryTeamAuctionLost
                     - IndustryTeamAuctionWon
                     - InfrastructureHubBillAboutToExpire
@@ -8820,6 +8817,8 @@ paths:
                     - StructureUnderAttack
                     - StructureWentHighPower
                     - StructureWentLowPower
+                    - StructuresJobsCancelled
+                    - StructuresJobsPaused
                     - StructuresReinforcementChanged
                     - TowerAlertMsg
                     - TowerResourceAlertMsg
@@ -8912,7 +8911,8 @@ paths:
       tags:
         - Character
       x-alternate-versions:
-        - v2
+        - dev
+        - v4
       x-cached-seconds: 600
   '/characters/{character_id}/notifications/contacts/':
     get:
@@ -10410,7 +10410,7 @@ paths:
         Alternate route: `/v2/characters/{character_id}/portrait/`
 
         ---
-        This route is cached for up to 3600 seconds
+        This route expires daily at 11:05
       operationId: get_characters_character_id_portrait
       parameters:
         - $ref: '#/parameters/character_id'
@@ -10529,7 +10529,6 @@ paths:
       x-alternate-versions:
         - dev
         - v2
-      x-cached-seconds: 3600
   '/characters/{character_id}/roles/':
     get:
       description: |-
@@ -13736,14 +13735,18 @@ paths:
         Retrieve the given character's wallet journal going 30 days back
 
         ---
-        Alternate route: `/dev/characters/{character_id}/wallet/journal/`
-
         Alternate route: `/legacy/characters/{character_id}/wallet/journal/`
 
         Alternate route: `/v4/characters/{character_id}/wallet/journal/`
 
         ---
         This route is cached for up to 3600 seconds
+
+        ---
+        Warning: This route has an upgrade available
+
+        ---
+        [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/characters/{character_id}/wallet/journal/)
       operationId: get_characters_character_id_wallet_journal
       parameters:
         - $ref: '#/parameters/character_id'
@@ -13845,7 +13848,7 @@ paths:
                   title: get_characters_character_id_wallet_journal_reason
                   type: string
                 ref_type:
-                  description: 'The transaction type for the given transaction. Different transaction types will populate different attributes. Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can look at the following file to see string->int mappings: https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py'
+                  description: '"The transaction type for the given. transaction. Different transaction types will populate different attributes. Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can look at the following file to see string->int mappings: https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
                   enum:
                     - acceleration_gate_fee
                     - advertisement_listing_fee
@@ -14062,7 +14065,6 @@ paths:
       tags:
         - Wallet
       x-alternate-versions:
-        - dev
         - legacy
         - v4
       x-cached-seconds: 3600
@@ -14296,7 +14298,6 @@ paths:
             application/json:
               - amount: 1.23
                 bid_id: 1
-                bidder_id: 123
                 date_bid: '2017-01-01T10:10:10Z'
           headers:
             Cache-Control:
@@ -14331,11 +14332,6 @@ paths:
                   format: int32
                   title: get_contracts_public_bids_contract_id_bid_id
                   type: integer
-                bidder_id:
-                  description: Character ID of the bidder
-                  format: int32
-                  title: get_contracts_public_bids_contract_id_bidder_id
-                  type: integer
                 date_bid:
                   description: Datetime when the bid was placed
                   format: date-time
@@ -14343,7 +14339,6 @@ paths:
                   type: string
               required:
                 - bid_id
-                - bidder_id
                 - date_bid
                 - amount
               title: get_contracts_public_bids_contract_id_200_ok
@@ -14920,7 +14915,7 @@ paths:
         This route is cached for up to 1800 seconds
 
         ---
-        Requires one of the following EVE corporation role(s): Structure_manager
+        Requires one of the following EVE corporation role(s): Station_Manager
       operationId: get_corporation_corporation_id_mining_extractions
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -15076,7 +15071,7 @@ paths:
         - v1
       x-cached-seconds: 1800
       x-required-roles:
-        - Structure_manager
+        - Station_Manager
   '/corporation/{corporation_id}/mining/observers/':
     get:
       description: |
@@ -15632,6 +15627,10 @@ paths:
                 description: url string
                 title: get_corporations_corporation_id_url
                 type: string
+              war_eligible:
+                description: war_eligible boolean
+                title: get_corporations_corporation_id_war_eligible
+                type: boolean
             required:
               - name
               - ticker
@@ -19348,7 +19347,7 @@ paths:
         This route is cached for up to 300 seconds
 
         ---
-        Requires one of the following EVE corporation role(s): FactoryManager
+        Requires one of the following EVE corporation role(s): Factory_Manager
       operationId: get_corporations_corporation_id_industry_jobs
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -19618,7 +19617,7 @@ paths:
         - v1
       x-cached-seconds: 300
       x-required-roles:
-        - FactoryManager
+        - Factory_Manager
   '/corporations/{corporation_id}/killmails/recent/':
     get:
       description: |
@@ -22890,19 +22889,24 @@ paths:
         - Director
   '/corporations/{corporation_id}/structures/':
     get:
-      description: |
-        Get a list of corporation structures. This route's version includes the changes to structures detailed in this blog: https://www.eveonline.com/article/upwell-2.0-structures-changes-coming-on-february-13th
+      description: |-
+        Get a list of corporation structures. This route's version includes the changes to structures detailed in this blog: https://www.eveonline.com/article/upwell-2.0-structures-changes-coming-on-february-13th Note: this route will not return any flex structures owned by a corporation, use the v3 route to have those included in the response. A list of FLEX structures can be found here: https://support.eveonline.com/hc/en-us/articles/213021829-Upwell-Structures
 
         ---
-        Alternate route: `/dev/corporations/{corporation_id}/structures/`
-
         Alternate route: `/v2/corporations/{corporation_id}/structures/`
 
         ---
         This route is cached for up to 3600 seconds
 
         ---
-        Requires one of the following EVE corporation role(s): StationManager
+        Requires one of the following EVE corporation role(s): Station_Manager
+
+
+        ---
+        Warning: This route has an upgrade available
+
+        ---
+        [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/corporations/{corporation_id}/structures/)
       operationId: get_corporations_corporation_id_structures
       parameters:
         - $ref: '#/parameters/Accept-Language'
@@ -23084,8 +23088,8 @@ paths:
                 - corporation_id
                 - system_id
                 - profile_id
-                - reinforce_weekday
                 - reinforce_hour
+                - reinforce_weekday
                 - state
               title: get_corporations_corporation_id_structures_200_ok
               type: object
@@ -23163,11 +23167,10 @@ paths:
       tags:
         - Corporation
       x-alternate-versions:
-        - dev
         - v2
       x-cached-seconds: 3600
       x-required-roles:
-        - StationManager
+        - Station_Manager
   '/corporations/{corporation_id}/titles/':
     get:
       description: |
@@ -23958,12 +23961,10 @@ paths:
         - Junior_Accountant
   '/corporations/{corporation_id}/wallets/{division}/journal/':
     get:
-      description: |
-        Retrieve the given corporation's wallet journal for the given division going 30 days back
+      description: |-
+        Retrieve the given corporation's wallet journal for the given division going 30 days back. Note: any journal records having to do with the new navigation structures from the release of Onslaught will not show up in this version. To see those, use the v4 version of this route.
 
         ---
-        Alternate route: `/dev/corporations/{corporation_id}/wallets/{division}/journal/`
-
         Alternate route: `/legacy/corporations/{corporation_id}/wallets/{division}/journal/`
 
         Alternate route: `/v3/corporations/{corporation_id}/wallets/{division}/journal/`
@@ -23973,6 +23974,13 @@ paths:
 
         ---
         Requires one of the following EVE corporation role(s): Accountant, Junior_Accountant
+
+
+        ---
+        Warning: This route has an upgrade available
+
+        ---
+        [Diff of the upcoming changes](https://esi.evetech.net/diff/latest/dev/#GET-/corporations/{corporation_id}/wallets/{division}/journal/)
       operationId: get_corporations_corporation_id_wallets_division_journal
       parameters:
         - $ref: '#/parameters/corporation_id'
@@ -24082,7 +24090,7 @@ paths:
                   title: get_corporations_corporation_id_wallets_division_journal_reason
                   type: string
                 ref_type:
-                  description: 'The transaction type for the given transaction. Different transaction types will populate different attributes. Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can look at the following file to see string->int mappings: https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py'
+                  description: '"The transaction type for the given. transaction. Different transaction types will populate different attributes. Note: If you have an existing XML API application that is using ref_types, you will need to know which string ESI ref_type maps to which integer. You can look at the following file to see string->int mappings: https://github.com/ccpgames/eve-glue/blob/master/eve_glue/wallet_journal_ref.py"'
                   enum:
                     - acceleration_gate_fee
                     - advertisement_listing_fee
@@ -24299,7 +24307,6 @@ paths:
       tags:
         - Wallet
       x-alternate-versions:
-        - dev
         - legacy
         - v3
       x-cached-seconds: 3600
@@ -30136,7 +30143,7 @@ paths:
                 - range
               title: get_markets_structures_structure_id_200_ok
               type: object
-            maxItems: 5000
+            maxItems: 1000
             title: get_markets_structures_structure_id_ok
             type: array
         '304':
@@ -36638,6 +36645,14 @@ paths:
       operationId: get_universe_structures
       parameters:
         - $ref: '#/parameters/datasource'
+        - description: Only list public structures that have this service online
+          enum:
+            - market
+            - manufacturing_basic
+          in: query
+          name: filter
+          required: false
+          type: string
         - $ref: '#/parameters/If-None-Match'
       responses:
         '200':

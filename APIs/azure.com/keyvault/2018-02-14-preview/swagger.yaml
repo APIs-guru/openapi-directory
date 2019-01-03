@@ -1270,7 +1270,7 @@ definitions:
         readOnly: true
         type: string
   IPRule:
-    description: A rule governing the accesibility of a vault from a specific ip address or ip range.
+    description: A rule governing the accessibility of a vault from a specific ip address or ip range.
     properties:
       value:
         description: 'An IPv4 address range in CIDR notation, such as ''124.56.78.91'' (simple IP address) or ''124.56.78.0/24'' (all addresses that start with 124.56.78).'
@@ -1479,7 +1479,7 @@ definitions:
         readOnly: true
         type: string
       location:
-        description: The resource type of the the access policy.
+        description: The resource type of the access policy.
         readOnly: true
         type: string
       name:
@@ -1507,7 +1507,7 @@ definitions:
     required:
       - accessPolicies
   VaultCheckNameAvailabilityParameters:
-    description: The parameters used to check the availabity of the vault name.
+    description: The parameters used to check the availability of the vault name.
     properties:
       name:
         description: The vault name.
@@ -1655,7 +1655,7 @@ definitions:
       - tenantId
       - sku
   VirtualNetworkRule:
-    description: A rule governing the accesibility of a vault from a specific virtual network.
+    description: A rule governing the accessibility of a vault from a specific virtual network.
     properties:
       id:
         description: 'Full resource id of a vnet subnet, such as ''/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1''.'

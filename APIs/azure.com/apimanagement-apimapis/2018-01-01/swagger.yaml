@@ -1209,7 +1209,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of diagnostics for an API.
+          description: Paged Result response of diagnostics for an API.
           schema:
             description: Paged Diagnostic list representation.
             properties:
@@ -1924,7 +1924,7 @@ paths:
                 type: Microsoft.ApiManagement/service/apis/diagnostics
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/diagnostics/{diagnosticId}/loggers':
     get:
-      description: Lists all loggers assosiated with the specified Diagnostic of an API.
+      description: Lists all loggers associated with the specified Diagnostic of an API.
       operationId: ApiDiagnosticLogger_ListByService
       parameters:
         - description: The name of the resource group.
@@ -1989,7 +1989,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of loggers assigned to the specified Diagnostic.
+          description: Paged Result response of loggers assigned to the specified Diagnostic.
           schema:
             description: Paged Logger list representation.
             properties:
@@ -2311,7 +2311,7 @@ paths:
             '204': {}
             '404': {}
     put:
-      description: Attaches a logger to a dignostic for an API.
+      description: Attaches a logger to a diagnostic for an API.
       operationId: ApiDiagnosticLogger_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -2541,7 +2541,7 @@ paths:
                 type: Microsoft.ApiManagement/service/apis/diagnostics/loggers
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues':
     get:
-      description: Lists all issues assosiated with the specified API.
+      description: Lists all issues associated with the specified API.
       operationId: ApiIssue_ListByService
       parameters:
         - description: The name of the resource group.
@@ -2598,7 +2598,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of issues for the API.
+          description: Paged Result response of issues for the API.
           schema:
             $ref: '#/definitions/IssueCollection'
         default:
@@ -3132,7 +3132,7 @@ paths:
                 type: Microsoft.ApiManagement/service/apis/issues
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/attachments':
     get:
-      description: Lists all comments for the Issue assosiated with the specified API.
+      description: Lists all comments for the Issue associated with the specified API.
       operationId: ApiIssueAttachment_ListByService
       parameters:
         - description: The name of the resource group.
@@ -3189,7 +3189,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of issue comments for the API.
+          description: Paged Result response of issue comments for the API.
           schema:
             $ref: '#/definitions/IssueAttachmentCollection'
         default:
@@ -3630,7 +3630,7 @@ paths:
                 type: Microsoft.ApiManagement/service/apis/issues/attachments
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/comments':
     get:
-      description: Lists all comments for the Issue assosiated with the specified API.
+      description: Lists all comments for the Issue associated with the specified API.
       operationId: ApiIssueComment_ListByService
       parameters:
         - description: The name of the resource group.
@@ -3687,7 +3687,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of issue comments for the API.
+          description: Paged Result response of issue comments for the API.
           schema:
             $ref: '#/definitions/IssueCommentCollection'
         default:

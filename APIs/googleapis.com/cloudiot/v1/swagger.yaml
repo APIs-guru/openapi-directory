@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://cloudiot.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -351,6 +351,61 @@ paths:
             - 'https://www.googleapis.com/auth/cloudiot'
       tags:
         - projects
+  '/v1/{name}:sendCommandToDevice':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Sends a command to the specified device. In order for a device to be able
+        to receive commands, it must:
+        1) be connected to Cloud IoT Core using the MQTT protocol, and
+        2) be subscribed to the group of MQTT topics specified by
+           /devices/{device-id}/commands/#. This subscription will receive commands
+           at the top-level topic /devices/{device-id}/commands as well as commands
+           for subfolders, like /devices/{device-id}/commands/subfolder.
+           Note that subscribing to specific subfolders is not supported.
+        If the command could not be delivered to the device, this method will
+        return an error; in particular, if the device is not subscribed, this
+        method will return FAILED_PRECONDITION. Otherwise, this method will
+        return OK. If the subscription is QoS 1, at least once delivery will be
+        guaranteed; for QoS 0, no acknowledgment will be expected from the device.
+      operationId: cloudiot.projects.locations.registries.devices.sendCommandToDevice
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SendCommandToDeviceRequest'
+        - description: |-
+            The name of the device. For example,
+            `projects/p0/locations/us-central1/registries/registry0/devices/device0` or
+            `projects/p0/locations/us-central1/registries/registry0/devices/{num_id}`.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SendCommandToDeviceResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+      tags:
+        - projects
   '/v1/{parent}/devices':
     get:
       description: List devices in a device registry.
@@ -358,9 +413,8 @@ paths:
       parameters:
         - collectionFormat: multi
           description: |-
-            A list of device string identifiers. If empty, it will ignore this field.
-            For example, `['device0', 'device12']`. This field cannot hold more than
-            10,000 entries.
+            A list of device string IDs. For example, `['device0', 'device12']`.
+            If empty, this field is ignored. Maximum IDs: 10,000
           in: query
           items:
             type: string
@@ -368,8 +422,8 @@ paths:
           type: array
         - collectionFormat: multi
           description: |-
-            A list of device numerical ids. If empty, it will ignore this field. This
-            field cannot hold more than 10,000 entries.
+            A list of device numeric IDs. If empty, this field is ignored. Maximum
+            IDs: 10,000.
           in: query
           items:
             type: string
@@ -377,26 +431,53 @@ paths:
           type: array
         - description: |-
             The fields of the `Device` resource to be returned in the response. The
-            fields `id`, and `num_id` are always returned by default, along with any
+            fields `id` and `num_id` are always returned, along with any
             other fields specified.
           in: query
           name: fieldMask
           type: string
         - collectionFormat: multi
           description: |-
-            The maximum number of devices to return in the response. If this value
-            is zero, the service will select a default size. A call may return fewer
-            objects than requested, but if there is a non-empty `page_token`, it
-            indicates that more entries are available.
+            If set, returns only the gateways with which the specified device is
+            associated. The device ID can be numeric (`num_id`) or the user-defined
+            string (`id`). For example, if `456` is specified, returns only the
+            gateways to which the device with `num_id` 456 is bound.
           in: query
           items:
             type: string
+          name: gatewayListOptions.associationsDeviceId
+          type: string
+        - description: |-
+            If set, only devices associated with the specified gateway are returned.
+            The gateway ID can be numeric (`num_id`) or the user-defined string
+            (`id`). For example, if `123` is specified, only devices bound to the
+            gateway with `num_id` 123 are returned.
+          in: query
+          name: gatewayListOptions.associationsGatewayId
+          type: string
+        - description: |-
+            If `GATEWAY` is specified, only gateways are returned. If `NON_GATEWAY`
+            is specified, only non-gateway devices are returned. If
+            `GATEWAY_TYPE_UNSPECIFIED` is specified, all devices are returned.
+          enum:
+            - GATEWAY_TYPE_UNSPECIFIED
+            - GATEWAY
+            - NON_GATEWAY
+          in: query
+          name: gatewayListOptions.gatewayType
+          type: string
+        - description: |-
+            The maximum number of devices to return in the response. If this value
+            is zero, the service will select a default size. A call may return fewer
+            objects than requested. A non-empty `next_page_token` in the response
+            indicates that more data is available.
+          in: query
           name: pageSize
           type: integer
         - description: |-
             The value returned by the last `ListDevicesResponse`; indicates
-            that this is a continuation of a prior `ListDevices` call, and
-            that the system should return the next page of data.
+            that this is a continuation of a prior `ListDevices` call and
+            the system should return the next page of data.
           in: query
           name: pageToken
           type: string
@@ -469,15 +550,15 @@ paths:
         - description: |-
             The maximum number of registries to return in the response. If this value
             is zero, the service will select a default size. A call may return fewer
-            objects than requested, but if there is a non-empty `page_token`, it
-            indicates that more entries are available.
+            objects than requested. A non-empty `next_page_token` in the response
+            indicates that more data is available.
           in: query
           name: pageSize
           type: integer
         - description: |-
             The value returned by the last `ListDeviceRegistriesResponse`; indicates
-            that this is a continuation of a prior `ListDeviceRegistries` call, and
-            that the system should return the next page of data.
+            that this is a continuation of a prior `ListDeviceRegistries` call and
+            the system should return the next page of data.
           in: query
           name: pageToken
           type: string
@@ -534,6 +615,88 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/DeviceRegistry'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+      tags:
+        - projects
+  '/v1/{parent}:bindDeviceToGateway':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Associates the device with the gateway.
+      operationId: cloudiot.projects.locations.registries.groups.bindDeviceToGateway
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/BindDeviceToGatewayRequest'
+        - description: |-
+            The name of the registry. For example,
+            `projects/example-project/locations/us-central1/registries/my-registry`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/BindDeviceToGatewayResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudiot'
+      tags:
+        - projects
+  '/v1/{parent}:unbindDeviceFromGateway':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Deletes the association between the device and the gateway.
+      operationId: cloudiot.projects.locations.registries.groups.unbindDeviceFromGateway
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/UnbindDeviceFromGatewayRequest'
+        - description: |-
+            The name of the registry. For example,
+            `projects/example-project/locations/us-central1/registries/my-registry`.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/UnbindDeviceFromGatewayResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -673,6 +836,25 @@ paths:
       tags:
         - projects
 definitions:
+  BindDeviceToGatewayRequest:
+    description: Request for `BindDeviceToGateway`.
+    properties:
+      deviceId:
+        description: |-
+          The device to associate with the specified gateway. The value of
+          `device_id` can be either the device numeric ID or the user-defined device
+          identifier.
+        type: string
+      gatewayId:
+        description: |-
+          The value of `gateway_id` can be either the device numeric ID or the
+          user-defined device identifier.
+        type: string
+    type: object
+  BindDeviceToGatewayResponse:
+    description: Response for `BindDeviceToGateway`.
+    properties: {}
+    type: object
   Binding:
     description: Associates `members` with a `role`.
     properties:
@@ -745,6 +927,9 @@ definitions:
         items:
           $ref: '#/definitions/DeviceCredential'
         type: array
+      gatewayConfig:
+        $ref: '#/definitions/GatewayConfig'
+        description: Gateway-related configuration and state.
       id:
         description: |-
           The user-defined device identifier. The device ID must be unique
@@ -800,6 +985,19 @@ definitions:
           periodically collected and written to storage; they may be stale by a few
           minutes.
         format: google-datetime
+        type: string
+      logLevel:
+        description: |-
+          **Beta Feature**
+
+          The logging verbosity for device activity. If unspecified,
+          DeviceRegistry.log_level will be used.
+        enum:
+          - LOG_LEVEL_UNSPECIFIED
+          - NONE
+          - ERROR
+          - INFO
+          - DEBUG
         type: string
       metadata:
         additionalProperties:
@@ -937,6 +1135,19 @@ definitions:
       id:
         description: 'The identifier of this device registry. For example, `myRegistry`.'
         type: string
+      logLevel:
+        description: |-
+          **Beta Feature**
+
+          The default logging verbosity for activity from devices in this registry.
+          The verbosity level can be overridden by Device.log_level.
+        enum:
+          - LOG_LEVEL_UNSPECIFIED
+          - NONE
+          - ERROR
+          - INFO
+          - DEBUG
+        type: string
       mqttConfig:
         $ref: '#/definitions/MqttConfig'
         description: The MQTT configuration for this device registry.
@@ -1029,6 +1240,36 @@ definitions:
           An optional title for the expression, i.e. a short string describing
           its purpose. This can be used e.g. in UIs which allow to enter the
           expression.
+        type: string
+    type: object
+  GatewayConfig:
+    description: Gateway-related configuration and state.
+    properties:
+      gatewayAuthMethod:
+        description: |-
+          Indicates how to authorize and/or authenticate devices to access the
+          gateway.
+        enum:
+          - GATEWAY_AUTH_METHOD_UNSPECIFIED
+          - ASSOCIATION_ONLY
+          - DEVICE_AUTH_TOKEN_ONLY
+          - ASSOCIATION_AND_DEVICE_AUTH_TOKEN
+        type: string
+      gatewayType:
+        description: Indicates whether the device is a gateway.
+        enum:
+          - GATEWAY_TYPE_UNSPECIFIED
+          - GATEWAY
+          - NON_GATEWAY
+        type: string
+      lastAccessedGatewayId:
+        description: '[Output only] The ID of the gateway the device accessed most recently.'
+        type: string
+      lastAccessedGatewayTime:
+        description: |-
+          [Output only] The most recent time at which the device accessed the gateway
+          specified in `last_accessed_gateway`.
+        format: google-datetime
         type: string
     type: object
   GetIamPolicyRequest:
@@ -1242,6 +1483,26 @@ definitions:
         $ref: '#/definitions/PublicKeyCertificate'
         description: A public key certificate used to verify the device credentials.
     type: object
+  SendCommandToDeviceRequest:
+    description: Request for `SendCommandToDevice`.
+    properties:
+      binaryData:
+        description: The command data to send to the device.
+        format: byte
+        type: string
+      subfolder:
+        description: |-
+          Optional subfolder for the command. If empty, the command will be delivered
+          to the /devices/{device-id}/commands topic, otherwise it will be delivered
+          to the /devices/{device-id}/commands/{subfolder} topic. Multi-level
+          subfolders are allowed. This field must not have more than 256 characters,
+          and must not contain any MQTT wildcards ("+" or "#") or null characters.
+        type: string
+    type: object
+  SendCommandToDeviceResponse:
+    description: Response for `SendCommandToDevice`.
+    properties: {}
+    type: object
   SetIamPolicyRequest:
     description: Request message for `SetIamPolicy` method.
     properties:
@@ -1360,6 +1621,25 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  UnbindDeviceFromGatewayRequest:
+    description: Request for `UnbindDeviceFromGateway`.
+    properties:
+      deviceId:
+        description: |-
+          The device to disassociate from the specified gateway. The value of
+          `device_id` can be either the device numeric ID or the user-defined device
+          identifier.
+        type: string
+      gatewayId:
+        description: |-
+          The value of `gateway_id` can be either the device numeric ID or the
+          user-defined device identifier.
+        type: string
+    type: object
+  UnbindDeviceFromGatewayResponse:
+    description: Response for `UnbindDeviceFromGateway`.
+    properties: {}
     type: object
   X509CertificateDetails:
     description: Details of an X.509 certificate. For informational purposes only.

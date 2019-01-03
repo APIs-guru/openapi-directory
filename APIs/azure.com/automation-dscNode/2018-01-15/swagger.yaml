@@ -1393,7 +1393,7 @@ paths:
                 content-type: text/plain
 definitions:
   AgentRegistration:
-    description: Definition of the agent registration infomration type.
+    description: Definition of the agent registration information type.
     properties:
       dscMetaConfiguration:
         description: Gets or sets the dsc meta configuration.
@@ -1485,10 +1485,10 @@ definitions:
         description: The properties of a DscNode.
         x-ms-client-flatten: true
   DscNodeConfigurationAssociationProperty:
-    description: The dsc nodeconfiguration property associated with the entity.
+    description: The dsc node configuration property associated with the entity.
     properties:
       name:
-        description: Gets or sets the name of the dsc nodeconfiguration.
+        description: Gets or sets the name of the dsc node configuration.
         type: string
   DscNodeExtensionHandlerAssociationProperty:
     description: The dsc extensionHandler property associated with the node

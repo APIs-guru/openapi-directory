@@ -1305,41 +1305,6 @@ paths:
       summary: Get email platform usage
       tags:
         - Stats API
-  /stats/outbound/opens/readtimes:
-    get:
-      operationId: getOutboundOpenCountsByReadingTime
-      parameters:
-        - description: The token associated with the Server on which this request will operate.
-          in: header
-          name: X-Postmark-Server-Token
-          required: true
-          type: string
-        - description: Filter by tag
-          in: query
-          name: tag
-          type: string
-        - description: Filter stats starting from the date specified. e.g. `2014-01-01`
-          format: date
-          in: query
-          name: fromdate
-          type: string
-        - description: Filter stats up to the date specified. e.g. `2014-02-01`
-          format: date
-          in: query
-          name: todate
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/DynamicResponse'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
-      summary: Get email read times
-      tags:
-        - Stats API
   /stats/outbound/sends:
     get:
       operationId: getSentCounts
@@ -2235,8 +2200,6 @@ definitions:
             type: string
       Platform:
         type: string
-      ReadSeconds:
-        type: string
       ReceivedAt:
         format: date-time
         type: string
@@ -2536,8 +2499,6 @@ definitions:
       WithOpenTracking:
         type: integer
       WithPlatformRecorded:
-        type: integer
-      WithReadTimeRecorded:
         type: integer
   OutboundSearchResponse:
     description: ''

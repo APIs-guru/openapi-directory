@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://jobs.googleapis.com/$discovery/rest?version=v3'
       version: v1
@@ -2798,6 +2798,24 @@ definitions:
 
           Defaults to false.
         type: boolean
+      diversificationLevel:
+        description: |-
+          Optional.
+
+          Controls whether highly similar jobs are returned next to each other in
+          the search results. Jobs are identified as highly similar based on
+          their titles, job categories, and locations. Highly similar results are
+          clustered so that only one representative job of the cluster is
+          displayed to the job seeker higher up in the results, with the other jobs
+          being displayed lower down in the results.
+
+          Defaults to DiversificationLevel.SIMPLE if no value
+          is specified.
+        enum:
+          - DIVERSIFICATION_LEVEL_UNSPECIFIED
+          - DISABLED
+          - SIMPLE
+        type: string
       enableBroadening:
         description: |-
           Optional.

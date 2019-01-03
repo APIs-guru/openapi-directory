@@ -1395,7 +1395,7 @@ paths:
               body: ''
       x-ms-request-id: request-id
     put:
-      description: 'This fully replaces all the updateable properties of the job. For example, if the job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.'
+      description: 'This fully replaces all the updatable properties of the job. For example, if the job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.'
       operationId: Job_Update
       parameters:
         - description: The ID of the job whose properties you want to update.
@@ -4628,7 +4628,7 @@ paths:
               body: ''
       x-ms-request-id: request-id
     put:
-      description: 'This fully replaces all the updateable properties of the job schedule. For example, if the schedule property is not specified with this request, then the Batch service will remove the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.'
+      description: 'This fully replaces all the updatable properties of the job schedule. For example, if the schedule property is not specified with this request, then the Batch service will remove the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.'
       operationId: JobSchedule_Update
       parameters:
         - description: The ID of the job schedule to update.
@@ -8536,7 +8536,7 @@ paths:
               body: ''
       x-ms-request-id: request-id
     put:
-      description: 'This operation replaces of all the updateable properties of the account. For example, if the expiryTime element is not specified, the current value is replaced with the default value, not left unmodified. You can update a user account on a node only when it is in the idle or running state.'
+      description: 'This operation replaces of all the updatable properties of the account. For example, if the expiryTime element is not specified, the current value is replaced with the default value, not left unmodified. You can update a user account on a node only when it is in the idle or running state.'
       operationId: ComputeNode_UpdateUser
       parameters:
         - description: The ID of the pool that contains the compute node.
@@ -9006,7 +9006,7 @@ paths:
       x-ms-request-id: request-id
   '/pools/{poolId}/updateproperties':
     post:
-      description: 'This fully replaces all the updateable properties of the pool. For example, if the pool has a start task associated with it and if start task is not specified with this request, then the Batch service will remove the existing start task.'
+      description: 'This fully replaces all the updatable properties of the pool. For example, if the pool has a start task associated with it and if start task is not specified with this request, then the Batch service will remove the existing start task.'
       operationId: Pool_UpdateProperties
       parameters:
         - description: The ID of the pool to update.
@@ -9686,9 +9686,9 @@ definitions:
               - description: The certificate should be visible to the user account under which the start task is run.
                 name: startTask
                 value: starttask
-              - description: The certificate should be visibile to the user accounts under which job tasks are run.
+              - description: The certificate should be visible to the user accounts under which job tasks are run.
                 value: task
-              - description: The certificate should be visibile to the user accounts under which users remotely access the node.
+              - description: The certificate should be visible to the user accounts under which users remotely access the node.
                 name: remoteUser
                 value: remoteuser
           x-nullable: false
@@ -10300,7 +10300,7 @@ definitions:
         $ref: '#/definitions/StartTaskInformation'
         title: Runtime information about the execution of the start task on the compute node.
       state:
-        description: The low-priority node has been preempted. Tasks which were running on the node when it was pre-empted will be rescheduled when another node becomes available.
+        description: The low-priority node has been preempted. Tasks which were running on the node when it was preempted will be rescheduled when another node becomes available.
         enum:
           - idle
           - rebooting
@@ -10348,7 +10348,7 @@ definitions:
               value: leavingpool
             - description: 'The node is not currently running a task, and scheduling of new tasks to the node is disabled.'
               value: offline
-            - description: The low-priority node has been preempted. Tasks which were running on the node when it was pre-empted will be rescheduled when another node becomes available.
+            - description: The low-priority node has been preempted. Tasks which were running on the node when it was preempted will be rescheduled when another node becomes available.
               value: preempted
       stateTransitionTime:
         format: date-time
@@ -10656,7 +10656,7 @@ definitions:
     properties:
       default:
         $ref: '#/definitions/ExitOptions'
-        description: 'This value is used if the task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behaviour on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection.'
+        description: 'This value is used if the task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behavior on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection.'
         title: How the Batch service should respond if the task fails with an exit condition not covered by any of the other properties.
       exitCodeRanges:
         items:
@@ -10694,7 +10694,7 @@ definitions:
             - description: Block the task's dependencies.
               value: block
       jobAction:
-        description: 'The default is none for exit code 0 and terminate for all other exit conditions. If the job''s onTaskFailed property is noaction, then specifying this property returns an error and the add task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).'
+        description: 'The default is none for exit code 0 and terminate for all other exit conditions. If the job''s onTaskFailed property is noAction, then specifying this property returns an error and the add task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).'
         enum:
           - none
           - disable
@@ -11115,7 +11115,7 @@ definitions:
         type: array
       userIdentity:
         $ref: '#/definitions/UserIdentity'
-        description: 'If omitted, the task runs as a non-administrative user unique to the task on Windows nodes, or a a non-administrative user unique to the pool on Linux nodes.'
+        description: 'If omitted, the task runs as a non-administrative user unique to the task on Windows nodes, or a non-administrative user unique to the pool on Linux nodes.'
         title: The user identity under which the Job Preparation task runs.
       waitForSuccess:
         description: 'If true and the Job Preparation task fails on a compute node, the Batch service retries the Job Preparation task up to its maximum retry count (as specified in the constraints element). If the task has still not completed successfully after all retries, then the Batch service will not schedule tasks of the job to the compute node. The compute node remains active and eligible to run tasks of other jobs. If false, the Batch service will not wait for the Job Preparation task to complete. In this case, other tasks of the job can start executing on the compute node while the Job Preparation task is still running; and even if the Job Preparation task fails, new tasks will continue to be scheduled on the node. The default value is true.'
@@ -13422,7 +13422,7 @@ definitions:
         description: 'This property must be specified if the compute nodes in the pool need to have empty data disks attached to them. This cannot be updated. Each node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the node is removed from the pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.'
         items:
           $ref: '#/definitions/DataDisk'
-        title: The configuration for data disks attached to the comptue nodes in the pool.
+        title: The configuration for data disks attached to the compute nodes in the pool.
         type: array
       imageReference:
         $ref: '#/definitions/ImageReference'

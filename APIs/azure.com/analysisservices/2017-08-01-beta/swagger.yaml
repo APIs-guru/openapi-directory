@@ -799,7 +799,7 @@ paths:
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend':
     post:
-      description: Supends operation of the specified Analysis Services server instance.
+      description: Suspends operation of the specified Analysis Services server instance.
       operationId: Servers_Suspend
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -964,7 +964,7 @@ definitions:
         type: string
     type: object
   CheckServerNameAvailabilityResult:
-    description: The checking result of server name availibility.
+    description: The checking result of server name availability.
     properties:
       message:
         description: The detailed message of the request unavailability.
@@ -1047,7 +1047,7 @@ definitions:
     description: An array of firewall rules.
     properties:
       enablePowerBIService:
-        description: The indicator of enableing PBI service.
+        description: The indicator of enabling PBI service.
         type: string
       firewallRules:
         description: An array of firewall rules.

@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://cloudfunctions.googleapis.com/$discovery/rest?version=v1beta2'
       version: v1
@@ -374,8 +374,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Invokes synchronously deployed function. To be used for testing, very
-        limited traffic allowed.
+        Synchronously invokes a deployed Cloud Function. To be used for testing
+        purposes as very limited traffic is allowed. For more information on
+        the actual limits refer to [API Calls](
+        https://cloud.google.com/functions/quotas#rate_limits).
       operationId: cloudfunctions.projects.locations.functions.call
       parameters:
         - in: body
@@ -546,10 +548,7 @@ definitions:
       environmentVariables:
         additionalProperties:
           type: string
-        description: |-
-          **Beta Feature**
-
-          Environment variables that shall be available during function execution.
+        description: Environment variables that shall be available during function execution.
         type: object
       eventTrigger:
         $ref: '#/definitions/EventTrigger'
@@ -590,6 +589,9 @@ definitions:
           `projects/{project}/global/networks/{network}` or `{network}`, where
           {project} is a project id where the network is defined, and {network} is
           the short name of the network.
+
+          This field is mutually exclusive with `vpc_connector` and will be replaced
+          by it.
 
           See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
           more information on connecting Cloud projects.
@@ -659,6 +661,21 @@ definitions:
           The version identifier of the Cloud Function. Each deployment attempt
           results in a new version of a function being created.
         format: int64
+        type: string
+      vpcConnector:
+        description: |-
+          The VPC Network Connector that this cloud function can connect to. It can
+          be either the fully-qualified URI, or the short name of the network
+          connector resource. The format of this field is
+          `projects/*/locations/*/connectors/*`
+
+          This field is mutually exclusive with `network` field and will eventually
+          replace it.
+
+          See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
+          more information on connecting Cloud projects.
+
+          This feature is currently in alpha, available only for whitelisted users.
         type: string
     type: object
   EventTrigger:
@@ -889,7 +906,7 @@ definitions:
       versionId:
         description: |-
           Version id of the function created or updated by an API call.
-          This field is only pupulated for Create and Update operations.
+          This field is only populated for Create and Update operations.
         format: int64
         type: string
     type: object
@@ -921,7 +938,7 @@ definitions:
       versionId:
         description: |-
           Version id of the function created or updated by an API call.
-          This field is only pupulated for Create and Update operations.
+          This field is only populated for Create and Update operations.
         format: int64
         type: string
     type: object

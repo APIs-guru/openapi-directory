@@ -108,7 +108,7 @@ paths:
           required: true
           type: string
           x-ms-client-name: Query
-        - description: 'comma-delimiated list of business categories to search for. Supported categories can be high-level such as EatDrink, Shop, SeeDo.'
+        - description: 'comma-delimited list of business categories to search for. Supported categories can be high-level such as EatDrink, Shop, SeeDo.'
           in: query
           name: localcategories
           required: false
@@ -763,7 +763,7 @@ definitions:
         readOnly: true
         type: string
       countryIso:
-        description: 'The two letter ISO code of this countr. For example, US.'
+        description: 'The two letter ISO code of this country. For example, US.'
         readOnly: true
         type: string
       formattingRuleId:

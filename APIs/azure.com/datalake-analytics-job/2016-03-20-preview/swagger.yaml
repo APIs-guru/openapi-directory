@@ -111,7 +111,7 @@ paths:
           name: $search
           required: false
           type: string
-        - description: The return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
+        - description: The return format. Return the response in particular format without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
           in: query
           name: $format
           required: false
@@ -229,7 +229,7 @@ definitions:
   Diagnostics:
     properties:
       columnNumber:
-        description: the column where the error occured.
+        description: the column where the error occurred.
         format: int32
         readOnly: true
         type: integer
@@ -239,7 +239,7 @@ definitions:
         readOnly: true
         type: integer
       lineNumber:
-        description: the line number the error occured on.
+        description: the line number the error occurred on.
         format: int32
         readOnly: true
         type: integer
@@ -341,7 +341,7 @@ definitions:
         readOnly: true
         type: string
       lineNumber:
-        description: the specific line number in the job where the error occured.
+        description: the specific line number in the job where the error occurred.
         format: int32
         readOnly: true
         type: integer
@@ -398,6 +398,10 @@ definitions:
         description: the degree of parallelism used for this job. This must be greater than 0.
         format: int32
         type: integer
+      degreeOfParallelismPercent:
+        description: the degree of parallelism in percentage used for this job.
+        format: double
+        type: number
       endTime:
         description: the completion time of the job.
         format: date-time
@@ -409,6 +413,10 @@ definitions:
           $ref: '#/definitions/JobErrorDetails'
         readOnly: true
         type: array
+      hierarchyQueueNode:
+        description: 'the name of hierarchy queue node this job is assigned to, null if job has not been assigned yet or the account doesn''t have hierarchy queue.'
+        readOnly: true
+        type: string
       jobId:
         description: the job's unique identifier (a GUID).
         format: uuid
@@ -660,7 +668,7 @@ definitions:
         readOnly: true
         type: integer
       failedCount:
-        description: the number of failures that occured in this stage.
+        description: the number of failures that occurred in this stage.
         format: int32
         readOnly: true
         type: integer

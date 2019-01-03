@@ -172,6 +172,52 @@ paths:
               type: string
       security:
         - api_key: []
+  '/subject/{name}':
+    get:
+      consumes:
+        - application/json
+      description: Returns details and a list of books from the subject.
+      parameters:
+        - in: path
+          name: name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+          schema:
+            $ref: '#/definitions/Subject'
+        '404':
+          description: Subject not found
+      security:
+        - api_key: []
+      summary: Gets subject books
+      tags:
+        - Subject
+  '/subjects/{query}':
+    get:
+      consumes:
+        - application/json
+      description: This returns a list of subjects that match the given query
+      parameters:
+        - in: path
+          name: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            Access-Control-Allow-Origin:
+              type: string
+      security:
+        - api_key: []
+      summary: Search subjects
+      tags:
+        - Subject
 definitions:
   Author:
     properties:
@@ -191,6 +237,8 @@ definitions:
         items:
           type: string
         type: array
+      binding:
+        type: string
       date_published:
         format: date-time
         type: string
@@ -203,6 +251,8 @@ definitions:
       excerpt:
         type: string
       format:
+        type: string
+      image:
         type: string
       isbn:
         type: string
@@ -240,10 +290,6 @@ definitions:
               type: string
           type: object
         type: array
-      category:
-        type: string
-      location:
-        type: string
       name:
         type: string
     type: object

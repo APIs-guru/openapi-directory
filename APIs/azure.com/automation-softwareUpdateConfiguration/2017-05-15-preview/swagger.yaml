@@ -120,6 +120,14 @@ paths:
                     nextRun: '2017-10-23T12:22:00-07:00'
                     provisioningState: Succeeded
                     startTime: '2017-10-19T12:22:00-07:00'
+                    tasks:
+                      postTask:
+                        parameters: null
+                        source: GetCache
+                      preTask:
+                        parameters:
+                          COMPUTERNAME: Computer1
+                        source: HelloWorld
                     updateConfiguration:
                       azureVirtualMachines:
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
@@ -129,6 +137,21 @@ paths:
                       linux: null
                       nonAzureComputerNames: null
                       operatingSystem: Windows
+                      targets:
+                        azureQueries:
+                          - locations: null
+                            scope:
+                              - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0
+                              - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d
+                            tagSettings:
+                              filterOperator: All
+                              tags:
+                                tag1:
+                                  - tag1Value1
+                                  - tag1Value2
+                                tag2:
+                                  - tag2Value1
+                                  - tag2Value2
                       windows:
                         excludedKbNumbers: null
                         includedUpdateClassifications: 'Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools, Updates'
@@ -141,6 +164,14 @@ paths:
                     nextRun: '2018-05-05T12:26:00-07:00'
                     provisioningState: Succeeded
                     startTime: '2018-05-05T12:26:00-07:00'
+                    tasks:
+                      postTask:
+                        parameters: null
+                        source: GetCache
+                      preTask:
+                        parameters:
+                          COMPUTERNAME: Computer1
+                        source: HelloWorld
                     updateConfiguration:
                       azureVirtualMachines:
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-04
@@ -150,6 +181,23 @@ paths:
                       linux: null
                       nonAzureComputerNames: null
                       operatingSystem: Windows
+                      targets:
+                        azureQueries:
+                          - locations:
+                              - Japan East
+                              - UK South
+                            scope:
+                              - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0
+                              - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d
+                            tagSettings:
+                              filterOperator: All
+                              tags:
+                                tag1:
+                                  - tag1Value1
+                                  - tag1Value2
+                                tag2:
+                                  - tag2Value1
+                                  - tag2Value2
                       windows:
                         excludedKbNumbers: null
                         includedUpdateClassifications: 'Critical, FeaturePack'
@@ -173,6 +221,14 @@ paths:
                     nextRun: '2017-10-23T12:22:00-07:00'
                     provisioningState: Succeeded
                     startTime: '2017-10-19T12:22:00-07:00'
+                    tasks:
+                      postTask:
+                        parameters: null
+                        source: GetCache
+                      preTask:
+                        parameters:
+                          COMPUTERNAME: Computer1
+                        source: HelloWorld
                     updateConfiguration:
                       azureVirtualMachines:
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
@@ -194,6 +250,14 @@ paths:
                     nextRun: '2018-05-05T12:26:00-07:00'
                     provisioningState: Succeeded
                     startTime: '2018-05-05T12:26:00-07:00'
+                    tasks:
+                      postTask:
+                        parameters: null
+                        source: GetCache
+                      preTask:
+                        parameters:
+                          COMPUTERNAME: Computer1
+                        source: HelloWorld
                     updateConfiguration:
                       azureVirtualMachines:
                         - /subscriptions/1a7d4044-286c-4acb-969a-96639265bf2e/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
@@ -376,6 +440,14 @@ paths:
                     startTime: '2017-10-19T12:22:00-07:00'
                     startTimeOffsetMinutes: -420
                     timeZone: America/Los_Angeles
+                  tasks:
+                    postTask:
+                      parameters: null
+                      source: GetCache
+                    preTask:
+                      parameters:
+                        COMPUTERNAME: Computer1
+                      source: HelloWorld
                   updateConfiguration:
                     azureVirtualMachines:
                       - /subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
@@ -387,6 +459,21 @@ paths:
                       - box1.contoso.com
                       - box2.contoso.com
                     operatingSystem: Windows
+                    targets:
+                      azureQueries:
+                        - locations: null
+                          scope:
+                            - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0
+                            - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d
+                          tagSettings:
+                            filterOperator: All
+                            tags:
+                              tag1:
+                                - tag1Value1
+                                - tag1Value2
+                              tag2:
+                                - tag2Value1
+                                - tag2Value2
                     windows:
                       excludedKbNumbers:
                         - '168934'
@@ -481,6 +568,14 @@ paths:
                   interval: 1
                   startTime: '2017-10-19T12:22:57+00:00'
                   timeZone: America/Los_Angeles
+                tasks:
+                  postTask:
+                    parameters: null
+                    source: GetCache
+                  preTask:
+                    parameters:
+                      COMPUTERNAME: Computer1
+                    source: HelloWorld
                 updateConfiguration:
                   azureVirtualMachines:
                     - /subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
@@ -491,6 +586,30 @@ paths:
                     - box1.contoso.com
                     - box2.contoso.com
                   operatingSystem: Windows
+                  targets:
+                    azureQueries:
+                      - locations:
+                          - Japan East
+                          - UK South
+                        scope:
+                          - /subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources
+                          - /subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067
+                        tagSettings:
+                          filterOperator: All
+                          tags:
+                            - tag1:
+                                - tag1Value1
+                                - tag1Value2
+                                - tag1Value3
+                            - tag2:
+                                - tag2Value1
+                                - tag2Value2
+                                - tag2Value3
+                    nonAzureQueries:
+                      - FunctionAlias: SavedSearch1
+                        WorkspaceId: WorkspaceId1
+                      - FunctionAlias: SavedSearch2
+                        WorkspaceId: WorkspaceId2
                   windows:
                     excludedKbNumbers:
                       - '168934'
@@ -527,6 +646,14 @@ paths:
                     startTime: '2017-10-19T12:22:00-07:00'
                     startTimeOffsetMinutes: -420
                     timeZone: America/Los_Angeles
+                  tasks:
+                    postTask:
+                      parameters: null
+                      source: GetCache
+                    preTask:
+                      parameters:
+                        COMPUTERNAME: Computer1
+                      source: HelloWorld
                   updateConfiguration:
                     azureVirtualMachines:
                       - /subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
@@ -538,6 +665,23 @@ paths:
                       - box1.contoso.com
                       - box2.contoso.com
                     operatingSystem: Windows
+                    targets:
+                      azureQueries:
+                        - locations:
+                            - Japan East
+                            - UK South
+                          scope:
+                            - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0
+                            - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d
+                          tagSettings:
+                            filterOperator: All
+                            tags:
+                              tag1:
+                                - tag1Value1
+                                - tag1Value2
+                              tag2:
+                                - tag2Value1
+                                - tag2Value2
                     windows:
                       excludedKbNumbers:
                         - '168934'
@@ -568,6 +712,14 @@ paths:
                     startTime: '2017-10-19T12:22:00-07:00'
                     startTimeOffsetMinutes: -420
                     timeZone: America/Los_Angeles
+                  tasks:
+                    postTask:
+                      parameters: null
+                      source: GetCache
+                    preTask:
+                      parameters:
+                        COMPUTERNAME: Computer1
+                      source: HelloWorld
                   updateConfiguration:
                     azureVirtualMachines:
                       - /subscriptions/5ae68d89-69a4-454f-b5ce-e443cc4e0067/resourceGroups/myresources/providers/Microsoft.Compute/virtualMachines/vm-01
@@ -579,6 +731,23 @@ paths:
                       - box1.contoso.com
                       - box2.contoso.com
                     operatingSystem: Windows
+                    targets:
+                      azureQueries:
+                        - locations:
+                            - Japan East
+                            - UK South
+                          scope:
+                            - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d/resourceGroups/a-stasku-rg0
+                            - /subscriptions/422b6c61-95b0-4213-b3be-7282315df71d
+                          tagSettings:
+                            filterOperator: All
+                            tags:
+                              tag1:
+                                - tag1Value1
+                                - tag1Value2
+                              tag2:
+                                - tag2Value1
+                                - tag2Value2
                     windows:
                       excludedKbNumbers:
                         - '168934'
@@ -627,6 +796,26 @@ definitions:
         description: Occurrence of the week within the month. Must be between 1 and 5
         format: int32
         type: integer
+  AzureQueryProperties:
+    description: Azure query for the update configuration.
+    properties:
+      locations:
+        description: List of locations to scope the query to.
+        items:
+          description: Location to scope the query to.
+          type: string
+        type: array
+      scope:
+        description: List of Subscription or Resource Group ARM Ids.
+        items:
+          description: Subscription or Resource Group ARM Id.
+          type: string
+        type: array
+      tagSettings:
+        $ref: '#/definitions/TagSettingsProperties'
+        description: Tag settings for the VM.
+        type: object
+    type: object
   LinuxProperties:
     description: Linux specific update configuration.
     properties:
@@ -653,6 +842,16 @@ definitions:
         type: array
       rebootSetting:
         description: Reboot setting for the software update configuration.
+        type: string
+    type: object
+  NonAzureQueryProperties:
+    description: Non Azure query for the update configuration.
+    properties:
+      functionAlias:
+        description: Log Analytics Saved Search name.
+        type: string
+      workspaceId:
+        description: Workspace Id for Log Analytics in which the saved Search is resided.
         type: string
     type: object
   ScheduleProperties:
@@ -727,6 +926,43 @@ definitions:
       timeZone:
         description: Gets or sets the time zone of the schedule.
         type: string
+  TagSettingsProperties:
+    description: Tag filter information for the VM.
+    properties:
+      filterOperator:
+        description: Filter VMs by Any or All specified tags.
+        enum:
+          - All
+          - Any
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TagOperators
+      tags:
+        additionalProperties:
+          items:
+            description: List of tag values for a tag.
+            type: string
+          type: array
+        description: Dictionary of tags with its list of values.
+        type: object
+    type: object
+  TargetProperties:
+    description: Group specific to the update configuration.
+    properties:
+      azureQueries:
+        description: List of Azure queries in the software update configuration.
+        items:
+          $ref: '#/definitions/AzureQueryProperties'
+          type: object
+        type: array
+      nonAzureQueries:
+        description: List of non Azure queries in the software update configuration.
+        items:
+          $ref: '#/definitions/NonAzureQueryProperties'
+          type: object
+        type: array
+    type: object
   WindowsProperties:
     description: Windows specific update configuration.
     properties:
@@ -883,11 +1119,11 @@ definitions:
     description: Software update configuration properties.
     properties:
       createdBy:
-        description: 'createdBy property, which only appears in the response.'
+        description: 'CreatedBy property, which only appears in the response.'
         readOnly: true
         type: string
       creationTime:
-        description: 'Creation time of theresource, which only appears in the response.'
+        description: 'Creation time of the resource, which only appears in the response.'
         format: date-time
         readOnly: true
         type: string
@@ -903,7 +1139,7 @@ definitions:
             type: string
         type: object
       lastModifiedBy:
-        description: 'lastModifiedBy property, which only appears in the response.'
+        description: 'LastModifiedBy property, which only appears in the response.'
         readOnly: true
         type: string
       lastModifiedTime:
@@ -919,14 +1155,39 @@ definitions:
       scheduleInfo:
         $ref: '#/definitions/ScheduleProperties'
         description: Schedule information for the Software update configuration
+      tasks:
+        $ref: '#/definitions/softwareUpdateConfigurationTasks'
+        description: Tasks information for the Software update configuration.
       updateConfiguration:
         $ref: '#/definitions/updateConfiguration'
         description: update specific properties for the Software update configuration
     required:
       - updateConfiguration
       - scheduleInfo
+  softwareUpdateConfigurationTasks:
+    description: Task properties of the software update configuration.
+    properties:
+      postTask:
+        $ref: '#/definitions/taskProperties'
+        description: Post task properties.
+      preTask:
+        $ref: '#/definitions/taskProperties'
+        description: Pre task properties.
+    type: object
+  taskProperties:
+    description: Task properties of the software update configuration.
+    properties:
+      parameters:
+        additionalProperties:
+          type: string
+        description: Gets or sets the parameters of the task.
+        type: object
+      source:
+        description: Gets or sets the name of the runbook.
+        type: string
+    type: object
   updateConfiguration:
-    description: Update specifc properties of the software update configuration.
+    description: Update specific properties of the software update configuration.
     properties:
       azureVirtualMachines:
         description: List of azure resource Ids for azure virtual machines targeted by the software update configuration.
@@ -950,6 +1211,9 @@ definitions:
       operatingSystem:
         $ref: '#/definitions/operatingSystemType'
         description: operating system of target machines
+      targets:
+        $ref: '#/definitions/TargetProperties'
+        description: Group targets for the software update configuration.
       windows:
         $ref: '#/definitions/WindowsProperties'
         description: Windows specific update configuration.

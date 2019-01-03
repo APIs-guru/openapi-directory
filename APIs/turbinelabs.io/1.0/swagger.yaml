@@ -148,7 +148,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-      summary: Allows an arbitrary filter to be specified and applied to the org's change log.
+      summary: Allows an arbitrary filter to be specified and applied to the org\'s change log.
       tags:
         - Audit Log
   '/changelog/cluster-graph/{clusterKey}':
@@ -1569,7 +1569,8 @@ definitions:
       properties:
         $ref: '#/definitions/Metadata'
       response_data:
-        $ref: '#/definitions/ResponseData'
+        allOf:
+          - $ref: '#/definitions/ResponseData'
         description: |
           When a request is served by a cluster selected by this constraint annotate
           the response with the information specified within this ResponseData
@@ -1649,12 +1650,6 @@ definitions:
     description: |
       This describes a cookie that should be set in response to a HTTP request.
     properties:
-      always_send:
-        description: |
-          If false or not set then this cookie will only be sent on HTTP response codes
-          of 2xx and 3xx. If true then data will be returned for 4xx and 5xx responses
-          as well.
-        type: boolean
       domain:
         description: |
           Specifies the hosts to hich a cookie will be sent. Maps directly to a
@@ -1733,6 +1728,12 @@ definitions:
         $ref: '#/definitions/CORSConfig'
       domain_key:
         type: string
+      force_https:
+        description: |
+          If set to true, requests must use TLS. If a request is not using TLS, (as determined by
+          the scheme or the presence of X-Forwarded-Proto header), a 301 redirect will be sent
+          telling the client to use HTTPS.
+        type: boolean
       gzip_enabled:
         description: 'Experimental: if set to true will enable gzip compression on data that passes trough this domain'
         type: boolean
@@ -1888,7 +1889,8 @@ definitions:
           checking.
         type: string
       request_headers_to_add:
-        $ref: '#/definitions/Metadata'
+        allOf:
+          - $ref: '#/definitions/Metadata'
         description: |
           Specifies a list of HTTP headers that should be added to each request
           sent to the health checked cluster.
@@ -1927,12 +1929,6 @@ definitions:
     description: |
       This describes a HTTP header that should be attached to requests.
     properties:
-      always_send:
-        description: |
-          If false or not set then this header will only be sent on HTTP response codes
-          of 2xx and 3xx. If true then data will be returned for 4xx and 5xx responses
-          as well.
-        type: boolean
       name:
         description: |
           The name of the header that will be attached to the response sent.
@@ -2122,13 +2118,67 @@ definitions:
         $ref: '#/definitions/Listener'
     type: object
   Match:
+    description: |
+      Represents a mapping of request attributes to constraints on a cluster
+      using different matching schemes.
+
+      Certain combinations of `kind` and `behavior` are not allowed
+        | kind | behavior |
+        | ---- | -------- |
+        | query | regex |
+        | query | range |
+        | cookie | range |
     properties:
+      behavior:
+        description: |
+          Defines how a request attribute should be matched. If not specified,
+          defaults to `exact`. Valid values are
+            * exact
+            * regex
+            * range
+            * prefix
+            * suffix
+        type: string
       from:
-        $ref: '#/definitions/Metadatum'
+        allOf:
+          - $ref: '#/definitions/Metadatum'
+        description: |
+          The request attribute key and value to match. `key` must always be
+          defined while `value` can be unspecified (only if behavior is set to
+          `exact`) to indicate that all values should be matched. If to.value
+          is also unspecified, the matched value of the request will be used as
+          a constraint on the destination cluster.
+
+          \# Behavior
+            * `regex` if To.Value is unspecified, `value` must contain one and
+            only one subgroup. Otherwise, `value` must not be empty.
+            * `range` `value` must be specified and must be of the format
+            `[start_integer, end_integer)`. Start and end must be valid integer
+            values and `end_integer` must be greater than `start_integer`.
+            * `prefix`/`suffix` `value` must be specified
+
+          \# Kind
+            * `cookie` does not support `range` behavior
+            * `query` does not support `regex` behavior
       kind:
+        description: |
+          Defines the attribute by which a request should be matched on. Valid
+          values are
+            * cookie
+            * header
+            * query (for query parameter)
         type: string
       to:
-        $ref: '#/definitions/Metadatum'
+        allOf:
+          - $ref: '#/definitions/Metadatum'
+        description: |
+          The constraints on a cluster that a matched request should map to. If
+          to.key is specified and to.value is not, the matched from.value will
+          be used as a metadata constraint on instances in the destination
+          cluster, keyed by to.key. If using `regex` behavior with multiple
+          subgroups in from.value, variables `$1` through `$n`, where n is the
+          number of subgroups in the matching regex, can be used to interpolate
+          captured matches in to.value.
     type: object
   Matches:
     items:
@@ -2456,7 +2506,8 @@ definitions:
       path:
         type: string
       response_data:
-        $ref: '#/definitions/ResponseData'
+        allOf:
+          - $ref: '#/definitions/ResponseData'
         description: |
           When a request is served by this Route annotate the response with the
           information specified within this ResponseData object. It's possible
@@ -2567,7 +2618,8 @@ definitions:
       properties:
         $ref: '#/definitions/Metadata'
       response_data:
-        $ref: '#/definitions/ResponseData'
+        allOf:
+          - $ref: '#/definitions/ResponseData'
         description: |
           When a request is served by a Route that is part of this SharedRules
           group the response is annotated with the information specified within

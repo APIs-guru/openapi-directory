@@ -218,7 +218,7 @@ parameters:
     type: integer
     x-eg: '20'
   param_locale:
-    description: 'Code used to select a set of top bets settings, default is "whapi" which allows events set in far future to be included, setting the value to "en-GB" will activate english sportsbook settings, mirroring top bets on the website, which restricts events returned to those taking place in next 36 hours.  Acceptable values (not all heve their own settings - if none currently available for that locale - en-GB will be used) are  de-DE|whapi|en-GB|es-ES|fr-FR|nn-NO|fi-FI|ru-RU|pt-PT|hu-HU|sl-SL|ga-IE|en-CA|sr-Latn|sv-SE|el=GR|zh-CHS|it-IT|zh-CHT|cs-CZ|de-AT|ja-JP|pl-PL|da-DK|ro-RO|nl-NL|tr-TR'
+    description: 'Code used to select a set of top bets settings, default is "whapi" which allows events set in far future to be included, setting the value to "en-GB" will activate english sportsbook settings, mirroring top bets on the website, which restricts events returned to those taking place in next 36 hours. Acceptable values (not all heve their own settings - if none currently available for that locale - en-GB will be used) are de-DE|whapi|en-GB|es-ES|fr-FR|nn-NO|fi-FI|ru-RU|pt-PT|hu-HU|sl-SL|ga-IE|en-CA|sr-Latn|sv-SE|el=GR|zh-CHS|it-IT|zh-CHT|cs-CZ|de-AT|ja-JP|pl-PL|da-DK|ro-RO|nl-NL|tr-TR'
     in: query
     name: Locale
     required: false
@@ -295,7 +295,7 @@ parameters:
     type: string
     x-eg: 'yes'
   param_marketSort:
-    description: Filter by market sort  (e.g. MR (match result) -- (Outright)).
+    description: Filter by market sort (e.g. MR (match result) -- (Outright)).
     in: query
     name: marketSort
     required: false
@@ -426,13 +426,13 @@ paths:
           examples:
             application/json: |
               {
-                "competitions": [
-                  {
-                    "id": "OB_TY1733",
-                    "name": "Manchester Senior Cup",
-                    "status": "A"
-                  }
-                ]
+               "competitions": [
+               {
+               "id": "OB_TY1733",
+               "name": "Manchester Senior Cup",
+               "status": "A"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/competitionsWrapper'
@@ -441,13 +441,13 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10070",
-                              "message":"Missing Parameter",
-                              "field":"apiKey"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -456,12 +456,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -515,22 +515,22 @@ paths:
               {
               "events": [
                {
-                "id": "OB_EV2828",
-                "name": "Forest Green Vs Liverpool",
-                "status": "A",
-                "startDateTime": "2016-01-29T20:00:00"
+               "id": "OB_EV2828",
+               "name": "Forest Green Vs Liverpool",
+               "status": "A",
+               "startDateTime": "2016-01-29T20:00:00"
                },
                {
-                "id": "OB_EV2829",
-                "name": "XXXMan Utd Vs Man City",
-                "status": "A",
-                "startDateTime": "2016-01-07T11:00:00"
+               "id": "OB_EV2829",
+               "name": "XXXMan Utd Vs Man City",
+               "status": "A",
+               "startDateTime": "2016-01-07T11:00:00"
                },
                {
-                "id": "OB_EV2849",
-                "name": "Manchester Senior Cup - Winners 2015-16",
-                "status": "A",
-                "startDateTime": "2016-01-01T00:00:00"
+               "id": "OB_EV2849",
+               "name": "Manchester Senior Cup - Winners 2015-16",
+               "status": "A",
+               "startDateTime": "2016-01-01T00:00:00"
                }
               ]
               }
@@ -542,12 +542,12 @@ paths:
             application/json: |
               {
                "errors" : [
-                              {
-                                "code":"10070",
-                                "message":"Missing Parameter",
-                                "field":"apiKey"
-                              }
-                            ]
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -556,12 +556,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -587,9 +587,9 @@ paths:
           examples:
             application/json: |
               {
-                "id": "OB_TY1733",
-                "name": "Manchester Senior Cup",
-                "status": "A"
+               "id": "OB_TY1733",
+               "name": "Manchester Senior Cup",
+               "status": "A"
               }
           schema:
             $ref: '#/definitions/competition'
@@ -598,13 +598,13 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10070",
-                              "message":"Missing Parameter",
-                              "field":"apiKey"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -613,12 +613,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -673,22 +673,22 @@ paths:
               {
               "events": [
                {
-                "id": "OB_EV2828",
-                "name": "Forest Green Vs Liverpool",
-                "status": "A",
-                "startDateTime": "2016-01-29T20:00:00"
+               "id": "OB_EV2828",
+               "name": "Forest Green Vs Liverpool",
+               "status": "A",
+               "startDateTime": "2016-01-29T20:00:00"
                },
                {
-                "id": "OB_EV2829",
-                "name": "XXXMan Utd Vs Man City",
-                "status": "A",
-                "startDateTime": "2016-01-07T11:00:00"
+               "id": "OB_EV2829",
+               "name": "XXXMan Utd Vs Man City",
+               "status": "A",
+               "startDateTime": "2016-01-07T11:00:00"
                },
                {
-                "id": "OB_EV2849",
-                "name": "Manchester Senior Cup - Winners 2015-16",
-                "status": "A",
-                "startDateTime": "2016-01-01T00:00:00"
+               "id": "OB_EV2849",
+               "name": "Manchester Senior Cup - Winners 2015-16",
+               "status": "A",
+               "startDateTime": "2016-01-01T00:00:00"
                }
               ]
               }
@@ -700,12 +700,12 @@ paths:
             application/json: |
               {
                "errors" : [
-                              {
-                                "code":"10070",
-                                "message":"Missing Parameter",
-                                "field":"apiKey"
-                              }
-                            ]
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -714,12 +714,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -754,28 +754,28 @@ paths:
           examples:
             application/json: |
               {
-                "marketgroups": [
-                  {
-                    "id": "OB_MG36963",
-                    "name": "90 Minutes"
-                  },
-                  {
-                    "id": "OB_MG36964",
-                    "name": "Correct Score"
-                  },
-                  {
-                    "id": "OB_MG36966",
-                    "name": "First Goalscorer"
-                  },
-                  {
-                    "id": "OB_MG37004",
-                    "name": "Match Betting Live"
-                  },
-                  {
-                    "id": "OB_MG37043",
-                    "name": "Outright"
-                  }
-                ]
+               "marketgroups": [
+               {
+               "id": "OB_MG36963",
+               "name": "90 Minutes"
+               },
+               {
+               "id": "OB_MG36964",
+               "name": "Correct Score"
+               },
+               {
+               "id": "OB_MG36966",
+               "name": "First Goalscorer"
+               },
+               {
+               "id": "OB_MG37004",
+               "name": "Match Betting Live"
+               },
+               {
+               "id": "OB_MG37043",
+               "name": "Outright"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/marketGroupsWrapper'
@@ -784,13 +784,13 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                              {
-                                "code":"10070",
-                                "message":"Missing Parameter",
-                                "field":"apiKey"
-                              }
-                            ]
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -799,12 +799,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -850,30 +850,30 @@ paths:
           examples:
             application/json: |
               {
-                "events": [
-                  {
-                    "id": "OB_EV2828",
-                    "name": "Forest Green Vs Liverpool",
-                    "status": "A",
-                    "startDateTime": "2016-01-29T20:00:00",
-                    "markets": [
-                      {
-                        "id": "OB_MA2559",
-                        "name": "Correct Score",
-                        "status": "A",
-                        "selections": [
-                          {
-                            "id": "OB_OU3863",
-                            "currentPriceNum": 14,
-                            "currentPriceDen": 1,
-                            "name": "Liverpool 2-1",
-                            "status": "A"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                 ]
+               "events": [
+               {
+               "id": "OB_EV2828",
+               "name": "Forest Green Vs Liverpool",
+               "status": "A",
+               "startDateTime": "2016-01-29T20:00:00",
+               "markets": [
+               {
+               "id": "OB_MA2559",
+               "name": "Correct Score",
+               "status": "A",
+               "selections": [
+               {
+               "id": "OB_OU3863",
+               "currentPriceNum": 14,
+               "currentPriceDen": 1,
+               "name": "Liverpool 2-1",
+               "status": "A"
+               }
+               ]
+               }
+               ]
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/eventsWrapper'
@@ -882,13 +882,13 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10070",
-                              "message":"Missing Parameter",
-                              "field":"apiKey"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -897,12 +897,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -942,30 +942,30 @@ paths:
           examples:
             application/json: |
               {
-                "events": [
-                  {
-                    "id": "OB_EV2828",
-                    "name": "Forest Green Vs Liverpool",
-                    "status": "A",
-                    "startDateTime": "2016-01-29T20:00:00",
-                    "markets": [
-                      {
-                        "id": "OB_MA2559",
-                        "name": "Correct Score",
-                        "status": "A",
-                        "selections": [
-                          {
-                            "id": "OB_OU3863",
-                            "currentPriceNum": 14,
-                            "currentPriceDen": 1,
-                            "name": "Liverpool 2-1",
-                            "status": "A"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                 ]
+               "events": [
+               {
+               "id": "OB_EV2828",
+               "name": "Forest Green Vs Liverpool",
+               "status": "A",
+               "startDateTime": "2016-01-29T20:00:00",
+               "markets": [
+               {
+               "id": "OB_MA2559",
+               "name": "Correct Score",
+               "status": "A",
+               "selections": [
+               {
+               "id": "OB_OU3863",
+               "currentPriceNum": 14,
+               "currentPriceDen": 1,
+               "name": "Liverpool 2-1",
+               "status": "A"
+               }
+               ]
+               }
+               ]
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/eventsWrapper'
@@ -974,13 +974,13 @@ paths:
           examples:
             application/json: |
               {
-                    "errors" : [
-                                {
-                                  "code":"10070",
-                                  "message":"Missing Parameter",
-                                  "field":"apiKey"
-                                }
-                              ]
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -989,18 +989,93 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
       summary: Retrieves a single event by ID.
       tags:
         - sportsdata
+      x-canReturnErrors:
+        - 0
+  '/events/{eventId}/competitors':
+    get:
+      description: Retrieves competitors for a single event by ID.
+      operationId: getEventCompetitors
+      parameters:
+        - $ref: '#/parameters/param_apiKey'
+        - $ref: '#/parameters/param_eventId'
+        - $ref: '#/parameters/param_fields'
+        - $ref: '#/parameters/param_include'
+        - $ref: '#/parameters/param_exclude'
+      responses:
+        '200':
+          description: Success
+          examples:
+            application/json: |
+              {
+               "competitors": 
+               [
+               {
+               "id": "1",
+               "name": "Springer Dinger",
+               "age": "3",
+               "drawNumber": "4",
+               "jockeyName": "Atzeni, A",
+               "weightPounds": "134",
+               "silkImageUrl": "http://whdn.williamhill.com/content/sportsbook/silks/55336.gif",
+               "trainerName": "Varian, R",
+               "ownerName": "Sheikh Mohammed Obaid Al Maktoum"
+               "colour": "grey",
+               "sex": "Male",
+               "formGuide": "4-2711",
+               "rating": "27",
+               "overview":
+               {
+               "runner":"Good pedigree; took him five times to click but won his Lingfield novice nicely in the end and duly confirmed himself progressive by following up at Newmarket, again over 7f (good ground); pace was true there so form looks okay and rates a danger to all off 6lb higher."
+               "sire":"top-class 2yo over 6-7f inc Phoenix S. Lagardere; sire of Group winners; good record with fillies",
+               }
+               ]
+              }
+          schema:
+            $ref: '#/definitions/eventCompetitorsWrapper'
+        '400':
+          description: Incorrect or Missing Parameter
+          examples:
+            application/json: |
+              {
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
+              }
+          schema:
+            $ref: '#/definitions/errorsWrapper'
+        '404':
+          description: No data found for request
+          examples:
+            application/json: |
+              {
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
+              }
+          schema:
+            $ref: '#/definitions/errorsWrapper'
+      summary: Retrieves competitors for a single event by ID.
+      tags:
+        - competitors
       x-canReturnErrors:
         - 0
   '/events/{eventId}/markets/':
@@ -1032,18 +1107,18 @@ paths:
           examples:
             application/json: |
               {
-                "markets": [
-                  {
-                    "id": "OB_MA2493",
-                    "name": "90 Minutes",
-                    "status": "A"
-                  },
-                  {
-                    "id": "OB_MA2559",
-                    "name": "Correct Score",
-                    "status": "A"
-                  }
-                ]
+               "markets": [
+               {
+               "id": "OB_MA2493",
+               "name": "90 Minutes",
+               "status": "A"
+               },
+               {
+               "id": "OB_MA2559",
+               "name": "Correct Score",
+               "status": "A"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/marketsWrapper'
@@ -1052,13 +1127,13 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                             {
-                               "code":"10070",
-                               "message":"Missing Parameter",
-                               "field":"apiKey"
-                             }
-                           ]
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1067,12 +1142,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1103,21 +1178,21 @@ paths:
           examples:
             application/json: |
               {
-                "selections": [
-                      {
-                        "id": "OB_OU3863",
-                        "currentPriceNum": 14,
-                        "currentPriceDen": 1,
-                        "name": "Liverpool 2-1",
-                        "status": "A"
-                      },
-                      {
-                        "id": "OB_OU3846",
-                        "currentPriceNum": 11,
-                        "currentPriceDen": 2,
-                        "name": "Forest Green 1-0",
-                        "status": "A"
-                      }
+               "selections": [
+               {
+               "id": "OB_OU3863",
+               "currentPriceNum": 14,
+               "currentPriceDen": 1,
+               "name": "Liverpool 2-1",
+               "status": "A"
+               },
+               {
+               "id": "OB_OU3846",
+               "currentPriceNum": 11,
+               "currentPriceDen": 2,
+               "name": "Forest Green 1-0",
+               "status": "A"
+               }
               }
           schema:
             $ref: '#/definitions/selectionsWrapper'
@@ -1126,13 +1201,13 @@ paths:
           examples:
             application/json: |
               {
-                 "errors" : [
-                             {
-                               "code":"10070",
-                               "message":"Missing Parameter",
-                               "field":"apiKey"
-                             }
-                           ]
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1141,12 +1216,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1175,16 +1250,16 @@ paths:
           examples:
             application/json: |
               {
-                "sports": [
-                  {
-                    "id": "OB_SP43",
-                    "name": "Horse Racing"
-                  },
-                  {
-                    "id": "OB_SP9",
-                    "name": "Football"
-                  }
-                ]
+               "sports": [
+               {
+               "id": "OB_SP43",
+               "name": "Horse Racing"
+               },
+               {
+               "id": "OB_SP9",
+               "name": "Football"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/sportsWrapper'
@@ -1193,13 +1268,13 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"000000",
-                              "message":"Error Message Text",
-                              "field":"aparam"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"000000",
+               "message":"Error Message Text",
+               "field":"aparam"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1208,12 +1283,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1246,13 +1321,13 @@ paths:
           examples:
             application/json: |
               {
-                "classes": [
-                  {
-                    "id": "OB_CL1",
-                    "name": "UK Football",
-                    "status": "A"
-                  }
-                ]
+               "classes": [
+               {
+               "id": "OB_CL1",
+               "name": "UK Football",
+               "status": "A"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/classesWrapper'
@@ -1261,13 +1336,13 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10070",
-                              "message":"Missing Parameter",
-                              "field":"apiKey"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1276,12 +1351,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1314,13 +1389,13 @@ paths:
           examples:
             application/json: |
               {
-                "competitions": [
-                  {
-                    "id": "OB_TY1733",
-                    "name": "Manchester Senior Cup",
-                    "status": "A"
-                  }
-                ]
+               "competitions": [
+               {
+               "id": "OB_TY1733",
+               "name": "Manchester Senior Cup",
+               "status": "A"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/competitionsWrapper'
@@ -1329,13 +1404,13 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10070",
-                              "message":"Missing Parameter",
-                              "field":"apiKey"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10070",
+               "message":"Missing Parameter",
+               "field":"apiKey"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1344,12 +1419,12 @@ paths:
           examples:
             application/json: |
               {
-                "errors" : [
-                            {
-                              "code":"10003",
-                              "message":"Resource Not Found"
-                            }
-                          ]
+               "errors" : [
+               {
+               "code":"10003",
+               "message":"Resource Not Found"
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1380,222 +1455,222 @@ paths:
           examples:
             application/json: |
               {
-                bets:
-                {
-                weight: "",
-                sports:
-                    {
-                        isPublished:true,
-                        id:  "",
-                        name: ""
-                    },
-                  competitions:
-                  {
-                      isPublished: true,
-                      parentIds: ["",""],
-                      betInRunningDelay:9
-                      description:"The description of the competition"
-                      cashinAvailable:true,
-                      channels:["",""],
-                      displayed:true,
-                      flags:["",""],
-                      id:"",
-                      name:"",
-                      order: 1,
-                      status:"A"
-                  },
-                  events:
-                  {
-                    isPublished: true,
-                    parentIds:["",""],
-                    bettingStatus:"",
-                    betInRunningDelay:5,
-                    description:"The description of the event",
-                    cashinAvailable: true,
-                    channels:["",""],
-                    country: "",
-                    displayed: true,                    
-                    flags: ["",""],                    
-                    hasInPlayMarkets:true,
-                    hasLivePrices:true,
-                    id: "",
-                    isInPlay:true,
-                    marketCountActiveInPlay:2,                    
-                    marketCountActivePreMatch: 3,
-                    marketCountActiveTotal:9,
-                    marketCountInPlay:6,
-                    marketCountPreMatch:2,
-                    name:"6:10 Windsor",
-                    order:4,                    
-                    raceNum:"",                    
-                    settled: true,
-                    eventSort:"",
-                    startDateTime:"",
-                    status:"A",
-                    markets:
-                    [   
-                        {
-                            isPublished:true,
-                            parentIds:["",""],
-                            antepostMarket:true,
-                            betInRunningDelay:4,
-                            description:"Additional market information",
-                            channels:"",
-                            displayed:true,
-                            eachWay: true,
-                            eachWayFactorDen:5,                        
-                            eachWayFactorNum:1,
-                            eachWayPlaces:3,
-                            earlyPriceAvailable:true,
-                            firstFourAvailable:true,
-                            firstPriceAvailable:true,
-                            flags:"",
-                            bestOddsGuaranteed:true,
-                            isInPlayMarket: true,
-                            hcapMakeup:5,
-                            hcapValue: 5,
-                            id:"OB_MA1",
-                            livePriceAvailable:true,
-                            marketGroupCollectionId:"",
-                            marketGroupId:"",
-                            marketGroupName:"",
-                            name:"",
-                            order:"5",
-                            quinellaAvailable:true,
-                            settled:true,
-                            marketSort:"",
-                            startingPriceAvailable:true,
-                            status:"A",
-                            selections:
-                            [
-                                {
-                                    parentIds:["",""],
-                                    isPublished:true,
-                                    description:"",
-                                    cashinPriceNum:5,
-                                    cashinPriceDen:4,
-                                    channels:["",""],
-                                    csAway:5,
-                                    csHome:5,
-                                    currentPriceNum:5,
-                                    currentPriceDen:5,
-                                    displayed:true,
-                                    resultType:"",
-                                    id:"",
-                                    name:"",
-                                    order:5,
-                                    result:"",
-                                    runnerNum:5,
-                                    settled:true,
-                                    status:"A",
-                                    oddsDecimal:1.1,
-                                    resultType:"",
-                                    priceFormatted:
-                                    {
-                                      fractional:"EVS",
-                                      decimal:2,
-                                      american:"+100"
-                                    } 
-                                }
-                            ]
-                        }
-                    ],
-                    markets:
-                    {
-                        isPublished:true,
-                        parentIds:["",""],
-                        antepostMarket:true,
-                        betInRunningDelay:4,
-                        description:"Additional market information",
-                        channels:"",
-                        displayed:true,
-                        eachWay: true,
-                        eachWayFactorDen:5,                        
-                        eachWayFactorNum:1,
-                        eachWayPlaces:3,
-                        earlyPriceAvailable:true,
-                        firstFourAvailable:true,
-                        firstPriceAvailable:true,
-                        flags:"",
-                        bestOddsGuaranteed:true,
-                        isInPlayMarket: true,
-                        hcapMakeup:5,
-                        hcapValue: 5,
-                        id:"OB_MA1",
-                        livePriceAvailable:true,
-                        marketGroupCollectionId:"",
-                        marketGroupId:"",
-                        marketGroupName:"",
-                        name:"",
-                        order:"5",
-                        quinellaAvailable:true,
-                        settled:true,
-                        marketSort:"",
-                        startingPriceAvailable:true,
-                        status:"A",
-                        selections:
-                        [
-                            {
-                                parentIds:["",""],
-                                isPublished:true,
-                                description:"",
-                                cashinPriceNum:5,
-                                cashinPriceDen:4,
-                                channels:["",""],
-                                csAway:5,
-                                csHome:5,
-                                currentPriceNum:5,
-                                currentPriceDen:5,
-                                displayed:true,
-                                resultType:"",
-                                id:"",
-                                name:"",
-                                order:5,
-                                result:"",
-                                runnerNum:5,
-                                settled:true,
-                                status:"A",
-                                oddsDecimal:1.1,
-                                priceFormatted:
-                                {
-                                  fractional:"EVS",
-                                  decimal:2,
-                                  american:"+100"
-                                } 
-                            }
-                        ]
-                    },
-                    selections:
-                    {
-                        parentIds:["",""],
-                        isPublished:true,
-                        description:"",
-                        cashinPriceNum:5,
-                        cashinPriceDen:4,
-                        channels:["",""],
-                        csAway:5,
-                        csHome:5,
-                        currentPriceNum:5,
-                        currentPriceDen:5,
-                        displayed:true,
-                        resultType:"",
-                        id:"",
-                        name:"",
-                        order:5,
-                        result:"",
-                        runnerNum:5,
-                        settled:true,
-                        status:"A",
-                        oddsDecimal:1.1,
-                        resultType:"",
-                        priceFormatted:
-                        {
-                          fractional:"EVS",
-                          decimal:2,
-                          american:"+100"
-                        } 
-                    }
-                 }
+               bets:
+               {
+               weight: "",
+               sports:
+               {
+               isPublished:true,
+               id: "",
+               name: ""
+               },
+               competitions:
+               {
+               isPublished: true,
+               parentIds: ["",""],
+               betInRunningDelay:9
+               description:"The description of the competition"
+               cashinAvailable:true,
+               channels:["",""],
+               displayed:true,
+               flags:["",""],
+               id:"",
+               name:"",
+               order: 1,
+               status:"A"
+               },
+               events:
+               {
+               isPublished: true,
+               parentIds:["",""],
+               bettingStatus:"",
+               betInRunningDelay:5,
+               description:"The description of the event",
+               cashinAvailable: true,
+               channels:["",""],
+               country: "",
+               displayed: true, 
+               flags: ["",""], 
+               hasInPlayMarkets:true,
+               hasLivePrices:true,
+               id: "",
+               isInPlay:true,
+               marketCountActiveInPlay:2, 
+               marketCountActivePreMatch: 3,
+               marketCountActiveTotal:9,
+               marketCountInPlay:6,
+               marketCountPreMatch:2,
+               name:"6:10 Windsor",
+               order:4, 
+               raceNum:"", 
+               settled: true,
+               eventSort:"",
+               startDateTime:"",
+               status:"A",
+               markets:
+               [ 
+               {
+               isPublished:true,
+               parentIds:["",""],
+               antepostMarket:true,
+               betInRunningDelay:4,
+               description:"Additional market information",
+               channels:"",
+               displayed:true,
+               eachWay: true,
+               eachWayFactorDen:5, 
+               eachWayFactorNum:1,
+               eachWayPlaces:3,
+               earlyPriceAvailable:true,
+               firstFourAvailable:true,
+               firstPriceAvailable:true,
+               flags:"",
+               bestOddsGuaranteed:true,
+               isInPlayMarket: true,
+               hcapMakeup:5,
+               hcapValue: 5,
+               id:"OB_MA1",
+               livePriceAvailable:true,
+               marketGroupCollectionId:"",
+               marketGroupId:"",
+               marketGroupName:"",
+               name:"",
+               order:"5",
+               quinellaAvailable:true,
+               settled:true,
+               marketSort:"",
+               startingPriceAvailable:true,
+               status:"A",
+               selections:
+               [
+               {
+               parentIds:["",""],
+               isPublished:true,
+               description:"",
+               cashinPriceNum:5,
+               cashinPriceDen:4,
+               channels:["",""],
+               csAway:5,
+               csHome:5,
+               currentPriceNum:5,
+               currentPriceDen:5,
+               displayed:true,
+               resultType:"",
+               id:"",
+               name:"",
+               order:5,
+               result:"",
+               runnerNum:5,
+               settled:true,
+               status:"A",
+               oddsDecimal:1.1,
+               resultType:"",
+               priceFormatted:
+               {
+               fractional:"EVS",
+               decimal:2,
+               american:"+100"
+               } 
+               }
+               ]
+               }
+               ],
+               markets:
+               {
+               isPublished:true,
+               parentIds:["",""],
+               antepostMarket:true,
+               betInRunningDelay:4,
+               description:"Additional market information",
+               channels:"",
+               displayed:true,
+               eachWay: true,
+               eachWayFactorDen:5, 
+               eachWayFactorNum:1,
+               eachWayPlaces:3,
+               earlyPriceAvailable:true,
+               firstFourAvailable:true,
+               firstPriceAvailable:true,
+               flags:"",
+               bestOddsGuaranteed:true,
+               isInPlayMarket: true,
+               hcapMakeup:5,
+               hcapValue: 5,
+               id:"OB_MA1",
+               livePriceAvailable:true,
+               marketGroupCollectionId:"",
+               marketGroupId:"",
+               marketGroupName:"",
+               name:"",
+               order:"5",
+               quinellaAvailable:true,
+               settled:true,
+               marketSort:"",
+               startingPriceAvailable:true,
+               status:"A",
+               selections:
+               [
+               {
+               parentIds:["",""],
+               isPublished:true,
+               description:"",
+               cashinPriceNum:5,
+               cashinPriceDen:4,
+               channels:["",""],
+               csAway:5,
+               csHome:5,
+               currentPriceNum:5,
+               currentPriceDen:5,
+               displayed:true,
+               resultType:"",
+               id:"",
+               name:"",
+               order:5,
+               result:"",
+               runnerNum:5,
+               settled:true,
+               status:"A",
+               oddsDecimal:1.1,
+               priceFormatted:
+               {
+               fractional:"EVS",
+               decimal:2,
+               american:"+100"
+               } 
+               }
+               ]
+               },
+               selections:
+               {
+               parentIds:["",""],
+               isPublished:true,
+               description:"",
+               cashinPriceNum:5,
+               cashinPriceDen:4,
+               channels:["",""],
+               csAway:5,
+               csHome:5,
+               currentPriceNum:5,
+               currentPriceDen:5,
+               displayed:true,
+               resultType:"",
+               id:"",
+               name:"",
+               order:5,
+               result:"",
+               runnerNum:5,
+               settled:true,
+               status:"A",
+               oddsDecimal:1.1,
+               resultType:"",
+               priceFormatted:
+               {
+               fractional:"EVS",
+               decimal:2,
+               american:"+100"
+               } 
+               }
+               }
               }
           schema:
             $ref: '#/definitions/topBetsWrapper'
@@ -1604,13 +1679,13 @@ paths:
           examples:
             application/json: |
               {
-                 "errors" : 
-                 [
-                   {
-                     "code":"10000",
-                     "message":"Server Error",                               
-                   }
-                 ]
+               "errors" : 
+               [
+               {
+               "code":"10000",
+               "message":"Server Error", 
+               }
+               ]
               }
           schema:
             $ref: '#/definitions/errorsWrapper'
@@ -1701,6 +1776,67 @@ definitions:
           $ref: '#/definitions/competition'
         type: array
     type: object
+  competitor:
+    properties:
+      age:
+        description: The age of the horse
+        type: number
+        x-eg: '3'
+      colour:
+        description: The colour of the horse (There are 5 colours. b = Bay. bl = Black. br = Brown. ch = Chestnut. gr = Grey)
+        type: string
+        x-eg: bl
+      drawNumber:
+        description: The stall number that the horse is allocated and will start from
+        type: number
+        x-eg: '4'
+      formGuide:
+        description: 'The form of a horse is a record of significant events, mainly its performance in previous races. For example: The value 874-1 means that the horse finished 8th, then 7th in the next race, then 4th, hyphen here means he did not finish in the race, and was 1st in the last race he was running in.'
+        type: string
+        x-eg: 4-2711
+      id:
+        description: Unique identifier of the competitor in the event
+        type: number
+        x-eg: '1'
+      jockeyName:
+        description: The name of the Jockey who's riding the horse
+        type: string
+        x-eg: 'Atzeni, A'
+      name:
+        description: The name of competitor that the information is being given for
+        type: string
+        x-eg: Springer Dinger
+      overview:
+        description: Additional information about the horse's performance
+        type: string
+        x-eg: 'Good pedigree; took him five times to click but won his Lingfield novice nicely in the end and duly confirmed himself progressive by following up at Newmarket, again over 7f (good ground); pace was true there so form looks okay and rates a danger to all off 6lb higher.'
+      ownerName:
+        description: The name of the horses owner(s)
+        type: string
+        x-eg: Sheikh Mohammed Obaid Al Maktoum
+      rating:
+        description: 'The rating of the horse which is defined by a rating provider. It represents the horse''s performance (the higher the rating, the better the horse is)'
+        type: string
+        x-eg: '98'
+      sex:
+        description: The sex of the horse (F|M)
+        type: string
+        x-eg: M
+      silkImageUrl:
+        description: The URL for the image that represents the 'silk' (Coathing pattern) worn by the jockey.
+        type: string
+        x-eg: 'http://whdn.williamhill.com/content/sportsbook/silks/55336.gif'
+      trainerName:
+        description: The name of the horses trainer
+        type: string
+        x-eg: 'Varian, R'
+      weightPounds:
+        description: The rider weight (in pounds)
+        type: string
+        x-eg: '134'
+    required:
+      - id
+      - silkImageUrl
   error:
     properties:
       code:
@@ -1822,6 +1958,13 @@ definitions:
       - name
       - startDateTime
       - status
+  eventCompetitorsWrapper:
+    properties:
+      competitors:
+        items:
+          $ref: '#/definitions/competitor'
+        type: array
+    type: object
   eventsWrapper:
     properties:
       events:

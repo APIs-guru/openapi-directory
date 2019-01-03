@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/logic/resource-manager/Microsoft.Logic/preview/2018-07-01-preview/logic.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: logic
   x-tags:
@@ -1432,8 +1432,8 @@ paths:
                                 trailingSeparatorPolicy: NotAllowed
                                 trimLeadingAndTrailingSpacesAndZeroes: false
                                 validateCharacterSet: true
-                                validateEdiTypes: true
-                                validateXsdTypes: false
+                                validateEDITypes: true
+                                validateXSDTypes: false
                             receiverBusinessIdentity:
                               qualifier: ZZ
                               value: ZZ
@@ -1509,8 +1509,8 @@ paths:
                                 trailingSeparatorPolicy: NotAllowed
                                 trimLeadingAndTrailingSpacesAndZeroes: false
                                 validateCharacterSet: true
-                                validateEdiTypes: true
-                                validateXsdTypes: false
+                                validateEDITypes: true
+                                validateXSDTypes: false
                             receiverBusinessIdentity:
                               qualifier: AA
                               value: AA
@@ -1746,8 +1746,8 @@ paths:
                                 trailingSeparatorPolicy: Optional
                                 trimLeadingAndTrailingSpacesAndZeroes: true
                                 validateCharacterSet: true
-                                validateEdiTypes: true
-                                validateXsdTypes: true
+                                validateEDITypes: true
+                                validateXSDTypes: true
                             receiverBusinessIdentity:
                               qualifier: ZZ
                               value: ZZ
@@ -1837,8 +1837,8 @@ paths:
                                 trailingSeparatorPolicy: Optional
                                 trimLeadingAndTrailingSpacesAndZeroes: true
                                 validateCharacterSet: true
-                                validateEdiTypes: true
-                                validateXsdTypes: true
+                                validateEDITypes: true
+                                validateXSDTypes: true
                             receiverBusinessIdentity:
                               qualifier: ZZ
                               value: ZZ
@@ -8590,17 +8590,17 @@ definitions:
       trimLeadingAndTrailingSpacesAndZeroes:
         description: The value indicating whether to trim leading and trailing spaces and zeroes.
         type: boolean
-      validateEdiTypes:
+      validateEDITypes:
         description: The value indicating whether to validate EDI types.
         type: boolean
-      validateXsdTypes:
+      validateXSDTypes:
         description: The value indicating whether to validate XSD types.
         type: boolean
     required:
       - messageId
       - enforceCharacterSet
-      - validateEdiTypes
-      - validateXsdTypes
+      - validateEDITypes
+      - validateXSDTypes
       - allowLeadingAndTrailingSpacesAndZeroes
       - trailingSeparatorPolicy
       - trimLeadingAndTrailingSpacesAndZeroes
@@ -8633,10 +8633,10 @@ definitions:
       validateCharacterSet:
         description: The value indicating whether to validate character set in the message.
         type: boolean
-      validateEdiTypes:
+      validateEDITypes:
         description: The value indicating whether to Whether to validate EDI types.
         type: boolean
-      validateXsdTypes:
+      validateXSDTypes:
         description: The value indicating whether to Whether to validate XSD types.
         type: boolean
     required:
@@ -8645,8 +8645,8 @@ definitions:
       - interchangeControlNumberValidityDays
       - checkDuplicateGroupControlNumber
       - checkDuplicateTransactionSetControlNumber
-      - validateEdiTypes
-      - validateXsdTypes
+      - validateEDITypes
+      - validateXSDTypes
       - allowLeadingAndTrailingSpacesAndZeroes
       - trimLeadingAndTrailingSpacesAndZeroes
       - trailingSeparatorPolicy
@@ -11118,16 +11118,16 @@ definitions:
       validateCharacterSet:
         description: The value indicating whether to validate character Set.
         type: boolean
-      validateEdiTypes:
+      validateEDITypes:
         description: The value indicating whether to validate EDI types.
         type: boolean
-      validateXsdTypes:
+      validateXSDTypes:
         description: The value indicating whether to validate XSD types.
         type: boolean
     required:
       - messageId
-      - validateEdiTypes
-      - validateXsdTypes
+      - validateEDITypes
+      - validateXSDTypes
       - allowLeadingAndTrailingSpacesAndZeroes
       - validateCharacterSet
       - trimLeadingAndTrailingSpacesAndZeroes
@@ -11161,10 +11161,10 @@ definitions:
       validateCharacterSet:
         description: The value indicating whether to validate character set in the message.
         type: boolean
-      validateEdiTypes:
+      validateEDITypes:
         description: The value indicating whether to Whether to validate EDI types.
         type: boolean
-      validateXsdTypes:
+      validateXSDTypes:
         description: The value indicating whether to Whether to validate XSD types.
         type: boolean
     required:
@@ -11173,8 +11173,8 @@ definitions:
       - interchangeControlNumberValidityDays
       - checkDuplicateGroupControlNumber
       - checkDuplicateTransactionSetControlNumber
-      - validateEdiTypes
-      - validateXsdTypes
+      - validateEDITypes
+      - validateXSDTypes
       - allowLeadingAndTrailingSpacesAndZeroes
       - trimLeadingAndTrailingSpacesAndZeroes
       - trailingSeparatorPolicy

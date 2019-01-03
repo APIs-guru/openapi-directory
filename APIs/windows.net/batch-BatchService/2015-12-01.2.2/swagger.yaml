@@ -7019,7 +7019,7 @@ definitions:
         $ref: '#/definitions/AffinityInformation'
         description: Gets or sets a locality hint that can be used by the Batch service to select a compute node on which to start the new task.
       commandLine:
-        description: 'Gets or sets the command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordianation command line.'
+        description: 'Gets or sets the command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordination command line.'
         type: string
       constraints:
         $ref: '#/definitions/TaskConstraints'
@@ -8623,7 +8623,7 @@ definitions:
         $ref: '#/definitions/AffinityInformation'
         description: Gets or sets a locality hint that can be used by the Batch service to select a compute node on which to start the new task.
       commandLine:
-        description: 'Gets or sets the command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordianation command line.'
+        description: 'Gets or sets the command line of the task. For multi-instance tasks, the command line is executed on the primary subtask after all the subtasks have finished executing the coordination command line.'
         type: string
       constraints:
         $ref: '#/definitions/TaskConstraints'

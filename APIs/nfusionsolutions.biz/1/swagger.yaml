@@ -12,7 +12,6 @@ info:
   license:
     name: Commercial License
     url: 'https://nfusionsolutions.com/nfusion-solutions-metals-gold-price-feed-quote/'
-  termsOfService: See nFusion Solutions Service Agreeement
   title: nFusion Solutions Market Data API v1
   version: '1'
   x-apisguru-categories:
@@ -28,12 +27,6 @@ consumes: []
 produces:
   - application/json
   - application/xml
-securityDefinitions:
-  token:
-    description: Authorization Token included in request
-    in: query
-    name: token
-    type: apiKey
 paths:
   '/api/v{version}/Currencies/history':
     get:
@@ -85,10 +78,11 @@ paths:
             items:
               $ref: '#/definitions/Response[IntervalCollection]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get historical prices for requested currency pairs
       tags:
         - Currencies
@@ -120,10 +114,11 @@ paths:
             items:
               type: string
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get list of currency pairs supported by the history endpoint
       tags:
         - Currencies
@@ -160,10 +155,11 @@ paths:
             items:
               $ref: '#/definitions/Response[Rate]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get latest mid rate for requested currency pairs
       tags:
         - Currencies
@@ -195,10 +191,11 @@ paths:
             items:
               type: string
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get list of currencies supported by the rate endpoint
       tags:
         - Currencies
@@ -235,10 +232,11 @@ paths:
             items:
               $ref: '#/definitions/Response[Summary]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get latest Summary for requested currency pairs
       tags:
         - Currencies
@@ -270,10 +268,11 @@ paths:
             items:
               type: string
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get list of currency pairs supported by the Summary endpoint
       tags:
         - Currencies
@@ -342,10 +341,11 @@ paths:
             items:
               $ref: '#/definitions/Response[IntervalCollection]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get historical benchmark prices for requested metals
       tags:
         - Metals
@@ -392,10 +392,11 @@ paths:
             items:
               $ref: '#/definitions/Response[Summary]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get latest Benchmark prices for requested metals
       tags:
         - Metals
@@ -427,10 +428,11 @@ paths:
             items:
               type: string
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get list of symbols supported by the benchmark endpoints
       tags:
         - Metals
@@ -499,10 +501,11 @@ paths:
             items:
               $ref: '#/definitions/Response[IntervalCollection]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get historical Spot prices for requested metals
       tags:
         - Metals
@@ -549,10 +552,11 @@ paths:
             items:
               $ref: '#/definitions/Response[Summary]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get Historical Performance for requested metals
       tags:
         - Metals
@@ -605,10 +609,11 @@ paths:
             items:
               $ref: '#/definitions/Response[Summary]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get Historical Annual Performance for requested metals
       tags:
         - Metals
@@ -662,10 +667,11 @@ paths:
             items:
               $ref: '#/definitions/Response[IntervalCollection]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get historical Spot Ratio prices for requested metals
       tags:
         - Metals
@@ -702,10 +708,11 @@ paths:
             items:
               $ref: '#/definitions/Response[Summary]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get latest Spot Summary for requested metal ratios
       tags:
         - Metals
@@ -739,7 +746,8 @@ paths:
           name: format
           required: false
           type: string
-        - description: apply global and per-tenant spot price adjustments. Defaults to true.
+        - default: true
+          description: apply global and per-tenant spot price adjustments. Defaults to true.
           in: query
           name: adjust
           required: false
@@ -757,10 +765,11 @@ paths:
             items:
               $ref: '#/definitions/Response[Summary]'
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get latest Spot Summary for requested metals
       tags:
         - Metals
@@ -792,10 +801,11 @@ paths:
             items:
               type: string
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get list of symbols supported by the spot endpoints
       tags:
         - Metals
@@ -827,10 +837,11 @@ paths:
             items:
               type: string
             type: array
+            uniqueItems: false
         '400':
-          description: bad request
+          description: Bad Request
         '401':
-          description: unauthorized
+          description: Unauthorized
       summary: Get list of currencies supported by metals endpoints for currency conversion
       tags:
         - Metals
@@ -870,6 +881,7 @@ definitions:
         items:
           $ref: '#/definitions/Interval'
         type: array
+        uniqueItems: false
       name:
         type: string
       symbol:

@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: REST APIs for Azure Active Drectory Connect Health
+  description: REST APIs for Azure Active Directory Connect Health
   title: ADHybridHealthService
   version: '2014-01-01'
   x-apisguru-categories:
@@ -372,7 +372,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Sucessfully updated service.
+          description: Successfully updated service.
           schema:
             $ref: '#/definitions/ServiceProperties'
       tags:
@@ -482,7 +482,7 @@ paths:
             nextPartitionKey: ' '
             nextRowKey: ' '
             serviceName: sampleServiceName
-            takeCount: '1'
+            takeCount: 1
           responses:
             '200':
               body:
@@ -686,14 +686,14 @@ paths:
                       - key: ActiveProperty1
                         value: Value1
                     additionalInformation:
-                      - hasProperties: true
-                        properties:
-                          - key: Property1
-                            value: Value1
-                          - key: Property2
-                            value: Value2
-                        titleName: SampleAdditionalInfo
-                        titleValue: SampleTitle
+                      hasProperties: true
+                      properties:
+                        - key: Property1
+                          value: Value1
+                        - key: Property2
+                          value: Value2
+                      titleName: SampleAdditionalInfo
+                      titleValue: SampleTitle
                     alertId: SampleAlertId
                     createdDate: '2018-04-10T03:12:23.4408944Z'
                     description: SampleAlertDescription
@@ -1920,14 +1920,14 @@ paths:
                       - key: ActiveProperty1
                         value: Value1
                     additionalInformation:
-                      - hasProperties: true
-                        properties:
-                          - key: Property1
-                            value: Value1
-                          - key: Property2
-                            value: Value2
-                        titleName: SampleAdditionalInfo
-                        titleValue: SampleTitle
+                      hasProperties: true
+                      properties:
+                        - key: Property1
+                          value: Value1
+                        - key: Property2
+                          value: Value2
+                      titleName: SampleAdditionalInfo
+                      titleValue: SampleTitle
                     alertId: SampleAlertId
                     createdDate: '2018-04-10T03:12:23.4408944Z'
                     description: SampleAlertDescription
@@ -2752,14 +2752,14 @@ paths:
                       - key: ActiveProperty1
                         value: Value1
                     additionalInformation:
-                      - hasProperties: true
-                        properties:
-                          - key: Property1
-                            value: Value1
-                          - key: Property2
-                            value: Value2
-                        titleName: SampleAdditionalInfo
-                        titleValue: SampleTitle
+                      hasProperties: true
+                      properties:
+                        - key: Property1
+                          value: Value1
+                        - key: Property2
+                          value: Value2
+                      titleName: SampleAdditionalInfo
+                      titleValue: SampleTitle
                     alertId: SampleAlertId
                     createdDate: '2018-04-10T03:12:23.4408944Z'
                     description: SampleAlertDescription
@@ -3903,7 +3903,7 @@ paths:
       description: Gets the details of an alert for a given service and server combination.
       operationId: serviceMembers_listAlerts
       parameters:
-        - description: The server Id for which the laert details needs to be queried.
+        - description: The server Id for which the alert details needs to be queried.
           format: uuid
           in: path
           name: serviceMemberId
@@ -3962,14 +3962,14 @@ paths:
                       - key: ActiveProperty1
                         value: Value1
                     additionalInformation:
-                      - hasProperties: true
-                        properties:
-                          - key: Property1
-                            value: Value1
-                          - key: Property2
-                            value: Value2
-                        titleName: SampleAdditionalInfo
-                        titleValue: SampleTitle
+                      hasProperties: true
+                      properties:
+                        - key: Property1
+                          value: Value1
+                        - key: Property2
+                          value: Value2
+                      titleName: SampleAdditionalInfo
+                      titleValue: SampleTitle
                     alertId: SampleAlertId
                     createdDate: '2018-04-10T03:12:23.4408944Z'
                     description: SampleAlertDescription
@@ -4348,7 +4348,7 @@ paths:
                 version: 1.1.750.0
 definitions:
   AdditionalInformation:
-    description: The addtional information for a property.
+    description: The additional information for a property.
     properties:
       hasProperties:
         description: Indicates if properties are present or not.
@@ -4398,7 +4398,7 @@ definitions:
           type: string
         type: array
       createdDate:
-        description: 'The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.'
+        description: 'The date time , in UTC, when the server was onboarded to Azure Active Directory Connect Health.'
         format: date-time
         type: string
       dcTypes:
@@ -4444,7 +4444,7 @@ definitions:
         format: date-time
         type: string
       lastUpdated:
-        description: 'The date and time, in UTC, when the server proeprties were last updated.'
+        description: 'The date and time, in UTC, when the server properties were last updated.'
         format: date-time
         type: string
       machineId:
@@ -4639,7 +4639,7 @@ definitions:
         description: The alert short name.
         type: string
       state:
-        description: The alert state which can be either active or resolved with multile resolution types.
+        description: The alert state which can be either active or resolved with multiple resolution types.
         enum:
           - Active
           - ResolvedByPositiveResult
@@ -4681,7 +4681,7 @@ definitions:
         description: The alert short name.
         type: string
       state:
-        description: The alert state which can be either active or resolved with multile resolution types.
+        description: The alert state which can be either active or resolved with multiple resolution types.
         type: string
     type: object
   AlertFeedbacks:
@@ -4871,7 +4871,7 @@ definitions:
           - Update
           - Delete
           - Obsolete
-          - DeletAdd
+          - DeleteAdd
         type: string
         x-ms-enum:
           modelAsString: true
@@ -4897,7 +4897,7 @@ definitions:
           $ref: '#/definitions/AttributeDelta'
         type: array
       objectClasses:
-        description: The olist of object classes.
+        description: The list of object classes.
         items:
           type: string
         type: array
@@ -4993,7 +4993,7 @@ definitions:
         description: The server where the connection error happened.
         type: string
       timeOccured:
-        description: The time when the connection error occured.
+        description: The time when the connection error occurred.
         format: date-time
         type: string
       type:
@@ -5025,10 +5025,10 @@ definitions:
         description: The connector Id.
         type: string
       dn:
-        description: The distingished name of the object.
+        description: The distinguished name of the object.
         type: string
       entryNumber:
-        description: The entry number for object error occured.
+        description: The entry number for object error occurred.
         type: integer
       errorCode:
         description: The error code.
@@ -5258,7 +5258,7 @@ definitions:
       aadDisplayName:
         description: The AAD side display name
         type: string
-      aadDistringuishedName:
+      aadDistinguishedName:
         description: The AAD side distinguished name for the object.
         type: string
       aadMail:
@@ -5341,7 +5341,7 @@ definitions:
         description: The minimum limit.
         type: string
       modifiedAttributeValue:
-        description: The modified atttribute value.
+        description: The modified attribute value.
         type: string
       objectIdConflict:
         description: The object Id with which there was an attribute conflict.
@@ -5359,11 +5359,11 @@ definitions:
         description: The server error detail.
         type: string
       timeFirstOccured:
-        description: The date and time when the export error first occured.
+        description: The date and time when the export error first occurred.
         format: date-time
         type: string
       timeOccured:
-        description: The date and time of occurance.
+        description: The date and time of occurrence.
         format: date-time
         type: string
       type:
@@ -5599,7 +5599,7 @@ definitions:
         description: The additional details.
         type: string
       consecutiveFailureCount:
-        description: The number of consecutive faulire counts.
+        description: The number of consecutive failure counts.
         type: integer
       errorDescription:
         description: The error description.
@@ -5707,7 +5707,7 @@ definitions:
         format: uuid
         type: string
       modifiedOrRemovedAttributeValue:
-        description: The modified or removed attribute vlaue.
+        description: The modified or removed attribute value.
         type: string
       runStepResultId:
         description: The run step result Id.
@@ -5797,7 +5797,7 @@ definitions:
         description: The name of the class which retrieve and process the metric.
         type: string
       minValue:
-        description: The minimun value.
+        description: The minimum value.
         type: integer
       valueKind:
         description: 'Indicates if the metrics is a rate,value, percent or duration type.'
@@ -5891,10 +5891,10 @@ definitions:
         type: array
     type: object
   ObjectWithSyncError:
-    description: The objects withg sync errors.
+    description: The objects with sync errors.
     properties:
       attributeMultiValues:
-        description: Indicates if the atttibute is multi-valued or not.
+        description: Indicates if the attribute is multi-valued or not.
         type: boolean
       attributeName:
         description: The attribute name.
@@ -5936,7 +5936,7 @@ definitions:
         description: The source of authority.
         type: string
       timeOccured:
-        description: The date and time of occurance.
+        description: The date and time of occurrence.
         format: date-time
         type: string
       userPrincipalName:
@@ -5966,10 +5966,10 @@ definitions:
         readOnly: true
         type: string
       totalCount:
-        description: The total count of opertaions.
+        description: The total count of operations.
         type: integer
       value:
-        description: List of operations supported by the Microsoft.ADHybridhHealthService resource provider.
+        description: List of operations supported by the Microsoft.ADHybridHealthService resource provider.
         items:
           $ref: '#/definitions/Operation'
         readOnly: true
@@ -6047,7 +6047,7 @@ definitions:
         description: Connection point of password management.
         type: string
       connectionTimeout:
-        description: Connection timeoit for password extension.
+        description: Connection timeout for password extension.
         type: integer
       enabled:
         description: Indicates if the password extension is enabled.
@@ -6075,7 +6075,7 @@ definitions:
           modelAsString: true
           name: PasswordOperationTypes
       unlockAccount:
-        description: Indicates if accounts should be unloacked when resetting password.
+        description: Indicates if accounts should be unlocked when resetting password.
         type: boolean
       user:
         description: User to execute password extension.
@@ -6109,7 +6109,7 @@ definitions:
         description: The forest name.
         type: string
       totalDcCount:
-        description: The total numbe of domain controllers for a given forest.
+        description: The total number of domain controllers for a given forest.
         type: integer
     type: object
   ReplicationSummary:
@@ -6210,7 +6210,7 @@ definitions:
         description: The object deletion limit.
         type: integer
       objectProcessLimit:
-        description: The obect processing limit.
+        description: The object processing limit.
         type: integer
       operationType:
         description: The run step operation types.
@@ -6219,7 +6219,7 @@ definitions:
         description: The page size of the run step.
         type: integer
       partitionId:
-        description: The Id of the partition that a current run setp operation is executing.
+        description: The Id of the partition that a current run step operation is executing.
         type: string
       timeout:
         description: The operation timeout.
@@ -6266,7 +6266,7 @@ definitions:
         description: 'The additional information, if any, for the server.'
         type: string
       createdDate:
-        description: 'The date time , in UTC, when the server was onboaraded to Azure Active Directory Connect Health.'
+        description: 'The date time , in UTC, when the server was onboarded to Azure Active Directory Connect Health.'
         format: date-time
         type: string
       dimensions:
@@ -6298,7 +6298,7 @@ definitions:
         format: date-time
         type: string
       lastUpdated:
-        description: 'The date and time, in UTC, when the server proeprties were last updated.'
+        description: 'The date and time, in UTC, when the server properties were last updated.'
         format: date-time
         type: string
       machineId:
@@ -6394,7 +6394,7 @@ definitions:
         format: date-time
         type: string
       customNotificationEmails:
-        description: The list of additional emails that are configured to recieve notifications about the service.
+        description: The list of additional emails that are configured to receive notifications about the service.
         items:
           type: string
         type: array
@@ -6519,7 +6519,7 @@ definitions:
         description: Indicates if the tenant is configured to automatically receive updates for Azure Active Directory Connect Health client side features.
         type: boolean
       alertSuppressionTimeInMins:
-        description: The time in minutues after which an alert will be autosupressed.
+        description: The time in minutes after which an alert will be auto-suppressed.
         type: integer
       consentedToMicrosoftDevOps:
         description: Indicates if the tenant data can be seen by Microsoft through Azure portal.
@@ -6542,10 +6542,10 @@ definitions:
         description: The reason due to which the tenant was disabled in Azure Active Directory Connect Health.
         type: integer
       globalAdminsEmail:
-        description: The list of golbal administrators for the tenant.
+        description: The list of global administrators for the tenant.
         items:
           type: string
-        type: object
+        type: array
       initialDomain:
         description: The initial domain of the tenant.
         type: string

@@ -43,13 +43,14 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/socrata/odn-backend/master/opendatanetwork-apiary.apib'
       version: 1A
   x-providerName: opendatanetwork.com
 produces:
   - application/json
+tags: []
 paths:
   /data/v1/availability/:
     get:

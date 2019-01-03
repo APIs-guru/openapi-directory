@@ -88,6 +88,60 @@ paths:
       summary: Gets list of Companies
       tags:
         - Company
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: Company_Post
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/NewCompany'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Company'
+        '401':
+          description: Unauthorized
+      security:
+        - oauth2:
+            - write
+      summary: Create a Company
+      tags:
+        - Company
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: Requires TaskID and a list of field names to update. The FieldsToUpdate field accepts a string array containing field names that should be updated.
+      operationId: Company_Put
+      parameters:
+        - description: ''
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateCompany'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Company'
+      security:
+        - oauth2:
+            - write
+      summary: Update a Task.
+      tags:
+        - Company
   '/api/Company/{id}':
     get:
       consumes: []
@@ -726,31 +780,37 @@ paths:
       consumes: []
       operationId: Project_Get
       parameters:
-        - format: date-time
+        - description: Only show project records updated after a certain date (UTC)
+          format: date-time
           in: query
           name: UpdatedAfter
           required: false
           type: string
-        - format: int32
+        - description: Number of items per page
+          format: int32
           in: query
           name: pageSize
           required: false
           type: integer
-        - format: int32
+        - description: Page to display. Starts from 1.
+          format: int32
           in: query
           name: pageNumber
           required: false
           type: integer
-        - in: query
+        - description: 'A column to sort on. Current possible values: "DateUpdated", "DateCreated", "DateUpdated desc", "DateCreated desc"'
+          in: query
           name: Sort
           required: false
           type: string
-        - format: int32
+        - description: Filter to the projects that the supplied UserID can add timesheets to
+          format: int32
           in: query
           name: TimesheetUserID
           required: false
           type: integer
-        - in: query
+        - description: Include Archived Projects in the results
+          in: query
           name: includeArchived
           required: false
           type: boolean
@@ -762,6 +822,7 @@ paths:
       security:
         - oauth2:
             - read
+      summary: Gets list of Projects
       tags:
         - Project
     post:
@@ -964,6 +1025,33 @@ paths:
       summary: Create a Task
       tags:
         - Task
+    put:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      description: Requires TaskID and a list of field names to update. The FieldsToUpdate field accepts a string array containing field names that should be updated.
+      operationId: Task_Put
+      parameters:
+        - description: ''
+          in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTask'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TaskDetails'
+      security:
+        - oauth2:
+            - write
+      summary: Update a Task.
+      tags:
+        - Task
   '/api/Task/{id}':
     get:
       consumes: []
@@ -1002,6 +1090,7 @@ paths:
       security:
         - oauth2:
             - read
+      summary: Get List of Taxes configured in the Avaza account.
       tags:
         - Tax
   /api/Timesheet:
@@ -1024,6 +1113,12 @@ paths:
           name: EntryDateTo
           required: false
           type: string
+        - description: The UserID of a timesheet user to filter timesheets for. Only api users with certain higher roles can see timesheets across multiple users.
+          format: int32
+          in: query
+          name: UserID
+          required: false
+          type: integer
         - in: query
           name: UserEmail
           required: false
@@ -1043,6 +1138,10 @@ paths:
           type: boolean
         - in: query
           name: isInvoiced
+          required: false
+          type: boolean
+        - in: query
+          name: isTimerRunning
           required: false
           type: boolean
         - description: Number of items per page
@@ -1108,7 +1207,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: Expects a full set of updated values for the timesheet
+      description: The FieldsToUpdate field expects a string array collection of the field names you would like updated.
       operationId: Timesheet_Put
       parameters:
         - description: ''
@@ -1175,20 +1274,117 @@ paths:
       summary: Gets a Timesheet Entry by Timesheet ID
       tags:
         - Timesheet
+  /api/TimesheetTimer:
+    get:
+      consumes: []
+      operationId: TimesheetTimer_GetRunningTimer
+      parameters:
+        - description: Optional - User ID number if impersonating a different user. Otherwise assumes the current user. Only users with certain security roles have permission to impersonate other users
+          format: int32
+          in: query
+          name: UserID
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      security:
+        - oauth2:
+            - read
+      summary: Gets the  Running Timer if there is one for a user.
+      tags:
+        - TimesheetTimer
+  '/api/TimesheetTimer/{id}':
+    delete:
+      consumes: []
+      operationId: TimesheetTimer_StopTimer
+      parameters:
+        - description: The ID of the existing timesheet entry that needs its timer stopped
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Optional - User ID number if impersonating a different user. Otherwise assumes the current user. Only users with certain security roles have permission to impersonate other users
+          format: int32
+          in: query
+          name: UserID
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      security:
+        - oauth2:
+            - write
+      summary: Stop the timer running on an existing Timesheet Entry
+      tags:
+        - TimesheetTimer
+    post:
+      consumes: []
+      operationId: TimesheetTimer_StartTimer
+      parameters:
+        - description: The ID of the existing timesheet entry on which to start a timer
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Optional - User ID number if impersonating a different user. Otherwise assumes the current user. Only users with certain security roles have permission to impersonate other users
+          format: int32
+          in: query
+          name: UserID
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+      security:
+        - oauth2:
+            - write
+      summary: Starts a Timer running on an existing Timesheet Entry
+      tags:
+        - TimesheetTimer
   /api/UserProfile:
     get:
       consumes: []
+      description: Admin and Invoice Managers can see all. Other users are limited to seeing their own profile.
       operationId: UserProfile_Get
       parameters:
-        - in: query
+        - description: 'Optional list of comma sepaprated roele codes to filter users by (e.g. "TimesheetUser,Admin")'
+          in: query
           name: Roles
           required: false
           type: string
-        - in: query
+        - description: Optional boolean (true/false) to filter to only show current authenticated user (always true for non Admin/InvoiceManager users)
+          in: query
           name: CurrentUserOnly
           required: false
           type: boolean
-        - format: int32
+        - description: Optionally filter by Company ID
+          format: int32
           in: query
           name: CompanyIDFK
           required: false
@@ -1201,6 +1397,7 @@ paths:
       security:
         - oauth2:
             - read
+      summary: Get Collection of Users who have roles in the current Avaza account.
       tags:
         - UserProfile
   /api/Webhook:
@@ -1247,7 +1444,7 @@ paths:
         - application/xml
         - text/xml
         - application/x-www-form-urlencoded
-      description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent", "project_created", "project_deleted", "project_updated", "task_created", "timesheet_created", "timesheet_deleted", "timesheet_updated".  You can subscribe to any webhook, but you will only receive notifications for data appropriate to the roles of your user account.'
+      description: 'When you receive a webhook, you should respond with Http 200 OK Status Code, otherwise we will retry. Event values are: "company_created", "company_deleted", "company_updated", "contact_created", "contact_deleted", "contact_updated", "invoice_created", "invoice_sent", "project_created", "project_deleted", "project_updated", "task_created", "timesheet_created", "timesheet_deleted", "timesheet_updated".  You can subscribe to any webhook, but you will only receive notifications for data appropriate to the roles of your user account. There is an optional  Secret parameter (string 255 char max). This allows for webhook authentication. If provided, the Secret will be BASE 64 encoded and passed with notications as a basic authentication http header. i.e. Authorization Basic [BASE64 of Secret]"'
       operationId: Webhook_Post
       parameters:
         - in: body
@@ -1429,6 +1626,9 @@ definitions:
     properties:
       event:
         description: 'The event code to be notified about. Possible values: company_created, contact_created, invoice_created, invoice_sent, project_created, task_created'
+        type: string
+      secret:
+        description: 'Optional Secret string (255 char max). If provided, the secret will be BASE 64 encoded and used as a basic authentication http header with webhook notifications. i.e. Authorization Basic [BASE64 of Secret]"'
         type: string
       target_url:
         description: The URL that should be notified of the event.
@@ -1977,6 +2177,37 @@ definitions:
       TaxNumber:
         type: string
     type: object
+  NewCompany:
+    properties:
+      BillingAddress:
+        type: string
+      BillingAddressCity:
+        type: string
+      BillingAddressLine:
+        type: string
+      BillingAddressPostCode:
+        type: string
+      BillingAddressState:
+        type: string
+      BillingCountryCode:
+        type: string
+      Comments:
+        type: string
+      CompanyName:
+        type: string
+      CurrencyCode:
+        type: string
+      Fax:
+        type: string
+      Phone:
+        type: string
+      TaxNumber:
+        type: string
+      website:
+        type: string
+    required:
+      - CompanyName
+    type: object
   NewCompanyContact:
     properties:
       CompanyBillingAddress:
@@ -2249,6 +2480,12 @@ definitions:
     type: object
   NewProjectModel:
     properties:
+      BudgetAmount:
+        format: double
+        type: number
+      BudgetHours:
+        format: double
+        type: number
       CompanyIDFK:
         description: 'An ID of a company in Avaza to create the Project under. You must provide either a CompanyID, or a CompanyName'
         format: int32
@@ -2259,13 +2496,24 @@ definitions:
       CurrencyCode:
         description: 'The ISO 3 letter currency code to use when creating a new Company. If not provided, the account''s default currency will be used.'
         type: string
+      EndDate:
+        format: date-time
+        type: string
       PopulateDefaultProjectMembers:
         type: boolean
+      ProjectCategoryIDFK:
+        format: int32
+        type: integer
       ProjectNotes:
         description: Any descriptive notes about the project. (2000 characters max)
         type: string
+      ProjectStatusCode:
+        type: string
       ProjectTitle:
         description: The title of the new project. (255 characters max)
+        type: string
+      StartDate:
+        format: date-time
         type: string
       TimesheetApprovalRequiredbyDefault:
         type: boolean
@@ -2339,7 +2587,7 @@ definitions:
   NewTimesheet:
     properties:
       Duration:
-        description: 'The duration of the timesheet, in decimal hours.'
+        description: 'The duration of the timesheet, in decimal hours. If null or 0, a timer will be started.'
         format: double
         type: number
       EntryDate:
@@ -2350,7 +2598,7 @@ definitions:
         description: Timesheet Notes
         type: string
       ProjectIDFK:
-        description: The project to associate the timesheet with
+        description: The project to associate the timesheet with.
         format: int32
         type: integer
       TaskIDFK:
@@ -2889,6 +3137,8 @@ definitions:
         type: string
       Firstname:
         type: string
+      HasTimer:
+        type: boolean
       Lastname:
         type: string
       Notes:
@@ -2908,6 +3158,9 @@ definitions:
         format: int32
         type: integer
       TaskTitle:
+        type: string
+      TimerStartedAtUTC:
+        format: date-time
         type: string
       TimesheetCategoryIDFK:
         format: int32
@@ -2943,6 +3196,79 @@ definitions:
         format: int32
         type: integer
     type: object
+  UpdateCompany:
+    properties:
+      BillingAddress:
+        type: string
+      BillingAddressCity:
+        type: string
+      BillingAddressLine:
+        type: string
+      BillingAddressPostCode:
+        type: string
+      BillingAddressState:
+        type: string
+      BillingCountryCode:
+        type: string
+      Comments:
+        type: string
+      CompanyID:
+        format: int32
+        type: integer
+      CompanyName:
+        type: string
+      Fax:
+        type: string
+      FieldsToUpdate:
+        items:
+          type: string
+        type: array
+      Phone:
+        type: string
+      TaxNumber:
+        type: string
+      website:
+        type: string
+    type: object
+  UpdateTask:
+    properties:
+      AssignedToUserIDFK:
+        format: int32
+        type: integer
+      DateDue:
+        format: date-time
+        type: string
+      DateDueUTC:
+        format: date-time
+        type: string
+      DateStart:
+        format: date-time
+        type: string
+      DateStartUTC:
+        format: date-time
+        type: string
+      Description:
+        type: string
+      EstimatedEffort:
+        description: Decimal hours
+        format: double
+        type: number
+      FieldsToUpdate:
+        items:
+          type: string
+        type: array
+      PercentComplete:
+        format: int32
+        type: integer
+      TaskID:
+        format: int32
+        type: integer
+      Title:
+        type: string
+    required:
+      - TaskID
+      - FieldsToUpdate
+    type: object
   UpdateTimesheetModel:
     properties:
       Duration:
@@ -2951,6 +3277,10 @@ definitions:
       EntryDate:
         format: date-time
         type: string
+      FieldsToUpdate:
+        items:
+          type: string
+        type: array
       Notes:
         type: string
       ProjectIDFK:
@@ -2965,11 +3295,12 @@ definitions:
       TimeSheetEntryID:
         format: int64
         type: integer
-      UserIDFK:
-        format: int32
-        type: integer
       hasStartEndTime:
         type: boolean
+    required:
+      - TimeSheetEntryID
+      - FieldsToUpdate
+      - ProjectIDFK
     type: object
   UserDetails:
     properties:

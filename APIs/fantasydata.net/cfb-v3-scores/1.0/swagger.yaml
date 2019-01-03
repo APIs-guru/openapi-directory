@@ -350,6 +350,12 @@ definitions:
         type: string
       Day:
         type: string
+      Distance:
+        type: integer
+      Down:
+        type: integer
+      GameEndDateTime:
+        type: string
       GameID:
         type: integer
       GlobalAwayTeamID:
@@ -368,12 +374,20 @@ definitions:
         type: string
       HomeTeamScore:
         type: integer
+      IsClosed:
+        type: boolean
       OverUnder:
         type: number
       Period:
         type: string
+      Periods:
+        items:
+          $ref: '#/definitions/Period'
+        type: array
       PointSpread:
         type: number
+      Possession:
+        type: string
       Season:
         type: integer
       SeasonType:
@@ -388,9 +402,29 @@ definitions:
         type: integer
       TimeRemainingSeconds:
         type: integer
+      Title:
+        type: string
       Updated:
         type: string
       Week:
+        type: integer
+      YardLine:
+        type: integer
+      YardLineTerritory:
+        type: string
+  Period:
+    properties:
+      AwayScore:
+        type: integer
+      GameID:
+        type: integer
+      HomeScore:
+        type: integer
+      Name:
+        type: string
+      Number:
+        type: integer
+      PeriodID:
         type: integer
   Stadium:
     properties:
@@ -432,6 +466,8 @@ definitions:
         type: integer
       School:
         type: string
+      ShortDisplayName:
+        type: string
       StadiumID:
         type: integer
       TeamID:
@@ -444,6 +480,8 @@ definitions:
         type: string
   TeamGame:
     properties:
+      AssistedTackles:
+        type: number
       Created:
         type: string
       DateTime:
@@ -470,6 +508,14 @@ definitions:
         type: integer
       FourthDownConversions:
         type: integer
+      FumbleReturnTouchdowns:
+        type: number
+      Fumbles:
+        type: number
+      FumblesLost:
+        type: number
+      FumblesRecovered:
+        type: number
       GameID:
         type: integer
       Games:
@@ -482,6 +528,12 @@ definitions:
         type: integer
       HomeOrAway:
         type: string
+      InterceptionReturnTouchdowns:
+        type: number
+      InterceptionReturnYards:
+        type: number
+      Interceptions:
+        type: number
       IsGameOver:
         type: boolean
       KickReturnLong:
@@ -502,6 +554,8 @@ definitions:
         type: integer
       OpponentScore:
         type: integer
+      PassesDefended:
+        type: number
       PassingAttempts:
         type: number
       PassingCompletionPercentage:
@@ -542,6 +596,8 @@ definitions:
         type: number
       Punts:
         type: number
+      QuarterbackHurries:
+        type: number
       ReceivingLong:
         type: number
       ReceivingTouchdowns:
@@ -562,14 +618,20 @@ definitions:
         type: number
       RushingYardsPerAttempt:
         type: number
+      Sacks:
+        type: number
       Score:
         type: integer
       Season:
         type: integer
       SeasonType:
         type: integer
+      SoloTackles:
+        type: number
       StatID:
         type: integer
+      TacklesForLoss:
+        type: number
       Team:
         type: string
       TeamID:
@@ -588,6 +650,8 @@ definitions:
         type: integer
   TeamSeason:
     properties:
+      AssistedTackles:
+        type: number
       ConferenceLosses:
         type: integer
       ConferencePointsAgainst:
@@ -618,6 +682,14 @@ definitions:
         type: integer
       FourthDownConversions:
         type: integer
+      FumbleReturnTouchdowns:
+        type: number
+      Fumbles:
+        type: number
+      FumblesLost:
+        type: number
+      FumblesRecovered:
+        type: number
       Games:
         type: integer
       GlobalTeamID:
@@ -626,6 +698,12 @@ definitions:
         type: integer
       HomeWins:
         type: integer
+      InterceptionReturnTouchdowns:
+        type: number
+      InterceptionReturnYards:
+        type: number
+      Interceptions:
+        type: number
       KickReturnLong:
         type: number
       KickReturnTouchdowns:
@@ -642,6 +720,8 @@ definitions:
         type: string
       OpponentScore:
         type: integer
+      PassesDefended:
+        type: number
       PassingAttempts:
         type: number
       PassingCompletionPercentage:
@@ -686,6 +766,8 @@ definitions:
         type: number
       Punts:
         type: number
+      QuarterbackHurries:
+        type: number
       ReceivingLong:
         type: number
       ReceivingTouchdowns:
@@ -710,16 +792,22 @@ definitions:
         type: number
       RushingYardsPerAttempt:
         type: number
+      Sacks:
+        type: number
       Score:
         type: integer
       Season:
         type: integer
       SeasonType:
         type: integer
+      SoloTackles:
+        type: number
       StatID:
         type: integer
       Streak:
         type: integer
+      TacklesForLoss:
+        type: number
       Team:
         type: string
       TeamID:

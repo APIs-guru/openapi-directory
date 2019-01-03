@@ -7,7 +7,7 @@ info:
   description: |-
     # Integrating with ShipStation
 
-    ShipStation strives to streamline shipping for online sellers, no matter where they sell their products online. We are continuously adding new marketplaces, shopping carts, and integration tools, because we know the e-commerce space is growing.
+    ShipStation strives to streamline shipping for online sellers, no matter where they sell their products online. We are continuously adding new marketplaces, shopping carts, and integration tools, because we know the e-commerce space is growing. 
     As a result, we’ve worked hard to provide developer resources to build custom integrations with ShipStation.  If you’re interested in becoming a partner of ours, drop us a line by [filling out this form](http://www.shipstation.com/partners/shipstation-api-custom-store/) and we’ll get in touch.
 
     There are two methods to integrate with ShipStation:
@@ -18,7 +18,7 @@ info:
 
     ## Custom Store Integration
 
-    Looking for a more 1-to-1 relationship between ShipStation and your chosen selling platform? The Custom Store Integration is the ticket. Our custom store integration is just like any of our other selling channel integration, and could be eligible (based on internal review) as a branded option within the ShipStation admin. It also allows the user to sync orders within ShipStation in a single click, in addition to ShipStation automatically sending shipment status and tracking information
+    Looking for a more 1-to-1 relationship between ShipStation and your chosen selling platform? The Custom Store Integration is the ticket. Our custom store integration is just like any of our other selling channel integration, and could be eligible (based on internal review) as a branded option within the ShipStation admin. It also allows the user to sync orders within ShipStation in a single click, in addition to ShipStation automatically sending shipment status and tracking information 
     updates back to your cart or marketplace once a label is created. It’s the best way to sync up orders with ShipStation and have the most seamless experience.
 
     The Custom Store allows you to perform two major functions:
@@ -27,14 +27,14 @@ info:
 
     * Receive tracking information when an order is shipped, including shipping method, shipping status, tracking number, and more
 
-    To integrate with the Custom Store, you must expose a web page that renders XML that adheres to the specification defined in the Custom Store Integration Guide.
+    To integrate with the Custom Store, you must expose a web page that renders XML that adheres to the specification defined in the Custom Store Integration Guide. 
     We refer to this page as your “XML Endpoint”. If you can provide us an XML Endpoint, we can *pull* data from your endpoint just like we do with other marketplaces like eBay and Amazon.
 
     **To find out more about our Custom Store Integration, click here: [Custom Store Integration Guide](https://help.shipstation.com/hc/en-us/articles/205928478)**
 
     ## ShipStation API
 
-    Our API is available for any plan, and allows for read access to almost all data in your account, and write access to create specific objects, like Orders, Customers, and Products.
+    Our API is available for any plan, and allows for read access to almost all data in your account, and write access to create specific objects, like Orders, Customers, and Products. 
     The API is a great way to get data directly to and from ShipStation, like creating products, customers, and querying order & shipping data. Please note that an API integration will not allow you to use your own MarketplaceID that could eventually be branded with your company's logo (see the Custom Store Integration above for that functionality).
 
     **This API allows developers to build applications that interface with the ShipStation platform. The API can be used to automate many tasks including:**
@@ -53,10 +53,10 @@ info:
 
     ## Which one should I pick?
 
-    The method that's right for your integration very much depends on the type of integration you're planning on implementing. A Custom Store allows ShipStation to *pull* order information from your platform the very same way we *pull* data from marketplaces such as eBay, Amazon, and Shopify. Once an order has been shipped in ShipStation, ShipStation automatically *pushes* tracking information back to your custom store. Though the functionality afforded by this approach is limited to these 2 main functions, much of the *heavy lifting* is performed by ShipStation. Importing orders
+    The method that's right for your integration very much depends on the type of integration you're planning on implementing. A Custom Store allows ShipStation to *pull* order information from your platform the very same way we *pull* data from marketplaces such as eBay, Amazon, and Shopify. Once an order has been shipped in ShipStation, ShipStation automatically *pushes* tracking information back to your custom store. Though the functionality afforded by this approach is limited to these 2 main functions, much of the *heavy lifting* is performed by ShipStation. Importing orders 
     and sending tracking information is performed automatically by ShipStation, as long as your XML endpoint is available to receive our data.
 
-    An API integration, on the other hand, exposes much more functionality, but requires that the developer do much of the heavy lifting. Orders must be *pushed* to ShipStation by using our "/orders/CreateOrder" endpoint.  The API allows developers to perform functions such as tagging an order,
+    An API integration, on the other hand, exposes much more functionality, but requires that the developer do much of the heavy lifting. Orders must be *pushed* to ShipStation by using our "/orders/CreateOrder" endpoint.  The API allows developers to perform functions such as tagging an order, 
     shipping an order, creating a shipping label (without an order), retrieving shipping rates, adding funds to a carrier account, creating a warehouse, listing products, and much more.  The functionality the API affords are typical actions that a user would perform if using the web app.
 
     ### Considerations
@@ -157,11 +157,238 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: apiBlueprint
       url: 'https://shipstation.docs.apiary.io/api-description-document'
       version: 1A
   x-providerName: shipstation.com
+tags:
+  - name: Accounts
+  - name: Carriers
+  - name: Customers
+  - name: Fulfillments
+  - description: |-
+      # Orders
+
+      ## Model: [**Order**](https://www.shipstation.com/developer-api/#/reference/model-order)
+    name: Orders
+  - description: |-
+      ## Products
+
+      ## Model: [**Product**](http://www.shipstation.com/developer-api/#/reference/model-product)
+    name: Products
+  - name: Shipments
+  - name: Stores
+  - name: Users
+  - name: Warehouses
+  - name: Webhooks
+  - description: |-
+      Name               |Data Type          |Description        
+      -------------------|-------------------|-------------------
+      ``name``|string|Name of person.
+      ``company``|string|Name of company.
+      ``street1``|string|First line of address.
+      ``street2``|string|Second line of address.
+      ``street3``|string|Third line of address.
+      ``city``|string|City
+      ``state``|string|State
+      ``postalCode``|string|Postal Code
+      ``country``|string|Country Code.  The two-character ISO country code is required.
+      ``phone``|string|Telephone number.
+      ``residential``|boolean|Specifies whether the given address is residential.
+      ``addressVerified``|string| Identifies whether the address has been verified by ShipStation (read only).  Possible values: ``Address not yet validated``, ``Address validated successfully``, ``Address validation warning``, ``Address validation failed``.
+    name: Model - Address
+  - description: |-
+      Name               |Data Type          |Description
+      -------------------|-------------------|-------------------
+      ``warehouseId``|number|Specifies the warehouse where to the order is to ship from. If the order was fulfilled using a fill provider, no warehouse is attached to these orders and will result in a `null` value being returned. *Please see note below
+      ``nonMachinable``|boolean|Specifies whether the order is non-machinable.
+      ``saturdayDelivery``|boolean|Specifies whether the order is to be delivered on a Saturday.
+      ``containsAlcohol``|boolean|Specifies whether the order contains alcohol.
+      ``storeId``|number|ID of store that is associated with the order. If not specified in the CreateOrder call either to create or update an order, ShipStation will default to the first manual store on the account. Can only be specified during order creation.
+      ``customField1``|string|Field that allows for custom data to be associated with an order. *Please see note below
+      ``customField2``|string|Field that allows for custom data to be associated with an order. *Please see note below
+      ``customField3``|string|Field that allows for custom data to be associated with an order. *Please see note below
+      ``source``|string|Identifies the original source/marketplace of the order. *Please see note below
+      ``mergedOrSplit``|boolean|Read-Only: Returns whether or not an order has been merged or split with another order. Read Only
+      ``mergedIds``|number[]|Read-Only: Array of orderIds.  Each orderId identifies an order that was merged with the associated order. Read Only
+      ``parentId ``|number|Read-Only: If an order has been split, it will return the Parent ID of the order with which it has been split. If the order has not been split, this field will return null. Read Only
+      ``billToParty``|string|Identifies which party to bill.  Possible values: "my_account", **"my_other_account" (see ** note below), "recipient", "third_party". billTo values can only be used when creating/updating orders.
+      ``billToAccount``|string|Account number of billToParty. billTo values can only be used when creating/updating orders.
+      ``billToPostalCode``|string|Postal Code of billToParty. billTo values can only be used when creating/updating orders.
+      ``billToCountryCode``|string|Country Code of billToParty. billTo values can only be used when creating/updating orders.
+      ``billToMyOtherAccount``|string|When using my_other_account billToParty value, the shippingProviderId value associated with the desired account. Make a List Carriers call to obtain shippingProviderId values.
+
+      NOTES:
+
+      - CreateLabelForOrder will not affect billTo values. Calls will default billTo fields to the values set in the order.
+
+      - **Setting "billToParty" attribute to "my_other_account" is used when wanting to charge a second connected account for the same carrier.
+    name: Model - AdvancedOptions
+  - description: |-
+      Name               |Data Type          |Description
+      -------------------|-------------------|-------------------
+      ``customsItemId``|string|Read Only field. When this field is not submitted in the Order/CreateOrder call, it will create a new customs line. If this field is included when submitting an order through Order/CreateOrder, then it will look for the corresponding customs line and update any values.
+      ``description``|string|A short description of the CustomsItem
+      ``quantity``|number|The quantity for this line item
+      ``value``|number|The value (in USD) of the line item
+      ``harmonizedTariffCode``|string| The Harmonized Commodity Code for this line item
+      ``countryOfOrigin``|string| The 2-character ISO country code where the item originated
+    name: Model - CustomsItem
+  - description: |-
+      Name               |Data Type          |Description
+      -------------------|-------------------|-------------------
+      ``length``|number| Length of package.
+      ``width``|number|Width of package.
+      ``height``|number|Height of package.
+      ``units``|string| Units of measurement.  Allowed units are: ``"inches"``, or ``"centimeters"``
+    name: Model - Dimensions
+  - description: |-
+      Name               |Data Type          |Description
+      -------------------|-------------------|-------------------
+      ``provider``|string| Preferred Insurance provider.  Available options: "shipsurance", "carrier", or "provider". The "provider" option is used to indicate that a shipment was insured by a third party other than ShipSurance or the carrier. The insurance is handled outside of ShipStation, and will not affect the cost of processing the label.
+      ``insureShipment``|boolean| Indicates whether shipment should be insured.
+      ``insuredValue``|number| Value to insure.
+    name: Model - InsuranceOptions
+  - description: |-
+      Name               |Data Type          |Description
+      -------------------|-------------------|-------------------
+      ``contents``|string|Contents of international shipment.  Available options are: ``"merchandise"``, ``"documents"``, ``"gift"``, ``"returned_goods"``, or ``"sample"``
+      ``customsItems``|[**CustomsItem[]**](https://www.shipstation.com/developer-api/#/reference/model-customsitem)|An array of customs items. Please note: If you wish to supply customsItems in the CreateOrder call and have the values not be overwritten by ShipStation, you must have the International Settings > Customs Declarations set to "Leave blank (Enter Manually)" in the UI: https://ss.shipstation.com/#/settings/international
+      ``nonDelivery``|string|Non-Delivery option for international shipment.  Available options are: ``"return_to_sender"`` or ``"treat_as_abandoned"``.  Please note: If the shipment is created through the Orders/CreateLabelForOrder endpoint and the nonDelivery field is not specified then value defaults based on the International Setting in the UI.  If the call is being made to the Shipments/CreateLabel endpoint and the nonDelivery field is not specified then the value will default to ``"return_to_sender"``.
+    name: Model - InternationalOptions
+  - description: |-
+      Name               |Data Type          |Description
+      -------------------|-------------------|-------------------
+      ``name``|string|Name of item option. Example: "Size"
+      ``value``|string|The value of the item option. Example: "Medium"
+    name: Model - ItemOption
+  - description: |-
+      Name               |Data Type          |Description        
+      -------------------|-------------------|-------------------
+      ``orderId``|number|The system generated identifier for the order.  This is a read-only field.
+      ``orderNumber``|string| A user-defined order number used to identify an order.
+      ``orderKey``|string|A user-provided key that should be unique to each order. Can only be initalized during order creation. If the orderkey isn't specified during creation, a unique value will be generated and assigned to the order.
+      ``orderDate``|string|The date the order was placed.
+      ``createDate``|string|The timestamp the order was created in ShipStation's database. Read-Only.
+      ``modifyDate``|string|The timestamp the order was modified in ShipStation. ``modifyDate`` will equal ``createDate`` until a modification is made. Read-Only.
+      ``paymentDate``|string|The date the order was paid for.
+      ``shipByDate``|string|The date the order is to be shipped before or on. This field is a suggested value generated by the order source/platform/cart and passed to ShipStation. Not all ShipStation integrations support this field and will show ``null`` if absent.
+      ``orderStatus``|string|The order's status.  Possible values: "awaiting_payment", "awaiting_shipment", "shipped", "on_hold", "cancelled"
+      ``customerId``|number|Unique identifier for the customer. Generated by ShipStation the first time the customer record is created. Read-Only
+      ``customerUsername``|string|Identifier for the customer in the originating system. This is typically a username or email address.
+      ``customerEmail``|string|The customer's email address.
+      ``billTo``|[**Address**](https://www.shipstation.com/developer-api/#/reference/model-address)|The recipients billing address. 
+      ``shipTo``|[**Address**](https://www.shipstation.com/developer-api/#/reference/model-address)|The recipients shipping address. 
+      ``items``|[**OrderItem[]**](https://www.shipstation.com/developer-api/#/reference/model-orderitem)|Array of purchased items.
+      ``orderTotal``|number|The order total. Please note is this a read-only field.
+      ``amountPaid``|number|The total amount paid for the Order.
+      ``taxAmount``|number|The total tax amount for the Order.
+      ``shippingAmount``|number|Shipping amount paid by the customer, if any.
+      ``customerNotes``|string|Notes left by the customer when placing the order.
+      ``internalNotes``|string|Private notes that are only visible to the seller.
+      ``gift``|boolean|Specifies whether or not this Order is a gift
+      ``giftMessage``|string|Gift message left by the customer when placing the order.
+      ``paymentMethod``|string|Method of payment used by the customer.
+      ``requestedShippingService``|string|Identifies the shipping service selected by the customer when placing this order. This value is given to ShipStation by the marketplace/cart. If value is "null" then the marketplace or cart does not support this field in ShipStation.
+      ``carrierCode``|string|The code for the carrier that is to be used(or was used) when this order is shipped(was shipped).
+      ``serviceCode``|string|The code for the shipping service that is to be used(or was used) when this order is shipped(was shipped).
+      ``packageCode``|string|The code for the package type that is to be used(or was used) when this order is shipped(was shipped).
+      ``confirmation``|string|The type of delivery confirmation that is to be used(or was used) when this order is shipped(was shipped).
+      ``shipDate``|string|The date the order was shipped.
+      ``holdUntilDate``|string|If placed on hold, this date is the expiration date for this order's hold status.  The order is moved back to awaiting_shipment on this date.
+      ``weight``|[**Weight**](https://www.shipstation.com/developer-api/#/reference/model-weight)|Weight of the order.
+      ``dimensions``|[**Dimensions**](https://www.shipstation.com/developer-api/#/reference/model-dimensions)|Dimensions of the order.
+      ``insuranceOptions``|[**InsuranceOptions**](https://www.shipstation.com/developer-api/#/reference/model-insuranceoptions)|The shipping insurance information associated with this order.
+      ``internationalOptions``|[**InternationalOptions**](https://www.shipstation.com/developer-api/#/reference/model-internationaloptions)|Customs information that can be used to generate customs documents for international orders.
+      ``advancedOptions``|[**AdvancedOptions**](https://www.shipstation.com/developer-api/#/reference/model-advancedoptions)|Various advanced options that may be available depending on the shipping carrier that is used to ship the order.
+      ``tagIds``|number[]|Array of tagIds.  Each tagId identifies a tag that has been associated with this order.
+      ``userId``|string|User assigned to Order/Shipment in the GUID. Read-Only.
+      ``externallyFulfilled``|boolean|States whether the order has is current marked as externally fulfilled by the marketplace. A common example is when an Amazon order is marked an Amazon Fulfilled Network (AFN). If the order is an AFN then this element will be true. Read-Only.
+      ``externallyFulfilledBy``|string|If ``externallFulfilled`` is true then this string will return how the order is being fulfilled by the marketplace. Read-Only.
+    name: Model - Order
+  - description: |-
+      Name               |Data Type          |Description
+      -------------------|-------------------|-------------------
+      ``orderItemId``|number| The system generated identifier for the OrderItem. This is a read-only field.
+      ``lineItemKey``|string| An identifier for the OrderItem in the originating system.
+      ``sku``|string| The SKU (stock keeping unit) identifier for the product associated with this line item.
+      ``name``|string| The name of the product associated with this line item. Cannot be ``null``
+      ``imageUrl``|string|The public URL to the product image.
+      ``weight``|[**Weight**](https://www.shipstation.com/developer-api/#/reference/model-weight)|The weight of a single item.
+      ``quantity``|number|The quantity of product ordered.
+      ``unitPrice``|number|The sell price of a single item specified by the order source.
+      ``taxAmount``|number|The tax price of a single item specified by the order source.
+      ``shippingAmount``|number|The shipping amount or price of a single item specified by the order source.
+      ``warehouseLocation``|string|The location of the product within the seller's warehouse (e.g. Aisle 3, Shelf A, Bin 5)
+      ``options``|[**ItemOption[]**](https://www.shipstation.com/developer-api/#/reference/model-itemoption)|
+      ``productId``|number|The identifier for the Product Resource associated with this OrderItem.
+      ``fulfillmentSku``|string|The fulfillment SKU associated with this OrderItem if the fulfillment provider requires an identifier other then the SKU.
+      ``adjustment``|boolean| Indicates that the OrderItem is a non-physical adjustment to the order (e.g. a discount or promotional code)
+      ``upc``|string|The Universal Product Code associated with this OrderItem.
+      ``createDate``|string|The timestamp the orderItem was created in ShipStation's database. Read-Only.
+      ``modifyDate``|string|The timestamp the orderItem was modified in ShipStation. ``modifyDate`` will equal ``createDate`` until a modification is made. Read-Only.
+    name: Model - OrderItem
+  - description: |-
+      Name               |Data Type          |Description        
+      -------------------|-------------------|-------------------
+      ``productId``|number|The system generated identifier for the product.  This is a read-only field.
+      ``sku``|string|Stock keeping Unit. A user-defined value for a product to help identify the product. It is suggested that each product should contain a unique SKU.
+      ``name``|string|Name or description of the product.
+      ``price``|number|The unit price of the product.
+      ``defaultCost``|number|The seller's cost for this product.
+      ``length``|number|The length of the product. Unit of measurement is UI dependent. No conversions will be made from one UOM to another. See our knowledge base [**here**](https://help.shipstation.com/hc/en-us/articles/206639187) for more details.
+      ``width``|number|The width of the product. Unit of measurement is UI dependent. No conversions will be made from one UOM to another. See our knowledge base [**here**](https://help.shipstation.com/hc/en-us/articles/206639187) for more details.
+      ``height``|number|The height of the product. Unit of measurement is UI dependent. No conversions will be made from one UOM to another. See our knowledge base [**here**](https://help.shipstation.com/hc/en-us/articles/206639187) for more details.
+      ``weightOz``|number|The weight of a single item in ounces.
+      ``internalNotes``|string|Seller's private notes for the product.
+      ``fulfillmentSku``|string|Stock keeping Unit for the fulfillment of that product by a 3rd party.
+      ``createDate``|string|The timestamp the product record was created in ShipStation's database. Read-Only.
+      ``modifyDate``|string|The timestamp the product record was modified in ShipStation. Read-Only.
+      ``active``|boolean|Specifies whether or not the product is an active record. 
+      ``productCategory``|[**ProductCategory**](https://www.shipstation.com/developer-api/#/reference/model-product-category)|The Product Category used to organize and report on similar products. See our knowledge base [**here**](https://help.shipstation.com/hc/en-us/articles/206639217) for more information on Product Categories.
+      ``productType``|string|Specifies the product type. See our knowledge base [**here**](https://help.shipstation.com/hc/en-us/articles/209157678) for more information on Product Types.
+      ``warehouseLocation``|string|The warehouse location associated with the product record.
+      ``defaultCarrierCode``|string|The default domestic shipping carrier for this product.
+      ``defaultServiceCode``|string|The default domestic shipping service for this product.
+      ``defaultPackageCode``|string|The default domestic packageType for this product.
+      ``defaultIntlCarrierCode``|string|The default international shipping carrier for this product.
+      ``defaultIntlServiceCode``|string|The default international shipping service for this product.
+      ``defaultIntlPackageCode``|string|The default international packageType for this product.
+      ``defaultConfirmation``|string|The default domestic Confirmation type for this Product.
+      ``defaultIntlConfirmation``|string|The default international Confirmation type for this Product.
+      ``customsDescription``|string|The default customs Description for the product.
+      ``customsValue``|number|The default customs Declared Value for the product.
+      ``customsTariffNo``|string|The default Harmonized Code for the Product.
+      ``customsCountryCode``|string|The default 2 digit ISO Origin Country for the Product.
+      ``noCustoms``|boolean|If ``true``, this product will not be included on international customs forms.
+      ``tags``|[**ProductTag**](https://www.shipstation.com/developer-api/#/reference/model-product-tag)|The Product Tag used to organize and visually identify products. See our knowledge base [**here**](https://help.shipstation.com/hc/en-us/articles/206639227) for more information on Product Defaults and tags.
+    name: Model - Product
+  - description: |-
+      Name               |Data Type          |Description        
+      -------------------|-------------------|-------------------
+      ``categoryId``|number|The system generated identifier for the product category.
+      ``name``|string|Name or description for the product category.
+    name: Model - Product Category
+  - description: |-
+      Name               |Data Type          |Description        
+      -------------------|-------------------|-------------------
+      ``tagId``|number|The system generated identifier for the product tag.
+      ``name``|string|Name or description for the product tag.
+    name: Model - Product Tag
+  - description: |-
+      Name               |Data Type          |Description
+      -------------------|-------------------|-------------------
+      ``resource_url``|string|This URL can be used to get the resource which triggered the webhook. 200 character limit. The URL can be accessed with ShipStation API Basic Authentication credentials.
+      ``resource_type``|string|The event type that triggered the webhook. Will be one of the following values: ORDER_NOTIFY, ITEM_ORDER_NOTIFY, SHIP_NOTIFY, ITEM_SHIP_NOTIFY
+    name: Model - Webhook
+  - description: |-
+      Name               |Data Type          |Description
+      -------------------|-------------------|-------------------
+      ``value``|number|weight value.
+      ``units``|string|units of weight.  Allowed units are: ``"pounds"``, ``"ounces"``, or ``"grams"``
+      ``WeightUnits``|number|(read only) A numeric value that is equivalent to the above units field.
+    name: Model - Weight
 paths:
   /accounts/listtags:
     get:
@@ -207,7 +434,7 @@ paths:
         ``addr1`` | string, optional | Company Address - Street 1
         ``addr2`` | string, optional | Company Address - Street 2
         ``city`` | string, optional | Company Address - City
-        ``state`` | string, optional | Company Address - State
+        ``state`` | string, optional | Company Address - State 
         ``zip`` | string, optional | Company Address - Zip Code
         ``countryCode`` |string, optional | Company Address - Country.  Please use a 2-character country code.
         ``phone`` | string, optional | Company Phone number.
@@ -1432,7 +1659,7 @@ paths:
         ``carrierCode`` | string, optional | The code for the carrier that is to be used(or was used) when this order is shipped(was shipped).
         ``serviceCode`` | string, optional | The code for the shipping service that is to be used(or was used) when this order is shipped(was shipped).
         ``packageCode`` | string, optional | The code for the package type that is to be used(or was used) when this order is shipped(was shipped).
-        ``confirmation`` | string, optional | The type of delivery confirmation that is to be used(or was used) when this order is shipped(was shipped). Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.
+        ``confirmation`` | string, optional | The type of delivery confirmation that is to be used(or was used) when this order is shipped(was shipped). Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.  
         ``shipDate`` | string, optional | The date the order was shipped.
         ``weight`` | Weight, optional | Weight of the order.  Use the [**Weight**](http://www.shipstation.com/developer-api/#/reference/model-weight) model.
         ``dimensions`` | Dimensions, optional | Dimensions of the order.  Use the [**Dimensions**](http://www.shipstation.com/developer-api/#/reference/model-dimensions) model.
@@ -3581,9 +3808,9 @@ paths:
          ``shipFrom`` | Address, required | Address indicating shipment's origin.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
          ``shipTo`` | Address, required | Address indicating shipment's destination.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
          ``returnTo`` | Address, optional | Address indicating return address displayed on the label.  Use the [**Address**](https://www.shipstation.com/developer-api/#/reference/model-address) model.
-         ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this order.
+         ``insuranceOptions`` | InsuranceOptions, optional | The shipping insurance information associated with this order.  
          ``internationalOptions`` | InternationalOptions, optional | Customs information that can be used to generate customs documents for international orders.  Use the [**InternationalOptions**](https://www.shipstation.com/developer-api/#/reference/model-internationaloptions) model.
-         ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order.  Use the [**AdvancedOptions**](https://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model.
+         ``advancedOptions`` | AdvancedOptions, optional | Various advanced options that may be available depending on the shipping carrier that is used to ship the order.  Use the [**AdvancedOptions**](https://www.shipstation.com/developer-api/#/reference/model-advancedoptions) model. 
          ``testLabel`` | boolean, optional | Specifies whether a test label should be created. Default value: false.
       parameters:
         - in: body
@@ -3753,7 +3980,7 @@ paths:
          ``toPostalCode`` | string, required | Destination Postal Code.
          ``toCity`` | string, optional | Destination City.
          ``weight`` | Weight, required | Shipment's weight.  Use ``Weight`` object.
-         ``dimensions`` | Dimensions, optional | Shipment's dimensions.  Use ``Dimensions`` object.
+         ``dimensions`` | Dimensions, optional | Shipment's dimensions.  Use ``Dimensions`` object. 
          ``confirmation`` | string, optional | The type of delivery confirmation that is to be used once the shipment is created.  Possible values: ``none``, ``delivery``, ``signature``, ``adult_signature``, and ``direct_signature``.  ``direct_signature`` is available for FedEx only.
          ``residential`` | boolean, optional | Returns rates that account for the specified delivery confirmation type. Default value: false
       parameters:
@@ -3887,7 +4114,7 @@ paths:
       summary: Void Label
       tags:
         - Shipments
-  '/shipments?recipientName={recipientName}&recipientCountryCode={recipientCountryCode}&orderNumber={orderNumber}&orderId={orderId}&carrierCode={carrierCode}&serviceCode={serviceCode}&trackingNumber={trackingNumber}&createDateStart={createDateStart}&createDateEnd={createDateEnd}&shipDateStart={shipDateStart}&shipDateEnd={shipDateEnd}&voidDateStart={voidDateStart}&voidDateEnd={voidDateEnd}&includeShipmentItems={includeShipmentItems}&sortBy={sortBy}&sortDir={sortDir}&page={page}&pageSize={pageSize}':
+  '/shipments?recipientName={recipientName}&recipientCountryCode={recipientCountryCode}&orderNumber={orderNumber}&orderId={orderId}&carrierCode={carrierCode}&serviceCode={serviceCode}&trackingNumber={trackingNumber}&createDateStart={createDateStart}&createDateEnd={createDateEnd}&shipDateStart={shipDateStart}&shipDateEnd={shipDateEnd}&voidDateStart={voidDateStart}&voidDateEnd={voidDateEnd}&storeId={storeId}&includeShipmentItems={includeShipmentItems}&sortBy={sortBy}&sortDir={sortDir}&page={page}&pageSize={pageSize}':
     get:
       description: |-
         Obtains a list of shipments that match the specified criteria.  Please note the following:
@@ -3914,6 +4141,7 @@ paths:
         &shipDateEnd={shipDateEnd}
         &voidDateStart={voidDateStart}
         &voidDateEnd={voidDateEnd}
+        &storeId={storeId}
         &includeShipmentItems={includeShipmentItems}
         &sortBy={sortBy}
         &sortDir={sortDir}
@@ -3992,6 +4220,12 @@ paths:
           required: true
           type: string
           x-example: '2015-01-08 00:00:00'
+        - description: Returns shipments whose orders belong to the specified store ID.
+          in: path
+          name: storeId
+          required: true
+          type: number
+          x-example: '304352'
         - description: 'Specifies whether to include shipment items with results Default value: false.'
           in: path
           name: includeShipmentItems

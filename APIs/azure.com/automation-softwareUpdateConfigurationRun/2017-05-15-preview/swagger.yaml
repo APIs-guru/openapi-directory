@@ -81,7 +81,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: number of entries you skip before returning results
+        - description: Number of entries you skip before returning results
           in: query
           name: $skip
           required: false
@@ -139,6 +139,12 @@ paths:
                         name: mypatch
                       startTime: '2017-10-23T02:30:36.2401233+00:00'
                       status: Failed
+                      tasks:
+                        postTask: null
+                        preTask:
+                          jobId: be430e9e-2290-462e-8f86-686407c35fab
+                          source: preRunbook
+                          status: Completed
                   - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurationRuns/5dabff55-9812-4a58-af16-b0cb1d9384e8
                     name: 5dabff55-9812-4a58-af16-b0cb1d9384e8
                     properties:
@@ -154,6 +160,12 @@ paths:
                         name: mypatch
                       startTime: '2017-10-23T01:33:01.8818952+00:00'
                       status: Failed
+                      tasks:
+                        postTask: null
+                        preTask:
+                          jobId: be430e9e-2290-462e-8f86-686407c35fab
+                          source: preRunbook
+                          status: Completed
               headers: {}
         List software update configuration machine runs:
           parameters:
@@ -182,6 +194,12 @@ paths:
                         name: mypatch
                       startTime: '2017-10-23T02:30:36.2401233+00:00'
                       status: Succeeded
+                      tasks:
+                        postTask: null
+                        preTask:
+                          jobId: be430e9e-2290-462e-8f86-686407c35fab
+                          source: preRunbook
+                          status: Completed
                   - id: /subscriptions/51766542-3ed7-4a72-a187-0c8ab644ddab/resourceGroups/mygroup/providers/Microsoft.Automation/automationAccounts/myaccount/softwareUpdateConfigurationRuns/5dabff55-9812-4a58-af16-b0cb1d9384e8
                     name: 5dabff55-9812-4a58-af16-b0cb1d9384e8
                     properties:
@@ -197,6 +215,12 @@ paths:
                         name: mypatch
                       startTime: '2017-10-23T01:33:01.8818952+00:00'
                       status: Succeeded
+                      tasks:
+                        postTask: null
+                        preTask:
+                          jobId: be430e9e-2290-462e-8f86-686407c35fab
+                          source: preRunbook
+                          status: Completed
               headers: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automation/automationAccounts/{automationAccountName}/softwareUpdateConfigurationRuns/{softwareUpdateConfigurationRunId}':
     get:
@@ -287,8 +311,37 @@ paths:
                     name: mypatch
                   startTime: '2017-10-23T02:30:36.2401233+00:00'
                   status: Succeeded
+                  tasks:
+                    postTask: null
+                    preTask:
+                      jobId: be430e9e-2290-462e-8f86-686407c35fab
+                      source: preRunbook
+                      status: Completed
               headers: {}
 definitions:
+  softareUpdateConfigurationRunTaskProperties:
+    description: Task properties of the software update configuration.
+    properties:
+      jobId:
+        description: The job id of the task.
+        type: string
+      source:
+        description: The name of the source of the task.
+        type: string
+      status:
+        description: The status of the task.
+        type: string
+    type: object
+  softareUpdateConfigurationRunTasks:
+    description: Software update configuration run tasks model.
+    properties:
+      postTask:
+        $ref: '#/definitions/softareUpdateConfigurationRunTaskProperties'
+        description: Post task properties.
+      preTask:
+        $ref: '#/definitions/softareUpdateConfigurationRunTaskProperties'
+        description: Pre task properties.
+    type: object
   softwareUpdateConfigurationRun:
     description: Software update configuration Run properties.
     properties:
@@ -325,15 +378,15 @@ definitions:
         readOnly: true
         type: integer
       configuredDuration:
-        description: configured duration for the software update configuration run.
+        description: Configured duration for the software update configuration run.
         readOnly: true
         type: string
       createdBy:
-        description: 'createdBy property, which only appears in the response.'
+        description: 'CreatedBy property, which only appears in the response.'
         readOnly: true
         type: string
       creationTime:
-        description: 'Creation time of theresource, which only appears in the response.'
+        description: 'Creation time of the resource, which only appears in the response.'
         format: date-time
         readOnly: true
         type: string
@@ -349,7 +402,7 @@ definitions:
         readOnly: true
         type: integer
       lastModifiedBy:
-        description: 'lastModifiedBy property, which only appears in the response.'
+        description: 'LastModifiedBy property, which only appears in the response.'
         readOnly: true
         type: string
       lastModifiedTime:
@@ -366,7 +419,7 @@ definitions:
         $ref: '#/definitions/updateConfigurationNavigation'
         description: software update configuration triggered this run
       startTime:
-        description: Etart time of the software update configuration run.
+        description: Start time of the software update configuration run.
         format: date-time
         readOnly: true
         type: string
@@ -375,6 +428,9 @@ definitions:
         description: Status of the software update configuration run.
         readOnly: true
         type: string
+      tasks:
+        $ref: '#/definitions/softareUpdateConfigurationRunTasks'
+        description: Software update configuration tasks triggered in this run
   updateConfigurationNavigation:
     description: Software update configuration Run Navigation model.
     properties:

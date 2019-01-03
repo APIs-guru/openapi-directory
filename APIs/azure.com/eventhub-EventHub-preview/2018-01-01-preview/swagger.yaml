@@ -35,13 +35,13 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  ApiVersionParameter:
+  apiVersionParameter:
     description: Client API version.
     in: query
     name: api-version
     required: true
     type: string
-  AuthorizationRuleNameParameter:
+  authorizationRuleNameParameter:
     description: The authorization rule name.
     in: path
     minLength: 1
@@ -49,7 +49,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  ClusterNameParameter:
+  clusterNameParameter:
     description: The name of the Event Hubs Cluster.
     in: path
     maxLength: 50
@@ -58,7 +58,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  IPFilterRuleNameParameter:
+  ipFilterRuleNameParameter:
     description: The IP Filter Rule name.
     in: path
     minLength: 1
@@ -66,7 +66,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  NamespaceNameParameter:
+  namespaceNameParameter:
     description: The Namespace name
     in: path
     maxLength: 50
@@ -75,7 +75,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  ResourceGroupNameParameter:
+  resourceGroupNameParameter:
     description: Name of the resource group within the Azure subscription.
     in: path
     maxLength: 90
@@ -84,7 +84,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SkipParameter:
+  skipParameter:
     description: 'Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.'
     in: query
     maximum: 1000
@@ -93,7 +93,7 @@ parameters:
     required: false
     type: integer
     x-ms-parameter-location: method
-  SkuNameParameter:
+  skuNameParameter:
     description: The sku type.
     in: path
     maxLength: 50
@@ -102,13 +102,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
+  subscriptionIdParameter:
     description: Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
     type: string
-  TopParameter:
+  topParameter:
     description: May be used to limit the number of results to the most recent N usageDetails.
     in: query
     maximum: 1000
@@ -117,7 +117,7 @@ parameters:
     required: false
     type: integer
     x-ms-parameter-location: method
-  VirtualNetworkRuleNameParameter:
+  virtualNetworkRuleNameParameter:
     description: The Virtual Network Rule name.
     in: path
     minLength: 1
@@ -131,7 +131,7 @@ paths:
       description: Lists all of the available Event Hub REST API operations.
       operationId: Operations_List
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
           description: OK. The request has succeeded.
@@ -293,8 +293,8 @@ paths:
       description: 'Lists all the available Namespaces within a subscription, irrespective of the resource groups.'
       operationId: Namespaces_List
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespaces returned successfully.
@@ -1412,9 +1412,9 @@ paths:
       description: Lists the available Event Hubs Clusters within an ARM resource group.
       operationId: Clusters_ListByResourceGroup
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
           description: Clusters returned successfully.
@@ -1455,10 +1455,10 @@ paths:
       description: Gets the resource description of the specified Event Hubs Cluster.
       operationId: Clusters_Get
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ClusterNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/clusterNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
           description: Event Hubs Cluster resource description returned successfully.
@@ -1498,10 +1498,10 @@ paths:
       description: Modifies mutable properties on the Event Hubs Cluster. This operation is idempotent.
       operationId: Clusters_Patch
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ClusterNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/clusterNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
         - description: The properties of the Event Hubs Cluster which should be updated.
           in: body
           name: parameters
@@ -1577,10 +1577,10 @@ paths:
       description: Get all Event Hubs Cluster settings - a collection of key/value pairs which represent the quotas and settings imposed on the cluster.
       operationId: Configuration_Get
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ClusterNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/clusterNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
           description: Event Hubs Cluster settings configuration returned.
@@ -1609,10 +1609,10 @@ paths:
       description: Replace all specified Event Hubs Cluster settings with those contained in the request body. Leaves the settings not specified in the request body unmodified.
       operationId: Configuration_Patch
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ClusterNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/clusterNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
         - description: Parameters for creating an Event Hubs Cluster resource.
           in: body
           name: parameters
@@ -1666,9 +1666,9 @@ paths:
       description: Lists the available Namespaces within a resource group.
       operationId: Namespaces_ListByResourceGroup
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespaces returned successfully.
@@ -1937,13 +1937,13 @@ paths:
       description: Deletes an existing namespace. This operation also removes all associated resources under the namespace.
       operationId: Namespaces_Delete
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly deleted.
+          description: Namespace successfully deleted.
         '202':
           description: Namespace delete request accepted.
         '204':
@@ -1970,10 +1970,10 @@ paths:
       description: Gets the description of the specified namespace.
       operationId: Namespaces_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace returned successfully.
@@ -2043,19 +2043,19 @@ paths:
       description: 'Creates or updates a namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       operationId: Namespaces_Update
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
         - description: Parameters for updating a namespace resource.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/EHNamespace'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly updated.
+          description: Namespace successfully updated.
           schema:
             $ref: '#/definitions/EHNamespace'
         '201':
@@ -2130,8 +2130,8 @@ paths:
       description: 'Creates or updates a namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       operationId: Namespaces_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
         - description: Parameters for creating a namespace resource.
           in: body
           name: parameters
@@ -2140,11 +2140,11 @@ paths:
             $ref: '#/definitions/EHNamespace'
             required:
               - location
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly created.
+          description: Namespace successfully created.
           schema:
             $ref: '#/definitions/EHNamespace'
         '201':
@@ -2224,10 +2224,10 @@ paths:
       description: Gets a list of IP Filter rules for a Namespace.
       operationId: Namespaces_ListIPFilterRules
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace IpFilterRule successfully returned.
@@ -2264,11 +2264,11 @@ paths:
       description: Deletes an IpFilterRule for a Namespace.
       operationId: Namespaces_DeleteIpFilterRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/IPFilterRuleNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ipFilterRuleNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace IpFilterRule successfully deleted.
@@ -2295,11 +2295,11 @@ paths:
       description: Gets an IpFilterRule for a Namespace by rule name.
       operationId: Namespaces_GetIpFilterRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/IPFilterRuleNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ipFilterRuleNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace IpFilterRule returned successfully.
@@ -2333,17 +2333,17 @@ paths:
       description: Creates or updates an IpFilterRule for a Namespace.
       operationId: Namespaces_CreateOrUpdateIpFilterRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/IPFilterRuleNameParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ipFilterRuleNameParameter'
         - description: The Namespace IpFilterRule.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/IpFilterRule'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace IpFilterRule created
@@ -2378,15 +2378,156 @@ paths:
                   filterName: sdk-IPFilterRules-7337
                   ipMask: 13.78.143.246/32
                 type: Microsoft.EventHub/Namespaces/IpFilterRules
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets/default':
+    get:
+      description: Gets NetworkRuleSet for a Namespace.
+      operationId: Namespaces_GetNetworkRuleSet
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace NetworkRuleSet successfully returned.
+          schema:
+            $ref: '#/definitions/NetworkRuleSet'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        NameSpaceNetworkRuleSetGet:
+          parameters:
+            api-version: 2018-01-01-preview
+            namespaceName: sdk-Namespace-6019
+            resourceGroupName: ResourceGroup
+            subscriptionId: Subscription
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subscriptionid/resourceGroups/resourcegroupid/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9659/networkruleset/default
+                name: default
+                properties:
+                  defaultAction: Deny
+                  ipRules:
+                    - action: Allow
+                      ipMask: 1.1.1.1
+                    - action: Allow
+                      ipMask: 1.1.1.2
+                    - action: Allow
+                      ipMask: 1.1.1.3
+                    - action: Allow
+                      ipMask: 1.1.1.4
+                    - action: Allow
+                      ipMask: 1.1.1.5
+                  virtualNetworkRules:
+                    - ignoreMissingVnetServiceEndpoint: true
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+                type: Microsoft.EventHub/Namespaces/NetworkRuleSet
+    put:
+      description: Create or update NetworkRuleSet for a Namespace.
+      operationId: Namespaces_CreateOrUpdateNetworkRuleSet
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - description: The Namespace IpFilterRule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/NetworkRuleSet'
+      responses:
+        '200':
+          description: Namespace NetworkRuleSet successfully returned.
+          schema:
+            $ref: '#/definitions/NetworkRuleSet'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        NameSpaceNetworkRuleSetCreate:
+          parameters:
+            api-version: 2018-01-01-preview
+            namespaceName: sdk-Namespace-6019
+            parameters:
+              properties:
+                defaultAction: Deny
+                ipRules:
+                  - action: Allow
+                    ipMask: 1.1.1.1
+                  - action: Allow
+                    ipMask: 1.1.1.2
+                  - action: Allow
+                    ipMask: 1.1.1.3
+                  - action: Allow
+                    ipMask: 1.1.1.4
+                  - action: Allow
+                    ipMask: 1.1.1.5
+                virtualNetworkRules:
+                  - ignoreMissingVnetServiceEndpoint: true
+                    subnet:
+                      id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                  - ignoreMissingVnetServiceEndpoint: false
+                    subnet:
+                      id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                  - ignoreMissingVnetServiceEndpoint: false
+                    subnet:
+                      id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+            resourceGroupName: ResourceGroup
+            subscriptionId: Subscription
+          responses:
+            '200':
+              body:
+                id: /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourceGroups/resourcegroupid/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9659/networkruleset/default
+                name: default
+                properties:
+                  defaultAction: Deny
+                  ipRules:
+                    - action: Allow
+                      ipMask: 1.1.1.1
+                    - action: Allow
+                      ipMask: 1.1.1.2
+                    - action: Allow
+                      ipMask: 1.1.1.3
+                    - action: Allow
+                      ipMask: 1.1.1.4
+                    - action: Allow
+                      ipMask: 1.1.1.5
+                  virtualNetworkRules:
+                    - ignoreMissingVnetServiceEndpoint: true
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+                type: Microsoft.EventHub/Namespaces/NetworkRuleSet
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/virtualnetworkrules':
     get:
       description: Gets a list of VirtualNetwork rules for a Namespace.
       operationId: Namespaces_ListVirtualNetworkRules
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace VirtualNetworkRule successfully returned.
@@ -2421,11 +2562,11 @@ paths:
       description: Deletes an VirtualNetworkRule for a Namespace.
       operationId: Namespaces_DeleteVirtualNetworkRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/VirtualNetworkRuleNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/virtualNetworkRuleNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace VirtualNetworkRule successfully deleted.
@@ -2452,11 +2593,11 @@ paths:
       description: Gets an VirtualNetworkRule for a Namespace by rule name.
       operationId: Namespaces_GetVirtualNetworkRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/VirtualNetworkRuleNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/virtualNetworkRuleNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace VirtualNetworkRule returned successfully.
@@ -2488,17 +2629,17 @@ paths:
       description: Creates or updates an VirtualNetworkRule for a Namespace.
       operationId: Namespaces_CreateOrUpdateVirtualNetworkRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/VirtualNetworkRuleNameParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/virtualNetworkRuleNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
         - description: The Namespace VirtualNetworkRule.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/VirtualNetworkRule'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: Namespace VirtualNetworkRule created
@@ -2613,7 +2754,7 @@ definitions:
             description: Value that indicates whether Kafka is enabled for eventhub namespace.
             type: boolean
           maximumThroughputUnits:
-            description: 'Upper limit of throughput units when AutoInflate is enabled, vaule should be within 0 to 20 throughput units. ( ''0'' if AutoInflateEnabled = true)'
+            description: 'Upper limit of throughput units when AutoInflate is enabled, value should be within 0 to 20 throughput units. ( ''0'' if AutoInflateEnabled = true)'
             format: int32
             maximum: 20
             minimum: 0
@@ -2698,6 +2839,59 @@ definitions:
         items:
           $ref: '#/definitions/IpFilterRule'
         type: array
+  NWRuleSetIpRules:
+    description: The response from the List namespace operation.
+    properties:
+      action:
+        description: The IP Filter Action
+        enum:
+          - Allow
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NetworkRuleIPAction
+      ipMask:
+        description: IP Mask
+        type: string
+    x-ms-client-flatten: true
+  NWRuleSetVirtualNetworkRules:
+    description: The response from the List namespace operation.
+    properties:
+      ignoreMissingVnetServiceEndpoint:
+        description: Value that indicates whether to ignore missing Vnet Service Endpoint
+        type: boolean
+      subnet:
+        $ref: '#/definitions/Subnet'
+        description: Subnet properties
+    x-ms-client-flatten: true
+  NetworkRuleSet:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of topic resource.
+    properties:
+      properties:
+        description: NetworkRuleSet properties
+        properties:
+          defaultAction:
+            description: Default Action for Network Rule Set
+            enum:
+              - Allow
+              - Deny
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: DefaultAction
+          ipRules:
+            description: List of IpRules
+            items:
+              $ref: '#/definitions/NWRuleSetIpRules'
+            type: array
+          virtualNetworkRules:
+            description: List VirtualNetwork Rules
+            items:
+              $ref: '#/definitions/NWRuleSetVirtualNetworkRules'
+            type: array
+        x-ms-client-flatten: true
   Operation:
     description: A Event Hub REST API operation
     properties:
@@ -2754,7 +2948,7 @@ definitions:
     description: SKU parameters supplied to the create namespace operation
     properties:
       capacity:
-        description: 'The Event Hubs throughput units, vaule should be 0 to 20 throughput units.'
+        description: 'The Event Hubs throughput units, value should be 0 to 20 throughput units.'
         format: int32
         maximum: 20
         minimum: 0
@@ -2780,6 +2974,12 @@ definitions:
     required:
       - name
     type: object
+  Subnet:
+    description: Properties supplied for Subnet
+    properties:
+      id:
+        description: Resource ID of Virtual Network Subnet
+        type: string
   TrackedResource:
     allOf:
       - $ref: '#/definitions/Resource'

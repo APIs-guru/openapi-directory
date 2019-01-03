@@ -116,6 +116,13 @@ paths:
                       resource: Microsoft.GuestConfiguration/guestConfigurationAssignments
                     name: Microsoft.GuestConfiguration/guestConfigurationAssignments/read
                     properties: null
+                  - display:
+                      description: Get guest configuration assignment report.
+                      operation: Microsoft.GuestConfiguration/guestConfigurationAssignments/reports/read
+                      provider: Microsoft Guest Configuration
+                      resource: Microsoft.GuestConfiguration/guestConfigurationAssignments
+                    name: Microsoft.GuestConfiguration/guestConfigurationAssignments/reports/read
+                    properties: null
               headers: {}
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments':
@@ -210,6 +217,62 @@ paths:
               headers: {}
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}':
+    delete:
+      description: Delete a guest configuration assignment
+      operationId: GuestConfigurationAssignments_Delete
+      parameters:
+        - description: The resource group name.
+          in: path
+          name: resourceGroupName
+          pattern: '^[-\w\._]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Name of the guest configuration assignment
+          in: path
+          name: guestConfigurationAssignmentName
+          required: true
+          type: string
+        - description: Subscription ID which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The name of the virtual machine.
+          in: path
+          name: vmName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Client Api Version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error response of an operation failure
+            properties:
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+      tags:
+        - GuestConfigurationAssignments
+      x-ms-examples:
+        Delete an guest configuration assignment:
+          parameters:
+            api-version: 2018-06-30-preview
+            guestConfigurationAssignmentName: SecureProtocol
+            resourceGroupName: myResourceGroupName
+            subscriptionId: mySubscriptionId
+            vmName: myVMName
+          responses:
+            '200': {}
+      x-ms-long-running-operation: true
     get:
       description: Get information about a guest configuration assignment
       operationId: GuestConfigurationAssignments_Get
@@ -221,7 +284,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The guest configuration assingment name.
+        - description: The guest configuration assignment name.
           in: path
           name: guestConfigurationAssignmentName
           required: true
@@ -326,6 +389,10 @@ paths:
           required: true
           type: string
       responses:
+        '200':
+          description: OK. The guest configuration assignment for the VM was updated successfully.
+          schema:
+            $ref: '#/definitions/GuestConfigurationAssignment'
         '201':
           description: Created. The guest configuration assignment for the VM was created successfully.
           schema:
@@ -357,6 +424,27 @@ paths:
             subscriptionId: mySubscriptionId
             vmName: myVMName
           responses:
+            '200':
+              body:
+                id: null
+                location: westcentralus
+                name: multiconfigassignment2
+                properties:
+                  assignmentHash: null
+                  complianceStatus: Pending
+                  context: Azure policy A
+                  guestConfiguration:
+                    configurationParameter: null
+                    configurationSetting: null
+                    contentHash: null
+                    contentUri: null
+                    kind: null
+                    name: AuditSecureProtocol
+                    version: 1.0.0.3
+                  lastComplianceStatusChecked: null
+                  latestReportId: null
+                  provisioningState: Succeeded
+              headers: {}
             '201':
               body:
                 id: null
@@ -391,7 +479,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: The guest configuration assingment name.
+        - description: The guest configuration assignment name.
           in: path
           name: guestConfigurationAssignmentName
           required: true
@@ -483,7 +571,9 @@ paths:
                               - code: 'DSC::RESOURCE::SUCCESS'
                                 phrase: Operation successful.
                         startTime: '2018-08-29T22:13:53Z'
+                      endTime: '2018-08-29T22:14:13Z'
                       reportId: 7367cbb8-ae99-47d0-a33b-a283564d2cb1
+                      startTime: '2018-08-29T22:13:53Z'
                       vm:
                         id: /subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm
                         uuid: vmuuid
@@ -531,7 +621,9 @@ paths:
                               - code: 'DSC::RESOURCE::SUCCESS'
                                 phrase: Operation successful.
                         startTime: '2018-08-29T21:58:54Z'
+                      endTime: '2018-08-29T21:59:13Z'
                       reportId: 41ee2caf-48f9-4999-a793-82ec7c6beb2c
+                      startTime: '2018-08-29T21:58:54Z'
                       vm:
                         id: /subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm
                         uuid: vmuuid
@@ -645,7 +737,9 @@ paths:
                           - code: 'DSC::RESOURCE::SUCCESS'
                             phrase: Operation successful.
                     startTime: '2018-08-29T22:13:53Z'
+                  endTime: '2018-08-29T22:14:13Z'
                   reportId: 7367cbb8-ae99-47d0-a33b-a283564d2cb1
+                  startTime: '2018-08-29T22:13:53Z'
                   vm:
                     id: /subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm
                     uuid: vmuuid
@@ -677,6 +771,7 @@ definitions:
           name: complianceStatus
       endTime:
         description: End date and time of the guest configuration assignment compliance status check.
+        format: date-time
         readOnly: true
         type: string
       jobId:
@@ -700,6 +795,7 @@ definitions:
         type: array
       startTime:
         description: Start date and time of the guest configuration assignment compliance status check.
+        format: date-time
         readOnly: true
         type: string
   AssignmentReportResource:
@@ -717,7 +813,7 @@ definitions:
           modelAsString: true
           name: complianceStatus
       properties:
-        description: Properties of a guest configuation assignment resource.
+        description: Properties of a guest configuration assignment resource.
         readOnly: true
         type: object
       reasons:
@@ -875,6 +971,7 @@ definitions:
         description: The guest configuration to assign.
       lastComplianceStatusChecked:
         description: Date and time when last compliance status was checked.
+        format: date-time
         readOnly: true
         type: string
         x-nullable: true
@@ -887,6 +984,9 @@ definitions:
         description: 'The provisioning state, which only appears in the response.'
         enum:
           - Succeeded
+          - Failed
+          - Canceled
+          - Created
         readOnly: true
         type: string
         x-ms-enum:
@@ -935,8 +1035,18 @@ definitions:
       details:
         $ref: '#/definitions/AssignmentReportDetails'
         description: Details of the assignment report.
+      endTime:
+        description: End date and time of the guest configuration assignment compliance status check.
+        format: date-time
+        readOnly: true
+        type: string
       reportId:
         description: 'GUID that identifies the guest configuration assignment report under a subscription, resource group.'
+        readOnly: true
+        type: string
+      startTime:
+        description: Start date and time of the guest configuration assignment compliance status check.
+        format: date-time
         readOnly: true
         type: string
       vm:

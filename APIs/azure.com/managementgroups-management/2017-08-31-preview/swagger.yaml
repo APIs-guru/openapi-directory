@@ -196,7 +196,7 @@ paths:
                   displayName: 'Enrollment 1, under Tenant 1'
                   tenantId: 10000000-0000-0000-0000-000000000000
                 type: /providers/Microsoft.Management/managementGroups
-        GetManagementGroupsWithExpandAndResurse:
+        GetManagementGroupsWithExpandAndRecurse:
           parameters:
             $expand: children
             $recurse: true
@@ -376,7 +376,7 @@ definitions:
         type: string
       childType:
         $ref: '#/definitions/ManagementGroupType'
-        title: Managment Group Child Info
+        title: Management Group Child Info
       displayName:
         description: The friendly name of the child resource.
         type: string
@@ -508,7 +508,7 @@ definitions:
         type: string
       childType:
         $ref: '#/definitions/ManagementGroupType'
-        title: Managment Group Recursive Child Info
+        title: Management Group Recursive Child Info
       children:
         description: The list of children.
         items:

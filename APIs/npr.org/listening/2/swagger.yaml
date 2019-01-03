@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: listening.api.npr.org
+host: us-east-1-production-listening.api.npr.org
 info:
   contact:
     email: NPROneEnterprise@npr.org
@@ -206,8 +206,6 @@ paths:
         - oauth2:
             - listening.readonly
       summary: Get a set of recommendations for an aggregation
-      tags:
-        - listening
   /v2/channels:
     get:
       description: These channels allow the user to specify a focus for the content returned in the recommendations endpoint.
@@ -245,8 +243,6 @@ paths:
         - oauth2:
             - listening.readonly
       summary: Get the list of available channels
-      tags:
-        - listening
   /v2/history:
     get:
       description: 'This endpoint provides the list of recently-rated audio recommendations that the logged-in user has consumed. Some rated recommendations are filtered, such as sponsorship and donation.'
@@ -268,8 +264,6 @@ paths:
         - oauth2:
             - listening.readonly
       summary: Get recent ratings the logged-in user has submitted
-      tags:
-        - listening
   '/v2/organizations/{orgId}/categories/{category}/recommendations':
     get:
       description: This endpoint provides a list of recommendations from a category of content from  an organization.
@@ -321,8 +315,6 @@ paths:
         - oauth2:
             - listening.readonly
       summary: Get a list of recommendations from a category of content from an organization
-      tags:
-        - listening
   '/v2/organizations/{orgId}/recommendations':
     get:
       description: This endpoint provides a variety of details about an organization including various lists of recent audio items.
@@ -364,8 +356,6 @@ paths:
         - oauth2:
             - listening.readonly
       summary: Get a variety of details about an organization including various lists of recent audio items
-      tags:
-        - listening
   /v2/promo/recommendations:
     get:
       description: Gets the most recently played promo for which the user has neither tapped through the promo or listened to the target story.
@@ -387,8 +377,6 @@ paths:
         - oauth2:
             - listening.readonly
       summary: Retrieve the most recent promo audio heard by the logged-in user
-      tags:
-        - listening
   /v2/ratings:
     post:
       consumes:
@@ -448,8 +436,6 @@ paths:
         - oauth2:
             - listening.write
       summary: Collect new ratings for media previously recommended to the logged-in user
-      tags:
-        - listening
   /v2/recommendations:
     get:
       description: |-
@@ -489,8 +475,6 @@ paths:
         - oauth2:
             - listening.readonly
       summary: Get a list of media for the logged-in user from NPR's recommendation engine
-      tags:
-        - listening
   /v2/search/recommendations:
     get:
       description: 'In the schema shown below, SearchItemDocument is not an actual type of returned object; the object returned by a search will be either an AggregationAudioItemListDocument or an AudioItemDocument.'
@@ -529,8 +513,6 @@ paths:
         - oauth2:
             - listening.readonly
       summary: Get a list of recent audio and aggregation items associated with search terms
-      tags:
-        - listening
 definitions:
   AbstractCDocLink:
     allOf:
@@ -876,8 +858,7 @@ definitions:
         type: string
       orgId:
         description: The unique identifier for the organization
-        format: int64
-        type: integer
+        type: string
       title:
         description: The title of this category
         type: string
@@ -965,6 +946,7 @@ definitions:
     description: Base Collection.Doc+JSON output
     properties:
       attributes:
+        description: Basic Swagger definitions used across Carbon services.
         type: object
       errors:
         description: 'A list of encountered errors, ignored on POST, PUT'
@@ -975,10 +957,12 @@ definitions:
         description: A URL representation of the resource; should generally be ignored by clients unless noted otherwise
         type: string
       items:
+        description: Basic Swagger definitions used across Carbon services.
         items:
           type: object
         type: array
       links:
+        description: Basic Swagger definitions used across Carbon services.
         type: object
       version:
         default: '1.0'
@@ -1046,6 +1030,9 @@ definitions:
     allOf:
       - $ref: '#/definitions/AbstractLink'
       - properties:
+          caption:
+            description: The caption of the image; can be used as alternate text for accessibility
+            type: string
           content-type:
             default: image/jpeg
             description: 'The MIME type of the response of this link; note that the enumerated list of possible values is not exhaustive and other MIME types could occur. The list should be treated as examples, rather than absolutes.'
@@ -1104,8 +1091,7 @@ definitions:
         type: boolean
       orgId:
         description: The unique identifier for the organization
-        format: int64
-        type: integer
+        type: string
       type:
         default: organization
         description: The type of list returned; will always be `organization`

@@ -75,7 +75,7 @@ paths:
       tags:
         - GalleryItems
       x-ms-examples:
-        Lists gallery gallery items.:
+        Lists gallery items.:
           parameters:
             api-version: '2016-05-01'
             subscriptionId: 0ff0bbbe-d68d-4314-8f68-80a808b5a6ec
@@ -2117,7 +2117,7 @@ definitions:
         description: Marketing materials for the gallery item.
       metadata:
         $ref: '#/definitions/OpenProperty'
-        description: Custom item metdata.
+        description: Custom item metadata.
         readOnly: true
       products:
         description: List of products.

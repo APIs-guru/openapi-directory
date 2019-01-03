@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/groupssettings/v1/rest'
       version: v1
@@ -185,6 +185,9 @@ definitions:
       email:
         description: Email id of the group
         type: string
+      favoriteRepliesOnTop:
+        description: If favorite replies should be displayed above other replies.
+        type: string
       includeCustomFooter:
         description: Whether to include custom footer.
         type: string
@@ -232,8 +235,17 @@ definitions:
       whoCanAdd:
         description: 'Permissions to add members. Possible values are: ALL_MANAGERS_CAN_ADD ALL_OWNERS_CAN_ADD ALL_MEMBERS_CAN_ADD NONE_CAN_ADD'
         type: string
+      whoCanAddReferences:
+        description: 'Permission to add references to a topic. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
+        type: string
+      whoCanAssignTopics:
+        description: 'Permission to assign topics in a forum to another user. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
+        type: string
       whoCanContactOwner:
         description: 'Permission to contact owner of the group via web UI. Possible values are: ANYONE_CAN_CONTACT ALL_IN_DOMAIN_CAN_CONTACT ALL_MEMBERS_CAN_CONTACT ALL_MANAGERS_CAN_CONTACT'
+        type: string
+      whoCanEnterFreeFormTags:
+        description: 'Permission to enter free form tags for topics in a forum. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
         type: string
       whoCanInvite:
         description: 'Permissions to invite members. Possible values are: ALL_MEMBERS_CAN_INVITE ALL_MANAGERS_CAN_INVITE ALL_OWNERS_CAN_INVITE NONE_CAN_INVITE'
@@ -244,8 +256,32 @@ definitions:
       whoCanLeaveGroup:
         description: 'Permission to leave the group. Possible values are: ALL_MANAGERS_CAN_LEAVE ALL_OWNERS_CAN_LEAVE ALL_MEMBERS_CAN_LEAVE NONE_CAN_LEAVE'
         type: string
+      whoCanMarkDuplicate:
+        description: 'Permission to mark a topic as a duplicate of another topic. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
+        type: string
+      whoCanMarkFavoriteReplyOnAnyTopic:
+        description: 'Permission to mark any other user''s post as a favorite reply. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
+        type: string
+      whoCanMarkFavoriteReplyOnOwnTopic:
+        description: 'Permission to mark a post for a topic they started as a favorite reply. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
+        type: string
+      whoCanMarkNoResponseNeeded:
+        description: 'Permission to mark a topic as not needing a response. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
+        type: string
+      whoCanModifyTagsAndCategories:
+        description: 'Permission to change tags and categories. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
+        type: string
       whoCanPostMessage:
         description: 'Permissions to post messages to the group. Possible values are: NONE_CAN_POST ALL_MANAGERS_CAN_POST ALL_MEMBERS_CAN_POST ALL_OWNERS_CAN_POST ALL_IN_DOMAIN_CAN_POST ANYONE_CAN_POST'
+        type: string
+      whoCanTakeTopics:
+        description: 'Permission to take topics in a forum. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
+        type: string
+      whoCanUnassignTopic:
+        description: 'Permission to unassign any topic in a forum. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
+        type: string
+      whoCanUnmarkFavoriteReplyOnAnyTopic:
+        description: 'Permission to unmark any post from a favorite reply. Possible values are: NONE OWNERS_ONLY MANAGERS_ONLY OWNERS_AND_MANAGERS ALL_MEMBERS'
         type: string
       whoCanViewGroup:
         description: 'Permissions to view group. Possible values are: ANYONE_CAN_VIEW ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW ALL_OWNERS_CAN_VIEW'

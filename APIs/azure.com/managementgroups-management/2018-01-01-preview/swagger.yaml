@@ -17,7 +17,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/managementgroups/resource-manager/Microsoft.Management/preview/2018-01-01-preview/management.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: managementgroups-management
   x-tags:
@@ -415,7 +415,7 @@ paths:
                   displayName: Group 1 Tenant 2
                   tenantId: 20000000-0000-0000-0000-000000000000
                 type: /providers/Microsoft.Management/managementGroups
-        GetManagementGroupsWithExpandAndResurse:
+        GetManagementGroupsWithExpandAndRecurse:
           parameters:
             $expand: children
             $recurse: true

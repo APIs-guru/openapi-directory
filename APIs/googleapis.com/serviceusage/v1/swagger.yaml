@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://serviceusage.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -589,7 +589,7 @@ definitions:
         type: string
       authorizationUrl:
         description: |-
-          Redirect URL if JWT token is required but no present or is expired.
+          Redirect URL if JWT token is required but not present or is expired.
           Implement authorizationUrl of securityDefinitions in OpenAPI spec.
         type: string
       id:
@@ -1493,8 +1493,10 @@ definitions:
         description: Monitoring configuration.
       name:
         description: |-
-          The DNS address at which this service is available,
-          e.g. `calendar.googleapis.com`.
+          The service name, which is a DNS-like logical identifier for the
+          service, such as `calendar.googleapis.com`. The service name
+          typically goes through DNS verification to make sure the owner
+          of the service also owns the DNS name.
         type: string
       producerProjectId:
         description: The Google project that owns this service.
@@ -2520,18 +2522,22 @@ definitions:
       consumerDestinations:
         description: |-
           Monitoring configurations for sending metrics to the consumer project.
-          There can be multiple consumer destinations, each one must have a
-          different monitored resource type. A metric can be used in at most
-          one consumer destination.
+          There can be multiple consumer destinations. A monitored resouce type may
+          appear in multiple monitoring destinations if different aggregations are
+          needed for different sets of metrics associated with that monitored
+          resource type. A monitored resource and metric pair may only be used once
+          in the Monitoring configuration.
         items:
           $ref: '#/definitions/MonitoringDestination'
         type: array
       producerDestinations:
         description: |-
           Monitoring configurations for sending metrics to the producer project.
-          There can be multiple producer destinations, each one must have a
-          different monitored resource type. A metric can be used in at most
-          one producer destination.
+          There can be multiple producer destinations. A monitored resouce type may
+          appear in multiple monitoring destinations if different aggregations are
+          needed for different sets of metrics associated with that monitored
+          resource type. A monitored resource and metric pair may only be used once
+          in the Monitoring configuration.
         items:
           $ref: '#/definitions/MonitoringDestination'
         type: array
@@ -2543,8 +2549,8 @@ definitions:
     properties:
       metrics:
         description: |-
-          Names of the metrics to report to this monitoring destination.
-          Each name must be defined in Service.metrics section.
+          Types of the metrics to report to this monitoring destination.
+          Each type must be defined in Service.metrics section.
         items:
           type: string
         type: array

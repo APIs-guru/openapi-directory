@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://cloudfunctions.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -224,10 +224,13 @@ paths:
       tags:
         - projects
     get:
-      description: Returns a function with the given name from the requested project.
-      operationId: cloudfunctions.projects.locations.functions.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: cloudfunctions.operations.get
       parameters:
-        - description: The name of the function which details should be obtained.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -237,12 +240,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/CloudFunction'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -345,8 +348,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Invokes synchronously deployed function. To be used for testing, very
-        limited traffic allowed.
+        Synchronously invokes a deployed Cloud Function. To be used for testing
+        purposes as very limited traffic is allowed. For more information on
+        the actual limits refer to [API Calls](
+        https://cloud.google.com/functions/quotas#rate_limits).
       operationId: cloudfunctions.projects.locations.functions.call
       parameters:
         - in: body
@@ -518,7 +523,281 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/{resource}:getIamPolicy':
+    get:
+      description: |-
+        Gets the access control policy for a resource.
+        Returns an empty policy if the resource exists and does not have a policy
+        set.
+      operationId: cloudfunctions.projects.locations.functions.getIamPolicy
+      parameters:
+        - description: |-
+            REQUIRED: The resource for which the policy is being requested.
+            See the operation documentation for the appropriate value for this field.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/{resource}:setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Sets the access control policy on the specified resource. Replaces any
+        existing policy.
+      operationId: cloudfunctions.projects.locations.functions.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SetIamPolicyRequest'
+        - description: |-
+            REQUIRED: The resource for which the policy is being specified.
+            See the operation documentation for the appropriate value for this field.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+  '/v1/{resource}:testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Returns permissions that a caller has on the specified resource.
+        If the resource does not exist, this will return an empty set of
+        permissions, not a NOT_FOUND error.
+
+        Note: This operation is designed to be used for building permission-aware
+        UIs and command-line tools, not for authorization checking. This operation
+        may "fail open" without warning.
+      operationId: cloudfunctions.projects.locations.functions.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestIamPermissionsRequest'
+        - description: |-
+            REQUIRED: The resource for which the policy detail is being requested.
+            See the operation documentation for the appropriate value for this field.
+          in: path
+          name: resource
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestIamPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
 definitions:
+  AuditConfig:
+    description: |-
+      Specifies the audit configuration for a service.
+      The configuration determines which permission types are logged, and what
+      identities, if any, are exempted from logging.
+      An AuditConfig must have one or more AuditLogConfigs.
+
+      If there are AuditConfigs for both `allServices` and a specific service,
+      the union of the two AuditConfigs is used for that service: the log_types
+      specified in each AuditConfig are enabled, and the exempted_members in each
+      AuditLogConfig are exempted.
+
+      Example Policy with multiple AuditConfigs:
+
+          {
+            "audit_configs": [
+              {
+                "service": "allServices"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                    "exempted_members": [
+                      "user:foo@gmail.com"
+                    ]
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                  },
+                  {
+                    "log_type": "ADMIN_READ",
+                  }
+                ]
+              },
+              {
+                "service": "fooservice.googleapis.com"
+                "audit_log_configs": [
+                  {
+                    "log_type": "DATA_READ",
+                  },
+                  {
+                    "log_type": "DATA_WRITE",
+                    "exempted_members": [
+                      "user:bar@gmail.com"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+
+      For fooservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      logging. It also exempts foo@gmail.com from DATA_READ logging, and
+      bar@gmail.com from DATA_WRITE logging.
+    properties:
+      auditLogConfigs:
+        description: The configuration for logging of each type of permission.
+        items:
+          $ref: '#/definitions/AuditLogConfig'
+        type: array
+      service:
+        description: |-
+          Specifies a service that will be enabled for audit logging.
+          For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+          `allServices` is a special value that covers all services.
+        type: string
+    type: object
+  AuditLogConfig:
+    description: |-
+      Provides the configuration for logging a type of permissions.
+      Example:
+
+          {
+            "audit_log_configs": [
+              {
+                "log_type": "DATA_READ",
+                "exempted_members": [
+                  "user:foo@gmail.com"
+                ]
+              },
+              {
+                "log_type": "DATA_WRITE",
+              }
+            ]
+          }
+
+      This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+      foo@gmail.com from DATA_READ logging.
+    properties:
+      exemptedMembers:
+        description: |-
+          Specifies the identities that do not cause logging for this type of
+          permission.
+          Follows the same format of Binding.members.
+        items:
+          type: string
+        type: array
+      logType:
+        description: The log type that this config enables.
+        enum:
+          - LOG_TYPE_UNSPECIFIED
+          - ADMIN_READ
+          - DATA_WRITE
+          - DATA_READ
+        type: string
+    type: object
+  Binding:
+    description: Associates `members` with a `role`.
+    properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
+      members:
+        description: |+
+          Specifies the identities requesting access for a Cloud Platform resource.
+          `members` can have the following values:
+
+          * `allUsers`: A special identifier that represents anyone who is
+             on the internet; with or without a Google account.
+
+          * `allAuthenticatedUsers`: A special identifier that represents anyone
+             who is authenticated with a Google account or a service account.
+
+          * `user:{emailid}`: An email address that represents a specific Google
+             account. For example, `alice@gmail.com` .
+
+
+          * `serviceAccount:{emailid}`: An email address that represents a service
+             account. For example, `my-other-app@appspot.gserviceaccount.com`.
+
+          * `group:{emailid}`: An email address that represents a Google group.
+             For example, `admins@example.com`.
+
+
+          * `domain:{domain}`: A Google Apps domain name that represents all the
+             users of that domain. For example, `google.com` or `example.com`.
+
+        items:
+          type: string
+        type: array
+      role:
+        description: |-
+          Role that is assigned to `members`.
+          For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+        type: string
+    type: object
   CallFunctionRequest:
     description: Request for the `CallFunction` method.
     properties:
@@ -547,6 +826,7 @@ definitions:
     description: |-
       Describes a Cloud Function that contains user computation executed in
       response to an event. It encapsulate function and triggers configurations.
+      LINT.IfChange
     properties:
       availableMemoryMb:
         description: |-
@@ -569,10 +849,7 @@ definitions:
       environmentVariables:
         additionalProperties:
           type: string
-        description: |-
-          **Beta Feature**
-
-          Environment variables that shall be available during function execution.
+        description: Environment variables that shall be available during function execution.
         type: object
       eventTrigger:
         $ref: '#/definitions/EventTrigger'
@@ -607,6 +884,9 @@ definitions:
           `projects/{project}/global/networks/{network}` or `{network}`, where
           {project} is a project id where the network is defined, and {network} is
           the short name of the network.
+
+          This field is mutually exclusive with `vpc_connector` and will be replaced
+          by it.
 
           See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
           more information on connecting Cloud projects.
@@ -665,6 +945,21 @@ definitions:
           results in a new version of a function being created.
         format: int64
         type: string
+      vpcConnector:
+        description: |-
+          The VPC Network Connector that this cloud function can connect to. It can
+          be either the fully-qualified URI, or the short name of the network
+          connector resource. The format of this field is
+          `projects/*/locations/*/connectors/*`
+
+          This field is mutually exclusive with `network` field and will eventually
+          replace it.
+
+          See [the VPC documentation](https://cloud.google.com/compute/docs/vpc) for
+          more information on connecting Cloud projects.
+
+          This feature is currently in alpha, available only for whitelisted users.
+        type: string
     type: object
   EventTrigger:
     description: |-
@@ -720,6 +1015,39 @@ definitions:
           If no string is provided, the default service implementing the API will
           be used. For example, `storage.googleapis.com` is the default for all
           event types in the `google.storage` namespace.
+        type: string
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
         type: string
     type: object
   FailurePolicy:
@@ -914,7 +1242,7 @@ definitions:
       versionId:
         description: |-
           Version id of the function created or updated by an API call.
-          This field is only pupulated for Create and Update operations.
+          This field is only populated for Create and Update operations.
         format: int64
         type: string
     type: object
@@ -946,9 +1274,88 @@ definitions:
       versionId:
         description: |-
           Version id of the function created or updated by an API call.
-          This field is only pupulated for Create and Update operations.
+          This field is only populated for Create and Update operations.
         format: int64
         type: string
+    type: object
+  Policy:
+    description: |-
+      Defines an Identity and Access Management (IAM) policy. It is used to
+      specify access control policies for Cloud Platform resources.
+
+
+      A `Policy` consists of a list of `bindings`. A `binding` binds a list of
+      `members` to a `role`, where the members can be user accounts, Google groups,
+      Google domains, and service accounts. A `role` is a named list of permissions
+      defined by IAM.
+
+      **JSON Example**
+
+          {
+            "bindings": [
+              {
+                "role": "roles/owner",
+                "members": [
+                  "user:mike@example.com",
+                  "group:admins@example.com",
+                  "domain:google.com",
+                  "serviceAccount:my-other-app@appspot.gserviceaccount.com"
+                ]
+              },
+              {
+                "role": "roles/viewer",
+                "members": ["user:sean@example.com"]
+              }
+            ]
+          }
+
+      **YAML Example**
+
+          bindings:
+          - members:
+            - user:mike@example.com
+            - group:admins@example.com
+            - domain:google.com
+            - serviceAccount:my-other-app@appspot.gserviceaccount.com
+            role: roles/owner
+          - members:
+            - user:sean@example.com
+            role: roles/viewer
+
+
+      For a description of IAM and its features, see the
+      [IAM developer's guide](https://cloud.google.com/iam/docs).
+    properties:
+      auditConfigs:
+        description: Specifies cloud audit logging configuration for this policy.
+        items:
+          $ref: '#/definitions/AuditConfig'
+        type: array
+      bindings:
+        description: |-
+          Associates a list of `members` to a `role`.
+          `bindings` with no members will result in an error.
+        items:
+          $ref: '#/definitions/Binding'
+        type: array
+      etag:
+        description: |-
+          `etag` is used for optimistic concurrency control as a way to help
+          prevent simultaneous updates of a policy from overwriting each other.
+          It is strongly suggested that systems make use of the `etag` in the
+          read-modify-write cycle to perform policy updates in order to avoid race
+          conditions: An `etag` is returned in the response to `getIamPolicy`, and
+          systems are expected to put that etag in the request to `setIamPolicy` to
+          ensure that their change will be applied to the same version of the policy.
+
+          If no `etag` is provided in the call to `setIamPolicy`, then the existing
+          policy is overwritten blindly.
+        format: byte
+        type: string
+      version:
+        description: Deprecated.
+        format: int32
+        type: integer
     type: object
   Retry:
     description: |-
@@ -958,6 +1365,26 @@ definitions:
       (capped at 10 seconds).
       Retried execution is charged as any other execution.
     properties: {}
+    type: object
+  SetIamPolicyRequest:
+    description: Request message for `SetIamPolicy` method.
+    properties:
+      policy:
+        $ref: '#/definitions/Policy'
+        description: |-
+          REQUIRED: The complete policy to be applied to the `resource`. The size of
+          the policy is limited to a few 10s of KB. An empty policy is a
+          valid policy but certain Cloud Platform services (such as Projects)
+          might reject them.
+      updateMask:
+        description: |-
+          OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+          the fields in the mask will be modified. If no mask is provided, the
+          following default mask is used:
+          paths: "bindings, etag"
+          This field is only used by Cloud IAM.
+        format: google-fieldmask
+        type: string
     type: object
   SourceRepository:
     description: |-
@@ -1061,4 +1488,28 @@ definitions:
           user-facing error message should be localized and sent in the
           google.rpc.Status.details field, or localized by the client.
         type: string
+    type: object
+  TestIamPermissionsRequest:
+    description: Request message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: |-
+          The set of permissions to check for the `resource`. Permissions with
+          wildcards (such as '*' or 'storage.*') are not allowed. For more
+          information see
+          [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+        items:
+          type: string
+        type: array
+    type: object
+  TestIamPermissionsResponse:
+    description: Response message for `TestIamPermissions` method.
+    properties:
+      permissions:
+        description: |-
+          A subset of `TestPermissionsRequest.permissions` that the caller is
+          allowed.
+        items:
+          type: string
+        type: array
     type: object

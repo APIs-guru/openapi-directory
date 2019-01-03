@@ -7,7 +7,7 @@ info:
   contact:
     x-twitter: microsoft
   description: 'The News Search API lets you send a search query to Bing and get back a list of news that are relevant to the search query. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).'
-  title: News Search
+  title: News Search Client
   version: '1.0'
   x-apisguru-categories:
     - cloud
@@ -175,7 +175,7 @@ paths:
           description: An error has occurred. Check the response type and/or status code for more details.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: 'The News Category API lets lets you search on Bing and get back a list of top news articles by category. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them.  For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).'
+      summary: 'The News Category API lets you search on Bing and get back a list of top news articles by category. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them.  For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).'
       tags:
         - NewsCategory
       x-ms-examples:
@@ -630,7 +630,7 @@ paths:
           description: An error has occurred. Check the response type and/or status code for more details.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: 'The News Trending Topics API lets lets you search on Bing and get back a list of trending news topics that are currently trending on Bing. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them.  For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).'
+      summary: 'The News Trending Topics API lets you search on Bing and get back a list of trending news topics that are currently trending on Bing. This section provides technical details about the query parameters and headers that you use to request news and the JSON response objects that contain them.  For examples that show how to make requests, see [Searching the web for news](https://docs.microsoft.com/en-us/azure/cognitive-services/bing-news-search/search-the-web).'
       tags:
         - NewsTrendingTopics
       x-ms-examples:
@@ -1063,3 +1063,15 @@ definitions:
         readOnly: true
         type: integer
     type: object
+x-ms-parameterized-host:
+  hostTemplate: '{Endpoint}'
+  parameters:
+    - default: 'https://api.cognitive.microsoft.com'
+      description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: "https://westus.api.cognitive.microsoft.com", "https://api.cognitive.microsoft.com").'
+      in: path
+      name: Endpoint
+      required: true
+      type: string
+      x-ms-parameter-location: client
+      x-ms-skip-url-encoding: true
+  useSchemePrefix: false

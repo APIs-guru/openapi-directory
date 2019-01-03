@@ -144,7 +144,7 @@ paths:
                   WarningThreshold: 90
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/featurecapabilities':
     get:
-      description: Returns feature capabilites of the application insights component.
+      description: Returns feature capabilities of the application insights component.
       operationId: ComponentFeatureCapabilities_Get
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -437,7 +437,7 @@ definitions:
     description: An Application Insights component available features.
     properties:
       Result:
-        description: A list of Application Insigths component feature.
+        description: A list of Application Insights component feature.
         items:
           $ref: '#/definitions/ApplicationInsightsComponentFeature'
           type: object
@@ -454,10 +454,10 @@ definitions:
         type: array
       DataVolumeCap:
         $ref: '#/definitions/ApplicationInsightsComponentDataVolumeCap'
-        description: An Application Insights component daily data volumne cap
+        description: An Application Insights component daily data volume cap
     type: object
   ApplicationInsightsComponentDataVolumeCap:
-    description: An Application Insights component daily data volumne cap
+    description: An Application Insights component daily data volume cap
     properties:
       Cap:
         description: Daily data volume cap in GB.
@@ -484,7 +484,7 @@ definitions:
     description: An Application Insights component daily data volume cap status
     properties:
       Capabilities:
-        description: A list of Application Insigths component feature capability.
+        description: A list of Application Insights component feature capability.
         items:
           $ref: '#/definitions/ApplicationInsightsComponentFeatureCapability'
           type: object
@@ -507,7 +507,7 @@ definitions:
         readOnly: true
         type: string
       MeterRateFrequency:
-        description: The meter meter rate for the feature's meter.
+        description: The meter rate for the feature's meter.
         readOnly: true
         type: string
       ResouceId:
@@ -519,7 +519,7 @@ definitions:
         readOnly: true
         type: string
       Title:
-        description: Desplay name of the feature.
+        description: Display name of the feature.
         readOnly: true
         type: string
     type: object
@@ -583,7 +583,7 @@ definitions:
         readOnly: true
         type: number
       TrackingType:
-        description: The applciation insights component used tracking type.
+        description: The application insights component used tracking type.
         readOnly: true
         type: string
       WorkItemIntegration:
@@ -615,7 +615,7 @@ definitions:
         readOnly: true
         type: string
       Value:
-        description: The vaule of the capability.
+        description: The value of the capability.
         readOnly: true
         type: string
     type: object

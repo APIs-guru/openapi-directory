@@ -715,6 +715,7 @@ paths:
               - Paid
               - Unpaid
               - Overdue
+              - Void
             type: string
       summary: Retrieve the status of the invoice
       tags:
@@ -1671,6 +1672,12 @@ paths:
       tags:
         - WorkType
 definitions:
+  AdditionalClientEmailApiModel:
+    properties:
+      Email:
+        description: CC
+        type: string
+    type: object
   ChangeOrderStatusApiModel:
     properties:
       Id:
@@ -1706,15 +1713,18 @@ definitions:
           - Paid
           - Unpaid
           - Overdue
+          - Void
         type: string
     type: object
   ClientCreateApiModel:
     properties:
+      AdditionalEmails:
+        description: Client additional emails contact for CC
+        items:
+          $ref: '#/definitions/AdditionalClientEmailApiModel'
+        type: array
       Address:
         description: Client business address
-        type: string
-      CC:
-        description: Client additional email contact for CC
         type: string
       ClientCountryId:
         description: Indicates the country where the clients is from
@@ -1753,11 +1763,13 @@ definitions:
     type: object
   ClientDetailsApiModel:
     properties:
+      AdditionalEmails:
+        description: Client additional emails contact for CC
+        items:
+          $ref: '#/definitions/AdditionalClientEmailApiModel'
+        type: array
       Address:
         description: Client business address
-        type: string
-      CC:
-        description: Client additional email contact for CC
         type: string
       ClientCountryId:
         description: Indicates the country where the clients is from
@@ -1797,11 +1809,13 @@ definitions:
     type: object
   ClientUpdateApiModel:
     properties:
+      AdditionalEmails:
+        description: Client additional emails contact for CC
+        items:
+          $ref: '#/definitions/AdditionalClientEmailApiModel'
+        type: array
       Address:
         description: Client business address
-        type: string
-      CC:
-        description: Client additional email contact for CC
         type: string
       ClientCountryId:
         description: Indicates the country where the clients is from
@@ -1941,6 +1955,9 @@ definitions:
           - OrderCreated
           - NewPaymentWithTwoCheckout
           - NewPaymentWithPaymentWall
+          - NewPaymentWithBamboraEU
+          - NewPaymentWithBamboraNA
+          - Void
         type: string
     type: object
   InvoiceAttachmentApiModel:
@@ -2029,6 +2046,7 @@ definitions:
           - Paid
           - Unpaid
           - Overdue
+          - Void
         type: string
       Terms:
         description: Terms of agreement
@@ -2150,6 +2168,7 @@ definitions:
           - Paid
           - Unpaid
           - Overdue
+          - Void
         type: string
       SubTotalAmount:
         description: Total amount of the invoice without tax
@@ -2249,6 +2268,7 @@ definitions:
           - Paid
           - Unpaid
           - Overdue
+          - Void
         type: string
       SubTotalAmount:
         description: Total amount of the invoice without tax
@@ -2364,6 +2384,8 @@ definitions:
           - Halkbank
           - TwoCheckout
           - PaymentWall
+          - BamboraEU
+          - BamboraNA
         type: string
     type: object
   InvoiceRecurringApiModel:
@@ -2488,6 +2510,7 @@ definitions:
           - Paid
           - Unpaid
           - Overdue
+          - Void
         type: string
       Terms:
         description: Terms of agreement

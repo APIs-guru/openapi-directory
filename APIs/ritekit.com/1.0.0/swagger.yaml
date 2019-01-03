@@ -35,11 +35,12 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/RiteKit/api-docs/master/apiary.apib'
       version: 1A
   x-providerName: ritekit.com
+tags: []
 paths:
   /v1/emoji/auto-emojify:
     get:
@@ -254,61 +255,6 @@ paths:
               url: 'https://media.ritekit.com/media/images/82a4d5be-6981-4913-8018-94161a5e190e.jpeg'
           headers: {}
       summary: Text to Image
-      tags: []
-  '/v1/influencers/hashtag/{hashtag}':
-    get:
-      description: Returns list of Twitter influencers for a given hashtag
-      parameters:
-        - description: 'Hashtag without # mark'
-          in: path
-          name: hashtag
-          required: true
-          type: string
-          x-example: SocialMedia
-      produces:
-        - application/json; charset=utf-8
-      responses:
-        '200':
-          description: OK
-          examples:
-            application/json; charset=utf-8:
-              code: 200
-              hashtag: SocialMedia
-              influencers:
-                - followers: 274453
-                  photo: 'https://pbs.twimg.com/profile_images/3609515388/762d0403bdaa8036f6ae88626da0b370.png'
-                  username: NancyBadillo13
-                - followers: 45753
-                  photo: 'https://pbs.twimg.com/profile_images/880555785654292481/6lT-k7tn.jpg'
-                  username: MHiesboeck
-                - followers: 12579
-                  photo: 'https://pbs.twimg.com/profile_images/780071018320760832/42BQ4wXg.jpg'
-                  username: quentinmasson57
-                - followers: 6883
-                  photo: 'https://pbs.twimg.com/profile_images/692343275848667136/F-W4dKUU.jpg'
-                  username: Transparent_Red
-                - followers: 5354
-                  photo: 'https://pbs.twimg.com/profile_images/831630430403231745/71XigzTJ.jpg'
-                  username: BLAMPartners
-                - followers: 3461
-                  photo: 'https://pbs.twimg.com/profile_images/647767475136761856/0QcvedHT.png'
-                  username: TwitProBook
-                - followers: 1299
-                  photo: 'https://pbs.twimg.com/profile_images/820916557920567302/i1wQFfqg.jpg'
-                  username: lewebfrancais33
-                - followers: 886
-                  photo: 'https://pbs.twimg.com/profile_images/890165745094709248/4OxXNo1w.jpg'
-                  username: prkmmcom
-                - followers: 834
-                  photo: 'https://pbs.twimg.com/profile_images/484647758209355776/Jcu4OLFy.png'
-                  username: 2bintl
-                - followers: 244
-                  photo: 'https://pbs.twimg.com/profile_images/378800000182262579/12b755ce0eabd5b222428da63347028c.jpeg'
-                  username: YIE_RA_1
-              message: OK
-              result: true
-          headers: {}
-      summary: Influencers for a Hashtag
       tags: []
   /v1/link/cta:
     get:
@@ -999,6 +945,5 @@ definitions:
   Emojis: {}
   Hashtags: {}
   Images: {}
-  Influencers: {}
   Instagram: {}
   Link_shortening: {}

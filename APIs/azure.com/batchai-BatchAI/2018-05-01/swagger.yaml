@@ -2949,7 +2949,7 @@ definitions:
         title: Job preparation.
       mountVolumes:
         $ref: '#/definitions/MountVolumes'
-        description: Information on mount volumes to be used by the job. These volumes will be mounted before the job execution and will be unmouted after the job completion. The volumes will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.
+        description: Information on mount volumes to be used by the job. These volumes will be mounted before the job execution and will be unmounted after the job completion. The volumes will be mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.
         title: Mount volumes.
       nodeCount:
         description: Number of compute nodes to run the job on. The job will be gang scheduled on that many compute nodes.
@@ -3104,7 +3104,7 @@ definitions:
             title: Start time.
             type: string
       executionState:
-        description: 'The current state of the job. Possible values are: queued - The job is queued and able to run. A job enters this state when it is created, or when it is awaiting a retry after a failed run. running - The job is running on a compute cluster. This includes job-level preparation such as downloading resource files or set up container specified on the job - it does not necessarily mean that the job command line has started executing. terminating - The job is terminated by the user, the terminate operation is in progress. succeeded - The job has completed running succesfully and exited with exit code 0. failed - The job has finished unsuccessfully (failed with a non-zero exit code) and has exhausted its retry limit. A job is also marked as failed if an error occurred launching the job.'
+        description: 'The current state of the job. Possible values are: queued - The job is queued and able to run. A job enters this state when it is created, or when it is awaiting a retry after a failed run. running - The job is running on a compute cluster. This includes job-level preparation such as downloading resource files or set up container specified on the job - it does not necessarily mean that the job command line has started executing. terminating - The job is terminated by the user, the terminate operation is in progress. succeeded - The job has completed running successfully and exited with exit code 0. failed - The job has finished unsuccessfully (failed with a non-zero exit code) and has exhausted its retry limit. A job is also marked as failed if an error occurred launching the job.'
         enum:
           - queued
           - running
@@ -3143,7 +3143,7 @@ definitions:
         title: Specifies the actions to be performed before tool kit is launched.
       mountVolumes:
         $ref: '#/definitions/MountVolumes'
-        description: Collection of mount volumes available to the job during execution. These volumes are mounted before the job execution and unmouted after the job completion. The volumes are mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.
+        description: Collection of mount volumes available to the job during execution. These volumes are mounted before the job execution and unmounted after the job completion. The volumes are mounted at location specified by $AZ_BATCHAI_JOB_MOUNT_ROOT environment variable.
         title: Mount volumes.
       nodeCount:
         description: The job will be gang scheduled on that many compute nodes
@@ -3217,7 +3217,7 @@ definitions:
         type: string
       sourceVault:
         $ref: '#/definitions/ResourceId'
-        description: Fully qualified resource indentifier of the Key Vault.
+        description: Fully qualified resource identifier of the Key Vault.
         title: Key Vault resource identifier.
     required:
       - sourceVault
@@ -3408,7 +3408,7 @@ definitions:
     description: Output directory for the job.
     properties:
       id:
-        description: 'The ID of the output directory. The job can use AZ_BATCHAI_OUTPUT_<id> environment variale to find the directory path, where <id> is the value of id attribute.'
+        description: 'The ID of the output directory. The job can use AZ_BATCHAI_OUTPUT_<id> environment variable to find the directory path, where <id> is the value of id attribute.'
         title: ID.
         type: string
       pathPrefix:
@@ -3666,7 +3666,7 @@ definitions:
       modelAsString: true
       name: ToolType
   UnmanagedFileSystemReference:
-    description: Unmananged file system mounting configuration.
+    description: Unmanaged file system mounting configuration.
     properties:
       mountCommand:
         description: 'Mount command line. Note, Batch AI will append mount path to the command on its own.'

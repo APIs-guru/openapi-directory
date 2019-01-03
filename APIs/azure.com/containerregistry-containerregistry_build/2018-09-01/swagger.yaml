@@ -55,6 +55,7 @@ parameters:
   ResourceGroupNameParameter:
     description: The name of the resource group to which the container registry belongs.
     in: path
+    minLength: 1
     name: resourceGroupName
     required: true
     type: string
@@ -1236,7 +1237,7 @@ definitions:
         $ref: '#/definitions/PlatformProperties'
         description: The platform properties against which the run has to happen.
       sourceLocation:
-        description: "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repoistory.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
+        description: "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
         type: string
       timeout:
         default: 3600
@@ -1325,7 +1326,7 @@ definitions:
         $ref: '#/definitions/PlatformProperties'
         description: The platform properties against which the run has to happen.
       sourceLocation:
-        description: "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repoistory.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
+        description: "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
         type: string
       timeout:
         default: 3600
@@ -1395,7 +1396,7 @@ definitions:
         $ref: '#/definitions/PlatformProperties'
         description: The platform properties against which the run has to happen.
       sourceLocation:
-        description: "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repoistory.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
+        description: "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
         type: string
       taskFilePath:
         description: The template/definition file path relative to the source.
@@ -1813,7 +1814,7 @@ definitions:
         description: The branch name of the source code.
         type: string
       repositoryUrl:
-        description: The full URL to the source code respository
+        description: The full URL to the source code repository
         type: string
       sourceControlAuthProperties:
         $ref: '#/definitions/AuthInfo'
@@ -1929,7 +1930,7 @@ definitions:
         description: The branch name of the source code.
         type: string
       repositoryUrl:
-        description: The full URL to the source code respository
+        description: The full URL to the source code repository
         type: string
       sourceControlAuthProperties:
         $ref: '#/definitions/AuthInfoUpdateParameters'
@@ -1957,7 +1958,7 @@ definitions:
   Task:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: "The task that has the ARM resource and task properties. \r\nThe  task will have all information to schedule a run against it."
+    description: "The task that has the ARM resource and task properties. \r\nThe task will have all information to schedule a run against it."
     properties:
       properties:
         $ref: '#/definitions/TaskProperties'

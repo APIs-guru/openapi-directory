@@ -39,6 +39,8 @@ tags:
   - name: Phenotype
   - name: QTL
   - name: Rat Strain
+  - description: AGR Web Service
+    name: agr-web-service
   - description: Annotation Web Service
     name: annotation-web-service
   - description: Gene Web Service
@@ -58,6 +60,136 @@ tags:
   - description: Strain Web Service
     name: strain-web-service
 paths:
+  '/agr/alleles/{taxonId}':
+    get:
+      operationId: getAllelesForTaxonUsingGET
+      parameters:
+        - description: The taxon ID for species
+          in: path
+          name: taxonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get gene allele records submitted by RGD to AGR by taxonId
+      tags:
+        - AGR
+  '/agr/expression/{taxonId}':
+    get:
+      operationId: getExpressionForTaxonUsingGET
+      parameters:
+        - description: The taxon ID for species
+          in: path
+          name: taxonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get expression annotations submitted by RGD to AGR by taxonId
+      tags:
+        - AGR
+  '/agr/phenotypes/{taxonId}':
+    get:
+      operationId: getPhenotypesForTaxonUsingGET
+      parameters:
+        - description: The taxon ID for species
+          in: path
+          name: taxonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get phenotype annotations submitted by RGD to AGR by taxonId
+      tags:
+        - AGR
+  '/agr/{taxonId}':
+    get:
+      operationId: getGenesForLatestAssemblyUsingGET
+      parameters:
+        - description: The taxon ID for species
+          in: path
+          name: taxonId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              type: object
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get gene records submitted by RGD to AGR by taxonId
+      tags:
+        - AGR
+  /annotations/:
+    post:
+      consumes:
+        - application/json
+      operationId: getAnnotationsUsingPOST
+      parameters:
+        - description: data
+          in: body
+          name: data
+          required: false
+          schema:
+            $ref: '#/definitions/AnnotationRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Annotation'
+            type: array
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Return a list of genes annotated to an ontology term
+      tags:
+        - Annotation
   '/annotations/accId/{rgdId}':
     get:
       operationId: getTermAccIdsUsingGET
@@ -599,7 +731,7 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Return a list of gene ortholocp s
+      summary: Return a list of gene orthologs
       tags:
         - Gene
   '/genes/orthologs/{rgdId}':
@@ -1473,9 +1605,9 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
-      summary: Return a list of pathways based on search term and species type.  3=rat 4=chinchilla
+      summary: 'Return a list of quantitative phenotypes values based on a combination of Clinical Measurement, Experimental Condition, Rat Strain, and/or Measurement Method ontology terms.  Results will be all records that match all terms submitted.  Ontology ids should be submitted as a comma delimited list (ex. RS:0000029,CMO:0000155,CMO:0000139).  Species type is an integer value (3=rat, 4=chinchilla)'
       tags:
-        - Phenotype
+        - Quantitative Phenotype
   '/qtls/{chr}/{start}/{stop}/{mapKey}':
     get:
       operationId: getQtlListByPositionUsingGET
@@ -2509,9 +2641,6 @@ definitions:
         type: string
       evidence:
         type: string
-      expRgdId:
-        format: int32
-        type: integer
       key:
         format: int32
         type: integer
@@ -2549,6 +2678,25 @@ definitions:
       xrefSource:
         type: string
     title: Annotation
+    type: object
+  AnnotationRequest:
+    properties:
+      evidenceCodes:
+        items:
+          type: string
+        type: array
+      ids:
+        items:
+          type: string
+        type: array
+      speciesTypeKeys:
+        items:
+          format: int32
+          type: integer
+        type: array
+      termAcc:
+        type: string
+    title: AnnotationRequest
     type: object
   Gene:
     properties:

@@ -70,7 +70,7 @@ info:
 
     Paylocity uses a combination of RSA and AES cryptography. As part of the setup, each client is issued a public RSA key.
 
-    Paylocity recommends the encryption of the incoming requests as additional protection of the sensitive data. Clients can opt-out of the encryption during the initial setup process. Opt-out will allow Paylocity to process un-encrypted requests.
+    Paylocity recommends the encryption of the incoming requests as additional protection of the sensitive data. Clients can opt-out of the encryption during the initial setup process. Opt-out will allow Paylocity to process unencrypted requests.
 
     The Paylocity Public Key has the following properties:
 
@@ -97,6 +97,22 @@ info:
     * 128 bit block size
 
     * 256 bit key size
+
+    ##### Encryption Flow
+
+    * Generate the unencrypted JSON payload to POST/PUT
+    * Encrypt this JSON payload using your _own key and IV_ (NOT with the Paylocity public key)
+    * RSA encrypt the _key_ you used in step 2 with the Paylocity Public Key, then, base64 encode the result
+    * Base64 encode the IV used to encrypt the JSON payload in step 2
+    * Put together a "securecontent" JSON object:
+     
+    {
+      'secureContent' : {
+        'key' : -- RSA-encrypted & base64 encoded key from step 3,
+        'iv' : -- base64 encoded iv from step 4
+        'content' -- content encrypted with your own key from step 2, base64 encoded
+      }
+    }
 
     ##### Sample Example
 
@@ -313,6 +329,65 @@ paths:
         - paylocity_auth:
             - WebLinkAPI
       summary: Add new employee
+      tags:
+        - Employee
+  '/v2/companies/{companyId}/employees/':
+    get:
+      description: Get All Employees API will return employee data currently available in Web Pay.
+      operationId: Get all employees
+      parameters:
+        - description: Bearer + JWT
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: Number of records per page. Default value is 25.
+          in: query
+          name: pagesize
+          required: false
+          type: integer
+        - description: 'Page number to retrieve; page numbers are 0-based (so to get the first page of results, pass pagenumber=0). Default value is 0.'
+          in: query
+          name: pagenumber
+          required: false
+          type: integer
+        - description: Whether to include the total record count in the header's X-Pcty-Total-Count property. Default value is true.
+          in: query
+          name: includetotalcount
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: Successfully Retrieved
+          schema:
+            items:
+              $ref: '#/definitions/employeeInfo'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: The company does not exist
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+        '500':
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Get all employees
       tags:
         - Employee
   '/v2/companies/{companyId}/employees/{employeeId}':
@@ -1349,7 +1424,7 @@ definitions:
     description: The employee model
     properties:
       additionalDirectDeposit:
-        description: 'Add up to 19 direct deposit accounts in addition to the main direct deposit account. If an employee already has at least one direct deposit account, users cannot add or update direct deposit information. Direct deposit is only available when inserting the employee''s initial direct deposit information. GET API will not return direct deposit data.'
+        description: 'Add up to 19 direct deposit accounts in addition to the main direct deposit account. IMPORTANT: A direct deposit update will remove ALL existing main and additional direct deposit information in WebPay and replace with information provided on the request. GET API will not return direct deposit data.'
         items:
           additionalProperties: false
           description: The additional direct deposit model
@@ -1448,6 +1523,11 @@ definitions:
           - 'null'
       companyName:
         description: 'Company name as defined in Web Pay, applicable with GET requests only.<br  /> Max length: 50'
+        type:
+          - string
+          - 'null'
+      currency:
+        description: 'Employee is paid in this currency. <br  />Max length: 30'
         type:
           - string
           - 'null'
@@ -1891,7 +1971,7 @@ definitions:
         type: array
       mainDirectDeposit:
         additionalProperties: false
-        description: 'Add the main direct deposit account. After deposits are made to any additional direct deposit accounts, the remaining net check is deposited in the main direct deposit account. If an employee already has at least one direct deposit account, users cannot add or update direct deposit information. Direct deposit is only available when inserting the employee''s initial direct deposit information. GET API will not return direct deposit data.'
+        description: 'Add the main direct deposit account. After deposits are made to any additional direct deposit accounts, the remaining net check is deposited in the main direct deposit account. IMPORTANT: A direct deposit update will remove ALL existing main and additional direct deposit information in WebPay and replace with what is provided on the request. GET API will not return direct deposit data.'
         properties:
           accountNumber:
             description: 'Account number, entered without special characters and spaces. <br  />Max length: 17'
@@ -2329,6 +2409,11 @@ definitions:
             type:
               - string
               - 'null'
+          location:
+            description: 'Work Location name. <br />Max length: 50'
+            type:
+              - string
+              - 'null'
           mailStop:
             description: 'Employee mail stop.<br  /> Max length: 10'
             type:
@@ -2452,6 +2537,26 @@ definitions:
         description: The EmployeeId
         type: string
     type: object
+  employeeInfo:
+    additionalProperties: false
+    description: The employee info model
+    properties:
+      employeeId:
+        description: 'Employee Id.<br  /> Max length: 10'
+        type:
+          - string
+          - 'null'
+      statusCode:
+        description: 'Employee current work status. Common values are *A* (Active), *L* (Leave of Absence), *T* (Terminated). <br  />Max length: 20'
+        type:
+          - string
+          - 'null'
+      statusTypeCode:
+        description: 'Employee current work status type. <br  />Max length: 10'
+        type:
+          - string
+          - 'null'
+    type: object
   error:
     description: The error model
     properties:
@@ -2568,7 +2673,7 @@ definitions:
     description: The staged employee model
     properties:
       additionalDirectDeposit:
-        description: Add up to 4 direct deposit accounts in addition to the main direct deposit account. Direct deposit is only available when inserting the employee's initial direct deposit information.
+        description: 'Add up to 19 direct deposit accounts in addition to the main direct deposit account. IMPORTANT: A direct deposit update will remove ALL existing main and additional direct deposit information in WebPay and replace with information provided on the request. GET API will not return direct deposit data.'
         items:
           additionalProperties: false
           description: The additional direct deposit model
@@ -3114,7 +3219,7 @@ definitions:
         maxItems: 5
         type: array
       mainDirectDeposit:
-        description: 'Add the main direct deposit account. After deposits are made to any additional direct deposit accounts, the remaining net check is deposited in the main direct deposit account. Direct deposit is only available when inserting the employee''s initial direct deposit information.'
+        description: 'Add the main direct deposit account. After deposits are made to any additional direct deposit accounts, the remaining net check is deposited in the main direct deposit account. IMPORTANT: A direct deposit update will remove ALL existing main and additional direct deposit information in WebPay and replace with what is provided on the request. GET API will not return direct deposit data.'
         items:
           additionalProperties: false
           description: The Main Direct Deposit model

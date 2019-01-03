@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2016-10-10/apimtenant.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimtenant
   x-tags:
@@ -501,7 +501,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Result of appplying changes from Git branch to database.
+          description: Result of applying changes from Git branch to database.
           schema:
             $ref: '#/definitions/OperationResultContract'
         default:

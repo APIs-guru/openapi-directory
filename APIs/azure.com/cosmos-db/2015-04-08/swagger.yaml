@@ -467,6 +467,7 @@ paths:
                     locationName: eastus
                 virtualNetworkRules:
                   - id: /subscriptions/subId/resourceGroups/rg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+                    ignoreMissingVNetServiceEndpoint: false
               tags: {}
             resourceGroupName: rg1
             subscriptionId: subid
@@ -558,7 +559,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions':
     get:
-      description: Retrieves metric defintions for the given collection.
+      description: Retrieves metric definitions for the given collection.
       operationId: Collection_ListMetricDefinitions
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
@@ -847,7 +848,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metricDefinitions':
     get:
-      description: Retrieves metric defintions for the given database.
+      description: Retrieves metric definitions for the given database.
       operationId: Database_ListMetricDefinitions
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
@@ -1081,7 +1082,7 @@ paths:
                 secondaryMasterKey: secondaryMasterKey
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/metricDefinitions':
     get:
-      description: Retrieves metric defintions for the given database account.
+      description: Retrieves metric definitions for the given database account.
       operationId: DatabaseAccounts_ListMetricDefinitions
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
@@ -1200,6 +1201,8 @@ paths:
             accountName: ddb1
             api-version: '2015-04-08'
             region: North Europe
+            regionParameterForOffline:
+              - region: North Europe
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -1236,6 +1239,8 @@ paths:
             accountName: ddb1
             api-version: '2015-04-08'
             region: North Europe
+            regionParameterForOnline:
+              - region: North Europe
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
@@ -1864,6 +1869,9 @@ definitions:
       enableAutomaticFailover:
         description: Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
         type: boolean
+      enableMultipleWriteLocations:
+        description: Enables the account to write in multiple locations
+        type: boolean
       ipRangeFilter:
         $ref: '#/definitions/IPRangeFilter'
         description: 'Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.'
@@ -1964,6 +1972,9 @@ definitions:
         type: string
       enableAutomaticFailover:
         description: Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.
+        type: boolean
+      enableMultipleWriteLocations:
+        description: Enables the account to write in multiple locations
         type: boolean
       failoverPolicies:
         description: An array that contains the regions ordered by their failover priorities.
@@ -2259,7 +2270,7 @@ definitions:
     description: The metric values for a single partition.
     properties:
       partitionId:
-        description: The parition id (GUID identifier) of the metric values.
+        description: The partition id (GUID identifier) of the metric values.
         readOnly: true
         type: string
       partitionKeyRangeId:
@@ -2281,7 +2292,7 @@ definitions:
     description: The partition level usage data for a usage request.
     properties:
       partitionId:
-        description: The parition id (GUID identifier) of the usages.
+        description: The partition id (GUID identifier) of the usages.
         readOnly: true
         type: string
       partitionKeyRangeId:
@@ -2469,4 +2480,7 @@ definitions:
       id:
         description: 'Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}.'
         type: string
+      ignoreMissingVNetServiceEndpoint:
+        description: Create firewall rule before the virtual network has vnet service endpoint enabled.
+        type: boolean
     type: object

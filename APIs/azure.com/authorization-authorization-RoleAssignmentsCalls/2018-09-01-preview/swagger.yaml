@@ -96,6 +96,7 @@ paths:
                     properties:
                       canDelegate: false
                       principalId: Pid
+                      principalType: Ptype
                       roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                       scope: /subscriptions/subId/resourcegroups/rgname
                     type: Microsoft.Authorization/roleAssignments
@@ -137,6 +138,7 @@ paths:
                     properties:
                       canDelegate: false
                       principalId: Pid
+                      principalType: Ptype
                       roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                       scope: /subscriptions/subId/resourcegroups/rgname
                     type: Microsoft.Authorization/roleAssignments
@@ -200,6 +202,7 @@ paths:
                     properties:
                       canDelegate: false
                       principalId: Pid
+                      principalType: Ptype
                       roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                       scope: /subscriptions/subId/resourcegroups/rgname
                     type: Microsoft.Authorization/roleAssignments
@@ -239,6 +242,7 @@ paths:
                 properties:
                   canDelegate: false
                   principalId: Pid
+                  principalType: Ptype
                   roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                   scope: /subscriptions/subId/resourcegroups/rgname
                 type: Microsoft.Authorization/roleAssignments
@@ -273,6 +277,7 @@ paths:
                 properties:
                   canDelegate: false
                   principalId: Pid
+                  principalType: Ptype
                   roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                   scope: /subscriptions/subId/resourcegroups/rgname
                 type: Microsoft.Authorization/roleAssignments
@@ -320,6 +325,7 @@ paths:
                 properties:
                   canDelegate: false
                   principalId: Pid
+                  principalType: Ptype
                   roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                   scope: /subscriptions/subId/resourcegroups/rgname
                 type: Microsoft.Authorization/roleAssignments
@@ -361,6 +367,7 @@ paths:
                     properties:
                       canDelegate: false
                       principalId: Pid
+                      principalType: Ptype
                       roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                       scope: /subscriptions/subId/resourcegroups/rgname
                     type: Microsoft.Authorization/roleAssignments
@@ -405,6 +412,7 @@ paths:
                 properties:
                   canDelegate: false
                   principalId: Pid
+                  principalType: Ptype
                   roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                   scope: /subscriptions/subId/resourcegroups/rgname
                 type: Microsoft.Authorization/roleAssignments
@@ -446,6 +454,7 @@ paths:
                 properties:
                   canDelegate: false
                   principalId: Pid
+                  principalType: Ptype
                   roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                   scope: /subscriptions/subId/resourcegroups/rgname
                 type: Microsoft.Authorization/roleAssignments
@@ -498,6 +507,7 @@ paths:
                 properties:
                   canDelegate: false
                   principalId: Pid
+                  principalType: Ptype
                   roleDefinitionId: /subscriptions/subId/providers/Microsoft.Authorization/roleDefinitions/roledefinitionId
                   scope: /subscriptions/subId/resourcegroups/rgname
                 type: Microsoft.Authorization/roleAssignments
@@ -534,7 +544,7 @@ definitions:
     description: Role Assignments filter
     properties:
       canDelegate:
-        description: The Delegation flag for the roleassignment
+        description: The Delegation flag for the role assignment
         type: boolean
       principalId:
         description: Returns role assignment of the specific principal.
@@ -554,7 +564,7 @@ definitions:
     description: Role assignment properties.
     properties:
       canDelegate:
-        description: The delgation flag used for creating a role assignment
+        description: The delegation flag used for creating a role assignment
         type: boolean
       principalId:
         description: 'The principal ID assigned to the role. This maps to the ID inside the Active Directory. It can point to a user, service principal, or security group.'
@@ -586,11 +596,28 @@ definitions:
     description: Role assignment properties with scope.
     properties:
       canDelegate:
-        description: The Delegation flag for the roleassignment
+        description: The Delegation flag for the role assignment
         type: boolean
       principalId:
         description: The principal ID.
         type: string
+      principalType:
+        description: The principal type of the assigned principal ID.
+        enum:
+          - User
+          - Group
+          - ServicePrincipal
+          - Unknown
+          - DirectoryRoleTemplate
+          - ForeignGroup
+          - Application
+          - MSI
+          - DirectoryObjectOrGroup
+          - Everyone
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: PrincipalType
       roleDefinitionId:
         description: The role definition ID.
         type: string

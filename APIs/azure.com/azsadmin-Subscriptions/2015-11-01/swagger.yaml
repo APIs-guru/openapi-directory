@@ -58,28 +58,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  /providers/Microsoft.Subscriptions/operations:
-    get:
-      description: Get the list of Operations.
-      operationId: Operations_List
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/OperationList'
-      tags:
-        - Operations
-      x-ms-examples:
-        Get the list of Operations.:
-          parameters:
-            api-version: '2015-11-01'
-            location: local
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '200':
-              body: {}
   /subscriptions:
     get:
       description: Get the list of subscriptions.
@@ -115,7 +93,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}':
     delete:
-      description: Delete the specifed subscription.
+      description: Delete the specified subscription.
       operationId: Subscriptions_Delete
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -128,7 +106,7 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        Delete the specifed subscription:
+        Delete the specified subscription:
           parameters:
             api-version: '2015-11-01'
             location: local
@@ -214,47 +192,6 @@ paths:
                 subscriptionId: a7aeb2dd-1b1d-458c-a3dc-09070c2ece5e
                 tenantId: 1e64bce5-9f3b-4add-8be8-e550e05014d0
 definitions:
-  Operation:
-    description: Supported REST operation.
-    properties:
-      display:
-        description: Display information for the operation.
-        properties:
-          description:
-            description: Description for the operation.
-            readOnly: true
-            type: string
-          operation:
-            description: Display name of the operation.
-            readOnly: true
-            type: string
-          provider:
-            description: Resource provider display name.
-            readOnly: true
-            type: string
-          resource:
-            description: Resource type display name related to the operation.
-            readOnly: true
-            type: string
-        type: object
-      name:
-        description: Name of the operation being performed on an object.
-        readOnly: true
-        type: string
-      origin:
-        description: Origin for the operation.
-        readOnly: true
-        type: string
-    type: object
-  OperationList:
-    description: List of supported operations.
-    properties:
-      value:
-        description: List of supported operations.
-        items:
-          $ref: '#/definitions/Operation'
-        type: array
-    type: object
   Resource:
     description: Base Resource Object
     properties:

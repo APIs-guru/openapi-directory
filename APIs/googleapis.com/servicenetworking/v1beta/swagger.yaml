@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://servicenetworking.googleapis.com/$discovery/rest?version=v1beta'
       version: v1
@@ -144,8 +144,9 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Allocated ranges specified for the connection may be updated.
-        Operation<response: Connection>.
+        Updates the allocated ranges that are assigned to a connection.
+        The response from the `get` operation will be of type `Connection` if the
+        operation successfully completes.
       operationId: servicenetworking.services.patch
       parameters:
         - in: body
@@ -159,18 +160,18 @@ paths:
           name: force
           type: boolean
         - description: |-
-            Provider peering service that is managing peering connectivity for a
-            service provider organization.
-            For Google services that support this functionality it is
-            'services/servicenetworking.googleapis.com'.
+            The service producer peering service that is managing peering connectivity
+            for a service producer organization.
+            For Google services that support this functionality, this is
+            `services/servicenetworking.googleapis.com`.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
         - description: |-
-            The update mask. If this is omitted, it defaults to "*".   Only reserved
-            peering ranges list may be updated.
+            The update mask. If this is omitted, it defaults to "*". You can only
+            update the listed peering ranges.
           in: query
           name: updateMask
           type: string
@@ -189,26 +190,27 @@ paths:
   '/v1beta/{parent}/connections':
     get:
       description: |-
-        Service consumers use this method to list configured peering connection for
-        the given service and consumer network.
+        List the private connections that are configured in a service consumer's
+        VPC network.
       operationId: servicenetworking.services.connections.list
       parameters:
         - description: |-
-            Network name in the consumer project.   This network must have been
-            already peered with a shared VPC network using CreateConnection
-            method.
-            Must be in a form 'projects/{project}/global/networks/{network}'.
-            {project} is a project number, as in '12345'
-            {network} is network name.
+            The name of service consumer's VPC network that's connected with service
+            producer network through a private connection. The network name must be in
+            the following format:
+            `projects/{project}/global/networks/{network}`. {project} is a
+            project number, such as in `12345` that includes the VPC service
+            consumer's VPC network. {network} is the name of the service consumer's VPC
+            network.
           in: query
           name: network
           type: string
         - description: |-
-            Provider peering service that is managing peering connectivity for a
-            service provider organization.
-            For Google services that support this functionality it is
-            'services/servicenetworking.googleapis.com'.
-            For "-" all configured public peering services will be queried.
+            The service that is managing peering connectivity for a service producer's
+            organization. For Google services that support this functionality, this
+            value is `services/servicenetworking.googleapis.com`.
+            If you specify `-` as the parameter value, all configured public peering
+            services are listed.
           in: path
           name: parent
           required: true
@@ -240,15 +242,15 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        To connect service to a VPC network peering connection
-        must be established prior to service provisioning.
-        This method must be invoked by the consumer VPC network administrator
-        It will establish a permanent peering connection with a shared
-        network created in the service producer organization and register a
-        allocated IP range(s) to be used for service subnetwork provisioning.
-        This connection will be used for all supported services in the service
-        producer organization, so it only needs to be invoked once.
-        Operation<response: Connection>.
+        Creates a private connection that establishes a VPC Network Peering
+        connection to a VPC network in the service producer's organization.
+        The administrator of the service consumer's VPC network invokes this
+        method. The administrator must assign one or more allocated IP ranges for
+        provisioning subnetworks in the service producer's VPC network. This
+        connection is used for all supported services in the service producer's
+        organization, so it only needs to be invoked once. The response from the
+        `get` operation will be of type `Connection` if the operation successfully
+        completes.
       operationId: servicenetworking.services.connections.create
       parameters:
         - in: body
@@ -256,10 +258,9 @@ paths:
           schema:
             $ref: '#/definitions/Connection'
         - description: |-
-            Provider peering service that is managing peering connectivity for a
-            service provider organization.
-            For Google services that support this functionality it is
-            'services/servicenetworking.googleapis.com'.
+            The service that is managing peering connectivity for a service producer's
+            organization. For Google services that support this functionality, this
+            value is `services/servicenetworking.googleapis.com`.
           in: path
           name: parent
           required: true
@@ -292,16 +293,15 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Service producers use this method to provision a new subnet in
-        peered service shared VPC network.
-        It will validate previously provided allocated ranges, find
-        non-conflicting sub-range of requested size (expressed in
-        number of leading bits of ipv4 network mask, as in CIDR range
-        notation). It will then create a subnetwork in the request
-        region. The subsequent call will try to reuse the
-        subnetwork previously created if subnetwork name, region and
-        prefix length of the IP range match.
-        Operation<response: Subnetwork>
+        For service producers, provisions a new subnet in a
+        peered service's shared VPC network in the requested region and with the
+        requested size that's expressed as a CIDR range (number of leading bits of
+        ipV4 network mask). The method checks against the assigned allocated ranges
+        to find a non-conflicting IP address range. The method will reuse a subnet
+        if subsequent calls contain the same subnet name, region, and prefix
+        length. This method will make producer's tenant project to be a shared VPC
+        service project as needed. The response from the `get` operation will be of
+        type `Subnetwork` if the operation successfully completes.
       operationId: servicenetworking.services.addSubnetwork
       parameters:
         - in: body
@@ -309,14 +309,64 @@ paths:
           schema:
             $ref: '#/definitions/AddSubnetworkRequest'
         - description: |-
-            Required. This is a 'tenant' project in the service producer organization.
-            services/{service}/{collection-id}/{resource-id}
-            {collection id} is the cloud resource collection type representing the
-            tenant project. Only 'projects' are currently supported.
-            {resource id} is the tenant project numeric id: '123456'.
-            {service} the name of the peering service, for example
-            'service-peering.example.com'. This service must be activated.
-            in the consumer project.
+            Required. A tenant project in the service producer organization, in the
+            following format: services/{service}/{collection-id}/{resource-id}.
+            {collection-id} is the cloud resource collection type that represents the
+            tenant project. Only `projects` are supported.
+            {resource-id} is the tenant project numeric id, such as
+            `123456`. {service} the name of the peering service, such as
+            `service-peering.example.com`. This service must already be
+            enabled in the service consumer's project.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/service.management'
+      tags:
+        - services
+  '/v1beta/{parent}:searchRange':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Service producers can use this method to find a currently unused range
+        within consumer allocated ranges.   This returned range is not reserved,
+        and not guaranteed to remain unused.
+        It will validate previously provided allocated ranges, find
+        non-conflicting sub-range of requested size (expressed in
+        number of leading bits of ipv4 network mask, as in CIDR range
+        notation).
+        Operation<response: Range>
+      operationId: servicenetworking.services.searchRange
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SearchRangeRequest'
+        - description: |-
+            Required. This is in a form services/{service}.
+            {service} the name of the private access management service, for example
+            'service-peering.example.com'.
           in: path
           name: parent
           required: true
@@ -340,37 +390,36 @@ definitions:
     properties:
       consumer:
         description: |-
-          Required. Resource representing service consumer. It may be different from
-          the project number in consumer network parameter in case of that network
-          being a shared VPC network. In that case, Service Networking will validate
-          that this resource belongs to that shared VPC.
-          For example 'projects/123456'.
+          Required. A resource that represents the service consumer, such as
+          `projects/123456`. The project number can be different from the
+          value in the consumer network parameter. For example, the network might be
+          part of a Shared VPC network. In those cases, Service Networking validates
+          that this resource belongs to that Shared VPC.
         type: string
       consumerNetwork:
         description: |-
-          Required. Network name in the consumer project.   This network must have been
-          already peered with a shared VPC network using CreateConnection
-          method.
-          Must be in a form 'projects/{project}/global/networks/{network}'.
-          {project} is a project number, as in '12345'
-          {network} is network name.
+          Required. The name of the service consumer's VPC network. The network
+          must have an existing private connection that was provisioned through the
+          connections.create method. The name must be in the following format:
+          `projects/{project}/global/networks/{network}`, where {project}
+          is a project number, such as `12345`. {network} is the name of a
+          VPC network in the project.
         type: string
       description:
-        description: Optional. Description of the subnetwork.
+        description: An optional description of the subnet.
         type: string
       ipPrefixLength:
         description: |-
-          Required. The prefix length of the IP range.
-          Use usual CIDR range notation.
-          For example, '30' to provision subnet with x.x.x.x/30 CIDR range.
-          Actual range will be determined using allocated range for the consumer
-          peered network and returned in the result.
+          Required. The prefix length of the subnet's IP address range.  Use CIDR
+          range notation, such as `30` to provision a subnet with an
+          `x.x.x.x/30` CIDR range. The IP address range is drawn from a
+          pool of available ranges in the service consumer's allocated range.
         format: int32
         type: integer
       region:
         description: |-
-          Required. Cloud [region](/compute/docs/reference/rest/v1/regions) for the new
-          subnetwork.
+          Required. The name of a [region](/compute/docs/regions-zones)
+          for the subnet, such `europe-west1`.
         type: string
       requestedAddress:
         description: |-
@@ -382,14 +431,14 @@ definitions:
         type: string
       subnetwork:
         description: |-
-          Required. Name for the new subnetwork.
-          Must be a legal [subnetwork](compute/docs/reference/rest/v1/subnetworks)
-          name.
+          Required. A name for the new subnet. For information about the naming
+          requirements, see [subnetwork](/compute/docs/reference/rest/v1/subnetworks)
+          in the Compute API documentation.
         type: string
       subnetworkUsers:
         description: |-
-          Optional. List of members that will be granted 'compute.networkUser' role
-          on the newly added subnetwork.
+          A list of members that are granted the `compute.networkUser`
+          role on the subnet.
         items:
           type: string
         type: array
@@ -483,7 +532,7 @@ definitions:
         type: string
       authorizationUrl:
         description: |-
-          Redirect URL if JWT token is required but no present or is expired.
+          Redirect URL if JWT token is required but not present or is expired.
           Implement authorizationUrl of securityDefinitions in OpenAPI spec.
         type: string
       id:
@@ -724,24 +773,30 @@ definitions:
         type: string
     type: object
   Connection:
-    description: Message returning the created service connection.
+    description: |-
+      Represents a private connection resource. A private connection is implemented
+      as a VPC Network Peering connection between a service producer's VPC network
+      and a service consumer's VPC network.
     properties:
       network:
         description: |-
-          Name of VPC network connected with service producer network.
-          Must be in a form 'projects/{project}/global/networks/{network}'.
-          {project} is a project number, as in '12345'
-          {network} is a network name.
+          The name of service consumer's VPC network that's connected with service
+          producer network, in the following format:
+          `projects/{project}/global/networks/{network}`.
+          `{project}` is a project number, such as in `12345` that includes
+          the VPC service consumer's VPC network. `{network}` is the name of the
+          service consumer's VPC network.
         type: string
       peering:
         description: |-
           Output only.
-          Name of the peering connection that is created by the peering service.
+          The name of the VPC Network Peering connection that was created by the
+          service producer.
         type: string
       reservedPeeringRanges:
         description: |-
-          Named IP address range(s) of PEERING type allocated for this service
-          provider.
+          The name of one or more allocated IP address ranges for this service
+          producer of type `PEERING`.
           Note that invoking this method with a different range when connection is
           already established will not modify already provisioned service
           producer subnetworks.
@@ -751,8 +806,8 @@ definitions:
       service:
         description: |-
           Output only.
-          Name of the peering service associated with this connection.
-          "services/{service name}
+          The name of the peering service that's associated with this connection, in
+          the following format: `services/{service name}`.
         type: string
     type: object
   Context:
@@ -2074,18 +2129,22 @@ definitions:
       consumerDestinations:
         description: |-
           Monitoring configurations for sending metrics to the consumer project.
-          There can be multiple consumer destinations, each one must have a
-          different monitored resource type. A metric can be used in at most
-          one consumer destination.
+          There can be multiple consumer destinations. A monitored resouce type may
+          appear in multiple monitoring destinations if different aggregations are
+          needed for different sets of metrics associated with that monitored
+          resource type. A monitored resource and metric pair may only be used once
+          in the Monitoring configuration.
         items:
           $ref: '#/definitions/MonitoringDestination'
         type: array
       producerDestinations:
         description: |-
           Monitoring configurations for sending metrics to the producer project.
-          There can be multiple producer destinations, each one must have a
-          different monitored resource type. A metric can be used in at most
-          one producer destination.
+          There can be multiple producer destinations. A monitored resouce type may
+          appear in multiple monitoring destinations if different aggregations are
+          needed for different sets of metrics associated with that monitored
+          resource type. A monitored resource and metric pair may only be used once
+          in the Monitoring configuration.
         items:
           $ref: '#/definitions/MonitoringDestination'
         type: array
@@ -2097,8 +2156,8 @@ definitions:
     properties:
       metrics:
         description: |-
-          Names of the metrics to report to this monitoring destination.
-          Each name must be defined in Service.metrics section.
+          Types of the metrics to report to this monitoring destination.
+          Each type must be defined in Service.metrics section.
         items:
           type: string
         type: array
@@ -2409,6 +2468,28 @@ definitions:
           specified unit. Currently only STANDARD is supported.
         type: object
     type: object
+  SearchRangeRequest:
+    description: Request to search for an unused range within allocated ranges.
+    properties:
+      ipPrefixLength:
+        description: |-
+          Required. The prefix length of the IP range.
+          Use usual CIDR range notation.
+          For example, '30' to find unused x.x.x.x/30 CIDR range.
+          Actual range will be determined using allocated range for the consumer
+          peered network and returned in the result.
+        format: int32
+        type: integer
+      network:
+        description: |-
+          Network name in the consumer project.   This network must have been
+          already peered with a shared VPC network using CreateConnection
+          method.
+          Must be in a form 'projects/{project}/global/networks/{network}'.
+          {project} is a project number, as in '12345'
+          {network} is network name.
+        type: string
+    type: object
   Service:
     description: |-
       `Service` is the root object of Google service configuration schema. It
@@ -2531,8 +2612,10 @@ definitions:
         description: Monitoring configuration.
       name:
         description: |-
-          The DNS address at which this service is available,
-          e.g. `calendar.googleapis.com`.
+          The service name, which is a DNS-like logical identifier for the
+          service, such as `calendar.googleapis.com`. The service name
+          typically goes through DNS verification to make sure the owner
+          of the service also owns the DNS name.
         type: string
       producerProjectId:
         description: The Google project that owns this service.
@@ -2674,10 +2757,12 @@ definitions:
         type: string
     type: object
   Subnetwork:
-    description: Message returning the created service subnetwork.
+    description: |-
+      Represents a subnet that was created or discovered by a private access
+      management service.
     properties:
       ipCidrRange:
-        description: Subnetwork CIDR range in "10.x.x.x/y" format.
+        description: Subnetwork CIDR range in `10.x.x.x/y` format.
         type: string
       name:
         description: |-
@@ -2686,9 +2771,15 @@ definitions:
         type: string
       network:
         description: |-
-          Shared VPC host project network peered with consumer network.
-          For example: projects/1234321/global/networks/host-network
+          In the Shared VPC host project, the VPC network that's peered with the
+          consumer network. For example:
+          `projects/1234321/global/networks/host-network`
         type: string
+      outsideAllocation:
+        description: |-
+          This is a discovered subnet that is not within the current consumer
+          allocated ranges.
+        type: boolean
     type: object
   SystemParameter:
     description: |-

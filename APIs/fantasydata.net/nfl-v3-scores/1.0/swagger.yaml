@@ -1279,6 +1279,8 @@ definitions:
         $ref: '#/definitions/Stadium'
       StadiumID:
         type: integer
+      Status:
+        type: string
       Week:
         type: integer
   Score:
@@ -1329,6 +1331,8 @@ definitions:
         type: integer
       ForecastWindSpeed:
         type: integer
+      GameEndDateTime:
+        type: string
       GameKey:
         type: string
       GeoLat:
@@ -1405,6 +1409,8 @@ definitions:
         $ref: '#/definitions/Stadium'
       StadiumID:
         type: integer
+      Status:
+        type: string
       TimeRemaining:
         type: string
       Week:
@@ -1433,17 +1439,23 @@ definitions:
         type: integer
       State:
         type: string
+      Type:
+        type: string
   Standing:
     properties:
       Conference:
         type: string
       ConferenceLosses:
         type: integer
+      ConferenceTies:
+        type: integer
       ConferenceWins:
         type: integer
       Division:
         type: string
       DivisionLosses:
+        type: integer
+      DivisionTies:
         type: integer
       DivisionWins:
         type: integer

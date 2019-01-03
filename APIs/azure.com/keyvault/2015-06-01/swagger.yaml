@@ -1198,7 +1198,7 @@ definitions:
     description: Details of the organization administrator of the certificate issuer
     properties:
       email:
-        description: Email addresss.
+        description: Email address.
         type: string
         x-ms-client-name: EmailAddress
       first_name:
@@ -1531,7 +1531,7 @@ definitions:
     description: The contact information for the vault certificates.
     properties:
       email:
-        description: Email addresss.
+        description: Email address.
         type: string
         x-ms-client-name: EmailAddress
       name:
@@ -2158,7 +2158,7 @@ definitions:
         description: The subject name. Should be a valid X509 Distinguished Name.
         type: string
       validity_months:
-        description: The duration that the ceritifcate is valid in months.
+        description: The duration that the certificate is valid in months.
         format: int32
         minimum: 0
         type: integer

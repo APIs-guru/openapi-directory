@@ -899,10 +899,10 @@ paths:
                     value: '"server89.domain.com"'
         'List variables, Next 100':
           parameters:
+            $skip: 100
             api-version: '2015-10-31'
             automationAccountName: sampleAccount9
             resourceGroupName: rg
-            skip: '100'
             subscriptionId: subid
           responses:
             '200':
@@ -1344,7 +1344,7 @@ definitions:
         description: ARM proxy resource.
         properties: {}
         type: object
-    description: Definition of the varible.
+    description: Definition of the variable.
     properties:
       properties:
         $ref: '#/definitions/VariableProperties'
@@ -1387,7 +1387,7 @@ definitions:
           $ref: '#/definitions/Variable'
         type: array
   VariableProperties:
-    description: Definition of the varible properties
+    description: Definition of the variable properties
     properties:
       creationTime:
         description: Gets or sets the creation time.

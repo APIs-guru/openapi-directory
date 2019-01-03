@@ -549,7 +549,7 @@ definitions:
         description: DNS prefix to be used to create the FQDN for the agent pool.
         type: string
       fqdn:
-        description: FDQN for the agent pool.
+        description: FQDN for the agent pool.
         readOnly: true
         type: string
       name:
@@ -576,7 +576,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: VNet SubnetID specifies the vnet's subnet identifier.
+        description: VNet SubnetID specifies the VNet's subnet identifier.
     required:
       - name
       - vmSize
@@ -624,7 +624,7 @@ definitions:
         description: FirstConsecutiveStaticIP used to specify the first static ip of masters.
         type: string
       fqdn:
-        description: FDQN for the master pool.
+        description: FQDN for the master pool.
         readOnly: true
         type: string
       osDiskSizeGB:
@@ -638,7 +638,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: VNet SubnetID specifies the vnet's subnet identifier.
+        description: VNet SubnetID specifies the VNet's subnet identifier.
     required:
       - dnsPrefix
       - vmSize
@@ -883,7 +883,7 @@ definitions:
       modelAsString: true
       name: ContainerServiceVMSizeTypes
   ContainerServiceVnetSubnetID:
-    description: VNet SubnetID specifies the vnet's subnet identifier.
+    description: VNet SubnetID specifies the VNet's subnet identifier.
     type: string
   ContainerServiceWindowsProfile:
     description: Profile for Windows VMs in the container service cluster.
@@ -982,7 +982,7 @@ definitions:
         description: DNS prefix specified when creating the managed cluster.
         type: string
       fqdn:
-        description: FDQN for the master pool.
+        description: FQDN for the master pool.
         readOnly: true
         type: string
       kubernetesVersion:

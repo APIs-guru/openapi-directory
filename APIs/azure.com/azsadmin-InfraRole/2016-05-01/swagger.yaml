@@ -632,7 +632,7 @@ paths:
             '404': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/infraRoles/{infraRole}/Restart':
     post:
-      description: Restarts the requestd infrastructure role.
+      description: Restarts the requested infrastructure role.
       operationId: InfraRoles_Restart
       parameters:
         - description: Subscription credentials that uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -667,7 +667,7 @@ paths:
       tags:
         - InfraRole
       x-ms-examples:
-        Restarts the requestd infrastructure role.:
+        Restarts the requested infrastructure role.:
           parameters:
             api-version: '2016-05-01'
             infraRole: BackupRestoreResourceProvider

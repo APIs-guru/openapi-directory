@@ -37,13 +37,49 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/icons8/api-docs/master/apiary.apib'
       version: 1A
   x-providerName: icons8.com
 produces:
   - application/json
+tags:
+  - description: |-
+      ## Platform
+
+      Attributes and parameters named `platform` or `platform_api_code` or `platform_code` all indicate the style of the icons.
+      We’re sorry we have various parameters meaning the same.
+
+      `platform` | Icon style | Example
+      ---:|---|---
+      win8 | icons in the Microsoft Windows 8/Metro style | [example](https://icons8.com/windows-8-icons/)
+      win10 | icons in the Microsoft Windows 10/Threshold style | [example](https://icons8.com/download-huge-windows8-set/)
+      ios7 | icons in the Apple iOS 7/8/9/10 style | [example](https://icons8.com/free-ios-7-icons-in-vector/)
+      android | icons in the Google Android 4 Kitkat style | [example](https://icons8.com/android-kitkat-icons/)
+      androidL | icons in the Google Android 5 Lollipop (Material) style | [example](https://icons8.com/android-icons/)
+      color | flat color icons | [example](https://icons8.com/color-icons/)
+      office | icons in the Microsoft Office style | [example](https://icons8.com/office-icons/)
+
+      ## Language
+
+      Icon names, categories and tags are localized. Here's the list of supported languages:
+
+      `language` | Language name
+      ---|---
+      `en-US` | English
+      `fr-FR` | French
+      `de-DE` | German
+      `it-IT` | Italian
+      `pt-BR` | Portuguese
+      `pl-PL` | Polish
+      `ru-RU` | Russian
+      `es-ES` | Spanish
+      `zh-CN` | Chinese
+      `ja-JP` | Japanese
+
+      The primary language is English - if we do not translate something, it will be in English.
+    name: Parameters
 paths:
   '/api/iconsets/v3/categories?platform={platform}&language={language}':
     get:
@@ -994,6 +1030,7 @@ definitions:
   AuthArgument:
     properties:
       hash:
+        description: Authorization hash
         type: string
     required:
       - hash
@@ -1011,6 +1048,28 @@ definitions:
   CollectionWebFontTaskArguments:
     properties:
       arguments:
+        properties:
+          collection:
+            description: collection identifier
+            type: string
+          css_prefix:
+            description: 'prefix for CSS rules, used to generate LESS/SCSS'
+            type: string
+          css_rules_case:
+            description: glyph names conversion rule
+            enum:
+              - lowercase
+              - as_is
+            type: string
+          css_selector:
+            description: 'template for glyph selector; placeholder {{glyph}} will be replaced with glyph names'
+            type: string
+          font_name:
+            description: name of iconic webfont
+            type: string
+        required:
+          - collection
+          - font_name
         type: object
     type: object
   CompactCategoryV3Item:
@@ -1028,26 +1087,79 @@ definitions:
       category:
         type: string
       common_icon_id:
+        description: identifier for group of the same icons in different styles; i.e. id of all "home" icons
         type: number
       created:
+        description: date (ISO8601 format) of icon was published
         type: string
       features:
+        description: internal service attribute; internal information about icon features; private; depend on the rights of the current user
+        properties:
+          bitmap:
+            description: '"Could user use images in bitmap / raster formats in any size ?"'
+            type: number
+          nolink:
+            description: '"Could user use images without any link to Icons8 ?"'
+            type: number
+          vector:
+            description: '"Could user use images in vector formats ?"'
+            type: number
+        required:
+          - bitmap
+          - vector
+          - nolink
         type: object
       id:
+        description: unique icon identifier
         type: number
       name:
+        description: icon name
         type: string
       platform_code:
+        description: icon style
         type: string
       share:
+        description: internal service attribute; some links to spread the world
+        properties:
+          png:
+            description: some raster images for share the icon
+            items: {}
+            type: array
+          url:
+            description: short URL to use in twitter
+            type: string
         type: object
       subcategory:
+        properties:
+          api_code:
+            type: string
+          name:
+            type: string
+        required:
+          - name
+          - api_code
         type: object
       svg:
+        description: plain SVG content of icon
         type: string
       url:
+        description: internal service attribute; the meaning of this attribute is "Identifier of thread at Disquss"
         type: string
       vector:
+        description: URLs to icon sources in different vector formats; private; depend on the current user and could be opened in user's browser only
+        properties:
+          eps:
+            description: absolute URL to file in EPS format
+            type: string
+          pdf:
+            description: absolute URL to file in PDF format
+            type: string
+          svg-editable:
+            description: absolute URL to original SVG file
+            type: string
+          svg-simplified:
+            description: absolute URL to compressed and simplified SVG file
+            type: string
         type: object
     required:
       - id
@@ -1065,26 +1177,79 @@ definitions:
           category:
             type: string
           common_icon_id:
+            description: identifier for group of the same icons in different styles; i.e. id of all "home" icons
             type: number
           created:
+            description: date (ISO8601 format) of icon was published
             type: string
           features:
+            description: internal service attribute; internal information about icon features; private; depend on the rights of the current user
+            properties:
+              bitmap:
+                description: '"Could user use images in bitmap / raster formats in any size ?"'
+                type: number
+              nolink:
+                description: '"Could user use images without any link to Icons8 ?"'
+                type: number
+              vector:
+                description: '"Could user use images in vector formats ?"'
+                type: number
+            required:
+              - bitmap
+              - vector
+              - nolink
             type: object
           id:
+            description: unique icon identifier
             type: number
           name:
+            description: icon name
             type: string
           platform_code:
+            description: icon style
             type: string
           share:
+            description: internal service attribute; some links to spread the world
+            properties:
+              png:
+                description: some raster images for share the icon
+                items: {}
+                type: array
+              url:
+                description: short URL to use in twitter
+                type: string
             type: object
           subcategory:
+            properties:
+              api_code:
+                type: string
+              name:
+                type: string
+            required:
+              - name
+              - api_code
             type: object
           svg:
+            description: plain SVG content of icon
             type: string
           url:
+            description: internal service attribute; the meaning of this attribute is "Identifier of thread at Disquss"
             type: string
           vector:
+            description: URLs to icon sources in different vector formats; private; depend on the current user and could be opened in user's browser only
+            properties:
+              eps:
+                description: absolute URL to file in EPS format
+                type: string
+              pdf:
+                description: absolute URL to file in PDF format
+                type: string
+              svg-editable:
+                description: absolute URL to original SVG file
+                type: string
+              svg-simplified:
+                description: absolute URL to compressed and simplified SVG file
+                type: string
             type: object
         required:
           - id
@@ -1100,6 +1265,7 @@ definitions:
   TaskError:
     properties:
       code:
+        description: error code
         enum:
           - json_not_valid
           - auth_required
@@ -1113,6 +1279,7 @@ definitions:
           - not_possible
         type: string
       description:
+        description: human readable error message
         type: string
     required:
       - code
@@ -1121,12 +1288,19 @@ definitions:
   TaskResult:
     properties:
       description:
+        description: human readable description
         type: string
       id:
+        description: task identifier
         type: string
       results:
+        properties:
+          zip:
+            description: URL to webfont files in ZIP format
+            type: string
         type: object
       status:
+        description: task status
         enum:
           - '`preparing+'
           - idle
@@ -1136,6 +1310,7 @@ definitions:
           - failed
         type: string
       type:
+        description: task type
         enum:
           - create_web_font
           - create_svg_set
@@ -1148,6 +1323,7 @@ definitions:
   TotalV3Item:
     properties:
       api_code:
+        description: icons style code; in other places it named `plarform` or `platform_api_code`
         enum:
           - ios7
           - win8

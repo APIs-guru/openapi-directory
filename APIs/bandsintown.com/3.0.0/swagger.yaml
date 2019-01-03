@@ -13,9 +13,9 @@ info:
 
     It offers read-only access to artist info and artist events:
     - artist info: returns the link to the Bandsintown artist page, the link to the artist photo, the current number of trackers and more
-    - artist events: returns the list of upcoming events including their date and time, venue name and location, ticket links, lineup, description and the link to the Bandsintown event page
+    - artist events: returns the list of events including their date and time, venue name and location, ticket links, lineup, description and the link to the Bandsintown event page
 
-    Note you can also search for events on a given date or within a given date range, including past dates.
+    Note you can specify if you only want to return upcoming events, past events, all events, or events within a given date range.
 
     # Getting Started
     - In order to use the Bandsintown API, you must have written consent from Bandsintown Inc. Any other use of the Bandsintown API is prohibited. [Contact Bandsintown](http://help.bandsintown.com/) to tell us what you plan to do and request your personal application ID.
@@ -78,7 +78,7 @@ paths:
           name: app_id
           required: true
           type: string
-        - description: 'Date range of requested shows e.g. 2015-05-05,2017-05-05'
+        - description: 'Can be one of the following values: "upcoming", "past", "all", or a date range e.g. "2015-05-05,2017-05-05". If not specified, only upcoming shows are returned'
           in: query
           name: date
           required: false
@@ -90,7 +90,7 @@ paths:
             items:
               $ref: '#/definitions/EventData'
             type: array
-      summary: Get all upcoming artist events or all past and upcoming events within a date range
+      summary: 'Get upcoming, past, or all artist events, or events within a date range'
       tags:
         - artist events
 definitions:

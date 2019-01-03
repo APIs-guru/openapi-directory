@@ -30,8 +30,9 @@ tags:
   - name: search
   - name: parse
   - name: lookup
-  - name: suggest
+  - name: rationale
   - name: triage
+  - name: suggest
 paths:
   /conditions:
     get:
@@ -43,7 +44,7 @@ paths:
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/Condition'
+              $ref: '#/definitions/Condition_Public'
             type: array
       summary: List all conditions
       tags:
@@ -62,7 +63,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/Condition'
+            $ref: '#/definitions/Condition_Details'
         '400':
           description: Invalid id specified
         '404':
@@ -75,6 +76,7 @@ paths:
       consumes:
         - application/json
       description: Suggests possible diagnoses and relevant observations based on provided patient information.
+      operationId: computeDiagnosis
       parameters:
         - in: body
           name: body
@@ -118,7 +120,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/Info'
+            $ref: '#/definitions/Info_Public'
       summary: Get database information
       tags:
         - info
@@ -132,7 +134,7 @@ paths:
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/LabTest'
+              $ref: '#/definitions/LabTest_Public'
             type: array
       summary: List all lab tests
       tags:
@@ -151,7 +153,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/LabTest'
+            $ref: '#/definitions/LabTest_Details'
         '400':
           description: Invalid id specified
         '404':
@@ -211,6 +213,26 @@ paths:
       summary: Find mentions of observations in given text
       tags:
         - parse
+  /rationale:
+    post:
+      consumes:
+        - application/json
+      description: Returns rationale behind the question asked by the system.
+      operationId: getRationale
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RationaleRequest'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/RationaleResponse'
+      summary: Query diagnostic engine for question rationale
+      tags:
+        - rationale
   /risk_factors:
     get:
       description: Returns a list of all available risk factors.
@@ -221,7 +243,7 @@ paths:
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/RiskFactor'
+              $ref: '#/definitions/RiskFactor_Public'
             type: array
       summary: List all risk factors
       tags:
@@ -240,7 +262,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/RiskFactor'
+            $ref: '#/definitions/RiskFactor_Details'
         '400':
           description: Invalid id specified
         '404':
@@ -336,7 +358,7 @@ paths:
           description: successful operation
           schema:
             items:
-              $ref: '#/definitions/Symptom'
+              $ref: '#/definitions/Symptom_Public'
             type: array
       summary: List all symptoms
       tags:
@@ -355,7 +377,7 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/Symptom'
+            $ref: '#/definitions/Symptom_Details'
         '400':
           description: Invalid id specified
         '404':
@@ -368,6 +390,7 @@ paths:
       consumes:
         - application/json
       description: Estimates triage level based on provided patient information.
+      operationId: computeDiagnosis_1
       parameters:
         - in: body
           name: body
@@ -397,7 +420,26 @@ definitions:
       - id
       - label
     type: object
-  Condition:
+  ConditionProbability:
+    properties:
+      common_name:
+        description: condition common name
+        type: string
+      id:
+        description: condition id
+        type: string
+      name:
+        description: condition name
+        type: string
+      probability:
+        format: double
+        type: number
+    required:
+      - id
+      - name
+      - probability
+    type: object
+  Condition_Details:
     properties:
       acuteness:
         enum:
@@ -452,24 +494,60 @@ definitions:
       - name
       - sex_filter
     type: object
-  ConditionProbability:
+  Condition_Public:
     properties:
-      common_name:
-        description: condition common name
+      acuteness:
+        enum:
+          - chronic
+          - chronic_with_exacerbations
+          - acute_potentially_chronic
+          - acute
         type: string
+      categories:
+        items:
+          type: string
+        type: array
+      common_name:
+        type: string
+      extras:
+        additionalProperties:
+          type: object
+        description: 'additional content, like custom properties or images'
+        type: object
       id:
-        description: condition id
         type: string
       name:
-        description: condition name
         type: string
-      probability:
-        format: double
-        type: number
+      prevalence:
+        enum:
+          - very_rare
+          - rare
+          - moderate
+          - common
+        type: string
+      severity:
+        enum:
+          - mild
+          - moderate
+          - severe
+        type: string
+      sex_filter:
+        enum:
+          - both
+          - male
+          - female
+        type: string
+      triage_level:
+        enum:
+          - emergency
+          - consultation
+          - self_care
+        type: string
     required:
+      - categories
       - id
       - name
-      - probability
+      - sex_filter
     type: object
   DiagnosisRequest:
     properties:
@@ -509,7 +587,6 @@ definitions:
       question:
         $ref: '#/definitions/Question'
       should_stop:
-        default: false
         type: boolean
     type: object
   Evidence:
@@ -524,14 +601,12 @@ definitions:
         description: id of observation or condition
         type: string
       initial:
-        default: false
         description: 'true for initial evidence, false for evidence reported during interview'
         type: boolean
       observed_at:
         description: time when evidence was observed in ISO 8601 format
         type: string
       related:
-        default: false
         description: 'true for related evidence, false for evidence reported during interview'
         type: boolean
     required:
@@ -604,7 +679,7 @@ definitions:
       - supporting_evidence
       - unconfirmed_evidence
     type: object
-  Info:
+  Info_Public:
     properties:
       conditions_count:
         format: int32
@@ -628,25 +703,7 @@ definitions:
       - symptoms_count
       - updated_at
     type: object
-  LabTest:
-    properties:
-      category:
-        type: string
-      common_name:
-        type: string
-      id:
-        type: string
-      name:
-        type: string
-      results:
-        items:
-          $ref: '#/definitions/LabTestResult'
-        type: array
-    required:
-      - id
-      - name
-    type: object
-  LabTestResult:
+  LabTestResult_Details:
     properties:
       id:
         type: string
@@ -663,6 +720,60 @@ definitions:
     required:
       - id
       - type
+    type: object
+  LabTestResult_Public:
+    properties:
+      id:
+        type: string
+      type:
+        enum:
+          - very_low
+          - low
+          - normal
+          - high
+          - very_high
+          - absent
+          - present
+        type: string
+    required:
+      - id
+      - type
+    type: object
+  LabTest_Details:
+    properties:
+      category:
+        type: string
+      common_name:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      results:
+        items:
+          $ref: '#/definitions/LabTestResult_Details'
+        type: array
+    required:
+      - id
+      - name
+    type: object
+  LabTest_Public:
+    properties:
+      category:
+        type: string
+      common_name:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      results:
+        items:
+          $ref: '#/definitions/LabTestResult_Public'
+        type: array
+    required:
+      - id
+      - name
     type: object
   ObservationMention:
     properties:
@@ -715,11 +826,9 @@ definitions:
           type: string
         type: array
       correct_spelling:
-        default: false
         description: correct spelling of input text before proper analysis
         type: boolean
       include_tokens:
-        default: false
         description: include tokenization details in output
         type: boolean
       text:
@@ -736,7 +845,6 @@ definitions:
           $ref: '#/definitions/ObservationMention'
         type: array
       obvious:
-        default: false
         description: indicates that entire input text has been parsed successfully and unambiguously
         type: boolean
       tokens:
@@ -790,7 +898,73 @@ definitions:
       - id
       - name
     type: object
-  RiskFactor:
+  RationaleParam:
+    properties:
+      common_name:
+        description: observation or condition common name
+        type: string
+      id:
+        description: observation or condition id
+        type: string
+      name:
+        description: observation or condition name
+        type: string
+    required:
+      - id
+      - name
+    type: object
+  RationaleRequest:
+    properties:
+      age:
+        format: int32
+        type: integer
+      evaluated_at:
+        description: time when diagnosis was evaluated in ISO 8601 format
+        type: string
+      evidence:
+        items:
+          $ref: '#/definitions/Evidence'
+        type: array
+      extras:
+        additionalProperties:
+          type: object
+        type: object
+      sex:
+        enum:
+          - male
+          - female
+        type: string
+    required:
+      - age
+      - sex
+    type: object
+  RationaleResponse:
+    properties:
+      condition_params:
+        description: condition params
+        items:
+          $ref: '#/definitions/RationaleParam'
+        type: array
+      observation_params:
+        description: observation params
+        items:
+          $ref: '#/definitions/RationaleParam'
+        type: array
+      type:
+        description: type
+        enum:
+          - r0
+          - r1
+          - r2
+          - r3
+          - r4
+          - r5
+          - r6
+        type: string
+    required:
+      - type
+    type: object
+  RiskFactor_Details:
     properties:
       category:
         type: string
@@ -824,6 +998,36 @@ definitions:
       - question
       - sex_filter
     type: object
+  RiskFactor_Public:
+    properties:
+      category:
+        type: string
+      common_name:
+        type: string
+      extras:
+        additionalProperties:
+          type: object
+        description: 'additional content, like custom properties or images'
+        type: object
+      id:
+        type: string
+      image_source:
+        type: string
+      image_url:
+        type: string
+      name:
+        type: string
+      sex_filter:
+        enum:
+          - both
+          - male
+          - female
+        type: string
+    required:
+      - id
+      - name
+      - sex_filter
+    type: object
   SearchResult:
     properties:
       id:
@@ -844,7 +1048,6 @@ definitions:
         description: observation id
         type: string
       is_emergency:
-        default: false
         type: boolean
       name:
         description: observation name
@@ -887,7 +1090,7 @@ definitions:
       - id
       - name
     type: object
-  Symptom:
+  Symptom_Details:
     properties:
       category:
         type: string
@@ -937,6 +1140,54 @@ definitions:
       - id
       - name
       - question
+      - sex_filter
+    type: object
+  Symptom_Public:
+    properties:
+      category:
+        type: string
+      children:
+        description: list of child symptoms
+        type: object
+      common_name:
+        type: string
+      extras:
+        additionalProperties:
+          type: object
+        description: 'additional content, like custom properties or images'
+        type: object
+      id:
+        type: string
+      image_source:
+        type: string
+      image_url:
+        type: string
+      name:
+        type: string
+      parent_id:
+        description: id of parent symptom
+        type: string
+      parent_relation:
+        description: type of relation with parent symptom
+        enum:
+          - base
+          - duration
+          - severity
+          - character
+          - exacerbating_factor
+          - diminishing_factor
+          - location
+          - radiation
+        type: string
+      sex_filter:
+        enum:
+          - both
+          - male
+          - female
+        type: string
+    required:
+      - id
+      - name
       - sex_filter
     type: object
   TriageResponse:

@@ -36,12 +36,64 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
+  AliasNameParameter:
+    description: The Disaster Recovery configuration name
+    in: path
+    maxLength: 50
+    minLength: 1
+    name: alias
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ApiVersionParameter:
     description: Client API Version.
     in: query
     name: api-version
     required: true
     type: string
+  AuthorizationRuleNameParameter:
+    description: The authorization rule name.
+    in: path
+    minLength: 1
+    name: authorizationRuleName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ConsumerGroupNameParameter:
+    description: The consumer group name
+    in: path
+    maxLength: 50
+    minLength: 1
+    name: consumerGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  EventHubNameParameter:
+    description: The Event Hub name
+    in: path
+    minLength: 1
+    name: eventHubName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  NamespaceNameParameter:
+    description: The Namespace name
+    in: path
+    maxLength: 50
+    minLength: 6
+    name: namespaceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: Name of the resource group within the azure subscription.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   SkipParameter:
     description: 'Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.'
     in: query
@@ -50,6 +102,15 @@ parameters:
     name: $skip
     required: false
     type: integer
+    x-ms-parameter-location: method
+  SkuNameParameter:
+    description: The sku type.
+    in: path
+    maxLength: 50
+    minLength: 1
+    name: sku
+    required: true
+    type: string
     x-ms-parameter-location: method
   SubscriptionIdParameter:
     description: Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -65,67 +126,6 @@ parameters:
     name: $top
     required: false
     type: integer
-    x-ms-parameter-location: method
-  aliasNameParameter:
-    description: The Disaster Recovery configuration name
-    in: path
-    maxLength: 50
-    minLength: 1
-    name: alias
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  authorizationRuleNameParameter:
-    description: The authorization rule name.
-    in: path
-    minLength: 1
-    name: authorizationRuleName
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  consumerGroupNameParameter:
-    description: The consumer group name
-    in: path
-    maxLength: 50
-    minLength: 1
-    name: consumerGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  eventHubNameParameter:
-    description: The Event Hub name
-    in: path
-    minLength: 1
-    name: eventHubName
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  namespaceNameParameter:
-    description: The Namespace name
-    in: path
-    maxLength: 50
-    minLength: 6
-    name: namespaceName
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  resourceGroupNameParameter:
-    description: Name of the resource group within the azure subscription.
-    in: path
-    maxLength: 90
-    minLength: 1
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  skuNameParameter:
-    description: The sku type.
-    in: path
-    maxLength: 50
-    minLength: 1
-    name: sku
-    required: true
-    type: string
     x-ms-parameter-location: method
 paths:
   /providers/Microsoft.EventHub/operations:
@@ -154,151 +154,126 @@ paths:
               body:
                 value:
                   - display:
-                      description: Checks availability of namespace under given subscription.
                       operation: Get namespace availability.
                       provider: Microsoft Azure EventHub
                       resource: Non Resource Operation
                     name: Microsoft.EventHub/checkNameAvailability/action
                   - display:
-                      description: Registers the subscription for the EventHub resource provider and enables the creation of EventHub resources
                       operation: Registers the EventHub Resource Provider
                       provider: Microsoft Azure EventHub
                       resource: EventHub Resource Provider
                     name: Microsoft.EventHub/register/action
                   - display:
-                      description: Create a Namespace Resource and Update its properties. Tags and status of the Namespace are the properties which can be updated.
                       operation: 'Create Or Update Namespace '
                       provider: Microsoft Azure EventHub
                       resource: Namespace
                     name: Microsoft.EventHub/namespaces/write
                   - display:
-                      description: Get the list of Namespace Resource Description
                       operation: Get Namespace Resource
                       provider: Microsoft Azure EventHub
                       resource: Namespace
                     name: Microsoft.EventHub/namespaces/read
                   - display:
-                      description: Delete Namespace Resource
                       operation: Delete Namespace
                       provider: Microsoft Azure EventHub
                       resource: Namespace
                     name: Microsoft.EventHub/namespaces/Delete
                   - display:
-                      description: Get the list of Namespaces Authorization Rules description.
                       operation: Get Namespace Authorization Rules
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/read
                   - display:
-                      description: 'Create a Namespace level Authorization Rules and update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update Namespace Authorization Rules
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/write
                   - display:
-                      description: 'Delete Namespace Authorization Rule. The Default Namespace Authorization Rule cannot be deleted. '
                       operation: Delete Namespace Authorization Rule
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to the Namespace
                       operation: Get Namespace Listkeys
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/listkeys/action
                   - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
                       operation: Resource Regeneratekeys
                       provider: Microsoft Azure EventHub
                       resource: AuthorizationRules
                     name: Microsoft.EventHub/namespaces/authorizationRules/regenerateKeys/action
                   - display:
-                      description: Create or Update EventHub properties.
                       operation: Create or Update EventHub
                       provider: Microsoft Azure EventHub
                       resource: EventHub
                     name: Microsoft.EventHub/namespaces/eventhubs/write
                   - display:
-                      description: Get list of EventHub Resource Descriptions
                       operation: Get EventHub
                       provider: Microsoft Azure EventHub
                       resource: EventHub
                     name: Microsoft.EventHub/namespaces/eventhubs/read
                   - display:
-                      description: Operation to delete EventHub Resource
                       operation: Delete EventHub
                       provider: Microsoft Azure EventHub
                       resource: EventHub
                     name: Microsoft.EventHub/namespaces/eventhubs/Delete
                   - display:
-                      description: ' Get the list of EventHub Authorization Rules'
                       operation: ' Get EventHub Authorization Rules'
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/read
                   - display:
-                      description: 'Create EventHub Authorization Rules and Update its properties. The Authorization Rules Access Rights, the Primary and Secondary Keys can be updated.'
                       operation: Create or Update EventHub Authorization Rule
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/write
                   - display:
-                      description: Operation to delete EventHub Authorization Rules
                       operation: Delete EventHub Authorization Rules
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/delete
                   - display:
-                      description: Get the Connection String to EventHub
                       operation: List EventHub keys
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/listkeys/action
                   - display:
-                      description: Regenerate the Primary or Secondary key to the Resource
                       operation: Resource Regeneratekeys
                       provider: Microsoft Azure EventHub
                       resource: EventHub AuthorizationRules
                     name: Microsoft.EventHub/namespaces/eventhubs/authorizationRules/regenerateKeys/action
                   - display:
-                      description: Create or Update ConsumerGroup properties.
                       operation: Create or Update ConsumerGroup
                       provider: Microsoft Azure EventHub
                       resource: ConsumerGroup
                     name: Microsoft.EventHub/namespaces/eventHubs/consumergroups/write
                   - display:
-                      description: Get list of ConsumerGroup Resource Descriptions
                       operation: Get ConsumerGroup
                       provider: Microsoft Azure EventHub
                       resource: ConsumerGroup
                     name: Microsoft.EventHub/namespaces/eventHubs/consumergroups/read
                   - display:
-                      description: Operation to delete ConsumerGroup Resource
                       operation: Delete ConsumerGroup
                       provider: Microsoft Azure EventHub
                       resource: ConsumerGroup
                     name: Microsoft.EventHub/namespaces/eventHubs/consumergroups/Delete
                   - display:
-                      description: Get list of Namespace metrics Resource Descriptions
                       operation: Get Namespace metrics
                       provider: Microsoft Azure EventHub
                       resource: Namespace metrics
                     name: Microsoft.EventHub/namespaces/metricDefinitions/read
                   - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
                       operation: Get Namespace diagnostic settings
                       provider: Microsoft Azure EventHub
                       resource: Namespace diagnostic settings
                     name: Microsoft.EventHub/namespaces/diagnosticSettings/read
                   - display:
-                      description: Get list of Namespace diagnostic settings Resource Descriptions
                       operation: Create or Update Namespace diagnostic settings
                       provider: Microsoft Azure EventHub
                       resource: Namespace diagnostic settings
                     name: Microsoft.EventHub/namespaces/diagnosticSettings/write
                   - display:
-                      description: Get list of Namespace logs Resource Descriptions
                       operation: Get Namespace logs
                       provider: Microsoft Azure EventHub
                       resource: Namespace logs
@@ -1468,7 +1443,7 @@ paths:
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/skuNameParameter'
+        - $ref: '#/parameters/SkuNameParameter'
       responses:
         '200':
           description: Regions successfully returned.
@@ -2052,7 +2027,7 @@ paths:
       description: Lists the available Namespaces within a resource group.
       operationId: Namespaces_ListByResourceGroup
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -2323,13 +2298,13 @@ paths:
       description: Deletes an existing namespace. This operation also removes all associated resources under the namespace.
       operationId: Namespaces_Delete
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly deleted.
+          description: Namespace successfully deleted.
         '202':
           description: Namespace delete request accepted.
         '204':
@@ -2356,8 +2331,8 @@ paths:
       description: Gets the description of the specified namespace.
       operationId: Namespaces_Get
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -2429,8 +2404,8 @@ paths:
       description: 'Creates or updates a namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       operationId: Namespaces_Update
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
         - description: Parameters for updating a namespace resource.
           in: body
           name: parameters
@@ -2441,7 +2416,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly updated.
+          description: Namespace successfully updated.
           schema:
             $ref: '#/definitions/EHNamespace'
         '201':
@@ -2516,8 +2491,8 @@ paths:
       description: 'Creates or updates a namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       operationId: Namespaces_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
         - description: Parameters for creating a namespace resource.
           in: body
           name: parameters
@@ -2530,7 +2505,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly created.
+          description: Namespace successfully created.
           schema:
             $ref: '#/definitions/EHNamespace'
         '201':
@@ -2610,8 +2585,8 @@ paths:
       description: Gets a list of authorization rules for a Namespace.
       operationId: Namespaces_ListAuthorizationRules
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -2658,9 +2633,9 @@ paths:
       description: Deletes an AuthorizationRule for a Namespace.
       operationId: Namespaces_DeleteAuthorizationRule
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -2675,7 +2650,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAutorizationRuleDelete:
+        NameSpaceAuthorizationRuleDelete:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: sdk-Authrules-8929
@@ -2689,9 +2664,9 @@ paths:
       description: Gets an AuthorizationRule for a Namespace by rule name.
       operationId: Namespaces_GetAuthorizationRule
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -2706,7 +2681,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAutorizationRuleGet:
+        NameSpaceAuthorizationRuleGet:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: sdk-Authrules-1746
@@ -2727,9 +2702,9 @@ paths:
       description: Creates or updates an AuthorizationRule for a Namespace.
       operationId: Namespaces_CreateOrUpdateAuthorizationRule
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - description: The shared access AuthorizationRule.
           in: body
           name: parameters
@@ -2777,9 +2752,9 @@ paths:
       description: Gets the primary and secondary connection strings for the Namespace.
       operationId: Namespaces_ListKeys
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -2814,9 +2789,9 @@ paths:
       description: Regenerates the primary or secondary connection strings for the specified Namespace.
       operationId: Namespaces_RegenerateKeys
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - description: Parameters required to regenerate the connection string.
           in: body
           name: parameters
@@ -2837,7 +2812,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAuthorizationRuleRegenrateKey:
+        NameSpaceAuthorizationRuleRegenerateKey:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: sdk-Authrules-8929
@@ -2859,8 +2834,8 @@ paths:
       description: Gets all Alias(Disaster Recovery configurations)
       operationId: DisasterRecoveryConfigs_List
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -2903,8 +2878,8 @@ paths:
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
         - description: Parameters to check availability of the given Alias name
           in: body
           name: parameters
@@ -2942,9 +2917,9 @@ paths:
       description: Deletes an Alias(Disaster Recovery configuration)
       operationId: DisasterRecoveryConfigs_Delete
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AliasNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -2970,9 +2945,9 @@ paths:
       description: Retrieves Alias(Disaster Recovery configuration) for primary or secondary namespace
       operationId: DisasterRecoveryConfigs_Get
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AliasNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3010,9 +2985,9 @@ paths:
       description: Creates or updates a new Alias(Disaster Recovery configuration)
       operationId: DisasterRecoveryConfigs_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AliasNameParameter'
         - description: Parameters required to create an Alias(Disaster Recovery configuration)
           in: body
           name: parameters
@@ -3062,9 +3037,9 @@ paths:
       description: Gets a list of authorization rules for a Namespace.
       operationId: DisasterRecoveryConfigs_ListAuthorizationRules
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AliasNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3126,10 +3101,10 @@ paths:
       description: Gets an AuthorizationRule for a Namespace by rule name.
       operationId: DisasterRecoveryConfigs_GetAuthorizationRule
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/aliasNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AliasNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3144,7 +3119,7 @@ paths:
       tags:
         - DisasterRecoveryConfigs
       x-ms-examples:
-        NameSpaceAutorizationRuleGet:
+        NameSpaceAuthorizationRuleGet:
           parameters:
             alias: sdk-DisasterRecovery-4879
             api-version: '2017-04-01'
@@ -3167,10 +3142,10 @@ paths:
       description: Gets the primary and secondary connection strings for the Namespace.
       operationId: DisasterRecoveryConfigs_ListKeys
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/aliasNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AliasNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3206,9 +3181,9 @@ paths:
       description: This operation disables the Disaster Recovery and stops replicating changes from primary to secondary namespaces
       operationId: DisasterRecoveryConfigs_BreakPairing
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AliasNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3232,12 +3207,12 @@ paths:
             '200': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/disasterRecoveryConfigs/{alias}/failover':
     post:
-      description: envokes GEO DR failover and reconfigure the alias to point to the secondary namespace
+      description: Invokes GEO DR failover and reconfigure the alias to point to the secondary namespace
       operationId: DisasterRecoveryConfigs_FailOver
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/aliasNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/AliasNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3264,8 +3239,8 @@ paths:
       description: Gets all the Event Hubs in a Namespace.
       operationId: EventHubs_ListByNamespace
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/SkipParameter'
@@ -3325,9 +3300,9 @@ paths:
       description: Deletes an Event Hub from the specified Namespace and resource group.
       operationId: EventHubs_Delete
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3356,9 +3331,9 @@ paths:
       description: Gets an Event Hubs description for the specified Event Hub.
       operationId: EventHubs_Get
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3412,9 +3387,9 @@ paths:
       description: Creates or updates a new Event Hub as a nested resource within a Namespace.
       operationId: EventHubs_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
         - description: Parameters supplied to create an Event Hub resource.
           in: body
           name: parameters
@@ -3491,9 +3466,9 @@ paths:
       description: Gets the authorization rules for an Event Hub.
       operationId: EventHubs_ListAuthorizationRules
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3508,7 +3483,7 @@ paths:
       tags:
         - EventHubs
       x-ms-examples:
-        EventHubAutorizationRuleListAll:
+        EventHubAuthorizationRuleListAll:
           parameters:
             api-version: '2017-04-01'
             eventHubName: sdk-EventHub-532
@@ -3533,10 +3508,10 @@ paths:
       description: Deletes an Event Hub AuthorizationRule.
       operationId: EventHubs_DeleteAuthorizationRule
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3551,7 +3526,7 @@ paths:
       tags:
         - EventHubs
       x-ms-examples:
-        EventHubAutorizationRuleDelete:
+        EventHubAuthorizationRuleDelete:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: sdk-Authrules-2513
@@ -3566,10 +3541,10 @@ paths:
       description: Gets an AuthorizationRule for an Event Hub by rule name.
       operationId: EventHubs_GetAuthorizationRule
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3584,7 +3559,7 @@ paths:
       tags:
         - EventHubs
       x-ms-examples:
-        EventHubAutorizationRuleGet:
+        EventHubAuthorizationRuleGet:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: sdk-Authrules-2513
@@ -3606,10 +3581,10 @@ paths:
       description: Creates or updates an AuthorizationRule for the specified Event Hub.
       operationId: EventHubs_CreateOrUpdateAuthorizationRule
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - description: The shared access AuthorizationRule.
           in: body
           name: parameters
@@ -3658,10 +3633,10 @@ paths:
       description: Gets the ACS and SAS connection strings for the Event Hub.
       operationId: EventHubs_ListKeys
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3697,10 +3672,10 @@ paths:
       description: Regenerates the ACS and SAS connection strings for the Event Hub.
       operationId: EventHubs_RegenerateKeys
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
-        - $ref: '#/parameters/authorizationRuleNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
+        - $ref: '#/parameters/AuthorizationRuleNameParameter'
         - description: Parameters supplied to regenerate the AuthorizationRule Keys (PrimaryKey/SecondaryKey).
           in: body
           name: parameters
@@ -3721,7 +3696,7 @@ paths:
       tags:
         - EventHubs
       x-ms-examples:
-        EventHubAuthorizationRuleRegenrateKey:
+        EventHubAuthorizationRuleRegenerateKey:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: sdk-Authrules-1534
@@ -3744,9 +3719,9 @@ paths:
       description: Gets all the consumer groups in a Namespace. An empty feed is returned if no consumer group exists in the Namespace.
       operationId: ConsumerGroups_ListByEventHub
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/SkipParameter'
@@ -3793,10 +3768,10 @@ paths:
       description: Deletes a consumer group from the specified Event Hub and resource group.
       operationId: ConsumerGroups_Delete
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
-        - $ref: '#/parameters/consumerGroupNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
+        - $ref: '#/parameters/ConsumerGroupNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3826,10 +3801,10 @@ paths:
       description: Gets a description for the specified consumer group.
       operationId: ConsumerGroups_Get
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
-        - $ref: '#/parameters/consumerGroupNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
+        - $ref: '#/parameters/ConsumerGroupNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3865,10 +3840,10 @@ paths:
       description: Creates or updates an Event Hubs consumer group as a nested resource within a Namespace.
       operationId: ConsumerGroups_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
-        - $ref: '#/parameters/eventHubNameParameter'
-        - $ref: '#/parameters/consumerGroupNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/EventHubNameParameter'
+        - $ref: '#/parameters/ConsumerGroupNameParameter'
         - description: Parameters supplied to create or update a consumer group resource.
           in: body
           name: parameters
@@ -3914,8 +3889,8 @@ paths:
       description: Gets messaging plan for specified namespace.
       operationId: Namespaces_GetMessagingPlan
       parameters:
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -3993,7 +3968,7 @@ definitions:
             description: Alternate name specified when alias and namespace names are same.
             type: string
           partnerNamespace:
-            description: 'ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairning'
+            description: 'ARM Id of the Primary/Secondary eventhub namespace name, which is part of GEO DR pairing'
             type: string
           pendingReplicationOperationsCount:
             description: Number of entities pending to be replicated.
@@ -4139,7 +4114,7 @@ definitions:
             readOnly: true
             type: string
           userMetadata:
-            description: 'Usermetadata is a placeholder to store user-defined string data with maximum length 1024. e.g. it can be used to store descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored.'
+            description: 'User Metadata is a placeholder to store user-defined string data with maximum length 1024. e.g. it can be used to store descriptive data, such as list of teams and their contact information also user-defined configuration settings can be stored.'
             type: string
         x-ms-client-flatten: true
   ConsumerGroupListResult:
@@ -4160,7 +4135,7 @@ definitions:
         description: Name for capture destination
         type: string
       properties:
-        description: 'Properties describing the storage account, blob container and acrchive anme format for capture destination'
+        description: 'Properties describing the storage account, blob container and archive name format for capture destination'
         properties:
           archiveNameFormat:
             description: 'Blob naming convention for archive, e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order'
@@ -4188,8 +4163,11 @@ definitions:
           isAutoInflateEnabled:
             description: Value that indicates whether AutoInflate is enabled for eventhub namespace.
             type: boolean
+          kafkaEnabled:
+            description: Value that indicates whether Kafka is enabled for eventhub namespace.
+            type: boolean
           maximumThroughputUnits:
-            description: 'Upper limit of throughput units when AutoInflate is enabled, vaule should be within 0 to 20 throughput units. ( ''0'' if AutoInflateEnabled = true)'
+            description: 'Upper limit of throughput units when AutoInflate is enabled, value should be within 0 to 20 throughput units. ( ''0'' if AutoInflateEnabled = true)'
             format: int32
             maximum: 20
             minimum: 0
@@ -4227,7 +4205,7 @@ definitions:
           $ref: '#/definitions/EHNamespace'
         type: array
   ErrorResponse:
-    description: Error reponse indicates EventHub service is not able to process the incoming request. The reason is provided in the error message.
+    description: Error response indicates EventHub service is not able to process the incoming request. The reason is provided in the error message.
     properties:
       code:
         description: Error code.
@@ -4393,7 +4371,7 @@ definitions:
         readOnly: true
         type: array
   RegenerateAccessKeyParameters:
-    description: 'Parameters supplied to the Regenerate Authorization Rule operation, specifies which key neeeds to be reset.'
+    description: 'Parameters supplied to the Regenerate Authorization Rule operation, specifies which key needs to be reset.'
     properties:
       key:
         description: 'Optional, if the key value provided, is set for KeyType or autogenerated Key value set for keyType'
@@ -4429,7 +4407,7 @@ definitions:
     description: SKU parameters supplied to the create namespace operation
     properties:
       capacity:
-        description: 'The Event Hubs throughput units, vaule should be 0 to 20 throughput units.'
+        description: 'The Event Hubs throughput units, value should be 0 to 20 throughput units.'
         format: int32
         maximum: 20
         minimum: 0

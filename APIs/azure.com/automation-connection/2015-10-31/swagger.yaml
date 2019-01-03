@@ -1001,10 +1001,10 @@ paths:
               headers: {}
         'List connections by automation account, next 100':
           parameters:
+            $skip: 100
             api-version: '2015-10-31'
             automationAccountName: myAutomationAccount28
             resourceGroupName: rg
-            skip: '100'
             subscriptionId: subid
           responses:
             '200':

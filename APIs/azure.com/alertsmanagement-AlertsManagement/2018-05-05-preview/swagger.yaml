@@ -273,7 +273,7 @@ paths:
         - $ref: '#/parameters/api-version'
       responses:
         '200':
-          description: OK. Succesfully retrieved operations list.
+          description: OK. Successfully retrieved operations list.
           schema:
             $ref: '#/definitions/operationsList'
       x-ms-pageable:
@@ -300,7 +300,7 @@ paths:
         - $ref: '#/parameters/api-version'
       responses:
         '200':
-          description: OK. Succesfully listed alert objects.
+          description: OK. Successfully listed alert objects.
           schema:
             $ref: '#/definitions/alertsList'
         default:

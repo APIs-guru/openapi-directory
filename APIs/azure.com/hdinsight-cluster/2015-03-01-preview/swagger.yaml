@@ -1045,6 +1045,55 @@ paths:
             '200': {}
             '202': {}
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HDInsight/clusters/{clusterName}/rotatediskencryptionkey':
+    post:
+      description: Rotate disk encryption key of the specified HDInsight cluster.
+      operationId: Clusters_RotateDiskEncryptionKey
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ClusterNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The parameters for the disk encryption operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ClusterDiskEncryptionParameters'
+      responses:
+        '200':
+          description: OK response definition.
+        '202':
+          description: Accepted response definition.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Describes the format of Error response.
+            properties:
+              code:
+                description: Error code
+                type: string
+              message:
+                description: Error message indicating why the operation failed.
+                type: string
+            type: object
+      tags:
+        - Clusters
+      x-ms-examples:
+        Rotate disk encryption key of the specified HDInsight cluster:
+          parameters:
+            api-version: 2015-03-01-preview
+            clusterName: cluster1
+            parameters:
+              keyName: newkeyname
+              keyVersion: newkeyversion
+              vaultUri: 'https://newkeyvault.vault.azure.net/'
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
 definitions:
   Cluster:
     allOf:
@@ -1054,12 +1103,18 @@ definitions:
       etag:
         description: The ETag for the resource
         type: string
+      identity:
+        $ref: '#/definitions/ClusterIdentity'
+        description: 'The identity of the cluster, if configured.'
       properties:
         $ref: '#/definitions/ClusterGetProperties'
         description: The properties of the cluster.
   ClusterCreateParametersExtended:
     description: The CreateCluster request parameters.
     properties:
+      identity:
+        $ref: '#/definitions/ClusterIdentity'
+        description: 'The identity of the cluster, if configured.'
       location:
         description: The location of the cluster.
         type: string
@@ -1083,6 +1138,9 @@ definitions:
       computeProfile:
         $ref: '#/definitions/ComputeProfile'
         description: The compute profile.
+      diskEncryptionProperties:
+        $ref: '#/definitions/DiskEncryptionProperties'
+        description: The disk encryption properties.
       osType:
         description: The type of operating system.
         enum:
@@ -1124,6 +1182,18 @@ definitions:
       kind:
         description: The type of cluster.
         type: string
+  ClusterDiskEncryptionParameters:
+    description: The Disk Encryption Cluster request parameters.
+    properties:
+      keyName:
+        description: Key name that is used for enabling disk encryption.
+        type: string
+      keyVersion:
+        description: Specific key version that is used for enabling disk encryption.
+        type: string
+      vaultUri:
+        description: 'Base key vault URI where the customers key is located eg. https://myvault.vault.azure.net'
+        type: string
   ClusterGetProperties:
     description: The properties of cluster.
     properties:
@@ -1147,6 +1217,9 @@ definitions:
       createdDate:
         description: The date on which the cluster was created.
         type: string
+      diskEncryptionProperties:
+        $ref: '#/definitions/DiskEncryptionProperties'
+        description: The disk encryption properties.
       errors:
         description: The list of errors.
         items:
@@ -1190,6 +1263,42 @@ definitions:
           name: Tier
     required:
       - clusterDefinition
+  ClusterIdentity:
+    description: Identity for the cluster.
+    properties:
+      principalId:
+        description: The principal id of cluster identity. This property will only be provided for a system assigned identity.
+        readOnly: true
+        type: string
+      tenantId:
+        description: The tenant id associated with the cluster. This property will only be provided for a system assigned identity.
+        readOnly: true
+        type: string
+      type:
+        description: 'The type of identity used for the cluster. The type ''SystemAssigned, UserAssigned'' includes both an implicitly created identity and a set of user assigned identities.'
+        enum:
+          - SystemAssigned
+          - UserAssigned
+          - 'SystemAssigned, UserAssigned'
+          - None
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: ResourceIdentityType
+      userAssignedIdentities:
+        additionalProperties:
+          properties:
+            clientId:
+              description: The client id of user assigned identity.
+              readOnly: true
+              type: string
+            principalId:
+              description: The principal id of user assigned identity.
+              readOnly: true
+              type: string
+          type: object
+        description: 'The list of user identities associated with the cluster. The user identity dictionary key references will be ARM resource ids in the form: ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}''.'
+        type: object
   ClusterListPersistedScriptActionsResult:
     description: The ListPersistedScriptActions operation response.
     properties:
@@ -1280,6 +1389,31 @@ definitions:
       storageAccountType:
         description: ReadOnly. The storage account type. Do not set this value.
         readOnly: true
+        type: string
+  DiskEncryptionProperties:
+    description: The disk encryption properties
+    properties:
+      encryptionAlgorithm:
+        description: 'Algorithm identifier for encryption, default RSA-OAEP.'
+        enum:
+          - RSA-OAEP
+          - RSA-OAEP-256
+          - RSA1_5
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: JsonWebKeyEncryptionAlgorithm
+      keyName:
+        description: Key name that is used for enabling disk encryption.
+        type: string
+      keyVersion:
+        description: Specific key version that is used for enabling disk encryption.
+        type: string
+      msiResourceId:
+        description: Resource ID of Managed Identity that is used to access the key vault.
+        type: string
+      vaultUri:
+        description: 'Base key vault URI where the customers key is located eg. https://myvault.vault.azure.net'
         type: string
   Errors:
     description: The error message associated with the cluster creation.
@@ -1493,6 +1627,9 @@ definitions:
   SecurityProfile:
     description: The security profile which contains Ssh public key for the HDInsight cluster.
     properties:
+      aaddsResourceId:
+        description: The resource ID of the user's Azure Active Directory Domain Service.
+        type: string
       clusterUsersGroupDNs:
         description: Optional. The Distinguished Names for cluster user groups
         items:
@@ -1521,6 +1658,9 @@ definitions:
         items:
           type: string
         type: array
+      msiResourceId:
+        description: User assigned identity that has permissions to read and create cluster-related artifacts in the user's AADDS.
+        type: string
       organizationalUnitDN:
         description: The organizational unit within the Active Directory to place the cluster and service accounts.
         type: string

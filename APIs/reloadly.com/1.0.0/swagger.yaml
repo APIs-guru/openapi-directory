@@ -7,7 +7,9 @@ info:
   contact:
     x-twitter: Reloadly
   description: |-
-    The Reloadly APIs are HTTP-based RESTful APIs that use OAuth 2.0 for authorization. API request and response bodies are formatted in JSON.
+    Reloadly Mobile top up API enables your apps, websites and any other platforms to send mobile credit top ups to over 4.5 billion phones covering 600+ mobile operators worldwide.  
+    We provide a commission for every operator available. First you will need to create your account if you haven’t done so. 
+    Also, we suggest you download the Reloadly app to view and play with the user functionalities. This will better help guide you when integrating our APIs.
 
     ## GET STARTED
 
@@ -15,7 +17,9 @@ info:
 
     -----------------
 
-    The Reloadly REST API uses the OAuth 2.0 protocol to authorize calls. OAuth is an open standard that many companies use to provide secure access to protected resources.
+    The Reloadly APIs are HTTP-based RESTful APIs that use OAuth 2.0 protocol for authorization. API request and response bodies are formatted in JSON.
+
+    OAuth is an open standard that many companies use to provide secure access to protected resources.
 
     When you create a developer account. Reloadly generates a set of OAuth client ID and secret credentials for your app for both sandbox and live environments. You pass these credentials in the `Authorization` header in the get access token request.
 
@@ -42,7 +46,7 @@ info:
         -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik0wWXpRa" \
     ```
 
-    Access tokens have a finite lifetime. The `expires_in` field in the <a href="#get-access-token-response">get access token response</a> indicates the lifetime, in seconds, of the access token.
+    Access tokens have a finite lifetime. The `expires_in` field in the <a href="#get-access-token-response">get access token response</a> indicates the lifetime, in seconds, of the access token. 
     For example, an expiry value of 3600 indicates that the access token expires in one hour from the time the response was generated.
 
     To detect when an access token expires, write code to either :
@@ -257,7 +261,7 @@ info:
       "infoLink": "ERROR_DOCUMENTATION_LINK",
       "path": "/accounts/verify",
       "errorCode": "ERROR_CODE",
-
+      
       // Some types of errors also include a details array:
       "details": [
         {
@@ -386,7 +390,7 @@ info:
     This excerpt from a sample response shows an array of HATEOAS links:<br /><br />
 
     ```
-    {
+    {  
       "links": [{
         "href": "https://api.reloadly.com/payments/4",
         "rel": "self",
@@ -401,12 +405,12 @@ info:
 
     You can use the links in this example, as follow :
 
-    - Use the <strong>`self`</strong> link to get more information about the request. Combine the method and the target URL to make the call :
+    - Use the <strong>`self`</strong> link to get more information about the request. Combine the method and the target URL to make the call : 
         ```
         GET https://api.reloadly.com/payments/4
         ```
 
-    - Use the <strong>`refund`</strong> link to request a refund :
+    - Use the <strong>`refund`</strong> link to request a refund : 
         ```
         POST https://api.reloadly.com/payments/4/refund
         ```
@@ -491,6 +495,104 @@ info:
     </tbody>
     </table>
 
+    --------------------------
+
+    ### Error Codes
+
+    A Reloadly API operation may return multiple error and warning codes : <br /><br />
+
+    ###### Code &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Description ######
+
+    <table>
+    <tbody>
+    <tr>
+    <td><p>TOKEN_EXPIRED</p></td>
+    <td><p>
+    Access tokens have a finite lifetime. The expires_in field in the get access token response indicates the lifetime, in seconds, of the access token. For example, an expiry value of 3600 indicates that the access token expires in one hour from the time the response was generated.<br /><br />
+    To detect when an access token expires, write code to either :
+
+    + Keep track of the `expires_in` value in the token response. The value is expressed in seconds.
+    + Handle the HTTP `401 Unauthorized` status code and the `TOKEN_EXPIRED` error code in the <a href="#error-response-message">error response message</a>. The API endpoint issues this status code when it detects an expired token.
+    </p></td>
+    </tr>
+    <tr>
+    <td><p>COUNTRY_NOT_SUPPORTED</p></td>
+    <td><p>The specified country (ISO-2 country code) in the request is currently not supported</p></td>
+    </tr>
+    <tr>
+    <td><p>INVALID_RECIPIENT_PHONE</p></td>
+    <td>The specified `recipientPhone` in the request is not valid for the specified country (ISO-2 country code) country</td>
+    </tr>
+    <tr>
+    <td><p>INVALID_SENDER_PHONE</p></td>
+    <td>The specified `senderPhone` in the request is not valid for the specified country (ISO-2 country code) country</td>
+    </tr>
+    <tr>
+    <td><p>INVALID_PHONE_NUMBER</p></td>
+    <td>The specified phone number is not valid</td>
+    </tr>
+    <tr>
+    <td><p>PHONE_RECENTLY_RECHARGED</p></td>
+    <td>After a given phone number has been topuped-up, a delay of 2 minutes has to take place before the same phone number can be topuped-up again.</td>
+    </tr>
+    <tr>
+    <td><p>COUNTRY_NOT_SUPPORTED</p></td>
+    <td>The specified country in the request is currently disabled or not supported</td>
+    </tr>
+    <tr>
+    <td><p>OPERATOR_UNAVAILABLE_OR_CURRENTLY_INACTIVE</p></td>
+    <td>The specified operator is currently disabled or inactive on the platform.</td>
+    </tr>
+    <tr>
+    <td><p>INACTIVE_ACCOUNT</p></td>
+    <td>Reloadly reserves the right to de-activate a developer account for various reasons. The developer must contact support for more info.</td>
+    </tr>
+    <tr>
+    <td><p>INVALID_AMOUNT_FOR_OPERATOR</p></td>
+    <td>The specified topup amounts is not valid for the given operator in the request.</td>
+    </tr>
+    <tr>
+    <td><p>TOPUP_TRANSACTION_FAILED</p></td>
+    <td>Topup transactions may failed various reasons. Developer must contact support if they need more details.</td>
+    </tr>
+    <tr>
+    <td><p>COULD_NOT_AUTO_DETECT_OPERATOR</p></td>
+    <td>Reloadly platform has the ability to auto-detect mobile carriers/operators for a given phone number, see <a href="#auto-detect-operator" pa-marked="1">Operator auto-detect</a>. 
+    In cases where that's not possible, this error code is returned.</td>
+    </tr>
+    <tr>
+    <td><p>ACCOUNT_NOT_FOUND</p></td>
+    <td>User account not found or does not exist.</td>
+    </tr>
+    <tr>
+    <td><p>MAX_DAILY_TRANSACTION_COUNT_REACHED</p></td>
+    <td>Some developer account may have a daily transaction count limit. This error code is returned when that occurs</td>
+    </tr>
+    <tr>
+    <td><p>MAX_DAILY_TRANSACTION_AMOUNT_REACHED</p></td>
+    <td>Some developer account may have a daily total transaction amount limit. This error code is returned when that occurs</td>
+    </tr>
+    <tr>
+    <td><p>TRANSACTION_CANNOT_BE_PROCESSED_AT_THE_MOMENT</p></td>
+    <td>Topup transactions may failed various reasons. Developer must contact support if they need more details.</td>
+    </tr>
+    <tr>
+    <td><p>INVALID_AMOUNT</p></td>
+    <td>Reloadly expects amounts to be numerical.</td>
+    </tr>
+    <tr>
+    <td><p>INSUFFICIENT_BALANCE</p></td>
+    <td>This error code is returned when a user attempts an API operation that requires adequate account balance to be available in order to be performed.
+    This error code is returned when the user account lack enought balance.
+    </td>
+    </tr>
+    <tr>
+    <td><p>OPERATOR_NOT_IN_SERVICE</p></td>
+    <td>The specified operator in the request is currently disabled, inactive or not in service on the platform.</td>
+    </tr>
+    </tbody>
+    </table>
+
     <br /><br />
 
     ### Make Your First Call ###
@@ -570,9 +672,13 @@ info:
     <table>
         <colgroup><col width="25%">
         <col width="75%">
-        </colgroup><tbody><tr>
-           <td><code>https://reloadly.auth0.com/oauth/token</code></td>
-           <td>The get access token endpoint.</td>
+        </colgroup><tbody>
+        <tr>
+            <td>The get access token endpoint.</td>
+            <td>
+                Live : <code>https://reloadly.auth0.com/oauth/token</code><br />
+                Sandbox : <code>https://reloadly-sandbox.auth0.com/oauth/token</code>
+            </td>
         </tr>
         <tr>
            <td>
@@ -590,7 +696,7 @@ info:
            <td>
               <code><var>audience</var></code>
            </td>
-           <td>The API you're requesting the access token for. Example <code>https://topups.reloadly.com</code></td>
+           <td>The API you're requesting the access token for. <br /> Live : <code>https://topups.reloadly.com</code> <br /> Sandbox : <code>https://topups-sandbox.reloadly.com</code></td>
         </tr>
         <tr>
            <td><code>grant_type</code></td>
@@ -633,13 +739,13 @@ info:
           <p>On the <strong>Body</strong> tab, select <strong>raw</strong> and enter this information : </p>
         <code>
           {
-
+          
            "client_id": "YOUR_CLIENT_ID",
-
+           
            "client_secret": "YOUR_CLIENT_SECRET",
-
+           
            "grant_type": "client_credentials",
-
+           
            "audience": "https://topups-sandbox.reloadly.com"
           }
        </li>
@@ -650,13 +756,13 @@ info:
           <p>View the sample response : </p>
         <code>
          {
-
+         
           "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSU",
-
+        
           "scope": "send-topups read-topups-history read-operators read-promotions",
-
+        
           "expires_in": 86400,
-
+        
           "token_type": "Bearer"
          }
        </li>
@@ -691,11 +797,41 @@ info:
     curl -d '{
               "recipientPhone": {
                 "countryCode": "HT",
-                "number": "36377111"
+                "number": "50936377111" //(Note the "+509" country dialing code for Haiti)
               },
               "senderPhone": {
                 "countryCode": "US",
-                "number": "3059547862"
+                "number": "13059547862" //(Note the "+1" country dialing code for USA)
+              },
+              "operatorId": 173,
+              "amount": 15,
+              "customIdentifier": "transaction by john@example.com"
+            }' \
+        -H "Accept: application/com.reloadly.topups-v1+json" \
+        -H "Content-Type: application/json" \
+        -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSU" \
+        -X POST https://topups.reloadly.com/topups
+    ```
+
+    <br />
+
+    <blockquote class="dx-blockquote-note">
+    <p><strong>Note:</strong> Phone numbers (`recipientPhone`, `senderPhone`) can be in 2 formats. 
+    In the example above, the "+" sign is not present in front of the country dialing codes (see <a href="https://countrycode.org/">countries dialing codes</a>).
+    Our API also accept phone number prefixed with "+".
+    The following is equivalent to the example above :
+    </p>
+    </blockquote>
+
+    ```
+    curl -d '{
+              "recipientPhone": {
+                "countryCode": "HT",
+                "number": "+50936377111" //(Note the "+509" country dialing code for Haiti)
+              },
+              "senderPhone": {
+                "countryCode": "US",
+                "number": "+13059547862" //(Note the "+1" country dialing code for USA)
               },
               "operatorId": 173,
               "amount": 15,
@@ -725,7 +861,7 @@ info:
     --------------------
 
     Use the `/accounts/balance` resource to list account available balance.
-  title: Reloadly REST APIs
+  title: Reloadly Topup
   version: 1.0.0
   x-apisguru-categories:
     - telecom
@@ -734,13 +870,14 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: apiBlueprint
       url: 'https://topupsapi.docs.apiary.io/api-description-document'
       version: 1A
   x-providerName: reloadly.com
 produces:
   - application/json
+tags: []
 paths:
   /accounts/balance:
     get:
@@ -847,7 +984,9 @@ paths:
       tags: []
   /operators/173:
     get:
-      description: '- Endpoint : `/operators/{operatorId}`'
+      description: |-
+        - Endpoint : `/operators/{operatorId}`
+            <h4 id="auto-detect-operator"></h4>
       parameters: []
       responses:
         '200':
@@ -883,11 +1022,11 @@ paths:
           headers: {}
       summary: Retrieve account operator commission by operator id
       tags: []
-  /operators/auto-detect/phone/36377111/country-code/HT:
+  /operators/auto-detect/phone/+50936377111/country-code/HT?&includeBundles=true:
     get:
       description: |-
-        - NOTE: Supports phone number without country dialing code or with country dialing code.
-                 Example : `+50936377111` or `36377111` are equivalent
+        - NOTE: Supports phone number with a "+" in front of the country dialing code or without a "+" country dialing code.
+                 Example : `+50936377111` or `50936377111` are equivalent
                            `/operators/auto-detect/phone/{phone}/country-code/{countryIsoCode}?&includeBundles=true`
       parameters: []
       responses:
@@ -904,7 +1043,7 @@ paths:
           headers: {}
       summary: Auto-detect mobile operator for given phone number
       tags: []
-  /operators/commissions:
+  /operators/commissions?page=1&size=3:
     get:
       description: ''
       parameters: []
@@ -984,7 +1123,7 @@ paths:
           headers: {}
       summary: List available operators by (ISO Alpha-2) country code
       tags: []
-  /operators:
+  /operators?page=1&size=3&suggestedAmounts=true&suggestedAmountsMap=true&includeBundles=true:
     get:
       description: ''
       parameters: []
@@ -1034,9 +1173,29 @@ paths:
           headers: {}
       summary: List All Operators
       tags: []
-  /promotions/129:
+  /promotions/5:
     get:
-      description: '- Endpoint : `/promotions/{operatorId}`'
+      description: '- Endpoint : `/promotions/{promotionId}`'
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              denominations: USD 2 and up
+              description: '<br />- For top ups of USD$2.00 (EUR 5) or more, customers will receive double bonus 2x + 5 days of Whatsapp.<br />- Validity: 5 days<br />- Applies for all prepaid plans.<br /><br />T&eacute;rminos y Condiciones (Spanish version):<br />- Por recarfas desde 2 USD (5 &euro;) o m&aacute;s, el destinatario recibir&aacute; doble bono (2x) + 5 dias de WhatsApp<br />- Vigencia 5 d&iacute;as&nbsp;<br />- Aplica a todos los planes prepago'
+              endDate: 'Mon, 02 Jul 2018 04:59:00 +0000'
+              operatorId: 114
+              promotionId: 5
+              startDate: 'Mon, 01 Jan 2018 05:00:00 +0000'
+              title: ' Movistar Ecuador From 01 Jan 2018 00:00 To 01 Jul 2018 23:59 (GMT-05:00)'
+              title2: Bonus 2x
+          headers: {}
+      summary: Retrieve topup operator promotion by id
+      tags: []
+  /promotions/operators/129:
+    get:
+      description: '- Endpoint : `/promotions/operators/{operatorId}`'
       parameters: []
       responses:
         '200':
@@ -1070,27 +1229,7 @@ paths:
           headers: {}
       summary: Retrieve topup operator promotion by operator id
       tags: []
-  /promotions/5:
-    get:
-      description: '- Endpoint : `/promotions/{promotionId}`'
-      parameters: []
-      responses:
-        '200':
-          description: OK
-          examples:
-            application/json:
-              denominations: USD 2 and up
-              description: '<br />- For top ups of USD$2.00 (EUR 5) or more, customers will receive double bonus 2x + 5 days of Whatsapp.<br />- Validity: 5 days<br />- Applies for all prepaid plans.<br /><br />T&eacute;rminos y Condiciones (Spanish version):<br />- Por recarfas desde 2 USD (5 &euro;) o m&aacute;s, el destinatario recibir&aacute; doble bono (2x) + 5 dias de WhatsApp<br />- Vigencia 5 d&iacute;as&nbsp;<br />- Aplica a todos los planes prepago'
-              endDate: 'Mon, 02 Jul 2018 04:59:00 +0000'
-              operatorId: 114
-              promotionId: 5
-              startDate: 'Mon, 01 Jan 2018 05:00:00 +0000'
-              title: ' Movistar Ecuador From 01 Jan 2018 00:00 To 01 Jul 2018 23:59 (GMT-05:00)'
-              title2: Bonus 2x
-          headers: {}
-      summary: Retrieve topup operator promotion by id
-      tags: []
-  /promotions:
+  /promotions?page=1&size=3:
     get:
       description: ''
       parameters: []
@@ -1151,42 +1290,7 @@ paths:
   /topups:
     post:
       description: '- Endpoint : `/topups`'
-      parameters:
-        - in: body
-          name: body
-          schema:
-            example:
-              amount: 15
-              customIdentifier: transaction by john@example.com
-              operatorId: 173
-              recipientPhone:
-                countryCode: HT
-                number: '36377111'
-              senderPhone:
-                countryCode: US
-                number: '3059547862'
-            properties:
-              amount:
-                type: number
-              customIdentifier:
-                type: string
-              operatorId:
-                type: number
-              recipientPhone:
-                properties:
-                  countryCode:
-                    type: string
-                  number:
-                    type: string
-                type: object
-              senderPhone:
-                properties:
-                  countryCode:
-                    type: string
-                  number:
-                    type: string
-                type: object
-            type: object
+      parameters: []
       responses:
         '200':
           description: OK
@@ -1206,7 +1310,7 @@ paths:
           headers: {}
       summary: Send Topup
       tags: []
-  '/topups/reports/transactions':
+  '/topups/reports/transactions?page=1&size=1&startTime=2018-06-01 00:00:00&endTime=2018-06-26 23:59:59':
     get:
       description: '- Endpoint : `/topups/reports/transactions?page=1&size=1&startTime=2018-06-01 00:00:00&endTime=2018-06-26 23:59:59`'
       parameters: []

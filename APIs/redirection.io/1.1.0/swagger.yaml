@@ -269,15 +269,35 @@ paths:
           required: false
           type: string
         - in: query
-          name: referer
+          name: statusCode_gt
           required: false
           type: string
         - in: query
-          name: simplifiedUserAgent
+          name: statusCode_gte
+          required: false
+          type: string
+        - in: query
+          name: statusCode_lt
+          required: false
+          type: string
+        - in: query
+          name: statusCode_lte
+          required: false
+          type: string
+        - in: query
+          name: referrer
           required: false
           type: string
         - in: query
           name: userAgent
+          required: false
+          type: string
+        - in: query
+          name: userAgentType
+          required: false
+          type: string
+        - in: query
+          name: simplifiedUserAgent
           required: false
           type: string
         - in: query
@@ -290,6 +310,18 @@ paths:
           type: string
         - in: query
           name: excludeUrls
+          required: false
+          type: string
+        - in: query
+          name: bool
+          required: false
+          type: string
+        - in: query
+          name: ignoreProjectType
+          required: false
+          type: string
+        - in: query
+          name: excludeEmptyReferrer
           required: false
           type: string
       produces:
@@ -330,6 +362,149 @@ paths:
       summary: Retrieves a AggregateLog resource.
       tags:
         - AggregateLog
+  /crawl-urls:
+    get:
+      operationId: getCrawlUrlCollection
+      parameters:
+        - description: The collection page number
+          in: query
+          name: page
+          required: false
+          type: integer
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: CrawlUrl collection response
+          schema:
+            items:
+              $ref: '#/definitions/CrawlUrl-Read'
+            type: array
+      summary: Retrieves the collection of CrawlUrl resources.
+      tags:
+        - CrawlUrl
+  '/crawl-urls/{id}':
+    get:
+      operationId: getCrawlUrlItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: CrawlUrl resource response
+          schema:
+            $ref: '#/definitions/CrawlUrl-Read'
+        '404':
+          description: Resource not found
+      summary: Retrieves a CrawlUrl resource.
+      tags:
+        - CrawlUrl
+  /crawls:
+    get:
+      operationId: getCrawlCollection
+      parameters:
+        - in: query
+          name: projectId
+          required: true
+          type: string
+        - in: query
+          name: state
+          required: false
+          type: string
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: 'state[]'
+          required: false
+          type: array
+        - in: query
+          name: 'sort[createdAt]'
+          required: false
+          type: string
+        - description: The collection page number
+          in: query
+          name: page
+          required: false
+          type: integer
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Crawl collection response
+          schema:
+            items:
+              $ref: '#/definitions/Crawl-Read'
+            type: array
+      summary: Retrieves the collection of Crawl resources.
+      tags:
+        - Crawl
+    post:
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      operationId: postCrawlCollection
+      parameters:
+        - description: The new Crawl resource
+          in: body
+          name: crawl
+          schema:
+            $ref: '#/definitions/Crawl-Write'
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '201':
+          description: Crawl resource created
+          schema:
+            $ref: '#/definitions/Crawl'
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+      summary: Creates a Crawl resource.
+      tags:
+        - Crawl
+  '/crawls/{id}':
+    get:
+      operationId: getCrawlItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Crawl resource response
+          schema:
+            $ref: '#/definitions/Crawl-Read'
+        '404':
+          description: Resource not found
+      summary: Retrieves a Crawl resource.
+      tags:
+        - Crawl
   /explain-urls:
     post:
       consumes:
@@ -396,10 +571,13 @@ paths:
           name: redirectCode
           required: false
           type: integer
-        - in: query
+        - collectionFormat: multi
+          in: query
+          items:
+            type: integer
           name: 'redirectCode[]'
           required: false
-          type: integer
+          type: array
         - in: query
           name: source.input
           required: false
@@ -408,10 +586,13 @@ paths:
           name: isEnabled
           required: false
           type: boolean
-        - in: query
+        - collectionFormat: multi
+          in: query
+          items:
+            type: boolean
           name: 'isEnabled[]'
           required: false
-          type: boolean
+          type: array
         - in: query
           name: target
           required: false
@@ -664,6 +845,7 @@ paths:
   /instances:
     get:
       operationId: getInstanceCollection
+      parameters: []
       produces:
         - application/ld+json
         - application/json
@@ -880,15 +1062,35 @@ paths:
           required: false
           type: string
         - in: query
-          name: referer
+          name: statusCode_gt
           required: false
           type: string
         - in: query
-          name: simplifiedUserAgent
+          name: statusCode_gte
+          required: false
+          type: string
+        - in: query
+          name: statusCode_lt
+          required: false
+          type: string
+        - in: query
+          name: statusCode_lte
+          required: false
+          type: string
+        - in: query
+          name: referrer
           required: false
           type: string
         - in: query
           name: userAgent
+          required: false
+          type: string
+        - in: query
+          name: userAgentType
+          required: false
+          type: string
+        - in: query
+          name: simplifiedUserAgent
           required: false
           type: string
         - in: query
@@ -901,6 +1103,18 @@ paths:
           type: string
         - in: query
           name: excludeUrls
+          required: false
+          type: string
+        - in: query
+          name: bool
+          required: false
+          type: string
+        - in: query
+          name: ignoreProjectType
+          required: false
+          type: string
+        - in: query
+          name: excludeEmptyReferrer
           required: false
           type: string
       produces:
@@ -1044,9 +1258,57 @@ paths:
       summary: Replaces the Marker resource.
       tags:
         - Marker
+  /notifications:
+    get:
+      operationId: getNotificationCollection
+      parameters:
+        - description: The collection page number
+          in: query
+          name: page
+          required: false
+          type: integer
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Notification collection response
+          schema:
+            items:
+              $ref: '#/definitions/Notification-Read'
+            type: array
+      summary: Retrieves the collection of Notification resources.
+      tags:
+        - Notification
+  '/notifications/{id}':
+    get:
+      operationId: getNotificationItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Notification resource response
+          schema:
+            $ref: '#/definitions/Notification-Read'
+        '404':
+          description: Resource not found
+      summary: Retrieves a Notification resource.
+      tags:
+        - Notification
   /organizations:
     get:
       operationId: getOrganizationCollection
+      parameters: []
       produces:
         - application/ld+json
         - application/json
@@ -1304,6 +1566,22 @@ paths:
         - in: query
           name: projectId
           required: true
+          type: string
+        - in: query
+          name: 'createdAt[before]'
+          required: false
+          type: string
+        - in: query
+          name: 'createdAt[strictly_before]'
+          required: false
+          type: string
+        - in: query
+          name: 'createdAt[after]'
+          required: false
+          type: string
+        - in: query
+          name: 'createdAt[strictly_after]'
+          required: false
           type: string
         - description: The collection page number
           in: query
@@ -1585,10 +1863,13 @@ paths:
           name: redirectCode
           required: false
           type: integer
-        - in: query
+        - collectionFormat: multi
+          in: query
+          items:
+            type: integer
           name: 'redirectCode[]'
           required: false
-          type: integer
+          type: array
         - in: query
           name: source.input
           required: false
@@ -1597,10 +1878,13 @@ paths:
           name: isEnabled
           required: false
           type: boolean
-        - in: query
+        - collectionFormat: multi
+          in: query
+          items:
+            type: boolean
           name: 'isEnabled[]'
           required: false
-          type: boolean
+          type: array
         - in: query
           name: target
           required: false
@@ -2209,6 +2493,8 @@ definitions:
   AggregateLog-Read:
     description: ''
     properties:
+      fixed:
+        type: boolean
       id: {}
       lastOccurrenceAt:
         format: date-time
@@ -2220,6 +2506,91 @@ definitions:
         type: integer
       target: {}
       viewCount: {}
+    type: object
+  Crawl:
+    description: ''
+    properties:
+      firstUrl: {}
+      includeSubdomain: {}
+      maxUrls: {}
+      project:
+        type: string
+      rate: {}
+    required:
+      - project
+      - firstUrl
+      - rate
+      - maxUrls
+      - includeSubdomain
+    type: object
+  Crawl-Read:
+    description: ''
+    properties:
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      finishedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      firstUrl:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: string
+      resourceBlockedCount:
+        readOnly: true
+        type: integer
+      resourceCrawlableCount:
+        readOnly: true
+        type: integer
+      resourceCrawledCount:
+        readOnly: true
+        type: integer
+      resourceExternalCount:
+        readOnly: true
+        type: integer
+      resourceSeenCount:
+        readOnly: true
+        type: integer
+      state:
+        readOnly: true
+        type: string
+      stats:
+        readOnly: true
+      updatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+    type: object
+  Crawl-Write:
+    description: ''
+    properties:
+      firstUrl: {}
+      includeSubdomain: {}
+      maxUrls: {}
+      project:
+        type: string
+      rate: {}
+    required:
+      - project
+      - firstUrl
+      - rate
+      - maxUrls
+      - includeSubdomain
+    type: object
+  CrawlUrl-Read:
+    description: ''
+    properties:
+      depth: {}
+      description: {}
+      id: {}
+      statusCode: {}
+      title: {}
+      url: {}
+      urlsTo: {}
     type: object
   ExplainUrl:
     description: ''
@@ -2411,9 +2782,6 @@ definitions:
       agentVersionStatus:
         readOnly: true
         type: string
-      aggregatedLogsLastFlushedAt:
-        format: date-time
-        type: string
       createdAt:
         format: date-time
         type: string
@@ -2442,6 +2810,8 @@ definitions:
         type: string
       rulesCount:
         type: integer
+      rulesHash:
+        type: string
       stale:
         readOnly: true
         type: boolean
@@ -2499,6 +2869,17 @@ definitions:
     type: object
   Invitation-Read:
     description: ''
+    properties:
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      email:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: string
     type: object
   Invitation-Write:
     description: ''
@@ -2517,16 +2898,33 @@ definitions:
       createdAt:
         format: date-time
         type: string
+      fixed:
+        type: boolean
+      fixedByVersions:
+        items:
+          type: string
+        type: array
+      fromSmartList:
+        readOnly: true
+        type: boolean
       id: {}
       instanceName: {}
+      notFixedByVersions:
+        items:
+          type: string
+        type: array
       referrer: {}
       ruleId:
         type: string
       simplifiedUserAgent: {}
+      smartList:
+        readOnly: true
+        type: string
       source: {}
       statusCode: {}
       target: {}
       userAgent: {}
+      userAgentType: {}
     type: object
   Marker:
     description: ''
@@ -2576,6 +2974,23 @@ definitions:
     required:
       - type
       - name
+    type: object
+  Notification-Read:
+    description: ''
+    properties:
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: string
+      message:
+        type: string
+      updatedAt:
+        format: date-time
+        readOnly: true
+        type: string
     type: object
   Organization-List:
     description: ''
@@ -2640,6 +3055,10 @@ definitions:
   Project-CreationWrite:
     description: ''
     properties:
+      ignoreProjectTypes:
+        items:
+          type: string
+        type: array
       name:
         type: string
       onboardingCompletedDemos:
@@ -2659,6 +3078,7 @@ definitions:
         type: integer
       complexRulesUpdatedAt:
         format: date-time
+        readOnly: true
         type: string
       createdAt:
         format: date-time
@@ -2666,8 +3086,16 @@ definitions:
         type: string
       currentVersion:
         type: string
+      features:
+        items:
+          type: string
+        type: array
       id:
         type: string
+      ignoreProjectTypes:
+        items:
+          type: string
+        type: array
       name:
         type: string
       onboardingCompletedDemos:
@@ -2678,12 +3106,16 @@ definitions:
         type: string
       plan:
         type: integer
+      rulesHash:
+        readOnly: true
+        type: string
       slug:
         type: string
       straightRulesCount:
         type: integer
       straightRulesUpdatedAt:
         format: date-time
+        readOnly: true
         type: string
       token:
         type: string
@@ -2708,6 +3140,10 @@ definitions:
   Project-Write:
     description: ''
     properties:
+      ignoreProjectTypes:
+        items:
+          type: string
+        type: array
       name:
         type: string
       onboardingCompletedDemos:
@@ -2778,6 +3214,8 @@ definitions:
         type: array
       currentAction:
         type: string
+      formattedSource:
+        type: string
       id:
         type: string
       isEnabled:
@@ -2786,6 +3224,8 @@ definitions:
         items:
           type: string
         type: array
+      matchOnResponseStatus:
+        type: integer
       rank:
         type: integer
       redirectCode:
@@ -2811,6 +3251,8 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      formattedSource:
+        type: string
       id:
         readOnly: true
         type: string
@@ -2820,6 +3262,8 @@ definitions:
         items:
           type: string
         type: array
+      matchOnResponseStatus:
+        type: integer
       rank:
         type: integer
       ruleId:
@@ -2842,12 +3286,16 @@ definitions:
     properties:
       action:
         type: string
+      formattedSource:
+        type: string
       isEnabled:
         type: boolean
       markers:
         items:
           type: string
         type: array
+      matchOnResponseStatus:
+        type: integer
       rank:
         type: integer
       ruleId:

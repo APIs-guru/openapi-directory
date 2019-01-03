@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Lets Android application developers access their Google Play accounts.
+  description: Accesses Android application developers' Google Play accounts.
   title: Google Play Developer
   version: v2
   x-apiClientRegistration:
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidpublisher/v2/rest'
       version: v1
@@ -728,6 +728,10 @@ paths:
       description: 'Uploads a new Android App Bundle to this edit. If you are using the Google API client libraries, please increase the timeout of the http request before calling this endpoint (a timeout of 2 minutes is recommended). See: https://developers.google.com/api-client-library/java/google-api-java-client/errors for an example in java.'
       operationId: androidpublisher.edits.bundles.upload
       parameters:
+        - description: 'Must be set to true if the bundle installation may trigger a warning on user devices (for example, if installation size may be over a threshold, typically 100 MB).'
+          in: query
+          name: ackBundleInstallationWarning
+          type: boolean
         - description: Unique identifier for this edit.
           in: path
           name: editId
@@ -2633,8 +2637,8 @@ definitions:
     properties:
       consumptionState:
         description: |-
-          The consumption state of the inapp product. Possible values are:
-          - Yet to be consumed
+          The consumption state of the inapp product. Possible values are:  
+          - Yet to be consumed 
           - Consumed
         format: int32
         type: integer
@@ -2650,8 +2654,8 @@ definitions:
         type: string
       purchaseState:
         description: |-
-          The purchase state of the order. Possible values are:
-          - Purchased
+          The purchase state of the order. Possible values are:  
+          - Purchased 
           - Canceled
         format: int32
         type: integer
@@ -2661,8 +2665,8 @@ definitions:
         type: string
       purchaseType:
         description: |-
-          The type of purchase of the inapp product. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:
-          - Test (i.e. purchased from a license testing account)
+          The type of purchase of the inapp product. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:  
+          - Test (i.e. purchased from a license testing account) 
           - Promo (i.e. purchased using a promo code)
         format: int32
         type: integer
@@ -2740,11 +2744,11 @@ definitions:
     properties:
       cancelSurveyReason:
         description: |-
-          The cancellation reason the user chose in the survey. Possible values are:
-          - Other
-          - I don't use this service enough
-          - Technical issues
-          - Cost-related reasons
+          The cancellation reason the user chose in the survey. Possible values are:  
+          - Other 
+          - I don't use this service enough 
+          - Technical issues 
+          - Cost-related reasons 
           - I found a better app
         format: int32
         type: integer
@@ -2772,8 +2776,8 @@ definitions:
         description: The new price the subscription will renew with if the price change is accepted by the user.
       state:
         description: |-
-          The current state of the price change. Possible values are:
-          - Outstanding: State for a pending price change waiting for the user to agree. In this state, you can optionally seek confirmation from the user using the In-App API.
+          The current state of the price change. Possible values are:  
+          - Outstanding: State for a pending price change waiting for the user to agree. In this state, you can optionally seek confirmation from the user using the In-App API. 
           - Accepted: State for an accepted price change that the subscription will renew with unless it's canceled. The price change takes effect on a future date when the subscription renews. Note that the change might not occur when the subscription is renewed next.
         format: int32
         type: integer
@@ -2786,10 +2790,10 @@ definitions:
         type: boolean
       cancelReason:
         description: |-
-          The reason why a subscription was canceled or is not auto-renewing. Possible values are:
-          - User canceled the subscription
-          - Subscription was canceled by the system, for example because of a billing problem
-          - Subscription was replaced with a new subscription
+          The reason why a subscription was canceled or is not auto-renewing. Possible values are:  
+          - User canceled the subscription 
+          - Subscription was canceled by the system, for example because of a billing problem 
+          - Subscription was replaced with a new subscription 
           - Subscription was canceled by the developer
         format: int32
         type: integer
@@ -2821,8 +2825,8 @@ definitions:
         type: string
       linkedPurchaseToken:
         description: |-
-          The purchase token of the originating purchase if this subscription is one of the following:
-          - Re-signup of a canceled but non-lapsed subscription
+          The purchase token of the originating purchase if this subscription is one of the following:  
+          - Re-signup of a canceled but non-lapsed subscription 
           - Upgrade/downgrade from a previous subscription  For example, suppose a user originally signs up and you receive purchase token X, then the user cancels and goes through the resignup flow (before their subscription lapses) and you receive purchase token Y, and finally the user upgrades their subscription and you receive purchase token Z. If you call this API with purchase token Z, this field will be set to Y. If you call this API with purchase token Y, this field will be set to X. If you call this API with purchase token X, this field will not be set.
         type: string
       orderId:
@@ -2830,10 +2834,11 @@ definitions:
         type: string
       paymentState:
         description: |-
-          The payment state of the subscription. Possible values are:
-          - Payment pending
-          - Payment received
-          - Free trial
+          The payment state of the subscription. Possible values are:  
+          - Payment pending 
+          - Payment received 
+          - Free trial 
+          - Pending deferred upgrade/downgrade
         format: int32
         type: integer
       priceAmountMicros:
@@ -2857,7 +2862,7 @@ definitions:
         type: string
       purchaseType:
         description: |-
-          The type of purchase of the subscription. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:
+          The type of purchase of the subscription. This field is only set if this purchase was not made using the standard in-app billing flow. Possible values are:  
           - Test (i.e. purchased from a license testing account)
         format: int32
         type: integer

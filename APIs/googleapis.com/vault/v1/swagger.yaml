@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://vault.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -61,11 +61,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -86,12 +81,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -166,12 +155,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -250,12 +237,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -287,6 +272,134 @@ paths:
             - 'https://www.googleapis.com/auth/ediscovery'
       tags:
         - matters
+  '/v1/matters/{matterId}/exports':
+    get:
+      description: Lists Exports.
+      operationId: vault.matters.exports.list
+      parameters:
+        - description: The matter ID.
+          in: path
+          name: matterId
+          required: true
+          type: string
+        - description: The number of exports to return in the response.
+          in: query
+          name: pageSize
+          type: integer
+        - description: The pagination token as returned in the response.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListExportsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+      tags:
+        - matters
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates an Export.
+      operationId: vault.matters.exports.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Export'
+        - description: The matter ID.
+          in: path
+          name: matterId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Export'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+      tags:
+        - matters
+  '/v1/matters/{matterId}/exports/{exportId}':
+    delete:
+      description: Deletes an Export.
+      operationId: vault.matters.exports.delete
+      parameters:
+        - description: The export ID.
+          in: path
+          name: exportId
+          required: true
+          type: string
+        - description: The matter ID.
+          in: path
+          name: matterId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+      tags:
+        - matters
+    get:
+      description: Gets an Export.
+      operationId: vault.matters.exports.get
+      parameters:
+        - description: The export ID.
+          in: path
+          name: exportId
+          required: true
+          type: string
+        - description: The matter ID.
+          in: path
+          name: matterId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Export'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+      tags:
+        - matters
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/matters/{matterId}/holds':
     get:
       description: |-
@@ -335,12 +448,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -431,12 +542,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -507,12 +616,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -584,12 +691,238 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+  '/v1/matters/{matterId}/holds/{holdId}:addHeldAccounts':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Adds HeldAccounts to a hold. Returns a list of accounts that have been
+        successfully added. Accounts can only be added to an existing account-based
+        hold.
+      operationId: vault.matters.holds.addHeldAccounts
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AddHeldAccountsRequest'
+        - description: The hold ID.
+          in: path
+          name: holdId
+          required: true
+          type: string
+        - description: The matter ID.
+          in: path
+          name: matterId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AddHeldAccountsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+      tags:
+        - matters
+  '/v1/matters/{matterId}/holds/{holdId}:removeHeldAccounts':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Removes HeldAccounts from a hold. Returns a list of statuses in the same
+        order as the request. If this request leaves the hold with no held
+        accounts, the hold will not apply to any accounts.
+      operationId: vault.matters.holds.removeHeldAccounts
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RemoveHeldAccountsRequest'
+        - description: The hold ID.
+          in: path
+          name: holdId
+          required: true
+          type: string
+        - description: The matter ID.
+          in: path
+          name: matterId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RemoveHeldAccountsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+      tags:
+        - matters
+  '/v1/matters/{matterId}/savedQueries':
+    get:
+      description: |-
+        Lists saved queries within a matter. An empty page token in
+        ListSavedQueriesResponse denotes no more saved queries to list.
+      operationId: vault.matters.savedQueries.list
+      parameters:
+        - description: |-
+            The matter id of the parent matter for which the saved queries are to be
+            retrieved.
+          in: path
+          name: matterId
+          required: true
+          type: string
+        - description: The maximum number of saved queries to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: |-
+            The pagination token as returned in the previous response.
+            An empty token means start from the beginning.
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListSavedQueriesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+      tags:
+        - matters
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Creates a saved query.
+      operationId: vault.matters.savedQueries.create
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SavedQuery'
+        - description: |-
+            The matter id of the parent matter for which the saved query is to be
+            created.
+          in: path
+          name: matterId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SavedQuery'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+      tags:
+        - matters
+  '/v1/matters/{matterId}/savedQueries/{savedQueryId}':
+    delete:
+      description: Deletes a saved query by Id.
+      operationId: vault.matters.savedQueries.delete
+      parameters:
+        - description: |-
+            The matter id of the parent matter for which the saved query is to be
+            deleted.
+          in: path
+          name: matterId
+          required: true
+          type: string
+        - description: Id of the saved query to be deleted.
+          in: path
+          name: savedQueryId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Empty'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+      tags:
+        - matters
+    get:
+      description: Retrieves a saved query by Id.
+      operationId: vault.matters.savedQueries.get
+      parameters:
+        - description: |-
+            The matter id of the parent matter for which the saved query is to be
+            retrieved.
+          in: path
+          name: matterId
+          required: true
+          type: string
+        - description: Id of the saved query to be retrieved.
+          in: path
+          name: savedQueryId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SavedQuery'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/ediscovery.readonly'
+      tags:
+        - matters
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -599,12 +932,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -637,12 +968,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -675,12 +1004,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -713,12 +1040,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -751,12 +1076,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -785,6 +1108,54 @@ paths:
       tags:
         - matters
 definitions:
+  AccountInfo:
+    description: Accounts to search
+    properties:
+      emails:
+        description: A set of accounts to search.
+        items:
+          type: string
+        type: array
+    type: object
+  AddHeldAccountResult:
+    description: |-
+      A status detailing the status of each account creation, and the
+      HeldAccount, if successful.
+    properties:
+      account:
+        $ref: '#/definitions/HeldAccount'
+        description: 'If present, this account was successfully created.'
+      status:
+        $ref: '#/definitions/Status'
+        description: 'This represents the success status. If failed, check message.'
+    type: object
+  AddHeldAccountsRequest:
+    description: Add a list of accounts to a hold.
+    properties:
+      accountIds:
+        description: |-
+          Account ids to identify which accounts to add. Only account_ids or only
+          emails should be specified, but not both.
+        items:
+          type: string
+        type: array
+      emails:
+        description: |-
+          Emails to identify which accounts to add. Only emails or only account_ids
+          should be specified, but not both.
+        items:
+          type: string
+        type: array
+    type: object
+  AddHeldAccountsResponse:
+    description: Response for batch create held accounts.
+    properties:
+      responses:
+        description: 'The list of responses, in the same order as the batch request.'
+        items:
+          $ref: '#/definitions/AddHeldAccountResult'
+        type: array
+    type: object
   AddMatterPermissionsRequest:
     description: |-
       Add an account with the permission specified. The role cannot be owner.
@@ -817,6 +1188,36 @@ definitions:
         $ref: '#/definitions/Matter'
         description: 'The updated matter, with state CLOSED.'
     type: object
+  CloudStorageFile:
+    description: An export file on cloud storage
+    properties:
+      bucketName:
+        description: |-
+          The cloud storage bucket name of this export file.
+          Can be used in cloud storage JSON/XML API.
+        type: string
+      md5Hash:
+        description: The md5 hash of the file.
+        type: string
+      objectName:
+        description: |-
+          The cloud storage object name of this export file.
+          Can be used in cloud storage JSON/XML API.
+        type: string
+      size:
+        description: The size of the export file.
+        format: int64
+        type: string
+    type: object
+  CloudStorageSink:
+    description: Export sink for cloud storage files.
+    properties:
+      files:
+        description: Output only. The exported files on cloud storage.
+        items:
+          $ref: '#/definitions/CloudStorageFile'
+        type: array
+    type: object
   CorpusQuery:
     description: Corpus specific queries.
     properties:
@@ -835,6 +1236,30 @@ definitions:
         $ref: '#/definitions/HeldMailQuery'
         description: 'Details pertaining to mail holds. If set, corpus must be mail.'
     type: object
+  DriveExportOptions:
+    description: The options for Drive export.
+    properties:
+      includeAccessInfo:
+        description: |-
+          Set to true to include access level information for users
+          with <a href="https://support.google.com/vault/answer/6099459#metadata">indirect access</a>
+          to files.
+        type: boolean
+    type: object
+  DriveOptions:
+    description: Drive search advanced options
+    properties:
+      includeTeamDrives:
+        description: Set to true to include Team Drive.
+        type: boolean
+      versionDate:
+        description: |-
+          Search the versions of the Drive file
+          as of the reference date. These timestamps are in GMT and
+          rounded down to the given date.
+        format: google-datetime
+        type: string
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -847,6 +1272,124 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  Export:
+    description: An export
+    properties:
+      cloudStorageSink:
+        $ref: '#/definitions/CloudStorageSink'
+        description: Output only. Export sink for cloud storage files.
+      createTime:
+        description: Output only. The time when the export was created.
+        format: google-datetime
+        type: string
+      exportOptions:
+        $ref: '#/definitions/ExportOptions'
+        description: Advanced options of the export.
+      id:
+        description: Output only. The generated export ID.
+        type: string
+      matterId:
+        description: Output only. The matter ID.
+        type: string
+      name:
+        description: The export name.
+        type: string
+      query:
+        $ref: '#/definitions/Query'
+        description: The search query being exported.
+      requester:
+        $ref: '#/definitions/UserInfo'
+        description: Output only. The requester of the export.
+      stats:
+        $ref: '#/definitions/ExportStats'
+        description: Output only. Export statistics.
+      status:
+        description: Output only. The export status.
+        enum:
+          - EXPORT_STATUS_UNSPECIFIED
+          - COMPLETED
+          - FAILED
+          - IN_PROGRESS
+        type: string
+    type: object
+  ExportOptions:
+    description: Export advanced options
+    properties:
+      driveOptions:
+        $ref: '#/definitions/DriveExportOptions'
+        description: Option available for Drive export.
+      groupsOptions:
+        $ref: '#/definitions/GroupsExportOptions'
+        description: Option available for groups export.
+      hangoutsChatOptions:
+        $ref: '#/definitions/HangoutsChatExportOptions'
+        description: Option available for hangouts chat export.
+      mailOptions:
+        $ref: '#/definitions/MailExportOptions'
+        description: Option available for mail export.
+      region:
+        description: The requested export location.
+        enum:
+          - EXPORT_REGION_UNSPECIFIED
+          - ANY
+          - US
+          - EUROPE
+        type: string
+    type: object
+  ExportStats:
+    description: Stats of an export.
+    properties:
+      exportedArtifactCount:
+        description: The number of documents already processed by the export.
+        format: int64
+        type: string
+      sizeInBytes:
+        description: The size of export in bytes.
+        format: int64
+        type: string
+      totalArtifactCount:
+        description: The number of documents to be exported.
+        format: int64
+        type: string
+    type: object
+  GroupsExportOptions:
+    description: The options for groups export.
+    properties:
+      exportFormat:
+        description: The export format for groups export.
+        enum:
+          - EXPORT_FORMAT_UNSPECIFIED
+          - MBOX
+          - PST
+        type: string
+    type: object
+  HangoutsChatExportOptions:
+    description: The options for hangouts chat export.
+    properties:
+      exportFormat:
+        description: The export format for hangouts chat export.
+        enum:
+          - EXPORT_FORMAT_UNSPECIFIED
+          - MBOX
+          - PST
+        type: string
+    type: object
+  HangoutsChatInfo:
+    description: Accounts to search
+    properties:
+      roomId:
+        description: A set of rooms to search.
+        items:
+          type: string
+        type: array
+    type: object
+  HangoutsChatOptions:
+    description: Hangouts chat search advanced options
+    properties:
+      includeRooms:
+        description: Set to true to include rooms.
+        type: boolean
     type: object
   HeldAccount:
     description: |-
@@ -973,6 +1516,18 @@ definitions:
         format: google-datetime
         type: string
     type: object
+  ListExportsResponse:
+    description: The holds for a matter.
+    properties:
+      exports:
+        description: The list of exports.
+        items:
+          $ref: '#/definitions/Export'
+        type: array
+      nextPageToken:
+        description: Page token to retrieve the next page of results in the list.
+        type: string
+    type: object
   ListHeldAccountsResponse:
     description: Returns a list of held accounts for a hold.
     properties:
@@ -1007,6 +1562,38 @@ definitions:
       nextPageToken:
         description: Page token to retrieve the next page of results in the list.
         type: string
+    type: object
+  ListSavedQueriesResponse:
+    description: Definition of the response for method ListSaveQuery.
+    properties:
+      nextPageToken:
+        description: |-
+          Page token to retrieve the next page of results in the list.
+          If this is empty, then there are no more saved queries to list.
+        type: string
+      savedQueries:
+        description: List of output saved queries.
+        items:
+          $ref: '#/definitions/SavedQuery'
+        type: array
+    type: object
+  MailExportOptions:
+    description: The options for mail export.
+    properties:
+      exportFormat:
+        description: The export file format.
+        enum:
+          - EXPORT_FORMAT_UNSPECIFIED
+          - MBOX
+          - PST
+        type: string
+    type: object
+  MailOptions:
+    description: Mail search advanced options
+    properties:
+      excludeDrafts:
+        description: Set to true to exclude drafts.
+        type: boolean
     type: object
   Matter:
     description: Represents a matter.
@@ -1055,6 +1642,121 @@ definitions:
           - OWNER
         type: string
     type: object
+  OrgUnitInfo:
+    description: Org Unit to search
+    properties:
+      orgUnitId:
+        description: |-
+          Org unit to search, as provided by the
+          <a href="https://developers.google.com/admin-sdk/directory/">Admin SDK Directory API</a>.
+        type: string
+    type: object
+  Query:
+    description: A query definition relevant for search & export.
+    properties:
+      accountInfo:
+        $ref: '#/definitions/AccountInfo'
+        description: |-
+          When 'ACCOUNT' is chosen as search method,
+          account_info needs to be specified.
+      corpus:
+        description: The corpus to search.
+        enum:
+          - CORPUS_TYPE_UNSPECIFIED
+          - DRIVE
+          - MAIL
+          - GROUPS
+          - HANGOUTS_CHAT
+        type: string
+      dataScope:
+        description: The data source to search from.
+        enum:
+          - DATA_SCOPE_UNSPECIFIED
+          - ALL_DATA
+          - HELD_DATA
+          - UNPROCESSED_DATA
+        type: string
+      driveOptions:
+        $ref: '#/definitions/DriveOptions'
+        description: 'For Drive search, specify more options in this field.'
+      endTime:
+        description: |-
+          The end time range for the search query. These timestamps are in GMT and
+          rounded down to the start of the given date.
+        format: google-datetime
+        type: string
+      hangoutsChatInfo:
+        $ref: '#/definitions/HangoutsChatInfo'
+        description: |-
+          When 'ROOM' is chosen as search method, hangout_chats_info needs to be
+          specified. (read-only)
+      hangoutsChatOptions:
+        $ref: '#/definitions/HangoutsChatOptions'
+        description: 'For hangouts chat search, specify more options in this field. (read-only)'
+      mailOptions:
+        $ref: '#/definitions/MailOptions'
+        description: 'For mail search, specify more options in this field.'
+      orgUnitInfo:
+        $ref: '#/definitions/OrgUnitInfo'
+        description: |-
+          When 'ORG_UNIT' is chosen as as search method, org_unit_info needs
+          to be specified.
+      searchMethod:
+        description: The search method to use.
+        enum:
+          - SEARCH_METHOD_UNSPECIFIED
+          - ACCOUNT
+          - ORG_UNIT
+          - TEAM_DRIVE
+          - ENTIRE_ORG
+          - ROOM
+        type: string
+      startTime:
+        description: |-
+          The start time range for the search query. These timestamps are in GMT and
+          rounded down to the start of the given date.
+        format: google-datetime
+        type: string
+      teamDriveInfo:
+        $ref: '#/definitions/TeamDriveInfo'
+        description: |-
+          When 'TEAM_DRIVE' is chosen as search method, team_drive_info needs to be
+          specified.
+      terms:
+        description: |-
+          The corpus-specific
+          <a href="https://support.google.com/vault/answer/2474474">search operators</a>
+          used to generate search results.
+        type: string
+      timeZone:
+        description: |-
+          The time zone name.
+          It should be an IANA TZ name, such as "America/Los_Angeles".
+          For more information, see
+          <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">Time
+          Zone</a>.
+        type: string
+    type: object
+  RemoveHeldAccountsRequest:
+    description: Remove a list of accounts from a hold.
+    properties:
+      accountIds:
+        description: Account ids to identify HeldAccounts to remove.
+        items:
+          type: string
+        type: array
+    type: object
+  RemoveHeldAccountsResponse:
+    description: Response for batch delete held accounts.
+    properties:
+      statuses:
+        description: |-
+          A list of statuses for deleted accounts. Results have the
+          same order as the request.
+        items:
+          $ref: '#/definitions/Status'
+        type: array
+    type: object
   RemoveMatterPermissionsRequest:
     description: Remove an account as a matter collaborator.
     properties:
@@ -1073,7 +1775,130 @@ definitions:
         $ref: '#/definitions/Matter'
         description: 'The updated matter, with state OPEN.'
     type: object
+  SavedQuery:
+    description: Definition of the saved query.
+    properties:
+      createTime:
+        description: |-
+          Output only. The server generated timestamp at which saved query was
+          created.
+        format: google-datetime
+        type: string
+      displayName:
+        description: Name of the saved query.
+        type: string
+      matterId:
+        description: |-
+          Output only. The matter id of the associated matter.
+          The server does not look at this field during create and always uses matter
+          id in the URL.
+        type: string
+      query:
+        $ref: '#/definitions/Query'
+        description: |-
+          The underlying Query object which contains all the information of the saved
+          query.
+      savedQueryId:
+        description: A unique identifier for the saved query.
+        type: string
+    type: object
+  Status:
+    description: |-
+      The `Status` type defines a logical error model that is suitable for different
+      programming environments, including REST APIs and RPC APIs. It is used by
+      [gRPC](https://github.com/grpc). The error model is designed to be:
+
+      - Simple to use and understand for most users
+      - Flexible enough to meet unexpected needs
+
+      # Overview
+
+      The `Status` message contains three pieces of data: error code, error message,
+      and error details. The error code should be an enum value of
+      google.rpc.Code, but it may accept additional error codes if needed.  The
+      error message should be a developer-facing English message that helps
+      developers *understand* and *resolve* the error. If a localized user-facing
+      error message is needed, put the localized message in the error details or
+      localize it in the client. The optional error details may contain arbitrary
+      information about the error. There is a predefined set of error detail types
+      in the package `google.rpc` that can be used for common error conditions.
+
+      # Language mapping
+
+      The `Status` message is the logical representation of the error model, but it
+      is not necessarily the actual wire format. When the `Status` message is
+      exposed in different client libraries and different wire protocols, it can be
+      mapped differently. For example, it will likely be mapped to some exceptions
+      in Java, but more likely mapped to some error codes in C.
+
+      # Other uses
+
+      The error model and the `Status` message can be used in a variety of
+      environments, either with or without APIs, to provide a
+      consistent developer experience across different environments.
+
+      Example uses of this error model include:
+
+      - Partial errors. If a service needs to return partial errors to the client,
+          it may embed the `Status` in the normal response to indicate the partial
+          errors.
+
+      - Workflow errors. A typical workflow has multiple steps. Each step may
+          have a `Status` message for error reporting.
+
+      - Batch operations. If a client uses batch request and batch response, the
+          `Status` message should be used directly inside batch response, one for
+          each error sub-response.
+
+      - Asynchronous operations. If an API call embeds asynchronous operation
+          results in its response, the status of those operations should be
+          represented directly using the `Status` message.
+
+      - Logging. If some API errors are stored in logs, the message `Status` could
+          be used directly after any stripping needed for security/privacy reasons.
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: |-
+          A list of messages that carry the error details.  There is a common set of
+          message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          type: object
+        type: array
+      message:
+        description: |-
+          A developer-facing error message, which should be in English. Any
+          user-facing error message should be localized and sent in the
+          google.rpc.Status.details field, or localized by the client.
+        type: string
+    type: object
+  TeamDriveInfo:
+    description: Team Drives to search
+    properties:
+      teamDriveIds:
+        description: |-
+          List of Team Drive ids, as provided by <a
+          href="https://developers.google.com/drive">Drive API</a>.
+        items:
+          type: string
+        type: array
+    type: object
   UndeleteMatterRequest:
     description: Undelete a matter by ID.
     properties: {}
+    type: object
+  UserInfo:
+    description: User's information.
+    properties:
+      displayName:
+        description: The displayed name of the user.
+        type: string
+      email:
+        description: The email address of the user.
+        type: string
     type: object

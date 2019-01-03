@@ -1,15 +1,15 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://gwells.api.gov.bc.ca/gwells/registries/api/v1'
+  - url: 'https://apps.nrs.gov.bc.ca/gwells/api/v1/'
 info:
   contact:
     email: groundwater@gov.bc.ca
-  description: The registers of well drillers and well pump installers are lists of individuals who are authorized under the Water Sustainability Act (WSA) to operate in British Columbia. Registered well drillers and well pump installers are responsible for safe drilling practices and installation of pumps and other works.
+  description: 'The groundwater wells, aquifers and registry API contains information related to groudwater wells and aquifers as well as a register of qualified well drillers and well pump installers registered to operate in B.C.'
   license:
     name: Open Government License - British Columbia
     url: 'https://www2.gov.bc.ca/gov/content?id=A519A56BC2BF44E4A008B33FCF527F61'
   termsOfService: 'http://www2.gov.bc.ca/gov/content?id=D1EE0A405E584363B205CD4353E02C88'
-  title: Registers of Well Drillers and Well Pump Installers
+  title: 'Groundwater Wells, Aquifers and Registry'
   version: v1
   x-apisguru-categories:
     - open_data
@@ -18,17 +18,399 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: openapi
       url: 'https://raw.githubusercontent.com/bcgov/api-specs/master/gwells/gwells.json'
       version: '3.0'
   x-providerName: gov.bc.ca
   x-serviceName: gwells
 security:
-  - basic: []
+  - Bearer: []
 paths:
   /api-token-auth/:
     parameters: []
+  /aquifer-codes/demand/:
+    get:
+      description: return a list of aquifer demand codes
+      operationId: aquifer-codes_demand_list
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/AquiferDemand'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: ''
+      tags:
+        - aquifer-codes
+    parameters: []
+  /aquifer-codes/materials/:
+    get:
+      description: return a list of aquifer material codes
+      operationId: aquifer-codes_materials_list
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/AquiferMaterial'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: ''
+      tags:
+        - aquifer-codes
+    parameters: []
+  /aquifer-codes/productivity/:
+    get:
+      description: return a list of aquifer productivity codes
+      operationId: aquifer-codes_productivity_list
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/AquiferProductivity'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: ''
+      tags:
+        - aquifer-codes
+    parameters: []
+  /aquifer-codes/quality-concerns/:
+    get:
+      description: return a list of quality concern codes
+      operationId: aquifer-codes_quality-concerns_list
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/QualityConcern'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: ''
+      tags:
+        - aquifer-codes
+    parameters: []
+  /aquifer-codes/subtypes/:
+    get:
+      description: return a list of aquifer subtype codes
+      operationId: aquifer-codes_subtypes_list
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/AquiferSubtype'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: ''
+      tags:
+        - aquifer-codes
+    parameters: []
+  /aquifer-codes/vulnerability/:
+    get:
+      description: return a list of aquifer vulnerability codes
+      operationId: aquifer-codes_vulnerability_list
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/AquiferVulnerability'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: ''
+      tags:
+        - aquifer-codes
+    parameters: []
+  /aquifer-codes/water-use/:
+    get:
+      description: return a list of water use codes
+      operationId: aquifer-codes_water-use_list
+      parameters:
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/WaterUse'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: ''
+      tags:
+        - aquifer-codes
+    parameters: []
+  /aquifers/:
+    get:
+      description: return a list of aquifers
+      operationId: aquifers_list
+      parameters:
+        - description: ''
+          in: query
+          name: aquifer_id
+          required: false
+          schema:
+            type: number
+        - description: Which field to use when ordering the results.
+          in: query
+          name: ordering
+          required: false
+          schema:
+            type: string
+        - description: A search term.
+          in: query
+          name: search
+          required: false
+          schema:
+            type: string
+        - description: Number of results to return per page.
+          in: query
+          name: limit
+          required: false
+          schema:
+            type: integer
+        - description: The initial index from which to return the results.
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+                  next:
+                    format: uri
+                    type: string
+                  previous:
+                    format: uri
+                    type: string
+                  results:
+                    items:
+                      $ref: '#/components/schemas/Aquifer'
+                    type: array
+                required:
+                  - count
+                  - results
+                type: object
+          description: ''
+      tags:
+        - aquifers
+    parameters: []
+  '/aquifers/{aquifer_id}/':
+    get:
+      description: return details of aquifers
+      operationId: aquifers_read
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Aquifer'
+          description: ''
+      tags:
+        - aquifers
+    parameters:
+      - description: A unique value identifying this aquifer.
+        in: path
+        name: aquifer_id
+        required: true
+        schema:
+          type: integer
   /cities/drillers/:
     get:
       description: 'returns a list of cities with a qualified, registered operator (driller or installer)'
@@ -41,7 +423,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/CityList'
                 type: array
-          description: OK
+          description: ''
       tags:
         - cities
     parameters: []
@@ -57,39 +439,25 @@ paths:
                 items:
                   $ref: '#/components/schemas/CityList'
                 type: array
-          description: OK
+          description: ''
       tags:
         - cities
+    parameters: []
+  /config:
+    get:
+      description: serves general configuration
+      operationId: config_list
+      responses:
+        '200':
+          description: ''
+      tags:
+        - config
     parameters: []
   /drillers/:
     get:
       description: Returns a list of all person records
       operationId: drillers_list
       parameters:
-        - description: ''
-          in: query
-          name: city
-          required: false
-          schema:
-            type: string
-        - description: ''
-          in: query
-          name: prov
-          required: false
-          schema:
-            type: string
-        - description: ''
-          in: query
-          name: status
-          required: false
-          schema:
-            type: string
-        - description: ''
-          in: query
-          name: activity
-          required: false
-          schema:
-            type: string
         - description: A search term.
           in: query
           name: search
@@ -119,52 +487,17 @@ paths:
           content:
             application/json:
               schema:
-                properties:
-                  count:
-                    type: integer
-                  next:
-                    format: uri
-                    type: string
-                  previous:
-                    format: uri
-                    type: string
-                  results:
-                    items:
-                      $ref: '#/components/schemas/Person'
-                    type: array
-                required:
-                  - count
-                  - results
-                type: object
-          description: OK
+                items:
+                  $ref: '#/components/schemas/PersonList'
+                type: array
+          description: ''
       tags:
         - drillers
     parameters: []
-  '/drillers/{person_guid}/':
+  /drillers/names/:
     get:
-      description: Returns the specified person
-      operationId: drillers_read
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Person'
-          description: OK
-      tags:
-        - drillers
-    parameters:
-      - description: A UUID string identifying this person.
-        in: path
-        name: person_guid
-        required: true
-        schema:
-          format: uuid
-          type: string
-  /organizations/:
-    get:
-      description: Returns a list of all registered drilling organizations
-      operationId: organizations_list
+      description: Search for a person in the Register
+      operationId: drillers_names_list
       parameters:
         - description: A search term.
           in: query
@@ -172,6 +505,51 @@ paths:
           required: false
           schema:
             type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PersonName'
+                type: array
+          description: ''
+      tags:
+        - drillers
+    parameters: []
+  /drillers/options/:
+    parameters: []
+  /keycloak:
+    get:
+      description: serves keycloak config
+      operationId: keycloak_list
+      responses:
+        '200':
+          description: ''
+      tags:
+        - keycloak
+    parameters: []
+  /surveys/:
+    get:
+      description: returns a list of active surveys
+      operationId: surveys_list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Survey'
+                type: array
+          description: ''
+      tags:
+        - surveys
+    parameters: []
+  /wells/:
+    get:
+      description: returns a list of wells
+      operationId: wells_list
+      parameters:
         - description: Number of results to return per page.
           in: query
           name: limit
@@ -200,132 +578,271 @@ paths:
                     type: string
                   results:
                     items:
-                      $ref: '#/components/schemas/Organization'
+                      $ref: '#/components/schemas/WellList'
                     type: array
                 required:
                   - count
                   - results
                 type: object
-          description: OK
+          description: ''
       tags:
-        - organizations
+        - wells
     parameters: []
-  '/organizations/{org_guid}/':
+  /wells/tags/:
     get:
-      description: Returns the specified drilling organization
-      operationId: organizations_read
+      description: seach for wells by tag or owner
+      operationId: wells_tags_list
+      parameters:
+        - description: A search term.
+          in: query
+          name: search
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Organization'
-          description: OK
+                items:
+                  $ref: '#/components/schemas/WellTagSearch'
+                type: array
+          description: ''
       tags:
-        - organizations
+        - wells
+    parameters: []
+  '/wells/{tag}/files':
     parameters:
-      - description: A UUID string identifying this organization.
-        in: path
-        name: org_guid
+      - in: path
+        name: tag
         required: true
         schema:
-          format: uuid
           type: string
 components:
   schemas:
     ApplicationList:
       properties:
-        registrations:
+        cert_authority:
+          readOnly: true
+          title: Cert authority
+          type: string
+        certificate:
+          readOnly: true
+          title: Certificate
+          type: string
+        current_status:
+          $ref: '#/components/schemas/ApplicationStatusCode'
+        display_status:
+          readOnly: true
+          title: Display status
+          type: string
+        qualifications:
           items:
-            $ref: '#/components/schemas/RegistrationsList'
+            $ref: '#/components/schemas/Qualification'
           readOnly: true
           type: array
+        removal_date:
+          format: date
+          title: Removal date
+          type: string
+        subactivity:
+          $ref: '#/components/schemas/Subactivity'
+      required:
+        - subactivity
+      type: object
+    ApplicationStatusCode:
+      properties:
+        code:
+          readOnly: true
+          title: Code
+          type: string
+        description:
+          maxLength: 100
+          title: Description
+          type: string
+      required:
+        - description
+      title: Current status
+      type: object
+    Aquifer:
+      properties:
+        aquifer_id:
+          maximum: 2147483647
+          minimum: 0
+          title: Aquifer ID Number
+          type: integer
+        aquifer_name:
+          maxLength: 100
+          title: Aquifer name
+          type: string
+        area:
+          format: decimal
+          title: Size (square km)
+          type: string
+        demand:
+          title: Demand Reference
+          type: string
+        demand_description:
+          readOnly: true
+          title: Demand description
+          type: string
+        known_water_use:
+          title: Known Water Use Reference
+          type: string
+        known_water_use_description:
+          readOnly: true
+          title: Known water use description
+          type: string
+        litho_stratographic_unit:
+          maxLength: 100
+          title: Lithographic Stratographic Unit
+          type: string
+        location_description:
+          maxLength: 100
+          title: Description of Location
+          type: string
+        mapping_year:
+          description: 'Use the following format: <YYYY>'
+          maximum: 2018
+          minimum: 1990
+          title: Date of Mapping
+          type: integer
+        material:
+          title: Material Reference
+          type: string
+        material_description:
+          readOnly: true
+          title: Material description
+          type: string
+        notes:
+          maxLength: 2000
+          title: 'Notes on Aquifer, for internal use only.'
+          type: string
+        productivity:
+          title: Productivity Reference
+          type: string
+        productivity_description:
+          readOnly: true
+          title: Productivity description
+          type: string
+        quality_concern:
+          title: Quality Concern Reference
+          type: string
+        quality_concern_description:
+          readOnly: true
+          title: Quality concern description
+          type: string
+        subtype:
+          title: Subtype Reference
+          type: string
+        subtype_description:
+          readOnly: true
+          title: Subtype description
+          type: string
+        vulnerability:
+          title: Aquifer Vulnerabiliy
+          type: string
+        vulnerability_description:
+          readOnly: true
+          title: Vulnerability description
+          type: string
+      required:
+        - aquifer_id
+      type: object
+    AquiferDemand:
+      properties:
+        code:
+          maxLength: 1
+          title: Code
+          type: string
+        description:
+          maxLength: 100
+          title: Description
+          type: string
+      required:
+        - code
+        - description
+      type: object
+    AquiferMaterial:
+      properties:
+        code:
+          maxLength: 10
+          title: Code
+          type: string
+        description:
+          maxLength: 100
+          title: Description
+          type: string
+      required:
+        - code
+        - description
+      type: object
+    AquiferProductivity:
+      properties:
+        code:
+          maxLength: 1
+          title: Code
+          type: string
+        description:
+          maxLength: 100
+          title: Description
+          type: string
+      required:
+        - code
+        - description
+      type: object
+    AquiferSubtype:
+      properties:
+        code:
+          maxLength: 3
+          title: Code
+          type: string
+        description:
+          title: Description
+          type: string
+      required:
+        - code
+        - description
+      type: object
+    AquiferVulnerability:
+      properties:
+        code:
+          maxLength: 1
+          title: Code
+          type: string
+        description:
+          maxLength: 100
+          title: Description
+          type: string
+      required:
+        - code
+        - description
       type: object
     CityList:
       properties:
-        companies:
-          items:
-            $ref: '#/components/schemas/ContactAt'
-          readOnly: true
-          type: array
-      type: object
-    ContactAt:
-      properties:
-        city:
-          readOnly: true
-          title: City
-          type: string
-        contact_at_guid:
-          format: uuid
-          readOnly: true
-          title: 'Contact At UUID, hidden from users'
-          type: string
-        contact_email:
-          format: email
-          maxLength: 254
-          title: Email adddress
-          type: string
-        contact_tel:
-          maxLength: 15
-          title: Contact telephone number
-          type: string
-        org:
-          format: uuid
-          title: Company Reference
-          type: string
-        organization_name:
-          readOnly: true
-          title: Organization name
-          type: string
-        person:
-          format: uuid
-          title: Person Reference
-          type: string
-        person_name:
-          readOnly: true
-          title: Person name
-          type: string
-        postal_code:
-          readOnly: true
-          title: Postal code
-          type: string
-        province_state:
-          readOnly: true
-          title: Province state
-          type: string
-        street_address:
-          readOnly: true
-          title: Street address
-          type: string
-        website_url:
-          readOnly: true
-          title: Website url
-          type: string
+        organization:
+          $ref: '#/components/schemas/Organization'
+      required:
+        - organization
       type: object
     Organization:
       properties:
-        certificate_authority:
-          enum:
-            - false
-            - true
-          title: Certifying Authority for Registries Activities
-          type: boolean
         city:
           maxLength: 50
           title: Town/City
           type: string
-        contacts:
-          items:
-            $ref: '#/components/schemas/ContactAt'
-          readOnly: true
-          type: array
+        email:
+          format: email
+          maxLength: 254
+          title: Email adddress
+          type: string
         fax_tel:
           maxLength: 15
-          title: Facsimile telephone number
+          title: Fax number
           type: string
         main_tel:
           maxLength: 15
-          title: Company main telephone number
+          title: Telephone number
           type: string
         name:
           maxLength: 200
@@ -334,14 +851,18 @@ components:
         org_guid:
           format: uuid
           readOnly: true
-          title: 'Organization UUID, hidden from users'
+          title: Organization UUID
+          type: string
+        org_verbose_name:
+          readOnly: true
+          title: Org verbose name
           type: string
         postal_code:
           maxLength: 10
           title: Postal Code
           type: string
         province_state:
-          title: Province state
+          title: Province/State
           type: string
         street_address:
           maxLength: 100
@@ -350,23 +871,81 @@ components:
         website_url:
           format: uri
           maxLength: 200
-          title: Orgnization's Website
+          title: Website
           type: string
       required:
         - name
+        - province_state
+      title: Organization
       type: object
-    Person:
+    OrganizationList:
       properties:
-        applications:
-          items:
-            $ref: '#/components/schemas/ApplicationList'
+        city:
+          maxLength: 50
+          title: Town/City
+          type: string
+        email:
+          format: email
+          maxLength: 254
+          title: Email adddress
+          type: string
+        fax_tel:
+          maxLength: 15
+          title: Fax number
+          type: string
+        main_tel:
+          maxLength: 15
+          title: Telephone number
+          type: string
+        name:
+          maxLength: 200
+          title: Name
+          type: string
+        org_guid:
+          format: uuid
           readOnly: true
-          type: array
-        companies:
-          items:
-            $ref: '#/components/schemas/ContactAt'
+          title: Organization UUID
+          type: string
+        org_verbose_name:
           readOnly: true
-          type: array
+          title: Org verbose name
+          type: string
+        postal_code:
+          maxLength: 10
+          title: Postal Code
+          type: string
+        province_state:
+          title: Province/State
+          type: string
+        street_address:
+          maxLength: 100
+          title: Street Address
+          type: string
+        website_url:
+          format: uri
+          maxLength: 200
+          title: Website
+          type: string
+      required:
+        - name
+        - province_state
+      title: Organization
+      type: object
+    PersonList:
+      properties:
+        contact_cell:
+          maxLength: 15
+          title: Contact cell number
+          type: string
+        contact_email:
+          format: email
+          maxLength: 254
+          title: Email address
+          type: string
+        contact_tel:
+          maxLength: 15
+          title: Contact telephone number
+          type: string
         first_name:
           maxLength: 100
           title: First name
@@ -374,8 +953,13 @@ components:
         person_guid:
           format: uuid
           readOnly: true
-          title: 'Person UUID, hidden from users'
+          title: Person UUID
           type: string
+        registrations:
+          items:
+            $ref: '#/components/schemas/RegistrationsList'
+          readOnly: true
+          type: array
         surname:
           maxLength: 100
           title: Surname
@@ -384,22 +968,514 @@ components:
         - first_name
         - surname
       type: object
+    PersonName:
+      properties:
+        name:
+          readOnly: true
+          title: Name
+          type: string
+        person_guid:
+          format: uuid
+          readOnly: true
+          title: Person UUID
+          type: string
+      type: object
+    Qualification:
+      properties:
+        description:
+          readOnly: true
+          title: Description
+          type: string
+        well_class:
+          title: Well class
+          type: string
+      required:
+        - well_class
+      type: object
+    QualityConcern:
+      properties:
+        code:
+          maxLength: 2
+          title: Code
+          type: string
+        description:
+          maxLength: 100
+          title: Description
+          type: string
+      required:
+        - code
+        - description
+      type: object
     RegistrationsList:
       properties:
         activity:
           readOnly: true
           title: Activity
           type: string
+        activity_description:
+          readOnly: true
+          title: Activity description
+          type: string
+        applications:
+          items:
+            $ref: '#/components/schemas/ApplicationList'
+          readOnly: true
+          type: array
+        organization:
+          $ref: '#/components/schemas/OrganizationList'
         registration_no:
           maxLength: 15
           title: Registration no
           type: string
-        status:
+      required:
+        - organization
+      type: object
+    Subactivity:
+      properties:
+        description:
+          maxLength: 100
+          title: Description
+          type: string
+        qualification_set:
+          items:
+            $ref: '#/components/schemas/Qualification'
           readOnly: true
-          title: Status
+          type: array
+        registries_subactivity_code:
+          readOnly: true
+          title: Registries subactivity code
+          type: string
+      required:
+        - description
+      title: Subactivity
+      type: object
+    Survey:
+      properties:
+        survey_guid:
+          format: uuid
+          readOnly: true
+          title: Survey guid
+          type: string
+        survey_introduction_text:
+          maxLength: 250
+          title: Introduction Text
+          type: string
+        survey_link:
+          maxLength: 100
+          title: Link
+          type: string
+        survey_page:
+          enum:
+            - w
+            - r
+            - s
+          title: Page
           type: string
       type: object
+    WaterUse:
+      properties:
+        code:
+          maxLength: 2
+          title: Code
+          type: string
+        description:
+          maxLength: 100
+          title: Description
+          type: string
+      required:
+        - code
+        - description
+      type: object
+    WellList:
+      properties:
+        alteration_end_date:
+          format: date
+          title: Alteration Date
+          type: string
+        alternative_specs_submitted:
+          enum:
+            - false
+            - true
+          title: Alternative specs submitted (if required)
+          type: boolean
+        artesian_flow:
+          format: decimal
+          title: Artesian Flow
+          type: string
+        artesian_pressure:
+          format: decimal
+          title: Artesian Pressure
+          type: string
+        backfill_depth:
+          format: decimal
+          title: Backfill Depth
+          type: string
+        backfill_material:
+          maxLength: 100
+          title: Backfill Material
+          type: string
+        backfill_type:
+          maxLength: 250
+          title: Backfill Material Above Surface Seal
+          type: string
+        bcgs_id:
+          title: BCGS Mapsheet Number
+          type: integer
+        bedrock_depth:
+          format: decimal
+          title: Depth to Bedrock
+          type: string
+        city:
+          maxLength: 50
+          title: Town/City
+          type: string
+        comments:
+          maxLength: 3000
+          title: Comments
+          type: string
+        construction_end_date:
+          format: date
+          title: Construction Date
+          type: string
+        construction_start_date:
+          format: date
+          title: Construction Start Date
+          type: string
+        decommission_details:
+          maxLength: 250
+          title: Decommission Details
+          type: string
+        decommission_end_date:
+          format: date
+          title: Decommission Date
+          type: string
+        decommission_method:
+          title: Method of Decommission
+          type: string
+        decommission_reason:
+          maxLength: 250
+          title: Reason for Decommission
+          type: string
+        decommission_start_date:
+          format: date
+          title: Decommission Start Date
+          type: string
+        development_hours:
+          format: decimal
+          title: Development Total Duration
+          type: string
+        development_method:
+          title: Developed By
+          type: string
+        development_notes:
+          maxLength: 255
+          title: Development Notes
+          type: string
+        diameter:
+          maxLength: 9
+          title: Diameter
+          type: string
+        drilling_company:
+          format: uuid
+          title: Drilling Company
+          type: string
+        drilling_method:
+          title: Drilling Method
+          type: string
+        ems:
+          maxLength: 10
+          title: Environmental Monitoring System (EMS) ID
+          type: string
+        filter_pack_from:
+          format: decimal
+          title: Filter Pack From
+          type: string
+        filter_pack_material:
+          title: Filter Pack Material
+          type: string
+        filter_pack_material_size:
+          title: Filter Pack Material Size
+          type: string
+        filter_pack_thickness:
+          format: decimal
+          title: Filter Pack Thickness
+          type: string
+        filter_pack_to:
+          format: decimal
+          title: Filter Pack To
+          type: string
+        final_casing_stick_up:
+          format: decimal
+          title: Final Casing Stick Up
+          type: string
+        finished_well_depth:
+          format: decimal
+          title: Finished Well Depth
+          type: string
+        ground_elevation:
+          format: decimal
+          title: Ground Elevation
+          type: string
+        ground_elevation_method:
+          title: Elevation Determined By
+          type: string
+        identification_plate_number:
+          maximum: 2147483647
+          minimum: 0
+          title: Well Identification Plate Number
+          type: integer
+        intended_water_use:
+          title: Intended Water Use
+          type: string
+        land_district:
+          title: Land District
+          type: string
+        latitude:
+          format: decimal
+          title: Latitude
+          type: string
+        legal_block:
+          maxLength: 10
+          title: Block
+          type: string
+        legal_district_lot:
+          maxLength: 20
+          title: District Lot
+          type: string
+        legal_lot:
+          maxLength: 10
+          title: Lot
+          type: string
+        legal_pid:
+          maximum: 2147483647
+          minimum: 0
+          title: Property Identification Description (PID)
+          type: integer
+        legal_plan:
+          maxLength: 20
+          title: Plan
+          type: string
+        legal_range:
+          maxLength: 10
+          title: Range
+          type: string
+        legal_section:
+          maxLength: 10
+          title: Section
+          type: string
+        legal_township:
+          maxLength: 20
+          title: Township
+          type: string
+        licenced_status:
+          title: Licenced Status
+          type: string
+        liner_diameter:
+          format: decimal
+          title: Liner Diameter
+          type: string
+        liner_from:
+          format: decimal
+          title: Liner From
+          type: string
+        liner_material:
+          title: Liner Material
+          type: string
+        liner_thickness:
+          format: decimal
+          title: Liner Thickness
+          type: string
+        liner_to:
+          format: decimal
+          title: Liner To
+          type: string
+        longitude:
+          format: decimal
+          title: Longitude
+          type: string
+        observation_well_number:
+          maxLength: 3
+          title: Observation Well Number
+          type: string
+        observation_well_status:
+          title: Observation Well Status
+          type: string
+        other_drilling_method:
+          maxLength: 50
+          title: Specify Other Drilling Method
+          type: string
+        other_screen_bottom:
+          maxLength: 50
+          title: Specify Other Screen Bottom
+          type: string
+        other_screen_material:
+          maxLength: 50
+          title: Specify Other Screen Material
+          type: string
+        owner_full_name:
+          maxLength: 200
+          title: Owner Name
+          type: string
+        screen_bottom:
+          title: Bottom
+          type: string
+        screen_intake_method:
+          title: Intake Method
+          type: string
+        screen_material:
+          title: Material
+          type: string
+        screen_opening:
+          title: Opening
+          type: string
+        screen_type:
+          title: Type
+          type: string
+        sealant_material:
+          maxLength: 100
+          title: Sealant Material
+          type: string
+        static_water_level:
+          format: decimal
+          title: Static Water Level (BTOC)
+          type: string
+        street_address:
+          maxLength: 100
+          title: Street Address
+          type: string
+        surface_seal_length:
+          format: decimal
+          title: Surface Seal Length
+          type: string
+        surface_seal_material:
+          title: Surface Seal Material
+          type: string
+        surface_seal_method:
+          title: Surface Seal Installation Method
+          type: string
+        surface_seal_thickness:
+          format: decimal
+          title: Surface Seal Thickness
+          type: string
+        total_depth_drilled:
+          format: decimal
+          title: Total Depth Drilled
+          type: string
+        utm_accuracy_code:
+          maxLength: 10
+          title: Location Accuracy Code
+          type: string
+        utm_easting:
+          maximum: 2147483647
+          minimum: -2147483648
+          title: UTM Easting
+          type: integer
+        utm_northing:
+          maximum: 2147483647
+          minimum: -2147483648
+          title: UTM Northing
+          type: integer
+        utm_zone_code:
+          maxLength: 10
+          title: Zone
+          type: string
+        water_quality_characteristics:
+          items:
+            title: Obvious Water Quality Characteristics
+            type: string
+          type: array
+          uniqueItems: true
+        water_quality_colour:
+          maxLength: 60
+          title: Water Quality Colour
+          type: string
+        water_quality_odour:
+          maxLength: 60
+          title: Water Quality Odour
+          type: string
+        water_supply_system_name:
+          maxLength: 80
+          title: Water Supply System Name
+          type: string
+        water_supply_system_well_name:
+          maxLength: 80
+          title: Water Supply System Well Name
+          type: string
+        well_cap_type:
+          maxLength: 40
+          title: Well Cap
+          type: string
+        well_class:
+          title: Well Class
+          type: string
+        well_disinfected:
+          enum:
+            - false
+            - true
+          title: Well Disinfected
+          type: boolean
+        well_guid:
+          format: uuid
+          readOnly: true
+          title: Well guid
+          type: string
+        well_identification_plate_attached:
+          maxLength: 500
+          title: Well Identification Plate Is Attached
+          type: string
+        well_location_description:
+          maxLength: 500
+          title: Description of Well Location
+          type: string
+        well_orientation:
+          enum:
+            - true
+            - false
+          title: Orientation of Well
+          type: boolean
+        well_status:
+          title: Well Status
+          type: string
+        well_subclass:
+          format: uuid
+          title: Well Subclass
+          type: string
+        well_tag_number:
+          readOnly: true
+          title: Well Tag Number
+          type: integer
+        well_yield:
+          format: decimal
+          title: Estimated Well Yield
+          type: string
+        well_yield_unit:
+          title: Well yield unit
+          type: string
+      required:
+        - owner_full_name
+      type: object
+    WellTagSearch:
+      properties:
+        owner_full_name:
+          maxLength: 200
+          title: Owner Name
+          type: string
+        well_tag_number:
+          readOnly: true
+          title: Well Tag Number
+          type: integer
+      required:
+        - owner_full_name
+      type: object
   securitySchemes:
-    basic:
-      scheme: basic
-      type: http
+    Bearer:
+      in: header
+      name: JWT
+      type: apiKey
+x-origin:
+  - converter:
+      url: 'https://github.com/mermade/oas-kit'
+      version: 3.2.13
+    format: swagger
+    url: 'https://apps.nrs.gov.bc.ca/gwells/api/?format=openapi'
+    version: '2.0'

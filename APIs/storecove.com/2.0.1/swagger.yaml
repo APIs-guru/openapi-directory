@@ -266,7 +266,7 @@ paths:
           name: superscheme
           required: true
           type: string
-        - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<Peppol Schemes List>>.'
+        - description: 'PEPPOL identifier scheme id, e.g. "DE:VAT". For a full list see <<peppol_schemes_list>>.'
           in: path
           name: scheme
           required: true
@@ -665,24 +665,24 @@ definitions:
     description: The code in the chart of accounts used by the receiver of the invoice.
     properties:
       code:
-        description: ''
+        description: 'The buyer''s accounting cost centre for this invoice(line), expressed as a code'
         minLength: 1
-        title: ''
+        title: Accounting Cost Code
         type: string
       list:
-        description: ''
+        description: The identification of a list of codes.
         minLength: 1
-        title: ''
+        title: List ID
         type: string
       listAgency:
-        description: ''
+        description: An agency that maintains one or more lists of codes.
         minLength: 1
-        title: ''
+        title: List Agency
         type: string
       listVersion:
-        description: ''
+        description: The version of the list of codes.
         minLength: 1
-        title: ''
+        title: List Version
         type: string
     title: Accounting cost code
     type: object
@@ -698,6 +698,57 @@ definitions:
     required:
       - party
     title: Customer
+    type: object
+  AccountingSupplierParty:
+    description: 'The party sending the invoice. Most data for the AccountingSupplierParty is taken from the Storecove database, where your sender identity resides and has been validated. However, we provide a limited number of fields here that you can specify on an invoice-by-invoice basis.'
+    properties:
+      party:
+        $ref: '#/definitions/SupplierParty'
+    title: Supplier
+    type: object
+  Address:
+    description: The address
+    properties:
+      city:
+        description: The name of the city.
+        minLength: 2
+        title: City
+        type: string
+      country:
+        $ref: '#/definitions/Country'
+      county:
+        description: An optional county name.
+        title: County
+        type: string
+      department:
+        description: The department
+        title: Department
+        type: string
+      number:
+        description: 'This number will be added to the street1 element. The number can be provided in this field OR in the street1 field, but not in both.'
+        title: Building number
+        type: string
+      postbox:
+        description: The postbox number
+        title: Postbox
+        type: string
+      street1:
+        description: 'The street name. The number can be provided in this fiedl OR in the number field, but not in both.'
+        minLength: 2
+        title: Street 1
+        type: string
+      street2:
+        description: The second street field. Use this if you used the first field for the building name.
+        title: Street 2
+        type: string
+      zip:
+        description: The zipcode/postalzone.
+        minLength: 2
+        title: Zipcode
+        type: string
+    required:
+      - country
+    title: Address
     type: object
   AllowanceCharge:
     properties:
@@ -738,6 +789,38 @@ definitions:
       - amountExcludingVat
       - tax
     title: Allowance Charge
+    type: object
+  BuyerCustomerParty:
+    description: The buyer receiving the invoice.
+    properties:
+      accountId:
+        description: The account id you assigned to the customer.
+        title: Account id
+        type: string
+      party:
+        $ref: '#/definitions/Party'
+    required:
+      - party
+    title: Buyer
+    type: object
+  Contact:
+    description: Contact details for the invoice
+    properties:
+      email:
+        format: email
+        title: Email address
+        type: string
+      firstName:
+        title: First name
+        type: string
+      lastName:
+        title: Last name
+        type: string
+      phone:
+        description: Only supported for AccountingSupplierParty.
+        title: Phone number
+        type: string
+    title: Contact
     type: object
   Country:
     description: An ISO 3166-1 alpha-2 country code.
@@ -1176,14 +1259,187 @@ definitions:
       - ZMW
     title: Currency
     type: string
+  Delivery:
+    properties:
+      actualDate:
+        description: The actual date of the delivery.
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+        title: Actual Date
+        type: string
+      location:
+        properties:
+          address:
+            $ref: '#/definitions/Address'
+          id:
+            description: The location identifier.
+            minLength: 2
+            title: Identifier
+            type: string
+          schemeAgencyId:
+            description: The schemeAgencyId of the location identifier (e.g. 'ZZZ')
+            title: Identifier Scheme Agency ID
+            type: string
+          schemeId:
+            description: The schemeId of the location identifier (e.g. 'EAN')
+            title: Identifier Scheme ID
+            type: string
+        type: object
+      quantity:
+        default: 1
+        description: The quantity of the delivery.
+        title: Quantity
+        type: number
+    type: object
   ErrorModel:
     properties:
       details:
         type: string
       source:
         type: string
+  Invoice:
+    description: The invoice to send
+    properties:
+      accountingCost:
+        description: 'The buyer''s accounting cost centre for this invoice, expressed as text.'
+        minLength: 1
+        title: Accounting Cost
+        type: string
+      accountingCostCode:
+        $ref: '#/definitions/AccountingCostCode'
+      accountingCustomerParty:
+        $ref: '#/definitions/AccountingCustomerParty'
+        description: The party the invoice is sent to.
+      accountingSupplierParty:
+        $ref: '#/definitions/AccountingSupplierParty'
+        description: 'The party sending the invoice. Most data for the AccountingSupplierParty is taken from the Storecove database, where your sender identity resides and has been validated. However, we provide a limited number of fields here that you can specify on an invoice-by-invoice basis.'
+      allowanceCharges:
+        description: An array of allowance charges.
+        items:
+          $ref: '#/definitions/AllowanceCharge'
+        minItems: 0
+        title: Allowance Charges
+        type: array
+      amountIncludingVat:
+        description: 'amountIncludingVat is important because of rounding differences. In many invoices, the sum of the line item amounts excluding VAT and the VAT amounts is not equal to first summing the line items without VAT, and then applying VAT. The difference is automatically calculated and included in the electronic invoice, so the receiving accounting package can process the electronic invoice without problems.'
+        title: Amount including VAT
+        type: number
+      billingReference:
+        description: A reference to a commercial invoice or corrective invoice of which the current invoice is a correction. This field is mandatory when sending invoiceType 384.
+        title: Billing reference
+        type: string
+      buyerCustomerParty:
+        $ref: '#/definitions/BuyerCustomerParty'
+        description: The buyer party.
+      buyerReference:
+        description: A reference provided by the buyer used for internal routing of the document.
+        title: Buyer reference
+        type: string
+      contractDocumentReference:
+        description: A reference to a contract or framework agreement that this invoice relates to.
+        title: Contract document reference
+        type: string
+      delivery:
+        $ref: '#/definitions/Delivery'
+        description: The delivery of the invoice.
+        title: The Delivery
+      documentCurrencyCode:
+        $ref: '#/definitions/CurrencyCode'
+        default: EUR
+        description: 'The documentCurrencyCode is the currency for the entire invoice. We currently do not support invoices in multiple currencies. If left out, will default to EUR'
+      dueDate:
+        description: 'Format: yyyy-mm-dd.'
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+        title: Due date
+        type: string
+      invoiceLines:
+        description: An array of invoice lines.
+        items:
+          $ref: '#/definitions/InvoiceLine'
+        minItems: 1
+        title: Invoice lines
+        type: array
+      invoiceNumber:
+        description: 'The invoice number you assigned to the invoice. The invoiceNumber should be unique for the legalEntityId and year of the issueDate. This means invoice numbers can be reused in different years, as is customary in some countries.'
+        minLength: 1
+        title: Invoice number
+        type: string
+      invoicePeriod:
+        description: 'The period (or specific date) to which the invoice applies. Format: yyyy-mm-dd - yyyy-mm-dd.'
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} - [0-9]{4}-[0-9]{2}-[0-9]{2}$'
+        title: Invoice period
+        type: string
+      invoiceType:
+        default: '380'
+        description: 'Use 380 for a regular invoice, 381 for a credit invoice, 384 for a corrective invoice. Note that invoiceType 381 must be for a positive amount! In case of invoiceType 384, the billingReference field must contain the invoiceNumber of the invoice being corrected.'
+        enum:
+          - '380'
+          - '381'
+          - '384'
+        title: Type of invoice
+        type: string
+      issueDate:
+        description: 'Format: yyyy-mm-dd.'
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+        title: Invoice issue date
+        type: string
+      note:
+        description: A note to add to the invoice
+        title: Note
+        type: string
+      orderReference:
+        description: 'A reference to an order for this invoice, assigned by the buyer.'
+        title: Order reference
+        type: string
+      paymentMeansCode:
+        description: 'Leave empty. Defaults to 31 if an IBAN is provided, otherwise defaults to 1. But leave empty.'
+        title: Payment Means Code
+        type: string
+      paymentMeansIban:
+        description: The IBAN the amount payable should be transferred to
+        title: IBAN
+        type: string
+      paymentMeansPaymentId:
+        description: The payment id that you will use to match the payment against the invoice.
+        title: Payment Id
+        type: string
+      projectReference:
+        description: Information about the project this invoice relates to.
+        title: Project Reference
+        type: string
+      salesOrderId:
+        description: 'A reference to an order for this invoice, assigned by the seller.'
+        title: Sales Order Id
+        type: string
+      taxPointDate:
+        description: 'The tax date is the date on which the supply of goods or of services was made or completed or the date on which the payment on account was made insofar as that date can be determined and differs from the date of the issue of the invoice. EU 2006-112 Article 226 Point 7. Note: For the Dutch TAX authorities the tac date should be the same as the issue date.'
+        pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+        title: Tax date
+        type: string
+      ublExtensions:
+        description: An array of ubl extensions.
+        items:
+          type: string
+        title: UBL Extenstions
+        type: array
+      vatReverseCharge:
+        default: false
+        description: Whether or not the invoice is reverse charged
+        type: boolean
+    required:
+      - invoiceNumber
+      - issueDate
+      - accountingCustomerParty
+      - invoiceLines
+      - amountIncludingVat
+    title: Invoice
+    type: object
   InvoiceLine:
     properties:
+      accountingCost:
+        description: 'The buyer''s accounting cost centre for this invoice line, expressed as text.'
+        minLength: 1
+        title: Accounting Cost
+        type: string
       accountingCostCode:
         $ref: '#/definitions/AccountingCostCode'
       allowanceCharge:
@@ -1194,65 +1450,14 @@ definitions:
         description: The amount excluding VAT. Should equal quantity x itemPrice + allowanceCharge. A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
         title: amountExcludingVat
         type: number
+      delivery:
+        $ref: '#/definitions/Delivery'
+        description: The delivery of the invoice line.
+        title: Delivery
       description:
         description: The description for this invoice line.
         minLength: 1
         title: Description
-        type: string
-      groupArticlegroupAccount:
-        description: The articlegroup account number.
-        minLength: 1
-        title: Articlegroup Account
-        type: string
-      groupArticlegroupCode:
-        description: The articlegroup code.
-        minLength: 1
-        title: Articlegroup Code
-        type: string
-      groupArticlegroupDescription:
-        description: The description of the acticlegroup.
-        minLength: 1
-        title: Acticlegroup Description
-        type: string
-      groupCustomerAccount:
-        description: The account number the customer assigned to this customer code.
-        minLength: 1
-        title: Customer Account
-        type: string
-      groupCustomerCode:
-        description: The code the customer gave this item.
-        minLength: 1
-        title: Customer Code
-        type: string
-      groupCustomerDescription:
-        description: The description for the code the customer gave this item.
-        minLength: 1
-        title: Customer Code Description
-        type: string
-      groupNziAccount:
-        description: The NZI account number.
-        minLength: 1
-        title: NZI Account Code
-        type: string
-      groupNziCode:
-        description: The NZI (Nationale Zorg Instelling) code.
-        minLength: 1
-        title: NZI Code
-        type: string
-      groupNziDescription:
-        description: The description of the NZI code.
-        minLength: 1
-        title: NZI Code Description
-        type: string
-      id:
-        description: Your id for this invoice line.
-        minLength: 1
-        title: Id
-        type: string
-      imageUrl:
-        description: A URL to an image for the product in the invoice line.
-        format: uri
-        title: Image URL
         type: string
       invoicePeriod:
         description: 'The period (or specific date) to which the invoice line applies. Format: yyyy-mm-dd - yyyy-mm-dd.'
@@ -1264,20 +1469,42 @@ definitions:
         description: The price per item (may be fractional)
         title: Item price
         type: number
+      name:
+        description: 'A short name for this invoice line. If not provided, it will be taken from description and description will be set to an emtpy string.'
+        minLength: 1
+        title: Name
+        type: string
       quantity:
         default: 1
         description: The number of items (may be fractional).
         title: Quantity
         type: number
+      quantityUnitCode:
+        default: C62
+        description: 'A unit code from UNECE Rec20. The complete list can be found at http://www.datypic.com/sc/ubl20/a-unitCode-4.html'
+        title: Quantity Unit Code
+        type: string
       sellersItemIdentification:
         description: The ID the seller assigned to this item.
         minLength: 1
         title: Sellers Item Identification
         type: string
       standardItemIdentification:
-        description: Standardized ID for the item. Identifiers based on GTIN.
+        description: Standardized ID for the item.
         minLength: 1
         title: Standard Item Identification
+        type: string
+      standardItemIdentificationSchemeAgencyId:
+        default: '9'
+        description: The scheme agency for the standardized ID for the item.
+        minLength: 1
+        title: Standard Item Identification Scheme Agency
+        type: string
+      standardItemIdentificationSchemeId:
+        default: GTIN
+        description: The scheme for the standardized ID for the item.
+        minLength: 1
+        title: Standard Item Identification Scheme
         type: string
       tax:
         description: The tax for this invoice line.
@@ -1299,7 +1526,6 @@ definitions:
         title: Tax
         type: object
     required:
-      - description
       - amountExcludingVat
     title: Invoice line
     type: object
@@ -1360,112 +1586,7 @@ definitions:
         title: Document Url
         type: string
       invoice:
-        description: The invoice to send
-        properties:
-          accountingCostCode:
-            $ref: '#/definitions/AccountingCostCode'
-          accountingCustomerParty:
-            $ref: '#/definitions/AccountingCustomerParty'
-            description: The receiving party
-          allowanceCharges:
-            description: An array of allowance charges.
-            items:
-              $ref: '#/definitions/AllowanceCharge'
-            minItems: 0
-            title: Allowance Charges
-            type: array
-          amountIncludingVat:
-            description: 'amountIncludingVat is important because of rounding differences. In many invoices, the sum of the line item amounts excluding VAT and the VAT amounts is not equal to first summing the line items without VAT, and then applying VAT. The difference is automatically calculated and included in the electronic invoice, so the receiving accounting package can process the electronic invoice without problems.'
-            title: Amount including VAT
-            type: number
-          billingReference:
-            description: A reference to a commercial invoice or corrective invoice of which the current invoice is a correction.
-            title: Billing reference
-            type: string
-          buyerReference:
-            description: A reference provided by the buyer used for internal routing of the document.
-            title: Buyer reference
-            type: string
-          contractDocumentReference:
-            description: A reference to a contract or framework agreement that this invoice relates to.
-            title: Contract document reference
-            type: string
-          documentCurrencyCode:
-            $ref: '#/definitions/CurrencyCode'
-            default: EUR
-            description: 'The documentCurrencyCode is the currency for the entire invoice. We currently do not support invoices in multiple currencies. If left out, will default to EUR'
-          dueDate:
-            description: 'Format: yyyy-mm-dd.'
-            pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
-            title: Due date
-            type: string
-          invoiceLines:
-            description: An array of invoice lines.
-            items:
-              $ref: '#/definitions/InvoiceLine'
-            minItems: 1
-            title: Invoice lines
-            type: array
-          invoiceNumber:
-            description: 'The invoice number you assigned to the invoice. The invoiceNumber should be unique for the legalEntityId and year of the issueDate. This means invoice numbers can be reused in different years, as is customary in some countries.'
-            minLength: 1
-            title: Invoice number
-            type: string
-          invoicePeriod:
-            description: 'The period (or specific date) to which the invoice applies. Format: yyyy-mm-dd - yyyy-mm-dd.'
-            pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} - [0-9]{4}-[0-9]{2}-[0-9]{2}$'
-            title: Invoice period
-            type: string
-          invoiceType:
-            default: '380'
-            description: 'Use 380 for a regular invoice, 384 for a Corrective invoice.'
-            enum:
-              - '380'
-              - '384'
-            title: Type of invoice
-            type: string
-          issueDate:
-            description: 'Format: yyyy-mm-dd.'
-            pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
-            title: Invoice issue date
-            type: string
-          orderReference:
-            description: A reference to an order for this invoice.
-            title: Order reference
-            type: string
-          paymentMeansCode:
-            description: 'Leave empty. Defaults to 31 if an IBAN is provided, otherwise defaults to 1. But leave empty.'
-            title: Payment Means Code
-            type: string
-          paymentMeansIban:
-            description: The IBAN the amount payable should be transferred to
-            title: IBAN
-            type: string
-          paymentMeansPaymentId:
-            description: The payment id that you will use to match the payment against the invoice.
-            title: Payment Id
-            type: string
-          projectReference:
-            description: Information about the project this invoice relates to.
-            title: Project Reference
-            type: string
-          taxPointDate:
-            description: 'The tax date is the date on which the supply of goods or of services was made or completed or the date on which the payment on account was made insofar as that date can be determined and differs from the date of the issue of the invoice. EU 2006-112 Article 226 Point 7. Note: For the Dutch TAX authorities the tac date should be the same as the issue date.'
-            pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
-            title: Tax date
-            type: string
-          vatReverseCharge:
-            default: false
-            description: Whether or not the invoice is reverse charged
-            type: boolean
-        required:
-          - invoiceNumber
-          - issueDate
-          - accountingCustomerParty
-          - invoiceLines
-          - amountIncludingVat
-        title: Invoice
-        type: object
+        $ref: '#/definitions/Invoice'
       invoiceRecipient:
         $ref: '#/definitions/InvoiceRecipient'
       legalEntityId:
@@ -1477,7 +1598,7 @@ definitions:
         title: The legal supplier id
         type: integer
       mode:
-        description: The mode in which to run this invoice submission.
+        description: DEPRECATED. The mode in which to run this invoice submission.
         enum:
           - direct
         title: Mode
@@ -1487,7 +1608,6 @@ definitions:
         title: Supplier id
         type: integer
     required:
-      - mode
       - invoiceRecipient
       - invoice
     title: Invoice submission
@@ -1596,6 +1716,11 @@ definitions:
         maxLength: 64
         title: County
         type: string
+      id:
+        description: The Storecove assigned id for the LegalEntity.
+        format: int64
+        title: Id
+        type: integer
       line1:
         description: The first address line.
         maxLength: 64
@@ -1631,69 +1756,14 @@ definitions:
     description: A party that can receive or send invoices
     properties:
       address:
-        description: The company address
-        properties:
-          city:
-            description: The name of the city.
-            minLength: 2
-            title: City
-            type: string
-          country:
-            $ref: '#/definitions/Country'
-          county:
-            description: An optional county name.
-            title: County
-            type: string
-          department:
-            description: The department the invoice is addressed to
-            title: Department
-            type: string
-          number:
-            description: 'This number will be added to the street1 element. The number can be provided in this field OR in the street1 field, but not in both.'
-            title: Building number
-            type: string
-          postbox:
-            description: The postbox number
-            title: Postbox
-            type: string
-          street1:
-            description: 'The street name. The number can be provided in this fiedl OR in the number field, but not in both.'
-            minLength: 2
-            title: Street 1
-            type: string
-          street2:
-            description: The second street field. Use this if you used the first field for the building name.
-            title: Street 2
-            type: string
-          zip:
-            description: The zipcode/postalzone.
-            minLength: 2
-            title: Zipcode
-            type: string
-        required:
-          - country
-        title: Address
-        type: object
+        $ref: '#/definitions/Address'
       companyName:
         description: The name of the company receiving the invoice
         minLength: 2
         title: Company name
         type: string
       contact:
-        description: The billing contact
-        properties:
-          email:
-            format: email
-            title: Last name
-            type: string
-          firstName:
-            title: First name
-            type: string
-          lastName:
-            title: Last name
-            type: string
-        title: Contact
-        type: object
+        $ref: '#/definitions/Contact'
     required:
       - companyName
       - address
@@ -1708,7 +1778,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<Peppol Schemes List>> for a list.
+        description: The scheme of the identifier. See <<_peppol_schemes_list>> for a list.
         maxLength: 64
         minLength: 2
         title: Type
@@ -1728,7 +1798,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<Peppol Schemes List>> for a list.
+        description: The scheme of the identifier. See <<_peppol_schemes_list>> for a list.
         maxLength: 64
         minLength: 2
         title: Type
@@ -1764,7 +1834,7 @@ definitions:
         title: Identifier
         type: string
       scheme:
-        description: The scheme of the identifier. See <<Peppol Schemes List>> for a list.
+        description: The scheme of the identifier. See <<_peppol_schemes_list>> for a list.
         minLength: 3
         title: Scheme
         type: string
@@ -2196,6 +2266,13 @@ definitions:
       username:
         description: See <<_openapi_shopaccountinput>>.
         type: string
+  SupplierParty:
+    description: A party that can send invoices
+    properties:
+      contact:
+        $ref: '#/definitions/Contact'
+    title: SupplierParty
+    type: object
   WidgetIdentification:
     description: The identification for the identifier related to the Storecove Destination Configuration widget.
     properties:

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://oslogin.googleapis.com/$discovery/rest?version=v1alpha'
       version: v1
@@ -63,11 +63,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -88,12 +83,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -120,13 +109,13 @@ tags:
 paths:
   '/v1alpha/{name}':
     delete:
-      description: Deletes a POSIX account.
-      operationId: oslogin.users.projects.delete
+      description: Deletes an SSH public key.
+      operationId: oslogin.users.sshPublicKeys.delete
       parameters:
         - description: |-
-            A reference to the POSIX account to update. POSIX accounts are identified
-            by the project ID they are associated with. A reference to the POSIX
-            account is in format `users/{user}/projects/{project}`.
+            The fingerprint of the public key to update. Public keys are identified by
+            their SHA-256 fingerprint. The fingerprint of the public key is in format
+            `users/{user}/sshPublicKeys/{fingerprint}`.
           in: path
           name: name
           required: true
@@ -181,12 +170,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -239,6 +226,22 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
+        - description: The type of operating system associated with the account.
+          enum:
+            - OPERATING_SYSTEM_TYPE_UNSPECIFIED
+            - LINUX
+            - WINDOWS
+          in: query
+          name: operatingSystemType
+          type: string
+        - description: The project ID of the Google Cloud Platform project.
+          in: query
+          name: projectId
+          type: string
+        - description: A system ID for filtering the results of the request.
+          in: query
+          name: systemId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -259,12 +262,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -274,12 +275,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'

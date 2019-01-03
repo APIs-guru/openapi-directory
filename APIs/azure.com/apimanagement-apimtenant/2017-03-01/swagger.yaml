@@ -360,7 +360,7 @@ paths:
       tags:
         - TenantAccess
       x-ms-examples:
-        ApiManagementPostTenantRegenerateprimarykey:
+        ApiManagementPostTenantRegeneratePrimaryKey:
           parameters:
             accessName: access
             api-version: '2017-03-01'
@@ -410,7 +410,7 @@ paths:
       tags:
         - TenantAccess
       x-ms-examples:
-        ApiManagementPostTenantRegeneratesecondarykey:
+        ApiManagementPostTenantRegenerateSecondaryKey:
           parameters:
             accessName: access
             api-version: '2017-03-01'
@@ -439,7 +439,7 @@ paths:
         - $ref: '#/parameters/ConfigurationParameter'
       responses:
         '200':
-          description: Result of appplying changes from Git branch to database.
+          description: Result of applying changes from Git branch to database.
           schema:
             $ref: '#/definitions/OperationResultContract'
         '202':
@@ -589,7 +589,7 @@ paths:
       tags:
         - TenantConfigurationSyncState
       x-ms-examples:
-        ApiManagementListTenantSyncstate:
+        ApiManagementListTenantSyncState:
           parameters:
             api-version: '2017-03-01'
             apimBaseUrl: apimservice1.management.azure-api.net

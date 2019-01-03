@@ -1364,7 +1364,7 @@ paths:
               headers:
                 Etag: AAAAAAAACCI=
     put:
-      description: Create/Update tag fescription in scope of the Api.
+      description: Create/Update tag description in scope of the Api.
       operationId: TagDescription_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -3103,7 +3103,7 @@ paths:
           schema:
             $ref: '#/definitions/TagContract'
         '201':
-          description: Tag was created succesfully.
+          description: Tag was created successfully.
           schema:
             $ref: '#/definitions/TagContract'
         default:

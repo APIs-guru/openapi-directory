@@ -156,7 +156,7 @@ paths:
                 nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
                 value:
                   - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                    location: test_location
+                    location: eastus2
                     name: test_account
                     properties:
                       accountId: 94f4bf5d-78a9-4c31-8aa7-b34d07bad898
@@ -314,7 +314,7 @@ paths:
                 nextLink: 'https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/contosorg/providers/Microsoft.DataLakeAnalytics/accounts/contosoadla/jobPolicies?api-version=2016-11-01&%24skiptoken=<token>'
                 value:
                   - id: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                    location: test_location
+                    location: eastus2
                     name: test_account
                     properties:
                       accountId: 94f4bf5d-78a9-4c31-8aa7-b34d07bad898
@@ -385,7 +385,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rgaba12041/providers/Microsoft.DataLakeAnalytics/accounts/testaba15818
-                location: test_location
+                location: eastus2
                 name: test_account
                 properties:
                   accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
@@ -406,7 +406,7 @@ paths:
                       properties:
                         suffix: test_suffix
                       type: test_type
-                  defaultDataLakeStoreAccount: test_account
+                  defaultDataLakeStoreAccount: test_adls
                   endpoint: test_endpoint
                   firewallAllowAzureIps: Enabled
                   firewallRules:
@@ -501,7 +501,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rgaba12041/providers/Microsoft.DataLakeAnalytics/accounts/testaba15818
-                location: test_location
+                location: eastus2
                 name: test_account
                 properties:
                   accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
@@ -522,7 +522,7 @@ paths:
                       properties:
                         suffix: test_suffix
                       type: test_type
-                  defaultDataLakeStoreAccount: test_account
+                  defaultDataLakeStoreAccount: test_adls
                   endpoint: test_endpoint
                   firewallAllowAzureIps: Enabled
                   firewallRules:
@@ -556,7 +556,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rgaba12041/providers/Microsoft.DataLakeAnalytics/accounts/testaba15818
-                location: test_location
+                location: eastus2
                 name: test_account
                 properties:
                   accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
@@ -577,7 +577,7 @@ paths:
                       properties:
                         suffix: test_suffix
                       type: test_type
-                  defaultDataLakeStoreAccount: test_account
+                  defaultDataLakeStoreAccount: test_adls
                   endpoint: test_endpoint
                   firewallAllowAzureIps: Enabled
                   firewallRules:
@@ -611,7 +611,7 @@ paths:
             '202':
               body:
                 id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rgaba12041/providers/Microsoft.DataLakeAnalytics/accounts/testaba15818
-                location: test_location
+                location: eastus2
                 name: test_account
                 properties:
                   accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
@@ -632,7 +632,7 @@ paths:
                       properties:
                         suffix: test_suffix
                       type: test_type
-                  defaultDataLakeStoreAccount: test_account
+                  defaultDataLakeStoreAccount: test_adls
                   endpoint: test_endpoint
                   firewallAllowAzureIps: Enabled
                   firewallRules:
@@ -695,7 +695,7 @@ paths:
             accountName: contosoadla
             api-version: '2016-11-01'
             parameters:
-              location: test_location
+              location: eastus2
               properties:
                 computePolicies:
                   - name: test_policy
@@ -708,7 +708,7 @@ paths:
                   - name: test_adls
                     properties:
                       suffix: test_suffix
-                defaultDataLakeStoreAccount: test_account
+                defaultDataLakeStoreAccount: test_adls
                 firewallAllowAzureIps: Enabled
                 firewallRules:
                   - name: test_rule
@@ -735,7 +735,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rgaba12041/providers/Microsoft.DataLakeAnalytics/accounts/testaba15818
-                location: test_location
+                location: eastus2
                 name: test_account
                 properties:
                   accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
@@ -756,7 +756,7 @@ paths:
                       properties:
                         suffix: test_suffix
                       type: test_type
-                  defaultDataLakeStoreAccount: test_account
+                  defaultDataLakeStoreAccount: test_adls
                   endpoint: test_endpoint
                   firewallAllowAzureIps: Enabled
                   firewallRules:
@@ -790,7 +790,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rgaba12041/providers/Microsoft.DataLakeAnalytics/accounts/testaba15818
-                location: test_location
+                location: eastus2
                 name: test_account
                 properties:
                   accountId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
@@ -811,7 +811,7 @@ paths:
                       properties:
                         suffix: test_suffix
                       type: test_type
-                  defaultDataLakeStoreAccount: test_account
+                  defaultDataLakeStoreAccount: test_adls
                   endpoint: test_endpoint
                   firewallAllowAzureIps: Enabled
                   firewallRules:

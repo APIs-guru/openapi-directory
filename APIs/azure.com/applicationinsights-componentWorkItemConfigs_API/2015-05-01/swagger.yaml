@@ -182,7 +182,7 @@ paths:
               body: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}':
     delete:
-      description: Delete an workitem configuration of an Application Insights component.
+      description: Delete a work item configuration of an Application Insights component.
       operationId: WorkItemConfigurations_Delete
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -261,7 +261,7 @@ definitions:
     description: Work item configuration creation payload
     properties:
       ConnectorDataConfiguration:
-        description: Serialized JSON object for detaile d properties
+        description: Serialized JSON object for detailed properties
         type: string
       ConnectorId:
         description: Unique connector id

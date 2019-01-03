@@ -115,7 +115,7 @@ paths:
         - WebServices
       x-ms-long-running-operation: true
     get:
-      description: 'Gets the Web Service Definiton as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.'
+      description: 'Gets the Web Service Definition as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.'
       operationId: WebServices_Get
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
@@ -247,7 +247,7 @@ definitions:
         description: 'Access credentials for the asset, if applicable (e.g. asset specified by storage account connection string + blob URI)'
         type: string
       uri:
-        description: 'The URI where the asset is accessible from, (e.g. aml://abc for system assets or https://xyz for user asets'
+        description: 'The URI where the asset is accessible from, (e.g. aml://abc for system assets or https://xyz for user assets'
         format: url
         type: string
     required:

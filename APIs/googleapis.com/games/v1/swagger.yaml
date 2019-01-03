@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/games/v1/rest'
       version: v1
@@ -36,7 +36,6 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/drive.appdata': View and manage its own configuration data in your Google Drive
       'https://www.googleapis.com/auth/games': Share your Google+ profile information and view and manage your game activity
-      'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
     type: oauth2
 parameters:
   alt:
@@ -122,8 +121,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievementDefinitions
     parameters:
@@ -151,6 +148,10 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/AchievementUpdateMultipleRequest'
+        - description: Override used only by built-in games in Play Games application.
+          in: query
+          name: builtinGameId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -159,8 +160,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   '/achievements/{achievementId}/increment':
@@ -199,8 +198,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   '/achievements/{achievementId}/reveal':
@@ -229,8 +226,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   '/achievements/{achievementId}/setStepsAtLeast':
@@ -265,8 +260,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   '/achievements/{achievementId}/unlock':
@@ -287,6 +280,10 @@ paths:
           name: achievementId
           required: true
           type: string
+        - description: Override used only by built-in games in Play Games application.
+          in: query
+          name: builtinGameId
+          type: string
       responses:
         '200':
           description: Successful response
@@ -295,8 +292,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
   /applications/played:
@@ -311,14 +306,17 @@ paths:
     post:
       description: Indicate that the the currently authenticated user is playing your application.
       operationId: games.applications.played
+      parameters:
+        - description: Override used only by built-in games in Play Games application.
+          in: query
+          name: builtinGameId
+          type: string
       responses:
         '200':
           description: Successful response
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - applications
   '/applications/{applicationId}':
@@ -351,8 +349,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - applications
     parameters:
@@ -381,8 +377,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - applications
     parameters:
@@ -420,8 +414,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - events
     parameters:
@@ -459,8 +451,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - events
     parameters:
@@ -491,8 +481,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - events
   /leaderboards:
@@ -522,8 +510,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - leaderboards
     parameters:
@@ -563,8 +549,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
   '/leaderboards/{leaderboardId}':
@@ -589,8 +573,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - leaderboards
     parameters:
@@ -640,8 +622,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
   '/leaderboards/{leaderboardId}/scores/{collection}':
@@ -694,8 +674,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
     parameters:
@@ -764,8 +742,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
     parameters:
@@ -788,8 +764,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - metagame
     parameters:
@@ -837,8 +811,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - players
     parameters:
@@ -871,8 +843,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - players
     parameters:
@@ -924,8 +894,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - achievements
     parameters:
@@ -975,8 +943,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - metagame
     parameters:
@@ -1044,8 +1010,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - scores
     parameters:
@@ -1088,8 +1052,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - quests
     parameters:
@@ -1134,8 +1096,6 @@ paths:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - snapshots
     parameters:
@@ -1169,8 +1129,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - pushtokens
   /pushtokens/remove:
@@ -1196,8 +1154,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - pushtokens
   '/quests/{questId}/accept':
@@ -1230,8 +1186,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - quests
   '/quests/{questId}/milestones/{milestoneId}/claim':
@@ -1268,8 +1222,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - questMilestones
   /revisions/check:
@@ -1296,8 +1248,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - revisions
     parameters:
@@ -1335,8 +1285,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
     parameters:
@@ -1376,8 +1324,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
   '/rooms/{roomId}':
@@ -1402,8 +1348,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
     parameters:
@@ -1444,8 +1388,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
   '/rooms/{roomId}/dismiss':
@@ -1472,8 +1414,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
   '/rooms/{roomId}/join':
@@ -1510,8 +1450,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
   '/rooms/{roomId}/leave':
@@ -1548,8 +1486,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
   '/rooms/{roomId}/reportstatus':
@@ -1586,8 +1522,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - rooms
   '/snapshots/{snapshotId}':
@@ -1614,8 +1548,6 @@ paths:
             - 'https://www.googleapis.com/auth/drive.appdata'
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - snapshots
     parameters:
@@ -1663,8 +1595,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
     parameters:
@@ -1704,8 +1634,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   /turnbasedmatches/sync:
@@ -1745,8 +1673,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
     parameters:
@@ -1783,8 +1709,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
     parameters:
@@ -1819,8 +1743,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   '/turnbasedmatches/{matchId}/decline':
@@ -1853,8 +1775,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   '/turnbasedmatches/{matchId}/dismiss':
@@ -1881,8 +1801,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   '/turnbasedmatches/{matchId}/finish':
@@ -1919,8 +1837,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   '/turnbasedmatches/{matchId}/join':
@@ -1953,8 +1869,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   '/turnbasedmatches/{matchId}/leave':
@@ -1987,8 +1901,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   '/turnbasedmatches/{matchId}/leaveTurn':
@@ -2030,8 +1942,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   '/turnbasedmatches/{matchId}/rematch':
@@ -2068,8 +1978,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
   '/turnbasedmatches/{matchId}/turn':
@@ -2106,8 +2014,6 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/games'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
       tags:
         - turnBasedMatches
 definitions:

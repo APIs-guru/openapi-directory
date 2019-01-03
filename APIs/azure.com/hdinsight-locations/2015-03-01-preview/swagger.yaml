@@ -2256,7 +2256,7 @@ definitions:
     description: The Get Capabilities operation response.
     properties:
       features:
-        description: The capabilty features.
+        description: The capability features.
         items:
           type: string
         type: array
@@ -2266,7 +2266,7 @@ definitions:
       regions:
         additionalProperties:
           $ref: '#/definitions/RegionsCapability'
-        description: The virtual machine size compatibilty features.
+        description: The virtual machine size compatibility features.
         type: object
       versions:
         additionalProperties:
@@ -2274,7 +2274,7 @@ definitions:
         description: The version capability.
         type: object
       vmSize_filters:
-        description: The virtual machine size compatibilty filters.
+        description: The virtual machine size compatibility filters.
         items:
           $ref: '#/definitions/VmSizeCompatibilityFilter'
         type: array

@@ -146,7 +146,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/reports/byGeo':
     get:
-      description: Lists report records by GeoGraphy.
+      description: Lists report records by geography.
       operationId: Reports_ListByGeo
       parameters:
         - description: The name of the resource group.
@@ -746,7 +746,7 @@ paths:
           required: false
           type: integer
           x-ms-parameter-location: method
-        - description: 'By time interval. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimeSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, secconds))'
+        - description: 'By time interval. Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).This code can be used to convert TimeSpan to a valid interval string: XmlConvert.ToString(new TimeSpan(hours, minutes, seconds))'
           format: duration
           in: query
           name: interval
@@ -992,7 +992,7 @@ definitions:
         format: int32
         type: integer
       callCountBlocked:
-        description: Number of calls blocked due to invalid credentials. This includes calls returning HttpStatusCode.Unauthorize and HttpStatusCode.Forbidden and HttpStatusCode.TooManyRequests
+        description: Number of calls blocked due to invalid credentials. This includes calls returning HttpStatusCode.Unauthorized and HttpStatusCode.Forbidden and HttpStatusCode.TooManyRequests
         format: int32
         type: integer
       callCountFailed:
@@ -1004,7 +1004,7 @@ definitions:
         format: int32
         type: integer
       callCountSuccess:
-        description: Number of succesful calls. This includes calls returning HttpStatusCode <= 301 and HttpStatusCode.NotModified and HttpStatusCode.TemporaryRedirect
+        description: Number of successful calls. This includes calls returning HttpStatusCode <= 301 and HttpStatusCode.NotModified and HttpStatusCode.TemporaryRedirect
         format: int32
         type: integer
       callCountTotal:
@@ -1015,7 +1015,7 @@ definitions:
         description: Country to which this record data is related.
         type: string
       interval:
-        description: 'Length of agregation period.  Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO 8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).'
+        description: 'Length of aggregation period.  Interval must be multiple of 15 minutes and may not be zero. The value should be in ISO 8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).'
         type: string
       name:
         description: 'Name depending on report endpoint specifies product, API, operation or developer name.'
@@ -1086,7 +1086,7 @@ definitions:
         description: The HTTP status code received by the gateway as a result of forwarding this request to the backend.
         type: string
       cache:
-        description: 'Specifies if response cache was involved in generating the response. If the value is none, the cache was not used. If the value is hit, cached response was returned. If the value is miss, the cache was used but lookup resulted in a miss and request was fullfilled by the backend.'
+        description: 'Specifies if response cache was involved in generating the response. If the value is none, the cache was not used. If the value is hit, cached response was returned. If the value is miss, the cache was used but lookup resulted in a miss and request was fulfilled by the backend.'
         type: string
       ipAddress:
         description: The client IP address associated with this request.

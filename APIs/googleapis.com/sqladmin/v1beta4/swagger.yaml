@@ -7,8 +7,8 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: 'Creates and configures Cloud SQL instances, which provide fully-managed MySQL databases.'
-  title: Cloud SQL Administration
+  description: 'Creates and manages Cloud SQL instances, which provide fully managed MySQL or PostgreSQL databases.'
+  title: Cloud SQL Admin
   version: v1beta4
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/sqladmin/v1beta4/rest'
       version: v1
@@ -89,10 +89,10 @@ tags:
 paths:
   /flags:
     get:
-      description: List all available database flags for Google Cloud SQL instances.
+      description: List all available database flags for Cloud SQL instances.
       operationId: sql.flags.list
       parameters:
-        - description: Database version for flag retrieval. Flags are specific to the database version.
+        - description: 'Database type and version you want to retrieve flags for. By default, this method returns flags for all database types and versions.'
           in: query
           name: databaseVersion
           type: string
@@ -314,7 +314,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Add a new trusted Certificate Authority (CA) version for the specified instance. Required to prepare for a certificate rotation. If a CA version was previously added but never used in a certificate rotation, this operation replaces that version. There can not be more than one CA version waiting to be rotated in.'
+      description: 'Add a new trusted Certificate Authority (CA) version for the specified instance. Required to prepare for a certificate rotation. If a CA version was previously added but never used in a certificate rotation, this operation replaces that version. There cannot be more than one CA version waiting to be rotated in.'
       operationId: sql.instances.addServerCa
       parameters:
         - description: Cloud SQL instance ID. This does not include the project ID.
@@ -341,7 +341,7 @@ paths:
         - instances
   '/projects/{project}/instances/{instance}/backupRuns':
     get:
-      description: Lists all backup runs associated with a given instance and configuration in the reverse chronological order of the enqueued time.
+      description: Lists all backup runs associated with a given instance and configuration in the reverse chronological order of the backup initiation time.
       operationId: sql.backupRuns.list
       parameters:
         - description: Cloud SQL instance ID. This does not include the project ID.
@@ -493,7 +493,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Creates a Cloud SQL instance as a clone of the source instance. The API is not ready for Second Generation instances yet.
+      description: Creates a Cloud SQL instance as a clone of the source instance.
       operationId: sql.instances.clone
       parameters:
         - in: body
@@ -571,7 +571,7 @@ paths:
           name: instance
           required: true
           type: string
-        - description: Project ID of the project for which to list Cloud SQL instances.
+        - description: Project ID of the project that contains the instance.
           in: path
           name: project
           required: true
@@ -777,7 +777,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Reserved for future use.
+      description: Demotes the stand-alone instance to be a Cloud SQL read replica for an external database server.
       operationId: sql.instances.demoteMaster
       parameters:
         - in: body
@@ -816,7 +816,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Exports data from a Cloud SQL instance to a Google Cloud Storage bucket as a MySQL dump file.
+      description: Exports data from a Cloud SQL instance to a Cloud Storage bucket as a SQL dump or CSV file.
       operationId: sql.instances.export
       parameters:
         - in: body
@@ -892,7 +892,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Imports data into a Cloud SQL instance from a MySQL dump file in Google Cloud Storage.
+      description: Imports data into a Cloud SQL instance from a SQL dump or CSV file in Cloud Storage.
       operationId: sql.instances.import
       parameters:
         - in: body
@@ -999,7 +999,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Deletes all client certificates and generates a new server SSL certificate for the instance. The changes will not take effect until the instance is restarted. Existing instances without a server certificate will need to call this once to set a server certificate.
+      description: Deletes all client certificates and generates a new server SSL certificate for the instance.
       operationId: sql.instances.resetSslConfig
       parameters:
         - description: Cloud SQL instance ID. This does not include the project ID.
@@ -1147,7 +1147,7 @@ paths:
           name: instance
           required: true
           type: string
-        - description: Project ID of the project for which to list Cloud SQL instances.
+        - description: Project ID of the project that contains the instance.
           in: path
           name: project
           required: true
@@ -1185,7 +1185,7 @@ paths:
           name: instance
           required: true
           type: string
-        - description: Project ID of the project to which the newly created Cloud SQL instances should belong.
+        - description: Project ID of the project that contains the instance.
           in: path
           name: project
           required: true
@@ -1204,7 +1204,7 @@ paths:
         - sslCerts
   '/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}':
     delete:
-      description: Deletes the SSL certificate. The change will not take effect until the instance is restarted.
+      description: 'Deletes the SSL certificate. For First Generation instances, the certificate remains valid until the instance is restarted.'
       operationId: sql.sslCerts.delete
       parameters:
         - description: Cloud SQL instance ID. This does not include the project ID.
@@ -1212,7 +1212,7 @@ paths:
           name: instance
           required: true
           type: string
-        - description: Project ID of the project that contains the instance to be deleted.
+        - description: Project ID of the project that contains the instance.
           in: path
           name: project
           required: true
@@ -1494,7 +1494,6 @@ paths:
         - description: Host of the user in the instance.
           in: query
           name: host
-          required: true
           type: string
         - description: Database instance ID. This does not include the project ID.
           in: path
@@ -1603,7 +1602,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/projects/{project}/tiers':
     get:
-      description: 'Lists all available service tiers for Google Cloud SQL, for example D1, D2. For related information, see Pricing.'
+      description: 'Lists all available machine types (tiers) for Cloud SQL, for example, db-n1-standard-1. For related information, see Pricing.'
       operationId: sql.tiers.list
       parameters:
         - description: Project ID of the project for which to list tiers.
@@ -1650,6 +1649,16 @@ definitions:
         description: The whitelisted value for the access control list.
         type: string
     type: object
+  ApiWarning:
+    description: An Admin API warning message.
+    properties:
+      code:
+        description: Code to uniquely identify the warning type.
+        type: string
+      message:
+        description: The warning message.
+        type: string
+    type: object
   BackupConfiguration:
     description: Database instance backup configuration.
     properties:
@@ -1671,7 +1680,7 @@ definitions:
         type: string
     type: object
   BackupRun:
-    description: A database instance backup run resource.
+    description: A BackupRun resource.
     properties:
       description:
         description: 'The description of this run, only applicable to on-demand backups.'
@@ -1688,7 +1697,7 @@ definitions:
         $ref: '#/definitions/OperationError'
         description: Information about why the backup operation failed. This is only present if the run has the FAILED status.
       id:
-        description: A unique identifier for this backup run. Note that this is unique only within the scope of a particular Cloud SQL instance.
+        description: The identifier for this backup run. Unique only for a specific Cloud SQL instance.
         format: int64
         type: string
       instance:
@@ -1752,7 +1761,7 @@ definitions:
     properties:
       binLogCoordinates:
         $ref: '#/definitions/BinLogCoordinates'
-        description: 'Binary log coordinates, if specified, indentify the the position up to which the source instance should be cloned. If not specified, the source instance is cloned up to the most recent binary log coordintes.'
+        description: 'Binary log coordinates, if specified, identify the position up to which the source instance should be cloned. If not specified, the source instance is cloned up to the most recent binary log coordinates.'
       destinationInstanceName:
         description: Name of the Cloud SQL instance to be created as a clone.
         type: string
@@ -1766,7 +1775,7 @@ definitions:
         type: string
     type: object
   Database:
-    description: A database resource inside a Cloud SQL instance.
+    description: Represents a SQL database on the Cloud SQL instance.
     properties:
       charset:
         description: The MySQL charset value.
@@ -1775,7 +1784,7 @@ definitions:
         description: The MySQL collation value.
         type: string
       etag:
-        description: HTTP 1.1 Entity tag for the resource.
+        description: This field is deprecated and will be removed from a future version of the API.
         type: string
       instance:
         description: The name of the Cloud SQL instance. This does not include the project ID.
@@ -1795,10 +1804,10 @@ definitions:
         type: string
     type: object
   DatabaseFlags:
-    description: MySQL flags for Cloud SQL instances.
+    description: Database flags for Cloud SQL instances.
     properties:
       name:
-        description: 'The name of the flag. These flags are passed at instance startup, so include both MySQL server options and MySQL system variables. Flags should be specified with underscores, not hyphens. For more information, see Configuring MySQL Flags in the Google Cloud SQL documentation, as well as the official MySQL documentation for server options and system variables.'
+        description: 'The name of the flag. These flags are passed at instance startup, so include both server options and system variables for MySQL. Flags should be specified with underscores, not hyphens. For more information, see Configuring Database Flags in the Cloud SQL documentation.'
         type: string
       value:
         description: The value of the flag. Booleans should be set to on for true and off for false. This field must be omitted if the flag doesn't take a value.
@@ -1809,22 +1818,23 @@ definitions:
     properties:
       backendType:
         description: |-
-          FIRST_GEN: Basic Cloud SQL instance that runs in a Google-managed container.
-          SECOND_GEN: A newer Cloud SQL backend that runs in a Compute Engine VM.
-          EXTERNAL: A MySQL server that is not managed by Google.
+          FIRST_GEN: First Generation instance. MySQL only.
+          SECOND_GEN: Second Generation instance or PostgreSQL instance.
+          EXTERNAL: A database server that is not managed by Google.
+          This property is read-only; use the tier property in the settings object to determine the database type and Second or First Generation.
         type: string
       connectionName:
         description: Connection name of the Cloud SQL instance used in connection strings.
         type: string
       currentDiskSize:
-        description: 'The current disk usage of the instance in bytes. This property has been deprecated. Users should use the "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud Monitoring API instead. Please see https://groups.google.com/d/msg/google-cloud-sql-announce/I_7-F9EBhT0/BtvFtdFeAgAJ for details.'
+        description: The current disk usage of the instance in bytes. This property has been deprecated. Users should use the "cloudsql.googleapis.com/database/disk/bytes_used" metric in Cloud Monitoring API instead. Please see this announcement for details.
         format: int64
         type: string
       databaseVersion:
         description: 'The database engine type and version. The databaseVersion field can not be changed after instance creation. MySQL Second Generation instances: MYSQL_5_7 (default) or MYSQL_5_6. PostgreSQL instances: POSTGRES_9_6 MySQL First Generation instances: MYSQL_5_6 (default) or MYSQL_5_5'
         type: string
       etag:
-        description: HTTP 1.1 Entity tag for the resource.
+        description: This field is deprecated and will be removed from a future version of the API. Use the settings.settingsVersion field instead.
         type: string
       failoverReplica:
         description: The name and status of the failover replica. This property is applicable only to Second Generation instances.
@@ -1879,7 +1889,7 @@ definitions:
         type: string
       replicaConfiguration:
         $ref: '#/definitions/ReplicaConfiguration'
-        description: Configuration specific to read-replicas replicating from on-premises masters.
+        description: Configuration specific to failover replicas and read replicas.
       replicaNames:
         description: The replicas of the instance.
         items:
@@ -1981,14 +1991,19 @@ definitions:
     description: Database instance export context.
     properties:
       csvExportOptions:
-        description: Options for exporting data as CSV.
+        description: |-
+          Options for exporting data as CSV.
+          Exporting in CSV format using the Cloud SQL Admin API is not supported for PostgreSQL instances.
         properties:
           selectQuery:
             description: The select query used to extract the data.
             type: string
         type: object
       databases:
-        description: 'Databases (for example, guestbook) from which the export is made. If fileType is SQL and no database is specified, all databases are exported. If fileType is CSV, you can optionally specify at most one database to export. If csvExportOptions.selectQuery also specifies the database, this field will be ignored.'
+        description: |-
+          Databases to be exported.
+          MySQL instances: If fileType is SQL and no database is specified, all databases are exported, except for the mysql system database. If fileType is CSV, you can specify one database, either by using this property or by using the csvExportOptions.selectQuery property, which takes precedence over this property.
+          PostgreSQL instances: If fileType is SQL, you must specify one database to be exported. A fileType of CSV is not supported for PostgreSQL instances.
         items:
           type: string
         type: array
@@ -1997,6 +2012,7 @@ definitions:
           The file type for the specified uri.
           SQL: The file contains SQL statements.
           CSV: The file contains CSV data.
+          CSV is not supported for PostgreSQL instances.
         type: string
       kind:
         default: 'sql#exportContext'
@@ -2005,11 +2021,19 @@ definitions:
       sqlExportOptions:
         description: Options for exporting data as SQL statements.
         properties:
+          mysqlExportOptions:
+            description: Options for exporting from MySQL.
+            properties:
+              masterData:
+                description: 'Option to include SQL statement required to set up replication. If set to 1, the dump file includes a CHANGE MASTER TO statement with the binary log coordinates. If set to 2, the CHANGE MASTER TO statement is written as a SQL comment, and has no effect. All other values are ignored.'
+                format: int32
+                type: integer
+            type: object
           schemaOnly:
             description: Export only schemas.
             type: boolean
           tables:
-            description: 'Tables to export, or that were exported, from the specified database. If you specify tables, specify one and only one database.'
+            description: 'Tables to export, or that were exported, from the specified database. If you specify tables, specify one and only one database. For PostgreSQL instances, you can specify only one table.'
             items:
               type: string
             type: array
@@ -2031,7 +2055,7 @@ definitions:
         type: string
     type: object
   Flag:
-    description: A Google Cloud SQL service flag resource.
+    description: A flag resource.
     properties:
       allowedStringValues:
         description: 'For STRING flags, a list of strings that the value can be set to.'
@@ -2082,7 +2106,9 @@ definitions:
     description: Database instance import context.
     properties:
       csvImportOptions:
-        description: Options for importing data as CSV.
+        description: |-
+          Options for importing data as CSV.
+          Importing CSV data using the Cloud SQL Admin API is not supported for PostgreSQL instances.
         properties:
           columns:
             description: 'The columns to which CSV data is imported. If not specified, all columns of the database table are loaded with CSV data.'
@@ -2094,23 +2120,24 @@ definitions:
             type: string
         type: object
       database:
-        description: 'The database (for example, guestbook) to which the import is made. If fileType is SQL and no database is specified, it is assumed that the database is specified in the file to be imported. If fileType is CSV, it must be specified.'
+        description: 'The target database for the import. If fileType is SQL, this field is required only if the import file does not specify a database, and is overridden by any database specification in the import file. If fileType is CSV, one database must be specified.'
         type: string
       fileType:
         description: |-
           The file type for the specified uri.
           SQL: The file contains SQL statements.
           CSV: The file contains CSV data.
+          Importing CSV data using the Cloud SQL Admin API is not supported for PostgreSQL instances.
         type: string
       importUser:
-        description: The PostgreSQL user for this import operation. Defaults to cloudsqlsuperuser. Used only for PostgreSQL instances.
+        description: The PostgreSQL user for this import operation. Defaults to cloudsqlsuperuser. PostgreSQL instances only.
         type: string
       kind:
         default: 'sql#importContext'
         description: 'This is always sql#importContext.'
         type: string
       uri:
-        description: 'A path to the file in Google Cloud Storage from which the import is made. The URI is in the form gs://bucketName/fileName. Compressed gzip files (.gz) are supported when fileType is SQL.'
+        description: 'Path to the import file in Cloud Storage, in the form gs://bucketName/fileName. Compressed gzip files (.gz) are supported when fileType is SQL. The instance must have write permissions to the bucket and read access to the file.'
         type: string
     type: object
   InstancesCloneRequest:
@@ -2163,6 +2190,11 @@ definitions:
       nextPageToken:
         description: 'The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.'
         type: string
+      warnings:
+        description: List of warnings that ocurred while handling the request.
+        items:
+          $ref: '#/definitions/ApiWarning'
+        type: array
     type: object
   InstancesListServerCasResponse:
     description: Instances ListServerCas response.
@@ -2211,6 +2243,9 @@ definitions:
       ipv4Enabled:
         description: Whether the instance should be assigned an IP address or not.
         type: boolean
+      privateNetwork:
+        description: 'The resource link for the VPC network from which the Cloud SQL instance is accessible for private IP. For example, /projects/myProject/global/networks/default. This setting can be updated, but it cannot be removed after it is set.'
+        type: string
       requireSsl:
         description: Whether SSL connections over IP should be enforced or not.
         type: boolean
@@ -2240,11 +2275,11 @@ definitions:
         description: 'This is always sql#locationPreference.'
         type: string
       zone:
-        description: 'The preferred Compute Engine zone (e.g. us-centra1-a, us-central1-b, etc.).'
+        description: 'The preferred Compute Engine zone (e.g. us-central1-a, us-central1-b, etc.).'
         type: string
     type: object
   MaintenanceWindow:
-    description: Maintenance window. This specifies when a v2 Cloud SQL instance should preferably be restarted for system maintenance puruposes.
+    description: Maintenance window. This specifies when a v2 Cloud SQL instance should preferably be restarted for system maintenance purposes.
     properties:
       day:
         description: 'day of week (1-7), starting on Monday.'
@@ -2316,7 +2351,7 @@ definitions:
         type: string
     type: object
   Operation:
-    description: 'An Operations resource contains information about database instance operations such as create, delete, and restart. Operations resources are created in response to operations that were initiated; you never create them directly.'
+    description: "An Operation resource.\_For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource."
     properties:
       endTime:
         description: 'The time this operation finished in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.'
@@ -2463,7 +2498,7 @@ definitions:
           ON_DEMAND: First Generation instances only. The instance responds to incoming requests, and turns itself off when not in use. Instances with PER_USE pricing turn off after 15 minutes of inactivity. Instances with PER_PACKAGE pricing turn off after 12 hours of inactivity.
         type: string
       authorizedGaeApplications:
-        description: The App Engine app IDs that can access this instance. This property is only applicable to First Generation instances.
+        description: The App Engine app IDs that can access this instance. First Generation instances only.
         items:
           type: string
         type: array
@@ -2481,11 +2516,11 @@ definitions:
         description: Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled. This property is only applicable to First Generation instances.
         type: boolean
       dataDiskSizeGb:
-        description: 'The size of data disk, in GB. The data disk size minimum is 10GB. Applies only to Second Generation instances.'
+        description: 'The size of data disk, in GB. The data disk size minimum is 10GB. Not used for First Generation instances.'
         format: int64
         type: string
       dataDiskType:
-        description: The type of data disk. Only supported for Second Generation instances. The default type is PD_SSD. Applies only to Second Generation instances.
+        description: 'The type of data disk: PD_SSD (default) or PD_HDD. Not used for First Generation instances.'
         type: string
       databaseFlags:
         description: The database flags passed to the instance at startup.
@@ -2507,7 +2542,7 @@ definitions:
         description: The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or Compute Engine zone for better performance. App Engine co-location is only applicable to First Generation instances.
       maintenanceWindow:
         $ref: '#/definitions/MaintenanceWindow'
-        description: The maintenance window for this instance. This specifies when the instance may be restarted for maintenance purposes. Applies only to Second Generation instances.
+        description: The maintenance window for this instance. This specifies when the instance can be restarted for maintenance purposes. Not used for First Generation instances.
       pricingPlan:
         description: The pricing plan for this instance. This can be either PER_USE or PACKAGE. Only PER_USE is supported for Second Generation instances.
         type: string
@@ -2519,14 +2554,14 @@ definitions:
         format: int64
         type: string
       storageAutoResize:
-        description: Configuration to increase storage size automatically. The default value is true. Applies only to Second Generation instances.
+        description: Configuration to increase storage size automatically. The default value is true. Not used for First Generation instances.
         type: boolean
       storageAutoResizeLimit:
-        description: 'The maximum size to which storage capacity can be automatically increased. The default value is 0, which specifies that there is no limit. Applies only to Second Generation instances.'
+        description: 'The maximum size to which storage capacity can be automatically increased. The default value is 0, which specifies that there is no limit. Not used for First Generation instances.'
         format: int64
         type: string
       tier:
-        description: 'The tier of service for this instance, for example D1, D2. For more information, see pricing.'
+        description: 'The tier (or machine type) for this instance, for example db-n1-standard-1 (MySQL instances) or db-custom-1-3840 (PostgreSQL instances). For MySQL instances, this property determines whether the instance is First or Second Generation. For more information, see Instance Settings.'
         type: string
       userLabels:
         additionalProperties:
@@ -2590,7 +2625,7 @@ definitions:
     description: SslCerts insert request.
     properties:
       commonName:
-        description: User supplied name. Must be a distinct name from the other certificates for this instance. New certificates will not be usable until the instance is restarted.
+        description: User supplied name. Must be a distinct name from the other certificates for this instance.
         type: string
     type: object
   SslCertsInsertResponse:
@@ -2644,7 +2679,7 @@ definitions:
           type: string
         type: array
       tier:
-        description: 'An identifier for the service tier, for example D1, D2 etc. For related information, see Pricing.'
+        description: 'An identifier for the machine type, for example, db-n1-standard-1. For related information, see Pricing.'
         type: string
     type: object
   TiersListResponse:
@@ -2675,7 +2710,7 @@ definitions:
     description: A Cloud SQL user resource.
     properties:
       etag:
-        description: HTTP 1.1 Entity tag for the resource.
+        description: This field is deprecated and will be removed from a future version of the API.
         type: string
       host:
         description: 'The host name from which the user can connect. For insert operations, host defaults to an empty string. For update operations, host is specified as part of the request URL. The host name cannot be updated after insertion.'
@@ -2688,7 +2723,7 @@ definitions:
         description: 'This is always sql#user.'
         type: string
       name:
-        description: The name of the user in the Cloud SQL instance. Can be omitted for update since it is already specified on the URL.
+        description: The name of the user in the Cloud SQL instance. Can be omitted for update since it is already specified in the URL.
         type: string
       password:
         description: The password for the user.

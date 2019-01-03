@@ -93,9 +93,7 @@ paths:
         '200':
           description: ''
           schema:
-            items:
-              $ref: '#/definitions/Season'
-            type: array
+            $ref: '#/definitions/Season'
       summary: Current Season
   '/{format}/Games/{season}':
     get:
@@ -372,6 +370,8 @@ definitions:
       DateTime:
         type: string
       Day:
+        type: string
+      GameEndDateTime:
         type: string
       GameID:
         type: integer

@@ -7,7 +7,7 @@ info:
   contact:
     x-twitter: microsoft
   description: 'The Video Search API lets you search on Bing for video that are relevant to the user''s search query, for insights about a video or for videos that are trending based on search requests made by others. This section provides technical details about the query parameters and headers that you use to request videos and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the Web for Videos](https://docs.microsoft.com/azure/cognitive-services/bing-video-search/search-the-web).'
-  title: Video Search
+  title: Video Search Client
   version: '1.0'
   x-apisguru-categories:
     - cloud
@@ -3896,3 +3896,15 @@ definitions:
         readOnly: true
         type: array
     type: object
+x-ms-parameterized-host:
+  hostTemplate: '{Endpoint}'
+  parameters:
+    - default: 'https://api.cognitive.microsoft.com'
+      description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: "https://westus.api.cognitive.microsoft.com", "https://api.cognitive.microsoft.com").'
+      in: path
+      name: Endpoint
+      required: true
+      type: string
+      x-ms-parameter-location: client
+      x-ms-skip-url-encoding: true
+  useSchemePrefix: false

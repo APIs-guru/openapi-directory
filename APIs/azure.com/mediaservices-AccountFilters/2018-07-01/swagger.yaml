@@ -512,7 +512,7 @@ definitions:
           - NotEqual
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: FilterTrackPropertyCompareOperation
           values:
             - description: The equal operation.
@@ -530,7 +530,7 @@ definitions:
           - Bitrate
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: FilterTrackPropertyType
           values:
             - description: The unknown track property type.
@@ -633,11 +633,4 @@ definitions:
         description: The time scale of time stamps.
         format: int64
         type: integer
-    required:
-      - startTimestamp
-      - endTimestamp
-      - presentationWindowDuration
-      - liveBackoffDuration
-      - timescale
-      - forceEndTimestamp
     type: object

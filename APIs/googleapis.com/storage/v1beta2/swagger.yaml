@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/storage/v1beta2/rest'
       version: v1
@@ -1285,7 +1285,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ComposeRequest'
-        - description: Name of the bucket in which to store the new object.
+        - description: Name of the bucket containing the source objects. The destination object is stored in this bucket.
           in: path
           name: destinationBucket
           required: true
@@ -1712,7 +1712,7 @@ definitions:
               format: int64
               type: string
             name:
-              description: The source object's name. The source object's bucket is implicitly the destination bucket.
+              description: The source object's name. All source objects must reside in the same bucket.
               type: string
             objectPreconditions:
               description: Conditions that must be met for this operation to execute.

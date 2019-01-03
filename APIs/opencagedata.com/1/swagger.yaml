@@ -105,6 +105,10 @@ paths:
           in: query
           name: pretty
           type: boolean
+        - description: 'lat,lng to bias results.'
+          in: query
+          name: proximity
+          type: string
       responses:
         '200':
           description: Successful response

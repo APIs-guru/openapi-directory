@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2018-04-01/disk.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute-disk
   x-tags:
@@ -674,6 +674,8 @@ paths:
       tags:
         - Disks
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/disks/{diskName}/endGetAccess':
     post:
       description: Revokes access to a disk.
@@ -691,6 +693,8 @@ paths:
       tags:
         - Disks
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots':
     get:
       description: Lists snapshots under a resource group.
@@ -988,6 +992,8 @@ paths:
       tags:
         - Snapshots
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/snapshots/{snapshotName}/endGetAccess':
     post:
       description: Revokes access to a snapshot.
@@ -1005,6 +1011,8 @@ paths:
       tags:
         - Snapshots
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
 definitions:
   AccessUri:
     description: A disk access SAS uri.
@@ -1192,7 +1200,7 @@ definitions:
     description: The source image used for creating the disk.
     properties:
       id:
-        description: A relative uri containing either a Platform Imgage Repository or user image reference.
+        description: A relative uri containing either a Platform Image Repository or user image reference.
         type: string
       lun:
         description: 'If the disk is created from an image''s data disk, this is an index that indicates which of the data disks in the image to use. For OS disks, this field is null.'
@@ -1309,7 +1317,7 @@ definitions:
         description: Resource tags
         type: object
   SourceVault:
-    description: 'The vault id is an Azure Resource Manager Resoure id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}'
+    description: 'The vault id is an Azure Resource Manager Resource id in the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}'
     properties:
       id:
         description: Resource Id

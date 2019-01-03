@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/adexchangebuyer/v1.4/rest'
       version: v1
@@ -1561,6 +1561,9 @@ definitions:
               type: string
           type: object
         type: array
+      creativeStatusIdentityType:
+        description: 'Creative status identity type that the creative item applies to. Ad Exchange real-time bidding is migrating to the sizeless creative verification. Originally, Ad Exchange assigned creative verification status to a unique combination of a buyer creative ID and creative dimensions. Post-migration, a single verification status will be assigned at the buyer creative ID level. This field allows to distinguish whether a given creative status applies to a unique combination of a buyer creative ID and creative dimensions, or to a buyer creative ID as a whole.'
+        type: string
       dealsStatus:
         description: 'Top-level deals status. Read-only. This field should not be set in requests. If disapproved, an entry for auctionType=DIRECT_DEALS (or ALL) in servingRestrictions will also exist. Note that this may be nuanced with other contextual restrictions, in which case it may be preferable to read from servingRestrictions directly.'
         type: string
@@ -2746,9 +2749,6 @@ definitions:
     type: object
   PublisherProfileApiProto:
     properties:
-      accountId:
-        description: 'Deprecated: use the seller.account_id. The account id of the seller.'
-        type: string
       audience:
         description: Publisher provided info on its audience.
         type: string

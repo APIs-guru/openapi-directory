@@ -67,6 +67,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/containerServices':
     get:
+      deprecated: true
       description: 'Gets a list of container services in the specified subscription. The operation returns properties of each container service including state, orchestrator, number of masters and agents, and FQDNs of masters and agents.'
       operationId: ContainerServices_List
       parameters:
@@ -150,6 +151,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices':
     get:
+      deprecated: true
       description: 'Gets a list of container services in the specified subscription and resource group. The operation returns properties of each container service including state, orchestrator, number of masters and agents, and FQDNs of masters and agents.'
       operationId: ContainerServices_ListByResourceGroup
       parameters:
@@ -235,6 +237,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/containerServices/{containerServiceName}':
     delete:
+      deprecated: true
       description: 'Deletes the specified container service in the specified subscription and resource group. The operation does not delete other resources created as part of creating a container service, including storage accounts, VMs, and availability sets. All the other resources created with the container service are part of the same resource group and can be deleted individually.'
       operationId: ContainerServices_Delete
       parameters:
@@ -266,6 +269,7 @@ paths:
             '204': {}
       x-ms-long-running-operation: true
     get:
+      deprecated: true
       description: 'Gets the properties of the specified container service in the specified subscription and resource group. The operation returns the properties including state, orchestrator, number of masters and agents, and FQDNs of masters and agents. '
       operationId: ContainerServices_Get
       parameters:
@@ -326,6 +330,7 @@ paths:
                   provisioningState: Succeeded
                 type: Microsoft.ContainerService/ContainerServices
     put:
+      deprecated: true
       description: 'Creates or updates a container service with the specified configuration of orchestrator, masters, and agents.'
       operationId: ContainerServices_CreateOrUpdate
       parameters:
@@ -490,7 +495,7 @@ definitions:
         description: DNS prefix to be used to create the FQDN for the agent pool.
         type: string
       fqdn:
-        description: FDQN for the agent pool.
+        description: FQDN for the agent pool.
         readOnly: true
         type: string
       name:
@@ -517,7 +522,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: VNet SubnetID specifies the vnet's subnet identifier.
+        description: VNet SubnetID specifies the VNet's subnet identifier.
     required:
       - name
       - vmSize
@@ -585,7 +590,7 @@ definitions:
         description: FirstConsecutiveStaticIP used to specify the first static ip of masters.
         type: string
       fqdn:
-        description: FDQN for the master pool.
+        description: FQDN for the master pool.
         readOnly: true
         type: string
       osDiskSizeGB:
@@ -599,7 +604,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: VNet SubnetID specifies the vnet's subnet identifier.
+        description: VNet SubnetID specifies the VNet's subnet identifier.
     required:
       - dnsPrefix
       - vmSize
@@ -901,7 +906,7 @@ definitions:
       modelAsString: true
       name: ContainerServiceVMSizeTypes
   ContainerServiceVnetSubnetID:
-    description: VNet SubnetID specifies the vnet's subnet identifier.
+    description: VNet SubnetID specifies the VNet's subnet identifier.
     type: string
   ContainerServiceWindowsProfile:
     description: Profile for Windows VMs in the container service cluster.

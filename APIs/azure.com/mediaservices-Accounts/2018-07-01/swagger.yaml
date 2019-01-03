@@ -1030,7 +1030,7 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: MetricAggregationType
           values:
             - description: The average.
@@ -1067,7 +1067,7 @@ definitions:
         readOnly: true
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: MetricUnit
           values:
             - description: The number of bytes.
@@ -1199,7 +1199,7 @@ definitions:
           - Secondary
         type: string
         x-ms-enum:
-          modelAsExtensible: true
+          modelAsString: true
           name: StorageAccountType
           values:
             - description: The primary storage account for the Media Services account.

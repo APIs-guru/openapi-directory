@@ -439,7 +439,7 @@ definitions:
     properties:
       clientId:
         description: The id of the app associated with the identity. This is a random generated UUID by MSI.
-        format: UUID
+        format: uuid
         readOnly: true
         type: string
       clientSecretUrl:
@@ -448,12 +448,12 @@ definitions:
         type: string
       principalId:
         description: The id of the service principal object associated with the created identity.
-        format: UUID
+        format: uuid
         readOnly: true
         type: string
       tenantId:
         description: The id of the tenant which the identity belongs to.
-        format: UUID
+        format: uuid
         readOnly: true
         type: string
     title: Identity properties.

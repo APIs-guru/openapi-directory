@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/admin/reports_v1/rest'
       version: v1
@@ -120,6 +120,11 @@ paths:
           minimum: 1
           name: maxResults
           type: integer
+        - default: ''
+          description: the organizational unit's(OU) ID to filter activities from users belonging to a specific OU or one of its sub-OU(s)
+          in: query
+          name: orgUnitID
+          type: string
         - description: Token to specify next page.
           in: query
           name: pageToken
@@ -195,6 +200,11 @@ paths:
           minimum: 1
           name: maxResults
           type: integer
+        - default: ''
+          description: the organizational unit's(OU) ID to filter activities from users belonging to a specific OU or one of its sub-OU(s)
+          in: query
+          name: orgUnitID
+          type: string
         - description: Token to specify next page.
           in: query
           name: pageToken
@@ -310,6 +320,11 @@ paths:
           maximum: 1000
           name: maxResults
           type: integer
+        - default: ''
+          description: the organizational unit's ID to filter usage parameters from users belonging to a specific OU or one of its sub-OU(s).
+          in: query
+          name: orgUnitID
+          type: string
         - description: Token to specify next page.
           in: query
           name: pageToken

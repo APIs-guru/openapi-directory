@@ -1836,11 +1836,11 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: OK. Successfully created the interation.
+          description: OK. Successfully created the interaction.
           schema:
             $ref: '#/definitions/InteractionResourceFormat'
         '202':
-          description: Accepted. The create interation operation is accepted.
+          description: Accepted. The create interaction operation is accepted.
       tags:
         - Interactions
       x-ms-examples:
@@ -4273,7 +4273,7 @@ paths:
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - description: The user ID. Use * to retreive hub level views.
+        - description: The user ID. Use * to retrieve hub level views.
           in: query
           name: userId
           required: true
@@ -4331,7 +4331,7 @@ paths:
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - description: The user ID. Use * to retreive hub level view.
+        - description: The user ID. Use * to retrieve hub level view.
           in: query
           name: userId
           required: true
@@ -4373,7 +4373,7 @@ paths:
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - description: The user ID. Use * to retreive hub level view.
+        - description: The user ID. Use * to retrieve hub level view.
           in: query
           name: userId
           required: true
@@ -4408,7 +4408,7 @@ paths:
                   viewName: testView
                 type: Microsoft.CustomerInsights/hubs/views
     put:
-      description: Creates a view or updates an exisiting view in the hub.
+      description: Creates a view or updates an existing view in the hub.
       operationId: Views_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -4609,10 +4609,10 @@ definitions:
         readOnly: true
         type: string
       primaryKey:
-        description: Primary key assiciated with the policy.
+        description: Primary key associated with the policy.
         type: string
       secondaryKey:
-        description: Secondary key assiciated with the policy.
+        description: Secondary key associated with the policy.
         type: string
     required:
       - permissions
@@ -4712,7 +4712,7 @@ definitions:
         description: If this is an internal connector.
         type: boolean
       lastModified:
-        description: The last monified time.
+        description: The last modified time.
         format: date-time
         readOnly: true
         type: string
@@ -4792,7 +4792,7 @@ definitions:
         description: The mapping entity name.
         type: string
       lastModified:
-        description: The last monified time.
+        description: The last modified time.
         format: date-time
         readOnly: true
         type: string
@@ -4868,7 +4868,7 @@ definitions:
         description: The destination folder where files will be moved to once the import is done.
         type: string
   ConnectorMappingErrorManagement:
-    description: The error mangement.
+    description: The error management.
     properties:
       errorLimit:
         description: The error limit allowed while importing data.
@@ -4962,7 +4962,7 @@ definitions:
   ConnectorMappingResourceFormat:
     allOf:
       - $ref: '#/definitions/ProxyResource'
-    description: The c onnector mapping resource format.
+    description: The connector mapping resource format.
     properties:
       properties:
         $ref: '#/definitions/ConnectorMapping'
@@ -5100,7 +5100,7 @@ definitions:
     description: Describes an entity.
     properties:
       apiEntitySetName:
-        description: The api entity set name. This becomes the odata entity set name for the entity Type being refered in this object.
+        description: The api entity set name. This becomes the odata entity set name for the entity Type being referred in this object.
         type: string
       entityType:
         description: Type of entity.
@@ -5511,7 +5511,7 @@ definitions:
         description: Provisioning state.
         readOnly: true
       referenceOnly:
-        description: 'Indicating whether the link is reference only link. This flag is ingored if the Mappings are defined. If the mappings are not defined and it is set to true, links processing will not create or update profiles.'
+        description: 'Indicating whether the link is reference only link. This flag is ignored if the Mappings are defined. If the mappings are not defined and it is set to true, links processing will not create or update profiles.'
         type: boolean
       sourceEntityType:
         description: Type of source entity.
@@ -5892,7 +5892,7 @@ definitions:
         readOnly: true
         type: string
       signalsUsed:
-        description: The singnas used.
+        description: The signals used.
         readOnly: true
         type: integer
       status:
@@ -6062,7 +6062,7 @@ definitions:
         description: Whether the property is a name or a part of name.
         type: boolean
       isRequired:
-        description: 'Whether property value is required on instances, IsRequired field only for Intercation. Profile Instance will not check for required field.'
+        description: 'Whether property value is required on instances, IsRequired field only for Interaction. Profile Instance will not check for required field.'
         type: boolean
       maxLength:
         description: Max length of string. Used only if type is string.

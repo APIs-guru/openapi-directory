@@ -429,6 +429,8 @@ definitions:
         type: integer
       ForecastWindSpeed:
         type: integer
+      GameEndDateTime:
+        type: string
       GameKey:
         type: string
       GeoLat:
@@ -505,6 +507,8 @@ definitions:
         $ref: '#/definitions/Stadium'
       StadiumID:
         type: integer
+      Status:
+        type: string
       TimeRemaining:
         type: string
       Week:
@@ -566,4 +570,6 @@ definitions:
       StadiumID:
         type: integer
       State:
+        type: string
+      Type:
         type: string

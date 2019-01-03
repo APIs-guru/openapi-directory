@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/devtestlabs/resource-manager/Microsoft.DevTestLab/stable/2016-05-15/DTL.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: devtestlabs-DTL
   x-tags:
@@ -1135,7 +1135,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels':
     get:
-      description: List notificationchannels in a given lab.
+      description: List notification channels in a given lab.
       operationId: NotificationChannels_List
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1186,7 +1186,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DevTestLab/labs/{labName}/notificationchannels/{name}':
     delete:
-      description: Delete notificationchannel.
+      description: Delete notification channel.
       operationId: NotificationChannels_Delete
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1217,7 +1217,7 @@ paths:
       tags:
         - NotificationChannels
     get:
-      description: Get notificationchannel.
+      description: Get notification channels.
       operationId: NotificationChannels_Get
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -1253,7 +1253,7 @@ paths:
       tags:
         - NotificationChannels
     patch:
-      description: Modify properties of notificationchannels.
+      description: Modify properties of notification channels.
       operationId: NotificationChannels_Update
       parameters:
         - $ref: '#/parameters/subscriptionId'
@@ -4697,7 +4697,7 @@ definitions:
         description: The name of the disk to be attached.
         type: string
       diskSizeGiB:
-        description: Size of the disk to be attached in GibiBytes.
+        description: Size of the disk to be attached in Gibibytes.
         format: int32
         type: integer
       diskType:
@@ -5043,7 +5043,7 @@ definitions:
         description: 'When backed by a blob, the name of the VHD blob without extension.'
         type: string
       diskSizeGiB:
-        description: The size of the disk in GibiBytes.
+        description: The size of the disk in Gibibytes.
         format: int32
         type: integer
       diskType:
@@ -5365,7 +5365,7 @@ definitions:
         type: string
     type: object
   GenerateUploadUriResponse:
-    description: Reponse body for generating an upload URI.
+    description: Response body for generating an upload URI.
     properties:
       uploadUri:
         description: The upload URI for the VHD.

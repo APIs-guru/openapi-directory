@@ -465,7 +465,7 @@ definitions:
       - description: Base resource object.
         properties:
           etag:
-            description: The entity tag used for optimistic concurency when modifying the resource.
+            description: The entity tag used for optimistic concurrency when modifying the resource.
             type: string
           id:
             description: ID of the resource.
@@ -538,7 +538,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   RegistrationParameterProperties:
-    description: Properties of the Azure Stack regstration resource
+    description: Properties of the Azure Stack registration resource
     properties:
       registrationToken:
         description: The token identifying registered Azure Stack

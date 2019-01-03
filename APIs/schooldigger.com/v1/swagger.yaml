@@ -625,12 +625,6 @@ definitions:
           $ref: '#/definitions/APILEARankHistory'
         readOnly: false
         type: array
-      testScores:
-        description: Test scores (district and state) -- requires Pro or Enterprise level API subscription
-        items:
-          $ref: '#/definitions/APITestScoreWrapper'
-        readOnly: false
-        type: array
       url:
         description: SchoolDigger URL for this district
         readOnly: false

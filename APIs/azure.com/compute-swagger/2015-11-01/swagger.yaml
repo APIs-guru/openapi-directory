@@ -218,7 +218,7 @@ definitions:
           modelAsString: false
           name: DeploymentMode
       outputs:
-        description: Gets or sets key/value pairs that represent deploymentoutput.
+        description: Gets or sets key/value pairs that represent deployment output.
         type: object
       parameters:
         description: Deployment parameters. Use only one of Parameters or ParametersLink.
@@ -245,7 +245,7 @@ definitions:
         format: date-time
         type: string
   ParametersLink:
-    description: Entity representing the reference to the deployment paramaters.
+    description: Entity representing the reference to the deployment parameters.
     properties:
       contentVersion:
         description: If included it must match the ContentVersion in the template.

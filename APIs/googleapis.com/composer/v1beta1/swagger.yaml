@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://composer.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -308,6 +308,16 @@ paths:
              variables  are cleared.
              It is an error to provide both this mask and a mask specifying one or
              more individual environment variables.</td>
+             </tr>
+             <tr>
+             <td>config.softwareConfig.imageVersion</td>
+             <td>Upgrade the version of the environment in-place. Refer to
+             `SoftwareConfig.image_version` for information on how to format the new
+             image version. Additionally, the new image version cannot effect a version
+             downgrade and must match the current image version's Composer major
+             version and Airflow major and minor versions. Consult the
+             <a href="/composer/docs/concepts/versioning/composer-versions">Cloud
+             Composer Version List</a> for valid values.</td>
              </tr>
              </tbody>
              </table>
@@ -817,12 +827,12 @@ definitions:
         type: object
       imageVersion:
         description: |-
-          Immutable. The version of the software running in the environment.
+          The version of the software running in the environment.
           This encapsulates both the version of Cloud Composer functionality and the
           version of Apache Airflow. It must match the regular expression
           `composer-([0-9]+\.[0-9]+\.[0-9]+|latest)-airflow-[0-9]+\.[0-9]+(\.[0-9]+.*)?`.
           When used as input, the server will also check if the provided version is
-          supported and deny the creation request for an unsupported version.
+          supported and deny the request for an unsupported version.
 
           The Cloud Composer portion of the version is a
           [semantic version](https://semver.org) or `latest`. The patch version

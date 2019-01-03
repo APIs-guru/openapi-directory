@@ -459,7 +459,7 @@ paths:
               headers:
                 etag: AAAAAAAAAAa=
     patch:
-      description: Updates the details of a subscription specificied by its identifier.
+      description: Updates the details of a subscription specified by its identifier.
       operationId: Subscription_Update
       parameters:
         - description: The name of the resource group.
@@ -942,7 +942,7 @@ definitions:
         minLength: 1
         type: string
       productId:
-        description: 'Product (product id path) for which subscription is being created in form /products/{productid}'
+        description: 'Product (product id path) for which subscription is being created in form /products/{productId}'
         type: string
       secondaryKey:
         description: Secondary subscription key. If not specified during request key will be generated automatically.

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://runtimeconfig.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -61,11 +61,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -86,12 +81,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -183,12 +172,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -227,12 +214,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -322,12 +307,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -439,12 +422,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -544,12 +525,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -635,12 +614,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -650,12 +627,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -695,12 +670,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -744,6 +717,13 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -776,7 +756,6 @@ definitions:
         description: |-
           Role that is assigned to `members`.
           For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-          Required
         type: string
     type: object
   Cardinality:
@@ -784,15 +763,15 @@ definitions:
       A Cardinality condition for the Waiter resource. A cardinality condition is
       met when the number of variables under a specified path prefix reaches a
       predefined number. For example, if you set a Cardinality condition where
-      the `path` is set to `/foo` and the number of paths is set to 2, the
+      the `path` is set to `/foo` and the number of paths is set to `2`, the
       following variables would meet the condition in a RuntimeConfig resource:
 
       + `/foo/variable1 = "value1"`
       + `/foo/variable2 = "value2"`
       + `/bar/variable3 = "value3"`
 
-      It would not would not satisify the same condition with the `number` set to
-      3, however, because there is only 2 paths that start with `/foo`.
+      It would not satisfy the same condition with the `number` set to
+      `3`, however, because there is only 2 paths that start with `/foo`.
       Cardinality conditions are recursive; all subtrees under the specific
       path prefix are counted.
     properties:
@@ -825,6 +804,39 @@ definitions:
       cardinality:
         $ref: '#/definitions/Cardinality'
         description: The cardinality of the `EndCondition`.
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
     type: object
   ListConfigsResponse:
     description: |-
@@ -1152,7 +1164,7 @@ definitions:
               projects/[PROJECT_ID]/configs/[CONFIG_NAME]/variables/[VARIABLE_NAME]
 
           The `[PROJECT_ID]` must be a valid project ID, `[CONFIG_NAME]` must be a
-          valid RuntimeConfig reource and `[VARIABLE_NAME]` follows Unix file system
+          valid RuntimeConfig resource and `[VARIABLE_NAME]` follows Unix file system
           file path naming.
 
           The `[VARIABLE_NAME]` can contain ASCII letters, numbers, slashes and
@@ -1167,7 +1179,7 @@ definitions:
         type: string
       state:
         description: |-
-          [Ouput only] The current state of the variable. The variable state indicates
+          Output only. The current state of the variable. The variable state indicates
           the outcome of the `variables().watch` call and is visible through the
           `get` and `list` calls.
         enum:
@@ -1182,14 +1194,18 @@ definitions:
           `text: "my text value"`. The string must be valid UTF-8.
         type: string
       updateTime:
-        description: Output only. The time of the last variable update.
+        description: |-
+          Output only. The time of the last variable update.
+          Timestamp will be UTC timestamp.
         format: google-datetime
         type: string
       value:
         description: |-
           The binary value of the variable. The length of the value must be less
           than 4096 bytes. Empty values are also accepted. The value must be
-          base64 encoded. Only one of `value` or `text` can be set.
+          base64 encoded, and must comply with IETF RFC4648
+          (https://www.ietf.org/rfc/rfc4648.txt). Only one of `value` or `text`
+          can be set.
         format: byte
         type: string
     type: object
@@ -1197,7 +1213,7 @@ definitions:
     description: |-
       A Waiter resource waits for some end condition within a RuntimeConfig resource
       to be met before it returns. For example, assume you have a distributed
-      system where each node writes to a Variable resource indidicating the node's
+      system where each node writes to a Variable resource indicating the node's
       readiness as part of the startup process.
 
       You then configure a Waiter resource with the success condition set to wait

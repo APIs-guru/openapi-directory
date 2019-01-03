@@ -1345,7 +1345,7 @@ definitions:
       - clientSecret
     type: object
   SslConfiguration:
-    description: The ssl configugation for scoring
+    description: The SSL configuration for scoring
     properties:
       cert:
         description: Cert data
@@ -1357,7 +1357,7 @@ definitions:
         description: Key data
         type: string
       status:
-        description: Enable or disable ssl for scoring
+        description: Enable or disable SSL for scoring
         enum:
           - Disabled
           - Enabled
@@ -1407,7 +1407,7 @@ definitions:
       - properties:
           administratorAccount:
             $ref: '#/definitions/VirtualMachineSshCredentials'
-            description: Admin creadentials for virtual machine.
+            description: Admin credentials for virtual machine.
         type: object
     description: Secrets related to a Machine Learning compute based on AKS.
     x-ms-discriminator-value: VirtualMachine

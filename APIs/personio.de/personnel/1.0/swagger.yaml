@@ -82,6 +82,7 @@ paths:
                     is_holiday: false
                     is_on_time_off: false
                     start_time: '9:00'
+                  id: 1234
                   type: AttendancePeriod
                 - attributes:
                     break: 60
@@ -91,6 +92,7 @@ paths:
                     is_holiday: false
                     is_on_time_off: true
                     start_time: '9:30'
+                  id: 1235
                   type: AttendancePeriod
               limit: 200
               offset: 0
@@ -125,17 +127,37 @@ paths:
                 message: Error when trying to insert Attendances periods rows
               success: true
           schema:
-            properties:
+            $ref: '#/definitions/ErrorResponse'
+  '/company/attendances/{id}':
+    delete:
+      description: This endpoint is responsible for deleting attendance data for the company employees.
+      parameters:
+        - description: ID of the attendance period to delete
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success response
+          examples:
+            application/json:
+              data:
+                message: The attendance period was deleted.
+              success: true
+          schema:
+            $ref: '#/definitions/Response'
+        '404':
+          description: Not found response
+          examples:
+            application/json:
               error:
-                properties:
-                  code:
-                    type: integer
-                  message:
-                    type: string
-                type: object
-              success:
-                type: boolean
-            type: object
+                code: 404
+                message: The attendance period was not found.
+              success: false
+          schema:
+            $ref: '#/definitions/ErrorResponse'
   /company/employees:
     get:
       description: List Employees
@@ -212,6 +234,9 @@ paths:
                     id:
                       label: id
                       value: 83752
+                    last_modified_at:
+                      label: Last modified
+                      value: '2016-10-22T16:15:55+0200'
                     last_name:
                       label: Last name
                       value: Anderson
@@ -273,11 +298,11 @@ paths:
       description: Employee
       parameters:
         - description: Numeric `id` of the employee
-          format: integer
+          format: int32
           in: path
           name: employee_id
           required: true
-          type: number
+          type: integer
       responses:
         '200':
           description: ''
@@ -339,6 +364,9 @@ paths:
                   id:
                     label: id
                     value: 83752
+                  last_modified_at:
+                    label: Last modified
+                    value: '2016-10-22T16:15:55+0200'
                   last_name:
                     label: Last name
                     value: Anderson
@@ -481,6 +509,159 @@ paths:
               success: true
           schema:
             $ref: '#/definitions/AbsencePeriodsResponse'
+  '/temp-ignore-this/company/employees/{employee_id}':
+    get:
+      description: Employee
+      parameters:
+        - description: Numeric `id` of the employee
+          format: int32
+          in: path
+          name: employee_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              data:
+                attributes:
+                  contract_end_date:
+                    label: Contract ends
+                  cost_centers:
+                    label: Cost center
+                    value:
+                      - attributes:
+                          id: 320
+                          name: Cost Center One
+                          percentage: 50
+                        type: CostCenter
+                      - attributes:
+                          id: 321
+                          name: Cost Center Two
+                          percentage: 50
+                        type: CostCenter
+                  created_at:
+                    label: created_at
+                    value: '2016-10-20T16:15:55+0200'
+                  department:
+                    label: Department
+                    value:
+                      attributes:
+                        name: Marketing
+                      type: Department
+                  dynamic_21827:
+                    label: IBAN
+                    value: DE98 8989 9898 0000 8989 00
+                  dynamic_24407:
+                    label: Titel
+                    value: Dr
+                  email:
+                    label: Email
+                    value: andreas.anderson@demo.com
+                  employment_type:
+                    label: Employment type
+                    value: internal
+                  first_name:
+                    label: First name
+                    value: Andreas
+                  fix_salary:
+                    label: Fix salary
+                    value: 4000
+                  gender:
+                    label: Gender
+                    value: male
+                  hire_date:
+                    label: Hire date
+                    value: '2012-02-01T00:00:00+0100'
+                  holiday_calendar:
+                    label: Holiday Calendar
+                    value:
+                      attributes:
+                        country: DE
+                        id: 931
+                        name: DE (Hamburg) Feiertage
+                        state: Hamburg
+                      type: HolidayCalendar
+                  hourly_salary:
+                    label: Hourly salary
+                    value: 0
+                  id:
+                    label: id
+                    value: 83752
+                  last_modified_at:
+                    label: Last modified
+                    value: '2016-10-22T16:15:55+0200'
+                  last_name:
+                    label: Last name
+                    value: Anderson
+                  last_working_day:
+                    label: Last working day
+                    value: '2017-02-28T00:00:00+0200'
+                  office:
+                    label: Office
+                    value:
+                      attributes:
+                        name: Munich
+                      type: Office
+                  position:
+                    label: Position
+                    value: Online Marketing Specialist
+                  probation_period_end:
+                    label: Probation period end
+                    value: '2012-07-31T00:00:00+0200'
+                  status:
+                    label: Status
+                    value: active
+                  supervisor:
+                    label: Supervisor
+                    value:
+                      attributes:
+                        email:
+                          label: Email
+                          value: max.mustermann@example.org
+                        first_name:
+                          label: First name
+                          value: Max
+                        id:
+                          label: id
+                          value: 423506
+                        last_name:
+                          label: Last name
+                          value: Mustermann
+                      type: Employee
+                  termination_date:
+                    label: Termination date
+                  termination_reason:
+                    label: Termination reason
+                    value: ''
+                  termination_type:
+                    label: Termination type
+                    value: ''
+                  vacation_day_balance:
+                    label: Vacation day balance
+                    value: 28.5
+                  weekly_working_hours:
+                    label: Weekly hours
+                    value: '40'
+                  work_schedule:
+                    label: Work Schedule
+                    value:
+                      attributes:
+                        friday: '06:00'
+                        id: 123
+                        monday: '08:30'
+                        name: Standard Hours
+                        saturday: '00:00'
+                        sunday: '00:00'
+                        thursday: '08:30'
+                        tuesday: '08:30'
+                        wednesday: '08:30'
+                      type: WorkSchedule
+                type: Employee
+              success: true
+          schema:
+            $ref: '#/definitions/TempIgnoreThisEmployeeResponse'
 definitions:
   AbsencePeriodResponse:
     type: object
@@ -591,9 +772,12 @@ definitions:
                       - is_on_time_off
                     type: object
                   type: array
+                id:
+                  type: integer
                 type:
                   type: string
               required:
+                - id
                 - type
                 - attributes
               type: object
@@ -736,6 +920,43 @@ definitions:
             type: array
         type: object
     title: List of Employees
+  ErrorResponse:
+    properties:
+      error:
+        properties:
+          code:
+            type: integer
+          message:
+            type: string
+        type: object
+      success:
+        type: boolean
+    required:
+      - success
+      - error
+    title: Default error response
+    type: object
+  HolidayCalendar:
+    allOf:
+      - $ref: '#/definitions/Attribute'
+    properties:
+      value:
+        properties:
+          attributes:
+            properties:
+              country:
+                type: string
+              id:
+                type: number
+              name:
+                type: string
+              state:
+                type: string
+            type: object
+          type:
+            type: string
+        type: object
+    type: object
   NewAttendancePeriodRequest:
     example:
       attendances:
@@ -832,4 +1053,115 @@ definitions:
     properties:
       value:
         $ref: '#/definitions/Employee'
+    type: object
+  TempIgnoreThisEmployee:
+    properties:
+      attributes:
+        items:
+          properties:
+            contract_end_date:
+              $ref: '#/definitions/Attribute'
+            cost_centers:
+              $ref: '#/definitions/CostCenters'
+            created_at:
+              $ref: '#/definitions/Attribute'
+            department:
+              $ref: '#/definitions/Department'
+            email:
+              $ref: '#/definitions/Attribute'
+            employment_type:
+              $ref: '#/definitions/Attribute'
+            first_name:
+              $ref: '#/definitions/Attribute'
+            fix_salary:
+              $ref: '#/definitions/Attribute'
+            gender:
+              $ref: '#/definitions/Attribute'
+            hire_date:
+              $ref: '#/definitions/Attribute'
+            holiday_calendar:
+              $ref: '#/definitions/HolidayCalendar'
+            hourly_salary:
+              $ref: '#/definitions/Attribute'
+            id:
+              $ref: '#/definitions/Attribute'
+            last_name:
+              $ref: '#/definitions/Attribute'
+            office:
+              $ref: '#/definitions/Office'
+            position:
+              $ref: '#/definitions/Attribute'
+            probation_period_end:
+              $ref: '#/definitions/Attribute'
+            status:
+              $ref: '#/definitions/Attribute'
+            supervisor:
+              $ref: '#/definitions/Supervisor'
+            termination_date:
+              $ref: '#/definitions/Attribute'
+            termination_reason:
+              $ref: '#/definitions/Attribute'
+            termination_type:
+              $ref: '#/definitions/Attribute'
+            vacation_day_balance:
+              $ref: '#/definitions/Attribute'
+            weekly_working_hours:
+              $ref: '#/definitions/Attribute'
+            work_schedule:
+              $ref: '#/definitions/WorkSchedule'
+          type: object
+        type: array
+      type:
+        type: string
+    required:
+      - type
+      - attributes
+    type: object
+  TempIgnoreThisEmployeeResponse:
+    allOf:
+      - $ref: '#/definitions/Response'
+      - properties:
+          data:
+            allOf:
+              - $ref: '#/definitions/TempIgnoreThisEmployee'
+            type: object
+        type: object
+    title: Employee
+  WorkSchedule:
+    allOf:
+      - $ref: '#/definitions/Attribute'
+    properties:
+      value:
+        properties:
+          attributes:
+            properties:
+              friday:
+                pattern: '^\d\d:\d\d$'
+                type: string
+              id:
+                type: number
+              monday:
+                pattern: '^\d\d:\d\d$'
+                type: string
+              name:
+                type: string
+              saturday:
+                pattern: '^\d\d:\d\d$'
+                type: string
+              sunday:
+                pattern: '^\d\d:\d\d$'
+                type: string
+              thursday:
+                pattern: '^\d\d:\d\d$'
+                type: string
+              tuesday:
+                pattern: '^\d\d:\d\d$'
+                type: string
+              wednesday:
+                pattern: '^\d\d:\d\d$'
+                type: string
+            type: object
+          type:
+            type: string
+        type: object
     type: object

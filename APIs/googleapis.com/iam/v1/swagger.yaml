@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://iam.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -60,11 +60,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -85,12 +80,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -119,17 +108,70 @@ tags:
   - name: projects
   - name: roles
 paths:
+  '/v1/iamPolicies:lintPolicy':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Lints a Cloud IAM policy object or its sub fields. Currently supports
+        google.iam.v1.Policy, google.iam.v1.Binding and
+        google.iam.v1.Binding.condition.
+
+        Each lint operation consists of multiple lint validation units.
+        Validation units have the following properties:
+
+        - Each unit inspects the input object in regard to a particular
+          linting aspect and issues a google.iam.admin.v1.LintResult
+          disclosing the result.
+        - Domain of discourse of each unit can be either
+          google.iam.v1.Policy, google.iam.v1.Binding, or
+          google.iam.v1.Binding.condition depending on the purpose of the
+          validation.
+        - A unit may require additional data (like the list of all possible
+          enumerable values of a particular attribute used in the policy instance)
+          which shall be provided by the caller. Refer to the comments of
+          google.iam.admin.v1.LintPolicyRequest.context for more details.
+
+        The set of applicable validation units is determined by the Cloud IAM
+        server and is not configurable.
+
+        Regardless of any lint issues or their severities, successful calls to
+        `lintPolicy` return an HTTP 200 OK status code.
+      operationId: iam.iamPolicies.lintPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LintPolicyRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LintPolicyResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - iamPolicies
   '/v1/iamPolicies:queryAuditableServices':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -159,12 +201,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -235,12 +275,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -250,12 +288,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -291,7 +327,7 @@ paths:
         Existing Bindings remains, but are inactive. The Role can be undeleted
         within 7 days. After 7 days the Role is deleted and all Bindings associated
         with the role are removed.
-      operationId: iam.organizations.roles.delete
+      operationId: iam.projects.roles.delete
       parameters:
         - description: Used to perform a consistent read-modify-write.
           in: query
@@ -315,10 +351,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     get:
       description: Gets a Role definition.
-      operationId: iam.organizations.roles.get
+      operationId: iam.projects.roles.get
       parameters:
         - description: |-
             The resource name of the role in one of the following formats:
@@ -349,24 +385,22 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a Role definition.
-      operationId: iam.organizations.roles.patch
+      operationId: iam.projects.roles.patch
       parameters:
         - in: body
           name: body
@@ -395,7 +429,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     put:
       description: |-
         Updates a ServiceAccount.
@@ -479,12 +513,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -561,12 +593,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -604,12 +634,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -648,12 +676,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -697,19 +723,17 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.organizations.roles.undelete
+      operationId: iam.projects.roles.undelete
       parameters:
         - in: body
           name: body
@@ -733,11 +757,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{parent}/roles':
     get:
       description: Lists the Roles defined on a resource.
-      operationId: iam.organizations.roles.list
+      operationId: iam.projects.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
           in: query
@@ -780,24 +804,22 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new Role.
-      operationId: iam.organizations.roles.create
+      operationId: iam.projects.roles.create
       parameters:
         - in: body
           name: body
@@ -821,18 +843,16 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -866,12 +886,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -909,12 +927,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1075,6 +1091,13 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1107,7 +1130,6 @@ definitions:
         description: |-
           Role that is assigned to `members`.
           For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-          Required
         type: string
     type: object
   BindingDelta:
@@ -1124,6 +1146,11 @@ definitions:
           - ADD
           - REMOVE
         type: string
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          This field is logged only for Cloud Audit Logging.
       member:
         description: |-
           A single identity requesting access for a Cloud Platform resource.
@@ -1200,6 +1227,162 @@ definitions:
 
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
+    type: object
+  LintPolicyRequest:
+    description: |-
+      The request to lint a Cloud IAM policy object. LintPolicy is currently
+      functional only for `lint_object` of type `condition`.
+    properties:
+      binding:
+        $ref: '#/definitions/Binding'
+        description: |-
+          Binding object to be linted. The functionality of linting a binding is
+          not yet implemented and if this field is set, it returns NOT_IMPLEMENTED
+          error.
+      condition:
+        $ref: '#/definitions/Expr'
+        description: google.iam.v1.Binding.condition object to be linted.
+      context:
+        additionalProperties:
+          description: Properties of the object.
+        description: |-
+          `context` contains additional *permission-controlled* data that any
+          lint unit may depend on, in form of `{key: value}` pairs. Currently, this
+          field is non-operational and it will not be used during the lint operation.
+        type: object
+      fullResourceName:
+        description: |-
+          The full resource name of the policy this lint request is about.
+
+          The name follows the Google Cloud Platform (GCP) resource format.
+          For example, a GCP project with ID `my-project` will be named
+          `//cloudresourcemanager.googleapis.com/projects/my-project`.
+
+          The resource name is not used to read the policy instance from the Cloud
+          IAM database. The candidate policy for lint has to be provided in the same
+          request object.
+        type: string
+      policy:
+        $ref: '#/definitions/Policy'
+        description: |-
+          Policy object to be linted. The functionality of linting a policy is not
+          yet implemented and if this field is set, it returns NOT_IMPLEMENTED
+          error.
+    type: object
+  LintPolicyResponse:
+    description: |-
+      The response of a lint operation. An empty response indicates
+      the operation was able to fully execute and no lint issue was found.
+    properties:
+      lintResults:
+        description: |-
+          List of lint results sorted by a composite <severity, binding_ordinal> key,
+          descending order of severity and ascending order of binding_ordinal.
+          There is no certain order among the same keys.
+
+          For cross-binding results (only if the input object to lint is
+          instance of google.iam.v1.Policy), there will be a
+          google.iam.admin.v1.LintResult for each of the involved bindings,
+          and the associated debug_message may enumerate the other involved
+          binding ordinal number(s).
+        items:
+          $ref: '#/definitions/LintResult'
+        type: array
+    type: object
+  LintResult:
+    description: Structured response of a single validation unit.
+    properties:
+      bindingOrdinal:
+        description: |-
+          0-based index ordinality of the binding in the input object associated
+          with this result.
+          This field is populated only if the input object to lint is of type
+          google.iam.v1.Policy, which can comprise more than one binding.
+          It is set to -1 if the result is not associated with any particular
+          binding and only targets the policy as a whole, such as results about
+          policy size violations.
+        format: int32
+        type: integer
+      debugMessage:
+        description: Human readable debug message associated with the issue.
+        type: string
+      fieldName:
+        description: |-
+          The name of the field for which this lint result is about.
+
+          For nested messages, `field_name` consists of names of the embedded fields
+          separated by period character. The top-level qualifier is the input object
+          to lint in the request. For instance, if the lint request is on a
+          google.iam.v1.Policy and this lint result is about a condition
+          expression of one of the input policy bindings, the field would be
+          populated as `policy.bindings.condition.expression`.
+
+          This field does not identify the ordinality of the repetitive fields (for
+          instance bindings in a policy).
+        type: string
+      level:
+        description: The validation unit level.
+        enum:
+          - LEVEL_UNSPECIFIED
+          - POLICY
+          - BINDING
+          - CONDITION
+        type: string
+      locationOffset:
+        description: |-
+          0-based character position of problematic construct within the object
+          identified by `field_name`. Currently, this is populated only for condition
+          expression.
+        format: int32
+        type: integer
+      severity:
+        description: The validation unit severity.
+        enum:
+          - SEVERITY_UNSPECIFIED
+          - ERROR
+          - WARNING
+          - NOTICE
+          - INFO
+          - DEPRECATED
+        type: string
+      validationUnitName:
+        description: |-
+          The validation unit name, for instance
+          “lintValidationUnits/ConditionComplexityCheck”.
+        type: string
     type: object
   ListRolesResponse:
     description: The response containing the roles defined under a resource.
@@ -1490,7 +1673,10 @@ definitions:
           and organizations/{ORGANIZATION_ID}/roles/logging.viewer for custom roles.
         type: string
       stage:
-        description: The current launch stage of the role.
+        description: |-
+          The current launch stage of the role. If the `ALPHA` launch stage has been
+          selected for a role, the `stage` field will not be included in the
+          returned definition for the role.
         enum:
           - ALPHA
           - BETA
@@ -1526,14 +1712,16 @@ definitions:
     properties:
       displayName:
         description: |-
-          Optional. A user-specified description of the service account.  Must be
-          fewer than 100 UTF-8 bytes.
+          Optional. A user-specified name for the service account.
+          Must be less than or equal to 100 UTF-8 bytes.
         type: string
       email:
         description: '@OutputOnly The email address of the service account.'
         type: string
       etag:
-        description: Used to perform a consistent read-modify-write.
+        description: |-
+          Optional. Note: `etag` is an inoperable legacy field that is only returned
+          for backwards compatibility.
         format: byte
         type: string
       name:
@@ -1573,9 +1761,11 @@ definitions:
       their service accounts.  Users retain the private key of these key-pairs,
       and Google retains ONLY the public key.
 
-      System-managed key-pairs are managed automatically by Google, and rotated
-      daily without user intervention.  The private key never leaves Google's
-      servers to maximize security.
+      System-managed keys are automatically rotated by Google, and are used for
+      signing for a maximum of two weeks. The rotation process is probabilistic,
+      and usage of the new key will gradually ramp up and down over the key's
+      lifetime. We recommend caching the public key set for a service account for
+      no more than 24 hours to ensure you have access to the latest keys.
 
       Public keys for all service accounts are also published at the OAuth2
       Service Account API.

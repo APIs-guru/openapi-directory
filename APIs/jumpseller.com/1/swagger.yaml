@@ -721,6 +721,115 @@ paths:
       summary: Update a new Customer.
       tags:
         - Customers
+  '/customers/{id}/fields':
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Customer
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CustomerAdditionalField'
+            type: array
+        '404':
+          description: Customer doesn't have additional fields.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Retrieves the Customer Additional Field of a Customer.
+      tags:
+        - Customer Additional Fields
+    post:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Customer
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Customer Additional Field parameters.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerAdditionalFieldEdit'
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CustomerAdditionalField'
+            type: array
+        '404':
+          description: Customer Additional Field Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Adds Customer Additional Fields to a Customer.
+      tags:
+        - Customer Additional Fields
+  '/customers/{id}/fields/{field_id}':
+    delete:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/ProductIDParam'
+        - description: Id of the Customer Additional Field
+          format: int32
+          in: path
+          name: field_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '404':
+          description: Customer Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Delete a Customer Additional Field.
+      tags:
+        - Customer Additional Fields
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+        - description: Id of the Customer
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: Id of the Customer Additional Field
+          format: int32
+          in: path
+          name: field_id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/CustomerAdditionalField'
+            type: array
+        '404':
+          description: Customer Not Found.
+          schema:
+            $ref: '#/definitions/NotFound'
+      summary: Create a new Customer Additional Field.
+      tags:
+        - Customer Additional Fields
   /fields.json:
     get:
       parameters:
@@ -935,6 +1044,8 @@ paths:
       parameters:
         - $ref: '#/parameters/LoginParam'
         - $ref: '#/parameters/AuthtokenParam'
+        - $ref: '#/parameters/LimitParam'
+        - $ref: '#/parameters/PageParam'
       responses:
         '200':
           description: An array of Orders
@@ -988,6 +1099,19 @@ paths:
           schema:
             $ref: '#/definitions/NotFound'
       summary: Retrieve orders filtered by Order Id.
+      tags:
+        - Orders
+  /orders/count.json:
+    get:
+      parameters:
+        - $ref: '#/parameters/LoginParam'
+        - $ref: '#/parameters/AuthtokenParam'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Count'
+      summary: Count all Orders.
       tags:
         - Orders
   '/orders/status/{status}.json':
@@ -2338,7 +2462,7 @@ definitions:
         description: City of the Customer's Billing Address
         type: string
       country:
-        description: Country of the Customer's Billing Address
+        description: Country of the Customer's Billing Address (ISO 3166-1 alpha-2)
         type: string
       municipality:
         description: Municipality of the Customer's Billing Address
@@ -2350,8 +2474,8 @@ definitions:
         description: Postal code of the Customer's Billing Address
         type: string
       region:
-        description: Region of the Customer's Billing Address
-        type: string
+        description: 'Region of the Customer''s Billing Address (Use the FIPS standard - http://www.geonames.org/countries/)'
+        type: integer
       surname:
         description: Surname of the Customer's Billing Address
         type: string
@@ -2501,6 +2625,50 @@ definitions:
       customer:
         $ref: '#/definitions/CustomerFields'
     type: object
+  CustomerAdditionalField:
+    properties:
+      customer_additional_field:
+        $ref: '#/definitions/CustomerAdditionalFieldFields'
+    type: object
+  CustomerAdditionalFieldEdit:
+    properties:
+      customer_additional_field:
+        $ref: '#/definitions/CustomerAdditionalFieldEditFields'
+    type: object
+  CustomerAdditionalFieldEditFields:
+    properties:
+      checkout_custom_field_id:
+        description: Unique identifier of the Checkout Custom Field
+        format: int32
+        type: integer
+      value:
+        description: Value of the Customer Additional Field
+        type: string
+    type: object
+  CustomerAdditionalFieldFields:
+    properties:
+      area:
+        description: Area of the Customer Additional Field
+        type: string
+      checkout_custom_field_id:
+        description: Unique identifier of the Checkout Custom Field
+        format: int32
+        type: integer
+      customer_id:
+        description: Unique identifier of the Customer
+        format: int32
+        type: integer
+      id:
+        description: Unique identifier of the Customer Additional Field
+        format: int32
+        type: integer
+      label:
+        description: Label of the Customer Additional Field
+        type: string
+      value:
+        description: Value of the Customer Additional Field
+        type: string
+    type: object
   CustomerCategory:
     properties:
       category:
@@ -2534,6 +2702,14 @@ definitions:
     properties:
       billing_address:
         $ref: '#/definitions/BillingAddress'
+      customer_additional_fields:
+        items:
+          $ref: '#/definitions/CustomerAdditionalField'
+        type: array
+      customer_category:
+        items:
+          type: integer
+        type: array
       email:
         description: Email of the Customer
         type: string
@@ -2588,6 +2764,10 @@ definitions:
     properties:
       billing_address:
         $ref: '#/definitions/BillingAddress'
+      customer_category:
+        items:
+          type: integer
+        type: array
       email:
         description: Email of the Customer
         type: string
@@ -2805,6 +2985,9 @@ definitions:
         type: string
       billing_address:
         $ref: '#/definitions/BillingAddress'
+      coupons:
+        description: Promotion Coupons used on the given Order
+        type: string
       created_at:
         description: Order date
         type: string
@@ -2972,11 +3155,9 @@ definitions:
       type:
         description: Type of the Payment Method
         enum:
-          - dineromail
           - manual
           - paypal
           - pagseguro
-          - interpagos
           - moneybookers
           - webpay_cl
           - easypay
@@ -3096,6 +3277,9 @@ definitions:
         description: Width of the product
         format: float
         type: number
+    required:
+      - price
+      - name
     type: object
   ProductFields:
     properties:
@@ -3353,7 +3537,7 @@ definitions:
           $ref: '#/definitions/Id'
         type: array
       type:
-        description: 'Controls if the discount will be a fixed value (''fix'', ''percentage'')'
+        description: 'Controls if the discount will be a fixed area (''fix'', ''percentage'')'
         type: string
     type: object
   PromotionFields:
@@ -3436,7 +3620,7 @@ definitions:
         description: City of the Customer's Shipping Address
         type: string
       country:
-        description: Country of the Customer's Shipping Address
+        description: Country of the Customer's Shipping Address (ISO 3166-1 alpha-2)
         type: string
       municipality:
         description: Municipality of the Customer's Shipping Address
@@ -3448,8 +3632,8 @@ definitions:
         description: Postal code of the Customer's Shipping Address
         type: string
       region:
-        description: Region of the Customer's Shipping Address
-        type: string
+        description: 'Region of the Customer''s Shipping Address (Use the FIPS standard - http://www.geonames.org/countries/)'
+        type: integer
       surname:
         description: Surname of the Customer's Shipping Address
         type: string

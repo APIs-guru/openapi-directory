@@ -331,7 +331,111 @@ paths:
       summary: XML - Path Between Stations
   /SrcStationToDstStationInfo:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a distance, fare information, and estimated travel time between any\r\ntwo stations, including those on different lines. Omit both parameters to\r\nretrieve data for all stations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>StationToStationInfos</td>\r\n\r\n<td>\r\nArray containing station to station information (<a href=\r\n\"#StationToStationInfo\">StationToStationInfo</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationToStationInfo\" name=\r\n\"StationToStationInfo\">StationToStationInfo Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>CompositeMiles</td>\r\n\r\n<td>Distance in miles from the source to destination station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DestinationStation</td>\r\n\r\n<td>Destination station code. Use this value in other rail-related\r\nAPIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RailFare</td>\r\n\r\n<td>\r\nStructure containing <a href=\"#RailFare\">fare</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RailTime</td>\r\n\r\n<td>Estimated travel time (schedule time) in minutes between the source and destination station. This is not correlated to minutes <span class=\"text-info\">(Min)</span> in Real-Time Rail Predictions.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SourceStation</td>\r\n\r\n<td>Origin station code. Use this value in other rail-related APIs\r\nto retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"RailFare\" name=\"RailFare\">RailFare Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>OffPeakTime</td>\r\n\r\n<td>Fare during off-peak times (times other than the ones described\r\nbelow).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>PeakTime</td>\r\n\r\n<td>Fare during peak times (weekdays from opening to 9:30 AM and\r\n3-7 PM, and weekends from midnight to closing).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SeniorDisabled</td>\r\n\r\n<td>\r\nReduced fare for <a href=\r\n\"http://www.wmata.com/fares/reduced.cfm\">senior citizens or\r\npeople with disabilities</a>.\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>"
+      description: |-
+        <h4 class="text-primary">Description</h4>
+
+        <p>Returns a distance, fare information, and estimated travel time between any
+        two stations, including those on different lines. Omit both parameters to
+        retrieve data for all stations.</p>
+
+        <h4 class="text-primary">Response Elements</h4>
+
+        <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+        <th class="col-md-3">Element</th>
+
+        <th>Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+        <td>StationToStationInfos</td>
+
+        <td>
+        Array containing station to station information (<a href=
+        "#StationToStationInfo">StationToStationInfo</a>).
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="StationToStationInfo" name=
+        "StationToStationInfo">StationToStationInfo Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>CompositeMiles</td>
+
+        <td>Average of distance traveled between two stations and straight-line distance (as used for WMATA fare calculations).  For more details, please refer to WMATA's <a href="https://www.wmata.com/about/records/public_docs/upload/Tariff-on-Fares-Annotated-2-12-18.pdf#page=6" target="_blank" rel="noopener noreferrer">Tariff on Fares</a>.</td>
+        </tr>
+
+        <tr>
+        <td>DestinationStation</td>
+
+        <td>Destination station code. Use this value in other rail-related
+        APIs to retrieve data about a station.</td>
+        </tr>
+
+        <tr>
+        <td>RailFare</td>
+
+        <td>
+        Structure containing <a href="#RailFare">fare</a> information.
+        </td>
+        </tr>
+
+        <tr>
+        <td>RailTime</td>
+
+        <td>Estimated travel time (schedule time) in minutes between the source and
+        destination station. This is not correlated to minutes <span class="text-info">(Min)</span> in Real-Time Rail Predictions.</td>
+        </tr>
+
+        <tr>
+        <td>SourceStation</td>
+
+        <td>Origin station code. Use this value in other rail-related APIs
+        to retrieve data about a station.</td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="RailFare" name="RailFare">RailFare Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>OffPeakTime</td>
+
+        <td>Fare during off-peak times (times other than the ones described
+        below).</td>
+        </tr>
+
+        <tr>
+        <td>PeakTime</td>
+
+        <td>Fare during peak times (weekdays from opening to 9:30 AM and
+        3-7 PM, and weekends from midnight to closing).</td>
+        </tr>
+
+        <tr>
+        <td>SeniorDisabled</td>
+
+        <td>
+        Reduced fare for <a href=
+        "http://www.wmata.com/fares/reduced.cfm">senior citizens or
+        people with disabilities</a>.
+        </td>
+        </tr>
+        </tbody>
+        </table>
       operationId: 5476364f031f5909e4fe331b
       parameters:
         - default: E10
@@ -1537,7 +1641,111 @@ paths:
       summary: JSON - Path Between Stations
   /json/jSrcStationToDstStationInfo:
     get:
-      description: "<h4 class=\"text-primary\">Description</h4>\r\n\r\n<p>Returns a distance, fare information, and estimated travel time between any\r\ntwo stations, including those on different lines. Omit both parameters to\r\nretrieve data for all stations.</p>\r\n\r\n<h4 class=\"text-primary\">Response Elements</h4>\r\n\r\n<table class=\"table table-condensed table-hover\">\r\n<thead>\r\n<tr>\r\n<th class=\"col-md-3\">Element</th>\r\n\r\n<th>Description</th>\r\n</tr>\r\n</thead>\r\n\r\n<tbody>\r\n<tr>\r\n<td>StationToStationInfos</td>\r\n\r\n<td>\r\nArray containing station to station information (<a href=\r\n\"#StationToStationInfo\">StationToStationInfo</a>).\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"StationToStationInfo\" name=\r\n\"StationToStationInfo\">StationToStationInfo Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>CompositeMiles</td>\r\n\r\n<td>Distance in miles from the source to destination station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>DestinationStation</td>\r\n\r\n<td>Destination station code. Use this value in other rail-related\r\nAPIs to retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RailFare</td>\r\n\r\n<td>\r\nStructure containing <a href=\"#RailFare\">fare</a> information.\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>RailTime</td>\r\n\r\n<td>Estimated travel time (schedule time) in minutes between the source and\r\ndestination station. This is not correlated to minutes <span class=\"text-info\">(Min)</span> in Real-Time Rail Predictions.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SourceStation</td>\r\n\r\n<td>Origin station code. Use this value in other rail-related APIs\r\nto retrieve data about a station.</td>\r\n</tr>\r\n\r\n<tr>\r\n<td colspan=\"2\">\r\n<div class=\"text-primary\" style=\"margin-top: 1em\">\r\n<a id=\"RailFare\" name=\"RailFare\">RailFare Elements</a>\r\n</div>\r\n</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>OffPeakTime</td>\r\n\r\n<td>Fare during off-peak times (times other than the ones described\r\nbelow).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>PeakTime</td>\r\n\r\n<td>Fare during peak times (weekdays from opening to 9:30 AM and\r\n3-7 PM, and weekends from midnight to closing).</td>\r\n</tr>\r\n\r\n<tr>\r\n<td>SeniorDisabled</td>\r\n\r\n<td>\r\nReduced fare for <a href=\r\n\"http://www.wmata.com/fares/reduced.cfm\">senior citizens or\r\npeople with disabilities</a>.\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>"
+      description: |-
+        <h4 class="text-primary">Description</h4>
+
+        <p>Returns a distance, fare information, and estimated travel time between any
+        two stations, including those on different lines. Omit both parameters to
+        retrieve data for all stations.</p>
+
+        <h4 class="text-primary">Response Elements</h4>
+
+        <table class="table table-condensed table-hover">
+        <thead>
+        <tr>
+        <th class="col-md-3">Element</th>
+
+        <th>Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+        <td>StationToStationInfos</td>
+
+        <td>
+        Array containing station to station information (<a href=
+        "#StationToStationInfo">StationToStationInfo</a>).
+        </td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="StationToStationInfo" name=
+        "StationToStationInfo">StationToStationInfo Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>CompositeMiles</td>
+
+        <td>Average of distance traveled between two stations and straight-line distance (as used for WMATA fare calculations).  For more details, please refer to WMATA's <a href="https://www.wmata.com/about/records/public_docs/upload/Tariff-on-Fares-Annotated-2-12-18.pdf#page=6" target="_blank" rel="noopener noreferrer">Tariff on Fares</a>.</td>
+        </tr>
+
+        <tr>
+        <td>DestinationStation</td>
+
+        <td>Destination station code. Use this value in other rail-related
+        APIs to retrieve data about a station.</td>
+        </tr>
+
+        <tr>
+        <td>RailFare</td>
+
+        <td>
+        Structure containing <a href="#RailFare">fare</a> information.
+        </td>
+        </tr>
+
+        <tr>
+        <td>RailTime</td>
+
+        <td>Estimated travel time (schedule time) in minutes between the source and
+        destination station. This is not correlated to minutes <span class="text-info">(Min)</span> in Real-Time Rail Predictions.</td>
+        </tr>
+
+        <tr>
+        <td>SourceStation</td>
+
+        <td>Origin station code. Use this value in other rail-related APIs
+        to retrieve data about a station.</td>
+        </tr>
+
+        <tr>
+        <td colspan="2">
+        <div class="text-primary" style="margin-top: 1em">
+        <a id="RailFare" name="RailFare">RailFare Elements</a>
+        </div>
+        </td>
+        </tr>
+
+        <tr>
+        <td>OffPeakTime</td>
+
+        <td>Fare during off-peak times (times other than the ones described
+        below).</td>
+        </tr>
+
+        <tr>
+        <td>PeakTime</td>
+
+        <td>Fare during peak times (weekdays from opening to 9:30 AM and
+        3-7 PM, and weekends from midnight to closing).</td>
+        </tr>
+
+        <tr>
+        <td>SeniorDisabled</td>
+
+        <td>
+        Reduced fare for <a href=
+        "http://www.wmata.com/fares/reduced.cfm">senior citizens or
+        people with disabilities</a>.
+        </td>
+        </tr>
+        </tbody>
+        </table>
       operationId: 5476364f031f5909e4fe3313
       parameters:
         - default: E10

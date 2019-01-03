@@ -1584,14 +1584,14 @@ paths:
                   - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/databases/db1
                     name: db1
                     properties:
-                      charset: UTF8
-                      collation: English_United States.1252
+                      charset: utf8
+                      collation: utf8_general_ci
                     type: Microsoft.DBforMySQL/servers/databases
                   - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/databases/db2
                     name: db2
                     properties:
-                      charset: UTF8
-                      collation: English_United States.1252
+                      charset: utf8
+                      collation: utf8_general_ci
                     type: Microsoft.DBforMySQL/servers/databases
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/databases/{databaseName}':
@@ -1656,8 +1656,8 @@ paths:
                 id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/databases/db1
                 name: db1
                 properties:
-                  charset: UTF8
-                  collation: English_United States.1252
+                  charset: utf8
+                  collation: utf8_general_ci
                 type: Microsoft.DBforMySQL/servers/databases
     put:
       description: Creates a new database or updates an existing database.
@@ -1694,8 +1694,8 @@ paths:
             databaseName: db1
             parameters:
               properties:
-                charset: UTF8
-                collation: English_United States.1252
+                charset: utf8
+                collation: utf8_general_ci
             resourceGroupName: TestGroup
             serverName: testserver
             subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
@@ -1705,16 +1705,16 @@ paths:
                 id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/databases/db1
                 name: db1
                 properties:
-                  charset: UTF8
-                  collation: English_United States.1252
+                  charset: utf8
+                  collation: utf8_general_ci
                 type: Microsoft.DBforMySQL/servers/databases
             '201':
               body:
                 id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/servers/testserver/databases/db1
                 name: db1
                 properties:
-                  charset: UTF8
-                  collation: English_United States.1252
+                  charset: utf8
+                  collation: utf8_general_ci
                 type: Microsoft.DBforMySQL/servers/databases
             '202': {}
       x-ms-long-running-operation: true
@@ -2792,7 +2792,7 @@ definitions:
         description: The fully qualified domain name of a server.
         type: string
       masterServerId:
-        description: The master server id of a relica server.
+        description: The master server id of a replica server.
         type: string
       replicaCapacity:
         description: The maximum number of replicas that a master server can have.
@@ -2912,7 +2912,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   ServerUpdateParameters:
-    description: Parameters allowd to update for a server.
+    description: Parameters allowed to update for a server.
     properties:
       properties:
         description: The properties that can be updated for a server.

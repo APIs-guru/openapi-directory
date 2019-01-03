@@ -58,6 +58,8 @@ tags:
   - name: Games
   - name: GoWatchIt
   - name: Images
+  - name: ImdbFeeds
+  - name: Internal
   - name: Metacritic
   - name: Movies
   - name: My
@@ -67,8 +69,7 @@ tags:
   - name: Shows
   - name: Tests
   - name: TheatricalMovies
-  - name: TvMedia
-  - name: TvMediaIndex
+  - name: TvGrid
   - name: Videos
   - name: XroadMedia
 paths:
@@ -1484,6 +1485,30 @@ paths:
           name: BirthYear
           required: false
           type: integer
+        - description: Birth Day of Month
+          format: int32
+          in: query
+          name: BirthDayOfMonth
+          required: false
+          type: integer
+        - description: Birth Month of Year
+          format: int32
+          in: query
+          name: BirthMonthOfYear
+          required: false
+          type: integer
+        - description: Birth Day of Month
+          format: int32
+          in: query
+          name: DeathDayOfMonth
+          required: false
+          type: integer
+        - description: Birth Month of Year
+          format: int32
+          in: query
+          name: DeathMonthOfYear
+          required: false
+          type: integer
         - description: Filter results matching external Id
           in: query
           name: ExternalId
@@ -1774,6 +1799,30 @@ paths:
           format: int32
           in: formData
           name: BirthYear
+          required: false
+          type: integer
+        - description: Birth Day of Month
+          format: int32
+          in: formData
+          name: BirthDayOfMonth
+          required: false
+          type: integer
+        - description: Birth Month of Year
+          format: int32
+          in: formData
+          name: BirthMonthOfYear
+          required: false
+          type: integer
+        - description: Birth Day of Month
+          format: int32
+          in: formData
+          name: DeathDayOfMonth
+          required: false
+          type: integer
+        - description: Birth Month of Year
+          format: int32
+          in: formData
+          name: DeathMonthOfYear
           required: false
           type: integer
         - description: Filter results matching external Id
@@ -3332,6 +3381,7 @@ paths:
           name: StringDistance
           required: false
           type: integer
+          x-nullable: false
       produces:
         - application/json
         - application/xml
@@ -3446,6 +3496,7 @@ paths:
           name: StringDistance
           required: false
           type: integer
+          x-nullable: false
       produces:
         - application/json
         - application/xml
@@ -3615,6 +3666,14 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
+          description: List of tags (movie and show).
+          in: query
+          items:
+            type: string
+          name: Tags
+          required: false
+          type: array
+        - collectionFormat: multi
           description: List of certifications for movie and show.
           in: query
           items:
@@ -3774,6 +3833,12 @@ paths:
           name: HasVideo
           required: false
           type: boolean
+        - description: Filter results based on matching a single Video ID.
+          format: int64
+          in: query
+          name: VideoId
+          required: false
+          type: integer
         - collectionFormat: multi
           description: List of 2 character country codes when filtering on video target countries.
           in: query
@@ -3790,12 +3855,23 @@ paths:
           name: VideoTargetLanguages
           required: false
           type: array
-        - description: Sort results based on last modified descending.  Default is sorted by _score
+        - description: Sort results based on last modified descending.  Default is sorted by _score. DEPRECIATED! Use SortBy instead.
           in: query
           name: SortByTimeStamp
           required: false
           type: boolean
           x-nullable: false
+        - description: SortBy
+          enum:
+            - NOT_SET
+            - Relevance
+            - TimeStamp
+            - IvaRating
+            - ReleaseDate
+          in: query
+          name: SortBy
+          required: false
+          type: string
         - description: Filter results based on timestamp.  Returns >= value timestamp (UTC) provided.
           format: date-time
           in: query
@@ -4020,6 +4096,14 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
+          description: List of tags (movie and show).
+          in: formData
+          items:
+            type: string
+          name: Tags
+          required: false
+          type: array
+        - collectionFormat: multi
           description: List of certifications for movie and show.
           in: formData
           items:
@@ -4179,6 +4263,12 @@ paths:
           name: HasVideo
           required: false
           type: boolean
+        - description: Filter results based on matching a single Video ID.
+          format: int64
+          in: formData
+          name: VideoId
+          required: false
+          type: integer
         - collectionFormat: multi
           description: List of 2 character country codes when filtering on video target countries.
           in: formData
@@ -4195,12 +4285,23 @@ paths:
           name: VideoTargetLanguages
           required: false
           type: array
-        - description: Sort results based on last modified descending.  Default is sorted by _score
+        - description: Sort results based on last modified descending.  Default is sorted by _score. DEPRECIATED! Use SortBy instead.
           in: formData
           name: SortByTimeStamp
           required: false
           type: boolean
           x-nullable: false
+        - description: SortBy
+          enum:
+            - NOT_SET
+            - Relevance
+            - TimeStamp
+            - IvaRating
+            - ReleaseDate
+          in: formData
+          name: SortBy
+          required: false
+          type: string
         - description: Filter results based on timestamp.  Returns >= value timestamp (UTC) provided.
           format: date-time
           in: formData
@@ -5508,16 +5609,6 @@ paths:
           name: Radius
           required: false
           type: integer
-        - description: Filter by theaters that have showtimes.
-          enum:
-            - Any
-            - 'true'
-            - 'false'
-          in: query
-          name: HasShowtimes
-          required: false
-          type: string
-          x-nullable: false
         - description: Number of items to return. Used in pagination.
           format: int32
           in: query
@@ -5573,7 +5664,7 @@ paths:
       description: ''
       operationId: GetFandangoTheater
       parameters:
-        - description: Offset index of the first item to return. Used in pagination.
+        - description: Id of theater.
           in: path
           name: TheaterId
           required: true
@@ -5628,7 +5719,7 @@ paths:
       description: ''
       operationId: GetFandangoTheaterDisplayDates
       parameters:
-        - description: Offset index of the first item to return. Used in pagination.
+        - description: Id of theater.
           in: path
           name: TheaterId
           required: true
@@ -6542,6 +6633,126 @@ paths:
       summary: Redirect to an Image.
       tags:
         - Images
+    parameters:
+      - $ref: '#/parameters/Accept'
+  /ImdbFeeds/Games:
+    get:
+      deprecated: false
+      description: Returns a list of ImdbGame Items
+      operationId: GetImdbGamesFeedGames_Get
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/ImdbFeedResponse'
+            title: List<ImdbFeedResponse>
+            type: array
+      summary: ''
+      tags:
+        - private
+    parameters:
+      - $ref: '#/parameters/Accept'
+  /ImdbFeeds/Shows:
+    get:
+      deprecated: false
+      description: Returns a list of ImdbShow Items
+      operationId: GetImdbShowFeedShows_Get
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/ImdbFeedResponse'
+            title: List<ImdbFeedResponse>
+            type: array
+      summary: ''
+      tags:
+        - private
+    parameters:
+      - $ref: '#/parameters/Accept'
+  /Internal/MovieExceptionRecordValidation/Query:
+    get:
+      deprecated: false
+      operationId: QueryMovieExceptionRecordValidationMovieExceptionRecordValidationQuery_Get
+      parameters:
+        - format: int32
+          in: query
+          name: Skip
+          type: integer
+        - format: int32
+          in: query
+          name: Take
+          type: integer
+        - in: query
+          name: OrderBy
+          type: string
+        - in: query
+          name: OrderByDesc
+          type: string
+        - in: query
+          name: Include
+          type: string
+        - in: query
+          name: Fields
+          type: string
+        - in: query
+          name: Meta
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/QueryResponse<MovieExceptionsFromRecordValidation>'
+      tags:
+        - private
+    parameters:
+      - $ref: '#/parameters/Accept'
+  /Internal/MovieExceptionsFromAlphaMergeGeneral/Query:
+    get:
+      deprecated: false
+      operationId: QueryMovieExceptionsFromAlphaMergeGeneralMovieExceptionsFromAlphaMergeGeneralQuery_Get
+      parameters:
+        - format: int32
+          in: query
+          name: Skip
+          type: integer
+        - format: int32
+          in: query
+          name: Take
+          type: integer
+        - in: query
+          name: OrderBy
+          type: string
+        - in: query
+          name: OrderByDesc
+          type: string
+        - in: query
+          name: Include
+          type: string
+        - in: query
+          name: Fields
+          type: string
+        - in: query
+          name: Meta
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/QueryResponse<MovieExceptionsFromAlphaMergeGeneral>'
+      tags:
+        - private
     parameters:
       - $ref: '#/parameters/Accept'
   '/Metacritic/Movie/{Id}':
@@ -9658,7 +9869,7 @@ paths:
         - TheatricalMovies
     parameters:
       - $ref: '#/parameters/Accept'
-  /TvMedia/Videos:
+  /TvGrid/Videos:
     get:
       deprecated: false
       description: List of Videos for a program.
@@ -9703,10 +9914,10 @@ paths:
           ApiKeyQuery: []
       summary: List of Videos for a program.
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  /TvMedia/genres/movies:
+  /TvGrid/genres/movies:
     get:
       deprecated: false
       description: Gets list of movie genres.
@@ -9752,10 +9963,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  /TvMedia/genres/shows:
+  /TvGrid/genres/shows:
     get:
       deprecated: false
       description: Gets list of show genres.
@@ -9801,10 +10012,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  /TvMedia/genres/sports:
+  /TvGrid/genres/sports:
     get:
       deprecated: false
       description: Gets list of sports genres.
@@ -9850,10 +10061,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  /TvMedia/leagues:
+  /TvGrid/leagues:
     get:
       deprecated: false
       description: Gets list of sports leagues.
@@ -9899,10 +10110,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/leagues/{LeagueID}/listings':
+  '/TvGrid/leagues/{LeagueID}/listings':
     get:
       deprecated: false
       description: Retrieve listings for a given leagueID.
@@ -10126,10 +10337,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/leagues/{LeagueID}/teams':
+  '/TvGrid/leagues/{LeagueID}/teams':
     get:
       deprecated: false
       description: Gets list of teams in a league.
@@ -10180,10 +10391,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  /TvMedia/lineups:
+  /TvGrid/lineups:
     get:
       deprecated: false
       description: Get lineups by postal code.
@@ -10258,10 +10469,10 @@ paths:
           ApiKeyQuery: []
       summary: ''
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  /TvMedia/lineups/browse:
+  /TvGrid/lineups/browse:
     get:
       deprecated: false
       description: 'Starting point for lineup browser, returns available countries.'
@@ -10307,10 +10518,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/lineups/browse/{CountryID}':
+  '/TvGrid/lineups/browse/{CountryID}':
     get:
       deprecated: false
       description: Browse regions by country.
@@ -10361,10 +10572,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/lineups/browse/{CountryID}/{RegionID}':
+  '/TvGrid/lineups/browse/{CountryID}/{RegionID}':
     get:
       deprecated: false
       description: Get service areas for a specific country and region.
@@ -10420,10 +10631,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/lineups/browse/{CountryID}/{RegionID}/{AreaID}':
+  '/TvGrid/lineups/browse/{CountryID}/{RegionID}/{AreaID}':
     get:
       deprecated: false
       description: Get lineups by AreaID.
@@ -10507,10 +10718,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  /TvMedia/lineups/geo:
+  /TvGrid/lineups/geo:
     get:
       deprecated: false
       description: Get lineups by latitude and longitude.
@@ -10593,10 +10804,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/lineups/{LineupID}':
+  '/TvGrid/lineups/{LineupID}':
     get:
       deprecated: false
       description: Get lineups by specific LineupID.
@@ -10652,10 +10863,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/lineups/{LineupID}/listings':
+  '/TvGrid/lineups/{LineupID}/listings':
     get:
       deprecated: false
       description: 'Retrieve individual listings for a given lineup ordered by start time (listDateTime) and channel number; unless using the search parameter, in which case they will be ordered by search term relevance.'
@@ -10874,10 +11085,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/lineups/{LineupID}/listings/grid':
+  '/TvGrid/lineups/{LineupID}/listings/grid':
     get:
       deprecated: false
       description: 'A collection of listings grouped by channel and ordered by listDateTime. The grid dimensions ( time x channels ) can be modified by using the start, end, startchan and maxchan parameters. Channels without any listings will be returned with an empty listings collection.'
@@ -11096,10 +11307,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/lineups/{LineupID}/listings/highlights':
+  '/TvGrid/lineups/{LineupID}/listings/highlights':
     get:
       deprecated: false
       description: Retrieves featured listings. setting a start and/or end time for every request is a highly recommended.
@@ -11318,10 +11529,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  /TvMedia/reference/lineups:
+  /TvGrid/reference/lineups:
     get:
       deprecated: false
       description: 'Get list of generic lineup IDs that can be used.  A ''generic'' lineup is not a real lineup, but a collection of stations defined by TV Media.  Any listing retrieved using a generic lineup will not return any channel number information, as it is irrelevant.'
@@ -11376,10 +11587,10 @@ paths:
           ApiKeyQuery: []
       summary: ''
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/stations/{StationID}':
+  '/TvGrid/stations/{StationID}':
     get:
       deprecated: false
       description: Gets station details by ID.
@@ -11429,10 +11640,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/stations/{StationID}/listings':
+  '/TvGrid/stations/{StationID}/listings':
     get:
       deprecated: false
       description: Get listings for a given station.
@@ -11654,10 +11865,10 @@ paths:
           ApiKeyQuery: []
       summary: 'Stations are not tied to lineups, therefore no channel numbers will be present in the response, unlike most other listing operations.'
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/teams/{TeamID}':
+  '/TvGrid/teams/{TeamID}':
     get:
       deprecated: false
       description: Gets details for a specific team.
@@ -11710,10 +11921,10 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
-  '/TvMedia/teams/{TeamID}/listings':
+  '/TvGrid/teams/{TeamID}/listings':
     get:
       deprecated: false
       description: Retrieve listings for a given TeamID.
@@ -11939,215 +12150,7 @@ paths:
         - ApiKeyHeader: []
           ApiKeyQuery: []
       tags:
-        - TvMedia
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /TvMediaIndex/ConvertSeries:
-    get:
-      deprecated: false
-      description: Converts a TvMediaSeriesIndex to a ThirdPartyProgram.
-      operationId: ConvertTvMediaSeriesToThirdPartyProgramConvertSeries_Get
-      parameters:
-        - format: int32
-          in: query
-          name: seriesID
-          type: integer
-          x-nullable: false
-        - in: query
-          name: seriesName
-          type: string
-        - in: query
-          name: showType
-          type: string
-        - in: query
-          name: description
-          type: string
-        - format: int32
-          in: query
-          name: usualDuration
-          type: integer
-          x-nullable: false
-        - in: query
-          name: rating
-          type: string
-        - in: query
-          name: originatingNetwork
-          type: string
-        - in: query
-          name: language
-          type: string
-        - in: query
-          name: stereo
-          type: boolean
-          x-nullable: false
-        - in: query
-          name: educational
-          type: boolean
-          x-nullable: false
-        - in: query
-          name: startYear
-          type: string
-        - in: query
-          name: endYear
-          type: string
-        - in: query
-          name: productionEnded
-          type: boolean
-          x-nullable: false
-        - in: query
-          name: twitter
-          type: string
-        - in: query
-          name: imdbID
-          type: string
-        - in: query
-          name: picture
-          type: string
-        - in: query
-          name: artwork
-          type: string
-        - in: query
-          name: seasons
-          type: string
-        - in: query
-          name: cast
-          type: string
-        - in: query
-          name: externalIds
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ThirdPartyProgram'
-      summary: ''
-      tags:
-        - private
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /TvMediaIndex/GetDistinctValues:
-    get:
-      deprecated: false
-      description: 'Returns various lists of distinct values, Ex: ShowTypes, Genres, etc.'
-      operationId: GetDistinctValuesGetDistinctValues_Get
-      parameters: []
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/Object'
-      summary: Samples 2000 records to get distince TV Ratings and Genres/Types.
-      tags:
-        - private
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /TvMediaIndex/ThirdPartyProgram/RefershFullShow:
-    get:
-      deprecated: false
-      description: Requires TvMedia ID and program type to uopdate and return 3PP.
-      operationId: RefreshTvMedia3PPFullShowThirdPartyProgramRefershFullShow_Get
-      parameters:
-        - description: TvMedia ID of program.
-          in: query
-          name: Id
-          required: true
-          type: string
-        - description: 'Flag indicating that only the last 2 seasons of a show will be updated, defaults to true.'
-          in: query
-          name: LastTwoSeasonsOnly
-          required: false
-          type: boolean
-          x-nullable: false
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            items:
-              $ref: '#/definitions/ThirdPartyProgram'
-            title: List<ThirdPartyProgram>
-            type: array
-      summary: Refreshes and returns TvMedia ThirdPartyProgram.
-      tags:
-        - private
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /TvMediaIndex/ThirdPartyProgram/Refresh:
-    get:
-      deprecated: false
-      description: Requires TvMedia ID and program type to uopdate and return 3PP.
-      operationId: RefreshTvMedia3PPThirdPartyProgramRefresh_Get
-      parameters:
-        - description: TvMedia ID of program.
-          in: query
-          name: Id
-          required: true
-          type: string
-        - description: Entertainment program type. See /Common/GetCommonEnumerators endpoint for complete list.
-          enum:
-            - Movie
-            - Show
-            - Game
-            - Season
-            - Episode
-          in: query
-          name: ProgramType
-          required: true
-          type: string
-          x-nullable: false
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/ThirdPartyProgram'
-      summary: Refreshes and returns TvMedia ThirdPartyProgram.
-      tags:
-        - private
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /TvMediaIndex/UpdateAllTvMediaShows:
-    get:
-      deprecated: false
-      description: Updates all Series from TvMedia and adds to 3rd party index.
-      operationId: UpdateAllTvMediaShowsUpdateAllTvMediaShows_Get
-      parameters:
-        - in: query
-          name: ListOfIds
-          type: string
-        - in: query
-          name: IncludeTvSpecials
-          type: boolean
-          x-nullable: false
-      produces:
-        - application/json
-      responses:
-        '204':
-          description: No Content
-      summary: ''
-      tags:
-        - private
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /TvMediaIndex/UpdateIndexFromNewlyAiringShows:
-    get:
-      deprecated: false
-      description: Uses Grid Data to identify series to add to Third Party Index.
-      operationId: UpdateIndexFromNewlyAiringShowsUpdateIndexFromNewlyAiringShows_Get
-      parameters: []
-      produces:
-        - application/json
-      responses:
-        '204':
-          description: No Content
-      tags:
-        - private
+        - TvGrid
     parameters:
       - $ref: '#/parameters/Accept'
   '/Videos/GetVideo/{Id}':
@@ -12703,64 +12706,6 @@ definitions:
         x-nullable: false
     title: Contribution
     type: object
-  ConvertTvMediaSeriesToThirdPartyProgram:
-    description: ConvertTvMediaSeriesToThirdPartyProgram
-    properties:
-      artwork:
-        $ref: '#/definitions/Artwork'
-      cast:
-        items:
-          $ref: '#/definitions/TvMediaCast'
-        type: array
-      description:
-        type: string
-      educational:
-        type: boolean
-        x-nullable: false
-      endYear:
-        type: string
-      externalIds:
-        items:
-          $ref: '#/definitions/TvMediaExternalId'
-        type: array
-      imdbID:
-        type: string
-      language:
-        type: string
-      originatingNetwork:
-        type: string
-      picture:
-        type: string
-      productionEnded:
-        type: boolean
-        x-nullable: false
-      rating:
-        type: string
-      seasons:
-        items:
-          $ref: '#/definitions/TvMediaSeason'
-        type: array
-      seriesID:
-        format: int32
-        type: integer
-        x-nullable: false
-      seriesName:
-        type: string
-      showType:
-        type: string
-      startYear:
-        type: string
-      stereo:
-        type: boolean
-        x-nullable: false
-      twitter:
-        type: string
-      usualDuration:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: ConvertTvMediaSeriesToThirdPartyProgram
-    type: object
   Country:
     description: Country
     properties:
@@ -12936,6 +12881,12 @@ definitions:
         x-nullable: false
     title: DbShowCertification
     type: object
+  'Dictionary<String,String>':
+    additionalProperties:
+      type: string
+    description: 'Dictionary<String,String>'
+    title: 'Dictionary<String,String>'
+    type: object
   DiscoverMovie:
     description: DiscoverMovie
     properties:
@@ -13054,12 +13005,28 @@ definitions:
       BirthDate:
         $ref: '#/definitions/FlexDate'
         description: Date Person was born.
+      BirthDayOfMonth:
+        description: Day of month Person was born.
+        format: int32
+        type: integer
+      BirthMonthOfYear:
+        description: Month of Year Person was born.
+        format: int32
+        type: integer
       BirthName:
         description: Name of Person at birth.
         type: string
       DeathDate:
         $ref: '#/definitions/FlexDate'
         description: Date Person died.
+      DeathDayOfMonth:
+        description: Day of month Person died.
+        format: int32
+        type: integer
+      DeathMonthOfYear:
+        description: Month of Year Person died.
+        format: int32
+        type: integer
       Descriptions:
         description: List of biographies for this person.
         items:
@@ -15952,11 +15919,6 @@ definitions:
     properties: {}
     title: GetDbShowReleaseTypes
     type: object
-  GetDistinctValues:
-    description: GetDistinctValues
-    properties: {}
-    title: GetDistinctValues
-    type: object
   GetEngagementActions:
     description: GetEngagementActions
     properties:
@@ -16454,7 +16416,7 @@ definitions:
           - tms
         type: string
       TheaterId:
-        description: Offset index of the first item to return. Used in pagination.
+        description: Id of theater.
         type: string
     required:
       - TheaterId
@@ -16479,7 +16441,7 @@ definitions:
         format: date-time
         type: string
       TheaterId:
-        description: Offset index of the first item to return. Used in pagination.
+        description: Id of theater.
         type: string
     required:
       - TheaterId
@@ -16515,13 +16477,6 @@ definitions:
   GetFandangoTheaters:
     description: GetFandangoTheaters
     properties:
-      HasShowtimes:
-        description: Filter by theaters that have showtimes.
-        enum:
-          - Any
-          - 'true'
-          - 'false'
-        type: string
       Latitude:
         description: Latitude of the user's location.
         format: double
@@ -16775,6 +16730,11 @@ definitions:
     properties: {}
     title: GetImageTypes
     type: object
+  GetImdbGamesFeed:
+    description: GetImdbGamesFeed
+    properties: {}
+    title: GetImdbGamesFeed
+    type: object
   GetImdbMovieIds:
     description: GetImdbMovieIds
     properties:
@@ -16792,6 +16752,11 @@ definitions:
       - Skip
       - Take
     title: GetImdbMovieIds
+    type: object
+  GetImdbShowFeed:
+    description: GetImdbShowFeed
+    properties: {}
+    title: GetImdbShowFeed
     type: object
   GetImdbShowIds:
     description: GetImdbShowIds
@@ -19511,6 +19476,13 @@ definitions:
         type: string
     title: ImageTypeResponse
     type: object
+  ImdbFeedResponse:
+    description: ImdbFeedResponse
+    properties:
+      Message:
+        type: string
+    title: ImdbFeedResponse
+    type: object
   LanguageResponse:
     description: LanguageResponse
     properties:
@@ -19601,6 +19573,11 @@ definitions:
     items:
       $ref: '#/definitions/ImageTypeResponse'
     title: List<ImageTypeResponse>
+    type: array
+  List<ImdbFeedResponse>:
+    items:
+      $ref: '#/definitions/ImdbFeedResponse'
+    title: List<ImdbFeedResponse>
     type: array
   List<LanguageResponse>:
     items:
@@ -19736,11 +19713,6 @@ definitions:
     items:
       $ref: '#/definitions/TagResponse'
     title: List<TagResponse>
-    type: array
-  List<ThirdPartyProgram>:
-    items:
-      $ref: '#/definitions/ThirdPartyProgram'
-    title: List<ThirdPartyProgram>
     type: array
   List<TitleReportResponse>:
     items:
@@ -19927,6 +19899,7 @@ definitions:
         description: 'For fuzzy title match, default is 4, set to 0 for no fuzzy match.'
         format: int32
         type: integer
+        x-nullable: false
       Title:
         description: Title of Program to be matched.
         type: string
@@ -20558,6 +20531,48 @@ definitions:
         description: Language object for language of MovieDescription.
         type: string
     title: MovieDescription
+    type: object
+  MovieExceptionsFromAlphaMergeGeneral:
+    description: MovieExceptionsFromAlphaMergeGeneral
+    properties:
+      Id:
+        format: int64
+        type: integer
+        x-nullable: false
+      OriginalTitle:
+        type: string
+      Status:
+        type: string
+      Title:
+        type: string
+      Url:
+        $ref: '#/definitions/Uri'
+      Year:
+        format: int32
+        type: integer
+        x-nullable: false
+    title: MovieExceptionsFromAlphaMergeGeneral
+    type: object
+  MovieExceptionsFromRecordValidation:
+    description: MovieExceptionsFromRecordValidation
+    properties:
+      Id:
+        format: int64
+        type: integer
+        x-nullable: false
+      OriginalTitle:
+        type: string
+      Status:
+        type: string
+      Title:
+        type: string
+      Url:
+        $ref: '#/definitions/Uri'
+      Year:
+        format: int32
+        type: integer
+        x-nullable: false
+    title: MovieExceptionsFromRecordValidation
     type: object
   MovieExternalIdMap:
     description: MovieExternalIdMap
@@ -21826,6 +21841,90 @@ definitions:
         type: string
     title: ProgramVideo
     type: object
+  QueryMovieExceptionRecordValidation:
+    description: QueryMovieExceptionRecordValidation
+    properties:
+      Fields:
+        type: string
+      Include:
+        type: string
+      Meta:
+        $ref: '#/definitions/Dictionary<String,String>'
+      OrderBy:
+        type: string
+      OrderByDesc:
+        type: string
+      Skip:
+        format: int32
+        type: integer
+      Take:
+        format: int32
+        type: integer
+    title: QueryMovieExceptionRecordValidation
+    type: object
+  QueryMovieExceptionsFromAlphaMergeGeneral:
+    description: QueryMovieExceptionsFromAlphaMergeGeneral
+    properties:
+      Fields:
+        type: string
+      Include:
+        type: string
+      Meta:
+        $ref: '#/definitions/Dictionary<String,String>'
+      OrderBy:
+        type: string
+      OrderByDesc:
+        type: string
+      Skip:
+        format: int32
+        type: integer
+      Take:
+        format: int32
+        type: integer
+    title: QueryMovieExceptionsFromAlphaMergeGeneral
+    type: object
+  QueryResponse<MovieExceptionsFromAlphaMergeGeneral>:
+    description: QueryResponse<MovieExceptionsFromAlphaMergeGeneral>
+    properties:
+      Meta:
+        $ref: '#/definitions/Dictionary<String,String>'
+      Offset:
+        format: int32
+        type: integer
+        x-nullable: false
+      ResponseStatus:
+        $ref: '#/definitions/ResponseStatus'
+      Results:
+        items:
+          $ref: '#/definitions/MovieExceptionsFromAlphaMergeGeneral'
+        type: array
+      Total:
+        format: int32
+        type: integer
+        x-nullable: false
+    title: QueryResponse`1
+    type: object
+  QueryResponse<MovieExceptionsFromRecordValidation>:
+    description: QueryResponse<MovieExceptionsFromRecordValidation>
+    properties:
+      Meta:
+        $ref: '#/definitions/Dictionary<String,String>'
+      Offset:
+        format: int32
+        type: integer
+        x-nullable: false
+      ResponseStatus:
+        $ref: '#/definitions/ResponseStatus'
+      Results:
+        items:
+          $ref: '#/definitions/MovieExceptionsFromRecordValidation'
+        type: array
+      Total:
+        format: int32
+        type: integer
+        x-nullable: false
+    title: QueryResponse`1
+    type: object
   RecentVisitorsResponse:
     description: RecentVisitorsResponse
     properties:
@@ -21869,39 +21968,35 @@ definitions:
         x-nullable: false
     title: Recommendation
     type: object
-  RefreshTvMedia3PP:
-    description: RefreshTvMedia3PP
+  ResponseError:
+    description: ResponseError
     properties:
-      Id:
-        description: TvMedia ID of program.
+      ErrorCode:
         type: string
-      ProgramType:
-        description: Entertainment program type. See /Common/GetCommonEnumerators endpoint for complete list.
-        enum:
-          - Movie
-          - Show
-          - Game
-          - Season
-          - Episode
+      FieldName:
         type: string
-    required:
-      - Id
-      - ProgramType
-    title: RefreshTvMedia3PP
+      Message:
+        type: string
+      Meta:
+        $ref: '#/definitions/Dictionary<String,String>'
+    title: ResponseError
     type: object
-  RefreshTvMedia3PPFullShow:
-    description: RefreshTvMedia3PPFullShow
+  ResponseStatus:
+    description: ResponseStatus
     properties:
-      Id:
-        description: TvMedia ID of program.
+      ErrorCode:
         type: string
-      LastTwoSeasonsOnly:
-        description: 'Flag indicating that only the last 2 seasons of a show will be updated, defaults to true.'
-        type: boolean
-        x-nullable: false
-    required:
-      - Id
-    title: RefreshTvMedia3PPFullShow
+      Errors:
+        items:
+          $ref: '#/definitions/ResponseError'
+        type: array
+      Message:
+        type: string
+      Meta:
+        $ref: '#/definitions/Dictionary<String,String>'
+      StackTrace:
+        type: string
+    title: ResponseStatus
     type: object
   RevCaptionItem:
     description: RevCaptionItem
@@ -22000,11 +22095,27 @@ definitions:
         description: Birth Date
         format: date-time
         type: string
+      BirthDayOfMonth:
+        description: Birth Day of Month
+        format: int32
+        type: integer
+      BirthMonthOfYear:
+        description: Birth Month of Year
+        format: int32
+        type: integer
       BirthName:
         description: Filter by birth name.
         type: string
       BirthYear:
         description: Birth Year
+        format: int32
+        type: integer
+      DeathDayOfMonth:
+        description: Birth Day of Month
+        format: int32
+        type: integer
+      DeathMonthOfYear:
+        description: Birth Month of Year
         format: int32
         type: integer
       ExternalId:
@@ -22409,12 +22520,26 @@ definitions:
         format: int32
         type: integer
         x-nullable: false
+      SortBy:
+        description: SortBy
+        enum:
+          - NOT_SET
+          - Relevance
+          - TimeStamp
+          - IvaRating
+          - ReleaseDate
+        type: string
       SortByTimeStamp:
-        description: Sort results based on last modified descending.  Default is sorted by _score
+        description: Sort results based on last modified descending.  Default is sorted by _score. DEPRECIATED! Use SortBy instead.
         type: boolean
         x-nullable: false
       Status:
         description: 'The status of the movie or show.  Ex: Returning_Series, in_production, etc.  '
+        items:
+          type: string
+        type: array
+      Tags:
+        description: List of tags (movie and show).
         items:
           type: string
         type: array
@@ -22426,6 +22551,10 @@ definitions:
       Title:
         description: Title search.
         type: string
+      VideoId:
+        description: Filter results based on matching a single Video ID.
+        format: int64
+        type: integer
       VideoQualities:
         description: List of availability video qualities. See /Common/GetCommonEnumerators endpoint for complete list.
         enum:
@@ -24162,367 +24291,6 @@ definitions:
         type: string
     title: TestDateTimeResponse
     type: object
-  ThirdPartyIndexCompany:
-    description: ThirdPartyIndexCompany
-    properties:
-      Company:
-        type: string
-      IvaCompany:
-        type: string
-      IvaCompanyId:
-        format: int32
-        type: integer
-    title: ThirdPartyIndexCompany
-    type: object
-  ThirdPartyIndexContributor:
-    description: ThirdPartyIndexContributor
-    properties:
-      Character:
-        type: string
-      ExternalIds:
-        items:
-          $ref: '#/definitions/ThirdPartyIndexExternalId'
-        type: array
-      IvaJob:
-        type: string
-      IvaJobId:
-        format: int32
-        type: integer
-      Job:
-        type: string
-      PersonId:
-        type: string
-      PersonName:
-        type: string
-    title: ThirdPartyIndexContributor
-    type: object
-  ThirdPartyIndexExternalId:
-    description: ThirdPartyIndexExternalId
-    properties:
-      Id:
-        type: string
-      IvaName:
-        type: string
-      IvaNameId:
-        format: int32
-        type: integer
-      Name:
-        type: string
-    title: ThirdPartyIndexExternalId
-    type: object
-  ThirdPartyIndexGenre:
-    description: ThirdPartyIndexGenre
-    properties:
-      Genre:
-        type: string
-      IvaGenre:
-        type: string
-      IvaGenreId:
-        format: int32
-        type: integer
-    title: ThirdPartyIndexGenre
-    type: object
-  ThirdPartyIndexImage:
-    description: ThirdPartyIndexImage
-    properties:
-      Attribution:
-        type: string
-      Copyright:
-        type: string
-      Height:
-        format: int32
-        type: integer
-        x-nullable: false
-      Id:
-        type: string
-      IvaImageType:
-        type: string
-      IvaImageTypeId:
-        format: int32
-        type: integer
-      IvaLanguage:
-        type: string
-      IvaLanguageId:
-        format: int32
-        type: integer
-      Language:
-        type: string
-      Link:
-        type: string
-      Official:
-        type: boolean
-        x-nullable: false
-      Source:
-        type: string
-      Type:
-        type: string
-      Width:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: ThirdPartyIndexImage
-    type: object
-  ThirdPartyIndexOriginatingNetwork:
-    description: ThirdPartyIndexOriginatingNetwork
-    properties:
-      IvaNetwork:
-        type: string
-      IvaNetworkId:
-        format: int32
-        type: integer
-      Network:
-        type: string
-    title: ThirdPartyIndexOriginatingNetwork
-    type: object
-  ThirdPartyIndexRelease:
-    description: ThirdPartyIndexRelease
-    properties:
-      Certification:
-        type: string
-      Country:
-        type: string
-      Date:
-        format: date-time
-        type: string
-      IvaCertification:
-        type: string
-      IvaCertificationId:
-        format: int32
-        type: integer
-      IvaCountry:
-        type: string
-      IvaCountryId:
-        format: int32
-        type: integer
-      IvaReleaseType:
-        type: string
-      IvaReleaseTypeId:
-        format: int32
-        type: integer
-      ReleaseType:
-        type: string
-    title: ThirdPartyIndexRelease
-    type: object
-  ThirdPartyIndexTag:
-    description: ThirdPartyIndexTag
-    properties:
-      IvaTag:
-        type: string
-      IvaTagId:
-        format: int64
-        type: integer
-      Tag:
-        type: string
-    title: ThirdPartyIndexTag
-    type: object
-  ThirdPartyIndexVideo:
-    description: ThirdPartyIndexVideo
-    properties:
-      Definition:
-        type: string
-      Description:
-        type: string
-      Duration:
-        format: int32
-        type: integer
-      Id:
-        type: string
-      Image:
-        type: string
-      IvaLanguage:
-        type: string
-      IvaLanguageId:
-        format: int32
-        type: integer
-      Language:
-        type: string
-      PubDate:
-        format: date-time
-        type: string
-      Title:
-        type: string
-      UpVotes:
-        format: int32
-        type: integer
-      VideoMature:
-        type: boolean
-        x-nullable: false
-      VideoUrl:
-        type: string
-      VideoiD:
-        type: string
-    title: ThirdPartyIndexVideo
-    type: object
-  ThirdPartyProgram:
-    description: ThirdPartyProgram
-    properties:
-      AlternateTitles:
-        description: List of alternate titles for this Program.
-        items:
-          $ref: '#/definitions/ProgramAlternateTitle'
-        type: array
-      Budget:
-        description: Program budget
-        format: int64
-        type: integer
-      Cast:
-        description: List of cast member names for matching / searching.  Also in Contributor.
-        items:
-          type: string
-        type: array
-      Companies:
-        description: 'List of companies (Production, Distribution, etc.) associated with program.'
-        items:
-          $ref: '#/definitions/ThirdPartyIndexCompany'
-        type: array
-      Complete:
-        description: 'Flag indicating completeness of record, mainly for IMDb.'
-        type: boolean
-        x-nullable: false
-      Contributors:
-        description: 'List of contributors (Cast, Director, Writer, Production, etc.) for this program.'
-        items:
-          $ref: '#/definitions/ThirdPartyIndexContributor'
-        type: array
-      Descriptions:
-        description: List of descriptions for this Program.
-        items:
-          $ref: '#/definitions/ProgramDescription'
-        type: array
-      Directors:
-        description: List of director names for matching.
-        items:
-          type: string
-        type: array
-      EntertainmentId:
-        description: 'Entertainment ID for program record, populated once matched.  Ex: Movie/6568'
-        type: string
-      EpisodeNumber:
-        description: Used for episodes.
-        type: string
-      ExternalIds:
-        description: List of external Ids associated with Program.
-        items:
-          $ref: '#/definitions/ThirdPartyIndexExternalId'
-        type: array
-      Genres:
-        description: List of genres.
-        items:
-          $ref: '#/definitions/ThirdPartyIndexGenre'
-        type: array
-      Id:
-        description: 'Unique ID of the Elastic Index documant, Show, Season or Episode in the form of Movie/{Source}/1 or Show/{Source}/2'
-        type: string
-      Images:
-        description: List of images.
-        items:
-          $ref: '#/definitions/ThirdPartyIndexImage'
-        type: array
-      IvaProgramType:
-        description: Entertainment Program type of record.
-        type: string
-      IvaSourceTypeId:
-        description: IVA Source type ID for program record.
-        format: int32
-        type: integer
-        x-nullable: false
-      IvaStatus:
-        description: Iva Status of program translated from Status.
-        type: string
-      IvaSubType:
-        description: IVA's Translated SubType from ProgramSubType.
-        type: string
-      Modified:
-        description: DateTime record last modified.
-        format: date-time
-        type: string
-        x-nullable: false
-      OfficialSiteUrl:
-        description: Program website home page.
-        type: string
-      OriginalLanguage:
-        description: Original language.
-        type: string
-      OriginalReleaseDate:
-        description: First generally available release regardless of country. Excludes festivals and premieres.
-        format: date-time
-        type: string
-      OriginalTitle:
-        description: Original title of program
-        type: string
-      OriginatingNetwork:
-        $ref: '#/definitions/ThirdPartyIndexOriginatingNetwork'
-        description: The network that shows are currently airing on.
-      Producers:
-        description: List of producer names for matching.
-        items:
-          type: string
-        type: array
-      ProgramSubType:
-        description: Provider's SubType.
-        type: string
-      ProgramType:
-        description: Source Program type of record.
-        type: string
-      Releases:
-        description: List of releases associated with Program.
-        items:
-          $ref: '#/definitions/ThirdPartyIndexRelease'
-        type: array
-      Revenue:
-        description: Total revenue generated by program.
-        format: int64
-        type: integer
-      Runtime:
-        description: Program runtime in minutes.
-        format: int32
-        type: integer
-      SeasonId:
-        description: 'Used for episodes. Ex: Season/{Source}/1234'
-        type: string
-      SeasonNumber:
-        description: Used for season and episodes.
-        type: string
-      ShowId:
-        description: 'Used for season and episodes.  Ex: Show/{Source}/1234'
-        type: string
-      Source:
-        description: Source of Elastic Search document content
-        type: string
-      SourceId:
-        description: Source ID for program record.
-        type: string
-      SourceModified:
-        description: DateTime record last modified from the source.
-        format: date-time
-        type: string
-      Status:
-        description: Status of program.
-        type: string
-      Tags:
-        description: List of tags associated with Program.
-        items:
-          $ref: '#/definitions/ThirdPartyIndexTag'
-        type: array
-      Title:
-        description: English version of any foreign Original Title.
-        type: string
-      Titles:
-        description: List of alternate titles for program for easy searching.
-        items:
-          type: string
-        type: array
-      Videos:
-        description: List of videos.
-        items:
-          $ref: '#/definitions/ThirdPartyIndexVideo'
-        type: array
-      Year:
-        description: Release year of program.
-        format: int32
-        type: integer
-    title: ThirdPartyProgram
-    type: object
   TitleReportResponse:
     description: TitleReportResponse
     properties:
@@ -24543,15 +24311,6 @@ definitions:
         type: integer
         x-nullable: false
     title: TitleReportResponse
-    type: object
-  TvMediaCast:
-    description: TvMediaCast
-    properties:
-      person:
-        $ref: '#/definitions/TvMediaPerson'
-      role:
-        type: string
-    title: TvMediaCast
     type: object
   TvMediaChannelResponse:
     description: TvMediaChannelResponse
@@ -24605,63 +24364,6 @@ definitions:
       countryName:
         type: string
     title: TvMediaCountryResponse
-    type: object
-  TvMediaEpisode:
-    description: TvMediaEpisode
-    properties:
-      actors:
-        type: string
-      airdate:
-        type: string
-      alternateTitle:
-        type: string
-      artwork:
-        $ref: '#/definitions/Artwork'
-      cast:
-        items:
-          $ref: '#/definitions/TvMediaCast'
-        type: array
-      description:
-        type: string
-      educational:
-        type: boolean
-        x-nullable: false
-      episodeID:
-        format: int32
-        type: integer
-        x-nullable: false
-      externalIds:
-        items:
-          $ref: '#/definitions/TvMediaExternalId'
-        type: array
-      seasonID:
-        format: int32
-        type: integer
-        x-nullable: false
-      seasonSeqNo:
-        format: int32
-        type: integer
-        x-nullable: false
-      seriesID:
-        format: int32
-        type: integer
-        x-nullable: false
-      seriesName:
-        type: string
-      seriesSeqNo:
-        format: int32
-        type: integer
-        x-nullable: false
-      showTitle:
-        type: string
-      showTitleSort:
-        type: string
-      showType:
-        type: string
-      subtitled:
-        type: boolean
-        x-nullable: false
-    title: TvMediaEpisode
     type: object
   TvMediaExternalId:
     description: TvMediaExternalId
@@ -24886,29 +24588,6 @@ definitions:
         type: string
     title: TvMediaListingResponse
     type: object
-  TvMediaPerson:
-    description: TvMediaPerson
-    properties:
-      credit:
-        type: string
-      dateOfBirth:
-        type: string
-      externalIds:
-        items:
-          $ref: '#/definitions/Object'
-        type: array
-      imdbID:
-        type: string
-      name:
-        type: string
-      personID:
-        format: int32
-        type: integer
-        x-nullable: false
-      twitter:
-        type: string
-    title: TvMediaPerson
-    type: object
   TvMediaRegionResponse:
     description: TvMediaRegionResponse
     properties:
@@ -24917,39 +24596,6 @@ definitions:
       regionName:
         type: string
     title: TvMediaRegionResponse
-    type: object
-  TvMediaSeason:
-    description: TvMediaSeason
-    properties:
-      actors:
-        type: string
-      cast:
-        items:
-          $ref: '#/definitions/TvMediaCast'
-        type: array
-      episodes:
-        items:
-          $ref: '#/definitions/TvMediaEpisode'
-        type: array
-      externalIds:
-        items:
-          $ref: '#/definitions/Object'
-        type: array
-      seasonDescription:
-        type: string
-      seasonID:
-        format: int32
-        type: integer
-        x-nullable: false
-      seasonNumber:
-        format: int32
-        type: integer
-        x-nullable: false
-      showName:
-        type: string
-      showType:
-        type: string
-    title: TvMediaSeason
     type: object
   TvMediaServiceAreaResponse:
     description: TvMediaServiceAreaResponse
@@ -25140,25 +24786,6 @@ definitions:
         x-nullable: false
     title: TvMediaTeamResponse
     type: object
-  UpdateAllTvMediaShows:
-    description: UpdateAllTvMediaShows
-    properties:
-      IncludeTvSpecials:
-        type: boolean
-        x-nullable: false
-      ListOfIds:
-        items:
-          format: int32
-          type: integer
-          x-nullable: false
-        type: array
-    title: UpdateAllTvMediaShows
-    type: object
-  UpdateIndexFromNewlyAiringShows:
-    description: UpdateIndexFromNewlyAiringShows
-    properties: {}
-    title: UpdateIndexFromNewlyAiringShows
-    type: object
   UpdateMyProgram:
     description: UpdateMyProgram
     properties:
@@ -25223,6 +24850,11 @@ definitions:
         description: Title of MyVideo.
         type: string
     title: UpdateMyVideo
+    type: object
+  Uri:
+    description: Uri
+    properties: {}
+    title: Uri
     type: object
   VideoLogResponse:
     description: VideoLogResponse

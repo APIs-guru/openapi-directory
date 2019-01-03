@@ -253,9 +253,59 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PartnerChannelList'
+        '404':
+          description: ChannelsNotFound
       summary: Get a list of asset change notification channels.
       tags:
         - AssetChanges
+  '/v3/asset-licensing/{assetId}':
+    post:
+      consumes:
+        - application/json
+        - text/json
+      deprecated: false
+      operationId: AssetLicensing_AcquireAssetLicenseWithCredits
+      parameters:
+        - description: "Structure that specifies an array of LicenseTypes (Multiseat, Unlimited, Resale, Indemnification) to acquire,\r\n            and whether or not to use Team Credits. Authenticated User must have access to Team Credits if UseTeamCredits is set to \"true\"."
+          in: body
+          name: request
+          required: true
+          schema:
+            $ref: '#/definitions/GettyImages.Controllers.AssetLicensing.AcquireAssetLicensesRequest'
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+        - description: 'Getty Images assetId - examples 520621493, 112301284'
+          in: path
+          name: assetId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GettyImages.Controllers.AssetLicensing.AssetLicensingResponse'
+        '400':
+          description: InvalidRequest
+        '401':
+          description: AuthorizationTokenRequired
+        '402':
+          description: NotEnoughCreditsForPurchase
+        '404':
+          description: StandardLicenseNotFound
+      summary: Endpoint for acquiring extended licenses with iStock credits for an asset.
+      tags:
+        - AssetLicensing
   /v3/asset-registrations:
     post:
       consumes:
@@ -1023,7 +1073,7 @@ paths:
         '303':
           description: See Other
         '400':
-          description: InvalidRequestParameterValue
+          description: MissingRequiredQueryParameters
         '401':
           description: AuthorizationTokenRequired
         '404':
@@ -1093,7 +1143,7 @@ paths:
         '303':
           description: See Other
         '400':
-          description: ProductIdNotSpecified
+          description: MissingRequiredQueryParameters
         '401':
           description: AuthorizationTokenRequired
         '404':
@@ -1224,7 +1274,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This endpoint returns the detailed image metadata for all specified images. Due to a wide variety of available image resolutions,\r\nthe images are grouped into a handful of size categories for simplicity. \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) \r\npage for more information on how to sign up for an API key. \r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build \r\nsearch response results. The following fields are provided for every image in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a \r\ndetailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\", \r\n        \"artist_title\", \r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\", \r\n        \"city\",\r\n        \"collection_code\",\r\n        \"collection_id\", \r\n        \"collection_name\",\r\n        \"color_type\", \r\n        \"copyright\", \r\n        \"country\", \r\n        \"credit_line\", \r\n        \"date_created\", \r\n        \"date_submitted\",\r\n        \"download_sizes\", \r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"prestige\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"state_province\", \r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution\r\nfiles that are most frequently used to build a UI displaying search results. The following fields are provided for every image \r\nin your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
+      description: "This endpoint returns the detailed image metadata for all specified images. Due to a wide variety of available image resolutions,\r\nthe images are grouped into a handful of size categories for simplicity. \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) \r\npage for more information on how to sign up for an API key. \r\n\r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that are often used to build \r\nsearch response results. The following fields are provided for every image in your result set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are often used to build a \r\ndetailed view of images. The following fields are provided for every image in your result set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\", \r\n        \"artist_title\", \r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\", \r\n        \"city\",\r\n        \"collection_code\",\r\n        \"collection_id\", \r\n        \"collection_name\",\r\n        \"color_type\", \r\n        \"copyright\", \r\n        \"country\", \r\n        \"credit_line\", \r\n        \"date_created\", \r\n        \"date_submitted\",\r\n        \"download_sizes\", \r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"state_province\", \r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low resolution\r\nfiles that are most frequently used to build a UI displaying search results. The following fields are provided for every image \r\nin your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Images_GetBatch
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -1289,7 +1339,6 @@ paths:
               - object_name
               - orientation
               - people
-              - prestige
               - preview
               - product_types
               - quality_rank
@@ -1328,7 +1377,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: "This endpoint returns the detailed image metadata for a specified image. Due to a wide variety of available image resolutions, \r\nthe images are grouped into a handful of size categories for simplicity. \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) \r\npage for more information on how to sign up for an API key. \r\n \r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that\r\nare often used to build search response results. The following fields are provided for every image in your\r\nresult set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are \r\noften used to build a detailed view of images. The following fields are provided for every image in your \r\nresult set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\", \r\n        \"artist_title\", \r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\", \r\n        \"city\",\r\n        \"collection_code\",\r\n        \"collection_id\", \r\n        \"collection_name\",\r\n        \"color_type\", \r\n        \"copyright\", \r\n        \"country\", \r\n        \"credit_line\", \r\n        \"date_created\", \r\n        \"date_submitted\",\r\n        \"download_sizes\", \r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"prestige\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"state_province\", \r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low\r\nresolution files that are most frequently used to build a UI displaying search results. The following fields are provided \r\nfor every image in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
+      description: "This endpoint returns the detailed image metadata for a specified image. Due to a wide variety of available image resolutions, \r\nthe images are grouped into a handful of size categories for simplicity. \r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) \r\npage for more information on how to sign up for an API key. \r\n \r\n## Working with Fields Sets\r\n\r\nFields sets are used in the **fields** request parameter to receive a suite of metadata fields. The following fields sets are available:\r\n\r\n#### Summary Fields Set\r\n\r\nThe **summary_set** query string parameter fields value represents a small batch of metadata fields that\r\nare often used to build search response results. The following fields are provided for every image in your\r\nresult set when you include **summary_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"artist\",\r\n        \"asset_family\",\r\n        \"caption\",\r\n        \"collection_code\",\r\n        \"collection_id\",\r\n        \"collection_name\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Detail Fields Set\r\n\r\nThe **detail_set** query string parameter fields value represents a large batch of metadata fields that are \r\noften used to build a detailed view of images. The following fields are provided for every image in your \r\nresult set when you include **detail_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"allowed_use\",\r\n        \"artist\", \r\n        \"artist_title\", \r\n        \"asset_family\",\r\n        \"call_for_image\",\r\n        \"caption\", \r\n        \"city\",\r\n        \"collection_code\",\r\n        \"collection_id\", \r\n        \"collection_name\",\r\n        \"color_type\", \r\n        \"copyright\", \r\n        \"country\", \r\n        \"credit_line\", \r\n        \"date_created\", \r\n        \"date_submitted\",\r\n        \"download_sizes\", \r\n        \"editorial_segments\",\r\n        \"event_ids\",\r\n        \"graphical_style\",\r\n        \"license_model\",\r\n        \"max_dimensions\",\r\n        \"orientation\",\r\n        \"product_types\",\r\n        \"quality_rank\",\r\n        \"referral_destinations\",\r\n        \"state_province\", \r\n        \"title\"\r\n    ]\r\n}\r\n```\r\n\r\n#### Display Fields Set\r\n\r\nThe **display_set** query string parameter fields value represents the fields that provide you with URLs for the low\r\nresolution files that are most frequently used to build a UI displaying search results. The following fields are provided \r\nfor every image in your result set when you include **display_set** in your request.\r\n\r\n```\r\n{\r\n    \"images\":\r\n    [\r\n        \"display_sizes\": \r\n        [\r\n            {\r\n                \"name\": \"comp\"\r\n            },\r\n            {\r\n                \"name\": \"preview\"\r\n            },\r\n            {\r\n                \"name\": \"thumb\"\r\n            }\r\n        ]\r\n    ]\r\n}\r\n```\r\n\r\n## Request Usage Considerations\r\n\r\n- Specifying the \"entity_details\" response field can have significant performance implications. The field should be used only when necessary.\r\n"
       operationId: Images_Get
       parameters:
         - description: Provide a header to specify the language of result values.
@@ -1390,7 +1439,6 @@ paths:
               - object_name
               - orientation
               - people
-              - prestige
               - preview
               - product_types
               - quality_rank
@@ -1470,6 +1518,7 @@ paths:
               - date_submitted
               - detail_set
               - display_set
+              - download_sizes
               - editorial_segments
               - editorial_source
               - entity_details
@@ -1483,7 +1532,6 @@ paths:
               - max_dimensions
               - orientation
               - people
-              - prestige
               - preview
               - product_types
               - quality_rank
@@ -2000,6 +2048,7 @@ paths:
               - date_submitted
               - detail_set
               - display_set
+              - download_sizes
               - editorial_segments
               - editorial_source
               - entity_details
@@ -2013,7 +2062,6 @@ paths:
               - max_dimensions
               - orientation
               - people
-              - prestige
               - preview
               - product_types
               - quality_rank
@@ -2134,11 +2182,6 @@ paths:
           name: phrase
           required: false
           type: string
-        - description: Restrict search results to prestige images. The default is false.
-          in: query
-          name: prestige_content_only
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
@@ -2336,6 +2379,23 @@ paths:
           required: false
           type: boolean
         - collectionFormat: multi
+          description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r\n                   The include_facets parameter must be set to \"true\" for facets to be returned."
+          in: query
+          items:
+            enum:
+              - artists
+              - locations
+            type: string
+          name: facet_fields
+          required: false
+          type: array
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
+          format: int32
+          in: query
+          name: facet_max_count
+          required: false
+          type: integer
+        - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
           items:
@@ -2357,6 +2417,7 @@ paths:
               - date_submitted
               - detail_set
               - display_set
+              - download_sizes
               - graphical_style
               - id
               - istock_collection
@@ -2365,7 +2426,6 @@ paths:
               - license_model
               - max_dimensions
               - orientation
-              - prestige
               - preview
               - product_types
               - quality_rank
@@ -2410,6 +2470,11 @@ paths:
           name: graphical_styles_filter_type
           required: false
           type: string
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
+          in: query
+          name: include_facets
+          required: false
+          type: boolean
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -2486,11 +2551,6 @@ paths:
           name: phrase
           required: false
           type: string
-        - description: Restrict search results to prestige images. The default is false.
-          in: query
-          name: prestige_content_only
-          required: false
-          type: boolean
         - collectionFormat: multi
           description: "Filter images to those from one of your product types. \r\n                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription. \r\n                    If you have more than one instance of a product, you may also include the ID of the product instance you wish to filter on. \r\n                    For example, some users may have more than one premiumaccess product, so the product_types value would be premiumaccess:1234. \r\n                    Product ID can be obtained from the GET /products response."
           in: query
@@ -2545,6 +2605,23 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
+          description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r\n                    The include_facets parameter must be set to \"true\" for facets to be returned."
+          in: query
+          items:
+            enum:
+              - artists
+              - locations
+            type: string
+          name: facet_fields
+          required: false
+          type: array
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
+          format: int32
+          in: query
+          name: facet_max_count
+          required: false
+          type: integer
+        - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
           items:
@@ -2566,6 +2643,7 @@ paths:
               - date_submitted
               - detail_set
               - display_set
+              - download_sizes
               - graphical_style
               - id
               - istock_collection
@@ -2574,7 +2652,6 @@ paths:
               - license_model
               - max_dimensions
               - orientation
-              - prestige
               - preview
               - product_types
               - quality_rank
@@ -2597,6 +2674,11 @@ paths:
           name: image_url
           required: false
           type: string
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
+          in: query
+          name: include_facets
+          required: false
+          type: boolean
         - description: Request results starting at a page number (default is 1).
           format: int32
           in: query
@@ -2820,6 +2902,25 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
+          description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r\n                   The include_facets parameter must be set to \"true\" for facets to be returned."
+          in: query
+          items:
+            enum:
+              - artists
+              - events
+              - locations
+              - specific_people
+            type: string
+          name: facet_fields
+          required: false
+          type: array
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
+          format: int32
+          in: query
+          name: facet_max_count
+          required: false
+          type: integer
+        - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
           items:
@@ -2841,6 +2942,7 @@ paths:
               - date_submitted
               - detail_set
               - display_set
+              - download_sizes
               - editorial_segments
               - editorial_source
               - entity_details
@@ -2896,6 +2998,11 @@ paths:
           name: graphical_styles_filter_type
           required: false
           type: string
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
+          in: query
+          name: include_facets
+          required: false
+          type: boolean
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -3126,6 +3233,7 @@ paths:
               - date_submitted
               - detail_set
               - display_set
+              - download_sizes
               - editorial_segments
               - entity_details
               - era
@@ -3349,6 +3457,23 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
+          description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r\n                   The include_facets parameter must be set to \"true\" for facets to be returned."
+          in: query
+          items:
+            enum:
+              - artists
+              - locations
+            type: string
+          name: facet_fields
+          required: false
+          type: array
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
+          format: int32
+          in: query
+          name: facet_max_count
+          required: false
+          type: integer
+        - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
           items:
@@ -3369,6 +3494,7 @@ paths:
               - date_submitted
               - detail_set
               - display_set
+              - download_sizes
               - era
               - id
               - istock_collection
@@ -3416,6 +3542,11 @@ paths:
           name: frame_rates
           required: false
           type: array
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
+          in: query
+          name: include_facets
+          required: false
+          type: boolean
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -3601,6 +3732,25 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
+          description: "Specifies the facets to return in the response. Facets provide additional search parameters to refine your results.\r\n                   The include_facets parameter must be set to \"true\" for facets to be returned."
+          in: query
+          items:
+            enum:
+              - artists
+              - events
+              - locations
+              - specific_people
+            type: string
+          name: facet_fields
+          required: false
+          type: array
+        - description: Specifies the maximum number of facets to return per type. Default is 300.
+          format: int32
+          in: query
+          name: facet_max_count
+          required: false
+          type: integer
+        - collectionFormat: multi
           description: Specifies fields to return. Defaults to 'summary_set'.
           in: query
           items:
@@ -3621,6 +3771,7 @@ paths:
               - date_submitted
               - detail_set
               - display_set
+              - download_sizes
               - editorial_segments
               - entity_details
               - era
@@ -3671,6 +3822,11 @@ paths:
           name: frame_rates
           required: false
           type: array
+        - description: Specifies whether or not to include facets in the result set. Default is "false".
+          in: query
+          name: include_facets
+          required: false
+          type: boolean
         - collectionFormat: multi
           description: 'Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.'
           in: query
@@ -3762,7 +3918,7 @@ paths:
           name: Authorization
           required: true
           type: string
-        - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            The date format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
+        - description: "Specifies up to 1000 sets of asset Id, usage count, and date of use to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded. \r\n            All dates must be on or before this date and the format should be ISO 8601 (ex: YYYY-MM-DD), time is not needed."
           in: body
           name: request
           required: true
@@ -3785,8 +3941,10 @@ paths:
           description: 'InvalidRequest - The content of the request was invalid. Most commonly this is due to either too many assets specified, no assets or invalid JSON.'
         '401':
           description: AuthorizationTokenRequired - Authorization token was missing or not valid.
+        '403':
+          description: UnauthorizedToReportUsage
         '409':
-          description: TransactionIdDuplicated - The id parameter supplied was already used in a previous usage report.
+          description: TransactionIdDuplicated
       summary: Report usage of assets via a batch format.
       tags:
         - Usage
@@ -4013,6 +4171,7 @@ paths:
               - date_submitted
               - detail_set
               - display_set
+              - download_sizes
               - editorial_segments
               - entity_details
               - era
@@ -4279,6 +4438,102 @@ definitions:
         type: string
       uri:
         type: string
+    type: object
+  Enterprise.Proxies.Public.V3.Controllers.Search.Facets.Artist:
+    properties:
+      name:
+        type: string
+    type: object
+  Enterprise.Proxies.Public.V3.Controllers.Search.Facets.Entertainment:
+    properties:
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+    type: object
+  Enterprise.Proxies.Public.V3.Controllers.Search.Facets.Event:
+    properties:
+      date:
+        format: date-time
+        type: string
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+    type: object
+  Enterprise.Proxies.Public.V3.Controllers.Search.Facets.Location:
+    properties:
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+    type: object
+  Enterprise.Proxies.Public.V3.Controllers.Search.Facets.SearchFacetsResponse:
+    properties:
+      artists:
+        items:
+          $ref: '#/definitions/Enterprise.Proxies.Public.V3.Controllers.Search.Facets.Artist'
+        type: array
+      entertainment:
+        items:
+          $ref: '#/definitions/Enterprise.Proxies.Public.V3.Controllers.Search.Facets.Entertainment'
+        type: array
+      events:
+        items:
+          $ref: '#/definitions/Enterprise.Proxies.Public.V3.Controllers.Search.Facets.Event'
+        type: array
+      locations:
+        items:
+          $ref: '#/definitions/Enterprise.Proxies.Public.V3.Controllers.Search.Facets.Location'
+        type: array
+      specific_people:
+        items:
+          $ref: '#/definitions/Enterprise.Proxies.Public.V3.Controllers.Search.Facets.SpecificPeople'
+        type: array
+    type: object
+  Enterprise.Proxies.Public.V3.Controllers.Search.Facets.SpecificPeople:
+    properties:
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+    type: object
+  GettyImages.Controllers.AssetLicensing.AcquireAssetLicensesRequest:
+    properties:
+      LicenseTypes:
+        items:
+          enum:
+            - Multiseat
+            - Unlimited
+            - Resale
+            - Indemnification
+          type: string
+        type: array
+      UseTeamCredits:
+        description: Defaults to false.
+        type: boolean
+    required:
+      - LicenseTypes
+    type: object
+  GettyImages.Controllers.AssetLicensing.AssetLicensingResponse:
+    properties:
+      AcquiredLicenses:
+        items:
+          enum:
+            - Standard
+            - Multiseat
+            - Unlimited
+            - Resale
+            - Indemnification
+          type: string
+        type: array
+      CreditsUsed:
+        format: int32
+        type: integer
     type: object
   GettyImages.Models.AllowedUse:
     properties:
@@ -4614,6 +4869,12 @@ definitions:
         format: int32
         type: integer
       license_type:
+        enum:
+          - Standard
+          - Multiseat
+          - Unlimited
+          - Resale
+          - Indemnification
         type: string
     type: object
   GettyImages.Models.Images.EditorialSource:
@@ -4717,8 +4978,6 @@ definitions:
         items:
           type: string
         type: array
-      prestige:
-        type: boolean
       product_types:
         items:
           type: string
@@ -5054,6 +5313,8 @@ definitions:
     type: object
   GettyImages.Models.Search.CreativeVideoSearchResults:
     properties:
+      facets:
+        $ref: '#/definitions/Enterprise.Proxies.Public.V3.Controllers.Search.Facets.SearchFacetsResponse'
       result_count:
         format: int32
         type: integer
@@ -5080,6 +5341,8 @@ definitions:
     type: object
   GettyImages.Models.Search.EditorialVideoSearchResults:
     properties:
+      facets:
+        $ref: '#/definitions/Enterprise.Proxies.Public.V3.Controllers.Search.Facets.SearchFacetsResponse'
       result_count:
         format: int32
         type: integer
@@ -5170,8 +5433,6 @@ definitions:
         items:
           type: string
         type: array
-      prestige:
-        type: boolean
       product_types:
         items:
           type: string
@@ -5243,12 +5504,6 @@ definitions:
         $ref: '#/definitions/GettyImages.Models.MaxDimensions'
       orientation:
         type: string
-      prestige:
-        type: boolean
-      product_types:
-        items:
-          type: string
-        type: array
       quality_rank:
         format: int32
         type: integer
@@ -5457,6 +5712,8 @@ definitions:
     type: object
   'GettyImages.Models.Search.VideoSearchResults[GettyImages.Models.Artists.VideoSearchItem]':
     properties:
+      facets:
+        $ref: '#/definitions/Enterprise.Proxies.Public.V3.Controllers.Search.Facets.SearchFacetsResponse'
       result_count:
         format: int32
         type: integer

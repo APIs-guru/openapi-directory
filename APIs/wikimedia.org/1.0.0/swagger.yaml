@@ -73,27 +73,7 @@ paths:
       summary: Gets availability of featured feed content for the apps by wiki domain.
       tags:
         - Feed content availability
-      x-amples:
-        - request:
-            params:
-              domain: wikimedia.org
-          response:
-            body:
-              in_the_news:
-                - /.+/
-              most_read:
-                - '*'
-              on_this_day:
-                - /.+/
-              picture_of_the_day:
-                - '*'
-              todays_featured_article:
-                - /.+/
-            headers:
-              content-type: application/json
-            status: 200
-          title: Retrieve feed content availability
-      x-monitor: true
+      x-monitor: false
   '/media/math/check/{type}':
     post:
       description: |
@@ -323,6 +303,87 @@ paths:
       tags:
         - Bytes difference data
       x-monitor: false
+  '/metrics/bytes-difference/absolute/per-page/{project}/{page-title}/{editor-type}/{granularity}/{start}/{end}':
+    get:
+      description: |
+        Given a Mediawiki project, a page-title prefixed with canonical namespace (for
+        instance 'User:Jimbo_Wales') and a date range, returns a timeseries of bytes
+        difference absolute sums. You can filter by editors-type (all-editor-types, anonymous,
+        group-bot, name-bot, user). You can choose between daily and monthly granularity as well.
+
+        - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Rate limit: 25 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
+      parameters:
+        - description: |
+            The name of any Wikimedia project formatted like {language code}.{project name},
+            for example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped
+            off. For projects like commons without language codes, use commons.wikimedia. For
+            projects like www.mediawiki.org, you can use that full string, or just use mediawiki
+            or mediawiki.org.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |
+            The page-title to request absolute bytes-difference for. Should be prefixed with the
+            page canonical namespace.
+          in: path
+          name: page-title
+          required: true
+          type: string
+        - description: |
+            If you want to filter by editor-type, use one of anonymous, group-bot (registered
+            accounts belonging to the bot group), name-bot (registered accounts not belonging to
+            the bot group but having bot-like names) or user (registered account not in bot group
+            nor having bot-like name). If you are interested in edits regardless of their
+            editor-type, use all-editor-types.
+          enum:
+            - all-editor-types
+            - anonymous
+            - group-bot
+            - name-bot
+            - user
+          in: path
+          name: editor-type
+          required: true
+          type: string
+        - description: |
+            Time unit for the response data. As of today, supported values are daily and monthly
+          enum:
+            - daily
+            - monthly
+          in: path
+          name: granularity
+          required: true
+          type: string
+        - description: 'The date of the first day to include, in YYYYMMDD format'
+          in: path
+          name: start
+          required: true
+          type: string
+        - description: 'The date of the last day to include, in YYYYMMDD format'
+          in: path
+          name: end
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/problem+json
+      responses:
+        '200':
+          description: The list of values
+          schema:
+            $ref: '#/definitions/absolute-bytes-difference-per-page'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Get the sum of absolute text bytes difference per page.
+      tags:
+        - Bytes difference data
+      x-monitor: false
   '/metrics/bytes-difference/net/aggregate/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}':
     get:
       description: |
@@ -407,6 +468,87 @@ paths:
           schema:
             $ref: '#/definitions/problem'
       summary: Get the sum of net text bytes difference between current edit and previous one.
+      tags:
+        - Bytes difference data
+      x-monitor: false
+  '/metrics/bytes-difference/net/per-page/{project}/{page-title}/{editor-type}/{granularity}/{start}/{end}':
+    get:
+      description: |
+        Given a Mediawiki project, a page-title prefixed with canonical namespace (for
+        instance 'User:Jimbo_Wales') and a date range, returns a timeseries of bytes
+        difference net sums. You can filter by editors-type (all-editor-types, anonymous,
+        group-bot, name-bot, user). You can choose between daily and monthly granularity as well.
+
+        - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Rate limit: 25 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
+      parameters:
+        - description: |
+            The name of any Wikimedia project formatted like {language code}.{project name},
+            for example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped
+            off. For projects like commons without language codes, use commons.wikimedia. For
+            projects like www.mediawiki.org, you can use that full string, or just use mediawiki
+            or mediawiki.org.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |
+            The page-title to request net bytes-difference for. Should be prefixed with the
+            page canonical namespace.
+          in: path
+          name: page-title
+          required: true
+          type: string
+        - description: |
+            If you want to filter by editor-type, use one of anonymous, group-bot (registered
+            accounts belonging to the bot group), name-bot (registered accounts not belonging to
+            the bot group but having bot-like names) or user (registered account not in bot group
+            nor having bot-like name). If you are interested in edits regardless of their
+            editor-type, use all-editor-types.
+          enum:
+            - all-editor-types
+            - anonymous
+            - group-bot
+            - name-bot
+            - user
+          in: path
+          name: editor-type
+          required: true
+          type: string
+        - description: |
+            Time unit for the response data. As of today, supported values are daily and monthly
+          enum:
+            - daily
+            - monthly
+          in: path
+          name: granularity
+          required: true
+          type: string
+        - description: 'The date of the first day to include, in YYYYMMDD format'
+          in: path
+          name: start
+          required: true
+          type: string
+        - description: 'The date of the last day to include, in YYYYMMDD format'
+          in: path
+          name: end
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/problem+json
+      responses:
+        '200':
+          description: The list of values
+          schema:
+            $ref: '#/definitions/net-bytes-difference-per-page'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Get the sum of net text bytes difference per page.
       tags:
         - Bytes difference data
       x-monitor: false
@@ -519,9 +661,6 @@ paths:
         You can filter by editor type (all-editor-types, anonymous, group-bot, name-bot, user)
         or page-type (all-page-types, content or non-content). You can choose between daily and
         monthly granularity as well.
-        The new pages value is computed as follow:
-          [number of created pages] - [number of deleted pages] + [number of restored pages]
-        for the chosen filters.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
         - Rate limit: 25 req/s
@@ -603,13 +742,12 @@ paths:
       tags:
         - Edited pages data
       x-monitor: false
-  '/metrics/edited-pages/top-by-absolute-bytes-difference/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}':
+  '/metrics/edited-pages/top-by-absolute-bytes-difference/{project}/{editor-type}/{page-type}/{year}/{month}/{day}':
     get:
       description: |
-        Given a Mediawiki project and a date range, returns a timeseries of the top 100 edited-pages
-        by absolute bytes-difference. You can filter by editor-type (all-editor-types, anonymous,
-        group-bot, name-bot, user) or page-type (all-page-types, content or non-content). You can
-        choose between daily and monthly granularity as well.
+        Given a Mediawiki project and a date (day or month), returns a timeseries of the top 100
+        edited-pages by absolute bytes-difference. You can filter by editor-type (all-editor-types,
+        anonymous, group-bot, name-bot, user) or page-type (all-page-types, content or non-content).
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
         - Rate limit: 25 req/s
@@ -654,23 +792,19 @@ paths:
           name: page-type
           required: true
           type: string
-        - description: |
-            Time unit for the response data. As of today, supported values are daily and monthly
-          enum:
-            - daily
-            - monthly
+        - description: 'The year of the date for which to retrieve top edited-pages, in YYYY format.'
           in: path
-          name: granularity
+          name: year
           required: true
           type: string
-        - description: 'The date of the first day to include, in YYYYMMDD format'
+        - description: 'The month of the date for which to retrieve top edited-pages, in MM format. If you want to get the top edited-pages of a whole month, the day parameter should be all-days.'
           in: path
-          name: start
+          name: month
           required: true
           type: string
-        - description: 'The date of the last day to include, in YYYYMMDD format'
+        - description: 'The day of the date for which to retrieve top edited-pages, in DD format, or all-days for a monthly value.'
           in: path
-          name: end
+          name: day
           required: true
           type: string
       produces:
@@ -689,13 +823,13 @@ paths:
       tags:
         - Edited pages data
       x-monitor: false
-  '/metrics/edited-pages/top-by-edits/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}':
+  '/metrics/edited-pages/top-by-edits/{project}/{editor-type}/{page-type}/{year}/{month}/{day}':
     get:
       description: |
-        Given a Mediawiki project and a date range, returns a timeseries of the top 100 edited-pages
-        by edits count. You can filter by editor-type (all-editor-types, anonymous, group-bot,
-        name-bot, user) or page-type (all-page-types, content or non-content). You can choose
-        between daily and monthly granularity as well.
+        Given a Mediawiki project and a date (day or month), returns a timeseries of the top
+        100 edited-pages by edits count. You can filter by editor-type (all-editor-types,
+        anonymous, group-bot, name-bot, user) or page-type (all-page-types, content or
+        non-content).
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
         - Rate limit: 25 req/s
@@ -740,23 +874,19 @@ paths:
           name: page-type
           required: true
           type: string
-        - description: |
-            Time unit for the response data. As of today, supported values are daily and monthly
-          enum:
-            - daily
-            - monthly
+        - description: 'The year of the date for which to retrieve top edited-pages, in YYYY format.'
           in: path
-          name: granularity
+          name: year
           required: true
           type: string
-        - description: 'The date of the first day to include, in YYYYMMDD format'
+        - description: 'The month of the date for which to retrieve top edited-pages, in MM format. If you want to get the top edited-pages of a whole month, the day parameter should be all-days.'
           in: path
-          name: start
+          name: month
           required: true
           type: string
-        - description: 'The date of the last day to include, in YYYYMMDD format'
+        - description: 'The day of the date for which to retrieve top edited-pages, in DD format, or all-days for a monthly value.'
           in: path
-          name: end
+          name: day
           required: true
           type: string
       produces:
@@ -775,13 +905,12 @@ paths:
       tags:
         - Edited pages data
       x-monitor: false
-  '/metrics/edited-pages/top-by-net-bytes-difference/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}':
+  '/metrics/edited-pages/top-by-net-bytes-difference/{project}/{editor-type}/{page-type}/{year}/{month}/{day}':
     get:
       description: |
-        Given a Mediawiki project and a date range, returns a timeseries of the top 100 edited-pages
-        by net bytes-difference. You can filter by editor-type (all-editor-types, anonymous,
-        group-bot, name-bot, user) or page-type (all-page-types, content or non-content). You can
-        choose between daily and monthly granularity as well.
+        Given a Mediawiki project and a date (day or month), returns a timeseries of the top 100
+        edited-pages by net bytes-difference. You can filter by editor-type (all-editor-types,
+        anonymous, group-bot, name-bot, user) or page-type (all-page-types, content or non-content).
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
         - Rate limit: 25 req/s
@@ -826,23 +955,19 @@ paths:
           name: page-type
           required: true
           type: string
-        - description: |
-            Time unit for the response data. As of today, supported values are daily and monthly
-          enum:
-            - daily
-            - monthly
+        - description: 'The year of the date for which to retrieve top edited-pages, in YYYY format.'
           in: path
-          name: granularity
+          name: year
           required: true
           type: string
-        - description: 'The date of the first day to include, in YYYYMMDD format'
+        - description: 'The month of the date for which to retrieve top edited-pages, in MM format. If you want to get the top edited-pages of a whole month, the day parameter should be all-days.'
           in: path
-          name: start
+          name: month
           required: true
           type: string
-        - description: 'The date of the last day to include, in YYYYMMDD format'
+        - description: 'The day of the date for which to retrieve top edited-pages, in DD format, or all-days for a monthly value.'
           in: path
-          name: end
+          name: day
           required: true
           type: string
       produces:
@@ -963,14 +1088,14 @@ paths:
       tags:
         - Editors data
       x-monitor: false
-  '/metrics/editors/top-by-absolute-bytes-difference/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}':
+  '/metrics/editors/top-by-absolute-bytes-difference/{project}/{editor-type}/{page-type}/{year}/{month}/{day}':
     get:
       description: |
-        Given a Mediawiki project and a date range, returns a timeseries of the top 100 editors by
-        absolute bytes-difference. You can filter by editor-type (all-editor-types, anonymous,
-        group-bot, name-bot, user) or page-type (all-page-types, content or non-content). You can
-        choose between daily and monthly granularity as well. The user_id returned is either the
-        mediawiki user_id if user is registered, or his/her IP if the user is anonymous.
+        Given a Mediawiki project and a date (day or month), returns a timeseries of the top 100
+        editors by absolute bytes-difference. You can filter by editor-type (all-editor-types,
+        anonymous, group-bot, name-bot, user) or page-type (all-page-types, content or non-content).
+        The user_text returned is either the mediawiki user_text if the user is registered, or
+        null if user is anonymous.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
         - Rate limit: 25 req/s
@@ -1015,23 +1140,19 @@ paths:
           name: page-type
           required: true
           type: string
-        - description: |
-            Time unit for the response data. As of today, supported values are daily and monthly
-          enum:
-            - daily
-            - monthly
+        - description: 'The year of the date for which to retrieve top editors, in YYYY format.'
           in: path
-          name: granularity
+          name: year
           required: true
           type: string
-        - description: 'The date of the first day to include, in YYYYMMDD format'
+        - description: 'The month of the date for which to retrieve top editors, in MM format. If you want to get the top editors of a whole month, the day parameter should be all-days.'
           in: path
-          name: start
+          name: month
           required: true
           type: string
-        - description: 'The date of the last day to include, in YYYYMMDD format'
+        - description: 'The day of the date for which to retrieve top editors, in DD format, or all-days for a monthly value.'
           in: path
-          name: end
+          name: day
           required: true
           type: string
       produces:
@@ -1050,14 +1171,14 @@ paths:
       tags:
         - Editors data
       x-monitor: false
-  '/metrics/editors/top-by-edits/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}':
+  '/metrics/editors/top-by-edits/{project}/{editor-type}/{page-type}/{year}/{month}/{day}':
     get:
       description: |
-        Given a Mediawiki project and a date range, returns a timeseries of the top 100 editors by
-        edits count. You can filter by editor-type (all-editor-types, anonymous, group-bot,
-        name-bot, user) or page-type (all-page-types, content or non-content). You can choose
-        between daily and monthly granularity as well. The user_id returned is either the
-        mediawiki user_id if user is registered, or his/her IP if the user is anonymous.
+        Given a Mediawiki project and a date (day or month), returns a timeseries of the top
+        100 editors by edits count. You can filter by editor-type (all-editor-types,
+        anonymous, group-bot, name-bot, user) or page-type (all-page-types, content or
+        non-content). The user_text returned is either the mediawiki user_text if the user is
+        registered, or null if user is anonymous.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
         - Rate limit: 25 req/s
@@ -1102,23 +1223,19 @@ paths:
           name: page-type
           required: true
           type: string
-        - description: |
-            Time unit for the response data. As of today, supported values are daily and monthly
-          enum:
-            - daily
-            - monthly
+        - description: 'The year of the date for which to retrieve top editors, in YYYY format.'
           in: path
-          name: granularity
+          name: year
           required: true
           type: string
-        - description: 'The date of the first day to include, in YYYYMMDD format'
+        - description: 'The month of the date for which to retrieve top editors, in MM format. If you want to get the top editors of a whole month, the day parameter should be all-days.'
           in: path
-          name: start
+          name: month
           required: true
           type: string
-        - description: 'The date of the last day to include, in YYYYMMDD format'
+        - description: 'The day of the date for which to retrieve top editors, in DD format, or all-days for a monthly value.'
           in: path
-          name: end
+          name: day
           required: true
           type: string
       produces:
@@ -1137,14 +1254,14 @@ paths:
       tags:
         - Editors data
       x-monitor: false
-  '/metrics/editors/top-by-net-bytes-difference/{project}/{editor-type}/{page-type}/{granularity}/{start}/{end}':
+  '/metrics/editors/top-by-net-bytes-difference/{project}/{editor-type}/{page-type}/{year}/{month}/{day}':
     get:
       description: |
-        Given a Mediawiki project and a date range, returns a timeseries of the top 100 editors by
-        net bytes-difference. You can filter by editor-type (all-editor-types, anonymous, group-bot,
-        name-bot, user) or page-type (all-page-types, content or non-content). You can choose
-        between daily and monthly granularity as well. The user_id returned is either the mediawiki
-        user_id if user is registered, or his/her IP if the user is anonymous.
+        Given a Mediawiki project and a date (day or month), returns a timeseries of the top 100
+        editors by net bytes-difference. You can filter by editor-type (all-editor-types, anonymous,
+        group-bot, name-bot, user) or page-type (all-page-types, content or non-content). The
+        user_text returned is either the mediawiki user_text if the user is registered, or
+        "Anonymous Editor" if user is anonymous.
 
         - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
         - Rate limit: 25 req/s
@@ -1189,23 +1306,19 @@ paths:
           name: page-type
           required: true
           type: string
-        - description: |
-            Time unit for the response data. As of today, supported values are daily and monthly
-          enum:
-            - daily
-            - monthly
+        - description: 'The year of the date for which to retrieve top editors, in YYYY format.'
           in: path
-          name: granularity
+          name: year
           required: true
           type: string
-        - description: 'The date of the first day to include, in YYYYMMDD format'
+        - description: 'The month of the date for which to retrieve top editors, in MM format. If you want to get the top editors of a whole month, the day parameter should be all-days.'
           in: path
-          name: start
+          name: month
           required: true
           type: string
-        - description: 'The date of the last day to include, in YYYYMMDD format'
+        - description: 'The day of the date for which to retrieve top editors, in DD format, or all-days for a monthly value.'
           in: path
-          name: end
+          name: day
           required: true
           type: string
       produces:
@@ -1309,6 +1422,87 @@ paths:
           schema:
             $ref: '#/definitions/problem'
       summary: Get edits counts for a project.
+      tags:
+        - Edits data
+      x-monitor: false
+  '/metrics/edits/per-page/{project}/{page-title}/{editor-type}/{granularity}/{start}/{end}':
+    get:
+      description: |
+        Given a Mediawiki project, a page-title prefixed with its canonical namespace (for
+        instance 'User:Jimbo_Wales') and a date range, returns a timeseries of edit counts.
+        You can filter by editors-type (all-editor-types, anonymous, group-bot, name-bot, user).
+        You can choose between daily and monthly granularity as well.
+
+        - Stability: [experimental](https://www.mediawiki.org/wiki/API_versioning#Experimental)
+        - Rate limit: 25 req/s
+        - License: Data accessible via this endpoint is available under the
+          [CC0 1.0 license](https://creativecommons.org/publicdomain/zero/1.0/).
+      parameters:
+        - description: |
+            The name of any Wikimedia project formatted like {language code}.{project name},
+            for example en.wikipedia. You may pass en.wikipedia.org and the .org will be stripped
+            off. For projects like commons without language codes, use commons.wikimedia. For
+            projects like www.mediawiki.org, you can use that full string, or just use mediawiki
+            or mediawiki.org.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |
+            The page-title to request edits for. It should be prefixed with canonical namespace.
+            Spaces will be converted to underscores.
+          in: path
+          name: page-title
+          required: true
+          type: string
+        - description: |
+            If you want to filter by editor-type, use one of anonymous, group-bot (registered
+            accounts belonging to the bot group), name-bot (registered accounts not belonging to
+            the bot group but having bot-like names) or user (registered account not in bot group
+            nor having bot-like name). If you are interested in edits regardless of their
+            editor-type, use all-editor-types.
+          enum:
+            - all-editor-types
+            - anonymous
+            - group-bot
+            - name-bot
+            - user
+          in: path
+          name: editor-type
+          required: true
+          type: string
+        - description: |
+            Time unit for the response data. As of today, supported values are daily and monthly
+          enum:
+            - daily
+            - monthly
+          in: path
+          name: granularity
+          required: true
+          type: string
+        - description: 'The date of the first day to include, in YYYYMMDD format'
+          in: path
+          name: start
+          required: true
+          type: string
+        - description: 'The date of the last day to include, in YYYYMMDD format'
+          in: path
+          name: end
+          required: true
+          type: string
+      produces:
+        - application/json
+        - application/problem+json
+      responses:
+        '200':
+          description: The list of values
+          schema:
+            $ref: '#/definitions/edits-per-page'
+        default:
+          description: Error
+          schema:
+            $ref: '#/definitions/problem'
+      summary: Get edit counts for a page in a project.
       tags:
         - Edits data
       x-monitor: false
@@ -2183,6 +2377,52 @@ definitions:
                     type: string
               type: array
         type: array
+  absolute-bytes-difference-per-editor:
+    properties:
+      items:
+        items:
+          properties:
+            granularity:
+              type: string
+            page-type:
+              type: string
+            project:
+              type: string
+            results:
+              items:
+                properties:
+                  abs_bytes_diff:
+                    format: int64
+                    type: integer
+                  timestamp:
+                    type: string
+              type: array
+            user-text:
+              type: string
+        type: array
+  absolute-bytes-difference-per-page:
+    properties:
+      items:
+        items:
+          properties:
+            editor-type:
+              type: string
+            granularity:
+              type: string
+            page-title:
+              type: string
+            project:
+              type: string
+            results:
+              items:
+                properties:
+                  abs_bytes_diff:
+                    format: int64
+                    type: integer
+                  timestamp:
+                    type: string
+              type: array
+        type: array
   availability:
     additionalProperties: false
     properties:
@@ -2370,6 +2610,52 @@ definitions:
                     type: string
               type: array
         type: array
+  edits-per-editor:
+    properties:
+      items:
+        items:
+          properties:
+            granularity:
+              type: string
+            page-type:
+              type: string
+            project:
+              type: string
+            results:
+              items:
+                properties:
+                  edits:
+                    format: int64
+                    type: integer
+                  timestamp:
+                    type: string
+              type: array
+            user-text:
+              type: string
+        type: array
+  edits-per-page:
+    properties:
+      items:
+        items:
+          properties:
+            editor-type:
+              type: string
+            granularity:
+              type: string
+            page-title:
+              type: string
+            project:
+              type: string
+            results:
+              items:
+                properties:
+                  edits:
+                    format: int64
+                    type: integer
+                  timestamp:
+                    type: string
+              type: array
+        type: array
   listing:
     description: The result format for listings
     properties:
@@ -2389,6 +2675,52 @@ definitions:
             granularity:
               type: string
             page-type:
+              type: string
+            project:
+              type: string
+            results:
+              items:
+                properties:
+                  net_bytes_diff:
+                    format: int64
+                    type: integer
+                  timestamp:
+                    type: string
+              type: array
+        type: array
+  net-bytes-difference-per-editor:
+    properties:
+      items:
+        items:
+          properties:
+            granularity:
+              type: string
+            page-type:
+              type: string
+            project:
+              type: string
+            results:
+              items:
+                properties:
+                  net_bytes_diff:
+                    format: int64
+                    type: integer
+                  timestamp:
+                    type: string
+              type: array
+            user-text:
+              type: string
+        type: array
+  net-bytes-difference-per-page:
+    properties:
+      items:
+        items:
+          properties:
+            editor-type:
+              type: string
+            granularity:
+              type: string
+            page-title:
               type: string
             project:
               type: string
@@ -2657,8 +2989,11 @@ definitions:
                         abs_bytes_diff:
                           format: int64
                           type: integer
-                        page_id:
+                        page_title:
                           type: string
+                        rank:
+                          format: int32
+                          type: integer
                     type: array
               type: array
         type: array
@@ -2686,8 +3021,11 @@ definitions:
                         edits:
                           format: int64
                           type: integer
-                        page_id:
+                        page_title:
                           type: string
+                        rank:
+                          format: int32
+                          type: integer
                     type: array
               type: array
         type: array
@@ -2715,8 +3053,11 @@ definitions:
                         net_bytes_diff:
                           format: int64
                           type: integer
-                        page_id:
+                        page_title:
                           type: string
+                        rank:
+                          format: int32
+                          type: integer
                     type: array
               type: array
         type: array
@@ -2744,7 +3085,10 @@ definitions:
                         abs_bytes_diff:
                           format: int64
                           type: integer
-                        user_id:
+                        rank:
+                          format: int32
+                          type: integer
+                        user_text:
                           type: string
                     type: array
               type: array
@@ -2773,7 +3117,10 @@ definitions:
                         edits:
                           format: int64
                           type: integer
-                        user_id:
+                        rank:
+                          format: int32
+                          type: integer
+                        user_text:
                           type: string
                     type: array
               type: array
@@ -2802,7 +3149,10 @@ definitions:
                         net_bytes_diff:
                           format: int64
                           type: integer
-                        user_id:
+                        rank:
+                          format: int32
+                          type: integer
+                        user_text:
                           type: string
                     type: array
               type: array

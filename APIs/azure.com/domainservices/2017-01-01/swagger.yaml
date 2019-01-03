@@ -39,6 +39,13 @@ parameters:
     name: api-version
     required: true
     type: string
+  DomainServiceNameParameter:
+    description: The name of the domain service.
+    in: path
+    name: domainServiceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: The name of the resource group within the user's subscription. The name is case insensitive.
     in: path
@@ -78,6 +85,20 @@ paths:
               body:
                 value:
                   - display:
+                      description: Unregisters Domain Services
+                      operation: Unregister Domain Service
+                      provider: Domain Services Resource Provider
+                      resource: Domain Service Type
+                    name: Microsoft.AAD/unregister/action
+                    origin: 'user,system'
+                  - display:
+                      description: Registers Domain Services
+                      operation: Register Domain Service
+                      provider: Domain Services Resource Provider
+                      resource: Domain Service Type
+                    name: Microsoft.AAD/register/action
+                    origin: 'user,system'
+                  - display:
                       description: Reads Domain Services
                       operation: Read Domain Service
                       provider: Domain Services Resource Provider
@@ -98,6 +119,8 @@ paths:
                       resource: Domain Service Type
                     name: Microsoft.AAD/domainServices/delete
                     origin: 'user,system'
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.AAD/domainServices':
     get:
       description: The List Domain Services in Subscription operation lists all the domain services available under the given subscription (and across all resource groups within that subscription).
@@ -131,6 +154,27 @@ paths:
                         - 10.0.0.5
                         - 10.0.0.8
                       domainName: zdomain.zforest.com
+                      domainSecuritySettings:
+                        ntlmV1: Enabled
+                        syncNtlmPasswords: Enabled
+                        tlsV1: Disabled
+                      filteredSync: Enabled
+                      healthAlerts:
+                        - id: AADDS104
+                          issue: Microsoft is unable to reach the domain controllers for this managed domain. This may happen if a network security group (NSG) configured on your virtual network blocks access to the managed domain. Another possible reason is if there is a user defined route that blocks incoming traffic from the internet.
+                          lastDetected: '2018-09-18T17:46:39.2697888Z'
+                          name: The managed domain is experiencing a network error
+                          raised: '2018-09-18T01:55:40.7834289Z'
+                          resolutionUri: 'https://aka.ms/aadds-neterr'
+                          severity: '2'
+                      healthLastEvaluated: '2018-02-15T21:43:21Z'
+                      healthMonitors:
+                        - details: 'Last backed up on Tue, 18 Sep 2018 03:37:04 GMT'
+                          id: AADDS501
+                          name: Backup
+                        - details: 'Synchronized on Tue, 18 Sep 2018 16:47:57 GMT.'
+                          id: AADDS500
+                          name: Synchronization with Azure AD
                       ldapsSettings:
                         certificateNotAfter: '2018-02-15T21:43:21Z'
                         certificateThumbprint: 9154A390F0C387D679E0DD040701745CDFED67F3
@@ -138,6 +182,12 @@ paths:
                         externalAccessIpAddress: 13.64.148.151
                         ldaps: Enabled
                         publicCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
+                      notificationSettings:
+                        additionalRecipients:
+                          - jicha@microsoft.com
+                          - caalmont@microsoft.com
+                        notifyDcAdmins: Enabled
+                        notifyGlobalAdmins: Enabled
                       provisioningState: Succeeded
                       serviceStatus: Running
                       subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.ClassicNetwork/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
@@ -147,7 +197,8 @@ paths:
                       Owner: jicha
                     type: Microsoft.AAD/domainServices
               description: HTTP 200 (OK) if the operation was successful.
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices':
     get:
       description: The List Domain Services in Resource Group operation lists all the domain services available under the given resource group.
@@ -183,6 +234,27 @@ paths:
                         - 10.0.0.5
                         - 10.0.0.8
                       domainName: zdomain.zforest.com
+                      domainSecuritySettings:
+                        ntlmV1: Enabled
+                        syncNtlmPasswords: Enabled
+                        tlsV1: Disabled
+                      filteredSync: Enabled
+                      healthAlerts:
+                        - id: AADDS104
+                          issue: Microsoft is unable to reach the domain controllers for this managed domain. This may happen if a network security group (NSG) configured on your virtual network blocks access to the managed domain. Another possible reason is if there is a user defined route that blocks incoming traffic from the internet.
+                          lastDetected: '2018-09-18T17:46:39.2697888Z'
+                          name: The managed domain is experiencing a network error
+                          raised: '2018-09-18T01:55:40.7834289Z'
+                          resolutionUri: 'https://aka.ms/aadds-neterr'
+                          severity: '2'
+                      healthLastEvaluated: '2018-02-15T21:43:21Z'
+                      healthMonitors:
+                        - details: 'Last backed up on Tue, 18 Sep 2018 03:37:04 GMT'
+                          id: AADDS501
+                          name: Backup
+                        - details: 'Synchronized on Tue, 18 Sep 2018 16:47:57 GMT.'
+                          id: AADDS500
+                          name: Synchronization with Azure AD
                       ldapsSettings:
                         certificateNotAfter: '2018-02-15T21:43:21Z'
                         certificateThumbprint: 9154A390F0C387D679E0DD040701745CDFED67F3
@@ -190,6 +262,12 @@ paths:
                         externalAccessIpAddress: 13.64.148.151
                         ldaps: Enabled
                         publicCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
+                      notificationSettings:
+                        additionalRecipients:
+                          - jicha@microsoft.com
+                          - caalmont@microsoft.com
+                        notifyDcAdmins: Enabled
+                        notifyGlobalAdmins: Enabled
                       provisioningState: Succeeded
                       serviceStatus: Running
                       subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.ClassicNetwork/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
@@ -199,7 +277,8 @@ paths:
                       Owner: jicha
                     type: Microsoft.AAD/domainServices
               description: HTTP 200 (OK) if the operation was successful.
-      x-ms-pageable: {}
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/domainServices/{domainServiceName}':
     delete:
       description: The Delete Domain Service operation deletes an existing Domain Service.
@@ -208,11 +287,7 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: The name of the domain service in the specified subscription and resource group.
-          in: path
-          name: domainServiceName
-          required: true
-          type: string
+        - $ref: '#/parameters/DomainServiceNameParameter'
       responses:
         '202':
           description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
@@ -243,11 +318,7 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: The name of the domain service in the specified subscription and resource group.
-          in: path
-          name: domainServiceName
-          required: true
-          type: string
+        - $ref: '#/parameters/DomainServiceNameParameter'
       responses:
         '200':
           description: HTTP 200 (OK) if the operation was successful.
@@ -275,6 +346,27 @@ paths:
                     - 10.0.0.5
                     - 10.0.0.8
                   domainName: zdomain.zforest.com
+                  domainSecuritySettings:
+                    ntlmV1: Enabled
+                    syncNtlmPasswords: Enabled
+                    tlsV1: Disabled
+                  filteredSync: Enabled
+                  healthAlerts:
+                    - id: AADDS104
+                      issue: Microsoft is unable to reach the domain controllers for this managed domain. This may happen if a network security group (NSG) configured on your virtual network blocks access to the managed domain. Another possible reason is if there is a user defined route that blocks incoming traffic from the internet.
+                      lastDetected: '2018-09-18T17:46:39.2697888Z'
+                      name: The managed domain is experiencing a network error
+                      raised: '2018-09-18T01:55:40.7834289Z'
+                      resolutionUri: 'https://aka.ms/aadds-neterr'
+                      severity: '2'
+                  healthLastEvaluated: '2018-02-15T21:43:21Z'
+                  healthMonitors:
+                    - details: 'Last backed up on Tue, 18 Sep 2018 03:37:04 GMT'
+                      id: AADDS501
+                      name: Backup
+                    - details: 'Synchronized on Tue, 18 Sep 2018 16:47:57 GMT.'
+                      id: AADDS500
+                      name: Synchronization with Azure AD
                   ldapsSettings:
                     certificateNotAfter: '2018-02-15T21:43:21Z'
                     certificateThumbprint: 9154A390F0C387D679E0DD040701745CDFED67F3
@@ -282,6 +374,12 @@ paths:
                     externalAccessIpAddress: 13.64.148.151
                     ldaps: Enabled
                     publicCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
+                  notificationSettings:
+                    additionalRecipients:
+                      - jicha@microsoft.com
+                      - caalmont@microsoft.com
+                    notifyDcAdmins: Enabled
+                    notifyGlobalAdmins: Enabled
                   provisioningState: Succeeded
                   serviceStatus: Running
                   subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.ClassicNetwork/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
@@ -298,17 +396,13 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: The name of the domain service in the specified subscription and resource group.
-          in: path
-          name: domainServiceName
-          required: true
-          type: string
+        - $ref: '#/parameters/DomainServiceNameParameter'
         - description: Properties supplied to the Update a Domain Service operation.
           in: body
-          name: properties
+          name: domainService
           required: true
           schema:
-            $ref: '#/definitions/DomainServicePatchProperties'
+            $ref: '#/definitions/DomainService'
       responses:
         '200':
           description: HTTP 200 (OK) if the operation was successful.
@@ -325,14 +419,28 @@ paths:
         Update Domain Service:
           parameters:
             api-version: '2017-01-01'
+            domainService:
+              id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com
+              location: westus
+              name: zdomain.zforest.com
+              properties:
+                domainSecuritySettings:
+                  ntlmV1: Enabled
+                  syncNtlmPasswords: Enabled
+                  tlsV1: Disabled
+                filteredSync: Enabled
+                ldapsSettings:
+                  externalAccess: Enabled
+                  ldaps: Enabled
+                  pfxCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
+                  pfxCertificatePassword: Password01
+                notificationSettings:
+                  additionalRecipients:
+                    - jicha@microsoft.com
+                    - caalmont@microsoft.com
+                  notifyDcAdmins: Enabled
+                  notifyGlobalAdmins: Enabled
             domainServiceName: zdomain.zforest.com
-            location: westus
-            properties:
-              ldapsSettings:
-                externalAccess: Enabled
-                ldaps: Enabled
-                pfxCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
-                pfxCertificatePassword: Password01
             resourceGroupName: sva-tt-WUS
             subscriptionId: 1639790a-76a2-4ac4-98d9-8562f5dfcb4d
           responses:
@@ -347,6 +455,11 @@ paths:
                     - 10.0.0.5
                     - 10.0.0.8
                   domainName: zdomain.zforest.com
+                  domainSecuritySettings:
+                    ntlmV1: Enabled
+                    syncNtlmPasswords: Enabled
+                    tlsV1: Disabled
+                  filteredSync: Enabled
                   ldapsSettings:
                     certificateNotAfter: '2018-02-15T21:43:21Z'
                     certificateThumbprint: 9154A390F0C387D679E0DD040701745CDFED67F3
@@ -354,6 +467,12 @@ paths:
                     externalAccessIpAddress: 13.64.148.151
                     ldaps: Enabled
                     publicCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
+                  notificationSettings:
+                    additionalRecipients:
+                      - jicha@microsoft.com
+                      - caalmont@microsoft.com
+                    notifyDcAdmins: Enabled
+                    notifyGlobalAdmins: Enabled
                   provisioningState: Succeeded
                   serviceStatus: Running
                   subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.ClassicNetwork/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
@@ -370,11 +489,22 @@ paths:
                 location: westus
                 name: zdomain.zforest.com
                 properties:
+                  domainSecuritySettings:
+                    ntlmV1: Enabled
+                    syncNtlmPasswords: Enabled
+                    tlsV1: Disabled
+                  filteredSync: Enabled
                   ldapsSettings:
                     externalAccess: Enabled
                     ldaps: Enabled
                     pfxCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
                     pfxCertificatePassword: Password01
+                  notificationSettings:
+                    additionalRecipients:
+                      - jicha@microsoft.com
+                      - caalmont@microsoft.com
+                    notifyDcAdmins: Enabled
+                    notifyGlobalAdmins: Enabled
                   provisioningState: Accepted
                 type: Microsoft.AAD/domainServices
               description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
@@ -386,17 +516,13 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: The name of the domain service in the specified subscription and resource group.
-          in: path
-          name: domainServiceName
-          required: true
-          type: string
+        - $ref: '#/parameters/DomainServiceNameParameter'
         - description: Properties supplied to the Create or Update a Domain Service operation.
           in: body
-          name: properties
+          name: domainService
           required: true
           schema:
-            $ref: '#/definitions/DomainServiceProperties'
+            $ref: '#/definitions/DomainService'
       responses:
         '200':
           description: HTTP 200 (OK) if the operation was successful.
@@ -417,11 +543,30 @@ paths:
         Create Domain Service:
           parameters:
             api-version: '2017-01-01'
+            domainService:
+              id: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/sva-tt-WUS/providers/Microsoft.AAD/domainServices/zdomain.zforest.com
+              location: westus
+              name: zdomain.zforest.com
+              properties:
+                domainName: zdomain.zforest.com
+                domainSecuritySettings:
+                  ntlmV1: Enabled
+                  syncNtlmPasswords: Enabled
+                  tlsV1: Disabled
+                filteredSync: Enabled
+                ldapsSettings:
+                  externalAccess: Enabled
+                  ldaps: Enabled
+                  pfxCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
+                  pfxCertificatePassword: Password01
+                notificationSettings:
+                  additionalRecipients:
+                    - jicha@microsoft.com
+                    - caalmont@microsoft.com
+                  notifyDcAdmins: Enabled
+                  notifyGlobalAdmins: Enabled
+                subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.ClassicNetwork/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
             domainServiceName: zdomain.zforest.com
-            location: westus
-            properties:
-              domainName: zdomain.zforest.com
-              subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.ClassicNetwork/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
             resourceGroupName: sva-tt-WUS
             subscriptionId: 1639790a-76a2-4ac4-98d9-8562f5dfcb4d
           responses:
@@ -436,6 +581,24 @@ paths:
                     - 10.0.0.5
                     - 10.0.0.8
                   domainName: zdomain.zforest.com
+                  domainSecuritySettings:
+                    ntlmV1: Enabled
+                    syncNtlmPasswords: Enabled
+                    tlsV1: Disabled
+                  filteredSync: Enabled
+                  ldapsSettings:
+                    certificateNotAfter: '2018-02-15T21:43:21Z'
+                    certificateThumbprint: 9154A390F0C387D679E0DD040701745CDFED67F3
+                    externalAccess: Enabled
+                    externalAccessIpAddress: 13.64.148.151
+                    ldaps: Enabled
+                    publicCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
+                  notificationSettings:
+                    additionalRecipients:
+                      - jicha@microsoft.com
+                      - caalmont@microsoft.com
+                    notifyDcAdmins: Enabled
+                    notifyGlobalAdmins: Enabled
                   provisioningState: Succeeded
                   serviceStatus: Running
                   subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.ClassicNetwork/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
@@ -454,6 +617,24 @@ paths:
                     - 10.0.0.5
                     - 10.0.0.8
                   domainName: zdomain.zforest.com
+                  domainSecuritySettings:
+                    ntlmV1: Enabled
+                    syncNtlmPasswords: Enabled
+                    tlsV1: Disabled
+                  filteredSync: Enabled
+                  ldapsSettings:
+                    certificateNotAfter: '2018-02-15T21:43:21Z'
+                    certificateThumbprint: 9154A390F0C387D679E0DD040701745CDFED67F3
+                    externalAccess: Enabled
+                    externalAccessIpAddress: 13.64.148.151
+                    ldaps: Enabled
+                    publicCertificate: MIIDPDCCAiSgAwIBAgIQQUI9P6tq2p9OFIJa7DLNvTANBgkqhkiG9w0BAQsFADAgMR4w...
+                  notificationSettings:
+                    additionalRecipients:
+                      - jicha@microsoft.com
+                      - caalmont@microsoft.com
+                    notifyDcAdmins: Enabled
+                    notifyGlobalAdmins: Enabled
                   provisioningState: Succeeded
                   serviceStatus: Running
                   subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.ClassicNetwork/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
@@ -469,12 +650,56 @@ paths:
                 name: zdomain.zforest.com
                 properties:
                   domainName: zdomain.zforest.com
+                  domainSecuritySettings:
+                    ntlmV1: Enabled
+                    syncNtlmPasswords: Enabled
+                    tlsV1: Disabled
+                  filteredSync: Enabled
+                  ldapsSettings:
+                    externalAccess: Enabled
+                    ldaps: Enabled
+                  notificationSettings:
+                    additionalRecipients:
+                      - jicha@microsoft.com
+                      - caalmont@microsoft.com
+                    notifyDcAdmins: Enabled
+                    notifyGlobalAdmins: Enabled
                   provisioningState: Accepted
                   subnetId: /subscriptions/1639790a-76a2-4ac4-98d9-8562f5dfcb4d/resourceGroups/Default-Networking/providers/Microsoft.ClassicNetwork/virtualNetworks/DCIaasTmpWusNet/subnets/Subnet-1
                 type: Microsoft.AAD/domainServices
               description: HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.
       x-ms-long-running-operation: true
 definitions:
+  DomainSecuritySettings:
+    description: Domain Security Settings
+    properties:
+      ntlmV1:
+        description: A flag to determine whether or not NtlmV1 is enabled or disabled.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NtlmV1
+      syncNtlmPasswords:
+        description: A flag to determine whether or not SyncNtlmPasswords is enabled or disabled.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SyncNtlmPasswords
+      tlsV1:
+        description: A flag to determine whether or not TlsV1 is enabled or disabled.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: TlsV1
   DomainService:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -487,17 +712,15 @@ definitions:
   DomainServiceListResult:
     description: The response from the List Domain Services operation.
     properties:
+      nextLink:
+        description: The continuation token for the next page of results.
+        readOnly: true
+        type: string
       value:
         description: the list of domain services.
         items:
           $ref: '#/definitions/DomainService'
         type: array
-  DomainServicePatchProperties:
-    description: Update Properties of the Domain Service.
-    properties:
-      ldapsSettings:
-        $ref: '#/definitions/LdapsSettings'
-        description: Secure LDAP Settings
   DomainServiceProperties:
     description: Properties of the Domain Service.
     properties:
@@ -511,9 +734,43 @@ definitions:
       domainName:
         description: The name of the Azure domain that the user would like to deploy Domain Services to.
         type: string
+      domainSecuritySettings:
+        $ref: '#/definitions/DomainSecuritySettings'
+        description: DomainSecurity Settings
+      filteredSync:
+        description: Enabled or Disabled flag to turn on Group-based filtered sync
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: filteredSync
+      healthAlerts:
+        description: List of Domain Health Alerts
+        items:
+          $ref: '#/definitions/HealthAlert'
+          description: Domain Health Alerts
+        readOnly: true
+        type: array
+      healthLastEvaluated:
+        description: Last domain evaluation run DateTime
+        format: date-time
+        readOnly: true
+        type: string
+      healthMonitors:
+        description: List of Domain Health Monitors
+        items:
+          $ref: '#/definitions/HealthMonitor'
+          description: Domain Health Monitors
+        readOnly: true
+        type: array
       ldapsSettings:
         $ref: '#/definitions/LdapsSettings'
         description: Secure LDAP Settings
+      notificationSettings:
+        $ref: '#/definitions/NotificationSettings'
+        description: Notification Settings
       provisioningState:
         description: 'the current deployment or provisioning state, which only appears in the response.'
         readOnly: true
@@ -531,6 +788,54 @@ definitions:
         type: string
       vnetSiteId:
         description: Virtual network site id
+        readOnly: true
+        type: string
+  HealthAlert:
+    description: Health Alert Description
+    properties:
+      id:
+        description: Health Alert Id
+        readOnly: true
+        type: string
+      issue:
+        description: Health Alert Issue
+        readOnly: true
+        type: string
+      lastDetected:
+        description: Health Alert Last Detected DateTime
+        format: date-time
+        readOnly: true
+        type: string
+      name:
+        description: Health Alert Name
+        readOnly: true
+        type: string
+      raised:
+        description: Health Alert Raised DateTime
+        format: date-time
+        readOnly: true
+        type: string
+      resolutionUri:
+        description: Health Alert TSG Link
+        readOnly: true
+        type: string
+      severity:
+        description: Health Alert Severity
+        readOnly: true
+        type: string
+  HealthMonitor:
+    description: Health Monitor Description
+    properties:
+      details:
+        description: Health Monitor Details
+        readOnly: true
+        type: string
+      id:
+        description: Health Monitor Id
+        readOnly: true
+        type: string
+      name:
+        description: Health Monitor Name
         readOnly: true
         type: string
   LdapsSettings:
@@ -577,6 +882,33 @@ definitions:
         description: Public certificate used to configure secure ldap.
         readOnly: true
         type: string
+  NotificationSettings:
+    description: Settings for notification
+    properties:
+      additionalRecipients:
+        description: The list of additional recipients
+        items:
+          description: Email address for additional recipient
+          type: string
+        type: array
+      notifyDcAdmins:
+        description: Should domain controller admins be notified
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: notifyDcAdmins
+      notifyGlobalAdmins:
+        description: Should global admins be notified
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: notifyGlobalAdmins
   OperationDisplayInfo:
     description: The operation supported by Domain Services.
     properties:
@@ -609,6 +941,10 @@ definitions:
   OperationEntityListResult:
     description: The list of domain service operation response.
     properties:
+      nextLink:
+        description: The continuation token for the next page of results.
+        readOnly: true
+        type: string
       value:
         description: The list of operations.
         items:
@@ -628,6 +964,9 @@ definitions:
       location:
         description: Resource location
         type: string
+        x-ms-mutability:
+          - read
+          - create
       name:
         description: Resource name
         readOnly: true
@@ -641,6 +980,4 @@ definitions:
         description: Resource type
         readOnly: true
         type: string
-    required:
-      - location
     x-ms-azure-resource: true

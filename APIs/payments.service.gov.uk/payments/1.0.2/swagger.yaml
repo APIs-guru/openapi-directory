@@ -77,6 +77,21 @@ paths:
           name: display_size
           required: false
           type: string
+        - description: Name on card used to make payment
+          in: query
+          name: cardholder_name
+          required: false
+          type: string
+        - description: First six digits of the card used to make payment
+          in: query
+          name: first_digits_card_number
+          required: false
+          type: string
+        - description: Last four digits of the card used to make payment
+          in: query
+          name: last_digits_card_number
+          required: false
+          type: string
       responses:
         '200':
           description: OK
@@ -197,6 +212,41 @@ paths:
           schema:
             $ref: '#/definitions/PaymentError'
       summary: Cancel payment
+  '/v1/payments/{paymentId}/capture':
+    post:
+      description: 'Capture a payment based on the provided payment ID and the Authorisation token. The Authorisation token needs to be specified in the ''authorization'' header as ''authorization: Bearer YOUR_API_KEY_HERE''. A payment can only be captured if it''s in ''submitted'' state'
+      operationId: capturePayment
+      parameters:
+        - in: path
+          name: paymentId
+          required: true
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Capture of payment failed
+          schema:
+            $ref: '#/definitions/PaymentError'
+        '401':
+          description: Credentials are required to access this resource
+        '404':
+          description: Not found
+          schema:
+            $ref: '#/definitions/PaymentError'
+        '409':
+          description: Conflict
+          schema:
+            $ref: '#/definitions/PaymentError'
+        '429':
+          description: Too many requests
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '500':
+          description: Downstream system error
+          schema:
+            $ref: '#/definitions/PaymentError'
+      summary: Capture payment
   '/v1/payments/{paymentId}/events':
     get:
       description: 'Return payment events information about a certain payment The Authorisation token needs to be specified in the ''authorization'' header as ''authorization: Bearer YOUR_API_KEY_HERE'''
@@ -370,6 +420,10 @@ definitions:
         example: 12/20
         readOnly: true
         type: string
+      first_digits_card_number:
+        example: '123456'
+        readOnly: true
+        type: string
       last_digits_card_number:
         example: '1234'
         readOnly: true
@@ -387,12 +441,27 @@ definitions:
           card_details:
             $ref: '#/definitions/CardDetails'
             readOnly: true
+          corporate_card_surcharge:
+            example: 250
+            format: int64
+            readOnly: true
+            type: integer
+          delayed_capture:
+            description: delayed capture flag
+            example: false
+            readOnly: true
+            type: boolean
           refund_summary:
             $ref: '#/definitions/RefundSummary'
             readOnly: true
           settlement_summary:
             $ref: '#/definitions/SettlementSummary'
             readOnly: true
+          total_amount:
+            example: 1450
+            format: int64
+            readOnly: true
+            type: integer
         type: object
   CreatePaymentRefundRequest:
     description: The Payment Refund Request Payload
@@ -532,11 +601,15 @@ definitions:
         type: string
     type: object
   PaymentLinks:
-    description: 'self,events and next links of a Payment'
+    description: links for payment
     properties:
       cancel:
         $ref: '#/definitions/PostLink'
         description: cancel
+        readOnly: true
+      capture:
+        $ref: '#/definitions/PostLink'
+        description: capture
         readOnly: true
       events:
         $ref: '#/definitions/Link'
@@ -565,6 +638,10 @@ definitions:
       cancel:
         $ref: '#/definitions/PostLink'
         description: cancel
+        readOnly: true
+      capture:
+        $ref: '#/definitions/PostLink'
+        description: capture
         readOnly: true
       events:
         $ref: '#/definitions/Link'
@@ -673,12 +750,27 @@ definitions:
   ValidCreatePaymentRequest:
     properties:
       amount:
+        description: amount in pence
+        example: 12000
         format: int32
+        maximum: 10000000
+        minimum: 1
         type: integer
       description:
+        description: payment description
+        example: New passport application
         type: string
       reference:
+        description: payment reference
+        example: '12345'
         type: string
-      returnUrl:
+      return_url:
+        description: service return url
+        example: 'https://service-name.gov.uk/transactions/12345'
         type: string
+    required:
+      - amount
+      - description
+      - reference
+      - return_url
     type: object

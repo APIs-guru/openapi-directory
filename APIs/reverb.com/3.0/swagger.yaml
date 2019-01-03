@@ -300,6 +300,9 @@ paths:
                 type: object
               quantity:
                 type: string
+              recipient_id:
+                description: ID of the recipient of the offer. Required if you are the seller pushing an offer to a buyer.
+                type: string
               region_code:
                 type: string
               shipping_price:
@@ -1930,6 +1933,9 @@ paths:
               recipient_id:
                 description: The id of the user you are trying to contact
                 type: integer
+              recipient_uuid:
+                description: The uuid of the user you are trying to contact
+                type: string
               shop_id:
                 description: The id of the shop you are trying to contact
                 type: string
@@ -3217,6 +3223,9 @@ paths:
                   - currency
                 type: object
               quantity:
+                type: string
+              recipient_id:
+                description: ID of the recipient of the offer. Required if you are the seller pushing an offer to a buyer.
                 type: string
               region_code:
                 type: string

@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2016-09-01/expressRouteCircuit.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-expressRouteCircuit
   x-tags:
@@ -76,7 +76,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Request successful. The operation returns a list of ExpressRouteServiceProdiver resources.
+          description: Request successful. The operation returns a list of ExpressRouteServiceProvider resources.
           schema:
             $ref: '#/definitions/ExpressRouteServiceProviderListResult'
       tags:

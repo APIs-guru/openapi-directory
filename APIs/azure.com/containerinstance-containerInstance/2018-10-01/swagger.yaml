@@ -103,6 +103,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/OperationListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       tags:
         - Operations
       x-ms-examples:
@@ -132,6 +136,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ContainerGroupListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Get a list of container groups in the specified subscription.
       x-ms-examples:
         ContainerGroupsList:
@@ -189,6 +197,86 @@ paths:
                     type: Microsoft.ContainerInstance/containerGroups
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/cachedImages':
+    get:
+      description: Get the list of cached images on specific OS type for a subscription in a region.
+      operationId: ListCachedImages
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/LocationParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CachedImagesListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      summary: Get the list of cached images.
+      x-ms-examples:
+        CachedImages:
+          parameters:
+            api-version: '2018-10-01'
+            location: westcentralus
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - image: 'ubuntu:16.04'
+                    osType: Linux
+                  - image: 'alpine:3.6'
+                    osType: Linux
+                  - image: 'microsoft/nanoserver:10.0.14393.2485'
+                    osType: Windows
+  '/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/capabilities':
+    get:
+      description: Get the list of CPU/memory/GPU capabilities of a region.
+      operationId: ListCapabilities
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/LocationParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CapabilitiesListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      summary: Get the list of capabilities of the location.
+      x-ms-examples:
+        GetCapabilities:
+          parameters:
+            api-version: '2018-10-01'
+            location: westus
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - capabilities:
+                      maxCpu: 4
+                      maxGpuCount: 4
+                      maxMemoryInGB: 14
+                    gpu: K80
+                    ipAddressType: Public
+                    location: West US
+                    osType: Linux
+                    resourceType: containerGroups
+                  - capabilities:
+                      maxCpu: 4
+                      maxGpuCount: 0
+                      maxMemoryInGB: 14
+                    gpu: None
+                    ipAddressType: Public
+                    location: West US
+                    osType: Windows
+                    resourceType: containerGroups
   '/subscriptions/{subscriptionId}/providers/Microsoft.ContainerInstance/locations/{location}/usages':
     get:
       description: Get the usage for a subscription
@@ -202,6 +290,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/UsageListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       x-ms-examples:
         ContainerUsage:
           parameters:
@@ -231,6 +323,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ContainerGroupListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Get a list of container groups in the specified subscription and resource group.
       x-ms-examples:
         ContainerGroupsListByResourceGroup:
@@ -298,6 +394,10 @@ paths:
             $ref: '#/definitions/ContainerGroup'
         '204':
           description: No Content - the specified container group was not found.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Delete the specified container group.
       x-ms-examples:
         ContainerGroupsDelete:
@@ -322,6 +422,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ContainerGroup'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Get the properties of the specified container group.
       x-ms-examples:
         ContainerGroupsGet_Failed:
@@ -465,6 +569,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ContainerGroup'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Update container groups.
       x-ms-examples:
         ContainerGroupsUpdate:
@@ -553,6 +661,10 @@ paths:
           description: Created - the container group is created.
           schema:
             $ref: '#/definitions/ContainerGroup'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Create or update container groups.
       x-ms-examples:
         ContainerGroupsCreateOrUpdate:
@@ -773,6 +885,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ContainerExecResponse'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Executes a command in a specific container instance.
       x-ms-examples:
         ContainerExec:
@@ -815,6 +931,10 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Logs'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Get the logs for a specified container instance.
       x-ms-examples:
         ContainerListLogs:
@@ -841,6 +961,10 @@ paths:
       responses:
         '204':
           description: NoContent
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Restarts all containers in a container group.
       x-ms-examples:
         ContainerRestart:
@@ -864,6 +988,10 @@ paths:
       responses:
         '204':
           description: NoContent
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Starts all containers in a container group.
       x-ms-examples:
         ContainerStart:
@@ -887,6 +1015,10 @@ paths:
       responses:
         '204':
           description: NoContent
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Stops all containers in a container group.
       x-ms-examples:
         ContainerStop:
@@ -912,6 +1044,10 @@ paths:
           description: OK
         '204':
           description: No Content - the specified service association link was not found.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
       summary: Delete the container instance service association link for the subnet.
       x-ms-examples:
         ContainerGroupsDelete:
@@ -944,6 +1080,95 @@ definitions:
       - shareName
       - storageAccountName
     type: object
+  CachedImagesListResult:
+    description: The response containing cached images.
+    properties:
+      nextLink:
+        description: The URI to fetch the next page of cached images.
+        type: string
+      value:
+        description: The list of cached images.
+        items:
+          $ref: '#/definitions/cachedImages'
+        type: array
+    type: object
+  Capabilities:
+    description: The regional capabilities.
+    properties:
+      capabilities:
+        description: The supported capabilities.
+        properties:
+          maxCpu:
+            description: The maximum allowed CPU request in cores.
+            readOnly: true
+            type: number
+          maxGpuCount:
+            description: The maximum allowed GPU count.
+            readOnly: true
+            type: number
+          maxMemoryInGB:
+            description: The maximum allowed memory request in GB.
+            readOnly: true
+            type: number
+        readOnly: true
+        type: object
+      gpu:
+        description: The GPU sku that this capability describes.
+        readOnly: true
+        type: string
+      ipAddressType:
+        description: The ip address type that this capability describes.
+        readOnly: true
+        type: string
+      location:
+        description: The resource location.
+        readOnly: true
+        type: string
+      osType:
+        description: The OS type that this capability describes.
+        readOnly: true
+        type: string
+      resourceType:
+        description: The resource type that this capability describes.
+        readOnly: true
+        type: string
+    type: object
+  CapabilitiesListResult:
+    description: The response containing list of capabilities.
+    properties:
+      nextLink:
+        description: The URI to fetch the next page of capabilities.
+        type: string
+      value:
+        description: The list of capabilities.
+        items:
+          $ref: '#/definitions/Capabilities'
+        type: array
+    type: object
+  CloudError:
+    description: An error response from the Batch service.
+    properties:
+      error:
+        $ref: '#/definitions/CloudErrorBody'
+    x-ms-external: true
+  CloudErrorBody:
+    description: An error response from the Batch service.
+    properties:
+      code:
+        description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+        type: string
+      details:
+        description: A list of additional details about the error.
+        items:
+          $ref: '#/definitions/CloudErrorBody'
+        type: array
+      message:
+        description: 'A message describing the error, intended to be suitable for display in a user interface.'
+        type: string
+      target:
+        description: 'The target of the particular error. For example, the name of the property in error.'
+        type: string
+    x-ms-external: true
   Container:
     description: A container instance.
     properties:
@@ -1503,6 +1728,9 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: ContainerInstanceOperationsOrigin
+      properties:
+        description: The additional properties.
+        type: object
     required:
       - name
       - display
@@ -1687,4 +1915,20 @@ definitions:
     required:
       - name
       - mountPath
+    type: object
+  cachedImages:
+    description: The cached image and OS type.
+    properties:
+      id:
+        description: The resource Id of the cached image.
+        type: string
+      image:
+        description: The cached image name.
+        type: string
+      osType:
+        description: The OS type of the cached image.
+        type: string
+    required:
+      - osType
+      - image
     type: object

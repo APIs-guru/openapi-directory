@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/billing/resource-manager/Microsoft.Billing/preview/2018-03-01-preview/billing.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: billing
   x-tags:
@@ -284,7 +284,7 @@ paths:
         InvoicesExpand:
           parameters:
             $expand: downloadUrl
-            $filter: invoicePeriodStartDate le 2017-02-01
+            $filter: invoicePeriodEndDate le 2017-02-01
             $top: 1
             api-version: 2018-03-01-preview
             subscriptionId: subid
@@ -526,7 +526,7 @@ definitions:
     description: The properties of the invoice.
     properties:
       billingPeriodIds:
-        description: Array of billing perdiod ids that the invoice is attributed to.
+        description: Array of billing period ids that the invoice is attributed to.
         items:
           type: string
         readOnly: true

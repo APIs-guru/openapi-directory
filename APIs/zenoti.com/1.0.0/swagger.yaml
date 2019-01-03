@@ -37,10 +37,15 @@ securityDefinitions:
 security:
   - API Key: []
 paths:
-  '/packages/{package_id}':
+  '/packages/{packageId}':
     get:
       description: Returns details of a package
-      parameters: []
+      parameters:
+        - description: 'DataType: UniqueIdentifier(GUID)'
+          in: query
+          name: centerId
+          required: true
+          type: string
       responses:
         '200':
           description: Status 200
@@ -50,8 +55,9 @@ paths:
       tags:
         - Packages
     parameters:
-      - in: path
-        name: package_id
+      - description: 'DataType: UniqueIdentifier(GUID)'
+        in: path
+        name: packageId
         required: true
         type: string
     x-restlet:
@@ -14017,9 +14023,9 @@ paths:
         | status  | value  | 
         | -------- | -------- | 
         | New | 0 |
-        | Checkin     | 1     |
-        | Undo Checkin     | 2     |
-        | Confirm     | 3     |
+        | Checkin     | 2     |
+        | Undo Checkin     | 0     |
+        | Confirm     | 4     |
 
       parameters:
         - description: issued key

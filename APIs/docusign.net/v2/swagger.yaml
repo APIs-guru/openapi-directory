@@ -5,8 +5,9 @@ host: www.docusign.net
 basePath: /restapi
 info:
   contact:
-    name: DocuSign Dev Center
-    url: 'https://www.docusign.com/developer-center'
+    email: devcenter@docusign.com
+    name: DocuSign Developer Center
+    url: 'https://developers.docusign.com/'
   description: 'The DocuSign REST API provides you with a powerful, convenient, and simple Web services API for interacting with DocuSign.'
   termsOfService: 'https://www.docusign.com/company/terms-and-conditions/web'
   title: DocuSign
@@ -504,7 +505,7 @@ tags:
       [enotary-resources]:              https://support.docusign.com/en/guides/ndse-user-guide-enotary-resources
 
     name: EnvelopeRecipients
-  - description: "<!-- resources aren't rendered the same way\n     as other pages. This is a little hack to\n     make the headings work better -->\n<style>\nh1, h2, h3 {\n  margin-top: 1em;\n}\n</style>\n\nThe EnvelopeRecipientTabs resource provides methods that let you\nadd,\nupdate,\nand delete tabs\nfrom an envelope.\nTabs are associated with a specific recipient\nin an envelope\nand are only used by the recipient types\nIn Person Signers and Signers.\n\n<!-- START doctoc generated TOC please keep comment here to allow auto update -->\n<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->\n**On this page**\n\n- [Tab Types](#tab-types)\n- [Sign Here Tab Alignment](#sign-here-tab-alignment)\n- [View Tab](#view-tab)\n- [Requesting Payments](#requesting-payments)\n- [Using Custom Tabs in Envelopes and Templates](#using-custom-tabs-in-envelopes-and-templates)\n- [Anchoring Tabs](#anchoring-tabs)\n- [Automatically Populating Tabs](#automatically-populating-tabs)\n\n<!-- END doctoc generated TOC please keep comment here to allow auto update -->\n\n\n## Tab Types\n\nSome tabs enable values to be entered by the signer. Those tabs' values can be preset either through the web browser or via the API. Other tab types use information that is already recognized by the DocuSign platform. These tabs cannot have their value updated on a per-tab basis by the API or via the browser. In some cases, the info might be settable using a different technique. For example, the Full name tab uses the signer's name, which is set elsewhere in the request. \n\nHere is the list of tabs and whether you can or cannot set their values in the tab definition:\n\n<br>\n\n| Tab Type                                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  \n| :--------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |  \n| Approve ([`approve`][approve])                             | Allows the recipient to approve documents without placing a signature or initials on the document. If the recipient clicks the tab during the signing process, the recipient is considered to have signed the document. No information is shown on the document of the approval, but it is recorded as a signature in the envelope history. This value **can't** be set.                                                                                                                                                                                                                                                                                                    |  \n| Checkbox ([`checkbox`][checkbox])                          | Allows the recipient to select a yes/no (on/off) option. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |  \n| Company ([`company`][company])                             | Displays the recipient's company name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |  \n| Date Signed ([`dateSigned`][dateSigned])                   | Displays the date that the recipient signed the document. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |  \n| Date ([`date`][date])                                      | Allows the recipient to enter a date. Date tabs are one-line fields that allow date information to be entered in any format. The tooltip for this tab recommends entering the date as MM/DD/YYYY, but this is not enforced. The format entered by the signer is retained. If you need a particular date format enforced, DocuSign recommends using a Text tab with a validation pattern and a validation message to enforce the format. This value can be set.                                                                                                                                                                                                        |  \n| Decline ([`decline`][decline])                             | Allows the recipient the option of declining an envelope. If the recipient clicks the tab during the signing process, the envelope is voided. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |  \n| Email Address ([`emailAddress`][emailAddress])             | Displays the recipient's email as entered in the recipient information. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |  \n| Email ([`email`][email])                                   | Allows the recipient to enter an email address. This is a one-line field that checks that a valid email address is entered. It uses the same parameters as a Text tab, with the validation message and pattern set for email information.<br><br>When getting information that includes this tab type, the original value of the tab when the associated envelope was sent is included in the response. This value be set.                                                                                                                                                                                                                                        |  \n| Envelope ID ([`envelopeId`][envelopeId])                   | Displays the envelope ID. Recipients cannot enter or change the information in this tab.  This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |  \n| First Name ([`firstName`][firstName])                      | Displays the recipient's first name. This tab takes the recipient's name as entered in the recipient information, splits it into sections based on spaces and uses the first section as the first name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                        |  \n| Formula Tab ([`formulaTab`][formulaTab])                   | The value of a formula tab is calculated from the values of other number or date tabs in the document. When the recipient completes the underlying fields, the formula tab calculates and displays the result. This value can be set.The `formula` property of the tab contains the references to the underlying tabs. See [Calculated Fields][calculatedfields] in the DocuSign Support Center to learn more about formulas. If a formula tab contains a `paymentDetails` property, the tab is considered a payment item. See [Requesting Payments Along with Signatures][paymentguide] in the DocuSign Support Center to learn more about payments. |  \n| Full Name ([`fullName`][fullName])                         | Displays the recipient's full name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |  \n| Initial Here ([`initialHere`][initialHere])                | Allows the recipient to initial the document. May be optional. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  \n| Last Name ([`lastName`][lastName])                         | Displays the recipient's last name. This tab takes the recipient's name as entered in the recipient information, splits it into sections based on spaces and uses the last section as the last name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                            |  \n| List ([`list`][list])                                      | This tab offers a list of options to choose from. The `listItems` property is used to specify the selectable options. This value can be set,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  \n| Notarize ([`notarize`][notarize])                          | Place this tab on a page to alert Notary recipients that they must take action. Only one notarize tab can appear on a page. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  \n| Note ([`note`][note])                                      | Displays additional information, in the form of a note, for the recipient. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |  \n| Number ([`number`][number])                                | Allows the recipient to enter numbers and decimal (.) points. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |  \n| Radio Group ([`radioGroup`][radioGroup])                   | This group tab is used to place radio buttons on a document. The `radios` property is used to add and place the radio buttons associated with the group. Only one radio button can be selected in a group. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                     |  \n| Sign Here ([`signHere`][signHere])                         | Allows the recipient to sign a document. May be optional. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |  \n| Signer Attachment ([`signerAttachment`][signerAttachment]) | Allows the recipient to attach supporting documents to an envelope. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |  \n| SSN ([`ssn`][ssn])                                         | A one-line field that allows the recipient to enter a Social Security Number. The SSN can be typed with or without dashes. It uses the same parameters as a Text tab, with the validation message and pattern set for SSN information.  This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                       |  \n| Text ([`text`][text])                                      | Allows the recipient to enter any type of text. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |  \n| Title ([`title`][title])                                   | Displays the recipient's title. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |  \n| View ([`view`][view])                                      | The View tab is used with the Approve tab to handle [supplemental documents][supdocs]. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |  \n| Zip ([`zip`][zip])                                         | Allows the recipient to enter a ZIP code. The ZIP code can be five digits or nine digits in the ZIP+4 format. The zip code can be typed with or without dashes. It uses the same parameters as a Text tab, with the validation message and pattern set for ZIP code information. This value can be set.                                                                                                                                                                                                                                                                                                                                                               |  \n\n\n[approve]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/approve\n[checkbox]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/checkbox\n[company]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/company\n[dateSigned]:\t\t    /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/dateSigned\n[date]:\t\t          /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/date\n[decline]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/decline\n[emailAddress]:     /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/emailAddress\n[email]:\t\t        /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/email\n[envelopeId]:\t    \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/envelopeId\n[firstName]:\t    \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/firstName\n[formulaTab]:\t    \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/formulaTab\n[fullName]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/fullName\n[initialHere]:\t  \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/initialHere\n[lastName]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/lastName\n[list]:\t           \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/list\n[notarize]:         /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/notarize\n[note]:\t\t          /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/note\n[number]:\t\t        /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/number\n[radioGroup]:\t\t    /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/radioGroup\n[signerAttachment]: /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/signerAttachment\n[signHere]:\t      \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/signHere\n[ssn]:\t          \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/ssn\n[text]:\t          \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/text\n[title]:\t        \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/title\n[view]:\t\t          /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/view\n[zip]:\t          \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/zip\n\n[supdocs]:          /esign/guide/appendix/glossary.html#supplemental-documents\n[calculatedfields]: https://support.docusign.com/en/guides/ndse-user-guide-calculated-fields\n[paymentguide]:     https://support.docusign.com/en/guides/requesting-payments-along-with-signatures\n\n\n## Sign Here Tab Alignment\n\nWhen you provide an x- and y-coordinate for the\nsign here tab,\nthe tab appears 21 points *lower*\nthan the value you provide for the y-coordinate.\nTo align the tab as expected,\nsubtract 21 from the expected y-value.\n\n![Sign Here Tab Alignment](/img/signherealign.png)\n\n\n\n\n\n## View Tab\n\nThe View tab is used on supplemental documents.\nTo learn more about using the View tab with\nsupplemental documents, see\n[Using Supplemental Documents][usingsupdocs]\nin the [Sending Documents][sendenvelopes] section of\nthe [Envelope: create][envelopecreate] method.\n\n[sendenvelopes]:  /esign/restapi/Envelopes/Envelopes/create/#sending-envelopes\n[usingsupdocs]:   /esign/restapi/Envelopes/Envelopes/create/#using-supplemental-documents\n[envelopecreate]: /esign/restapi/Envelopes/Envelopes/create/\n\n<br>\n\n| Name              | Required  | Type    | Description |\n| :----             | :----     | :----   | :----       |\n| documentId        | Yes       | String  | The document ID number that the tab is placed on. This must refer to an existing Document's ID attribute. |\n| pageNumber        | Yes       | String  | Must be set to 1. |\n| recipientId       | Yes       | String  | The recipient associated with the tab. Must refer to an existing recipient's ID attribute. |\n| required          | No        | Boolean | If **true**, the recipient is required to select the supplemental document View button during signing. |\n| tabLabel          | No        | String  | The label used for the tab.  If an empty string is provided for this, an empty sting is used. If no value is provided, the tab type is used as the value. Maximum of 500 characters. |\n| templateLocked    | No        | Boolean | Optional. Used only when working with template tabs. If **true**, the attributes of the tab cannot be changed by the sender. |\n| templateRequired  | No        | Boolean | Optional. Used only when working with template tabs. If **true**, the tab cannot be removed by the sender. |\n| xPosition         | Yes       | String  | Required, but can be 0.  |\n| yPosition         | Yes       | String  | Required, but can be 0. |\n\n\n## Requesting Payments\n\nThe Payments feature of the DocuSign eSignature REST API\nlets you collect payments\nalong with signatures and other information.\n\nTo send a request for payment\nand collect payments,\nyou need a payment gateway account,\nwhich is the destination for the payments.\nCreate a payment account\nwith a supported payment gateway,\nand then connect the payment gateway account\nto your DocuSign account.\nTo learn how to connect a payment gateway account\nto your DocuSign account\nsee [Managing Payment Gateways][paymentgateways]\nin the DocuSign Support Center.\nYou must connect and manage payment gateway accounts manually\nthrough the DocuSign Admin console\nand through your chosen payment gateway.\nThere is no public API\nfor connecting payment gateway accounts\nto DocuSign accounts\nor for managing payment gateway accounts.\n\nCurrently\n[Stripe][stripe], \n[Braintree](https://www.braintreepayments.com/), and\n[Authorize.net](https://www.authorize.net/)\nare the supported payment gateways.\n\n### How Payments Work\n\nTo make a request for payment,\nuse a [`formulaTab`][formulatab]\nthat has a\n[`paymentDetails`][paymentdetails] object.\nThis object includes\na list of [`paymentLineItem`][paymentlineitem] objects.\nEach line item refers to a [`number`][numbertab] tab\nthat contains the value of the each item.\nThe purpose of the line items\nis to transmit them to the payment gateway\nas metadata, so that you can use the information\nin the payment processor.\n\n**Note**: If the fileExtension parameter is not added in an API call, only base64 converted pdf files will be accepted.\nAny attempt to send a non pdf file without using fileExtension results in an error.\n\nThis is an example request for two books.\nEach book is specified in the `number` tabs\nlabeled \"Hamlet\" and \"Tempest\".\nThe books are referenced as line items\nby their tab labels\nwithin the `paymentDetails` object\nof a `formula` tab.\nThe formula of the `formula` tab\nadd the values of the same two `number` tabs.\n\n```json\n{\n  \"documents\": [\n    {\n      \"documentBase64\": \"<base64-encoded PDF document>\",\n      \"documentId\": \"1\",\n      \"fileExtension\": \"pdf\",\n      \"name\": \"payment.pdf\"\n    }\n  ],\n  \"emailSubject\": \"Order Some Books\",\n  \"recipients\": {\n    \"signers\": [\n      {\n        \"email\": \"vreader@example.com\",\n        \"name\": \"Voracious Reader\",\n        \"recipientId\": \"1\",\n        \"routingOrder\": \"1\",\n        \"tabs\": {\n          . . .\n          \"numberTabs\": [\n            {\n              \"value\": \"10.00\",\n              \"width\": 78,\n              \"required\": \"true\",\n              \"locked\": \"true\",\n              \"tabLabel\": \"Hamlet\",\n              \"documentId\": \"1\",\n              \"pageNumber\": \"1\",\n              \"xPosition\": \"323\",\n              \"yPosition\": \"134\"\n            },\n            {\n              \"value\": \"10.00\",\n              \"width\": 78,\n              \"required\": \"true\",\n              \"locked\": \"true\",\n              \"tabLabel\": \"Tempest\",\n              \"documentId\": \"1\",\n              \"pageNumber\": \"1\",\n              \"xPosition\": \"323\",\n              \"yPosition\": \"154\"\n            }\n          ],\n          \"formulaTabs\": [\n            {\n              \"required\": \"true\",\n              \"formula\": \"([Hamlet] + [Tempest]) * 100\",\n              \"roundDecimalPlaces\": \"2\",\n              \"paymentDetails\": {\n                \"currencyCode\": \"USD\",\n                \"lineItems\": [\n                  {\n                    \"name\": \"Hamlet\",\n                    \"description\": \"The Danish Play\",\n                    \"itemCode\": \"SHAK1\",\n                    \"amountReference\": \"Hamlet\"\n                  },\n                  {\n                    \"name\": \"Othello\",\n                    \"description\": \"The one with Caliban in it\",\n                    \"itemCode\": \"SHAK2\",\n                    \"amountReference\": \"Tempest\"\n                  }\n                ],\n                \"gatewayAccountId\": \"e76668b4-53a9-4413-b551-a208d659e490\"\n              },\n              \"tabLabel\": \"Payment1\",\n              \"documentId\": \"1\",\n              \"pageNumber\": \"1\",\n              \"xPosition\": 300,\n              \"yPosition\": 200\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"status\": \"sent\"\n}\n```\n\nUse the\n[EnvelopeRecipients: list][enveloperecipientslist] method\nto check the status of a payment.\nWhen the payment is successful,\nthe `status` property of\nthe [`paymentDetails`][paymentdetails] object\nis `payment_complete`.\n\n```json\n{\n  \"signers\": [\n    {\n      \"tabs\": {\n        . . .\n        \"numberTabs\": [\n          {\n            \"value\": \"10.00\",\n            \"tabLabel\": \"Hamlet\",\n            \"documentId\": \"1\",\n            \"recipientId\": \"1\",\n            \"pageNumber\": \"1\",\n            \"xPosition\": \"323\",\n            \"yPosition\": \"134\",\n          },\n          {\n            \"value\": \"10.00\",\n            \"tabLabel\": \"Tempest\",\n            \"documentId\": \"1\",\n            \"recipientId\": \"1\",\n            \"pageNumber\": \"1\",\n          }\n        ],\n        \"formulaTabs\": [\n          {\n            \"formula\": \"([Hamlet] + [Tempest]) * 100\",\n            \"roundDecimalPlaces\": \"2\",\n            \"paymentDetails\": {\n              \"status\": \"payment_complete\",\n              \"currencyCode\": \"USD\",\n              \"lineItems\": [\n                {\n                  \"name\": \"Hamlet\",\n                  \"description\": \"The Danish Play\",\n                  \"itemCode\": \"SHAK1\",\n                  \"amountReference\": \"Hamlet\"\n                },\n                {\n                  \"name\": \"Tempest\",\n                  \"description\": \"The one with Caliban in it\",\n                  \"itemCode\": \"SHAK2\",\n                  \"amountReference\": \"Tempest\"\n                }\n              ],\n              \"gatewayAccountId\": \"e76668b4-53a9-4413-b551-a208d659e490\"\n            },\n            \"value\": \"20\",\n            \"required\": \"true\",\n            \"locked\": \"false\",\n            \"tabLabel\": \"Payment1\",\n            \"documentId\": \"1\",\n            \"recipientId\": \"1\",\n            \"pageNumber\": \"1\",\n          }\n        ]\n      },\n      \"creationReason\": \"sender\",\n      \"email\": \"vreader@example.com\",\n      \"name\": \"Voracious Reader\",\n      \"recipientId\": \"1\",\n      \"requireIdLookup\": \"false\",\n      \"status\": \"completed\",\n    }\n  ],\n  . . .\n}\n```\n\n### Some Things to Keep in Mind About Payments\n\n* An envelope is not completed until all payments are completed.\n\n* If a DocuSign account Administrator\n  deletes a payment gateway account connection\n  DocuSign cancels all in-process envelopes\n  that reference the deleted payment gateway account.\n\n* If the sender voids an envelope,\n  all payment authorizations are canceled.\n\n* If a required recipient refuses to sign,\n  all authorized payments are canceled.\n\n* If a required recipient's payment fails authorization,\n  DocuSign attempts to recover\n  by sending the recipient\n  notification about the failed payment authorization.\n  The recipient has the opportunity\n  to correct the payment method information.\n\n* Each recipient's payment is authorized separately.\n  Accounts are charged and payment made\n  after all required tabs are completed,\n  and all payments in an envelope for all recipients are authorized.\n\n* Refunds are not supported.\n  Conduct refunds or payment changes\n  with the payment gateway separately from DocuSign.\n\n* At this time, DocuSign does not charge a per-transaction fee.\n\n\n[enveloperecipientslist]: /esign/restapi/Envelopes/EnvelopeRecipients/list/\n[formulatab]:             /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/formulaTab\n[ISO4217]:                https://en.wikipedia.org/wiki/ISO_4217\n[numbertab]:              /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/number\n[paymentgateways]:        https://support.docusign.com/en/guides/managing-payment-gateways\n[paymentguide]:           https://support.docusign.com/en/guides/requesting-payments-along-with-signatures\n[paymentlineitem]:        /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/paymentLineItem\n[paymentdetails]:         /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/paymentDetails\n[stripe]:                 https://stripe.com/\n\n\n## Using Custom Tabs in Envelopes and Templates\n\nCustom Tabs can be added to envelopes and templates\nby setting the `customTabId` property\nwhen creating an envelope or template recipient\nor when adding a new tab for an existing recipient.\nThe custom tab must be added as the correct tab type.\nFor example if the custom tab type is text, it cannot be used as a number tab.\n\nWhen the `customTabId` property is set,\nthe new tab inherits all the custom tab properties.\nRequired information that is not included in the custom tab,\nsuch as document ID and page ID, must be included when adding the tab.\nIf the custom tab does not have anchor settings, the X and Y positions must be included.\n\nAfter the tab is created,\nit is treated as any other tab for updating or deleting.\n\n## Anchoring Tabs\n\nThe tab anchoring option\nallows you to send documents for signature\nthat do not have a fixed layout or format.\nIn these documents you might not know\nthe absolute location of the tabs\nwhen you design your API client application because the tabs must move with text.\nAs an alternative to sending X and Y coordinates for tabs,\nthe DocuSign Service can derive an anchor location for the tab\nby correlating anchor information to data within the document.\n\nWhen the DocuSign Service receives a request that contains tabs\nwith anchor information,\nit searches the document for instances of the `anchorString` property.\nWhen found,\nit places a tab of the specified type for the designated recipient.\nTab positions are established by setting offsets for the tab.\n\nWhen you apply tabs to the document,\nDocuSign does not remove or replace the text in the `anchorString` property. You can hide codified anchors by using the same font color as the background of the document. So the anchor can be used by DocuSign processes and it will not be visible on the document.\n\nTo use an anchoring option:\n\n1. Identify the location in the document by text string. You can use a pre-existing text string or add a new one.\nFor best performance DocuSign recommends using single word anchor strings when possible, especially when there are a large number of pages in the envelope.\nFor example, you might want to add a Sign Here tab to the \"Borrower's Signature\" lines in a document, but that phrase might occur in places in the document where you don't want to tab to appear. In this case, you could add the text \"BorrowerSignHere\" in white font color (so that isn't visible in the document) to all the places you want Sign Here tabs to appear and use \"BorrowerSignHere\" as the anchor string.\n1. Reference the anchor through the `anchorString` property of the tab.\n1. Determine the offset from the anchor string location to where the tab should be placed.\n\nSetting a positive value in the `anchorXOffset` property moves the tab right on the page and positive values in the  `anchorYoffset` prove moves the tab down the page. The `anchorUnits` property specifies the units used for the offsets.\nFor Sign Here and Initial Here tabs the bottom-left of the anchor string is equivalent to position (0,0), and the bottom-left of the tab graphic is placed relative to that.\nFor all other tabs the bottom-left of the anchor string is equivalent to position (0,0), and the top-left of the tab graphic is placed relative to that.\nDocuSign does not currently provide tools to derive the offset values. Determination of the proper offset will likely require some trial-and-error.\n\n### Rules for working with anchor tags\n\nWhen anchor tabs are used, all documents in the envelope are searched for the `anchorString` property.\n\n* You set the text of the anchor string in the `anchorString` property. DocuSign tabs are created for each instance of the `anchorString` property within the document, so special care must be taken to establish unique anchor strings that do not result in unintentional tabs.\n* You cannot use the same anchored tab for different recipients for the same document.\n* The DocuSign system cannot search for text that is embedded in an image when checking for anchor strings.\n* X or Y offsets supplied for a tab apply to all instances of the tab in the document. To use different offsets at different locations in the document for the same recipient, create multiple, unique anchor tabs.\n* If the Y offset value of an anchor string would force a tab outside of the page boundaries, the tag is placed at the page boundary. If the X offset value places a tab outside of the page boundaries, the error message `Invalid_User_Offset` is sent. The error message includes the X offset that resulted in the error.\n* The system does not support an anchor string embedded in the form of a PDF X-object in the document.\n* The system does not re-flow the text that surrounds the anchor tabs. It is the responsibility of the document author to provide sufficient white space to contain the potential width of the ultimate tab value.\n\n### Tips and Tricks\n\nThe following are tips for effective use of anchor tags:\n* In order to avoid unintentional conflicts between text contained in an `anchorString` property and the text that naturally exists in documents, establish a codified syntax for the anchor string text that is unlikely to appear elsewhere in a document.\n* Develop an extensible and consistent syntax that can be used across multiple document types.\n* Especially for documents that have variable numbers of tabs or signers, author the source document to include hidden anchor tabs for all potential signers/permutations. Then, control the tabs that are actually placed by including/excluding the anchor tabs in the request. This approach allows a single document to be used for all use cases instead of maintaining separate documents for each scenario.\n\n## Automatically Populating Tabs\n\nIf you want similar tab types\nto automatically populate with the same data,\nyou must follow these guidelines:\n\n* Each `tabLabel` entry must have the characters\n  `\\\\*` in front of the label.\n  If you omit the `\\\\*` prefix,\n  only the first occurrence of the tab is populated.\n\n  When automatically populating tabs,\n  the `tabLabel` must not contain any spaces.\n  In the JSON example below,\n  the Text tabs  properties `StudentLastName` and `StudentFirstName`\n  will be auto-populated as specified (\"Doe\" and \"John\")\n  each place they appear throughout the envelope.\n\n  ```\n  \"tabs\": {\n    \"textTabs\": [\n    {\n      \"tabLabel\": \"\\\\*StudentLastName\",\n      \"value\": \"Doe\"\n    },\n    {\n      \"tabLabel\": \"\\\\*StudentFirstName\",\n      \"value\": \"John\"\n    }]\n  }\n  ```\n\n* Each occurrence of the tab must have identical properties.\n\n  For example, suppose there are two Text tabs in a document,\n  each with `tabLabel` set to `Name`.\n  If one tab has the `bold` property set to **true**,\n  and the other has the `bold` property set to **false**,\n  only the first one will be populated.\n  In order to automatically populate both occurrences\n  of the `Name` Text tabs,\n  the `bold` property must be set to the same value for both tabs.\n"
+  - description: "<!-- resources aren't rendered the same way\n     as other pages. This is a little hack to\n     make the headings work better -->\n<style>\nh1, h2, h3 {\n  margin-top: 1em;\n}\n</style>\n\nThe EnvelopeRecipientTabs resource provides methods that let you\nadd,\nupdate,\nand delete tabs\nfrom an envelope.\nTabs are associated with a specific recipient\nin an envelope\nand are only used by the recipient types\nIn Person Signers and Signers.\n\n<!-- START doctoc generated TOC please keep comment here to allow auto update -->\n<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->\n**On this page**\n\n- [Tab Types](#tab-types)\n- [Sign Here Tab Alignment](#sign-here-tab-alignment)\n- [View Tab](#view-tab)\n- [Requesting Payments](#requesting-payments)\n- [Using Custom Tabs in Envelopes and Templates](#using-custom-tabs-in-envelopes-and-templates)\n- [Anchoring Tabs](#anchoring-tabs)\n- [Automatically Populating Tabs](#automatically-populating-tabs)\n\n<!-- END doctoc generated TOC please keep comment here to allow auto update -->\n\n\n## Tab Types\n\nSome tabs enable values to be entered by the signer. Those tabs' values can be preset either through the web browser or via the API. Other tab types use information that is already recognized by the DocuSign platform. These tabs cannot have their value updated on a per-tab basis by the API or via the browser. In some cases, the info might be settable using a different technique. For example, the Full name tab uses the signer's name, which is set elsewhere in the request. \n\nHere is the list of tabs and whether you can or cannot set their values in the tab definition:\n\n<br>\n\n| Tab Type                                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  \n| :--------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |  \n| Approve ([`approve`][approve])                             | Allows the recipient to approve documents without placing a signature or initials on the document. If the recipient clicks the tab during the signing process, the recipient is considered to have signed the document. No information is shown on the document of the approval, but it is recorded as a signature in the envelope history. This value **can't** be set.                                                                                                                                                                                                                                                                                                    |  \n| Checkbox ([`checkbox`][checkbox])                          | Allows the recipient to select a yes/no (on/off) option. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |  \n| Company ([`company`][company])                             | Displays the recipient's company name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |  \n| Date Signed ([`dateSigned`][dateSigned])                   | Displays the date that the recipient signed the document. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |  \n| Date ([`date`][date])                                      | Allows the recipient to enter a date. Date tabs are one-line fields that allow date information to be entered in any format. The tooltip for this tab recommends entering the date as MM/DD/YYYY, but this is not enforced. The format entered by the signer is retained. If you need a particular date format enforced, DocuSign recommends using a Text tab with a validation pattern and a validation message to enforce the format. This value can be set.                                                                                                                                                                                                        |  \n| Decline ([`decline`][decline])                             | Allows the recipient the option of declining an envelope. If the recipient clicks the tab during the signing process, the envelope is voided. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |  \n| Email Address ([`emailAddress`][emailAddress])             | Displays the recipient's email as entered in the recipient information. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |  \n| Email ([`email`][email])                                   | Allows the recipient to enter an email address. This is a one-line field that checks that a valid email address is entered. It uses the same parameters as a Text tab, with the validation message and pattern set for email information.<br><br>When getting information that includes this tab type, the original value of the tab when the associated envelope was sent is included in the response. This value be set.                                                                                                                                                                                                                                        |  \n| Envelope ID ([`envelopeId`][envelopeId])                   | Displays the envelope ID. Recipients cannot enter or change the information in this tab.  This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |  \n| First Name ([`firstName`][firstName])                      | Displays the recipient's first name. This tab takes the recipient's name as entered in the recipient information, splits it into sections based on spaces and uses the first section as the first name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                        |  \n| Formula Tab ([`formulaTab`][formulaTab])                   | The value of a formula tab is calculated from the values of other number or date tabs in the document. When the recipient completes the underlying fields, the formula tab calculates and displays the result. This value can be set.The `formula` property of the tab contains the references to the underlying tabs. See [Calculated Fields][calculatedfields] in the DocuSign Support Center to learn more about formulas. If a formula tab contains a `paymentDetails` property, the tab is considered a payment item. See [Requesting Payments Along with Signatures][paymentguide] in the DocuSign Support Center to learn more about payments. |  \n| Full Name ([`fullName`][fullName])                         | Displays the recipient's full name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |  \n| Initial Here ([`initialHere`][initialHere])                | Allows the recipient to initial the document. May be optional. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |  \n| Last Name ([`lastName`][lastName])                         | Displays the recipient's last name. This tab takes the recipient's name as entered in the recipient information, splits it into sections based on spaces and uses the last section as the last name. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                            |  \n| List ([`list`][list])                                      | This tab offers a list of options to choose from. The `listItems` property is used to specify the selectable options. This value can be set,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |  \n| Notarize ([`notarize`][notarize])                          | Place this tab on a page to alert Notary recipients that they must take action. Only one notarize tab can appear on a page. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |  \n| Note ([`note`][note])                                      | Displays additional information, in the form of a note, for the recipient. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |  \n| Number ([`number`][number])                                | Allows the recipient to enter numbers and decimal (.) points. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |  \n| Radio Group ([`radioGroup`][radioGroup])                   | This group tab is used to place radio buttons on a document. The `radios` property is used to add and place the radio buttons associated with the group. Only one radio button can be selected in a group. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                     |  \n| Sign Here ([`signHere`][signHere])                         | Allows the recipient to sign a document. May be optional. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |  \n| Signer Attachment ([`signerAttachment`][signerAttachment]) | Allows the recipient to attach supporting documents to an envelope. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |  \n| SSN ([`ssn`][ssn])                                         | A one-line field that allows the recipient to enter a Social Security Number. The SSN can be typed with or without dashes. It uses the same parameters as a Text tab, with the validation message and pattern set for SSN information.  This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                       |  \n| Text ([`text`][text])                                      | Allows the recipient to enter any type of text. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |  \n| Title ([`title`][title])                                   | Displays the recipient's title. This value **can't** be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |  \n| View ([`view`][view])                                      | The View tab is used with the Approve tab to handle [supplemental documents][supdocs]. This value can be set.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |  \n| Zip ([`zip`][zip])                                         | Allows the recipient to enter a ZIP code. The ZIP code can be five digits or nine digits in the ZIP+4 format. The zip code can be typed with or without dashes. It uses the same parameters as a Text tab, with the validation message and pattern set for ZIP code information. This value can be set.                                                                                                                                                                                                                                                                                                                                                               |  \n\n\n[approve]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/approve\n[checkbox]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/checkbox\n[company]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/company\n[dateSigned]:\t\t    /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/dateSigned\n[date]:\t\t          /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/date\n[decline]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/decline\n[emailAddress]:     /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/emailAddress\n[email]:\t\t        /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/email\n[envelopeId]:\t    \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/envelopeId\n[firstName]:\t    \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/firstName\n[formulaTab]:\t    \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/formulaTab\n[fullName]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/fullName\n[initialHere]:\t  \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/initialHere\n[lastName]:\t\t      /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/lastName\n[list]:\t           \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/list\n[notarize]:         /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/notarize\n[note]:\t\t          /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/note\n[number]:\t\t        /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/number\n[radioGroup]:\t\t    /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/radioGroup\n[signerAttachment]: /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/signerAttachment\n[signHere]:\t      \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/signHere\n[ssn]:\t          \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/ssn\n[text]:\t          \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/text\n[title]:\t        \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/title\n[view]:\t\t          /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/view\n[zip]:\t          \t/esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/zip\n\n[supdocs]:          /esign/guide/appendix/glossary.html#supplemental-documents\n[calculatedfields]: https://support.docusign.com/en/guides/ndse-user-guide-calculated-fields\n[paymentguide]:     https://support.docusign.com/en/guides/requesting-payments-along-with-signatures\n\n\n## Sign Here Tab Alignment\n\nWhen you provide an x- and y-coordinate for the\nsign here tab,\nthe tab appears 21 points *lower*\nthan the value you provide for the y-coordinate.\nTo align the tab as expected,\nsubtract 21 from the expected y-value.\n\n![Sign Here Tab Alignment](/img/esignapi/signherealign.png)\n\n\n\n\n\n## View Tab\n\nThe View tab is used on supplemental documents.\nTo learn more about using the View tab with\nsupplemental documents, see\n[Using Supplemental Documents][usingsupdocs]\nin the [Sending Documents][sendenvelopes] section of\nthe [Envelope: create][envelopecreate] method.\n\n[sendenvelopes]:  /esign/restapi/Envelopes/Envelopes/create/#sending-envelopes\n[usingsupdocs]:   /esign/restapi/Envelopes/Envelopes/create/#using-supplemental-documents\n[envelopecreate]: /esign/restapi/Envelopes/Envelopes/create/\n\n<br>\n\n| Name              | Required  | Type    | Description |\n| :----             | :----     | :----   | :----       |\n| documentId        | Yes       | String  | The document ID number that the tab is placed on. This must refer to an existing Document's ID attribute. |\n| pageNumber        | Yes       | String  | Must be set to 1. |\n| recipientId       | Yes       | String  | The recipient associated with the tab. Must refer to an existing recipient's ID attribute. |\n| required          | No        | Boolean | If **true**, the recipient is required to select the supplemental document View button during signing. |\n| tabLabel          | No        | String  | The label used for the tab.  If an empty string is provided for this, an empty sting is used. If no value is provided, the tab type is used as the value. Maximum of 500 characters. |\n| templateLocked    | No        | Boolean | Optional. Used only when working with template tabs. If **true**, the attributes of the tab cannot be changed by the sender. |\n| templateRequired  | No        | Boolean | Optional. Used only when working with template tabs. If **true**, the tab cannot be removed by the sender. |\n| xPosition         | Yes       | String  | Required, but can be 0.  |\n| yPosition         | Yes       | String  | Required, but can be 0. |\n\n\n## Requesting Payments\n\nThe Payments feature of the DocuSign eSignature REST API\nlets you collect payments\nalong with signatures and other information.\n\nTo send a request for payment\nand collect payments,\nyou need a payment gateway account,\nwhich is the destination for the payments.\nCreate a payment account\nwith a supported payment gateway,\nand then connect the payment gateway account\nto your DocuSign account.\nTo learn how to connect a payment gateway account\nto your DocuSign account\nsee [Managing Payment Gateways][paymentgateways]\nin the DocuSign Support Center.\nYou must connect and manage payment gateway accounts manually\nthrough the DocuSign Admin console\nand through your chosen payment gateway.\nThere is no public API\nfor connecting payment gateway accounts\nto DocuSign accounts\nor for managing payment gateway accounts.\n\nCurrently\n[Stripe][stripe], \n[Braintree](https://www.braintreepayments.com/), and\n[Authorize.net](https://www.authorize.net/)\nare the supported payment gateways.\n\n### How Payments Work\n\nTo make a request for payment,\nuse a [`formulaTab`][formulatab]\nthat has a\n[`paymentDetails`][paymentdetails] object.\nThis object includes\na list of [`paymentLineItem`][paymentlineitem] objects.\nEach line item refers to a [`number`][numbertab] tab\nthat contains the value of the each item.\nThe purpose of the line items\nis to transmit them to the payment gateway\nas metadata, so that you can use the information\nin the payment processor.\n\nThis is an example request for two books.\nEach book is specified in the `number` tabs\nlabeled \"Hamlet\" and \"Tempest\".\nThe books are referenced as line items\nby their tab labels\nwithin the `paymentDetails` object\nof a `formula` tab.\nThe formula of the `formula` tab\nadd the values of the same two `number` tabs.\n\n```json\n{\n  \"documents\": [\n    {\n      \"documentBase64\": \"<base64-encoded PDF document>\",\n      \"documentId\": \"1\",\n      \"fileExtension\": \"pdf\",\n      \"name\": \"payment.pdf\"\n    }\n  ],\n  \"emailSubject\": \"Order Some Books\",\n  \"recipients\": {\n    \"signers\": [\n      {\n        \"email\": \"vreader@example.com\",\n        \"name\": \"Voracious Reader\",\n        \"recipientId\": \"1\",\n        \"routingOrder\": \"1\",\n        \"tabs\": {\n          . . .\n          \"numberTabs\": [\n            {\n              \"value\": \"10.00\",\n              \"width\": 78,\n              \"required\": \"true\",\n              \"locked\": \"true\",\n              \"tabLabel\": \"Hamlet\",\n              \"documentId\": \"1\",\n              \"pageNumber\": \"1\",\n              \"xPosition\": \"323\",\n              \"yPosition\": \"134\"\n            },\n            {\n              \"value\": \"10.00\",\n              \"width\": 78,\n              \"required\": \"true\",\n              \"locked\": \"true\",\n              \"tabLabel\": \"Tempest\",\n              \"documentId\": \"1\",\n              \"pageNumber\": \"1\",\n              \"xPosition\": \"323\",\n              \"yPosition\": \"154\"\n            }\n          ],\n          \"formulaTabs\": [\n            {\n              \"required\": \"true\",\n              \"formula\": \"([Hamlet] + [Tempest]) * 100\",\n              \"roundDecimalPlaces\": \"2\",\n              \"paymentDetails\": {\n                \"currencyCode\": \"USD\",\n                \"lineItems\": [\n                  {\n                    \"name\": \"Hamlet\",\n                    \"description\": \"The Danish Play\",\n                    \"itemCode\": \"SHAK1\",\n                    \"amountReference\": \"Hamlet\"\n                  },\n                  {\n                    \"name\": \"Othello\",\n                    \"description\": \"The one with Caliban in it\",\n                    \"itemCode\": \"SHAK2\",\n                    \"amountReference\": \"Tempest\"\n                  }\n                ],\n                \"gatewayAccountId\": \"e76668b4-53a9-4413-b551-a208d659e490\"\n              },\n              \"tabLabel\": \"Payment1\",\n              \"documentId\": \"1\",\n              \"pageNumber\": \"1\",\n              \"xPosition\": 300,\n              \"yPosition\": 200\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"status\": \"sent\"\n}\n```\n\nUse the\n[EnvelopeRecipients: list][enveloperecipientslist] method\nto check the status of a payment.\nWhen the payment is successful,\nthe `status` property of\nthe [`paymentDetails`][paymentdetails] object\nis `payment_complete`.\n\n```json\n{\n  \"signers\": [\n    {\n      \"tabs\": {\n        . . .\n        \"numberTabs\": [\n          {\n            \"value\": \"10.00\",\n            \"tabLabel\": \"Hamlet\",\n            \"documentId\": \"1\",\n            \"recipientId\": \"1\",\n            \"pageNumber\": \"1\",\n            \"xPosition\": \"323\",\n            \"yPosition\": \"134\",\n          },\n          {\n            \"value\": \"10.00\",\n            \"tabLabel\": \"Tempest\",\n            \"documentId\": \"1\",\n            \"recipientId\": \"1\",\n            \"pageNumber\": \"1\",\n          }\n        ],\n        \"formulaTabs\": [\n          {\n            \"formula\": \"([Hamlet] + [Tempest]) * 100\",\n            \"roundDecimalPlaces\": \"2\",\n            \"paymentDetails\": {\n              \"status\": \"payment_complete\",\n              \"currencyCode\": \"USD\",\n              \"lineItems\": [\n                {\n                  \"name\": \"Hamlet\",\n                  \"description\": \"The Danish Play\",\n                  \"itemCode\": \"SHAK1\",\n                  \"amountReference\": \"Hamlet\"\n                },\n                {\n                  \"name\": \"Tempest\",\n                  \"description\": \"The one with Caliban in it\",\n                  \"itemCode\": \"SHAK2\",\n                  \"amountReference\": \"Tempest\"\n                }\n              ],\n              \"gatewayAccountId\": \"e76668b4-53a9-4413-b551-a208d659e490\"\n            },\n            \"value\": \"20\",\n            \"required\": \"true\",\n            \"locked\": \"false\",\n            \"tabLabel\": \"Payment1\",\n            \"documentId\": \"1\",\n            \"recipientId\": \"1\",\n            \"pageNumber\": \"1\",\n          }\n        ]\n      },\n      \"creationReason\": \"sender\",\n      \"email\": \"vreader@example.com\",\n      \"name\": \"Voracious Reader\",\n      \"recipientId\": \"1\",\n      \"requireIdLookup\": \"false\",\n      \"status\": \"completed\",\n    }\n  ],\n  . . .\n}\n```\n\n### Some Things to Keep in Mind About Payments\n\n* An envelope is not completed until all payments are completed.\n\n* If a DocuSign account Administrator\n  deletes a payment gateway account connection\n  DocuSign cancels all in-process envelopes\n  that reference the deleted payment gateway account.\n\n* If the sender voids an envelope,\n  all payment authorizations are canceled.\n\n* If a required recipient refuses to sign,\n  all authorized payments are canceled.\n\n* If a required recipient's payment fails authorization,\n  DocuSign attempts to recover\n  by sending the recipient\n  notification about the failed payment authorization.\n  The recipient has the opportunity\n  to correct the payment method information.\n\n* Each recipient's payment is authorized separately.\n  Accounts are charged and payment made\n  after all required tabs are completed,\n  and all payments in an envelope for all recipients are authorized.\n\n* Refunds are not supported.\n  Conduct refunds or payment changes\n  with the payment gateway separately from DocuSign.\n\n* At this time, DocuSign does not charge a per-transaction fee.\n\n\n[enveloperecipientslist]: /esign/restapi/Envelopes/EnvelopeRecipients/list/\n[formulatab]:             /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/formulaTab\n[ISO4217]:                https://en.wikipedia.org/wiki/ISO_4217\n[numbertab]:              /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/number\n[paymentgateways]:        https://support.docusign.com/en/guides/managing-payment-gateways\n[paymentguide]:           https://support.docusign.com/en/guides/requesting-payments-along-with-signatures\n[paymentlineitem]:        /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/paymentLineItem\n[paymentdetails]:         /esign/restapi/Envelopes/EnvelopeRecipientTabs/create/#/definitions/paymentDetails\n[stripe]:                 https://stripe.com/\n\n\n## Using Custom Tabs in Envelopes and Templates\n\nCustom Tabs can be added to envelopes and templates\nby setting the `customTabId` property\nwhen creating an envelope or template recipient\nor when adding a new tab for an existing recipient.\nThe custom tab must be added as the correct tab type.\nFor example if the custom tab type is text, it cannot be used as a number tab.\n\nWhen the `customTabId` property is set,\nthe new tab inherits all the custom tab properties.\nRequired information that is not included in the custom tab,\nsuch as document ID and page ID, must be included when adding the tab.\nIf the custom tab does not have anchor settings, the X and Y positions must be included.\n\nAfter the tab is created,\nit is treated as any other tab for updating or deleting.\n\n## Anchoring Tabs\n\nThe tab anchoring option\nallows you to send documents for signature\nthat do not have a fixed layout or format.\nIn these documents you might not know\nthe absolute location of the tabs\nwhen you design your API client application because the tabs must move with text.\nAs an alternative to sending X and Y coordinates for tabs,\nthe DocuSign Service can derive an anchor location for the tab\nby correlating anchor information to data within the document.\n\nWhen the DocuSign Service receives a request that contains tabs\nwith anchor information,\nit searches the document for instances of the `anchorString` property.\nWhen found,\nit places a tab of the specified type for the designated recipient.\nTab positions are established by setting offsets for the tab.\n\nWhen you apply tabs to the document,\nDocuSign does not remove or replace the text in the `anchorString` property. You can hide codified anchors by using the same font color as the background of the document. So the anchor can be used by DocuSign processes and it will not be visible on the document.\n\nTo use an anchoring option:\n\n1. Identify the location in the document by text string. You can use a pre-existing text string or add a new one.\nFor best performance DocuSign recommends using single word anchor strings when possible, especially when there are a large number of pages in the envelope.\nFor example, you might want to add a Sign Here tab to the \"Borrower's Signature\" lines in a document, but that phrase might occur in places in the document where you don't want to tab to appear. In this case, you could add the text \"BorrowerSignHere\" in white font color (so that isn't visible in the document) to all the places you want Sign Here tabs to appear and use \"BorrowerSignHere\" as the anchor string.\n1. Reference the anchor through the `anchorString` property of the tab.\n1. Determine the offset from the anchor string location to where the tab should be placed.\n\nSetting a positive value in the `anchorXOffset` property moves the tab right on the page and positive values in the  `anchorYoffset` prove moves the tab down the page. The `anchorUnits` property specifies the units used for the offsets.\nFor Sign Here and Initial Here tabs the bottom-left of the anchor string is equivalent to position (0,0), and the bottom-left of the tab graphic is placed relative to that.\nFor all other tabs the bottom-left of the anchor string is equivalent to position (0,0), and the top-left of the tab graphic is placed relative to that.\nDocuSign does not currently provide tools to derive the offset values. Determination of the proper offset will likely require some trial-and-error.\n\n### Rules for working with anchor tags\n\nWhen anchor tabs are used, all documents in the envelope are searched for the `anchorString` property.\n\n* You set the text of the anchor string in the `anchorString` property. DocuSign tabs are created for each instance of the `anchorString` property within the document, so special care must be taken to establish unique anchor strings that do not result in unintentional tabs.\n* You cannot use the same anchored tab for different recipients for the same document.\n* The DocuSign system cannot search for text that is embedded in an image when checking for anchor strings.\n* X or Y offsets supplied for a tab apply to all instances of the tab in the document. To use different offsets at different locations in the document for the same recipient, create multiple, unique anchor tabs.\n* If the Y offset value of an anchor string would force a tab outside of the page boundaries, the tag is placed at the page boundary. If the X offset value places a tab outside of the page boundaries, the error message `Invalid_User_Offset` is sent. The error message includes the X offset that resulted in the error.\n* The system does not support an anchor string embedded in the form of a PDF X-object in the document.\n* The system does not re-flow the text that surrounds the anchor tabs. It is the responsibility of the document author to provide sufficient white space to contain the potential width of the ultimate tab value.\n\n### Tips and Tricks\n\nThe following are tips for effective use of anchor tags:\n* In order to avoid unintentional conflicts between text contained in an `anchorString` property and the text that naturally exists in documents, establish a codified syntax for the anchor string text that is unlikely to appear elsewhere in a document.\n* Develop an extensible and consistent syntax that can be used across multiple document types.\n* Especially for documents that have variable numbers of tabs or signers, author the source document to include hidden anchor tabs for all potential signers/permutations. Then, control the tabs that are actually placed by including/excluding the anchor tabs in the request. This approach allows a single document to be used for all use cases instead of maintaining separate documents for each scenario.\n\n## Automatically Populating Tabs\n\nIf you want similar tab types\nto automatically populate with the same data,\nyou must follow these guidelines:\n\n* Each `tabLabel` entry must have the characters\n  `\\\\*` in front of the label.\n  If you omit the `\\\\*` prefix,\n  only the first occurrence of the tab is populated.\n\n  When automatically populating tabs,\n  the `tabLabel` must not contain any spaces.\n  In the JSON example below,\n  the Text tabs  properties `StudentLastName` and `StudentFirstName`\n  will be auto-populated as specified (\"Doe\" and \"John\")\n  each place they appear throughout the envelope.\n\n  ```\n  \"tabs\": {\n    \"textTabs\": [\n    {\n      \"tabLabel\": \"\\\\*StudentLastName\",\n      \"value\": \"Doe\"\n    },\n    {\n      \"tabLabel\": \"\\\\*StudentFirstName\",\n      \"value\": \"John\"\n    }]\n  }\n  ```\n\n* Each occurrence of the tab must have identical properties.\n\n  For example, suppose there are two Text tabs in a document,\n  each with `tabLabel` set to `Name`.\n  If one tab has the `bold` property set to **true**,\n  and the other has the `bold` property set to **false**,\n  only the first one will be populated.\n  In order to automatically populate both occurrences\n  of the `Name` Text tabs,\n  the `bold` property must be set to the same value for both tabs.\n"
     name: EnvelopeRecipientTabs
   - description: The EnvelopeDocumentTabs resource provides methods that allow you to manage various tabs in envelopes. For a complete list of options see the following Properties section.
     name: EnvelopeDocumentTabs
@@ -521,6 +522,8 @@ tags:
       * Recipient View The correction view of the DocuSign UI.
       * Sender View - The sending view of the DocuSign UI.
     name: EnvelopeViews
+  - description: ''
+    name: AccountSealProviders
   - description: 'The Accounts resource provides methods that allow you to create, delete, and manage your accounts.'
     name: Accounts
   - description: This resource provides information on the Standards Based Signature providers that have been provisioned for this account.
@@ -535,7 +538,7 @@ tags:
       [user applications](https://developers.docusign.com/esign-rest-api/guides/common-terms)
       and to learn more about
       DocuSign authentication
-      see [Authentication Overview](https://developers.docusign.com/esign-rest-api/guides/authentication).
+      see [Authentication Overview](https://docs.docusign.com/esign/guide/authentication/auth_overview.html).
 
       When accessing the API resources, the GET [Authentication:login method](https://developers.docusign.com/esign-rest-api/reference/Authentication/Authentication/login) is the first request you make. It allows you to determine whether a user is authenticated and provides the information you will need to make subsequent API requests.
 
@@ -1359,10 +1362,6 @@ tags:
       The ENoteConfigurations resource provides methods that allow you to manage
       information for the eNote eOriginal integration.
     name: ENoteConfigurations
-  - description: |-
-      The EMortgageTransactions resource provides a method that allow you
-      to create an eMortgage transaction.
-    name: EMortgageTransactions
   - description: |
       The WorkspaceItems resource provides methods that allow you to manage
       workspace items.
@@ -1387,6 +1386,8 @@ tags:
     name: PaymentGatewayAccounts
   - description: ''
     name: NotaryJournals
+  - description: ''
+    name: IdentityVerifications
 paths:
   /service_information:
     get:
@@ -3165,6 +3166,138 @@ paths:
       x-ds-method: update
       x-ds-methodname: updateConfiguration
       x-ds-service: Connect
+  '/v2/accounts/{accountId}/connect/envelopes/publish':
+    get:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: EnvelopePublish_GetEnvelopePublishTransactionList
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/envelopePublishTransactionList'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-api-comment: Check with Ted if this can be released
+      x-ds-api-integrator-access: EnvelopePublish
+      x-ds-api-status: restricted
+      x-ds-in-sdk: true
+      x-ds-methodname: getEnvelopePublishTransactionList
+    parameters: []
+    post:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: EnvelopePublish_PostEnvelopePublishTransaction
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: envelopePublishRequest
+          required: false
+          schema:
+            $ref: '#/definitions/envelopePublishRequest'
+      responses:
+        '201':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/envelopePublishTransaction'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-api-comment: Check with Ted if this can be released
+      x-ds-api-integrator-access: EnvelopePublish
+      x-ds-api-status: restricted
+      x-ds-in-sdk: true
+      x-ds-methodname: createEnvelopePublishTransaction
+  '/v2/accounts/{accountId}/connect/envelopes/publish/{transactionId}':
+    get:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: EnvelopePublish_GetEnvelopePublishTransactionMetaData
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Specifies the Transaction ID from the AppStore.
+          in: path
+          name: transactionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/envelopePublishTransaction'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-api-comment: Check with Ted if this can be released
+      x-ds-api-integrator-access: EnvelopePublish
+      x-ds-api-status: restricted
+      x-ds-in-sdk: true
+      x-ds-methodname: getEnvelopePublishTransactionMetaData
+    parameters: []
+  '/v2/accounts/{accountId}/connect/envelopes/publish/{transactionId}/results_csv':
+    get:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: EnvelopePublish_GetEnvelopePublishTransactionResults
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: Specifies the Transaction ID from the AppStore.
+          in: path
+          name: transactionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-api-comment: Check with Ted if this can be released
+      x-ds-api-integrator-access: EnvelopePublish
+      x-ds-api-status: restricted
+      x-ds-in-sdk: true
+      x-ds-methodname: getEnvelopePublishTransactionResults
+    parameters: []
   '/v2/accounts/{accountId}/connect/envelopes/retry_queue':
     parameters: []
     put:
@@ -4026,42 +4159,6 @@ paths:
       x-ds-method: update
       x-ds-methodname: updateCustomField
       x-ds-service: Accounts
-  '/v2/accounts/{accountId}/eMortgage/transactions':
-    parameters: []
-    post:
-      consumes: []
-      deprecated: false
-      description: 'Deprecated: This method will be removed in a future release'
-      operationId: EMortgage_PostTransactions
-      parameters:
-        - description: The external account number (int) or account ID Guid.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - description: ''
-          in: body
-          name: EMortgageTransactions
-          required: false
-          schema:
-            $ref: '#/definitions/EMortgageTransactions'
-      responses:
-        '201':
-          description: Successful response.
-          schema:
-            $ref: '#/definitions/postTransactionsResponse'
-        '400':
-          description: Error encountered.
-          schema:
-            $ref: '#/definitions/errorDetails'
-      summary: Starts a new eMortgage Transaction
-      tags:
-        - EMortgageTransactions
-      x-ds-api-status: beta
-      x-ds-in-sdk: true
-      x-ds-method: create
-      x-ds-methodname: createEMortgageTransaction
-      x-ds-service: Accounts
   '/v2/accounts/{accountId}/envelopes':
     get:
       consumes: []
@@ -4656,7 +4753,7 @@ paths:
         status changes.
         DocuSign limits polling to once every 15 minutes or less
         frequently.
-        See [API Rules and Limits](https://developers.docusign.com/esign-rest-api/guides/resource-limits) in the **Resource Limits Guide** for additional information and examples.
+        See [API Rules and Limits][apirules] for more information and examples.
 
 
         When a webhook is used,
@@ -5039,7 +5136,7 @@ paths:
           name: cdse_mode
           required: false
           type: string
-        - description: 'When true, users can define the routing order of recipients while sending documents for signature.'
+        - description: ''
           in: query
           name: change_routing_order
           required: false
@@ -5056,6 +5153,11 @@ paths:
             ###### Note: DocuSign recommends that this parameter should be set to **true** whenever you create a draft envelope with multiple templates.
           in: query
           name: merge_roles_on_draft
+          required: false
+          type: string
+        - description: ''
+          in: query
+          name: preserve_template_recipientids
           required: false
           type: string
         - description: ''
@@ -6000,10 +6102,54 @@ paths:
       summary: Gets the envelope audit events for an envelope.
       tags:
         - Envelopes
+      x-ds-api-comment: Mark B. pointed out that paging is a concern with this version update as well as scalablilty and performance. Address before going to public API
+      x-ds-api-workstate: rework_required
       x-ds-in-sdk: true
       x-ds-method: listAuditEvents
       x-ds-methodname: listAuditEvents
       x-ds-service: Envelopes
+    parameters: []
+  '/v2/accounts/{accountId}/envelopes/{envelopeId}/comments/transcript':
+    get:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: Comments_GetCommentsTranscript
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: 'The envelope''s GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec '
+          in: path
+          name: envelopeId
+          required: true
+          type: string
+        - description: ''
+          in: query
+          name: encoding
+          required: false
+          type: string
+      produces:
+        - application/pdf
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            type: file
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-api-comment: 'Talk to Peter Salama. '
+      x-ds-api-integrator-access: CommentsTranscript
+      x-ds-api-status: beta
+      x-ds-in-sdk: true
+      x-ds-methodname: getCommentsTranscript
     parameters: []
   '/v2/accounts/{accountId}/envelopes/{envelopeId}/custom_fields':
     delete:
@@ -6166,30 +6312,9 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      description: |+
-        Deletes one or more documents from an existing envelope that has not yet been completed.
-
-        To delete a document, use only the relevant parts of the [`envelopeDefinition`](#envelopeDefinition).
-        For example, this request body specifies that you want to delete the document whose `documentId` is "1".
-
-
-        ```text
-        {
-          "documents": [
-            {
-              "documentId": "1"
-            }
-          ]
-        }
-        ```
-
-        The envelope status must be one of:
-
-        - `created`
-        - `sent`
-        - `delivered`
-
-
+      description: |-
+        Deletes one or more documents from an existing draft envelope.
+        <p>**Note**: Only relevant parts of an object are needed to delete a document.
       operationId: Documents_DeleteDocuments
       parameters:
         - description: The external account number (int) or account ID Guid.
@@ -7052,6 +7177,49 @@ paths:
       x-ds-methodname: getPageTabs
       x-ds-service: Envelopes
     parameters: []
+  '/v2/accounts/{accountId}/envelopes/{envelopeId}/documents/{documentId}/responsive_html_preview':
+    parameters: []
+    post:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: ResponsiveHtml_PostDocumentResponsiveHtmlPreview
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The ID of the document being accessed.
+          in: path
+          name: documentId
+          required: true
+          type: string
+        - description: 'The envelope''s GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec '
+          in: path
+          name: envelopeId
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: documentHtmlDefinition
+          required: false
+          schema:
+            $ref: '#/definitions/documentHtmlDefinition'
+      responses:
+        '201':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/documentHtmlDefinitions'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-in-sdk: true
+      x-ds-methodname: createDocumentResponsiveHtmlPreview
   '/v2/accounts/{accountId}/envelopes/{envelopeId}/documents/{documentId}/tabs':
     get:
       consumes: []
@@ -7679,7 +7847,7 @@ paths:
       consumes: []
       deprecated: false
       description: |-
-        Retrieves the status of all recipients in a single envelope and identifies the current recipient in the routing list. This method can also be used to retrieve the tab values.
+        Retrieves the status of all recipients in a single envelope and identifies the current recipient in the routing list. 
 
         The `currentRoutingOrder` property of the response contains the `routingOrder` value of the current recipient indicating that the envelope has been sent to the recipient, but the recipient has not completed their actions.
       operationId: Recipients_GetRecipients
@@ -7694,7 +7862,7 @@ paths:
           name: envelopeId
           required: true
           type: string
-        - description: ' When set to **true** and `include_tabs` value is set to **true**, all tabs with anchor tab properties are included in the response. '
+        - description: ' When set to **true** and `include_tabs` is set to **true**, all tabs with anchor tab properties are included in the response. '
           in: query
           name: include_anchor_tab_locations
           required: false
@@ -7868,7 +8036,7 @@ paths:
 
         For draft envelopes, you can edit the following properties: `email`, `userName`, `routingOrder`, `faxNumber`, `deliveryMethod`, `accessCode`, and `requireIdLookup`.
 
-        Once an envelope has been sent, you can only edit: `email`, `userName`, `signerName`, `signingGroupId`, `routingOrder`, `faxNumber`, and `deliveryMethod`. You can also select to resend an envelope by using the `resend_envelope` option.
+        Once an envelope has been sent, you can only edit: `email`, `userName`, `signerName`, `routingOrder`, `faxNumber`, and `deliveryMethod`. You can also select to resend an envelope by using the `resend_envelope` option.
 
         If you send information for a recipient that does not already exist in a draft envelope, the recipient is added to the envelope (similar to the POST).
       operationId: Recipients_PutRecipients
@@ -7882,6 +8050,11 @@ paths:
           in: path
           name: envelopeId
           required: true
+          type: string
+        - description: ''
+          in: query
+          name: offline_signing
+          required: false
           type: string
         - description: 'When set to **true**, resends the   envelope if the new recipient''s routing order is before or the same as the envelope''s next recipient.'
           in: query
@@ -8577,7 +8750,7 @@ paths:
     get:
       consumes: []
       deprecated: false
-      description: 'Retrieves information about the tabs associated with a recipient. You can make a single API call to get all the tab values and information from a given, completed envelope in addition to draft ones.  Tab values can be retrieved by using the [EnvelopeRecipients:list method](https://docs.docusign.com/esign/restapi/Envelopes/EnvelopeRecipients/list/) with query parameter include_tabs set to "true".'
+      description: Retrieves information about the tabs associated with a recipient in a draft envelope.
       operationId: Recipients_GetRecipientTabs
       parameters:
         - description: The external account number (int) or account ID Guid.
@@ -8713,6 +8886,44 @@ paths:
       x-ds-method: update
       x-ds-methodname: updateTabs
       x-ds-service: Envelopes
+  '/v2/accounts/{accountId}/envelopes/{envelopeId}/responsive_html_preview':
+    parameters: []
+    post:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: ResponsiveHtml_PostResponsiveHtmlPreview
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: 'The envelope''s GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec '
+          in: path
+          name: envelopeId
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: documentHtmlDefinition
+          required: false
+          schema:
+            $ref: '#/definitions/documentHtmlDefinition'
+      responses:
+        '201':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/documentHtmlDefinitions'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-in-sdk: true
+      x-ds-methodname: createResponsiveHtmlPreview
   '/v2/accounts/{accountId}/envelopes/{envelopeId}/templates':
     get:
       consumes: []
@@ -8974,9 +9185,9 @@ paths:
         For the best user experience, don't use an iFrame. For iOS devices DocuSign recommends using a WebView.
 
         Multiple solutions are available for maintaining your
-        client state. See the **Maintaining State** section of the [Embedded Signing introduction.](https://developers.docusign.com/esign-rest-api/guides/embedded-signing)
+        client state. See the "Maintaining State" section of the [Embedded Signing introduction.](https://developers.docusign.com/esign-rest-api/guides/embedded-signing)
 
-        After the user has completed the sending view, the browser is redirected to the `returnUrl` you supplied.
+        After the user has completed the sending view, their browser is redirected to the `returnUrl` you supplied.
 
         By default, if the envelope already contains one or more documents, DocuSign will initially show the document tagging view when you redirect to the URL. 
 
@@ -9016,6 +9227,46 @@ paths:
       x-ds-method: createSender
       x-ds-methodname: createSenderView
       x-ds-service: Envelopes
+  '/v2/accounts/{accountId}/envelopes/{envelopeId}/views/shared':
+    parameters: []
+    post:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: Views_PostEnvelopeRecipientSharedView
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: 'The envelope''s GUID. Eg 93be49ab-afa0-4adf-933c-f752070d71ec '
+          in: path
+          name: envelopeId
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: recipientViewRequest
+          required: false
+          schema:
+            $ref: '#/definitions/recipientViewRequest'
+      responses:
+        '201':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/TemplateViews'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - EnvelopeViews
+      x-ds-in-sdk: true
+      x-ds-method: createSharedRecipient
+      x-ds-methodname: createEnvelopeRecipientSharedView
+      x-ds-service: Uncategorized
   '/v2/accounts/{accountId}/folders':
     get:
       consumes: []
@@ -9580,6 +9831,35 @@ paths:
       x-ds-method: update
       x-ds-methodname: updateGroupUsers
       x-ds-service: Groups
+  '/v2/accounts/{accountId}/identity_verification':
+    get:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: AccountIdentityVerification_GetAccountIdentityVerification
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/IdentityVerifications'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - IdentityVerifications
+      x-ds-in-sdk: true
+      x-ds-method: list
+      x-ds-methodname: getAccountIdentityVerification
+      x-ds-service: Uncategorized
+    parameters: []
   '/v2/accounts/{accountId}/payment_gateway_accounts':
     get:
       consumes: []
@@ -9604,6 +9884,7 @@ paths:
       summary: List payment gateway account information
       tags:
         - PaymentGatewayAccounts
+      x-ds-api-comment: Michael D. says this is an internal only endpoint.
       x-ds-api-status: beta
       x-ds-in-sdk: true
       x-ds-method: list
@@ -10144,6 +10425,35 @@ paths:
       x-ds-methodname: listRecipientNamesByEmail
       x-ds-service: Accounts
     parameters: []
+  '/v2/accounts/{accountId}/seals':
+    get:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: AccountSignatureProviders_GetSealProviders
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/AccountSealProviders'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - AccountSealProviders
+      x-ds-in-sdk: true
+      x-ds-method: list
+      x-ds-methodname: getSealProviders
+      x-ds-service: TrustServiceProviders
+    parameters: []
   '/v2/accounts/{accountId}/search_folders/{searchFolderId}':
     get:
       consumes: []
@@ -10216,6 +10526,8 @@ paths:
       summary: Gets a list of envelopes in folders matching the specified criteria.
       tags:
         - Folders
+      x-ds-api-comment: Use GetEnvelopes in V2.1 and later instead of this function.
+      x-ds-api-workstate: deprecated
       x-ds-in-sdk: true
       x-ds-method: search
       x-ds-methodname: search
@@ -12266,6 +12578,49 @@ paths:
       x-ds-methodname: getPageTabs
       x-ds-service: Templates
     parameters: []
+  '/v2/accounts/{accountId}/templates/{templateId}/documents/{documentId}/responsive_html_preview':
+    parameters: []
+    post:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: ResponsiveHtml_PostTemplateDocumentResponsiveHtmlPreview
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The ID of the document being accessed.
+          in: path
+          name: documentId
+          required: true
+          type: string
+        - description: The ID of the template being accessed.
+          in: path
+          name: templateId
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: documentHtmlDefinition
+          required: false
+          schema:
+            $ref: '#/definitions/documentHtmlDefinition'
+      responses:
+        '201':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/documentHtmlDefinitions'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-in-sdk: true
+      x-ds-methodname: createTemplateDocumentResponsiveHtmlPreview
   '/v2/accounts/{accountId}/templates/{templateId}/documents/{documentId}/tabs':
     get:
       consumes: []
@@ -13191,6 +13546,44 @@ paths:
       x-ds-method: update
       x-ds-methodname: updateTabs
       x-ds-service: Templates
+  '/v2/accounts/{accountId}/templates/{templateId}/responsive_html_preview':
+    parameters: []
+    post:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: ResponsiveHtml_PostTemplateResponsiveHtmlPreview
+      parameters:
+        - description: The external account number (int) or account ID Guid.
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The ID of the template being accessed.
+          in: path
+          name: templateId
+          required: true
+          type: string
+        - description: ''
+          in: body
+          name: documentHtmlDefinition
+          required: false
+          schema:
+            $ref: '#/definitions/documentHtmlDefinition'
+      responses:
+        '201':
+          description: Successful response.
+          schema:
+            $ref: '#/definitions/documentHtmlDefinitions'
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-in-sdk: true
+      x-ds-methodname: createTemplateResponsiveHtmlPreview
   '/v2/accounts/{accountId}/templates/{templateId}/views/edit':
     parameters: []
     post:
@@ -13445,13 +13838,15 @@ paths:
           required: false
           type: string
         - description: |
-            Filters the user records by account status. One of:
+            Indicates the envelope status. Valid values are: 
 
-            * ActivationRequired
-            * ActivationSent
-            * Active
-            * Closed
-            * Disabled
+            * completed - The envelope has been completed and all tags have been signed.
+            * created - The envelope is created as a draft. It can be modified and sent later.
+            * declined - The envelope has been declined by the recipients.
+            * delivered - The envelope has been delivered to the recipients.
+            * sent - The envelope is sent to the recipients.
+            * signed - The envelope has been signed by the recipients.
+            * voided - The envelope is no longer valid and recipients cannot access or sign the envelope.
           in: query
           name: status
           required: false
@@ -14802,7 +15197,7 @@ paths:
 
         The userId property specified in the endpoint must match the authenticated user's user ID and the user must be a member of the account.
 
-        The `signatureId` parameter accepts a signature ID. DocuSign recommends you use signature ID (`signatureId`), since some names contain characters that do not properly encode into a URL. If you use the user name, it is likely that the name includes spaces. In that case, URL encode the name before using it in the endpoint. 
+        The `signatureId` parameter accepts a signature ID or a signature name. DocuSign recommends you use signature ID (`signatureId`), since some names contain characters that do not properly encode into a URL. If you use the user name, it is likely that the name includes spaces. In that case, URL encode the name before using it in the endpoint. 
 
         For example encode "Bob Smith" as "Bob%20Smith".
       operationId: UserSignatures_PutUserSignatureById
@@ -16031,7 +16426,7 @@ paths:
         Retrieves account information for the authenticated user. Since the API is sessionless, this method does not actually log you in. 
         Instead, the method returns information about the account or accounts that the authenticated user has access to.
 
-        ###### Important: This method must only be used for the [Legacy Header Authentication](https://developers.docusign.com/esign-rest-api/guides/authentication/legacy) flow. Use the [`AccountServer: userInfo` method](https://developers.docusign.com/esign-rest-api/guides/authentication/user-info-endpoints) for the OAuth2 Authentication Code and [Implicit Grant flows](https://developers.docusign.com/esign-rest-api/guides/authentication/oauth2-implicit).
+        ###### Important: This method must only be used for the [Legacy Header Authentication][legacyheader] flow. Use the [`AccountServer: userInfo` method](../../../../guides/authentication/userinfo.html) for the OAuth2 Authentiction Code and Implicit Grant flows.
 
         Each account has a `baseUrl` property, returned in the response.
         Use this `baseUrl` in all future API calls as the base of the request URL.
@@ -16213,6 +16608,37 @@ paths:
       x-ds-method: getOAuthToken
       x-ds-methodname: getOAuthToken
       x-ds-service: Authentication
+  '/v2/organization_exports/{organizationId}/account_settings/{resultId}':
+    get:
+      consumes: []
+      deprecated: false
+      description: ''
+      operationId: OrganizationExports_GetAccountSettingsExport
+      parameters:
+        - description: ''
+          in: path
+          name: organizationId
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: resultId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response.
+        '400':
+          description: Error encountered.
+          schema:
+            $ref: '#/definitions/errorDetails'
+      summary: ''
+      tags:
+        - Uncategorized
+      x-ds-api-status: beta
+      x-ds-in-sdk: true
+      x-ds-methodname: getAccountSettingsExport
+    parameters: []
 definitions:
   AccountBrands:
     description: Brand management for accounts
@@ -16477,6 +16903,19 @@ definitions:
     x-ds-category: Accounts
     x-ds-definition-name: permissionProfile
     x-ds-order: '70'
+    x-ms-summary: ''
+  AccountSealProviders:
+    description: ''
+    properties:
+      seals:
+        description: ''
+        items:
+          $ref: '#/definitions/sealIdentifier'
+        type: array
+    type: object
+    x-ds-category: Accounts
+    x-ds-definition-name: accountSeals
+    x-ds-order: '10'
     x-ms-summary: ''
   AccountSignatureProviders:
     description: Account SBS Signature Providers
@@ -17290,6 +17729,15 @@ definitions:
       name:
         description: ''
         type: string
+      paymentItemCode:
+        description: ''
+        type: string
+      paymentItemDescription:
+        description: ''
+        type: string
+      paymentItemName:
+        description: ''
+        type: string
       required:
         description: 'When set to **true**, the signer is required to fill out this tab'
         type: string
@@ -17333,26 +17781,6 @@ definitions:
     x-ds-definition-name: tabMetadata
     x-ds-order: '10'
     x-ms-summary: Custom tabs
-  EMortgageTransactions:
-    description: ''
-    properties:
-      documentData:
-        description: ''
-        type: string
-      dptName:
-        description: ''
-        type: string
-      transactionName:
-        description: ''
-        type: string
-      transactionTypeName:
-        description: ''
-        type: string
-    type: object
-    x-ds-category: Accounts
-    x-ds-definition-name: postTransactionsRequest
-    x-ds-order: '120'
-    x-ms-summary: ''
   ENoteConfigurations:
     description: ''
     properties:
@@ -17902,6 +18330,11 @@ definitions:
         items:
           $ref: '#/definitions/ssn'
         type: array
+      tabGroups:
+        description: ''
+        items:
+          $ref: '#/definitions/tabGroup'
+        type: array
       textTabs:
         description: |
           A list of 
@@ -18393,6 +18826,11 @@ definitions:
         items:
           $ref: '#/definitions/ssn'
         type: array
+      tabGroups:
+        description: ''
+        items:
+          $ref: '#/definitions/tabGroup'
+        type: array
       textTabs:
         description: |
           A list of 
@@ -18547,6 +18985,9 @@ definitions:
         type: string
       allowReassign:
         description: 'When set to **true**, the recipient can redirect an envelope to a more appropriate recipient.'
+        type: string
+      allowViewHistory:
+        description: ''
         type: string
       asynchronous:
         description: 'When set to **true**, the envelope is queued for processing and the value of the `status` property is set to ''Processing''. Additionally, get status calls return ''Processing'' until completed.'
@@ -18850,6 +19291,19 @@ definitions:
     x-ds-definition-name: groupInformation
     x-ds-order: '10'
     x-ms-summary: Group information
+  IdentityVerifications:
+    description: ''
+    properties:
+      identityVerification:
+        description: ''
+        items:
+          $ref: '#/definitions/accountIdentityVerificationWorkflow'
+        type: array
+    type: object
+    x-ds-category: Accounts
+    x-ds-definition-name: accountIdentityVerificationResponse
+    x-ds-order: '30'
+    x-ms-summary: ''
   Invoices:
     description: Invoices
     properties:
@@ -19010,6 +19464,9 @@ definitions:
   PowerForms:
     description: ''
     properties:
+      createdBy:
+        description: ''
+        type: string
       createdDateTime:
         description: Indicates the date and time the item was created.
         type: string
@@ -19582,6 +20039,11 @@ definitions:
         items:
           $ref: '#/definitions/ssn'
         type: array
+      tabGroups:
+        description: ''
+        items:
+          $ref: '#/definitions/tabGroup'
+        type: array
       textTabs:
         description: |
           A list of 
@@ -20016,6 +20478,11 @@ definitions:
         items:
           $ref: '#/definitions/ssn'
         type: array
+      tabGroups:
+        description: ''
+        items:
+          $ref: '#/definitions/tabGroup'
+        type: array
       textTabs:
         description: |
           A list of 
@@ -20156,6 +20623,9 @@ definitions:
         type: string
       allowReassign:
         description: 'When set to **true**, the recipient can redirect an envelope to a more appropriate recipient.'
+        type: string
+      allowViewHistory:
+        description: ''
         type: string
       asynchronous:
         description: 'When set to **true**, the envelope is queued for processing and the value of the `status` property is set to ''Processing''. Additionally, get status calls return ''Processing'' until completed.'
@@ -20537,6 +21007,9 @@ definitions:
       activationAccessCode:
         description: The activation code the new user must enter when activating their account.
         type: string
+      countryCode:
+        description: ''
+        type: string
       createdDateTime:
         description: Indicates the date and time the item was created.
         type: string
@@ -20630,6 +21103,9 @@ definitions:
         type: string
       signatureImageUri:
         description: Contains the URI for an endpoint that you can use to retrieve the signature image.
+        type: string
+      subscribe:
+        description: ''
         type: string
       suffixName:
         description: |-
@@ -20776,7 +21252,11 @@ definitions:
         $ref: '#/definitions/workspaceUser'
         description: ''
       status:
-        description: Item status. <!-- TODO -->
+        description: |-
+          Indicates the envelope status. Valid values are:
+
+          * sent - The envelope is sent to the recipients. 
+          * created - The envelope is saved as a draft and can be modified and sent later.
         type: string
       workspaceBaseUrl:
         description: The relative URL that may be used to access the workspace.
@@ -20939,6 +21419,35 @@ definitions:
     type: object
     x-ds-definition-name: accountBillingPlan
     x-ms-summary: Contains information about an account billing plan.
+  accountIdentityVerificationStep:
+    description: ''
+    properties:
+      name:
+        description: ''
+        type: string
+      type:
+        description: 'Type of the user. Valid values: type_owner, type_participant.'
+        type: string
+    type: object
+    x-ds-definition-name: accountIdentityVerificationStep
+    x-ms-summary: ''
+  accountIdentityVerificationWorkflow:
+    description: ''
+    properties:
+      defaultName:
+        description: ''
+        type: string
+      steps:
+        description: ''
+        items:
+          $ref: '#/definitions/accountIdentityVerificationStep'
+        type: array
+      workflowId:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: accountIdentityVerificationWorkflow
+    x-ms-summary: ''
   accountMinimumPasswordLength:
     description: ''
     properties:
@@ -21093,10 +21602,22 @@ definitions:
       allowDocuSignDesktopClientMetadata:
         $ref: '#/definitions/settingsMetadata'
         description: ''
+      allowESealRecipients:
+        description: ''
+        type: string
+      allowESealRecipientsMetadata:
+        $ref: '#/definitions/settingsMetadata'
+        description: ''
       allowEnvelopeSending:
         description: ''
         type: string
       allowEnvelopeSendingMetadata:
+        $ref: '#/definitions/settingsMetadata'
+        description: ''
+      allowPowerFormsAdminToAccessAllPowerFormEnvelopes:
+        description: ''
+        type: string
+      allowPowerFormsAdminToAccessAllPowerFormEnvelopesMetadata:
         $ref: '#/definitions/settingsMetadata'
         description: ''
       allowSendersToSetRecipientEmailLanguage:
@@ -21703,7 +22224,11 @@ definitions:
         description: ''
         type: string
       status:
-        description: Item status. <!-- TODO -->
+        description: |-
+          Indicates the envelope status. Valid values are:
+
+          * sent - The envelope is sent to the recipients. 
+          * created - The envelope is saved as a draft and can be modified and sent later.
         type: string
     type: object
     x-ds-definition-name: apiRequestLog
@@ -21774,7 +22299,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -22951,6 +23476,12 @@ definitions:
       addAccessCodeToEmail:
         description: This Optional attribute indicates that the access code will be added to the email sent to the recipient; this nullifies the Security measure of Access Code on the recipient.
         type: string
+      agentCanEditEmail:
+        description: ''
+        type: string
+      agentCanEditName:
+        description: ''
+        type: string
       clientUserId:
         description: |-
           Specifies whether the recipient is embedded or remote. 
@@ -23178,6 +23709,12 @@ definitions:
         type: string
       addAccessCodeToEmail:
         description: This Optional attribute indicates that the access code will be added to the email sent to the recipient; this nullifies the Security measure of Access Code on the recipient.
+        type: string
+      agentCanEditEmail:
+        description: ''
+        type: string
+      agentCanEditName:
+        description: ''
         type: string
       clientUserId:
         description: |-
@@ -23414,7 +23951,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -23592,7 +24129,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -23801,6 +24338,27 @@ definitions:
     type: object
     x-ds-definition-name: compositeTemplate
     x-ms-summary: ''
+  conciergeQueryRequest:
+    description: ''
+    properties:
+      accountManagementRepCountry:
+        description: ''
+        type: string
+      contractCountry:
+        description: ''
+        type: string
+      planId:
+        description: The DocuSign Plan ID for the account.
+        type: string
+      region:
+        description: ''
+        type: string
+      shippingCountry:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: conciergeQueryRequest
+    x-ms-summary: ''
   connectConfigResults:
     description: ''
     properties:
@@ -23854,20 +24412,23 @@ definitions:
     description: ''
     properties:
       configId:
-        description: Reserved for DocuSign.
+        description: 'Reserved: TBD'
         type: string
       configUrl:
-        description: |
-          Reserved for DocuSign.
+        description: 'Reserved: TBD'
         type: string
       envelopeId:
         description: The envelope ID of the envelope status that failed to post.
         type: string
       status:
-        description: Connection status.
+        description: |-
+          Indicates the envelope status. Valid values are:
+
+          * sent - The envelope is sent to the recipients. 
+          * created - The envelope is saved as a draft and can be modified and sent later.
         type: string
       statusMessage:
-        description: Connection status message.
+        description: ''
         type: string
     type: object
     x-ds-definition-name: connectFailureResult
@@ -24171,7 +24732,7 @@ definitions:
         description: 'When set to **true**, the signer is required to fill out this tab'
         type: string
       show:
-        description: 'A boolean indicating if the value should be displayed.  If this value is set to **true**, the custom field is displayed at the top of the certificate of completion. If this value is left blank/ or set to **false**, then it does not appear in the certificate of completion. '
+        description: A boolean indicating if the value should be displayed.
         type: string
       value:
         description: 'Specifies the value of the tab. '
@@ -24198,7 +24759,7 @@ definitions:
         description: 'When set to **true**, the signer is required to fill out this tab'
         type: string
       show:
-        description: 'A boolean indicating if the value should be displayed.  If this value is set to **true**, the custom field is displayed at the top of the certificate of completion. If this value is left blank/ or set to **false**, then it does not appear in the certificate of completion. '
+        description: A boolean indicating if the value should be displayed.
         type: string
       value:
         description: The value of the custom field.
@@ -24258,7 +24819,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -24502,7 +25063,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -24708,7 +25269,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -25028,6 +25589,175 @@ definitions:
     type: object
     x-ds-definition-name: document
     x-ms-summary: A document object.
+  documentHtmlCollapsibleDisplaySettings:
+    description: ''
+    properties:
+      arrowClosed:
+        description: ''
+        type: string
+      arrowColor:
+        description: ''
+        type: string
+      arrowLocation:
+        description: ''
+        type: string
+      arrowOpen:
+        description: ''
+        type: string
+      arrowSize:
+        description: ''
+        type: string
+      arrowStyle:
+        description: ''
+        type: string
+      containerStyle:
+        description: ''
+        type: string
+      labelStyle:
+        description: ''
+        type: string
+      onlyArrowIsClickable:
+        description: ''
+        type: boolean
+      outerLabelAndArrowStyle:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: documentHtmlCollapsibleDisplaySettings
+    x-ms-summary: ''
+  documentHtmlDefinition:
+    description: ''
+    properties:
+      displayAnchorPrefix:
+        description: ''
+        type: string
+      displayAnchors:
+        description: ''
+        items:
+          $ref: '#/definitions/documentHtmlDisplayAnchor'
+        type: array
+      displayOrder:
+        description: ''
+        type: string
+      displayPageNumber:
+        description: ''
+        type: string
+      documentGuid:
+        description: ''
+        type: string
+      documentId:
+        description: The ID of the document being accessed.
+        type: string
+      headerLabel:
+        description: ''
+        type: string
+      maxScreenWidth:
+        description: ''
+        type: string
+      removeEmptyTags:
+        description: ''
+        type: string
+      showMobileOptimizedToggle:
+        description: ''
+        type: string
+      source:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: documentHtmlDefinition
+    x-ms-summary: ''
+  documentHtmlDefinitions:
+    description: ''
+    properties:
+      htmlDefinitions:
+        description: ''
+        items:
+          type: string
+        type: array
+    type: object
+    x-ds-definition-name: documentHtmlDefinitions
+    x-ms-summary: ''
+  documentHtmlDisplayAnchor:
+    description: ''
+    properties:
+      caseSensitive:
+        description: ''
+        type: boolean
+      displaySettings:
+        $ref: '#/definitions/documentHtmlDisplaySettings'
+        description: ''
+      endAnchor:
+        description: ''
+        type: string
+      removeEndAnchor:
+        description: ''
+        type: boolean
+      removeStartAnchor:
+        description: ''
+        type: boolean
+      startAnchor:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: documentHtmlDisplayAnchor
+    x-ms-summary: ''
+  documentHtmlDisplaySettings:
+    description: ''
+    properties:
+      cellStyle:
+        description: ''
+        type: string
+      collapsibleSettings:
+        $ref: '#/definitions/documentHtmlCollapsibleDisplaySettings'
+        description: ''
+      display:
+        description: |
+          This string sets the display and behavior properties of
+          the document during signing. The possible values are:
+
+          * `modal`<br>
+            The document is shown as a supplement action strip
+            and can be viewed, downloaded, or printed in a modal window.
+            This is the recommended value for supplemental documents. 
+
+          * `download`<br>
+            The document is shown as a supplement action strip
+            and can be viewed, downloaded, or printed in a new browser window. 
+
+          * `inline`<br>
+            The document is shown in the normal signing window.
+            This value is not used with supplemental documents,
+            but is the default value for all other documents.
+        type: string
+      displayLabel:
+        description: ''
+        type: string
+      displayOrder:
+        description: ''
+        format: int32
+        type: integer
+      displayPageNumber:
+        description: ''
+        format: int32
+        type: integer
+      hideLabelWhenOpened:
+        description: ''
+        type: boolean
+      inlineOuterStyle:
+        description: ''
+        type: string
+      labelWhenOpened:
+        description: ''
+        type: string
+      scrollToTopWhenOpened:
+        description: ''
+        type: boolean
+      tableStyle:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: documentHtmlDisplaySettings
+    x-ms-summary: ''
   documentTemplate:
     description: ''
     properties:
@@ -25338,7 +26068,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -25583,7 +26313,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -25801,6 +26531,9 @@ definitions:
         type: string
       allowRecipientRecursion:
         description: 'When set to **true**, this enables the Recursive Recipients feature and allows a recipient to appear more than once in the routing order.'
+        type: string
+      allowViewHistory:
+        description: ''
         type: string
       asynchronous:
         description: 'When set to **true**, the envelope is queued for processing and the value of the `status` property is set to ''Processing''. Additionally, get status calls return ''Processing'' until completed.'
@@ -26140,7 +26873,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -26325,6 +27058,113 @@ definitions:
     type: object
     x-ds-definition-name: envelopeNotificationRequest
     x-ms-summary: ''
+  envelopePublishRequest:
+    description: ''
+    properties:
+      applyConnectSettings:
+        description: ''
+        type: string
+      envelopeIds:
+        description: ''
+        items:
+          type: string
+        type: array
+      envelopeIdsBase64:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: envelopePublishRequest
+    x-ms-summary: ''
+  envelopePublishTransaction:
+    description: ''
+    properties:
+      applyConnectSettings:
+        description: ''
+        type: string
+      envelopeCount:
+        description: ''
+        type: string
+      envelopeLevelErrorRollups:
+        description: ''
+        items:
+          $ref: '#/definitions/envelopePublishTransactionErrorRollup'
+        type: array
+      envelopePublishTransactionId:
+        description: ''
+        type: string
+      errorCount:
+        description: ''
+        type: string
+      fileLevelErrors:
+        description: ''
+        items:
+          type: string
+        type: array
+      noActionRequiredEnvelopeCount:
+        description: ''
+        type: string
+      processedEnvelopeCount:
+        description: ''
+        type: string
+      processingStatus:
+        description: ''
+        type: string
+      resultsUri:
+        description: ''
+        type: string
+      submissionDate:
+        description: ''
+        type: string
+      submittedByUserInfo:
+        $ref: '#/definitions/userInfo'
+        description: ''
+      submittedForPublishingEnvelopeCount:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: envelopePublishTransaction
+    x-ms-summary: ''
+  envelopePublishTransactionErrorRollup:
+    description: ''
+    properties:
+      count:
+        description: The maximum number of results to be returned by this request.
+        type: string
+      errorType:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: envelopePublishTransactionErrorRollup
+    x-ms-summary: ''
+  envelopePublishTransactionList:
+    description: ''
+    properties:
+      endPosition:
+        description: 'The last position in the result set. '
+        type: string
+      envelopePublishTransactions:
+        description: ''
+        items:
+          $ref: '#/definitions/envelopePublishTransaction'
+        type: array
+      nextUri:
+        description: 'The URI for the next chunk of records based on the search request. It is `null` if this is the last set of results for the search. '
+        type: string
+      previousUri:
+        description: 'The URI for the prior chunk of records based on the search request. It is `null` if this is the first set of results for the search. '
+        type: string
+      resultSetSize:
+        description: 'The number of results returned in this response. '
+        type: string
+      startPosition:
+        description: Starting position of the current result set.
+        type: string
+      totalSetSize:
+        description: The total number of items in the search's result set. It will always be greater than or equal to the value of the `resultSetSize` field.
+        type: string
+    type: object
+    x-ds-definition-name: envelopePublishTransactionList
+    x-ms-summary: ''
   envelopeSummary:
     description: ''
     properties:
@@ -26332,16 +27172,11 @@ definitions:
         description: The envelope ID of the envelope status that failed to post.
         type: string
       status:
-        description: |
-          Indicates the envelope status. Valid values are: 
+        description: |-
+          Indicates the envelope status. Valid values are:
 
-          * completed - The envelope has been completed and all tags have been signed.
-          * created - The envelope is created as a draft. It can be modified and sent later.
-          * declined - The envelope has been declined by the recipients.
-          * delivered - The envelope has been delivered to the recipients.
-          * sent - The envelope is sent to the recipients.
-          * signed - The envelope has been signed by the recipients.
-          * voided - The envelope is no longer valid and recipients cannot access or sign the envelope.
+          * sent - The envelope is sent to the recipients. 
+          * created - The envelope is saved as a draft and can be modified and sent later.
         type: string
       statusDateTime:
         description: The DateTime that the envelope changed status (i.e. was created or sent.)
@@ -26374,6 +27209,9 @@ definitions:
 
       owner: The userName, email, userId, userType, and userStatus for the template owner.
     properties:
+      created:
+        description: The UTC DateTime when the workspace user authorization was created.
+        type: string
       description:
         description: |
           A sender-defined description of the line item.
@@ -26452,6 +27290,9 @@ definitions:
       allowReassign:
         description: 'When set to **true**, the recipient can redirect an envelope to a more appropriate recipient.'
         type: string
+      allowViewHistory:
+        description: ''
+        type: string
       asynchronous:
         description: 'When set to **true**, the envelope is queued for processing and the value of the `status` property is set to ''Processing''. Additionally, get status calls return ''Processing'' until completed.'
         type: string
@@ -26483,6 +27324,9 @@ definitions:
         type: string
       completedDateTime:
         description: Specifies the date and time this item was completed.
+        type: string
+      created:
+        description: The UTC DateTime when the workspace user authorization was created.
         type: string
       createdDateTime:
         description: Indicates the date and time the item was created.
@@ -26884,7 +27728,11 @@ definitions:
         description: ''
         type: string
       status:
-        description: Event status.
+        description: |-
+          Indicates the envelope status. Valid values are:
+
+          * sent - The envelope is sent to the recipients. 
+          * created - The envelope is saved as a draft and can be modified and sent later.
         type: string
       vendorFailureStatusCode:
         description: ''
@@ -27014,7 +27862,7 @@ definitions:
     description: ''
     properties:
       actionRequired:
-        description: Action required.
+        description: Access token information.
         type: string
       expires:
         description: ''
@@ -27047,10 +27895,14 @@ definitions:
         description: ''
         type: string
       status:
-        description: Filter status.
+        description: |-
+          Indicates the envelope status. Valid values are:
+
+          * sent - The envelope is sent to the recipients. 
+          * created - The envelope is saved as a draft and can be modified and sent later.
         type: string
       toDateTime:
-        description: Latest date to filter.
+        description: Must be set to "bearer".
         type: string
     type: object
     x-ds-definition-name: filter
@@ -27087,7 +27939,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -27349,7 +28201,11 @@ definitions:
         description: 'When set to **true**, this custom tab is shared.'
         type: string
       status:
-        description: Item status. <!-- TODO -->
+        description: |-
+          Indicates the envelope status. Valid values are:
+
+          * sent - The envelope is sent to the recipients. 
+          * created - The envelope is saved as a draft and can be modified and sent later.
         type: string
       subject:
         description: ''
@@ -27450,7 +28306,11 @@ definitions:
         description: The date and time the envelope was sent.
         type: string
       status:
-        description: Item status. <!-- TODO -->
+        description: |-
+          Indicates the envelope status. Valid values are:
+
+          * sent - The envelope is sent to the recipients. 
+          * created - The envelope is saved as a draft and can be modified and sent later.
         type: string
       subject:
         description: ''
@@ -27581,7 +28441,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -27898,7 +28758,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -28528,7 +29388,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -28905,6 +29765,12 @@ definitions:
   jurisdiction:
     description: ''
     properties:
+      allowSystemCreatedSeal:
+        description: ''
+        type: string
+      allowUserUploadedSeal:
+        description: ''
+        type: string
       commissionIdInSeal:
         description: ''
         type: string
@@ -28964,7 +29830,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -29156,7 +30022,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -29373,7 +30239,7 @@ definitions:
         description: 'When set to **true**, the signer is required to fill out this tab'
         type: string
       show:
-        description: 'A boolean indicating if the value should be displayed.  If this value is set to **true**, the custom field is displayed at the top of the certificate of completion. If this value is left blank/ or set to **false**, then it does not appear in the certificate of completion. '
+        description: A boolean indicating if the value should be displayed.
         type: string
       value:
         description: |-
@@ -29828,7 +30694,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -30226,7 +31092,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -30467,7 +31333,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -31052,18 +31918,6 @@ definitions:
     type: object
     x-ds-definition-name: planInformation
     x-ms-summary: An object used to identify the features and attributes of the account being created.
-  postTransactionsResponse:
-    description: ''
-    properties:
-      documentData:
-        description: ''
-        type: string
-      transactionSid:
-        description: ''
-        type: string
-    type: object
-    x-ds-definition-name: postTransactionsResponse
-    x-ms-summary: ''
   powerFormFormDataRecipient:
     description: ''
     properties:
@@ -31336,7 +32190,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -31663,6 +32517,9 @@ definitions:
   recipientSignatureProvider:
     description: 'An Electronic or Standards Based Signature (digital signature) provider for the signer to use. [More information.](../../../../guide/appendix/standards_based_signatures.html)'
     properties:
+      sealDocumentsWithTabsOnly:
+        description: ''
+        type: string
       sealName:
         description: ''
         type: string
@@ -31971,6 +32828,18 @@ definitions:
     type: object
     x-ds-definition-name: seal
     x-ms-summary: ''
+  sealIdentifier:
+    description: ''
+    properties:
+      sealDisplayName:
+        description: ''
+        type: string
+      sealName:
+        description: ''
+        type: string
+    type: object
+    x-ds-definition-name: sealIdentifier
+    x-ms-summary: ''
   sealSign:
     description: ''
     properties:
@@ -32081,6 +32950,9 @@ definitions:
       inheritEmailNotificationConfiguration:
         description: 'When set to **true** and the envelope recipient creates a DocuSign account after signing, the Manage Account Email Notification settings are used as the default settings for the recipient''s account. '
         type: string
+      name:
+        description: ''
+        type: string
       note:
         description: |
           A note sent to the recipient in the signing email.
@@ -32148,8 +33020,20 @@ definitions:
           $ref: '#/definitions/socialAuthentication'
         type: array
       status:
-        description: Item status. <!-- TODO -->
+        description: |
+          Indicates the envelope status. Valid values are: 
+
+          * completed - The envelope has been completed and all tags have been signed.
+          * created - The envelope is created as a draft. It can be modified and sent later.
+          * declined - The envelope has been declined by the recipients.
+          * delivered - The envelope has been delivered to the recipients.
+          * sent - The envelope is sent to the recipients.
+          * signed - The envelope has been signed by the recipients.
+          * voided - The envelope is no longer valid and recipients cannot access or sign the envelope.
         type: string
+      tabs:
+        $ref: '#/definitions/EnvelopeRecipientTabs'
+        description: ''
       templateLocked:
         description: 'When set to **true**, the sender cannot change any attributes of the recipient. Used only when working with template recipients. '
         type: string
@@ -32308,7 +33192,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -32465,6 +33349,12 @@ definitions:
         type: string
       addAccessCodeToEmail:
         description: This Optional attribute indicates that the access code will be added to the email sent to the recipient; this nullifies the Security measure of Access Code on the recipient.
+        type: string
+      agentCanEditEmail:
+        description: ''
+        type: string
+      agentCanEditName:
+        description: ''
         type: string
       autoNavigation:
         description: |
@@ -32761,7 +33651,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -32979,7 +33869,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -33238,6 +34128,77 @@ definitions:
         type: array
     type: object
     x-ds-definition-name: supportedLanguages
+    x-ms-summary: ''
+  tabGroup:
+    description: ''
+    properties:
+      childTabLabels:
+        description: ''
+        items:
+          type: string
+        type: array
+      childTabLabelsMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+      errorDetails:
+        $ref: '#/definitions/errorDetails'
+        description: ''
+      groupLabel:
+        description: ''
+        type: string
+      groupLabelMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+      groupRule:
+        description: ''
+        type: string
+      groupRuleMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+      maximumAllowed:
+        description: ''
+        type: string
+      maximumAllowedMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+      minimumRequired:
+        description: ''
+        type: string
+      minimumRequiredMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+      recipientId:
+        description: The `recipientId` used when the envelope or template was created.
+        type: string
+      recipientIdMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+      tabId:
+        description: The unique identifier for the tab.
+        type: string
+      tabIdMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+      templateLocked:
+        description: 'When set to **true**, the sender cannot change any attributes of the recipient. Used only when working with template recipients. '
+        type: string
+      templateLockedMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+      templateRequired:
+        description: 'When set to **true**, the sender may not remove the recipient. Used only when working with template recipients.'
+        type: string
+      templateRequiredMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+      validationMessage:
+        description: The message displayed if the custom tab fails input validation (either custom of embedded).
+        type: string
+      validationMessageMetadata:
+        $ref: '#/definitions/propertyMetadata'
+        description: ''
+    type: object
+    x-ds-definition-name: tabGroup
     x-ms-summary: ''
   tabMetadataList:
     description: ''
@@ -33798,6 +34759,11 @@ definitions:
         items:
           $ref: '#/definitions/ssn'
         type: array
+      tabGroups:
+        description: ''
+        items:
+          $ref: '#/definitions/tabGroup'
+        type: array
       textTabs:
         description: |
           A list of 
@@ -33921,7 +34887,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -34185,7 +35151,7 @@ definitions:
         description: 'When set to **true**, the signer is required to fill out this tab'
         type: string
       show:
-        description: 'A boolean indicating if the value should be displayed.  If this value is set to **true**, the custom field is displayed at the top of the certificate of completion. If this value is left blank/ or set to **false**, then it does not appear in the certificate of completion. '
+        description: A boolean indicating if the value should be displayed.
         type: string
       value:
         description: The value of the custom field.
@@ -34222,7 +35188,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -34441,6 +35407,18 @@ definitions:
   userAccountManagementGranularInformation:
     description: Describes which account management capabilities a user has.
     properties:
+      canManageAccountSecuritySettings:
+        description: ''
+        type: string
+      canManageAccountSecuritySettingsMetadata:
+        $ref: '#/definitions/settingsMetadata'
+        description: ''
+      canManageAccountSettings:
+        description: ''
+        type: string
+      canManageAccountSettingsMetadata:
+        $ref: '#/definitions/settingsMetadata'
+        description: ''
       canManageAdmins:
         description: |-
           **True**
@@ -34459,10 +35437,22 @@ definitions:
       canManageGroupsMetadata:
         $ref: '#/definitions/settingsMetadata'
         description: ''
+      canManageReporting:
+        description: ''
+        type: string
+      canManageReportingMetadata:
+        $ref: '#/definitions/settingsMetadata'
+        description: ''
       canManageSharing:
         description: ''
         type: string
       canManageSharingMetadata:
+        $ref: '#/definitions/settingsMetadata'
+        description: ''
+      canManageSigningGroups:
+        description: ''
+        type: string
+      canManageSigningGroupsMetadata:
         $ref: '#/definitions/settingsMetadata'
         description: ''
       canManageUsers:
@@ -34712,7 +35702,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'
@@ -35097,7 +36087,7 @@ definitions:
           -->
         type: string
       anchorString:
-        description: Specifies the anchor string.
+        description: Anchor text information for a radio button.
         type: string
       anchorUnits:
         description: 'Specifies units of the X and Y offset. Units could be pixels, millimeters, centimeters, or inches.'

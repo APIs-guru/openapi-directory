@@ -1053,7 +1053,7 @@ definitions:
     description: Properties to control reconnect requests.
     properties:
       after:
-        description: Duration in ISO8601 format after which reconnect will be initiated. Minimum duration of the Reconect is PT2M.
+        description: Duration in ISO8601 format after which reconnect will be initiated. Minimum duration of the Reconnect is PT2M.
         format: duration
         type: string
   BackendServiceFabricClusterProperties:
@@ -1068,7 +1068,7 @@ definitions:
           type: string
         type: array
       maxPartitionResolutionRetries:
-        description: Maximum number of retries while attempting resolve the parition.
+        description: Maximum number of retries while attempting resolve the partition.
         format: int32
         type: integer
       serverCertificateThumbprints:

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/drive/v2/rest'
       version: v1
@@ -34,14 +34,14 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
-      'https://www.googleapis.com/auth/drive': View and manage the files in your Google Drive
+      'https://www.googleapis.com/auth/drive': 'See, edit, create, and delete all of your Google Drive files'
       'https://www.googleapis.com/auth/drive.appdata': View and manage its own configuration data in your Google Drive
       'https://www.googleapis.com/auth/drive.apps.readonly': View your Google Drive apps
       'https://www.googleapis.com/auth/drive.file': View and manage Google Drive files and folders that you have opened or created with this app
       'https://www.googleapis.com/auth/drive.metadata': View and manage metadata of files in your Google Drive
       'https://www.googleapis.com/auth/drive.metadata.readonly': View metadata for files in your Google Drive
       'https://www.googleapis.com/auth/drive.photos.readonly': 'View the photos, videos and albums in your Google Photos'
-      'https://www.googleapis.com/auth/drive.readonly': View the files in your Google Drive
+      'https://www.googleapis.com/auth/drive.readonly': See and download all your Google Drive files
       'https://www.googleapis.com/auth/drive.scripts': Modify your Google Apps Script scripts' behavior
     type: oauth2
 parameters:
@@ -1771,7 +1771,7 @@ paths:
           name: supportsTeamDrives
           type: boolean
         - default: false
-          description: 'Whether the request should be treated as if it was issued by a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
+          description: 'Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
           in: query
           name: useDomainAdminAccess
           type: boolean
@@ -1831,7 +1831,7 @@ paths:
           name: supportsTeamDrives
           type: boolean
         - default: false
-          description: 'Whether the request should be treated as if it was issued by a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
+          description: 'Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
           in: query
           name: useDomainAdminAccess
           type: boolean
@@ -1868,7 +1868,7 @@ paths:
           name: supportsTeamDrives
           type: boolean
         - default: false
-          description: 'Whether the request should be treated as if it was issued by a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
+          description: 'Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
           in: query
           name: useDomainAdminAccess
           type: boolean
@@ -1902,7 +1902,7 @@ paths:
           name: supportsTeamDrives
           type: boolean
         - default: false
-          description: 'Whether the request should be treated as if it was issued by a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
+          description: 'Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
           in: query
           name: useDomainAdminAccess
           type: boolean
@@ -1968,7 +1968,7 @@ paths:
           name: transferOwnership
           type: boolean
         - default: false
-          description: 'Whether the request should be treated as if it was issued by a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
+          description: 'Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
           in: query
           name: useDomainAdminAccess
           type: boolean
@@ -2018,7 +2018,7 @@ paths:
           name: transferOwnership
           type: boolean
         - default: false
-          description: 'Whether the request should be treated as if it was issued by a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
+          description: 'Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the item belongs.'
           in: query
           name: useDomainAdminAccess
           type: boolean
@@ -2561,7 +2561,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Moves a file to the trash. The currently authenticated user must own the file or be an organizer on the parent for Team Drive files.
+      description: Moves a file to the trash. The currently authenticated user must own the file or be at least a fileOrganizer on the parent for Team Drive files.
       operationId: drive.files.trash
       parameters:
         - description: The ID of the file to trash.
@@ -2921,7 +2921,7 @@ paths:
           name: q
           type: string
         - default: false
-          description: 'Whether the request should be treated as if it was issued by a domain administrator; if set to true, then all Team Drives of the domain in which the requester is an administrator are returned.'
+          description: 'Issue the request as a domain administrator; if set to true, then all Team Drives of the domain in which the requester is an administrator are returned.'
           in: query
           name: useDomainAdminAccess
           type: boolean
@@ -2996,7 +2996,7 @@ paths:
           required: true
           type: string
         - default: false
-          description: 'Whether the request should be treated as if it was issued by a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.'
+          description: 'Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.'
           in: query
           name: useDomainAdminAccess
           type: boolean
@@ -3033,6 +3033,11 @@ paths:
           name: teamDriveId
           required: true
           type: string
+        - default: false
+          description: 'Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.'
+          in: query
+          name: useDomainAdminAccess
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -3669,8 +3674,11 @@ definitions:
           canAddChildren:
             description: Whether the current user can add children to this folder. This is always false when the item is not a folder.
             type: boolean
+          canChangeCopyRequiresWriterPermission:
+            description: Whether the current user can change the copyRequiresWriterPermission restriction of this file.
+            type: boolean
           canChangeRestrictedDownload:
-            description: Whether the current user can change the restricted download label of this file.
+            description: Deprecated
             type: boolean
           canComment:
             description: Whether the current user can comment on this file.
@@ -3681,6 +3689,9 @@ definitions:
           canDelete:
             description: Whether the current user can delete this file.
             type: boolean
+          canDeleteChildren:
+            description: Whether the current user can delete children of this folder. This is false when the item is not a folder. Only populated for Team Drive items.
+            type: boolean
           canDownload:
             description: Whether the current user can download this file.
             type: boolean
@@ -3690,11 +3701,23 @@ definitions:
           canListChildren:
             description: Whether the current user can list the children of this folder. This is always false when the item is not a folder.
             type: boolean
+          canMoveChildrenOutOfTeamDrive:
+            description: Whether the current user can move children of this folder outside of the Team Drive. This is false when the item is not a folder. Only populated for Team Drive items.
+            type: boolean
+          canMoveChildrenWithinTeamDrive:
+            description: Whether the current user can move children of this folder within the Team Drive. This is false when the item is not a folder. Only populated for Team Drive items.
+            type: boolean
           canMoveItemIntoTeamDrive:
             description: 'Whether the current user can move this item into a Team Drive. If the item is in a Team Drive, this field is equivalent to canMoveTeamDriveItem.'
             type: boolean
+          canMoveItemOutOfTeamDrive:
+            description: Whether the current user can move this Team Drive item outside of this Team Drive by changing its parent. Note that a request to change the parent of the item may still fail depending on the new parent that is being added. Only populated for Team Drive items.
+            type: boolean
+          canMoveItemWithinTeamDrive:
+            description: Whether the current user can move this Team Drive item within this Team Drive. Note that a request to change the parent of the item may still fail depending on the new parent that is being added. Only populated for Team Drive items.
+            type: boolean
           canMoveTeamDriveItem:
-            description: Whether the current user can move this Team Drive item by changing its parent. Note that a request to change the parent for this item may still fail depending on the new parent that is being added. Only populated for Team Drive files.
+            description: Deprecated - use canMoveItemWithinTeamDrive or canMoveItemOutOfTeamDrive instead.
             type: boolean
           canReadRevisions:
             description: 'Whether the current user can read the revisions resource of this file. For a Team Drive item, whether revisions of non-folder descendants of this item, or this item itself if it is not a folder, can be read.'
@@ -3703,7 +3726,7 @@ definitions:
             description: Whether the current user can read the Team Drive to which this file belongs. Only populated for Team Drive files.
             type: boolean
           canRemoveChildren:
-            description: Whether the current user can remove children from this folder. This is always false when the item is not a folder.
+            description: 'Whether the current user can remove children from this folder. This is always false when the item is not a folder. For Team Drive items, use canDeleteChildren or canTrashChildren instead.'
             type: boolean
           canRename:
             description: Whether the current user can rename this file.
@@ -3714,10 +3737,16 @@ definitions:
           canTrash:
             description: Whether the current user can move this file to trash.
             type: boolean
+          canTrashChildren:
+            description: Whether the current user can trash children of this folder. This is false when the item is not a folder. Only populated for Team Drive items.
+            type: boolean
           canUntrash:
             description: Whether the current user can restore this file from trash.
             type: boolean
         type: object
+      copyRequiresWriterPermission:
+        description: 'Whether the options to copy, print, or download this file, should be disabled for readers and commenters.'
+        type: boolean
       copyable:
         description: 'Deprecated: use capabilities/canCopy.'
         type: boolean
@@ -3732,6 +3761,7 @@ definitions:
         description: A short description of the file.
         type: string
       downloadUrl:
+        description: Short lived download URL for the file. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.
         type: string
       editable:
         description: 'Deprecated: use capabilities/canEdit.'
@@ -3893,7 +3923,7 @@ definitions:
             description: Whether the file has been modified by this user.
             type: boolean
           restricted:
-            description: 'Whether viewers and commenters are prevented from downloading, printing, and copying this file.'
+            description: Deprecated - use copyRequiresWriterPermission instead.
             type: boolean
           starred:
             description: Whether this file is starred by the user.
@@ -4196,10 +4226,11 @@ definitions:
       role:
         description: |-
           The primary role for this user. While new values may be supported in the future, the following are currently allowed:  
-          - organizer 
           - owner 
-          - reader 
-          - writer
+          - organizer 
+          - fileOrganizer 
+          - writer 
+          - reader
         type: string
       selfLink:
         description: A link back to this permission.
@@ -4223,8 +4254,9 @@ definitions:
               description: |-
                 The primary role for this user. While new values may be added in the future, the following are currently possible:  
                 - organizer 
-                - reader 
-                - writer
+                - fileOrganizer 
+                - writer 
+                - reader
               type: string
             teamDrivePermissionType:
               description: |-
@@ -4457,14 +4489,26 @@ definitions:
           canAddChildren:
             description: Whether the current user can add children to folders in this Team Drive.
             type: boolean
+          canChangeCopyRequiresWriterPermissionRestriction:
+            description: Whether the current user can change the copyRequiresWriterPermission restriction of this Team Drive.
+            type: boolean
+          canChangeDomainUsersOnlyRestriction:
+            description: Whether the current user can change the domainUsersOnly restriction of this Team Drive.
+            type: boolean
           canChangeTeamDriveBackground:
             description: Whether the current user can change the background of this Team Drive.
+            type: boolean
+          canChangeTeamMembersOnlyRestriction:
+            description: Whether the current user can change the teamMembersOnly restriction of this Team Drive.
             type: boolean
           canComment:
             description: Whether the current user can comment on files in this Team Drive.
             type: boolean
           canCopy:
             description: Whether the current user can copy files in this Team Drive.
+            type: boolean
+          canDeleteChildren:
+            description: Whether the current user can delete children from folders in this Team Drive.
             type: boolean
           canDeleteTeamDrive:
             description: Whether the current user can delete this Team Drive. Attempting to delete the Team Drive may still fail if there are untrashed items inside the Team Drive.
@@ -4485,7 +4529,7 @@ definitions:
             description: Whether the current user can read the revisions resource of files in this Team Drive.
             type: boolean
           canRemoveChildren:
-            description: Whether the current user can remove children from folders in this Team Drive.
+            description: Deprecated - use canDeleteChildren or canTrashChildren instead.
             type: boolean
           canRename:
             description: Whether the current user can rename files or folders in this Team Drive.
@@ -4496,6 +4540,9 @@ definitions:
           canShare:
             description: Whether the current user can share files or folders in this Team Drive.
             type: boolean
+          canTrashChildren:
+            description: Whether the current user can trash children from folders in this Team Drive.
+            type: boolean
         type: object
       colorRgb:
         description: The color of this Team Drive as an RGB hex string. It can only be set on a drive.teamdrives.update request that does not set themeId.
@@ -4505,7 +4552,7 @@ definitions:
         format: date-time
         type: string
       id:
-        description: The ID of this Team Drive which is also the ID of the top level folder for this Team Drive.
+        description: The ID of this Team Drive which is also the ID of the top level folder of this Team Drive.
         type: string
       kind:
         default: 'drive#teamDrive'
@@ -4514,6 +4561,22 @@ definitions:
       name:
         description: The name of this Team Drive.
         type: string
+      restrictions:
+        description: A set of restrictions that apply to this Team Drive or items inside this Team Drive.
+        properties:
+          adminManagedRestrictions:
+            description: Whether administrative privileges on this Team Drive are required to modify restrictions.
+            type: boolean
+          copyRequiresWriterPermission:
+            description: 'Whether the options to copy, print, or download files inside this Team Drive, should be disabled for readers and commenters. When this restriction is set to true, it will override the similarly named field to true for any file inside this Team Drive.'
+            type: boolean
+          domainUsersOnly:
+            description: Whether access to this Team Drive and items inside this Team Drive is restricted to users of the domain to which this Team Drive belongs. This restriction may be overridden by other sharing policies controlled outside of this Team Drive.
+            type: boolean
+          teamMembersOnly:
+            description: Whether access to items inside this Team Drive is restricted to members of this Team Drive.
+            type: boolean
+        type: object
       themeId:
         description: 'The ID of the theme from which the background image and color will be set. The set of possible teamDriveThemes can be retrieved from a drive.about.get response. When not specified on a drive.teamdrives.insert request, a random theme is chosen from which the background image and color are set. This is a write-only field; it can only be set on requests that don''t set colorRgb or backgroundImageFile.'
         type: string

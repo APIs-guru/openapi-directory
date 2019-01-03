@@ -7,7 +7,7 @@ info:
   contact:
     x-twitter: microsoft
   description: 'The Image Search API lets you send a search query to Bing and get back a list of relevant images. This section provides technical details about the query parameters and headers that you use to request images and the JSON response objects that contain them. For examples that show how to make requests, see [Searching the Web for Images](https://docs.microsoft.com/azure/cognitive-services/bing-image-search/search-the-web).'
-  title: Image Search
+  title: Image Search Client
   version: '1.0'
   x-apisguru-categories:
     - cloud
@@ -4579,7 +4579,7 @@ definitions:
         type: string
       insightsMetadata:
         $ref: '#/definitions/ImagesImageMetadata'
-        description: 'A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInisghtsToken to get the list of websites.'
+        description: 'A count of the number of websites where you can shop or perform other actions related to the image. For example, if the image is of an apple pie, this object includes a count of the number of websites where you can buy an apple pie. To indicate the number of offers in your UX, include badging such as a shopping cart icon that contains the count. When the user clicks on the icon, use imageInsightsToken to get the list of websites.'
         readOnly: true
       thumbnail:
         $ref: '#/definitions/ImageObject'
@@ -5263,3 +5263,15 @@ definitions:
     description: Defines a webpage that is relevant to the query.
     properties: {}
     type: object
+x-ms-parameterized-host:
+  hostTemplate: '{Endpoint}'
+  parameters:
+    - default: 'https://api.cognitive.microsoft.com'
+      description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: "https://westus.api.cognitive.microsoft.com", "https://api.cognitive.microsoft.com").'
+      in: path
+      name: Endpoint
+      required: true
+      type: string
+      x-ms-parameter-location: client
+      x-ms-skip-url-encoding: true
+  useSchemePrefix: false

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/dns/v2beta1/rest'
       version: v1
@@ -1083,9 +1083,6 @@ definitions:
   Quota:
     description: Limits associated with a Project.
     properties:
-      blackHoleHidesSystemZones:
-        description: Whether a black hole zone should suppress system zones for this project.
-        type: boolean
       dnsKeysPerManagedZone:
         description: Maximum allowed number of DnsKeys per ManagedZone.
         format: int32

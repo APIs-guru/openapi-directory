@@ -2266,7 +2266,7 @@ paths:
                 x-ms-request-id: 05bae251-45ef-4bca-9710-ecfc0181755b
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/upgrade':
     post:
-      description: Upgrade self-hosted integration runtime to latest version if availably.
+      description: Upgrade self-hosted integration runtime to latest version if availability.
       operationId: IntegrationRuntimes_Upgrade
       parameters:
         - $ref: '#/parameters/subscriptionId'

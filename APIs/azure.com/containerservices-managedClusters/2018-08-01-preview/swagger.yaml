@@ -554,7 +554,7 @@ paths:
                 type: Microsoft.ContainerService/ManagedClusters/AccessProfiles
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterAdminCredential':
     post:
-      description: Gets clusteradmin credential of the managed cluster with a specified resource group and name.
+      description: Gets cluster admin credential of the managed cluster with a specified resource group and name.
       operationId: ManagedClusters_ListClusterAdminCredentials
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -574,7 +574,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CredentialResults'
-      summary: Gets clusteradmin credential of a managed cluster.
+      summary: Gets cluster admin credential of a managed cluster.
       tags:
         - ManagedClusters
       x-ms-examples:
@@ -592,7 +592,7 @@ paths:
                     value: credentialValue1
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/listClusterUserCredential':
     post:
-      description: Gets clusteruser credential of the managed cluster with a specified resource group and name.
+      description: Gets cluster user credential of the managed cluster with a specified resource group and name.
       operationId: ManagedClusters_ListClusterUserCredentials
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -612,7 +612,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/CredentialResults'
-      summary: Gets clusteruser credential of a managed cluster.
+      summary: Gets cluster user credential of a managed cluster.
       tags:
         - ManagedClusters
       x-ms-examples:
@@ -628,6 +628,188 @@ paths:
                 kubeconfigs:
                   - name: credentialName1
                     value: credentialValue1
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetAADProfile':
+    post:
+      description: Update the AAD Profile for a managed cluster.
+      operationId: ManagedClusters_ResetAADProfile
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the managed cluster resource.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+        - description: Parameters supplied to the Reset AAD Profile operation for a Managed Cluster.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ManagedClusterAADProfile'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ManagedCluster'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/ManagedCluster'
+        default:
+          description: 'Error response describing why the operation failed. If the cluster doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/CloudError'
+      summary: Reset AAD Profile of a managed cluster.
+      tags:
+        - ManagedClusters
+      x-ms-examples:
+        Reset Service Principal Profile:
+          parameters:
+            api-version: 2018-08-01-preview
+            parameters:
+              aadProfile:
+                clientAppID: clientappid
+                serverAppID: serverappid
+                serverAppSecret: serverappsecret
+                tenantID: tenantid
+            resourceGroupName: rg1
+            resourceName: clustername1
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1
+                location: location1
+                name: clustername1
+                properties:
+                  aadProfile:
+                    clientAppID: clientappid
+                    serverAppID: serverappid
+                    tenantID: tenantid
+                  agentPoolProfiles:
+                    - count: 3
+                      maxPods: 110
+                      name: nodepool1
+                      osType: Linux
+                      storageProfile: ManagedDisks
+                      vmSize: Standard_DS1_v2
+                  dnsPrefix: dnsprefix1
+                  enableRBAC: false
+                  fqdn: dnsprefix1-abcd1234.hcp.eastus.azmk8s.io
+                  kubernetesVersion: 1.9.6
+                  linuxProfile:
+                    adminUsername: azureuser
+                    ssh:
+                      publicKeys:
+                        - keyData: keydata
+                  networkProfile:
+                    dnsServiceIP: 10.0.0.10
+                    dockerBridgeCidr: 172.17.0.1/16
+                    networkPlugin: kubenet
+                    podCidr: 10.244.0.0/16
+                    serviceCidr: 10.0.0.0/16
+                  nodeResourceGroup: MC_rg1_clustername1_location1
+                  provisioningState: Succeeded
+                  servicePrincipalProfile:
+                    clientId: clientid
+                tags:
+                  archv2: ''
+                  tier: production
+                type: Microsoft.ContainerService/ManagedClusters
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile':
+    post:
+      description: Update the service principal Profile for a managed cluster.
+      operationId: ManagedClusters_ResetServicePrincipalProfile
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the managed cluster resource.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+        - description: Parameters supplied to the Reset Service Principal Profile operation for a Managed Cluster.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ManagedClusterServicePrincipalProfile'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ManagedCluster'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/ManagedCluster'
+        default:
+          description: 'Error response describing why the operation failed. If the cluster doesn''t exist, 404 (Not found) is returned.'
+          schema:
+            $ref: '#/definitions/CloudError'
+      summary: Reset Service Principal Profile of a managed cluster.
+      tags:
+        - ManagedClusters
+      x-ms-examples:
+        Reset Service Principal Profile:
+          parameters:
+            api-version: 2018-08-01-preview
+            parameters:
+              servicePrincipalProfile:
+                clientId: clientid
+                secret: secret
+            resourceGroupName: rg1
+            resourceName: clustername1
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1
+                location: location1
+                name: clustername1
+                properties:
+                  agentPoolProfiles:
+                    - count: 3
+                      maxPods: 110
+                      name: nodepool1
+                      osType: Linux
+                      storageProfile: ManagedDisks
+                      vmSize: Standard_DS1_v2
+                  dnsPrefix: dnsprefix1
+                  enableRBAC: false
+                  fqdn: dnsprefix1-abcd1234.hcp.eastus.azmk8s.io
+                  kubernetesVersion: 1.9.6
+                  linuxProfile:
+                    adminUsername: azureuser
+                    ssh:
+                      publicKeys:
+                        - keyData: keydata
+                  networkProfile:
+                    dnsServiceIP: 10.0.0.10
+                    dockerBridgeCidr: 172.17.0.1/16
+                    networkPlugin: kubenet
+                    podCidr: 10.244.0.0/16
+                    serviceCidr: 10.0.0.0/16
+                  nodeResourceGroup: MC_rg1_clustername1_location1
+                  provisioningState: Succeeded
+                  servicePrincipalProfile:
+                    clientId: clientid
+                tags:
+                  archv2: ''
+                  tier: production
+                type: Microsoft.ContainerService/ManagedClusters
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/upgradeProfiles/default':
     get:
       description: Gets the details of the upgrade profile for a managed cluster with a specified resource group and name.
@@ -689,7 +871,7 @@ definitions:
         type: string
     type: object
   AgentPoolType:
-    description: AgentPoolType represents types of agentpool
+    description: AgentPoolType represents types of an agent pool
     enum:
       - VirtualMachineScaleSets
       - AvailabilitySet
@@ -697,6 +879,31 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: AgentPoolType
+  CloudError:
+    description: An error response from the Container service.
+    properties:
+      error:
+        $ref: '#/definitions/CloudErrorBody'
+        description: Details about the error.
+    x-ms-external: true
+  CloudErrorBody:
+    description: An error response from the Container service.
+    properties:
+      code:
+        description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+        type: string
+      details:
+        description: A list of additional details about the error.
+        items:
+          $ref: '#/definitions/CloudErrorBody'
+        type: array
+      message:
+        description: 'A message describing the error, intended to be suitable for display in a user interface.'
+        type: string
+      target:
+        description: 'The target of the particular error. For example, the name of the property in error.'
+        type: string
+    x-ms-external: true
   ContainerServiceDiagnosticsProfile:
     description: Profile for diagnostics on the container service cluster.
     properties:
@@ -741,7 +948,7 @@ definitions:
         description: FirstConsecutiveStaticIP used to specify the first static ip of masters.
         type: string
       fqdn:
-        description: FDQN for the master pool.
+        description: FQDN for the master pool.
         readOnly: true
         type: string
       osDiskSizeGB:
@@ -755,7 +962,7 @@ definitions:
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: VNet SubnetID specifies the vnet's subnet identifier.
+        description: VNet SubnetID specifies the VNet's subnet identifier.
     required:
       - dnsPrefix
       - vmSize
@@ -1027,7 +1234,7 @@ definitions:
       modelAsString: true
       name: ContainerServiceVMSizeTypes
   ContainerServiceVnetSubnetID:
-    description: VNet SubnetID specifies the vnet's subnet identifier.
+    description: VNet SubnetID specifies the VNet's subnet identifier.
     type: string
   ContainerServiceWindowsProfile:
     description: Profile for Windows VMs in the container service cluster.
@@ -1149,13 +1356,13 @@ definitions:
         description: OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux.
       type:
         $ref: '#/definitions/AgentPoolType'
-        description: AgentPoolType represents types of agentpool
+        description: AgentPoolType represents types of an agent pool
       vmSize:
         $ref: '#/definitions/ContainerServiceVMSize'
         description: Size of agent VMs.
       vnetSubnetID:
         $ref: '#/definitions/ContainerServiceVnetSubnetID'
-        description: VNet SubnetID specifies the vnet's subnet identifier.
+        description: VNet SubnetID specifies the VNet's subnet identifier.
     required:
       - name
       - vmSize
@@ -1220,7 +1427,7 @@ definitions:
         description: Whether to enable Kubernetes Role-Based Access Control.
         type: boolean
       fqdn:
-        description: FDQN for the master pool.
+        description: FQDN for the master pool.
         readOnly: true
         type: string
       kubernetesVersion:

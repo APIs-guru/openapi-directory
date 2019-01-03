@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://cloudtrace.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -341,7 +341,8 @@ definitions:
       traceId:
         description: |-
           Globally unique identifier for the trace. This identifier is a 128-bit
-          numeric value formatted as a 32-byte hex string.
+          numeric value formatted as a 32-byte hex string. For example,
+          `382d4f4c6b7bb2f4a972559d9085001d`.
         type: string
     type: object
   TraceSpan:
@@ -423,7 +424,7 @@ definitions:
       spanId:
         description: |-
           Identifier for the span. Must be a 64-bit integer other than 0 and
-          unique within a trace.
+          unique within a trace. For example, `2205310701640571284`.
         format: uint64
         type: string
       startTime:

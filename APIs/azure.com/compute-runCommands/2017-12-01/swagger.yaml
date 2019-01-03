@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/compute/resource-manager/Microsoft.Compute/stable/2017-12-01/runCommands.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: compute-runCommands
   x-tags:
@@ -221,7 +221,7 @@ paths:
       x-ms-examples:
         VirtualMachineRunCommand:
           parameters:
-            $top: '1'
+            $top: 1
             api-version: '2017-12-01'
             monitor: 'true'
             parameters:

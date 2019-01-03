@@ -192,6 +192,32 @@ paths:
               $ref: '#/definitions/Membership'
             type: array
       summary: Memberships (Historical)
+  '/{format}/HistoricalMembershipsByCompetition/{competition}':
+    get:
+      operationId: MembershipsByCompetitionHistorical
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc.'
+          in: path
+          name: competition
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Membership'
+            type: array
+      summary: Memberships by Competition (Historical)
   '/{format}/HistoricalMembershipsByTeam/{teamid}':
     get:
       operationId: MembershipsByTeamHistorical
@@ -220,6 +246,32 @@ paths:
               $ref: '#/definitions/Membership'
             type: array
       summary: Memberships by Team (Historical)
+  '/{format}/MembershipsByCompetition/{competition}':
+    get:
+      operationId: MembershipsByCompetitionActive
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'An indication of a soccer competition/league. This value can be the CompetitionId or the Competition Key. Possible values include: <code>EPL</code>, <code>1</code>, <code>MLS</code>, <code>8</code>, etc.'
+          in: path
+          name: competition
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Membership'
+            type: array
+      summary: Memberships by Competition (Active)
   '/{format}/MembershipsByTeam/{teamid}':
     get:
       operationId: MembershipsByTeamActive
@@ -323,6 +375,32 @@ paths:
               $ref: '#/definitions/Player'
             type: array
       summary: Players by Team
+  '/{format}/RecentlyChangedMemberships/{days}':
+    get:
+      operationId: MembershipsRecentlyChanged
+      parameters:
+        - default: xml
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - xml
+            - json
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'The number of days since memberships were updated. For example, if you pass <code>3</code>, you''ll receive all memberships that have been updated in the past 3 days. Valid entries are: <code>1</code>, <code>2</code> ... <code>30</code>'
+          in: path
+          name: days
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Membership'
+            type: array
+      summary: Memberships (Recently Changed)
   '/{format}/Schedule/{roundid}':
     get:
       operationId: Schedule
@@ -558,6 +636,8 @@ definitions:
         type: string
       Gender:
         type: string
+      Key:
+        type: string
       Name:
         type: string
       Seasons:
@@ -583,6 +663,8 @@ definitions:
           $ref: '#/definitions/Game'
         type: array
       Gender:
+        type: string
+      Key:
         type: string
       Name:
         type: string
@@ -623,6 +705,10 @@ definitions:
       AwayTeamScorePeriod2:
         type: integer
       Clock:
+        type: integer
+      ClockDisplay:
+        type: string
+      ClockExtra:
         type: integer
       DateTime:
         type: string
@@ -844,6 +930,8 @@ definitions:
         type: integer
       GoalsScored:
         type: integer
+      Group:
+        type: string
       Losses:
         type: integer
       Name:

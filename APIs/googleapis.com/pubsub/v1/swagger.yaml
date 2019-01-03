@@ -21,7 +21,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://pubsub.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -63,11 +63,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -88,12 +83,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -123,31 +112,31 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates an existing snapshot.<br><br>
-        Lists the names of the snapshots on this topic.<br><br>
-        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
-        changed in backward-incompatible ways and is not recommended for production
-        use. It is not subject to any SLA or deprecation policy.
-        Note that certain properties of a snapshot are not modifiable.
-      operationId: pubsub.projects.snapshots.patch
+        Updates an existing topic. Note that certain properties of a
+        topic are not modifiable.
+      operationId: pubsub.projects.topics.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/UpdateSnapshotRequest'
-        - description: The name of the snapshot.
+            $ref: '#/definitions/UpdateTopicRequest'
+        - description: |-
+            The name of the topic. It must have the format
+            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
+            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+            signs (`%`). It must be between 3 and 255 characters in length, and it
+            must not start with `"goog"`.
           in: path
           name: name
           required: true
@@ -157,7 +146,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Snapshot'
+            $ref: '#/definitions/Topic'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -167,34 +156,22 @@ paths:
         - projects
     put:
       description: |-
-        Creates a snapshot from the requested subscription.<br><br>
-        Lists the names of the snapshots on this topic.<br><br>
-        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
-        changed in backward-incompatible ways and is not recommended for production
-        use. It is not subject to any SLA or deprecation policy.
-        If the snapshot already exists, returns `ALREADY_EXISTS`.
-        If the requested subscription doesn't exist, returns `NOT_FOUND`.
-        If the backlog in the subscription is too old -- and the resulting snapshot
-        would expire in less than 1 hour -- then `FAILED_PRECONDITION` is returned.
-        See also the `Snapshot.expire_time` field. If the name is not provided in
-        the request, the server will assign a random
-        name for this snapshot on the same project as the subscription, conforming
-        to the [resource name format](https://cloud.google.com/pubsub/docs/overview#names).
-        The generated
-        name is populated in the returned Snapshot object. Note that for REST API
-        requests, you must specify a name in the request.
-      operationId: pubsub.projects.snapshots.create
+        Creates the given topic with the given name. See the
+        <a href="https://cloud.google.com/pubsub/docs/admin#resource_names">
+        resource name rules</a>.
+      operationId: pubsub.projects.topics.create
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/CreateSnapshotRequest'
+            $ref: '#/definitions/Topic'
         - description: |-
-            Optional user-provided name for this snapshot.
-            If the name is not provided in the request, the server will assign a random
-            name for this snapshot on the same project as the subscription.
-            Note that for REST API requests, you must specify a name.
-            Format is `projects/{project}/snapshots/{snap}`.
+            The name of the topic. It must have the format
+            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
+            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
+            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
+            signs (`%`). It must be between 3 and 255 characters in length, and it
+            must not start with `"goog"`.
           in: path
           name: name
           required: true
@@ -204,7 +181,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Snapshot'
+            $ref: '#/definitions/Topic'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -215,9 +192,13 @@ paths:
   '/v1/{project}/snapshots':
     get:
       description: |-
-        Lists the existing snapshots.<br><br>
-        Lists the names of the snapshots on this topic.<br><br>
-        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        Lists the existing snapshots. Snapshots are used in
+        <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+        operations, which allow
+        you to manage message acknowledgments in bulk. That is, you can set the
+        acknowledgment state of messages in an existing subscription to the state
+        captured by a snapshot.<br><br>
+        <b>BETA:</b> This feature is part of a beta release. This API might be
         changed in backward-incompatible ways and is not recommended for production
         use. It is not subject to any SLA or deprecation policy.
       operationId: pubsub.projects.snapshots.list
@@ -234,8 +215,8 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            The name of the cloud project that snapshots belong to.
-            Format is `projects/{project}`.
+            The name of the project in which to list snapshots.
+            Format is `projects/{project-id}`.
           in: path
           name: project
           required: true
@@ -257,12 +238,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -284,8 +263,8 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            The name of the cloud project that subscriptions belong to.
-            Format is `projects/{project}`.
+            The name of the project in which to list subscriptions.
+            Format is `projects/{project-id}`.
           in: path
           name: project
           required: true
@@ -307,12 +286,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -334,8 +311,8 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            The name of the cloud project that topics belong to.
-            Format is `projects/{project}`.
+            The name of the project in which to list topics.
+            Format is `projects/{project-id}`.
           in: path
           name: project
           required: true
@@ -357,12 +334,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -373,7 +348,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: pubsub.projects.snapshots.getIamPolicy
+      operationId: pubsub.projects.topics.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -399,12 +374,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -414,12 +387,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -428,7 +399,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: pubsub.projects.snapshots.setIamPolicy
+      operationId: pubsub.projects.topics.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -459,12 +430,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -478,7 +447,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: pubsub.projects.snapshots.testIamPermissions
+      operationId: pubsub.projects.topics.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -507,9 +476,13 @@ paths:
   '/v1/{snapshot}':
     delete:
       description: |-
-        Removes an existing snapshot. <br><br>
-        Lists the names of the snapshots on this topic.<br><br>
-        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        Removes an existing snapshot. Snapshots are used in
+        <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+        operations, which allow
+        you to manage message acknowledgments in bulk. That is, you can set the
+        acknowledgment state of messages in an existing subscription to the state
+        captured by a snapshot.<br><br>
+        <b>BETA:</b> This feature is part of a beta release. This API might be
         changed in backward-incompatible ways and is not recommended for production
         use. It is not subject to any SLA or deprecation policy.
         When the snapshot is deleted, all messages retained in the snapshot
@@ -540,9 +513,12 @@ paths:
         - projects
     get:
       description: |-
-        Gets the configuration details of a snapshot.<br><br>
-        Lists the names of the snapshots on this topic.<br><br>
-        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        Gets the configuration details of a snapshot. Snapshots are used in
+        <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+        operations, which allow you to manage message acknowledgments in bulk. That
+        is, you can set the acknowledgment state of messages in an existing
+        subscription to the state captured by a snapshot.<br><br>
+        <b>BETA:</b> This feature is part of a beta release. This API might be
         changed in backward-incompatible ways and is not recommended for production
         use. It is not subject to any SLA or deprecation policy.
       operationId: pubsub.projects.snapshots.get
@@ -571,12 +547,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -639,12 +613,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -654,12 +626,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -704,12 +674,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -752,12 +720,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -801,20 +767,17 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Pulls messages from the server. Returns an empty list if there are no
-        messages available in the backlog. The server may return `UNAVAILABLE` if
+        Pulls messages from the server. The server may return `UNAVAILABLE` if
         there are too many concurrent pull requests pending for the given
         subscription.
       operationId: pubsub.projects.subscriptions.pull
@@ -848,12 +811,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -861,9 +822,14 @@ paths:
     post:
       description: |-
         Seeks an existing subscription to a point in time or to a given snapshot,
-        whichever is provided in the request.<br><br>
-        Lists the names of the snapshots on this topic.<br><br>
-        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        whichever is provided in the request. Snapshots are used in
+        <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+        operations, which allow
+        you to manage message acknowledgments in bulk. That is, you can set the
+        acknowledgment state of messages in an existing subscription to the state
+        captured by a snapshot. Note that both the subscription and the snapshot
+        must be on the same topic.<br><br>
+        <b>BETA:</b> This feature is part of a beta release. This API might be
         changed in backward-incompatible ways and is not recommended for production
         use. It is not subject to any SLA or deprecation policy.
       operationId: pubsub.projects.subscriptions.seek
@@ -948,12 +914,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -961,8 +925,13 @@ paths:
   '/v1/{topic}/snapshots':
     get:
       description: |-
-        Lists the names of the snapshots on this topic.<br><br>
-        <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+        Lists the names of the snapshots on this topic. Snapshots are used in
+        <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+        operations, which allow
+        you to manage message acknowledgments in bulk. That is, you can set the
+        acknowledgment state of messages in an existing subscription to the state
+        captured by a snapshot.<br><br>
+        <b>BETA:</b> This feature is part of a beta release. This API might be
         changed in backward-incompatible ways and is not recommended for production
         use. It is not subject to any SLA or deprecation policy.
       operationId: pubsub.projects.topics.snapshots.list
@@ -1002,12 +971,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1052,12 +1019,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1067,12 +1032,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1080,8 +1043,7 @@ paths:
     post:
       description: |-
         Adds one or more messages to the topic. Returns `NOT_FOUND` if the topic
-        does not exist. The message payload must not be empty; it must contain
-         either a non-empty data field, or at least one attribute.
+        does not exist.
       operationId: pubsub.projects.topics.publish
       parameters:
         - in: body
@@ -1123,6 +1085,13 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1155,16 +1124,22 @@ definitions:
         description: |-
           Role that is assigned to `members`.
           For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-          Required
         type: string
     type: object
   CreateSnapshotRequest:
     description: |-
       Request for the `CreateSnapshot` method.<br><br>
-      <b>ALPHA:</b> This feature is part of an alpha release. This API might be changed in
+      <b>BETA:</b> This feature is part of a beta release. This API might be changed in
       backward-incompatible ways and is not recommended for production use.
       It is not subject to any SLA or deprecation policy.
     properties:
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
+          managing labels</a>.
+        type: object
       subscription:
         description: |-
           The subscription whose backlog the snapshot retains.
@@ -1191,11 +1166,59 @@ definitions:
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
     type: object
+  ExpirationPolicy:
+    description: |-
+      A policy that specifies the conditions for resource expiration (i.e.,
+      automatic resource deletion).
+    properties:
+      ttl:
+        description: |-
+          Specifies the "time-to-live" duration for an associated resource. The
+          resource expires if it is not active for a period of `ttl`. The definition
+          of "activity" depends on the type of the associated resource. The minimum
+          and maximum allowed values for `ttl` depend on the type of the associated
+          resource, as well. If `ttl` is not set, the associated resource never
+          expires.
+        format: google-duration
+        type: string
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
+    type: object
   ListSnapshotsResponse:
     description: |-
       Response for the `ListSnapshots` method.<br><br>
-      Lists the names of the snapshots on this topic.<br><br>
-      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      <b>BETA:</b> This feature is part of a beta release. This API might be
       changed in backward-incompatible ways and is not recommended for production
       use. It is not subject to any SLA or deprecation policy.
     properties:
@@ -1228,8 +1251,7 @@ definitions:
   ListTopicSnapshotsResponse:
     description: |-
       Response for the `ListTopicSnapshots` method.<br><br>
-      Lists the names of the snapshots on this topic.<br><br>
-      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      <b>BETA:</b> This feature is part of a beta release. This API might be
       changed in backward-incompatible ways and is not recommended for production
       use. It is not subject to any SLA or deprecation policy.
     properties:
@@ -1282,8 +1304,9 @@ definitions:
           The new ack deadline with respect to the time this request was sent to
           the Pub/Sub system. For example, if the value is 10, the new
           ack deadline will expire 10 seconds after the `ModifyAckDeadline` call
-          was made. Specifying zero may immediately make the message available for
-          another pull request.
+          was made. Specifying zero might immediately make the message available for
+          delivery to another subscriber client. This typically results in an
+          increase in the rate of message redeliveries (that is, duplicates).
           The minimum deadline you can specify is 0 seconds.
           The maximum deadline you can specify is 600 seconds (10 minutes).
         format: int32
@@ -1404,8 +1427,14 @@ definitions:
     type: object
   PubsubMessage:
     description: |-
-      A message data and its attributes. The message payload must not be empty;
-      it must contain either a non-empty data field, or at least one attribute.
+      A message that is published by publishers and consumed by subscribers. The
+      message must contain either a non-empty data field or at least one attribute.
+      Note that client libraries represent this object differently
+      depending on the language. See the corresponding
+      <a href="https://cloud.google.com/pubsub/docs/reference/libraries">client
+      library documentation</a> for more information. See
+      <a href="https://cloud.google.com/pubsub/quotas">Quotas and limits</a>
+      for more information about message limits.
     properties:
       attributes:
         additionalProperties:
@@ -1413,7 +1442,9 @@ definitions:
         description: Optional attributes for this message.
         type: object
       data:
-        description: The message payload.
+        description: |-
+          The message data field. If this field is empty, the message must contain
+          at least one attribute.
         format: byte
         type: string
       messageId:
@@ -1445,9 +1476,7 @@ definitions:
           If this field set to true, the system will respond immediately even if
           it there are no messages available to return in the `Pull` response.
           Otherwise, the system may wait (for a bounded amount of time) until at
-          least one message is available, rather than returning no messages. The
-          client may cancel the request if it does not wish to wait any longer for
-          the response.
+          least one message is available, rather than returning no messages.
         type: boolean
     type: object
   PullResponse:
@@ -1455,10 +1484,10 @@ definitions:
     properties:
       receivedMessages:
         description: |-
-          Received Pub/Sub messages. The Pub/Sub system will return zero messages if
-          there are no more available in the backlog. The Pub/Sub system may return
-          fewer than the `maxMessages` requested even if there are more messages
-          available in the backlog.
+          Received Pub/Sub messages. The list will be empty if there are no more
+          messages available in the backlog. For JSON, the response can be entirely
+          empty. The Pub/Sub system may return fewer than the `maxMessages` requested
+          even if there are more messages available in the backlog.
         items:
           $ref: '#/definitions/ReceivedMessage'
         type: array
@@ -1510,9 +1539,8 @@ definitions:
     type: object
   SeekRequest:
     description: |-
-      Request for the `Seek` method.<br><br>
-      Lists the names of the snapshots on this topic.<br><br>
-      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      Request for the `Seek` method. <br><br>
+      <b>BETA:</b> This feature is part of a beta release. This API might be
       changed in backward-incompatible ways and is not recommended for production
       use. It is not subject to any SLA or deprecation policy.
     properties:
@@ -1539,6 +1567,7 @@ definitions:
         type: string
     type: object
   SeekResponse:
+    description: Response for the `Seek` method (this response is empty).
     properties: {}
     type: object
   SetIamPolicyRequest:
@@ -1554,9 +1583,13 @@ definitions:
     type: object
   Snapshot:
     description: |-
-      A snapshot resource.<br><br>
-      Lists the names of the snapshots on this topic.<br><br>
-      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      A snapshot resource. Snapshots are used in
+      <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+      operations, which allow
+      you to manage message acknowledgments in bulk. That is, you can set the
+      acknowledgment state of messages in an existing subscription to the state
+      captured by a snapshot.<br><br>
+      <b>BETA:</b> This feature is part of a beta release. This API might be
       changed in backward-incompatible ways and is not recommended for production
       use. It is not subject to any SLA or deprecation policy.
     properties:
@@ -1574,6 +1607,13 @@ definitions:
           snapshot that would expire in less than 1 hour after creation.
         format: google-datetime
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
+          managing labels</a>.
+        type: object
       name:
         description: The name of the snapshot.
         type: string
@@ -1586,11 +1626,11 @@ definitions:
     properties:
       ackDeadlineSeconds:
         description: |-
-          This value is the maximum time after a subscriber receives a message
-          before the subscriber should acknowledge the message. After message
-          delivery but before the ack deadline expires and before the message is
-          acknowledged, it is an outstanding message and will not be delivered
-          again during that time (on a best-effort basis).
+          The approximate amount of time (on a best-effort basis) Pub/Sub waits for
+          the subscriber to acknowledge receipt before resending the message. In the
+          interval after the message is delivered and before it is acknowledged, it
+          is considered to be <i>outstanding</i>. During that time period, the
+          message will not be redelivered (on a best-effort basis).
 
           For pull subscriptions, this value is used as the initial value for the ack
           deadline. To override this value for a given message, call
@@ -1608,6 +1648,25 @@ definitions:
           system will eventually redeliver the message.
         format: int32
         type: integer
+      expirationPolicy:
+        $ref: '#/definitions/ExpirationPolicy'
+        description: |-
+          A policy that specifies the conditions for this subscription's expiration.
+          A subscription is considered active as long as any connected subscriber is
+          successfully consuming messages from the subscription or is issuing
+          operations on the subscription. If `expiration_policy` is not set, a
+          *default policy* with `ttl` of 31 days will be used. The minimum allowed
+          value for `expiration_policy.ttl` is 1 day.
+          <b>BETA:</b> This feature is part of a beta release. This API might be
+          changed in backward-incompatible ways and is not recommended for production
+          use. It is not subject to any SLA or deprecation policy.
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
+          managing labels</a>.
+        type: object
       messageRetentionDuration:
         description: |-
           How long to retain unacknowledged messages in the subscription's backlog,
@@ -1616,8 +1675,7 @@ definitions:
           of acknowledged messages, and thus configures how far back in time a `Seek`
           can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
           minutes.<br><br>
-          Lists the names of the snapshots on this topic.<br><br>
-          <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          <b>BETA:</b> This feature is part of a beta release. This API might be
           changed in backward-incompatible ways and is not recommended for production
           use. It is not subject to any SLA or deprecation policy.
         format: google-duration
@@ -1642,9 +1700,11 @@ definitions:
           Indicates whether to retain acknowledged messages. If true, then
           messages are not expunged from the subscription's backlog, even if they are
           acknowledged, until they fall out of the `message_retention_duration`
-          window.<br><br>
-          Lists the names of the snapshots on this topic.<br><br>
-          <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+          window. This must be true if you would like to
+          <a href="https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time">
+          Seek to a timestamp</a>.
+          <br><br>
+          <b>BETA:</b> This feature is part of a beta release. This API might be
           changed in backward-incompatible ways and is not recommended for production
           use. It is not subject to any SLA or deprecation policy.
         type: boolean
@@ -1683,6 +1743,13 @@ definitions:
   Topic:
     description: A topic resource.
     properties:
+      labels:
+        additionalProperties:
+          type: string
+        description: |-
+          See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
+          managing labels</a>.
+        type: object
       name:
         description: |-
           The name of the topic. It must have the format
@@ -1696,8 +1763,7 @@ definitions:
   UpdateSnapshotRequest:
     description: |-
       Request for the UpdateSnapshot method.<br><br>
-      Lists the names of the snapshots on this topic.<br><br>
-      <b>ALPHA:</b> This feature is part of an alpha release. This API might be
+      <b>BETA:</b> This feature is part of a beta release. This API might be
       changed in backward-incompatible ways and is not recommended for production
       use. It is not subject to any SLA or deprecation policy.
     properties:
@@ -1721,6 +1787,22 @@ definitions:
         description: |-
           Indicates which fields in the provided subscription to update.
           Must be specified and non-empty.
+        format: google-fieldmask
+        type: string
+    type: object
+  UpdateTopicRequest:
+    description: Request for the UpdateTopic method.
+    properties:
+      topic:
+        $ref: '#/definitions/Topic'
+        description: The updated topic object.
+      updateMask:
+        description: |-
+          Indicates which fields in the provided topic to update. Must be specified
+          and non-empty. Note that if `update_mask` contains
+          "message_storage_policy" then the new value will be determined based on the
+          policy configured at the project or organization level. The
+          `message_storage_policy` must not be set in the `topic` provided above.
         format: google-fieldmask
         type: string
     type: object

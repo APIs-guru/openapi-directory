@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/customsearch/v1/rest'
       version: v1
@@ -33,7 +33,6 @@ parameters:
     default: json
     description: Data format for the response.
     enum:
-      - atom
       - json
     in: query
     name: alt
@@ -140,15 +139,17 @@ paths:
           in: query
           name: imgColorType
           type: string
-        - description: 'Returns images of a specific dominant color: yellow, green, teal, blue, purple, pink, white, gray, black and brown.'
+        - description: 'Returns images of a specific dominant color: red, orange, yellow, green, teal, blue, purple, pink, white, gray, black and brown.'
           enum:
             - black
             - blue
             - brown
             - gray
             - green
+            - orange
             - pink
             - purple
+            - red
             - teal
             - white
             - yellow
@@ -250,6 +251,7 @@ paths:
         - default: 'off'
           description: Search safety level
           enum:
+            - active
             - high
             - medium
             - 'off'
@@ -298,7 +300,7 @@ paths:
       - $ref: '#/parameters/userIp'
   /v1/siterestrict:
     get:
-      description: '(Closed Beta API) Returns metadata about the search performed, metadata about the custom search engine used for the search, and the search results only for site-restrict cses.'
+      description: 'Returns metadata about the search performed, metadata about the custom search engine used for the search, and the search results. Uses a small set of url patterns.'
       operationId: search.cse.siterestrict.list
       parameters:
         - description: Turns off the translation between zh-CN and zh-TW.
@@ -364,15 +366,17 @@ paths:
           in: query
           name: imgColorType
           type: string
-        - description: 'Returns images of a specific dominant color: yellow, green, teal, blue, purple, pink, white, gray, black and brown.'
+        - description: 'Returns images of a specific dominant color: red, orange, yellow, green, teal, blue, purple, pink, white, gray, black and brown.'
           enum:
             - black
             - blue
             - brown
             - gray
             - green
+            - orange
             - pink
             - purple
+            - red
             - teal
             - white
             - yellow

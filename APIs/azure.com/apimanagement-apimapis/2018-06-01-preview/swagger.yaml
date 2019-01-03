@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/preview/2018-06-01-preview/apimapis.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: apimanagement-apimapis
   x-tags:
@@ -1209,7 +1209,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of diagnostics for an API.
+          description: Paged Result response of diagnostics for an API.
           schema:
             description: Paged Diagnostic list representation.
             properties:
@@ -1252,7 +1252,7 @@ paths:
                               - description: Always log all erroneous request regardless of sampling settings.
                                 value: allErrors
                         backend:
-                          description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                          description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                           properties:
                             request:
                               description: Http message diagnostic settings.
@@ -1290,7 +1290,7 @@ paths:
                           description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
                           type: boolean
                         frontend:
-                          description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                          description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                           properties:
                             request:
                               description: Http message diagnostic settings.
@@ -1603,7 +1603,7 @@ paths:
                         - description: Always log all erroneous request regardless of sampling settings.
                           value: allErrors
                   backend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -1641,7 +1641,7 @@ paths:
                     description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
                     type: boolean
                   frontend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -1931,7 +1931,7 @@ paths:
                         - description: Always log all erroneous request regardless of sampling settings.
                           value: allErrors
                   backend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -1969,7 +1969,7 @@ paths:
                     description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
                     type: boolean
                   frontend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -2186,7 +2186,7 @@ paths:
                         - description: Always log all erroneous request regardless of sampling settings.
                           value: allErrors
                   backend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -2224,7 +2224,7 @@ paths:
                     description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
                     type: boolean
                   frontend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -2336,7 +2336,7 @@ paths:
                         - description: Always log all erroneous request regardless of sampling settings.
                           value: allErrors
                   backend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -2374,7 +2374,7 @@ paths:
                     description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
                     type: boolean
                   frontend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -2469,7 +2469,7 @@ paths:
                         - description: Always log all erroneous request regardless of sampling settings.
                           value: allErrors
                   backend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -2507,7 +2507,7 @@ paths:
                     description: Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true.
                     type: boolean
                   frontend:
-                    description: Diagnostic settings for incoming/outcoming HTTP messages to the Gateway.
+                    description: Diagnostic settings for incoming/outgoing HTTP messages to the Gateway.
                     properties:
                       request:
                         description: Http message diagnostic settings.
@@ -2704,7 +2704,7 @@ paths:
                 type: Microsoft.ApiManagement/service/apis/diagnostics
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues':
     get:
-      description: Lists all issues assosiated with the specified API.
+      description: Lists all issues associated with the specified API.
       operationId: ApiIssue_ListByService
       parameters:
         - description: The name of the resource group.
@@ -2761,7 +2761,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of issues for the API.
+          description: Paged Result response of issues for the API.
           schema:
             $ref: '#/definitions/IssueCollection'
         default:
@@ -3295,7 +3295,7 @@ paths:
                 type: Microsoft.ApiManagement/service/apis/issues
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/attachments':
     get:
-      description: Lists all comments for the Issue assosiated with the specified API.
+      description: Lists all comments for the Issue associated with the specified API.
       operationId: ApiIssueAttachment_ListByService
       parameters:
         - description: The name of the resource group.
@@ -3352,7 +3352,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of issue comments for the API.
+          description: Paged Result response of issue comments for the API.
           schema:
             $ref: '#/definitions/IssueAttachmentCollection'
         default:
@@ -3793,7 +3793,7 @@ paths:
                 type: Microsoft.ApiManagement/service/apis/issues/attachments
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/issues/{issueId}/comments':
     get:
-      description: Lists all comments for the Issue assosiated with the specified API.
+      description: Lists all comments for the Issue associated with the specified API.
       operationId: ApiIssueComment_ListByService
       parameters:
         - description: The name of the resource group.
@@ -3850,7 +3850,7 @@ paths:
           x-ms-parameter-location: method
       responses:
         '200':
-          description: Paged Result reponse of issue comments for the API.
+          description: Paged Result response of issue comments for the API.
           schema:
             $ref: '#/definitions/IssueCommentCollection'
         default:
@@ -4630,6 +4630,65 @@ paths:
                       statusCode: 200
                   templateParameters: []
                   urlTemplate: '/?soapAction=http://tempuri.org/IFazioService/CancelOrder'
+                type: Microsoft.ApiManagement/service/apis/operations
+        ApiManagementGetApiOperationPetStore:
+          parameters:
+            api-version: 2018-06-01-preview
+            apiId: swagger-petstore
+            operationId: loginUser
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/swagger-petstore/operations/loginUser
+                name: loginUser
+                properties:
+                  description: ''
+                  displayName: Logs user into the system
+                  method: GET
+                  request:
+                    headers: []
+                    queryParameters: []
+                    representations: []
+                  responses:
+                    - description: successful operation
+                      headers:
+                        - description: calls per hour allowed by the user
+                          name: X-Rate-Limit
+                          type: integer
+                          values: []
+                        - description: date in UTC when token expires
+                          name: X-Expires-After
+                          type: string
+                          values: []
+                      representations:
+                        - contentType: application/xml
+                          schemaId: 5ba91a35f373b513a0bf31c6
+                          typeName: UserLoginGet200ApplicationXmlResponse
+                        - contentType: application/json
+                          schemaId: 5ba91a35f373b513a0bf31c6
+                          typeName: UserLoginGet200ApplicationJsonResponse
+                      statusCode: 200
+                    - description: Invalid username/password supplied
+                      headers: []
+                      representations:
+                        - contentType: application/xml
+                        - contentType: application/json
+                      statusCode: 400
+                  templateParameters:
+                    - description: The user name for login
+                      name: username
+                      required: true
+                      type: string
+                      values: []
+                    - description: The password for login in clear text
+                      name: password
+                      required: true
+                      type: string
+                      values: []
+                  urlTemplate: '/user/login?username={username}&password={password}'
                 type: Microsoft.ApiManagement/service/apis/operations
     head:
       description: Gets the entity state (Etag) version of the API operation specified by its identifier.

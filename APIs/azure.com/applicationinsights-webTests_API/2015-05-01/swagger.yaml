@@ -71,7 +71,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Insights/webtests':
     get:
-      description: Get all Application Insights web test alerts definitioned within a subscription.
+      description: Get all Application Insights web test alerts definitions within a subscription.
       operationId: WebTests_List
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'

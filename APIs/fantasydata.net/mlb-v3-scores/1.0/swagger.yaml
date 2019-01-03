@@ -510,6 +510,8 @@ definitions:
         type: integer
       ForecastWindSpeed:
         type: integer
+      GameEndDateTime:
+        type: string
       GameID:
         type: integer
       GlobalAwayTeamID:
@@ -540,6 +542,10 @@ definitions:
         type: integer
       InningHalf:
         type: string
+      Innings:
+        items:
+          $ref: '#/definitions/Inning'
+        type: array
       IsClosed:
         type: boolean
       LastPlay:
@@ -587,6 +593,18 @@ definitions:
       WinningPitcher:
         type: string
       WinningPitcherID:
+        type: integer
+  Inning:
+    properties:
+      AwayTeamRuns:
+        type: integer
+      GameID:
+        type: integer
+      HomeTeamRuns:
+        type: integer
+      InningID:
+        type: integer
+      InningNumber:
         type: integer
   News:
     properties:

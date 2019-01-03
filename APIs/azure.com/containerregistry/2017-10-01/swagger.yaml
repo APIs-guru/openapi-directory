@@ -64,6 +64,7 @@ parameters:
   ResourceGroupParameter:
     description: The name of the resource group to which the container registry belongs.
     in: path
+    minLength: 1
     name: resourceGroupName
     required: true
     type: string
@@ -1490,6 +1491,25 @@ definitions:
         description: The HTTP message version.
         type: string
     type: object
+  IPRule:
+    description: IP rule with specific IP or IP range in CIDR format.
+    properties:
+      action:
+        default: Allow
+        description: The action of IP ACL rule.
+        enum:
+          - Allow
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: Action
+      value:
+        description: Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed.
+        type: string
+        x-ms-client-name: IPAddressOrRange
+    required:
+      - value
+    type: object
   ImportImageParameters:
     properties:
       mode:
@@ -1520,8 +1540,11 @@ definitions:
     type: object
   ImportSource:
     properties:
+      credentials:
+        $ref: '#/definitions/ImportSourceCredentials'
+        description: Credentials used when importing from a registry uri.
       registryUri:
-        description: The address of the source registry.
+        description: The address of the source registry (e.g. 'mcr.microsoft.com').
         type: string
       resourceId:
         description: The resource identifier of the source Azure Container Registry.
@@ -1531,6 +1554,43 @@ definitions:
         type: string
     required:
       - sourceImage
+    type: object
+  ImportSourceCredentials:
+    properties:
+      password:
+        description: The password used to authenticate with the source registry.
+        type: string
+      username:
+        description: The username to authenticate with the source registry.
+        type: string
+    required:
+      - password
+    type: object
+  NetworkRuleSet:
+    description: The network rule set for a container registry.
+    properties:
+      defaultAction:
+        default: Allow
+        description: The default action of allow or deny when no other rules match.
+        enum:
+          - Allow
+          - Deny
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DefaultAction
+      ipRules:
+        description: The IP ACL rules.
+        items:
+          $ref: '#/definitions/IPRule'
+        type: array
+      virtualNetworkRules:
+        description: The virtual network rules.
+        items:
+          $ref: '#/definitions/VirtualNetworkRule'
+        type: array
+    required:
+      - defaultAction
     type: object
   OperationDefinition:
     description: The definition of a container registry operation.
@@ -1758,6 +1818,9 @@ definitions:
         description: The URL that can be used to log into the container registry.
         readOnly: true
         type: string
+      networkRuleSet:
+        $ref: '#/definitions/NetworkRuleSet'
+        description: The network rule set for a container registry.
       provisioningState:
         description: The provisioning state of the container registry at the time the operation was called.
         enum:
@@ -1786,6 +1849,9 @@ definitions:
       adminUserEnabled:
         description: The value that indicates whether the admin user is enabled.
         type: boolean
+      networkRuleSet:
+        $ref: '#/definitions/NetworkRuleSet'
+        description: The network rule set for a container registry.
       storageAccount:
         $ref: '#/definitions/StorageAccountProperties'
         description: 'The parameters of a storage account for the container registry. Only applicable to Classic SKU. If specified, the storage account must be in the same physical location as the container registry.'
@@ -2053,6 +2119,25 @@ definitions:
           modelAsString: true
           name: TrustPolicyType
     type: object
+  VirtualNetworkRule:
+    description: Virtual network rule.
+    properties:
+      action:
+        default: Allow
+        description: The action of virtual network rule.
+        enum:
+          - Allow
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: Action
+      id:
+        description: 'Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}.'
+        type: string
+        x-ms-client-name: VirtualNetworkResourceId
+    required:
+      - id
+    type: object
   Webhook:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -2103,6 +2188,8 @@ definitions:
             - push
             - delete
             - quarantine
+            - chart_push
+            - chart_delete
           type: string
           x-ms-enum:
             modelAsString: true
@@ -2147,6 +2234,8 @@ definitions:
             - push
             - delete
             - quarantine
+            - chart_push
+            - chart_delete
           type: string
           x-ms-enum:
             modelAsString: true
@@ -2186,6 +2275,8 @@ definitions:
             - push
             - delete
             - quarantine
+            - chart_push
+            - chart_delete
           type: string
           x-ms-enum:
             modelAsString: true

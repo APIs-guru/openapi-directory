@@ -193,7 +193,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly deleted.
+          description: Namespace successfully deleted.
         '202':
           description: Namespace delete request accepted.
         '204':
@@ -236,7 +236,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly updated.
+          description: Namespace successfully updated.
           schema:
             $ref: '#/definitions/NamespaceResource'
         '201':
@@ -263,7 +263,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Namespace successfuly created.
+          description: Namespace successfully created.
           schema:
             $ref: '#/definitions/NamespaceResource'
         '201':

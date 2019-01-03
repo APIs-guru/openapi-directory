@@ -66,7 +66,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/orchestrators':
     get:
-      description: Gets a list of supported orchestrators in the specified subscription. The operation returns properties of each orchestrator including verison and available upgrades.
+      description: Gets a list of supported orchestrators in the specified subscription. The operation returns properties of each orchestrator including version and available upgrades.
       operationId: ContainerServices_ListOrchestrators
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'

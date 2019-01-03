@@ -312,7 +312,7 @@ paths:
         url: 'https://docs.microsoft.com/en-us/rest/api/consumption/'
       operationId: UsageDetails_List
       parameters:
-        - description: 'The scope of the usage details. The scope can be ''/subscriptions/{subscriptionId}'' for a subscription, or ''/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'' for a billing perdiod.'
+        - description: 'The scope of the usage details. The scope can be ''/subscriptions/{subscriptionId}'' for a subscription, or ''/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'' for a billing period.'
           in: path
           name: scope
           required: true
@@ -357,7 +357,7 @@ paths:
           parameters:
             $expand: 'meterDetails,additionalProperties'
             $filter: 'usageEnd le 2017-02-14T00:00:00Z'
-            $top: '1'
+            $top: 1
             api-version: '2017-04-30'
             scope: subscriptions/subid/providers/Microsoft.Billing/billingPeriods/201702
           responses:
@@ -585,11 +585,11 @@ definitions:
         readOnly: true
         type: number
       skuName:
-        description: This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.
+        description: This is the ARM Sku name. It can be used to join with the serviceType field in additional info in usage records.
         readOnly: true
         type: string
       totalReservedQuantity:
-        description: This is the total count of instances that are reserved for the reservationid.
+        description: This is the total count of instances that are reserved for the reservationId.
         format: decimal
         readOnly: true
         type: number
@@ -654,7 +654,7 @@ definitions:
         readOnly: true
         type: number
       skuName:
-        description: This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.
+        description: This is the ARM Sku name. It can be used to join with the serviceType field in additional info in usage records.
         readOnly: true
         type: string
       usageDate:

@@ -1,0 +1,2056 @@
+swagger: '2.0'
+schemes:
+  - http
+  - https
+host: adobe.local
+basePath: /
+info:
+  contact:
+    email: opensource@shinesolutions.com
+    name: Shine Solutions
+    url: 'http://shinesolutions.com'
+    x-twitter: Adobe
+  description: Swagger AEM is an OpenAPI specification for Adobe Experience Manager (AEM) API
+  title: Adobe Experience Manager (AEM)
+  version: 2.3.0-pre
+  x-apisguru-categories:
+    - marketing
+  x-logo:
+    url: 'https://twitter.com/Adobe/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/shinesolutions/swagger-aem/master/conf/api.yml'
+      version: '2.0'
+  x-providerName: adobe.com
+  x-serviceName: aem
+  x-unofficialSpec: true
+securityDefinitions:
+  aemAuth:
+    type: basic
+security:
+  - aemAuth: []
+paths:
+  /.cqactions.html:
+    post:
+      operationId: postCqActions
+      parameters:
+        - in: query
+          name: authorizableId
+          required: true
+          type: string
+        - in: query
+          name: changelog
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - cq
+  /apps/system/config/com.adobe.granite.auth.saml.SamlAuthenticationHandler.config:
+    post:
+      operationId: postConfigAdobeGraniteSamlAuthenticationHandler
+      parameters:
+        - in: query
+          name: keyStorePassword
+          required: false
+          type: string
+        - in: query
+          name: keyStorePassword@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: service.ranking
+          required: false
+          type: integer
+        - in: query
+          name: service.ranking@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: idpHttpRedirect
+          required: false
+          type: boolean
+        - in: query
+          name: idpHttpRedirect@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: createUser
+          required: false
+          type: boolean
+        - in: query
+          name: createUser@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: defaultRedirectUrl
+          required: false
+          type: string
+        - in: query
+          name: defaultRedirectUrl@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: userIDAttribute
+          required: false
+          type: string
+        - in: query
+          name: userIDAttribute@TypeHint
+          required: false
+          type: string
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: defaultGroups
+          required: false
+          type: array
+        - in: query
+          name: defaultGroups@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: idpCertAlias
+          required: false
+          type: string
+        - in: query
+          name: idpCertAlias@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: addGroupMemberships
+          required: false
+          type: boolean
+        - in: query
+          name: addGroupMemberships@TypeHint
+          required: false
+          type: string
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: path
+          required: false
+          type: array
+        - in: query
+          name: path@TypeHint
+          required: false
+          type: string
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: synchronizeAttributes
+          required: false
+          type: array
+        - in: query
+          name: synchronizeAttributes@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: clockTolerance
+          required: false
+          type: integer
+        - in: query
+          name: clockTolerance@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: groupMembershipAttribute
+          required: false
+          type: string
+        - in: query
+          name: groupMembershipAttribute@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: idpUrl
+          required: false
+          type: string
+        - in: query
+          name: idpUrl@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: logoutUrl
+          required: false
+          type: string
+        - in: query
+          name: logoutUrl@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: serviceProviderEntityId
+          required: false
+          type: string
+        - in: query
+          name: serviceProviderEntityId@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: assertionConsumerServiceURL
+          required: false
+          type: string
+        - in: query
+          name: assertionConsumerServiceURL@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: handleLogout
+          required: false
+          type: boolean
+        - in: query
+          name: handleLogout@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: spPrivateKeyAlias
+          required: false
+          type: string
+        - in: query
+          name: spPrivateKeyAlias@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: useEncryption
+          required: false
+          type: boolean
+        - in: query
+          name: useEncryption@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: nameIdFormat
+          required: false
+          type: string
+        - in: query
+          name: nameIdFormat@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: digestMethod
+          required: false
+          type: string
+        - in: query
+          name: digestMethod@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: signatureMethod
+          required: false
+          type: string
+        - in: query
+          name: signatureMethod@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: userIntermediatePath
+          required: false
+          type: string
+        - in: query
+          name: userIntermediatePath@TypeHint
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  /apps/system/config/com.shinesolutions.aem.passwordreset.Activator:
+    post:
+      operationId: postConfigAemPasswordReset
+      parameters:
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: pwdreset.authorizables
+          required: false
+          type: array
+        - in: query
+          name: pwdreset.authorizables@TypeHint
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - custom
+  /apps/system/config/com.shinesolutions.healthcheck.hc.impl.ActiveBundleHealthCheck:
+    post:
+      operationId: postConfigAemHealthCheckServlet
+      parameters:
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: bundles.ignored
+          required: false
+          type: array
+        - in: query
+          name: bundles.ignored@TypeHint
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - custom
+  /apps/system/config/org.apache.felix.http:
+    post:
+      operationId: postConfigApacheFelixJettyBasedHttpService
+      parameters:
+        - in: query
+          name: org.apache.felix.https.nio
+          required: false
+          type: boolean
+        - in: query
+          name: org.apache.felix.https.nio@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.keystore
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.keystore@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.keystore.password
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.keystore.password@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.keystore.key
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.keystore.key@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.keystore.key.password
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.keystore.key.password@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.truststore
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.truststore@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.truststore.password
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.truststore.password@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.clientcertificate
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.clientcertificate@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: org.apache.felix.https.enable
+          required: false
+          type: boolean
+        - in: query
+          name: org.apache.felix.https.enable@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: org.osgi.service.http.port.secure
+          required: false
+          type: string
+        - in: query
+          name: org.osgi.service.http.port.secure@TypeHint
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  /apps/system/config/org.apache.http.proxyconfigurator.config:
+    post:
+      operationId: postConfigApacheHttpComponentsProxyConfiguration
+      parameters:
+        - in: query
+          name: proxy.host
+          required: false
+          type: string
+        - in: query
+          name: proxy.host@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: proxy.port
+          required: false
+          type: integer
+        - in: query
+          name: proxy.port@TypeHint
+          required: false
+          type: string
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: proxy.exceptions
+          required: false
+          type: array
+        - in: query
+          name: proxy.exceptions@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: proxy.enabled
+          required: false
+          type: boolean
+        - in: query
+          name: proxy.enabled@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: proxy.user
+          required: false
+          type: string
+        - in: query
+          name: proxy.user@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: proxy.password
+          required: false
+          type: string
+        - in: query
+          name: proxy.password@TypeHint
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  /apps/system/config/org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet:
+    post:
+      operationId: postConfigApacheSlingDavExServlet
+      parameters:
+        - in: query
+          name: alias
+          required: false
+          type: string
+        - in: query
+          name: alias@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: dav.create-absolute-uri
+          required: false
+          type: boolean
+        - in: query
+          name: dav.create-absolute-uri@TypeHint
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  /apps/system/config/org.apache.sling.security.impl.ReferrerFilter:
+    post:
+      operationId: postConfigApacheSlingReferrerFilter
+      parameters:
+        - in: query
+          name: allow.empty
+          required: false
+          type: boolean
+        - in: query
+          name: allow.empty@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: allow.hosts
+          required: false
+          type: string
+        - in: query
+          name: allow.hosts@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: allow.hosts.regexp
+          required: false
+          type: string
+        - in: query
+          name: allow.hosts.regexp@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: filter.methods
+          required: false
+          type: string
+        - in: query
+          name: filter.methods@TypeHint
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  /apps/system/config/org.apache.sling.servlets.get.DefaultGetServlet:
+    post:
+      operationId: postConfigApacheSlingGetServlet
+      parameters:
+        - in: query
+          name: json.maximumresults
+          required: false
+          type: string
+        - in: query
+          name: json.maximumresults@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: enable.html
+          required: false
+          type: boolean
+        - in: query
+          name: enable.html@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: enable.txt
+          required: false
+          type: boolean
+        - in: query
+          name: enable.txt@TypeHint
+          required: false
+          type: string
+        - in: query
+          name: enable.xml
+          required: false
+          type: boolean
+        - in: query
+          name: enable.xml@TypeHint
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  /bin/querybuilder.json:
+    get:
+      operationId: getQuery
+      parameters:
+        - in: query
+          name: path
+          required: true
+          type: string
+        - in: query
+          name: p.limit
+          required: true
+          type: number
+        - in: query
+          name: 1_property
+          required: true
+          type: string
+        - in: query
+          name: 1_property.value
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+    post:
+      operationId: postQuery
+      parameters:
+        - in: query
+          name: path
+          required: true
+          type: string
+        - in: query
+          name: p.limit
+          required: true
+          type: number
+        - in: query
+          name: 1_property
+          required: true
+          type: string
+        - in: query
+          name: 1_property.value
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+  /crx/explorer/ui/setpassword.jsp:
+    post:
+      operationId: postSetPassword
+      parameters:
+        - in: query
+          name: old
+          required: true
+          type: string
+        - in: query
+          name: plain
+          required: true
+          type: string
+        - in: query
+          name: verify
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - crx
+  /crx/packmgr/installstatus.jsp:
+    get:
+      operationId: getInstallStatus
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Retrieved CRX package manager install status
+          schema:
+            $ref: '#/definitions/InstallStatus'
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - crx
+  /crx/packmgr/service.jsp:
+    post:
+      operationId: postPackageService
+      parameters:
+        - in: query
+          name: cmd
+          required: true
+          type: string
+      produces:
+        - text/xml
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - crx
+  '/crx/packmgr/service/.json/{path}':
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: postPackageServiceJson
+      parameters:
+        - in: path
+          name: path
+          required: true
+          type: string
+        - in: query
+          name: cmd
+          required: true
+          type: string
+        - in: query
+          name: groupName
+          required: false
+          type: string
+        - in: query
+          name: packageName
+          required: false
+          type: string
+        - in: query
+          name: packageVersion
+          required: false
+          type: string
+        - in: query
+          name: _charset_
+          required: false
+          type: string
+        - in: query
+          name: force
+          required: false
+          type: boolean
+        - in: query
+          name: recursive
+          required: false
+          type: boolean
+        - in: formData
+          name: package
+          required: false
+          type: file
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - crx
+  /crx/packmgr/update.jsp:
+    post:
+      operationId: postPackageUpdate
+      parameters:
+        - in: query
+          name: groupName
+          required: true
+          type: string
+        - in: query
+          name: packageName
+          required: true
+          type: string
+        - in: query
+          name: version
+          required: true
+          type: string
+        - in: query
+          name: path
+          required: true
+          type: string
+        - in: query
+          name: filter
+          required: false
+          type: string
+        - in: query
+          name: _charset_
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - crx
+  '/crx/server/crx.default/jcr:root/.1.json':
+    get:
+      operationId: getCrxdeStatus
+      produces:
+        - plain/text
+      responses:
+        '200':
+          description: CRXDE is enabled
+          schema:
+            type: string
+        '404':
+          description: CRXDE is disabled
+          schema:
+            type: string
+      tags:
+        - crx
+  '/etc/packages/{group}/{name}-{version}.zip':
+    get:
+      operationId: getPackage
+      parameters:
+        - in: path
+          name: group
+          required: true
+          type: string
+        - in: path
+          name: name
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+      produces:
+        - application/octet-stream
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: file
+      tags:
+        - sling
+  '/etc/packages/{group}/{name}-{version}.zip/jcr:content/vlt:definition/filter.tidy.2.json':
+    get:
+      operationId: getPackageFilter
+      parameters:
+        - in: path
+          name: group
+          required: true
+          type: string
+        - in: path
+          name: name
+          required: true
+          type: string
+        - in: path
+          name: version
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+  '/etc/replication/agents.{runmode}.-1.json':
+    get:
+      operationId: getAgents
+      parameters:
+        - in: path
+          name: runmode
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+  '/etc/replication/agents.{runmode}/{name}':
+    delete:
+      operationId: deleteAgent
+      parameters:
+        - in: path
+          name: runmode
+          required: true
+          type: string
+        - in: path
+          name: name
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+    get:
+      operationId: getAgent
+      parameters:
+        - in: path
+          name: runmode
+          required: true
+          type: string
+        - in: path
+          name: name
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+    post:
+      operationId: postAgent
+      parameters:
+        - in: path
+          name: runmode
+          required: true
+          type: string
+        - in: path
+          name: name
+          required: true
+          type: string
+        - in: query
+          name: 'jcr:content/cq:distribute'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/cq:distribute@TypeHint'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/cq:name'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/cq:template'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/enabled'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/jcr:description'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/jcr:lastModified'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/jcr:lastModifiedBy'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/jcr:mixinTypes'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/jcr:title'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/logLevel'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/noStatusUpdate'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/noVersioning'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/protocolConnectTimeout'
+          required: false
+          type: number
+        - in: query
+          name: 'jcr:content/protocolHTTPConnectionClosed'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/protocolHTTPExpired'
+          required: false
+          type: string
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: 'jcr:content/protocolHTTPHeaders'
+          required: false
+          type: array
+        - in: query
+          name: 'jcr:content/protocolHTTPHeaders@TypeHint'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/protocolHTTPMethod'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/protocolHTTPSRelaxed'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/protocolInterface'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/protocolSocketTimeout'
+          required: false
+          type: number
+        - in: query
+          name: 'jcr:content/protocolVersion'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/proxyNTLMDomain'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/proxyNTLMHost'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/proxyHost'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/proxyPassword'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/proxyPort'
+          required: false
+          type: number
+        - in: query
+          name: 'jcr:content/proxyUser'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/queueBatchMaxSize'
+          required: false
+          type: number
+        - in: query
+          name: 'jcr:content/queueBatchMode'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/queueBatchWaitTime'
+          required: false
+          type: number
+        - in: query
+          name: 'jcr:content/retryDelay'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/reverseReplication'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/serializationType'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/sling:resourceType'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/ssl'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/transportNTLMDomain'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/transportNTLMHost'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/transportPassword'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/transportUri'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/transportUser'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:content/triggerDistribute'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/triggerModified'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/triggerOnOffTime'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/triggerReceive'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/triggerSpecific'
+          required: false
+          type: boolean
+        - in: query
+          name: 'jcr:content/userId'
+          required: false
+          type: string
+        - in: query
+          name: 'jcr:primaryType'
+          required: false
+          type: string
+        - in: query
+          name: ':operation'
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  /etc/replication/treeactivation.html:
+    post:
+      operationId: postTreeActivation
+      parameters:
+        - in: query
+          name: ignoredeactivated
+          required: true
+          type: boolean
+        - in: query
+          name: onlymodified
+          required: true
+          type: boolean
+        - in: query
+          name: path
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  /etc/truststore:
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: postTruststorePKCS12
+      parameters:
+        - in: formData
+          name: truststore.p12
+          required: false
+          type: file
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+  /etc/truststore/truststore.p12:
+    get:
+      operationId: getTruststore
+      produces:
+        - application/octet-stream
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: file
+      tags:
+        - sling
+  /libs/granite/core/content/login.html:
+    get:
+      operationId: getLoginPage
+      produces:
+        - text/html
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      security: []
+      tags:
+        - cq
+  /libs/granite/security/post/authorizables:
+    post:
+      operationId: postAuthorizables
+      parameters:
+        - in: query
+          name: authorizableId
+          required: true
+          type: string
+        - in: query
+          name: intermediatePath
+          required: true
+          type: string
+        - in: query
+          name: createUser
+          required: false
+          type: string
+        - in: query
+          name: createGroup
+          required: false
+          type: string
+        - in: query
+          name: 'rep:password'
+          required: false
+          type: string
+        - in: query
+          name: profile/givenName
+          required: false
+          type: string
+      produces:
+        - text/html
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+  /libs/granite/security/post/truststore:
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: postTruststore
+      parameters:
+        - in: query
+          name: ':operation'
+          required: false
+          type: string
+        - in: query
+          name: newPassword
+          required: false
+          type: string
+        - in: query
+          name: rePassword
+          required: false
+          type: string
+        - in: query
+          name: keyStoreType
+          required: false
+          type: string
+        - in: query
+          name: removeAlias
+          required: false
+          type: string
+        - in: formData
+          name: certificate
+          required: false
+          type: file
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+  /libs/granite/security/truststore.json:
+    get:
+      operationId: getTruststoreInfo
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Retrieved AEM Truststore info
+          schema:
+            $ref: '#/definitions/TruststoreInfo'
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+  '/system/console/bundles/{name}':
+    post:
+      operationId: postBundle
+      parameters:
+        - in: path
+          name: name
+          required: true
+          type: string
+        - in: query
+          name: action
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - console
+  /system/console/configMgr/com.adobe.granite.auth.saml.SamlAuthenticationHandler:
+    post:
+      operationId: postSamlConfiguration
+      parameters:
+        - in: query
+          name: post
+          required: false
+          type: boolean
+        - in: query
+          name: apply
+          required: false
+          type: boolean
+        - in: query
+          name: delete
+          required: false
+          type: boolean
+        - in: query
+          name: action
+          required: false
+          type: string
+        - in: query
+          name: $location
+          required: false
+          type: string
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: path
+          required: false
+          type: array
+        - in: query
+          name: service.ranking
+          required: false
+          type: integer
+        - in: query
+          name: idpUrl
+          required: false
+          type: string
+        - in: query
+          name: idpCertAlias
+          required: false
+          type: string
+        - in: query
+          name: idpHttpRedirect
+          required: false
+          type: boolean
+        - in: query
+          name: serviceProviderEntityId
+          required: false
+          type: string
+        - in: query
+          name: assertionConsumerServiceURL
+          required: false
+          type: string
+        - in: query
+          name: spPrivateKeyAlias
+          required: false
+          type: string
+        - in: query
+          name: keyStorePassword
+          required: false
+          type: string
+        - in: query
+          name: defaultRedirectUrl
+          required: false
+          type: string
+        - in: query
+          name: userIDAttribute
+          required: false
+          type: string
+        - in: query
+          name: useEncryption
+          required: false
+          type: boolean
+        - in: query
+          name: createUser
+          required: false
+          type: boolean
+        - in: query
+          name: addGroupMemberships
+          required: false
+          type: boolean
+        - in: query
+          name: groupMembershipAttribute
+          required: false
+          type: string
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: defaultGroups
+          required: false
+          type: array
+        - in: query
+          name: nameIdFormat
+          required: false
+          type: string
+        - collectionFormat: multi
+          in: query
+          items:
+            type: string
+          name: synchronizeAttributes
+          required: false
+          type: array
+        - in: query
+          name: handleLogout
+          required: false
+          type: boolean
+        - in: query
+          name: logoutUrl
+          required: false
+          type: string
+        - in: query
+          name: clockTolerance
+          required: false
+          type: integer
+        - in: query
+          name: digestMethod
+          required: false
+          type: string
+        - in: query
+          name: signatureMethod
+          required: false
+          type: string
+        - in: query
+          name: userIntermediatePath
+          required: false
+          type: string
+        - collectionFormat: csv
+          in: query
+          items:
+            type: string
+          name: propertylist
+          required: false
+          type: array
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: Retrieved AEM SAML Configuration
+          schema:
+            $ref: '#/definitions/SamlConfigurationInfo'
+        '302':
+          description: Default response
+          schema:
+            type: string
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - console
+  '/system/console/jmx/com.adobe.granite:type=Repository/op/{action}':
+    post:
+      operationId: postJmxRepository
+      parameters:
+        - in: path
+          name: action
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - console
+  /system/console/status-productinfo.json:
+    get:
+      operationId: getAemProductInfo
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Default response
+          schema:
+            items:
+              type: string
+            type: array
+      tags:
+        - console
+  /system/health:
+    get:
+      operationId: getAemHealthCheck
+      parameters:
+        - in: query
+          name: tags
+          required: false
+          type: string
+        - in: query
+          name: combineTagsOr
+          required: false
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - custom
+  '/{intermediatePath}/{authorizableId}.ks.html':
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: postAuthorizableKeystore
+      parameters:
+        - in: path
+          name: intermediatePath
+          required: true
+          type: string
+        - in: path
+          name: authorizableId
+          required: true
+          type: string
+        - in: query
+          name: ':operation'
+          required: false
+          type: string
+        - in: query
+          name: currentPassword
+          required: false
+          type: string
+        - in: query
+          name: newPassword
+          required: false
+          type: string
+        - in: query
+          name: rePassword
+          required: false
+          type: string
+        - in: query
+          name: keyPassword
+          required: false
+          type: string
+        - in: query
+          name: keyStorePass
+          required: false
+          type: string
+        - in: query
+          name: alias
+          required: false
+          type: string
+        - in: query
+          name: newAlias
+          required: false
+          type: string
+        - in: query
+          name: removeAlias
+          required: false
+          type: string
+        - in: formData
+          name: cert-chain
+          required: false
+          type: file
+        - in: formData
+          name: pk
+          required: false
+          type: file
+        - in: formData
+          name: keyStore
+          required: false
+          type: file
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: Retrieved Authorizable Keystore info
+          schema:
+            $ref: '#/definitions/KeystoreInfo'
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+  '/{intermediatePath}/{authorizableId}.ks.json':
+    get:
+      operationId: getAuthorizableKeystore
+      parameters:
+        - in: path
+          name: intermediatePath
+          required: true
+          type: string
+        - in: path
+          name: authorizableId
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: Retrieved Authorizable Keystore info
+          schema:
+            $ref: '#/definitions/KeystoreInfo'
+        default:
+          description: Default response
+          schema:
+            type: string
+      tags:
+        - sling
+  '/{intermediatePath}/{authorizableId}/keystore/store.p12':
+    get:
+      operationId: getKeystore
+      parameters:
+        - in: path
+          name: intermediatePath
+          required: true
+          type: string
+        - in: path
+          name: authorizableId
+          required: true
+          type: string
+      produces:
+        - application/octet-stream
+      responses:
+        default:
+          description: Default response
+          schema:
+            type: file
+      tags:
+        - sling
+  '/{path}/':
+    post:
+      operationId: postPath
+      parameters:
+        - in: path
+          name: path
+          required: true
+          type: string
+        - in: query
+          name: 'jcr:primaryType'
+          required: true
+          type: string
+        - in: query
+          name: ':name'
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  '/{path}/{name}':
+    delete:
+      operationId: deleteNode
+      parameters:
+        - in: path
+          name: path
+          required: true
+          type: string
+        - in: path
+          name: name
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+    get:
+      operationId: getNode
+      parameters:
+        - in: path
+          name: path
+          required: true
+          type: string
+        - in: path
+          name: name
+          required: true
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+    post:
+      consumes:
+        - multipart/form-data
+      operationId: postNode
+      parameters:
+        - in: path
+          name: path
+          required: true
+          type: string
+        - in: path
+          name: name
+          required: true
+          type: string
+        - in: query
+          name: ':operation'
+          required: false
+          type: string
+        - in: query
+          name: deleteAuthorizable
+          required: false
+          type: string
+        - in: formData
+          name: file
+          required: false
+          type: file
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+  '/{path}/{name}.rw.html':
+    post:
+      operationId: postNodeRw
+      parameters:
+        - in: path
+          name: path
+          required: true
+          type: string
+        - in: path
+          name: name
+          required: true
+          type: string
+        - in: query
+          name: addMembers
+          required: false
+          type: string
+      produces:
+        - text/plain
+      responses:
+        default:
+          description: Default response
+      tags:
+        - sling
+definitions:
+  InstallStatus:
+    properties:
+      status:
+        properties:
+          finished:
+            type: boolean
+          itemCount:
+            type: integer
+        type: object
+    type: object
+  KeystoreChainItems:
+    properties:
+      issuer:
+        description: e.g. "CN=Admin"
+        type: string
+      notAfter:
+        description: 'e.g. "Sun Jun 30 23:59:50 AEST 2019"'
+        type: string
+      notBefore:
+        description: 'e.g. "Sun Jul 01 12:00:00 AEST 2018"'
+        type: string
+      serialNumber:
+        description: '18165099476682912368'
+        type: integer
+      subject:
+        description: e.g. "CN=localhost"
+        type: string
+    type: object
+  KeystoreInfo:
+    properties:
+      aliases:
+        items:
+          $ref: '#/definitions/KeystoreItems'
+        type: array
+      exists:
+        description: False if truststore don't exist
+        type: boolean
+    type: object
+  KeystoreItems:
+    properties:
+      algorithm:
+        description: e.g. "RSA"
+        type: string
+      alias:
+        description: Keystore alias name
+        type: string
+      chain:
+        items:
+          $ref: '#/definitions/KeystoreChainItems'
+        type: array
+      entryType:
+        description: e.g. "privateKey"
+        type: string
+      format:
+        description: 'e.g. "PKCS#8"'
+        type: string
+    type: object
+  SamlConfigurationInfo:
+    properties:
+      bundle_location:
+        description: needed for configuration binding
+        type: string
+      description:
+        description: Title
+        type: string
+      pid:
+        description: Persistent Identity (PID)
+        type: string
+      properties:
+        items:
+          $ref: '#/definitions/SamlConfigurationProperties'
+        type: object
+      service_location:
+        description: needed for configuraiton binding
+        type: string
+      title:
+        description: Title
+        type: string
+    type: object
+  SamlConfigurationProperties:
+    properties:
+      addGroupMemberships:
+        description: Whether or not a user should be automatically added to CRX groups after successful authentication.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+        type: array
+      assertionConsumerServiceURL:
+        description: The (optional) AssertionConsumerServiceURL attribute of an Authn request specifies the location to which a <Response> message MUST be sent to the requester.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      clockTolerance:
+        description: Time tolerance in seconds to compensate clock skew between IDP and SP when validating Assertions.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsLong'
+        type: array
+      createUser:
+        description: Whether or not to autocreate nonexisting users in the repository.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+        type: array
+      defaultGroups:
+        description: A list of default CRX groups users are added to after successful authentication.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsArray'
+        type: array
+      defaultRedirectUrl:
+        description: The default location to redirect to after successful authentication.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      digestMethod:
+        description: The digest algorithm to use when signing a SAML message.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      groupMembershipAttribute:
+        description: The name of the attribute containing a list of CRX groups this user should be added to.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      handleLogout:
+        description: Whether or not logout (dropCredentials) requests will be processed by this handler.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+        type: array
+      idpCertAlias:
+        description: The alias of the IdP's certificate in the global truststore. If this property is empty the authentication handler is disabled.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      idpHttpRedirect:
+        description: Use an HTTP Redirect to the IDP URL instead of sending an AuthnRequest-message to request credentials. Use this for IDP initiated authentication.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+        type: array
+      idpUrl:
+        description: URL of the IDP where the SAML Authentication Request should be sent to. If this property is empty the authentication handler is disabled. (idpUrl)
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      keyStorePassword:
+        description: The password of the key-store of the 'authentication-service' system user.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      logoutUrl:
+        description: URL of the IDP where the SAML Logout Request should be sent to. If this property is empty the authentication handler won't handle logouts.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      nameIdFormat:
+        description: The value of the NameIDPolicy format parameter to send in the AuthnRequest message.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      path:
+        description: 'Repository path for which this authentication handler should be used by Sling. If this is empty, the authentication handler will be disabled.'
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsArray'
+        type: array
+      service.ranking:
+        description: OSGi Framework Service Ranking value to indicate the order in which to call this service. This is an int value where higher values designate higher precedence. Default value is 0.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsLong'
+        type: array
+      serviceProviderEntityId:
+        description: ID which uniquely identifies this service provider with the identity provider. If this property is empty the authentication handler is disabled.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      signatureMethod:
+        description: The signature algorithm to use when signing a SAML message.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      spPrivateKeyAlias:
+        description: The alias of the SP's private key in the key-store of the 'authentication-service' system user. If this property is empty the handler will not be able to sign or decrypt messages.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      synchronizeAttributes:
+        description: A list of attribute mappings (in the format \attributename=path/relative/to/user/node\) which should be stored in the repository on user-synchronization.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsArray'
+        type: array
+      useEncryption:
+        description: Whether or not this authentication handler expects encrypted SAML assertions. If this is enabled the SP's private key must be provided in the key-store of the 'authentication-service' system user (see SP Private Key Alias above).
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsBoolean'
+        type: array
+      userIDAttribute:
+        description: 'The name of the attribute containing the user ID used to authenticate and create the user in the CRX repository. Leave empty to use the Subject:NameId.'
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+      userIntermediatePath:
+        description: User intermediate path to store created users.
+        items:
+          $ref: '#/definitions/SamlConfigurationPropertyItemsString'
+        type: array
+    type: object
+  SamlConfigurationPropertyItemsArray:
+    properties:
+      description:
+        description: Property description
+        type: string
+      is_set:
+        description: True if property is set
+        type: boolean
+      name:
+        description: property name
+        type: string
+      optional:
+        description: True if optional
+        type: boolean
+      type:
+        description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
+        type: integer
+      values:
+        description: Property value
+        items:
+          type: string
+        type: array
+    type: object
+  SamlConfigurationPropertyItemsBoolean:
+    properties:
+      description:
+        description: Property description
+        type: string
+      is_set:
+        description: True if property is set
+        type: boolean
+      name:
+        description: property name
+        type: string
+      optional:
+        description: True if optional
+        type: boolean
+      type:
+        description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
+        type: integer
+      values:
+        description: Property value
+        type: boolean
+    type: object
+  SamlConfigurationPropertyItemsLong:
+    properties:
+      description:
+        description: Property description
+        type: string
+      is_set:
+        description: True if property is set
+        type: boolean
+      name:
+        description: property name
+        type: string
+      optional:
+        description: True if optional
+        type: boolean
+      type:
+        description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
+        type: integer
+      values:
+        description: Property value
+        type: integer
+    type: object
+  SamlConfigurationPropertyItemsString:
+    properties:
+      description:
+        description: Property description
+        type: string
+      is_set:
+        description: True if property is set
+        type: boolean
+      name:
+        description: property name
+        type: string
+      optional:
+        description: True if optional
+        type: boolean
+      type:
+        description: 'Property type, 1=String, 3=long, 11=boolean, 12=Password'
+        type: integer
+      values:
+        description: Property value
+        type: string
+    type: object
+  TruststoreInfo:
+    properties:
+      aliases:
+        items:
+          $ref: '#/definitions/TruststoreItems'
+        type: array
+      exists:
+        description: False if truststore don't exist
+        type: boolean
+    type: object
+  TruststoreItems:
+    properties:
+      alias:
+        description: Truststore alias name
+        type: string
+      entryType:
+        type: string
+      issuer:
+        description: e.g. "CN=Admin"
+        type: string
+      notAfter:
+        description: 'e.g. "Sun Jun 30 23:59:50 AEST 2019"'
+        type: string
+      notBefore:
+        description: 'e.g. "Sun Jul 01 12:00:00 AEST 2018"'
+        type: string
+      serialNumber:
+        description: '18165099476682912368'
+        type: integer
+      subject:
+        description: e.g. "CN=localhost"
+        type: string
+    type: object

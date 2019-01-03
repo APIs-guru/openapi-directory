@@ -372,7 +372,7 @@ paths:
           type: string
           x-nullable: false
         - collectionFormat: csv
-          description: Ids of the images to be deleted. Limted to 256 images per batch
+          description: Ids of the images to be deleted. Limited to 256 images per batch
           in: query
           items:
             type: string
@@ -628,7 +628,7 @@ paths:
           required: true
           type: string
           x-nullable: false
-        - description: Image and tag ids. Limted to 64 images and 20 tags per batch
+        - description: Image and tag ids. Limited to 64 images and 20 tags per batch
           in: body
           name: batch
           required: true
@@ -939,7 +939,7 @@ paths:
           type: array
           x-nullable: true
         - collectionFormat: csv
-          description: Tags to be deleted from the specified images. Limted to 20 tags
+          description: Tags to be deleted from the specified images. Limited to 20 tags
           in: query
           items:
             type: string
@@ -3223,7 +3223,7 @@ definitions:
         type: string
         x-nullable: false
       lastModified:
-        description: Gets the date this project was last modifed
+        description: Gets the date this project was last modified
         format: date-time
         readOnly: true
         type: string

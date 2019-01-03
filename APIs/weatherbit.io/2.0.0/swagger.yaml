@@ -22,6 +22,30 @@ info:
 produces:
   - application/json
 paths:
+  '/bulk/files/{file}':
+    get:
+      description: '**(Advanceed/Enterprise plans only)** Downloads bulk data files - OPTIONS: ( current.json.gz - Current observations for cities > 1000 population). Units are Metric (Celcius, m/s, etc).'
+      parameters:
+        - description: Filename (ie. current.json.gz)
+          format: string
+          in: path
+          name: file
+          required: true
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Download pre-generated bulk datasets
+      tags:
+        - Bulk Downloads
   '/bulk/history/daily?city={city}&country={country}':
     get:
       description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate.'
@@ -1210,30 +1234,6 @@ paths:
       summary: '[Enterprise Plan Only] Returns Historical Observations - Given a station ID. (1 Year/call limit)'
       tags:
         - (Bulk) Hourly Historical Weather Data (Enterprise Plans)
-  '/bulk/{file}':
-    get:
-      description: '**(Enterprise plans only)** Downloads bulk data files - OPTIONS: (forecast16d.json.gz - 16 day forecasts for cities > 1000 population, current.json.gz - Current observations for cities > 1000 population).'
-      parameters:
-        - description: Filename (ie. forecast16d.json.gz)
-          format: string
-          in: path
-          name: file
-          required: true
-          type: string
-        - description: Your registered API key.
-          format: string
-          in: query
-          name: key
-          required: true
-          type: string
-      responses:
-        default:
-          description: No Data.
-          schema:
-            $ref: '#/definitions/Error'
-      summary: Download pre-generated bulk datasets
-      tags:
-        - Bulk Downloads
   '/current?cities={cities}':
     get:
       description: 'Returns a group of Current Observations - Given a list of City IDs. '
@@ -3456,7 +3456,7 @@ paths:
         - 48 hour / hourly Forecast
   '/history/daily?city={city}&country={country}':
     get:
-      description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
       parameters:
         - description: 'City search.. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
           format: string
@@ -3563,7 +3563,7 @@ paths:
         - Daily Historical Weather Data
   '/history/daily?city_id={city_id}':
     get:
-      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: 'City ID. Example: 4487042'
           format: string
@@ -3658,7 +3658,7 @@ paths:
         - Daily Historical Weather Data
   '/history/daily?ip={ip}':
     get:
-      description: 'Returns Historical Observations - Given IP Address, or auto. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: 'Returns Historical Observations - Given IP Address, or auto. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
       parameters:
         - description: 'IP Address, or auto. Example: ip=auto'
           format: string
@@ -3753,7 +3753,7 @@ paths:
         - Daily Historical Weather Data
   '/history/daily?lat={lat}&lon={lon}':
     get:
-      description: 'Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: 'Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
       parameters:
         - description: Latitude component of location.
           format: double
@@ -3854,7 +3854,7 @@ paths:
         - Daily Historical Weather Data
   '/history/daily?postal_code={postal_code}':
     get:
-      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: 'Postal Code. Example: 28546'
           format: string
@@ -3955,7 +3955,7 @@ paths:
         - Daily Historical Weather Data
   '/history/daily?station={station}':
     get:
-      description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: Station ID.
           format: string
@@ -4209,7 +4209,7 @@ paths:
         - Historical Weather Energy API
   '/history/hourly?city={city}&country={country}':
     get:
-      description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: 'Returns Historical Observations - Given a city in the format of City,ST or City. The state, and country parameters can be provided to make the search more accurate. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
       parameters:
         - description: 'City search. Example - &city=Raleigh,NC or &city=Berlin,DE or city=Paris&country=FR'
           format: string
@@ -4290,6 +4290,15 @@ paths:
           name: lang
           required: false
           type: string
+        - description: 'Assume utc (default) or local time for start_date, end_date'
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
         - description: 'Wraps return in jsonp callback. Example: callback=func'
           format: string
           in: query
@@ -4316,7 +4325,7 @@ paths:
         - Hourly Historical Weather Data
   '/history/hourly?city_id={city_id}':
     get:
-      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a City ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: 'City ID. Example: 4487042'
           format: string
@@ -4385,6 +4394,15 @@ paths:
           name: lang
           required: false
           type: string
+        - description: 'Assume utc (default) or local time for start_date, end_date'
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
         - description: 'Wraps return in jsonp callback. Example: callback=func'
           format: string
           in: query
@@ -4411,7 +4429,7 @@ paths:
         - Hourly Historical Weather Data
   '/history/hourly?ip={ip}':
     get:
-      description: 'Returns Historical Observations - Given IP Address, or auto. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: 'Returns Historical Observations - Given IP Address, or auto. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
       parameters:
         - description: 'IP Address, or auto. Example: ip=auto'
           format: string
@@ -4480,6 +4498,15 @@ paths:
           name: lang
           required: false
           type: string
+        - description: 'Assume utc (default) or local time for start_date, end_date'
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
         - description: 'Wraps return in jsonp callback. Example: callback=func'
           format: string
           in: query
@@ -4506,7 +4533,7 @@ paths:
         - Hourly Historical Weather Data
   '/history/hourly?lat={lat}&lon={lon}':
     get:
-      description: 'Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
+      description: 'Returns Historical Observations - Given a lat, and lon. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**'
       parameters:
         - description: Latitude component of location.
           format: double
@@ -4581,6 +4608,15 @@ paths:
           name: lang
           required: false
           type: string
+        - description: 'Assume utc (default) or local time for start_date, end_date'
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
         - description: 'Wraps return in jsonp callback. Example: callback=func'
           format: string
           in: query
@@ -4607,7 +4643,7 @@ paths:
         - Hourly Historical Weather Data
   '/history/hourly?postal_code={postal_code}':
     get:
-      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a Postal Code. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: 'Postal Code. Example: 28546'
           format: string
@@ -4682,6 +4718,15 @@ paths:
           name: lang
           required: false
           type: string
+        - description: 'Assume utc (default) or local time for start_date, end_date'
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
+          required: false
+          type: string
         - description: 'Wraps return in jsonp callback. Example: callback=func'
           format: string
           in: query
@@ -4708,7 +4753,7 @@ paths:
         - Hourly Historical Weather Data
   '/history/hourly?station={station}':
     get:
-      description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Low Volume plans. LIMIT 7 days for Basic/Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
+      description: Returns Historical Observations - Given a station ID. **(LIMIT 1 day for Free plan. LIMIT 7 days for Developer. LIMIT 30 days for Advanced/Advanced+/Enterprise)**
       parameters:
         - description: Station ID.
           format: string
@@ -4775,6 +4820,15 @@ paths:
           format: string
           in: query
           name: lang
+          required: false
+          type: string
+        - description: 'Assume utc (default) or local time for start_date, end_date'
+          enum:
+            - local
+            - utc
+          format: string
+          in: query
+          name: tz
           required: false
           type: string
         - description: 'Wraps return in jsonp callback. Example: callback=func'

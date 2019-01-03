@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2016-10-10/apimapis.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: apimanagement-apimapis
   x-tags:
@@ -119,7 +119,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Paged Result reponse of Apis.
+          description: Paged Result response of Apis.
           schema:
             $ref: '#/definitions/ApiCollection'
         default:

@@ -58,6 +58,14 @@ parameters:
     name: subscriptionId
     required: true
     type: string
+  TagsParameter:
+    description: Request body that only contains the new Tags field
+    in: body
+    name: tagsParameter
+    required: true
+    schema:
+      $ref: '#/definitions/Tags'
+    x-ms-parameter-location: method
 paths:
   /providers/Microsoft.HanaOnAzure/operations:
     get:
@@ -191,6 +199,26 @@ paths:
                       storageProfile:
                         nfsIpAddress: 200.200.200.202
                     type: Microsoft.HanaOnAzure/hanaInstances
+                  - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance4
+                    location: westus
+                    name: myHanaInstance4
+                    properties:
+                      hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                      hardwareProfile:
+                        hanaInstanceSize: S96
+                        hardwareType: Cisco_UCS
+                      networkProfile:
+                        circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup2/providers/Microsoft.Network/expressRouteCircuit
+                        networkInterfaces:
+                          - ipAddress: 100.100.100.103
+                      osProfile:
+                        computerName: myComputerName4
+                        osType: SUSE
+                        version: 12 SP1
+                      powerState: started
+                      storageProfile:
+                        nfsIpAddress: 200.200.200.203
+                    type: Microsoft.HanaOnAzure/hanaInstances
       x-ms-pageable:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances':
@@ -248,7 +276,6 @@ paths:
                   - id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance2
                     location: westus
                     name: myHanaInstance2
-                    powerState: started
                     properties:
                       hanaInstanceId: 00000000-0000-0000-0000-000000000000
                       hardwareProfile:
@@ -323,6 +350,117 @@ paths:
                 tags:
                   key: value
                 type: Microsoft.HanaOnAzure/hanaInstances
+    patch:
+      description: 'Patches the Tags field of a SAP HANA instance for the specified subscription, resource group, and instance name.'
+      operationId: HanaInstances_Update
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/HanaInstanceNameParameter'
+        - $ref: '#/parameters/TagsParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/HanaInstance'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      summary: Patches the Tags field of a SAP HANA instance.
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Delete Tags field of a HANA instance:
+          parameters:
+            api-version: 2017-11-03-preview
+            hanaInstanceName: myHanaInstance
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+            tagsParameter:
+              tags: {}
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance
+                location: westus
+                name: myHanaInstance
+                properties:
+                  hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                  hardwareProfile:
+                    hanaInstanceSize: S72
+                    hardwareType: Cisco_UCS
+                  networkProfile:
+                    circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                    networkInterfaces:
+                      - ipAddress: 100.100.100.100
+                  osProfile:
+                    computerName: myComputerName
+                    osType: SUSE
+                    version: 12 SP1
+                  powerState: started
+                  storageProfile:
+                    nfsIpAddress: 200.200.200.200
+                tags: {}
+                type: Microsoft.HanaOnAzure/hanaInstances
+        Update Tags field of a HANA instance:
+          parameters:
+            api-version: 2017-11-03-preview
+            hanaInstanceName: myHanaInstance
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+            tagsParameter:
+              tags:
+                testkey: testvalue
+          responses:
+            '200':
+              body:
+                id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HanaOnAzure/hanaInstances/myHanaInstance
+                location: westus
+                name: myHanaInstance
+                properties:
+                  hanaInstanceId: 00000000-0000-0000-0000-000000000000
+                  hardwareProfile:
+                    hanaInstanceSize: S72
+                    hardwareType: Cisco_UCS
+                  networkProfile:
+                    circuitId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/expressRouteCircuit
+                    networkInterfaces:
+                      - ipAddress: 100.100.100.100
+                  osProfile:
+                    computerName: myComputerName
+                    osType: SUSE
+                    version: 12 SP1
+                  powerState: started
+                  storageProfile:
+                    nfsIpAddress: 200.200.200.200
+                tags:
+                  testkey: testvalue
+                type: Microsoft.HanaOnAzure/hanaInstances
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/restart':
+    post:
+      description: The operation to restart a SAP HANA instance.
+      operationId: HanaInstances_Restart
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/HanaInstanceNameParameter'
+      responses:
+        '202':
+          description: Accepted
+      tags:
+        - HanaOnAzure
+      x-ms-examples:
+        Restart a HANA instance:
+          parameters:
+            api-version: 2017-11-03-preview
+            hanaInstanceName: myHanaInstance
+            resourceGroupName: myResourceGroup
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '202': {}
 definitions:
   Disk:
     description: Specifies the disk information fo the HANA instance
@@ -439,6 +577,7 @@ definitions:
           - S192
           - S192m
           - S192xm
+          - S96
           - S384
           - S384m
           - S384xm
@@ -465,7 +604,7 @@ definitions:
           modelAsString: true
           name: HanaHardwareTypeNamesEnum
   IpAddress:
-    description: Specifies the IP address of the network interaface.
+    description: Specifies the IP address of the network interface.
     properties:
       ipAddress:
         description: Specifies the IP address of the network interface.
@@ -556,3 +695,12 @@ definitions:
         items:
           $ref: '#/definitions/Disk'
         type: array
+  Tags:
+    description: Tags field of the HANA instance.
+    properties:
+      tags:
+        additionalProperties:
+          type: string
+        description: Tags field of the HANA instance.
+        type: object
+    type: object

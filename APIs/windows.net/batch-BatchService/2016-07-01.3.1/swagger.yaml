@@ -1062,7 +1062,7 @@ paths:
         - Jobs
       x-ms-request-id: request-id
     put:
-      description: 'This fully replaces all the updateable properties of the job. For example, if the job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.'
+      description: 'This fully replaces all the updatable properties of the job. For example, if the job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.'
       operationId: Job_Update
       parameters:
         - description: The ID of the job whose properties you want to update.
@@ -3459,7 +3459,7 @@ paths:
         - JobSchedules
       x-ms-request-id: request-id
     put:
-      description: 'This fully replaces all the updateable properties of the job schedule. For example, if the schedule property is not specified with this request, then the Batch service will remove the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.'
+      description: 'This fully replaces all the updatable properties of the job schedule. For example, if the schedule property is not specified with this request, then the Batch service will remove the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.'
       operationId: JobSchedule_Update
       parameters:
         - description: The ID of the job schedule to update.
@@ -6258,7 +6258,7 @@ paths:
         - ComputeNodes
       x-ms-request-id: request-id
     put:
-      description: 'This operation replaces of all the updateable properties of the account. For example, if the expiryTime element is not specified, the current value is replaced with the default value, not left unmodified. You can update a user account on a node only when it is in the idle or running state.'
+      description: 'This operation replaces of all the updatable properties of the account. For example, if the expiryTime element is not specified, the current value is replaced with the default value, not left unmodified. You can update a user account on a node only when it is in the idle or running state.'
       operationId: ComputeNode_UpdateUser
       parameters:
         - description: The ID of the pool that contains the compute node.
@@ -6664,7 +6664,7 @@ paths:
       x-ms-request-id: request-id
   '/pools/{poolId}/updateproperties':
     post:
-      description: 'This fully replaces all the updateable properties of the pool. For example, if the pool has a start task associated with it and if start task is not specified with this request, then the Batch service will remove the existing start task.'
+      description: 'This fully replaces all the updatable properties of the pool. For example, if the pool has a start task associated with it and if start task is not specified with this request, then the Batch service will remove the existing start task.'
       operationId: Pool_UpdateProperties
       parameters:
         - description: The ID of the pool to update.
@@ -7277,7 +7277,7 @@ definitions:
         title: A list of name-value pairs associated with the job as metadata.
         type: array
       onAllTasksComplete:
-        description: 'Permitted values are: noaction – do nothing. The job remains active unless terminated or disabled by some other means. terminatejob – terminate the job. The job''s terminateReason is set to ''AllTasksComplete''. The default is noaction.'
+        description: 'Permitted values are: noAction – do nothing. The job remains active unless terminated or disabled by some other means. terminateJob – terminate the job. The job''s terminateReason is set to ''AllTasksComplete''. The default is noAction.'
         enum:
           - noAction
           - terminateJob
@@ -7287,7 +7287,7 @@ definitions:
           modelAsString: false
           name: OnAllTasksComplete
       onTaskFailure:
-        description: 'Permitted values are: noaction – do nothing. performexitoptionsjobaction – take the action associated with the task exit condition in the task''s exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noaction.'
+        description: 'Permitted values are: noAction – do nothing. performExitOptionsJobAction – take the action associated with the task exit condition in the task''s exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noAction.'
         enum:
           - noAction
           - performExitOptionsJobAction
@@ -8007,7 +8007,7 @@ definitions:
     properties:
       default:
         $ref: '#/definitions/ExitOptions'
-        description: 'Note that the default condition does not include exit code 0. If you want non-default behaviour on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection.'
+        description: 'Note that the default condition does not include exit code 0. If you want non-default behavior on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection.'
         title: 'How the Batch service should respond if the task fails with an exit condition not covered by any of the other properties – that is, any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, or a scheduling error if the schedulingError property is not present.'
       exitCodeRanges:
         items:
@@ -8026,12 +8026,12 @@ definitions:
   ExitOptions:
     properties:
       jobAction:
-        description: 'The default is none for exit code 0 and terminate for all other exit conditions. It is an error to specify this if the job''s onTaskFailed is noaction. The add task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).'
+        description: 'The default is none for exit code 0 and terminate for all other exit conditions. It is an error to specify this if the job''s onTaskFailed is noAction. The add task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).'
         enum:
           - none
           - disable
           - terminate
-        title: 'An action to take on the job containing the task, if the task completes with the given exit condition and the job’s onTaskFailed property is ''performexitoptionsjobaction''.'
+        title: 'An action to take on the job containing the task, if the task completes with the given exit condition and the job’s onTaskFailed property is ''performExitOptionsJobAction''.'
         type: string
         x-ms-enum:
           modelAsString: false
@@ -8123,7 +8123,7 @@ definitions:
         title: A list of name-value pairs associated with the job as metadata.
         type: array
       onAllTasksComplete:
-        description: 'Note that if a job contains no tasks, then all tasks are considered complete. This option is therefore most commonly used with a job manager task; if you want to use automatic job termination without a job manager, you should initially set onAllTasksComplete to noaction and update the job properties to set onAllTasksComplete to terminatejob once you have finished adding tasks. Permitted values are: noaction – do nothing. The job remains active unless terminated or disabled by some other means. terminatejob – terminate the job. The job’s terminateReason is set to ''AllTasksComplete''. The default is noaction.'
+        description: 'Note that if a job contains no tasks, then all tasks are considered complete. This option is therefore most commonly used with a job manager task; if you want to use automatic job termination without a job manager, you should initially set onAllTasksComplete to noAction and update the job properties to set onAllTasksComplete to terminateJob once you have finished adding tasks. Permitted values are: noAction – do nothing. The job remains active unless terminated or disabled by some other means. terminateJob – terminate the job. The job’s terminateReason is set to ''AllTasksComplete''. The default is noAction.'
         enum:
           - noAction
           - terminateJob
@@ -8133,7 +8133,7 @@ definitions:
           modelAsString: false
           name: OnAllTasksComplete
       onTaskFailure:
-        description: 'Permitted values are: noaction – do nothing. performexitoptionsjobaction – take the action associated with the task exit condition in the task''s exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noaction.'
+        description: 'Permitted values are: noAction – do nothing. performExitOptionsJobAction – take the action associated with the task exit condition in the task''s exitConditions collection. (This may still result in no action being taken, if that is what the task specifies.) The default is noAction.'
         enum:
           - noAction
           - performExitOptionsJobAction
@@ -8207,7 +8207,7 @@ definitions:
         title: The start time of the job.
         type: string
       terminateReason:
-        description: 'This property is set only if the job is in the completed state. If the Batch service terminates the job, it sets the reason as follows: JMComplete – the Job Manager task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry – the job reached its maxWallClockTime constraint. TerminateJobSchedule – the job ran as part of a schedule, and the schedule terminated. AllTasksComplete – the job''s onAllTasksComplete attribute is set to terminatejob, and all tasks in the job are complete. TaskFailed – the job''s onTaskFailure attribute is set to performexitoptionsjobaction, and a task in the job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the ''Terminate a job'' operation.'
+        description: 'This property is set only if the job is in the completed state. If the Batch service terminates the job, it sets the reason as follows: JMComplete – the Job Manager task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry – the job reached its maxWallClockTime constraint. TerminateJobSchedule – the job ran as part of a schedule, and the schedule terminated. AllTasksComplete – the job''s onAllTasksComplete attribute is set to terminateJob, and all tasks in the job are complete. TaskFailed – the job''s onTaskFailure attribute is set to performExitOptionsJobAction, and a task in the job failed with an exit condition that specified a jobAction of terminateJob. Any other string is a user-defined reason specified in a call to the ''Terminate a job'' operation.'
         title: A string describing the reason the job ended.
         type: string
     required:
@@ -8239,7 +8239,7 @@ definitions:
         type: array
       id:
         description: The id can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters.
-        title: A string that uniquely identifies the Job Manager taskwithin the job.
+        title: A string that uniquely identifies the Job Manager task within the job.
         type: string
       killJobOnCompletion:
         description: 'If true, when the Job Manager task completes, the Batch service marks the job as complete. If any tasks are still running at this time (other than Job Release), those tasks are terminated. If false, the completion of the Job Manager task does not affect the job status. In this case, you should either use the onAllTasksComplete attribute to terminate the job, or have a client or user terminate the job explicitly. An example of this is if the Job Manager creates a set of tasks but then takes no further role in their execution. The default value is true. If you are using the onAllTasksComplete and onTaskFailure attributes to control job lifetime, and using the job manager task only to create the tasks for the job (not to monitor progress), then it is important to set killJobOnCompletion to false.'
@@ -8275,7 +8275,7 @@ definitions:
         title: A list of name-value pairs associated with the job as metadata.
         type: array
       onAllTasksComplete:
-        description: 'If omitted, the completion behavior is left unchanged. You may not change the value from terminatejob to noaction – that is, once you have engaged automatic job termination, you cannot turn it off again. If you try to do this, the request fails with an ''invalid property value'' error response; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).'
+        description: 'If omitted, the completion behavior is left unchanged. You may not change the value from terminateJob to noAction – that is, once you have engaged automatic job termination, you cannot turn it off again. If you try to do this, the request fails with an ''invalid property value'' error response; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).'
         enum:
           - noAction
           - terminateJob
@@ -8693,7 +8693,7 @@ definitions:
         title: A list of name-value pairs associated with each job created under this schedule as metadata.
         type: array
       onAllTasksComplete:
-        description: 'Note that if a job contains no tasks, then all tasks are considered complete. This option is therefore most commonly used with a job manager task; if you want to use automatic job termination without a job manager, you should initially set onAllTasksComplete to noaction and update the job properties to set onAllTasksComplete to terminatejob once you have finished adding tasks. The default is noaction.'
+        description: 'Note that if a job contains no tasks, then all tasks are considered complete. This option is therefore most commonly used with a job manager task; if you want to use automatic job termination without a job manager, you should initially set onAllTasksComplete to noAction and update the job properties to set onAllTasksComplete to terminateJob once you have finished adding tasks. The default is noAction.'
         enum:
           - noAction
           - terminateJob
@@ -8703,7 +8703,7 @@ definitions:
           modelAsString: false
           name: OnAllTasksComplete
       onTaskFailure:
-        description: The default is noaction.
+        description: The default is noAction.
         enum:
           - noAction
           - performExitOptionsJobAction
@@ -8821,7 +8821,7 @@ definitions:
         title: A list of name-value pairs associated with the job as metadata.
         type: array
       onAllTasksComplete:
-        description: 'If omitted, the completion behavior is set to noaction. If the current value is terminatejob, this is an error because a job''s completion behavior may not be changed from terminatejob to noaction.'
+        description: 'If omitted, the completion behavior is set to noAction. If the current value is terminateJob, this is an error because a job''s completion behavior may not be changed from terminateJob to noAction.'
         enum:
           - noAction
           - terminateJob

@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cdn/resource-manager/Microsoft.Cdn/stable/2017-10-12/cdn.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: cdn
   x-tags:
@@ -1188,7 +1188,7 @@ paths:
               body: {}
       x-ms-long-running-operation: true
     get:
-      description: Gets an exisitng custom domain within an endpoint.
+      description: Gets an existing custom domain within an endpoint.
       operationId: CustomDomains_Get
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
@@ -1307,7 +1307,7 @@ paths:
                 name: www-someDomain-net
                 properties:
                   customHttpsProvisioningState: Enabling
-                  customHttpsProvisioningSubstate: PendingDomainControlValidationRequestApproval
+                  customHttpsProvisioningSubstate: PendingDomainControlValidationREquestApproval
                   hostName: www.someDomain.net
                   provisioningState: Succeeded
                   resourceState: Active
@@ -1426,7 +1426,7 @@ paths:
           name: endpointName
           required: true
           type: string
-        - description: 'The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictires/city.png'' which loads a single file '
+        - description: 'The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictures/city.png'' which loads a single file '
           in: body
           name: contentFilePaths
           required: true
@@ -1868,7 +1868,7 @@ paths:
                 reason: null
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/generateSsoUri':
     post:
-      description: 'Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemnetal portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.'
+      description: 'Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.'
       operationId: Profiles_GenerateSsoUri
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
@@ -1954,7 +1954,7 @@ definitions:
           - SetIfMissing
         type: string
       cacheDuration:
-        description: 'The duration for which the the content needs to be cached. Allowed format is [d.]hh:mm:ss'
+        description: 'The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss'
         type: string
         x-nullable: true
       cacheType:
@@ -1998,7 +1998,7 @@ definitions:
   CustomDomain:
     allOf:
       - $ref: '#/definitions/ProxyResource'
-    description: 'Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.consoto.com.'
+    description: 'Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.'
     properties:
       properties:
         $ref: '#/definitions/CustomDomainProperties'
@@ -2242,7 +2242,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   EndpointListResult:
-    description: Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the the next set of results.
+    description: Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the next set of results.
     properties:
       nextLink:
         description: URL to get the next set of endpoint objects if there is any.
@@ -2259,7 +2259,7 @@ definitions:
     description: The JSON object that contains the properties required to create an endpoint.
     properties:
       hostName:
-        description: 'The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. consoto.azureedge.net'
+        description: 'The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. contoso.azureedge.net'
         readOnly: true
         type: string
       origins:
@@ -2310,7 +2310,7 @@ definitions:
           - rules
         type: object
       geoFilters:
-        description: 'List of rules defining the user''s geo access within a CDN endpoint. Each geo filter defines an acess rule to a specified path or content, e.g. block APAC for path /pictures/'
+        description: 'List of rules defining the user''s geo access within a CDN endpoint. Each geo filter defines an access rule to a specified path or content, e.g. block APAC for path /pictures/'
         items:
           $ref: '#/definitions/GeoFilter'
         type: array
@@ -2330,7 +2330,7 @@ definitions:
         description: 'The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.'
         type: string
       originPath:
-        description: 'A directory path on the origin that CDN can use to retreive content from, e.g. contoso.cloudapp.net/originpath.'
+        description: 'A directory path on the origin that CDN can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.'
         type: string
       probePath:
         description: Path to a file hosted on the origin which helps accelerate delivery of the dynamic content and calculate the most optimal routes for the CDN. This is relative to the origin path.
@@ -2352,7 +2352,7 @@ definitions:
     type: object
     x-ms-azure-resource: true
   ErrorResponse:
-    description: Error reponse indicates CDN service is not able to process the incoming request. The reason is provided in the error message.
+    description: Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.
     properties:
       code:
         description: Error code.
@@ -2564,7 +2564,7 @@ definitions:
       - sku
     type: object
   ProfileListResult:
-    description: Result of the request to list profiles. It contains a list of profile objects and a URL link to get the the next set of results.
+    description: Result of the request to list profiles. It contains a list of profile objects and a URL link to get the next set of results.
     properties:
       nextLink:
         description: URL to get the next set of profile objects if there are any.
@@ -2829,7 +2829,7 @@ definitions:
     description: CIDR Ip address
     properties:
       baseIpAddress:
-        description: Ip adress itself.
+        description: Ip address itself.
         type: string
       prefixLength:
         description: The length of the prefix of the ip address.

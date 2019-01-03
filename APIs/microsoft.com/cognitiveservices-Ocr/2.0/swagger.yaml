@@ -32,7 +32,7 @@ security:
   - apim_key: []
 parameters:
   Endpoint:
-    description: Supported Cognitive Services endpoints
+    description: Supported Cognitive Services endpoints.
     in: path
     name: Endpoint
     required: true
@@ -334,26 +334,32 @@ definitions:
       x-nullable: false
     type: array
   ComputerVisionError:
+    description: Details about the API request error.
     properties:
       code:
         description: The error code.
         enum:
-          - InvalidImageUrl
           - InvalidImageFormat
-          - InvalidImageSize
-          - NotSupportedVisualFeature
+          - UnsupportedMediaType
+          - InvalidImageUrl
+          - NotSupportedFeature
           - NotSupportedImage
-          - InvalidDetails
-          - NotSupportedLanguage
-          - BadArgument
-          - FailedToProcess
           - Timeout
           - InternalServerError
+          - InvalidImageSize
+          - BadArgument
+          - DetectFaceError
+          - NotSupportedLanguage
+          - InvalidThumbnailSize
+          - InvalidDetails
+          - InvalidModel
+          - CancelledRequest
+          - NotSupportedVisualFeature
+          - FailedToProcess
           - Unspecified
           - StorageException
-        type: string
         x-ms-enum:
-          modelAsString: false
+          modelAsString: true
           name: ComputerVisionErrorCodes
       message:
         description: A message explaining the error reported by the service.
@@ -368,7 +374,7 @@ definitions:
   ImageUrl:
     properties:
       url:
-        description: Publicly reachable URL of an image
+        description: Publicly reachable URL of an image.
         type: string
     required:
       - url

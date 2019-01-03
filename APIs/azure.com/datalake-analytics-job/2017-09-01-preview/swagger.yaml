@@ -934,9 +934,13 @@ definitions:
     properties:
       degreeOfParallelism:
         default: 1
-        description: 'The degree of parallelism to use for this job. This must be greater than 0, if set to less than 0 it will default to 1.'
+        description: 'The degree of parallelism to use for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism.'
         format: int32
         type: integer
+      degreeOfParallelismPercent:
+        description: 'the degree of parallelism in percentage used for this job. At most one of degreeOfParallelism and degreeOfParallelismPercent should be specified. If none, a default value of 1 will be used for degreeOfParallelism.'
+        format: double
+        type: number
       logFilePatterns:
         description: 'The list of log file name patterns to find in the logFolder. ''*'' is the only matching character allowed. Example format: jobExecution*.log or *mylog*.txt'
         items:
@@ -1014,7 +1018,7 @@ definitions:
     description: Error diagnostic information for failed jobs.
     properties:
       columnNumber:
-        description: The column where the error occured.
+        description: The column where the error occurred.
         format: int32
         readOnly: true
         type: integer
@@ -1024,7 +1028,7 @@ definitions:
         readOnly: true
         type: integer
       lineNumber:
-        description: The line number the error occured on.
+        description: The line number the error occurred on.
         format: int32
         readOnly: true
         type: integer
@@ -1130,7 +1134,7 @@ definitions:
         readOnly: true
         type: string
       lineNumber:
-        description: The specific line number in the job where the error occured.
+        description: The specific line number in the job where the error occurred.
         format: int32
         readOnly: true
         type: integer
@@ -1205,12 +1209,21 @@ definitions:
     properties:
       degreeOfParallelism:
         default: 1
-        description: 'The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1.'
+        description: The degree of parallelism used for this job.
         format: int32
         type: integer
+      degreeOfParallelismPercent:
+        description: the degree of parallelism in percentage used for this job.
+        format: double
+        readOnly: true
+        type: number
       endTime:
         description: The completion time of the job.
         format: date-time
+        readOnly: true
+        type: string
+      hierarchyQueueNode:
+        description: 'the name of hierarchy queue node this job is assigned to, Null if job has not been assigned yet or the account doesn''t have hierarchy queue.'
         readOnly: true
         type: string
       jobId:
@@ -1267,6 +1280,8 @@ definitions:
           - Starting
           - Paused
           - WaitingForCapacity
+          - Yielded
+          - Finalizing
         readOnly: true
         type: string
         x-ms-enum:
@@ -1699,7 +1714,7 @@ definitions:
         readOnly: true
         type: integer
       failedCount:
-        description: The number of failures that occured in this stage.
+        description: The number of failures that occurred in this stage.
         format: int32
         readOnly: true
         type: integer
@@ -1942,9 +1957,13 @@ definitions:
     description: The parameters that can be used to update existing Data Lake Analytics job information properties. (Only for use internally with Scope job type.)
     properties:
       degreeOfParallelism:
-        description: 'The degree of parallelism used for this job. This must be greater than 0, if set to less than 0 it will default to 1.'
+        description: The degree of parallelism used for this job.
         format: int32
         type: integer
+      degreeOfParallelismPercent:
+        description: the degree of parallelism in percentage used for this job.
+        format: double
+        type: number
       priority:
         description: 'The priority value for the current job. Lower numbers have a higher priority. By default, a job has a priority of 1000. This must be greater than 0.'
         format: int32

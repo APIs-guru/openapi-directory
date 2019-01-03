@@ -101,7 +101,7 @@ paths:
           name: $search
           required: false
           type: string
-        - description: The desired return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
+        - description: The desired return format. Return the response in particular format without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
           in: query
           name: $format
           required: false
@@ -170,7 +170,7 @@ paths:
           name: $search
           required: false
           type: string
-        - description: The return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
+        - description: The return format. Return the response in particular format without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
           in: query
           name: $format
           required: false
@@ -189,7 +189,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataLakeAnalytics/accounts/{accountName}':
     delete:
-      description: Begins the delete delete process for the Data Lake Analytics account object specified by the account name.
+      description: Begins the delete process for the Data Lake Analytics account object specified by the account name.
       operationId: Account_Delete
       parameters:
         - description: The name of the Azure resource group that contains the Data Lake Analytics account.
@@ -296,7 +296,7 @@ paths:
           name: $search
           required: false
           type: string
-        - description: The desired return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
+        - description: The desired return format. Return the response in particular format without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
           in: query
           name: $format
           required: false
@@ -457,7 +457,7 @@ paths:
           name: $search
           required: false
           type: string
-        - description: The desired return format. Return the response in particular formatxii without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
+        - description: The desired return format. Return the response in particular format without access to request headers for standard content-type negotiation (e.g Orders?$format=json). Optional.
           in: query
           name: $format
           required: false
@@ -787,7 +787,7 @@ definitions:
         $ref: '#/definitions/Error'
         readOnly: true
       status:
-        description: the status of the AzureAsuncOperation
+        description: the status of the AzureAsyncOperation
         enum:
           - InProgress
           - Succeeded

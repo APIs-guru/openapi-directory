@@ -97,6 +97,9 @@ paths:
                       code:
                         description: 'ISO 639-1 code like ''en'', ''en-US'', or ''ca-ES-valencia''.'
                         type: string
+                      confidence:
+                        description: Estimate of the probability of the submitted text being in the detected language. Between 0 and 1.
+                        type: number
                       name:
                         description: Language name like 'French' or 'English (US)'.
                         type: string

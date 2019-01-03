@@ -43,6 +43,10 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/responseMetadata'
+              - $ref: '#/definitions/creditBalanceResponse'
         '401':
           description: Unauthorized
           examples:
@@ -128,6 +132,10 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/responseMetadata'
+              - $ref: '#/definitions/creditTransferResponse'
         '400':
           description: Bad Request
           examples:
@@ -234,6 +242,11 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/responseMetadata'
+              - $ref: '#/definitions/responsePagination'
+              - $ref: '#/definitions/shortcodeMessageResponse'
         '401':
           description: Unauthorized
           examples:
@@ -316,6 +329,11 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/responseMetadata'
+              - $ref: '#/definitions/responsePagination'
+              - $ref: '#/definitions/incomingMessageResponse'
         '401':
           description: Unauthorized
           examples:
@@ -383,6 +401,10 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/responseMetadata'
+              - $ref: '#/definitions/incomingOptoutMessageResponse'
         '401':
           description: Unauthorized
           examples:
@@ -446,6 +468,10 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/responseMetadata'
+              - $ref: '#/definitions/sendMessageResponse'
         '400':
           description: Bad Request
           examples:
@@ -545,9 +571,13 @@ paths:
           name: apiIds
           required: true
           schema:
-            example: '[2316,2317]'
+            example:
+              - 2316
+              - 2317
             items:
               type: integer
+            maxItems: 1000
+            minItems: 1
             type: array
       responses:
         '200':
@@ -686,6 +716,11 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/responseMetadata'
+              - $ref: '#/definitions/responsePagination'
+              - $ref: '#/definitions/scheduledMessageResponse'
         '401':
           description: Unauthorized
           examples:
@@ -755,9 +790,13 @@ paths:
           name: apiIds
           required: true
           schema:
-            example: '[2316,2317]'
+            example:
+              - 2316
+              - 2317
             items:
               type: integer
+            maxItems: 1000
+            minItems: 1
             type: array
       responses:
         '200':
@@ -855,6 +894,10 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            allOf:
+              - $ref: '#/definitions/responseMetadata'
+              - $ref: '#/definitions/subAccountsListResponse'
         '401':
           description: Unauthorized
           examples:
@@ -1134,6 +1177,194 @@ definitions:
       - incomingOptoutMessages
     title: incomingOptoutMessageResponse
     type: object
+  inline_response_200:
+    example:
+      creditBalanceResponse:
+        creditBalance: 96.4
+      responseMetadata:
+        statusCode: 200
+        timeStamp: '20170117054658978'
+        version: '1.0'
+    properties:
+      creditBalanceResponse:
+        $ref: '#/definitions/creditBalanceResponse'
+      responseMetadata:
+        $ref: '#/definitions/responseMetadata'
+  inline_response_200_1:
+    example:
+      creditTransferResponse:
+        transferSuccessful: true
+      responseMetadata:
+        statusCode: 200
+        timeStamp: '20170117054658978'
+        version: '1.0'
+    properties:
+      creditTransferResponse:
+        $ref: '#/definitions/creditTransferResponse'
+      responseMetadata:
+        $ref: '#/definitions/responseMetadata'
+  inline_response_200_2:
+    example:
+      responseMetadata:
+        statusCode: 200
+        timeStamp: '20170117054658978'
+        version: '1.0'
+      sendMessageResponse:
+        recipients:
+          - acceptError: ''
+            accepted: true
+            apiMessageId: 2316
+            clientMessageId: clientId-3023
+            creditCost: 1
+            mobileNumber: '27444444444'
+            newCreditBalance: 188.6
+            scheduledTime: 201712251430
+          - acceptError: ''
+            accepted: true
+            apiMessageId: 2317
+            creditCost: 1
+            mobileNumber: '27555555555'
+            newCreditBalance: 187.6
+            scheduledTime: 201712251430
+          - acceptError: BADDEST
+            accepted: false
+            clientMessageId: clientId-3024
+            creditCost: 0
+            mobileNumber: '276666666666'
+            newCreditBalance: 187.6
+    properties:
+      responseMetadata:
+        $ref: '#/definitions/responseMetadata'
+      sendMessageResponse:
+        $ref: '#/definitions/sendMessageResponse'
+  inline_response_200_3:
+    example:
+      responseMetadata:
+        statusCode: 200
+        timeStamp: '20170117054658978'
+        version: '1.0'
+      responsePagination:
+        resultsLimit: 100
+        resultsOffset: 3400
+        resultsTotalAvailable: 3402
+      scheduledMessageResponse:
+        scheduledMessages:
+          - apiMessageId: 2316
+            creditCost: 1
+            mobileNumber: '27444444444'
+            scheduledSendTime: 201712251430
+            submitTime: 201710220850
+          - apiMessageId: 2317
+            creditCost: 1
+            mobileNumber: '27555555555'
+            scheduledSendTime: 201712251430
+            submitTime: 201710220850
+    properties:
+      responseMetadata:
+        $ref: '#/definitions/responseMetadata'
+      responsePagination:
+        $ref: '#/definitions/responsePagination'
+      scheduledMessageResponse:
+        $ref: '#/definitions/scheduledMessageResponse'
+  inline_response_200_4:
+    example:
+      incomingMessageResponse:
+        incomingMessages:
+          - incomingApiMessageId: 58324
+            messageText: Thank you for the holiday wishes. Stay safe
+            mobileNumber: '27444444444'
+            outgoingApiMessageId: 2316
+            receiveTime: 201707252208
+          - incomingApiMessageId: 58336
+            messageText: That is much appreciated. Happy holidays to you too
+            mobileNumber: '27555555555'
+            outgoingApiMessageId: 2316
+            receiveTime: 201707270952
+      responseMetadata:
+        statusCode: 200
+        timeStamp: '20170117054658978'
+        version: '1.0'
+      responsePagination:
+        resultsLimit: 100
+        resultsOffset: 3400
+        resultsTotalAvailable: 3402
+    properties:
+      incomingMessageResponse:
+        $ref: '#/definitions/incomingMessageResponse'
+      responseMetadata:
+        $ref: '#/definitions/responseMetadata'
+      responsePagination:
+        $ref: '#/definitions/responsePagination'
+  inline_response_200_5:
+    example:
+      incomingOptoutMessageResponse:
+        incomingOptoutMessages:
+          - incomingApiMessageId: 58324
+            messageText: STOP
+            mobileNumber: '27444444444'
+            receiveTime: 201707252208
+          - messageText: '* MANUALLY ADDED BY USER *'
+            mobileNumber: '27555555555'
+            receiveTime: 201707270952
+      responseMetadata:
+        statusCode: 200
+        timeStamp: '20170117054658978'
+        version: '1.0'
+    properties:
+      incomingOptoutMessageResponse:
+        $ref: '#/definitions/incomingOptoutMessageResponse'
+      responseMetadata:
+        $ref: '#/definitions/responseMetadata'
+  inline_response_200_6:
+    example:
+      responseMetadata:
+        statusCode: 200
+        timeStamp: '20170117054658978'
+        version: '1.0'
+      responsePagination:
+        resultsLimit: 100
+        resultsOffset: 3400
+        resultsTotalAvailable: 3402
+      shortcodeMessageResponse:
+        shortcodeMessages:
+          - incomingApiMessageId: 58324
+            messageText: Win Big
+            mobileNumber: '27444444444'
+            receiveTime: 201707252208
+          - incomingApiMessageId: 58336
+            messageText: Savings for me
+            mobileNumber: '27555555555'
+            receiveTime: 201707270952
+    properties:
+      responseMetadata:
+        $ref: '#/definitions/responseMetadata'
+      responsePagination:
+        $ref: '#/definitions/responsePagination'
+      shortcodeMessageResponse:
+        $ref: '#/definitions/shortcodeMessageResponse'
+  inline_response_200_7:
+    example:
+      responseMetadata:
+        statusCode: 200
+        timeStamp: '20170117054658978'
+        version: '1.0'
+      subAccountsListResponse:
+        subAccounts:
+          - accountNumber: 58324
+            creditBalance: 201.4
+            firstName: Jon
+            loginName: jon@castleblack.com
+            surname: Snow
+          - accountNumber: 98676
+            creditBalance: 1936
+            firstName: Daenerys
+            loginName: khaleesi
+            surname: Targaryen
+    properties:
+      responseMetadata:
+        $ref: '#/definitions/responseMetadata'
+      subAccountsListResponse:
+        $ref: '#/definitions/subAccountsListResponse'
   messageRecipientRequest:
     properties:
       clientMessageId:

@@ -224,6 +224,27 @@ paths:
               $ref: '#/definitions/Player'
             type: array
       summary: Player Details by Team
+  '/{format}/Stadiums':
+    get:
+      operationId: Stadiums
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Stadium'
+            type: array
+      summary: Stadiums
   '/{format}/TeamGameStatsByDate/{date}':
     get:
       operationId: TeamGameStatsByDate
@@ -356,6 +377,8 @@ definitions:
         type: string
       Day:
         type: string
+      GameEndDateTime:
+        type: string
       GameID:
         type: integer
       GlobalAwayTeamID:
@@ -378,6 +401,8 @@ definitions:
         type: integer
       HomeTeamSeed:
         type: integer
+      IsClosed:
+        type: boolean
       OverUnder:
         type: number
       Period:
@@ -394,6 +419,8 @@ definitions:
         type: integer
       SeasonType:
         type: integer
+      Stadium:
+        $ref: '#/definitions/Stadium'
       Status:
         type: string
       TimeRemainingMinutes:
@@ -476,6 +503,26 @@ definitions:
         type: integer
       StartYear:
         type: integer
+  Stadium:
+    properties:
+      Active:
+        type: boolean
+      Address:
+        type: string
+      Capacity:
+        type: integer
+      City:
+        type: string
+      Country:
+        type: string
+      Name:
+        type: string
+      StadiumID:
+        type: integer
+      State:
+        type: string
+      Zip:
+        type: string
   Team:
     properties:
       Active:
@@ -498,6 +545,10 @@ definitions:
         type: string
       School:
         type: string
+      ShortDisplayName:
+        type: string
+      Stadium:
+        $ref: '#/definitions/Stadium'
       TeamID:
         type: integer
       TeamLogoUrl:
@@ -742,9 +793,17 @@ definitions:
         items:
           $ref: '#/definitions/Game'
         type: array
+      LeftBottomBracketConference:
+        type: string
+      LeftTopBracketConference:
+        type: string
       Location:
         type: string
       Name:
+        type: string
+      RightBottomBracketConference:
+        type: string
+      RightTopBracketConference:
         type: string
       Season:
         type: integer

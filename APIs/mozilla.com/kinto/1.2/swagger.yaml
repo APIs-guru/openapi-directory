@@ -4,7 +4,7 @@ schemes:
 host: firefox.settings.services.mozilla.com
 basePath: /v1
 info:
-  title: kinto
+  title: Remote Settings
   version: '1.2'
   x-apisguru-categories:
     - cloud
@@ -19,9 +19,7 @@ info:
   x-serviceName: kinto
 produces:
   - application/json
-securityDefinitions:
-  basicauth:
-    type: basic
+securityDefinitions: {}
 tags:
   - name: Blocklist
   - name: Changess
@@ -520,8 +518,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Buckets
   /buckets/monitor/collections/changes/records:
@@ -783,8 +780,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Changess
   '/buckets/{bucket_id}/collections':
@@ -1042,8 +1038,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Collections
     parameters:
@@ -1298,8 +1293,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Records
     parameters:
@@ -1552,8 +1546,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Records
     parameters:
@@ -1575,8 +1568,7 @@ paths:
       responses:
         default:
           description: UNDOCUMENTED RESPONSE
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Attachment
     parameters:
@@ -1597,8 +1589,7 @@ paths:
       responses:
         default:
           description: UNDOCUMENTED RESPONSE
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Attachment
   '/buckets/{bucket_id}/collections/{id}':
@@ -1855,8 +1846,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Collections
     parameters:
@@ -2121,8 +2111,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Groups
     parameters:
@@ -2377,8 +2366,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Groups
     parameters:
@@ -2651,8 +2639,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Buckets
     parameters:
@@ -2688,8 +2675,7 @@ paths:
       responses:
         default:
           description: UNDOCUMENTED RESPONSE
-      security:
-        - basicauth: []
+      security: []
       tags:
         - Blocklist
     parameters:

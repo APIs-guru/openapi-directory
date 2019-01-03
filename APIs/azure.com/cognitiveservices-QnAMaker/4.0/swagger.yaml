@@ -188,7 +188,7 @@ paths:
             '204': {}
   /endpointkeys:
     get:
-      operationId: Endpoint_GetKeys
+      operationId: EndpointKeys_GetKeys
       parameters: []
       responses:
         '200':
@@ -217,7 +217,7 @@ paths:
               headers: {}
   '/endpointkeys/{keyType}':
     patch:
-      operationId: Endpoint_RefreshKeys
+      operationId: EndpointKeys_RefreshKeys
       parameters:
         - $ref: '#/parameters/KeyType'
       responses:
@@ -254,7 +254,7 @@ paths:
       parameters: []
       responses:
         '200':
-          description: Collection of knowlegebases.
+          description: Collection of knowledgebases.
           schema:
             $ref: '#/definitions/KnowledgebasesDTO'
           x-nullable: true
@@ -1252,7 +1252,7 @@ definitions:
     description: PATCH Body schema to represent list of Metadata to be updated
     properties:
       add:
-        description: List of Metadat associated with answer to be added
+        description: List of metadata associated with answer to be added
         items:
           $ref: '#/definitions/MetadataDTO'
         maxLength: 100

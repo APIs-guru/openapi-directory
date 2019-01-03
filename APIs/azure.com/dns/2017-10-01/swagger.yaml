@@ -346,7 +346,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ZoneUpdate'
-        - description: The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwritting any concurrent changes.
+        - description: The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
           in: header
           name: If-Match
           required: false
@@ -427,7 +427,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Zone'
-        - description: The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwritting any concurrent changes.
+        - description: The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
           in: header
           name: If-Match
           required: false
@@ -1559,7 +1559,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RecordSet'
-        - description: The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwritting concurrent changes.
+        - description: The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes.
           in: header
           name: If-Match
           required: false
@@ -1912,7 +1912,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RecordSet'
-        - description: The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwritting any concurrent changes.
+        - description: The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes.
           in: header
           name: If-Match
           required: false

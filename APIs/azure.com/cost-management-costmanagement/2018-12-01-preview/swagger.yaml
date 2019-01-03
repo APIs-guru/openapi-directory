@@ -83,6 +83,113 @@ parameters:
     required: true
     type: string
 paths:
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/Forecast':
+    post:
+      description: Forecast the usage data for department.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Forecast_UsageByDepartment
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/departmentIdParameter'
+        - description: Parameters supplied to the CreateOrUpdate Report Config operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ReportConfigDefinition'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/QueryResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Forecast
+      x-ms-examples:
+        DepartmentForecast:
+          parameters:
+            api-version: 2018-12-01-preview
+            billingAccountId: '70664866'
+            departmentId: '123'
+            parameters:
+              dataset:
+                filter:
+                  and:
+                    - or:
+                        - dimension:
+                            name: SubscriptionName
+                            operator: In
+                            values:
+                              - Azure Dev Subscription
+                              - Azure Prod Subscription
+                              - Azure PPE Subscription
+                        - tag:
+                            name: Environment
+                            operator: In
+                            values:
+                              - Dev
+                              - PPE
+                              - Prod
+                    - dimension:
+                        name: AccountName
+                        operator: In
+                        values:
+                          - Azure Account
+                granularity: Daily
+              timePeriod:
+                from: '2018-10-01T00:00:00.000Z'
+                to: '2018-12-31T00:00:00.000Z'
+              timeframe: Custom
+              type: Usage
+          responses:
+            '200':
+              body:
+                value:
+                  - id: providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Forecast/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: UsageDate
+                          type: Number
+                        - name: CostStatus
+                          type: String
+                        - name: Currency
+                          type: String
+                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Forecast?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
+                      rows:
+                        - - 19.545363672276512
+                          - 20181026
+                          - Actual
+                          - USD
+                        - - 20.41179241293923
+                          - 20181027
+                          - Actual
+                          - USD
+                        - - 21.35941656262545
+                          - 20181028
+                          - Actual
+                          - USD
+                        - - 22.545363672276512
+                          - 20181029
+                          - Forecast
+                          - USD
+                        - - 23.41979241290323
+                          - 20181030
+                          - Forecast
+                          - USD
+                        - - 24.35941656262545
+                          - 20181031
+                          - Forecast
+                          - USD
+                    type: microsoft.costmanagement/Forecast
+      x-ms-pageable: {}
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for department.
@@ -158,109 +265,18 @@ paths:
                           type: Number
                         - name: UsageDate
                           type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
                         - name: Currency
                           type: String
                       nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
                       rows:
                         - - 19.545363672276512
                           - 20181031
-                          - 0
-                          - 0
                           - USD
                         - - 173.41979241290323
                           - 20181031
-                          - 0
-                          - 0
                           - USD
                         - - 20.35941656262545
                           - 20181031
-                          - 0
-                          - 0
-                          - USD
-                        - - 19.545363672276512
-                          - 20181231
-                          - 9.4567
-                          - 37.9876
-                          - USD
-                        - - 173.41979241290323
-                          - 20181231
-                          - 79.4567
-                          - 437.9876
-                          - USD
-                        - - 20.35941656262545
-                          - 20181231
-                          - 10.24567
-                          - 37.19876
-                          - USD
-                    type: microsoft.costmanagement/Query
-        DepartmentQueryForecast:
-          parameters:
-            api-version: 2018-12-01-preview
-            billingAccountId: '70664866'
-            departmentId: '123'
-            parameters:
-              dataset:
-                filter:
-                  and:
-                    - or:
-                        - dimension:
-                            name: SubscriptionName
-                            operator: In
-                            values:
-                              - Azure Dev Subscription
-                              - Azure Prod Subscription
-                              - Azure PPE Subscription
-                        - tag:
-                            name: Environment
-                            operator: In
-                            values:
-                              - Dev
-                              - PPE
-                              - Prod
-                    - dimension:
-                        name: AccountName
-                        operator: In
-                        values:
-                          - Azure Account
-                granularity: Daily
-              timePeriod:
-                from: '2018-11-01T00:00:00.000Z'
-                to: '2019-01-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Forecast
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 20181131
-                          - 9.4567
-                          - 37.9876
-                          - USD
-                        - - 20181231
-                          - 79.4567
-                          - 437.9876
-                          - USD
-                        - - 20190131
-                          - 10.24567
-                          - 37.19876
                           - USD
                     type: microsoft.costmanagement/Query
         DepartmentQueryGroupingUsage:
@@ -309,67 +325,6 @@ paths:
                           - Azure Prod Account
                           - USD
                     type: microsoft.costmanagement/Query
-        DepartmentQueryUsage:
-          parameters:
-            api-version: 2018-12-01-preview
-            billingAccountId: '70664866'
-            departmentId: '123'
-            parameters:
-              dataset:
-                filter:
-                  and:
-                    - or:
-                        - dimension:
-                            name: SubscriptionName
-                            operator: In
-                            values:
-                              - Azure Dev Subscription
-                              - Azure Prod Subscription
-                              - Azure PPE Subscription
-                        - tag:
-                            name: Environment
-                            operator: In
-                            values:
-                              - Dev
-                              - PPE
-                              - Prod
-                    - dimension:
-                        name: AccountName
-                        operator: In
-                        values:
-                          - Azure Account
-                granularity: Daily
-              timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2018-12-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Usage
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: PreTaxCost
-                          type: Number
-                        - name: UsageDate
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/departments/123/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 19.545363672276512
-                          - 20181031
-                          - USD
-                        - - 173.41979241290323
-                          - 20181031
-                          - USD
-                        - - 20.35941656262545
-                          - 20181031
-                          - USD
-                    type: microsoft.costmanagement/Query
       x-ms-pageable: {}
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/dimensions':
     get:
@@ -386,7 +341,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: 'May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.'
+        - description: 'May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.'
           in: query
           name: $expand
           required: false
@@ -525,6 +480,107 @@ paths:
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
       x-ms-pageable: {}
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Forecast':
+    post:
+      description: Forecast the usage data for an enrollment account.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Forecast_UsageByEnrollmentAccount
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/enrollmentAccountIdParameter'
+        - description: Parameters supplied to the CreateOrUpdate Report Config operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ReportConfigDefinition'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/QueryResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Forecast
+      x-ms-examples:
+        EnrollmentAccountForecast:
+          parameters:
+            api-version: 2018-12-01-preview
+            billingAccountId: '70664866'
+            enrollmentAccountId: '456'
+            parameters:
+              dataset:
+                filter:
+                  or:
+                    - dimension:
+                        name: SubscriptionName
+                        operator: In
+                        values:
+                          - Azure Dev Subscription
+                          - Azure Prod Subscription
+                          - Azure PPE Subscription
+                    - tag:
+                        name: Environment
+                        operator: In
+                        values:
+                          - Dev
+                          - PPE
+                          - Prod
+                granularity: Daily
+              timePeriod:
+                from: '2018-08-01T00:00:00.000Z'
+                to: '2018-10-31T00:00:00.000Z'
+              timeframe: Custom
+              type: Usage
+          responses:
+            '200':
+              body:
+                value:
+                  - id: providers/Microsoft.Billing/billingAccounts/70664866/enrollmentAccounts/456/providers/Microsoft.CostManagement/Forecast/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: UsageDate
+                          type: Number
+                        - name: CostStatus
+                          type: String
+                        - name: Currency
+                          type: String
+                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/enrollmentAccounts/456/providers/Microsoft.CostManagement/Forecast?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
+                      rows:
+                        - - 168.54532346722763
+                          - 20180826
+                          - Actual
+                          - USD
+                        - - 169.41979241290343
+                          - 20180927
+                          - Actual
+                          - USD
+                        - - 170.35941656233845
+                          - 20181028
+                          - Actual
+                          - USD
+                        - - 172.54536323427652
+                          - 20180829
+                          - Forecast
+                          - USD
+                        - - 173.41979241290323
+                          - 20180930
+                          - Forecast
+                          - USD
+                        - - 174.35941656262546
+                          - 20181031
+                          - Forecast
+                          - USD
+                    type: microsoft.costmanagement/Forecast
+      x-ms-pageable: {}
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for an enrollment account.
@@ -578,8 +634,8 @@ paths:
                           - Prod
                 granularity: Daily
               timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2018-12-31T00:00:00.000Z'
+                from: '2018-08-01T00:00:00.000Z'
+                to: '2018-10-31T00:00:00.000Z'
               timeframe: Custom
               type: Usage
           responses:
@@ -594,103 +650,18 @@ paths:
                           type: Number
                         - name: UsageDate
                           type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
                         - name: Currency
                           type: String
                       nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/enrollmentAccounts/456/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
                       rows:
                         - - 19.545363672276512
-                          - 20181031
-                          - 0
-                          - 0
+                          - 20180831
                           - USD
                         - - 173.41979241290323
-                          - 20181031
-                          - 0
-                          - 0
+                          - 20180930
                           - USD
                         - - 20.35941656262545
                           - 20181031
-                          - 0
-                          - 0
-                          - USD
-                        - - 19.545363672276512
-                          - 20181231
-                          - 9.6776786
-                          - 23.7889
-                          - USD
-                        - - 173.41979241290323
-                          - 20181231
-                          - 89.5679
-                          - 389.566777
-                          - USD
-                        - - 20.35941656262545
-                          - 20181231
-                          - 11.26777655
-                          - 43.64432
-                          - USD
-                    type: microsoft.costmanagement/Query
-        EnrollmentAccountQueryForecast:
-          parameters:
-            api-version: 2018-12-01-preview
-            billingAccountId: '70664866'
-            enrollmentAccountId: '456'
-            parameters:
-              dataset:
-                filter:
-                  or:
-                    - dimension:
-                        name: SubscriptionName
-                        operator: In
-                        values:
-                          - Azure Dev Subscription
-                          - Azure Prod Subscription
-                          - Azure PPE Subscription
-                    - tag:
-                        name: Environment
-                        operator: In
-                        values:
-                          - Dev
-                          - PPE
-                          - Prod
-                granularity: Daily
-              timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2018-12-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Forecast
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Billing/billingAccounts/70664866/enrollmentAccounts/456/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/enrollmentAccounts/456/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 20181231
-                          - 9.6776786
-                          - 23.7889
-                          - USD
-                        - - 20181231
-                          - 89.5679
-                          - 389.566777
-                          - USD
-                        - - 20181231
-                          - 11.26777655
-                          - 43.64432
                           - USD
                     type: microsoft.costmanagement/Query
         EnrollmentAccountQueryGroupingUsage:
@@ -746,61 +717,6 @@ paths:
                           - 20181031
                           - USD
                     type: microsoft.costmanagement/Query
-        EnrollmentAccountQueryUsage:
-          parameters:
-            api-version: 2018-12-01-preview
-            billingAccountId: '70664866'
-            enrollmentAccountId: '456'
-            parameters:
-              dataset:
-                filter:
-                  or:
-                    - dimension:
-                        name: SubscriptionName
-                        operator: In
-                        values:
-                          - Azure Dev Subscription
-                          - Azure Prod Subscription
-                          - Azure PPE Subscription
-                    - tag:
-                        name: Environment
-                        operator: In
-                        values:
-                          - Dev
-                          - PPE
-                          - Prod
-                granularity: Daily
-              timePeriod:
-                from: '2018-08-01T00:00:00.000Z'
-                to: '2018-10-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Usage
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Billing/billingAccounts/70664866/enrollmentAccounts/456/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: PreTaxCost
-                          type: Number
-                        - name: UsageDate
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/enrollmentAccounts/456/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 19.545363672276512
-                          - 20180831
-                          - USD
-                        - - 173.41979241290323
-                          - 20180930
-                          - USD
-                        - - 20.35941656262545
-                          - 20181031
-                          - USD
-                    type: microsoft.costmanagement/Query
       x-ms-pageable: {}
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/dimensions':
     get:
@@ -817,7 +733,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: 'May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.'
+        - description: 'May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.'
           in: query
           name: $expand
           required: false
@@ -956,6 +872,111 @@ paths:
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
       x-ms-pageable: {}
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Forecast':
+    post:
+      description: Forecast the usage data for billing account.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Forecast_UsageByBillingAccount
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - description: Parameters supplied to the CreateOrUpdate Report Config operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ReportConfigDefinition'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/QueryResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Forecast
+      x-ms-examples:
+        BillingAccountForecast:
+          parameters:
+            api-version: 2018-12-01-preview
+            billingAccountId: '70664866'
+            parameters:
+              dataset:
+                filter:
+                  and:
+                    - or:
+                        - dimension:
+                            name: SubscriptionName
+                            operator: In
+                            values:
+                              - Azure Dev
+                              - Azure Prod
+                              - Azure PPE
+                        - tag:
+                            name: Environment
+                            operator: In
+                            values:
+                              - Dev
+                              - PPE
+                              - Prod
+                    - dimension:
+                        name: DepartmentName
+                        operator: In
+                        values:
+                          - Azure Dept
+                granularity: Daily
+              timePeriod:
+                from: '2018-08-01T00:00:00.000Z'
+                to: '2018-10-31T00:00:00.000Z'
+              timeframe: Custom
+              type: Usage
+          responses:
+            '200':
+              body:
+                value:
+                  - id: providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Forecast/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: UsageDate
+                          type: Number
+                        - name: CostStatus
+                          type: String
+                        - name: Currency
+                          type: String
+                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Forecast?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
+                      rows:
+                        - - 19.545363672276512
+                          - 20180831
+                          - Actual
+                          - USD
+                        - - 20.41979233490323
+                          - 20180930
+                          - Actual
+                          - USD
+                        - - 21.322216562625453
+                          - 20181031
+                          - Actual
+                          - USD
+                        - - 22.545363672276533
+                          - 20180831
+                          - Actual
+                          - USD
+                        - - 23.41979675590323
+                          - 20180930
+                          - Forecast
+                          - USD
+                        - - 24.359416562626652
+                          - 20181031
+                          - Forecast
+                          - USD
+                    type: microsoft.costmanagement/Forecast
+      x-ms-pageable: {}
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for billing account.
@@ -984,202 +1005,6 @@ paths:
         - Query
       x-ms-examples:
         BillingAccountQuery:
-          parameters:
-            api-version: 2018-12-01-preview
-            billingAccountId: '70664866'
-            parameters:
-              dataset:
-                filter:
-                  and:
-                    - or:
-                        - dimension:
-                            name: SubscriptionName
-                            operator: In
-                            values:
-                              - Azure Dev
-                              - Azure Prod
-                              - Azure PPE
-                        - tag:
-                            name: Environment
-                            operator: In
-                            values:
-                              - Dev
-                              - PPE
-                              - Prod
-                    - dimension:
-                        name: DepartmentName
-                        operator: In
-                        values:
-                          - Azure Dept
-                granularity: Daily
-              timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2018-12-31T00:00:00.000Z'
-              timeframe: Custom
-              type: UsageAndForecast
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: PreTaxCost
-                          type: Number
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 19.545363672276512
-                          - 20181031
-                          - 0
-                          - 0
-                          - USD
-                        - - 173.41979241290323
-                          - 20181031
-                          - 0
-                          - 0
-                          - USD
-                        - - 20.35941656262545
-                          - 20181031
-                          - 0
-                          - 0
-                          - USD
-                        - - 0
-                          - 20181231
-                          - 9.4567
-                          - 37.9876
-                          - USD
-                        - - 0
-                          - 20181231
-                          - 78.9887
-                          - 316.87654
-                          - USD
-                        - - 0
-                          - Azue Prod Account
-                          - 20181231
-                          - 10.4567
-                          - 40.564433
-                          - USD
-                    type: microsoft.costmanagement/Query
-        BillingAccountQueryForecast:
-          parameters:
-            api-version: 2018-12-01-preview
-            billingAccountId: '70664866'
-            parameters:
-              dataset:
-                filter:
-                  and:
-                    - or:
-                        - dimension:
-                            name: SubscriptionName
-                            operator: In
-                            values:
-                              - Azure Dev
-                              - Azure Prod
-                              - Azure PPE
-                        - tag:
-                            name: Environment
-                            operator: In
-                            values:
-                              - Dev
-                              - PPE
-                              - Prod
-                    - dimension:
-                        name: DepartmentName
-                        operator: In
-                        values:
-                          - Azure Dept
-                granularity: Daily
-              timePeriod:
-                from: '2018-11-01T00:00:00.000Z'
-                to: '2019-01-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Forecast
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 20181131
-                          - 9.4567
-                          - 37.9876
-                          - USD
-                        - - 20181231
-                          - 78.9887
-                          - 316.87654
-                          - USD
-                        - - 20190131
-                          - 10.4567
-                          - 40.564433
-                          - USD
-                    type: microsoft.costmanagement/Query
-        BillingAccountQueryGroupingUsage:
-          parameters:
-            api-version: 2018-12-01-preview
-            billingAccountId: '70664866'
-            parameters:
-              dataset:
-                aggregation:
-                  totalCost:
-                    function: Sum
-                    name: PreTaxCost
-                granularity: None
-                grouping:
-                  - name: SubscriptionName
-                    type: Dimension
-              timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2018-10-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Usage
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: PreTaxCost
-                          type: Number
-                        - name: SubscriptionName
-                          type: String
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 19.545363672276512
-                          - Trial Subscription
-                          - USD
-                        - - 173.41979241290323
-                          - DEV Subscription
-                          - USD
-                        - - 20.35941656262545
-                          - Cost Management Subscrioption
-                          - USD
-                    type: microsoft.costmanagement/Query
-        BillingAccountQueryUsage:
           parameters:
             api-version: 2018-12-01-preview
             billingAccountId: '70664866'
@@ -1239,6 +1064,51 @@ paths:
                           - 20181031
                           - USD
                     type: microsoft.costmanagement/Query
+        BillingAccountQueryGroupingUsage:
+          parameters:
+            api-version: 2018-12-01-preview
+            billingAccountId: '70664866'
+            parameters:
+              dataset:
+                aggregation:
+                  totalCost:
+                    function: Sum
+                    name: PreTaxCost
+                granularity: None
+                grouping:
+                  - name: SubscriptionName
+                    type: Dimension
+              timePeriod:
+                from: '2018-10-01T00:00:00.000Z'
+                to: '2018-10-31T00:00:00.000Z'
+              timeframe: Custom
+              type: Usage
+          responses:
+            '200':
+              body:
+                value:
+                  - id: providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: SubscriptionName
+                          type: String
+                        - name: Currency
+                          type: String
+                      nextLink: 'https://management.azure.com/providers/Microsoft.Billing/billingAccounts/70664866/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
+                      rows:
+                        - - 19.545363672276512
+                          - Trial Subscription
+                          - USD
+                        - - 173.41979241290323
+                          - DEV Subscription
+                          - USD
+                        - - 20.35941656262545
+                          - Cost Management Subscrioption
+                          - USD
+                    type: microsoft.costmanagement/Query
       x-ms-pageable: {}
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/dimensions':
     get:
@@ -1254,7 +1124,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: 'May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.'
+        - description: 'May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.'
           in: query
           name: $expand
           required: false
@@ -1409,9 +1279,108 @@ paths:
         - Operations
       x-ms-pageable:
         nextLinkName: nextLink
+  '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Forecast':
+    post:
+      description: Lists the usage data for management group.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Forecast_UsageByManagmentGroup
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/managementGroupIdParameter'
+        - description: Parameters supplied to the CreateOrUpdate Report Config operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ReportConfigDefinition'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/QueryResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Forecast
+      x-ms-examples:
+        ManagementGroupForecast:
+          parameters:
+            api-version: 2018-12-01-preview
+            managementGroupId: MyMgId
+            parameters:
+              dataset:
+                filter:
+                  or:
+                    - dimension:
+                        name: SubscriptionName
+                        operator: In
+                        values:
+                          - Azure Dev
+                          - Azure Prod
+                          - Azure PPE
+                    - tag:
+                        name: Environment
+                        operator: In
+                        values:
+                          - Dev
+                          - PPE
+                          - Prod
+                granularity: Daily
+              timePeriod:
+                from: '2018-11-01T00:00:00.000Z'
+                to: '2019-01-31T00:00:00.000Z'
+              timeframe: Custom
+              type: Usage
+          responses:
+            '200':
+              body:
+                value:
+                  - id: providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Forecast/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: UsageDate
+                          type: Number
+                        - name: CostStatus
+                          type: String
+                        - name: Currency
+                          type: String
+                      nextLink: 'https://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Forecast?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
+                      rows:
+                        - - 19.045363672276512
+                          - 20190126
+                          - Actual
+                          - USD
+                        - - 19.41979241290323
+                          - 20190127
+                          - Actual
+                          - USD
+                        - - 20.35941656262545
+                          - 20190128
+                          - Actual
+                          - USD
+                        - - 19.045363672276512
+                          - 20190129
+                          - Forecast
+                          - USD
+                        - - 19.41979241290323
+                          - 20190130
+                          - Forecast
+                          - USD
+                        - - 20.35941656262545
+                          - 20190131
+                          - Forecast
+                          - USD
+                    type: microsoft.costmanagement/Forecast
+      x-ms-pageable: {}
   '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Query':
     post:
-      description: Lists the usage data for managment group.
+      description: Lists the usage data for management group.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
       operationId: Query_UsageByManagmentGroup
@@ -1437,189 +1406,6 @@ paths:
         - Query
       x-ms-examples:
         ManagementGroupQuery:
-          parameters:
-            api-version: 2018-12-01-preview
-            managementGroupId: MyMgId
-            parameters:
-              dataset:
-                filter:
-                  or:
-                    - dimension:
-                        name: SubscriptionName
-                        operator: In
-                        values:
-                          - Azure Dev
-                          - Azure Prod
-                          - Azure PPE
-                    - tag:
-                        name: Environment
-                        operator: In
-                        values:
-                          - Dev
-                          - PPE
-                          - Prod
-                granularity: Daily
-              timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2018-12-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Usage
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: PreTaxCost
-                          type: Number
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 19.545363672276512
-                          - 20181031
-                          - 0
-                          - 0
-                          - USD
-                        - - 173.41979241290323
-                          - 20181031
-                          - 0
-                          - 0
-                          - USD
-                        - - 20.35941656262545
-                          - 20181031
-                          - 0
-                          - 0
-                          - USD
-                        - - 19.545363672276512
-                          - 20181231
-                          - 9.4567
-                          - 37.9876
-                          - USD
-                        - - 173.41979241290323
-                          - 20181231
-                          - 78.9887
-                          - 316.87654
-                          - USD
-                        - - 20.35941656262545
-                          - 20181231
-                          - 10.4567
-                          - 40.564433
-                          - USD
-                    type: microsoft.costmanagement/Query
-        ManagementGroupQueryForecast:
-          parameters:
-            api-version: 2018-12-01-preview
-            managementGroupId: MyMgId
-            parameters:
-              dataset:
-                filter:
-                  or:
-                    - dimension:
-                        name: SubscriptionName
-                        operator: In
-                        values:
-                          - Azure Dev
-                          - Azure Prod
-                          - Azure PPE
-                    - tag:
-                        name: Environment
-                        operator: In
-                        values:
-                          - Dev
-                          - PPE
-                          - Prod
-                granularity: Daily
-              timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2018-12-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Forecast
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 20181231
-                          - 9.4567
-                          - 37.9876
-                          - USD
-                        - - 20181231
-                          - 78.9887
-                          - 316.87654
-                          - USD
-                        - - 20181231
-                          - 10.4567
-                          - 40.564433
-                          - USD
-                    type: microsoft.costmanagement/Query
-        ManagementGroupQueryGroupingUsage:
-          parameters:
-            api-version: 2018-12-01-preview
-            managementGroupId: MyMgId
-            parameters:
-              dataset:
-                aggregation:
-                  totalCost:
-                    function: Sum
-                    name: PreTaxCost
-                granularity: None
-                grouping:
-                  - name: SubscriptionName
-                    type: Dimension
-              timePeriod:
-                from: '2018-08-01T00:00:00.000Z'
-                to: '2018-10-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Usage
-          responses:
-            '200':
-              body:
-                value:
-                  - id: providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
-                    properties:
-                      columns:
-                        - name: PreTaxCost
-                          type: Number
-                        - name: SubscriptionName
-                          type: String
-                        - name: Currency
-                          type: String
-                      nextLink: 'https://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
-                      rows:
-                        - - 19.545363672276512
-                          - Trial Subscription
-                          - USD
-                        - - 173.41979241290323
-                          - DEV Subscription
-                          - USD
-                        - - 20.35941656262545
-                          - Cost Management Subscrioption
-                          - USD
-                    type: microsoft.costmanagement/Query
-        ManagementGroupQueryUsage:
           parameters:
             api-version: 2018-12-01-preview
             managementGroupId: MyMgId
@@ -1673,6 +1459,51 @@ paths:
                           - 20190131
                           - USD
                     type: microsoft.costmanagement/Query
+        ManagementGroupQueryGroupingUsage:
+          parameters:
+            api-version: 2018-12-01-preview
+            managementGroupId: MyMgId
+            parameters:
+              dataset:
+                aggregation:
+                  totalCost:
+                    function: Sum
+                    name: PreTaxCost
+                granularity: None
+                grouping:
+                  - name: SubscriptionName
+                    type: Dimension
+              timePeriod:
+                from: '2018-08-01T00:00:00.000Z'
+                to: '2018-10-31T00:00:00.000Z'
+              timeframe: Custom
+              type: Usage
+          responses:
+            '200':
+              body:
+                value:
+                  - id: providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    name: ad67fd91-c131-4bda-9ba9-7187ecb1cebd
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: SubscriptionName
+                          type: String
+                        - name: Currency
+                          type: String
+                      nextLink: 'https://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Query?api-version=2018-12-01-preview&$skiptoken=AQAAAA%3D%3D'
+                      rows:
+                        - - 19.545363672276512
+                          - Trial Subscription
+                          - USD
+                        - - 173.41979241290323
+                          - DEV Subscription
+                          - USD
+                        - - 20.35941656262545
+                          - Cost Management Subscrioption
+                          - USD
+                    type: microsoft.costmanagement/Query
       x-ms-pageable: {}
   '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/dimensions':
     get:
@@ -1688,7 +1519,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: 'May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.'
+        - description: 'May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.'
           in: query
           name: $expand
           required: false
@@ -1824,6 +1655,113 @@ paths:
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Forecast':
+    post:
+      description: Forecast the usage data for subscriptionId.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Forecast_UsageBySubscription
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - description: Parameters supplied to the CreateOrUpdate Report Config operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ReportConfigDefinition'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/QueryResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Forecast
+      x-ms-examples:
+        SubscriptionForecast:
+          parameters:
+            api-version: 2018-12-01-preview
+            parameters:
+              dataset:
+                filter:
+                  tag:
+                    name: Environment
+                    operator: In
+                    values:
+                      - Dev
+                      - PPE
+                      - Prod
+                granularity: Daily
+              timePeriod:
+                from: '2018-10-01T00:00:00.000Z'
+                to: '2018-12-31T00:00:00.000Z'
+              timeframe: Custom
+              type: Usage
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                value:
+                  - id: subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/Forecast/00000000-0000-0000-0000-000000000000
+                    name: 55312978-ba1b-415c-9304-cfd9c43c0481
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: UsageDate
+                          type: Number
+                        - name: CostStatus
+                          type: String
+                        - name: Currency
+                          type: String
+                      nextLink: null
+                      rows:
+                        - - 214.68795741935486
+                          - 20181222
+                          - Actual
+                          - USD
+                        - - 215.68795741935486
+                          - 20181223
+                          - Actual
+                          - USD
+                        - - 216.68795741935486
+                          - 20181224
+                          - Actual
+                          - USD
+                        - - 217.68795741935486
+                          - 20181225
+                          - Actual
+                          - USD
+                        - - 218.68795741935486
+                          - 20181226
+                          - Actual
+                          - USD
+                        - - 219.14384914358166
+                          - 20181227
+                          - Actual
+                          - USD
+                        - - 220.14384914358877
+                          - 20181228
+                          - Forecast
+                          - USD
+                        - - 221.14343314358877
+                          - 20181229
+                          - Forecast
+                          - USD
+                        - - 222.14343355558876
+                          - 20181230
+                          - Forecast
+                          - USD
+                        - - 223.14343355558876
+                          - 20181231
+                          - Forecast
+                          - USD
+                    type: microsoft.costmanagement/Forecast
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for subscriptionId.
@@ -1852,128 +1790,6 @@ paths:
         - Query
       x-ms-examples:
         SubscriptionQuery:
-          parameters:
-            api-version: 2018-12-01-preview
-            parameters:
-              dataset:
-                filter:
-                  tag:
-                    name: Environment
-                    operator: In
-                    values:
-                      - Dev
-                      - PPE
-                      - Prod
-                granularity: Daily
-              timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2018-12-31T00:00:00.000Z'
-              timeframe: Custom
-              type: UsageAndForecast
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                value:
-                  - id: subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/Query/00000000-0000-0000-0000-000000000000
-                    name: 55312978-ba1b-415c-9304-cfd9c43c0481
-                    properties:
-                      columns:
-                        - name: PreTaxCost
-                          type: Number
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: null
-                      rows:
-                        - - 2.10333307059661
-                          - 20181017
-                          - 0
-                          - 0
-                          - USD
-                        - - 218.68795741935486
-                          - 20181018
-                          - 0
-                          - 0
-                          - USD
-                        - - 0.14384913581657052
-                          - 20181019
-                          - 0
-                          - 0
-                          - USD
-                        - - 0
-                          - 20181217
-                          - 1.67777
-                          - 5.9787
-                          - USD
-                        - - 0
-                          - 20181218
-                          - 102.78787
-                          - 456.976554
-                          - USD
-                        - - 0
-                          - 20181219
-                          - 0.07233
-                          - 0.287766
-                          - USD
-                    type: microsoft.costmanagement/Query
-        SubscriptionQueryForecast:
-          parameters:
-            api-version: 2018-12-01-preview
-            parameters:
-              dataset:
-                filter:
-                  tag:
-                    name: Environment
-                    operator: In
-                    values:
-                      - Dev
-                      - PPE
-                      - Prod
-                granularity: Daily
-              timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2018-12-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Forecast
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '200':
-              body:
-                value:
-                  - id: subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/Query/00000000-0000-0000-0000-000000000000
-                    name: 55312978-ba1b-415c-9304-cfd9c43c0481
-                    properties:
-                      columns:
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: null
-                      rows:
-                        - - 20181217
-                          - 1.67777
-                          - 5.9787
-                          - USD
-                        - - 20181218
-                          - 102.78787
-                          - 456.976554
-                          - USD
-                        - - 20181219
-                          - 0.07233
-                          - 0.287766
-                          - USD
-                    type: microsoft.costmanagement/Query
-        SubscriptionQueryUsage:
           parameters:
             api-version: 2018-12-01-preview
             parameters:
@@ -2034,7 +1850,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: 'May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.'
+        - description: 'May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.'
           in: query
           name: $expand
           required: false
@@ -2123,7 +1939,7 @@ paths:
           name: $filter
           required: false
           type: string
-        - description: 'May be used to expand the properties/data within a dimension dategory. By default, data is not included when listing dimensions.'
+        - description: 'May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.'
           in: query
           name: $expand
           required: false
@@ -2195,6 +2011,100 @@ paths:
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Forecast':
+    post:
+      description: Forecast the usage data for subscriptionId and resource group.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: Forecast_UsageByResourceGroup
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Parameters supplied to the CreateOrUpdate Report Config operation.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ReportConfigDefinition'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/QueryResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Forecast
+      x-ms-examples:
+        ResourceGroupForecast:
+          parameters:
+            api-version: 2018-12-01-preview
+            parameters:
+              dataset:
+                filter:
+                  and:
+                    - or:
+                        - dimension:
+                            name: ResourceLocation
+                            operator: In
+                            values:
+                              - East US
+                              - West Europe
+                        - tag:
+                            name: Environment
+                            operator: In
+                            values:
+                              - UAT
+                              - Prod
+                    - dimension:
+                        name: ResourceGroup
+                        operator: In
+                        values:
+                          - API
+                granularity: Daily
+              timeframe: MonthToDate
+              type: Usage
+            resourceGroupName: ScreenSharingTest-peer
+            subscriptionId: 55312978-ba1b-415c-9304-c4b9c43c0481
+          responses:
+            '200':
+              body:
+                value:
+                  - id: subscriptions/55312978-ba1b-415c-9304-c4b9c43c0481/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Forecast/9af9459d-441d-4055-9ed0-83d4c4a363fb
+                    name: 9af9459d-441d-4055-9ed0-83d4c4a363fb
+                    properties:
+                      columns:
+                        - name: PreTaxCost
+                          type: Number
+                        - name: UsageDate
+                          type: Number
+                        - name: CostStatus
+                          type: String
+                        - name: Currency
+                          type: String
+                      nextLink: null
+                      rows:
+                        - - 19.10333307059661
+                          - 20180417
+                          - Actual
+                          - USD
+                        - - 20.10333307059661
+                          - 20180418
+                          - Actual
+                          - USD
+                        - - 21.10333307059661
+                          - 20180419
+                          - Forecast
+                          - USD
+                        - - 22.10333307059661
+                          - 20180420
+                          - Forecast
+                          - USD
+                    type: microsoft.costmanagement/Forecast
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Query':
     post:
       description: Query the usage data for subscriptionId and resource group.
@@ -2224,140 +2134,6 @@ paths:
         - Query
       x-ms-examples:
         ResourceGroupQuery:
-          parameters:
-            api-version: 2018-12-01-preview
-            parameters:
-              dataset:
-                filter:
-                  and:
-                    - or:
-                        - dimension:
-                            name: ResourceLocation
-                            operator: In
-                            values:
-                              - East US
-                              - West Europe
-                        - tag:
-                            name: Environment
-                            operator: In
-                            values:
-                              - UAT
-                              - Prod
-                    - dimension:
-                        name: ResourceGroup
-                        operator: In
-                        values:
-                          - API
-                granularity: Daily
-              timePeriod:
-                from: '2018-10-01T00:00:00.000Z'
-                to: '2019-12-31T00:00:00.000Z'
-              timeframe: Custom
-              type: UsageAndForecast
-            resourceGroupName: ScreenSharingTest-peer
-            subscriptionId: 55312978-ba1b-415c-9304-c4b9c43c0481
-          responses:
-            '200':
-              body:
-                value:
-                  - id: subscriptions/55312978-ba1b-415c-9304-c4b9c43c0481/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb
-                    name: 9af9459d-441d-4055-9ed0-83d4c4a363fb
-                    properties:
-                      columns:
-                        - name: PreTaxCost
-                          type: Number
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: null
-                      rows:
-                        - - 2.10333307059661
-                          - 20180417
-                          - 0
-                          - 0
-                          - USD
-                        - - 20.10333307059661
-                          - 20180418
-                          - 0
-                          - 0
-                          - USD
-                        - - 0
-                          - 20190417
-                          - 1.2087
-                          - 4.35788
-                          - USD
-                        - - 0
-                          - 20190418
-                          - 10.44657
-                          - 43.565767
-                          - USD
-                    type: microsoft.costmanagement/Query
-        ResourceGroupQueryGroupingForecast:
-          parameters:
-            api-version: 2018-12-01-preview
-            parameters:
-              dataset:
-                filter:
-                  and:
-                    - or:
-                        - dimension:
-                            name: ResourceLocation
-                            operator: In
-                            values:
-                              - East US
-                              - West Europe
-                        - tag:
-                            name: Environment
-                            operator: In
-                            values:
-                              - UAT
-                              - Prod
-                    - dimension:
-                        name: ResourceGroup
-                        operator: In
-                        values:
-                          - API
-                granularity: Daily
-              timePeriod:
-                from: '2019-10-01T00:00:00.000Z'
-                to: '2019-12-31T00:00:00.000Z'
-              timeframe: Custom
-              type: Forecast
-            resourceGroupName: ScreenSharingTest-peer
-            subscriptionId: 55312978-ba1b-415c-9304-c4b9c43c0481
-          responses:
-            '200':
-              body:
-                value:
-                  - id: subscriptions/55312978-ba1b-415c-9304-c4b9c43c0481/resourcegroups/ScreenSharingTest-peer/providers/Microsoft.CostManagement/Query/9af9459d-441d-4055-9ed0-83d4c4a363fb
-                    name: 9af9459d-441d-4055-9ed0-83d4c4a363fb
-                    properties:
-                      columns:
-                        - name: UsageDate
-                          type: Number
-                        - name: ConfidenceLevelsLower
-                          type: String
-                        - name: ConfidenceLevelsUpper
-                          type: Number
-                        - name: Currency
-                          type: String
-                      nextLink: null
-                      rows:
-                        - - 20190417
-                          - 545.33555
-                          - 1000.434344
-                          - USD
-                        - - 20190418
-                          - 344.5677
-                          - 789.7666
-                          - USD
-                    type: microsoft.costmanagement/Query
-        ResourceGroupQueryGroupingUsage:
           parameters:
             api-version: 2018-12-01-preview
             parameters:
@@ -2582,7 +2358,7 @@ definitions:
     description: The comparison expression to be used in the report.
     properties:
       name:
-        description: The name of the column to use in comaprison.
+        description: The name of the column to use in comparison.
         type: string
       operator:
         description: The operator to use for comparison.
@@ -2610,7 +2386,7 @@ definitions:
         additionalProperties:
           $ref: '#/definitions/ReportConfigAggregation'
           type: object
-        description: Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have upto 2 aggregation clauses.
+        description: Dictionary of aggregation expression to use in the report. The key of each item in the dictionary is the alias for the aggregated column. Report can have up to 2 aggregation clauses.
         maxItems: 2
         type: object
       configuration:
@@ -2630,7 +2406,7 @@ definitions:
           modelAsString: true
           name: GranularityType
       grouping:
-        description: Array of group by expression to use in the report. Report can have upto 2 group by clauses.
+        description: Array of group by expression to use in the report. Report can have up to 2 group by clauses.
         items:
           $ref: '#/definitions/ReportConfigGrouping'
         maxItems: 2
@@ -2672,8 +2448,6 @@ definitions:
         description: 'The type of the report. Usage represents actual usage, forecast represents forecasted data and UsageAndForecast represents both usage and forecasted data. Actual usage and forecasted data can be differentiated based on dates.'
         enum:
           - Usage
-          - Forecast
-          - UsageAndForecast
         type: string
         x-ms-enum:
           modelAsString: true
@@ -2685,7 +2459,7 @@ definitions:
     description: The filter expression to be used in the report.
     properties:
       and:
-        description: The logical "AND" expression. Must have atleast 2 items.
+        description: The logical "AND" expression. Must have at least 2 items.
         items:
           $ref: '#/definitions/ReportConfigFilter'
         minItems: 2
@@ -2697,7 +2471,7 @@ definitions:
         $ref: '#/definitions/ReportConfigFilter'
         description: The logical "NOT" expression.
       or:
-        description: The logical "OR" expression. Must have atleast 2 items.
+        description: The logical "OR" expression. Must have at least 2 items.
         items:
           $ref: '#/definitions/ReportConfigFilter'
         minItems: 2

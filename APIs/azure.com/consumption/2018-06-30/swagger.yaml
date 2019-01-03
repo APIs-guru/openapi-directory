@@ -444,7 +444,7 @@ paths:
                     - key: OrgName
                 type: Microsoft.Consumption/costTags
     put:
-      description: The operation to create or update cost tags assiciated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.
+      description: The operation to create or update cost tags associated with a billing account. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/rest/api/consumption/'
       operationId: CostTags_CreateOrUpdate
@@ -1975,7 +1975,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/marketplaces':
     get:
-      description: 'Lists the marketplaces for a scope by billing period and subscripotionId. Marketplaces are available via this API only for May 1, 2014 or later.'
+      description: 'Lists the marketplaces for a scope by billing period and subscriptionId. Marketplaces are available via this API only for May 1, 2014 or later.'
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/rest/api/consumption/'
       operationId: Marketplaces_ListByBillingPeriod
@@ -2978,7 +2978,7 @@ paths:
                 type: Microsoft.Consumption/pricesheets
   '/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/reservationRecommendations':
     get:
-      description: List of recomendations for purchasing reserved instances.
+      description: List of recommendations for purchasing reserved instances.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/rest/api/consumption/'
       operationId: ReservationRecommendations_List
@@ -3807,7 +3807,7 @@ definitions:
           name: TimeGrainType
       timePeriod:
         $ref: '#/definitions/BudgetTimePeriod'
-        description: 'Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain preiod. There are no restrictions on the end date.'
+        description: 'Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.'
     required:
       - category
       - amount
@@ -4372,7 +4372,7 @@ definitions:
     description: The Resource model definition.
     properties:
       eTag:
-        description: 'eTag of the resource. To handle concurrent update scenarion, this field will be used to determine whether the user is updating the latest version or not.'
+        description: 'eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.'
         type: string
       id:
         description: Resource Id.
@@ -4418,11 +4418,11 @@ definitions:
         readOnly: true
         type: number
       skuName:
-        description: This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.
+        description: This is the ARM Sku name. It can be used to join with the serviceType field in additional info in usage records.
         readOnly: true
         type: string
       totalReservedQuantity:
-        description: This is the total count of instances that are reserved for the reservationid.
+        description: This is the total count of instances that are reserved for the reservationId.
         format: decimal
         readOnly: true
         type: number
@@ -4488,7 +4488,7 @@ definitions:
         readOnly: true
         type: number
       recommendedQuantity:
-        description: Recomended quality for reserved instances.
+        description: Recommended quality for reserved instances.
         format: decimal
         readOnly: true
         type: number
@@ -4573,7 +4573,7 @@ definitions:
         readOnly: true
         type: number
       skuName:
-        description: This is the ARM Sku name. It can be used to join with the servicetype field in additoinalinfo in usage records.
+        description: This is the ARM Sku name. It can be used to join with the serviceType field in additional info in usage records.
         readOnly: true
         type: string
       usageDate:

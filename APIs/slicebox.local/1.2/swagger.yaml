@@ -52,6 +52,8 @@ tags:
     name: Directories
   - description: Methods for handling forwarding rules for automatically forwarding image data from sources to destinations.
     name: Forwarding
+  - description: Methods for handling filtering of DICOM attributes on incoming objects.
+    name: Filtering
   - description: Methods for defining and handling series types
     name: Series Types
   - description: Methods for handling slicebox system log messages
@@ -492,6 +494,178 @@ paths:
           description: directory watch removed
       tags:
         - Directories
+  /filtering/associations:
+    get:
+      description: Get a list of source to filter associations.
+      parameters:
+        - default: 0
+          description: start index of returned slice of source <-> filter associations
+          format: int64
+          in: query
+          name: startindex
+          required: false
+          type: integer
+        - default: 20
+          description: size of returned slice of source <-> filter associations
+          format: int64
+          in: query
+          name: count
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: the list of source <-> filter associations
+          schema:
+            items:
+              $ref: '#/definitions/sourceTagFilter'
+            type: array
+      tags:
+        - Filtering
+    post:
+      description: 'Inserts or updates a source <-> filter associations. If the specified Source already  has an association this is updated, otherwise a new is inserted.'
+      parameters:
+        - description: Source to Filter association
+          in: body
+          name: sourcetagfilter
+          required: true
+          schema:
+            $ref: '#/definitions/sourceTagFilter'
+      responses:
+        '201':
+          description: Upserted source <-> filter association
+      tags:
+        - Filtering
+  '/filtering/associations/{id}':
+    delete:
+      description: remove the source <-> filter association corresponding to the supplied ID
+      parameters:
+        - description: id of source <-> filter association to remove
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: source <-> filter association removed
+      tags:
+        - Filtering
+  /filtering/filters:
+    get:
+      description: List defined filters
+      parameters:
+        - default: 0
+          description: start index of returned slice of filters
+          format: int64
+          in: query
+          name: startindex
+          required: false
+          type: integer
+        - default: 20
+          description: size of returned slice of filters
+          format: int64
+          in: query
+          name: count
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: the list of filters
+          schema:
+            items:
+              $ref: '#/definitions/filter'
+            type: array
+      tags:
+        - Filtering
+    post:
+      description: 'Inserts or updates a filter. If a filter with same name as supplied filter exists this filter is updated, otherwise a new filter is inserted.'
+      parameters:
+        - description: Filter
+          in: body
+          name: tagFilter
+          required: true
+          schema:
+            $ref: '#/definitions/filter'
+      responses:
+        '201':
+          description: Filter upserted
+      tags:
+        - Filtering
+  '/filtering/filters/{id}':
+    delete:
+      description: remove the filter corresponding to the supplied ID
+      parameters:
+        - description: id of filter to remove
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: Filter removed
+      tags:
+        - Filtering
+  '/filtering/filters/{id}/tagpaths':
+    get:
+      description: List tagpaths for the selected filter
+      parameters:
+        - description: id of filter
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: the list of tagpaths
+          schema:
+            items:
+              $ref: '#/definitions/tagPathTag'
+            type: array
+      tags:
+        - Filtering
+    post:
+      description: add a tagpath to a filter
+      parameters:
+        - description: id of filter to remove
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: id of filter to remove
+          in: body
+          name: tagpath
+          required: true
+          schema:
+            $ref: '#/definitions/tagPathTag'
+      responses:
+        '201':
+          description: TagPath added
+      tags:
+        - Filtering
+  '/filtering/filters/{id}/tagpaths/{tagpathid}':
+    delete:
+      description: remove the tagpath corresponding to the supplied ID
+      parameters:
+        - description: id of filter
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: id of TagPath to remove
+          format: int64
+          in: path
+          name: tagpathid
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: TagPath removed
+      tags:
+        - Filtering
   '/forwarding/rule/{id}':
     delete:
       description: remove the forwarding rule corresponding to the supplied ID
@@ -779,6 +953,29 @@ paths:
           description: if no image was found for the supplied image ID
       tags:
         - Images
+  '/images/{id}/modify':
+    put:
+      description: modify and/or insert image attributes according to the input tagpath-value mappings
+      parameters:
+        - description: ID of image to modify
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: specification of tag paths and corresponding values to insert or modify
+          in: body
+          name: tag path value mappings
+          required: true
+          schema:
+            items:
+              $ref: '#/definitions/tagMapping'
+            type: array
+      responses:
+        '201':
+          description: image attributes successfully modified
+      tags:
+        - Images
   '/images/{id}/png':
     get:
       description: get a PNG image representation of the image corresponding to the supplied ID
@@ -953,6 +1150,13 @@ paths:
       tags:
         - Import
   /log:
+    delete:
+      description: delete all log messages
+      responses:
+        '204':
+          description: log messages successfully
+      tags:
+        - Logs
     get:
       description: get a list of slicebox log messages
       parameters:
@@ -2453,6 +2657,20 @@ definitions:
       transactionImage:
         $ref: '#/definitions/outgoingTransactionImage'
     type: object
+  filter:
+    properties:
+      id:
+        format: int64
+        type: integer
+      name:
+        type: string
+      tagFilterType:
+        type: string
+      tags:
+        items:
+          $ref: '#/definitions/tagPathTag'
+        type: array
+    type: object
   flatSeries:
     properties:
       id:
@@ -2892,6 +3110,20 @@ definitions:
       sourceType:
         type: string
     type: object
+  sourceTagFilter:
+    properties:
+      id:
+        format: int64
+        type: integer
+      sourceId:
+        format: int64
+        type: integer
+      sourceType:
+        type: string
+      tagFilterId:
+        format: int64
+        type: integer
+    type: object
   study:
     properties:
       accessionNumber:
@@ -2912,6 +3144,31 @@ definitions:
         $ref: '#/definitions/dicomPropertyValue'
       studyInstanceUID:
         $ref: '#/definitions/dicomPropertyValue'
+    type: object
+  tagMapping:
+    properties:
+      tagPath:
+        $ref: '#/definitions/tagPathTag'
+      value:
+        type: string
+    type: object
+  tagPathSequence:
+    properties:
+      item:
+        type: string
+      previous:
+        $ref: '#/definitions/tagPathSequence'
+      tag:
+        format: int32
+        type: integer
+    type: object
+  tagPathTag:
+    properties:
+      previous:
+        $ref: '#/definitions/tagPathSequence'
+      tag:
+        format: int32
+        type: integer
     type: object
   tagValue:
     properties:

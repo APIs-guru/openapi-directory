@@ -489,7 +489,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -850,7 +850,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -1676,7 +1676,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -1794,7 +1794,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -2014,7 +2014,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -2144,7 +2144,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -2727,10 +2727,10 @@ definitions:
             photo_id:
               type: string
             thumbnail:
-              description: A URL to a thumbnail of this photo.  The size of the thumbnail depends on the device_pixel_ratio parameter and can vary from 120px by 120px up to 360px by 360px (but the thumbnail is not guaranteed to be square).
+              description: A URL to a thumbnail of this photo.  The size of the thumbnail depends on the device_pixel_ratio parameter and it is not guaranteed to be square.
               type: string
             url:
-              description: A URL to a version of this photo that is at most 800px by 600px (but may be smaller if no copy of the photo exists at that exact size).
+              description: A URL to a large version of this photo (but not necessarily the largest size available).
               type: string
           type: object
         type: array

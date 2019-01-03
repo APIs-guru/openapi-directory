@@ -377,6 +377,7 @@ paths:
             - MeterSubTypeGas
             - MeterSubTypeElectricityHeat
             - MeterSubTypeTemperature
+            - MeterSubTypeVirtualBattery
           in: query
           name: meterSubType
           required: true
@@ -530,24 +531,12 @@ paths:
       summary: "Gets the Values for a Meter at a given Date. \r\n            The first Value found before the given Date is returned."
       tags:
         - MeterValues
-  /api/SignUp:
-    post:
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
+  /api/RegisterForRealtimeApi:
+    get:
+      consumes: []
       deprecated: false
-      description: "Sign up a new User.\r\n            The sign up is done on the smart-me Cloud."
-      operationId: SignUp_Post
-      parameters:
-        - description: The user data
-          in: body
-          name: signUpData
-          required: true
-          schema:
-            $ref: '#/definitions/SignUpData'
+      description: Gets all registrations for the Realtime API.
+      operationId: RegisterForRealtimeApi_Get
       produces:
         - application/json
         - text/json
@@ -557,14 +546,54 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/User'
-        '400':
-          description: BadRequest
-        '500':
-          description: InternalServerError
-      summary: "Sign up a new User.\r\n            The sign up is done on the smart-me Cloud."
+            items:
+              $ref: '#/definitions/RegisterRealtimeApiData'
+            type: array
+      summary: Gets all registrations for the Realtime API.
       tags:
-        - SignUp
+        - RegisterForRealtimeApi
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: 'Creates a new registration for the realtime API. The Realtime API sends you the data of the registred devices as soon as we have them on the cloud. More Information about the realtime API: https://www.smart-me.com/Description/api/realtimeapi.aspx'
+      operationId: RegisterForRealtimeApi_Post
+      parameters:
+        - in: body
+          name: registration
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterRealtimeApiData'
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: "Creates a new registration for the realtime API. The Realtime API sends you the data of the registred devices as soon as we have them on the cloud.\r\n             More Information about the realtime API: https://www.smart-me.com/Description/api/realtimeapi.aspx"
+      tags:
+        - RegisterForRealtimeApi
+  '/api/RegisterForRealtimeApi/{id}':
+    delete:
+      consumes: []
+      deprecated: false
+      description: Deletes a realtime API registration.
+      operationId: RegisterForRealtimeApi_Delete
+      parameters:
+        - description: The ID of the realtime API registration
+          in: path
+          name: id
+          required: true
+          type: string
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      summary: Deletes a realtime API registration.
+      tags:
+        - RegisterForRealtimeApi
   /api/User:
     get:
       consumes: []
@@ -1139,6 +1168,7 @@ definitions:
           - MeterSubTypeGas
           - MeterSubTypeElectricityHeat
           - MeterSubTypeTemperature
+          - MeterSubTypeVirtualBattery
         type: string
       Name:
         description: The Name of the Device
@@ -1330,6 +1360,7 @@ definitions:
           - MeterSubTypeGas
           - MeterSubTypeElectricityHeat
           - MeterSubTypeTemperature
+          - MeterSubTypeVirtualBattery
         type: string
       Name:
         description: The Name of the Device
@@ -1407,6 +1438,9 @@ definitions:
   MeterFolderInformation:
     description: Container Class for the Web API
     properties:
+      AdditionalMeterSerialNumber:
+        description: An additional Meter serial number. e.g. the number of a meter a smart-me device is connected to.
+        type: string
       FirmwareVersion:
         description: The Firmware Version of a Meter
         format: int32
@@ -1465,14 +1499,30 @@ definitions:
         description: The Obis Code for this Output
         type: string
     type: object
-  SignUpData:
-    description: Container for the Sign UP API
+  RegisterRealtimeApiData:
+    description: Container class for the register realtime API API
     properties:
-      Email:
-        description: The Email Address to register
+      ApiUrl:
+        description: The URL of your endpoint. To this endpoint all the values are send to.
         type: string
-      Password:
-        description: The Password to register
+      BasicAuthPassword:
+        description: The Password (basic auth) of your endpoint. Leave empty of none.
+        type: string
+      BasicAuthUsername:
+        description: The Username (basic auth) of your endpoint. Leave empty of none.
+        type: string
+      Id:
+        description: The ID of the registration
+        type: string
+      MeterId:
+        description: The ID of the Meter. Just used if the RegistrationType is "SingleMeterRegistration".
+        type: string
+      RegistrationType:
+        description: 'The Type of this registration (per meter, per user, ...)'
+        enum:
+          - Disabled
+          - SingleMeterRegistration
+          - UserRegistration
         type: string
     type: object
   User:

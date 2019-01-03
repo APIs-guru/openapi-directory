@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/toolresults/v1beta3/rest'
       version: v1
@@ -227,7 +227,7 @@ paths:
   '/{projectId}/histories/{historyId}/executions':
     get:
       description: |-
-        Lists Histories for a given Project.
+        Lists Executions for a given History.
 
         The executions are sorted by creation_time in descending order. The execution_id key will be used to order the executions with the same creation_time.
 
@@ -1464,7 +1464,7 @@ definitions:
     properties:
       typeUrl:
         description: |-
-          A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading "." is not accepted).
+          A URL/resource name that uniquely identifies the type of the serialized protocol buffer message. This string must contain at least one "/" character. The last segment of the URL's path must represent the fully qualified name of the type (as in `path/google.protobuf.Duration`). The name should be in a canonical form (e.g., leading "." is not accepted).
 
           In practice, teams usually precompile into the binary all types that they expect it to use in the context of Any. However, for URLs which use the scheme `http`, `https`, or no scheme, one can optionally set up a type server that maps type URLs to message definitions as follows:
 
@@ -2141,17 +2141,11 @@ definitions:
   StackTrace:
     description: A stacktrace.
     properties:
-      clusterId:
-        description: Exception cluster ID
-        type: string
       exception:
         description: |-
           The stack trace message.
 
           Required
-        type: string
-      reportId:
-        description: Exception report ID
         type: string
     type: object
   Status:
@@ -2416,6 +2410,13 @@ definitions:
   TestIssue:
     description: An issue detected occurring during a test execution.
     properties:
+      category:
+        description: Category of issue. Required.
+        enum:
+          - common
+          - robo
+          - unspecifiedCategory
+        type: string
       errorMessage:
         description: A brief human-readable message describing the issue. Required.
         type: string
@@ -2424,6 +2425,7 @@ definitions:
         enum:
           - info
           - severe
+          - suggestion
           - unspecifiedSeverity
           - warning
         type: string
@@ -2434,16 +2436,27 @@ definitions:
         description: Type of issue. Required.
         enum:
           - anr
+          - availableDeepLinks
           - compatibleWithOrchestrator
           - completeRoboScriptExecution
+          - encounteredLoginScreen
+          - encounteredNonAndroidUiWidgetScreen
           - failedToInstall
           - fatalException
+          - inAppPurchases
           - incompleteRoboScriptExecution
+          - insufficientCoverage
+          - iosCrash
+          - iosException
           - launcherActivityNotFound
           - nativeCrash
+          - nonSdkApiUsageViolation
+          - performedGoogleLogin
+          - performedMonkeyActions
           - startActivityNotFound
           - unspecifiedType
           - unusedRoboDirective
+          - usedRoboDirective
         type: string
       warning:
         $ref: '#/definitions/Any'
@@ -2545,7 +2558,11 @@ definitions:
     type: object
   Timestamp:
     description: |-
-      A Timestamp represents a point in time independent of any time zone or calendar, represented as seconds and fractions of seconds at nanosecond resolution in UTC Epoch time. It is encoded using the Proleptic Gregorian Calendar which extends the Gregorian calendar backwards to year one. It is encoded assuming all minutes are 60 seconds long, i.e. leap seconds are "smeared" so that no leap second table is needed for interpretation. Range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we can convert to and from RFC 3339 date strings. See [https://www.ietf.org/rfc/rfc3339.txt](https://www.ietf.org/rfc/rfc3339.txt).
+      A Timestamp represents a point in time independent of any time zone or local calendar, encoded as a count of seconds and fractions of seconds at nanosecond resolution. The count is relative to an epoch at UTC midnight on January 1, 1970, in the proleptic Gregorian calendar which extends the Gregorian calendar backwards to year one.
+
+      All minutes are 60 seconds long. Leap seconds are "smeared" so that no leap second table is needed for interpretation, using a [24-hour linear smear](https://developers.google.com/time/smear).
+
+      The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By restricting to that range, we ensure that we can convert to and from [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
 
       # Examples
 
@@ -2583,7 +2600,7 @@ definitions:
 
       For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past 01:30 UTC on January 15, 2017.
 
-      In JavaScript, one can convert a Date object to this format using the standard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString] method. In Python, a standard `datetime.datetime` object can be converted to this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use the Joda Time's [`ISODateTimeFormat.dateTime()`]( http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime-- ) to obtain a formatter capable of generating timestamps in this format.
+      In JavaScript, one can convert a Date object to this format using the standard [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) method. In Python, a standard `datetime.datetime` object can be converted to this format using [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with the time format spec '%Y-%m-%dT%H:%M:%S.%fZ'. Likewise, in Java, one can use the Joda Time's [`ISODateTimeFormat.dateTime()`]( http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D ) to obtain a formatter capable of generating timestamps in this format.
     properties:
       nanos:
         description: 'Non-negative fractions of a second at nanosecond resolution. Negative second values with fractions must still have non-negative nanos values that count forward in time. Must be from 0 to 999,999,999 inclusive.'

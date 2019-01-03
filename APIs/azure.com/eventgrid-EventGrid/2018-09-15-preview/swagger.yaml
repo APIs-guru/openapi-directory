@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/eventgrid/resource-manager/Microsoft.EventGrid/preview/2018-09-15-preview/EventGrid.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: eventgrid-EventGrid
   x-tags:
@@ -2779,7 +2779,7 @@ definitions:
     discriminator: operatorType
     properties:
       key:
-        description: The filter key. Represents an event property with upto two levels of nesting.
+        description: The filter key. Represents an event property with up to two levels of nesting.
         type: string
       operatorType:
         description: Represents the filter operator
@@ -3164,14 +3164,14 @@ definitions:
           name: InputSchemaMappingType
     type: object
   JsonField:
-    description: 'This is used to express the source of an input schema mapping for a single target field in the Event Grid Event schema. This is currently used in the mappings for the ''id'',''topic'' and ''eventtime'' properties. This represents a field in the input event schema.'
+    description: 'This is used to express the source of an input schema mapping for a single target field in the Event Grid Event schema. This is currently used in the mappings for the ''id'',''topic'' and ''eventTime'' properties. This represents a field in the input event schema.'
     properties:
       sourceField:
         description: Name of a field in the input event schema that's to be used as the source of a mapping.
         type: string
     type: object
   JsonFieldWithDefault:
-    description: 'This is used to express the source of an input schema mapping for a single target field in the Event Grid Event schema. This is currently used in the mappings for the ''subject'',''eventtype'' and ''dataversion'' properties. This represents a field in the input event schema along with a default value to be used, and at least one of these two properties should be provided.'
+    description: 'This is used to express the source of an input schema mapping for a single target field in the Event Grid Event schema. This is currently used in the mappings for the ''subject'',''eventType'' and ''dataVersion'' properties. This represents a field in the input event schema along with a default value to be used, and at least one of these two properties should be provided.'
     properties:
       defaultValue:
         description: The default value to be used for mapping when a SourceField is not provided or if there's no property with the specified name in the published JSON event payload.

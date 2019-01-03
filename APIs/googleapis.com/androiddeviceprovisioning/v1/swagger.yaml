@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.18
       format: google
       url: 'https://androiddeviceprovisioning.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -151,7 +151,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/UpdateDeviceMetadataRequest'
-        - description: Required. The ID of the reseller partner.
+        - description: Required. The ID of the device.
           in: path
           name: deviceId
           required: true
@@ -178,6 +178,16 @@ paths:
         created and customers that enrolled themselves using the portal.
       operationId: androiddeviceprovisioning.partners.customers.list
       parameters:
+        - description: |-
+            The maximum number of results to be returned. If not specified or 0, all
+            the records are returned.
+          in: query
+          name: pageSize
+          type: integer
+        - description: A token identifying a page of results returned by the server.
+          in: query
+          name: pageToken
+          type: string
         - description: Required. The ID of the reseller partner.
           in: path
           name: partnerId
@@ -483,12 +493,13 @@ paths:
       tags:
         - customers
     get:
-      description: Gets a device.
-      operationId: androiddeviceprovisioning.partners.devices.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: androiddeviceprovisioning.operations.get
       parameters:
-        - description: |-
-            Required. The device API resource name in the format
-            `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -498,9 +509,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/Operation'
       tags:
-        - partners
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -646,8 +657,9 @@ paths:
       description: |-
         Creates a customer for zero-touch enrollment. After the method returns
         successfully, admin and owner roles can manage devices and EMM configs
-        by calling API methods or using their zero-touch enrollment portal. The API
-        doesn't notify the customer that they have access.
+        by calling API methods or using their zero-touch enrollment portal.
+        The customer receives an email that welcomes them to zero-touch enrollment
+        and explains how to sign into the portal.
       operationId: androiddeviceprovisioning.partners.customers.create
       parameters:
         - in: body
@@ -910,6 +922,9 @@ definitions:
       deviceIdentifier:
         $ref: '#/definitions/DeviceIdentifier'
         description: Required. The device identifier of the device to claim.
+      deviceMetadata:
+        $ref: '#/definitions/DeviceMetadata'
+        description: Optional. The metadata to attach to the device.
       sectionType:
         description: Required. The section type of the device's provisioning record.
         enum:
@@ -1393,6 +1408,10 @@ definitions:
           A token used to access the next page of results. Omitted if no further
           results are available.
         type: string
+      totalSize:
+        description: The total count of items in the list irrespective of pagination.
+        format: int32
+        type: integer
     type: object
   FindDevicesByOwnerRequest:
     description: Request to find devices by customers.
@@ -1433,6 +1452,10 @@ definitions:
           A token used to access the next page of results.
           Omitted if no further results are available.
         type: string
+      totalSize:
+        description: The total count of items in the list irrespective of pagination.
+        format: int32
+        type: integer
     type: object
   ListCustomersResponse:
     description: Response message of all customers related to this partner.
@@ -1442,6 +1465,15 @@ definitions:
         items:
           $ref: '#/definitions/Company'
         type: array
+      nextPageToken:
+        description: |-
+          A token to retrieve the next page of results. Omitted if no further results
+          are available.
+        type: string
+      totalSize:
+        description: The total count of items in the list irrespective of pagination.
+        format: int32
+        type: integer
     type: object
   ListVendorCustomersResponse:
     description: Response message to list customers of the vendor.
@@ -1456,6 +1488,10 @@ definitions:
           A token to retrieve the next page of results. Omitted if no further results
           are available.
         type: string
+      totalSize:
+        description: The total count of items in the list irrespective of pagination.
+        format: int32
+        type: integer
     type: object
   ListVendorsResponse:
     description: Response message to list vendors of the partner.
@@ -1465,6 +1501,10 @@ definitions:
           A token to retrieve the next page of results. Omitted if no further results
           are available.
         type: string
+      totalSize:
+        description: The total count of items in the list irrespective of pagination.
+        format: int32
+        type: integer
       vendors:
         description: |-
           List of vendors of the reseller partner. Fields `name`, `companyId` and

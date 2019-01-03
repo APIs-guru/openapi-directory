@@ -268,6 +268,91 @@ paths:
       summary: Gets a list of available networks
       tags:
         - Calendar (Television Show Schedules)
+  '/Calendar/Seasons/{AccessToken}/{Name}':
+    get:
+      consumes: []
+      operationId: CalendarShowSeasons_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of years
+          schema:
+            items:
+              $ref: '#/definitions/ShowSeasons'
+            type: array
+      summary: Returns list of seasons available in the calendar for show
+      tags:
+        - Calendar (Television Show Schedules)
+  '/Calendar/Show/Season/{AccessToken}/{Name}/{Season}':
+    get:
+      consumes: []
+      operationId: CalendarbyShownameSeason_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: Name
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: Season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of schedules/calendar entries
+          schema:
+            items:
+              $ref: '#/definitions/schedule'
+            type: array
+      summary: Get Calendar by showname and season
+      tags:
+        - Calendar (Television Show Schedules)
+  '/Calendar/Show/{AccessToken}/{Name}/{Year}':
+    get:
+      consumes: []
+      operationId: CalendarByShowName_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: Name
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: Year
+          required: true
+          type: string
+      responses:
+        '200':
+          description: List of schedules/calendar entries
+          schema:
+            items:
+              $ref: '#/definitions/schedule'
+            type: array
+      summary: Will return show schedule for queried showname and year
+      tags:
+        - Calendar (Television Show Schedules)
   '/Calendar/Today/{AccessToken}':
     get:
       consumes: []
@@ -541,6 +626,29 @@ paths:
               $ref: '#/definitions/Episode'
             type: array
       summary: Gets all episodes for selected show
+      tags:
+        - 'Television (Shows, Episodes, & Statuses)'
+  '/Episodes/LatestSeason/Show/{AccessToken}/{Name}':
+    get:
+      consumes: []
+      operationId: EpisodesLastAvailableSeasonbyName_Get
+      parameters:
+        - description: ''
+          in: path
+          name: AccessToken
+          required: true
+          type: string
+        - description: ''
+          in: path
+          name: Name
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Returns last available Season Number for passed showname
+          schema:
+            $ref: '#/definitions/LastAvailableSeason'
+      summary: Gets latest season number based on show name
       tags:
         - 'Television (Shows, Episodes, & Statuses)'
   '/Episodes/LatestSeason/{AccessToken}/{ID}':
@@ -1679,6 +1787,11 @@ definitions:
       imdbID:
         type: string
     type: object
+  ShowSeasons:
+    properties:
+      Year:
+        type: string
+    type: object
   TVInformation:
     properties:
       EpisodeCount:
@@ -1855,6 +1968,8 @@ definitions:
         type: string
       DaysOn:
         type: string
+      Episode:
+        type: string
       ID:
         type: string
       Image:
@@ -1864,6 +1979,8 @@ definitions:
       PremiereDate:
         type: string
       Runtime:
+        type: string
+      Season:
         type: string
       ShowName:
         type: string

@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.6.2
+        version: 2.7.18
       format: google
       url: 'https://spanner.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -63,11 +63,6 @@ parameters:
     in: query
     name: alt
     type: string
-  bearer_token:
-    description: OAuth bearer token.
-    in: query
-    name: bearer_token
-    type: string
   callback:
     description: JSONP
     in: query
@@ -88,12 +83,6 @@ parameters:
     in: query
     name: oauth_token
     type: string
-  pp:
-    default: true
-    description: Pretty-print response.
-    in: query
-    name: pp
-    type: boolean
   prettyPrint:
     default: true
     description: Returns response with indentations and line breaks.
@@ -145,12 +134,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -185,12 +172,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -282,12 +267,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -365,12 +348,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a particular instance configuration.
-      operationId: spanner.projects.instanceConfigs.get
+      description: |-
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: spanner.projects.instances.operations.get
       parameters:
-        - description: |-
-            Required. The name of the requested instance configuration. Values are of
-            the form `projects/<project>/instanceConfigs/<config>`.
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -380,7 +364,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/InstanceConfig'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -392,12 +376,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -477,12 +459,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -561,12 +541,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -650,12 +628,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -725,12 +701,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -802,20 +776,19 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Gets the access control policy for a database resource. Returns an empty
-        policy if a database exists but does not have a policy set.
+        Gets the access control policy for a database resource.
+        Returns an empty policy if a database exists but does
+        not have a policy set.
 
         Authorization requires `spanner.databases.getIamPolicy` permission on
         resource.
@@ -848,23 +821,21 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Sets the access control policy on a database resource. Replaces any
-        existing policy.
+        Sets the access control policy on a database resource.
+        Replaces any existing policy.
 
-        Authorization requires `spanner.databases.setIamPolicy` permission on
-        resource.
+        Authorization requires `spanner.databases.setIamPolicy`
+        permission on resource.
       operationId: spanner.projects.instances.databases.setIamPolicy
       parameters:
         - in: body
@@ -894,12 +865,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -908,10 +877,10 @@ paths:
       description: |-
         Returns permissions that the caller has on the specified database resource.
 
-        Attempting this RPC on a non-existent Cloud Spanner database will result in
-        a NOT_FOUND error if the user has `spanner.databases.list` permission on
-        the containing Cloud Spanner instance. Otherwise returns an empty set of
-        permissions.
+        Attempting this RPC on a non-existent Cloud Spanner database will
+        result in a NOT_FOUND error if the user has
+        `spanner.databases.list` permission on the containing Cloud
+        Spanner instance. Otherwise returns an empty set of permissions.
       operationId: spanner.projects.instances.databases.testIamPermissions
       parameters:
         - in: body
@@ -941,12 +910,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -986,12 +953,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1035,12 +1000,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1087,12 +1050,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1133,12 +1094,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1151,8 +1110,11 @@ paths:
         of the query result to read.  The same session and read-only transaction
         must be used by the PartitionQueryRequest used to create the
         partition tokens and the ExecuteSqlRequests that use the partition tokens.
+
         Partition tokens become invalid when the session used to create them
-        is deleted or begins a new transaction.
+        is deleted, is idle for too long, begins a new transaction, or becomes too
+        old.  When any of these happen, it is not possible to resume the query, and
+        the whole operation must be restarted from the beginning.
       operationId: spanner.projects.instances.databases.sessions.partitionQuery
       parameters:
         - in: body
@@ -1182,12 +1144,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1199,9 +1159,14 @@ paths:
         by StreamingRead to specify a subset of the read
         result to read.  The same session and read-only transaction must be used by
         the PartitionReadRequest used to create the partition tokens and the
-        ReadRequests that use the partition tokens.
+        ReadRequests that use the partition tokens.  There are no ordering
+        guarantees on rows returned among the returned partition tokens, or even
+        within each individual StreamingRead call issued with a partition_token.
+
         Partition tokens become invalid when the session used to create them
-        is deleted or begins a new transaction.
+        is deleted, is idle for too long, begins a new transaction, or becomes too
+        old.  When any of these happen, it is not possible to resume the read, and
+        the whole operation must be restarted from the beginning.
       operationId: spanner.projects.instances.databases.sessions.partitionRead
       parameters:
         - in: body
@@ -1231,12 +1196,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1285,12 +1248,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1334,12 +1295,10 @@ paths:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
       - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/bearer_token'
       - $ref: '#/parameters/callback'
       - $ref: '#/parameters/fields'
       - $ref: '#/parameters/key'
       - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/pp'
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
@@ -1386,6 +1345,13 @@ definitions:
   Binding:
     description: Associates `members` with a `role`.
     properties:
+      condition:
+        $ref: '#/definitions/Expr'
+        description: |-
+          Unimplemented. The condition that is associated with this binding.
+          NOTE: an unsatisfied condition will not allow user access via current
+          binding. Different bindings, including their conditions, are examined
+          independently.
       members:
         description: |+
           Specifies the identities requesting access for a Cloud Platform resource.
@@ -1418,7 +1384,6 @@ definitions:
         description: |-
           Role that is assigned to `members`.
           For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
-          Required
         type: string
     type: object
   ChildLink:
@@ -1674,6 +1639,20 @@ definitions:
           request that yielded this token.
         format: byte
         type: string
+      seqno:
+        description: |-
+          A per-transaction sequence number used to identify this request. This
+          makes each request idempotent such that if the request is received multiple
+          times, at most one will succeed.
+
+          The sequence number must be monotonically increasing within the
+          transaction. If a request arrives for the first time with an out-of-order
+          sequence number, the transaction may be aborted. Replays of previously
+          handled requests will yield the same response as the first execution.
+
+          Required for DML statements. Ignored for queries.
+        format: int64
+        type: string
       sql:
         description: Required. The SQL string.
         type: string
@@ -1682,6 +1661,50 @@ definitions:
         description: |-
           The transaction to use. If none is provided, the default is a
           temporary read-only transaction with strong concurrency.
+
+          The transaction to use.
+
+          For queries, if none is provided, the default is a temporary read-only
+          transaction with strong concurrency.
+
+          Standard DML statements require a ReadWrite transaction. Single-use
+          transactions are not supported (to avoid replay).  The caller must
+          either supply an existing transaction ID or begin a new transaction.
+
+          Partitioned DML requires an existing PartitionedDml transaction ID.
+    type: object
+  Expr:
+    description: |-
+      Represents an expression text. Example:
+
+          title: "User account presence"
+          description: "Determines whether the request has a user account"
+          expression: "size(request.user) > 0"
+    properties:
+      description:
+        description: |-
+          An optional description of the expression. This is a longer text which
+          describes the expression, e.g. when hovered over it in a UI.
+        type: string
+      expression:
+        description: |-
+          Textual representation of an expression in
+          Common Expression Language syntax.
+
+          The application context of the containing message determines which
+          well-known feature set of CEL is supported.
+        type: string
+      location:
+        description: |-
+          An optional string indicating the location of the expression for error
+          reporting, e.g. a file name and a position in the file.
+        type: string
+      title:
+        description: |-
+          An optional title for the expression, i.e. a short string describing
+          its purpose. This can be used e.g. in UIs which allow to enter the
+          expression.
+        type: string
     type: object
   Field:
     description: Message representing a single field of a struct.
@@ -2131,6 +2154,8 @@ definitions:
           streaming result set. These can be requested by setting
           ExecuteSqlRequest.query_mode and are sent
           only once with the last response in the stream.
+          This field will also be present in the last response for DML
+          statements.
       values:
         description: |-
           A streamed result set consists of a stream of values, which might
@@ -2296,6 +2321,10 @@ definitions:
           union operator conceptually divides one or more tables into multiple
           splits, remotely evaluates a subquery independently on each split, and
           then unions all results.
+
+          This must not contain DML commands, such as INSERT, UPDATE, or
+          DELETE. Use ExecuteStreamingSql with a
+          PartitionedDml transaction for large, partition-friendly DML operations.
         type: string
       transaction:
         $ref: '#/definitions/TransactionSelector'
@@ -2354,6 +2383,10 @@ definitions:
       transaction:
         $ref: '#/definitions/Transaction'
         description: Transaction created by this request.
+    type: object
+  PartitionedDml:
+    description: Message type to initiate a Partitioned DML transaction.
+    properties: {}
     type: object
   PlanNode:
     description: Node information for nodes appearing in a QueryPlan.plan_nodes.
@@ -2669,6 +2702,11 @@ definitions:
           Query plan and execution statistics for the SQL statement that
           produced this result set. These can be requested by setting
           ExecuteSqlRequest.query_mode.
+          DML statements always produce stats containing the number of rows
+          modified, unless executed using the
+          ExecuteSqlRequest.QueryMode.PLAN ExecuteSqlRequest.query_mode.
+          Other fields may or may not be populated, based on the
+          ExecuteSqlRequest.query_mode.
     type: object
   ResultSetMetadata:
     description: Metadata about a ResultSet or PartialResultSet.
@@ -2710,6 +2748,16 @@ definitions:
                 "cpu_time": "1.19 secs"
               }
         type: object
+      rowCountExact:
+        description: Standard DML returns an exact count of rows that were modified.
+        format: int64
+        type: string
+      rowCountLowerBound:
+        description: |-
+          Partitioned DML does not offer exactly-once semantics, so it
+          returns a lower bound of the rows modified.
+        format: int64
+        type: string
     type: object
   RollbackRequest:
     description: The request for Rollback.
@@ -2933,7 +2981,7 @@ definitions:
 
       # Transaction Modes
 
-      Cloud Spanner supports two transaction modes:
+      Cloud Spanner supports three transaction modes:
 
         1. Locking read-write. This type of transaction is the only way
            to write data into Cloud Spanner. These transactions rely on
@@ -2947,6 +2995,12 @@ definitions:
            read at timestamps in the past. Snapshot read-only
            transactions do not need to be committed.
 
+        3. Partitioned DML. This type of transaction is used to execute
+           a single Partitioned DML statement. Partitioned DML partitions
+           the key space and runs the DML statement over each partition
+           in parallel using separate, internal transactions that commit
+           independently. Partitioned DML transactions do not need to be
+           committed.
 
       For transactions that only read, snapshot read-only transactions
       provide simpler semantics and are almost always faster. In
@@ -2974,11 +3028,8 @@ definitions:
       inactivity at the client may cause Cloud Spanner to release a
       transaction's locks and abort it.
 
-      Reads performed within a transaction acquire locks on the data
-      being read. Writes can only be done at commit time, after all reads
-      have been completed.
       Conceptually, a read-write transaction consists of zero or more
-      reads or SQL queries followed by
+      reads or SQL statements followed by
       Commit. At any time before
       Commit, the client can send a
       Rollback request to abort the
@@ -3142,8 +3193,70 @@ definitions:
       timestamp become too old while executing. Reads and SQL queries with
       too-old read timestamps fail with the error `FAILED_PRECONDITION`.
 
-      ##
+      ## Partitioned DML Transactions
+
+      Partitioned DML transactions are used to execute DML statements with a
+      different execution strategy that provides different, and often better,
+      scalability properties for large, table-wide operations than DML in a
+      ReadWrite transaction. Smaller scoped statements, such as an OLTP workload,
+      should prefer using ReadWrite transactions.
+
+      Partitioned DML partitions the keyspace and runs the DML statement on each
+      partition in separate, internal transactions. These transactions commit
+      automatically when complete, and run independently from one another.
+
+      To reduce lock contention, this execution strategy only acquires read locks
+      on rows that match the WHERE clause of the statement. Additionally, the
+      smaller per-partition transactions hold locks for less time.
+
+      That said, Partitioned DML is not a drop-in replacement for standard DML used
+      in ReadWrite transactions.
+
+       - The DML statement must be fully-partitionable. Specifically, the statement
+         must be expressible as the union of many statements which each access only
+         a single row of the table.
+
+       - The statement is not applied atomically to all rows of the table. Rather,
+         the statement is applied atomically to partitions of the table, in
+         independent transactions. Secondary index rows are updated atomically
+         with the base table rows.
+
+       - Partitioned DML does not guarantee exactly-once execution semantics
+         against a partition. The statement will be applied at least once to each
+         partition. It is strongly recommended that the DML statement should be
+         idempotent to avoid unexpected results. For instance, it is potentially
+         dangerous to run a statement such as
+         `UPDATE table SET column = column + 1` as it could be run multiple times
+         against some rows.
+
+       - The partitions are committed automatically - there is no support for
+         Commit or Rollback. If the call returns an error, or if the client issuing
+         the ExecuteSql call dies, it is possible that some rows had the statement
+         executed on them successfully. It is also possible that statement was
+         never executed against other rows.
+
+       - Partitioned DML transactions may only contain the execution of a single
+         DML statement via ExecuteSql or ExecuteStreamingSql.
+
+       - If any error is encountered during the execution of the partitioned DML
+         operation (for instance, a UNIQUE INDEX violation, division by zero, or a
+         value that cannot be stored due to schema constraints), then the
+         operation is stopped at that point and an error is returned. It is
+         possible that at this point, some partitions have been committed (or even
+         committed multiple times), and other partitions have not been run at all.
+
+      Given the above, Partitioned DML is good fit for large, database-wide,
+      operations that are idempotent, such as deleting old rows from a very large
+      table.
     properties:
+      partitionedDml:
+        $ref: '#/definitions/PartitionedDml'
+        description: |-
+          Partitioned DML transaction.
+
+          Authorization to begin a Partitioned DML transaction requires
+          `spanner.databases.beginPartitionedDmlTransaction` permission
+          on the `session` resource.
       readOnly:
         $ref: '#/definitions/ReadOnly'
         description: |-

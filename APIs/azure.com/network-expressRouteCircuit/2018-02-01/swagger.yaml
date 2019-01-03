@@ -76,7 +76,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Request successful. The operation returns a list of ExpressRouteServiceProdiver resources.
+          description: Request successful. The operation returns a list of ExpressRouteServiceProvider resources.
           schema:
             $ref: '#/definitions/ExpressRouteServiceProviderListResult'
       tags:
@@ -680,7 +680,7 @@ paths:
           name: connectionName
           required: true
           type: string
-        - description: Parameters supplied to the create or update express route circuit circuit connection operation.
+        - description: Parameters supplied to the create or update express route circuit connection operation.
           in: body
           name: expressRouteCircuitConnectionParameters
           required: true
@@ -1026,7 +1026,7 @@ definitions:
                 type: string
             x-ms-azure-resource: true
           provisioningState:
-            description: 'Provisioning state of the circuit connection resource. Possible values are: ''Succeded'', ''Updating'', ''Deleting'', and ''Failed''.'
+            description: 'Provisioning state of the circuit connection resource. Possible values are: ''Succeeded'', ''Updating'', ''Deleting'', and ''Failed''.'
             readOnly: true
             type: string
   ExpressRouteCircuitConnectionPropertiesFormat:
@@ -1063,7 +1063,7 @@ definitions:
             type: string
         x-ms-azure-resource: true
       provisioningState:
-        description: 'Provisioning state of the circuit connection resource. Possible values are: ''Succeded'', ''Updating'', ''Deleting'', and ''Failed''.'
+        description: 'Provisioning state of the circuit connection resource. Possible values are: ''Succeeded'', ''Updating'', ''Deleting'', and ''Failed''.'
         readOnly: true
         type: string
   ExpressRouteCircuitListResult:
@@ -1101,7 +1101,7 @@ definitions:
     description: Specifies the peering configuration.
     properties:
       advertisedCommunities:
-        description: The communities of bgp peering. Spepcified for microsoft peering
+        description: The communities of bgp peering. Specified for microsoft peering
         items:
           type: string
         type: array
@@ -1202,7 +1202,7 @@ definitions:
                       type: string
                   x-ms-azure-resource: true
                 provisioningState:
-                  description: 'Provisioning state of the circuit connection resource. Possible values are: ''Succeded'', ''Updating'', ''Deleting'', and ''Failed''.'
+                  description: 'Provisioning state of the circuit connection resource. Possible values are: ''Succeeded'', ''Updating'', ''Deleting'', and ''Failed''.'
                   readOnly: true
                   type: string
         type: array
@@ -1219,7 +1219,7 @@ definitions:
         description: Specifies the peering configuration.
         properties:
           advertisedCommunities:
-            description: The communities of bgp peering. Spepcified for microsoft peering
+            description: The communities of bgp peering. Specified for microsoft peering
             items:
               type: string
             type: array
@@ -1584,7 +1584,7 @@ definitions:
         description: Specifies the peering configuration.
         properties:
           advertisedCommunities:
-            description: The communities of bgp peering. Spepcified for microsoft peering
+            description: The communities of bgp peering. Specified for microsoft peering
             items:
               type: string
             type: array
