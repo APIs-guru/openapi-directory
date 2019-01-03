@@ -252,7 +252,8 @@ function updateCollection(dir, command) {
                 warnings.push(`Spec was moved from "${filename}" to "${newFilename}"`);
             }
             else {
-              assert(!resolverContext.anyDiff,'anyDiff must be false here');
+              // we might have thrown a SpecError and converted it to a warning
+              //assert(!resolverContext.anyDiff,'anyDiff must be false here');
             }
           });
       }
@@ -307,7 +308,9 @@ function validateCollection(dir, command) {
           if (command.nuke) {
             fs.unlinkSync(filename);
           }
-          else throw Error('Validation errors detected '+filename);
+          else {
+            warnings.push('Validation errors detected '+filename);
+          }
         }
         else {
           if (command.fix) {
@@ -594,8 +597,10 @@ function writeSpec(source, format, exPatch, command) {
       if (!fromLeads) {
         if (e.message.indexOf('Can not')>=0)
           e.message = 'Warning: '+e.message;
-        if (resolverContext.anyDiff || (!e.message.startsWith('Warning')))
-          throw new SpecError(e, context);
+        if (resolverContext.anyDiff || (!e.message.startsWith('Warning'))) {
+          //throw new SpecError(e, context);
+          warnings.push(e.message);
+        }
         console.log(e.message);
       }
       else {

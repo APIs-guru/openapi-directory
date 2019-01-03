@@ -74,7 +74,7 @@ function indexByOriginUrl(leads) {
   return _(leads)
     .groupBy(util.getOriginUrl)
     .mapValues(function (array, url) {
-      assert(_.size(array) === 1, `Duplicate leads for "${url}" URL. `+utilLib.inspect(array));
+      assert(_.size(array) === 1, `Duplicate leads for "${url}" URL. `+utilLib.inspect(array,{depth:Math.INFINITY}));
       return array[0];
     }).value();
 }
