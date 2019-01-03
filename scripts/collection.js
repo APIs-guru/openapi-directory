@@ -1260,7 +1260,7 @@ function logYaml(json) {
 
 process.on('exit', function() {
   if (warnings.length) {
-    process.exitCode = 1;
+    //process.exitCode = 1;
     for (var w of warnings) {
       console.log(w);
     }
