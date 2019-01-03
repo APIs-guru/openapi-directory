@@ -604,6 +604,7 @@ function writeSpec(source, format, exPatch, command) {
           e.message = 'Warning: '+e.message;
         if (resolverContext.anyDiff || (!e.message.startsWith('Warning'))) {
           //throw new SpecError(e, context);
+          process.exitCode = 1;
           warnings.push(e.message);
         }
         console.log(e.message);
