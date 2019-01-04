@@ -1,0 +1,162 @@
+swagger: '2.0'
+schemes:
+  - https
+host: sheetlabs.com
+basePath: /IND/rv
+info:
+  contact:
+    email: ab.techwriter@gmail.com
+    x-twitter: sheetlabs
+  description: 'This API returns information about all of the verses in Rig Veda. The results are JSON objects that contain the name of the god, poet, and meter of the verses in Rig Veda, the category of the god and the poet, and the mandal and sukta number.'
+  license:
+    name: Distributed under the MIT license
+    url: 'https://opensource.org/licenses/MIT'
+  title: rv
+  version: '1.1'
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: 'https://twitter.com/sheetlabs/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/AninditaBasu/indica/master/rv_SDKs/rv.yaml'
+      version: '2.0'
+  x-providerName: sheetlabs.com
+  x-serviceName: rig-veda
+externalDocs:
+  description: Documentation
+  url: 'https://aninditabasu.github.io/indica/'
+paths:
+  /:
+    get:
+      responses:
+        '200':
+          description: Records fetched
+        '401':
+          description: The API needs an authentication key.
+      summary: Fetch all records from the database
+  /mandal:
+    get:
+      parameters:
+        - description: Click to select the mandal number from the list.
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+            - 9
+            - 10
+          in: query
+          name: mandal
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Verses fetched successfully.
+        '401':
+          description: You need an authentication key.
+      summary: Fetch all verses in a specific book
+  /meter:
+    get:
+      parameters:
+        - description: 'The name of the meter. Wildcard characters allowed, for example *tri'
+          in: query
+          name: meter
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Verses fetched successfully.
+        '401':
+          description: You need an authentication key.
+        '404':
+          description: Rig Veda does not have any verses in that meter.
+      summary: Fetch all verses composed in a specific meter
+  /sungby:
+    get:
+      parameters:
+        - description: 'The name of the rishi. Wildcard characters allowed, for example *mitra'
+          in: query
+          name: sungby
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Verses fetched successfully.
+        '401':
+          description: You need an authentication key.
+        '404':
+          description: No such rishi composed anything that went into the Rig Veda.
+      summary: Fetch all verses composed by a specific rishi
+  /sungbycategory:
+    get:
+      parameters:
+        - description: Click to select from the list.
+          enum:
+            - animal
+            - demon male
+            - divine female
+            - divine male
+            - human female
+            - human male
+          in: query
+          name: sungbycategory
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Verses fetched successfully.
+        '401':
+          description: You need an authentication key.
+        '404':
+          description: No such poet category exists in this API.
+      summary: Fetch all verses composed by a specific category of beings
+  /sungfor:
+    get:
+      parameters:
+        - description: 'The name of the god, goddess, or object. Wildcard characters allowed, for example *dra'
+          in: query
+          name: sungfor
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Verses fetched successfully.
+        '401':
+          description: You need an authentication key.
+        '404':
+          description: No such god or thing had verses composed in their honour.
+      summary: 'Fetch all verses addressed to a specific god, goddess, or object'
+  /sungforcategory:
+    get:
+      parameters:
+        - description: Click to select from the list.
+          enum:
+            - abstract
+            - animal
+            - demon male
+            - divine female
+            - divine human
+            - divine male
+            - human couple
+            - human female
+            - human male
+            - human unborn
+            - object
+            - plant
+          in: query
+          name: sungforcategory
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Verses fetched successfully.
+        '401':
+          description: You need an authentication key.
+        '404':
+          description: No such category exists in this API.
+      summary: Fetch all verses composed for a specific category
