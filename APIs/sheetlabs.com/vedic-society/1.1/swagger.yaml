@@ -1,0 +1,134 @@
+swagger: '2.0'
+schemes:
+  - https
+host: sheetlabs.com
+basePath: /IND/vs
+info:
+  contact:
+    email: ab.techwriter@gmail.com
+    x-twitter: sheetlabs
+  description: 'This API returns data regarding the descriptions of almost all nouns in vedic literature. The results are JSON objects that contain the word transliterated to roman, the word in nagari, the meaning of the word, and the category the word belongs to.'
+  license:
+    name: Distributed under the MIT license
+    url: 'https://opensource.org/licenses/MIT'
+  title: vs
+  version: '1.1'
+  x-apisguru-categories:
+    - open_data
+  x-logo:
+    url: 'https://twitter.com/sheetlabs/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/AninditaBasu/indica/master/vs_SDKs/vs.yaml'
+      version: '2.0'
+  x-providerName: sheetlabs.com
+  x-serviceName: vedic-society
+externalDocs:
+  description: Documentation
+  url: 'https://aninditabasu.github.io/indica/'
+paths:
+  /:
+    get:
+      responses:
+        '200':
+          description: Records fetched
+        '401':
+          description: The API needs an authentication key.
+      summary: Fetch all records from the database
+  /category:
+    get:
+      parameters:
+        - description: Click to select from a list
+          enum:
+            - grass
+            - plant
+            - tree
+            - animal
+            - bird
+            - cattle
+            - fish
+            - insect
+            - snake
+            - worm
+            - building
+            - chariot
+            - food
+            - grain
+            - metal
+            - object
+            - ship
+            - weapon
+            - war
+            - number
+            - distance
+            - time
+            - weight
+            - mountain
+            - place
+            - river
+            - astronomy
+            - disease
+            - literature
+            - medicine
+            - poison
+            - subject
+            - dicing
+            - games
+            - music
+            - clothing
+            - hair
+            - ornament
+            - law
+            - morals
+            - agriculture
+            - caste
+            - family
+            - occupation
+            - priest
+            - royalty
+            - trade
+            - tribe
+          in: query
+          name: category
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Words fetched successfully.
+        '401':
+          description: You need an authentication key.
+        '404':
+          description: No such category exists in this API.
+      summary: Fetch all words in a specific category
+  /description:
+    get:
+      parameters:
+        - description: 'The string you are looking for in the word meaning, for example, chariot. Wildcards allowed; example: char*.'
+          in: query
+          name: description
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Words fetched successfully.
+        '401':
+          description: You need an authentication key.
+        '404':
+          description: This string does not exist in the database.
+      summary: Fetch all meanings that contain a specific string
+  /word:
+    get:
+      parameters:
+        - description: 'The Sanskrit word transliterated into English, for example, rajan. Wildcards allowed; example: *aj*.'
+          in: query
+          name: word
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Word meaning fetched successfully.
+        '401':
+          description: You need an authentication key.
+        '404':
+          description: No such word exists in the database.
+      summary: Fetch the meaning of a specific word
