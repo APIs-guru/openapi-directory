@@ -378,7 +378,7 @@ paths:
   '/datasets/{datasetName}/content':
     post:
       operationId: CreateDatasetContent
-      description: Creates the content of a data set by applying a SQL action.
+      description: Creates the content of a data set by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application).
       responses:
         '200':
           description: Success
@@ -1582,7 +1582,7 @@ definitions:
         description: The name of the channel where the messages are sent.
       messages:
         $ref: '#/definitions/Messages'
-        description: 'The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.'
+        description: '<p>The list of messages to be sent. Each message has format: ''{ "messageId": "string", "payload": "string"}''.</p> <p>Note that the field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_); no other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$". </p> </li> <li> <p>Cannot be greater than 255 characters.</p> </li> <li> <p>Are case-insensitive. (Fields named "foo" and "FOO" in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. </p>'
   ResourceNotFoundException: {}
   InvalidRequestException: {}
   InternalFailureException: {}
@@ -1651,6 +1651,7 @@ definitions:
         description: A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <b>DataSetTrigger</b> objects.
       contentDeliveryRules:
         $ref: '#/definitions/DatasetContentDeliveryRules'
+        description: When data set contents are created they are delivered to destinations specified here.
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: '[Optional] How long, in days, message data is kept for the data set. If not given or set to null, the latest version of the dataset content plus the latest succeeded version (if they are different) are retained for at most 90 days.'
@@ -1955,6 +1956,7 @@ definitions:
         description: A list of "DatasetTrigger" objects. The list can be empty or can contain up to five <b>DataSetTrigger</b> objects.
       contentDeliveryRules:
         $ref: '#/definitions/DatasetContentDeliveryRules'
+        description: When data set contents are created they are delivered to destinations specified here.
       retentionPeriod:
         $ref: '#/definitions/RetentionPeriod'
         description: 'How long, in days, message data is kept for the data set.'
@@ -2278,6 +2280,7 @@ definitions:
         description: The "DatasetTrigger" objects that specify when the data set is automatically updated.
       contentDeliveryRules:
         $ref: '#/definitions/DatasetContentDeliveryRules'
+        description: When data set contents are created they are delivered to destinations specified here.
       status:
         $ref: '#/definitions/DatasetStatus'
         description: The status of the data set.
@@ -2316,11 +2319,11 @@ definitions:
         description: The name of the data set action by which data set contents are automatically created.
       queryAction:
         $ref: '#/definitions/SqlQueryDatasetAction'
-        description: An "SqlQueryDatasetAction" object that contains the SQL query to modify the message.
+        description: An "SqlQueryDatasetAction" object that uses an SQL query to automatically create data set contents.
       containerAction:
         $ref: '#/definitions/ContainerDatasetAction'
         description: Information which allows the system to run a containerized application in order to create the data set contents. The application must be in a Docker container along with any needed support libraries.
-    description: A "DatasetAction" object specifying the query that creates the data set content.
+    description: A "DatasetAction" object that specifies how data set contents are automatically created.
   DatasetActionSummary:
     type: object
     properties:
@@ -2350,13 +2353,18 @@ definitions:
     properties:
       inputName:
         $ref: '#/definitions/IotEventsInputName'
+        description: The name of the AWS IoT Events input to which data set contents are delivered.
       roleArn:
         $ref: '#/definitions/RoleArn'
+        description: The ARN of the role which grants AWS IoT Analytics permission to deliver data set contents to an AWS IoT Events input.
+    description: Configuration information for delivery of data set contents to AWS IoT Events.
   DatasetContentDeliveryDestination:
     type: object
     properties:
       iotEventsDestinationConfiguration:
         $ref: '#/definitions/IotEventsDestinationConfiguration'
+        description: Configuration information for delivery of data set contents to AWS IoT Events.
+    description: The destination to which data set contents are delivered.
   EntryName:
     type: string
   DatasetContentDeliveryRule:
@@ -2366,8 +2374,11 @@ definitions:
     properties:
       entryName:
         $ref: '#/definitions/EntryName'
+        description: The name of the data set content delivery rules entry.
       destination:
         $ref: '#/definitions/DatasetContentDeliveryDestination'
+        description: The destination to which data set contents are delivered.
+    description: When data set contents are created they are delivered to destination specified here.
   DatasetContentState:
     type: string
     enum:
@@ -2413,8 +2424,8 @@ definitions:
     properties:
       datasetName:
         $ref: '#/definitions/DatasetName'
-        description: The name of the data set whose latest contents will be used as input to the notebook or application.
-    description: The data set whose latest contents will be used as input to the notebook or application.
+        description: The name of the data set whose latest contents are used as input to the notebook or application.
+    description: The data set whose latest contents are used as input to the notebook or application.
   DatasetEntry:
     type: object
     properties:
@@ -2471,8 +2482,8 @@ definitions:
     properties:
       name:
         $ref: '#/definitions/DatasetName'
-        description: The name of the data set whose content generation will trigger the new data set content generation.
-    description: Information about the data set whose content generation will trigger the new data set content generation.
+        description: The name of the data set whose content generation triggers the new data set content generation.
+    description: Information about the data set whose content generation triggers the new data set content generation.
   DatasetTrigger:
     type: object
     properties:
@@ -2481,7 +2492,7 @@ definitions:
         description: The "Schedule" when the trigger is initiated.
       dataset:
         $ref: '#/definitions/TriggeringDataset'
-        description: The data set whose content creation will trigger the creation of this data set's contents.
+        description: The data set whose content creation triggers the creation of this data set's contents.
     description: The "DatasetTrigger" that specifies when the data set is automatically updated.
   DatastoreStatus:
     type: string
@@ -2563,11 +2574,11 @@ definitions:
     properties:
       offsetSeconds:
         $ref: '#/definitions/OffsetSeconds'
-        description: The number of seconds of estimated "in flight" lag time of message data.
+        description: 'The number of seconds of estimated "in flight" lag time of message data. When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of your message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.'
       timeExpression:
         $ref: '#/definitions/TimeExpression'
         description: 'An expression by which the time of the message data may be determined. This may be the name of a timestamp field, or a SQL expression which is used to derive the time the message data was generated.'
-    description: 'When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of your message data, so that data not processed from the previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.'
+    description: Used to limit data to that which has arrived since the last execution of the action.
   IncludeStatisticsFlag:
     type: boolean
   LoggingOptions:
@@ -2754,7 +2765,7 @@ definitions:
         description: The name of the 'math' activity.
       attribute:
         $ref: '#/definitions/AttributeName'
-        description: The name of the attribute that will contain the result of the math operation.
+        description: The name of the attribute that contains the result of the math operation.
       math:
         $ref: '#/definitions/MathExpression'
         description: An expression that uses one or more existing attributes and must return an integer value.
@@ -2798,7 +2809,7 @@ definitions:
       fileName:
         $ref: '#/definitions/OutputFileName'
         description: 'The URI of the location where data set contents are stored, usually the URI of a file in an S3 bucket.'
-    description: 'The URI of the location where data set contents are stored, usually the URI of a file in an S3 bucket.'
+    description: The value of the variable as a structure that specifies an output file URI.
   ReprocessingSummaries:
     type: array
     items:
@@ -2890,7 +2901,7 @@ definitions:
     properties:
       deltaTime:
         $ref: '#/definitions/DeltaTime'
-        description: 'Used to limit data to that which has arrived since the last execution of the action. When you create data set contents using message data from a specified time frame, some message data may still be "in flight" when processing begins, and so will not arrive in time to be processed. Use this field to make allowances for the "in flight" time of you message data, so that data not processed from a previous time frame will be included with the next time frame. Without this, missed message data would be excluded from processing during the next time frame as well, because its timestamp places it within the previous time frame.'
+        description: Used to limit data to that which has arrived since the last execution of the action.
     description: 'Information which is used to filter message data, to segregate it according to the time frame in which it arrives.'
   QueryFilters:
     type: array
