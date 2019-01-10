@@ -15,7 +15,7 @@ info:
                 <p>App Mesh supports containerized microservice applications that use service discovery
                 naming for their components. To use App Mesh, you must have a containerized application
                 running on Amazon EC2 instances, hosted in either Amazon ECS, Amazon EKS, or Kubernetes on AWS. For
-                more information about service discovery on Amazon ECS, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguideservice-discovery.html">Service Discovery</a> in the
+                more information about service discovery on Amazon ECS, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html">Service Discovery</a> in the
                    <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> is supported.
                 For more information, see <a href="https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/">DNS
                    for Services and Pods</a> in the Kubernetes documentation.</p>
@@ -664,7 +664,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeMesh
-      description: Describes an existing cluster.
+      description: Describes an existing service mesh.
       responses:
         '200':
           description: Success
@@ -1545,6 +1545,10 @@ definitions:
     description: ''
   ServiceName:
     type: string
+  HealthCheckThreshold:
+    type: integer
+    minimum: 2
+    maximum: 10
   MeshData:
     type: object
     required:
@@ -1691,6 +1695,10 @@ definitions:
         $ref: '#/definitions/ServiceName'
         description: The DNS service name for your virtual node.
     description: The DNS service discovery information for your virtual node.
+  HealthCheckIntervalMillis:
+    type: integer
+    minimum: 5000
+    maximum: 300000
   Arn:
     type: string
   ServiceDiscovery:
@@ -1727,10 +1735,10 @@ definitions:
                    </note>
       createdAt:
         $ref: '#/definitions/Timestamp'
-        description: The Unix epoch timestamp in seconds for when the cluster was created.
+        description: The Unix epoch timestamp in seconds for when the resource was created.
       lastUpdatedAt:
         $ref: '#/definitions/Timestamp'
-        description: The Unix epoch timestamp in seconds for when the cluster was last updated.
+        description: The Unix epoch timestamp in seconds for when the resource was last updated.
       uid:
         $ref: '#/definitions/String'
         description: The unique identifier for the resource.
@@ -1795,11 +1803,6 @@ definitions:
     items:
       $ref: '#/definitions/ServiceName'
     maxItems: 10
-  DurationMillis:
-    type: integer
-  NonNegativeInt:
-    type: integer
-    minimum: 0
   MeshRef:
     type: object
     properties:
@@ -1825,6 +1828,10 @@ definitions:
     description: |-
       An object representing the traffic distribution requirements for matched HTTP
                requests.
+  HealthCheckTimeoutMillis:
+    type: integer
+    minimum: 2000
+    maximum: 60000
   String:
     type: string
   VirtualRouterSpec:
@@ -1880,11 +1887,7 @@ definitions:
     properties:
       healthCheck:
         $ref: '#/definitions/HealthCheckPolicy'
-        description: |-
-          <p>The health check information for the listener.</p>
-                   <note>
-                      <p>Listener health checks are not available during the App Mesh preview.</p>
-                   </note>
+        description: The health check information for the listener.
       portMapping:
         $ref: '#/definitions/PortMapping'
         description: The port mapping information for the listener.
@@ -1961,39 +1964,45 @@ definitions:
       - INACTIVE
   HealthCheckPolicy:
     type: object
+    required:
+      - healthyThreshold
+      - intervalMillis
+      - protocol
+      - timeoutMillis
+      - unhealthyThreshold
     properties:
       healthyThreshold:
-        $ref: '#/definitions/NonNegativeInt'
+        $ref: '#/definitions/HealthCheckThreshold'
         description: |-
           The number of consecutive successful health checks that must occur before declaring
                    listener healthy.
       intervalMillis:
-        $ref: '#/definitions/DurationMillis'
+        $ref: '#/definitions/HealthCheckIntervalMillis'
         description: The time period in milliseconds between each health check execution.
       path:
         $ref: '#/definitions/String'
-        description: The destination path for the health check request.
+        description: |-
+          The destination path for the health check request. This is only required if the
+                   specified protocol is HTTP; if the protocol is TCP, then this parameter is ignored.
       port:
         $ref: '#/definitions/PortNumber'
-        description: The destination port for the health check request.
+        description: |-
+          The destination port for the health check request. This port must match the port defined
+                   in the <a>PortMapping</a> for the listener.
       protocol:
         $ref: '#/definitions/PortProtocol'
         description: The protocol for the health check request.
       timeoutMillis:
-        $ref: '#/definitions/DurationMillis'
+        $ref: '#/definitions/HealthCheckTimeoutMillis'
         description: |-
           The amount of time to wait when receiving a response from the health check, in
                    milliseconds.
       unhealthyThreshold:
-        $ref: '#/definitions/NonNegativeInt'
+        $ref: '#/definitions/HealthCheckThreshold'
         description: |-
           The number of consecutive failed health checks that must occur before declaring a
                    virtual node unhealthy. 
-    description: |-
-      <p>An object representing the health check policy for a virtual node's listener.</p>
-               <note>
-                  <p>Listener health checks are not available during the App Mesh preview.</p>
-               </note>
+    description: An object representing the health check policy for a virtual node's listener.
   ListVirtualNodesLimit:
     type: integer
     minimum: 1

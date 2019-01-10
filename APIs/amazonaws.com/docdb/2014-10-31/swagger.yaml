@@ -1,0 +1,3601 @@
+swagger: '2.0'
+info:
+  version: '2014-10-31'
+  x-release: v4
+  title: Amazon DocumentDB with MongoDB compatibility
+  description: Amazon DocumentDB API documentation
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: docdb
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/docdb-2014-10-31.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/rds/'
+host: rds.amazonaws.com
+basePath: /
+x-hasEquivalentPaths: true
+schemes:
+  - https
+  - http
+consumes: []
+produces: []
+parameters:
+  Action:
+    name: Action
+    in: query
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: query
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /:
+    post:
+      operationId: AddTagsToResource
+      description: Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a <code>Condition</code> statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+        '482':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddTagsToResourceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ApplyPendingMaintenanceAction':
+    post:
+      operationId: ApplyPendingMaintenanceAction
+      description: 'Applies a pending maintenance action to a resource (for example, to a DB instance).'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplyPendingMaintenanceActionResult'
+        '480':
+          description: ResourceNotFoundFault
+          schema:
+            $ref: '#/definitions/ResourceNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ApplyPendingMaintenanceActionMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CopyDBClusterParameterGroup':
+    post:
+      operationId: CopyDBClusterParameterGroup
+      description: Copies the specified DB cluster parameter group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyDBClusterParameterGroupResult'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '481':
+          description: DBParameterGroupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupQuotaExceededFault'
+        '482':
+          description: DBParameterGroupAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupAlreadyExistsFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopyDBClusterParameterGroupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CopyDBClusterSnapshot':
+    post:
+      operationId: CopyDBClusterSnapshot
+      description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>To cancel the copy operation after it is in progress, delete the target DB cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in the <i>copying</i> status.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CopyDBClusterSnapshotResult'
+        '480':
+          description: DBClusterSnapshotAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotAlreadyExistsFault'
+        '481':
+          description: DBClusterSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotNotFoundFault'
+        '482':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '483':
+          description: InvalidDBClusterSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterSnapshotStateFault'
+        '484':
+          description: SnapshotQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SnapshotQuotaExceededFault'
+        '485':
+          description: KMSKeyNotAccessibleFault
+          schema:
+            $ref: '#/definitions/KMSKeyNotAccessibleFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CopyDBClusterSnapshotMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBCluster':
+    post:
+      operationId: CreateDBCluster
+      description: Creates a new Amazon DocumentDB DB cluster.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBClusterResult'
+        '480':
+          description: DBClusterAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBClusterAlreadyExistsFault'
+        '481':
+          description: InsufficientStorageClusterCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientStorageClusterCapacityFault'
+        '482':
+          description: DBClusterQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBClusterQuotaExceededFault'
+        '483':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '484':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '485':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '486':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '487':
+          description: InvalidDBSubnetGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSubnetGroupStateFault'
+        '488':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+        '489':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '490':
+          description: DBClusterParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterParameterGroupNotFoundFault'
+        '491':
+          description: KMSKeyNotAccessibleFault
+          schema:
+            $ref: '#/definitions/KMSKeyNotAccessibleFault'
+        '492':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '493':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '494':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDBClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBClusterParameterGroup':
+    post:
+      operationId: CreateDBClusterParameterGroup
+      description: '<p>Creates a new DB cluster parameter group.</p> <p>Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.</p> <p>A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after you create it. After you create a DB cluster parameter group, you must associate it with your DB cluster. For the new DB cluster parameter group and associated settings to take effect, you must then reboot the DB instances in the DB cluster without failover.</p> <important> <p>After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This step is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBClusterParameterGroupResult'
+        '480':
+          description: DBParameterGroupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupQuotaExceededFault'
+        '481':
+          description: DBParameterGroupAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupAlreadyExistsFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDBClusterParameterGroupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBClusterSnapshot':
+    post:
+      operationId: CreateDBClusterSnapshot
+      description: 'Creates a snapshot of a DB cluster. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBClusterSnapshotResult'
+        '480':
+          description: DBClusterSnapshotAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotAlreadyExistsFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SnapshotQuotaExceededFault'
+        '484':
+          description: InvalidDBClusterSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterSnapshotStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDBClusterSnapshotMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBInstance':
+    post:
+      operationId: CreateDBInstance
+      description: Creates a new DB instance.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBInstanceResult'
+        '480':
+          description: DBInstanceAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBInstanceAlreadyExistsFault'
+        '481':
+          description: InsufficientDBInstanceCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientDBInstanceCapacityFault'
+        '482':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '483':
+          description: DBSecurityGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotFoundFault'
+        '484':
+          description: InstanceQuotaExceededFault
+          schema:
+            $ref: '#/definitions/InstanceQuotaExceededFault'
+        '485':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '486':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '487':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '488':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '489':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+        '490':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '491':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '492':
+          description: StorageTypeNotSupportedFault
+          schema:
+            $ref: '#/definitions/StorageTypeNotSupportedFault'
+        '493':
+          description: AuthorizationNotFoundFault
+          schema:
+            $ref: '#/definitions/AuthorizationNotFoundFault'
+        '494':
+          description: KMSKeyNotAccessibleFault
+          schema:
+            $ref: '#/definitions/KMSKeyNotAccessibleFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDBInstanceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreateDBSubnetGroup':
+    post:
+      operationId: CreateDBSubnetGroup
+      description: Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateDBSubnetGroupResult'
+        '480':
+          description: DBSubnetGroupAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupAlreadyExistsFault'
+        '481':
+          description: DBSubnetGroupQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupQuotaExceededFault'
+        '482':
+          description: DBSubnetQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBSubnetQuotaExceededFault'
+        '483':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '484':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateDBSubnetGroupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBCluster':
+    post:
+      operationId: DeleteDBCluster
+      description: '<p>Deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can''t be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted.</p> <p/>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: DBClusterSnapshotAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotAlreadyExistsFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SnapshotQuotaExceededFault'
+        '484':
+          description: InvalidDBClusterSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterSnapshotStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDBClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBClusterParameterGroup':
+    post:
+      operationId: DeleteDBClusterParameterGroup
+      description: Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidDBParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBParameterGroupStateFault'
+        '481':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDBClusterParameterGroupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBClusterSnapshot':
+    post:
+      operationId: DeleteDBClusterSnapshot
+      description: '<p>Deletes a DB cluster snapshot. If the snapshot is being copied, the copy operation is terminated.</p> <note> <p>The DB cluster snapshot must be in the <code>available</code> state to be deleted.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDBClusterSnapshotResult'
+        '480':
+          description: InvalidDBClusterSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterSnapshotStateFault'
+        '481':
+          description: DBClusterSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDBClusterSnapshotMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBInstance':
+    post:
+      operationId: DeleteDBInstance
+      description: 'Deletes a previously provisioned DB instance. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteDBInstanceResult'
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '482':
+          description: DBSnapshotAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBSnapshotAlreadyExistsFault'
+        '483':
+          description: SnapshotQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SnapshotQuotaExceededFault'
+        '484':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDBInstanceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteDBSubnetGroup':
+    post:
+      operationId: DeleteDBSubnetGroup
+      description: <p>Deletes a DB subnet group.</p> <note> <p>The specified database subnet group must not be associated with any DB instances.</p> </note>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidDBSubnetGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSubnetGroupStateFault'
+        '481':
+          description: InvalidDBSubnetStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSubnetStateFault'
+        '482':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteDBSubnetGroupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBClusterParameterGroups':
+    post:
+      operationId: DescribeDBClusterParameterGroups
+      description: 'Returns a list of <code>DBClusterParameterGroup</code> descriptions. If a <code>DBClusterParameterGroupName</code> parameter is specified, the list contains only the description of the specified DB cluster parameter group. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBClusterParameterGroupsMessage'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDBClusterParameterGroupsMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBClusterParameters':
+    post:
+      operationId: DescribeDBClusterParameters
+      description: Returns the detailed parameter list for a particular DB cluster parameter group.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBClusterParameterGroupDetails'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDBClusterParametersMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBClusterSnapshotAttributes':
+    post:
+      operationId: DescribeDBClusterSnapshotAttributes
+      description: '<p>Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot.</p> <p>When you share snapshots with other AWS accounts, <code>DescribeDBClusterSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDBClusterSnapshotAttributesResult'
+        '480':
+          description: DBClusterSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDBClusterSnapshotAttributesMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBClusterSnapshots':
+    post:
+      operationId: DescribeDBClusterSnapshots
+      description: Returns information about DB cluster snapshots. This API operation supports pagination.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotMessage'
+        '480':
+          description: DBClusterSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDBClusterSnapshotsMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBClusters':
+    post:
+      operationId: DescribeDBClusters
+      description: Returns information about provisioned Amazon DocumentDB DB clusters. This API operation supports pagination.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBClusterMessage'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDBClustersMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBEngineVersions':
+    post:
+      operationId: DescribeDBEngineVersions
+      description: Returns a list of the available DB engines.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBEngineVersionMessage'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDBEngineVersionsMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBInstances':
+    post:
+      operationId: DescribeDBInstances
+      description: Returns information about provisioned Amazon DocumentDB instances. This API supports pagination.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBInstanceMessage'
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDBInstancesMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeDBSubnetGroups':
+    post:
+      operationId: DescribeDBSubnetGroups
+      description: 'Returns a list of <code>DBSubnetGroup</code> descriptions. If a <code>DBSubnetGroupName</code> is specified, the list will contain only the descriptions of the specified <code>DBSubnetGroup</code>.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBSubnetGroupMessage'
+        '480':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDBSubnetGroupsMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEngineDefaultClusterParameters':
+    post:
+      operationId: DescribeEngineDefaultClusterParameters
+      description: Returns the default engine and system parameter information for the cluster database engine.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeEngineDefaultClusterParametersResult'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEngineDefaultClusterParametersMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEventCategories':
+    post:
+      operationId: DescribeEventCategories
+      description: 'Displays a list of categories for all event source types, or, if specified, for a specified source type. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventCategoriesMessage'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEventCategoriesMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeEvents':
+    post:
+      operationId: DescribeEvents
+      description: 'Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, DB security group, DB snapshot, or DB parameter group by providing the name as a parameter. By default, the events of the past hour are returned.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/EventsMessage'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeEventsMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeOrderableDBInstanceOptions':
+    post:
+      operationId: DescribeOrderableDBInstanceOptions
+      description: Returns a list of orderable DB instance options for the specified engine.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/OrderableDBInstanceOptionsMessage'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeOrderableDBInstanceOptionsMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribePendingMaintenanceActions':
+    post:
+      operationId: DescribePendingMaintenanceActions
+      description: 'Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PendingMaintenanceActionsMessage'
+        '480':
+          description: ResourceNotFoundFault
+          schema:
+            $ref: '#/definitions/ResourceNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribePendingMaintenanceActionsMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#FailoverDBCluster':
+    post:
+      operationId: FailoverDBCluster
+      description: '<p>Forces a failover for a DB cluster.</p> <p>A failover for a DB cluster promotes one of the Amazon DocumentDB replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer).</p> <p>If the primary instance fails, Amazon DocumentDB automatically fails over to an Amazon DocumentDB replica, if one exists. You can force a failover when you want to simulate a failure of a primary instance for testing.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/FailoverDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/FailoverDBClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Lists all tags on an Amazon DocumentDB resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagListMessage'
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+        '482':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyDBCluster':
+    post:
+      operationId: ModifyDBCluster
+      description: 'Modifies a setting for an Amazon DocumentDB DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyDBClusterResult'
+        '480':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '481':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '482':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '483':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '484':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '485':
+          description: InvalidDBSubnetGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSubnetGroupStateFault'
+        '486':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+        '487':
+          description: DBClusterParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterParameterGroupNotFoundFault'
+        '488':
+          description: InvalidDBSecurityGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSecurityGroupStateFault'
+        '489':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '490':
+          description: DBClusterAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBClusterAlreadyExistsFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyDBClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyDBClusterParameterGroup':
+    post:
+      operationId: ModifyDBClusterParameterGroup
+      description: '<p> Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: <code>ParameterName</code>, <code>ParameterValue</code>, and <code>ApplyMethod</code>. A maximum of 20 parameters can be modified in a single request. </p> <note> <p>Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot or maintenance window before the change can take effect.</p> </note> <important> <p>After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the parameter group is used as the default for a new DB cluster. This step is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter.</p> </important>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBClusterParameterGroupNameMessage'
+        '480':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '481':
+          description: InvalidDBParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBParameterGroupStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyDBClusterParameterGroupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyDBClusterSnapshotAttribute':
+    post:
+      operationId: ModifyDBClusterSnapshotAttribute
+      description: '<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual DB cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code>, and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value <code>all</code> to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can''t use <code>all</code> as a value for that parameter in this case.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyDBClusterSnapshotAttributeResult'
+        '480':
+          description: DBClusterSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotNotFoundFault'
+        '481':
+          description: InvalidDBClusterSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterSnapshotStateFault'
+        '482':
+          description: SharedSnapshotQuotaExceededFault
+          schema:
+            $ref: '#/definitions/SharedSnapshotQuotaExceededFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyDBClusterSnapshotAttributeMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyDBInstance':
+    post:
+      operationId: ModifyDBInstance
+      description: Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyDBInstanceResult'
+        '480':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '481':
+          description: InvalidDBSecurityGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSecurityGroupStateFault'
+        '482':
+          description: DBInstanceAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBInstanceAlreadyExistsFault'
+        '483':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '484':
+          description: DBSecurityGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSecurityGroupNotFoundFault'
+        '485':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+        '486':
+          description: InsufficientDBInstanceCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientDBInstanceCapacityFault'
+        '487':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '488':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '489':
+          description: DBUpgradeDependencyFailureFault
+          schema:
+            $ref: '#/definitions/DBUpgradeDependencyFailureFault'
+        '490':
+          description: StorageTypeNotSupportedFault
+          schema:
+            $ref: '#/definitions/StorageTypeNotSupportedFault'
+        '491':
+          description: AuthorizationNotFoundFault
+          schema:
+            $ref: '#/definitions/AuthorizationNotFoundFault'
+        '492':
+          description: CertificateNotFoundFault
+          schema:
+            $ref: '#/definitions/CertificateNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyDBInstanceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ModifyDBSubnetGroup':
+    post:
+      operationId: ModifyDBSubnetGroup
+      description: Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModifyDBSubnetGroupResult'
+        '480':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '481':
+          description: DBSubnetQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBSubnetQuotaExceededFault'
+        '482':
+          description: SubnetAlreadyInUse
+          schema:
+            $ref: '#/definitions/SubnetAlreadyInUse'
+        '483':
+          description: DBSubnetGroupDoesNotCoverEnoughAZs
+          schema:
+            $ref: '#/definitions/DBSubnetGroupDoesNotCoverEnoughAZs'
+        '484':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ModifyDBSubnetGroupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RebootDBInstance':
+    post:
+      operationId: RebootDBInstance
+      description: '<p>You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the DB cluster parameter group that is associated with the DB instance, you must reboot the instance for the changes to take effect. </p> <p>Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to <i>rebooting</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RebootDBInstanceResult'
+        '480':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '481':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RebootDBInstanceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RemoveTagsFromResource':
+    post:
+      operationId: RemoveTagsFromResource
+      description: Removes metadata tags from an Amazon DocumentDB resource.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+        '482':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveTagsFromResourceMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ResetDBClusterParameterGroup':
+    post:
+      operationId: ResetDBClusterParameterGroup
+      description: '<p> Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters, submit a list of the following: <code>ParameterName</code> and <code>ApplyMethod</code>. To reset the entire DB cluster parameter group, specify the <code>DBClusterParameterGroupName</code> and <code>ResetAllParameters</code> parameters. </p> <p> When you reset the entire group, dynamic parameters are updated immediately and static parameters are set to <code>pending-reboot</code> to take effect on the next DB instance reboot.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DBClusterParameterGroupNameMessage'
+        '480':
+          description: InvalidDBParameterGroupStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBParameterGroupStateFault'
+        '481':
+          description: DBParameterGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBParameterGroupNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ResetDBClusterParameterGroupMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RestoreDBClusterFromSnapshot':
+    post:
+      operationId: RestoreDBClusterFromSnapshot
+      description: '<p>Creates a new DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.</p> <p>If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestoreDBClusterFromSnapshotResult'
+        '480':
+          description: DBClusterAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBClusterAlreadyExistsFault'
+        '481':
+          description: DBClusterQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBClusterQuotaExceededFault'
+        '482':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '483':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '484':
+          description: DBSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSnapshotNotFoundFault'
+        '485':
+          description: DBClusterSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotNotFoundFault'
+        '486':
+          description: InsufficientDBClusterCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientDBClusterCapacityFault'
+        '487':
+          description: InsufficientStorageClusterCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientStorageClusterCapacityFault'
+        '488':
+          description: InvalidDBSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSnapshotStateFault'
+        '489':
+          description: InvalidDBClusterSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterSnapshotStateFault'
+        '490':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+        '491':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '492':
+          description: InvalidRestoreFault
+          schema:
+            $ref: '#/definitions/InvalidRestoreFault'
+        '493':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '494':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+        '495':
+          description: KMSKeyNotAccessibleFault
+          schema:
+            $ref: '#/definitions/KMSKeyNotAccessibleFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RestoreDBClusterFromSnapshotMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RestoreDBClusterToPointInTime':
+    post:
+      operationId: RestoreDBClusterToPointInTime
+      description: 'Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before <code>LatestRestorableTime</code> for up to <code>BackupRetentionPeriod</code> days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/RestoreDBClusterToPointInTimeResult'
+        '480':
+          description: DBClusterAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBClusterAlreadyExistsFault'
+        '481':
+          description: DBClusterNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterNotFoundFault'
+        '482':
+          description: DBClusterQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBClusterQuotaExceededFault'
+        '483':
+          description: DBClusterSnapshotNotFoundFault
+          schema:
+            $ref: '#/definitions/DBClusterSnapshotNotFoundFault'
+        '484':
+          description: DBSubnetGroupNotFoundFault
+          schema:
+            $ref: '#/definitions/DBSubnetGroupNotFoundFault'
+        '485':
+          description: InsufficientDBClusterCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientDBClusterCapacityFault'
+        '486':
+          description: InsufficientStorageClusterCapacityFault
+          schema:
+            $ref: '#/definitions/InsufficientStorageClusterCapacityFault'
+        '487':
+          description: InvalidDBClusterSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterSnapshotStateFault'
+        '488':
+          description: InvalidDBClusterStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBClusterStateFault'
+        '489':
+          description: InvalidDBSnapshotStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBSnapshotStateFault'
+        '490':
+          description: InvalidRestoreFault
+          schema:
+            $ref: '#/definitions/InvalidRestoreFault'
+        '491':
+          description: InvalidSubnet
+          schema:
+            $ref: '#/definitions/InvalidSubnet'
+        '492':
+          description: InvalidVPCNetworkStateFault
+          schema:
+            $ref: '#/definitions/InvalidVPCNetworkStateFault'
+        '493':
+          description: KMSKeyNotAccessibleFault
+          schema:
+            $ref: '#/definitions/KMSKeyNotAccessibleFault'
+        '494':
+          description: StorageQuotaExceededFault
+          schema:
+            $ref: '#/definitions/StorageQuotaExceededFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RestoreDBClusterToPointInTimeMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AddTagsToResourceMessage:
+    type: object
+    required:
+      - ResourceName
+      - Tags
+    properties:
+      ResourceName:
+        $ref: '#/definitions/String'
+        description: The Amazon DocumentDB resource that the tags are added to. This value is an Amazon Resource Name (ARN).
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'The tags to be assigned to the Amazon DocumentDB resource. '
+    description: Represents the input to <a>AddTagsToResource</a>.
+  DBInstanceNotFoundFault: {}
+  DBSnapshotNotFoundFault: {}
+  DBClusterNotFoundFault: {}
+  ApplyPendingMaintenanceActionResult:
+    type: object
+    properties:
+      ResourcePendingMaintenanceActions:
+        $ref: '#/definitions/ResourcePendingMaintenanceActions'
+  ApplyPendingMaintenanceActionMessage:
+    type: object
+    required:
+      - ResourceIdentifier
+      - ApplyAction
+      - OptInType
+    properties:
+      ResourceIdentifier:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource that the pending maintenance action applies to.
+      ApplyAction:
+        $ref: '#/definitions/String'
+        description: '<p>The pending maintenance action to apply to this resource.</p> <p>Valid values: <code>system-update</code>, <code>db-upgrade</code> </p>'
+      OptInType:
+        $ref: '#/definitions/String'
+        description: '<p>A value that specifies the type of opt-in request or undoes an opt-in request. An opt-in request of type <code>immediate</code> can''t be undone.</p> <p>Valid values:</p> <ul> <li> <p> <code>immediate</code> - Apply the maintenance action immediately.</p> </li> <li> <p> <code>next-maintenance</code> - Apply the maintenance action during the next maintenance window for the resource.</p> </li> <li> <p> <code>undo-opt-in</code> - Cancel any existing <code>next-maintenance</code> opt-in requests.</p> </li> </ul>'
+    description: Represents the input to <a>ApplyPendingMaintenanceAction</a>.
+  ResourceNotFoundFault: {}
+  CopyDBClusterParameterGroupResult:
+    type: object
+    properties:
+      DBClusterParameterGroup:
+        $ref: '#/definitions/DBClusterParameterGroup'
+  CopyDBClusterParameterGroupMessage:
+    type: object
+    required:
+      - SourceDBClusterParameterGroupIdentifier
+      - TargetDBClusterParameterGroupIdentifier
+      - TargetDBClusterParameterGroupDescription
+    properties:
+      SourceDBClusterParameterGroupIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid DB cluster parameter group.</p> </li> <li> <p>If the source DB cluster parameter group is in the same AWS Region as the copy, specify a valid DB parameter group identifier; for example, <code>my-db-cluster-param-group</code>, or a valid ARN.</p> </li> <li> <p>If the source DB parameter group is in a different AWS Region than the copy, specify a valid DB cluster parameter group ARN; for example, <code>arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1</code>.</p> </li> </ul>'
+      TargetDBClusterParameterGroupIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier for the copied DB cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster-param-group1</code> </p>'
+      TargetDBClusterParameterGroupDescription:
+        $ref: '#/definitions/String'
+        description: A description for the copied DB cluster parameter group.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags that are to be assigned to the parameter group.
+    description: Represents the input to <a>CopyDBClusterParameterGroup</a>.
+  DBParameterGroupNotFoundFault: {}
+  DBParameterGroupQuotaExceededFault: {}
+  DBParameterGroupAlreadyExistsFault: {}
+  CopyDBClusterSnapshotResult:
+    type: object
+    properties:
+      DBClusterSnapshot:
+        $ref: '#/definitions/DBClusterSnapshot'
+  CopyDBClusterSnapshotMessage:
+    type: object
+    required:
+      - SourceDBClusterSnapshotIdentifier
+      - TargetDBClusterSnapshotIdentifier
+    properties:
+      SourceDBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier of the DB cluster snapshot to copy. This parameter is not case sensitive.</p> <p>You can''t copy an encrypted, shared DB cluster snapshot from one AWS Region to another.</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid system snapshot in the "available" state.</p> </li> <li> <p>If the source snapshot is in the same AWS Region as the copy, specify a valid DB snapshot identifier.</p> </li> <li> <p>If the source snapshot is in a different AWS Region than the copy, specify a valid DB cluster snapshot ARN.</p> </li> </ul> <p>Example: <code>my-cluster-snapshot1</code> </p>'
+      TargetDBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier of the new DB cluster snapshot to create from the source DB cluster snapshot. This parameter is not case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster-snapshot2</code> </p>'
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: '<p>The AWS KMS key ID for an encrypted DB cluster snapshot. The AWS KMS key ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or the AWS KMS key alias for the AWS KMS encryption key. </p> <p>If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new AWS KMS encryption key. If you don''t specify a value for <code>KmsKeyId</code>, then the copy of the DB cluster snapshot is encrypted with the same AWS KMS key as the source DB cluster snapshot. </p> <p>If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for <code>KmsKeyId</code>. </p> <p>To copy an encrypted DB cluster snapshot to another AWS Region, set <code>KmsKeyId</code> to the AWS KMS key ID that you want to use to encrypt the copy of the DB cluster snapshot in the destination Region. AWS KMS encryption keys are specific to the AWS Region that they are created in, and you can''t use encryption keys from one Region in another Region.</p> <p>If you copy an unencrypted DB cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>'
+      PreSignedUrl:
+        $ref: '#/definitions/String'
+        description: '<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> API action in the AWS Region that contains the source DB cluster snapshot to copy. You must use the <code>PreSignedUrl</code> parameter when copying an encrypted DB cluster snapshot from another AWS Region.</p> <p>The presigned URL must be a valid request for the <code>CopyDBSClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The presigned URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the presigned URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot will be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115</code>.</p> </li> </ul>'
+      CopyTags:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Set to <code>true</code> to copy all tags from the source DB cluster snapshot to the target DB cluster snapshot, and otherwise <code>false</code>. The default is <code>false</code>.'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to be assigned to the DB cluster snapshot.
+    description: Represents the input to <a>CopyDBClusterSnapshot</a>.
+  DBClusterSnapshotAlreadyExistsFault: {}
+  DBClusterSnapshotNotFoundFault: {}
+  InvalidDBClusterStateFault: {}
+  InvalidDBClusterSnapshotStateFault: {}
+  SnapshotQuotaExceededFault: {}
+  KMSKeyNotAccessibleFault: {}
+  CreateDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  CreateDBClusterMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+      - Engine
+    properties:
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: A list of Amazon EC2 Availability Zones that instances in the DB cluster can be created in.
+      BackupRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days for which automated backups are retained. You must specify a minimum value of 1.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 1 to 35.</p> </li> </ul>'
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The DB cluster identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster</code> </p>'
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: ' The name of the DB cluster parameter group to associate with this DB cluster.'
+      VpcSecurityGroupIds:
+        $ref: '#/definitions/VpcSecurityGroupIdList'
+        description: A list of EC2 VPC security groups to associate with this DB cluster.
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>A DB subnet group to associate with this DB cluster.</p> <p>Constraints: Must match the name of an existing <code>DBSubnetGroup</code>. Must not be default.</p> <p>Example: <code>mySubnetgroup</code> </p>'
+      Engine:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the database engine to be used for this DB cluster.</p> <p>Valid values: <code>docdb</code> </p>'
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The version number of the database engine to use.
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+        description: The port number on which the instances in the DB cluster accept connections.
+      MasterUsername:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the master user for the DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 16 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>'
+      MasterUserPassword:
+        $ref: '#/definitions/String'
+        description: '<p>The password for the master database user. This password can contain any printable ASCII character except "/", """, or "@".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+      PreferredBackupWindow:
+        $ref: '#/definitions/String'
+        description: '<p>The daily time range during which automated backups are created if automated backups are enabled using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/String'
+        description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.</p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to be assigned to the DB cluster.
+      StorageEncrypted:
+        $ref: '#/definitions/BooleanOptional'
+        description: Specifies whether the DB cluster is encrypted.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: '<p>The AWS KMS key identifier for an encrypted DB cluster.</p> <p>The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are creating a DB cluster using the same AWS account that owns the AWS KMS encryption key that is used to encrypt the new DB cluster, you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption key.</p> <p>If an encryption key is not specified in <code>KmsKeyId</code>:</p> <ul> <li> <p>If <code>ReplicationSourceIdentifier</code> identifies an encrypted source, then Amazon DocumentDB uses the encryption key that is used to encrypt the source. Otherwise, Amazon DocumentDB uses your default encryption key. </p> </li> <li> <p>If the <code>StorageEncrypted</code> parameter is <code>true</code> and <code>ReplicationSourceIdentifier</code> is not specified, Amazon DocumentDB uses your default encryption key.</p> </li> </ul> <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p> <p>If you create a replica of an encrypted DB cluster in another AWS Region, you must set <code>KmsKeyId</code> to a KMS key ID that is valid in the destination AWS Region. This key is used to encrypt the replica in that AWS Region.</p>'
+      EnableCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: A list of log types that need to be enabled for exporting to Amazon CloudWatch Logs.
+    description: Represents the input to <a>CreateDBCluster</a>.
+  DBClusterAlreadyExistsFault: {}
+  InsufficientStorageClusterCapacityFault: {}
+  DBClusterQuotaExceededFault: {}
+  StorageQuotaExceededFault: {}
+  DBSubnetGroupNotFoundFault: {}
+  InvalidVPCNetworkStateFault: {}
+  InvalidDBSubnetGroupStateFault: {}
+  InvalidSubnet: {}
+  InvalidDBInstanceStateFault: {}
+  DBClusterParameterGroupNotFoundFault: {}
+  DBSubnetGroupDoesNotCoverEnoughAZs: {}
+  CreateDBClusterParameterGroupResult:
+    type: object
+    properties:
+      DBClusterParameterGroup:
+        $ref: '#/definitions/DBClusterParameterGroup'
+  CreateDBClusterParameterGroupMessage:
+    type: object
+    required:
+      - DBClusterParameterGroupName
+      - DBParameterGroupFamily
+      - Description
+    properties:
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the DB cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>'
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: The DB cluster parameter group family name.
+      Description:
+        $ref: '#/definitions/String'
+        description: The description for the DB cluster parameter group.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to be assigned to the DB cluster parameter group.
+    description: Represents the input of <a>CreateDBClusterParameterGroup</a>.
+  CreateDBClusterSnapshotResult:
+    type: object
+    properties:
+      DBClusterSnapshot:
+        $ref: '#/definitions/DBClusterSnapshot'
+  CreateDBClusterSnapshotMessage:
+    type: object
+    required:
+      - DBClusterSnapshotIdentifier
+      - DBClusterIdentifier
+    properties:
+      DBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier of the DB cluster snapshot. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster-snapshot1</code> </p>'
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier of the DB cluster to create a snapshot for. This parameter is not case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing <code>DBCluster</code>.</p> </li> </ul> <p>Example: <code>my-cluster</code> </p>'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to be assigned to the DB cluster snapshot.
+    description: Represents the input of <a>CreateDBClusterSnapshot</a>.
+  CreateDBInstanceResult:
+    type: object
+    properties:
+      DBInstance:
+        $ref: '#/definitions/DBInstance'
+  CreateDBInstanceMessage:
+    type: object
+    required:
+      - DBInstanceIdentifier
+      - DBInstanceClass
+      - Engine
+      - DBClusterIdentifier
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The DB instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>mydbinstance</code> </p>'
+      DBInstanceClass:
+        $ref: '#/definitions/String'
+        description: 'The compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. '
+      Engine:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the database engine to be used for this instance.</p> <p>Valid value: <code>docdb</code> </p>'
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: '<p> The Amazon EC2 Availability Zone that the DB instance is created in.</p> <p>Default: A random, system-chosen Availability Zone in the endpoint''s AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can''t be specified if the <code>MultiAZ</code> parameter is set to <code>true</code>. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p>'
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/String'
+        description: '<p>The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. </p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>'
+      AutoMinorVersionUpgrade:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>Indicates that minor engine upgrades are applied automatically to the DB instance during the maintenance window.</p> <p>Default: <code>true</code> </p>'
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to be assigned to the DB instance.
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier of the DB cluster that the instance will belong to.
+      PromotionTier:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.</p> <p>Default: 1</p> <p>Valid values: 0-15</p>'
+    description: Represents the input to <a>CreateDBInstance</a>.
+  DBInstanceAlreadyExistsFault: {}
+  InsufficientDBInstanceCapacityFault: {}
+  DBSecurityGroupNotFoundFault: {}
+  InstanceQuotaExceededFault: {}
+  StorageTypeNotSupportedFault: {}
+  AuthorizationNotFoundFault: {}
+  CreateDBSubnetGroupResult:
+    type: object
+    properties:
+      DBSubnetGroup:
+        $ref: '#/definitions/DBSubnetGroup'
+  CreateDBSubnetGroupMessage:
+    type: object
+    required:
+      - DBSubnetGroupName
+      - DBSubnetGroupDescription
+      - SubnetIds
+    properties:
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name for the DB subnet group. This value is stored as a lowercase string.</p> <p>Constraints: Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens. Must not be default.</p> <p>Example: <code>mySubnetgroup</code> </p>'
+      DBSubnetGroupDescription:
+        $ref: '#/definitions/String'
+        description: The description for the DB subnet group.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIdentifierList'
+        description: The Amazon EC2 subnet IDs for the DB subnet group.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to be assigned to the DB subnet group.
+    description: Represents the input to <a>CreateDBSubnetGroup</a>.
+  DBSubnetGroupAlreadyExistsFault: {}
+  DBSubnetGroupQuotaExceededFault: {}
+  DBSubnetQuotaExceededFault: {}
+  DeleteDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  DeleteDBClusterMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The DB cluster identifier for the DB cluster to be deleted. This parameter isn''t case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match an existing <code>DBClusterIdentifier</code>.</p> </li> </ul>'
+      SkipFinalSnapshot:
+        $ref: '#/definitions/Boolean'
+        description: '<p> Determines whether a final DB cluster snapshot is created before the DB cluster is deleted. If <code>true</code> is specified, no DB cluster snapshot is created. If <code>false</code> is specified, a DB cluster snapshot is created before the DB cluster is deleted. </p> <note> <p>If <code>SkipFinalSnapshot</code> is <code>false</code>, you must specify a <code>FinalDBSnapshotIdentifier</code> parameter.</p> </note> <p>Default: <code>false</code> </p>'
+      FinalDBSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p> The DB cluster snapshot identifier of the new DB cluster snapshot created when <code>SkipFinalSnapshot</code> is set to <code>false</code>. </p> <note> <p> Specifying this parameter and also setting the <code>SkipFinalShapshot</code> parameter to <code>true</code> results in an error. </p> </note> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+    description: Represents the input to <a>DeleteDBCluster</a>.
+  DeleteDBClusterParameterGroupMessage:
+    type: object
+    required:
+      - DBClusterParameterGroupName
+    properties:
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the DB cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be the name of an existing DB cluster parameter group.</p> </li> <li> <p>You can''t delete a default DB cluster parameter group.</p> </li> <li> <p>Cannot be associated with any DB clusters.</p> </li> </ul>'
+    description: Represents the input to <a>DeleteDBClusterParameterGroup</a>.
+  InvalidDBParameterGroupStateFault: {}
+  DeleteDBClusterSnapshotResult:
+    type: object
+    properties:
+      DBClusterSnapshot:
+        $ref: '#/definitions/DBClusterSnapshot'
+  DeleteDBClusterSnapshotMessage:
+    type: object
+    required:
+      - DBClusterSnapshotIdentifier
+    properties:
+      DBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier of the DB cluster snapshot to delete.</p> <p>Constraints: Must be the name of an existing DB cluster snapshot in the <code>available</code> state.</p>'
+    description: Represents the input to <a>DeleteDBClusterSnapshot</a>.
+  DeleteDBInstanceResult:
+    type: object
+    properties:
+      DBInstance:
+        $ref: '#/definitions/DBInstance'
+  DeleteDBInstanceMessage:
+    type: object
+    required:
+      - DBInstanceIdentifier
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The DB instance identifier for the DB instance to be deleted. This parameter isn''t case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the name of an existing DB instance.</p> </li> </ul>'
+    description: Represents the input to <a>DeleteDBInstance</a>.
+  DBSnapshotAlreadyExistsFault: {}
+  DeleteDBSubnetGroupMessage:
+    type: object
+    required:
+      - DBSubnetGroupName
+    properties:
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the database subnet group to delete.</p> <note> <p>You can''t delete the default subnet group.</p> </note> <p>Constraints:</p> <p>Must match the name of an existing <code>DBSubnetGroup</code>. Must not be default.</p> <p>Example: <code>mySubnetgroup</code> </p>'
+    description: Represents the input to <a>DeleteDBSubnetGroup</a>.
+  InvalidDBSubnetStateFault: {}
+  DBClusterParameterGroupsMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      DBClusterParameterGroups:
+        $ref: '#/definitions/DBClusterParameterGroupList'
+        description: A list of DB cluster parameter groups.
+    description: Represents the output of <a>DBClusterParameterGroups</a>.
+  DescribeDBClusterParameterGroupsMessage:
+    type: object
+    properties:
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of a specific DB cluster parameter group to return details for.</p> <p>Constraints:</p> <ul> <li> <p>If provided, must match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul>'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the input to <a>DescribeDBClusterParameterGroups</a>.
+  DBClusterParameterGroupDetails:
+    type: object
+    properties:
+      Parameters:
+        $ref: '#/definitions/ParametersList'
+        description: Provides a list of parameters for the DB cluster parameter group.
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the output of <a>DBClusterParameterGroup</a>.
+  DescribeDBClusterParametersMessage:
+    type: object
+    required:
+      - DBClusterParameterGroupName
+    properties:
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of a specific DB cluster parameter group to return parameter details for.</p> <p>Constraints:</p> <ul> <li> <p>If provided, must match the name of an existing <code>DBClusterParameterGroup</code>.</p> </li> </ul>'
+      Source:
+        $ref: '#/definitions/String'
+        description: ' A value that indicates to return only parameters for a specific source. Parameter sources can be <code>engine</code>, <code>service</code>, or <code>customer</code>. '
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the input to <a>DescribeDBClusterParameters</a>.
+  DescribeDBClusterSnapshotAttributesResult:
+    type: object
+    properties:
+      DBClusterSnapshotAttributesResult:
+        $ref: '#/definitions/DBClusterSnapshotAttributesResult'
+  DescribeDBClusterSnapshotAttributesMessage:
+    type: object
+    required:
+      - DBClusterSnapshotIdentifier
+    properties:
+      DBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier for the DB cluster snapshot to describe the attributes for.
+    description: Represents the input to <a>DescribeDBClusterSnapshotAttributes</a>.
+  DBClusterSnapshotMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      DBClusterSnapshots:
+        $ref: '#/definitions/DBClusterSnapshotList'
+        description: Provides a list of DB cluster snapshots.
+    description: Represents the output of <a>DescribeDBClusterSnapshots</a>.
+  DescribeDBClusterSnapshotsMessage:
+    type: object
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This parameter can''t be used with the <code>DBClusterSnapshotIdentifier</code> parameter. This parameter is not case sensitive. </p> <p>Constraints:</p> <ul> <li> <p>If provided, must match the identifier of an existing <code>DBCluster</code>.</p> </li> </ul>'
+      DBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>A specific DB cluster snapshot identifier to describe. This parameter can''t be used with the <code>DBClusterIdentifier</code> parameter. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li> <p>If provided, must match the identifier of an existing <code>DBClusterSnapshot</code>.</p> </li> <li> <p>If this identifier is for an automated snapshot, the <code>SnapshotType</code> parameter must also be specified.</p> </li> </ul>'
+      SnapshotType:
+        $ref: '#/definitions/String'
+        description: '<p>The type of DB cluster snapshots to be returned. You can specify one of the following values:</p> <ul> <li> <p> <code>automated</code> - Return all DB cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.</p> </li> <li> <p> <code>manual</code> - Return all DB cluster snapshots that you have manually created for your AWS account.</p> </li> <li> <p> <code>shared</code> - Return all manual DB cluster snapshots that have been shared to your AWS account.</p> </li> <li> <p> <code>public</code> - Return all DB cluster snapshots that have been marked as public.</p> </li> </ul> <p>If you don''t specify a <code>SnapshotType</code> value, then both automated and manual DB cluster snapshots are returned. You can include shared DB cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public DB cluster snapshots with these results by setting the <code>IncludePublic</code> parameter to <code>true</code>.</p> <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don''t apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn''t apply when <code>SnapshotType</code> is set to <code>public</code>.</p>'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      IncludeShared:
+        $ref: '#/definitions/Boolean'
+        description: 'Set to <code>true</code> to include shared manual DB cluster snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, and otherwise <code>false</code>. The default is <code>false</code>.'
+      IncludePublic:
+        $ref: '#/definitions/Boolean'
+        description: 'Set to <code>true</code> to include manual DB cluster snapshots that are public and can be copied or restored by any AWS account, and otherwise <code>false</code>. The default is <code>false</code>.'
+    description: Represents the input to <a>DescribeDBClusterSnapshots</a>.
+  DBClusterMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      DBClusters:
+        $ref: '#/definitions/DBClusterList'
+        description: A list of DB clusters.
+    description: Represents the output of <a>DescribeDBClusters</a>.
+  DescribeDBClustersMessage:
+    type: object
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The user-provided DB cluster identifier. If this parameter is specified, information from only the specific DB cluster is returned. This parameter isn''t case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>If provided, must match an existing <code>DBClusterIdentifier</code>.</p> </li> </ul>'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list only includes information about the DB clusters identified by these ARNs.</p> </li> </ul>'
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the input to <a>DescribeDBClusters</a>.
+  DBEngineVersionMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      DBEngineVersions:
+        $ref: '#/definitions/DBEngineVersionList'
+        description: Detailed information about one or more DB engine versions.
+    description: Represents the output of <a>DescribeDBEngineVersions</a>.
+  DescribeDBEngineVersionsMessage:
+    type: object
+    properties:
+      Engine:
+        $ref: '#/definitions/String'
+        description: The database engine to return.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: '<p>The database engine version to return.</p> <p>Example: <code>5.1.49</code> </p>'
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: '<p>The name of a specific DB parameter group family to return details for.</p> <p>Constraints:</p> <ul> <li> <p>If provided, must match an existing <code>DBParameterGroupFamily</code>.</p> </li> </ul>'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      DefaultOnly:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that only the default version of the specified engine or engine and major version combination is returned.
+      ListSupportedCharacterSets:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'If this parameter is specified and the requested engine supports the <code>CharacterSetName</code> parameter for <code>CreateDBInstance</code>, the response includes a list of supported character sets for each engine version. '
+      ListSupportedTimezones:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'If this parameter is specified and the requested engine supports the <code>TimeZone</code> parameter for <code>CreateDBInstance</code>, the response includes a list of supported time zones for each engine version. '
+    description: Represents the input to <a>DescribeDBEngineVersions</a>.
+  DBInstanceMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      DBInstances:
+        $ref: '#/definitions/DBInstanceList'
+        description: 'Detailed information about one or more DB instances. '
+    description: Represents the output of <a>DescribeDBInstances</a>.
+  DescribeDBInstancesMessage:
+    type: object
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The user-provided instance identifier. If this parameter is specified, information from only the specific DB instance is returned. This parameter isn''t case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>If provided, must match the identifier of an existing <code>DBInstance</code>.</p> </li> </ul>'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A filter that specifies one or more DB instances to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list includes only the information about the DB instances that are associated with the DB clusters that are identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance ARNs. The results list includes only the information about the DB instances that are identified by these ARNs.</p> </li> </ul>'
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the input to <a>DescribeDBInstances</a>.
+  DBSubnetGroupMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      DBSubnetGroups:
+        $ref: '#/definitions/DBSubnetGroups'
+        description: Detailed information about one or more DB subnet groups.
+    description: Represents the output of <a>DescribeDBSubnetGroups</a>.
+  DescribeDBSubnetGroupsMessage:
+    type: object
+    properties:
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the DB subnet group to return details for.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the input to <a>DescribeDBSubnetGroups</a>.
+  DescribeEngineDefaultClusterParametersResult:
+    type: object
+    properties:
+      EngineDefaults:
+        $ref: '#/definitions/EngineDefaults'
+  DescribeEngineDefaultClusterParametersMessage:
+    type: object
+    required:
+      - DBParameterGroupFamily
+    properties:
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: The name of the DB cluster parameter group family to return the engine parameter information for.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the input to <a>DescribeEngineDefaultClusterParameters</a>.
+  EventCategoriesMessage:
+    type: object
+    properties:
+      EventCategoriesMapList:
+        $ref: '#/definitions/EventCategoriesMapList'
+        description: A list of event category maps.
+    description: Represents the output of <a>DescribeEventCategories</a>.
+  DescribeEventCategoriesMessage:
+    type: object
+    properties:
+      SourceType:
+        $ref: '#/definitions/String'
+        description: '<p>The type of source that is generating the events.</p> <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>, <code>db-security-group</code>, <code>db-snapshot</code> </p>'
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+    description: Represents the input to <a>DescribeEventCategories</a>.
+  EventsMessage:
+    type: object
+    properties:
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      Events:
+        $ref: '#/definitions/EventList'
+        description: 'Detailed information about one or more events. '
+    description: Represents the output of <a>DescribeEvents</a>.
+  DescribeEventsMessage:
+    type: object
+    properties:
+      SourceIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier of the event source for which events are returned. If not specified, then all sources are included in the response.</p> <p>Constraints:</p> <ul> <li> <p>If <code>SourceIdentifier</code> is provided, <code>SourceType</code> must also be provided.</p> </li> <li> <p>If the source type is <code>DBInstance</code>, a <code>DBInstanceIdentifier</code> must be provided.</p> </li> <li> <p>If the source type is <code>DBSecurityGroup</code>, a <code>DBSecurityGroupName</code> must be provided.</p> </li> <li> <p>If the source type is <code>DBParameterGroup</code>, a <code>DBParameterGroupName</code> must be provided.</p> </li> <li> <p>If the source type is <code>DBSnapshot</code>, a <code>DBSnapshotIdentifier</code> must be provided.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: 'The event source to retrieve events for. If no value is specified, all events are returned.'
+      StartTime:
+        $ref: '#/definitions/TStamp'
+        description: '<p> The beginning of the time interval to retrieve events for, specified in ISO 8601 format. </p> <p>Example: 2009-07-08T18:00Z</p>'
+      EndTime:
+        $ref: '#/definitions/TStamp'
+        description: '<p> The end of the time interval for which to retrieve events, specified in ISO 8601 format. </p> <p>Example: 2009-07-08T18:00Z</p>'
+      Duration:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of minutes to retrieve events for.</p> <p>Default: 60</p>'
+      EventCategories:
+        $ref: '#/definitions/EventCategoriesList'
+        description: A list of event categories that trigger notifications for an event notification subscription.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the input to <a>DescribeEvents</a>.
+  OrderableDBInstanceOptionsMessage:
+    type: object
+    properties:
+      OrderableDBInstanceOptions:
+        $ref: '#/definitions/OrderableDBInstanceOptionsList'
+        description: The options that are available for a particular orderable DB instance.
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the output of <a>DescribeOrderableDBInstanceOptions</a>.
+  DescribeOrderableDBInstanceOptionsMessage:
+    type: object
+    required:
+      - Engine
+    properties:
+      Engine:
+        $ref: '#/definitions/String'
+        description: The name of the engine to retrieve DB instance options for.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The engine version filter value. Specify this parameter to show only the available offerings that match the specified engine version.
+      DBInstanceClass:
+        $ref: '#/definitions/String'
+        description: The DB instance class filter value. Specify this parameter to show only the available offerings that match the specified DB instance class.
+      LicenseModel:
+        $ref: '#/definitions/String'
+        description: The license model filter value. Specify this parameter to show only the available offerings that match the specified license model.
+      Vpc:
+        $ref: '#/definitions/BooleanOptional'
+        description: The virtual private cloud (VPC) filter value. Specify this parameter to show only the available VPC or non-VPC offerings.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the input to <a>DescribeOrderableDBInstanceOptions</a>.
+  PendingMaintenanceActionsMessage:
+    type: object
+    properties:
+      PendingMaintenanceActions:
+        $ref: '#/definitions/PendingMaintenanceActions'
+        description: The maintenance actions to be applied.
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+    description: Represents the output of <a>DescribePendingMaintenanceActions</a>.
+  DescribePendingMaintenanceActionsMessage:
+    type: object
+    properties:
+      ResourceIdentifier:
+        $ref: '#/definitions/String'
+        description: The ARN of a resource to return pending maintenance actions for.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: '<p>A filter that specifies one or more resources to return pending maintenance actions for.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list includes only pending maintenance actions for the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>db-instance-id</code> - Accepts DB instance identifiers and DB instance ARNs. The results list includes only pending maintenance actions for the DB instances identified by these ARNs.</p> </li> </ul>'
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+    description: Represents the input to <a>DescribePendingMaintenanceActions</a>.
+  FailoverDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  FailoverDBClusterMessage:
+    type: object
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>A DB cluster identifier to force a failover for. This parameter is not case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing <code>DBCluster</code>.</p> </li> </ul>'
+      TargetDBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the instance to promote to the primary instance.</p> <p>You must specify the instance identifier for an Amazon DocumentDB replica in the DB cluster. For example, <code>mydbcluster-replica1</code>.</p>'
+    description: Represents the input to <a>FailoverDBCluster</a>.
+  TagListMessage:
+    type: object
+    properties:
+      TagList:
+        $ref: '#/definitions/TagList'
+        description: A list of one or more tags.
+    description: Represents the output of <a>ListTagsForResource</a>.
+  ListTagsForResourceMessage:
+    type: object
+    required:
+      - ResourceName
+    properties:
+      ResourceName:
+        $ref: '#/definitions/String'
+        description: The Amazon DocumentDB resource with tags to be listed. This value is an Amazon Resource Name (ARN).
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: This parameter is not currently supported.
+    description: Represents the input to <a>ListTagsForResource</a>.
+  ModifyDBClusterResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  ModifyDBClusterMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The DB cluster identifier for the cluster that is being modified. This parameter is not case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing <code>DBCluster</code>.</p> </li> </ul>'
+      NewDBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The new DB cluster identifier for the DB cluster when renaming a DB cluster. This value is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>'
+      ApplyImmediately:
+        $ref: '#/definitions/Boolean'
+        description: '<p>A value that specifies whether the changes in this request and any pending changes are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB cluster. If this parameter is set to <code>false</code>, changes to the DB cluster are applied during the next maintenance window.</p> <p>The <code>ApplyImmediately</code> parameter affects only the <code>NewDBClusterIdentifier</code> and <code>MasterUserPassword</code> values. If you set this parameter value to <code>false</code>, the changes to the <code>NewDBClusterIdentifier</code> and <code>MasterUserPassword</code> values are applied during the next maintenance window. All other changes are applied immediately, regardless of the value of the <code>ApplyImmediately</code> parameter.</p> <p>Default: <code>false</code> </p>'
+      BackupRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of days for which automated backups are retained. You must specify a minimum value of 1.</p> <p>Default: 1</p> <p>Constraints:</p> <ul> <li> <p>Must be a value from 1 to 35.</p> </li> </ul>'
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the DB cluster parameter group to use for the DB cluster.
+      VpcSecurityGroupIds:
+        $ref: '#/definitions/VpcSecurityGroupIdList'
+        description: A list of virtual private cloud (VPC) security groups that the DB cluster will belong to.
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The port number on which the DB cluster accepts connections.</p> <p>Constraints: Must be a value from <code>1150</code> to <code>65535</code>. </p> <p>Default: The same port as the original DB cluster.</p>'
+      MasterUserPassword:
+        $ref: '#/definitions/String'
+        description: '<p>The new password for the master database user. This password can contain any printable ASCII character except "<code>/</code>", "<code>"</code>", or "<code>@</code>".</p> <p>Constraints: Must contain from 8 to 41 characters.</p>'
+      PreferredBackupWindow:
+        $ref: '#/definitions/String'
+        description: '<p>The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>'
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/String'
+        description: '<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. </p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>'
+      CloudwatchLogsExportConfiguration:
+        $ref: '#/definitions/CloudwatchLogsExportConfiguration'
+        description: The configuration setting for the log types to be enabled for export to Amazon CloudWatch Logs for a specific DB instance or DB cluster. The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs are exported (or not exported) to CloudWatch Logs.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code>.
+    description: Represents the input to <a>ModifyDBCluster</a>.
+  InvalidDBSecurityGroupStateFault: {}
+  DBClusterParameterGroupNameMessage:
+    type: object
+    properties:
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of a DB cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 255 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <note> <p>This value is stored as a lowercase string.</p> </note>'
+    description: Contains the name of a DB cluster parameter group.
+  ModifyDBClusterParameterGroupMessage:
+    type: object
+    required:
+      - DBClusterParameterGroupName
+      - Parameters
+    properties:
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the DB cluster parameter group to modify.
+      Parameters:
+        $ref: '#/definitions/ParametersList'
+        description: A list of parameters in the DB cluster parameter group to modify.
+    description: Represents the input to <a>ModifyDBClusterParameterGroup</a>.
+  ModifyDBClusterSnapshotAttributeResult:
+    type: object
+    properties:
+      DBClusterSnapshotAttributesResult:
+        $ref: '#/definitions/DBClusterSnapshotAttributesResult'
+  ModifyDBClusterSnapshotAttributeMessage:
+    type: object
+    required:
+      - DBClusterSnapshotIdentifier
+      - AttributeName
+    properties:
+      DBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier for the DB cluster snapshot to modify the attributes for.
+      AttributeName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the DB cluster snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual DB cluster snapshot, set this value to <code>restore</code>.</p>'
+      ValuesToAdd:
+        $ref: '#/definitions/AttributeValueList'
+        description: '<p>A list of DB cluster snapshot attributes to add to the attribute specified by <code>AttributeName</code>.</p> <p>To authorize other AWS accounts to copy or restore a manual DB cluster snapshot, set this list to include one or more AWS account IDs. To make the manual DB cluster snapshot restorable by any AWS account, set it to <code>all</code>. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don''t want to be available to all AWS accounts.</p>'
+      ValuesToRemove:
+        $ref: '#/definitions/AttributeValueList'
+        description: '<p>A list of DB cluster snapshot attributes to remove from the attribute specified by <code>AttributeName</code>.</p> <p>To remove authorization for other AWS accounts to copy or restore a manual DB cluster snapshot, set this list to include one or more AWS account identifiers. To remove authorization for any AWS account to copy or restore the DB cluster snapshot, set it to <code>all</code> . If you specify <code>all</code>, an AWS account whose account ID is explicitly added to the <code>restore</code> attribute can still copy or restore a manual DB cluster snapshot.</p>'
+    description: Represents the input to <a>ModifyDBClusterSnapshotAttribute</a>.
+  SharedSnapshotQuotaExceededFault: {}
+  ModifyDBInstanceResult:
+    type: object
+    properties:
+      DBInstance:
+        $ref: '#/definitions/DBInstance'
+  ModifyDBInstanceMessage:
+    type: object
+    required:
+      - DBInstanceIdentifier
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The DB instance identifier. This value is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing <code>DBInstance</code>.</p> </li> </ul>'
+      DBInstanceClass:
+        $ref: '#/definitions/String'
+        description: '<p>The new compute and memory capacity of the DB instance; for example, <code>db.m4.large</code>. Not all DB instance classes are available in all AWS Regions. </p> <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>'
+      ApplyImmediately:
+        $ref: '#/definitions/Boolean'
+        description: '<p>Specifies whether the modifications in this request and any pending modifications are asynchronously applied as soon as possible, regardless of the <code>PreferredMaintenanceWindow</code> setting for the DB instance. </p> <p> If this parameter is set to <code>false</code>, changes to the DB instance are applied during the next maintenance window. Some parameter changes can cause an outage and are applied on the next reboot.</p> <p>Default: <code>false</code> </p>'
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/String'
+        description: '<p>The weekly time range (in UTC) during which system maintenance can occur, which might result in an outage. Changing this parameter doesn''t result in an outage except in the following situation, and the change is asynchronously applied as soon as possible. If there are pending actions that cause a reboot, and the maintenance window is changed to include the current time, changing this parameter causes a reboot of the DB instance. If you are moving this window to the current time, there must be at least 30 minutes between the current time and end of the window to ensure that pending changes are applied.</p> <p>Default: Uses existing setting.</p> <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Must be at least 30 minutes.</p>'
+      AutoMinorVersionUpgrade:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Indicates that minor version upgrades are applied automatically to the DB instance during the maintenance window. Changing this parameter doesn''t result in an outage except in the following case, and the change is asynchronously applied as soon as possible. An outage results if this parameter is set to <code>true</code> during the maintenance window, and a newer minor version is available, and Amazon DocumentDB has enabled automatic patching for that engine version. '
+      NewDBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p> The new DB instance identifier for the DB instance when renaming a DB instance. When you change the DB instance identifier, an instance reboot occurs immediately if you set <code>Apply Immediately</code> to <code>true</code>. It occurs during the next maintenance window if you set <code>Apply Immediately</code> to <code>false</code>. This value is stored as a lowercase string. </p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>mydbinstance</code> </p>'
+      PromotionTier:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.</p> <p>Default: 1</p> <p>Valid values: 0-15</p>'
+    description: Represents the input to <a>ModifyDBInstance</a>.
+  DBUpgradeDependencyFailureFault: {}
+  CertificateNotFoundFault: {}
+  ModifyDBSubnetGroupResult:
+    type: object
+    properties:
+      DBSubnetGroup:
+        $ref: '#/definitions/DBSubnetGroup'
+  ModifyDBSubnetGroupMessage:
+    type: object
+    required:
+      - DBSubnetGroupName
+      - SubnetIds
+    properties:
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name for the DB subnet group. This value is stored as a lowercase string. You can''t modify the default subnet group. </p> <p>Constraints: Must match the name of an existing <code>DBSubnetGroup</code>. Must not be default.</p> <p>Example: <code>mySubnetgroup</code> </p>'
+      DBSubnetGroupDescription:
+        $ref: '#/definitions/String'
+        description: The description for the DB subnet group.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIdentifierList'
+        description: The Amazon EC2 subnet IDs for the DB subnet group.
+    description: Represents the input to <a>ModifyDBSubnetGroup</a>.
+  SubnetAlreadyInUse: {}
+  RebootDBInstanceResult:
+    type: object
+    properties:
+      DBInstance:
+        $ref: '#/definitions/DBInstance'
+  RebootDBInstanceMessage:
+    type: object
+    required:
+      - DBInstanceIdentifier
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The DB instance identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing <code>DBInstance</code>.</p> </li> </ul>'
+      ForceFailover:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p> When <code>true</code>, the reboot is conducted through a Multi-AZ failover. </p> <p>Constraint: You can''t specify <code>true</code> if the instance is not configured for Multi-AZ.</p>'
+    description: Represents the input to <a>RebootDBInstance</a>.
+  RemoveTagsFromResourceMessage:
+    type: object
+    required:
+      - ResourceName
+      - TagKeys
+    properties:
+      ResourceName:
+        $ref: '#/definitions/String'
+        description: The Amazon DocumentDB resource that the tags are removed from. This value is an Amazon Resource Name (ARN).
+      TagKeys:
+        $ref: '#/definitions/KeyList'
+        description: The tag key (name) of the tag to be removed.
+    description: Represents the input to <a>RemoveTagsFromResource</a>.
+  ResetDBClusterParameterGroupMessage:
+    type: object
+    required:
+      - DBClusterParameterGroupName
+    properties:
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the DB cluster parameter group to reset.
+      ResetAllParameters:
+        $ref: '#/definitions/Boolean'
+        description: 'A value that is set to <code>true</code> to reset all parameters in the DB cluster parameter group to their default values, and <code>false</code> otherwise. You can''t use this parameter if there is a list of parameter names specified for the <code>Parameters</code> parameter.'
+      Parameters:
+        $ref: '#/definitions/ParametersList'
+        description: A list of parameter names in the DB cluster parameter group to reset to the default values. You can't use this parameter if the <code>ResetAllParameters</code> parameter is set to <code>true</code>.
+    description: Represents the input to <a>ResetDBClusterParameterGroup</a>.
+  RestoreDBClusterFromSnapshotResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  RestoreDBClusterFromSnapshotMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+      - SnapshotIdentifier
+      - Engine
+    properties:
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: Provides the list of Amazon EC2 Availability Zones that instances in the restored DB cluster can be created in.
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the DB cluster to create from the DB snapshot or DB cluster snapshot. This parameter isn''t case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-snapshot-id</code> </p>'
+      SnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier for the DB snapshot or DB cluster snapshot to restore from.</p> <p>You can use either the name or the Amazon Resource Name (ARN) to specify a DB cluster snapshot. However, you can use only the ARN to specify a DB snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing snapshot.</p> </li> </ul>'
+      Engine:
+        $ref: '#/definitions/String'
+        description: '<p>The database engine to use for the new DB cluster.</p> <p>Default: The same as source.</p> <p>Constraint: Must be compatible with the engine of the source.</p>'
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The version of the database engine to use for the new DB cluster.
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The port number on which the new DB cluster accepts connections.</p> <p>Constraints: Must be a value from <code>1150</code> to <code>65535</code>.</p> <p>Default: The same port as the original DB cluster.</p>'
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the DB subnet group to use for the new DB cluster.</p> <p>Constraints: If provided, must match the name of an existing <code>DBSubnetGroup</code>.</p> <p>Example: <code>mySubnetgroup</code> </p>'
+      VpcSecurityGroupIds:
+        $ref: '#/definitions/VpcSecurityGroupIdList'
+        description: A list of virtual private cloud (VPC) security groups that the new DB cluster will belong to.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to be assigned to the restored DB cluster.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the AWS KMS encryption key used to encrypt the new DB cluster, then you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption key.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB snapshot or DB cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored DB cluster is encrypted using the AWS KMS key that was used to encrypt the DB snapshot or the DB cluster snapshot.</p> </li> <li> <p>If the DB snapshot or the DB cluster snapshot in <code>SnapshotIdentifier</code> is not encrypted, then the restored DB cluster is not encrypted.</p> </li> </ul>'
+      EnableCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: A list of log types that must be enabled for exporting to Amazon CloudWatch Logs.
+    description: Represents the input to <a>RestoreDBClusterFromSnapshot</a>.
+  InsufficientDBClusterCapacityFault: {}
+  InvalidDBSnapshotStateFault: {}
+  InvalidRestoreFault: {}
+  RestoreDBClusterToPointInTimeResult:
+    type: object
+    properties:
+      DBCluster:
+        $ref: '#/definitions/DBCluster'
+  RestoreDBClusterToPointInTimeMessage:
+    type: object
+    required:
+      - DBClusterIdentifier
+      - SourceDBClusterIdentifier
+    properties:
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The name of the new DB cluster to be created.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
+      SourceDBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: '<p>The identifier of the source DB cluster from which to restore.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing <code>DBCluster</code>.</p> </li> </ul>'
+      RestoreToTime:
+        $ref: '#/definitions/TStamp'
+        description: '<p>The date and time to restore the DB cluster to.</p> <p>Valid values: A time in Universal Coordinated Time (UTC) format.</p> <p>Constraints:</p> <ul> <li> <p>Must be before the latest restorable time for the DB instance.</p> </li> <li> <p>Must be specified if the <code>UseLatestRestorableTime</code> parameter is not provided.</p> </li> <li> <p>Cannot be specified if the <code>UseLatestRestorableTime</code> parameter is <code>true</code>.</p> </li> <li> <p>Cannot be specified if the <code>RestoreType</code> parameter is <code>copy-on-write</code>.</p> </li> </ul> <p>Example: <code>2015-03-07T23:45:00Z</code> </p>'
+      UseLatestRestorableTime:
+        $ref: '#/definitions/Boolean'
+        description: '<p>A value that is set to <code>true</code> to restore the DB cluster to the latest restorable backup time, and <code>false</code> otherwise. </p> <p>Default: <code>false</code> </p> <p>Constraints: Cannot be specified if the <code>RestoreToTime</code> parameter is provided.</p>'
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The port number on which the new DB cluster accepts connections.</p> <p>Constraints: Must be a value from <code>1150</code> to <code>65535</code>. </p> <p>Default: The default port for the engine.</p>'
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: '<p>The DB subnet group name to use for the new DB cluster.</p> <p>Constraints: If provided, must match the name of an existing <code>DBSubnetGroup</code>.</p> <p>Example: <code>mySubnetgroup</code> </p>'
+      VpcSecurityGroupIds:
+        $ref: '#/definitions/VpcSecurityGroupIdList'
+        description: A list of VPC security groups that the new DB cluster belongs to.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The tags to be assigned to the restored DB cluster.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.</p> <p>The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the AWS KMS encryption key used to encrypt the new DB cluster, then you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption key.</p> <p>You can restore to a new DB cluster and encrypt the new DB cluster with an AWS KMS key that is different from the AWS KMS key used to encrypt the source DB cluster. The new DB cluster is encrypted with the AWS KMS key identified by the <code>KmsKeyId</code> parameter.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB cluster is encrypted, then the restored DB cluster is encrypted using the AWS KMS key that was used to encrypt the source DB cluster.</p> </li> <li> <p>If the DB cluster is not encrypted, then the restored DB cluster is not encrypted.</p> </li> </ul> <p>If <code>DBClusterIdentifier</code> refers to a DB cluster that is not encrypted, then the restore request is rejected.</p>'
+      EnableCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: A list of log types that must be enabled for exporting to Amazon CloudWatch Logs.
+    description: Represents the input to <a>RestoreDBClusterToPointInTime</a>.
+  String:
+    type: string
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
+  ApplyMethod:
+    type: string
+    enum:
+      - immediate
+      - pending-reboot
+  ResourcePendingMaintenanceActions:
+    type: object
+    properties:
+      ResourceIdentifier:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the resource that has pending maintenance actions.
+      PendingMaintenanceActionDetails:
+        $ref: '#/definitions/PendingMaintenanceActionDetails'
+        description: A list that provides details about the pending maintenance actions for the resource.
+    description: Represents the output of <a>ApplyPendingMaintenanceAction</a>.
+  AttributeValueList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  AvailabilityZone:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the Availability Zone.
+    description: Information about an Availability Zone.
+  AvailabilityZoneList:
+    type: array
+    items:
+      $ref: '#/definitions/AvailabilityZone'
+  AvailabilityZones:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Boolean:
+    type: boolean
+  BooleanOptional:
+    type: boolean
+  LogTypeList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  CloudwatchLogsExportConfiguration:
+    type: object
+    properties:
+      EnableLogTypes:
+        $ref: '#/definitions/LogTypeList'
+        description: The list of log types to enable.
+      DisableLogTypes:
+        $ref: '#/definitions/LogTypeList'
+        description: The list of log types to disable.
+    description: <p>The configuration setting for the log types to be enabled for export to Amazon CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs are exported (or not exported) to CloudWatch Logs. The values within these arrays depend on the DB engine that is being used.</p>
+  DBClusterParameterGroup:
+    type: object
+    properties:
+      DBClusterParameterGroupName:
+        $ref: '#/definitions/String'
+        description: Provides the name of the DB cluster parameter group.
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: Provides the name of the DB parameter group family that this DB cluster parameter group is compatible with.
+      Description:
+        $ref: '#/definitions/String'
+        description: Provides the customer-specified description for this DB cluster parameter group.
+      DBClusterParameterGroupArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB cluster parameter group.
+    description: 'Detailed information about a DB cluster parameter group. '
+  DBClusterSnapshot:
+    type: object
+    properties:
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: Provides the list of Amazon EC2 Availability Zones that instances in the DB cluster snapshot can be restored in.
+      DBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the identifier for the DB cluster snapshot.
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the DB cluster identifier of the DB cluster that this DB cluster snapshot was created from.
+      SnapshotCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: 'Provides the time when the snapshot was taken, in UTC.'
+      Engine:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the database engine.
+      Status:
+        $ref: '#/definitions/String'
+        description: Specifies the status of this DB cluster snapshot.
+      Port:
+        $ref: '#/definitions/Integer'
+        description: Specifies the port that the DB cluster was listening on at the time of the snapshot.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: Provides the virtual private cloud (VPC) ID that is associated with the DB cluster snapshot.
+      ClusterCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: 'Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).'
+      MasterUsername:
+        $ref: '#/definitions/String'
+        description: Provides the master user name for the DB cluster snapshot.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: Provides the version of the database engine for this DB cluster snapshot.
+      SnapshotType:
+        $ref: '#/definitions/String'
+        description: Provides the type of the DB cluster snapshot.
+      PercentProgress:
+        $ref: '#/definitions/Integer'
+        description: Specifies the percentage of the estimated data that has been transferred.
+      StorageEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the DB cluster snapshot is encrypted.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: 'If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB cluster snapshot.'
+      DBClusterSnapshotArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB cluster snapshot.
+      SourceDBClusterSnapshotArn:
+        $ref: '#/definitions/String'
+        description: 'If the DB cluster snapshot was copied from a source DB cluster snapshot, the ARN for the source DB cluster snapshot; otherwise, a null value.'
+    description: 'Detailed information about a DB cluster snapshot. '
+  IntegerOptional:
+    type: integer
+  VpcSecurityGroupIdList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DBCluster:
+    type: object
+    properties:
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZones'
+        description: Provides the list of Amazon EC2 Availability Zones that instances in the DB cluster can be created in.
+      BackupRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the number of days for which automatic DB snapshots are retained.
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster.
+      DBClusterParameterGroup:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the DB cluster parameter group for the DB cluster.
+      DBSubnetGroup:
+        $ref: '#/definitions/String'
+        description: 'Specifies information on the subnet group that is associated with the DB cluster, including the name, description, and subnets in the subnet group.'
+      Status:
+        $ref: '#/definitions/String'
+        description: Specifies the current state of this DB cluster.
+      PercentProgress:
+        $ref: '#/definitions/String'
+        description: Specifies the progress of the operation as a percentage.
+      EarliestRestorableTime:
+        $ref: '#/definitions/TStamp'
+        description: The earliest time to which a database can be restored with point-in-time restore.
+      Endpoint:
+        $ref: '#/definitions/String'
+        description: Specifies the connection endpoint for the primary instance of the DB cluster.
+      ReaderEndpoint:
+        $ref: '#/definitions/String'
+        description: '<p>The reader endpoint for the DB cluster. The reader endpoint for a DB cluster load balances connections across the Amazon DocumentDB replicas that are available in a DB cluster. As clients request new connections to the reader endpoint, Amazon DocumentDB distributes the connection requests among the Amazon DocumentDB replicas in the DB cluster. This functionality can help balance your read workload across multiple Amazon DocumentDB replicas in your DB cluster. </p> <p>If a failover occurs, and the Amazon DocumentDB replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Amazon DocumentDB replicas in the cluster, you can then reconnect to the reader endpoint.</p>'
+      MultiAZ:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the DB cluster has instances in multiple Availability Zones.
+      Engine:
+        $ref: '#/definitions/String'
+        description: Provides the name of the database engine to be used for this DB cluster.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: Indicates the database engine version.
+      LatestRestorableTime:
+        $ref: '#/definitions/TStamp'
+        description: Specifies the latest time to which a database can be restored with point-in-time restore.
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the port that the database engine is listening on.
+      MasterUsername:
+        $ref: '#/definitions/String'
+        description: Contains the master user name for the DB cluster.
+      PreferredBackupWindow:
+        $ref: '#/definitions/String'
+        description: 'Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the <code>BackupRetentionPeriod</code>. '
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/String'
+        description: 'Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).'
+      DBClusterMembers:
+        $ref: '#/definitions/DBClusterMemberList'
+        description: Provides the list of instances that make up the DB cluster.
+      VpcSecurityGroups:
+        $ref: '#/definitions/VpcSecurityGroupMembershipList'
+        description: Provides a list of virtual private cloud (VPC) security groups that the DB cluster belongs to.
+      HostedZoneId:
+        $ref: '#/definitions/String'
+        description: Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+      StorageEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the DB cluster is encrypted.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: 'If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB cluster.'
+      DbClusterResourceId:
+        $ref: '#/definitions/String'
+        description: 'The AWS Region-unique, immutable identifier for the DB cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed.'
+      DBClusterArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB cluster.
+      AssociatedRoles:
+        $ref: '#/definitions/DBClusterRoles'
+        description: Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.
+      ClusterCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: 'Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).'
+      EnabledCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: A list of log types that this DB cluster is configured to export to Amazon CloudWatch Logs.
+    description: 'Detailed information about a DB cluster. '
+  DBInstance:
+    type: object
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: Contains a user-provided database identifier. This identifier is the unique key that identifies a DB instance.
+      DBInstanceClass:
+        $ref: '#/definitions/String'
+        description: Contains the name of the compute and memory capacity class of the DB instance.
+      Engine:
+        $ref: '#/definitions/String'
+        description: Provides the name of the database engine to be used for this DB instance.
+      DBInstanceStatus:
+        $ref: '#/definitions/String'
+        description: Specifies the current state of this database.
+      Endpoint:
+        $ref: '#/definitions/Endpoint'
+        description: Specifies the connection endpoint.
+      InstanceCreateTime:
+        $ref: '#/definitions/TStamp'
+        description: Provides the date and time that the DB instance was created.
+      PreferredBackupWindow:
+        $ref: '#/definitions/String'
+        description: ' Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the <code>BackupRetentionPeriod</code>. '
+      BackupRetentionPeriod:
+        $ref: '#/definitions/Integer'
+        description: Specifies the number of days for which automatic DB snapshots are retained.
+      VpcSecurityGroups:
+        $ref: '#/definitions/VpcSecurityGroupMembershipList'
+        description: Provides a list of VPC security group elements that the DB instance belongs to.
+      AvailabilityZone:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the Availability Zone that the DB instance is located in.
+      DBSubnetGroup:
+        $ref: '#/definitions/DBSubnetGroup'
+        description: 'Specifies information on the subnet group that is associated with the DB instance, including the name, description, and subnets in the subnet group.'
+      PreferredMaintenanceWindow:
+        $ref: '#/definitions/String'
+        description: 'Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).'
+      PendingModifiedValues:
+        $ref: '#/definitions/PendingModifiedValues'
+        description: Specifies that changes to the DB instance are pending. This element is included only when changes are pending. Specific changes are identified by subelements.
+      LatestRestorableTime:
+        $ref: '#/definitions/TStamp'
+        description: Specifies the latest time to which a database can be restored with point-in-time restore.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: Indicates the database engine version.
+      AutoMinorVersionUpgrade:
+        $ref: '#/definitions/Boolean'
+        description: Indicates that minor version patches are applied automatically.
+      PubliclyAccessible:
+        $ref: '#/definitions/Boolean'
+        description: 'Specifies the availability options for the DB instance. A value of <code>true</code> specifies an internet-facing instance with a publicly resolvable DNS name, which resolves to a public IP address. A value of <code>false</code> specifies an internal instance with a DNS name that resolves to a private IP address.'
+      StatusInfos:
+        $ref: '#/definitions/DBInstanceStatusInfoList'
+        description: 'The status of a read replica. If the instance is not a read replica, this is blank.'
+      DBClusterIdentifier:
+        $ref: '#/definitions/String'
+        description: Contains the name of the DB cluster that the DB instance is a member of if the DB instance is a member of a DB cluster.
+      StorageEncrypted:
+        $ref: '#/definitions/Boolean'
+        description: Specifies whether the DB instance is encrypted.
+      KmsKeyId:
+        $ref: '#/definitions/String'
+        description: ' If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB instance. '
+      DbiResourceId:
+        $ref: '#/definitions/String'
+        description: 'The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.'
+      PromotionTier:
+        $ref: '#/definitions/IntegerOptional'
+        description: A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.
+      DBInstanceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the DB instance.
+      EnabledCloudwatchLogsExports:
+        $ref: '#/definitions/LogTypeList'
+        description: A list of log types that this DB instance is configured to export to Amazon CloudWatch Logs.
+    description: 'Detailed information about a DB instance. '
+  SubnetIdentifierList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  DBSubnetGroup:
+    type: object
+    properties:
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: The name of the DB subnet group.
+      DBSubnetGroupDescription:
+        $ref: '#/definitions/String'
+        description: Provides the description of the DB subnet group.
+      VpcId:
+        $ref: '#/definitions/String'
+        description: Provides the virtual private cloud (VPC) ID of the DB subnet group.
+      SubnetGroupStatus:
+        $ref: '#/definitions/String'
+        description: Provides the status of the DB subnet group.
+      Subnets:
+        $ref: '#/definitions/SubnetList'
+        description: Detailed information about one or more subnets within a DB subnet group.
+      DBSubnetGroupArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Identifier (ARN) for the DB subnet group.
+    description: 'Detailed information about a DB subnet group. '
+  TStamp:
+    type: string
+    format: date-time
+  DBClusterMemberList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterMember'
+  VpcSecurityGroupMembershipList:
+    type: array
+    items:
+      $ref: '#/definitions/VpcSecurityGroupMembership'
+  DBClusterRoles:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterRole'
+  DBClusterList:
+    type: array
+    items:
+      $ref: '#/definitions/DBCluster'
+  DBClusterMember:
+    type: object
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the instance identifier for this member of the DB cluster.
+      IsClusterWriter:
+        $ref: '#/definitions/Boolean'
+        description: A value that is <code>true</code> if the cluster member is the primary instance for the DB cluster and <code>false</code> otherwise.
+      DBClusterParameterGroupStatus:
+        $ref: '#/definitions/String'
+        description: Specifies the status of the DB cluster parameter group for this member of the DB cluster.
+      PromotionTier:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance. '
+    description: Contains information about an instance that is part of a DB cluster.
+  ParametersList:
+    type: array
+    items:
+      $ref: '#/definitions/Parameter'
+  DBClusterParameterGroupList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterParameterGroup'
+  DBClusterRole:
+    type: object
+    properties:
+      RoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>Describes the state of association between the IAM role and the DB cluster. The <code>Status</code> property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - The IAM role ARN is being associated with the DB cluster.</p> </li> <li> <p> <code>INVALID</code> - The IAM role ARN is associated with the DB cluster, but the DB cluster cannot assume the IAM role to access other AWS services on your behalf.</p> </li> </ul>'
+    description: Describes an AWS Identity and Access Management (IAM) role that is associated with a DB cluster.
+  Integer:
+    type: integer
+  DBClusterSnapshotAttribute:
+    type: object
+    properties:
+      AttributeName:
+        $ref: '#/definitions/String'
+        description: <p>The name of the manual DB cluster snapshot attribute.</p> <p>The attribute named <code>restore</code> refers to the list of AWS accounts that have permission to copy or restore the manual DB cluster snapshot.</p>
+      AttributeValues:
+        $ref: '#/definitions/AttributeValueList'
+        description: '<p>The values for the manual DB cluster snapshot attribute.</p> <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If a value of <code>all</code> is in the list, then the manual DB cluster snapshot is public and available for any AWS account to copy or restore.</p>'
+    description: <p>Contains the name and values of a manual DB cluster snapshot attribute.</p> <p>Manual DB cluster snapshot attributes are used to authorize other AWS accounts to restore a manual DB cluster snapshot.</p>
+  DBClusterSnapshotAttributeList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterSnapshotAttribute'
+  DBClusterSnapshotAttributesResult:
+    type: object
+    properties:
+      DBClusterSnapshotIdentifier:
+        $ref: '#/definitions/String'
+        description: The identifier of the DB cluster snapshot that the attributes apply to.
+      DBClusterSnapshotAttributes:
+        $ref: '#/definitions/DBClusterSnapshotAttributeList'
+        description: The list of attributes and values for the DB cluster snapshot.
+    description: Detailed information about the attributes that are associated with a DB cluster snapshot.
+  DBClusterSnapshotList:
+    type: array
+    items:
+      $ref: '#/definitions/DBClusterSnapshot'
+  ValidUpgradeTargetList:
+    type: array
+    items:
+      $ref: '#/definitions/UpgradeTarget'
+  DBEngineVersion:
+    type: object
+    properties:
+      Engine:
+        $ref: '#/definitions/String'
+        description: The name of the database engine.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The version number of the database engine.
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: The name of the DB parameter group family for the database engine.
+      DBEngineDescription:
+        $ref: '#/definitions/String'
+        description: The description of the database engine.
+      DBEngineVersionDescription:
+        $ref: '#/definitions/String'
+        description: The description of the database engine version.
+      ValidUpgradeTarget:
+        $ref: '#/definitions/ValidUpgradeTargetList'
+        description: A list of engine versions that this database engine version can be upgraded to.
+      ExportableLogTypes:
+        $ref: '#/definitions/LogTypeList'
+        description: The types of logs that the database engine has available for export to Amazon CloudWatch Logs.
+      SupportsLogExportsToCloudwatchLogs:
+        $ref: '#/definitions/Boolean'
+        description: A value that indicates whether the engine version supports exporting the log types specified by <code>ExportableLogTypes</code> to CloudWatch Logs.
+    description: ' Detailed information about a DB engine version. '
+  DBEngineVersionList:
+    type: array
+    items:
+      $ref: '#/definitions/DBEngineVersion'
+  Endpoint:
+    type: object
+    properties:
+      Address:
+        $ref: '#/definitions/String'
+        description: Specifies the DNS address of the DB instance.
+      Port:
+        $ref: '#/definitions/Integer'
+        description: Specifies the port that the database engine is listening on.
+      HostedZoneId:
+        $ref: '#/definitions/String'
+        description: Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+    description: Network information for accessing a DB cluster or DB instance. Client programs must specify a valid endpoint to access these Amazon DocumentDB resources.
+  PendingModifiedValues:
+    type: object
+    properties:
+      DBInstanceClass:
+        $ref: '#/definitions/String'
+        description: ' Contains the new <code>DBInstanceClass</code> for the DB instance that will be applied or is currently being applied. '
+      AllocatedStorage:
+        $ref: '#/definitions/IntegerOptional'
+        description: ' Contains the new <code>AllocatedStorage</code> size for the DB instance that will be applied or is currently being applied. '
+      MasterUserPassword:
+        $ref: '#/definitions/String'
+        description: Contains the pending or currently in-progress change of the master credentials for the DB instance.
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the pending port for the DB instance.
+      BackupRetentionPeriod:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the pending number of days for which automated backups are retained.
+      MultiAZ:
+        $ref: '#/definitions/BooleanOptional'
+        description: Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: Indicates the database engine version.
+      LicenseModel:
+        $ref: '#/definitions/String'
+        description: '<p>The license model for the DB instance.</p> <p>Valid values: <code>license-included</code>, <code>bring-your-own-license</code>, <code>general-public-license</code> </p>'
+      Iops:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the new Provisioned IOPS value for the DB instance that will be applied or is currently being applied.
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: ' Contains the new <code>DBInstanceIdentifier</code> for the DB instance that will be applied or is currently being applied. '
+      StorageType:
+        $ref: '#/definitions/String'
+        description: Specifies the storage type to be associated with the DB instance.
+      CACertificateIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the identifier of the certificate authority (CA) certificate for the DB instance.
+      DBSubnetGroupName:
+        $ref: '#/definitions/String'
+        description: 'The new DB subnet group for the DB instance. '
+      PendingCloudwatchLogsExports:
+        $ref: '#/definitions/PendingCloudwatchLogsExports'
+        description: A list of the log types whose configuration is still pending. These log types are in the process of being activated or deactivated.
+    description: ' One or more modified settings for a DB instance. These modified settings have been requested, but haven''t been applied yet.'
+  DBInstanceStatusInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/DBInstanceStatusInfo'
+  DBInstanceList:
+    type: array
+    items:
+      $ref: '#/definitions/DBInstance'
+  DBInstanceStatusInfo:
+    type: object
+    properties:
+      StatusType:
+        $ref: '#/definitions/String'
+        description: This value is currently "<code>read replication</code>."
+      Normal:
+        $ref: '#/definitions/Boolean'
+        description: 'A Boolean value that is <code>true</code> if the instance is operating normally, or <code>false</code> if the instance is in an error state.'
+      Status:
+        $ref: '#/definitions/String'
+        description: 'Status of the DB instance. For a <code>StatusType</code> of read replica, the values can be <code>replicating</code>, error, <code>stopped</code>, or <code>terminated</code>.'
+      Message:
+        $ref: '#/definitions/String'
+        description: 'Details of the error if there is an error for the instance. If the instance is not in an error state, this value is blank.'
+    description: Provides a list of status information for a DB instance.
+  SubnetList:
+    type: array
+    items:
+      $ref: '#/definitions/Subnet'
+  DBSubnetGroups:
+    type: array
+    items:
+      $ref: '#/definitions/DBSubnetGroup'
+  FilterList:
+    type: array
+    items:
+      $ref: '#/definitions/Filter'
+  EngineDefaults:
+    type: object
+    properties:
+      DBParameterGroupFamily:
+        $ref: '#/definitions/String'
+        description: The name of the DB cluster parameter group family to return the engine parameter information for.
+      Marker:
+        $ref: '#/definitions/String'
+        description: 'An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+      Parameters:
+        $ref: '#/definitions/ParametersList'
+        description: The parameters of a particular DB cluster parameter group family.
+    description: 'Contains the result of a successful invocation of the <code>DescribeEngineDefaultClusterParameters</code> operation. '
+  SourceType:
+    type: string
+    enum:
+      - db-instance
+      - db-parameter-group
+      - db-security-group
+      - db-snapshot
+      - db-cluster
+      - db-cluster-snapshot
+  EventCategoriesList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Event:
+    type: object
+    properties:
+      SourceIdentifier:
+        $ref: '#/definitions/String'
+        description: Provides the identifier for the source of the event.
+      SourceType:
+        $ref: '#/definitions/SourceType'
+        description: Specifies the source type for this event.
+      Message:
+        $ref: '#/definitions/String'
+        description: Provides the text of this event.
+      EventCategories:
+        $ref: '#/definitions/EventCategoriesList'
+        description: Specifies the category for the event.
+      Date:
+        $ref: '#/definitions/TStamp'
+        description: Specifies the date and time of the event.
+      SourceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) for the event.
+    description: Detailed information about an event.
+  EventCategoriesMap:
+    type: object
+    properties:
+      SourceType:
+        $ref: '#/definitions/String'
+        description: The source type that the returned categories belong to.
+      EventCategories:
+        $ref: '#/definitions/EventCategoriesList'
+        description: The event categories for the specified source type.
+    description: 'An event source type, accompanied by one or more event category names.'
+  EventCategoriesMapList:
+    type: array
+    items:
+      $ref: '#/definitions/EventCategoriesMap'
+  EventList:
+    type: array
+    items:
+      $ref: '#/definitions/Event'
+  FilterValueList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  Filter:
+    type: object
+    required:
+      - Name
+      - Values
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The name of the filter. Filter names are case sensitive.
+      Values:
+        $ref: '#/definitions/FilterValueList'
+        description: One or more filter values. Filter values are case sensitive.
+    description: '<p>A named set of filter values, used to return a more specific list of results. You can use a filter to match a set of resources by specific criteria, such as IDs.</p> <p>Wildcards are not supported in filters.</p>'
+  KeyList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
+  OrderableDBInstanceOption:
+    type: object
+    properties:
+      Engine:
+        $ref: '#/definitions/String'
+        description: The engine type of a DB instance.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The engine version of a DB instance.
+      DBInstanceClass:
+        $ref: '#/definitions/String'
+        description: The DB instance class for a DB instance.
+      LicenseModel:
+        $ref: '#/definitions/String'
+        description: The license model for a DB instance.
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZoneList'
+        description: A list of Availability Zones for a DB instance.
+      Vpc:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether a DB instance is in a virtual private cloud (VPC).
+    description: The options that are available for a DB instance.
+  OrderableDBInstanceOptionsList:
+    type: array
+    items:
+      $ref: '#/definitions/OrderableDBInstanceOption'
+  Parameter:
+    type: object
+    properties:
+      ParameterName:
+        $ref: '#/definitions/String'
+        description: Specifies the name of the parameter.
+      ParameterValue:
+        $ref: '#/definitions/String'
+        description: Specifies the value of the parameter.
+      Description:
+        $ref: '#/definitions/String'
+        description: Provides a description of the parameter.
+      Source:
+        $ref: '#/definitions/String'
+        description: Indicates the source of the parameter value.
+      ApplyType:
+        $ref: '#/definitions/String'
+        description: Specifies the engine-specific parameters type.
+      DataType:
+        $ref: '#/definitions/String'
+        description: Specifies the valid data type for the parameter.
+      AllowedValues:
+        $ref: '#/definitions/String'
+        description: Specifies the valid range of values for the parameter.
+      IsModifiable:
+        $ref: '#/definitions/Boolean'
+        description: ' Indicates whether (<code>true</code>) or not (<code>false</code>) the parameter can be modified. Some parameters have security or operational implications that prevent them from being changed. '
+      MinimumEngineVersion:
+        $ref: '#/definitions/String'
+        description: The earliest engine version to which the parameter can apply.
+      ApplyMethod:
+        $ref: '#/definitions/ApplyMethod'
+        description: Indicates when to apply parameter updates.
+    description: Detailed information about an individual parameter.
+  PendingCloudwatchLogsExports:
+    type: object
+    properties:
+      LogTypesToEnable:
+        $ref: '#/definitions/LogTypeList'
+        description: 'Log types that are in the process of being deactivated. After they are deactivated, these log types aren''t exported to CloudWatch Logs.'
+      LogTypesToDisable:
+        $ref: '#/definitions/LogTypeList'
+        description: 'Log types that are in the process of being enabled. After they are enabled, these log types are exported to Amazon CloudWatch Logs.'
+    description: A list of the log types whose configuration is still pending. These log types are in the process of being activated or deactivated.
+  PendingMaintenanceAction:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/String'
+        description: The type of pending maintenance action that is available for the resource.
+      AutoAppliedAfterDate:
+        $ref: '#/definitions/TStamp'
+        description: 'The date of the maintenance window when the action is applied. The maintenance action is applied to the resource during its first maintenance window after this date. If this date is specified, any <code>next-maintenance</code> opt-in requests are ignored.'
+      ForcedApplyDate:
+        $ref: '#/definitions/TStamp'
+        description: 'The date when the maintenance action is automatically applied. The maintenance action is applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any <code>immediate</code> opt-in requests are ignored.'
+      OptInStatus:
+        $ref: '#/definitions/String'
+        description: Indicates the type of opt-in request that has been received for the resource.
+      CurrentApplyDate:
+        $ref: '#/definitions/TStamp'
+        description: The effective date when the pending maintenance action is applied to the resource.
+      Description:
+        $ref: '#/definitions/String'
+        description: A description providing more detail about the maintenance action.
+    description: Provides information about a pending maintenance action for a resource.
+  PendingMaintenanceActionDetails:
+    type: array
+    items:
+      $ref: '#/definitions/PendingMaintenanceAction'
+  PendingMaintenanceActions:
+    type: array
+    items:
+      $ref: '#/definitions/ResourcePendingMaintenanceActions'
+  Subnet:
+    type: object
+    properties:
+      SubnetIdentifier:
+        $ref: '#/definitions/String'
+        description: Specifies the identifier of the subnet.
+      SubnetAvailabilityZone:
+        $ref: '#/definitions/AvailabilityZone'
+        description: Specifies the Availability Zone for the subnet.
+      SubnetStatus:
+        $ref: '#/definitions/String'
+        description: Specifies the status of the subnet.
+    description: ' Detailed information about a subnet. '
+  Tag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/String'
+        description: 'The required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can''t be prefixed with "aws:" or "rds:". The string can contain only the set of Unicode letters, digits, white space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
+      Value:
+        $ref: '#/definitions/String'
+        description: 'The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can''t be prefixed with "aws:" or "rds:". The string can contain only the set of Unicode letters, digits, white space, ''_'', ''.'', ''/'', ''='', ''+'', ''-'' (Java regex: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").'
+    description: Metadata assigned to an Amazon DocumentDB resource consisting of a key-value pair.
+  UpgradeTarget:
+    type: object
+    properties:
+      Engine:
+        $ref: '#/definitions/String'
+        description: The name of the upgrade target database engine.
+      EngineVersion:
+        $ref: '#/definitions/String'
+        description: The version number of the upgrade target database engine.
+      Description:
+        $ref: '#/definitions/String'
+        description: The version of the database engine that a DB instance can be upgraded to.
+      AutoUpgrade:
+        $ref: '#/definitions/Boolean'
+        description: A value that indicates whether the target version is applied to any source DB instances that have <code>AutoMinorVersionUpgrade</code> set to <code>true</code>.
+      IsMajorVersionUpgrade:
+        $ref: '#/definitions/Boolean'
+        description: A value that indicates whether a database engine is upgraded to a major version.
+    description: The version of the database engine that a DB instance can be upgraded to.
+  VpcSecurityGroupMembership:
+    type: object
+    properties:
+      VpcSecurityGroupId:
+        $ref: '#/definitions/String'
+        description: The name of the VPC security group.
+      Status:
+        $ref: '#/definitions/String'
+        description: The status of the VPC security group.
+    description: Used as a response element for queries on virtual private cloud (VPC) security group membership.
