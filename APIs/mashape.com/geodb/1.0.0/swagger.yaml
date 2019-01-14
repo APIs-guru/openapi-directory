@@ -4,21 +4,21 @@ schemes:
 host: wft-geo-db.p.mashape.com
 basePath: /
 info:
-  description: 'The GeoDB API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li><li>Sort cities by name, country code, elevation, and population - or any combination of these.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li><li>Display results in multiple languages.</li> <li>RESTful API adheres to industry best-practices, including HATEOAS-style links to facilitate paging results.</li> <li>Backed by cloud-based load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames and WikiData.</li></ul><p>Notes:<ul><li>All endpoints implicitly support JSONP-style invocation via an optional <tt>callback</tt> param.</li><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you''re really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href=''https://www.npmjs.com/package/wft-geodb-angular-client''>Angular</a>, <a href=''https://github.com/wirefreethought/geo-db-sample-angular-app''>Sample App</a></li><li><a href=''https://github.com/wirefreethought/geo-db-java-client''>Java</a></li><li><a href=''https://www.npmjs.com/package/wft-geodb-js-client''>JavaScript</a></li></ul><li><a href=''swagger.json''>Swagger Docs</a></li><li><a href=''http://creativecommons.org/licenses/by/3.0/''>Usage License</a></i></li></ul>'
+  description: 'The GeoDB API focuses on getting global city and region data. Easily obtain country, region, and city data for use in your apps! <ul><li>Filter cities by name prefix, country, location, time-zone, and even minimum population.</li><li>Sort cities by name, country code, elevation, and population - or any combination of these.</li> <li>Get all country regions.</li> <li>Get all cities in a given region.</li><li>Display results in multiple languages.</li> <li>RESTful API adheres to industry best-practices, including HATEOAS-style links to facilitate paging results.</li> <li>Backed by cloud-based load-balanced infrastructure for resiliency and performance!</li> <li>Data is periodically refreshed from GeoNames and WikiData.</li></ul><p>Notes:<ul><li>Since the database is periodically updated, this may <strong>very rarely</strong> result in certain cities being marked deleted (e.g., duplicates removed). By default, endpoints returning city data will exclude cities marked deleted. However, in the unlikely event that this occurs while your app is paging through a set of affected results - and you care about the paged results suddenly changing underneath - specify <tt>includeDeleted=SINCE_YESTERDAY</tt> (or <tt>SINCE_LAST_WEEK</tt> if you''re really paranoid!).</li></ul><hr/><h3>Useful Resources</h3><ul><li>SDKs<ul><li><a href=''https://www.npmjs.com/package/wft-geodb-angular-client''>Angular</a>, <a href=''https://github.com/wirefreethought/geodb-sample-angular-app''>Sample App</a></li><li><a href=''https://github.com/wirefreethought/geodb-java-client''>Java</a></li><li><a href=''https://www.npmjs.com/package/wft-geodb-js-client''>JavaScript</a></li></ul><li><a href=''swagger.json''>Swagger Docs</a></li><li><a href=''http://creativecommons.org/licenses/by/3.0/''>Usage License</a></i></li></ul>'
   license:
     name: Creative Commons Attribution 3.0
     url: 'http://creativecommons.org/licenses/by/3.0/'
-  title: GeoDB
+  title: GeoDB Cities
   version: 1.0.0
   x-apisguru-categories:
     - developer_tools
     - location
   x-logo:
     backgroundColor: '#FFFFFF'
-    url: 'https://raw.githubusercontent.com/wirefreethought/geodb-cities-api-docs/master/images/logo.png'
+    url: 'https://wirefreethought.github.io/geodb-cities-api-docs/images/logo.png'
   x-origin:
     - format: swagger
-      url: 'https://wirefreethought.github.io/geo-db-city-api-docs/swagger.json'
+      url: 'https://wirefreethought.github.io/geodb-cities-api-docs/swagger.json'
       version: '2.0'
   x-providerName: mashape.com
   x-serviceName: geodb
@@ -123,6 +123,12 @@ paths:
           name: includeDeleted
           required: false
           type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -303,6 +309,12 @@ paths:
           name: includeDeleted
           required: false
           type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -385,6 +397,12 @@ paths:
           name: offset
           required: false
           type: integer
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -478,6 +496,12 @@ paths:
           name: offset
           required: false
           type: integer
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -593,6 +617,12 @@ paths:
           name: includeDeleted
           required: false
           type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -673,6 +703,12 @@ paths:
           name: includeDeleted
           required: false
           type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -713,6 +749,12 @@ paths:
           name: offset
           required: false
           type: integer
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -746,6 +788,12 @@ paths:
           name: offset
           required: false
           type: integer
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -781,6 +829,12 @@ paths:
           name: offset
           required: false
           type: integer
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
@@ -816,6 +870,12 @@ paths:
           name: offset
           required: false
           type: integer
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK
