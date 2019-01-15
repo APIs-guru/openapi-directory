@@ -264,6 +264,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AttachVolume':
+    post:
+      operationId: AttachVolume
+      description: Connects a volume to an iSCSI connection and then attaches the volume to the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AttachVolumeOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AttachVolumeInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CancelArchival':
     post:
       operationId: CancelArchival
@@ -1467,6 +1500,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DetachVolume':
+    post:
+      operationId: DetachVolume
+      description: Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DetachVolumeOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          schema:
+            $ref: '#/definitions/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DetachVolumeInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DisableGateway':
     post:
       operationId: DisableGateway
@@ -2589,6 +2655,39 @@ definitions:
         $ref: '#/definitions/DiskIds'
         description: An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.
     description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>AddWorkingStorageInput$DiskIds</a> </p> </li> </ul>'
+  AttachVolumeOutput:
+    type: object
+    properties:
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the volume that was attached to the gateway.
+      TargetARN:
+        $ref: '#/definitions/TargetARN'
+        description: 'The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name for the initiator that was used to connect to the target.'
+    description: AttachVolumeOutput
+  AttachVolumeInput:
+    type: object
+    required:
+      - GatewayARN
+      - VolumeARN
+      - NetworkInterfaceId
+    properties:
+      GatewayARN:
+        $ref: '#/definitions/GatewayARN'
+        description: The Amazon Resource Name (ARN) of the gateway that you want to attach the volume to.
+      TargetName:
+        $ref: '#/definitions/TargetName'
+        description: '<p>The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>. The target name must be unique across all volumes on a gateway.</p> <p>If you don''t specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.</p>'
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the volume to attach to the specified gateway.
+      NetworkInterfaceId:
+        $ref: '#/definitions/NetworkInterfaceId'
+        description: '<p>The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use <a>DescribeGatewayInformation</a> to get a list of the network interfaces available on a gateway.</p> <p> Valid Values: A valid IP address.</p>'
+      DiskId:
+        $ref: '#/definitions/DiskId'
+        description: The unique device ID or other distinguishing data that identifies the local disk used to create the volume. This value is only required when you are attaching a stored volume.
+    description: AttachVolumeInput
   CancelArchivalOutput:
     type: object
     example:
@@ -2648,7 +2747,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the configured volume.
       TargetARN:
         $ref: '#/definitions/TargetARN'
-        description: he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
+        description: 'The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.'
   CreateCachediSCSIVolumeInput:
     type: object
     required:
@@ -2878,7 +2977,7 @@ definitions:
         description: The size of the volume in bytes.
       TargetARN:
         $ref: '#/definitions/TargetARN'
-        description: he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
+        description: 'The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.'
     description: 'A JSON object containing the following fields:'
   CreateStorediSCSIVolumeInput:
     type: object
@@ -3735,6 +3834,25 @@ definitions:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
     description: A JSON object containing the of the gateway.
+  DetachVolumeOutput:
+    type: object
+    properties:
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the volume that was detached.
+    description: AttachVolumeOutput
+  DetachVolumeInput:
+    type: object
+    required:
+      - VolumeARN
+    properties:
+      VolumeARN:
+        $ref: '#/definitions/VolumeARN'
+        description: The Amazon Resource Name (ARN) of the volume to detach from the gateway.
+      ForceDetach:
+        $ref: '#/definitions/Boolean'
+        description: 'Set to <code>true</code> to forcibly remove the iSCSI connection of the target volume and detach the volume. The default is <code>false</code>. If this value is set to <code>false</code>, you must manually disconnect the iSCSI connection from the target volume.'
+    description: AttachVolumeInput
   DisableGatewayOutput:
     type: object
     example:
@@ -3771,10 +3889,16 @@ definitions:
     properties:
       GatewayARN:
         $ref: '#/definitions/GatewayARN'
-        description: 'The unique Amazon Resource Name (ARN) of the file gateway you want to add to the Active Directory domain. '
+        description: The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and region.
       DomainName:
         $ref: '#/definitions/DomainName'
         description: The name of the domain that you want the gateway to join.
+      OrganizationalUnit:
+        $ref: '#/definitions/OrganizationalUnit'
+        description: 'The organizational unit (OU) is a container with an Active Directory that can hold users, groups, computers, and other OUs and this parameter specifies the OU that the gateway will join within the AD domain.'
+      DomainControllers:
+        $ref: '#/definitions/Hosts'
+        description: 'List of IPv4 addresses, NetBIOS names, or host names of your domain server. If you need to specify the port number include it after the colon (“:”). For example, <code>mydc.mydomain.com:389</code>.'
       UserName:
         $ref: '#/definitions/DomainUserName'
         description: Sets the user name of user who has permission to add the gateway to the Active Directory domain.
@@ -4033,11 +4157,14 @@ definitions:
     properties:
       FileShareARN:
         $ref: '#/definitions/FileShareARN'
+        description: The Amazon Resource Name (ARN) of the file share you want to refresh.
       FolderList:
         $ref: '#/definitions/FolderList'
+        description: 'A comma-separated list of the paths of folders to refresh in the cache. The default is [<code>"/"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to "true", the entire S3 bucket that the file share has access to is refreshed.'
       Recursive:
         $ref: '#/definitions/Boolean'
         description: 'A value that specifies whether to recursively refresh folders in the cache. The refresh includes folders that were in the cache the last time the gateway listed the folder''s contents. If this value set to "true", each folder that is listed in <code>FolderList</code> is recursively updated. Otherwise, subfolders listed in <code>FolderList</code> are not refreshed. Only objects that are in folders listed directly under <code>FolderList</code> are found and used for the update. The default is "true".'
+    description: RefreshCacheInput
   RemoveTagsFromResourceOutput:
     type: object
     example:
@@ -4541,6 +4668,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Tag'
+  TargetName:
+    type: string
+    pattern: '^[-\.;a-z0-9]+$'
+    minLength: 1
+    maxLength: 200
+  VolumeARN:
+    type: string
+    minLength: 50
+    maxLength: 500
+  NetworkInterfaceId:
+    type: string
+    pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
+  DiskId:
+    type: string
+    minLength: 1
+    maxLength: 300
+  TargetARN:
+    type: string
+    minLength: 50
+    maxLength: 800
   Authentication:
     type: string
     description: <p>The authentication method of the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>
@@ -4558,10 +4705,6 @@ definitions:
     minimum: 51200
   Boolean:
     type: boolean
-  VolumeARN:
-    type: string
-    minLength: 50
-    maxLength: 500
   VolumeId:
     type: string
     minLength: 12
@@ -4571,6 +4714,10 @@ definitions:
     minLength: 3
     maxLength: 100
   VolumeStatus:
+    type: string
+    minLength: 3
+    maxLength: 50
+  VolumeAttachmentStatus:
     type: string
     minLength: 3
     maxLength: 50
@@ -4626,6 +4773,9 @@ definitions:
       VolumeStatus:
         $ref: '#/definitions/VolumeStatus'
         description: One of the VolumeStatus values that indicates the state of the storage volume.
+      VolumeAttachmentStatus:
+        $ref: '#/definitions/VolumeAttachmentStatus'
+        description: A value that indicates whether a storage volume is attached to or detached from a gateway.
       VolumeSizeInBytes:
         $ref: '#/definitions/long'
         description: 'The size, in bytes, of the volume capacity.'
@@ -4646,6 +4796,9 @@ definitions:
         description: '<p>The size of the data stored on the volume in bytes.</p> <note> <p>This value is not available for volumes created prior to May 13, 2015, until you store data on the volume.</p> </note>'
       KMSKey:
         $ref: '#/definitions/KMSKey'
+      TargetName:
+        $ref: '#/definitions/TargetName'
+        description: 'The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>.'
     description: Describes an iSCSI cached volume.
   CachediSCSIVolumes:
     type: array
@@ -4676,10 +4829,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ChapInfo'
-  TargetARN:
-    type: string
-    minLength: 50
-    maxLength: 800
   ChapSecret:
     type: string
     minLength: 1
@@ -4693,14 +4842,6 @@ definitions:
     type: string
     minLength: 5
     maxLength: 100
-  TargetName:
-    type: string
-    pattern: '^[-\.;a-z0-9]+$'
-    minLength: 1
-    maxLength: 200
-  NetworkInterfaceId:
-    type: string
-    pattern: '\A(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}\z'
   NFSFileShareDefaults:
     type: object
     properties:
@@ -4772,10 +4913,6 @@ definitions:
     maxLength: 255
   string:
     type: string
-  DiskId:
-    type: string
-    minLength: 1
-    maxLength: 300
   boolean:
     type: boolean
   TapeSize:
@@ -4855,6 +4992,8 @@ definitions:
   DomainName:
     type: string
     pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
+    minLength: 1
+    maxLength: 1024
   RecurrenceInHours:
     type: integer
     minimum: 1
@@ -4918,7 +5057,7 @@ definitions:
     description: Lists iSCSI information about a VTL device.
   DiskAllocationType:
     type: string
-    description: 'One of the <code>DiskAllocationType</code> enumeration values that identifies how a local disk is used. Valid values: "UPLOAD_BUFFER", "CACHE_STORAGE".'
+    description: 'One of the <code>DiskAllocationType</code> enumeration values that identifies how a local disk is used. Valid values: <code>UPLOAD_BUFFER</code>, <code>CACHE_STORAGE</code> '
     minLength: 3
     maxLength: 100
   DiskAttributeList:
@@ -4950,7 +5089,7 @@ definitions:
         $ref: '#/definitions/DiskAllocationType'
       DiskAllocationResource:
         $ref: '#/definitions/string'
-        description: 'The iSCSI Qualified Name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is <i>targetIqn::LUNNumber::region-volumeId</i>. '
+        description: 'The iSCSI qualified name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is <i>targetIqn::LUNNumber::region-volumeId</i>. '
       DiskAttributeList:
         $ref: '#/definitions/DiskAttributeList'
     description: Represents a gateway's local disk.
@@ -4965,9 +5104,13 @@ definitions:
   DomainUserName:
     type: string
     pattern: '^\w[\w\.\- ]*$'
+    minLength: 1
+    maxLength: 1024
   DomainUserPassword:
     type: string
     pattern: '^[ -~]+$'
+    minLength: 1
+    maxLength: 1024
     format: password
   IPV4AddressCIDR:
     type: string
@@ -5016,7 +5159,6 @@ definitions:
     maxLength: 1024
   FolderList:
     type: array
-    description: 'A comma-separated list of the paths of folders to refresh in the cache. The default is [<code>"/"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to "true", the entire S3 bucket that the file share has access to is refreshed.'
     items:
       $ref: '#/definitions/Folder'
     minItems: 1
@@ -5061,6 +5203,13 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/GatewayInfo'
+  Host:
+    type: string
+    pattern: '^(([a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9\-]*[A-Za-z0-9])(:(\d+))?$'
+  Hosts:
+    type: array
+    items:
+      $ref: '#/definitions/Host'
   Initiator:
     type: string
     minLength: 1
@@ -5069,6 +5218,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Initiator'
+  OrganizationalUnit:
+    type: string
+    minLength: 1
+    maxLength: 1024
   TapeInfos:
     type: array
     description: 'An array of <a>TapeInfo</a> objects, where each object describes an a single tape. If there not tapes in the tape library or VTS, then the <code>TapeInfos</code> is an empty array.'
@@ -5219,6 +5372,9 @@ definitions:
       VolumeStatus:
         $ref: '#/definitions/VolumeStatus'
         description: One of the VolumeStatus values that indicates the state of the storage volume.
+      VolumeAttachmentStatus:
+        $ref: '#/definitions/VolumeAttachmentStatus'
+        description: 'A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway.'
       VolumeSizeInBytes:
         $ref: '#/definitions/long'
         description: The size of the volume in bytes.
@@ -5245,6 +5401,9 @@ definitions:
         description: '<p>The size of the data stored on the volume in bytes. </p> <note> <p>This value is not available for volumes created prior to May 13, 2015, until you store data on the volume.</p> </note>'
       KMSKey:
         $ref: '#/definitions/KMSKey'
+      TargetName:
+        $ref: '#/definitions/TargetName'
+        description: 'The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>.'
     description: Describes an iSCSI stored volume.
   TagKey:
     type: string
@@ -5414,6 +5573,8 @@ definitions:
       VolumeSizeInBytes:
         $ref: '#/definitions/long'
         description: '<p>The size of the volume in bytes.</p> <p>Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).</p>'
+      VolumeAttachmentStatus:
+        $ref: '#/definitions/VolumeAttachmentStatus'
     description: Describes a storage volume object.
   VolumeRecoveryPointInfo:
     type: object

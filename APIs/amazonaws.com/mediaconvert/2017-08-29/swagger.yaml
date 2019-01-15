@@ -1333,6 +1333,9 @@ definitions:
       - Role
       - Settings
     properties:
+      AccelerationSettings:
+        $ref: '#/definitions/AccelerationSettings'
+        description: 'This is a beta feature. If you are interested in using this feature, please contact AWS customer support.'
       BillingTagsSource:
         $ref: '#/definitions/BillingTagsSource'
       ClientRequestToken:
@@ -1363,6 +1366,9 @@ definitions:
       - Settings
       - Name
     properties:
+      AccelerationSettings:
+        $ref: '#/definitions/AccelerationSettings'
+        description: This is a beta feature. If you are interested in using this feature please contact AWS customer support.
       Category:
         $ref: '#/definitions/__string'
         description: Optional. A category for the job template you are creating
@@ -1600,6 +1606,9 @@ definitions:
   UpdateJobTemplateRequest:
     type: object
     properties:
+      AccelerationSettings:
+        $ref: '#/definitions/AccelerationSettings'
+        description: 'This is a beta feature. If you are interested in using this feature, please contact AWS customer support.'
       Category:
         $ref: '#/definitions/__string'
         description: 'The new category for the job template, if you are changing it.'
@@ -1707,7 +1716,7 @@ definitions:
         $ref: '#/definitions/AacAudioDescriptionBroadcasterMix'
       Bitrate:
         $ref: '#/definitions/__integerMin6000Max1024000'
-        description: Average bitrate in bits/second. Defaults and valid values depend on rate control mode and profile.
+        description: 'Average bitrate in bits/second. The set of valid values for this setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 288000, 320000, 384000, 448000, 512000, 576000, 640000, 768000, 896000, 1024000. The value you set is also constrained by the values you choose for Profile (codecProfile), Bitrate control mode (codingMode), and Sample rate (sampleRate). Default values depend on Bitrate control mode and Profile.'
       CodecProfile:
         $ref: '#/definitions/AacCodecProfile'
       CodingMode:
@@ -1797,13 +1806,28 @@ definitions:
         $ref: '#/definitions/__integerMin48000Max48000'
         description: Sample rate in hz. Sample rate is always 48000.
     description: Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AC3.
+  AccelerationMode:
+    type: string
+    enum:
+      - DISABLED
+      - ENABLED
+    description: Acceleration configuration for the job.
+  AccelerationSettings:
+    type: object
+    required:
+      - Mode
+    properties:
+      Mode:
+        $ref: '#/definitions/AccelerationMode'
+        description: Acceleration configuration for the job.
+    description: Acceleration settings for job execution.
   AfdSignaling:
     type: string
     enum:
       - NONE
       - AUTO
       - FIXED
-    description: 'This setting only applies to H.264, H.265, and MPEG2 outputs. Use Insert AFD signaling  (AfdSignaling) to specify whether the service includes AFD values in the output video data  and what those values are. * Choose None to remove all AFD values from this output. * Choose Fixed to ignore input AFD values and instead encode the value specified in the job. * Choose Auto to calculate output AFD values based on the input AFD scaler data.'
+    description: 'This setting only applies to H.264, H.265, and MPEG2 outputs. Use Insert AFD signaling (AfdSignaling) to specify whether the service includes AFD values in the output video data and what those values are. * Choose None to remove all AFD values from this output. * Choose Fixed to ignore input AFD values and instead encode the value specified in the job. * Choose Auto to calculate output AFD values based on the input AFD scaler data.'
   __integerMin16Max24:
     type: integer
     minimum: 16
@@ -2394,6 +2418,13 @@ definitions:
     type: integer
     minimum: 96
     maximum: 600
+  FontScript:
+    type: string
+    enum:
+      - AUTOMATIC
+      - HANS
+      - HANT
+    description: 'Provide the font script, using an ISO 15924 script code, if the LanguageCode is not sufficient for determining the script type. Where LanguageCode or CustomLanguageCode is sufficient, use "AUTOMATIC" or leave unset.'
   __integerMin0Max96:
     type: integer
     minimum: 0
@@ -2453,6 +2484,9 @@ definitions:
         description: |-
           Font resolution in DPI (dots per inch); default is 96 dpi.
           All burn-in and DVB-Sub font settings must match.
+      FontScript:
+        $ref: '#/definitions/FontScript'
+        description: 'Provide the font script, using an ISO 15924 script code, if the LanguageCode is not sufficient for determining the script type. Where LanguageCode or CustomLanguageCode is sufficient, use "AUTOMATIC" or leave unset. This is used to help determine the appropriate font for rendering burn-in captions.'
       FontSize:
         $ref: '#/definitions/__integerMin0Max96'
         description: A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
@@ -2493,6 +2527,8 @@ definitions:
         $ref: '#/definitions/CaptionDestinationType'
       DvbSubDestinationSettings:
         $ref: '#/definitions/DvbSubDestinationSettings'
+      EmbeddedDestinationSettings:
+        $ref: '#/definitions/EmbeddedDestinationSettings'
       SccDestinationSettings:
         $ref: '#/definitions/SccDestinationSettings'
       TeletextDestinationSettings:
@@ -2508,12 +2544,12 @@ definitions:
         description: 'Specifies which "Caption Selector":#inputs-caption_selector to use from each input when generating captions. The name should be of the format "Caption Selector <N>", which denotes that the Nth Caption Selector will be used from each input.'
       CustomLanguageCode:
         $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
-        description: 'Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code'
+        description: 'Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.'
       DestinationSettings:
         $ref: '#/definitions/CaptionDestinationSettings'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: Indicates the language of the caption output track.
+        description: 'Specify the language of this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.'
       LanguageDescription:
         $ref: '#/definitions/__string'
         description: 'Human readable information to indicate captions available for players (eg. English, or Spanish). Alphanumeric characters, spaces, and underscore are legal.'
@@ -2523,12 +2559,12 @@ definitions:
     properties:
       CustomLanguageCode:
         $ref: '#/definitions/__stringMin3Max3PatternAZaZ3'
-        description: 'Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code'
+        description: 'Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.'
       DestinationSettings:
         $ref: '#/definitions/CaptionDestinationSettings'
       LanguageCode:
         $ref: '#/definitions/LanguageCode'
-        description: Indicates the language of the caption output track.
+        description: 'Specify the language of this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.'
       LanguageDescription:
         $ref: '#/definitions/__string'
         description: 'Human readable information to indicate captions available for players (eg. English, or Spanish). Alphanumeric characters, spaces, and underscore are legal.'
@@ -2547,7 +2583,7 @@ definitions:
       - TELETEXT
       - TTML
       - WEBVTT
-    description: 'Type of Caption output, including Burn-In, Embedded (with or without SCTE20), SCC, SMI, SRT, TTML, WebVTT, DVB-Sub, Teletext.'
+    description: 'Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).'
   DvbSubDestinationSettings:
     type: object
     properties:
@@ -2570,6 +2606,9 @@ definitions:
         description: |-
           Font resolution in DPI (dots per inch); default is 96 dpi.
           All burn-in and DVB-Sub font settings must match.
+      FontScript:
+        $ref: '#/definitions/FontScript'
+        description: 'Provide the font script, using an ISO 15924 script code, if the LanguageCode is not sufficient for determining the script type. Where LanguageCode or CustomLanguageCode is sufficient, use "AUTOMATIC" or leave unset. This is used to help determine the appropriate font for rendering DVB-Sub captions.'
       FontSize:
         $ref: '#/definitions/__integerMin0Max96'
         description: A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
@@ -2598,6 +2637,13 @@ definitions:
         $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.'
     description: DVB-Sub Destination Settings
+  EmbeddedDestinationSettings:
+    type: object
+    properties:
+      Destination608ChannelNumber:
+        $ref: '#/definitions/__integerMin1Max4'
+        description: 'Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. If you don''t specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. Channels must be unique and may only be combined in the following combinations: (1+3, 2+4, 1+4, 2+3).'
+    description: 'Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number.'
   SccDestinationSettings:
     type: object
     properties:
@@ -2632,6 +2678,8 @@ definitions:
         $ref: '#/definitions/CaptionSourceType'
       TeletextSourceSettings:
         $ref: '#/definitions/TeletextSourceSettings'
+      TrackSourceSettings:
+        $ref: '#/definitions/TrackSourceSettings'
     description: Source settings (SourceSettings) contains the group of settings for captions in the input.
   CaptionSelector:
     type: object
@@ -2690,6 +2738,7 @@ definitions:
       - SMI
       - TELETEXT
       - NULL_SOURCE
+      - IMSC
     description: Use Source (SourceType) to identify the format of your input captions.  The service cannot auto-detect caption format.
   TeletextSourceSettings:
     type: object
@@ -2698,6 +2747,13 @@ definitions:
         $ref: '#/definitions/__stringMin3Max3Pattern1809aFAF09aEAE'
         description: Use Page Number (PageNumber) to specify the three-digit hexadecimal page number that will be used for Teletext captions. Do not use this setting if you are passing through teletext from the input source to output.
     description: 'Settings specific to Teletext caption sources, including Page number.'
+  TrackSourceSettings:
+    type: object
+    properties:
+      TrackNumber:
+        $ref: '#/definitions/__integerMin1Max2147483647'
+        description: 'Use this setting to select a single captions track from a source. Track numbers correspond to the order in the captions source file. For IMF sources, track numbering is based on the order that the captions appear in the CPL. For example, use 1 to select the captions asset that is listed first in the CPL. To include more than one captions track in your job outputs, create multiple input captions selectors. Specify one track per selector.'
+    description: Settings specific to caption sources that are specfied by track number. Sources include IMSC in IMF.
   __listOfOutputChannelMapping:
     type: array
     items:
@@ -2912,7 +2968,7 @@ definitions:
       WhitePointY:
         $ref: '#/definitions/__integerMin0Max50000'
         description: 'HDR Master Display Information must be provided by a color grader, using color grading tools. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that this setting is not for color correction.'
-    description: 'Use the HDR master display (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. These values vary depending on the input video and must be provided by a color grader. Range is 0 to 50,000, each increment represents 0.00002 in CIE1931 color coordinate. Note that these settings are not color correction. Note that if you are creating HDR outputs inside of an HLS CMAF package, to comply with the Apple specification, you must use the HVC1 for H.265 setting.'
+    description: 'Use the "HDR master display information" (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. These values vary depending on the input video and must be provided by a color grader. Range is 0 to 50,000; each increment represents 0.00002 in CIE1931 color coordinate. Note that these settings are not color correction. Note that if you are creating HDR outputs inside of an HLS CMAF package, to comply with the Apple specification, you must use the following settings. Set "MP4 packaging type" (writeMp4PackagingType) to HVC1 (HVC1). Set "Profile" (H265Settings > codecProfile) to Main10/High (MAIN10_HIGH). Set "Level" (H265Settings > codecLevel) to 5 (LEVEL_5).'
   __integerMinNegative180Max180:
     type: integer
     minimum: -180
@@ -2930,6 +2986,7 @@ definitions:
         description: Contrast level.
       Hdr10Metadata:
         $ref: '#/definitions/Hdr10Metadata'
+        description: Use the HDR master display (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. Note that these settings are not color correction.
       Hue:
         $ref: '#/definitions/__integerMinNegative180Max180'
         description: Hue in degrees.
@@ -3017,6 +3074,8 @@ definitions:
         $ref: '#/definitions/M2tsEbpPlacement'
       EsRateInPes:
         $ref: '#/definitions/M2tsEsRateInPes'
+      ForceTsVideoEbpOrder:
+        $ref: '#/definitions/M2tsForceTsVideoEbpOrder'
       FragmentTime:
         $ref: '#/definitions/__doubleMin0'
         description: The length in seconds of each fragment. Only used with EBP markers.
@@ -3207,6 +3266,9 @@ definitions:
       - Role
       - Settings
     properties:
+      AccelerationSettings:
+        $ref: '#/definitions/AccelerationSettings'
+        description: Acceleration settings for job execution.
       Arn:
         $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
@@ -3278,6 +3340,9 @@ definitions:
       - Settings
       - Name
     properties:
+      AccelerationSettings:
+        $ref: '#/definitions/AccelerationSettings'
+        description: Acceleration settings for job execution.
       Arn:
         $ref: '#/definitions/__string'
         description: An identifier for this resource that is unique within all of AWS.
@@ -3416,7 +3481,7 @@ definitions:
     type: object
     properties:
       CertificateArn:
-        $ref: '#/definitions/__stringPatternArnAwsAcm'
+        $ref: '#/definitions/__stringPatternArnAwsUsGovAcm'
         description: Optional AWS Certificate Manager ARN for a certificate to send to the keyprovider. The certificate holds a key used by the keyprovider to encrypt the keys in its response.
       ResourceId:
         $ref: '#/definitions/__string'
@@ -3846,7 +3911,7 @@ definitions:
       - LEVEL_5
       - LEVEL_5_1
       - LEVEL_5_2
-    description: H.264 Level.
+    description: 'Specify an H.264 level that is consistent with your output video settings. If you aren''t sure what level to specify, choose Auto (AUTO).'
   H264CodecProfile:
     type: string
     enum:
@@ -3886,13 +3951,13 @@ definitions:
     enum:
       - INITIALIZE_FROM_SOURCE
       - SPECIFIED
-    description: 'If you are using the console, use the Framerate setting to specify the framerate for this output. If you want to keep the same framerate as the input video, choose Follow source. If you want to do framerate conversion, choose a framerate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your framerate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the framerate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the framerate from the input. Choose SPECIFIED if you want the service to use the framerate you specify in the settings FramerateNumerator and FramerateDenominator.'
+    description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
   H264FramerateConversionAlgorithm:
     type: string
     enum:
       - DUPLICATE_DROP
       - INTERPOLATE
-    description: 'When set to INTERPOLATE, produces smoother motion during framerate conversion.'
+    description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
   H264GopBReference:
     type: string
     enum:
@@ -4062,10 +4127,10 @@ definitions:
         $ref: '#/definitions/H264FramerateConversionAlgorithm'
       FramerateDenominator:
         $ref: '#/definitions/__integerMin1Max2147483647'
-        description: 'When you use the API for transcode jobs that use framerate conversion, specify the framerate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use framerate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
+        description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.'
       FramerateNumerator:
         $ref: '#/definitions/__integerMin1Max2147483647'
-        description: 'Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
+        description: 'Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
       GopBReference:
         $ref: '#/definitions/H264GopBReference'
       GopClosedCadence:
@@ -4197,13 +4262,13 @@ definitions:
     enum:
       - INITIALIZE_FROM_SOURCE
       - SPECIFIED
-    description: 'If you are using the console, use the Framerate setting to specify the framerate for this output. If you want to keep the same framerate as the input video, choose Follow source. If you want to do framerate conversion, choose a framerate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your framerate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the framerate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the framerate from the input. Choose SPECIFIED if you want the service to use the framerate you specify in the settings FramerateNumerator and FramerateDenominator.'
+    description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
   H265FramerateConversionAlgorithm:
     type: string
     enum:
       - DUPLICATE_DROP
       - INTERPOLATE
-    description: 'When set to INTERPOLATE, produces smoother motion during framerate conversion.'
+    description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
   H265GopBReference:
     type: string
     enum:
@@ -4353,10 +4418,10 @@ definitions:
         $ref: '#/definitions/H265FramerateConversionAlgorithm'
       FramerateDenominator:
         $ref: '#/definitions/__integerMin1Max2147483647'
-        description: Framerate denominator.
+        description: Frame rate denominator.
       FramerateNumerator:
         $ref: '#/definitions/__integerMin1Max2147483647'
-        description: 'Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
+        description: 'Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
       GopBReference:
         $ref: '#/definitions/H265GopBReference'
       GopClosedCadence:
@@ -4684,7 +4749,7 @@ definitions:
       InsertableImages:
         $ref: '#/definitions/__listOfInsertableImage'
         description: Specify the images that you want to overlay on your video. The images must be PNG or TGA files.
-    description: Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input or output individually. This setting is disabled by default.
+    description: Enable the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input or output individually. This setting is disabled by default.
   __mapOfAudioSelectorGroup:
     type: array
     items:
@@ -4739,9 +4804,9 @@ definitions:
       - ENABLED
       - DISABLED
     description: 'Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs.'
-  __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM:
+  __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL:
     type: string
-    pattern: '^(s3:\/\/)([^\/]+\/)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM])))$'
+    pattern: '^(s3:\/\/)([^\/]+\/)+([^\/\.]+|(([^\/]*)\.([mM]2[vV]|[mM][pP][eE][gG]|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$'
   InputFilterEnable:
     type: string
     enum:
@@ -4763,6 +4828,10 @@ definitions:
       - IGNORE_PSI
       - USE_PSI
     description: Set PSI control (InputPsiControl) for transport stream inputs to specify which data the demux process to scans. * Ignore PSI - Scan all PIDs for audio and video. * Use PSI - Scan only PSI data.
+  __listOf__stringPatternS3ASSETMAPXml:
+    type: array
+    items:
+      $ref: '#/definitions/__stringPatternS3ASSETMAPXml'
   InputTimecodeSource:
     type: string
     enum:
@@ -4802,12 +4871,12 @@ definitions:
         $ref: '#/definitions/InputDeblockFilter'
       DecryptionSettings:
         $ref: '#/definitions/InputDecryptionSettings'
-        description: 'If the input file is encrypted, decryption settings to decrypt the media file'
+        description: Settings for decrypting any input files that are encrypted.
       DenoiseFilter:
         $ref: '#/definitions/InputDenoiseFilter'
       FileInput:
-        $ref: '#/definitions/__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM'
-        description: 'Use Input (fileInput) to define the source file used in the transcode job. There can be multiple inputs in a job. These inputs are concantenated, in the order they are specified in the job, to create the output.'
+        $ref: '#/definitions/__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL'
+        description: 'Specify the source file for your transcoding job. You can use multiple inputs in a single job. The service concatenates these inputs, in the order that you specify them in the job, to create the outputs. If your input format is IMF, specify your input by providing the path to your CPL. For example, "s3://bucket/vf/cpl.xml". If the CPL is in an incomplete IMP, make sure to use *Supplemental IMPs* (SupplementalImps) to specify any supplemental IMPs that contain assets referenced by the CPL.'
       FilterEnable:
         $ref: '#/definitions/InputFilterEnable'
       FilterStrength:
@@ -4815,7 +4884,7 @@ definitions:
         description: Use Filter strength (FilterStrength) to adjust the magnitude the input filter settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
       ImageInserter:
         $ref: '#/definitions/ImageInserter'
-        description: Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
+        description: Enable the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
       InputClippings:
         $ref: '#/definitions/__listOfInputClipping'
         description: '(InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.'
@@ -4824,6 +4893,9 @@ definitions:
         description: 'Use Program (programNumber) to select a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported. Default is the first program within the transport stream. If the program you specify doesn''t exist, the transcoding service will use this default.'
       PsiControl:
         $ref: '#/definitions/InputPsiControl'
+      SupplementalImps:
+        $ref: '#/definitions/__listOf__stringPatternS3ASSETMAPXml'
+        description: 'Provide a list of any necessary supplemental IMPs. You need supplemental IMPs if the CPL that you''re using for your input is in an incomplete IMP. Specify either the supplemental IMP directories with a trailing slash or the ASSETMAP.xml files. For example ["s3://bucket/ov/", "s3://bucket/vf2/ASSETMAP.xml"]. You don''t need to specify the IMP that contains your input CPL, because the service automatically detects it.'
       TimecodeSource:
         $ref: '#/definitions/InputTimecodeSource'
       VideoSelector:
@@ -4877,7 +4949,7 @@ definitions:
         description: Use Filter strength (FilterStrength) to adjust the magnitude the input filter settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
       ImageInserter:
         $ref: '#/definitions/ImageInserter'
-        description: Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
+        description: Enable the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
       InputClippings:
         $ref: '#/definitions/__listOfInputClipping'
         description: '(InputClippings) contains sets of start and end times that together specify a portion of the input to be used in the outputs. If you provide only a start time, the clip will be the entire input from that point to the end. If you provide only an end time, it will be the entire input up to that point. When you specify more than one input clip, the transcoding service creates the job outputs by stringing the clips together in the order you specify them.'
@@ -4907,10 +4979,10 @@ definitions:
     properties:
       Duration:
         $ref: '#/definitions/__integerMin0Max2147483647'
-        description: 'Set the time, in milliseconds, for the image to remain on the output video.'
+        description: 'Specify the time, in milliseconds, for the image to remain on the output video. This duration includes fade-in time but not fade-out time.'
       FadeIn:
         $ref: '#/definitions/__integerMin0Max2147483647'
-        description: 'Set the length of time, in milliseconds, between the Start time that you specify for the image insertion and the time that the image appears at full opacity. Full opacity is the level that you specify for the opacity setting. If you don''t specify a value for Fade-in, the image will appear abruptly at the overlay start time.'
+        description: 'Specify the length of time, in milliseconds, between the Start time that you specify for the image insertion and the time that the image appears at full opacity. Full opacity is the level that you specify for the opacity setting. If you don''t specify a value for Fade-in, the image will appear abruptly at the overlay start time.'
       FadeOut:
         $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specify the length of time, in milliseconds, between the end of the time that you have specified for the image overlay Duration and when the overlaid image has faded to total transparency. If you don''t specify a value for Fade-out, the image will disappear abruptly at the end of the inserted image duration.'
@@ -4919,13 +4991,13 @@ definitions:
         description: 'Specify the height of the inserted image in pixels. If you specify a value that''s larger than the video resolution height, the service will crop your overlaid image to fit. To use the native height of the image, keep this setting blank.'
       ImageInserterInput:
         $ref: '#/definitions/__stringMin14PatternS3BmpBMPPngPNGTgaTGA'
-        description: Use Image location (imageInserterInput) to specify the Amazon S3 location of the image to be inserted into the output. Use a PNG or TGA file that fits inside the video frame.
+        description: Specify the Amazon S3 location of the image that you want to overlay on the video. Use a PNG or TGA file.
       ImageX:
         $ref: '#/definitions/__integerMin0Max2147483647'
-        description: 'Use Left (ImageX) to set the distance, in pixels, between the inserted image and the left edge of the video frame. Required for any image overlay that you specify.'
+        description: 'Specify the distance, in pixels, between the inserted image and the left edge of the video frame. Required for any image overlay that you specify.'
       ImageY:
         $ref: '#/definitions/__integerMin0Max2147483647'
-        description: 'Use Top (ImageY) to set the distance, in pixels, between the overlaid image and the top edge of the video frame. Required for any image overlay that you specify.'
+        description: 'Specify the distance, in pixels, between the overlaid image and the top edge of the video frame. Required for any image overlay that you specify.'
       Layer:
         $ref: '#/definitions/__integerMin0Max99'
         description: Specify how overlapping inserted images appear. Images with higher values for Layer appear on top of images with lower values for Layer.
@@ -4934,11 +5006,11 @@ definitions:
         description: Use Opacity (Opacity) to specify how much of the underlying video shows through the inserted image. 0 is transparent and 100 is fully opaque. Default is 50.
       StartTime:
         $ref: '#/definitions/__stringPattern01D20305D205D'
-        description: 'Use Start time (StartTime) to specify the video timecode when the image is inserted in the output. This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF) format.'
+        description: 'Specify the timecode of the frame that you want the overlay to first appear on. This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF) format. Remember to take into account your timecode source settings.'
       Width:
         $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Specify the width of the inserted image in pixels. If you specify a value that''s larger than the video resolution width, the service will crop your overlaid image to fit. To use the native width of the image, keep this setting blank.'
-    description: Settings that specify how your overlay appears.
+    description: Settings that specify how your still graphic overlay appears.
   __timestampUnix:
     type: string
     format: date-time
@@ -4981,7 +5053,7 @@ definitions:
     properties:
       Framerate:
         $ref: '#/definitions/MotionImageInsertionFramerate'
-        description: 'If your motion graphic asset is a .mov file, keep this setting unspecified. If your motion graphic asset is a series of .png files, specify the framerate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. Make sure that the number of images in your series matches the framerate and your intended overlay duration. For example, if you want a 30-second overlay at 30 fps, you should have 900 .png images. This overlay framerate doesn''t need to match the framerate of the underlying video.'
+        description: 'If your motion graphic asset is a .mov file, keep this setting unspecified. If your motion graphic asset is a series of .png files, specify the frame rate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. Make sure that the number of images in your series matches the frame rate and your intended overlay duration. For example, if you want a 30-second overlay at 30 fps, you should have 900 .png images. This overlay frame rate doesn''t need to match the frame rate of the underlying video.'
       Input:
         $ref: '#/definitions/__stringMin14Max1285PatternS3Mov09Png'
         description: 'Specify the .mov file or series of .png files that you want to overlay on your video. For .png files, provide the file name of the first file in the series. Make sure that the names of the .png files end with sequential numbers that specify the order that they are played in. For example, overlay_000.png, overlay_001.png, overlay_002.png, and so on. The sequence must start at zero, and each image file name must have the same number of digits. Pad your initial file names with enough zeros to complete the sequence. For example, if the first image is overlay_0.png, there can be only 10 images in the sequence, with the last image being overlay_9.png. But if the first image is overlay_00.png, there can be 100 images in the sequence.'
@@ -5017,7 +5089,7 @@ definitions:
     properties:
       Anchor:
         $ref: '#/definitions/__stringPattern010920405090509092'
-        description: 'If you use an editing platform that relies on an anchor timecode, use Anchor Timecode (Anchor) to specify a timecode that will match the input video frame to the output video frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting ignores framerate conversion. System behavior for Anchor Timecode varies depending on your setting for Source (TimecodeSource). * If Source (TimecodeSource) is set to Specified Start (SPECIFIEDSTART), the first input frame is the specified value in Start Timecode (Start). Anchor Timecode (Anchor) and Start Timecode (Start) are used calculate output timecode. * If Source (TimecodeSource) is set to Start at 0 (ZEROBASED)  the  first frame is 00:00:00:00. * If Source (TimecodeSource) is set to Embedded (EMBEDDED), the  first frame is the timecode value on the first input frame of the input.'
+        description: 'If you use an editing platform that relies on an anchor timecode, use Anchor Timecode (Anchor) to specify a timecode that will match the input video frame to the output video frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting ignores frame rate conversion. System behavior for Anchor Timecode varies depending on your setting for Source (TimecodeSource). * If Source (TimecodeSource) is set to Specified Start (SPECIFIEDSTART), the first input frame is the specified value in Start Timecode (Start). Anchor Timecode (Anchor) and Start Timecode (Start) are used calculate output timecode. * If Source (TimecodeSource) is set to Start at 0 (ZEROBASED)  the  first frame is 00:00:00:00. * If Source (TimecodeSource) is set to Embedded (EMBEDDED), the  first frame is the timecode value on the first input frame of the input.'
       Source:
         $ref: '#/definitions/TimecodeSource'
       Start:
@@ -5129,6 +5201,12 @@ definitions:
       - INCLUDE
       - EXCLUDE
     description: Controls whether to include the ES Rate field in the PES header.
+  M2tsForceTsVideoEbpOrder:
+    type: string
+    enum:
+      - FORCE
+      - DEFAULT
+    description: Keep the default value (DEFAULT) unless you know that your audio EBP markers are incorrectly appearing before your video EBP markers. Set this value to Force (FORCE) to correct this problem.
   M2tsNielsenId3:
     type: string
     enum:
@@ -5218,11 +5296,11 @@ definitions:
     properties:
       FramerateDenominator:
         $ref: '#/definitions/__integerMin1Max17895697'
-        description: 'The bottom of the fraction that expresses your overlay framerate. For example, if your framerate is 24 fps, set this value to 1.'
+        description: 'The bottom of the fraction that expresses your overlay frame rate. For example, if your frame rate is 24 fps, set this value to 1.'
       FramerateNumerator:
         $ref: '#/definitions/__integerMin1Max2147483640'
-        description: 'The top of the fraction that expresses your overlay framerate. For example, if your framerate is 24 fps, set this value to 24.'
-    description: 'For motion overlays that don''t have a built-in framerate, specify the framerate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. The overlay framerate doesn''t need to match the framerate of the underlying video.'
+        description: 'The top of the fraction that expresses your overlay frame rate. For example, if your frame rate is 24 fps, set this value to 24.'
+    description: 'For motion overlays that don''t have a built-in frame rate, specify the frame rate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. The overlay frame rate doesn''t need to match the frame rate of the underlying video.'
   __stringMin14Max1285PatternS3Mov09Png:
     type: string
     pattern: '^(s3:\/\/)(.*)(\.mov|[0-9]+\.png)$'
@@ -5292,7 +5370,7 @@ definitions:
     enum:
       - SELF_CONTAINED
       - EXTERNAL
-    description: A value of 'external' creates separate media files and the wrapper file (.mov) contains references to these media files. A value of 'self_contained' creates only a wrapper (.mov) file and this file contains all of the media.
+    description: Always keep the default value (SELF_CONTAINED) for this setting.
   __integerMin32000Max384000:
     type: integer
     minimum: 32000
@@ -5353,13 +5431,13 @@ definitions:
     enum:
       - INITIALIZE_FROM_SOURCE
       - SPECIFIED
-    description: 'If you are using the console, use the Framerate setting to specify the framerate for this output. If you want to keep the same framerate as the input video, choose Follow source. If you want to do framerate conversion, choose a framerate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your framerate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the framerate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the framerate from the input. Choose SPECIFIED if you want the service to use the framerate you specify in the settings FramerateNumerator and FramerateDenominator.'
+    description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
   Mpeg2FramerateConversionAlgorithm:
     type: string
     enum:
       - DUPLICATE_DROP
       - INTERPOLATE
-    description: 'When set to INTERPOLATE, produces smoother motion during framerate conversion.'
+    description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
   Mpeg2GopSizeUnits:
     type: string
     enum:
@@ -5483,10 +5561,10 @@ definitions:
         $ref: '#/definitions/Mpeg2FramerateConversionAlgorithm'
       FramerateDenominator:
         $ref: '#/definitions/__integerMin1Max1001'
-        description: Framerate denominator.
+        description: Frame rate denominator.
       FramerateNumerator:
         $ref: '#/definitions/__integerMin24Max60000'
-        description: 'Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
+        description: 'Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
       GopClosedCadence:
         $ref: '#/definitions/__integerMin0Max2147483647'
         description: 'Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting.'
@@ -5572,7 +5650,7 @@ definitions:
         $ref: '#/definitions/MsSmoothEncryptionSettings'
       FragmentLength:
         $ref: '#/definitions/__integerMin1Max2147483647'
-        description: Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and framerate.
+        description: Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and frame rate.
       ManifestEncoding:
         $ref: '#/definitions/MsSmoothManifestEncoding'
     description: Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to MS_SMOOTH_GROUP_SETTINGS.
@@ -5663,7 +5741,7 @@ definitions:
         $ref: '#/definitions/ColorMetadata'
       Crop:
         $ref: '#/definitions/Rectangle'
-        description: 'Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. Do not use this setting if you have enabled Stretch to output (stretchToOutput) in your output settings.'
+        description: 'Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. If you crop your input frame size to smaller than your output frame size, make sure to specify the behavior you want in your output setting "Scaling behavior".'
       DropFrameTimecode:
         $ref: '#/definitions/DropFrameTimecode'
       FixedAfd:
@@ -5819,13 +5897,13 @@ definitions:
     enum:
       - INITIALIZE_FROM_SOURCE
       - SPECIFIED
-    description: 'If you are using the console, use the Framerate setting to specify the framerate for this output. If you want to keep the same framerate as the input video, choose Follow source. If you want to do framerate conversion, choose a framerate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your framerate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the framerate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the framerate from the input. Choose SPECIFIED if you want the service to use the framerate you specify in the settings FramerateNumerator and FramerateDenominator.'
+    description: 'If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator.'
   ProresFramerateConversionAlgorithm:
     type: string
     enum:
       - DUPLICATE_DROP
       - INTERPOLATE
-    description: 'When set to INTERPOLATE, produces smoother motion during framerate conversion.'
+    description: 'When set to INTERPOLATE, produces smoother motion during frame rate conversion.'
   ProresInterlaceMode:
     type: string
     enum:
@@ -5867,10 +5945,10 @@ definitions:
         $ref: '#/definitions/ProresFramerateConversionAlgorithm'
       FramerateDenominator:
         $ref: '#/definitions/__integerMin1Max2147483647'
-        description: Framerate denominator.
+        description: Frame rate denominator.
       FramerateNumerator:
         $ref: '#/definitions/__integerMin1Max2147483647'
-        description: 'When you use the API for transcode jobs that use framerate conversion, specify the framerate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator.'
+        description: 'When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator.'
       InterlaceMode:
         $ref: '#/definitions/ProresInterlaceMode'
       ParControl:
@@ -5966,7 +6044,7 @@ definitions:
     enum:
       - DEFAULT
       - STRETCH_TO_OUTPUT
-    description: Applies only if your input aspect ratio is different from your output aspect ratio. Enable Stretch to output (StretchToOutput) to have the service stretch your video image to fit. Leave this setting disabled to allow the service to letterbox your video instead. This setting overrides any positioning value you specify elsewhere in the job.
+    description: Applies only if your input aspect ratio is different from your output aspect ratio. Choose "Stretch to output" to have the service stretch your video image to fit. Keep the setting "Default" to allow the service to letterbox your video instead. This setting overrides any positioning value you specify elsewhere in the job.
   SccDestinationFramerate:
     type: string
     enum:
@@ -5974,10 +6052,10 @@ definitions:
       - FRAMERATE_24
       - FRAMERATE_29_97_DROPFRAME
       - FRAMERATE_29_97_NON_DROPFRAME
-    description: 'Set Framerate (SccDestinationFramerate) to make sure that the captions and the video are synchronized in the output. Specify a framerate that matches the framerate of the associated video. If the video framerate is 29.97, choose 29.97 dropframe (FRAMERATE_29_97_DROPFRAME) only if the video has video_insertion=true and drop_frame_timecode=true; otherwise, choose 29.97 non-dropframe (FRAMERATE_29_97_NON_DROPFRAME).'
-  __stringPatternArnAwsAcm:
+    description: 'Set Framerate (SccDestinationFramerate) to make sure that the captions and the video are synchronized in the output. Specify a frame rate that matches the frame rate of the associated video. If the video frame rate is 29.97, choose 29.97 dropframe (FRAMERATE_29_97_DROPFRAME) only if the video has video_insertion=true and drop_frame_timecode=true; otherwise, choose 29.97 non-dropframe (FRAMERATE_29_97_NON_DROPFRAME).'
+  __stringPatternArnAwsUsGovAcm:
     type: string
-    pattern: '^arn:aws:acm:'
+    pattern: '^arn:aws(-us-gov)?:acm:'
   __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12:
     type: array
     items:
@@ -6094,7 +6172,7 @@ definitions:
     enum:
       - DISABLED
       - PIC_TIMING_SEI
-    description: 'Applies only to H.264, H.265, MPEG2, and ProRes outputs. Only enable Timecode insertion when the input framerate is identical to the output framerate. To include timecodes in this output, set Timecode insertion (VideoTimecodeInsertion) to PIC_TIMING_SEI. To leave them out, set it to DISABLED. Default is DISABLED. When the service inserts timecodes in an output, by default, it uses any embedded timecodes from the input. If none are present, the service will set the timecode for the first output frame to zero. To change this default behavior, adjust the settings under Timecode configuration (TimecodeConfig). In the console, these settings are located under Job > Job settings > Timecode configuration. Note - Timecode source under input settings (InputTimecodeSource) does not affect the timecodes that are inserted in the output. Source under Job settings > Timecode configuration (TimecodeSource) does.'
+    description: 'Applies only to H.264, H.265, MPEG2, and ProRes outputs. Only enable Timecode insertion when the input frame rate is identical to the output frame rate. To include timecodes in this output, set Timecode insertion (VideoTimecodeInsertion) to PIC_TIMING_SEI. To leave them out, set it to DISABLED. Default is DISABLED. When the service inserts timecodes in an output, by default, it uses any embedded timecodes from the input. If none are present, the service will set the timecode for the first output frame to zero. To change this default behavior, adjust the settings under Timecode configuration (TimecodeConfig). In the console, these settings are located under Job > Job settings > Timecode configuration. Note - Timecode source under input settings (InputTimecodeSource) does not affect the timecodes that are inserted in the output. Source under Job settings > Timecode configuration (TimecodeSource) does.'
   VideoPreprocessor:
     type: object
     properties:
@@ -6131,3 +6209,6 @@ definitions:
   __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12:
     type: string
     pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+  __stringPatternS3ASSETMAPXml:
+    type: string
+    pattern: '^s3:\/\/.*\/(ASSETMAP.xml)?$'

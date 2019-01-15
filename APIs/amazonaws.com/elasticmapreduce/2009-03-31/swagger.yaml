@@ -984,23 +984,8 @@ definitions:
       InstanceFleet:
         $ref: '#/definitions/InstanceFleetConfig'
         description: Specifies the configuration of the instance fleet.
-  InternalServerException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The message associated with the exception.
-    description: This exception occurs when there is an internal failure in the EMR service.
-  InvalidRequestException:
-    type: object
-    properties:
-      ErrorCode:
-        $ref: '#/definitions/ErrorCode'
-        description: The error code associated with the exception.
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-        description: The message associated with the exception.
-    description: This exception occurs when there is something wrong with user input.
+  InternalServerException: {}
+  InvalidRequestException: {}
   AddInstanceGroupsOutput:
     type: object
     properties:
@@ -1024,10 +1009,7 @@ definitions:
         $ref: '#/definitions/XmlStringMaxLen256'
         description: Job flow in which to add the instance groups.
     description: Input to an AddInstanceGroups call.
-  InternalServerError:
-    type: object
-    properties: {}
-    description: Indicates that an error occurred while processing the request and that the request was not completed.
+  InternalServerError: {}
   AddJobFlowStepsOutput:
     type: object
     properties:
@@ -1493,7 +1475,7 @@ definitions:
         description: '<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the <a href="http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf">Amazon EMR Developer Guide</a>. Supported values are:</p> <ul> <li> <p>"mapr-m3" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>"mapr-m5" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>"mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.</p> </li> <li> <p>"mapr-m7" - launch the cluster using MapR M7 Edition.</p> </li> <li> <p>"hunk" - launch the cluster with the Hunk Big Data Analtics Platform.</p> </li> <li> <p>"hue"- launch the cluster with Hue installed.</p> </li> <li> <p>"spark" - launch the cluster with Apache Spark installed.</p> </li> <li> <p>"ganglia" - launch the cluster with the Ganglia Monitoring System installed.</p> </li> </ul>'
       Applications:
         $ref: '#/definitions/ApplicationList'
-        description: 'For Amazon EMR releases 4.0 and later. A list of applications for the cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig", and "Spark." They are case insensitive.'
+        description: 'Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of applications for Amazon EMR to install and configure when launching the cluster. For a list of applications available for each Amazon EMR release version, see the <a href="http://docs.aws.amazon.com/emr/latest/ReleaseGuide/">Amazon EMR Release Guide</a>.'
       Configurations:
         $ref: '#/definitions/ConfigurationList'
         description: For Amazon EMR releases 4.0 and later. The list of configurations supplied for the EMR cluster you are creating.
@@ -1662,7 +1644,7 @@ definitions:
       AdditionalInfo:
         $ref: '#/definitions/StringMap'
         description: This option is for advanced users only. This is meta information about third-party applications that third-party vendors use for testing purposes.
-    description: '<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument. For more information, see <a href="http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-mapr.html">Using the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li> <p>"mapr-m3" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>"mapr-m5" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>"mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the cluster using MapR M3 or M5 Edition, respectively.</p> </li> </ul> <note> <p>In Amazon EMR releases 4.x and later, the only accepted parameter is the application name. To pass arguments to applications, you supply a configuration for each application.</p> </note>'
+    description: '<p>With Amazon EMR release version 4.0 and later, the only accepted parameter is the application name. To pass arguments to applications, you use configuration classifications specified using configuration JSON objects. For more information, see <a href="http://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html">Configuring Applications</a>.</p> <p>With earlier Amazon EMR releases, the application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument.</p>'
   ApplicationList:
     type: array
     items:
@@ -1945,7 +1927,7 @@ definitions:
         description: The identifier of the Amazon EC2 security group for the master node.
       EmrManagedSlaveSecurityGroup:
         $ref: '#/definitions/String'
-        description: The identifier of the Amazon EC2 security group for the slave nodes.
+        description: The identifier of the Amazon EC2 security group for the core and task nodes.
       ServiceAccessSecurityGroup:
         $ref: '#/definitions/String'
         description: The identifier of the Amazon EC2 security group for the Amazon EMR service to access clusters in VPC private subnets.
@@ -1954,7 +1936,7 @@ definitions:
         description: A list of additional Amazon EC2 security group IDs for the master node.
       AdditionalSlaveSecurityGroups:
         $ref: '#/definitions/StringList'
-        description: A list of additional Amazon EC2 security group IDs for the slave nodes.
+        description: A list of additional Amazon EC2 security group IDs for the core and task nodes.
     description: 'Provides information about the EC2 instances in a cluster grouped by category. For example, key name, subnet ID, IAM instance profile, and so on.'
   InstanceCollectionType:
     type: string
@@ -2208,7 +2190,7 @@ definitions:
         description: The Hadoop job configuration of the cluster step.
       ActionOnFailure:
         $ref: '#/definitions/ActionOnFailure'
-        description: 'This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.'
+        description: 'The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.'
       Status:
         $ref: '#/definitions/StepStatus'
         description: The current execution status details of the cluster step.
@@ -2297,12 +2279,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/XmlStringMaxLen256'
-  ErrorCode:
-    type: string
-    minLength: 1
-    maxLength: 256
-  ErrorMessage:
-    type: string
   FailureDetails:
     type: object
     properties:
@@ -2524,7 +2500,7 @@ definitions:
         description: 'The spot provisioning timeout period in minutes. If Spot instances are not provisioned within this time period, the <code>TimeOutAction</code> is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.'
       TimeoutAction:
         $ref: '#/definitions/SpotProvisioningTimeoutAction'
-        description: 'The action to take when <code>TargetSpotCapacity</code> has not been fulfilled when the <code>TimeoutDurationMinutes</code> has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are <code>TERMINATE_CLUSTER</code> and <code>SWITCH_TO_ON_DEMAND</code>. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.'
+        description: 'The action to take when <code>TargetSpotCapacity</code> has not been fulfilled when the <code>TimeoutDurationMinutes</code> has expired; that is, when all Spot instances could not be provisioned within the Spot provisioning timeout. Valid values are <code>TERMINATE_CLUSTER</code> and <code>SWITCH_TO_ON_DEMAND</code>. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.'
       BlockDurationMinutes:
         $ref: '#/definitions/WholeNumber'
         description: 'The defined duration for Spot instances (also known as Spot blocks) in minutes. When specified, the Spot instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates. '
@@ -2970,10 +2946,10 @@ definitions:
         description: The Amazon EC2 instance identifier of the master node.
       SlaveInstanceType:
         $ref: '#/definitions/InstanceType'
-        description: The Amazon EC2 slave node instance type.
+        description: The Amazon EC2 core and task node instance type.
       InstanceCount:
         $ref: '#/definitions/Integer'
-        description: 'The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance serves as both the master and slave node. If the value is greater than 1, one instance is the master node and all others are slave nodes.'
+        description: 'The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance serves as both the master and core and task node. If the value is greater than 1, one instance is the master node and all others are core and task nodes.'
       InstanceGroups:
         $ref: '#/definitions/InstanceGroupDetailList'
         description: Details about the instance groups in a cluster.
@@ -3092,7 +3068,7 @@ definitions:
         description: The EC2 instance type of the master node.
       SlaveInstanceType:
         $ref: '#/definitions/InstanceType'
-        description: The EC2 instance type of the slave nodes.
+        description: The EC2 instance type of the core and task nodes.
       InstanceCount:
         $ref: '#/definitions/Integer'
         description: The number of EC2 instances in the cluster.
@@ -3128,7 +3104,7 @@ definitions:
         description: The identifier of the Amazon EC2 security group for the master node.
       EmrManagedSlaveSecurityGroup:
         $ref: '#/definitions/XmlStringMaxLen256'
-        description: The identifier of the Amazon EC2 security group for the slave nodes.
+        description: The identifier of the Amazon EC2 security group for the core and task nodes.
       ServiceAccessSecurityGroup:
         $ref: '#/definitions/XmlStringMaxLen256'
         description: The identifier of the Amazon EC2 security group for the Amazon EMR service to access clusters in VPC private subnets.
@@ -3137,7 +3113,7 @@ definitions:
         description: A list of additional Amazon EC2 security group IDs for the master node.
       AdditionalSlaveSecurityGroups:
         $ref: '#/definitions/SecurityGroupsList'
-        description: A list of additional Amazon EC2 security group IDs for the slave nodes.
+        description: A list of additional Amazon EC2 security group IDs for the core and task nodes.
     description: 'A description of the Amazon EC2 instance on which the cluster (job flow) runs. A valid JobFlowInstancesConfig must contain either InstanceGroups or InstanceFleets, which is the recommended configuration. They cannot be used together. You may also have MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be present), but we don''t recommend this configuration.'
   KeyValue:
     type: object
@@ -3285,7 +3261,7 @@ definitions:
         description: The name of the step.
       ActionOnFailure:
         $ref: '#/definitions/ActionOnFailure'
-        description: The action to take if the step fails.
+        description: 'The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.'
       HadoopJarStep:
         $ref: '#/definitions/HadoopJarStepConfig'
         description: The JAR file used for the step.
@@ -3386,7 +3362,7 @@ definitions:
         description: The Hadoop job configuration of the cluster step.
       ActionOnFailure:
         $ref: '#/definitions/ActionOnFailure'
-        description: 'This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.'
+        description: 'The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility. We recommend using TERMINATE_CLUSTER instead.'
       Status:
         $ref: '#/definitions/StepStatus'
         description: The current execution status details of the cluster step.

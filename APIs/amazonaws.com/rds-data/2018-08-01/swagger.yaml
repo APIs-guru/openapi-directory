@@ -157,19 +157,19 @@ definitions:
       - sqlStatements
     properties:
       awsSecretStoreArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/Arn'
         description: ARN of the db credentials in AWS Secret Store or the friendly secret name
       database:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/DbName'
         description: Target DB name
       dbClusterOrInstanceArn:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/Arn'
         description: ARN of the target db cluster or instance
       schema:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/DbName'
         description: Target Schema name
       sqlStatements:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/SqlStatement'
         description: SQL statement(s) to be executed. Statements can be chained by using semicolons
     description: Execute SQL Request
   BadRequestException: {}
@@ -178,33 +178,13 @@ definitions:
   ServiceUnavailableError: {}
   Boolean:
     type: boolean
-  Long:
-    type: integer
-  ResultFrame:
-    type: object
-    properties:
-      records:
-        $ref: '#/definitions/Records'
-        description: ResultSet Metadata.
-      resultSetMetadata:
-        $ref: '#/definitions/ResultSetMetadata'
-        description: ResultSet Metadata.
-    description: Result Frame
-  SqlStatementResult:
-    type: object
-    properties:
-      numberOfRecordsUpdated:
-        $ref: '#/definitions/Long'
-        description: Number of rows updated.
-      resultFrame:
-        $ref: '#/definitions/ResultFrame'
-        description: ResultFrame returned by executing the sql statement
-    description: SQL statement execution result
   ArrayValues:
     type: array
     description: Array value
     items:
       $ref: '#/definitions/Value'
+  Long:
+    type: integer
   Blob:
     type: string
   Double:
@@ -258,6 +238,16 @@ definitions:
         $ref: '#/definitions/StructValue'
         description: Struct or UDT
     description: Column value
+  SqlStatementResult:
+    type: object
+    properties:
+      numberOfRecordsUpdated:
+        $ref: '#/definitions/Long'
+        description: Number of rows updated.
+      resultFrame:
+        $ref: '#/definitions/ResultFrame'
+        description: ResultFrame returned by executing the sql statement
+    description: SQL statement execution result
   SqlStatementResults:
     type: array
     description: SQL statement execution results
@@ -314,6 +304,11 @@ definitions:
     description: List of Column metadata
     items:
       $ref: '#/definitions/ColumnMetadata'
+  Records:
+    type: array
+    description: List of records
+    items:
+      $ref: '#/definitions/Record'
   ResultSetMetadata:
     type: object
     properties:
@@ -324,6 +319,21 @@ definitions:
         $ref: '#/definitions/ColumnMetadataList'
         description: List of columns and their types
     description: List of columns and their types.
+  ResultFrame:
+    type: object
+    properties:
+      records:
+        $ref: '#/definitions/Records'
+        description: ResultSet Metadata.
+      resultSetMetadata:
+        $ref: '#/definitions/ResultSetMetadata'
+        description: ResultSet Metadata.
+    description: Result Frame
+  Row:
+    type: array
+    description: List of column values
+    items:
+      $ref: '#/definitions/Value'
   Record:
     type: object
     properties:
@@ -331,13 +341,12 @@ definitions:
         $ref: '#/definitions/Row'
         description: Record
     description: Row or Record
-  Records:
-    type: array
-    description: List of records
-    items:
-      $ref: '#/definitions/Record'
-  Row:
-    type: array
-    description: List of column values
-    items:
-      $ref: '#/definitions/Value'
+  Arn:
+    type: string
+    maxLength: 1024
+  DbName:
+    type: string
+    maxLength: 64
+  SqlStatement:
+    type: string
+    maxLength: 65536
