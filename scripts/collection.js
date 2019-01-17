@@ -296,15 +296,15 @@ function validateCollection(dir, command) {
     if (command.fix) f = validateAndFix;
 
     return f(swagger, source)
-      .then(({errors, warnings}) => {
-        if (warnings) {
+      .then(({errors, localWarnings}) => {
+        if (localWarnings) {
           if (command.quiet) {
-            _.remove(warnings, function (warning) {
+            _.remove(localWarnings, function (warning) {
               return ((warning.code === 'UNUSED_DEFINITION') || (warning.code === 'EXTRA_REFERENCE_PROPERTIES'));
             });
           }
-          if (warnings.length)
-            logYaml(warnings);
+          if (localWarnings.length)
+            logYaml(localWarnings);
         }
         if (errors) {
           logYaml(errors);
@@ -553,7 +553,8 @@ function writeSpec(source, format, exPatch, command) {
       context.validation = validation;
 
       if (validation.errors && !command.ignore)
-        throw Error('Validation errors!!!');
+        throw new SpecError('Validation errors!!!', validation.errors);
+        //throw Error('Validation errors!!!');
 
       if (command && command.quiet) {
         _.remove(warnings, function (warning) {
