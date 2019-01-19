@@ -116,6 +116,9 @@ Some definitions are taken from Open Source projects:
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
 <a href="https://github.com/APIs-guru/openapi-directory/graphs/contributors"><img src="https://opencollective.com/openapi-directory/contributors.svg?width=890&button=false" /></a>
 
+## Asynchronous APIs
+
+See also [AsyncAPI-Directory](https://github.com/APIs-guru/asyncapi-directory)
 
 ## Backers
 
