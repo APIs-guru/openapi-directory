@@ -6727,6 +6727,15 @@ definitions:
   Event:
     type: object
     properties:
+      AppPackageName:
+        $ref: '#/definitions/__string'
+        description: The package name associated with the app that's recording the event.
+      AppTitle:
+        $ref: '#/definitions/__string'
+        description: The title of the app that's recording the event.
+      AppVersionCode:
+        $ref: '#/definitions/__string'
+        description: The version number of the app that's recording the event.
       Attributes:
         $ref: '#/definitions/MapOf__string'
         description: Custom attributes that are associated with the event you're adding or updating.
@@ -6739,6 +6748,9 @@ definitions:
       Metrics:
         $ref: '#/definitions/MapOf__double'
         description: Custom metrics related to the event.
+      SdkName:
+        $ref: '#/definitions/__string'
+        description: The name of the SDK that's being used to record the event.
       Session:
         $ref: '#/definitions/Session'
         description: Information about the session in which the event occurred.
