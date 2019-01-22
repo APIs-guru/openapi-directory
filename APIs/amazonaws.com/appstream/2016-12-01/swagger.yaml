@@ -3,7 +3,7 @@ info:
   version: '2016-12-01'
   x-release: v4
   title: Amazon AppStream
-  description: '<fullname>Amazon AppStream 2.0</fullname> <p>You can use Amazon AppStream 2.0 to stream desktop applications to any device running a web browser, without rewriting them.</p>'
+  description: '<fullname>Amazon AppStream 2.0</fullname> <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. It provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed application streaming service. You centrally manage your desktop applications on AppStream 2.0 and securely deliver them to any computer. AppStream 2.0 manages the AWS resources required to host and run your applications, scales automatically, and provides access to your users on demand.</p> <p>To learn more about AppStream 2.0, see the following resources:</p> <ul> <li> <p> <a href="http://aws.amazon.com/appstream2">Amazon AppStream 2.0 product page</a> </p> </li> <li> <p> <a href="http://aws.amazon.com/documentation/appstream2">Amazon AppStream 2.0 documentation</a> </p> </li> </ul>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1009,7 +1009,7 @@ paths:
   '/#DescribeSessions':
     post:
       operationId: DescribeSessions
-      description: 'Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a user ID is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.'
+      description: 'Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.'
       responses:
         '200':
           description: Success
@@ -1096,7 +1096,7 @@ paths:
   '/#DescribeUsers':
     post:
       operationId: DescribeUsers
-      description: 'Retrieves a list that describes one or more specified users in the user pool, if user names are provided. Otherwise, all users in the user pool are described.'
+      description: Retrieves a list that describes one or more specified users in the user pool.
       responses:
         '200':
           description: Success
@@ -1892,16 +1892,19 @@ definitions:
         description: 'The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.'
       Description:
         $ref: '#/definitions/Description'
-        description: The description for display.
+        description: The description to display.
       DisplayName:
         $ref: '#/definitions/DisplayName'
-        description: The fleet name for display.
+        description: The fleet name to display.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
         description: Enables or disables default internet access for the fleet.
       DomainJoinInfo:
         $ref: '#/definitions/DomainJoinInfo'
-        description: The information needed to join a Microsoft Active Directory domain.
+        description: 'The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. '
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: '<p>The tags to associate with the fleet. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=. </p> <p>If you do not specify a value, we set the value to an empty string.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
   InvalidRoleException: {}
   InvalidParameterCombinationException: {}
   CreateImageBuilderResult:
@@ -1921,7 +1924,7 @@ definitions:
         description: A unique name for the image builder.
       ImageName:
         $ref: '#/definitions/String'
-        description: The name of the image used to create the builder.
+        description: The name of the image used to create the image builder.
       ImageArn:
         $ref: '#/definitions/Arn'
         description: 'The ARN of the public, private, or shared image to use.'
@@ -1930,10 +1933,10 @@ definitions:
         description: The instance type to use when launching the image builder.
       Description:
         $ref: '#/definitions/Description'
-        description: The description for display.
+        description: The description to display.
       DisplayName:
         $ref: '#/definitions/DisplayName'
-        description: The image builder name for display.
+        description: The image builder name to display.
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
         description: The VPC configuration for the image builder. You can specify only one subnet.
@@ -1942,10 +1945,13 @@ definitions:
         description: Enables or disables default internet access for the image builder.
       DomainJoinInfo:
         $ref: '#/definitions/DomainJoinInfo'
-        description: The information needed to join a Microsoft Active Directory domain.
+        description: 'The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. '
       AppstreamAgentVersion:
         $ref: '#/definitions/AppstreamAgentVersion'
         description: 'The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. '
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: '<p>The tags to associate with the image builder. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=. </p> <p>If you do not specify a value, we set the value to an empty string.</p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
   CreateImageBuilderStreamingURLResult:
     type: object
     properties:
@@ -1982,10 +1988,10 @@ definitions:
         description: The name of the stack.
       Description:
         $ref: '#/definitions/Description'
-        description: The description for display.
+        description: The description to display.
       DisplayName:
         $ref: '#/definitions/DisplayName'
-        description: The stack name for display.
+        description: The stack name to display.
       StorageConnectors:
         $ref: '#/definitions/StorageConnectorList'
         description: The storage connectors to enable.
@@ -2001,6 +2007,9 @@ definitions:
       ApplicationSettings:
         $ref: '#/definitions/ApplicationSettings'
         description: 'The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: '<p>The tags to associate with the stack. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=. </p> <p>If you do not specify a value, we set the value to an empty string.</p> <p>For more information about tags, see <a href="http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>'
   CreateStreamingURLResult:
     type: object
     properties:
@@ -2025,7 +2034,7 @@ definitions:
         description: The name of the fleet.
       UserId:
         $ref: '#/definitions/StreamingUrlUserId'
-        description: The ID of the user.
+        description: The identifier of the user.
       ApplicationId:
         $ref: '#/definitions/String'
         description: The name of the application to launch after the session starts. This is the name that you specified as <b>Name</b> in the Image Assistant.
@@ -2124,7 +2133,7 @@ definitions:
         description: The name of the private image.
       SharedAccountId:
         $ref: '#/definitions/AwsAccountId'
-        description: The 12-digit ID of the AWS account for which to delete image permissions.
+        description: The 12-digit identifier of the AWS account for which to delete image permissions.
   DeleteStackResult:
     type: object
     properties: {}
@@ -2236,7 +2245,7 @@ definitions:
         description: The maximum size of each page of results.
       SharedAwsAccountIds:
         $ref: '#/definitions/AwsAccountIdList'
-        description: The 12-digit ID of one or more AWS accounts with which the image is shared.
+        description: The 12-digit identifier of one or more AWS accounts with which the image is shared.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
@@ -2290,7 +2299,7 @@ definitions:
         description: The name of the fleet. This value is case-sensitive.
       UserId:
         $ref: '#/definitions/UserId'
-        description: The user ID.
+        description: The user identifier.
       NextToken:
         $ref: '#/definitions/String'
         description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
@@ -2423,7 +2432,7 @@ definitions:
     properties:
       SessionId:
         $ref: '#/definitions/String'
-        description: The ID of the streaming session.
+        description: The identifier of the streaming session.
   ListAssociatedFleetsResult:
     type: object
     properties:
@@ -2619,16 +2628,16 @@ definitions:
         description: Deletes the VPC association for the specified fleet.
       Description:
         $ref: '#/definitions/Description'
-        description: The description for display.
+        description: The description to display.
       DisplayName:
         $ref: '#/definitions/DisplayName'
-        description: The fleet name for display.
+        description: The fleet name to display.
       EnableDefaultInternetAccess:
         $ref: '#/definitions/BooleanObject'
         description: Enables or disables default internet access for the fleet.
       DomainJoinInfo:
         $ref: '#/definitions/DomainJoinInfo'
-        description: The information needed to join a Microsoft Active Directory domain.
+        description: 'The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. '
       AttributesToDelete:
         $ref: '#/definitions/FleetAttributes'
         description: The fleet attributes to delete.
@@ -2647,7 +2656,7 @@ definitions:
         description: The name of the private image.
       SharedAccountId:
         $ref: '#/definitions/AwsAccountId'
-        description: The 12-digit ID of the AWS account for which you want add or update image permissions.
+        description: The 12-digit identifier of the AWS account for which you want add or update image permissions.
       ImagePermissions:
         $ref: '#/definitions/ImagePermissions'
         description: The permissions for the image.
@@ -2664,10 +2673,10 @@ definitions:
     properties:
       DisplayName:
         $ref: '#/definitions/DisplayName'
-        description: The stack name for display.
+        description: The stack name to display.
       Description:
         $ref: '#/definitions/Description'
-        description: The description for display.
+        description: The description to display.
       Name:
         $ref: '#/definitions/String'
         description: The name of the stack.
@@ -2682,7 +2691,7 @@ definitions:
         description: The URL that users are redirected to after their streaming session ends.
       FeedbackURL:
         $ref: '#/definitions/FeedbackURL'
-        description: 'The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.'
+        description: 'The URL that users are redirected to after they choose the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.'
       AttributesToDelete:
         $ref: '#/definitions/StackAttributes'
         description: The stack attributes to delete.
@@ -2731,7 +2740,7 @@ definitions:
         description: The name of the application.
       DisplayName:
         $ref: '#/definitions/String'
-        description: The application name for display.
+        description: The application name to display.
       IconURL:
         $ref: '#/definitions/String'
         description: The URL for the application icon. This URL might be time-limited.
@@ -2891,7 +2900,7 @@ definitions:
       CreatedTime:
         $ref: '#/definitions/Timestamp'
         description: The time the directory configuration was created.
-    description: Configuration information for the directory used to join domains.
+    description: Describes the configuration information for the directory used to join a streaming instance to a Microsoft Active Directory domain.
   FleetType:
     type: string
     enum:
@@ -2902,11 +2911,11 @@ definitions:
     properties:
       SubnetIds:
         $ref: '#/definitions/SubnetIdList'
-        description: The subnets to which a network interface is established from the fleet instance.
+        description: The identifiers of the subnets to which a network interface is attached from the fleet instance or image builder instance. Fleet instances use one or two subnets. Image builder instances use one subnet.
       SecurityGroupIds:
         $ref: '#/definitions/SecurityGroupIdList'
-        description: The security groups for the fleet.
-    description: Describes VPC configuration information.
+        description: The identifiers of the security groups for the fleet or image builder.
+    description: Describes VPC configuration information for fleets and image builders.
   DisplayName:
     type: string
     maxLength: 100
@@ -2919,7 +2928,18 @@ definitions:
       OrganizationalUnitDistinguishedName:
         $ref: '#/definitions/OrganizationalUnitDistinguishedName'
         description: The distinguished name of the organizational unit for computer accounts.
-    description: Contains the information needed to join a Microsoft Active Directory domain.
+    description: Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
+  Tags:
+    type: array
+    minItems: 1
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
   Fleet:
     type: object
     required:
@@ -2937,10 +2957,10 @@ definitions:
         description: The name of the fleet.
       DisplayName:
         $ref: '#/definitions/String'
-        description: The fleet name for display.
+        description: The fleet name to display.
       Description:
         $ref: '#/definitions/String'
-        description: The description for display.
+        description: The description to display.
       ImageName:
         $ref: '#/definitions/String'
         description: The name of the image used to create the fleet.
@@ -2979,8 +2999,8 @@ definitions:
         description: Indicates whether default internet access is enabled for the fleet.
       DomainJoinInfo:
         $ref: '#/definitions/DomainJoinInfo'
-        description: The information needed to join a Microsoft Active Directory domain.
-    description: Contains the parameters for a fleet.
+        description: 'The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. '
+    description: Describes the parameters for a fleet.
   ImageBuilder:
     type: object
     required:
@@ -2997,10 +3017,10 @@ definitions:
         description: The ARN of the image from which this builder was created.
       Description:
         $ref: '#/definitions/String'
-        description: The description for display.
+        description: The description to display.
       DisplayName:
         $ref: '#/definitions/String'
-        description: The image builder name for display.
+        description: The image builder name to display.
       VpcConfig:
         $ref: '#/definitions/VpcConfig'
         description: The VPC configuration of the image builder.
@@ -3024,14 +3044,14 @@ definitions:
         description: Enables or disables default internet access for the image builder.
       DomainJoinInfo:
         $ref: '#/definitions/DomainJoinInfo'
-        description: The information needed to join a Microsoft Active Directory domain.
+        description: 'The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. '
       ImageBuilderErrors:
         $ref: '#/definitions/ResourceErrors'
         description: The image builder errors.
       AppstreamAgentVersion:
         $ref: '#/definitions/AppstreamAgentVersion'
-        description: 'The version of the AppStream 2.0 agent that is currently being used by this image builder. '
-    description: Describes a streaming instance used for editing an image. New images are created from a snapshot through an image builder.
+        description: 'The version of the AppStream 2.0 agent that is currently being used by the image builder. '
+    description: 'Describes a virtual machine that is used to create an image. '
   Long:
     type: integer
   Timestamp:
@@ -3066,10 +3086,10 @@ definitions:
         description: The name of the stack.
       Description:
         $ref: '#/definitions/String'
-        description: The description for display.
+        description: The description to display.
       DisplayName:
         $ref: '#/definitions/String'
-        description: The stack name for display.
+        description: The stack name to display.
       CreatedTime:
         $ref: '#/definitions/Timestamp'
         description: The time the stack was created.
@@ -3129,7 +3149,7 @@ definitions:
         description: The ARN of the image from which this image was created.
       DisplayName:
         $ref: '#/definitions/String'
-        description: The image name for display.
+        description: The image name to display.
       State:
         $ref: '#/definitions/ImageState'
         description: 'The image starts in the <code>PENDING</code> state. If image creation succeeds, the state is <code>AVAILABLE</code>. If image creation fails, the state is <code>FAILED</code>.'
@@ -3144,7 +3164,7 @@ definitions:
         description: The operating system platform of the image.
       Description:
         $ref: '#/definitions/String'
-        description: The description for display.
+        description: The description to display.
       StateChangeReason:
         $ref: '#/definitions/ImageStateChangeReason'
         description: The reason why the last state change occurred.
@@ -3368,17 +3388,6 @@ definitions:
       - INTERNAL_ERROR
       - IMAGE_BUILDER_NOT_AVAILABLE
       - IMAGE_COPY_FAILURE
-  Tags:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
   NetworkAccessConfiguration:
     type: object
     properties:
@@ -3388,7 +3397,7 @@ definitions:
       EniId:
         $ref: '#/definitions/String'
         description: The resource identifier of the elastic network interface that is attached to instances in your VPC. All network interfaces have the eni-xxxxxxxx resource identifier.
-    description: The network details of the fleet instance for the streaming session.
+    description: Describes the network details of the fleet instance for the streaming session.
   Permission:
     type: string
     enum:
@@ -3413,7 +3422,7 @@ definitions:
     minLength: 1
   SecurityGroupIdList:
     type: array
-    description: The security group IDs.
+    description: The security group identifiers.
     items:
       $ref: '#/definitions/String'
     maxItems: 5
@@ -3435,7 +3444,7 @@ definitions:
     properties:
       Id:
         $ref: '#/definitions/String'
-        description: The ID of the streaming session.
+        description: The identifier of the streaming session.
       UserId:
         $ref: '#/definitions/UserId'
         description: The identifier of the user for whom the session was created.
@@ -3463,7 +3472,7 @@ definitions:
     properties:
       sharedAccountId:
         $ref: '#/definitions/AwsAccountId'
-        description: The 12-digit ID of the AWS account with which the image is shared.
+        description: The 12-digit identifier of the AWS account with which the image is shared.
       imagePermissions:
         $ref: '#/definitions/ImagePermissions'
         description: Describes the permissions for a shared image.
@@ -3523,11 +3532,11 @@ definitions:
         description: The ARN of the storage connector.
       Domains:
         $ref: '#/definitions/DomainList'
-        description: The names of the domains for the G Suite account.
+        description: The names of the domains for the account.
     description: Describes a connector to enable persistent storage for users.
   SubnetIdList:
     type: array
-    description: The subnet IDs.
+    description: The subnet identifiers.
     items:
       $ref: '#/definitions/String'
   TagKey:

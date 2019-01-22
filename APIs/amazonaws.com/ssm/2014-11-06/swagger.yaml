@@ -4691,6 +4691,9 @@ definitions:
       AssociationName:
         $ref: '#/definitions/AssociationName'
         description: Specify a descriptive name for the association.
+      AutomationTargetParameterName:
+        $ref: '#/definitions/AutomationTargetParameterName'
+        description: Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
         description: '<p>The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received.</p> <p>Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.</p>'
@@ -7361,6 +7364,9 @@ definitions:
       AssociationVersion:
         $ref: '#/definitions/AssociationVersion'
         description: 'This parameter is provided for concurrency control purposes. You must specify the latest association version in the service. If you want to ensure that this request succeeds, either specify <code>$LATEST</code>, or omit this parameter.'
+      AutomationTargetParameterName:
+        $ref: '#/definitions/AutomationTargetParameterName'
+        description: Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
       MaxErrors:
         $ref: '#/definitions/MaxErrors'
         description: '<p>The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received.</p> <p>Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won''t be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.</p>'
@@ -7984,6 +7990,10 @@ definitions:
         $ref: '#/definitions/StatusAdditionalInfo'
         description: A user-defined string.
     description: Describes an association status.
+  AutomationTargetParameterName:
+    type: string
+    minLength: 1
+    maxLength: 50
   Parameters:
     type: array
     items:
@@ -8037,6 +8047,9 @@ definitions:
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version.
+      AutomationTargetParameterName:
+        $ref: '#/definitions/AutomationTargetParameterName'
+        description: Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
       Parameters:
         $ref: '#/definitions/Parameters'
         description: 'A description of the parameters for a document. '
@@ -8386,7 +8399,8 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/AttachmentName'
-    description: 'An attribute of an attachment, such as the attachment name or size.'
+        description: The name of the attachment.
+    description: 'An attribute of an attachment, such as the attachment name.'
   AttachmentInformationList:
     type: array
     items:
@@ -8706,7 +8720,7 @@ definitions:
         description: The list of execution outputs as defined in the Automation document.
       AutomationType:
         $ref: '#/definitions/AutomationType'
-        description: 'Use this filter with <a>DescribeAutomationExecution</a>. Specify either Local of CrossAccount. CrossAccount is an Automation that executes in multiple AWS Regions and accounts. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html">Concurrently Executing Automations in Multiple AWS Regions and Accounts</a> in the <i>AWS Systems Manager User Guide</i>. '
+        description: 'Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or CrossAccount. CrossAccount is an Automation that executes in multiple AWS Regions and accounts. For more information, see <a href="http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html">Concurrently Executing Automations in Multiple AWS Regions and Accounts</a> in the <i>AWS Systems Manager User Guide</i>. '
     description: Details about a specific Automation execution.
   AutomationExecutionMetadataList:
     type: array
@@ -9338,6 +9352,9 @@ definitions:
       Parameters:
         $ref: '#/definitions/Parameters'
         description: 'A description of the parameters for a document. '
+      AutomationTargetParameterName:
+        $ref: '#/definitions/AutomationTargetParameterName'
+        description: Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
       DocumentVersion:
         $ref: '#/definitions/DocumentVersion'
         description: The document version.
@@ -11799,7 +11816,7 @@ definitions:
         description: 'The specific operating system versions a patch repository applies to, such as "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7". For lists of supported product values, see <a>PatchFilter</a>.'
       Configuration:
         $ref: '#/definitions/PatchSourceConfiguration'
-        description: '<p>The value of the yum repo configuration. For example:</p> <p> <code>cachedir=/var/cache/yum/$basesearch</code> </p> <p> <code>$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debuglevel=2</code> </p>'
+        description: '<p>The value of the yum repo configuration. For example:</p> <p> <code>[main]</code> </p> <p> <code>cachedir=/var/cache/yum/$basesearch$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debuglevel=2</code> </p>'
     description: 'Information about the patches to use to update the instances, including target operating systems and source repository. Applies to Linux instances only.'
   PatchSourceProduct:
     type: string

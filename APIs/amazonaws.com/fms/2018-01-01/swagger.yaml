@@ -211,7 +211,7 @@ paths:
   '/#DisassociateAdminAccount':
     post:
       operationId: DisassociateAdminAccount
-      description: Disassociates the account that has been set as the AWS Firewall Manager administrator account. You will need to submit an <code>AssociateAdminAccount</code> request to set a new account as the AWS Firewall administrator.
+      description: 'Disassociates the account that has been set as the AWS Firewall Manager administrator account. To set a different account as the administrator account, you must submit an <code>AssociateAdminAccount</code> request .'
       responses:
         '200':
           description: Success
@@ -606,6 +606,9 @@ definitions:
       PolicyId:
         $ref: '#/definitions/PolicyId'
         description: The ID of the policy that you want to delete. <code>PolicyId</code> is returned by <code>PutPolicy</code> and by <code>ListPolicies</code>.
+      DeleteAllPolicyResources:
+        $ref: '#/definitions/Boolean'
+        description: 'If <code>True</code>, the request will also delete all web ACLs in this policy. Associated resources will no longer be protected by web ACLs in this policy.'
   DisassociateAdminAccountRequest:
     type: object
     properties: {}
@@ -709,7 +712,7 @@ definitions:
         description: 'If you specify a value for <code>MaxResults</code> and you have more account IDs than the number that you specify for <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the response that allows you to list another group of IDs. For the second and subsequent <code>ListMemberAccountsRequest</code> requests, specify the value of <code>NextToken</code> from the previous response to get information about another batch of member account IDs.'
       MaxResults:
         $ref: '#/definitions/PaginationMaxResults'
-        description: 'Specifies the number of member account IDs that you want AWS Firewall Manager to return for this request. If you have more IDs than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of member account IDs. The maximum value for <code>MaxResults</code> is 100.'
+        description: 'Specifies the number of member account IDs that you want AWS Firewall Manager to return for this request. If you have more IDs than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of member account IDs.'
   ListPoliciesResponse:
     type: object
     properties:
@@ -885,7 +888,7 @@ definitions:
         description: A time stamp that indicates when the returned information should be considered out-of-date.
       IssueInfoMap:
         $ref: '#/definitions/IssueInfoMap'
-        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.'
+        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.'
     description: 'Describes the non-compliant resources in a member account for a specific AWS Firewall Manager policy. A maximum of 100 entries are displayed. If more than 100 resources are non-compliant, <code>EvaluationLimitExceeded</code> is set to <code>True</code>.'
   ResourceArn:
     type: string
@@ -926,10 +929,10 @@ definitions:
         description: Indicates if the policy should be automatically applied to new resources.
       IncludeMap:
         $ref: '#/definitions/CustomerPolicyScopeMap'
-        description: '<p>Specifies the AWS account IDs to include in the policy. If <code>IncludeMap</code> is null, all accounts in the AWS Organization are included in the policy. If <code>IncludeMap</code> is not null, only values listed in <code>IncludeMap</code> will be included in the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>IncludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>'
+        description: '<p>Specifies the AWS account IDs to include in the policy. If <code>IncludeMap</code> is null, all accounts in the organization in AWS Organizations are included in the policy. If <code>IncludeMap</code> is not null, only values listed in <code>IncludeMap</code> are included in the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>IncludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>'
       ExcludeMap:
         $ref: '#/definitions/CustomerPolicyScopeMap'
-        description: '<p>Specifies the AWS account IDs to exclude from the policy. The <code>IncludeMap</code> values are evaluated first, with all of the appropriate account IDs added to the policy. Then the accounts listed in <code>ExcludeMap</code> are removed, resulting in the final list of accounts to add to the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>ExcludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>'
+        description: '<p>Specifies the AWS account IDs to exclude from the policy. The <code>IncludeMap</code> values are evaluated first, with all the appropriate account IDs added to the policy. Then the accounts listed in <code>ExcludeMap</code> are removed, resulting in the final list of accounts to add to the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>ExcludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>'
     description: An AWS Firewall Manager policy.
   IssueInfoMap:
     type: array
@@ -1015,7 +1018,7 @@ definitions:
         description: Time stamp of the last update to the <code>EvaluationResult</code> objects.
       IssueInfoMap:
         $ref: '#/definitions/IssueInfoMap'
-        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.'
+        description: 'Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.'
     description: Indicates whether the account is compliant with the specified policy. An account is considered non-compliant if it includes resources that are not protected by the policy.
   SecurityServiceType:
     type: string
