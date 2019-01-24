@@ -1,0 +1,1603 @@
+swagger: '2.0'
+info:
+  version: '2018-09-25'
+  x-release: v4
+  title: Amazon WorkLink
+  description: 'Amazon WorkLink is a cloud-based service that provides secure access to internal websites and web apps from iOS phones. In a single step, your users, such as employees, can access internal websites as efficiently as they access any other public website. They enter a URL in their web browser, or choose a link to an internal website in an email. Amazon WorkLink authenticates the user''s access and securely renders authorized internal web content in a secure rendering service in the AWS cloud. Amazon WorkLink doesn''t download or store any internal web content on mobile devices.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: worklink
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/worklink-2018-09-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-direct: true
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://aws.amazon.com/worklink/'
+host: worklink.amazonaws.com
+basePath: /
+schemes:
+  - https
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+parameters:
+  Action:
+    name: Action
+    in: query
+    type: string
+    required: true
+  Version:
+    name: Version
+    in: query
+    type: string
+    required: true
+  X-Amz-Content-Sha256:
+    name: X-Amz-Content-Sha256
+    in: header
+    type: string
+    required: false
+  X-Amz-Date:
+    name: X-Amz-Date
+    in: header
+    type: string
+    required: false
+  X-Amz-Algorithm:
+    name: X-Amz-Algorithm
+    in: header
+    type: string
+    required: false
+  X-Amz-Credential:
+    name: X-Amz-Credential
+    in: header
+    type: string
+    required: false
+  X-Amz-Security-Token:
+    name: X-Amz-Security-Token
+    in: header
+    type: string
+    required: false
+  X-Amz-Signature:
+    name: X-Amz-Signature
+    in: header
+    type: string
+    required: false
+  X-Amz-SignedHeaders:
+    name: X-Amz-SignedHeaders
+    in: header
+    type: string
+    required: false
+securityDefinitions:
+  hmac:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: Amazon Signature authorization v4
+    x-amazon-apigateway-authtype: awsSigv4
+security:
+  - hmac: []
+paths:
+  /associateWebsiteCertificateAuthority:
+    post:
+      operationId: AssociateWebsiteCertificateAuthority
+      description: Imports the root certificate of a certificate authority (CA) used to obtain TLS certificates used by associated websites within the company network.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/AssociateWebsiteCertificateAuthorityResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AssociateWebsiteCertificateAuthorityRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /createFleet:
+    post:
+      operationId: CreateFleet
+      description: Creates a fleet. A fleet consists of resources and the configuration that delivers associated websites to authorized users who download and set up the Amazon WorkLink app.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/CreateFleetResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: ResourceAlreadyExistsException
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsException'
+        '485':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /deleteFleet:
+    post:
+      operationId: DeleteFleet
+      description: 'Deletes a fleet. Prevents users from accessing previously associated websites. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteFleetResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteFleetRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeAuditStreamConfiguration:
+    post:
+      operationId: DescribeAuditStreamConfiguration
+      description: Describes the configuration for delivering audit streams to the customer account.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeAuditStreamConfigurationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeAuditStreamConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeCompanyNetworkConfiguration:
+    post:
+      operationId: DescribeCompanyNetworkConfiguration
+      description: Describes the networking configuration to access the internal websites associated with the specified fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeCompanyNetworkConfigurationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeCompanyNetworkConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeDevice:
+    post:
+      operationId: DescribeDevice
+      description: Provides information about a user's device.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDeviceResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDeviceRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeDevicePolicyConfiguration:
+    post:
+      operationId: DescribeDevicePolicyConfiguration
+      description: Describes the device policy configuration for the specified fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeDevicePolicyConfigurationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeDevicePolicyConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeFleetMetadata:
+    post:
+      operationId: DescribeFleetMetadata
+      description: 'Provides basic information for the specified fleet, excluding identity provider, networking, and device configuration details.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeFleetMetadataResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeFleetMetadataRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeIdentityProviderConfiguration:
+    post:
+      operationId: DescribeIdentityProviderConfiguration
+      description: Describes the identity provider configuration of the specified fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeIdentityProviderConfigurationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeIdentityProviderConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /describeWebsiteCertificateAuthority:
+    post:
+      operationId: DescribeWebsiteCertificateAuthority
+      description: Provides information about the certificate authority.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeWebsiteCertificateAuthorityResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeWebsiteCertificateAuthorityRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /disassociateWebsiteCertificateAuthority:
+    post:
+      operationId: DisassociateWebsiteCertificateAuthority
+      description: Removes a certificate authority (CA).
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DisassociateWebsiteCertificateAuthorityResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DisassociateWebsiteCertificateAuthorityRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listDevices:
+    post:
+      operationId: ListDevices
+      description: Retrieves a list of devices registered with the specified fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListDevicesResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListDevicesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listFleets:
+    post:
+      operationId: ListFleets
+      description: Retrieves a list of fleets for the current account and Region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListFleetsResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListFleetsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /listWebsiteCertificateAuthorities:
+    post:
+      operationId: ListWebsiteCertificateAuthorities
+      description: Retrieves a list of certificate authorities added for the current account and Region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListWebsiteCertificateAuthoritiesResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListWebsiteCertificateAuthoritiesRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /signOutUser:
+    post:
+      operationId: SignOutUser
+      description: Signs the user out from all of their devices. The user can sign in again if they have valid credentials.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SignOutUserResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SignOutUserRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /updateAuditStreamConfiguration:
+    post:
+      operationId: UpdateAuditStreamConfiguration
+      description: Updates the audit stream configuration for the fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateAuditStreamConfigurationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAuditStreamConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /updateCompanyNetworkConfiguration:
+    post:
+      operationId: UpdateCompanyNetworkConfiguration
+      description: Updates the company network configuration for the fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateCompanyNetworkConfigurationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateCompanyNetworkConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /updateDevicePolicyConfiguration:
+    post:
+      operationId: UpdateDevicePolicyConfiguration
+      description: Updates the device policy configuration for the fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateDevicePolicyConfigurationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateDevicePolicyConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /UpdateFleetMetadata:
+    post:
+      operationId: UpdateFleetMetadata
+      description: 'Updates fleet metadata, such as DisplayName.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateFleetMetadataResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateFleetMetadataRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  /updateIdentityProviderConfiguration:
+    post:
+      operationId: UpdateIdentityProviderConfiguration
+      description: Updates the identity provider configuration for the fleet.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateIdentityProviderConfigurationResponse'
+        '480':
+          description: UnauthorizedException
+          schema:
+            $ref: '#/definitions/UnauthorizedException'
+        '481':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '482':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '484':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateIdentityProviderConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+definitions:
+  AssociateWebsiteCertificateAuthorityResponse:
+    type: object
+    properties:
+      WebsiteCaId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the CA.
+  AssociateWebsiteCertificateAuthorityRequest:
+    type: object
+    required:
+      - FleetArn
+      - Certificate
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      Certificate:
+        $ref: '#/definitions/Certificate'
+        description: The root certificate of the CA.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The certificate name to display.
+  UnauthorizedException: {}
+  InternalServerErrorException: {}
+  InvalidRequestException: {}
+  ResourceNotFoundException: {}
+  ResourceAlreadyExistsException: {}
+  TooManyRequestsException: {}
+  CreateFleetResponse:
+    type: object
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+  CreateFleetRequest:
+    type: object
+    required:
+      - FleetName
+    properties:
+      FleetName:
+        $ref: '#/definitions/FleetName'
+        description: A unique name for the fleet.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The fleet name to display.
+      OptimizeForEndUserLocation:
+        $ref: '#/definitions/Boolean'
+        description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+  DeleteFleetResponse:
+    type: object
+    properties: {}
+  DeleteFleetRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+  DescribeAuditStreamConfigurationResponse:
+    type: object
+    properties:
+      AuditStreamArn:
+        $ref: '#/definitions/AuditStreamArn'
+        description: The ARN of the Amazon Kinesis data stream that will receive the audit events.
+  DescribeAuditStreamConfigurationRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+  DescribeCompanyNetworkConfigurationResponse:
+    type: object
+    properties:
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The VPC with connectivity to associated websites.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: The security groups associated with access to the provided subnets.
+  DescribeCompanyNetworkConfigurationRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+  DescribeDeviceResponse:
+    type: object
+    properties:
+      Status:
+        $ref: '#/definitions/DeviceStatus'
+        description: The current state of the device.
+      Model:
+        $ref: '#/definitions/DeviceModel'
+        description: The model of the device.
+      Manufacturer:
+        $ref: '#/definitions/DeviceManufacturer'
+        description: The manufacturer of the device.
+      OperatingSystem:
+        $ref: '#/definitions/DeviceOperatingSystemName'
+        description: The operating system of the device.
+      OperatingSystemVersion:
+        $ref: '#/definitions/DeviceOperatingSystemVersion'
+        description: The operating system version of the device.
+      PatchLevel:
+        $ref: '#/definitions/DevicePatchLevel'
+        description: The operating system patch level of the device.
+      FirstAccessedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date that the device first signed in to Amazon WorkLink.
+      LastAccessedTime:
+        $ref: '#/definitions/DateTime'
+        description: The date that the device last accessed Amazon WorkLink.
+      Username:
+        $ref: '#/definitions/Username'
+        description: The user name associated with the device.
+  DescribeDeviceRequest:
+    type: object
+    required:
+      - FleetArn
+      - DeviceId
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      DeviceId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for a registered user's device.
+  DescribeDevicePolicyConfigurationResponse:
+    type: object
+    properties:
+      DeviceCaCertificate:
+        $ref: '#/definitions/Certificate'
+        description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
+  DescribeDevicePolicyConfigurationRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+  DescribeFleetMetadataResponse:
+    type: object
+    properties:
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time that the fleet was created.
+      LastUpdatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time that the fleet was last updated.
+      FleetName:
+        $ref: '#/definitions/FleetName'
+        description: The name of the fleet.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
+      OptimizeForEndUserLocation:
+        $ref: '#/definitions/Boolean'
+        description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+      CompanyCode:
+        $ref: '#/definitions/CompanyCode'
+        description: The identifier used by users to sign in to the Amazon WorkLink app.
+      FleetStatus:
+        $ref: '#/definitions/FleetStatus'
+        description: The current state of the fleet.
+  DescribeFleetMetadataRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+  DescribeIdentityProviderConfigurationResponse:
+    type: object
+    properties:
+      IdentityProviderType:
+        $ref: '#/definitions/IdentityProviderType'
+        description: The type of identity provider.
+      ServiceProviderSamlMetadata:
+        $ref: '#/definitions/SamlMetadata'
+        description: The SAML metadata document uploaded to the user’s identity provider.
+      IdentityProviderSamlMetadata:
+        $ref: '#/definitions/SamlMetadata'
+        description: The SAML metadata document provided by the user’s identity provider.
+  DescribeIdentityProviderConfigurationRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+  DescribeWebsiteCertificateAuthorityResponse:
+    type: object
+    properties:
+      Certificate:
+        $ref: '#/definitions/Certificate'
+        description: The root certificate of the certificate authority.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time that the certificate authority was added.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The certificate name to display.
+  DescribeWebsiteCertificateAuthorityRequest:
+    type: object
+    required:
+      - FleetArn
+      - WebsiteCaId
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      WebsiteCaId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the certificate authority.
+  DisassociateWebsiteCertificateAuthorityResponse:
+    type: object
+    properties: {}
+  DisassociateWebsiteCertificateAuthorityRequest:
+    type: object
+    required:
+      - FleetArn
+      - WebsiteCaId
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      WebsiteCaId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the CA.
+  ListDevicesResponse:
+    type: object
+    properties:
+      Devices:
+        $ref: '#/definitions/DeviceSummaryList'
+        description: Information about the devices.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  ListDevicesRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to be included in the next page.
+  ListFleetsResponse:
+    type: object
+    properties:
+      FleetSummaryList:
+        $ref: '#/definitions/FleetSummaryList'
+        description: The summary list of the fleets.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  ListFleetsRequest:
+    type: object
+    properties:
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to be included in the next page.
+  ListWebsiteCertificateAuthoritiesResponse:
+    type: object
+    properties:
+      WebsiteCertificateAuthorities:
+        $ref: '#/definitions/WebsiteCaSummaryList'
+        description: Information about the certificates.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+  ListWebsiteCertificateAuthoritiesRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: The maximum number of results to be included in the next page.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+  SignOutUserResponse:
+    type: object
+    properties: {}
+  SignOutUserRequest:
+    type: object
+    required:
+      - FleetArn
+      - Username
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      Username:
+        $ref: '#/definitions/Username'
+        description: The name of the user.
+  UpdateAuditStreamConfigurationResponse:
+    type: object
+    properties: {}
+  UpdateAuditStreamConfigurationRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      AuditStreamArn:
+        $ref: '#/definitions/AuditStreamArn'
+        description: The ARN of the Amazon Kinesis data stream that receives the audit events.
+  UpdateCompanyNetworkConfigurationResponse:
+    type: object
+    properties: {}
+  UpdateCompanyNetworkConfigurationRequest:
+    type: object
+    required:
+      - FleetArn
+      - VpcId
+      - SubnetIds
+      - SecurityGroupIds
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      VpcId:
+        $ref: '#/definitions/VpcId'
+        description: The VPC with connectivity to associated websites.
+      SubnetIds:
+        $ref: '#/definitions/SubnetIds'
+        description: The subnets used for X-ENI connections from Amazon WorkLink rendering containers.
+      SecurityGroupIds:
+        $ref: '#/definitions/SecurityGroupIds'
+        description: The security groups associated with access to the provided subnets.
+  UpdateDevicePolicyConfigurationResponse:
+    type: object
+    properties: {}
+  UpdateDevicePolicyConfigurationRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      DeviceCaCertificate:
+        $ref: '#/definitions/CertificateChain'
+        description: 'The certificate chain, including intermediate certificates and the root certificate authority certificate used to issue device certificates.'
+  UpdateFleetMetadataResponse:
+    type: object
+    properties: {}
+  UpdateFleetMetadataRequest:
+    type: object
+    required:
+      - FleetArn
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The fleet name to display. The existing DisplayName is unset if null is passed.
+      OptimizeForEndUserLocation:
+        $ref: '#/definitions/Boolean'
+        description: 'The option to optimize for better performance by routing traffic through the closest AWS Region to users, which may be outside of your home Region.'
+  UpdateIdentityProviderConfigurationResponse:
+    type: object
+    properties: {}
+  UpdateIdentityProviderConfigurationRequest:
+    type: object
+    required:
+      - FleetArn
+      - IdentityProviderType
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      IdentityProviderType:
+        $ref: '#/definitions/IdentityProviderType'
+        description: The type of identity provider.
+      IdentityProviderSamlMetadata:
+        $ref: '#/definitions/SamlMetadata'
+        description: The SAML metadata document provided by the customer’s identity provider. The existing IdentityProviderSamlMetadata is unset if null is passed.
+  FleetArn:
+    type: string
+    minLength: 20
+    maxLength: 2048
+  Certificate:
+    type: string
+    pattern: '-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
+    minLength: 1
+    maxLength: 8192
+  DisplayName:
+    type: string
+    maxLength: 100
+  Id:
+    type: string
+    minLength: 1
+    maxLength: 256
+  AuditStreamArn:
+    type: string
+  Boolean:
+    type: boolean
+  CertificateChain:
+    type: string
+    pattern: '(-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}\u000D?\u000A)*-{5}BEGIN CERTIFICATE-{5}\u000D?\u000A([A-Za-z0-9/+]{64}\u000D?\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\u000D?\u000A-{5}END CERTIFICATE-{5}(\u000D?\u000A)?'
+    minLength: 1
+    maxLength: 32768
+  CompanyCode:
+    type: string
+    minLength: 1
+    maxLength: 32
+  FleetName:
+    type: string
+    pattern: '^[a-z0-9](?:[a-z0-9\-]{0,46}[a-z0-9])?$'
+    minLength: 1
+    maxLength: 48
+  DateTime:
+    type: string
+    format: date-time
+  VpcId:
+    type: string
+    pattern: '^vpc-([0-9a-f]{8}|[0-9a-f]{17})$'
+  SubnetIds:
+    type: array
+    items:
+      $ref: '#/definitions/SubnetId'
+  SecurityGroupIds:
+    type: array
+    items:
+      $ref: '#/definitions/SecurityGroupId'
+  DeviceStatus:
+    type: string
+    enum:
+      - ACTIVE
+      - SIGNED_OUT
+  DeviceModel:
+    type: string
+    minLength: 1
+    maxLength: 256
+  DeviceManufacturer:
+    type: string
+    minLength: 1
+    maxLength: 256
+  DeviceOperatingSystemName:
+    type: string
+    minLength: 1
+    maxLength: 256
+  DeviceOperatingSystemVersion:
+    type: string
+    minLength: 1
+    maxLength: 256
+  DevicePatchLevel:
+    type: string
+    minLength: 1
+    maxLength: 256
+  Username:
+    type: string
+    minLength: 1
+    maxLength: 256
+  FleetStatus:
+    type: string
+    enum:
+      - CREATING
+      - ACTIVE
+      - DELETING
+      - DELETED
+      - FAILED_TO_CREATE
+      - FAILED_TO_DELETE
+  IdentityProviderType:
+    type: string
+    enum:
+      - SAML
+  SamlMetadata:
+    type: string
+    minLength: 1
+    maxLength: 204800
+  DeviceSummary:
+    type: object
+    properties:
+      DeviceId:
+        $ref: '#/definitions/Id'
+        description: The ID of the device.
+      DeviceStatus:
+        $ref: '#/definitions/DeviceStatus'
+        description: The status of the device.
+    description: The summary of devices.
+  DeviceSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceSummary'
+  FleetSummary:
+    type: object
+    properties:
+      FleetArn:
+        $ref: '#/definitions/FleetArn'
+        description: The ARN of the fleet.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time when the fleet was created.
+      LastUpdatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time when the fleet was last updated.
+      FleetName:
+        $ref: '#/definitions/FleetName'
+        description: The name of the fleet.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
+      CompanyCode:
+        $ref: '#/definitions/CompanyCode'
+        description: The identifier used by users to sign into the Amazon WorkLink app.
+      FleetStatus:
+        $ref: '#/definitions/FleetStatus'
+        description: The status of the fleet.
+    description: The summary of the fleet.
+  FleetSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/FleetSummary'
+  NextToken:
+    type: string
+    pattern: '[\w\-]+'
+    minLength: 1
+    maxLength: 4096
+  MaxResults:
+    type: integer
+    minimum: 1
+  WebsiteCaSummaryList:
+    type: array
+    items:
+      $ref: '#/definitions/WebsiteCaSummary'
+  SecurityGroupId:
+    type: string
+    pattern: '^sg-([0-9a-f]{8}|[0-9a-f]{17})$'
+  SubnetId:
+    type: string
+    pattern: '^subnet-([0-9a-f]{8}|[0-9a-f]{17})$'
+  WebsiteCaSummary:
+    type: object
+    properties:
+      WebsiteCaId:
+        $ref: '#/definitions/Id'
+        description: A unique identifier for the CA.
+      CreatedTime:
+        $ref: '#/definitions/DateTime'
+        description: The time when the CA was added.
+      DisplayName:
+        $ref: '#/definitions/DisplayName'
+        description: The name to display.
+    description: The summary of the certificate authority (CA).
