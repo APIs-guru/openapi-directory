@@ -1478,7 +1478,7 @@ paths:
   '/#StartQuery':
     post:
       operationId: StartQuery
-      description: '<p>Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group to query, the query string to use, and the time to query.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.</p>'
+      description: '<p>Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group and time range to query, and the query string to use.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2301,10 +2301,10 @@ definitions:
         description: The log group on which to perform the query.
       startTime:
         $ref: '#/definitions/Timestamp'
-        description: 'The time to start the query. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
+        description: 'The beginning of the time range to query. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
       endTime:
         $ref: '#/definitions/Timestamp'
-        description: 'The time to end this query, if it is still running. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
+        description: 'The end of the time range to query. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.'
       queryString:
         $ref: '#/definitions/QueryString'
         description: 'The query string to use. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html">CloudWatch Logs Insights Query Syntax</a>.'

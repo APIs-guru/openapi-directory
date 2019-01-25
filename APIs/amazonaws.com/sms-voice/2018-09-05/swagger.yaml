@@ -143,6 +143,32 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListConfigurationSets
+      description: List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListConfigurationSetsResponse'
+        '480':
+          description: TooManyRequestsException
+          schema:
+            $ref: '#/definitions/TooManyRequestsException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServiceErrorException
+          schema:
+            $ref: '#/definitions/InternalServiceErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListConfigurationSetsRequest'
   '/v1/sms-voice/configuration-sets/{ConfigurationSetName}/event-destinations':
     post:
       operationId: CreateConfigurationSetEventDestination
@@ -453,6 +479,19 @@ definitions:
   GetConfigurationSetEventDestinationsRequest:
     type: object
     properties: {}
+  ListConfigurationSetsResponse:
+    type: object
+    properties:
+      ConfigurationSets:
+        $ref: '#/definitions/ConfigurationSets'
+        description: An object that contains a list of configuration sets for your account in the current region.
+      NextToken:
+        $ref: '#/definitions/NextTokenString'
+        description: A token returned from a previous call to ListConfigurationSets to indicate the position in the list of configuration sets.
+    description: An object that contains information about the configuration sets for your account in the current region.
+  ListConfigurationSetsRequest:
+    type: object
+    properties: {}
   SendVoiceMessageResponse:
     type: object
     properties:
@@ -511,6 +550,13 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the Amazon CloudWatch Log Group that you want to record events in.
     description: An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.
+  WordCharactersWithDelimiters:
+    type: string
+  ConfigurationSets:
+    type: array
+    description: An array that contains all of the configuration sets in your Amazon Pinpoint account in the current AWS Region.
+    items:
+      $ref: '#/definitions/WordCharactersWithDelimiters'
   __string:
     type: string
   EventDestinationDefinition:
@@ -528,8 +574,6 @@ definitions:
       SnsDestination:
         $ref: '#/definitions/SnsDestination'
     description: An object that defines a single event destination.
-  WordCharactersWithDelimiters:
-    type: string
   KinesisFirehoseDestination:
     type: object
     properties:
@@ -586,6 +630,8 @@ definitions:
       - FAILED
       - NO_ANSWER
     description: The types of events that are sent to the event destination.
+  NextTokenString:
+    type: string
   PlainTextMessageType:
     type: object
     properties:

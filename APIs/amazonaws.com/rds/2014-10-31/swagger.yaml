@@ -100,7 +100,7 @@ paths:
   /:
     post:
       operationId: AddRoleToDBCluster
-      description: 'Associates an Identity and Access Management (IAM) role from an Aurora DB cluster. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf</a> in the <i>Amazon Aurora User Guide</i>.'
+      description: 'Associates an Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf</a> in the <i>Amazon Aurora User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -126,6 +126,45 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AddRoleToDBClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#AddRoleToDBInstance':
+    post:
+      operationId: AddRoleToDBInstance
+      description: Associates an AWS Identity and Access Management (IAM) role with a DB instance.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: DBInstanceRoleAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/DBInstanceRoleAlreadyExistsFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+        '483':
+          description: DBInstanceRoleQuotaExceededFault
+          schema:
+            $ref: '#/definitions/DBInstanceRoleQuotaExceededFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddRoleToDBInstanceMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -3661,7 +3700,7 @@ paths:
   '/#RemoveRoleFromDBCluster':
     post:
       operationId: RemoveRoleFromDBCluster
-      description: 'Disassociates an Identity and Access Management (IAM) role from an Aurora DB cluster. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf </a> in the <i>Amazon Aurora User Guide</i>.'
+      description: 'Disassociates an AWS Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf </a> in the <i>Amazon Aurora User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -3683,6 +3722,41 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/RemoveRoleFromDBClusterMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#RemoveRoleFromDBInstance':
+    post:
+      operationId: RemoveRoleFromDBInstance
+      description: Disassociates an AWS Identity and Access Management (IAM) role from a DB instance.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: DBInstanceNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceNotFoundFault'
+        '481':
+          description: DBInstanceRoleNotFoundFault
+          schema:
+            $ref: '#/definitions/DBInstanceRoleNotFoundFault'
+        '482':
+          description: InvalidDBInstanceStateFault
+          schema:
+            $ref: '#/definitions/InvalidDBInstanceStateFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/RemoveRoleFromDBInstanceMessage'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4647,6 +4721,26 @@ definitions:
   DBClusterRoleAlreadyExistsFault: {}
   InvalidDBClusterStateFault: {}
   DBClusterRoleQuotaExceededFault: {}
+  AddRoleToDBInstanceMessage:
+    type: object
+    required:
+      - DBInstanceIdentifier
+      - RoleArn
+      - FeatureName
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: The name of the DB instance to associate the IAM role with.
+      RoleArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the IAM role to associate with the DB instance, for example <code>arn:aws:iam::123456789012:role/AccessRole</code>. '
+      FeatureName:
+        $ref: '#/definitions/String'
+        description: 'The name of the feature for the DB instance that the IAM role is to be associated with. For the list of supported feature names, see <a>DBEngineVersion</a>. '
+  DBInstanceNotFoundFault: {}
+  DBInstanceRoleAlreadyExistsFault: {}
+  InvalidDBInstanceStateFault: {}
+  DBInstanceRoleQuotaExceededFault: {}
   AddSourceIdentifierToSubscriptionResult:
     type: object
     properties:
@@ -4680,7 +4774,6 @@ definitions:
         $ref: '#/definitions/TagList'
         description: The tags to be assigned to the Amazon RDS resource.
     description: <p/>
-  DBInstanceNotFoundFault: {}
   DBSnapshotNotFoundFault: {}
   ApplyPendingMaintenanceActionResult:
     type: object
@@ -4705,7 +4798,6 @@ definitions:
         description: '<p>A value that specifies the type of opt-in request, or undoes an opt-in request. An opt-in request of type <code>immediate</code> can''t be undone.</p> <p>Valid values:</p> <ul> <li> <p> <code>immediate</code> - Apply the maintenance action immediately.</p> </li> <li> <p> <code>next-maintenance</code> - Apply the maintenance action during the next maintenance window for the resource.</p> </li> <li> <p> <code>undo-opt-in</code> - Cancel any existing <code>next-maintenance</code> opt-in requests.</p> </li> </ul>'
     description: <p/>
   ResourceNotFoundFault: {}
-  InvalidDBInstanceStateFault: {}
   AuthorizeDBSecurityGroupIngressResult:
     type: object
     properties:
@@ -7045,7 +7137,7 @@ definitions:
         description: 'The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years). '
       CloudwatchLogsExportConfiguration:
         $ref: '#/definitions/CloudwatchLogsExportConfiguration'
-        description: The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.
+        description: '<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.</p> <p>A change to the <code>CloudwatchLogsExportConfiguration</code> parameter is always applied to the DB instance immediately. Therefore, the <code>ApplyImmediately</code> parameter has no effect.</p>'
       ProcessorFeatures:
         $ref: '#/definitions/ProcessorFeatureList'
         description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
@@ -7310,6 +7402,23 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The Amazon Resource Name (ARN) of the IAM role to disassociate from the Aurora DB cluster, for example <code>arn:aws:iam::123456789012:role/AuroraAccessRole</code>.'
   DBClusterRoleNotFoundFault: {}
+  RemoveRoleFromDBInstanceMessage:
+    type: object
+    required:
+      - DBInstanceIdentifier
+      - RoleArn
+      - FeatureName
+    properties:
+      DBInstanceIdentifier:
+        $ref: '#/definitions/String'
+        description: The name of the DB instance to disassociate the IAM role from.
+      RoleArn:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB instance, for example <code>arn:aws:iam::123456789012:role/AccessRole</code>.'
+      FeatureName:
+        $ref: '#/definitions/String'
+        description: 'The name of the feature for the DB instance that the IAM role is to be disassociated from. For the list of supported feature names, see <a>DBEngineVersion</a>. '
+  DBInstanceRoleNotFoundFault: {}
   RemoveSourceIdentifierFromSubscriptionResult:
     type: object
     properties:
@@ -8775,6 +8884,9 @@ definitions:
       DeletionProtection:
         $ref: '#/definitions/Boolean'
         description: 'Indicates if the DB instance has deletion protection enabled. The database can''t be deleted when this value is set to true. For more information, see <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html"> Deleting a DB Instance</a>. '
+      AssociatedRoles:
+        $ref: '#/definitions/DBInstanceRoles'
+        description: ' The AWS Identity and Access Management (IAM) roles associated with the DB instance. '
       ListenerEndpoint:
         $ref: '#/definitions/Endpoint'
         description: Specifies the listener connection endpoint for SQL Server Always On.
@@ -8987,6 +9099,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/String'
+  FeatureNameList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   DBEngineVersion:
     type: object
     properties:
@@ -9029,6 +9145,9 @@ definitions:
       SupportedEngineModes:
         $ref: '#/definitions/EngineModeList'
         description: A list of the supported DB engine modes.
+      SupportedFeatureNames:
+        $ref: '#/definitions/FeatureNameList'
+        description: <p> A list of features supported by the DB engine. Supported feature names include the following. </p> <ul> <li> <p>s3Import</p> </li> </ul>
     description: ' This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. '
   DBEngineVersionList:
     type: array
@@ -9124,6 +9243,10 @@ definitions:
     description: List of Active Directory Domain membership records associated with a DB instance.
     items:
       $ref: '#/definitions/DomainMembership'
+  DBInstanceRoles:
+    type: array
+    items:
+      $ref: '#/definitions/DBInstanceRole'
   RestoreWindow:
     type: object
     properties:
@@ -9215,6 +9338,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/DBInstance'
+  DBInstanceRole:
+    type: object
+    properties:
+      RoleArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.
+      FeatureName:
+        $ref: '#/definitions/String'
+        description: 'The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see <a>DBEngineVersion</a>. '
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>Describes the state of association between the IAM role and the DB instance. The Status property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB instance.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB instance, but the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf.</p> </li> </ul>'
+    description: Describes an AWS Identity and Access Management (IAM) role that is associated with a DB instance.
   DBInstanceStatusInfo:
     type: object
     properties:

@@ -1251,6 +1251,12 @@ definitions:
       logsConfigOverride:
         $ref: '#/definitions/LogsConfig'
         description: ' Log settings for this build that override the log settings defined in the build project. '
+      registryCredentialOverride:
+        $ref: '#/definitions/RegistryCredential'
+        description: ' The credentials for access to a private registry. '
+      imagePullCredentialsTypeOverride:
+        $ref: '#/definitions/ImagePullCredentialsType'
+        description: '<p> The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values: </p> <ul> <li> <p> <code>CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild''s service principal.</p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project''s service role. </p> </li> </ul> <p> When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. </p>'
   StopBuildOutput:
     type: object
     properties:
@@ -1507,7 +1513,7 @@ definitions:
         description: The type of build environment to use for related builds.
       image:
         $ref: '#/definitions/NonEmptyString'
-        description: The ID of the Docker image to use for this build project.
+        description: '<p>The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:</p> <ul> <li> <p>For an image tag: <code>registry/repository:tag</code>. For example, to specify an image with the tag "latest," use <code>registry/repository:latest</code>.</p> </li> <li> <p>For an image digest: <code>registry/repository@digest</code>. For example, to specify an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use <code>registry/repository@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf</code>.</p> </li> </ul>'
       computeType:
         $ref: '#/definitions/ComputeType'
         description: '<p>Information about the compute resources the build project uses. Available values include:</p> <ul> <li> <p> <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_LARGE</code>: Use up to 15 GB memory and 8 vCPUs for builds.</p> </li> </ul>'
@@ -1520,6 +1526,12 @@ definitions:
       certificate:
         $ref: '#/definitions/String'
         description: The certificate to use with this build project.
+      registryCredential:
+        $ref: '#/definitions/RegistryCredential'
+        description: ' The credentials for access to a private registry.'
+      imagePullCredentialsType:
+        $ref: '#/definitions/ImagePullCredentialsType'
+        description: '<p> The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values: </p> <ul> <li> <p> <code>CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild''s service principal. </p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project''s service role. </p> </li> </ul> <p> When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials. </p>'
     description: Information about the build environment of the build project.
   LogsLocation:
     type: object
@@ -1886,6 +1898,10 @@ definitions:
         $ref: '#/definitions/Timestamp'
         description: ' A timestamp that indicates the last time a repository''s secret token was modified. '
     description: Information about a webhook that connects repository events to a build project in AWS CodeBuild.
+  CredentialProviderType:
+    type: string
+    enum:
+      - SECRETS_MANAGER
   ImageVersions:
     type: array
     items:
@@ -1988,6 +2004,11 @@ definitions:
   GitCloneDepth:
     type: integer
     minimum: 0
+  ImagePullCredentialsType:
+    type: string
+    enum:
+      - CODEBUILD
+      - SERVICE_ROLE
   SensitiveNonEmptyString:
     type: string
     minLength: 1
@@ -2050,6 +2071,19 @@ definitions:
         $ref: '#/definitions/String'
         description: <p>The publicly-accessible URL through which you can access the build badge for your project. </p> <p>The publicly accessible URL through which you can access the build badge for your project. </p>
     description: Information about the build badge for the build project.
+  RegistryCredential:
+    type: object
+    required:
+      - credential
+      - credentialProvider
+    properties:
+      credential:
+        $ref: '#/definitions/NonEmptyString'
+        description: <p> The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager. </p> <note> <p> The <code>credential</code> can use the name of the credentials only if they exist in your current region. </p> </note>
+      credentialProvider:
+        $ref: '#/definitions/CredentialProviderType'
+        description: ' The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for AWS Secrets Manager. '
+    description: '<p> Information about credentials that provide access to a private Docker registry. When this is set: </p> <ul> <li> <p> <code>imagePullCredentialsType</code> must be set to <code>SERVICE_ROLE</code>. </p> </li> <li> <p> images cannot be curated or an Amazon ECR image.</p> </li> </ul> <p> For more information, see <a href="http://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html">Private Registry with AWS Secrets Manager Samle for AWS CodeBuild</a>. </p>'
   ProjectSourceVersion:
     type: object
     required:
