@@ -35,6 +35,7 @@ externalDocs:
   url: 'https://aws.amazon.com/mediaconnect/'
 host: mediaconnect.amazonaws.com
 basePath: /
+x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -437,6 +438,103 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists all tags associated with the resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: resourceArn
+          type: string
+          in: path
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: resourceArn
+          type: string
+          in: path
+          required: true
+    delete:
+      operationId: UntagResource
+      description: Deletes the specified tags from a resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: resourceArn
+          type: string
+          in: path
+          required: true
   '/v1/flows/{flowArn}/outputs/{outputArn}':
     delete:
       operationId: RemoveFlowOutput
@@ -924,6 +1022,15 @@ definitions:
   ListFlowsRequest:
     type: object
     properties: {}
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   RemoveFlowOutputResponse:
     type: object
     properties:
@@ -970,6 +1077,18 @@ definitions:
         $ref: '#/definitions/Status'
         description: The status of the flow when the StopFlow process begins.
   StopFlowRequest:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: 'A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+    description: 'The tags to add to the resource. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
+  UntagResourceRequest:
     type: object
     properties: {}
   UpdateFlowEntitlementResponse:
@@ -1342,6 +1461,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/ListedFlow'
+  __mapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
   ListedEntitlement:
     type: object
     required:

@@ -2480,7 +2480,7 @@ definitions:
     properties:
       Destination:
         $ref: '#/definitions/OutputLocationRef'
-        description: 'A directory and base filename where archive files should be written.  If the base filename portion of the URI is left blank, the base filename of the first input will be automatically inserted.'
+        description: A directory and base filename where archive files should be written.
       RolloverInterval:
         $ref: '#/definitions/__integerMin1'
         description: Number of seconds to write to archive file before closing and starting a new one.
@@ -4064,6 +4064,35 @@ definitions:
         $ref: '#/definitions/__string'
         description: The action name of another action that this one refers to.
     description: Settings to specify if an action follows another.
+  FrameCaptureGroupSettings:
+    type: object
+    required:
+      - Destination
+    properties:
+      Destination:
+        $ref: '#/definitions/OutputLocationRef'
+        description: 'The destination for the frame capture files. Either the URI for an Amazon S3 bucket and object, plus a file name prefix (for example, s3ssl://sportsDelivery/highlights/20180820/curling_) or the URI for a MediaStore container, plus a file name prefix (for example, mediastoressl://sportsDelivery/20180820/curling_). The final file names consist of the prefix from the destination field (for example, "curling_") + name modifier + the counter (5 digits, starting from 00001) + extension (which is always .jpg).  For example, curlingLow.00001.jpg'
+    description: Frame Capture Group Settings
+  FrameCaptureOutputSettings:
+    type: object
+    properties:
+      NameModifier:
+        $ref: '#/definitions/__string'
+        description: Required if the output group contains more than one output. This modifier forms part of the output file name.
+    description: Frame Capture Output Settings
+  __integerMin1Max3600:
+    type: integer
+    minimum: 1
+    maximum: 3600
+  FrameCaptureSettings:
+    type: object
+    required:
+      - CaptureInterval
+    properties:
+      CaptureInterval:
+        $ref: '#/definitions/__integerMin1Max3600'
+        description: 'The frequency, in seconds, for capturing frames for inclusion in the output.  For example, "10" means capture a frame every 10 seconds.'
+    description: Frame Capture Settings
   __integerMinNegative60Max60:
     type: integer
     description: Placeholder documentation for __integerMinNegative60Max60
@@ -4317,10 +4346,10 @@ definitions:
         $ref: '#/definitions/H264FramerateControl'
         description: 'This field indicates how the output video frame rate is specified.  If "specified" is selected then the output video frame rate is determined by framerateNumerator and framerateDenominator, else if "initializeFromSource" is selected then the output video frame rate will be set equal to the input video frame rate of the first input.'
       FramerateDenominator:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/__integerMin1'
         description: Framerate denominator.
       FramerateNumerator:
-        $ref: '#/definitions/__integer'
+        $ref: '#/definitions/__integerMin1'
         description: 'Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.'
       GopBReference:
         $ref: '#/definitions/H264GopBReference'
@@ -4584,6 +4613,12 @@ definitions:
     description: Placeholder documentation for __stringMin32Max32
     minLength: 32
     maxLength: 32
+  IFrameOnlyPlaylistType:
+    type: string
+    enum:
+      - DISABLED
+      - STANDARD
+    description: 'When set to "standard", an I-Frame only playlist will be written out for each video output in the output group. This I-Frame only playlist will contain byte range offsets pointing to the I-frame(s) in each segment.'
   __integerMin3:
     type: integer
     description: Placeholder documentation for __integerMin3
@@ -4723,6 +4758,9 @@ definitions:
       HlsCdnSettings:
         $ref: '#/definitions/HlsCdnSettings'
         description: Parameters that control interactions with the CDN.
+      IFrameOnlyPlaylists:
+        $ref: '#/definitions/IFrameOnlyPlaylistType'
+        description: 'If enabled, writes out I-Frame only playlists in addition to media playlists.'
       IndexNSegments:
         $ref: '#/definitions/__integerMin3'
         description: 'If mode is "live", the number of segments to retain in the manifest (.m3u8) file. This number must be less than or equal to keepSegments. If mode is "vod", this parameter has no effect.'
@@ -5576,6 +5614,8 @@ definitions:
     properties:
       ArchiveOutputSettings:
         $ref: '#/definitions/ArchiveOutputSettings'
+      FrameCaptureOutputSettings:
+        $ref: '#/definitions/FrameCaptureOutputSettings'
       HlsOutputSettings:
         $ref: '#/definitions/HlsOutputSettings'
       MsSmoothOutputSettings:
@@ -5646,6 +5686,8 @@ definitions:
     properties:
       ArchiveGroupSettings:
         $ref: '#/definitions/ArchiveGroupSettings'
+      FrameCaptureGroupSettings:
+        $ref: '#/definitions/FrameCaptureGroupSettings'
       HlsGroupSettings:
         $ref: '#/definitions/HlsGroupSettings'
       MsSmoothGroupSettings:
@@ -6220,6 +6262,8 @@ definitions:
   VideoCodecSettings:
     type: object
     properties:
+      FrameCaptureSettings:
+        $ref: '#/definitions/FrameCaptureSettings'
       H264Settings:
         $ref: '#/definitions/H264Settings'
     description: Placeholder documentation for VideoCodecSettings
@@ -6246,22 +6290,22 @@ definitions:
         description: Video codec settings.
       Height:
         $ref: '#/definitions/__integer'
-        description: 'Output video height (in pixels). Leave blank to use source video height. If left blank, width must also be unspecified.'
+        description: 'Output video height, in pixels. Must be an even number. For most codecs, you can leave this field and width blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.'
       Name:
         $ref: '#/definitions/__string'
         description: The name of this VideoDescription. Outputs will use this name to uniquely identify this Description.  Description names should be unique within this Live Event.
       RespondToAfd:
         $ref: '#/definitions/VideoDescriptionRespondToAfd'
-        description: 'Indicates how to respond to the AFD values in the input stream. Setting to "respond" causes input video to be clipped, depending on AFD value, input display aspect ratio and output display aspect ratio.'
+        description: 'Indicates how to respond to the AFD values in the input stream. RESPOND causes input video to be clipped, depending on the AFD value, input display aspect ratio, and output display aspect ratio, and (except for FRAMECAPTURE codec) includes the values in the output. PASSTHROUGH (does not apply to FRAMECAPTURE codec) ignores the AFD values and includes the values in the output, so input video is not clipped. NONE ignores the AFD values and does not include the values through to the output, so input video is not clipped.'
       ScalingBehavior:
         $ref: '#/definitions/VideoDescriptionScalingBehavior'
-        description: 'When set to "stretchToOutput", automatically configures the output position to stretch the video to the specified output resolution. This option will override any position value.'
+        description: STRETCHTOOUTPUT configures the output position to stretch the video to the specified output resolution (height and width). This option will override any position value. DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to provide the specified output resolution.
       Sharpness:
         $ref: '#/definitions/__integerMin0Max100'
-        description: 'Changes the width of the anti-alias filter kernel used for scaling. Only applies if scaling is being performed and antiAlias is set to true. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.'
+        description: 'Changes the strength of the anti-alias filter used for scaling. 0 is the softest setting, 100 is the sharpest. A setting of 50 is recommended for most content.'
       Width:
         $ref: '#/definitions/__integer'
-        description: 'Output video width (in pixels). Leave out to use source video width.  If left out, height must also be left out. Display aspect ratio is always preserved by letterboxing or pillarboxing when necessary.'
+        description: 'Output video width, in pixels. Must be an even number. For most codecs, you can leave this field and height blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.'
     description: Video settings for this stream.
   VideoSelectorColorSpace:
     type: string

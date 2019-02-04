@@ -2388,81 +2388,89 @@ paths:
           schema:
             $ref: '#/definitions/FileContentSizeLimitExceededException'
         '489':
+          description: FolderContentSizeLimitExceededException
+          schema:
+            $ref: '#/definitions/FolderContentSizeLimitExceededException'
+        '490':
           description: PathRequiredException
           schema:
             $ref: '#/definitions/PathRequiredException'
-        '490':
+        '491':
           description: InvalidPathException
           schema:
             $ref: '#/definitions/InvalidPathException'
-        '491':
+        '492':
           description: BranchNameRequiredException
           schema:
             $ref: '#/definitions/BranchNameRequiredException'
-        '492':
+        '493':
           description: InvalidBranchNameException
           schema:
             $ref: '#/definitions/InvalidBranchNameException'
-        '493':
+        '494':
           description: BranchDoesNotExistException
           schema:
             $ref: '#/definitions/BranchDoesNotExistException'
-        '494':
+        '495':
           description: BranchNameIsTagNameException
           schema:
             $ref: '#/definitions/BranchNameIsTagNameException'
-        '495':
+        '496':
           description: InvalidFileModeException
           schema:
             $ref: '#/definitions/InvalidFileModeException'
-        '496':
+        '497':
           description: NameLengthExceededException
           schema:
             $ref: '#/definitions/NameLengthExceededException'
-        '497':
+        '498':
           description: InvalidEmailException
           schema:
             $ref: '#/definitions/InvalidEmailException'
-        '498':
+        '499':
           description: CommitMessageLengthExceededException
           schema:
             $ref: '#/definitions/CommitMessageLengthExceededException'
-        '499':
+        '500':
           description: InvalidDeletionParameterException
           schema:
             $ref: '#/definitions/InvalidDeletionParameterException'
-        '500':
+        '501':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '501':
+        '502':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '502':
+        '503':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '503':
+        '504':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '504':
+        '505':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
-        '505':
+        '506':
           description: SameFileContentException
           schema:
             $ref: '#/definitions/SameFileContentException'
-        '506':
+        '507':
           description: FileNameConflictsWithDirectoryNameException
           schema:
             $ref: '#/definitions/FileNameConflictsWithDirectoryNameException'
-        '507':
+        '508':
           description: DirectoryNameConflictsWithFileNameException
           schema:
             $ref: '#/definitions/DirectoryNameConflictsWithFileNameException'
+        '509':
+          description: FilePathConflictsWithSubmodulePathException
+          schema:
+            $ref: '#/definitions/FilePathConflictsWithSubmodulePathException'
       parameters:
         - name: body
           in: body
@@ -4005,11 +4013,13 @@ definitions:
         description: An email address for the person adding or updating the file.
   FileContentRequiredException: {}
   FileContentSizeLimitExceededException: {}
+  FolderContentSizeLimitExceededException: {}
   InvalidFileModeException: {}
   InvalidDeletionParameterException: {}
   SameFileContentException: {}
   FileNameConflictsWithDirectoryNameException: {}
   DirectoryNameConflictsWithFileNameException: {}
+  FilePathConflictsWithSubmodulePathException: {}
   PutRepositoryTriggersOutput:
     type: object
     properties:
