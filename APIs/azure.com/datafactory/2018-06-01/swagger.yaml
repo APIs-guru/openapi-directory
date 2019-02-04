@@ -1105,6 +1105,48 @@ paths:
                 x-ms-correlation-request-id: c63640bd-3e5f-4ee0-bae1-cea74f761a7d
                 x-ms-ratelimit-remaining-subscription-writes: '1191'
                 x-ms-request-id: c63640bd-3e5f-4ee0-bae1-cea74f761a7d
+  '/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/getFeatureValue':
+    post:
+      description: Get exposure control feature for specific location.
+      operationId: ExposureControl_GetFeatureValue
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/locationId'
+        - $ref: '#/parameters/api-version'
+        - description: The exposure control request.
+          in: body
+          name: exposureControlRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ExposureControlRequest'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/ExposureControlResponse'
+        default:
+          description: An error response received from the Azure Data Factory service.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - exposureControl
+      x-ms-examples:
+        ExposureControl_GetFeatureValue:
+          parameters:
+            api-version: '2018-06-01'
+            exposureControlRequest:
+              featureName: ADFIntegrationRuntimeSharingRbac
+              featureType: Feature
+            locationId: WestEurope
+            subscriptionId: 12345678-1234-1234-1234-12345678abc
+          responses:
+            '200':
+              body:
+                featureName: ADFIntegrationRuntimeSharingRbac
+                value: 'False'
+              headers:
+                Date: 'Sat, 22 Dec 2018 09:46:07 GMT'
+                X-Content-Type-Options: nosniff
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories':
     get:
       description: Lists factories.
@@ -1658,6 +1700,13 @@ paths:
                       type: String
                     MyFolderPath:
                       type: String
+                  schema:
+                    - name: col1
+                      type: INT_32
+                    - name: col2
+                      precision: '38'
+                      scale: '2'
+                      type: Decimal
                   type: AzureBlob
                   typeProperties:
                     fileName:
@@ -5521,6 +5570,9 @@ definitions:
               type: object
             description: Definition of all parameters for an entity.
             type: object
+          schema:
+            description: 'Columns that define the physical type schema of the dataset. Type: array (or Expression with resultType array), itemType: DatasetSchemaDataElement.'
+            type: object
           structure:
             description: 'Columns that define the structure of the dataset. Type: array (or Expression with resultType array), itemType: DatasetDataElement.'
             type: object
@@ -5533,6 +5585,28 @@ definitions:
         type: object
     required:
       - properties
+  ExposureControlRequest:
+    description: The exposure control request.
+    properties:
+      featureName:
+        description: The feature name.
+        type: string
+      featureType:
+        description: The feature type.
+        type: string
+    type: object
+  ExposureControlResponse:
+    description: The exposure control response.
+    properties:
+      featureName:
+        description: The feature name.
+        readOnly: true
+        type: string
+      value:
+        description: The feature value.
+        readOnly: true
+        type: string
+    type: object
   Expression:
     description: Azure Data Factory expression definition.
     properties:

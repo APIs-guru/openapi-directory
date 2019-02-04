@@ -465,7 +465,7 @@ paths:
                   severity: '1'
                   trigger:
                     metricTrigger:
-                      metricColumn: ColumnName
+                      metricColumn: Computer
                       metricTriggerType: Consecutive
                       threshold: 5
                       thresholdOperator: GreaterThan
@@ -480,7 +480,7 @@ paths:
                   timeWindowInMinutes: 15
                 source:
                   dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace
-                  query: Heartbeat | count
+                  query: 'Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m)'
                   queryType: ResultCount
               tags:
                 'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace': Resource
@@ -503,7 +503,7 @@ paths:
                     severity: '1'
                     trigger:
                       metricTrigger:
-                        metricColumn: ColumnName
+                        metricColumn: Computer
                         metricTriggerType: Consecutive
                         threshold: 5
                         thresholdOperator: GreaterThan
@@ -518,7 +518,7 @@ paths:
                     timeWindowInMinutes: 15
                   source:
                     dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace
-                    query: Heartbeat | count
+                    query: 'Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m)'
                     queryType: ResultCount
                 tags:
                   'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace': Resource

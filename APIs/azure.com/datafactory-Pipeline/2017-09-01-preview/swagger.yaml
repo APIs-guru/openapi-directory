@@ -157,6 +157,50 @@ definitions:
         description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
         type: object
     type: object
+  AzureFunctionActivity:
+    allOf:
+      - $ref: '#/definitions/ExecutionActivity'
+    description: Azure Function activity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureFunctionActivityTypeProperties'
+        description: Azure Function activity properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    x-ms-discriminator-value: AzureFunctionActivity
+  AzureFunctionActivityMethod:
+    description: The list of HTTP methods supported by a AzureFunctionActivity.
+    enum:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+      - HEAD
+      - TRACE
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: AzureFunctionActivityMethod
+  AzureFunctionActivityTypeProperties:
+    description: Azure Function activity type properties.
+    properties:
+      body:
+        description: 'Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string).'
+        type: object
+      functionName:
+        description: 'Name of the Function that the Azure Function Activity will call. Type: string (or Expression with resultType string)'
+        type: object
+      headers:
+        description: 'Represents the headers that will be sent to the request. For example, to set the language and type on a request: "headers" : { "Accept-Language": "en-us", "Content-Type": "application/json" }. Type: string (or Expression with resultType string).'
+        type: object
+      method:
+        $ref: '#/definitions/AzureFunctionActivityMethod'
+        description: Rest API method for target endpoint.
+    required:
+      - method
+      - functionName
   AzureMLBatchExecutionActivity:
     allOf:
       - $ref: '#/definitions/ExecutionActivity'
@@ -1033,11 +1077,14 @@ definitions:
           - type
           - referenceName
       environmentPath:
-        description: The environment path to execute the SSIS package.
-        type: string
+        description: 'The environment path to execute the SSIS package. Type: string (or Expression with resultType string).'
+        type: object
+      executionCredential:
+        $ref: '#/definitions/SSISExecutionCredential'
+        description: The package execution credential.
       loggingLevel:
-        description: The logging level of SSIS package execution.
-        type: string
+        description: 'The logging level of SSIS package execution. Type: string (or Expression with resultType string).'
+        type: object
       packageConnectionManagers:
         additionalProperties:
           $ref: '#/definitions/SSISConnectionManager'
@@ -1067,14 +1114,8 @@ definitions:
         description: The property overrides to execute the SSIS package.
         type: object
       runtime:
-        description: Specifies the runtime to execute SSIS package.
-        enum:
-          - x64
-          - x86
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: SSISExecutionRuntime
+        description: 'Specifies the runtime to execute SSIS package. The value should be "x86" or "x64". Type: string (or Expression with resultType string).'
+        type: object
     required:
       - packageLocation
       - connectVia
@@ -2159,6 +2200,40 @@ definitions:
       $ref: '#/definitions/SSISExecutionParameter'
     description: SSIS Connection Manager.
     type: object
+  SSISExecutionCredential:
+    description: SSIS package execution credential.
+    properties:
+      domain:
+        description: Domain for windows authentication.
+        type: object
+      password:
+        allOf:
+          - description: The base definition of a secret type.
+            discriminator: type
+            properties:
+              type:
+                description: Type of the secret.
+                type: string
+            required:
+              - type
+            type: object
+        description: Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls.
+        properties:
+          value:
+            description: Value of secure string.
+            type: string
+        required:
+          - value
+        type: object
+        x-ms-discriminator-value: SecureString
+      userName:
+        description: UseName for windows authentication.
+        type: object
+    required:
+      - domain
+      - userName
+      - password
+    type: object
   SSISExecutionParameter:
     description: SSIS execution parameter.
     properties:
@@ -2172,8 +2247,8 @@ definitions:
     description: SSIS package location.
     properties:
       packagePath:
-        description: The SSIS package path.
-        type: string
+        description: 'The SSIS package path. Type: string (or Expression with resultType string).'
+        type: object
     required:
       - packagePath
     type: object

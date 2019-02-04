@@ -517,6 +517,40 @@ definitions:
     required:
       - domain
       - accessToken
+  AzureFunctionLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Azure Function linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureFunctionLinkedServiceTypeProperties'
+        description: Azure Function linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureFunction
+  AzureFunctionLinkedServiceTypeProperties:
+    description: Azure Function linked service properties.
+    properties:
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      functionAppUrl:
+        description: 'The endpoint of the Azure Function App. URL will be in the format https://<accountName>.azurewebsites.net.'
+        type: object
+      functionKey:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+    required:
+      - functionAppUrl
   AzureKeyVaultLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'

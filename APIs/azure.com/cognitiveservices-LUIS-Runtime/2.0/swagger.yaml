@@ -339,6 +339,8 @@ definitions:
         items:
           $ref: '#/definitions/CompositeEntityModel'
         type: array
+      connectedServiceResult:
+        $ref: '#/definitions/LuisResult'
       entities:
         description: The entities extracted from the utterance.
         items:

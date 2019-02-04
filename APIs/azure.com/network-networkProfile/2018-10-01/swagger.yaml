@@ -59,7 +59,7 @@ paths:
       tags:
         - NetworkProfiles
       x-ms-examples:
-        List all network profilees:
+        List all network profiles:
           parameters:
             api-version: '2018-10-01'
             subscriptionId: subid
@@ -143,7 +143,7 @@ paths:
       tags:
         - NetworkProfiles
       x-ms-examples:
-        List resource group network profilees:
+        List resource group network profiles:
           parameters:
             api-version: '2018-10-01'
             resourceGroupName: rg1
@@ -263,7 +263,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the PublicIPPrefx.
+        - description: The name of the Public IP Prefix.
           in: path
           name: networkProfileName
           required: true
@@ -722,7 +722,7 @@ definitions:
             description: Resource ID.
             type: string
         x-ms-azure-resource: true
-    description: Container network interface configruation child resource.
+    description: Container network interface configuration child resource.
     properties:
       etag:
         description: A unique read-only string that changes whenever the resource is updated.
@@ -788,7 +788,7 @@ definitions:
     properties:
       container:
         $ref: '#/definitions/Container'
-        description: Reference to the conatinaer to which this container network interface is attached.
+        description: Reference to the container to which this container network interface is attached.
       containerNetworkInterfaceConfiguration:
         $ref: '#/definitions/ContainerNetworkInterfaceConfiguration'
         description: Container network interface configuration from which this container network interface is created.
@@ -826,7 +826,7 @@ definitions:
         readOnly: true
         type: string
   IPConfigurationProfilePropertiesFormat:
-    description: IP configruation profile properties.
+    description: IP configuration profile properties.
     properties:
       provisioningState:
         description: The provisioning state of the resource.
@@ -834,7 +834,7 @@ definitions:
         type: string
       subnet:
         $ref: './virtualNetwork.json#/definitions/Subnet'
-        description: The reference of the subnet resource to create a contatainer network interface ip configruation.
+        description: The reference of the subnet resource to create a container network interface ip configuration.
   NetworkProfile:
     allOf:
       - description: Common resource representation.

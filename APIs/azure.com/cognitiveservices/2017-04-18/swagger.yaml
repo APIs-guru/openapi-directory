@@ -2592,6 +2592,9 @@ definitions:
   CognitiveServicesAccountProperties:
     description: Properties of Cognitive Services account.
     properties:
+      customSubDomainName:
+        description: Optional subdomain name used for token-based authentication.
+        type: string
       endpoint:
         description: Endpoint of the created account.
         type: string

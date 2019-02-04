@@ -7578,7 +7578,7 @@ definitions:
   AS2ErrorSettings:
     description: The AS2 agreement error settings.
     properties:
-      resendIfMdnNotReceived:
+      resendIfMDNNotReceived:
         description: The value indicating whether to resend message If MDN is not received.
         type: boolean
       suspendDuplicateMessage:
@@ -7586,7 +7586,7 @@ definitions:
         type: boolean
     required:
       - suspendDuplicateMessage
-      - resendIfMdnNotReceived
+      - resendIfMDNNotReceived
     type: object
   AS2MdnSettings:
     description: The AS2 agreement mdn settings.
@@ -7600,30 +7600,30 @@ definitions:
       micHashingAlgorithm:
         $ref: '#/definitions/HashingAlgorithm'
         description: The signing or hashing algorithm.
-      needMdn:
+      needMDN:
         description: The value indicating whether to send or request a MDN.
         type: boolean
       receiptDeliveryUrl:
         description: The receipt delivery URL.
         type: string
-      sendInboundMdnToMessageBox:
+      sendInboundMDNToMessageBox:
         description: The value indicating whether to send inbound MDN to message box.
         type: boolean
-      sendMdnAsynchronously:
+      sendMDNAsynchronously:
         description: The value indicating whether to send the asynchronous MDN.
         type: boolean
-      signMdn:
+      signMDN:
         description: The value indicating whether the MDN needs to be signed or not.
         type: boolean
-      signOutboundMdnIfOptional:
+      signOutboundMDNIfOptional:
         description: The value indicating whether to sign the outbound MDN if optional.
         type: boolean
     required:
-      - needMdn
-      - signMdn
-      - sendMdnAsynchronously
-      - signOutboundMdnIfOptional
-      - sendInboundMdnToMessageBox
+      - needMDN
+      - signMDN
+      - sendMDNAsynchronously
+      - signOutboundMDNIfOptional
+      - sendInboundMDNToMessageBox
       - micHashingAlgorithm
     type: object
   AS2MessageConnectionSettings:
@@ -7700,22 +7700,22 @@ definitions:
   AS2SecuritySettings:
     description: The AS2 agreement security settings.
     properties:
-      enableNrrForInboundDecodedMessages:
+      enableNRRForInboundDecodedMessages:
         description: The value indicating whether to enable NRR for inbound decoded messages.
         type: boolean
-      enableNrrForInboundEncodedMessages:
+      enableNRRForInboundEncodedMessages:
         description: The value indicating whether to enable NRR for inbound encoded messages.
         type: boolean
-      enableNrrForInboundMdn:
+      enableNRRForInboundMDN:
         description: The value indicating whether to enable NRR for inbound MDN.
         type: boolean
-      enableNrrForOutboundDecodedMessages:
+      enableNRRForOutboundDecodedMessages:
         description: The value indicating whether to enable NRR for outbound decoded messages.
         type: boolean
-      enableNrrForOutboundEncodedMessages:
+      enableNRRForOutboundEncodedMessages:
         description: The value indicating whether to enable NRR for outbound encoded messages.
         type: boolean
-      enableNrrForOutboundMdn:
+      enableNRRForOutboundMDN:
         description: The value indicating whether to enable NRR for outbound MDN.
         type: boolean
       encryptionCertificateName:
@@ -7732,12 +7732,12 @@ definitions:
         type: string
     required:
       - overrideGroupSigningCertificate
-      - enableNrrForInboundEncodedMessages
-      - enableNrrForInboundDecodedMessages
-      - enableNrrForOutboundMdn
-      - enableNrrForOutboundEncodedMessages
-      - enableNrrForOutboundDecodedMessages
-      - enableNrrForInboundMdn
+      - enableNRRForInboundEncodedMessages
+      - enableNRRForInboundDecodedMessages
+      - enableNRRForOutboundMDN
+      - enableNRRForOutboundEncodedMessages
+      - enableNRRForOutboundDecodedMessages
+      - enableNRRForInboundMDN
     type: object
   AS2ValidationSettings:
     description: The AS2 agreement validation settings.

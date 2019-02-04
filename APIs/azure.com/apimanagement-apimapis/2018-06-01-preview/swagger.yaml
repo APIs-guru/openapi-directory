@@ -407,6 +407,8 @@ paths:
         - application/vnd.sun.wadl+xml
         - application/vnd.swagger.doc+json
         - application/wsdl+xml
+        - application/vnd.oai.openapi
+        - application/vnd.oai.openapi+json
       responses:
         '200':
           description: The response body contains the specified API entity.
@@ -676,6 +678,8 @@ paths:
         - application/vnd.sun.wadl+xml
         - application/vnd.swagger.doc+json
         - application/wsdl+xml
+        - application/vnd.oai.openapi
+        - application/vnd.oai.openapi+json
       description: Creates new or updates existing specified API of the API Management service instance.
       operationId: Api_CreateOrUpdate
       parameters:
@@ -887,6 +891,51 @@ paths:
                   protocols:
                     - https
                   serviceUrl: 'http://petstore.swagger.io/v5'
+                  subscriptionKeyParameterNames:
+                    header: Ocp-Apim-Subscription-Key
+                    query: subscription-key
+                type: Microsoft.ApiManagement/service/apis
+        ApiManagementCreateApiUsingOai3Import:
+          parameters:
+            api-version: 2018-06-01-preview
+            apiId: petstore
+            parameters:
+              properties:
+                contentFormat: openapi-link
+                contentValue: 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/master/examples/v3.0/petstore.yaml'
+                path: petstore
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi
+                name: petstoreapi
+                properties:
+                  apiRevision: '1'
+                  displayName: Swagger Petstore
+                  isCurrent: true
+                  path: petstore
+                  protocols:
+                    - https
+                  serviceUrl: 'http://petstore.swagger.io/v1'
+                  subscriptionKeyParameterNames:
+                    header: Ocp-Apim-Subscription-Key
+                    query: subscription-key
+                type: Microsoft.ApiManagement/service/apis
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/petstoreapi
+                name: petstoreapi
+                properties:
+                  apiRevision: '1'
+                  displayName: Swagger Petstore
+                  isCurrent: true
+                  path: petstore
+                  protocols:
+                    - https
+                  serviceUrl: 'http://petstore.swagger.io/v1'
                   subscriptionKeyParameterNames:
                     header: Ocp-Apim-Subscription-Key
                     query: subscription-key
@@ -8383,6 +8432,9 @@ definitions:
           - swagger-link-json
           - wsdl
           - wsdl-link
+          - openapi
+          - openapi+json
+          - openapi-link
         type: string
         x-ms-enum:
           modelAsString: true
@@ -8400,6 +8452,12 @@ definitions:
               value: wsdl
             - description: The WSDL document is hosted on a publicly accessible internet address.
               value: wsdl-link
+            - description: The contents are inline and Content Type is a OpenApi 3.0 Document in YAML format.
+              value: openapi
+            - description: The contents are inline and Content Type is a OpenApi 3.0 Document in JSON format.
+              value: openapi+json
+            - description: The Open Api 3.0 document is hosted on a publicly accessible internet address.
+              value: openapi-link
       contentValue:
         description: Content value when Importing an API.
         type: string
@@ -9264,6 +9322,7 @@ x-ms-paths:
             - swagger-link
             - wadl-link
             - wsdl-link
+            - openapi-link
           in: query
           name: format
           required: true
@@ -9281,6 +9340,9 @@ x-ms-paths:
               - description: Export the Api Definition in WADL Schema to Storage Blob.
                 name: Wadl
                 value: wadl-link
+              - description: Export the Api Definition in OpenApi Specification 3.0 to Storage Blob.
+                name: OpenApi3
+                value: openapi-link
         - description: Query parameter required to export the API details.
           enum:
             - 'true'

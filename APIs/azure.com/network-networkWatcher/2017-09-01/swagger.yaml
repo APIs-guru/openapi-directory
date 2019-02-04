@@ -678,6 +678,8 @@ paths:
       tags:
         - PacketCaptures
       x-ms-long-running-operation: true
+      x-ms-long-running-operation-options:
+        final-state-via: location
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/stop':
     post:
       description: Stops a specified packet capture session.
@@ -1265,7 +1267,7 @@ definitions:
                   description: A description for this rule. Restricted to 140 chars.
                   type: string
                 destinationAddressPrefix:
-                  description: 'The destination address prefix. CIDR or destination IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used.'
+                  description: 'The destination address prefix. CIDR or destination IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used.'
                   type: string
                 destinationAddressPrefixes:
                   description: The destination address prefixes. CIDR or destination IP ranges.
@@ -1317,7 +1319,7 @@ definitions:
                             type: string
                   type: array
                 destinationPortRange:
-                  description: The destination port or range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+                  description: The destination port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
                   type: string
                 destinationPortRanges:
                   description: The destination port ranges.
@@ -1326,7 +1328,7 @@ definitions:
                     type: string
                   type: array
                 direction:
-                  description: 'The direction of the rule. The direction specifies if rule will be evaluated on incoming or outcoming traffic. Possible values are: ''Inbound'' and ''Outbound''.'
+                  description: 'The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are: ''Inbound'' and ''Outbound''.'
                   enum:
                     - Inbound
                     - Outbound
@@ -1352,7 +1354,7 @@ definitions:
                   description: 'The provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
                   type: string
                 sourceAddressPrefix:
-                  description: 'The CIDR or source IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
+                  description: 'The CIDR or source IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
                   type: string
                 sourceAddressPrefixes:
                   description: The CIDR or source IP ranges.
@@ -1404,7 +1406,7 @@ definitions:
                             type: string
                   type: array
                 sourcePortRange:
-                  description: The source port or range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+                  description: The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
                   type: string
                 sourcePortRanges:
                   description: The source port ranges.
@@ -1748,7 +1750,7 @@ definitions:
                   description: A description for this rule. Restricted to 140 chars.
                   type: string
                 destinationAddressPrefix:
-                  description: 'The destination address prefix. CIDR or destination IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used.'
+                  description: 'The destination address prefix. CIDR or destination IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used.'
                   type: string
                 destinationAddressPrefixes:
                   description: The destination address prefixes. CIDR or destination IP ranges.
@@ -1800,7 +1802,7 @@ definitions:
                             type: string
                   type: array
                 destinationPortRange:
-                  description: The destination port or range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+                  description: The destination port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
                   type: string
                 destinationPortRanges:
                   description: The destination port ranges.
@@ -1809,7 +1811,7 @@ definitions:
                     type: string
                   type: array
                 direction:
-                  description: 'The direction of the rule. The direction specifies if rule will be evaluated on incoming or outcoming traffic. Possible values are: ''Inbound'' and ''Outbound''.'
+                  description: 'The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are: ''Inbound'' and ''Outbound''.'
                   enum:
                     - Inbound
                     - Outbound
@@ -1835,7 +1837,7 @@ definitions:
                   description: 'The provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
                   type: string
                 sourceAddressPrefix:
-                  description: 'The CIDR or source IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
+                  description: 'The CIDR or source IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
                   type: string
                 sourceAddressPrefixes:
                   description: The CIDR or source IP ranges.
@@ -1887,7 +1889,7 @@ definitions:
                             type: string
                   type: array
                 sourcePortRange:
-                  description: The source port or range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+                  description: The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
                   type: string
                 sourcePortRanges:
                   description: The source port ranges.
@@ -1918,7 +1920,7 @@ definitions:
               description: The destination address prefix.
               type: string
             destinationAddressPrefixes:
-              description: 'The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AureLoadBalancer, Internet), System Tags, and the asterix (*).'
+              description: 'The destination address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*).'
               items:
                 type: string
               type: array
@@ -1926,7 +1928,7 @@ definitions:
               description: The destination port or range.
               type: string
             destinationPortRanges:
-              description: 'The destination port ranges. Expected values include a single integer between 0 and 65535, a range using ''-'' as seperator (e.g. 100-400), or an asterix (*)'
+              description: 'The destination port ranges. Expected values include a single integer between 0 and 65535, a range using ''-'' as separator (e.g. 100-400), or an asterisk (*)'
               items:
                 type: string
               type: array
@@ -1970,7 +1972,7 @@ definitions:
               description: The source address prefix.
               type: string
             sourceAddressPrefixes:
-              description: 'The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AureLoadBalancer, Internet), System Tags, and the asterix (*).'
+              description: 'The source address prefixes. Expected values include CIDR IP ranges, Default Tags (VirtualNetwork, AzureLoadBalancer, Internet), System Tags, and the asterisk (*).'
               items:
                 type: string
               type: array
@@ -1978,7 +1980,7 @@ definitions:
               description: The source port or range.
               type: string
             sourcePortRanges:
-              description: 'The source port ranges. Expected values include a single integer between 0 and 65535, a range using ''-'' as seperator (e.g. 100-400), or an asterix (*)'
+              description: 'The source port ranges. Expected values include a single integer between 0 and 65535, a range using ''-'' as separator (e.g. 100-400), or an asterisk (*)'
               items:
                 type: string
               type: array
@@ -2028,7 +2030,7 @@ definitions:
                   description: A description for this rule. Restricted to 140 chars.
                   type: string
                 destinationAddressPrefix:
-                  description: 'The destination address prefix. CIDR or destination IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used.'
+                  description: 'The destination address prefix. CIDR or destination IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used.'
                   type: string
                 destinationAddressPrefixes:
                   description: The destination address prefixes. CIDR or destination IP ranges.
@@ -2080,7 +2082,7 @@ definitions:
                             type: string
                   type: array
                 destinationPortRange:
-                  description: The destination port or range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+                  description: The destination port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
                   type: string
                 destinationPortRanges:
                   description: The destination port ranges.
@@ -2089,7 +2091,7 @@ definitions:
                     type: string
                   type: array
                 direction:
-                  description: 'The direction of the rule. The direction specifies if rule will be evaluated on incoming or outcoming traffic. Possible values are: ''Inbound'' and ''Outbound''.'
+                  description: 'The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are: ''Inbound'' and ''Outbound''.'
                   enum:
                     - Inbound
                     - Outbound
@@ -2115,7 +2117,7 @@ definitions:
                   description: 'The provisioning state of the public IP resource. Possible values are: ''Updating'', ''Deleting'', and ''Failed''.'
                   type: string
                 sourceAddressPrefix:
-                  description: 'The CIDR or source IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
+                  description: 'The CIDR or source IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
                   type: string
                 sourceAddressPrefixes:
                   description: The CIDR or source IP ranges.
@@ -2167,7 +2169,7 @@ definitions:
                             type: string
                   type: array
                 sourcePortRange:
-                  description: The source port or range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+                  description: The source port or range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
                   type: string
                 sourcePortRanges:
                   description: The source port ranges.

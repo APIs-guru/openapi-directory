@@ -13,7 +13,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/guestconfiguration/resource-manager/Microsoft.GuestConfiguration/stable/2018-11-20/guestconfiguration.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: guestconfiguration
   x-tags:
@@ -649,6 +649,7 @@ paths:
                   assignment:
                     configuration:
                       name: AuditSecureProtocol
+                      version: 1.0.0.0
                     name: AuditSecureProtocol
                   complianceStatus: Compliant
                   details:
@@ -787,6 +788,10 @@ definitions:
     properties:
       name:
         description: Name of the configuration.
+        readOnly: true
+        type: string
+      version:
+        description: Version of the configuration.
         readOnly: true
         type: string
   ConfigurationParameter:

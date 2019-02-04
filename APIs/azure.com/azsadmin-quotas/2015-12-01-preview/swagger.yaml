@@ -192,8 +192,8 @@ paths:
                     location: local
                     name: local/TestCreateQuota
                     properties:
-                      capacityInGb: -100000000
-                      numberOfStorageAccounts: -1000000000
+                      capacityInGb: 2048
+                      numberOfStorageAccounts: 20
                     type: Microsoft.Storage.Admin/locations/quotas
             '404': {}
       x-ms-pageable:

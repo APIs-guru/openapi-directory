@@ -1693,8 +1693,14 @@ definitions:
       key:
         description: The storage account access key.
         type: string
+      msiResourceId:
+        description: 'The managed identity (MSI) that is allowed to access the storage account, only to be specified for Azure Data Lake Storage Gen 2.'
+        type: string
       name:
         description: The name of the storage account.
+        type: string
+      resourceId:
+        description: 'The resource ID of storage account, only to be specified for Azure Data Lake Storage Gen 2.'
         type: string
   StorageProfile:
     description: The storage profile.

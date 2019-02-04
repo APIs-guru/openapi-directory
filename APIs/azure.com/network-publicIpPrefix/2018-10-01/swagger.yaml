@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-10-01/publicIpPrefix.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-publicIpPrefix
   x-tags:
@@ -204,7 +204,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the PublicIPPrefx.
+        - description: The name of the Public IP Prefix.
           in: path
           name: publicIpPrefixName
           required: true

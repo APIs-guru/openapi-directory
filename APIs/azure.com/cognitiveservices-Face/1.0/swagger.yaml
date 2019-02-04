@@ -35,6 +35,18 @@ parameters:
     type: string
     x-ms-parameter-location: client
     x-ms-skip-url-encoding: true
+  applyScope:
+    collectionFormat: csv
+    description: 'User specified snapshot apply scopes as a search filter. ApplyScope is an array of the target Azure subscription ids for the snapshot, specified by the user who created the snapshot by Snapshot - Take.'
+    in: query
+    items:
+      format: uuid
+      type: string
+      x-nullable: false
+    name: applyScope
+    required: false
+    type: array
+    x-ms-parameter-location: method
   faceListId:
     collectionFormat: csv
     description: Id referencing a particular face list.
@@ -71,6 +83,15 @@ parameters:
     maxLength: 64
     name: largePersonGroupId
     pattern: '^[a-z0-9-_]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  operationId:
+    collectionFormat: csv
+    description: Id referencing a particular take/apply snapshot operation.
+    format: uuid
+    in: path
+    name: operationId
     required: true
     type: string
     x-ms-parameter-location: method
@@ -130,6 +151,15 @@ parameters:
     name: returnFaceAttributes
     required: false
     type: array
+    x-ms-parameter-location: method
+  snapshotId:
+    collectionFormat: csv
+    description: Id referencing a particular snapshot.
+    format: uuid
+    in: path
+    name: snapshotId
+    required: true
+    type: string
     x-ms-parameter-location: method
   targetFace:
     collectionFormat: csv
@@ -1695,6 +1725,38 @@ paths:
                 lastSuccessfulTrainingDateTime: '2017-12-21T12:57:30.00Z'
                 message: null
                 status: succeeded
+  '/operations/{operationId}':
+    get:
+      description: Retrieve the status of a take/apply snapshot operation.
+      operationId: Snapshot_GetOperationStatus
+      parameters:
+        - $ref: '#/parameters/operationId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns the snapshot operation's status.
+          schema:
+            $ref: '#/definitions/OperationStatus'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Get snapshot operation status example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            operationId: a63a3bdd-a1db-4d05-87b8-dbad6850062a
+          responses:
+            '200':
+              body:
+                createdTime: '2018-12-25T11:41:02.2331413Z'
+                lastActionTime: '2018-12-25T11:51:27.8705696Z'
+                message: null
+                resourceLocation: /snapshots/e58b3f08-1e8b-4165-81df-aa9858f233dc
+                status: succeeded
   /persongroups:
     get:
       description: List person groups and their information.
@@ -2257,6 +2319,262 @@ paths:
                 lastActionDateTime: '2017-12-21T12:57:30.00Z'
                 message: null
                 status: succeeded
+  /snapshots:
+    get:
+      description: 'List all accessible snapshots with related information, including snapshots that were taken by the user, or snapshots to be applied to the user (subscription id was included in the applyScope in Snapshot - Take).'
+      operationId: Snapshot_List
+      parameters:
+        - description: User specified object type as a search filter.
+          enum:
+            - FaceList
+            - LargeFaceList
+            - LargePersonGroup
+            - PersonGroup
+          in: query
+          name: type
+          required: false
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: SnapshotObjectType
+        - $ref: '#/parameters/applyScope'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns an array of snapshots with snapshot information.
+          schema:
+            $ref: '#/definitions/Snapshots'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        List snapshots example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            applyScope:
+              - 64084E07-9B7F-4A98-BEA4-9986D3A1EDEB
+            type: FaceList
+          responses:
+            '200':
+              body:
+                - account: /subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/TestRG/providers/Microsoft.CognitiveServices/accounts/FaceTest01
+                  applyScope:
+                    - 35230F59-AA9C-45E0-AB5E-C859BF1A5429
+                    - 64084E07-9B7F-4A98-BEA4-9986D3A1EDEB
+                  createdTime: '2018-12-25T11:41:02.2331413Z'
+                  id: e58b3f08-1e8b-4165-81df-aa9858f233dc
+                  lastUpdateTime: '2018-12-25T11:51:27.8705696Z'
+                  type: FaceList
+                  userData: User-provided data attached to the snapshot1.
+                - account: /subscriptions/6622996e-0149-4b22-9703-4216dc948d52/resourceGroups/TestRG/providers/Microsoft.CognitiveServices/accounts/FaceTest01
+                  applyScope:
+                    - 64084E07-9B7F-4A98-BEA4-9986D3A1EDEB
+                  createdTime: '2018-12-29T17:09:32.3298483Z'
+                  id: a61e61e4-c3d1-4d33-8ae8-676e6104757d
+                  lastUpdateTime: '2018-12-29T17:14:34.5645877Z'
+                  type: FaceList
+                  userData: User-provided data attached to the snapshot2.
+    post:
+      consumes:
+        - application/json
+      description: |-
+        Submit an operation to take a snapshot of face list, large face list, person group or large person group, with user-specified snapshot type, source object id, apply scope and an optional user data.<br />
+        The snapshot interfaces are for users to backup and restore their face data from one face subscription to another, inside same region or across regions. The workflow contains two phases, user first calls Snapshot - Take to create a copy of the source object and store it as a snapshot, then calls Snapshot - Apply to paste the snapshot to target subscription. The snapshots are stored in a centralized location (per Azure instance), so that they can be applied cross accounts and regions.<br />
+        Taking snapshot is an asynchronous operation. An operation id can be obtained from the "Operation-Location" field in response header, to be used in OperationStatus - Get for tracking the progress of creating the snapshot. The snapshot id will be included in the "resourceLocation" field in OperationStatus - Get response when the operation status is "succeeded".<br />
+        Snapshot taking time depends on the number of person and face entries in the source object. It could be in seconds, or up to several hours for 1,000,000 persons with multiple faces.<br />
+        Snapshots will be automatically expired and cleaned in 48 hours after it is created by Snapshot - Take. User can delete the snapshot using Snapshot - Delete by themselves any time before expiration.<br />
+        Taking snapshot for a certain object will not block any other operations against the object. All read-only operations (Get/List and Identify/FindSimilar/Verify) can be conducted as usual. For all writable operations, including Add/Update/Delete the source object or its persons/faces and Train, they are not blocked but not recommended because writable updates may not be reflected on the snapshot during its taking. After snapshot taking is completed, all readable and writable operations can work as normal. Snapshot will also include the training results of the source object, which means target subscription the snapshot applied to does not need re-train the target object before calling Identify/FindSimilar.<br />
+        * Free-tier subscription quota: 100 take operations per month.
+        * S0-tier subscription quota: 100 take operations per day.
+      operationId: Snapshot_Take
+      parameters:
+        - description: Request body for taking a snapshot.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/TakeSnapshotRequest'
+          x-ms-client-flatten: true
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: The snapshot taking task was queued successfully.
+          headers:
+            Operation-Location:
+              description: 'Operation location with an operation id used to track the progress of taking snapshot. The returned id is the operation id, rather than snapshot id. Snapshot id can be obtained only when the operation status becomes "succeeded" in OperationStatus - Get.'
+              type: string
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Take a snapshot example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              applyScope:
+                - 35230F59-AA9C-45E0-AB5E-C859BF1A5429
+                - 64084E07-9B7F-4A98-BEA4-9986D3A1EDEB
+              objectId: source-face-list-id
+              type: FaceList
+              userData: User-provided data attached to the snapshot.
+          responses:
+            '202':
+              body: ''
+              header:
+                Operation-Location: /operations/a63a3bdd-a1db-4d05-87b8-dbad6850062a
+  '/snapshots/{snapshotId}':
+    delete:
+      description: 'Delete an existing snapshot according to the snapshotId. All object data and information in the snapshot will also be deleted. Only the source subscription who took the snapshot can delete the snapshot. If the user does not delete a snapshot with this API, the snapshot will still be automatically deleted in 48 hours after creation.'
+      operationId: Snapshot_Delete
+      parameters:
+        - $ref: '#/parameters/snapshotId'
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Delete snapshot example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            snapshotId: e58b3f08-1e8b-4165-81df-aa9858f233dc
+          responses:
+            '200':
+              body: ''
+    get:
+      description: 'Retrieve information about a snapshot. Snapshot is only accessible to the source subscription who took it, and target subscriptions included in the applyScope in Snapshot - Take.'
+      operationId: Snapshot_Get
+      parameters:
+        - $ref: '#/parameters/snapshotId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A successful call returns the snapshot's information.
+          schema:
+            $ref: '#/definitions/Snapshot'
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Get snapshot example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            snapshotId: e58b3f08-1e8b-4165-81df-aa9858f233dc
+          responses:
+            '200':
+              body:
+                account: /subscriptions/f9b96b36-1f5e-4021-8959-51527e26e6d3/resourceGroups/TestRG/providers/Microsoft.CognitiveServices/accounts/FaceTest01
+                applyScope:
+                  - 35230F59-AA9C-45E0-AB5E-C859BF1A5429
+                  - 64084E07-9B7F-4A98-BEA4-9986D3A1EDEB
+                createdTime: '2018-12-25T11:41:02.2331413Z'
+                id: e58b3f08-1e8b-4165-81df-aa9858f233dc
+                lastUpdateTime: '2018-12-25T11:51:27.8705696Z'
+                type: FaceList
+                userData: User-provided data attached to the snapshot.
+    patch:
+      consumes:
+        - application/json
+      description: Update the information of a snapshot. Only the source subscription who took the snapshot can update the snapshot.
+      operationId: Snapshot_Update
+      parameters:
+        - $ref: '#/parameters/snapshotId'
+        - description: Request body for updating a snapshot.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateSnapshotRequest'
+          x-ms-client-flatten: true
+      responses:
+        '200':
+          description: A successful call returns an empty response body.
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Update snapshot example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              applyScope:
+                - 64084E07-9B7F-4A98-BEA4-9986D3A1EDEB
+              userData: User-provided data attached to the snapshot.
+            snapshotId: e58b3f08-1e8b-4165-81df-aa9858f233dc
+          responses:
+            '200':
+              body: ''
+  '/snapshots/{snapshotId}/apply':
+    post:
+      consumes:
+        - application/json
+      description: |-
+        Submit an operation to apply a snapshot to current subscription. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.<br />
+        The snapshot interfaces are for users to backup and restore their face data from one face subscription to another, inside same region or across regions. The workflow contains two phases, user first calls Snapshot - Take to create a copy of the source object and store it as a snapshot, then calls Snapshot - Apply to paste the snapshot to target subscription. The snapshots are stored in a centralized location (per Azure instance), so that they can be applied cross accounts and regions.<br />
+        Applying snapshot is an asynchronous operation. An operation id can be obtained from the "Operation-Location" field in response header, to be used in OperationStatus - Get for tracking the progress of applying the snapshot. The target object id will be included in the "resourceLocation" field in OperationStatus - Get response when the operation status is "succeeded".<br />
+        Snapshot applying time depends on the number of person and face entries in the snapshot object. It could be in seconds, or up to 1 hour for 1,000,000 persons with multiple faces.<br />
+        Snapshots will be automatically expired and cleaned in 48 hours after it is created by Snapshot - Take. So the target subscription is required to apply the snapshot in 48 hours since its creation.<br />
+        Applying a snapshot will not block any other operations against the target object, however it is not recommended because the correctness cannot be guaranteed during snapshot applying. After snapshot applying is completed, all operations towards the target object can work as normal. Snapshot also includes the training results of the source object, which means target subscription the snapshot applied to does not need re-train the target object before calling Identify/FindSimilar.<br />
+        One snapshot can be applied multiple times in parallel, while currently only CreateNew apply mode is supported, which means the apply operation will fail if target subscription already contains an object of same type and using the same objectId. Users can specify the "objectId" in request body to avoid such conflicts.<br />
+        * Free-tier subscription quota: 100 apply operations per month.
+        * S0-tier subscription quota: 100 apply operations per day.
+      operationId: Snapshot_Apply
+      parameters:
+        - $ref: '#/parameters/snapshotId'
+        - description: Request body for applying a snapshot.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/ApplySnapshotRequest'
+          x-ms-client-flatten: true
+      produces:
+        - application/json
+      responses:
+        '202':
+          description: The snapshot applying task was queued successfully.
+          headers:
+            Operation-Location:
+              description: Operation location with an operation id used to track the progress of applying the snapshot by OperationStatus - Get.
+              type: string
+        default:
+          description: Error response.
+          schema:
+            $ref: '#/definitions/APIError'
+      x-ms-examples:
+        Apply snapshot example:
+          parameters:
+            Content-Type: application/json
+            Endpoint: '{Endpoint}'
+            Ocp-Apim-Subscription-Key: '{API key}'
+            body:
+              mode: CreateNew
+              objectId: target-face-list-id
+            snapshotId: e58b3f08-1e8b-4165-81df-aa9858f233dc
+          responses:
+            '202':
+              body: ''
+              header:
+                Operation-Location: /operations/84276574-2a2a-4540-a1b0-f65d834d225b
   /verify:
     post:
       consumes:
@@ -2326,6 +2644,34 @@ definitions:
           modelAsString: false
           name: AccessoryType
         x-nullable: false
+    type: object
+  ApplyScope:
+    description: 'Array of the target Face subscription ids for the snapshot, specified by the user who created the snapshot when calling Snapshot - Take. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.'
+    items:
+      format: uuid
+      type: string
+      x-nullable: false
+    type: array
+  ApplySnapshotRequest:
+    description: Request body for applying snapshot operation.
+    properties:
+      mode:
+        default: CreateNew
+        description: 'Snapshot applying mode. Currently only CreateNew is supported, which means the apply operation will fail if target subscription already contains an object of same type and using the same objectId. Users can specify the "objectId" in request body to avoid such conflicts.'
+        enum:
+          - CreateNew
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SnapshotApplyMode
+        x-nullable: false
+      objectId:
+        description: User specified target object id to be created from the snapshot.
+        maxLength: 64
+        pattern: '^[a-z0-9-_]+$'
+        type: string
+    required:
+      - objectId
     type: object
   Blur:
     description: Properties describing any presence of blur within the image.
@@ -2631,7 +2977,7 @@ definitions:
         maxItems: 1000
         type: array
       faceListId:
-        description: 'An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time。'
+        description: 'An existing user-specified unique candidate face list, created in Face List - Create a Face List. Face list contains a set of persistedFaceIds which are persisted and will never expire. Parameter faceListId, largeFaceListId and faceIds should not be provided at the same time.'
         maxLength: 64
         pattern: '^[a-z0-9-_]+$'
         type: string
@@ -2919,6 +3265,38 @@ definitions:
         type: boolean
         x-nullable: false
     type: object
+  OperationStatus:
+    description: Operation status object. Operation refers to the asynchronous backend task including taking a snapshot and applying a snapshot.
+    properties:
+      createdTime:
+        description: 'A combined UTC date and time string that describes the time when the operation (take or apply a snapshot) is requested. E.g. 2018-12-25T11:41:02.2331413Z.'
+        format: date-time
+        type: string
+      lastActionTime:
+        description: 'A combined UTC date and time string that describes the last time the operation (take or apply a snapshot) is actively migrating data. The lastActionTime will keep increasing until the operation finishes. E.g. 2018-12-25T11:51:27.8705696Z.'
+        format: date-time
+        type: string
+      message:
+        description: Show failure message when operation fails (omitted when operation succeeds).
+        type: string
+      resourceLocation:
+        description: 'When the operation succeeds successfully, for snapshot taking operation the snapshot id will be included in this field, and for snapshot applying operation, the path to get the target object will be returned in this field.'
+        type: string
+      status:
+        description: 'Operation status: notstarted, running, succeeded, failed. If the operation is requested and waiting to perform, the status is notstarted. If the operation is ongoing in backend, the status is running. Status succeeded means the operation is completed successfully, specifically for snapshot taking operation, it illustrates the snapshot is well taken and ready to apply, and for snapshot applying operation, it presents the target object has finished creating by the snapshot and ready to be used. Status failed is often caused by editing the source object while taking the snapshot or editing the target object while applying the snapshot before completion, see the field "message" to check the failure reason.'
+        enum:
+          - notstarted
+          - running
+          - succeeded
+          - failed
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: OperationStatusType
+    required:
+      - status
+      - createdTime
+    type: object
   PersistedFace:
     description: PersonFace object.
     properties:
@@ -3001,6 +3379,86 @@ definitions:
     items:
       $ref: '#/definitions/SimilarFace'
     type: array
+  Snapshot:
+    description: Snapshot object.
+    properties:
+      account:
+        description: Azure Cognitive Service Face account id of the subscriber who created the snapshot by Snapshot - Take.
+        type: string
+      applyScope:
+        $ref: '#/definitions/ApplyScope'
+        description: 'Array of the target Face subscription ids for the snapshot, specified by the user who created the snapshot when calling Snapshot - Take. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.'
+      createdTime:
+        description: 'A combined UTC date and time string that describes the created time of the snapshot. E.g. 2018-12-25T11:41:02.2331413Z.'
+        format: date-time
+        type: string
+      id:
+        description: Snapshot id.
+        format: uuid
+        type: string
+      lastUpdateTime:
+        description: 'A combined UTC date and time string that describes the last time when the snapshot was created or updated by Snapshot - Update. E.g. 2018-12-25T11:51:27.8705696Z.'
+        format: date-time
+        type: string
+      type:
+        description: 'Type of the source object in the snapshot, specified by the subscriber who created the snapshot when calling Snapshot - Take. Currently FaceList, PersonGroup, LargeFaceList and LargePersonGroup are supported.'
+        enum:
+          - FaceList
+          - LargeFaceList
+          - LargePersonGroup
+          - PersonGroup
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SnapshotObjectType
+      userData:
+        description: User specified data about the snapshot for any purpose. Length should not exceed 16KB.
+        maxLength: 16384
+        type: string
+    required:
+      - id
+      - account
+      - type
+      - applyScope
+      - createdTime
+      - lastUpdateTime
+    type: object
+  Snapshots:
+    description: An array of snapshots.
+    items:
+      $ref: '#/definitions/Snapshot'
+    type: array
+  TakeSnapshotRequest:
+    description: Request body for taking snapshot operation.
+    properties:
+      applyScope:
+        $ref: '#/definitions/ApplyScope'
+        description: 'User specified array of target Face subscription ids for the snapshot. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.'
+      objectId:
+        description: User specified source object id to take snapshot from.
+        maxLength: 64
+        pattern: '^[a-z0-9-_]+$'
+        type: string
+      type:
+        description: 'User specified type for the source object to take snapshot from. Currently FaceList, PersonGroup, LargeFaceList and LargePersonGroup are supported.'
+        enum:
+          - FaceList
+          - LargeFaceList
+          - LargePersonGroup
+          - PersonGroup
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SnapshotObjectType
+      userData:
+        description: User specified data about the snapshot for any purpose. Length should not exceed 16KB.
+        maxLength: 16384
+        type: string
+    required:
+      - type
+      - objectId
+      - applyScope
+    type: object
   TrainingStatus:
     description: Training status object.
     properties:
@@ -3043,6 +3501,17 @@ definitions:
       userData:
         description: User-provided data attached to the face. The size limit is 1KB.
         maxLength: 1024
+        type: string
+    type: object
+  UpdateSnapshotRequest:
+    description: 'Request body for updating a snapshot, with a combination of user defined apply scope and user specified data.'
+    properties:
+      applyScope:
+        $ref: '#/definitions/ApplyScope'
+        description: 'Array of the target Face subscription ids for the snapshot, specified by the user who created the snapshot when calling Snapshot - Take. For each snapshot, only subscriptions included in the applyScope of Snapshot - Take can apply it.'
+      userData:
+        description: User specified data about the snapshot for any purpose. Length should not exceed 16KB.
+        maxLength: 16384
         type: string
     type: object
   VerifyFaceToFaceRequest:

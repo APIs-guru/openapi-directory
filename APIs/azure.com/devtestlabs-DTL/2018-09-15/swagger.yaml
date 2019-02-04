@@ -80,7 +80,7 @@ paths:
       x-ms-examples:
         ProviderOperations_List:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
           responses:
             '200':
               body:
@@ -693,7 +693,7 @@ paths:
       x-ms-examples:
         Labs_ListBySubscription:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             subscriptionId: '{subscription-id}'
           responses:
             '200':
@@ -865,7 +865,7 @@ paths:
       x-ms-examples:
         Labs_ListByResourceGroup:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
           responses:
@@ -4165,7 +4165,7 @@ paths:
       x-ms-examples:
         VirtualMachines_List:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
@@ -4245,7 +4245,7 @@ paths:
       x-ms-examples:
         VirtualMachines_Delete:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             name: '{virtualmachine-name}'
             resourceGroupName: myResourceGroup
@@ -4294,7 +4294,7 @@ paths:
       x-ms-examples:
         VirtualMachines_Get:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             name: '{virtualmachine-name}'
             resourceGroupName: myResourceGroup
@@ -4374,7 +4374,7 @@ paths:
       x-ms-examples:
         VirtualMachines_Update:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             labVirtualMachine:
               properties:
@@ -4461,7 +4461,7 @@ paths:
       x-ms-examples:
         VirtualMachines_CreateOrUpdate:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             labVirtualMachine:
               location: '{azure-location}'
@@ -4662,7 +4662,7 @@ paths:
       x-ms-examples:
         VirtualMachines_Claim:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             name: '{virtualmachine-name}'
             resourceGroupName: myResourceGroup
@@ -4741,7 +4741,7 @@ paths:
       x-ms-examples:
         VirtualMachines_GetRdpFileContents:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             name: '{virtualmachine-name}'
             resourceGroupName: myResourceGroup
@@ -4811,7 +4811,7 @@ paths:
       x-ms-examples:
         VirtualMachines_Redeploy:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             monitor: 'true'
             name: '{virtualmachine-name}'
@@ -4861,7 +4861,7 @@ paths:
       x-ms-examples:
         VirtualMachines_Resize:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             monitor: 'true'
             name: '{virtualmachine-name}'
@@ -4907,7 +4907,7 @@ paths:
       x-ms-examples:
         VirtualMachines_Restart:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             monitor: 'true'
             name: '{virtualmachine-name}'
@@ -4951,7 +4951,7 @@ paths:
       x-ms-examples:
         VirtualMachines_Start:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             monitor: 'true'
             name: '{virtualmachine-name}'
@@ -4995,7 +4995,7 @@ paths:
       x-ms-examples:
         VirtualMachines_Stop:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             name: '{virtualmachine-name}'
             resourceGroupName: myResourceGroup
@@ -5068,7 +5068,7 @@ paths:
       x-ms-examples:
         VirtualMachines_UnClaim:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             monitor: 'true'
             name: '{virtualmachine-name}'
@@ -5370,7 +5370,7 @@ paths:
       x-ms-examples:
         VirtualNetworks_List:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
@@ -5440,7 +5440,7 @@ paths:
       x-ms-examples:
         VirtualNetworks_Delete:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             name: '{virtualnetwork-name}'
             resourceGroupName: myResourceGroup
@@ -5489,7 +5489,7 @@ paths:
       x-ms-examples:
         VirtualNetworks_Get:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             name: '{virtualnetwork-name}'
             resourceGroupName: myResourceGroup
@@ -5559,7 +5559,7 @@ paths:
       x-ms-examples:
         VirtualNetworks_Update:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             name: '{virtualnetwork-name}'
             resourceGroupName: myResourceGroup
@@ -5641,7 +5641,7 @@ paths:
       x-ms-examples:
         VirtualNetworks_CreateOrUpdate:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labName: '{devtestlab-name}'
             name: '{virtualnetwork-name}'
             resourceGroupName: myResourceGroup
@@ -5703,7 +5703,7 @@ paths:
       x-ms-examples:
         Labs_Delete:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             name: '{devtestlab-name}'
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
@@ -5746,7 +5746,7 @@ paths:
       x-ms-examples:
         Labs_Get:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             name: '{devtestlab-name}'
             resourceGroupName: myResourceGroup
             subscriptionId: '{subscription-id}'
@@ -5813,7 +5813,7 @@ paths:
       x-ms-examples:
         Labs_Update:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             lab:
               properties:
                 labStorageType: Premium
@@ -5883,7 +5883,7 @@ paths:
       x-ms-examples:
         Labs_CreateOrUpdate:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             lab:
               location: '{azure-location}'
               properties:
@@ -5972,7 +5972,7 @@ paths:
       x-ms-examples:
         Labs_ClaimAnyVm:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             monitor: 'true'
             name: '{devtestlab-name}'
             resourceGroupName: myResourceGroup
@@ -6016,7 +6016,7 @@ paths:
       x-ms-examples:
         Labs_CreateEnvironment:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             labVirtualMachineCreationParameter:
               location: '{azure-location}'
               name: '{virtualmachine-name}'
@@ -6111,7 +6111,7 @@ paths:
       x-ms-examples:
         Labs_GenerateUploadUri:
           parameters:
-            api-version: 2018-10-15-preview
+            api-version: '2018-09-15'
             generateUploadUriParameter:
               blobName: '{blob-name}'
             name: '{devtestlab-name}'

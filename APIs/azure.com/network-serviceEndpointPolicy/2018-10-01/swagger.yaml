@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-10-01/serviceEndpointPolicy.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-serviceEndpointPolicy
   x-tags:
@@ -209,7 +209,7 @@ paths:
       tags:
         - ServiceEndpointPolicies
       x-ms-examples:
-        Delete service endpoint Policys:
+        Delete service endpoint Policy:
           parameters:
             api-version: '2018-10-01'
             resourceGroupName: rg1

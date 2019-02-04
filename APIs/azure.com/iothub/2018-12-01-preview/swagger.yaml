@@ -16,7 +16,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/iothub/resource-manager/Microsoft.Devices/preview/2018-12-01-preview/iothub.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: iothub
   x-tags:
@@ -3430,7 +3430,11 @@ definitions:
         description: The name of storage container in the storage account.
         type: string
       encoding:
-        description: Encoding that is used to serialize messages to blobs. Supported values are 'avro' and 'avrodeflate'. Default value is 'avro'.
+        description: 'Encoding that is used to serialize messages to blobs. Supported values are ''avro'', ''avrodeflate'', and ''JSON''. Default value is ''avro''.'
+        enum:
+          - Avro
+          - AvroDeflate
+          - JSON
         type: string
       fileNameFormat:
         description: 'File name format for the blob. Default format is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters are mandatory but can be reordered.'

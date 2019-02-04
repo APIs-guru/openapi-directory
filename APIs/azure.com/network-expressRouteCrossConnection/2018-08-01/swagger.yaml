@@ -14,7 +14,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-08-01/expressRouteCrossConnection.json'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-expressRouteCrossConnection
   x-tags:
@@ -53,7 +53,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Request successful. The operation returns a list of ExpressRouteCrossConnection resources. If there are no crossconnection resources an empty list is returned.
+          description: Request successful. The operation returns a list of ExpressRouteCrossConnection resources. If there are no cross connection resources an empty list is returned.
           schema:
             $ref: '#/definitions/ExpressRouteCrossConnectionListResult'
       tags:
@@ -106,7 +106,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Request successful.The operation returns a list of ExpressRouteCrossConnection resources. If there are no crossconnection resources an empty list is returned.
+          description: Request successful.The operation returns a list of ExpressRouteCrossConnection resources. If there are no cross connection resources an empty list is returned.
           schema:
             $ref: '#/definitions/ExpressRouteCrossConnectionListResult'
       tags:

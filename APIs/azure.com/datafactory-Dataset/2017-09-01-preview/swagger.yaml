@@ -379,6 +379,9 @@ definitions:
           type: object
         description: Definition of all parameters for an entity.
         type: object
+      schema:
+        description: 'Columns that define the physical type schema of the dataset. Type: array (or Expression with resultType array), itemType: DatasetSchemaDataElement.'
+        type: object
       structure:
         description: 'Columns that define the structure of the dataset. Type: array (or Expression with resultType array), itemType: DatasetDataElement.'
         type: object
@@ -438,6 +441,18 @@ definitions:
         description: The GZip compression level.
     type: object
     x-ms-discriminator-value: GZip
+  DatasetSchemaDataElement:
+    additionalProperties:
+      type: object
+    description: Columns that define the physical type schema of the dataset.
+    properties:
+      name:
+        description: 'Name of the schema column. Type: string (or Expression with resultType string).'
+        type: object
+      type:
+        description: 'Type of the schema column. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   DatasetStorageFormat:
     additionalProperties:
       type: object

@@ -1204,6 +1204,28 @@ definitions:
     required:
       - name
     type: object
+  Credentials:
+    description: The parameters that describes a set of credentials that will be used when a run is invoked.
+    properties:
+      customRegistries:
+        additionalProperties:
+          $ref: '#/definitions/CustomRegistryCredentials'
+        description: "Describes the credential parameters for accessing other custom registries. The key\r\nfor the dictionary item will be the registry login server (myregistry.azurecr.io) and\r\nthe value of the item will be the registry credentials for accessing the registry."
+        type: object
+      sourceRegistry:
+        $ref: '#/definitions/SourceRegistryCredentials'
+        description: Describes the credential parameters for accessing the source registry.
+    type: object
+  CustomRegistryCredentials:
+    description: Describes the credentials that will be used to access a custom registry during a run.
+    properties:
+      password:
+        $ref: '#/definitions/SecretObject'
+        description: "The password for logging into the custom registry. The password is a secret \r\nobject that allows multiple ways of providing the value for it."
+      userName:
+        $ref: '#/definitions/SecretObject'
+        description: The username for logging into the custom registry.
+    type: object
   DockerBuildRequest:
     allOf:
       - $ref: '#/definitions/RunRequest'
@@ -1217,6 +1239,9 @@ definitions:
         items:
           $ref: '#/definitions/Argument'
         type: array
+      credentials:
+        $ref: '#/definitions/Credentials'
+        description: The properties that describes a set of credentials that will be used when this run is invoked.
       dockerFilePath:
         description: The Docker file path relative to the source location.
         type: string
@@ -1238,6 +1263,9 @@ definitions:
         description: The platform properties against which the run has to happen.
       sourceLocation:
         description: "The URL(absolute or relative) of the source context. It can be an URL to a tar or git repository.\r\nIf it is relative URL, the relative path should be obtained from calling listBuildSourceUploadUrl API."
+        type: string
+      target:
+        description: The name of the target build stage for the docker build.
         type: string
       timeout:
         default: 3600
@@ -1278,6 +1306,9 @@ definitions:
         default: false
         description: The value of this property indicates whether the image cache is enabled or not.
         type: boolean
+      target:
+        description: The name of the target build stage for the docker build.
+        type: string
     required:
       - dockerFilePath
     type: object
@@ -1306,6 +1337,9 @@ definitions:
       noCache:
         description: The value of this property indicates whether the image cache is enabled or not.
         type: boolean
+      target:
+        description: The name of the target build stage for the docker build.
+        type: string
     type: object
     x-ms-discriminator-value: Docker
   EncodedTaskRunRequest:
@@ -1316,6 +1350,9 @@ definitions:
       agentConfiguration:
         $ref: '#/definitions/AgentProperties'
         description: The machine configuration of the run agent.
+      credentials:
+        $ref: '#/definitions/Credentials'
+        description: The properties that describes a set of credentials that will be used when this run is invoked.
       encodedTaskContent:
         description: Base64 encoded value of the template/definition file content.
         type: string
@@ -1392,6 +1429,9 @@ definitions:
       agentConfiguration:
         $ref: '#/definitions/AgentProperties'
         description: The machine configuration of the run agent.
+      credentials:
+        $ref: '#/definitions/Credentials'
+        description: The properties that describes a set of credentials that will be used when this run is invoked.
       platform:
         $ref: '#/definitions/PlatformProperties'
         description: The platform properties against which the run has to happen.
@@ -1694,6 +1734,11 @@ definitions:
         description: The time the run was scheduled.
         format: date-time
         type: string
+      customRegistries:
+        description: The list of custom registries that were logged in during this run.
+        items:
+          type: string
+        type: array
       finishTime:
         description: The time the run finished.
         format: date-time
@@ -1744,6 +1789,9 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: RunType
+      sourceRegistryAuth:
+        description: The scope of the credentials that were used to login to the source registry during this run.
+        type: string
       sourceTrigger:
         $ref: '#/definitions/SourceTriggerDescriptor'
         description: The source trigger that caused the run.
@@ -1790,6 +1838,21 @@ definitions:
         description: The value that indicates whether archiving is enabled or not.
         type: boolean
     type: object
+  SecretObject:
+    description: Describes the properties of a secret object value.
+    properties:
+      type:
+        description: "The type of the secret object which determines how the value of the secret object has to be\r\ninterpreted."
+        enum:
+          - Opaque
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SecretObjectType
+      value:
+        description: "The value of the secret. The format of this value will be determined\r\nbased on the type of the secret object. If the type is Opaque, the value will be\r\nused as is without any modification."
+        type: string
+    type: object
   SetValue:
     description: The properties of a overridable value that can be passed to a task template.
     properties:
@@ -1831,6 +1894,19 @@ definitions:
     required:
       - sourceControlType
       - repositoryUrl
+    type: object
+  SourceRegistryCredentials:
+    description: Describes the credential parameters for accessing the source registry.
+    properties:
+      loginMode:
+        description: "The authentication mode which determines the source registry login scope. The credentials for the source registry\r\nwill be generated using the given scope. These credentials will be used to login to\r\nthe source registry during the run."
+        enum:
+          - None
+          - Default
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SourceRegistryLoginMode
     type: object
   SourceTrigger:
     description: The properties of a source based trigger.
@@ -1988,6 +2064,9 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      credentials:
+        $ref: '#/definitions/Credentials'
+        description: The properties that describes a set of credentials that will be used when this run is invoked.
       platform:
         $ref: '#/definitions/PlatformProperties'
         description: The platform properties against which the run has to happen.
@@ -2037,6 +2116,9 @@ definitions:
       agentConfiguration:
         $ref: '#/definitions/AgentProperties'
         description: The machine configuration of the run agent.
+      credentials:
+        $ref: '#/definitions/Credentials'
+        description: The parameters that describes a set of credentials that will be used when this run is invoked.
       platform:
         $ref: '#/definitions/PlatformUpdateParameters'
         description: The platform properties against which the run has to happen.

@@ -106,7 +106,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/ExpressRoutePortsLocations':
     get:
-      description: Retrieves all ExpressRoutePort peering locations. Does not return available bandwidths for each location. Available bandwidths can only be obtained when retriving a specific peering location.
+      description: Retrieves all ExpressRoutePort peering locations. Does not return available bandwidths for each location. Available bandwidths can only be obtained when retrieving a specific peering location.
       operationId: ExpressRoutePortsLocations_List
       parameters:
         - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -982,7 +982,7 @@ definitions:
           modelAsString: true
           name: ExpressRoutePortsEncapsulation
       etherType:
-        description: Ethertype of the physical port.
+        description: Ether type of the physical port.
         readOnly: true
         type: string
       links:

@@ -263,6 +263,23 @@ definitions:
     properties: {}
     type: object
     x-ms-discriminator-value: '#Microsoft.Media.JobOutputProcessing'
+  MediaJobOutputProgressEventData:
+    description: Job Output Progress Event Data.
+    properties:
+      jobCorrelationData:
+        additionalProperties:
+          type: string
+        description: Gets the Job correlation data.
+        type: object
+      label:
+        description: Gets the Job output label.
+        type: string
+      progress:
+        description: Gets the Job output progress.
+        format: int64
+        type: integer
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.JobOutputProgress'
   MediaJobOutputScheduledEventData:
     allOf:
       - $ref: '#/definitions/MediaJobOutputStateChangeEventData'

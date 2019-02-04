@@ -152,6 +152,7 @@ paths:
                         osType: SUSE
                         version: 12 SP1
                       powerState: started
+                      proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.200
                     tags:
@@ -174,6 +175,7 @@ paths:
                         osType: SUSE
                         version: 12 SP1
                       powerState: started
+                      proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.201
                     tags:
@@ -196,6 +198,7 @@ paths:
                         osType: SUSE
                         version: 12 SP1
                       powerState: started
+                      proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.202
                     type: Microsoft.HanaOnAzure/hanaInstances
@@ -216,6 +219,7 @@ paths:
                         osType: SUSE
                         version: 12 SP1
                       powerState: started
+                      proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.203
                     type: Microsoft.HanaOnAzure/hanaInstances
@@ -268,6 +272,7 @@ paths:
                         osType: SUSE
                         version: 12 SP1
                       powerState: started
+                      proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.200
                     tags:
@@ -290,6 +295,7 @@ paths:
                         osType: SUSE
                         version: 12 SP1
                       powerState: started
+                      proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                       storageProfile:
                         nfsIpAddress: 200.200.200.201
                     tags:
@@ -345,6 +351,7 @@ paths:
                     osType: SUSE
                     version: 12 SP1
                   powerState: restarting
+                  proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                   storageProfile:
                     nfsIpAddress: 200.200.200.200
                 tags:
@@ -400,6 +407,7 @@ paths:
                     osType: SUSE
                     version: 12 SP1
                   powerState: started
+                  proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                   storageProfile:
                     nfsIpAddress: 200.200.200.200
                 tags: {}
@@ -433,6 +441,7 @@ paths:
                     osType: SUSE
                     version: 12 SP1
                   powerState: started
+                  proximityPlacementGroup: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/proximityPlacementGroups/myplacementgroup
                   storageProfile:
                     nfsIpAddress: 200.200.200.200
                 tags:
@@ -448,6 +457,8 @@ paths:
         - $ref: '#/parameters/ResourceGroupNameParameter'
         - $ref: '#/parameters/HanaInstanceNameParameter'
       responses:
+        '200':
+          description: OK
         '202':
           description: Accepted
       tags:
@@ -460,7 +471,9 @@ paths:
             resourceGroupName: myResourceGroup
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
+            '200': {}
             '202': {}
+      x-ms-long-running-operation: true
 definitions:
   Disk:
     description: Specifies the disk information fo the HANA instance
@@ -550,6 +563,10 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: HanaInstancePowerStateEnum
+      proximityPlacementGroup:
+        description: Resource proximity placement group
+        readOnly: true
+        type: string
       storageProfile:
         $ref: '#/definitions/StorageProfile'
         description: Specifies the storage settings for the HANA instance disks.

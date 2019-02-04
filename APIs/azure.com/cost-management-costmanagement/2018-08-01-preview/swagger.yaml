@@ -5228,6 +5228,7 @@ definitions:
         description: The granularity of rows in the report.
         enum:
           - Daily
+          - Hourly
         type: string
         x-ms-enum:
           modelAsString: true
@@ -5346,11 +5347,13 @@ definitions:
       status:
         description: The status of the report execution.
         enum:
-          - Queud
+          - Queued
           - InProgress
           - Completed
           - Failed
           - Timeout
+          - NewDataNotAvailable
+          - DataNotAvailable
         type: string
         x-ms-enum:
           modelAsString: true

@@ -21,6 +21,57 @@ info:
     - Microsoft
 paths: {}
 definitions:
+  ContainerRegistryArtifactEventData:
+    description: The content of the event request message.
+    properties:
+      action:
+        description: The action that encompasses the provided event.
+        type: string
+      id:
+        description: The event ID.
+        type: string
+      target:
+        $ref: '#/definitions/ContainerRegistryArtifactEventTarget'
+        description: The target of the event.
+      timestamp:
+        description: The time at which the event occurred.
+        format: date-time
+        type: string
+  ContainerRegistryArtifactEventTarget:
+    description: The target of the event.
+    properties:
+      digest:
+        description: The digest of the artifact.
+        type: string
+      mediaType:
+        description: The MIME type of the artifact.
+        type: string
+      name:
+        description: The name of the artifact.
+        type: string
+      repository:
+        description: The repository name of the artifact.
+        type: string
+      size:
+        description: The size in bytes of the artifact.
+        format: int64
+        type: integer
+      tag:
+        description: The tag of the artifact.
+        type: string
+      version:
+        description: The version of the artifact.
+        type: string
+  ContainerRegistryChartDeletedEventData:
+    allOf:
+      - $ref: '#/definitions/ContainerRegistryArtifactEventData'
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.
+    properties: {}
+  ContainerRegistryChartPushedEventData:
+    allOf:
+      - $ref: '#/definitions/ContainerRegistryArtifactEventData'
+    description: Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event.
+    properties: {}
   ContainerRegistryEventActor:
     description: 'The agent that initiated the event. For most situations, this could be from the authorization context of the request.'
     properties:
