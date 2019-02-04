@@ -88,6 +88,7 @@ tags:
   - name: backendServices
   - name: diskTypes
   - name: disks
+  - name: externalVpnGateways
   - name: firewalls
   - name: forwardingRules
   - name: globalAddresses
@@ -4266,6 +4267,254 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - backendServices
+  '/{project}/global/externalVpnGateways':
+    get:
+      description: Retrieves the list of ExternalVpnGateway available to the specified project.
+      operationId: compute.externalVpnGateways.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ExternalVpnGatewayList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - externalVpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a ExternalVpnGateway in the specified project using the data included in the request.
+      operationId: compute.externalVpnGateways.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ExternalVpnGateway'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - externalVpnGateways
+  '/{project}/global/externalVpnGateways/{externalVpnGateway}':
+    delete:
+      description: Deletes the specified externalVpnGateway.
+      operationId: compute.externalVpnGateways.delete
+      parameters:
+        - description: Name of the externalVpnGateways to delete.
+          in: path
+          name: externalVpnGateway
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - externalVpnGateways
+    get:
+      description: Returns the specified externalVpnGateway. Get a list of available externalVpnGateways by making a list() request.
+      operationId: compute.externalVpnGateways.get
+      parameters:
+        - description: Name of the externalVpnGateway to return.
+          in: path
+          name: externalVpnGateway
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ExternalVpnGateway'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - externalVpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/externalVpnGateways/{resource}/setLabels':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Sets the labels on an ExternalVpnGateway. To learn more about labels, read the Labeling Resources documentation.'
+      operationId: compute.externalVpnGateways.setLabels
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GlobalSetLabelsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - externalVpnGateways
+  '/{project}/global/externalVpnGateways/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.externalVpnGateways.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - externalVpnGateways
   '/{project}/global/firewalls':
     get:
       description: Retrieves the list of firewall rules available to the specified project.
@@ -6173,7 +6422,7 @@ paths:
         - images
   '/{project}/global/instanceTemplates':
     get:
-      description: Retrieves a list of instance templates that are contained within the specified project and zone.
+      description: Retrieves a list of instance templates that are contained within the specified project.
       operationId: compute.instanceTemplates.list
       parameters:
         - description: |-
@@ -6269,7 +6518,7 @@ paths:
         - instanceTemplates
   '/{project}/global/instanceTemplates/{instanceTemplate}':
     delete:
-      description: Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It's not possible to delete templates which are in use by an instance group.
+      description: Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It is not possible to delete templates that are already in use by a managed instance group.
       operationId: compute.instanceTemplates.delete
       parameters:
         - description: The name of the instance template to delete.
@@ -13635,6 +13884,92 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - regionDisks
+  '/{project}/regions/{region}/disks/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.regionDisks.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionDisks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/disks/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.regionDisks.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetPolicyRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionDisks
   '/{project}/regions/{region}/disks/{resource}/setLabels':
     parameters:
       - $ref: '#/parameters/alt'
@@ -14808,6 +15143,59 @@ paths:
           in: path
           name: region
           required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionInstanceGroupManagers
+  '/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/createInstances':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates instances with per-instance configs in this regional managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
+      operationId: compute.regionInstanceGroupManagers.createInstances
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionInstanceGroupManagersCreateInstancesRequest'
+        - description: The name of the managed instance group. It should conform to RFC1035.
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region where the managed instance group is located. It should conform to RFC1035.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
           type: string
       responses:
         '200':
@@ -24814,7 +25202,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Performs a reset on the instance. For more information, see Resetting an instance.'
+      description: 'Performs a reset on the instance. This is a hard reset; the VM does not do a graceful shutdown. For more information, see Resetting an instance.'
       operationId: compute.instances.reset
       parameters:
         - description: Name of the instance scoping this request.
@@ -27047,6 +27435,59 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - nodeGroups
+  '/{project}/zones/{zone}/nodeGroups/{nodeGroup}/setAutoscalingPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the autoscaling policy of the node group.
+      operationId: compute.nodeGroups.setAutoscalingPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NodeGroupsSetAutoscalingPolicyRequest'
+        - description: Name of the NodeGroup resource to update.
+          in: path
+          name: nodeGroup
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - nodeGroups
   '/{project}/zones/{zone}/nodeGroups/{nodeGroup}/setNodeTemplate':
     parameters:
       - $ref: '#/parameters/alt'
@@ -27064,7 +27505,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/NodeGroupsSetNodeTemplateRequest'
-        - description: Name of the NodeGroup resource to delete.
+        - description: Name of the NodeGroup resource to update.
           in: path
           name: nodeGroup
           required: true
@@ -27764,7 +28205,7 @@ definitions:
         format: int32
         type: integer
       acceleratorType:
-        description: 'Full or partial URL of the accelerator type resource to attach to this instance. If you are creating an instance template, specify only the accelerator name.'
+        description: 'Full or partial URL of the accelerator type resource to attach to this instance. For example: projects/my-project/zones/us-central1-c/acceleratorTypes/nvidia-tesla-p100 If you are creating an instance template, specify only the accelerator name. See GPUs on Compute Engine for a full list of accelerator types.'
         type: string
     type: object
   AcceleratorType:
@@ -27797,6 +28238,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource''s resource id.'
         type: string
       zone:
         description: '[Output Only] The name of the zone where the accelerator type resides, such as us-central1-a. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
@@ -28124,6 +28568,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       status:
         description: '[Output Only] The status of the address, which can be one of RESERVING, RESERVED, or IN_USE. An address that is RESERVING is currently in the process of being reserved. A RESERVED address is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.'
         enum:
@@ -28371,6 +28818,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       specificAllocation:
         $ref: '#/definitions/AllocationSpecificSKUAllocation'
@@ -28668,7 +29118,7 @@ definitions:
         description: |-
           Specifies a unique device name of your choice that is reflected into the /dev/disk/by-id/google-* tree of a Linux operating system running within the instance. This name can be used to reference the device for mounting, resizing, and so on, from within the instance.
 
-          If not specified, the server chooses a default device name to apply to this disk, in the form persistent-disks-x, where x is a number assigned by Google Compute Engine. This field is only applicable for persistent disks.
+          If not specified, the server chooses a default device name to apply to this disk, in the form persistent-disk-x, where x is a number assigned by Google Compute Engine. This field is only applicable for persistent disks.
         type: string
       diskEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -28915,6 +29365,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       status:
         description: '[Output Only] The status of the autoscaler configuration.'
@@ -29263,7 +29716,7 @@ definitions:
     description: Configuration parameters of autoscaling based on load balancing.
     properties:
       utilizationTarget:
-        description: 'Fraction of backend capacity utilization (set in HTTP(s) load balancing configuration) that autoscaler should maintain. Must be a positive float value. If not defined, the default is 0.8.'
+        description: 'Fraction of backend capacity utilization (set in HTTP(S) load balancing configuration) that autoscaler should maintain. Must be a positive float value. If not defined, the default is 0.8.'
         format: double
         type: number
     type: object
@@ -29412,6 +29865,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
     type: object
   BackendBucketCdnPolicy:
@@ -29619,6 +30075,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       sessionAffinity:
         description: |-
@@ -30077,6 +30536,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       startTimestamp:
         description: '[Output Only] Commitment start time in RFC3339 text format.'
         type: string
@@ -30348,11 +30810,58 @@ definitions:
         format: int32
         type: integer
     type: object
+  CorsPolicy:
+    description: The specification for allowing client side cross-origin requests. Please see W3C Recommendation for Cross Origin Resource Sharing
+    properties:
+      allowCredentials:
+        description: |-
+          In response to a preflight request, setting this to true indicates that the actual request can include user credentials. This translates to the Access-Control-Allow-Credentials header.
+          Default is false.
+        type: boolean
+      allowHeaders:
+        description: Specifies the content for the Access-Control-Allow-Headers header.
+        items:
+          type: string
+        type: array
+      allowMethods:
+        description: Specifies the content for the Access-Control-Allow-Methods header.
+        items:
+          type: string
+        type: array
+      allowOriginRegexes:
+        description: |-
+          Specifies the regualar expression patterns that match allowed origins. For regular expression grammar please see en.cppreference.com/w/cpp/regex/ecmascript 
+          An origin is allowed if it matches either allow_origins or allow_origin_regex.
+        items:
+          type: string
+        type: array
+      allowOrigins:
+        description: |-
+          Specifies the list of origins that will be allowed to do CORS requests.
+          An origin is allowed if it matches either allow_origins or allow_origin_regex.
+        items:
+          type: string
+        type: array
+      disabled:
+        description: 'If true, specifies the CORS policy is disabled. The default value of false, which indicates that the CORS policy is in effect.'
+        type: boolean
+      exposeHeaders:
+        description: Specifies the content for the Access-Control-Expose-Headers header.
+        items:
+          type: string
+        type: array
+      maxAge:
+        description: Specifies how long the results of a preflight request can be cached. This translates to the content for the Access-Control-Max-Age header.
+        format: int32
+        type: integer
+    type: object
   CustomerEncryptionKey:
     description: Represents a customer-supplied encryption key
     properties:
       kmsKeyName:
         description: The name of the encryption key that is stored in Google Cloud KMS.
+        type: string
+      kmsKeyServiceAccount:
         type: string
       rawKey:
         description: 'Specifies a 256-bit customer-supplied encryption key, encoded in RFC 4648 base64 to either encrypt or decrypt this resource.'
@@ -30539,6 +31048,7 @@ definitions:
         description: '[Output Only] The status of disk creation.'
         enum:
           - CREATING
+          - DELETING
           - FAILED
           - READY
           - RESTORING
@@ -30781,6 +31291,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       validDiskSize:
         description: '[Output Only] An optional textual description of the valid disk size, such as "10GB-10TB".'
@@ -31085,6 +31598,18 @@ definitions:
         description: The URL of the zone. The zone must exist in the region where the managed instance group is located.
         type: string
     type: object
+  Duration:
+    description: 'A Duration represents a fixed-length span of time represented as a count of seconds and fractions of seconds at nanosecond resolution. It is independent of any calendar and concepts like "day" or "month". Range is approximately 10,000 years.'
+    properties:
+      nanos:
+        description: 'Span of time that''s a fraction of a second at nanosecond resolution. Durations less than one second are represented with a 0 `seconds` field and a positive `nanos` field. Must be from 0 to 999,999,999 inclusive.'
+        format: int32
+        type: integer
+      seconds:
+        description: 'Span of time at a resolution of a second. Must be from 0 to 315,576,000,000 inclusive. Note: these bounds are computed from: 60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years'
+        format: int64
+        type: string
+    type: object
   ExchangedPeeringRoute:
     properties:
       destRange:
@@ -31199,6 +31724,138 @@ definitions:
         description: 'An optional title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.'
         type: string
     type: object
+  ExternalVpnGateway:
+    description: 'External VPN gateway is the on-premises VPN gateway(s) or another cloud provider?s VPN gateway that connects to your Google Cloud VPN gateway. To create a highly available VPN from Google Cloud to your on-premises side or another Cloud provider''s VPN gateway, you must create a external VPN gateway resource in GCP, which provides the information to GCP about your external VPN gateway.'
+    properties:
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      interfaces:
+        description: List of interfaces for this external VPN gateway.
+        items:
+          $ref: '#/definitions/ExternalVpnGatewayInterface'
+        type: array
+      kind:
+        default: 'compute#externalVpnGateway'
+        description: '[Output Only] Type of the resource. Always compute#externalVpnGateway for externalVpnGateways.'
+        type: string
+      labelFingerprint:
+        description: |-
+          A fingerprint for the labels being applied to this ExternalVpnGateway, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet.
+
+          To see the latest fingerprint, make a get() request to retrieve an ExternalVpnGateway.
+        format: byte
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to this ExternalVpnGateway resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
+        type: object
+      name:
+        description: 'Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      redundancyType:
+        description: Indicates the user-supplied redundancy type of this external VPN gateway.
+        enum:
+          - FOUR_IPS_REDUNDANCY
+          - SINGLE_IP_INTERNALLY_REDUNDANT
+          - TWO_IPS_REDUNDANCY
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+    type: object
+  ExternalVpnGatewayInterface:
+    description: The interface for the external VPN gateway.
+    properties:
+      id:
+        description: 'The numeric ID of this interface. The allowed input values for this id for different redundancy types of external VPN gateway: SINGLE_IP_INTERNALLY_REDUNDANT - 0 TWO_IPS_REDUNDANCY - 0, 1 FOUR_IPS_REDUNDANCY - 0, 1, 2, 3'
+        format: uint32
+        type: integer
+      ipAddress:
+        description: 'IP address of the interface in the external VPN gateway. Only IPv4 is supported. This IP address can be either from your on-premise gateway or another Cloud provider?s VPN gateway, it cannot be an IP address from Google Compute Engine.'
+        type: string
+    type: object
+  ExternalVpnGatewayList:
+    description: 'Response to the list request, and contains a list of externalVpnGateways.'
+    properties:
+      etag:
+        type: string
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        description: A list of ExternalVpnGateway resources.
+        items:
+          $ref: '#/definitions/ExternalVpnGateway'
+        type: array
+      kind:
+        default: 'compute#externalVpnGatewayList'
+        description: '[Output Only] Type of resource. Always compute#externalVpnGatewayList  for lists of externalVpnGateways.'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
   Firewall:
     description: Represents a Firewall resource.
     properties:
@@ -31289,6 +31946,9 @@ definitions:
         type: integer
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       sourceRanges:
         description: 'If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges. These ranges must be expressed in CIDR format. One or both of sourceRanges and sourceTags may be set. If both properties are set, the firewall will apply to traffic that has source IP address within sourceRanges OR the source IP that belongs to a tag listed in the sourceTags property. The connection does not need to match both properties for the firewall to apply. Only IPv4 is supported.'
@@ -31564,6 +32224,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       serviceLabel:
         description: |-
@@ -31871,6 +32534,7 @@ definitions:
         description: The ID of a supported feature. Read  Enabling guest operating system features to see a list of available options.
         enum:
           - FEATURE_TYPE_UNSPECIFIED
+          - GVNIC
           - MULTI_IP_SUBNET
           - SECURE_BOOT
           - UEFI_COMPATIBLE
@@ -32059,6 +32723,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       sslHealthCheck:
         $ref: '#/definitions/SSLHealthCheck'
@@ -32351,6 +33018,135 @@ definitions:
         description: The name of the PathMatcher to use to match the path portion of the URL if the hostRule matches the URL's host portion.
         type: string
     type: object
+  HttpFaultAbort:
+    description: Specification for how requests are aborted as part of fault injection.
+    properties:
+      httpStatus:
+        description: |-
+          The HTTP status code used to abort the request.
+          The value must be between 200 and 599 inclusive.
+        format: uint32
+        type: integer
+      percentage:
+        description: |-
+          The percentage of traffic (connections/operations/requests) which will be aborted as part of fault injection.
+          The value must be between 0.0 and 100.0 inclusive.
+        format: double
+        type: number
+    type: object
+  HttpFaultDelay:
+    description: Specifies the delay introduced by Loadbalancer before forwarding the request to the backend service as part of fault injection.
+    properties:
+      fixedDelay:
+        $ref: '#/definitions/Duration'
+        description: Specifies the value of the fixed delay interval.
+      percentage:
+        description: |-
+          The percentage of traffic (connections/operations/requests) on which delay will be introduced as part of fault injection.
+          The value must be between 0.0 and 100.0 inclusive.
+        format: double
+        type: number
+    type: object
+  HttpFaultInjection:
+    description: 'The specification for fault injection introduced into traffic to test the resiliency of clients to backend service failure. As part of fault injection, when clients send requests to a backend service, delays can be introduced by Loadbalancer on a percentage of requests before sending those request to the backend service. Similarly requests from clients can be aborted by the Loadbalancer for a percentage of requests.'
+    properties:
+      abort:
+        $ref: '#/definitions/HttpFaultAbort'
+        description: The specification for how client requests are aborted as part of fault injection.
+      delay:
+        $ref: '#/definitions/HttpFaultDelay'
+        description: 'The specification for how client requests are delayed as part of fault injection, before being sent to a backend service.'
+    type: object
+  HttpHeaderAction:
+    description: The request and response header transformations that take effect before the request is passed along to the selected backendService.
+    properties:
+      requestHeadersToAdd:
+        description: Headers to add to a matching request prior to forwarding the request to the backendService.
+        items:
+          $ref: '#/definitions/HttpHeaderOption'
+        type: array
+      requestHeadersToRemove:
+        description: A list of header names for headers that need to be removed from the request prior to forwarding the request to the backendService.
+        items:
+          type: string
+        type: array
+      responseHeadersToAdd:
+        description: Headers to add the response prior to sending the response back to the client.
+        items:
+          $ref: '#/definitions/HttpHeaderOption'
+        type: array
+      responseHeadersToRemove:
+        description: A list of header names for headers that need to be removed from the response prior to sending the response back to the client.
+        items:
+          type: string
+        type: array
+    type: object
+  HttpHeaderMatch:
+    description: matchRule criteria for request header matches.
+    properties:
+      exactMatch:
+        description: |-
+          The value should exactly match contents of exactMatch.
+          Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set.
+        type: string
+      headerName:
+        description: |-
+          The name of the HTTP header to match.
+          For matching against the HTTP request's authority, use a headerMatch with the header name ":authority".
+          For matching a request's method, use the headerName ":method".
+        type: string
+      invertMatch:
+        description: |-
+          If set to false, the headerMatch is considered a match if the match criteria above are met. If set to true, the headerMatch is considered a match if the match criteria above are NOT met.
+          The default setting is false.
+        type: boolean
+      prefixMatch:
+        description: |-
+          The value of the header must start with the contents of prefixMatch.
+          Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set.
+        type: string
+      presentMatch:
+        description: |-
+          A header with the contents of headerName must exist. The match takes place whether or not the request's header has a value or not.
+          Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set.
+        type: boolean
+      rangeMatch:
+        $ref: '#/definitions/Int64RangeMatch'
+        description: |-
+          The header value must be an integer and its value must be in the range specified in rangeMatch. If the header does not contain an integer, number or is empty, the match fails.
+          For example for a range [-5, 0]  
+          - -3 will match. 
+          - 0 will not match. 
+          - 0.25 will not match. 
+          - -3someString will not match.  
+          Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set.
+      regexMatch:
+        description: |-
+          The value of the header must match the regualar expression specified in regexMatch. For regular expression grammar, please see:  en.cppreference.com/w/cpp/regex/ecmascript 
+          For matching against a port specified in the HTTP request, use a headerMatch with headerName set to PORT and a regular expression that satisfies the RFC2616 Host header's port specifier.
+          Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set.
+        type: string
+      suffixMatch:
+        description: |-
+          The value of the header must end with the contents of suffixMatch.
+          Only one of exactMatch, prefixMatch, suffixMatch, regexMatch, presentMatch or rangeMatch must be set.
+        type: string
+    type: object
+  HttpHeaderOption:
+    description: Specification determining how headers are added to requests or responses.
+    properties:
+      headerName:
+        description: The name of the header.
+        type: string
+      headerValue:
+        description: The value of the header to add.
+        type: string
+      replace:
+        description: |-
+          If false, headerValue is appended to any values that already exist for the header. If true, headerValue is set for the header, discarding any values that were set for that header.
+          The default value is false.
+        type: boolean
+    type: object
   HttpHealthCheck:
     description: 'An HttpHealthCheck resource. This resource defines a template for how individual instances should be checked for health, via HTTP.'
     properties:
@@ -32392,6 +33188,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       timeoutSec:
         description: How long (in seconds) to wait before claiming failure. The default value is 5 seconds. It is invalid for timeoutSec to have greater value than checkIntervalSec.
@@ -32472,6 +33271,201 @@ definitions:
             type: string
         type: object
     type: object
+  HttpQueryParameterMatch:
+    description: HttpRouteRuleMatch criteria for a request's query parameter.
+    properties:
+      exactMatch:
+        description: |-
+          The queryParameterMatch matches if the value of the parameter exactly matches the contents of exactMatch.
+          Only one of presentMatch, exactMatch and regexMatch must be set.
+        type: string
+      name:
+        description: 'The name of the query parameter to match. The query parameter must exist in the request, in the absence of which the request match fails.'
+        type: string
+      presentMatch:
+        description: |-
+          Specifies that the queryParameterMatch matches if the request contains the query parameter, irrespective of whether the parameter has a value or not.
+          Only one of presentMatch, exactMatch and regexMatch must be set.
+        type: boolean
+      regexMatch:
+        description: |-
+          The queryParameterMatch matches if the value of the parameter matches the regular expression specified by regexMatch. For the regular expression grammar, please see en.cppreference.com/w/cpp/regex/ecmascript 
+          Only one of presentMatch, exactMatch and regexMatch must be set.
+        type: string
+    type: object
+  HttpRedirectAction:
+    description: Specifies settings for an HTTP redirect.
+    properties:
+      hostRedirect:
+        description: |-
+          The host that will be used in the redirect response instead of the one that was supplied in the request.
+          The value must be between 1 and 255 characters.
+        type: string
+      httpsRedirect:
+        description: |-
+          If set to true, the URL scheme in the redirected request is set to https. If set to false, the URL scheme of the redirected request will remain the same as that of the request.
+          This must only be set for UrlMaps used in TargetHttpProxys. Setting this true for TargetHttpsProxy is not permitted.
+          The default is set to false.
+        type: boolean
+      pathRedirect:
+        description: |-
+          The path that will be used in the redirect response instead of the one that was supplied in the request.
+          Only one of pathRedirect or prefixRedirect must be specified.
+          The value must be between 1 and 1024 characters.
+        type: string
+      prefixRedirect:
+        description: 'The prefix that replaces the prefixMatch specified in the HttpRouteRuleMatch, retaining the remaining portion of the URL before redirecting the request.'
+        type: string
+      redirectResponseCode:
+        description: |-
+          The HTTP Status code to use for this RedirectAction.
+          Supported values are:  
+          - MOVED_PERMANENTLY_DEFAULT, which is the default value and corresponds to 301. 
+          - FOUND, which corresponds to 302. 
+          - SEE_OTHER which corresponds to 303. 
+          - TEMPORARY_REDIRECT, which corresponds to 307. In this case, the request method will be retained. 
+          - PERMANENT_REDIRECT, which corresponds to 308. In this case, the request method will be retained.
+        enum:
+          - FOUND
+          - MOVED_PERMANENTLY_DEFAULT
+          - PERMANENT_REDIRECT
+          - SEE_OTHER
+          - TEMPORARY_REDIRECT
+        type: string
+      stripQuery:
+        description: |-
+          If set to true, any accompanying query portion of the original URL is removed prior to redirecting the request. If set to false, the query portion of the original URL is retained.
+          The default is set to false.
+        type: boolean
+    type: object
+  HttpRetryPolicy:
+    description: The retry policy associates with HttpRouteRule
+    properties:
+      numRetries:
+        description: Specifies the allowed number retries. This number must be > 0.
+        format: uint32
+        type: integer
+      perTryTimeout:
+        $ref: '#/definitions/Duration'
+        description: Specifies a non-zero timeout per retry attempt.
+      retryConditions:
+        description: |-
+          Specfies one or more conditions when this retry rule applies. Valid values are:  
+          - 5xx: Loadbalancer will attempt a retry if the backend service responds with any 5xx response code, or if the backend service does not respond at all, example: disconnects, reset, read timeout, connection failure, and refused streams. 
+          - gateway-error: Similar to 5xx, but only applies to response codes 502, 503 or 504.
+          - 
+          - connect-failure: Loadbalancer will retry on failures connecting to backend services, for example due to connection timeouts. 
+          - retriable-4xx: Loadbalancer will retry for retriable 4xx response codes. Currently the only retriable error supported is 409. 
+          - refused-stream:Loadbalancer will retry if the backend service resets the stream with a REFUSED_STREAM error code. This reset type indicates that it is safe to retry. 
+          - cancelledLoadbalancer will retry if the gRPC status code in the response header is set to cancelled 
+          - deadline-exceeded: Loadbalancer will retry if the gRPC status code in the response header is set to deadline-exceeded 
+          - resource-exhausted: Loadbalancer will retry if the gRPC status code in the response header is set to resource-exhausted 
+          - unavailable: Loadbalancer will retry if the gRPC status code in the response header is set to unavailable
+        items:
+          type: string
+        type: array
+    type: object
+  HttpRouteAction:
+    properties:
+      corsPolicy:
+        $ref: '#/definitions/CorsPolicy'
+        description: The specification for allowing client side cross-origin requests. Please see W3C Recommendation for Cross Origin Resource Sharing
+      faultInjectionPolicy:
+        $ref: '#/definitions/HttpFaultInjection'
+        description: |-
+          The specification for fault injection introduced into traffic to test the resiliency of clients to backend service failure. As part of fault injection, when clients send requests to a backend service, delays can be introduced by Loadbalancer on a percentage of requests before sending those request to the backend service. Similarly requests from clients can be aborted by the Loadbalancer for a percentage of requests.
+          timeout and retry_policy will be ignored by clients that are configured with a fault_injection_policy.
+      requestMirrorPolicy:
+        $ref: '#/definitions/RequestMirrorPolicy'
+        description: 'Specifies the policy on how requests intended for the route''s backends are shadowed to a separate mirrored backend service. Loadbalancer does not wait for responses from the shadow service. Prior to sending traffic to the shadow service, the host / authority header is suffixed with -shadow.'
+      retryPolicy:
+        $ref: '#/definitions/HttpRetryPolicy'
+        description: Specifies the retry policy associated with this route.
+      timeout:
+        $ref: '#/definitions/Duration'
+        description: |-
+          Specifies the timeout for the selected route. Timeout is computed from the time the request is has been fully processed (i.e. end-of-stream) up until the response has been completely processed. Timeout includes all retries.
+          If not specified, the default value is 15 seconds.
+      urlRewrite:
+        $ref: '#/definitions/UrlRewrite'
+        description: 'The spec to modify the URL of the request, prior to forwarding the request to the matched service'
+      weightedBackendServices:
+        description: |-
+          A list of weighted backend services to send traffic to when a route match occurs. The weights determine the percentage of traffic that flows to their corresponding backend service. The weights must add up to 100. If all traffic needs to go to a single backend service, there must be one weightedBackendService with weight set to 100.
+          Once a backendService is identified and before forwarding the request to the backend service, advanced routing actions like Url rewrites and header transformations are applied depending on additional settings specified in this HttpRouteAction.
+        items:
+          $ref: '#/definitions/WeightedBackendService'
+        type: array
+    type: object
+  HttpRouteRule:
+    description: An HttpRouteRule specifies how to match an HTTP request and the corresponding routing action that load balancing proxies will perform.
+    properties:
+      headerAction:
+        $ref: '#/definitions/HttpHeaderAction'
+        description: |-
+          Specifies changes to request and response headers that need to take effect for the selected backendService.
+          The headerAction specified here are applied before the matching pathMatchers[].headerAction and after pathMatchers[].routeRules[].routeAction.weightedBackendService.backendServiceWeightAction[].headerAction
+      matchRules:
+        items:
+          $ref: '#/definitions/HttpRouteRuleMatch'
+        type: array
+      routeAction:
+        $ref: '#/definitions/HttpRouteAction'
+        description: |-
+          In response to a matching matchRule, the load balancer performs advanced routing actions like URL rewrites, header transformations, etc. prior to forwarding the request to the selected backend. If  routeAction specifies any  weightedBackendServices, service must not be set. Conversely if service is set, routeAction cannot contain any  weightedBackendServices.
+          Only one of routeAction or urlRedirect must be set.
+      urlRedirect:
+        $ref: '#/definitions/HttpRedirectAction'
+        description: |-
+          When this rule is matched, the request is redirected to a URL specified by urlRedirect.
+          If urlRedirect is specified, service or routeAction must not be set.
+    type: object
+  HttpRouteRuleMatch:
+    description: HttpRouteRuleMatch specifies a set of criteria for matching requests to an HttpRouteRule. All specified criteria must be satisfied for a match to occur.
+    properties:
+      fullPathMatch:
+        description: |-
+          For satifying the matchRule condition, the path of the request must exactly match the value specified in fullPathMatch after removing any query parameters and anchor that may be part of the original URL.
+          FullPathMatch must be between 1 and 1024 characters.
+          Only one of prefixMatch, fullPathMatch or regexMatch must be specified.
+        type: string
+      headerMatches:
+        description: 'Specifies a list of header match criteria, all of which must match corresponding headers in the request.'
+        items:
+          $ref: '#/definitions/HttpHeaderMatch'
+        type: array
+      ignoreCase:
+        description: |-
+          Specifies that prefixMatch and fullPathMatch matches are case sensitive.
+          The default value is false.
+          caseSensitive must not be used with regexMatch.
+        type: boolean
+      metadataFilters:
+        description: |-
+          Opaque filter criteria used by Loadbalancer to restrict routing configuration to a limited set xDS compliant clients. In their xDS requests to Loadbalancer, xDS clients present node metadata. If a match takes place, the relevant routing configuration is made available to those proxies.
+          For each metadataFilter in this list, if its filterMatchCriteria is set to MATCH_ANY, at least one of the filterLabels must match the corresponding label provided in the metadata. If its filterMatchCriteria is set to MATCH_ALL, then all of its filterLabels must match with corresponding labels in the provided metadata.
+          metadataFilters specified here can be overrides those specified in ForwardingRule that refers to this UrlMap.
+          metadataFilters only applies to Loadbalancers that have their loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+        items:
+          $ref: '#/definitions/MetadataFilter'
+        type: array
+      prefixMatch:
+        description: |-
+          For satifying the matchRule condition, the request's path must begin with the specified prefixMatch. prefixMatch must begin with a /.
+          The value must be between 1 and 1024 characters.
+          Only one of prefixMatch, fullPathMatch or regexMatch must be specified.
+        type: string
+      queryParameterMatches:
+        description: 'Specifies a list of query parameter match criteria, all of which must match corresponding query parameters in the request.'
+        items:
+          $ref: '#/definitions/HttpQueryParameterMatch'
+        type: array
+      regexMatch:
+        description: |-
+          For satifying the matchRule condition, the path of the request must satisfy the regular expression specified in regexMatch after removing any query parameters and anchor supplied with the original URL. For regular expression grammar please see en.cppreference.com/w/cpp/regex/ecmascript 
+          Only one of prefixMatch, fullPathMatch or regexMatch must be specified.
+        type: string
+    type: object
   HttpsHealthCheck:
     description: 'An HttpsHealthCheck resource. This resource defines a template for how individual instances should be checked for health, via HTTPS.'
     properties:
@@ -32513,6 +33507,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       timeoutSec:
         description: How long (in seconds) to wait before claiming failure. The default value is 5 seconds. It is invalid for timeoutSec to have a greater value than checkIntervalSec.
@@ -32685,6 +33682,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource''s resource id.'
+        type: string
       sourceDisk:
         description: |-
           URL of the source disk used to create this image. This can be a full or valid partial URL. You must provide either this property or the rawDisk.source property but not both to create an image. For example, the following are valid values:  
@@ -32734,10 +33734,16 @@ definitions:
       status:
         description: '[Output Only] The status of the image. An image can be used to create other resources, such as instances, only after the image has been successfully created and the status is set to READY. Possible values are FAILED, PENDING, or READY.'
         enum:
+          - DELETING
           - FAILED
           - PENDING
           - READY
         type: string
+      storageLocations:
+        description: GCS bucket storage location of the image (regional or multi-regional).
+        items:
+          type: string
+        type: array
     type: object
   ImageList:
     description: Contains a list of images.
@@ -32921,6 +33927,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for this resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       serviceAccounts:
         description: |-
           A list of service accounts, with their specified scopes, authorized for this instance. Only one service account per VM instance is supported.
@@ -32936,6 +33945,9 @@ definitions:
       sourceMachineImage:
         description: Source machine image
         type: string
+      sourceMachineImageEncryptionKey:
+        $ref: '#/definitions/CustomerEncryptionKey'
+        description: Source GMI encryption key when creating an instance from GMI.
       startRestricted:
         description: '[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity.'
         type: boolean
@@ -33074,6 +34086,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] The URL for this instance group. The server generates this URL.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       size:
         description: '[Output Only] The total number of instances in the instance group.'
@@ -33294,6 +34309,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       serviceAccount:
         description: 'The service account to be used as credentials for all operations performed by the managed instance group on instances. The service accounts needs all permissions required to create and delete instances. By default, the service account {projectNumber}@cloudservices.gserviceaccount.com is used.'
@@ -33633,7 +34651,7 @@ definitions:
           type: string
         type: array
       maximalAction:
-        description: The maximal action that should be perfomed on the instances. By default REPLACE.
+        description: 'The maximal action that should be performed on the instances. By default REPLACE. This field is deprecated, please use most_disruptive_allowed_action.'
         enum:
           - NONE
           - REFRESH
@@ -34201,6 +35219,9 @@ definitions:
         items:
           $ref: '#/definitions/AttachedDisk'
         type: array
+      displayDevice:
+        $ref: '#/definitions/DisplayDevice'
+        description: 'Display Device properties to enable support for remote display products like: Teradici, VNC and TeamViewer'
       guestAccelerators:
         description: A list of guest accelerator cards' type and count to use for instances created from the instance template.
         items:
@@ -34272,6 +35293,9 @@ definitions:
         description: The instance properties for this instance template.
       selfLink:
         description: '[Output Only] The URL for this instance template. The server defines this URL.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       sourceInstance:
         description: |-
@@ -34528,6 +35552,18 @@ definitions:
 
           If the instance you are starting is protected with a customer-supplied encryption key, the correct key must be provided otherwise the instance start will not succeed.
     type: object
+  Int64RangeMatch:
+    description: HttpRouteRuleMatch criteria for field values that must stay within the specified integer range.
+    properties:
+      rangeEnd:
+        description: The end of the range (exclusive) in signed long integer format.
+        format: int64
+        type: string
+      rangeStart:
+        description: The start of the range (inclusive) in signed long integer format.
+        format: int64
+        type: string
+    type: object
   Interconnect:
     description: 'Represents an Interconnects resource. The Interconnects resource is a dedicated connection between Google''s network and your on-premises network. For more information, see the  Dedicated overview page. (== resource_for v1.interconnects ==) (== resource_for beta.interconnects ==)'
     properties:
@@ -34592,8 +35628,9 @@ definitions:
         description: Labels to apply to this Interconnect resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
         type: object
       linkType:
-        description: 'Type of link requested. This field indicates speed of each of the links in the bundle, not the entire bundle. Only 10G per link is allowed for a dedicated interconnect. Options: Ethernet_10G_LR'
+        description: 'Type of link requested. This field indicates speed of each of the links in the bundle, not the entire bundle.'
         enum:
+          - LINK_TYPE_ETHERNET_100G_LR
           - LINK_TYPE_ETHERNET_10G_LR
         type: string
       location:
@@ -34625,6 +35662,9 @@ definitions:
         type: integer
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       state:
         description: '[Output Only] The current state of whether or not this Interconnect is functional.'
@@ -34734,6 +35774,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       state:
         description: '[Output Only] The current state of this attachment''s functionality.'
@@ -35193,6 +36236,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       status:
         description: '[Output Only] The status of this InterconnectLocation. If the status is AVAILABLE, new Interconnects may be provisioned in this InterconnectLocation. Otherwise, no new Interconnects may be provisioned.'
         enum:
@@ -35552,6 +36598,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       transferable:
         description: 'If false, licenses will not be copied from the source resource when creating an image from a disk, disk from snapshot, or snapshot from disk.'
         type: boolean
@@ -35760,12 +36809,18 @@ definitions:
         default: 'compute#machineImage'
         description: '[Output Only] The resource type, which is always compute#machineImage for machine image.'
         type: string
+      machineImageEncryptionKey:
+        $ref: '#/definitions/CustomerEncryptionKey'
+        description: Encryption key to protect the machine image.
       name:
         description: 'Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
       selfLink:
         description: '[Output Only] The URL for this machine image. The server defines this URL.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       sourceInstance:
         description: |-
@@ -35908,6 +36963,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       zone:
         description: '[Output Only] The name of the zone where the machine type resides, such as us-central1-a.'
@@ -36183,6 +37241,15 @@ definitions:
     type: object
   ManagedInstanceInstanceHealth:
     properties:
+      detailedHealthState:
+        description: '[Output Only] The current detailed instance health state.'
+        enum:
+          - DRAINING
+          - HEALTHY
+          - TIMEOUT
+          - UNHEALTHY
+          - UNKNOWN
+        type: string
       healthCheck:
         description: '[Output Only] The URL for the health check that verifies whether the instance is healthy.'
         type: string
@@ -36295,6 +37362,45 @@ definitions:
         description: '[Output Only] Type of the resource. Always compute#metadata for metadata.'
         type: string
     type: object
+  MetadataFilter:
+    description: |-
+      Opaque filter criteria used by loadbalancers to restrict routing configuration to a limited set of loadbalancing proxies. Proxies and sidecars involved in loadbalancing would typically present metadata to the loadbalancers which need to match criteria specified here. If a match takes place, the relevant routing configuration is made available to those proxies.
+      For each metadataFilter in this list, if its filterMatchCriteria is set to MATCH_ANY, at least one of the filterLabels must match the corresponding label provided in the metadata. If its filterMatchCriteria is set to MATCH_ALL, then all of its filterLabels must match with corresponding labels in the provided metadata.
+      An example for using metadataFilters would be: if loadbalancing involves  Envoys, they will only receive routing configuration when values in metadataFilters match values supplied in <a href="https://www.envoyproxy.io/docs/envoy/latest/api-v2/api/v2/core/base.proto#envoy-api-msg-core-node" Node metadata of their XDS requests to loadbalancers.
+    properties:
+      filterLabels:
+        description: |-
+          The list of label value pairs that must match labels in the provided metadata based on filterMatchCriteria 
+          This list must not be empty and can have at the most 64 entries.
+        items:
+          $ref: '#/definitions/MetadataFilterLabelMatch'
+        type: array
+      filterMatchCriteria:
+        description: |-
+          Specifies how individual filterLabel matches within the list of filterLabels contribute towards the overall metadataFilter match.
+          Supported values are:  
+          - MATCH_ANY: At least one of the filterLabels must have a matching label in the provided metadata. 
+          - MATCH_ALL: All filterLabels must have matching labels in the provided metadata.
+        enum:
+          - MATCH_ALL
+          - MATCH_ANY
+          - NOT_SET
+        type: string
+    type: object
+  MetadataFilterLabelMatch:
+    description: MetadataFilter label name value pairs that are expected to match corresponding labels presented as metadata to the loadbalancer.
+    properties:
+      name:
+        description: |-
+          Name of metadata label.
+          The name can have a maximum length of 1024 characters and must be at least 1 character long.
+        type: string
+      value:
+        description: |-
+          The value of the label must match the specified value.
+          value can have a maximum length of 1024 characters.
+        type: string
+    type: object
   NamedPort:
     description: 'The named port. For example: .'
     properties:
@@ -36363,6 +37469,9 @@ definitions:
         description: The network-level routing configuration for this network. Used by Cloud Router to determine what type of network-wide routing behavior to enforce.
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       subnetworks:
         description: '[Output Only] Server-defined fully-qualified URLs for all subnetworks in this VPC network.'
@@ -36434,6 +37543,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       size:
         description: '[Output only] Number of network endpoints in the network endpoint group.'
@@ -36984,6 +38096,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       size:
         description: '[Output Only] The total number of nodes in the node group.'
         format: int32
@@ -37312,6 +38427,11 @@ definitions:
             type: string
         type: object
     type: object
+  NodeGroupsSetAutoscalingPolicyRequest:
+    properties:
+      autoscalingPolicy:
+        $ref: '#/definitions/NodeGroupAutoscalingPolicy'
+    type: object
   NodeGroupsSetNodeTemplateRequest:
     properties:
       nodeTemplate:
@@ -37357,6 +38477,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       serverBinding:
         $ref: '#/definitions/ServerBinding'
@@ -37619,6 +38742,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       zone:
         description: '[Output Only] The name of the zone where the node type resides, such as us-central1-a.'
@@ -37887,6 +39013,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       startTime:
         description: '[Output Only] The time that this operation was started by the server. This value is in RFC3339 text format.'
@@ -38164,21 +39293,35 @@ definitions:
   PathMatcher:
     description: 'A matcher for the path portion of the URL. The BackendService from the longest-matched rule will serve the URL. If no rule was matched, the default service will be used.'
     properties:
+      defaultRouteAction:
+        $ref: '#/definitions/HttpRouteAction'
+        description: |-
+          defaultRouteAction takes effect when none of the  pathRules or routeRules match. The load balancer performs advanced routing actions like URL rewrites, header transformations, etc. prior to forwarding the request to the selected backend. If defaultRouteAction specifies any weightedBackendServices, defaultService must not be set. Conversely if defaultService is set, defaultRouteAction cannot contain any  weightedBackendServices.
+          Only one of defaultRouteAction or defaultUrlRedirect must be set.
       defaultService:
         description: |-
           The full or partial URL to the BackendService resource. This will be used if none of the pathRules or routeRules defined by this PathMatcher are matched. For example, the following are all valid URLs to a BackendService resource:  
           - https://www.googleapis.com/compute/v1/projects/project/global/backendServices/backendService 
           - compute/v1/projects/project/global/backendServices/backendService 
-          - global/backendServices/backendService  
-          Use defaultService instead of defaultRouteAction when simple routing to a backend service is desired and other advanced capabilities like traffic splitting and URL rewrites are not required.
-          Only one of defaultService, defaultRouteAction or defaultUrlRedirect must be set.
+          - global/backendServices/backendService  If defaultRouteAction is additionally specified, advanced routing actions like URL Rewrites, etc. take effect prior to sending the request to the backend. However, if defaultService is specified, defaultRouteAction cannot contain any weightedBackendServices. Conversely, if defaultRouteAction specifies any weightedBackendServices, defaultService must not be specified.
+          Only one of defaultService, defaultUrlRedirect  or defaultRouteAction.weightedBackendService must be set.
           Authorization requires one or more of the following Google IAM permissions on the specified resource default_service:  
           - compute.backendBuckets.use 
           - compute.backendServices.use
         type: string
+      defaultUrlRedirect:
+        $ref: '#/definitions/HttpRedirectAction'
+        description: |-
+          When when none of the specified pathRules or routeRules match, the request is redirected to a URL specified by defaultUrlRedirect.
+          If defaultUrlRedirect is specified, defaultService or defaultRouteAction must not be set.
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
+      headerAction:
+        $ref: '#/definitions/HttpHeaderAction'
+        description: |-
+          Specifies changes to request and response headers that need to take effect for the selected backendService.
+          HeaderAction specified here are applied after the matching HttpRouteRule HeaderAction and before the HeaderAction in the UrlMap
       name:
         description: The name to which this PathMatcher is referred by the HostRule.
         type: string
@@ -38190,6 +39333,13 @@ definitions:
         items:
           $ref: '#/definitions/PathRule'
         type: array
+      routeRules:
+        description: |-
+          The list of ordered HTTP route rules. Use this list instead of pathRules when advanced route matching and routing actions are desired. The order of specifying routeRules matters: the first rule that matches will cause its specified routing action to take effect.
+          Only one of pathRules or routeRules must be set.
+        items:
+          $ref: '#/definitions/HttpRouteRule'
+        type: array
     type: object
   PathRule:
     description: 'A path-matching rule for a URL. If matched, will use the specified BackendService to handle the traffic arriving at this URL.'
@@ -38199,12 +39349,21 @@ definitions:
         items:
           type: string
         type: array
+      routeAction:
+        $ref: '#/definitions/HttpRouteAction'
+        description: |-
+          In response to a matching path, the load balancer performs advanced routing actions like URL rewrites, header transformations, etc. prior to forwarding the request to the selected backend. If routeAction specifies any  weightedBackendServices, service must not be set. Conversely if service is set, routeAction cannot contain any  weightedBackendServices.
+          Only one of routeAction or urlRedirect must be set.
       service:
         description: |-
-          The URL of the backend service resource if this rule is matched.
-          Use service instead of routeAction when simple routing to a backend service is desired and other advanced capabilities like traffic splitting and rewrites are not required.
-          Only one of service, routeAction or urlRedirect should must be set.
+          The full or partial URL of the backend service resource to which traffic is directed if this rule is matched. If routeAction is additionally specified, advanced routing actions like URL Rewrites, etc. take effect prior to sending the request to the backend. However, if service is specified, routeAction cannot contain any weightedBackendService s. Conversely, if routeAction specifies any  weightedBackendServices, service must not be specified.
+          Only one of urlRedirect, service or routeAction.weightedBackendService must be set.
         type: string
+      urlRedirect:
+        $ref: '#/definitions/HttpRedirectAction'
+        description: |-
+          When a path pattern is matched, the request is redirected to a URL specified by urlRedirect.
+          If urlRedirect is specified, service or routeAction must not be set.
     type: object
   PerInstanceConfig:
     properties:
@@ -38429,6 +39588,7 @@ definitions:
       metric:
         description: '[Output Only] Name of the quota metric.'
         enum:
+          - ALIASES_PER_NETWORK_GLOBAL
           - AMD_S9300_GPUS
           - AUTOSCALERS
           - BACKEND_BUCKETS
@@ -38444,6 +39604,7 @@ definitions:
           - HEALTH_CHECKS
           - IMAGES
           - INSTANCES
+          - INSTANCES_PER_NETWORK_GLOBAL
           - INSTANCE_GROUPS
           - INSTANCE_GROUP_MANAGERS
           - INSTANCE_TEMPLATES
@@ -38451,9 +39612,14 @@ definitions:
           - INTERCONNECT_ATTACHMENTS_PER_REGION
           - INTERCONNECT_ATTACHMENTS_TOTAL_MBPS
           - INTERNAL_ADDRESSES
+          - INTERNAL_FORWARDING_RULES_PER_NETWORK
+          - INTERNAL_FORWARDING_RULES_WITH_GLOBAL_ACCESS_PER_NETWORK
+          - INTERNAL_FORWARDING_RULES_WITH_TARGET_INSTANCE_PER_NETWORK
+          - INTERNAL_TARGET_INSTANCE_WITH_GLOBAL_ACCESS_PER_NETWORK
           - IN_USE_ADDRESSES
           - IN_USE_BACKUP_SCHEDULES
           - IN_USE_MAINTENANCE_WINDOWS
+          - IN_USE_SNAPSHOT_SCHEDULES
           - LOCAL_SSD_TOTAL_GB
           - MACHINE_IMAGES
           - NETWORKS
@@ -38499,6 +39665,10 @@ definitions:
           - URL_MAPS
           - VPN_GATEWAYS
           - VPN_TUNNELS
+          - XPN_SERVICE_PROJECTS
+        type: string
+      owner:
+        description: '[Output Only] Owning resource. This is the resource on which this quota is applied.'
         type: string
       usage:
         description: '[Output Only] Current usage of this metric.'
@@ -38554,6 +39724,9 @@ definitions:
         type: array
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       status:
         description: '[Output Only] Status of the region, either UP or DOWN.'
@@ -38909,7 +40082,7 @@ definitions:
           type: string
         type: array
       maximalAction:
-        description: The maximal action that should be perfomed on the instances. By default REPLACE.
+        description: 'The maximal action that should be performed on the instances. By default REPLACE. This field is deprecated, please use most_disruptive_allowed_action.'
         enum:
           - NONE
           - REFRESH
@@ -38924,6 +40097,15 @@ definitions:
           - REPLACE
           - RESTART
         type: string
+    type: object
+  RegionInstanceGroupManagersCreateInstancesRequest:
+    description: RegionInstanceGroupManagers.createInstances
+    properties:
+      instances:
+        description: '[Required] List of specifications of per-instance configs.'
+        items:
+          $ref: '#/definitions/PerInstanceConfig'
+        type: array
     type: object
   RegionInstanceGroupManagersDeleteInstancesRequest:
     properties:
@@ -39241,6 +40423,13 @@ definitions:
         $ref: '#/definitions/UrlMap'
         description: Content of the UrlMap to be validated.
     type: object
+  RequestMirrorPolicy:
+    description: 'A policy that specifies how requests intended for the route''s backends are shadowed to a separate mirrored backend service. Loadbalancer does not wait for responses from the shadow service. Prior to sending traffic to the shadow service, the host / authority header is suffixed with -shadow.'
+    properties:
+      backendService:
+        description: The full or partial URL to the BackendService resource being mirrored to.
+        type: string
+    type: object
   ResourceCommitment:
     description: Commitment for a particular resource (a Commitment is composed of one or more of these).
     properties:
@@ -39325,9 +40514,6 @@ definitions:
     type: object
   ResourcePolicy:
     properties:
-      backupSchedulePolicy:
-        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicy'
-        description: Resource policy for persistent disks for creating snapshots.
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -39350,6 +40536,12 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
+      snapshotSchedulePolicy:
+        $ref: '#/definitions/ResourcePolicySnapshotSchedulePolicy'
+        description: Resource policy for persistent disks for creating snapshots.
       vmMaintenancePolicy:
         $ref: '#/definitions/ResourcePolicyVmMaintenancePolicy'
         description: Resource policy applicable to VMs for infrastructure maintenance.
@@ -39426,68 +40618,6 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
-    type: object
-  ResourcePolicyBackupSchedulePolicy:
-    description: A backup schedule policy specifies when and how frequently snapshots are to be created for the target disk. Also specifies how many and how long these scheduled snapshots should be retained.
-    properties:
-      retentionPolicy:
-        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicyRetentionPolicy'
-        description: Retention policy applied to snapshots created by this resource policy.
-      schedule:
-        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicySchedule'
-        description: A Vm Maintenance Policy specifies what kind of infrastructure maintenance we are allowed to perform on this VM and when. Schedule that is applied to disks covered by this policy.
-      snapshotProperties:
-        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicySnapshotProperties'
-        description: 'Properties with which snapshots are created such as labels, encryption keys.'
-    type: object
-  ResourcePolicyBackupSchedulePolicyRetentionPolicy:
-    description: Policy for retention of scheduled snapshots.
-    properties:
-      maxRetentionDays:
-        description: Maximum age of the snapshot that is allowed to be kept.
-        format: int32
-        type: integer
-      onPolicySwitch:
-        description: 'Specifies the behavior to apply to existing, scheduled snapshots snapshots if the policy is changed.'
-        enum:
-          - DO_NOT_RETROACTIVELY_APPLY
-          - RETROACTIVELY_APPLY
-          - UNSPECIFIED_ON_POLICY_SWITCH
-        type: string
-      onSourceDiskDelete:
-        description: Specifies the behavior to apply to scheduled snapshots when the source disk is deleted.
-        enum:
-          - APPLY_RETENTION_POLICY
-          - KEEP_AUTO_SNAPSHOTS
-          - UNSPECIFIED_ON_SOURCE_DISK_DELETE
-        type: string
-    type: object
-  ResourcePolicyBackupSchedulePolicySchedule:
-    description: A schedule for disks where the schedueled operations are performed.
-    properties:
-      dailySchedule:
-        $ref: '#/definitions/ResourcePolicyDailyCycle'
-      hourlySchedule:
-        $ref: '#/definitions/ResourcePolicyHourlyCycle'
-      weeklySchedule:
-        $ref: '#/definitions/ResourcePolicyWeeklyCycle'
-    type: object
-  ResourcePolicyBackupSchedulePolicySnapshotProperties:
-    description: Specified snapshot properties for scheduled snapshots created by this policy.
-    properties:
-      guestFlush:
-        description: Indication to perform a ?guest aware? snapshot.
-        type: boolean
-      labels:
-        additionalProperties:
-          type: string
-        description: Labels to apply to scheduled snapshots. These can be later modified by the setLabels method. Label values may be empty.
-        type: object
-      storageLocations:
-        description: GCS bucket storage location of the auto snapshot (regional or multi-regional).
-        items:
-          type: string
-        type: array
     type: object
   ResourcePolicyDailyCycle:
     description: Time window specified for daily operations.
@@ -39587,6 +40717,68 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  ResourcePolicySnapshotSchedulePolicy:
+    description: A snapshot schedule policy specifies when and how frequently snapshots are to be created for the target disk. Also specifies how many and how long these scheduled snapshots should be retained.
+    properties:
+      retentionPolicy:
+        $ref: '#/definitions/ResourcePolicySnapshotSchedulePolicyRetentionPolicy'
+        description: Retention policy applied to snapshots created by this resource policy.
+      schedule:
+        $ref: '#/definitions/ResourcePolicySnapshotSchedulePolicySchedule'
+        description: A Vm Maintenance Policy specifies what kind of infrastructure maintenance we are allowed to perform on this VM and when. Schedule that is applied to disks covered by this policy.
+      snapshotProperties:
+        $ref: '#/definitions/ResourcePolicySnapshotSchedulePolicySnapshotProperties'
+        description: 'Properties with which snapshots are created such as labels, encryption keys.'
+    type: object
+  ResourcePolicySnapshotSchedulePolicyRetentionPolicy:
+    description: Policy for retention of scheduled snapshots.
+    properties:
+      maxRetentionDays:
+        description: Maximum age of the snapshot that is allowed to be kept.
+        format: int32
+        type: integer
+      onPolicySwitch:
+        description: 'Specifies the behavior to apply to existing, scheduled snapshots snapshots if the policy is changed.'
+        enum:
+          - DO_NOT_RETROACTIVELY_APPLY
+          - RETROACTIVELY_APPLY
+          - UNSPECIFIED_ON_POLICY_SWITCH
+        type: string
+      onSourceDiskDelete:
+        description: Specifies the behavior to apply to scheduled snapshots when the source disk is deleted.
+        enum:
+          - APPLY_RETENTION_POLICY
+          - KEEP_AUTO_SNAPSHOTS
+          - UNSPECIFIED_ON_SOURCE_DISK_DELETE
+        type: string
+    type: object
+  ResourcePolicySnapshotSchedulePolicySchedule:
+    description: A schedule for disks where the schedueled operations are performed.
+    properties:
+      dailySchedule:
+        $ref: '#/definitions/ResourcePolicyDailyCycle'
+      hourlySchedule:
+        $ref: '#/definitions/ResourcePolicyHourlyCycle'
+      weeklySchedule:
+        $ref: '#/definitions/ResourcePolicyWeeklyCycle'
+    type: object
+  ResourcePolicySnapshotSchedulePolicySnapshotProperties:
+    description: Specified snapshot properties for scheduled snapshots created by this policy.
+    properties:
+      guestFlush:
+        description: Indication to perform a ?guest aware? snapshot.
+        type: boolean
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to scheduled snapshots. These can be later modified by the setLabels method. Label values may be empty.
+        type: object
+      storageLocations:
+        description: GCS bucket storage location of the auto snapshot (regional or multi-regional).
+        items:
+          type: string
+        type: array
     type: object
   ResourcePolicyVmMaintenancePolicy:
     properties:
@@ -39694,6 +40886,9 @@ definitions:
         type: integer
       selfLink:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       tags:
         description: A list of instance tags to which this route applies.
@@ -39868,6 +41063,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
     type: object
   RouterAdvertisedIpRange:
@@ -40177,12 +41375,16 @@ definitions:
   RouterNatLogConfig:
     description: Configuration of logging on a NAT.
     properties:
-      enabled:
+      enable:
         description: Indicates whether or not to export logs. This is false by default.
+        type: boolean
+      enabled:
+        description: 'Indicates whether or not to export logs. This is false by default. [Deprecated] Use ''enable'' instead.'
         type: boolean
       filter:
         description: 'Specifies the desired filtering of logs on this NAT. If unspecified, logs are exported for all connections handled by this NAT.'
         enum:
+          - ALL
           - ERRORS_ONLY
           - TRANSLATIONS_ONLY
         type: string
@@ -40668,6 +41870,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       type:
         description: The type indicates the intended use of the security policy. CLOUD_ARMOR policies apply to backend services. FIREWALL policies apply to organizations.
         enum:
@@ -40926,7 +42131,7 @@ definitions:
         description: An Attestation Key (AK) issued to the Shielded VM's vTPM.
     type: object
   ShieldedVmIdentityEntry:
-    description: A Shielded VM Identity Entry.
+    description: A Shielded Instance Identity Entry.
     properties:
       ekCert:
         description: A PEM-encoded X.509 certificate. This field can be empty.
@@ -41011,6 +42216,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource''s resource id.'
         type: string
       snapshotEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -41226,6 +42434,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       selfManaged:
         $ref: '#/definitions/SslCertificateSelfManagedSslCertificate'
@@ -41615,6 +42826,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       warnings:
         description: '[Output Only] If potential misconfigurations are detected for this SSL policy, this field will be populated with warning messages.'
         items:
@@ -41745,7 +42959,7 @@ definitions:
         description: 'Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is to disable flow logging.'
         type: boolean
       enablePrivateV6Access:
-        description: Whether the VMs in this subnet can directly access Google services via internal IPv6 addresses. This field can be both set at resource creation time and updated using patch.
+        description: Deprecated in favor of enable in PrivateIpv6GoogleAccess. Whether the VMs in this subnet can directly access Google services via internal IPv6 addresses. This field can be both set at resource creation time and updated using patch.
         type: boolean
       fingerprint:
         description: |-
@@ -41794,6 +43008,16 @@ definitions:
       privateIpGoogleAccess:
         description: Whether the VMs in this subnet can access Google services without assigned external IP addresses. This field can be both set at resource creation time and updated using setPrivateIpGoogleAccess.
         type: boolean
+      privateIpv6GoogleAccess:
+        description: |-
+          The private IPv6 google access type for the VMs in this subnet. This is an expanded field of enablePrivateV6Access. If both fields are set, privateIpv6GoogleAccess will take priority.
+
+          This field can be both set at resource creation time and updated using patch.
+        enum:
+          - DISABLE_GOOGLE_ACCESS
+          - ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE
+          - ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE
+        type: string
       purpose:
         description: 'The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918.'
         enum:
@@ -41817,6 +43041,9 @@ definitions:
         type: array
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       state:
         description: '[Output Only] The state of the subnetwork, which can be one of READY or DRAINING. A subnetwork that is READY is ready to be used. The state of DRAINING is only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY.'
@@ -42212,6 +43439,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       urlMap:
         description: URL to the UrlMap resource that defines the mapping from URL to the BackendService.
         type: string
@@ -42464,6 +43694,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
+        type: string
       sslCertificates:
         description: 'URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates.'
         items:
@@ -42655,6 +43888,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       zone:
         description: '[Output Only] URL of the zone where the target instance resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
@@ -42909,6 +44145,9 @@ definitions:
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
+        type: string
+      selfLinkWithId:
+        description: '[Output Only] Server-defined URL for this resource with the resource id.'
         type: string
       sessionAffinity:
         description: |-
@@ -43736,12 +44975,21 @@ definitions:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
+      defaultRouteAction:
+        $ref: '#/definitions/HttpRouteAction'
+        description: |-
+          defaultRouteAction takes effect when none of the  hostRules match. The load balancer performs advanced routing actions like URL rewrites, header transformations, etc. prior to forwarding the request to the selected backend. If defaultRouteAction specifies any weightedBackendServices, defaultService must not be set. Conversely if defaultService is set, defaultRouteAction cannot contain any  weightedBackendServices.
+          Only one of defaultRouteAction or defaultUrlRedirect must be set.
       defaultService:
         description: |-
-          The URL of the backendService resource if none of the hostRules match.
-          Use defaultService instead of defaultRouteAction when simple routing to a backendService is desired and other advanced capabilities like traffic splitting and rewrites are not required.
-          Only one of defaultService, defaultRouteAction or defaultUrlRedirect should must be set.
+          The full or partial URL of the defaultService resource to which traffic is directed if none of the hostRules match. If defaultRouteAction is additionally specified, advanced routing actions like URL Rewrites, etc. take effect prior to sending the request to the backend. However, if defaultService is specified, defaultRouteAction cannot contain any weightedBackendServices. Conversely, if routeAction specifies any weightedBackendServices, service must not be specified.
+          Only one of defaultService, defaultUrlRedirect  or defaultRouteAction.weightedBackendService must be set.
         type: string
+      defaultUrlRedirect:
+        $ref: '#/definitions/HttpRedirectAction'
+        description: |-
+          When none of the specified hostRules match, the request is redirected to a URL specified by defaultUrlRedirect.
+          If defaultUrlRedirect is specified, defaultService or defaultRouteAction must not be set.
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
@@ -43752,6 +45000,11 @@ definitions:
           To see the latest fingerprint, make a get() request to retrieve a UrlMap.
         format: byte
         type: string
+      headerAction:
+        $ref: '#/definitions/HttpHeaderAction'
+        description: |-
+          Specifies changes to request and response headers that need to take effect for the selected backendService.
+          The headerAction specified here take effect after headerAction specified under pathMatcher.
       hostRules:
         description: The list of HostRules to use against the URL.
         items:
@@ -43864,8 +45117,15 @@ definitions:
   UrlMapTest:
     description: Message for the expected URL mappings.
     properties:
+      backendServiceWeight:
+        description: The weight to use for the supplied host and path when using advanced routing rules that involve traffic splitting.
+        format: uint32
+        type: integer
       description:
         description: Description of this test case.
+        type: string
+      expectedUrlRedirect:
+        description: The expected URL that should be redirected to for the host and path being tested.
         type: string
       host:
         description: Host portion of the URL.
@@ -44031,6 +45291,20 @@ definitions:
     properties:
       result:
         $ref: '#/definitions/UrlMapValidationResult'
+    type: object
+  UrlRewrite:
+    description: The spec for modifying the path before sending the request to the matched backend service.
+    properties:
+      hostRewrite:
+        description: |-
+          Prior to forwarding the request to the selected service, the request's host header is replaced with contents of hostRewrite.
+          The value must be between 1 and 255 characters.
+        type: string
+      pathPrefixRewrite:
+        description: |-
+          Prior to forwarding the request to the selected backend service, the matching portion of the request's path is replaced by pathPrefixRewrite.
+          The value must be between 1 and 1024 characters.
+        type: string
     type: object
   UsableSubnetwork:
     description: Subnetwork which the current user has compute.subnetworks.use permission on.
@@ -44806,6 +46080,24 @@ definitions:
       id:
         description: Expression ID should uniquely identify the origin of the expression. E.g. owasp-crs-v020901-id973337 identifies Owasp core rule set version 2.9.1 rule id 973337. The ID could be used to determine the individual attack definition that has been detected. It could also be used to exclude it from the policy in case of false positive.
         type: string
+    type: object
+  WeightedBackendService:
+    description: 'In contrast to a single BackendService in  HttpRouteAction to which all matching traffic is directed to, WeightedBackendService allows traffic to be split across multiple BackendServices. The volume of traffic for each BackendService is proportional to the weight specified in each WeightedBackendService'
+    properties:
+      backendService:
+        description: 'The full or partial URL to the default BackendService resource. Before forwarding the request to backendService, the loadbalancer applies any relevant headerActions specified as part of this backendServiceWeight.'
+        type: string
+      headerAction:
+        $ref: '#/definitions/HttpHeaderAction'
+        description: |-
+          Specifies changes to request and response headers that need to take effect for the selected backendService.
+          headerAction specified here take effect before headerAction in the enclosing HttpRouteRule, PathMatcher and UrlMap.
+      weight:
+        description: |-
+          Specifies the fraction of traffic sent to backendService. The sum of all weights specified in weightedBackendServices within HttpRouteAction must equal 100.
+          The selection of a backend service is determined only for new traffic. Once a user's request has been directed to a backendService, subsequent requests will be sent to the same backendService as determined by the BackendService's session affinity policy.
+        format: uint32
+        type: integer
     type: object
   XpnHostList:
     properties:

@@ -320,6 +320,7 @@ definitions:
           - PICTURE
           - RULER
           - BARCODE
+          - KEY_VALUE_PAIR
         type: string
       boundingBox:
         $ref: '#/definitions/BoundingPoly'
@@ -542,7 +543,7 @@ definitions:
         $ref: '#/definitions/BoundingPoly'
         description: |-
           The bounding polygon for the crop region. The coordinates of the bounding
-          box are in the original image's scale, as returned in `ImageParams`.
+          box are in the original image's scale.
       confidence:
         description: 'Confidence of this being a salient region.  Range [0, 1].'
         format: float
@@ -692,7 +693,7 @@ definitions:
         $ref: '#/definitions/BoundingPoly'
         description: |-
           The bounding polygon around the face. The coordinates of the bounding box
-          are in the original image's scale, as returned in `ImageParams`.
+          are in the original image's scale.
           The bounding box is computed to "frame" the face in accordance with human
           expectations. It is based on the landmarker results.
           Note that one or more x and/or y coordinates may not be generated in the
@@ -935,6 +936,7 @@ definitions:
           - PICTURE
           - RULER
           - BARCODE
+          - KEY_VALUE_PAIR
         type: string
       boundingBox:
         $ref: '#/definitions/GoogleCloudVisionV1p1beta1BoundingPoly'
@@ -1012,7 +1014,7 @@ definitions:
         $ref: '#/definitions/GoogleCloudVisionV1p1beta1BoundingPoly'
         description: |-
           The bounding polygon for the crop region. The coordinates of the bounding
-          box are in the original image's scale, as returned in `ImageParams`.
+          box are in the original image's scale.
       confidence:
         description: 'Confidence of this being a salient region.  Range [0, 1].'
         format: float
@@ -1131,7 +1133,7 @@ definitions:
         $ref: '#/definitions/GoogleCloudVisionV1p1beta1BoundingPoly'
         description: |-
           The bounding polygon around the face. The coordinates of the bounding box
-          are in the original image's scale, as returned in `ImageParams`.
+          are in the original image's scale.
           The bounding box is computed to "frame" the face in accordance with human
           expectations. It is based on the landmarker results.
           Note that one or more x and/or y coordinates may not be generated in the
@@ -2137,6 +2139,7 @@ definitions:
           - PICTURE
           - RULER
           - BARCODE
+          - KEY_VALUE_PAIR
         type: string
       boundingBox:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
@@ -2214,7 +2217,7 @@ definitions:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
         description: |-
           The bounding polygon for the crop region. The coordinates of the bounding
-          box are in the original image's scale, as returned in `ImageParams`.
+          box are in the original image's scale.
       confidence:
         description: 'Confidence of this being a salient region.  Range [0, 1].'
         format: float
@@ -2349,7 +2352,7 @@ definitions:
         $ref: '#/definitions/GoogleCloudVisionV1p2beta1BoundingPoly'
         description: |-
           The bounding polygon around the face. The coordinates of the bounding box
-          are in the original image's scale, as returned in `ImageParams`.
+          are in the original image's scale.
           The bounding box is computed to "frame" the face in accordance with human
           expectations. It is based on the landmarker results.
           Note that one or more x and/or y coordinates may not be generated in the
@@ -3483,6 +3486,7 @@ definitions:
           - PICTURE
           - RULER
           - BARCODE
+          - KEY_VALUE_PAIR
         type: string
       boundingBox:
         $ref: '#/definitions/GoogleCloudVisionV1p3beta1BoundingPoly'
@@ -3560,7 +3564,7 @@ definitions:
         $ref: '#/definitions/GoogleCloudVisionV1p3beta1BoundingPoly'
         description: |-
           The bounding polygon for the crop region. The coordinates of the bounding
-          box are in the original image's scale, as returned in `ImageParams`.
+          box are in the original image's scale.
       confidence:
         description: 'Confidence of this being a salient region.  Range [0, 1].'
         format: float
@@ -3679,7 +3683,7 @@ definitions:
         $ref: '#/definitions/GoogleCloudVisionV1p3beta1BoundingPoly'
         description: |-
           The bounding polygon around the face. The coordinates of the bounding box
-          are in the original image's scale, as returned in `ImageParams`.
+          are in the original image's scale.
           The bounding box is computed to "frame" the face in accordance with human
           expectations. It is based on the landmarker results.
           Note that one or more x and/or y coordinates may not be generated in the

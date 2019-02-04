@@ -119,11 +119,11 @@ paths:
         is the parent resource, without the operations collection id.
       operationId: cloudfunctions.operations.list
       parameters:
-        - description: The standard list filter.
+        - description: 'Required. A filter for matching the requested operations.<br><br> The supported formats of <b>filter</b> are:<br> To query for specific function: <code>project:*,location:*,function:*</code><br> To query for all of the latest operations for a project: <code>project:*,latest:true</code>'
           in: query
           name: filter
           type: string
-        - description: The name of the operation's parent resource.
+        - description: Must not be set.
           in: query
           name: name
           type: string
@@ -224,13 +224,10 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: cloudfunctions.operations.get
+      description: Returns a function with the given name from the requested project.
+      operationId: cloudfunctions.projects.locations.functions.get
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the function which details should be obtained.
           in: path
           name: name
           required: true
@@ -240,12 +237,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/CloudFunction'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - operations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -526,8 +523,8 @@ paths:
   '/v1/{resource}:getIamPolicy':
     get:
       description: |-
-        Gets the access control policy for a resource.
-        Returns an empty policy if the resource exists and does not have a policy
+        Gets the IAM access control policy for a function.
+        Returns an empty policy if the function exists and does not have a policy
         set.
       operationId: cloudfunctions.projects.locations.functions.getIamPolicy
       parameters:
@@ -576,8 +573,8 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Sets the access control policy on the specified resource. Replaces any
-        existing policy.
+        Sets the IAM access control policy on the specified function.
+        Replaces any existing policy.
       operationId: cloudfunctions.projects.locations.functions.setIamPolicy
       parameters:
         - in: body
@@ -617,13 +614,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Returns permissions that a caller has on the specified resource.
-        If the resource does not exist, this will return an empty set of
+        Tests the specified permissions against the IAM access control policy
+        for a function.
+        If the function does not exist, this will return an empty set of
         permissions, not a NOT_FOUND error.
-
-        Note: This operation is designed to be used for building permission-aware
-        UIs and command-line tools, not for authorization checking. This operation
-        may "fail open" without warning.
       operationId: cloudfunctions.projects.locations.functions.testIamPermissions
       parameters:
         - in: body

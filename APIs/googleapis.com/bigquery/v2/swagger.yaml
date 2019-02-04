@@ -1356,6 +1356,9 @@ definitions:
       googleSheetsOptions:
         $ref: '#/definitions/GoogleSheetsOptions'
         description: '[Optional] Additional options if sourceFormat is set to GOOGLE_SHEETS.'
+      hivePartitioningMode:
+        description: '[Optional, Experimental] If hive partitioning is enabled, which mode to use. Two modes are supported: - AUTO: automatically infer partition key name(s) and type(s). - STRINGS: automatic infer partition key name(s). All types are strings. Not all storage formats support hive partitioning -- requesting hive partitioning on an unsupported format will lead to an error.'
+        type: string
       ignoreUnknownValues:
         description: '[Optional] Indicates if BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The sourceFormat property determines what BigQuery treats as an extra value: CSV: Trailing columns JSON: Named values that don''t match any column names Google Cloud Bigtable: This setting is ignored. Google Cloud Datastore backups: This setting is ignored. Avro: This setting is ignored.'
         type: boolean
@@ -1594,6 +1597,9 @@ definitions:
         type: string
       fieldDelimiter:
         description: '[Optional] The separator for fields in a CSV file. The separator can be any ISO-8859-1 single-byte character. To use a character in the range 128-255, you must encode the character as UTF8. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. BigQuery also supports the escape sequence "\t" to specify a tab separator. The default value is a comma ('','').'
+        type: string
+      hivePartitioningMode:
+        description: '[Optional, Experimental] If hive partitioning is enabled, which mode to use. Two modes are supported: - AUTO: automatically infer partition key name(s) and type(s). - STRINGS: automatic infer partition key name(s). All types are strings. Not all storage formats support hive partitioning -- requesting hive partitioning on an unsupported format will lead to an error.'
         type: string
       ignoreUnknownValues:
         description: '[Optional] Indicates if BigQuery should allow extra values that are not represented in the table schema. If true, the extra values are ignored. If false, records with extra columns are treated as bad records, and if there are too many bad records, an invalid error is returned in the job result. The default value is false. The sourceFormat property determines what BigQuery treats as an extra value: CSV: Trailing columns JSON: Named values that don''t match any column names'
@@ -2473,6 +2479,15 @@ definitions:
     type: object
   TableFieldSchema:
     properties:
+      categories:
+        description: '[Optional] The categories attached to this field, used for field-level access control.'
+        properties:
+          names:
+            description: 'A list of category resource names. For example, "projects/1/taxonomies/2/categories/3". At most 5 categories are allowed.'
+            items:
+              type: string
+            type: array
+        type: object
       description:
         description: '[Optional] The field description. The maximum length is 1,024 characters.'
         type: string

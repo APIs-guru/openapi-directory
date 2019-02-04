@@ -1202,6 +1202,11 @@ definitions:
   Service:
     description: Encapsulates a single service in Google Cloud Platform.
     properties:
+      businessEntityName:
+        description: |-
+          The business under which the service is offered.
+          Ex. "businessEntities/GCP", "businessEntities/Maps"
+        type: string
       displayName:
         description: A human readable display name for this service.
         type: string

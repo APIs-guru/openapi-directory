@@ -109,16 +109,13 @@ tags:
 paths:
   '/v1/{name}':
     delete:
-      description: |-
-        Delete a `Ruleset` by resource name.
-
-        If the `Ruleset` is referenced by a `Release` the operation will fail.
-      operationId: firebaserules.projects.rulesets.delete
+      description: Delete a `Release` by resource name.
+      operationId: firebaserules.projects.releases.delete
       parameters:
         - description: |-
-            Resource name for the ruleset to delete.
+            Resource name for the `Release` to delete.
 
-            Format: `projects/{project_id}/rulesets/{ruleset_id}`
+            Format: `projects/{project_id}/releases/{release_id}`
           in: path
           name: name
           required: true
@@ -137,13 +134,13 @@ paths:
       tags:
         - projects
     get:
-      description: Get a `Ruleset` by name including the full `Source` contents.
-      operationId: firebaserules.projects.rulesets.get
+      description: Get a `Release` by name.
+      operationId: firebaserules.projects.releases.get
       parameters:
         - description: |-
-            Resource name for the ruleset to get.
+            Resource name of the `Release`.
 
-            Format: `projects/{project_id}/rulesets/{ruleset_id}`
+            Format: `projects/{project_id}/releases/{release_id}`
           in: path
           name: name
           required: true
@@ -153,7 +150,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Ruleset'
+            $ref: '#/definitions/Release'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

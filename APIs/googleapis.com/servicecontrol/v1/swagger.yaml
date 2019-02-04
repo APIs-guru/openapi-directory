@@ -622,6 +622,12 @@ definitions:
       detail:
         description: Free-form text providing details on the error cause of the error.
         type: string
+      status:
+        $ref: '#/definitions/Status'
+        description: |-
+          Contains public information about the check error. If available,
+          `status.code` will be non zero and client can propagate it out as public
+          error.
       subject:
         description: |-
           Subject to whom this error applies. See the specific code enum for more
@@ -667,6 +673,7 @@ definitions:
         description: |-
           Indicates if service activation check should be skipped for this request.
           Default behavior is to perform the check and apply relevant quota.
+          WARNING: Setting this flag to "true" will disable quota enforcement.
         type: boolean
     type: object
   CheckResponse:
@@ -1733,6 +1740,8 @@ definitions:
       currentLocations:
         description: |-
           The locations of a resource after the execution of the operation.
+          Requests to create or delete a location based resource must populate
+          the 'current_locations' field and not the 'original_locations' field.
           For example:
 
               "europe-west1-a"
@@ -1744,6 +1753,8 @@ definitions:
       originalLocations:
         description: |-
           The locations of a resource prior to the execution of the operation.
+          Requests that mutate the resource's location must populate both the
+          'original_locations' as well as the 'current_locations' fields.
           For example:
 
               "europe-west1-a"

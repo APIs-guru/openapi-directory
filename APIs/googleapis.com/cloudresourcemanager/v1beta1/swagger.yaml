@@ -660,7 +660,10 @@ paths:
       description: Fetches an Organization resource identified by the specified resource name.
       operationId: cloudresourcemanager.organizations.get
       parameters:
-        - description: 'The resource name of the Organization to fetch, e.g. "organizations/1234".'
+        - description: |-
+            The resource name of the Organization to fetch. This is the organization's
+            relative path in the API, formatted as "organizations/[organizationId]".
+            For example, "organizations/1234".
           in: path
           name: name
           required: true

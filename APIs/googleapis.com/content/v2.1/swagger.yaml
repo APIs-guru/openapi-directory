@@ -84,7 +84,6 @@ tags:
   - name: datafeedstatuses
   - name: liasettings
   - name: orderinvoices
-  - name: orderpayments
   - name: orderreports
   - name: orderreturns
   - name: orders
@@ -152,6 +151,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
+      description: Retrieves multiple Merchant Center account statuses in a single request.
       operationId: content.accountstatuses.custombatch
       parameters:
         - in: body
@@ -1436,154 +1436,6 @@ paths:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - orderinvoices
-  '/{merchantId}/orderpayments/{orderId}/notifyAuthApproved':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Notify about successfully authorizing user's payment method for a given amount.
-      operationId: content.orderpayments.notifyauthapproved
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyAuthApprovedRequest'
-        - description: The ID of the account that manages the order. This cannot be a multi-client account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order for for which payment authorization is happening.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyAuthApprovedResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orderpayments
-  '/{merchantId}/orderpayments/{orderId}/notifyAuthDeclined':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Notify about failure to authorize user's payment method.
-      operationId: content.orderpayments.notifyauthdeclined
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyAuthDeclinedRequest'
-        - description: The ID of the account that manages the order. This cannot be a multi-client account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order for which payment authorization was declined.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyAuthDeclinedResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orderpayments
-  '/{merchantId}/orderpayments/{orderId}/notifyCharge':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Notify about charge on user's selected payments method.
-      operationId: content.orderpayments.notifycharge
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyChargeRequest'
-        - description: The ID of the account that manages the order. This cannot be a multi-client account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order for which charge is happening.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyChargeResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orderpayments
-  '/{merchantId}/orderpayments/{orderId}/notifyRefund':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Notify about refund on user's selected payments method.
-      operationId: content.orderpayments.notifyrefund
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyRefundRequest'
-        - description: The ID of the account that manages the order. This cannot be a multi-client account.
-          in: path
-          name: merchantId
-          required: true
-          type: string
-        - description: The ID of the order for which charge is happening.
-          in: path
-          name: orderId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/OrderpaymentsNotifyRefundResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/content'
-      tags:
-        - orderpayments
   '/{merchantId}/orderreports/disbursements':
     get:
       description: Retrieves a report for disbursements from your Merchant Center account.
@@ -3323,6 +3175,15 @@ definitions:
       emailAddress:
         description: User's email address.
         type: string
+      orderManager:
+        description: Whether user is an order manager.
+        type: boolean
+      paymentsAnalyst:
+        description: Whether user can access payment statements.
+        type: boolean
+      paymentsManager:
+        description: Whether user can manage payment settings.
+        type: boolean
     type: object
   AccountYouTubeChannelLink:
     properties:
@@ -3617,10 +3478,10 @@ definitions:
     type: object
   Amount:
     properties:
-      pretax:
+      priceAmount:
         $ref: '#/definitions/Price'
-        description: '[required] Value before taxes.'
-      tax:
+        description: '[required] The pre-tax or post-tax price depending on the location of the order.'
+      taxAmount:
         $ref: '#/definitions/Price'
         description: '[required] Tax value.'
     type: object
@@ -4586,6 +4447,9 @@ definitions:
       status:
         description: The status of the order.
         type: string
+      taxCollector:
+        description: The party responsible for collecting and remitting taxes.
+        type: string
     type: object
   OrderAddress:
     properties:
@@ -4877,9 +4741,9 @@ definitions:
       merchantPromotionId:
         description: This field is used to identify promotions within merchants' own systems.
         type: string
-      pretaxValue:
+      priceValue:
         $ref: '#/definitions/Price'
-        description: Estimated discount applied to pre-tax amount.
+        description: Estimated discount applied to price. Amount is pre-tax or post-tax depending on location of order.
       shortTitle:
         description: A short title of the promotion to be shown on the checkout page.
         type: string
@@ -4970,7 +4834,7 @@ definitions:
         description: The id of the order.
         type: string
       productAmount:
-        $ref: '#/definitions/Amount'
+        $ref: '#/definitions/ProductAmount'
         description: Total amount for the items.
       transactionDate:
         description: 'The date of the transaction, in ISO 8601 format.'
@@ -5133,81 +4997,6 @@ definitions:
         type: string
       reason:
         description: '[required] Reason for the return.'
-        type: string
-    type: object
-  OrderpaymentsNotifyAuthApprovedRequest:
-    properties:
-      authAmountPretax:
-        $ref: '#/definitions/Price'
-      authAmountTax:
-        $ref: '#/definitions/Price'
-    type: object
-  OrderpaymentsNotifyAuthApprovedResponse:
-    properties:
-      executionStatus:
-        description: The status of the execution.
-        type: string
-      kind:
-        default: 'content#orderpaymentsNotifyAuthApprovedResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderpaymentsNotifyAuthApprovedResponse".'
-        type: string
-    type: object
-  OrderpaymentsNotifyAuthDeclinedRequest:
-    properties:
-      declineReason:
-        description: Reason why payment authorization was declined.
-        type: string
-    type: object
-  OrderpaymentsNotifyAuthDeclinedResponse:
-    properties:
-      executionStatus:
-        description: The status of the execution.
-        type: string
-      kind:
-        default: 'content#orderpaymentsNotifyAuthDeclinedResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderpaymentsNotifyAuthDeclinedResponse".'
-        type: string
-    type: object
-  OrderpaymentsNotifyChargeRequest:
-    properties:
-      chargeState:
-        description: Whether charge was successful.
-        type: string
-      invoiceIds:
-        description: Invoice IDs from the orderinvoices service that correspond to the charge.
-        items:
-          type: string
-        type: array
-    type: object
-  OrderpaymentsNotifyChargeResponse:
-    properties:
-      executionStatus:
-        description: The status of the execution.
-        type: string
-      kind:
-        default: 'content#orderpaymentsNotifyChargeResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderpaymentsNotifyChargeResponse".'
-        type: string
-    type: object
-  OrderpaymentsNotifyRefundRequest:
-    properties:
-      invoiceIds:
-        description: Invoice IDs from the orderinvoices service that correspond to the refund.
-        items:
-          type: string
-        type: array
-      refundState:
-        description: Whether refund was successful.
-        type: string
-    type: object
-  OrderpaymentsNotifyRefundResponse:
-    properties:
-      executionStatus:
-        description: The status of the execution.
-        type: string
-      kind:
-        default: 'content#orderpaymentsNotifyRefundResponse'
-        description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderpaymentsNotifyRefundResponse".'
         type: string
     type: object
   OrderreportsListDisbursementsResponse:
@@ -5525,7 +5314,7 @@ definitions:
         type: string
       priceAmount:
         $ref: '#/definitions/Price'
-        description: 'The amount to be refunded. This may be pre-tax or post-tax depending on the location of the order. If omitted, refundless return is assumed. Optional, but if filled then both priceAmount and taxAmount must be set.'
+        description: 'The amount to be refunded. This may be pre-tax or post-tax depending on the location of the order. If omitted, refundless return is assumed.'
       productId:
         description: The ID of the product to return. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
@@ -5541,7 +5330,7 @@ definitions:
         type: string
       taxAmount:
         $ref: '#/definitions/Price'
-        description: The amount of tax to be refunded.
+        description: 'The amount of tax to be refunded. Optional, but if filled, then priceAmount must be set. Calculated automatically if not provided.'
     type: object
   OrdersReturnRefundLineItemResponse:
     properties:
@@ -6289,6 +6078,18 @@ definitions:
         $ref: '#/definitions/ProductUnitPricingMeasure'
         description: The measure and dimension of an item.
     type: object
+  ProductAmount:
+    properties:
+      priceAmount:
+        $ref: '#/definitions/Price'
+        description: The pre-tax or post-tax price depending on the location of the order.
+      remittedTaxAmount:
+        $ref: '#/definitions/Price'
+        description: Remitted tax value.
+      taxAmount:
+        $ref: '#/definitions/Price'
+        description: Tax value.
+    type: object
   ProductShipping:
     properties:
       country:
@@ -6936,9 +6737,6 @@ definitions:
       shippingDetails:
         $ref: '#/definitions/OrderLineItemShippingDetails'
         description: Details of the requested shipping for the line item.
-      unitTax:
-        $ref: '#/definitions/Price'
-        description: Unit tax for the line item.
     type: object
   TestOrderLineItemProduct:
     properties:
@@ -6971,7 +6769,7 @@ definitions:
         type: string
       price:
         $ref: '#/definitions/Price'
-        description: The price for the product.
+        description: 'The price for the product. Tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied.'
       targetCountry:
         description: The CLDR territory code of the target country of the product.
         type: string
@@ -6996,9 +6794,9 @@ definitions:
         items:
           $ref: '#/definitions/Promotion'
         type: array
-      unitPricePretax:
+      unitPrice:
         $ref: '#/definitions/Price'
-        description: '[required] Price of the unit, before applying taxes.'
+        description: '[required] Pre-tax or post-tax price of the unit depending on the locality of the order.'
       unitPriceTaxes:
         description: Tax amounts to apply to the unit price.
         items:

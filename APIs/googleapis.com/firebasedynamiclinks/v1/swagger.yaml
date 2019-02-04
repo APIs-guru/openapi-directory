@@ -753,6 +753,11 @@ definitions:
       invitationId:
         description: 'Optional invitation ID, for only invite typed requested FDL links.'
         type: string
+      iosMinAppVersion:
+        description: |-
+          FDL input value of the "&imv=" parameter, minimum app version to be
+          returned to Google Firebase SDK running on iOS-9.
+        type: string
       resolvedLink:
         description: |-
           The entire FDL, expanded from a short link. It is the same as the

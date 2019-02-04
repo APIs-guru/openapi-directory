@@ -337,25 +337,6 @@ paths:
       tags:
         - enterprises
   '/enterprises/{enterpriseId}/androidDevicePolicyConfig':
-    get:
-      description: Deprecated and unused.
-      operationId: androidenterprise.enterprises.getAndroidDevicePolicyConfig
-      parameters:
-        - description: The ID of the enterprise.
-          in: path
-          name: enterpriseId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AndroidDevicePolicyConfig'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/androidenterprise'
-      tags:
-        - enterprises
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -539,7 +520,7 @@ paths:
           in: query
           name: query
           type: string
-        - description: 'A pagination token is contained in a request''''s response when there are more products. The token can be used in a subsequent request to obtain more products, and so forth. This parameter cannot be used in the initial request.'
+        - description: 'A pagination token is contained in a request''s response when there are more products. The token can be used in a subsequent request to obtain more products, and so forth. This parameter cannot be used in the initial request.'
           in: query
           name: token
           type: string
@@ -3110,31 +3091,31 @@ definitions:
     description: The Auto install constraint. Defines a set of restrictions for installation. At least one of the fields must be set.
     properties:
       chargingStateConstraint:
-        description: Charging state to constrain on.
+        description: Charging state constraint.
         type: string
       deviceIdleStateConstraint:
-        description: The idle state of the device to constrain on.
+        description: Device idle state constraint.
         type: string
       networkTypeConstraint:
-        description: Network type to constrain on.
+        description: Network type constraint.
         type: string
     type: object
   AutoInstallPolicy:
     properties:
       autoInstallConstraint:
-        description: The constraints for the install. Currently there can be at most one constraint.
+        description: Constraints for auto-installing the app. You can specify a maximum of one constraint.
         items:
           $ref: '#/definitions/AutoInstallConstraint'
         type: array
       autoInstallMode:
-        description: The auto install mode. If unset defaults to AVAILABLE.
+        description: The auto-install mode. If unset defaults to "doNotAutoInstall".
         type: string
       autoInstallPriority:
-        description: 'The priority of the install, as an unsigned integer. Lower number means higher priority.'
+        description: 'The priority of the install, as an unsigned integer. A lower number means higher priority.'
         format: int32
         type: integer
       minimumVersionCode:
-        description: 'The minimum version of the app. If a lower version of the app is installed then the app will be auto-updated according to the auto-install constraints, instead of waiting for the regular auto-update.'
+        description: 'The minimum version of the app. If a lower version of the app is installed, then the app will be auto-updated according to the auto-install constraints, instead of waiting for the regular auto-update.'
         format: int32
         type: integer
     type: object
@@ -4178,7 +4159,7 @@ definitions:
         description: The display mode of the web app.
         type: string
       icons:
-        description: A list of icons representing this website. Must have at least one element.
+        description: 'A list of icons representing this website. If absent, a default icon (for create) or the current icon (for update) will be used.'
         items:
           $ref: '#/definitions/WebAppIcon'
         type: array

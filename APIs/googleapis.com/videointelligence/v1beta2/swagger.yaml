@@ -1441,13 +1441,29 @@ definitions:
         $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_Entity'
         description: Entity to specify the object category that this track is labeled as.
       frames:
-        description: Information corresponding to all frames where this object track appears.
+        description: |-
+          Information corresponding to all frames where this object track appears.
+          Non-streaming batch mode: it may be one or multiple ObjectTrackingFrame
+          messages in frames.
+          Streaming mode: it can only be one ObjectTrackingFrame message in frames.
         items:
           $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame'
         type: array
       segment:
         $ref: '#/definitions/GoogleCloudVideointelligenceV1p2beta1_VideoSegment'
-        description: Each object track corresponds to one video segment where it appears.
+        description: |-
+          Non-streaming batch mode ONLY.
+          Each object track corresponds to one video segment where it appears.
+      trackId:
+        description: |-
+          Streaming mode ONLY.
+          In streaming mode, we do not know the end time of a tracked object
+          before it is completed. Hence, there is no VideoSegment info returned.
+          Instead, we provide a unique identifiable integer track_id so that
+          the customers can correlate the results of the ongoing
+          ObjectTrackAnnotation of the same track_id over time.
+        format: int64
+        type: string
     type: object
   GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingFrame:
     description: |-

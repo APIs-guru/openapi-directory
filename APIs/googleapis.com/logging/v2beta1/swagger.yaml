@@ -564,7 +564,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter. The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
+      description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter.The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
       operationId: logging.projects.sinks.update
       parameters:
         - in: body
@@ -850,11 +850,11 @@ definitions:
           "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
           "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
           "folders/[FOLDER_ID]/logs/[LOG_ID]"
-          A project number may optionally be used in place of PROJECT_ID. The  project number is translated to its corresponding PROJECT_ID internally  and the log_name field will contain PROJECT_ID in queries and exports.[LOG_ID] must be URL-encoded within log_name. Example: "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". [LOG_ID] must be less than 512 characters long and can only include the following characters: upper and lower case alphanumeric characters, forward-slash, underscore, hyphen, and period.For backward compatibility, if log_name begins with a forward-slash, such as /projects/..., then the log entry is ingested as usual but the forward-slash is removed. Listing the log entry will not show the leading slash and filtering for a log name with a leading slash will never return any results.
+          A project number may optionally be used in place of PROJECT_ID. The project number is translated to its corresponding PROJECT_ID internally and the log_name field will contain PROJECT_ID in queries and exports.[LOG_ID] must be URL-encoded within log_name. Example: "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity". [LOG_ID] must be less than 512 characters long and can only include the following characters: upper and lower case alphanumeric characters, forward-slash, underscore, hyphen, and period.For backward compatibility, if log_name begins with a forward-slash, such as /projects/..., then the log entry is ingested as usual but the forward-slash is removed. Listing the log entry will not show the leading slash and filtering for a log name with a leading slash will never return any results.
         type: string
       metadata:
         $ref: '#/definitions/MonitoredResourceMetadata'
-        description: 'Output only. Additional metadata about the monitored resource. Only k8s_container, k8s_pod, and k8s_node MonitoredResources have this field populated.'
+        description: 'Output only. Additional metadata about the monitored resource.Only k8s_container, k8s_pod, and k8s_node MonitoredResources have this field populated.'
       operation:
         $ref: '#/definitions/LogEntryOperation'
         description: 'Optional. Information about an operation associated with the log entry, if applicable.'
@@ -869,7 +869,7 @@ definitions:
         type: string
       resource:
         $ref: '#/definitions/MonitoredResource'
-        description: 'Required. The primary monitored resource associated with this log entry. Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.'
+        description: 'Required. The primary monitored resource associated with this log entry.Example: a log entry that reports a database error would be associated with the monitored resource designating the particular database that reported the error.'
       severity:
         description: Optional. The severity of the log entry. The default value is LogSeverity.DEFAULT.
         enum:
@@ -887,7 +887,7 @@ definitions:
         $ref: '#/definitions/LogEntrySourceLocation'
         description: 'Optional. Source code location information associated with the log entry, if any.'
       spanId:
-        description: 'Optional. The span ID within the trace associated with the log entry. For Trace spans, this is the same format that the Trace API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such as <code>"000000000000004a"</code>.'
+        description: 'Optional. The span ID within the trace associated with the log entry.For Trace spans, this is the same format that the Trace API v2 uses: a 16-character hexadecimal encoding of an 8-byte array, such as <code>"000000000000004a"</code>.'
         type: string
       textPayload:
         description: 'The log entry payload, represented as a Unicode string (UTF-8).'
@@ -900,7 +900,7 @@ definitions:
         description: 'Optional. Resource name of the trace associated with the log entry, if any. If it contains a relative resource name, the name is assumed to be relative to //tracing.googleapis.com. Example: projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824'
         type: string
       traceSampled:
-        description: 'Optional. The sampling decision of the trace associated with the log entry. True means that the trace resource name in the trace field was sampled for storage in a trace backend. False means that the trace was not sampled for storage when this log entry was written, or the sampling decision was unknown at the time. A non-sampled trace value is still useful as a request correlation identifier. The default is False.'
+        description: 'Optional. The sampling decision of the trace associated with the log entry.True means that the trace resource name in the trace field was sampled for storage in a trace backend. False means that the trace was not sampled for storage when this log entry was written, or the sampling decision was unknown at the time. A non-sampled trace value is still useful as a request correlation identifier. The default is False.'
         type: boolean
     type: object
   LogEntryOperation:
@@ -966,6 +966,10 @@ definitions:
       bucketOptions:
         $ref: '#/definitions/BucketOptions'
         description: Optional. The bucket_options are required when the logs-based metric is using a DISTRIBUTION value type and it describes the bucket boundaries used to create a histogram of the extracted values.
+      createTime:
+        description: Output only. The creation timestamp of the metric.This field may not be present for older metrics.
+        format: google-datetime
+        type: string
       description:
         description: 'Optional. A description of this metric, which is used in documentation. The maximum length of the description is 8000 characters.'
         type: string
@@ -986,6 +990,10 @@ definitions:
       name:
         description: 'Required. The client-assigned metric identifier. Examples: "error_count", "nginx/requests".Metric identifiers are limited to 100 characters and can include only the following characters: A-Z, a-z, 0-9, and the special characters _-.,+!*'',()%/. The forward-slash character (/) denotes a hierarchy of name pieces, and it cannot be the first character of the name.The metric identifier in this field must not be URL-encoded (https://en.wikipedia.org/wiki/Percent-encoding). However, when the metric identifier appears as the [METRIC_ID] part of a metric_name API parameter, then the metric identifier must be URL-encoded. Example: "projects/my-project/metrics/nginx%2Frequests".'
         type: string
+      updateTime:
+        description: Output only. The last update timestamp of the metric.This field may not be present for older metrics.
+        format: google-datetime
+        type: string
       valueExtractor:
         description: 'Optional. A value_extractor is required when using a distribution logs-based metric to extract the values to record from a log entry. Two functions are supported for value extraction: EXTRACT(field) or REGEXP_EXTRACT(field, regex). The argument are:  1. field: The name of the log entry field from which the value is to be  extracted.  2. regex: A regular expression using the Google RE2 syntax  (https://github.com/google/re2/wiki/Syntax) with a single capture  group to extract data from the specified log entry field. The value  of the field is converted to a string before applying the regex.  It is an error to specify a regex that does not include exactly one  capture group.The result of the extraction must be convertible to a double type, as the distribution always records double values. If either the extraction or the conversion to double fails, then those values are not recorded in the distribution.Example: REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")'
         type: string
@@ -999,13 +1007,17 @@ definitions:
   LogSink:
     description: 'Describes a sink used to export log entries to one of the following destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or a Cloud Pub/Sub topic. A logs filter controls which log entries are exported. The sink must be created within a project, organization, billing account, or folder.'
     properties:
+      createTime:
+        description: Output only. The creation timestamp of the sink.This field may not be present for older sinks.
+        format: google-datetime
+        type: string
       destination:
         description: |-
           Required. The export destination:
           "storage.googleapis.com/[GCS_BUCKET]"
           "bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET]"
           "pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]"
-          The sink's writer_identity, set when the sink is created, must have permission to write to the destination or else the log entries are not exported. For more information, see Exporting Logs With Sinks.
+          The sink's writer_identity, set when the sink is created, must have permission to write to the destination or else the log entries are not exported. For more information, see Exporting Logs with Sinks.
         type: string
       filter:
         description: |
@@ -1028,8 +1040,12 @@ definitions:
           - V2
           - V1
         type: string
+      updateTime:
+        description: Output only. The last update timestamp of the sink.This field may not be present for older sinks.
+        format: google-datetime
+        type: string
       writerIdentity:
-        description: 'Output only. An IAM identity&mdash;a service account or group&mdash;under which Logging writes the exported log entries to the sink''s destination. This field is set by sinks.create and sinks.update, based on the setting of unique_writer_identity in those methods.Until you grant this identity write-access to the destination, log entry exports from this sink will fail. For more information, see Granting access for a resource. Consult the destination service''s documentation to determine the appropriate IAM roles to assign to the identity.'
+        description: 'Output only. An IAM identity&mdash;a service account or group&mdash;under which Logging writes the exported log entries to the sink''s destination. This field is set by sinks.create and sinks.update based on the value of unique_writer_identity in those methods.Until you grant this identity write-access to the destination, log entry exports from this sink will fail. For more information, see Granting Access for a Resource. Consult the destination service''s documentation to determine the appropriate IAM roles to assign to the identity.'
         type: string
     type: object
   MetricDescriptor:

@@ -230,8 +230,8 @@ definitions:
           $ref: '#/definitions/AttributeValue'
         description: |-
           The set of attributes. Each attribute's key can be up to 128 bytes
-          long. The value can be a string up to 256 bytes, an integer, or the
-          Boolean values `true` and `false`. For example:
+          long. The value can be a string up to 256 bytes, a signed 64-bit integer,
+          or the Boolean values `true` and `false`. For example:
 
               "/instance_id": "my-instance"
               "/http/user_agent": ""

@@ -104,37 +104,12 @@ tags:
 paths:
   '/v1/{name}':
     delete:
-      description: |-
-        Deletes a long-running operation. This method indicates that the client is
-        no longer interested in the operation result. It does not cancel the
-        operation. If the server doesn't support this method, it returns
-        `google.rpc.Code.UNIMPLEMENTED`.
-      operationId: composer.projects.locations.operations.delete
+      description: Delete an environment.
+      operationId: composer.projects.locations.environments.delete
       parameters:
-        - description: The name of the operation resource to be deleted.
-          in: path
-          name: name
-          required: true
-          type: string
-          x-reservedExpansion: true
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Empty'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-      tags:
-        - projects
-    get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: composer.projects.locations.operations.get
-      parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            The environment to delete, in the form:
+            "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
           in: path
           name: name
           required: true
@@ -145,6 +120,28 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    get:
+      description: Get an existing environment.
+      operationId: composer.projects.locations.environments.get
+      parameters:
+        - description: |-
+            The resource name of the environment to get, in the form:
+            "projects/{projectId}/locations/{locationId}/environments/{environmentId}"
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Environment'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -446,6 +443,49 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/{parent}/imageVersions':
+    get:
+      description: List ImageVersions for provided location.
+      operationId: composer.projects.locations.imageVersions.list
+      parameters:
+        - description: The maximum number of image_versions to return.
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'The next_page_token value returned from a previous List request, if any.'
+          in: query
+          name: pageToken
+          type: string
+        - description: |-
+            List ImageVersions in the given project and location, in the form:
+            "projects/{projectId}/locations/{locationId}"
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListImageVersionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
 definitions:
   Empty:
     description: |-
@@ -548,6 +588,25 @@ definitions:
         $ref: '#/definitions/SoftwareConfig'
         description: The configuration settings for software inside the environment.
     type: object
+  ImageVersion:
+    description: ImageVersion information
+    properties:
+      imageVersionId:
+        description: |-
+          The string identifier of the ImageVersion, in the form:
+          "composer-x.y.z-airflow-a.b(.c)"
+        type: string
+      isDefault:
+        description: |-
+          Whether this is the default ImageVersion used by Composer during
+          environment creation if no input ImageVersion is specified.
+        type: boolean
+      supportedPythonVersions:
+        description: supported python versions
+        items:
+          type: string
+        type: array
+    type: object
   ListEnvironmentsResponse:
     description: The environments in a project and location.
     properties:
@@ -555,6 +614,18 @@ definitions:
         description: The list of environments returned by a ListEnvironmentsRequest.
         items:
           $ref: '#/definitions/Environment'
+        type: array
+      nextPageToken:
+        description: The page token used to query for the next page if one exists.
+        type: string
+    type: object
+  ListImageVersionsResponse:
+    description: The ImageVersions in a project and location.
+    properties:
+      imageVersions:
+        description: The list of supported ImageVersions in a location.
+        items:
+          $ref: '#/definitions/ImageVersion'
         type: array
       nextPageToken:
         description: The page token used to query for the next page if one exists.

@@ -5033,7 +5033,7 @@ paths:
         - images
   '/{project}/global/instanceTemplates':
     get:
-      description: Retrieves a list of instance templates that are contained within the specified project and zone.
+      description: Retrieves a list of instance templates that are contained within the specified project.
       operationId: compute.instanceTemplates.list
       parameters:
         - description: |-
@@ -5129,7 +5129,7 @@ paths:
         - instanceTemplates
   '/{project}/global/instanceTemplates/{instanceTemplate}':
     delete:
-      description: Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It's not possible to delete templates which are in use by an instance group.
+      description: Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It is not possible to delete templates that are already in use by a managed instance group.
       operationId: compute.instanceTemplates.delete
       parameters:
         - description: The name of the instance template to delete.
@@ -5933,6 +5933,43 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/License'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - licenses
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/global/licenses/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.licenses.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -11602,6 +11639,92 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionDisks
+  '/{project}/regions/{region}/disks/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.regionDisks.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - regionDisks
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/disks/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.regionDisks.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionSetPolicyRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -19971,7 +20094,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Performs a reset on the instance. For more information, see Resetting an instance.'
+      description: 'Performs a reset on the instance. This is a hard reset; the VM does not do a graceful shutdown. For more information, see Resetting an instance.'
       operationId: compute.instances.reset
       parameters:
         - description: Name of the instance scoping this request.
@@ -22217,7 +22340,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/NodeGroupsSetNodeTemplateRequest'
-        - description: Name of the NodeGroup resource to delete.
+        - description: Name of the NodeGroup resource to update.
           in: path
           name: nodeGroup
           required: true
@@ -22875,7 +22998,7 @@ definitions:
         format: int32
         type: integer
       acceleratorType:
-        description: 'Full or partial URL of the accelerator type resource to attach to this instance. If you are creating an instance template, specify only the accelerator name.'
+        description: 'Full or partial URL of the accelerator type resource to attach to this instance. For example: projects/my-project/zones/us-central1-c/acceleratorTypes/nvidia-tesla-p100 If you are creating an instance template, specify only the accelerator name. See GPUs on Compute Engine for a full list of accelerator types.'
         type: string
     type: object
   AcceleratorType:
@@ -23217,6 +23340,7 @@ definitions:
         enum:
           - DNS_RESOLVER
           - GCE_ENDPOINT
+          - NAT_AUTO
           - VPC_PEERING
         type: string
       region:
@@ -23753,7 +23877,7 @@ definitions:
         description: |-
           Specifies a unique device name of your choice that is reflected into the /dev/disk/by-id/google-* tree of a Linux operating system running within the instance. This name can be used to reference the device for mounting, resizing, and so on, from within the instance.
 
-          If not specified, the server chooses a default device name to apply to this disk, in the form persistent-disks-x, where x is a number assigned by Google Compute Engine. This field is only applicable for persistent disks.
+          If not specified, the server chooses a default device name to apply to this disk, in the form persistent-disk-x, where x is a number assigned by Google Compute Engine. This field is only applicable for persistent disks.
         type: string
       diskEncryptionKey:
         $ref: '#/definitions/CustomerEncryptionKey'
@@ -24309,7 +24433,7 @@ definitions:
     description: Configuration parameters of autoscaling based on load balancing.
     properties:
       utilizationTarget:
-        description: 'Fraction of backend capacity utilization (set in HTTP(s) load balancing configuration) that autoscaler should maintain. Must be a positive float value. If not defined, the default is 0.8.'
+        description: 'Fraction of backend capacity utilization (set in HTTP(S) load balancing configuration) that autoscaler should maintain. Must be a positive float value. If not defined, the default is 0.8.'
         format: double
         type: number
     type: object
@@ -25457,6 +25581,7 @@ definitions:
         description: '[Output Only] The status of disk creation.'
         enum:
           - CREATING
+          - DELETING
           - FAILED
           - READY
           - RESTORING
@@ -27502,6 +27627,7 @@ definitions:
       status:
         description: '[Output Only] The status of the image. An image can be used to create other resources, such as instances, only after the image has been successfully created and the status is set to READY. Possible values are FAILED, PENDING, or READY.'
         enum:
+          - DELETING
           - FAILED
           - PENDING
           - READY
@@ -28804,6 +28930,9 @@ definitions:
         items:
           $ref: '#/definitions/AttachedDisk'
         type: array
+      displayDevice:
+        $ref: '#/definitions/DisplayDevice'
+        description: 'Display Device properties to enable support for remote display products like: Teradici, VNC and TeamViewer'
       guestAccelerators:
         description: A list of guest accelerator cards' type and count to use for instances created from the instance template.
         items:
@@ -29173,7 +29302,7 @@ definitions:
         description: Labels to apply to this Interconnect resource. These can be later modified by the setLabels method. Each label key/value must comply with RFC1035. Label values may be empty.
         type: object
       linkType:
-        description: 'Type of link requested. This field indicates speed of each of the links in the bundle, not the entire bundle. Only 10G per link is allowed for a dedicated interconnect. Options: Ethernet_10G_LR'
+        description: 'Type of link requested. This field indicates speed of each of the links in the bundle, not the entire bundle.'
         enum:
           - LINK_TYPE_ETHERNET_10G_LR
         type: string
@@ -32323,9 +32452,8 @@ definitions:
           The full or partial URL to the BackendService resource. This will be used if none of the pathRules or routeRules defined by this PathMatcher are matched. For example, the following are all valid URLs to a BackendService resource:  
           - https://www.googleapis.com/compute/v1/projects/project/global/backendServices/backendService 
           - compute/v1/projects/project/global/backendServices/backendService 
-          - global/backendServices/backendService  
-          Use defaultService instead of defaultRouteAction when simple routing to a backend service is desired and other advanced capabilities like traffic splitting and URL rewrites are not required.
-          Only one of defaultService, defaultRouteAction or defaultUrlRedirect must be set.
+          - global/backendServices/backendService  If defaultRouteAction is additionally specified, advanced routing actions like URL Rewrites, etc. take effect prior to sending the request to the backend. However, if defaultService is specified, defaultRouteAction cannot contain any weightedBackendServices. Conversely, if defaultRouteAction specifies any weightedBackendServices, defaultService must not be specified.
+          Only one of defaultService, defaultUrlRedirect  or defaultRouteAction.weightedBackendService must be set.
           Authorization requires one or more of the following Google IAM permissions on the specified resource default_service:  
           - compute.backendBuckets.use 
           - compute.backendServices.use
@@ -32355,9 +32483,8 @@ definitions:
         type: array
       service:
         description: |-
-          The URL of the backend service resource if this rule is matched.
-          Use service instead of routeAction when simple routing to a backend service is desired and other advanced capabilities like traffic splitting and rewrites are not required.
-          Only one of service, routeAction or urlRedirect should must be set.
+          The full or partial URL of the backend service resource to which traffic is directed if this rule is matched. If routeAction is additionally specified, advanced routing actions like URL Rewrites, etc. take effect prior to sending the request to the backend. However, if service is specified, routeAction cannot contain any weightedBackendService s. Conversely, if routeAction specifies any  weightedBackendServices, service must not be specified.
+          Only one of urlRedirect, service or routeAction.weightedBackendService must be set.
         type: string
     type: object
   Policy:
@@ -32548,6 +32675,7 @@ definitions:
           - INTERNAL_ADDRESSES
           - IN_USE_ADDRESSES
           - IN_USE_BACKUP_SCHEDULES
+          - IN_USE_SNAPSHOT_SCHEDULES
           - LOCAL_SSD_TOTAL_GB
           - NETWORKS
           - NETWORK_ENDPOINT_GROUPS
@@ -32591,6 +32719,9 @@ definitions:
           - URL_MAPS
           - VPN_GATEWAYS
           - VPN_TUNNELS
+        type: string
+      owner:
+        description: '[Output Only] Owning resource. This is the resource on which this quota is applied.'
         type: string
       usage:
         description: '[Output Only] Current usage of this metric.'
@@ -33291,9 +33422,6 @@ definitions:
     type: object
   ResourcePolicy:
     properties:
-      backupSchedulePolicy:
-        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicy'
-        description: Resource policy for persistent disks for creating snapshots.
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -33316,6 +33444,9 @@ definitions:
       selfLink:
         description: '[Output Only] Server-defined fully-qualified URL for this resource.'
         type: string
+      snapshotSchedulePolicy:
+        $ref: '#/definitions/ResourcePolicySnapshotSchedulePolicy'
+        description: Resource policy for persistent disks for creating snapshots.
     type: object
   ResourcePolicyAggregatedList:
     description: Contains a list of resourcePolicies.
@@ -33388,56 +33519,6 @@ definitions:
           message:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
-        type: object
-    type: object
-  ResourcePolicyBackupSchedulePolicy:
-    description: A backup schedule policy specifies when and how frequently snapshots are to be created for the target disk. Also specifies how many and how long these scheduled snapshots should be retained.
-    properties:
-      retentionPolicy:
-        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicyRetentionPolicy'
-        description: Retention policy applied to snapshots created by this resource policy.
-      schedule:
-        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicySchedule'
-        description: A Vm Maintenance Policy specifies what kind of infrastructure maintenance we are allowed to perform on this VM and when. Schedule that is applied to disks covered by this policy.
-      snapshotProperties:
-        $ref: '#/definitions/ResourcePolicyBackupSchedulePolicySnapshotProperties'
-        description: 'Properties with which snapshots are created such as labels, encryption keys.'
-    type: object
-  ResourcePolicyBackupSchedulePolicyRetentionPolicy:
-    description: Policy for retention of scheduled snapshots.
-    properties:
-      maxRetentionDays:
-        description: Maximum age of the snapshot that is allowed to be kept.
-        format: int32
-        type: integer
-      onSourceDiskDelete:
-        description: Specifies the behavior to apply to scheduled snapshots when the source disk is deleted.
-        enum:
-          - APPLY_RETENTION_POLICY
-          - KEEP_AUTO_SNAPSHOTS
-          - UNSPECIFIED_ON_SOURCE_DISK_DELETE
-        type: string
-    type: object
-  ResourcePolicyBackupSchedulePolicySchedule:
-    description: A schedule for disks where the schedueled operations are performed.
-    properties:
-      dailySchedule:
-        $ref: '#/definitions/ResourcePolicyDailyCycle'
-      hourlySchedule:
-        $ref: '#/definitions/ResourcePolicyHourlyCycle'
-      weeklySchedule:
-        $ref: '#/definitions/ResourcePolicyWeeklyCycle'
-    type: object
-  ResourcePolicyBackupSchedulePolicySnapshotProperties:
-    description: Specified snapshot properties for scheduled snapshots created by this policy.
-    properties:
-      guestFlush:
-        description: Indication to perform a ?guest aware? snapshot.
-        type: boolean
-      labels:
-        additionalProperties:
-          type: string
-        description: Labels to apply to scheduled snapshots. These can be later modified by the setLabels method. Label values may be empty.
         type: object
     type: object
   ResourcePolicyDailyCycle:
@@ -33538,6 +33619,61 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
+    type: object
+  ResourcePolicySnapshotSchedulePolicy:
+    description: A snapshot schedule policy specifies when and how frequently snapshots are to be created for the target disk. Also specifies how many and how long these scheduled snapshots should be retained.
+    properties:
+      retentionPolicy:
+        $ref: '#/definitions/ResourcePolicySnapshotSchedulePolicyRetentionPolicy'
+        description: Retention policy applied to snapshots created by this resource policy.
+      schedule:
+        $ref: '#/definitions/ResourcePolicySnapshotSchedulePolicySchedule'
+        description: A Vm Maintenance Policy specifies what kind of infrastructure maintenance we are allowed to perform on this VM and when. Schedule that is applied to disks covered by this policy.
+      snapshotProperties:
+        $ref: '#/definitions/ResourcePolicySnapshotSchedulePolicySnapshotProperties'
+        description: 'Properties with which snapshots are created such as labels, encryption keys.'
+    type: object
+  ResourcePolicySnapshotSchedulePolicyRetentionPolicy:
+    description: Policy for retention of scheduled snapshots.
+    properties:
+      maxRetentionDays:
+        description: Maximum age of the snapshot that is allowed to be kept.
+        format: int32
+        type: integer
+      onSourceDiskDelete:
+        description: Specifies the behavior to apply to scheduled snapshots when the source disk is deleted.
+        enum:
+          - APPLY_RETENTION_POLICY
+          - KEEP_AUTO_SNAPSHOTS
+          - UNSPECIFIED_ON_SOURCE_DISK_DELETE
+        type: string
+    type: object
+  ResourcePolicySnapshotSchedulePolicySchedule:
+    description: A schedule for disks where the schedueled operations are performed.
+    properties:
+      dailySchedule:
+        $ref: '#/definitions/ResourcePolicyDailyCycle'
+      hourlySchedule:
+        $ref: '#/definitions/ResourcePolicyHourlyCycle'
+      weeklySchedule:
+        $ref: '#/definitions/ResourcePolicyWeeklyCycle'
+    type: object
+  ResourcePolicySnapshotSchedulePolicySnapshotProperties:
+    description: Specified snapshot properties for scheduled snapshots created by this policy.
+    properties:
+      guestFlush:
+        description: Indication to perform a ?guest aware? snapshot.
+        type: boolean
+      labels:
+        additionalProperties:
+          type: string
+        description: Labels to apply to scheduled snapshots. These can be later modified by the setLabels method. Label values may be empty.
+        type: object
+      storageLocations:
+        description: GCS bucket storage location of the auto snapshot (regional or multi-regional).
+        items:
+          type: string
+        type: array
     type: object
   ResourcePolicyWeeklyCycle:
     description: Time window specified for weekly operations.
@@ -34062,6 +34198,9 @@ definitions:
         description: Timeout (in seconds) for ICMP connections. Defaults to 30s if not set.
         format: int32
         type: integer
+      logConfig:
+        $ref: '#/definitions/RouterNatLogConfig'
+        description: Configure logging on this NAT.
       minPortsPerVm:
         description: 'Minimum number of ports allocated to a VM from this NAT config. If not set, a default number of ports is allocated to a VM. This gets rounded up to the nearest power of 2. Eg. if the value of this field is 50, at least 64 ports will be allocated to a VM.'
         format: int32
@@ -34105,6 +34244,20 @@ definitions:
         description: Timeout (in seconds) for UDP connections. Defaults to 30s if not set.
         format: int32
         type: integer
+    type: object
+  RouterNatLogConfig:
+    description: Configuration of logging on a NAT.
+    properties:
+      enable:
+        description: Indicates whether or not to export logs. This is false by default.
+        type: boolean
+      filter:
+        description: 'Specifies the desired filtering of logs on this NAT. If unspecified, logs are exported for all connections handled by this NAT.'
+        enum:
+          - ALL
+          - ERRORS_ONLY
+          - TRANSLATIONS_ONLY
+        type: string
     type: object
   RouterNatSubnetworkToNat:
     description: Defines the IP ranges that want to use NAT for a subnetwork.
@@ -34660,7 +34813,7 @@ definitions:
         description: An Attestation Key (AK) issued to the Shielded VM's vTPM.
     type: object
   ShieldedVmIdentityEntry:
-    description: A Shielded VM Identity Entry.
+    description: A Shielded Instance Identity Entry.
     properties:
       ekCert:
         description: A PEM-encoded X.509 certificate. This field can be empty.
@@ -36896,9 +37049,8 @@ definitions:
         type: string
       defaultService:
         description: |-
-          The URL of the backendService resource if none of the hostRules match.
-          Use defaultService instead of defaultRouteAction when simple routing to a backendService is desired and other advanced capabilities like traffic splitting and rewrites are not required.
-          Only one of defaultService, defaultRouteAction or defaultUrlRedirect should must be set.
+          The full or partial URL of the defaultService resource to which traffic is directed if none of the hostRules match. If defaultRouteAction is additionally specified, advanced routing actions like URL Rewrites, etc. take effect prior to sending the request to the backend. However, if defaultService is specified, defaultRouteAction cannot contain any weightedBackendServices. Conversely, if routeAction specifies any weightedBackendServices, service must not be specified.
+          Only one of defaultService, defaultUrlRedirect  or defaultRouteAction.weightedBackendService must be set.
         type: string
       description:
         description: An optional description of this resource. Provide this property when you create the resource.

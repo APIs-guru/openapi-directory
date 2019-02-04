@@ -100,6 +100,7 @@ parameters:
     name: upload_protocol
     type: string
 tags:
+  - name: folders
   - name: organizations
   - name: projects
 paths:
@@ -109,7 +110,7 @@ paths:
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: cloudasset.organizations.operations.get
+      operationId: cloudasset.folders.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -126,7 +127,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - folders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -147,6 +148,8 @@ paths:
         non-delete or deleted status.
         For IAM_POLICY content, this API outputs history when the asset and its
         attached IAM POLICY both exist. This can create gaps in the output history.
+        If a specified asset does not exist, this API returns an INVALID_ARGUMENT
+        error.
       operationId: cloudasset.organizations.batchGetAssetsHistory
       parameters:
         - collectionFormat: multi
@@ -180,13 +183,20 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - description: |-
+        - collectionFormat: multi
+          description: |-
             End time of the time window (inclusive).
             Current timestamp if not specified.
           in: query
+          items:
+            type: string
           name: readTimeWindow.endTime
           type: string
         - description: Start time of the time window (exclusive).
+          enum:
+            - CONTENT_TYPE_UNSPECIFIED
+            - RESOURCE
+            - IAM_POLICY
           in: query
           name: readTimeWindow.startTime
           type: string
@@ -231,16 +241,17 @@ paths:
         location. The output format is newline-delimited JSON.
         This API implements the google.longrunning.Operation API allowing you
         to keep track of the export.
-      operationId: cloudasset.organizations.exportAssets
+      operationId: cloudasset.folders.exportAssets
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/ExportAssetsRequest'
         - description: |-
-            Required. The relative name of the root asset. This can only be an organization
-            number (such as "organizations/123"), a project ID (such as
-            "projects/my-project-id"), or a project number (such as "projects/12345").
+            Required. The relative name of the root asset. This can only be an
+            organization number (such as "organizations/123"), a project ID (such as
+            "projects/my-project-id"), a project number (such as "projects/12345"), or
+            a folder number (such as "folders/123").
           in: path
           name: parent
           required: true
@@ -255,7 +266,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - folders
 definitions:
   Asset:
     description: |-

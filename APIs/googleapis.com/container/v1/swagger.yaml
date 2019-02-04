@@ -2613,6 +2613,46 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/{parent}/.well-known/openid-configuration':
+    get:
+      description: |-
+        GetOpenIDConfig gets the OIDC discovery document for the cluster.
+        See the OpenID Connect Discovery 1.0 specification for details.
+        https://openid.net/specs/openid-connect-discovery-1_0.html
+        This API is not yet intended for general use, and is not available for all
+        clusters.
+      operationId: container.projects.locations.clusters.well-known.getOpenid-configuration
+      parameters:
+        - description: |-
+            The cluster (project, location, cluster id) to get the discovery document
+            for. Specified in the format 'projects/*/locations/*/clusters/*'.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetOpenIDConfigResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{parent}/clusters':
     get:
       description: |-
@@ -2705,6 +2745,45 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
+  '/v1/{parent}/jwks':
+    get:
+      description: |-
+        GetJSONWebKeys gets the public component of the cluster signing keys in
+        JSON Web Key format.
+        This API is not yet intended for general use, and is not available for all
+        clusters.
+      operationId: container.projects.locations.clusters.getJwks
+      parameters:
+        - description: |-
+            The cluster (project, location, cluster id) to get keys for. Specified in
+            the format 'projects/*/locations/*/clusters/*'.
+          in: path
+          name: parent
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GetJSONWebKeysResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
   '/v1/{parent}/nodePools':
     get:
       description: Lists the node pools for a cluster.
@@ -3388,6 +3467,54 @@ definitions:
       The JSON representation for `Empty` is empty JSON object `{}`.
     properties: {}
     type: object
+  GetJSONWebKeysResponse:
+    description: GetJSONWebKeysResponse is a valid JSON Web Key Set as specififed in rfc 7517
+    properties:
+      keys:
+        description: |-
+          The public component of the keys used by the cluster to sign token
+          requests.
+        items:
+          $ref: '#/definitions/Jwk'
+        type: array
+    type: object
+  GetOpenIDConfigResponse:
+    description: |-
+      GetOpenIDConfigResponse is an OIDC discovery document for the cluster.
+      See the OpenID Connect Discovery 1.0 specification for details.
+    properties:
+      claims_supported:
+        description: NOLINT
+        items:
+          type: string
+        type: array
+      grant_types:
+        description: NOLINT
+        items:
+          type: string
+        type: array
+      id_token_signing_alg_values_supported:
+        description: NOLINT
+        items:
+          type: string
+        type: array
+      issuer:
+        description: NOLINT
+        type: string
+      jwks_uri:
+        description: NOLINT
+        type: string
+      response_types_supported:
+        description: NOLINT
+        items:
+          type: string
+        type: array
+      subject_types_supported:
+        description: NOLINT
+        items:
+          type: string
+        type: array
+    type: object
   HorizontalPodAutoscaling:
     description: |-
       Configuration options for the horizontal pod autoscaling feature, which
@@ -3513,6 +3640,41 @@ definitions:
       useIpAliases:
         description: Whether alias IPs will be used for pod IPs in the cluster.
         type: boolean
+    type: object
+  Jwk:
+    description: Jwk is a JSON Web Key as specified in RFC 7517
+    properties:
+      alg:
+        description: NOLINT
+        type: string
+      crv:
+        description: NOLINT
+        type: string
+      e:
+        description: NOLINT
+        type: string
+      kid:
+        description: NOLINT
+        type: string
+      kty:
+        description: NOLINT
+        type: string
+      'n':
+        description: |-
+          Fields for RSA keys.
+          NOLINT
+        type: string
+      use:
+        description: NOLINT
+        type: string
+      x:
+        description: |-
+          Fields for ECDSA keys.
+          NOLINT
+        type: string
+      'y':
+        description: NOLINT
+        type: string
     type: object
   KubernetesDashboard:
     description: Configuration for the Kubernetes Dashboard.

@@ -152,14 +152,15 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.delete
+        Deletes a DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.delete
       parameters:
         - description: |-
-            Resource name of the organization and inspectTemplate to be deleted, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of the organization and deidentify template to be deleted,
+            for example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -174,17 +175,18 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     get:
       description: |-
-        Gets an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.get
+        Gets a DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.get
       parameters:
         - description: |-
-            Resource name of the organization and inspectTemplate to be read, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of the organization and deidentify template to be read, for
+            example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -194,12 +196,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -214,18 +216,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.patch
+        Updates the DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateInspectTemplateRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
         - description: |-
-            Resource name of organization and inspectTemplate to be updated, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of organization and deidentify template to be updated, for
+            example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -235,12 +238,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{name}:cancel':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -421,7 +424,7 @@ paths:
         Lists DeidentifyTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.list
+      operationId: dlp.projects.deidentifyTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -469,7 +472,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -488,7 +491,7 @@ paths:
         for de-identifying content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.create
+      operationId: dlp.projects.deidentifyTemplates.create
       parameters:
         - in: body
           name: body
@@ -511,7 +514,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/dlpJobs':
     get:
       description: |-
@@ -689,7 +692,7 @@ paths:
       description: |-
         Lists InspectTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.list
+      operationId: dlp.projects.inspectTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -737,7 +740,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -755,7 +758,7 @@ paths:
         Creates an InspectTemplate for re-using frequently used configuration
         for inspecting content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.create
+      operationId: dlp.projects.inspectTemplates.create
       parameters:
         - in: body
           name: body
@@ -778,7 +781,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/jobTriggers':
     get:
       description: |-
@@ -786,6 +789,34 @@ paths:
         See https://cloud.google.com/dlp/docs/creating-job-triggers to learn more.
       operationId: dlp.projects.jobTriggers.list
       parameters:
+        - description: |-
+            Optional. Allows filtering.
+
+            Supported syntax:
+
+            * Filter expressions are made up of one or more restrictions.
+            * Restrictions can be combined by `AND` or `OR` logical operators. A
+            sequence of restrictions implicitly uses `AND`.
+            * A restriction has the form of `<field> <operator> <value>`.
+            * Supported fields/values for inspect jobs:
+                - `status` - HEALTHY|PAUSED|CANCELLED
+                - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
+                - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
+                quotation marks. Nanoseconds are ignored.
+                - 'error_count' - Number of errors that have occurred while running.
+            * The operator must be `=` or `!=` for status and inspected_storage.
+
+            Examples:
+
+            * inspected_storage = cloud_storage AND status = HEALTHY
+            * inspected_storage = cloud_storage OR inspected_storage = bigquery
+            * inspected_storage = cloud_storage AND (state = PAUSED OR state = HEALTHY)
+            * last_run_time > \"2017-12-12T00:00:00+00:00\"
+
+            The length of this field should be no more than 500 characters.
+          in: query
+          name: filter
+          type: string
         - description: |-
             Optional comma separated list of triggeredJob fields to order by,
             followed by `asc` or `desc` postfix. This list is case-insensitive,
@@ -798,6 +829,7 @@ paths:
 
             - `create_time`: corresponds to time the JobTrigger was created.
             - `update_time`: corresponds to time the JobTrigger was last updated.
+            - `last_run_time`: corresponds to the last time the JobTrigger ran.
             - `name`: corresponds to JobTrigger's name.
             - `display_name`: corresponds to JobTrigger's display name.
             - `status`: corresponds to JobTrigger's status.
@@ -876,7 +908,7 @@ paths:
         Lists stored infoTypes.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.list
+      operationId: dlp.projects.storedInfoTypes.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -925,7 +957,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -943,7 +975,7 @@ paths:
         Creates a pre-built stored infoType to be used for inspection.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.create
+      operationId: dlp.projects.storedInfoTypes.create
       parameters:
         - in: body
           name: body
@@ -966,13 +998,18 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
 definitions:
   GooglePrivacyDlpV2Action:
     description: |-
       A task to execute on the completion of a job.
       See https://cloud.google.com/dlp/docs/concepts-actions to learn more.
     properties:
+      jobNotificationEmails:
+        $ref: '#/definitions/GooglePrivacyDlpV2JobNotificationEmails'
+        description: |-
+          Enable email notification to project owners and editors on job‘s
+          completion/failure.
       pubSub:
         $ref: '#/definitions/GooglePrivacyDlpV2PublishToPubSub'
         description: Publish a notification to a pubsub topic.
@@ -1633,6 +1670,7 @@ definitions:
       Outputs a base64 encoded representation of the hashed output
       (for example, L7k0BHmF1ha5U3NfGykjro4xWi1MPVQPjhMAZbSV9mM=).
       Currently, only string and integer values can be hashed.
+      See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
     properties:
       cryptoKey:
         $ref: '#/definitions/GooglePrivacyDlpV2CryptoKey'
@@ -2783,6 +2821,12 @@ definitions:
           $ref: '#/definitions/GooglePrivacyDlpV2InspectionRule'
         type: array
     type: object
+  GooglePrivacyDlpV2JobNotificationEmails:
+    description: |-
+      Enable email notification to project owners and editors on jobs's
+      completion/failure.
+    properties: {}
+    type: object
   GooglePrivacyDlpV2JobTrigger:
     description: |-
       Contains a configuration to make dlp api calls on a repeating basis.
@@ -3676,6 +3720,14 @@ definitions:
   GooglePrivacyDlpV2Regex:
     description: Message defining a custom regular expression.
     properties:
+      groupIndexes:
+        description: |-
+          The index of the submatch to extract as findings. When not
+          specified, the entire match is returned. No more than 3 may be included.
+        items:
+          format: int32
+          type: integer
+        type: array
       pattern:
         description: |-
           Pattern defining the regular expression. Its syntax

@@ -100,7 +100,7 @@ parameters:
     name: upload_protocol
     type: string
 tags:
-  - name: projects
+  - name: v1beta1
 paths:
   '/v1beta1/{resource}:getIamPolicy':
     parameters:
@@ -121,7 +121,7 @@ paths:
         resource.
         More information about managing access via IAP can be found at:
         https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
-      operationId: iap.projects.iap_tunnel.zones.instances.getIamPolicy
+      operationId: iap.getIamPolicy
       parameters:
         - in: body
           name: body
@@ -144,7 +144,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - v1beta1
   '/v1beta1/{resource}:setIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -164,7 +164,7 @@ paths:
         resource. Replaces any existing policy.
         More information about managing access via IAP can be found at:
         https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
-      operationId: iap.projects.iap_tunnel.zones.instances.setIamPolicy
+      operationId: iap.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -187,7 +187,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - v1beta1
   '/v1beta1/{resource}:testIamPermissions':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -209,7 +209,7 @@ paths:
         will be returned.
         More information about managing access via IAP can be found at:
         https://cloud.google.com/iap/docs/managing-access#managing_access_via_the_api
-      operationId: iap.projects.iap_tunnel.zones.instances.testIamPermissions
+      operationId: iap.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -232,7 +232,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - v1beta1
 definitions:
   Binding:
     description: Associates `members` with a `role`.

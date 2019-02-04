@@ -3,6 +3,7 @@ schemes:
   - https
 host: servicenetworking.googleapis.com
 basePath: /
+x-hasEquivalentPaths: true
 info:
   contact:
     name: Google
@@ -142,12 +143,25 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
+  '/v1beta/{name}/connections':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
         Updates the allocated ranges that are assigned to a connection.
         The response from the `get` operation will be of type `Connection` if the
         operation successfully completes.
-      operationId: servicenetworking.services.patch
+      operationId: servicenetworking.services.updateConnections
       parameters:
         - in: body
           name: body
@@ -701,6 +715,9 @@ definitions:
           deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.
         format: double
         type: number
+      jwtAudience:
+        description: The JWT audience is used when generating a JWT id token for the backend.
+        type: string
       minDeadline:
         description: |-
           Minimum deadline in seconds needed for this method. Calls having deadline
@@ -713,6 +730,12 @@ definitions:
           operation. The default is no deadline.
         format: double
         type: number
+      pathTranslation:
+        enum:
+          - PATH_TRANSLATION_UNSPECIFIED
+          - CONSTANT_ADDRESS
+          - APPEND_PATH_TO_ADDRESS
+        type: string
       selector:
         description: |-
           Selects the methods to which this rule applies.
@@ -1246,6 +1269,31 @@ definitions:
           The field type URL, without the scheme, for message or enumeration
           types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
         type: string
+    type: object
+  GoogleCloudServicenetworkingV1betaSubnetwork:
+    description: |-
+      Represents a subnet that was created or discovered by a private access
+      management service.
+    properties:
+      ipCidrRange:
+        description: Subnetwork CIDR range in `10.x.x.x/y` format.
+        type: string
+      name:
+        description: |-
+          Subnetwork name.
+          See https://cloud.google.com/compute/docs/vpc/
+        type: string
+      network:
+        description: |-
+          In the Shared VPC host project, the VPC network that's peered with the
+          consumer network. For example:
+          `projects/1234321/global/networks/host-network`
+        type: string
+      outsideAllocation:
+        description: |-
+          This is a discovered subnet that is not within the current consumer
+          allocated ranges.
+        type: boolean
     type: object
   Http:
     description: |-
@@ -2467,6 +2515,21 @@ definitions:
           integer value that is the maximum number of requests allowed for the
           specified unit. Currently only STANDARD is supported.
         type: object
+    type: object
+  Range:
+    description: Represents a found unused range.
+    properties:
+      ipCidrRange:
+        description: |-
+          CIDR range in "10.x.x.x/y" format that is within the
+          allocated ranges and currently unused.
+        type: string
+      network:
+        description: |-
+          In the Shared VPC host project, the VPC network that's peered with the
+          consumer network. For example:
+          `projects/1234321/global/networks/host-network`
+        type: string
     type: object
   SearchRangeRequest:
     description: Request to search for an unused range within allocated ranges.

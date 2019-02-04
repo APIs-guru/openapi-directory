@@ -862,7 +862,9 @@ definitions:
         type: string
     type: object
   ScanConfig:
-    description: A ScanConfig resource contains the configurations to launch a scan.
+    description: |-
+      A ScanConfig resource contains the configurations to launch a scan.
+      next id: 12
     properties:
       authentication:
         $ref: '#/definitions/Authentication'
@@ -881,6 +883,9 @@ definitions:
           Required.
           The user provided display name of the ScanConfig.
         type: string
+      latestRun:
+        $ref: '#/definitions/ScanRun'
+        description: Latest ScanRun if available.
       maxQps:
         description: |-
           The maximum QPS during scanning. A valid value ranges from 5 to 20

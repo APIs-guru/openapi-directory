@@ -36,6 +36,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloudkms': View and manage your keys and secrets stored in Cloud Key Management Service
     type: oauth2
 parameters:
   $.xgafv:
@@ -124,6 +125,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
     parameters:
@@ -173,6 +176,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{name}/locations':
@@ -206,6 +211,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
     parameters:
@@ -245,6 +252,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
     parameters:
@@ -299,6 +308,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{name}:asymmetricSign':
@@ -339,6 +350,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{name}:decrypt':
@@ -380,6 +393,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{name}:destroy':
@@ -429,6 +444,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{name}:encrypt':
@@ -474,6 +491,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{name}:restore':
@@ -518,6 +537,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{name}:updatePrimaryVersion':
@@ -558,6 +579,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{parent}/cryptoKeyVersions':
@@ -603,6 +626,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
     parameters:
@@ -646,6 +671,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{parent}/cryptoKeys':
@@ -690,6 +717,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
     parameters:
@@ -739,6 +768,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{parent}/keyRings':
@@ -776,6 +807,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
     parameters:
@@ -820,6 +853,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{resource}:getIamPolicy':
@@ -846,6 +881,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
     parameters:
@@ -899,6 +936,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
   '/v1/{resource}:testIamPermissions':
@@ -945,6 +984,8 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloudkms'
       tags:
         - projects
 definitions:

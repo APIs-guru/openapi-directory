@@ -1152,6 +1152,9 @@ definitions:
       the corresponding contents of the Build/Products directory that contains all
       the binaries needed to run the tests.
     properties:
+      appBundleId:
+        description: Output only. The bundle id for the application under test.
+        type: string
       testsZip:
         $ref: '#/definitions/FileReference'
         description: |-
@@ -1460,6 +1463,15 @@ definitions:
       environmentMatrix:
         $ref: '#/definitions/EnvironmentMatrix'
         description: Required. How the host machine(s) are configured.
+      flakyTestAttempts:
+        description: |-
+          The number of times a TestExecution should be re-attempted if one or more
+          of its test cases fail for any reason.
+          The maximum number of reruns allowed is 10.
+
+          Default is 0, which implies no reruns.
+        format: int32
+        type: integer
       invalidMatrixDetails:
         description: |-
           Output only. Describes why the matrix is considered invalid.
@@ -1471,6 +1483,7 @@ definitions:
           - MALFORMED_TEST_APK
           - NO_MANIFEST
           - NO_PACKAGE_NAME
+          - INVALID_PACKAGE_NAME
           - TEST_SAME_AS_APP
           - NO_INSTRUMENTATION
           - NO_SIGNATURE

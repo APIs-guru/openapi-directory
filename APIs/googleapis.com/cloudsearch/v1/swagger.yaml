@@ -1234,8 +1234,8 @@ paths:
         - settings
   '/v1/settings/{name}':
     delete:
-      description: Deletes a search application.
-      operationId: cloudsearch.settings.searchapplications.delete
+      description: Deletes a data source.
+      operationId: cloudsearch.settings.datasources.delete
       parameters:
         - description: |-
             If set, the request will enable debugging features of Cloud Search.
@@ -1244,8 +1244,8 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            The name of the search application to be deleted.
-            <br />Format: applications/{application_id}.
+            Name of the data source.
+            Format: datasources/{source_id}.
           in: path
           name: name
           required: true
@@ -1262,12 +1262,12 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - settings
     get:
-      description: Gets the specified search application.
-      operationId: cloudsearch.settings.searchapplications.get
+      description: Gets a data source.
+      operationId: cloudsearch.settings.datasources.get
       parameters:
         - description: |-
             If set, the request will enable debugging features of Cloud Search.
@@ -1276,8 +1276,8 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the search application.
-            <br />Format: applications/{application_id}.
+            Name of the data source resource.
+            Format: datasources/{source_id}.
           in: path
           name: name
           required: true
@@ -1287,14 +1287,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/SearchApplication'
+            $ref: '#/definitions/DataSource'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - settings
     parameters:
@@ -1310,16 +1310,17 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates a search application.
-      operationId: cloudsearch.settings.searchapplications.update
+      description: Updates a data source.
+      operationId: cloudsearch.settings.datasources.update
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/SearchApplication'
+            $ref: '#/definitions/UpdateDataSourceRequest'
         - description: |-
-            Name of the Search Application.
-            <br />Format: searchapplications/{application_id}.
+            Name of the data source resource.
+            Format: datasources/{source_id}.
+            <br />The name is ignored when creating a data source.
           in: path
           name: name
           required: true
@@ -1336,7 +1337,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
       tags:
         - settings
   '/v1/settings/{name}:reset':
@@ -1773,7 +1774,6 @@ definitions:
     description: List of date values.
     properties:
       values:
-        description: The maximum number of elements is 100.
         items:
           $ref: '#/definitions/Date'
         type: array
@@ -1842,7 +1842,6 @@ definitions:
     description: List of double values.
     properties:
       values:
-        description: The maximum number of elements is 100.
         items:
           format: double
           type: number
@@ -2012,9 +2011,7 @@ definitions:
     description: List of enum values.
     properties:
       values:
-        description: |-
-          The maximum allowable length for string values is 32 characters.
-          The maximum number of elements is 100.
+        description: The maximum allowable length for string values is 32 characters.
         items:
           type: string
         type: array
@@ -2233,9 +2230,7 @@ definitions:
     description: List of html values.
     properties:
       values:
-        description: |-
-          The maximum allowable length for html values is 2048 characters.
-          The maximum number of string elements is 100.
+        description: The maximum allowable length for html values is 2048 characters.
         items:
           type: string
         type: array
@@ -2344,7 +2339,6 @@ definitions:
     description: List of integer values.
     properties:
       values:
-        description: The maximum number of elements is 100.
         items:
           format: int64
           type: string
@@ -2914,7 +2908,6 @@ definitions:
     description: List of object values.
     properties:
       values:
-        description: The maximum number of elements is 100.
         items:
           $ref: '#/definitions/StructuredDataObject'
         type: array
@@ -4096,9 +4089,7 @@ definitions:
     description: List of text values.
     properties:
       values:
-        description: |-
-          The maximum allowable length for text values is 2048 characters.
-          The maximum number of string elements is 100.
+        description: The maximum allowable length for text values is 2048 characters.
         items:
           type: string
         type: array
@@ -4156,7 +4147,6 @@ definitions:
     description: List of timestamp values.
     properties:
       values:
-        description: The maximum number of elements is 100.
         items:
           format: google-datetime
           type: string

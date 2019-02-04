@@ -2870,7 +2870,7 @@ definitions:
   ListMessagesResponse:
     properties:
       messages:
-        description: List of messages.
+        description: List of messages. Note that each message resource contains only an id and a threadId. Additional message details can be fetched using the messages.get method.
         items:
           $ref: '#/definitions/Message'
         type: array
@@ -2909,7 +2909,7 @@ definitions:
         format: uint32
         type: integer
       threads:
-        description: List of threads.
+        description: List of threads. Note that each thread resource does not contain a list of messages. The list of messages for a given thread can be fetched using the threads.get method.
         items:
           $ref: '#/definitions/Thread'
         type: array

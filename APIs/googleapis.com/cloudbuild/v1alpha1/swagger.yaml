@@ -786,7 +786,7 @@ definitions:
       network:
         description: |-
           Network on which the workers are created.
-          “default” network is used if empty.
+          "default" network is used if empty.
         type: string
       projectId:
         description: |-
@@ -799,7 +799,7 @@ definitions:
       subnetwork:
         description: |-
           Subnetwork on which the workers are created.
-          “default” subnetwork is used if empty.
+          "default" subnetwork is used if empty.
         type: string
     type: object
   RepoSource:
@@ -910,8 +910,8 @@ definitions:
           $ref: '#/definitions/FileHashes'
         description: |-
           Output only. Hash(es) of the build source, which can be used to verify that
-          the originalsource integrity was maintained in the build. Note that
-          `FileHashes` willonly be populated if `BuildOptions` has requested a
+          the original source integrity was maintained in the build. Note that
+          `FileHashes` will only be populated if `BuildOptions` has requested a
           `SourceProvenanceHash`.
 
           The keys to this map are file paths used as build source and the values
@@ -1057,7 +1057,7 @@ definitions:
         type: string
       regions:
         description: |-
-          List of regions to create the `WorkerPool`. Regions can’t be empty.
+          List of regions to create the `WorkerPool`. Regions can't be empty.
           If Cloud Build adds a new GCP region in the future, the existing
           `WorkerPool` will not be enabled in the new region automatically;
           you must add the new region to the `regions` field to enable the
@@ -1065,10 +1065,10 @@ definitions:
         items:
           enum:
             - REGION_UNSPECIFIED
-            - US_CENTRAL1
-            - US_WEST1
-            - US_EAST1
-            - US_EAST4
+            - us-central1
+            - us-west1
+            - us-east1
+            - us-east4
           type: string
         type: array
       serviceAccountEmail:

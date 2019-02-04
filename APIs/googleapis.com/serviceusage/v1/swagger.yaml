@@ -297,8 +297,6 @@ paths:
         It is not valid to call the disable method on a service that is not
         currently enabled. Callers will receive a `FAILED_PRECONDITION` status if
         the target service is not currently enabled.
-
-        Operation<response: DisableServiceResponse>
       operationId: serviceusage.services.disable
       parameters:
         - in: body
@@ -344,10 +342,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: |-
-        Enable a service so that it can be used with a project.
-
-        Operation<response: EnableServiceResponse>
+      description: Enable a service so that it can be used with a project.
       operationId: serviceusage.services.enable
       parameters:
         - in: body
@@ -466,8 +461,6 @@ paths:
       description: |-
         Enable multiple services on a project. The operation is atomic: if enabling
         any service fails, then the entire batch fails, and no state changes occur.
-
-        Operation<response: BatchEnableServicesResponse>
       operationId: serviceusage.services.batchEnable
       parameters:
         - in: body
@@ -758,6 +751,9 @@ definitions:
           deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.
         format: double
         type: number
+      jwtAudience:
+        description: The JWT audience is used when generating a JWT id token for the backend.
+        type: string
       minDeadline:
         description: |-
           Minimum deadline in seconds needed for this method. Calls having deadline
@@ -770,6 +766,12 @@ definitions:
           operation. The default is no deadline.
         format: double
         type: number
+      pathTranslation:
+        enum:
+          - PATH_TRANSLATION_UNSPECIFIED
+          - CONSTANT_ADDRESS
+          - APPEND_PATH_TO_ADDRESS
+        type: string
       selector:
         description: |-
           Selects the methods to which this rule applies.

@@ -5256,6 +5256,12 @@ definitions:
       primaryEmail:
         description: username of User
         type: string
+      recoveryEmail:
+        description: Recovery email of the user.
+        type: string
+      recoveryPhone:
+        description: Recovery phone of the user.
+        type: string
       relations: {}
       sshPublicKeys: {}
       suspended:
@@ -5556,8 +5562,7 @@ definitions:
     description: 'JSON template for a POSIX account entry. Description of the field family: go/fbs-posix.'
     properties:
       accountId:
-        description: A POSIX account field identifier. (Read-only)
-        readOnly: true
+        description: A POSIX account field identifier.
         type: string
       gecos:
         description: The GECOS (user information) for this account.

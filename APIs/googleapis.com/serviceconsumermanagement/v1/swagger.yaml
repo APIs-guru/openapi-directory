@@ -189,6 +189,8 @@ paths:
         New billing configuration will be applied if specified.
         Omit billing configuration to keep the existing one.
         Service account in the project will be created if previously non existing.
+        Specified folder will be ignored, moving tenant project to a different
+        folder is not supported.
         Operation fails if any of the steps fail, but no rollback of already
         applied configuration changes is attempted.
         Operation<response: Empty>.
@@ -328,6 +330,8 @@ paths:
         It will remove project lien with 'TenantManager' origin if that was added.
         It will then attempt to delete the project. If that operation fails, this
         method fails.
+        Calls to remove already removed or non-existent tenant project
+        will succeed.
         After the project has been deleted, or if was already in DELETED state,
         resource metadata is permanently removed from the tenancy unit.
         Operation<response: Empty>.
@@ -866,6 +870,9 @@ definitions:
           deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.
         format: double
         type: number
+      jwtAudience:
+        description: The JWT audience is used when generating a JWT id token for the backend.
+        type: string
       minDeadline:
         description: |-
           Minimum deadline in seconds needed for this method. Calls having deadline
@@ -878,6 +885,12 @@ definitions:
           operation. The default is no deadline.
         format: double
         type: number
+      pathTranslation:
+        enum:
+          - PATH_TRANSLATION_UNSPECIFIED
+          - CONSTANT_ADDRESS
+          - APPEND_PATH_TO_ADDRESS
+        type: string
       selector:
         description: |-
           Selects the methods to which this rule applies.

@@ -100,12 +100,12 @@ paths:
       operationId: cloudidentity.groups.list
       parameters:
         - description: |-
-            Maximum number of Groups to return.
+            Maximum number of groups to return.
 
-            View | Default | Maximum
-            -----|---------|--------
-            BASIC | 200 | 1000
-            FULL | 50 | 500
+            View  | Default | Maximum
+            ----- | ------- | -------
+            BASIC | 200     | 1000
+            FULL  | 50      | 500
           in: query
           name: pageSize
           type: integer
@@ -210,12 +210,12 @@ paths:
       operationId: cloudidentity.groups.search
       parameters:
         - description: |-
-            Maximum number of Groups to return.
+            Maximum number of groups to return.
 
-            View | Default | Maximum
-            -----|---------|--------
-            BASIC | 200 | 1000
-            FULL | 50 | 500
+            View  | Default | Maximum
+            ----- | ------- | -------
+            BASIC | 200     | 1000
+            FULL  | 50      | 500
           in: query
           name: pageSize
           type: integer
@@ -357,8 +357,8 @@ paths:
 
             View | Default | Maximum
             -----|---------|--------
-            BASIC | 200 | 1000
-            FULL | 50 | 500
+            BASIC| 200     | 1000
+            FULL | 50      | 500
           in: query
           name: pageSize
           type: integer

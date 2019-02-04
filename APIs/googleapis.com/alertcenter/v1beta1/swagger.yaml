@@ -119,7 +119,8 @@ paths:
             Optional. A query string for filtering alert results.
             For more details, see [Query
             filters](/admin-sdk/alertcenter/guides/query-filters) and [Supported
-            query filter fields](/admin-sdk/alertcenter/reference/filter-fields#alerts.list).
+            query filter
+            fields](/admin-sdk/alertcenter/reference/filter-fields#alerts.list).
           in: query
           name: filter
           type: string
@@ -264,7 +265,8 @@ paths:
             Optional. A query string for filtering alert feedback results.
             For more details, see [Query
             filters](/admin-sdk/alertcenter/guides/query-filters) and [Supported
-            query filter fields](/admin-sdk/alertcenter/reference/filter-fields#alerts.feedback.list).
+            query filter
+            fields](/admin-sdk/alertcenter/reference/filter-fields#alerts.feedback.list).
           in: query
           name: filter
           type: string
@@ -437,6 +439,7 @@ definitions:
 
           * Suspicious login
           * Suspicious login (less secure app)
+          * Suspicious programmatic login
           * User suspended (suspicious activity)
     type: object
   Alert:

@@ -157,6 +157,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
+      description: Retrieves multiple Merchant Center account statuses in a single request.
       operationId: content.accountstatuses.custombatch
       parameters:
         - in: body
@@ -3840,6 +3841,15 @@ definitions:
       emailAddress:
         description: User's email address.
         type: string
+      orderManager:
+        description: Whether user is an order manager.
+        type: boolean
+      paymentsAnalyst:
+        description: Whether user can access payment statements.
+        type: boolean
+      paymentsManager:
+        description: Whether user can manage payment settings.
+        type: boolean
     type: object
   AccountYouTubeChannelLink:
     properties:
@@ -5279,7 +5289,7 @@ definitions:
         description: 'The date when the order was placed, in ISO 8601 format.'
         type: string
       promotions:
-        description: Deprecated. The details of the merchant provided promotions applied to the order. More details about the program are here.
+        description: Deprecated. Ignored if provided for createTestOrder. The details of the merchant provided promotions applied to the order. More details about the program are here.
         items:
           $ref: '#/definitions/OrderLegacyPromotion'
         type: array
@@ -5304,6 +5314,9 @@ definitions:
         type: string
       status:
         description: The status of the order.
+        type: string
+      taxCollector:
+        description: The party responsible for collecting and remitting taxes.
         type: string
     type: object
   OrderAddress:
@@ -5726,6 +5739,9 @@ definitions:
       productAmount:
         $ref: '#/definitions/Amount'
         description: Total amount for the items.
+      productAmountWithRemittedTax:
+        $ref: '#/definitions/ProductAmount'
+        description: Total amount with remitted tax for the items.
       transactionDate:
         description: 'The date of the transaction, in ISO 8601 format.'
         type: string
@@ -5893,8 +5909,10 @@ definitions:
     properties:
       authAmountPretax:
         $ref: '#/definitions/Price'
+        description: Authorized amount for pre-tax charge on user's credit card.
       authAmountTax:
         $ref: '#/definitions/Price'
+        description: Authorized amount for tax charge on user's credit card.
     type: object
   OrderpaymentsNotifyAuthApprovedResponse:
     properties:
@@ -6047,7 +6065,7 @@ definitions:
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
       amountTax:
         $ref: '#/definitions/Price'
-        description: Tax amount that correspond to cancellation amount in amountPretax.
+        description: 'Tax amount that corresponds to cancellation amount in amountPretax. Optional, but if filled, then amountPretax must be set. Calculated automatically if not provided.'
       lineItemId:
         description: The ID of the line item to cancel. Either lineItemId or productId is required.
         type: string
@@ -6241,7 +6259,7 @@ definitions:
         description: 'Amount to refund for the cancelation. Optional. If not set, Google will calculate the default based on the price and tax of the items involved. The amount must not be larger than the net amount left on the order.'
       amountTax:
         $ref: '#/definitions/Price'
-        description: Tax amount that correspond to cancellation amount in amountPretax.
+        description: 'Tax amount that corresponds to cancellation amount in amountPretax. Optional, but if filled, then amountPretax must be set. Calculated automatically if not provided.'
       lineItemId:
         description: The ID of the line item to cancel. Either lineItemId or productId is required.
         type: string
@@ -6301,10 +6319,10 @@ definitions:
         description: Deprecated. Please use amountPretax and amountTax instead.
       amountPretax:
         $ref: '#/definitions/Price'
-        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+        description: The amount that is refunded. Either amount or amountPretax should be filled.
       amountTax:
         $ref: '#/definitions/Price'
-        description: Tax amount that correspond to refund amount in amountPretax.
+        description: 'Tax amount that corresponds to refund amount in amountPretax. Optional, but if filled, amountPretax must be set. Calculated automatically if not provided.'
       reason:
         description: The reason for the refund.
         type: string
@@ -6354,10 +6372,10 @@ definitions:
     properties:
       amountPretax:
         $ref: '#/definitions/Price'
-        description: 'The amount that is refunded. If omitted, refundless return is assumed (same as calling returnLineItem method). Optional, but if filled then both amountPretax and amountTax must be set.'
+        description: 'The amount that is refunded. If omitted, refundless return is assumed (same as calling returnLineItem method).'
       amountTax:
         $ref: '#/definitions/Price'
-        description: Tax amount that correspond to refund amount in amountPretax.
+        description: 'Tax amount that corresponds to refund amount in amountPretax. Optional, but if filled, then amountPretax must be set. Calculated automatically if not provided.'
       lineItemId:
         description: The ID of the line item to return. Either lineItemId or productId is required.
         type: string
@@ -6572,10 +6590,10 @@ definitions:
         description: Deprecated. Please use amountPretax and amountTax instead.
       amountPretax:
         $ref: '#/definitions/Price'
-        description: The amount that is refunded. Either amount or amountPretax and amountTax should be filled.
+        description: The amount that is refunded. Either amount or amountPretax should be filled.
       amountTax:
         $ref: '#/definitions/Price'
-        description: Tax amount that correspond to refund amount in amountPretax.
+        description: 'Tax amount that corresponds to refund amount in amountPretax. Optional, but if filled, amountPretax must be set. Calculated automatically if not provided.'
       operationId:
         description: The ID of the operation. Unique across all operations for a given order.
         type: string
@@ -6664,10 +6682,10 @@ definitions:
     properties:
       amountPretax:
         $ref: '#/definitions/Price'
-        description: 'The amount that is refunded. If omitted, refundless return is assumed (same as calling returnLineItem method). Optional, but if filled then both amountPretax and amountTax must be set.'
+        description: 'The amount that is refunded. If omitted, refundless return is assumed (same as calling returnLineItem method).'
       amountTax:
         $ref: '#/definitions/Price'
-        description: Tax amount that correspond to refund amount in amountPretax.
+        description: 'Tax amount that corresponds to refund amount in amountPretax. Optional, but if filled, then amountPretax must be set. Calculated automatically if not provided.'
       lineItemId:
         description: The ID of the line item to return. Either lineItemId or productId is required.
         type: string
@@ -7464,6 +7482,18 @@ definitions:
           $ref: '#/definitions/Error'
         type: array
     type: object
+  ProductAmount:
+    properties:
+      priceAmount:
+        $ref: '#/definitions/Price'
+        description: The pre-tax or post-tax price depending on the location of the order.
+      remittedTaxAmount:
+        $ref: '#/definitions/Price'
+        description: Remitted tax value.
+      taxAmount:
+        $ref: '#/definitions/Price'
+        description: Tax value.
+    type: object
   ProductAspect:
     properties:
       aspectName:
@@ -8182,7 +8212,7 @@ definitions:
         description: Details of the requested shipping for the line item.
       unitTax:
         $ref: '#/definitions/Price'
-        description: Unit tax for the line item.
+        description: 'Deprecated. Ignored if provided. Tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied.'
     type: object
   TestOrderLineItemProduct:
     properties:
@@ -8215,7 +8245,7 @@ definitions:
         type: string
       price:
         $ref: '#/definitions/Price'
-        description: The price for the product.
+        description: 'The price for the product. Tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied.'
       targetCountry:
         description: The CLDR territory code of the target country of the product.
         type: string

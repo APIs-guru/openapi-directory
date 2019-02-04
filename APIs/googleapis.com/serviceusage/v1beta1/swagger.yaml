@@ -681,6 +681,9 @@ definitions:
           deadline for gRPC is infinite (no deadline) and HTTP requests is 5 seconds.
         format: double
         type: number
+      jwtAudience:
+        description: The JWT audience is used when generating a JWT id token for the backend.
+        type: string
       minDeadline:
         description: |-
           Minimum deadline in seconds needed for this method. Calls having deadline
@@ -693,6 +696,12 @@ definitions:
           operation. The default is no deadline.
         format: double
         type: number
+      pathTranslation:
+        enum:
+          - PATH_TRANSLATION_UNSPECIFIED
+          - CONSTANT_ADDRESS
+          - APPEND_PATH_TO_ADDRESS
+        type: string
       selector:
         description: |-
           Selects the methods to which this rule applies.
