@@ -11,6 +11,9 @@ info:
 
     To learn more about the API or to register your app for use with the API
     visit the [trash nothing! Developer page](https://trashnothing.com/developer).
+
+    NOTE: All date-time values are [UTC](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
+    and are in [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) (eg. 2019-02-03T01:23:53).
   termsOfService: |
     https://trashnothing.com/tos
   title: trash nothing!
@@ -496,7 +499,7 @@ paths:
           type: string
         - default: The group IDs of every group the current user is a member of.
           description: |
-            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of will be used (the group IDs of other groups will be silently discarded). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded).
+            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of or that are open archives groups will be used (the group IDs of other groups will be silently discarded*). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded*). <br /><br/> *To determine which group IDs were used and which were discarded, use the group_ids field in the response.
           in: query
           name: group_ids
           required: false
@@ -542,6 +545,19 @@ paths:
           name: radius
           required: false
           type: number
+        - description: |
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days. <br /><br /> NOTE: It's not recommended to request posts older than 30 days as this will cause the request to take longer.
+          format: date-time
+          in: query
+          name: date_min
+          required: false
+          type: string
+        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+          format: date-time
+          in: query
+          name: date_max
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -552,9 +568,15 @@ paths:
               end_index:
                 description: The index of the last post being returned (an integer between start_index and num_posts).
                 type: integer
+              group_ids:
+                description: |
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                items:
+                  type: string
+                type: array
               last_listings_view:
                 description: |
-                  The date and time when the current user last viewed the newest posts on the All Posts page (may be null). <br /><br /> NOTE: For this to be accurate, clients must update the last_listings_view property of the current user every time the user is shown the newest posts on the All Posts page. <br /><br /> NOTE: For requests using an api key instead of oauth, this field is always null.
+                  The UTC date and time when the current user last viewed the newest posts on the All Posts page (may be null). <br /><br /> NOTE: For this to be accurate, clients must update the last_listings_view property of the current user every time the user is shown the newest posts on the All Posts page. <br /><br /> NOTE: For requests using an api key instead of oauth, this field is always null.
                 format: date-time
                 type: string
               num_pages:
@@ -857,7 +879,7 @@ paths:
           type: string
         - default: The group IDs of every group the current user is a member of.
           description: |
-            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of will be used (the group IDs of other groups will be silently discarded). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded).
+            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of or that are open archives groups will be used (the group IDs of other groups will be silently discarded*). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded*). <br /><br/> *To determine which group IDs were used and which were discarded, use the group_ids field in the response.
           in: query
           name: group_ids
           required: false
@@ -903,6 +925,19 @@ paths:
           name: radius
           required: false
           type: number
+        - description: |
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days. <br /><br /> NOTE: It's not recommended to request posts older than 30 days as this will cause the request to take longer.
+          format: date-time
+          in: query
+          name: date_min
+          required: false
+          type: string
+        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+          format: date-time
+          in: query
+          name: date_max
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -913,6 +948,12 @@ paths:
               end_index:
                 description: The index of the last post being returned (an integer between start_index and num_posts).
                 type: integer
+              group_ids:
+                description: |
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                items:
+                  type: string
+                type: array
               num_pages:
                 description: The total number of pages available.
                 type: integer
@@ -1140,7 +1181,7 @@ paths:
         '400':
           description: Missing message parameter.
         '403':
-          description: The user doesn't have permission to access the post.
+          description: The user doesn't have permission to reply to the post.
         '404':
           description: Post not found.
       summary: Reply to a post
@@ -1213,7 +1254,7 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: Shares a post by email.
+      description: Forwards a copy of the post to the current user so that they can forward it to friends.
       operationId: share_post
       parameters:
         - description: The ID of the post to share.
@@ -1221,29 +1262,11 @@ paths:
           name: post_id
           required: true
           type: string
-        - description: |
-            If set to 1, a copy of post will be emailed to the current user so that they can share the email with anyone.  The message and recipients parameters are not used when this is set.
-          in: formData
-          name: send_copy
-          required: false
-          type: integer
-        - description: An optional message to prefix to the email body that will be sent to the recipients.
-          in: formData
-          name: message
-          required: false
-          type: string
-        - description: A comma separated list of email addresses to share the post with.  This is a required field if send_copy is not set.
-          in: formData
-          name: recipients
-          required: false
-          type: string
       produces:
         - application/json
       responses:
         '200':
           description: Post shared.
-        '400':
-          description: Invalid email addresses were passed in the recipients parameter.
         '403':
           description: The user doesn't have permission to access the post.
         '404':
@@ -1324,7 +1347,7 @@ paths:
           name: profile_image_source
           required: false
           type: string
-        - description: The date and time when the user last viewed the newest posts on the All Posts page.
+        - description: The UTC date and time when the user last viewed the newest posts on the All Posts page.
           format: date-time
           in: formData
           name: last_listings_view
@@ -1395,7 +1418,7 @@ paths:
           schema:
             $ref: '#/definitions/Alert'
         '400':
-          description: Missing or invalid parameters.
+          description: Missing or invalid parameters or maximum number of alerts reached.
       summary: Create an email alert
       tags:
         - users
@@ -1574,7 +1597,7 @@ paths:
     get:
       consumes:
         - multipart/form-data
-      operationId: get_user_groups
+      operationId: get_current_user_groups
       parameters:
         - description: |
             Set the membership parameter to only return certain groups. The options are: <br /><br /> - **subscribed**: Only return groups the user is a member of.<br /> - **pending-questions**: Only return groups where the user needs to respond to a new member questionnaire.<br /> - **pending**: Only return groups where the user is waiting for their membership request to be approved (excludes groups which are pending-questions). <br /><br /> If unset, all groups the user is a member of and pending membership on will be returned.
@@ -1683,7 +1706,7 @@ paths:
           type: string
         - default: The group IDs of every group the current user is a member of.
           description: |
-            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of will be used (the group IDs of other groups will be silently discarded). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded).
+            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of or that are open archives groups will be used (the group IDs of other groups will be silently discarded*). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded*). <br /><br/> *To determine which group IDs were used and which were discarded, use the group_ids field in the response.
           in: query
           name: group_ids
           required: false
@@ -1729,6 +1752,19 @@ paths:
           name: radius
           required: false
           type: number
+        - description: |
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days. <br /><br /> NOTE: It's not recommended to request posts older than 30 days as this will cause the request to take longer.
+          format: date-time
+          in: query
+          name: date_min
+          required: false
+          type: string
+        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+          format: date-time
+          in: query
+          name: date_max
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -1739,9 +1775,15 @@ paths:
               end_index:
                 description: The index of the last post being returned (an integer between start_index and num_posts).
                 type: integer
+              group_ids:
+                description: |
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                items:
+                  type: string
+                type: array
               last_listings_view:
                 description: |
-                  The date and time when the current user last viewed the newest posts on the All Posts page (may be null). <br /><br /> NOTE: For this to be accurate, clients must update the last_listings_view property of the current user every time the user is shown the newest posts on the All Posts page. <br /><br /> NOTE: For requests using an api key instead of oauth, this field is always null.
+                  The UTC date and time when the current user last viewed the newest posts on the All Posts page (may be null). <br /><br /> NOTE: For this to be accurate, clients must update the last_listings_view property of the current user every time the user is shown the newest posts on the All Posts page. <br /><br /> NOTE: For requests using an api key instead of oauth, this field is always null.
                 format: date-time
                 type: string
               num_pages:
@@ -1801,7 +1843,7 @@ paths:
           type: string
         - default: The group IDs of every group the current user is a member of.
           description: |
-            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of will be used (the group IDs of other groups will be silently discarded). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded).
+            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of or that are open archives groups will be used (the group IDs of other groups will be silently discarded*). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded*). <br /><br/> *To determine which group IDs were used and which were discarded, use the group_ids field in the response.
           in: query
           name: group_ids
           required: false
@@ -1847,6 +1889,19 @@ paths:
           name: radius
           required: false
           type: number
+        - description: |
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days. <br /><br /> NOTE: It's not recommended to request posts older than 30 days as this will cause the request to take longer.
+          format: date-time
+          in: query
+          name: date_min
+          required: false
+          type: string
+        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+          format: date-time
+          in: query
+          name: date_max
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -1857,6 +1912,12 @@ paths:
               end_index:
                 description: The index of the last post being returned (an integer between start_index and num_posts).
                 type: integer
+              group_ids:
+                description: |
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                items:
+                  type: string
+                type: array
               num_pages:
                 description: The total number of pages available.
                 type: integer
@@ -2021,7 +2082,7 @@ paths:
           type: string
         - default: The group IDs of every group the current user is a member of.
           description: |
-            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of will be used (the group IDs of other groups will be silently discarded). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded).
+            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of or that are open archives groups will be used (the group IDs of other groups will be silently discarded*). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded*). <br /><br/> *To determine which group IDs were used and which were discarded, use the group_ids field in the response.
           in: query
           name: group_ids
           required: false
@@ -2067,6 +2128,19 @@ paths:
           name: radius
           required: false
           type: number
+        - description: |
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
+          format: date-time
+          in: query
+          name: date_min
+          required: false
+          type: string
+        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+          format: date-time
+          in: query
+          name: date_max
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -2077,9 +2151,15 @@ paths:
               end_index:
                 description: The index of the last post being returned (an integer between start_index and num_posts).
                 type: integer
+              group_ids:
+                description: |
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                items:
+                  type: string
+                type: array
               last_listings_view:
                 description: |
-                  The date and time when the current user last viewed the newest posts on the All Posts page (may be null). <br /><br /> NOTE: For this to be accurate, clients must update the last_listings_view property of the current user every time the user is shown the newest posts on the All Posts page. <br /><br /> NOTE: For requests using an api key instead of oauth, this field is always null.
+                  The UTC date and time when the current user last viewed the newest posts on the All Posts page (may be null). <br /><br /> NOTE: For this to be accurate, clients must update the last_listings_view property of the current user every time the user is shown the newest posts on the All Posts page. <br /><br /> NOTE: For requests using an api key instead of oauth, this field is always null.
                 format: date-time
                 type: string
               num_pages:
@@ -2151,7 +2231,7 @@ paths:
           type: string
         - default: The group IDs of every group the current user is a member of.
           description: |
-            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of will be used (the group IDs of other groups will be silently discarded). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded).
+            A comma separated list of the group IDs to retrieve posts from. This parameter is only used if the 'groups' source is passed in the sources parameter and only groups that the current user is a member of or that are open archives groups will be used (the group IDs of other groups will be silently discarded*). <br /><br /> NOTE: For requests using an api key instead of oauth, this field is required if the 'groups' source is passed. In addition, only posts from groups that have open_archives set to true will be used (the group IDS of other groups will be silently discarded*). <br /><br/> *To determine which group IDs were used and which were discarded, use the group_ids field in the response.
           in: query
           name: group_ids
           required: false
@@ -2197,6 +2277,19 @@ paths:
           name: radius
           required: false
           type: number
+        - description: |
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
+          format: date-time
+          in: query
+          name: date_min
+          required: false
+          type: string
+        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+          format: date-time
+          in: query
+          name: date_max
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -2207,6 +2300,12 @@ paths:
               end_index:
                 description: The index of the last post being returned (an integer between start_index and num_posts).
                 type: integer
+              group_ids:
+                description: |
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                items:
+                  type: string
+                type: array
               num_pages:
                 description: The total number of pages available.
                 type: integer
@@ -2283,7 +2382,7 @@ definitions:
       alert_id:
         type: string
       last_sent:
-        description: The last time that the alert was triggered and sent out (may be null).
+        description: The UTC date and time when the alert was last triggered and sent out (may be null).
         format: date-time
         type: string
       search:
@@ -2363,7 +2462,7 @@ definitions:
             type: boolean
           last_listings_view:
             description: |
-              The date and time when the user last viewed the newest posts on the All Posts page (may be null). <br /><br /> NOTE: For this to be accurate, clients must update the last_listings_view property of the current user every time the user is shown the newest posts on the All Posts page.
+              The UTC date and time when the user last viewed the newest posts on the All Posts page (may be null). <br /><br /> NOTE: For this to be accurate, clients must update the last_listings_view property of the current user every time the user is shown the newest posts on the All Posts page.
             format: date-time
             type: string
           location:
@@ -2412,7 +2511,7 @@ definitions:
               type: string
             type: array
           signup:
-            description: The date and time when the user signed up.
+            description: The UTC date and time when the user signed up.
             format: date-time
             type: string
           uses_fair_offer_policy:
@@ -2561,7 +2660,7 @@ definitions:
         properties:
           date:
             description: |
-              For pending and pending-questions memberships, this is the date and time when the current user requested membership to this group. For subscribed memberships, this is the date and time when the membership status became subscribed.
+              For pending and pending-questions memberships, this is the UTC date and time when the current user requested membership to this group. For subscribed memberships, this is the UTC date and time when the membership status became subscribed.
             format: date-time
             type: string
           questionnaire:
@@ -2622,7 +2721,7 @@ definitions:
       content:
         type: string
       date:
-        description: The date and time when this notice was received.
+        description: The UTC date and time when this notice was received.
         format: date-time
         type: string
       group_id:
@@ -2692,7 +2791,7 @@ definitions:
       content:
         type: string
       date:
-        description: The date and time when the post was published.
+        description: The UTC date and time when the post was published.
         format: date-time
         type: string
       footer:

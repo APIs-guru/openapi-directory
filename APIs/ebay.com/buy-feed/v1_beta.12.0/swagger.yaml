@@ -12,7 +12,7 @@ info:
     name: eBay API License Agreement
     url: 'https://go.developer.ebay.com/api-license-agreement'
   title: Item Feed Service
-  version: v1_beta.11.0
+  version: v1_beta.12.0
   x-apisguru-categories:
     - ecommerce
   x-logo:
@@ -22,6 +22,7 @@ info:
     - format: swagger
       url: 'https://developer.ebay.com/api-docs/master/buy/feed/openapi/2/buy_feed_v1_beta_oas2.json'
       version: '2.0'
+  x-preferred: true
   x-providerName: ebay.com
   x-serviceName: buy-feed
 produces:
@@ -103,11 +104,11 @@ paths:
                 domain: API_FEED
               '13004':
                 category: REQUEST
-                description: 'The ''category_id'' {category_id} submitted is invalid. See the API documentation for help on how to find category Ids.'
+                description: 'The ''category_id'' {category_id} submitted is invalid. See the API documentation for help on how to find category IDs.'
                 domain: API_FEED
               '13005':
                 category: REQUEST
-                description: 'The ''date'' {date} submitted is invalid. The date can be 3 to 9 days in the past. The format is yyyMMdd.'
+                description: 'The ''date'' {date} submitted is invalid. The date can be 3 to 9 days in the past. The format is yyyyMMdd.'
                 domain: API_FEED
               '13006':
                 category: REQUEST
@@ -127,7 +128,7 @@ paths:
                 domain: API_FEED
               '13011':
                 category: REQUEST
-                description: 'The mandatory ''date'' query parameter is missing. Valid values: {earliestDate} to {latestDate} days in the past. The format is yyyMMdd.'
+                description: 'The mandatory ''date'' query parameter is missing. Valid values: {earliestDate} to {latestDate} days in the past. The format is yyyyMMdd.'
                 domain: API_FEED
               '13012':
                 category: REQUEST
@@ -160,6 +161,10 @@ paths:
               '13019':
                 category: REQUEST
                 description: The end position in the range header is invalid.
+                domain: API_FEED
+              '13022':
+                category: REQUEST
+                description: 'The ''category_id'' {category_id} submitted is not supported.'
                 domain: API_FEED
         '404':
           description: Not found
@@ -239,11 +244,11 @@ paths:
                 domain: API_FEED
               '13004':
                 category: REQUEST
-                description: 'The ''category_id'' {category_id} submitted is invalid. See the API documentation for help on how to find category Ids.'
+                description: 'The ''category_id'' {category_id} submitted is invalid. See the API documentation for help on how to find category IDs.'
                 domain: API_FEED
               '13005':
                 category: REQUEST
-                description: 'The ''date'' {date} submitted is invalid. The date can be 3 to 9 days in the past. The format is yyyMMdd.'
+                description: 'The ''date'' {date} submitted is invalid. The date can be 3 to 9 days in the past. The format is yyyyMMdd.'
                 domain: API_FEED
               '13006':
                 category: REQUEST
@@ -263,7 +268,7 @@ paths:
                 domain: API_FEED
               '13011':
                 category: REQUEST
-                description: 'The mandatory ''date'' query parameter is missing. Valid values: {earliestDate} to {latestDate} days in the past. The format is yyyMMdd.'
+                description: 'The mandatory ''date'' query parameter is missing. Valid values: {earliestDate} to {latestDate} days in the past. The format is yyyyMMdd.'
                 domain: API_FEED
               '13012':
                 category: REQUEST
@@ -297,6 +302,10 @@ paths:
                 category: REQUEST
                 description: The end position in the range header is invalid.
                 domain: API_FEED
+              '13022':
+                category: REQUEST
+                description: 'The ''category_id'' {category_id} submitted is not supported.'
+                domain: API_FEED
         '404':
           description: Not found
         '416':
@@ -310,7 +319,7 @@ paths:
         - item_group
   /item_snapshot:
     get:
-      description: 'The Hourly Snapshot feed file is generated each hour every day for all categories. This method lets you download an Hourly Snapshot TSV_GZIP (tab separated value gzip) feed file containing the details of all the items that have changed within the specified day and hour for a specific category. This means to generate the 8AM file of items that have changed from 8AM and 8:59AM, the service starts at 9AM. You can retrieve the 8AM snapshot file at 10AM. Note: Filters are applied to the feed files. For details, see Feed File Filters. When curating the items returned, be sure to code as if these filters are not applied as they can be changed or removed in the future. You can use the response from this method to update the item details of items stored in your database. By comparing the value of itemSnapshotDate for the same item you will be able to tell which information is the latest. URLs for this method Production URL: https://api.ebay.com/buy/feed/v1_beta/ Sandbox URL: https://api.sandbox.ebay.com/buy/feed/v1_beta/ Downloading feed files Hourly snapshot feed files are binary gzip files. If the file is larger than 100 MB, the download must be streamed in chunks. You specify the size of the chunks in bytes using the Range request header. The Content-range response header indicates where in the full resource this partial chunk of data belongs and the total number of bytes in the file. For more information about using these headers, see Retrieving a gzip feed file. Note: The response is always a TSV_GZIP file. However for documentation purposes, the response is shown as JSON fields so that the value returned in each column can be explained. The order of the response fields, shows you the order of the columns in the feed file. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
+      description: 'The Hourly Snapshot feed file is generated each hour every day for all categories. This method lets you download an Hourly Snapshot TSV_GZIP (tab separated value gzip) feed file containing the details of all the items that have changed within the specified day and hour for a specific category. This means to generate the 8AM file of items that have changed from 8AM and 8:59AM, the service starts at 9AM. You can retrieve the 8AM snapshot file at 10AM. Note: Filters are applied to the feed files. For details, see Feed File Filters. When curating the items returned, be sure to code as if these filters are not applied as they can be changed or removed in the future. You can use the response from this method to update the item details of items stored in your database. By comparing the value of itemSnapshotDate for the same item you will be able to tell which information is the latest. Important: When the value of the availability column is UNAVAILABLE, only the itemId and availability columns are populated. URLs for this method Production URL: https://api.ebay.com/buy/feed/v1_beta/ Sandbox URL: https://api.sandbox.ebay.com/buy/feed/v1_beta/ Downloading feed files Hourly snapshot feed files are binary gzip files. If the file is larger than 100 MB, the download must be streamed in chunks. You specify the size of the chunks in bytes using the Range request header. The Content-range response header indicates where in the full resource this partial chunk of data belongs and the total number of bytes in the file. For more information about using these headers, see Retrieving a gzip feed file. Note: The response is always a TSV_GZIP file. However for documentation purposes, the response is shown as JSON fields so that the value returned in each column can be explained. The order of the response fields, shows you the order of the columns in the feed file. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
       operationId: getItemSnapshotFeed
       parameters:
         - description: 'The ID of the eBay marketplace where the item is hosted. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions.'
@@ -366,7 +375,7 @@ paths:
                 domain: API_FEED
               '13004':
                 category: REQUEST
-                description: 'The ''category_id'' {category_id} submitted is invalid. See the API documentation for help on how to find category Ids.'
+                description: 'The ''category_id'' {category_id} submitted is invalid. See the API documentation for help on how to find category IDs.'
                 domain: API_FEED
               '13006':
                 category: REQUEST
@@ -420,6 +429,10 @@ paths:
                 category: REQUEST
                 description: 'The ''snapshot_date'' query parameter is invalid.Valid format is ''yyyy-MM-ddTHH:mm:ss'''
                 domain: API_FEED
+              '13022':
+                category: REQUEST
+                description: 'The ''category_id'' {category_id} submitted is not supported.'
+                domain: API_FEED
         '404':
           description: Not found
         '416':
@@ -432,8 +445,185 @@ paths:
       tags:
         - item_snapshot
 definitions:
+  AvailabilityEnum:
+    description: An enumerated type for the values that represent the item's availability. <br /><br />Code so that your app gracefully handles any future changes to this list.
+    enum:
+      - TEMPORARILY_UNAVAILABLE
+      - AVAILABLE
+      - UNAVAILABLE
+    type: object
+  AvailabilityThresholdEnum:
+    description: 'An enumerated type for the values that indicate the availability of an item based on the <a href="#display-item-quantity">display item quantity</a> preference set by the seller. <br /><br />Code so that your app gracefully handles any future changes to this list.'
+    enum:
+      - MORE_THAN
+    type: object
+  CurrencyCodeEnum:
+    description: 'The three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank">ISO 4217</a> code representing a world currency.'
+    enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHF
+      - CLP
+      - CNY
+      - COP
+      - CRC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - STD
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XCD
+      - XOF
+      - XPF
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    type: object
+  DeliveryOptionsEnum:
+    description: An enumerated type for the values that represent how an item can be delivered to the buyer. You use this information to filter for items that can be shipped. <br /><br />Code so that your app gracefully handles any future changes to this list. <br /><br />Code so that your app gracefully handles any future changes to this list.
+    enum:
+      - SHIP_TO_HOME
+      - SELLER_ARRANGED_LOCAL_PICKUP
+    type: object
   Item:
-    description: The type that defines the fields for the data returned by the <b> getItemFeed</b> method.
+    description: The type that defines the columns returned in the <b>Item</b> feed file.
     properties:
       acceptedPaymentMethods:
         description: 'Indicates the credit card service that will be used to process the transaction. If this column contains PAYPAL, you can use the Buy Order API to checkout and purchase the item. If this column is empty, you must use another method for checkout.'
@@ -442,14 +632,12 @@ definitions:
         description: 'A pipe separated (|) list of URLs for the additional images of the item. These images are in addition to the primary image, which is returned in the imageUrl column. Note: This column can contain multiple values.'
         type: string
       availability:
-        description: 'An enumeration value representing the item''s availability (possibility of being purchased). Values: AVAILABLE TEMPORARILY_UNAVAILABLE UNAVAILABLE Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/AvailabilityEnum'
       availabilityThreshold:
         description: 'This column has a value only when the seller sets their ''display item quantity'' preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be &quot;10&quot;, which is the threshold value. Code so that your app gracefully handles any future changes to this value.'
         type: integer
       availabilityThresholdType:
-        description: 'This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the ''Display Item Quantity'', which is 10, in stock for this item. The following are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/AvailabilityThresholdEnum'
       brand:
         description: 'The name brand of the item, such as Nike, Apple, etc.'
         type: string
@@ -469,8 +657,7 @@ definitions:
         description: 'The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.'
         type: string
       deliveryOptions:
-        description: 'A comma separated list of delivery options for the item, such as SHIP_TO_HOME and SELLER_ARRANGED_LOCAL_PICKUP. This column lets you filter out items that cannot be shipped to the buyer. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/DeliveryOptionsEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/DeliveryOptionsEnum'
       discountAmount:
         description: 'The calculated amount of the discount (originalPriceValue - priceValue). For example, if originalPriceValue is 70 and priceValue is 56, this value would be 14. Note: The currency shown in originalPriceCurrency is used for both discountAmount and originalPriceCurrency.'
         type: string
@@ -526,14 +713,12 @@ definitions:
         description: 'The manufacturer part number, which is a number that is used in combination with brand to identify a product.'
         type: string
       originalPriceCurrency:
-        description: 'The currency of the originalPriceValue of the item and the discountAmount. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/CurrencyCodeEnum'
       originalPriceValue:
         description: The original selling price of the item. This lets you surface a strikethrough price for the item.
         type: string
       priceCurrency:
-        description: 'The currency used for the price of the item. Generally, this is the currency used by the country of the eBay site offering the item. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/CurrencyCodeEnum'
       priceValue:
         description: 'The price of the item. This price can be a discounted price. If it is discounted, information about the discount is returned in the originalPriceValue, originalPriceCurrency, discountAmount, and discountPercentage columns.'
         type: string
@@ -543,21 +728,20 @@ definitions:
       primaryItemGroupType:
         description: 'The item group type. Supported value: SELLER_DEFINED_VARIATIONS, indicates that the item group was created by the seller. Code so that your app gracefully handles any future changes to this list.'
         type: string
+      qualifiedPrograms:
+        description: 'A pipe separated list of the qualified programs available for the item. Currently, the only qualified program returned is EBAY_PLUS. Note: The EBAY_PLUS program is supported only on the EBAY_DE and EBAY_AU marketplaces. This means the qualifiedPrograms column will be populated only in feed files for these marketplaces. Currently, only EBAY_DE feed files are available. For a list of marketplaces supported by the Feed API, see Buy API Support by Marketplace. Program Values: EBAY_PLUS'
+        type: string
       refundMethod:
-        description: 'An enumeration value that indicates how a buyer is refunded when an item is returned. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/RefundMethodEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/RefundMethodEnum'
       returnMethod:
-        description: 'An enumeration value that indicates the alternative methods for a full refund when an item is returned. This column will have data if the seller offers the buyer an item replacement or exchange instead of a monetary refund. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnMethodEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/ReturnMethodEnum'
       returnPeriodUnit:
-        description: 'An enumeration value that indicates the period of time being used to measure the duration, such as business days or months, or years. See the TimeDurationUnitEnum type for a list of possible time-measuring units. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/TimeDurationUnitEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/TimeDurationUnitEnum'
       returnPeriodValue:
         description: 'The amount of time the buyer has to return the item after the purchase date. This can be the number of years, months, or days depending on returnPeriodUnit. For example, if this value is ''30'', and the returnPeriodUnit value is ''DAY'', the return period is 30 days.'
         type: integer
       returnShippingCostPayer:
-        description: 'The party responsible for the return shipping costs when an item is returned. Valid Values: BUYER or SELLER Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnShippingCostPayerEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/ReturnShippingCostPayerEnum'
       returnsAccepted:
         description: Indicates whether the seller accepts returns for the item.
         type: boolean
@@ -571,8 +755,7 @@ definitions:
         description: 'An identifier generated/incremented when a seller revises the item. There are two types of item revisions; seller changes, such as changing the title and eBay system changes, such as changing the quantity when an item is purchased. This ID is changed only when the seller makes a change to the item.'
         type: string
       sellerTrustLevel:
-        description: 'An enumeration value representing the eBay status of the seller. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/SellerTrustLevelEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/SellerTrustLevelEnum'
       sellerUsername:
         description: The seller's eBay user name.
         type: string
@@ -586,8 +769,30 @@ definitions:
         description: 'The seller created title of the item. This text is an escaped string when special characters are present, using the following rules: Double quotes (&quot;) and backslashes (\) in the Title are escaped with a backslash (\) character If there are any tabs (\t), double quotes (&quot;), or backslashes (\) in the Title, the entire Title will be wrapped in double quotes. For example Before: Misty Rainforest Modern Masters 2017 MTG Magic Fetch Land Free Ship W\Tracking Marvel Legends HULK 8&quot; Figure Avengers Age of Ultron Studios 6&quot; Series After: &quot;Misty Rainforest Modern Masters 2017 MTG Magic Fetch Land Free Ship W\\Tracking&quot; &quot;Marvel Legends HULK 8\&quot; Figure Avengers Age of Ultron Studios 6\&quot; Series&quot;'
         type: string
     type: object
+  ItemDescription:
+    description: 'The type that defines the columns returned in the <b>Item Description</b> feed file. The first row is the header, which labels the columns and indicates the order of the values for each item. The header labels match the fields that are described in the <a href="/api-docs/buy/feed/resources/item_group/methods/getItemDescriptionFeed#h3-response-fields">Response fields</a> section. '
+    properties:
+      description:
+        description: 'The seller created description of the item, which is BASE64 encoded. Descriptions can contain HTML code, links, etc. and are often very large.'
+        type: string
+      itemGroupId:
+        description: 'The unique identifier for the item group (items with variations, such as a shirt in multiple sizes) where the items in the group share the same description. Even though the itemGroupId represents more than one item, the itemGroupId and description are returned only once for the entire group. In this case, there will be values in the itemGroupId and description columns. You match the value of itemGroupId from the Description feed file with the value of primaryItemGroupId from the Item feed file for the same day and category.'
+        type: string
+      itemId:
+        description: 'The unique identifier of the eBay item that is not part of an item group or (in rare cases) the item is part of an item group but does not share a description with other items in the group. In this case, there will be values in the itemId and description columns. You match the value of itemId from the Description feed file with the value of itemId from the Item feed file for the same day and category.'
+        type: string
+    type: object
+  ItemDescriptionResponse:
+    description: 'The type that defines the array for the item descriptions returned in the <b>Item Description</b> feed file. '
+    properties:
+      itemDescriptions:
+        description: 'The container for the array of items descriptions returned by the Item Description feed file. The data in the file is tab separated and the first row is the header, which labels the columns and indicates the order of the values for each item. The header labels match the fields that are described in the Response fields section.'
+        items:
+          $ref: '#/definitions/ItemDescription'
+        type: array
+    type: object
   ItemGroup:
-    description: The type that defines the fields for the data returned by the <b> getItemGroupFeed</b> method.
+    description: The type that defines the columns returned in the <b>Item Group</b> feed file.
     properties:
       additionalImageUrls:
         description: 'A pipe separated (|) list of URLs for the additional images for the item group. These images are in addition to the primary image, which is returned in the imageUrl column. Note: This column can contain multiple values.'
@@ -612,16 +817,16 @@ definitions:
         type: string
     type: object
   ItemGroupResponse:
-    description: The type that defines the array for the fields returned by the <b> getItemGroupFeed</b> method.
+    description: The type that defines the array for the items returned in the <b>Item Group</b> feed file.
     properties:
       itemGroups:
-        description: 'The container for the array of items returned by the getItemGroupFeed method. The data in the file is tab separated and the first row is the header, which labels the columns and indicates the order of the values for each item. The header labels match the fields that are described in the Response fields section.'
+        description: 'The container for the array of items groups returned by the getItemGroupFeed method. The data in the file is tab separated and the first row is the header, which labels the columns and indicates the order of the values for each item. The header labels match the fields that are described in the Response fields section.'
         items:
           $ref: '#/definitions/ItemGroup'
         type: array
     type: object
   ItemResponse:
-    description: 'The type that defines the array for the items returned by the <b> getItemFeed</b> method. '
+    description: 'The type that defines the array for the items returned in the <b>Item</b> feed file. '
     properties:
       items:
         description: 'The container for the array of items returned by the getItemFeed method. The data in the file is tab separated and the first row is the header, which labels the columns and indicates the order of the values on each line. The header labels match the fields that are described in the Response fields section.'
@@ -630,7 +835,7 @@ definitions:
         type: array
     type: object
   ItemSnapshot:
-    description: The type that defines the fields for the data returned by the <b> getItemSnapshotFeed</b> method.
+    description: 'The type that defines the columns returned in the <b>Hourly Snapshot</b> feed file.  <p>  <b>Note: </b> When the value of the <b>availability</b> column is <code>UNAVAILABLE</code>, only the <b>itemId</b> and <b>availability</b> columns are populated.  </p> '
     properties:
       acceptedPaymentMethods:
         description: 'Indicates the credit card service that will be used to process the transaction. If this column contains PAYPAL, you can use the Buy Order API to checkout and purchase the item. If this column is empty, you must use another method for checkout.'
@@ -639,14 +844,12 @@ definitions:
         description: 'A pipe separated (|) list of URLs for the additional images of the item. These images are in addition to the primary image, which is returned in the imageUrl column. Note: This column can contain multiple values.'
         type: string
       availability:
-        description: 'An enumeration value representing the item''s availability (possibility of being purchased). Values: AVAILABLE TEMPORARILY_UNAVAILABLE UNAVAILABLE Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/AvailabilityEnum'
       availabilityThreshold:
         description: 'This column has a value only when the seller sets their ''display item quantity'' preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be &quot;10&quot;, which is the threshold value. Code so that your app gracefully handles any future changes to this value.'
         type: integer
       availabilityThresholdType:
-        description: 'This column has a value only when the seller sets their Display Item Quantity preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this column will be MORE_THAN. This indicates that the seller has more than the ''Display Item Quantity'', which is 10, in stock for this item. The following are the Display Item Quantity preferences the seller can set. Display &quot;More than 10 available&quot; in your listing (if applicable) If the seller enables this preference, this column will have a value as long as there are more than 10 of this item in inventory. If the quantity is equal to 10 or drops below 10, this column will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Display the exact quantity in your items If the seller enables this preference, the availabilityThresholdType and availabilityThreshold columns will be null and the estimated quantity of the item is returned in the estimatedAvailableQuantity column. Note: Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. Code so that your app gracefully handles any future changes to these preferences. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/AvailabilityThresholdEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/AvailabilityThresholdEnum'
       brand:
         description: 'The name brand of the item, such as Nike, Apple, etc.'
         type: string
@@ -666,8 +869,7 @@ definitions:
         description: 'The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.'
         type: string
       deliveryOptions:
-        description: 'A comma separated list of delivery options for the item, such as SHIP_TO_HOME and SELLER_ARRANGED_LOCAL_PICKUP. This column lets you filter out items that cannot be shipped to the buyer. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/DeliveryOptionsEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/DeliveryOptionsEnum'
       discountAmount:
         description: 'The calculated amount of the discount (originalPriceValue - priceValue). For example, if originalPriceValue is 70 and priceValue is 56, this value would be 14. Note: The currency shown in originalPriceCurrency is used for both discountAmount and originalPriceCurrency.'
         type: string
@@ -711,14 +913,12 @@ definitions:
         description: 'The manufacturer part number, which is a number that is used in combination with brand to identify a product.'
         type: string
       originalPriceCurrency:
-        description: 'The currency of the originalPriceValue of the item and the discountAmount. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/CurrencyCodeEnum'
       originalPriceValue:
         description: The original selling price of the item. This lets you surface a strikethrough price for the item.
         type: string
       priceCurrency:
-        description: 'The currency used for the price of the item. Generally, this is the currency used by the country of the eBay site offering the item. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/CurrencyCodeEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/CurrencyCodeEnum'
       priceValue:
         description: 'The price of the item. Note: This price can be a discounted price.'
         type: string
@@ -728,21 +928,20 @@ definitions:
       primaryItemGroupType:
         description: 'The item group type. Supported value: SELLER_DEFINED_VARIATIONS, indicates that the item group was created by the seller. Code so that your app gracefully handles any future changes to this list.'
         type: string
+      qualifiedPrograms:
+        description: 'A pipe separated list of the qualified programs available for the item. Currently, the only qualified program returned is EBAY_PLUS. Note: The EBAY_PLUS program is supported only on the EBAY_DE and EBAY_AU marketplaces. This means the qualifiedPrograms column will be populated only in feed files for these marketplaces. Currently, only EBAY_DE feed files are available. For a list of marketplaces supported by the Feed API, see Buy API Support by Marketplace. Program Values: EBAY_PLUS'
+        type: string
       refundMethod:
-        description: 'An enumeration value that indicates how a buyer is refunded when an item is returned. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/RefundMethodEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/RefundMethodEnum'
       returnMethod:
-        description: 'An enumeration value that indicates the alternative methods for a full refund when an item is returned. This column will have data if the seller offers the buyer an item replacement or exchange instead of a monetary refund. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnMethodEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/ReturnMethodEnum'
       returnPeriodUnit:
-        description: 'An enumeration value that indicates the period of time being used to measure the duration, such as business days or months, or years. See the TimeDurationUnitEnum type for a list of possible time-measuring units. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/TimeDurationUnitEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/TimeDurationUnitEnum'
       returnPeriodValue:
         description: 'The amount of time the buyer has to return the item after the purchase date. This can be the number of years, months, or days depending on returnPeriodUnit. For example, if this value is ''30'', and the returnPeriodUnit value is ''DAY'', the return period is 30 days.'
         type: integer
       returnShippingCostPayer:
-        description: 'The party responsible for the return shipping costs when an item is returned. Valid Values: BUYER or SELLER Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/ReturnShippingCostPayerEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/ReturnShippingCostPayerEnum'
       returnsAccepted:
         description: Indicates whether the seller accepts returns for the item.
         type: boolean
@@ -756,8 +955,7 @@ definitions:
         description: 'An identifier generated/incremented when a seller revises the item. There are two types of item revisions; seller changes, such as changing the title and eBay system changes, such as changing the quantity when an item is purchased. This ID is changed only when the seller makes a change to the item.'
         type: string
       sellerTrustLevel:
-        description: 'An enumeration value representing the eBay status of the seller. Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href=''https://developer.ebay.com/devzone/rest/api-ref/feed/types/SellerTrustLevelEnum.html''>eBay API documentation</a>'
-        type: string
+        $ref: '#/definitions/SellerTrustLevelEnum'
       sellerUsername:
         description: The seller's eBay user name.
         type: string
@@ -772,11 +970,79 @@ definitions:
         type: string
     type: object
   ItemSnapshotResponse:
-    description: The type that defines the container for the items returned by the <b> getItemSnapshotResponse</b>.
+    description: The type that defines the array for the items returned in the <b>Hourly Snapshot</b> feed file.
     properties:
       items:
-        description: The type that defines the array for the items returned by the getItemSnapshotFeed method.
+        description: 'The container for the array of items returned by the getItemSnapshotFeed method. Note: When the value of the availability column is UNAVAILABLE, only the itemId and availability columns are populated.'
         items:
           $ref: '#/definitions/ItemSnapshot'
         type: array
+    type: object
+  Product:
+    description: The type that defines the columns returned in the <b> getProductFeed</b> feed file.
+    properties:
+      additionalImageUrls:
+        description: 'A pipe separated (|) list of URLs for the additional images of the item. These images are in addition to the primary image, which is returned in the imageUrl column. Note: This column can contain multiple values.'
+        type: string
+      description:
+        description: 'The description of the product, which is BASE64 encoded.'
+        type: string
+      epid:
+        description: The eBay product identifier of a product from the eBay product catalog. You can use this value in the Browse API search method to retrieve items for this product and in the Marketing API methods to retrieve 'also viewed' and 'also bought' products to encourage up-selling and cross-selling.
+        type: string
+      imageUrl:
+        description: The URL to the primary product image. This is the URL of the largest image available based on what the seller submitted.
+        type: string
+      localizedProductAspects:
+        description: 'A list of the name/value pairs for the aspects of the product, which are BASE64 encoded. The aspect label, is separated by a pipe (|), the aspect name and value are separated by a colon (:) and the name/value pairs are separated by a semicolon (;). Example without Label Encoded: encodedName:encodedValue;encodedName:encodedValue;encodedName:encodedValue Decoded: Size:XL;Color:Red;Sleeves:Long Example with Label Encoded: encodedLabel|encodedName:encodedValue;encodedName:encodedValue;encodedLabel|encodedName:encodedValue Decoded: Product Identifiers|GTIN:0190198066633;BRAND:Apple;Product Key Features|Model:iPhone 7 Note: The separators ( | : ; ) are not encoded. You must decode each label, name, and value separately. You cannot decode the entire string. For more information, see Encoded Aspects in the Buying Integration Guide.'
+        type: string
+      title:
+        description: 'The title of the product. This text is an escaped string when special characters are present, using the following rules: Double quotes (&quot;) and backslashes (\) in the Title are escaped with a backslash (\) character If there are any tabs (\t), double quotes (&quot;), or backslashes (\) in the Title, the entire Title will be wrapped in double quotes. For example Before: Misty Rainforest Modern Masters 2017 MTG Magic Fetch Land Free Ship W\Tracking Marvel Legends HULK 8&quot; Figure Avengers Age of Ultron Studios 6&quot; Series After: &quot;Misty Rainforest Modern Masters 2017 MTG Magic Fetch Land Free Ship W\\Tracking&quot; &quot;Marvel Legends HULK 8\&quot; Figure Avengers Age of Ultron Studios 6\&quot; Series&quot;'
+        type: string
+    type: object
+  ProductResponse:
+    description: The type that defines the array for the products returned in the <b>Product</b> feed file.
+    properties:
+      products:
+        description: 'The container for the array of products returned by the getProdutFeed method. The data in the file is tab separated and the first row is the header, which labels the columns and indicates the order of the values on each line. The header labels match the fields that are described in the Response fields section.'
+        items:
+          $ref: '#/definitions/Product'
+        type: array
+    type: object
+  RefundMethodEnum:
+    description: An enumerated type for the values that represent how a refund is given to the buyer when an item is returned. <br /><br />Code so that your app gracefully handles any future changes to this list.
+    enum:
+      - MONEY_BACK
+      - MERCHANDISE_CREDIT
+    type: object
+  ReturnMethodEnum:
+    description: An enumerated type for the values that represent the alternative methods for a full refund when an item is returned. <br /><br />Code so that your app gracefully handles any future changes to this list.
+    enum:
+      - REPLACEMENT
+      - EXCHANGE
+    type: object
+  ReturnShippingCostPayerEnum:
+    description: An enumeration value that represents who will pay the return shipping costs.
+    enum:
+      - SELLER
+      - BUYER
+    type: object
+  SellerTrustLevelEnum:
+    description: 'An enumerated type for the values that represent the eBay seller''s trust level. For example, TOP_RATED, or ABOVE_STANDARD.    <br /><br />Code so that your app gracefully handles any future changes to this list.'
+    enum:
+      - TOP_RATED
+      - ABOVE_STANDARD
+    type: object
+  TimeDurationUnitEnum:
+    description: 'An enumerated type for the values that represent the period of time being used. '
+    enum:
+      - YEAR
+      - MONTH
+      - DAY
+      - HOUR
+      - CALENDAR_DAY
+      - BUSINESS_DAY
+      - MINUTE
+      - SECOND
+      - MILLISECOND
     type: object

@@ -500,6 +500,39 @@ paths:
           source: 'curl -F ''value=65.5'' https://io.adafruit.com/api/v2/webhooks/feed/12345thistoken'
       x-swagger-router-action: create
       x-swagger-router-controller: WebhookReceivers
+  '/webhooks/feed/:token/raw':
+    post:
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      description: 'The raw data webhook receiver accepts POST requests and stores the raw request body on your feed. This is useful when you don''t have control of the webhook sender. If feed history is turned on, payloads will be truncated at 1024 bytes. If feed history is turned off, payloads will be truncated at 100KB.'
+      operationId: createRawWebhookFeedData
+      responses:
+        '200':
+          description: New feed data record
+          schema:
+            $ref: '#/definitions/Data'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Server Error
+      summary: Send arbitrary data to a feed via webhook URL.
+      tags:
+        - Webhooks
+        - Data
+      x-code-samples:
+        - lang: curl
+          source: |-
+            curl --header 'Content-Type: application/json' \
+              --request POST \
+              --data '{"some json": "goes here", "id": 12345}' \
+              https://io.adafruit.com/api/v2/webhooks/feed/12345thistoken/raw
+      x-swagger-router-action: createRaw
+      x-swagger-router-controller: WebhookReceivers
   '/{username}/activities':
     delete:
       description: Delete all your activities.
@@ -1122,6 +1155,10 @@ paths:
       consumes:
         - application/json
         - application/x-www-form-urlencoded
+      description: |-
+        Create new data records on the given feed.
+
+        **NOTE:** when feed history is on, data `value` size is limited to 1KB, when feed history is turned off data value size is limited to 100KB.
       operationId: createData
       parameters:
         - $ref: '#/parameters/UsernamePath'
@@ -1148,6 +1185,13 @@ paths:
           source: |-
             curl -F 'value=65.5' -H 'X-AIO-Key: io_key_12345' \
               https://io.adafruit.com/api/v2/io_username/feeds/io-feed-key/data
+        - lang: Ruby
+          source: |-
+            api = Adafruit::IO::Client.new(
+              key: ENV['IO_KEY'],
+              username: ENV['IO_USERNAME']
+            )
+            api.send_data('io-feed-key', 65.5)
       x-swagger-router-action: create
       x-swagger-router-controller: Data
   '/{username}/feeds/{feed_key}/data/batch':

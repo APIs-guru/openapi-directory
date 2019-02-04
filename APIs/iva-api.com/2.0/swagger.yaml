@@ -51,6 +51,7 @@ tags:
   - name: Changes
   - name: Charts
   - name: Common
+  - name: EidrFeeds
   - name: Entertainment
   - name: ExternalIds
   - name: Fandango
@@ -59,7 +60,6 @@ tags:
   - name: GoWatchIt
   - name: Images
   - name: ImdbFeeds
-  - name: Internal
   - name: Metacritic
   - name: Movies
   - name: My
@@ -3302,6 +3302,48 @@ paths:
       summary: List of Video Types.
       tags:
         - Common
+    parameters:
+      - $ref: '#/parameters/Accept'
+  /EidrFeeds/Movies:
+    get:
+      deprecated: false
+      description: Returns a list of EIDR Movie Items
+      operationId: GetEidrMovieFeedMovies_Get
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/ImdbFeedResponse'
+            title: List<ImdbFeedResponse>
+            type: array
+      summary: ''
+      tags:
+        - private
+    parameters:
+      - $ref: '#/parameters/Accept'
+  /EidrFeeds/Movies/IdMappings:
+    get:
+      deprecated: false
+      description: Returns a list of EIDR Ids mapped to IVA and EntertainmentIds
+      operationId: GetEidrMovieFeedIdMappingsMoviesIdMappings_Get
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/ImdbFeedResponse'
+            title: List<ImdbFeedResponse>
+            type: array
+      summary: ''
+      tags:
+        - private
     parameters:
       - $ref: '#/parameters/Accept'
   /Entertainment/Match/:
@@ -6673,84 +6715,6 @@ paths:
             title: List<ImdbFeedResponse>
             type: array
       summary: ''
-      tags:
-        - private
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Internal/MovieExceptionRecordValidation/Query:
-    get:
-      deprecated: false
-      operationId: QueryMovieExceptionRecordValidationMovieExceptionRecordValidationQuery_Get
-      parameters:
-        - format: int32
-          in: query
-          name: Skip
-          type: integer
-        - format: int32
-          in: query
-          name: Take
-          type: integer
-        - in: query
-          name: OrderBy
-          type: string
-        - in: query
-          name: OrderByDesc
-          type: string
-        - in: query
-          name: Include
-          type: string
-        - in: query
-          name: Fields
-          type: string
-        - in: query
-          name: Meta
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/QueryResponse<MovieExceptionsFromRecordValidation>'
-      tags:
-        - private
-    parameters:
-      - $ref: '#/parameters/Accept'
-  /Internal/MovieExceptionsFromAlphaMergeGeneral/Query:
-    get:
-      deprecated: false
-      operationId: QueryMovieExceptionsFromAlphaMergeGeneralMovieExceptionsFromAlphaMergeGeneralQuery_Get
-      parameters:
-        - format: int32
-          in: query
-          name: Skip
-          type: integer
-        - format: int32
-          in: query
-          name: Take
-          type: integer
-        - in: query
-          name: OrderBy
-          type: string
-        - in: query
-          name: OrderByDesc
-          type: string
-        - in: query
-          name: Include
-          type: string
-        - in: query
-          name: Fields
-          type: string
-        - in: query
-          name: Meta
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Success
-          schema:
-            $ref: '#/definitions/QueryResponse<MovieExceptionsFromAlphaMergeGeneral>'
       tags:
         - private
     parameters:
@@ -12881,12 +12845,6 @@ definitions:
         x-nullable: false
     title: DbShowCertification
     type: object
-  'Dictionary<String,String>':
-    additionalProperties:
-      type: string
-    description: 'Dictionary<String,String>'
-    title: 'Dictionary<String,String>'
-    type: object
   DiscoverMovie:
     description: DiscoverMovie
     properties:
@@ -15918,6 +15876,16 @@ definitions:
     description: GetDbShowReleaseTypes
     properties: {}
     title: GetDbShowReleaseTypes
+    type: object
+  GetEidrMovieFeed:
+    description: GetEidrMovieFeed
+    properties: {}
+    title: GetEidrMovieFeed
+    type: object
+  GetEidrMovieFeedIdMappings:
+    description: GetEidrMovieFeedIdMappings
+    properties: {}
+    title: GetEidrMovieFeedIdMappings
     type: object
   GetEngagementActions:
     description: GetEngagementActions
@@ -19880,6 +19848,9 @@ definitions:
         items:
           type: string
         type: array
+      LimitedResults:
+        type: boolean
+        x-nullable: false
       Poster:
         description: Poster of Program to be matched.
         type: string
@@ -20531,48 +20502,6 @@ definitions:
         description: Language object for language of MovieDescription.
         type: string
     title: MovieDescription
-    type: object
-  MovieExceptionsFromAlphaMergeGeneral:
-    description: MovieExceptionsFromAlphaMergeGeneral
-    properties:
-      Id:
-        format: int64
-        type: integer
-        x-nullable: false
-      OriginalTitle:
-        type: string
-      Status:
-        type: string
-      Title:
-        type: string
-      Url:
-        $ref: '#/definitions/Uri'
-      Year:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: MovieExceptionsFromAlphaMergeGeneral
-    type: object
-  MovieExceptionsFromRecordValidation:
-    description: MovieExceptionsFromRecordValidation
-    properties:
-      Id:
-        format: int64
-        type: integer
-        x-nullable: false
-      OriginalTitle:
-        type: string
-      Status:
-        type: string
-      Title:
-        type: string
-      Url:
-        $ref: '#/definitions/Uri'
-      Year:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: MovieExceptionsFromRecordValidation
     type: object
   MovieExternalIdMap:
     description: MovieExternalIdMap
@@ -21841,90 +21770,6 @@ definitions:
         type: string
     title: ProgramVideo
     type: object
-  QueryMovieExceptionRecordValidation:
-    description: QueryMovieExceptionRecordValidation
-    properties:
-      Fields:
-        type: string
-      Include:
-        type: string
-      Meta:
-        $ref: '#/definitions/Dictionary<String,String>'
-      OrderBy:
-        type: string
-      OrderByDesc:
-        type: string
-      Skip:
-        format: int32
-        type: integer
-      Take:
-        format: int32
-        type: integer
-    title: QueryMovieExceptionRecordValidation
-    type: object
-  QueryMovieExceptionsFromAlphaMergeGeneral:
-    description: QueryMovieExceptionsFromAlphaMergeGeneral
-    properties:
-      Fields:
-        type: string
-      Include:
-        type: string
-      Meta:
-        $ref: '#/definitions/Dictionary<String,String>'
-      OrderBy:
-        type: string
-      OrderByDesc:
-        type: string
-      Skip:
-        format: int32
-        type: integer
-      Take:
-        format: int32
-        type: integer
-    title: QueryMovieExceptionsFromAlphaMergeGeneral
-    type: object
-  QueryResponse<MovieExceptionsFromAlphaMergeGeneral>:
-    description: QueryResponse<MovieExceptionsFromAlphaMergeGeneral>
-    properties:
-      Meta:
-        $ref: '#/definitions/Dictionary<String,String>'
-      Offset:
-        format: int32
-        type: integer
-        x-nullable: false
-      ResponseStatus:
-        $ref: '#/definitions/ResponseStatus'
-      Results:
-        items:
-          $ref: '#/definitions/MovieExceptionsFromAlphaMergeGeneral'
-        type: array
-      Total:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: QueryResponse`1
-    type: object
-  QueryResponse<MovieExceptionsFromRecordValidation>:
-    description: QueryResponse<MovieExceptionsFromRecordValidation>
-    properties:
-      Meta:
-        $ref: '#/definitions/Dictionary<String,String>'
-      Offset:
-        format: int32
-        type: integer
-        x-nullable: false
-      ResponseStatus:
-        $ref: '#/definitions/ResponseStatus'
-      Results:
-        items:
-          $ref: '#/definitions/MovieExceptionsFromRecordValidation'
-        type: array
-      Total:
-        format: int32
-        type: integer
-        x-nullable: false
-    title: QueryResponse`1
-    type: object
   RecentVisitorsResponse:
     description: RecentVisitorsResponse
     properties:
@@ -21967,36 +21812,6 @@ definitions:
         type: number
         x-nullable: false
     title: Recommendation
-    type: object
-  ResponseError:
-    description: ResponseError
-    properties:
-      ErrorCode:
-        type: string
-      FieldName:
-        type: string
-      Message:
-        type: string
-      Meta:
-        $ref: '#/definitions/Dictionary<String,String>'
-    title: ResponseError
-    type: object
-  ResponseStatus:
-    description: ResponseStatus
-    properties:
-      ErrorCode:
-        type: string
-      Errors:
-        items:
-          $ref: '#/definitions/ResponseError'
-        type: array
-      Message:
-        type: string
-      Meta:
-        $ref: '#/definitions/Dictionary<String,String>'
-      StackTrace:
-        type: string
-    title: ResponseStatus
     type: object
   RevCaptionItem:
     description: RevCaptionItem
@@ -22389,6 +22204,9 @@ definitions:
         items:
           type: string
         type: array
+      LimitedResults:
+        type: boolean
+        x-nullable: false
       Minimum_EncodeDate:
         description: Filter results based on encode date.
         format: date-time
@@ -24850,11 +24668,6 @@ definitions:
         description: Title of MyVideo.
         type: string
     title: UpdateMyVideo
-    type: object
-  Uri:
-    description: Uri
-    properties: {}
-    title: Uri
     type: object
   VideoLogResponse:
     description: VideoLogResponse

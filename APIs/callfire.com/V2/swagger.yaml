@@ -4662,7 +4662,7 @@ definitions:
     description: Request object for adding new contacts to an existing contact list
     properties:
       contactIds:
-        description: A list of ids of existing contacts in Callfire system
+        description: A list of ids of existing contacts in CallFire system
         items:
           format: int64
           type: integer
@@ -4767,7 +4767,7 @@ definitions:
         readOnly: true
         type: integer
       status:
-        description: 'A status of batch (NEW, VALIDATING, ERRORS, SOURCE_ERROR, ACTIVE). NEW - batch is queued for validation; VALIDATING - batch is currently validating; ERRORS - batch is processed, some validation errors occurred; SOURCE_ERROR - if contact source is contact list in Callfire system and it has an error; ACTIVE - batch is processed and ready'
+        description: 'A status of batch (NEW, VALIDATING, ERRORS, SOURCE_ERROR, ACTIVE). NEW - batch is queued for validation; VALIDATING - batch is currently validating; ERRORS - batch is processed, some validation errors occurred; SOURCE_ERROR - if contact source is contact list in CallFire system and it has an error; ACTIVE - batch is processed and ready'
         enum:
           - NEW
           - VALIDATING
@@ -4832,7 +4832,7 @@ definitions:
         type: number
     type: object
   Call:
-    description: Represents a call action sent or received by Callfire platform
+    description: Represents a call action sent or received by CallFire platform
     properties:
       agentCall:
         description: An internal call to an agent
@@ -4964,9 +4964,9 @@ definitions:
         type: integer
       localTimeRestriction:
         $ref: '#/definitions/LocalTimeRestriction'
-        description: Specifies a range of time during which Callfire will send a call or text to recipients. Please note that range of time applies to the recipient's timezone
+        description: Specifies a range of time during which CallFire will send a call or text to recipients. Please note that range of time applies to the recipient's timezone
       maxActive:
-        description: Sets a maximum number of calls to be dialed by Callfire at once
+        description: Sets a maximum number of calls to be dialed by CallFire at once
         format: int32
         type: integer
       maxActiveTransfers:
@@ -5316,7 +5316,7 @@ definitions:
           $ref: '#/definitions/Note'
         type: array
       originateTime:
-        description: 'A date and time (timestamp) when call was originated by Callfire platform and went to downstream provider, formatted in unix time milliseconds (read only). Example: 1473781817000 '
+        description: 'A date and time (timestamp) when call was originated by CallFire platform and went to downstream provider, formatted in unix time milliseconds (read only). Example: 1473781817000 '
         format: int64
         readOnly: true
         type: integer
@@ -5646,7 +5646,7 @@ definitions:
     description: A request object is used to create a contact list from one of available contact sources
     properties:
       contactIds:
-        description: A list of ids of existing contacts in Callfire system
+        description: A list of ids of existing contacts in CallFire system
         items:
           format: int64
           type: integer
@@ -5926,7 +5926,7 @@ definitions:
         type: integer
     type: object
   LocalTimeRestriction:
-    description: Represents a range of time during which Callfire will send a call or text to recipients. Timeframe uses the local timezone of recipient's number
+    description: Represents a range of time during which CallFire will send a call or text to recipients. Timeframe uses the local timezone of recipient's number
     properties:
       beginHour:
         description: An hour of restriction start
@@ -6432,7 +6432,7 @@ definitions:
         type: object
     description: '~'
   Text:
-    description: Represents a text action sent or received by Callfire platform
+    description: Represents a text action sent or received by CallFire platform
     properties:
       attributes:
         additionalProperties:
@@ -6583,9 +6583,9 @@ definitions:
         type: integer
       localTimeRestriction:
         $ref: '#/definitions/LocalTimeRestriction'
-        description: Specifies a range of time when Callfire sends a text to recipients. Please note that a range of time applies to recipient's timezone
+        description: Specifies a range of time when CallFire sends a text to recipients. Please note that a range of time applies to recipient's timezone
       maxActive:
-        description: A maximum number of calls that CallFire dials at once
+        description: A maximum number of texts that CallFire dials at once
         format: int32
         type: integer
       media:
@@ -6806,7 +6806,7 @@ definitions:
         type: string
     type: object
   Webhook:
-    description: 'Webhook is a user-defined callback, which can be maintained via API. Callfire will send POST request to a client''s endpoint defined in webhook once one of assigned events is triggered. See [webhooks guide](https://developers.callfire.com/webhooks-guide.html) for more information about CallFire Webhooks API.'
+    description: 'Webhook is a user-defined callback, which can be maintained via API. CallFire will send POST request to a client''s endpoint defined in webhook once one of assigned events is triggered. See [webhooks guide](https://developers.callfire.com/webhooks-guide.html) for more information about CallFire Webhooks API.'
     properties:
       callback:
         description: URL that webhook will send POST to on resource event trigger
@@ -6867,7 +6867,7 @@ definitions:
         type: object
     description: '~'
   WebhookResource:
-    description: 'WebhookResource describes a resource and a list of supported events, once event is triggered Callfire performs an HTTP POST request to a client''s endpoint'
+    description: 'WebhookResource describes a resource and a list of supported events, once event is triggered CallFire performs an HTTP POST request to a client''s endpoint'
     properties:
       resource:
         description: 'A name of a webhook resource (ex: InboundCall, OutboundCall, InboundText, OutboundText, CallBroadcast, TextBroadcast, etc...)'

@@ -103,6 +103,10 @@ responses:
       items:
         $ref: '#/definitions/Comment'
       type: array
+  Commit:
+    description: Commit
+    schema:
+      $ref: '#/definitions/Commit'
   DeployKey:
     description: DeployKey
     schema:
@@ -129,6 +133,10 @@ responses:
       items:
         $ref: '#/definitions/GPGKey'
       type: array
+  GitTreeResponse:
+    description: GitTreeResponse
+    schema:
+      $ref: '#/definitions/GitTreeResponse'
   Hook:
     description: Hook
     schema:
@@ -327,7 +335,32 @@ responses:
       url:
         type: string
 paths:
+  /admin/orgs:
+    get:
+      operationId: adminGetAllOrgs
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/OrganizationList'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: List all organizations
+      tags:
+        - admin
   /admin/users:
+    get:
+      operationId: adminGetAllUsers
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/UserList'
+        '403':
+          $ref: '#/responses/forbidden'
+      summary: List all users
+      tags:
+        - admin
     post:
       consumes:
         - application/json
@@ -1358,6 +1391,35 @@ paths:
       summary: Fork a repository
       tags:
         - repository
+  '/repos/{owner}/{repo}/git/commits/{sha}':
+    get:
+      operationId: repoGetSingleCommit
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: the commit hash
+          in: path
+          name: sha
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/Commit'
+        '404':
+          $ref: '#/responses/notFound'
+      summary: Get a single commit from a repository
+      tags:
+        - repository
   '/repos/{owner}/{repo}/git/refs':
     get:
       operationId: repoListAllGitRefs
@@ -1409,6 +1471,33 @@ paths:
         '404':
           $ref: '#/responses/notFound'
       summary: Get specified ref or filtered repository's refs
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/git/trees/{sha}':
+    get:
+      operationId: GetTree
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: sha of the commit
+          in: path
+          name: sha
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/GitTreeResponse'
+      summary: Gets the tree of a repository.
       tags:
         - repository
   '/repos/{owner}/{repo}/hooks':
@@ -2827,6 +2916,14 @@ paths:
           name: repo
           required: true
           type: string
+        - description: page wants to load
+          in: query
+          name: page
+          type: integer
+        - description: items count every page wants to load
+          in: query
+          name: per_page
+          type: integer
       produces:
         - application/json
       responses:
@@ -3442,6 +3539,28 @@ paths:
       summary: Remove a team member
       tags:
         - organization
+    get:
+      operationId: orgListTeamMember
+      parameters:
+        - description: id of the team
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: username of the member to list
+          in: path
+          name: username
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/User'
+      summary: List a particular member of team
+      tags:
+        - organization
     put:
       operationId: orgAddTeamMember
       parameters:
@@ -3941,6 +4060,17 @@ paths:
       summary: List repositories watched by the authenticated user
       tags:
         - user
+  /user/teams:
+    get:
+      operationId: userListTeams
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TeamList'
+      summary: List all the teams a user belongs to
+      tags:
+        - user
   /user/times:
     get:
       operationId: userCurrentTrackedTimes
@@ -4355,6 +4485,56 @@ definitions:
         x-go-name: Updated
       user:
         $ref: '#/definitions/User'
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Commit:
+    properties:
+      author:
+        $ref: '#/definitions/User'
+      commit:
+        $ref: '#/definitions/RepoCommit'
+      committer:
+        $ref: '#/definitions/User'
+      html_url:
+        type: string
+        x-go-name: HTMLURL
+      parents:
+        items:
+          $ref: '#/definitions/CommitMeta'
+        type: array
+        x-go-name: Parents
+      sha:
+        type: string
+        x-go-name: SHA
+      url:
+        type: string
+        x-go-name: URL
+    title: Commit contains information generated from a Git commit.
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CommitMeta:
+    properties:
+      sha:
+        type: string
+        x-go-name: SHA
+      url:
+        type: string
+        x-go-name: URL
+    title: CommitMeta contains meta information of a commit in terms of API.
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  CommitUser:
+    properties:
+      date:
+        type: string
+        x-go-name: Date
+      email:
+        type: string
+        x-go-name: Email
+      name:
+        type: string
+        x-go-name: Name
+    title: CommitUser contains information of a user in the context of a commit.
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
   CreateEmailOption:
@@ -5111,6 +5291,30 @@ definitions:
         x-go-name: Verified
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  GitEntry:
+    description: GitEntry represents a git tree
+    properties:
+      mode:
+        type: string
+        x-go-name: Mode
+      path:
+        type: string
+        x-go-name: Path
+      sha:
+        type: string
+        x-go-name: SHA
+      size:
+        format: int64
+        type: integer
+        x-go-name: Size
+      type:
+        type: string
+        x-go-name: Type
+      url:
+        type: string
+        x-go-name: URL
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
   GitObject:
     properties:
       sha:
@@ -5123,6 +5327,25 @@ definitions:
         type: string
         x-go-name: URL
     title: GitObject represents a Git object.
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  GitTreeResponse:
+    description: GitTreeResponse returns a git tree
+    properties:
+      sha:
+        type: string
+        x-go-name: SHA
+      tree:
+        items:
+          $ref: '#/definitions/GitEntry'
+        type: array
+        x-go-name: Entries
+      truncated:
+        type: boolean
+        x-go-name: Truncated
+      url:
+        type: string
+        x-go-name: URL
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
   Issue:
@@ -5373,6 +5596,11 @@ definitions:
   PayloadCommit:
     description: PayloadCommit represents a commit
     properties:
+      added:
+        items:
+          type: string
+        type: array
+        x-go-name: Added
       author:
         $ref: '#/definitions/PayloadUser'
       committer:
@@ -5384,6 +5612,16 @@ definitions:
       message:
         type: string
         x-go-name: Message
+      modified:
+        items:
+          type: string
+        type: array
+        x-go-name: Modified
+      removed:
+        items:
+          type: string
+        type: array
+        x-go-name: Removed
       timestamp:
         format: date-time
         type: string
@@ -5642,6 +5880,23 @@ definitions:
         x-go-name: ZipURL
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  RepoCommit:
+    properties:
+      author:
+        $ref: '#/definitions/CommitUser'
+      committer:
+        $ref: '#/definitions/CommitUser'
+      message:
+        type: string
+        x-go-name: Message
+      tree:
+        $ref: '#/definitions/CommitMeta'
+      url:
+        type: string
+        x-go-name: URL
+    title: RepoCommit contains information of a commit in the context of a repository.
+    type: object
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
   Repository:
     description: Repository represents a repository
     properties:
@@ -5801,6 +6056,8 @@ definitions:
       name:
         type: string
         x-go-name: Name
+      organization:
+        $ref: '#/definitions/Organization'
       permission:
         enum:
           - none

@@ -1501,6 +1501,8 @@ definitions:
         type: string
       LockApprovedTimesheets:
         type: boolean
+      Subdomain:
+        type: string
       TimesheetDayOfWeek:
         format: int32
         type: integer
@@ -3139,6 +3141,12 @@ definitions:
         type: string
       HasTimer:
         type: boolean
+      InvoiceIDFK:
+        format: int64
+        type: integer
+      InvoiceLineItemIDFK:
+        format: int64
+        type: integer
       Lastname:
         type: string
       Notes:

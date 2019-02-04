@@ -72,14 +72,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/GameRegionOptionsDTO'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getRegionOptions
       tags:
         - region
@@ -160,14 +160,14 @@ paths:
             items:
               $ref: '#/definitions/AnalyticsDataSwaggerModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: Returns the results of executed query defined by the parameters passed in
       tags:
         - analytics
@@ -209,14 +209,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/AnalyticsDataCountSwaggerModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: Returns the count of executed query
       tags:
         - analytics
@@ -246,15 +246,15 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/AnalyticsDataCountSwaggerModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
-      summary: Returns the count of executed query
+      summary: Returns the percentage of user retention over the last 30 days
       tags:
         - analytics
   '/restv2/game/{apiKey}/admin/notifications/summary':
@@ -295,14 +295,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/GameSummaryModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getGameSummary
       tags:
         - notifications
@@ -330,14 +330,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PushNotificationTestSummaryListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: testPushAmazonNotifications
       tags:
         - pushNotificationTest
@@ -365,14 +365,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PushNotificationTestSummaryListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: testPushAppleDevNotifications
       tags:
         - pushNotificationTest
@@ -400,14 +400,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PushNotificationTestSummaryListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: testPushAppleProdNotifications
       tags:
         - pushNotificationTest
@@ -435,14 +435,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PushNotificationTestSummaryListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: testPushGoogleNotifications
       tags:
         - pushNotificationTest
@@ -470,14 +470,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PushNotificationTestSummaryListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: testWindows8Notifications
       tags:
         - pushNotificationTest
@@ -505,14 +505,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PushNotificationTestSummaryListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: testWindowsPhone8Notifications
       tags:
         - pushNotificationTest
@@ -540,14 +540,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PushNotificationTestSummaryListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: testViberIntegrationNotifications
       tags:
         - pushNotificationTest
@@ -575,14 +575,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PushNotificationTestSummaryListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: testViberProductionNotifications
       tags:
         - pushNotificationTest
@@ -614,14 +614,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ScriptsDifferenceListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getScriptDifferences
       tags:
         - scripts
@@ -641,14 +641,14 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: exportZip
       tags:
         - scripts
@@ -680,14 +680,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: importAccept
       tags:
         - scripts
@@ -714,14 +714,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ScriptsDifferenceListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: importZip
       tags:
         - scripts
@@ -750,14 +750,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SnapshotScriptVersionListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getScriptVersions
       tags:
         - scripts
@@ -792,14 +792,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SnapshotScriptVersionListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getScriptVersions
       tags:
         - scripts
@@ -821,14 +821,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SegmentQueryFilterListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getSegmentQueryFilters
       tags:
         - segmentQueryFilters
@@ -850,14 +850,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SegmentQueryFilterConfigModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getSegmentQueryFiltersConfig
       tags:
         - segmentQueryFilters
@@ -884,14 +884,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SegmentQueryFilterConfigModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: updateSegmentQueryFiltersConfig
       tags:
         - segmentQueryFilters
@@ -913,14 +913,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SegmentQueryFilterListModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getSegmentQueryStandardFilters
       tags:
         - segmentQueryFilters
@@ -951,14 +951,14 @@ paths:
             items:
               $ref: '#/definitions/SnapshotModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getSnapshots
       tags:
         - snapshots
@@ -985,14 +985,14 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/SnapshotModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: createSnapshots
       tags:
         - snapshots
@@ -1014,14 +1014,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getLiveSnapshotId
       tags:
         - snapshots
@@ -1058,14 +1058,14 @@ paths:
             items:
               $ref: '#/definitions/SnapshotModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getSnapshots
       tags:
         - snapshots
@@ -1092,14 +1092,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: revertToSnapshot
       tags:
         - snapshots
@@ -1126,14 +1126,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: deleteSnapshot
       tags:
         - snapshots
@@ -1159,14 +1159,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SnapshotModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getSnapshot
       tags:
         - snapshots
@@ -1217,14 +1217,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SnapshotCreationSuccessModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: copySnapshotToNewGame
       tags:
         - snapshots
@@ -1280,14 +1280,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SnapshotCreationSuccessModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: copySnapshotToExistingGame
       tags:
         - snapshots
@@ -1314,14 +1314,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: publishSnapshot
       tags:
         - snapshots
@@ -1348,14 +1348,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: unpublishSnapshot
       tags:
         - snapshots
@@ -1379,14 +1379,14 @@ paths:
             items:
               $ref: '#/definitions/TestHarnessScenarioModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getTestHarnessScenarios
       tags:
         - testHarness
@@ -1413,14 +1413,14 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/TestHarnessScenarioModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: createTestHarnessScenario
       tags:
         - testHarness
@@ -1447,14 +1447,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: deleteTestHarnessScenario
       tags:
         - testHarness
@@ -1480,14 +1480,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/TestHarnessScenarioModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getTestHarnessScenario
       tags:
         - testHarness
@@ -1519,14 +1519,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/TestHarnessScenarioModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: updateTestHarnessScenario
       tags:
         - testHarness
@@ -1551,14 +1551,14 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: Resets the secret of a credential
       tags:
         - credentials
@@ -1580,14 +1580,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/GameEndpointsModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getGamesEndpoints
       tags:
         - gamesAdmin
@@ -1609,14 +1609,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ImportSpecDTO'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getLastSelection
       tags:
         - import
@@ -1661,14 +1661,14 @@ paths:
             items:
               $ref: '#/definitions/ScriptsDifferenceModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getImportChanges
       tags:
         - import
@@ -1710,14 +1710,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: importChanges
       tags:
         - import
@@ -1762,14 +1762,14 @@ paths:
             items:
               $ref: '#/definitions/ScriptsDifferenceModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getImportChanges
       tags:
         - import
@@ -1811,14 +1811,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: importChanges
       tags:
         - import
@@ -1840,14 +1840,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ImportSpecDTO'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getLastSelection
       tags:
         - import
@@ -1892,14 +1892,14 @@ paths:
             items:
               $ref: '#/definitions/ScriptsDifferenceModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getTreeImportChanges
       tags:
         - import
@@ -1941,14 +1941,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: importTreeChanges
       tags:
         - import
@@ -1993,14 +1993,14 @@ paths:
             items:
               $ref: '#/definitions/ScriptsDifferenceModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getImportChanges
       tags:
         - import
@@ -2042,14 +2042,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: importChanges
       tags:
         - import
@@ -2094,14 +2094,14 @@ paths:
             items:
               $ref: '#/definitions/ScriptsDifferenceModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getImportChanges
       tags:
         - import
@@ -2143,14 +2143,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: importChanges
       tags:
         - import
@@ -2174,14 +2174,14 @@ paths:
             items:
               $ref: '#/definitions/ExperimentModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getExperiments
       tags:
         - experiments
@@ -2208,14 +2208,14 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/ExperimentModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: createExperiment
       tags:
         - experiments
@@ -2243,14 +2243,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: deleteExperiment
       tags:
         - experiments
@@ -2277,14 +2277,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ExperimentModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getExperiment
       tags:
         - experiments
@@ -2317,14 +2317,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ExperimentModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: updateExperiment
       tags:
         - experiments
@@ -2362,14 +2362,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ExperimentModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: doActionExperiment
       tags:
         - experiments
@@ -2393,14 +2393,14 @@ paths:
             items:
               $ref: '#/definitions/ManageItemSummary'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: listQueries
       tags:
         - manage
@@ -2427,14 +2427,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageQuery'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: createQuery
       tags:
         - manage
@@ -2461,14 +2461,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageResult'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: deleteQuery
       tags:
         - manage
@@ -2494,14 +2494,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageQuery'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getQuery
       tags:
         - manage
@@ -2533,14 +2533,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageQuery'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: updateQuery
       tags:
         - manage
@@ -2564,14 +2564,14 @@ paths:
             items:
               $ref: '#/definitions/ManageItemSummary'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: listScreens
       tags:
         - manage
@@ -2598,14 +2598,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageScreen'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: createScreen
       tags:
         - manage
@@ -2629,14 +2629,14 @@ paths:
             items:
               $ref: '#/definitions/ManageItemSummary'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: listExecutableScreens
       tags:
         - manage
@@ -2663,14 +2663,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageResult'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: deleteScreen
       tags:
         - manage
@@ -2696,14 +2696,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageScreen'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getScreen
       tags:
         - manage
@@ -2735,14 +2735,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageScreen'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: updateScreen
       tags:
         - manage
@@ -2766,14 +2766,14 @@ paths:
             items:
               $ref: '#/definitions/ManageSnapshot'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: listSnapshots
       tags:
         - manage
@@ -2800,14 +2800,14 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/ManageSnapshot'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: createSnapshot
       tags:
         - manage
@@ -2836,14 +2836,14 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/ManageResult'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: deleteSnapshot
       tags:
         - manage
@@ -2875,14 +2875,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageResult'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: copySnapshotToExistingGame
       tags:
         - manage
@@ -2909,14 +2909,14 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/ManageResult'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: publishSnapshot
       tags:
         - manage
@@ -2943,14 +2943,14 @@ paths:
           description: Created
           schema:
             $ref: '#/definitions/ManageResult'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: revertSnapshot
       tags:
         - manage
@@ -2974,14 +2974,14 @@ paths:
             items:
               $ref: '#/definitions/ManageItemSummary'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: listSnippets
       tags:
         - manage
@@ -3008,14 +3008,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageSnippet'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: createSnippet
       tags:
         - manage
@@ -3042,14 +3042,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageResult'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: deleteSnippet
       tags:
         - manage
@@ -3075,14 +3075,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageSnippet'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getSnippet
       tags:
         - manage
@@ -3114,14 +3114,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ManageSnippet'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: updateSnippet
       tags:
         - manage
@@ -3143,14 +3143,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/MessageModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: restoreDeletedGame
       tags:
         - gamesAdmin
@@ -3177,14 +3177,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RegionResult'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: setGameRegion
       tags:
         - region
@@ -3206,14 +3206,14 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/GameRegionOptionsDTO'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: getGameRegionOptions
       tags:
         - region
@@ -3227,14 +3227,18 @@ paths:
       responses:
         '200':
           description: OK
+          schema:
+            items:
+              $ref: '#/definitions/GameModel'
+            type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: list
       tags:
         - gamesAdmin
@@ -3252,14 +3256,14 @@ paths:
             items:
               $ref: '#/definitions/DeletedGameModel'
             type: array
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
         '403':
           description: not allowed
         '404':
           description: not found
-        '420':
-          description: json error
-          schema:
-            $ref: '#/definitions/MessageModel'
       summary: listDeleted
       tags:
         - gamesAdmin
@@ -3329,6 +3333,13 @@ definitions:
       previewElasticSearch:
         type: string
       previewNosql:
+        type: string
+    type: object
+  GameModel:
+    properties:
+      '@id':
+        type: string
+      name:
         type: string
     type: object
   GameRegionOptionDTO:

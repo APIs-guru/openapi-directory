@@ -30,7 +30,6 @@ tags:
   - name: search
   - name: parse
   - name: lookup
-  - name: rationale
   - name: triage
   - name: suggest
 paths:
@@ -213,26 +212,6 @@ paths:
       summary: Find mentions of observations in given text
       tags:
         - parse
-  /rationale:
-    post:
-      consumes:
-        - application/json
-      description: Returns rationale behind the question asked by the system.
-      operationId: getRationale
-      parameters:
-        - in: body
-          name: body
-          required: true
-          schema:
-            $ref: '#/definitions/RationaleRequest'
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            $ref: '#/definitions/RationaleResponse'
-      summary: Query diagnostic engine for question rationale
-      tags:
-        - rationale
   /risk_factors:
     get:
       description: Returns a list of all available risk factors.
@@ -897,72 +876,6 @@ definitions:
       - choices
       - id
       - name
-    type: object
-  RationaleParam:
-    properties:
-      common_name:
-        description: observation or condition common name
-        type: string
-      id:
-        description: observation or condition id
-        type: string
-      name:
-        description: observation or condition name
-        type: string
-    required:
-      - id
-      - name
-    type: object
-  RationaleRequest:
-    properties:
-      age:
-        format: int32
-        type: integer
-      evaluated_at:
-        description: time when diagnosis was evaluated in ISO 8601 format
-        type: string
-      evidence:
-        items:
-          $ref: '#/definitions/Evidence'
-        type: array
-      extras:
-        additionalProperties:
-          type: object
-        type: object
-      sex:
-        enum:
-          - male
-          - female
-        type: string
-    required:
-      - age
-      - sex
-    type: object
-  RationaleResponse:
-    properties:
-      condition_params:
-        description: condition params
-        items:
-          $ref: '#/definitions/RationaleParam'
-        type: array
-      observation_params:
-        description: observation params
-        items:
-          $ref: '#/definitions/RationaleParam'
-        type: array
-      type:
-        description: type
-        enum:
-          - r0
-          - r1
-          - r2
-          - r3
-          - r4
-          - r5
-          - r6
-        type: string
-    required:
-      - type
     type: object
   RiskFactor_Details:
     properties:

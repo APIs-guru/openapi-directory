@@ -809,6 +809,26 @@ paths:
             r = requests.get('https://www.targetvalidation.org/api/latest/public/search',
                             params={"q":"NOD2","size":1})
             pprint(r.json())
+  /platform/public/utils/metrics:
+    get:
+      description: |
+        Returns the metrics about associations and evidences, divided by datasource, genes and so on.
+      operationId: getDataMetrics
+      responses:
+        '200':
+          description: Successful response
+      summary: Get metrics about the current data release
+      tags:
+        - public
+        - utils
+      x-code-samples:
+        - lang: Python
+          source: |-
+            import requests
+            r = requests.get('https://www.targetvalidation.com/api/latest/public/metrics')
+            assert r.status_code == 200
+            assert r.headers['content-type'] == 'application/json'
+            print(r.json())
   /platform/public/utils/ping:
     get:
       description: |
@@ -835,7 +855,7 @@ paths:
         - utils
       x-code-samples:
         - lang: Python
-          source: |-
+          source: |
             import requests
             r = requests.get('https://www.targetvalidation.com/api/latest/public/stats')
             assert r.status_code == 200

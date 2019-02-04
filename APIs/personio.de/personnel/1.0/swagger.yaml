@@ -161,18 +161,6 @@ paths:
   /company/employees:
     get:
       description: List Employees
-      parameters:
-        - description: '[In development] Query string to perform search on. Returns all employees if not present. Can also be used with custom attributes, e.g. `dynamic_9382=abcd`'
-          in: query
-          name: query
-          required: false
-          type: string
-        - description: '[In development] Attributes to be returend for employees found. Returns all available attributes if not present. Pass `attributes` multiple times of needed.'
-          in: query
-          items: {}
-          name: attributes
-          required: false
-          type: array
       responses:
         '200':
           description: ''
@@ -228,6 +216,15 @@ paths:
                     hire_date:
                       label: Hire date
                       value: '2012-02-01T00:00:00+0100'
+                    holiday_calendar:
+                      label: Holiday Calendar
+                      value:
+                        attributes:
+                          country: DE
+                          id: 931
+                          name: DE (Hamburg) Feiertage
+                          state: Hamburg
+                        type: HolidayCalendar
                     hourly_salary:
                       label: Hourly salary
                       value: 0
@@ -289,227 +286,25 @@ paths:
                     weekly_working_hours:
                       label: Weekly hours
                       value: '40'
+                    work_schedule:
+                      label: Work Schedule
+                      value:
+                        attributes:
+                          friday: '06:00'
+                          id: 123
+                          monday: '08:30'
+                          name: Standard Hours
+                          saturday: '00:00'
+                          sunday: '00:00'
+                          thursday: '08:30'
+                          tuesday: '08:30'
+                          wednesday: '08:30'
+                        type: WorkSchedule
                   type: Employee
               success: true
           schema:
             $ref: '#/definitions/EmployeesResponse'
   '/company/employees/{employee_id}':
-    get:
-      description: Employee
-      parameters:
-        - description: Numeric `id` of the employee
-          format: int32
-          in: path
-          name: employee_id
-          required: true
-          type: integer
-      responses:
-        '200':
-          description: ''
-          examples:
-            application/json:
-              data:
-                attributes:
-                  contract_end_date:
-                    label: Contract ends
-                  cost_centers:
-                    label: Cost center
-                    value:
-                      - attributes:
-                          id: 320
-                          name: Cost Center One
-                          percentage: 50
-                        type: CostCenter
-                      - attributes:
-                          id: 321
-                          name: Cost Center Two
-                          percentage: 50
-                        type: CostCenter
-                  created_at:
-                    label: created_at
-                    value: '2016-10-20T16:15:55+0200'
-                  department:
-                    label: Department
-                    value:
-                      attributes:
-                        name: Marketing
-                      type: Department
-                  dynamic_21827:
-                    label: IBAN
-                    value: DE98 8989 9898 0000 8989 00
-                  dynamic_24407:
-                    label: Titel
-                    value: Dr
-                  email:
-                    label: Email
-                    value: andreas.anderson@demo.com
-                  employment_type:
-                    label: Employment type
-                    value: internal
-                  first_name:
-                    label: First name
-                    value: Andreas
-                  fix_salary:
-                    label: Fix salary
-                    value: 4000
-                  gender:
-                    label: Gender
-                    value: male
-                  hire_date:
-                    label: Hire date
-                    value: '2012-02-01T00:00:00+0100'
-                  hourly_salary:
-                    label: Hourly salary
-                    value: 0
-                  id:
-                    label: id
-                    value: 83752
-                  last_modified_at:
-                    label: Last modified
-                    value: '2016-10-22T16:15:55+0200'
-                  last_name:
-                    label: Last name
-                    value: Anderson
-                  last_working_day:
-                    label: Last working day
-                    value: '2017-02-28T00:00:00+0200'
-                  office:
-                    label: Office
-                    value:
-                      attributes:
-                        name: Munich
-                      type: Office
-                  position:
-                    label: Position
-                    value: Online Marketing Specialist
-                  probation_period_end:
-                    label: Probation period end
-                    value: '2012-07-31T00:00:00+0200'
-                  status:
-                    label: Status
-                    value: active
-                  supervisor:
-                    label: Supervisor
-                    value:
-                      attributes:
-                        email:
-                          label: Email
-                          value: max.mustermann@example.org
-                        first_name:
-                          label: First name
-                          value: Max
-                        id:
-                          label: id
-                          value: 423506
-                        last_name:
-                          label: Last name
-                          value: Mustermann
-                      type: Employee
-                  termination_date:
-                    label: Termination date
-                  termination_reason:
-                    label: Termination reason
-                    value: ''
-                  termination_type:
-                    label: Termination type
-                    value: ''
-                  vacation_day_balance:
-                    label: Vacation day balance
-                    value: 28.5
-                  weekly_working_hours:
-                    label: Weekly hours
-                    value: '40'
-                type: Employee
-              success: true
-          schema:
-            $ref: '#/definitions/EmployeeResponse'
-  '/company/time-off/{time_off_id}':
-    get:
-      description: Absence Period
-      parameters:
-        - description: Numeric `id` of the absence period
-          format: integer
-          in: path
-          name: time_off_id
-          required: true
-          type: number
-      responses:
-        '200':
-          description: ''
-          examples:
-            application/json:
-              data:
-                attributes:
-                  certificate:
-                    status: not-required
-                  created_at: '2017-01-17T10:32:18+0100'
-                  days_count: 3
-                  employee:
-                    attributes:
-                      email:
-                        label: Email
-                        value: michael.miller@demo.com
-                      first_name:
-                        label: First name
-                        value: Michael
-                      last_name:
-                        label: Last name
-                        value: Miller
-                    type: Employee
-                  end_date: '2017-12-29T00:00:00+0100'
-                  half_day_end: 0
-                  half_day_start: 0
-                  start_date: '2017-12-27T00:00:00+0100'
-                  status: approved
-                  time_off_type:
-                    attributes:
-                      name: Vacation
-                    type: TimeOffType
-                type: TimeOffPeriod
-              success: true
-          schema:
-            $ref: '#/definitions/AbsencePeriodResponse'
-  /company/time-offs:
-    get:
-      description: List All Absence Periods
-      parameters: []
-      responses:
-        '200':
-          description: ''
-          examples:
-            application/json:
-              data:
-                - attributes:
-                    certificate:
-                      status: not-required
-                    created_at: '2017-01-17T10:32:18+0100'
-                    days_count: 3
-                    employee:
-                      attributes:
-                        email:
-                          label: Email
-                          value: michael.miller@demo.com
-                        first_name:
-                          label: First name
-                          value: Michael
-                        last_name:
-                          label: Last name
-                          value: Miller
-                      type: Employee
-                    end_date: '2017-12-29T00:00:00+0100'
-                    half_day_end: 0
-                    half_day_start: 0
-                    start_date: '2017-12-27T00:00:00+0100'
-                    status: approved
-                    time_off_type:
-                      attributes:
-                        name: Vacation
-                      type: TimeOffType
-                  type: TimeOffPeriod
-              success: true
-          schema:
-            $ref: '#/definitions/AbsencePeriodsResponse'
-  '/temp-ignore-this/company/employees/{employee_id}':
     get:
       description: Employee
       parameters:
@@ -661,7 +456,292 @@ paths:
                 type: Employee
               success: true
           schema:
-            $ref: '#/definitions/TempIgnoreThisEmployeeResponse'
+            $ref: '#/definitions/EmployeeResponse'
+  /company/time-off-types:
+    get:
+      description: 'Provides a list of available time-off types, for example ''Paid vacation'', ''Parental leave'' or ''Home office'''
+      parameters:
+        - default: 200
+          description: Pagination attribute to limit how many records will be returned per page
+          in: query
+          minimum: 1
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: 'Pagination attribute to identify which page you are requesting, by the form of telling an offset from the first record that would be returned.'
+          in: query
+          minimum: 0
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    name: Paid vacation
+                  id: 1234
+                  type: TimeOffType
+                - attributes:
+                    name: Home office
+                  id: 1235
+                  type: TimeOffType
+              success: true
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: '#/definitions/TimeOffTypeResource'
+                type: array
+              success:
+                type: boolean
+            type: object
+  /company/time-offs:
+    get:
+      description: 'This endpoint is responsible for fetching absence data for the company employees. It is possible to paginate results, filter by period and/or specific employees. The result will contain a list of absence periods, structured as defined here.'
+      parameters:
+        - description: 'First day of the period to be queried. It is inclusive, so the day specified as start_date will also be considered on the results'
+          format: date
+          in: query
+          name: start_date
+          required: false
+          type: string
+        - description: 'Last day of the period to be queried. It is inclusive, so the day specified as end_date will also be considered on the results.'
+          format: date
+          in: query
+          name: end_date
+          required: false
+          type: string
+        - collectionFormat: multi
+          description: A list of Personio employee identifiers to filter the results. Only those employees specified here will be returned.
+          in: query
+          items:
+            type: integer
+          name: employees
+          required: false
+          type: array
+        - default: 200
+          description: Pagination attribute to limit how many attendances will be returned per page
+          in: query
+          minimum: 1
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: 'Pagination attribute to identify which page you are requesting, by the form of telling an offset from the first record that would be returned.'
+          in: query
+          minimum: 0
+          name: offset
+          required: false
+          type: integer
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              data:
+                - attributes:
+                    certificate:
+                      status: not-required
+                    created_at: '2017-01-17T10:32:18+0100'
+                    days_count: 3
+                    employee:
+                      attributes:
+                        email:
+                          label: Email
+                          value: michael.miller@demo.com
+                        first_name:
+                          label: First name
+                          value: Michael
+                        id:
+                          label: id
+                          value: 4567
+                        last_name:
+                          label: Last name
+                          value: Miller
+                      type: Employee
+                    end_date: '2017-12-29T00:00:00+0100'
+                    half_day_end: 0
+                    half_day_start: 0
+                    id: 12345
+                    start_date: '2017-12-27T00:00:00+0100'
+                    status: approved
+                    time_off_type:
+                      attributes:
+                        id: 54321
+                        name: Vacation
+                      type: TimeOffType
+                  type: TimeOffPeriod
+              success: true
+          schema:
+            $ref: '#/definitions/AbsencePeriodsResponse'
+    post:
+      description: This endpoint is responsible for adding absence data for the company employees.
+      parameters:
+        - description: Absence period to create
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTimeOffPeriodRequest'
+      responses:
+        '201':
+          description: The absence period was created successfully
+          examples:
+            application/json:
+              data:
+                attributes:
+                  certificate:
+                    status: not-required
+                  created_at: '2017-01-17T10:32:18+0100'
+                  days_count: 3
+                  employee:
+                    attributes:
+                      email:
+                        label: Email
+                        value: michael.miller@demo.com
+                      first_name:
+                        label: First name
+                        value: Michael
+                      id:
+                        label: id
+                        value: 4567
+                      last_name:
+                        label: Last name
+                        value: Miller
+                    type: Employee
+                  end_date: '2017-12-29T00:00:00+0100'
+                  half_day_end: 0
+                  half_day_start: 0
+                  id: 12345
+                  start_date: '2017-12-27T00:00:00+0100'
+                  status: approved
+                  time_off_type:
+                    attributes:
+                      id: 54321
+                      name: Vacation
+                    type: TimeOffType
+                type: TimeOffPeriod
+              success: true
+          schema:
+            properties:
+              data:
+                $ref: '#/definitions/CreateTimeOffPeriodResponse'
+            type: object
+        '400':
+          description: Invalid request
+          examples:
+            application/json:
+              error:
+                code: 400
+                message: Error when trying to insert absence period
+              success: false
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Employee or Absence type not found
+          examples:
+            application/json:
+              error:
+                code: 0
+                message: Something went wrong
+              success: false
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '422':
+          description: Validation error
+          examples:
+            application/json:
+              error:
+                code: 0
+                error_data: '{...}'
+                message: The given data failed to pass validation.
+              success: false
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  '/company/time-offs/{id}':
+    delete:
+      description: This endpoint is responsible for deleting absence period data for the company employees.
+      parameters:
+        - description: ID of the absence period to delete
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Success response
+          examples:
+            application/json:
+              data:
+                message: The absence period was deleted.
+              success: true
+          schema:
+            $ref: '#/definitions/Response'
+        '404':
+          description: Not found response
+          examples:
+            application/json:
+              error:
+                code: 404
+                message: The absence period was not found.
+              success: false
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+    get:
+      description: Absence Period
+      parameters:
+        - description: Numeric `id` of the absence period
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: ''
+          examples:
+            application/json:
+              data:
+                attributes:
+                  certificate:
+                    status: not-required
+                  created_at: '2017-01-17T10:32:18+0100'
+                  days_count: 3
+                  employee:
+                    attributes:
+                      email:
+                        label: Email
+                        value: michael.miller@demo.com
+                      first_name:
+                        label: First name
+                        value: Michael
+                      id:
+                        label: id
+                        value: 2367
+                      last_name:
+                        label: Last name
+                        value: Miller
+                    type: Employee
+                  end_date: '2017-12-29T00:00:00+0100'
+                  half_day_end: 0
+                  half_day_start: 0
+                  id: 12345
+                  start_date: '2017-12-27T00:00:00+0100'
+                  status: approved
+                  time_off_type:
+                    attributes:
+                      id: 45678
+                      name: Vacation
+                    type: TimeOffType
+                type: TimeOffPeriod
+              success: true
+          schema:
+            $ref: '#/definitions/AbsencePeriodResponse'
 definitions:
   AbsencePeriodResponse:
     type: object
@@ -692,6 +772,8 @@ definitions:
                                 type: string
                               first_name:
                                 type: string
+                              id:
+                                type: integer
                               last_name:
                                 type: string
                             type: object
@@ -705,6 +787,8 @@ definitions:
                       type: number
                     half_day_start:
                       type: number
+                    id:
+                      type: integer
                     start_date:
                       type: string
                     status:
@@ -714,6 +798,8 @@ definitions:
                         attributes:
                           items:
                             properties:
+                              id:
+                                type: integer
                               name:
                                 type: string
                             type: object
@@ -822,6 +908,109 @@ definitions:
           type: object
         type: array
     type: object
+  CreateTimeOffPeriodRequest:
+    properties:
+      comment:
+        description: Optional comment
+        type: string
+      employee_id:
+        description: Employee identifier
+        type: integer
+      end_date:
+        description: Absence end date as YYYY-MM-DD
+        format: date
+        type: string
+      half_day_end:
+        description: Weather the end date is a half-day off
+        type: boolean
+      half_day_start:
+        description: Weather the start date is a half-day off
+        type: boolean
+      start_date:
+        description: Absence start date as YYYY-MM-DD
+        format: date
+        type: string
+      time_off_type_id:
+        description: Time-off type identifier
+        type: integer
+    required:
+      - employee_id
+      - time_off_type_id
+      - start_date
+      - end_date
+      - half_day_start
+      - half_day_end
+    title: Create time-off periods
+    type: object
+  CreateTimeOffPeriodResponse:
+    allOf:
+      - $ref: '#/definitions/Response'
+      - properties:
+          data:
+            properties:
+              attributes:
+                properties:
+                  certificate:
+                    properties:
+                      status:
+                        type: string
+                    type: object
+                  created_at:
+                    type: string
+                  days_count:
+                    type: number
+                  employee:
+                    properties:
+                      attributes:
+                        items:
+                          properties:
+                            email:
+                              type: string
+                            first_name:
+                              type: string
+                            id:
+                              type: integer
+                            last_name:
+                              type: string
+                          type: object
+                        type: array
+                      type:
+                        type: string
+                    type: object
+                  end_date:
+                    type: string
+                  half_day_end:
+                    type: number
+                  half_day_start:
+                    type: number
+                  id:
+                    type: integer
+                  start_date:
+                    type: string
+                  status:
+                    type: string
+                  time_off_type:
+                    properties:
+                      attributes:
+                        items:
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: string
+                          type: object
+                        type: array
+                      type:
+                        type: string
+                    type: object
+              type:
+                description: Time-off period resource name
+                enum:
+                  - TimeOffPeriod
+                type: string
+            type: object
+        type: object
+    title: Time period when an employee is not available.
   Department:
     allOf:
       - $ref: '#/definitions/Attribute'
@@ -864,6 +1053,8 @@ definitions:
               $ref: '#/definitions/Attribute'
             hire_date:
               $ref: '#/definitions/Attribute'
+            holiday_calendar:
+              $ref: '#/definitions/HolidayCalendar'
             hourly_salary:
               $ref: '#/definitions/Attribute'
             id:
@@ -890,6 +1081,8 @@ definitions:
               $ref: '#/definitions/Attribute'
             weekly_working_hours:
               $ref: '#/definitions/Attribute'
+            work_schedule:
+              $ref: '#/definitions/WorkSchedule'
           type: object
         type: array
       type:
@@ -1054,79 +1247,23 @@ definitions:
       value:
         $ref: '#/definitions/Employee'
     type: object
-  TempIgnoreThisEmployee:
+  TimeOffTypeResource:
     properties:
       attributes:
-        items:
-          properties:
-            contract_end_date:
-              $ref: '#/definitions/Attribute'
-            cost_centers:
-              $ref: '#/definitions/CostCenters'
-            created_at:
-              $ref: '#/definitions/Attribute'
-            department:
-              $ref: '#/definitions/Department'
-            email:
-              $ref: '#/definitions/Attribute'
-            employment_type:
-              $ref: '#/definitions/Attribute'
-            first_name:
-              $ref: '#/definitions/Attribute'
-            fix_salary:
-              $ref: '#/definitions/Attribute'
-            gender:
-              $ref: '#/definitions/Attribute'
-            hire_date:
-              $ref: '#/definitions/Attribute'
-            holiday_calendar:
-              $ref: '#/definitions/HolidayCalendar'
-            hourly_salary:
-              $ref: '#/definitions/Attribute'
-            id:
-              $ref: '#/definitions/Attribute'
-            last_name:
-              $ref: '#/definitions/Attribute'
-            office:
-              $ref: '#/definitions/Office'
-            position:
-              $ref: '#/definitions/Attribute'
-            probation_period_end:
-              $ref: '#/definitions/Attribute'
-            status:
-              $ref: '#/definitions/Attribute'
-            supervisor:
-              $ref: '#/definitions/Supervisor'
-            termination_date:
-              $ref: '#/definitions/Attribute'
-            termination_reason:
-              $ref: '#/definitions/Attribute'
-            termination_type:
-              $ref: '#/definitions/Attribute'
-            vacation_day_balance:
-              $ref: '#/definitions/Attribute'
-            weekly_working_hours:
-              $ref: '#/definitions/Attribute'
-            work_schedule:
-              $ref: '#/definitions/WorkSchedule'
-          type: object
-        type: array
-      type:
-        type: string
-    required:
-      - type
-      - attributes
-    type: object
-  TempIgnoreThisEmployeeResponse:
-    allOf:
-      - $ref: '#/definitions/Response'
-      - properties:
-          data:
-            allOf:
-              - $ref: '#/definitions/TempIgnoreThisEmployee'
-            type: object
+        properties:
+          name:
+            type: string
         type: object
-    title: Employee
+      id:
+        description: identifier
+        type: integer
+      type:
+        description: Time-off type resource name
+        enum:
+          - TimeOffType
+        type: string
+    title: Type of time-off resource
+    type: object
   WorkSchedule:
     allOf:
       - $ref: '#/definitions/Attribute'

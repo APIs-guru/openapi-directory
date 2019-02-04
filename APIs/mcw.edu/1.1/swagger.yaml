@@ -35,30 +35,16 @@ tags:
   - name: Lookup
   - description: NIH Data Commons
     name: NIHdatacommons
+  - description: Ontology Web Service
+    name: Ontology
   - name: Pathway
   - name: Phenotype
   - name: QTL
-  - name: Rat Strain
-  - description: AGR Web Service
-    name: agr-web-service
-  - description: Annotation Web Service
-    name: annotation-web-service
-  - description: Gene Web Service
-    name: gene-web-service
-  - description: Lookup Web Service
-    name: lookup-web-service
-  - description: Ontology Web Service
-    name: ontology-web-service
-  - description: Pathway Web Service
-    name: pathway-web-service
   - description: Phenotype Web Service
-    name: phenotype-web-service
-  - description: QTL Web Service
-    name: qtl-web-service
+    name: Quantitative Phenotype
+  - name: Rat Strain
   - description: Stats Web Service
-    name: stats-web-service
-  - description: Strain Web Service
-    name: strain-web-service
+    name: Statistics
 paths:
   '/agr/alleles/{taxonId}':
     get:
@@ -2700,13 +2686,15 @@ definitions:
     type: object
   Gene:
     properties:
-      description:
+      agrDescription:
         type: string
-      function:
+      description:
         type: string
       key:
         format: int32
         type: integer
+      mergedDescription:
+        type: string
       name:
         type: string
       ncbiAnnotStatus:
@@ -2715,8 +2703,6 @@ definitions:
         format: date-time
         type: string
       notes:
-        type: string
-      product:
         type: string
       refSeqStatus:
         type: string

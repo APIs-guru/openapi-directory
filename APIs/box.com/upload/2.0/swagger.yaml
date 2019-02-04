@@ -42,16 +42,16 @@ paths:
         url: 'https://docs.box.com/reference#upload-a-file'
       operationId: uploadFile
       parameters:
-        - description: File to upload
-          in: formData
-          name: file
-          required: true
-          type: file
         - description: File attributes
           in: formData
           name: attributes
           required: true
           type: string
+        - description: File to upload
+          in: formData
+          name: file
+          required: true
+          type: file
       responses:
         '201':
           description: The upload would be successful

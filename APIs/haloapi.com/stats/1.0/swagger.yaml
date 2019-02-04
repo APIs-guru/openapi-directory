@@ -1556,6 +1556,12 @@ paths:
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">
+            <p><strong>February 1, 2019:</strong></p>
+            <ul>
+                <li>Enabled support for viewing the time component of the "MatchCompletedDate" via the "{include-times}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added support for the Custom Local Game mode.</li>
@@ -1613,225 +1619,59 @@ paths:
           in: query
           name: count
           type: number
+        - description: |-
+            When set to "true", this indicates that the time component of the "MatchCompletedDate" field should be populated.
+
+            Otherwise, when set to "false" or when omitted, the time component will be set to "00:00:00".
+
+            When the value contains a non-boolean, HTTP 400 ("Bad Request") is returned.
+          in: query
+          name: include-times
+          type: boolean
       responses:
         '200':
           description: The response body will contain the Player's recent Matches. An empty list will be returned if the Player has not played any Matches in the specified Game Mode(s).
           examples:
-            application/json: |
-              {
-                // The starting point that was used. When the "start" query string parameter is
-                // specified, this value is identical. When "start" is omitted, the default value is
-                // returned.
-                "Start": "int",  
-
-                // The number of results that the service attempted to retrieve to satisfy this
-                // request. Normally this value is equal to the "count" parameter. If the client
-                // specified a count parameter greater than the maximum allowed, this value contains
-                // the maximum allowed amount.
-                "Count": "int",
-
-                // The number of results that are actually being returned in this response. This field
-                // is named "ResultCount" to avoid confusion with "Count".
-                "ResultCount": "int",
-
-                // A list of recent matches. Matches are listed in reverse chronological order with the
-                // most recently started match first.
-                "Results": [
-                  {
-                    // Internal use only. A set of related resource links.
-                    "Links": "links",
-
-                    "Id": {
-
-                      // The ID for this match. More match details are available via the applicable
-                      // Match Result Endpoint.
-                      "MatchId": "guid",
-
-                      // The game mode applicable to this match. Options are: 
-                      //   Error = 0, 
-                      //   Arena = 1, 
-                      //   Campaign = 2, 
-                      //   Custom = 3, 
-                      //   Warzone = 4,
-                      //   CustomLocal = 6.
-                      "GameMode": "int",
-
-                    },
-
-                    // The ID of the playlist (aka "Hopper") for the match. 
-                    // Hoppers are used in Arena and Warzone. In Arena, they function just as you would
-                    // expect, similar to previous Halo titles. Warzone uses hoppers as well. There
-                    // will be multiple Warzone hoppers which contain a rotating playlist of scenarios
-                    // to play. 
-                    // Null for campaign & custom games. 
-                    // Playlists are available via the Metadata API.
-                    "HopperId": "guid",
-
-                    // The ID of the base map for this match. Maps are available via the Metadata API.
-                    "MapId": "guid",
-
-                    // The variant of the map for this match. There are two sources of map variants:
-                    // official map variants available via the Metadata API and user-generated map
-                    // variants which are not available via the APIs currently. This will be null for
-                    // campaign games.
-                    "MapVariant": {
-
-                      // The resource type. 3 indicates map variant.
-                      "ResourceType": 3,
-
-                      // The ID of the map variant. Official map variants are available via the
-                      // Metadata API.
-                      "ResourceId": "guid",
-
-                      // The source of the map variant. Options are:
-                      //   Unknown = 0,
-                      //   User-generated = 1,
-                      //   Official = 3.
-                      "OwnerType": "int",
-
-                      // The gamertag of the user that created the map variant if this is a
-                      // user-generated map variant, or null otherwise. 
-                      "Owner": "string"
-                    }
-                    // The ID of the game base variant for this match. Game base variants are available
-                    // via the Metadata API.
-                    "GameBaseVariantId": "guid",
-
-                    // The variant of the game for this match. There are two sources of game variants:
-                    // official game variants available via the Metadata API and user-generated game
-                    // variants which are not available via the APIs currently. This will be null for
-                    // campaign games.
-                    "GameVariant": {
-
-                      // The resource type. 2 indicates game variant.
-                      "ResourceType": 2,
-
-                      // The ID of the game variant. Official game variants are available via the
-                      // Metadata API.
-                      "ResourceId": "guid",        
-
-                      // The source of the game variant. Options are:
-                      //   Unknown = 0,
-                      //   User-generated = 1,
-                      //   Official = 3.
-                      "OwnerType": "int",
-
-                      // The gamertag of the user that created the game variant if this is a
-                      // user-generated game variant, or null otherwise. 
-                      "Owner": "string"
-                    },
-
-                    // The length of the match. This is expressed as an ISO 8601 Duration.
-                    "MatchDuration": "string",
-
-                    // The date and time when match ended. Note that this is different than the
-                    // processing date, once matches end they typically take a small amount of time to
-                    // process. The processing date is not available through this API. The time
-                    // component of this date is always set to "00:00:00". This is expressed as an ISO
-                    // 8601 combined Date and Time.
-                    "MatchCompletedDate": {
-
-                      "ISO8601Date": "string"
-                    },
-
-                    // Provides team data. This list contains all team that Won or Tied. Losing teams
-                    // are not included. This list is empty for campaign games. 
-                    "Teams": [
-                      {
-                        // The ID for the team. The team's ID dictates the team's color. Team colors
-                        // are available via the Metadata API.
-                        "Id": "int",
-
-                        // The team's score at the end of the match. The way the score is determined is
-                        // based off the game base variant being played: 
-                        //   Breakout = number of rounds won,
-                        //   CTF = number of flag captures,
-                        //   Slayer = number of kills,
-                        //   Strongholds = number of points,
-                        //   Warzone = number of points.
-                        // Score can be a negative value. Unfortunately, this value is returned as an
-                        // unsigned 32-bit integer. This means that if the score is -1, the score
-                        // reported is 4,294,967,295.
-                        "Score": "uint32",
-
-                        // The team's rank at the end of the match.
-                        "Rank": "int"
-                      }
-                    ],
-
-                    // This field contains the player's data. This will only contain data for the
-                    // player specified in the request.
-                    "Players": [
-                      {          
-                        "Player": {
-
-                          // The player's gamertag.
-                          "Gamertag": "string",
-
-                          // Internal use only. This will always be null.
-                          "Xuid": null
-                        },
-
-                        // The ID of the team that the player was on when the match ended. Zero for
-                        // campaign games.
-                        "TeamId": "int",
-
-                        // The player's team-agnostic ranking in this match.
-                        "Rank": "int",
-
-                        // Indicates what result the player received at the conclusion of the match.
-                        // Options are:
-                        //   Did Not Finish = 0, 
-                        //   Lost = 1, 
-                        //   Tied = 2, 
-                        //   Won = 3. 
-                        // Did Not Finish: The player was not present when the match ended.
-                        // Lost: The player was on a team that was assigned a loss, typically this is
-                        // when a team does not have rank = 1. 
-                        // Won: The player was on the team that was assigned the win, typically this is
-                        // the team that has rank = 1. 
-                        // Tied: The player was on the team that was awarded a tie. Typically this is
-                        // when the player is on the team with rank = 1, and there is at least one
-                        // other team with rank = 1. Ties are only for rank = 1 teams. Consider the
-                        // scenario when exactly one team is rank = 1, and two teams are rank = 2.
-                        // Players on the rank=1 team will have "Won", players on the rank = 2 teams
-                        // will have "Lost". For ties, this documentation states 'typically' because
-                        // the game may have unique rules for multi-team and FFA scenarios, in which
-                        // multiple teams are awarded a win.
-                        "Result": "int",
-
-                        // The number of enemy kills the player had during this match. This includes
-                        // other Spartans and Enemy AI.
-                        "TotalKills": "int",
-
-                        // The number of times this player died during the match.
-                        "TotalDeaths": "int",
-
-                        // The number of assists credited to the player during the match. This includes
-                        // other Spartans and Enemy AI.
-                        "TotalAssists": "int",
-
-                        // Internal use only. This will always be null.
-                        "PreMatchRatings": null,
-
-                        // Internal use only. This will always be null.
-                        "PostMatchRatings": null
-                      }
-                    ],
-
-                    // Whether this was a team-based game or not (e.g. free-for-all).
-                    "IsTeamGame": "boolean",
-
-                    // The ID of the season for this match if it was played in a seasonal playlist.
-                    // Null if the match was played in a non-seasonal playlist. This will only be set
-                    // for Arena matches and will be null for all other game modes.
-                    "SeasonId": null,
-
-                    // Internal use only. Do not use.
-                    "MatchCompletedDateFidelity": "int"
-                  }
-                ]
-              }
+            application/json:
+              Count: int
+              ResultCount: int
+              Results:
+                - GameBaseVariantId: guid
+                  GameVariant:
+                    Owner: string
+                    OwnerType: int
+                    ResourceId: guid
+                    ResourceType: 2
+                  HopperId: guid
+                  Id:
+                    GameMode: int
+                    MatchId: guid
+                  IsTeamGame: boolean
+                  Links: links
+                  MapId: guid
+                  MapVariant:
+                    Owner: string
+                    OwnerType: int
+                    ResourceId: guid
+                    ResourceType: 3
+                  MatchCompletedDate:
+                    ISO8601Date: string
+                  MatchCompletedDateFidelity: int
+                  MatchDuration: string
+                  Players:
+                    - Player:
+                        Gamertag: string
+                      Rank: int
+                      Result: int
+                      TeamId: int
+                      TotalAssists: int
+                      TotalDeaths: int
+                      TotalKills: int
+                  Teams:
+                    - Id: int
+                      Rank: int
+                      Score: uint32
+              Start: int
         '400':
           description: An unsupported value was provided for a query string parameter.
         '404':
@@ -3966,6 +3806,12 @@ paths:
         <br />
         <h4>Changelog</h4>
         <div class="panel-body">
+            <p><strong>February 1, 2019:</strong></p>
+            <ul>
+                <li>Enabled support for viewing the time component of the "MatchCompletedDate" via the "{include-times}" Request Parameter.</li>
+            </ul>
+        </div>
+        <div class="panel-body">
             <p><strong>December 22, 2017:</strong></p>
             <ul>
                 <li>Added support for the Custom Local Game mode.</li>
@@ -4023,225 +3869,59 @@ paths:
           in: query
           name: count
           type: number
+        - description: |-
+            When set to "true", this indicates that the time component of the "MatchCompletedDate" field should be populated.
+
+            Otherwise, when set to "false" or when omitted, the time component will be set to "00:00:00".
+
+            When the value contains a non-boolean, HTTP 400 ("Bad Request") is returned.
+          in: query
+          name: include-times
+          type: boolean
       responses:
         '200':
           description: The response body will contain the Player's recent Matches. An empty list will be returned if the Player has not played any Matches in the specified Game Mode(s).
           examples:
-            application/json: |
-              {
-                // The starting point that was used. When the "start" query string parameter is
-                // specified, this value is identical. When "start" is omitted, the default value is
-                // returned.
-                "Start": "int",  
-
-                // The number of results that the service attempted to retrieve to satisfy this
-                // request. Normally this value is equal to the "count" parameter. If the client
-                // specified a count parameter greater than the maximum allowed, this value contains
-                // the maximum allowed amount.
-                "Count": "int",
-
-                // The number of results that are actually being returned in this response. This field
-                // is named "ResultCount" to avoid confusion with "Count".
-                "ResultCount": "int",
-
-                // A list of recent matches. Matches are listed in reverse chronological order with the
-                // most recently started match first.
-                "Results": [
-                  {
-                    // Internal use only. A set of related resource links.
-                    "Links": "links",
-
-                    "Id": {
-
-                      // The ID for this match. More match details are available via the applicable
-                      // Match Result Endpoint.
-                      "MatchId": "guid",
-
-                      // The game mode applicable to this match. Options are: 
-                      //   Error = 0, 
-                      //   Arena = 1, 
-                      //   Campaign = 2, 
-                      //   Custom = 3, 
-                      //   Warzone = 4,
-                      //   CustomLocal = 6.
-                      "GameMode": "int",
-
-                    },
-
-                    // The ID of the playlist (aka "Hopper") for the match. 
-                    // Hoppers are used in Arena and Warzone. In Arena, they function just as you would
-                    // expect, similar to previous Halo titles. Warzone uses hoppers as well. There
-                    // will be multiple Warzone hoppers which contain a rotating playlist of scenarios
-                    // to play. 
-                    // Null for campaign & custom games. 
-                    // Playlists are available via the Metadata API.
-                    "HopperId": "guid",
-
-                    // The ID of the base map for this match. Maps are available via the Metadata API.
-                    "MapId": "guid",
-
-                    // The variant of the map for this match. There are two sources of map variants:
-                    // official map variants available via the Metadata API and user-generated map
-                    // variants which are not available via the APIs currently. This will be null for
-                    // campaign games.
-                    "MapVariant": {
-
-                      // The resource type. 3 indicates map variant.
-                      "ResourceType": 3,
-
-                      // The ID of the map variant. Official map variants are available via the
-                      // Metadata API.
-                      "ResourceId": "guid",
-
-                      // The source of the map variant. Options are:
-                      //   Unknown = 0,
-                      //   User-generated = 1,
-                      //   Official = 3.
-                      "OwnerType": "int",
-
-                      // The gamertag of the user that created the map variant if this is a
-                      // user-generated map variant, or null otherwise. 
-                      "Owner": "string"
-                    }
-                    // The ID of the game base variant for this match. Game base variants are available
-                    // via the Metadata API.
-                    "GameBaseVariantId": "guid",
-
-                    // The variant of the game for this match. There are two sources of game variants:
-                    // official game variants available via the Metadata API and user-generated game
-                    // variants which are not available via the APIs currently. This will be null for
-                    // campaign games.
-                    "GameVariant": {
-
-                      // The resource type. 2 indicates game variant.
-                      "ResourceType": 2,
-
-                      // The ID of the game variant. Official game variants are available via the
-                      // Metadata API.
-                      "ResourceId": "guid",        
-
-                      // The source of the game variant. Options are:
-                      //   Unknown = 0,
-                      //   User-generated = 1,
-                      //   Official = 3.
-                      "OwnerType": "int",
-
-                      // The gamertag of the user that created the game variant if this is a
-                      // user-generated game variant, or null otherwise. 
-                      "Owner": "string"
-                    },
-
-                    // The length of the match. This is expressed as an ISO 8601 Duration.
-                    "MatchDuration": "string",
-
-                    // The date and time when match ended. Note that this is different than the
-                    // processing date, once matches end they typically take a small amount of time to
-                    // process. The processing date is not available through this API. The time
-                    // component of this date is always set to "00:00:00". This is expressed as an ISO
-                    // 8601 combined Date and Time.
-                    "MatchCompletedDate": {
-
-                      "ISO8601Date": "string"
-                    },
-
-                    // Provides team data. This list contains all team that Won or Tied. Losing teams
-                    // are not included. This list is empty for campaign games. 
-                    "Teams": [
-                      {
-                        // The ID for the team. The team's ID dictates the team's color. Team colors
-                        // are available via the Metadata API.
-                        "Id": "int",
-
-                        // The team's score at the end of the match. The way the score is determined is
-                        // based off the game base variant being played: 
-                        //   Breakout = number of rounds won,
-                        //   CTF = number of flag captures,
-                        //   Slayer = number of kills,
-                        //   Strongholds = number of points,
-                        //   Warzone = number of points.
-                        // Score can be a negative value. Unfortunately, this value is returned as an
-                        // unsigned 32-bit integer. This means that if the score is -1, the score
-                        // reported is 4,294,967,295.
-                        "Score": "uint32",
-
-                        // The team's rank at the end of the match.
-                        "Rank": "int"
-                      }
-                    ],
-
-                    // This field contains the player's data. This will only contain data for the
-                    // player specified in the request.
-                    "Players": [
-                      {          
-                        "Player": {
-
-                          // The player's gamertag.
-                          "Gamertag": "string",
-
-                          // Internal use only. This will always be null.
-                          "Xuid": null
-                        },
-
-                        // The ID of the team that the player was on when the match ended. Zero for
-                        // campaign games.
-                        "TeamId": "int",
-
-                        // The player's team-agnostic ranking in this match.
-                        "Rank": "int",
-
-                        // Indicates what result the player received at the conclusion of the match.
-                        // Options are:
-                        //   Did Not Finish = 0, 
-                        //   Lost = 1, 
-                        //   Tied = 2, 
-                        //   Won = 3. 
-                        // Did Not Finish: The player was not present when the match ended.
-                        // Lost: The player was on a team that was assigned a loss, typically this is
-                        // when a team does not have rank = 1. 
-                        // Won: The player was on the team that was assigned the win, typically this is
-                        // the team that has rank = 1. 
-                        // Tied: The player was on the team that was awarded a tie. Typically this is
-                        // when the player is on the team with rank = 1, and there is at least one
-                        // other team with rank = 1. Ties are only for rank = 1 teams. Consider the
-                        // scenario when exactly one team is rank = 1, and two teams are rank = 2.
-                        // Players on the rank=1 team will have "Won", players on the rank = 2 teams
-                        // will have "Lost". For ties, this documentation states 'typically' because
-                        // the game may have unique rules for multi-team and FFA scenarios, in which
-                        // multiple teams are awarded a win.
-                        "Result": "int",
-
-                        // The number of enemy kills the player had during this match. This includes
-                        // other Spartans and Enemy AI.
-                        "TotalKills": "int",
-
-                        // The number of times this player died during the match.
-                        "TotalDeaths": "int",
-
-                        // The number of assists credited to the player during the match. This includes
-                        // other Spartans and Enemy AI.
-                        "TotalAssists": "int",
-
-                        // Internal use only. This will always be null.
-                        "PreMatchRatings": null,
-
-                        // Internal use only. This will always be null.
-                        "PostMatchRatings": null
-                      }
-                    ],
-
-                    // Whether this was a team-based game or not (e.g. free-for-all).
-                    "IsTeamGame": "boolean",
-
-                    // The ID of the season for this match if it was played in a seasonal playlist.
-                    // Null if the match was played in a non-seasonal playlist. This will only be set
-                    // for Arena matches and will be null for all other game modes.
-                    "SeasonId": null,
-
-                    // Internal use only. Do not use.
-                    "MatchCompletedDateFidelity": "int"
-                  }
-                ]
-              }
+            application/json:
+              Count: int
+              ResultCount: int
+              Results:
+                - GameBaseVariantId: guid
+                  GameVariant:
+                    Owner: string
+                    OwnerType: int
+                    ResourceId: guid
+                    ResourceType: 2
+                  HopperId: guid
+                  Id:
+                    GameMode: int
+                    MatchId: guid
+                  IsTeamGame: boolean
+                  Links: links
+                  MapId: guid
+                  MapVariant:
+                    Owner: string
+                    OwnerType: int
+                    ResourceId: guid
+                    ResourceType: 3
+                  MatchCompletedDate:
+                    ISO8601Date: string
+                  MatchCompletedDateFidelity: int
+                  MatchDuration: string
+                  Players:
+                    - Player:
+                        Gamertag: string
+                      Rank: int
+                      Result: int
+                      TeamId: int
+                      TotalAssists: int
+                      TotalDeaths: int
+                      TotalKills: int
+                  Teams:
+                    - Id: int
+                      Rank: int
+                      Score: uint32
+              Start: int
         '400':
           description: An unsupported value was provided for a query string parameter.
         '404':

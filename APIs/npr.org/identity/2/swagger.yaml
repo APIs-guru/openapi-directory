@@ -294,8 +294,7 @@ definitions:
         type: string
       id:
         description: A unique identifier for the aggregation (program)
-        format: int64
-        type: integer
+        type: string
       notif_following:
         description: The topic in Firebase Cloud Messaging to which the device should subscribe if it supports notifications and the user wants notifications about the podcasts they follow.
         items:

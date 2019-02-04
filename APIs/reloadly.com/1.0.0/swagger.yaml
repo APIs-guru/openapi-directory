@@ -189,7 +189,7 @@ info:
                 <td id="authorization"><strong>Authorization</strong></td>
                 <td>
                     <p>Required to get an access token or make API calls.</p>
-                    <p>To <a href="/docs/api/overview/#get-an-access-token" pa-marked="1">get an access token</a>, set this header to your <code>client_id</code> and <code>secret</code> credentials.</p>
+                    <p>To <a href="/docs/api/overview/#get-an-access-token" pa-marked="1">get an access token</a>, set this header to your <code>client_id</code> and <code>client_secret</code> credentials.</p>
                     <blockquote class="dx-blockquote-note"><strong>Note:</strong> If you use cURL, specify <code>-u "client_id:secret"</code>.</blockquote>
                     <p>To make REST API calls, include the bearer token in the <code>Authorization</code> header with the <code>Bearer</code> authentication scheme:</p>
                     <pre class="dx-pre-hljs"><code class="hljs">Authorization: Bearer <var>Access-Token</var></code></pre>
@@ -612,7 +612,7 @@ info:
     <tbody>
     <tr>
     <td>1.</td>
-    <td><a href="https://reloadly-dev.herokuapp.com" target="_blank" pa-marked="1"><strong>Create a developer account</strong></a>.<br>When you create a developer account, Reloadly generates a set of OAuth credentials.</td>
+    <td><a href="https://www.reloadly.com/login" target="_blank" pa-marked="1"><strong>Create a developer account</strong></a> <= (click to go there).<br>When you create a developer account, Reloadly generates a set of OAuth credentials.</td>
     </tr>
     <tr>
     <td>2.</td>
@@ -632,8 +632,7 @@ info:
     <blockquote class="dx-blockquote-tip">
     <p><strong>URLs:</strong></p>
     <ul>
-    <li>Live : <strong>`https://reloadly.auth0.com/oauth/token`</strong></li>
-    <li>Sandbox : <strong>`https://reloadly-sandbox.auth0.com/oauth/token`</strong></li>
+    <li><strong>`https://auth.reloadly.com/oauth/token`</strong></li>
     </ul>
     </blockquote><br />
 
@@ -665,7 +664,7 @@ info:
                 "audience":"https://topups.reloadly.com"
             }' \
         -H "Content-Type: application/json" \
-        -X POST https://reloadly.auth0.com/oauth/token \
+        -X POST https://auth.reloadly.com/oauth/token \
     ```
     <br />
     Where : <br />
@@ -676,8 +675,7 @@ info:
         <tr>
             <td>The get access token endpoint.</td>
             <td>
-                Live : <code>https://reloadly.auth0.com/oauth/token</code><br />
-                Sandbox : <code>https://reloadly-sandbox.auth0.com/oauth/token</code>
+                <code>https://auth.reloadly.com/oauth/token</code>
             </td>
         </tr>
         <tr>
@@ -688,7 +686,7 @@ info:
         </tr>
         <tr>
            <td>
-              <code><var>secret</var></code>
+              <code><var>client_secret</var></code>
            </td>
            <td>Your client secret.</td>
         </tr>
@@ -716,9 +714,7 @@ info:
            <p>Select the <code>POST</code> method.</p>
        </li>
        <li>
-           <p>Enter the <code>https://reloadly.auth0.com/oauth/token</code> request URL for LIVE mode.</p>
-           OR
-           <p>Enter the <code>https://reloadly-sandbox.auth0.com/oauth/token</code> request URL for SANDBOX (Test) mode.</p>
+           <p>Enter the <code>https://auth.reloadly.com/oauth/token</code> request URL.</p>
        </li>
        <li>
           <p>On the <strong>Header</strong> tab, enter <strong>Content-Type</strong> under key and <strong>application/json</strong> as value : </p>

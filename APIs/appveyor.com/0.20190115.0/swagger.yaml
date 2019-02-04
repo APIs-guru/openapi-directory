@@ -32,7 +32,7 @@ info:
     url: 'https://www.appveyor.com/eula/'
   termsOfService: 'https://www.appveyor.com/terms-of-service/'
   title: AppVeyor
-  version: 0.20181229.0
+  version: 0.20190115.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -2388,6 +2388,7 @@ definitions:
     enum:
       - gce
       - pro-ubuntu
+      - pro-ubuntu18
       - pro-vs2013
       - pro-win2016
       - pro-vs2017
@@ -3426,6 +3427,8 @@ definitions:
         items:
           $ref: '#/definitions/DeploymentProvider'
         type: array
+      disableNuGetPublishForOctopusPackages:
+        type: boolean
       disableNuGetPublishOnPullRequests:
         type: boolean
       doNotIncrementBuildNumberOnPullRequests:

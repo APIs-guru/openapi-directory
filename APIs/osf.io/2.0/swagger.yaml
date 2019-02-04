@@ -562,7 +562,7 @@ tags:
   - description: |-
       #### [osfclient](https://github.com/osfclient/osfclient)
       A python library and command-line client for file storage on the OSF.
-      #### [OSFR](https://github.com/chartgerink/osfr)
+      #### [OSFR](https://github.com/CenterForOpenScience/osfr)
       An R package to interface with the OSF.
     name: External Libraries
     x-traitTag: true
@@ -1879,8 +1879,10 @@ paths:
             application/json:
               data:
                 - attributes:
+                    assets:
+                      logo: /static/img/institutions/shields/cos-shield.png
+                      logo_rounded: /static/img/institutions/shields-rounded-corners/cos-shield.png
                     description: 'COS is a non-profit technology company providing free and open services to increase inclusivity and transparency of research. Find out more at <a href="https://cos.io">cos.io</a>.'
-                    logo_path: /static/img/institutions/shields/cos-shield.png
                     name: Center For Open Science
                   id: cos
                   links:
@@ -1914,16 +1916,26 @@ paths:
                 attributes:
                   description: The properties of the institution entity.
                   properties:
+                    assets:
+                      description: Assets belonging to a specific institution
+                      properties:
+                        logo:
+                          description: Static path to the institution specific normal logo
+                          readOnly: true
+                          type: string
+                        logo_rounded:
+                          description: Static path to the institution specific rounded logo
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Assets
+                      type: object
                     auth_url:
                       description: Url used to authenticate institution specific login.
                       readOnly: true
                       type: string
                     description:
                       description: Description of the institution.
-                      readOnly: true
-                      type: string
-                    logo_path:
-                      description: Static path to the institution specific logo.
                       readOnly: true
                       type: string
                     name:
@@ -2009,8 +2021,10 @@ paths:
             application/json:
               data:
                 attributes:
+                  assets:
+                    logo: /static/img/institutions/shields/cos-shield.png
+                    logo_rounded: /static/img/institutions/shields-rounded-corners/cos-shield.png
                   description: 'COS is a non-profit technology company providing free and open services to increase inclusivity and transparency of research. Find out more at <a href="https://cos.io">cos.io</a>.'
-                  logo_path: /static/img/institutions/shields/cos-shield.png
                   name: Center For Open Science
                 id: cos
                 links:
@@ -2039,16 +2053,26 @@ paths:
                 attributes:
                   description: The properties of the institution entity.
                   properties:
+                    assets:
+                      description: Assets belonging to a specific institution
+                      properties:
+                        logo:
+                          description: Static path to the institution specific normal logo
+                          readOnly: true
+                          type: string
+                        logo_rounded:
+                          description: Static path to the institution specific rounded logo
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Assets
+                      type: object
                     auth_url:
                       description: Url used to authenticate institution specific login.
                       readOnly: true
                       type: string
                     description:
                       description: Description of the institution.
-                      readOnly: true
-                      type: string
-                    logo_path:
-                      description: Static path to the institution specific logo.
                       readOnly: true
                       type: string
                     name:
@@ -2282,6 +2306,9 @@ paths:
                 data:
                   attributes:
                     category: software
+                    tags:
+                      - some
+                      - tags
                     title: An Excellent Project Title
                   type: nodes
               properties:
@@ -4042,6 +4069,9 @@ paths:
                 data:
                   attributes:
                     category: software
+                    tags:
+                      - some
+                      - tags
                     title: An Excellent Project Title
                   type: nodes
               properties:
@@ -4295,6 +4325,9 @@ paths:
               data:
                 attributes:
                   category: software
+                  tags:
+                    - some
+                    - tags
                   title: An Excellent Project Title
                 type: nodes
             properties:
@@ -4695,6 +4728,9 @@ paths:
               data:
                 attributes:
                   category: software
+                  tags:
+                    - some
+                    - tags
                   title: An Excellent Project Title
                 type: nodes
             properties:
@@ -5489,6 +5525,9 @@ paths:
                 data:
                   attributes:
                     category: software
+                    tags:
+                      - some
+                      - tags
                     title: An Excellent Project Title
                   type: nodes
               properties:
@@ -5753,6 +5792,9 @@ paths:
               data:
                 attributes:
                   category: software
+                  tags:
+                    - some
+                    - tags
                   title: An Excellent Project Title
                 type: nodes
             properties:
@@ -6138,6 +6180,9 @@ paths:
               data:
                 attributes:
                   category: software
+                  tags:
+                    - some
+                    - tags
                   title: An Excellent Project Title
                 type: nodes
             properties:
@@ -9142,6 +9187,9 @@ paths:
                 data:
                   attributes:
                     category: software
+                    tags:
+                      - some
+                      - tags
                     title: An Excellent Project Title
                   type: nodes
               properties:
@@ -9402,6 +9450,9 @@ paths:
               data:
                 attributes:
                   category: software
+                  tags:
+                    - some
+                    - tags
                   title: An Excellent Project Title
                 type: nodes
             properties:
@@ -9816,16 +9867,26 @@ paths:
                 attributes:
                   description: The properties of the institution entity.
                   properties:
+                    assets:
+                      description: Assets belonging to a specific institution
+                      properties:
+                        logo:
+                          description: Static path to the institution specific normal logo
+                          readOnly: true
+                          type: string
+                        logo_rounded:
+                          description: Static path to the institution specific rounded logo
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Assets
+                      type: object
                     auth_url:
                       description: Url used to authenticate institution specific login.
                       readOnly: true
                       type: string
                     description:
                       description: Description of the institution.
-                      readOnly: true
-                      type: string
-                    logo_path:
-                      description: Static path to the institution specific logo.
                       readOnly: true
                       type: string
                     name:
@@ -10172,6 +10233,9 @@ paths:
                 data:
                   attributes:
                     category: software
+                    tags:
+                      - some
+                      - tags
                     title: An Excellent Project Title
                   type: nodes
               properties:
@@ -12466,11 +12530,6 @@ paths:
                       readOnly: false
                       type: string
                   readOnly: false
-                  required:
-                    - node
-                    - user
-                    - comments
-                    - versions
                   title: Relationships
                   type: object
                 type:
@@ -12492,11 +12551,11 @@ paths:
         - application/json
       description: |-
         Creates a new wiki page on the given node.
-
         `name` is the only required field when creating a new wiki page. The `content` of the wiki page may optionally be included.
 
-        Returns a JSON object with a `data` key containing the representation of the created wiki, if the request is successful.
+        This POST request creates a wiki page, and then creates a first version for the wiki - adding your content to the first version. For subsequent updates to this wiki page, POST to the versions relationship.  This will create new versions of this wiki. For more information, see [Update a wiki](#operation/wiki_versions_create).
 
+        Returns a JSON object with a `data` key containing the representation of the created wiki, if the request is successful.
         If the request is unsuccessful, an `errors` key containing information about the failure will be returned. Refer to the [list of error codes](#tag/Errors-and-Error-Codes) to understand why this request may have failed.
       operationId: nodes_wikis_list_create
       parameters:
@@ -12609,11 +12668,6 @@ paths:
                     readOnly: false
                     type: string
                 readOnly: false
-                required:
-                  - node
-                  - user
-                  - comments
-                  - versions
                 title: Relationships
                 type: object
               type:
@@ -18446,16 +18500,26 @@ paths:
                 attributes:
                   description: The properties of the institution entity.
                   properties:
+                    assets:
+                      description: Assets belonging to a specific institution
+                      properties:
+                        logo:
+                          description: Static path to the institution specific normal logo
+                          readOnly: true
+                          type: string
+                        logo_rounded:
+                          description: Static path to the institution specific rounded logo
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Assets
+                      type: object
                     auth_url:
                       description: Url used to authenticate institution specific login.
                       readOnly: true
                       type: string
                     description:
                       description: Description of the institution.
-                      readOnly: true
-                      type: string
-                    logo_path:
-                      description: Static path to the institution specific logo.
                       readOnly: true
                       type: string
                     name:
@@ -18802,6 +18866,9 @@ paths:
                 data:
                   attributes:
                     category: software
+                    tags:
+                      - some
+                      - tags
                     title: An Excellent Project Title
                   type: nodes
               properties:
@@ -19920,11 +19987,6 @@ paths:
                       readOnly: false
                       type: string
                   readOnly: false
-                  required:
-                    - node
-                    - user
-                    - comments
-                    - versions
                   title: Relationships
                   type: object
                 type:
@@ -21394,16 +21456,26 @@ paths:
                 attributes:
                   description: The properties of the institution entity.
                   properties:
+                    assets:
+                      description: Assets belonging to a specific institution
+                      properties:
+                        logo:
+                          description: Static path to the institution specific normal logo
+                          readOnly: true
+                          type: string
+                        logo_rounded:
+                          description: Static path to the institution specific rounded logo
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                      title: Assets
+                      type: object
                     auth_url:
                       description: Url used to authenticate institution specific login.
                       readOnly: true
                       type: string
                     description:
                       description: Description of the institution.
-                      readOnly: true
-                      type: string
-                    logo_path:
-                      description: Static path to the institution specific logo.
                       readOnly: true
                       type: string
                     name:
@@ -21630,6 +21702,9 @@ paths:
                 data:
                   attributes:
                     category: software
+                    tags:
+                      - some
+                      - tags
                     title: An Excellent Project Title
                   type: nodes
               properties:
@@ -23053,6 +23128,9 @@ paths:
                 data:
                   attributes:
                     category: software
+                    tags:
+                      - some
+                      - tags
                     title: An Excellent Project Title
                   type: nodes
               properties:
@@ -23467,11 +23545,6 @@ paths:
                     readOnly: false
                     type: string
                 readOnly: false
-                required:
-                  - node
-                  - user
-                  - comments
-                  - versions
                 title: Relationships
                 type: object
               type:
@@ -23700,6 +23773,8 @@ paths:
         Updates the content of the given wiki page by creating a new wiki version.
 
         `content` is the only required field when updating a wiki page.
+
+        For information on creating a wiki for a node, see [Create a wiki](#operation/nodes_wikis_list_create).
 
         Returns a JSON object with a `data` key containing the representation of the created wiki version, if the request is successful.
 

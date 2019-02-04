@@ -4,20 +4,20 @@ schemes:
 host: app.billbee.io
 info:
   contact:
-    email: support@billbee.de
+    email: support@billbee.io
     name: Billbee GmbH
-    url: 'https://www.billbee.de'
+    url: 'https://www.billbee.io'
     x-twitter: billbeeio
   description: |+
     Documentation of the Billbee REST API to connect a Billbee account to external aplications.
 
     ## Endpoint
 
-    The Billbee API endpoint base url is https://app01.billbee.de/api/v1 
+    The Billbee API endpoint base url is https://app.billbee.io/api/v1 
 
     ## Activation
 
-    You have to enable the API in the settings of your Billbee account. In addition you need a Billbee API Key identifying the application you develop. To get an API key, send a mail to support@billbee.de and send us a short note about what you are building.
+    You have to enable the API in the settings of your Billbee account. In addition you need a Billbee API Key identifying the application you develop. To get an API key, send a mail to support@billbee.io and send us a short note about what you are building.
 
     ## Authorization & security
 
@@ -492,6 +492,22 @@ paths:
       summary: Get a list of all events optionally filtered by date
       tags:
         - Events
+  /api/v1/layouts:
+    get:
+      consumes: []
+      operationId: LayoutApi_GetList
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Models.LayoutTemplate]]'
+      tags:
+        - Orders
   /api/v1/orders:
     get:
       consumes: []
@@ -590,7 +606,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Models.Order]]'
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Order]]'
       summary: Get a list of all orders optionally filtered by date
       tags:
         - Orders
@@ -609,7 +625,7 @@ paths:
           name: orderData
           required: true
           schema:
-            $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.Order'
+            $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.Order'
         - description: ''
           format: int32
           in: query
@@ -625,7 +641,7 @@ paths:
         '201':
           description: The order was created successfully
           schema:
-            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Models.Order]'
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]'
         '400':
           description: Invalid data was received in the request
         '500':
@@ -677,6 +693,12 @@ paths:
           name: includeInvoicePdf
           required: false
           type: boolean
+        - description: You can pass the id of an invoice template to overwrite the assigned template for invoice creation
+          format: int32
+          in: query
+          name: templateId
+          required: false
+          type: integer
       produces:
         - application/json
         - text/json
@@ -749,7 +771,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Models.Order]'
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]'
       summary: Get a single order by its internal billbee id
       tags:
         - Orders
@@ -869,7 +891,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Models.Order]'
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]'
       summary: Get a single order by its internal billbee id
       tags:
         - Orders
@@ -901,7 +923,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Models.Order]'
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]'
       summary: Updates one or more fields of an order
       tags:
         - Orders
@@ -1690,7 +1712,7 @@ paths:
           name: model
           required: true
           schema:
-            $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.CreateShipmentApiModel'
+            $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.CreateShipmentApiModel'
       produces:
         - application/json
         - text/json
@@ -1700,6 +1722,66 @@ paths:
           schema:
             type: object
       summary: Creates a new shipment with the selected Shippingprovider
+      tags:
+        - Shipments
+  /api/v1/shipment/shipments:
+    get:
+      consumes: []
+      operationId: Shipment_GetList
+      parameters:
+        - description: Specifies the page to request.
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - description: 'Specifies the pagesize. Defaults to 50, max value is 250'
+          format: int32
+          in: query
+          name: pageSize
+          required: false
+          type: integer
+        - description: Specifies the oldest shipment date to include in the response
+          format: date-time
+          in: query
+          name: createdAtMin
+          required: false
+          type: string
+        - description: Specifies the newest shipment date to include in the response
+          format: date-time
+          in: query
+          name: createdAtMax
+          required: false
+          type: string
+        - description: Get shipments for this order only.
+          format: int32
+          in: query
+          name: orderId
+          required: false
+          type: integer
+        - description: Get Shipments with a shipment greater or equal than this id. New shipments have a greater id than older shipments.
+          format: int32
+          in: query
+          name: minimumShipmentId
+          required: false
+          type: integer
+        - description: 'Get Shippings for the specified shipping provider only. <seealso cref="M:Rechnungsdruck.WebApp.Controllers.Api.ShipmentController.GetShippingproviders" />'
+          format: int32
+          in: query
+          name: shippingProviderId
+          required: false
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Shipment]]'
+      summary: Get a list of all shipments optionally filtered by date. All parameters are optional.
       tags:
         - Shipments
   /api/v1/shipment/shippingproviders:
@@ -2184,6 +2266,71 @@ definitions:
       VatId:
         type: string
     type: object
+  Billbee.Interfaces.BillbeeAPI.Model.CreateShipmentApiModel:
+    properties:
+      ClientReference:
+        description: Optional specify a text to be included on the label. Not possible with all carriers
+        type: string
+      Content:
+        description: Optional specify a text describing the content of the shipment. Used for export shipments
+        type: string
+      CustomerNumber:
+        description: Not used anymore
+        type: string
+      Dimension:
+        $ref: '#/definitions/Billbee.Interfaces.Shipping.ShipmentData.Dimensions'
+      OrderCurrencyCode:
+        description: The Currency if the ordersum
+        type: string
+      OrderSum:
+        description: The value of the shipments content
+        format: double
+        type: number
+      PrinterName:
+        description: The name of a connected Cloudprinter to sent the label to
+        type: string
+      ProductCode:
+        description: The productcode to be used when creating the shipment. Values depends on the carrier used
+        type: string
+      ProviderName:
+        description: The name of the provider as specified in the billbee account
+        type: string
+      ReceiverAddress:
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ShipmentAddressApiModel'
+        description: The address of the receiver
+      Services:
+        description: A list of services to be used when creating the shipment
+        items:
+          $ref: '#/definitions/Billbee.Interfaces.Shipping.ProductService'
+        type: array
+      ShipDate:
+        description: Optional overwrite the shipdate to be transferred to the carrier
+        format: date-time
+        type: string
+      WeightInGram:
+        description: Optional specify the weight in gram of the shipment
+        format: double
+        type: number
+      shippingCarrier:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+        format: int32
+        type: integer
+    type: object
   Billbee.Interfaces.BillbeeAPI.Model.CustomerAddressApiModel:
     properties:
       AddressAddition:
@@ -2274,162 +2421,7 @@ definitions:
         format: double
         type: number
     type: object
-  Billbee.Interfaces.BillbeeAPI.Model.StockArticleApiModel:
-    properties:
-      Name:
-        type: string
-      StockCode:
-        type: string
-      StockCurrent:
-        format: double
-        type: number
-      StockDesired:
-        format: double
-        type: number
-      StockId:
-        format: int32
-        type: integer
-      StockWarning:
-        format: double
-        type: number
-      UnfulfilledAmount:
-        format: double
-        type: number
-    type: object
-  Billbee.Interfaces.BillbeeAPI.Model.UpdateStockApiModel:
-    properties:
-      AutosubtractReservedAmount:
-        description: Automatically reduce the NewQuantity by the currently not fulfilled amount
-        type: boolean
-      BillbeeId:
-        description: Optional the ID of the Billbee product to update
-        format: int32
-        type: integer
-      DeltaQuantity:
-        description: This parameter is currently ignored
-        format: double
-        type: number
-      ForceSendStockToShops:
-        description: 'If true, every sent stockchange is stored and transmitted to the connected shop, even if the value has not changed'
-        type: boolean
-      NewQuantity:
-        description: The new absolute stock quantity for the product you want to set
-        format: double
-        type: number
-      OldQuantity:
-        description: This parameter is currently ignored
-        format: double
-        type: number
-      Reason:
-        description: Optional a reason text for the stock update
-        type: string
-      Sku:
-        description: The SKU of the product to update
-        type: string
-      StockId:
-        description: Optional the stock id if the feature multi stock is activated
-        format: int32
-        type: integer
-    type: object
-  Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeApiModel:
-    properties:
-      BillbeeId:
-        format: int32
-        type: integer
-      Sku:
-        type: string
-      StockCode:
-        type: string
-      StockId:
-        format: int32
-        type: integer
-    type: object
-  Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeResponseData:
-    properties: {}
-    type: object
-  Billbee.Interfaces.BillbeeAPI.Model.UpdateStockResponseData:
-    properties:
-      CurrentStock:
-        description: The new value for current stock after the update
-        format: double
-        type: number
-      Message:
-        description: A human readable message that explains the result of the operation
-        type: string
-      SKU:
-        description: The SKU of the article to update the current stock
-        type: string
-      UnfulfilledAmount:
-        description: The value of the unfulfilled amount (reserved) of the article
-        format: double
-        type: number
-    type: object
-  Billbee.Interfaces.BillbeeAPI.Models.CreateShipmentApiModel:
-    properties:
-      ClientReference:
-        description: Optional specify a text to be included on the label. Not possible with all carriers
-        type: string
-      Content:
-        description: Optional specify a text describing the content of the shipment. Used for export shipments
-        type: string
-      CustomerNumber:
-        description: Not used anymore
-        type: string
-      Dimension:
-        $ref: '#/definitions/Billbee.Interfaces.Shipping.ShipmentData.Dimensions'
-      OrderCurrencyCode:
-        description: The Currency if the ordersum
-        type: string
-      OrderSum:
-        description: The value of the shipments content
-        format: double
-        type: number
-      PrinterName:
-        description: The name of a connected Cloudprinter to sent the label to
-        type: string
-      ProductCode:
-        description: The productcode to be used when creating the shipment. Values depends on the carrier used
-        type: string
-      ProviderName:
-        description: The name of the provider as specified in the billbee account
-        type: string
-      ReceiverAddress:
-        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.ShipmentAddressApiModel'
-        description: The address of the receiver
-      Services:
-        description: A list of services to be used when creating the shipment
-        items:
-          $ref: '#/definitions/Billbee.Interfaces.Shipping.ProductService'
-        type: array
-      ShipDate:
-        description: Optional overwrite the shipdate to be transferred to the carrier
-        format: date-time
-        type: string
-      WeightInGram:
-        description: Optional specify the weight in gram of the shipment
-        format: double
-        type: number
-      shippingCarrier:
-        enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          - 11
-          - 12
-          - 13
-          - 14
-        format: int32
-        type: integer
-    type: object
-  Billbee.Interfaces.BillbeeAPI.Models.Order:
+  Billbee.Interfaces.BillbeeAPI.Model.Order:
     description: A class that represents the Billbee data model of a single order
     properties:
       AcceptLossOfReturnRight:
@@ -2449,7 +2441,7 @@ definitions:
         format: int32
         type: integer
       Buyer:
-        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.OrderUser'
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.OrderUser'
       Comments:
         description: All messages / comments of the order
         items:
@@ -2510,7 +2502,7 @@ definitions:
       OrderItems:
         description: 'The list of items purchased like shirt, pant, toys etc'
         items:
-          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.OrderItem'
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.OrderItem'
         type: array
       OrderNumber:
         description: Order number of the order in the external system (marketplace)
@@ -2613,6 +2605,7 @@ definitions:
           - 96
           - 97
           - 98
+          - 99
         format: int32
         type: integer
       PaymentReference:
@@ -2626,7 +2619,7 @@ definitions:
         readOnly: true
         type: number
       Seller:
-        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.OrderUser'
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.OrderUser'
       SellerComment:
         description: An internal seller comment
         type: string
@@ -2648,7 +2641,7 @@ definitions:
       ShippingIds:
         description: The shipments of the order
         items:
-          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.Shipment'
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.Shipment'
         type: array
       ShippingProfileId:
         description: Internal Id for the shipping profile for that order
@@ -2731,12 +2724,12 @@ definitions:
         format: int32
         type: integer
     type: object
-  Billbee.Interfaces.BillbeeAPI.Models.OrderItem:
+  Billbee.Interfaces.BillbeeAPI.Model.OrderItem:
     properties:
       Attributes:
         description: A list of product attributes for this position
         items:
-          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.OrderItemAttribute'
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.OrderItemAttribute'
         type: array
       BillbeeId:
         description: The billbee id of this item
@@ -2756,7 +2749,7 @@ definitions:
         description: 'Determines if it is a coupon, which is interpreted as tax-free payment'
         type: boolean
       Product:
-        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.SoldProduct'
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.SoldProduct'
         description: The sold product
       Quantity:
         description: The sold quantity
@@ -2788,7 +2781,7 @@ definitions:
         format: double
         type: number
     type: object
-  Billbee.Interfaces.BillbeeAPI.Models.OrderItemAttribute:
+  Billbee.Interfaces.BillbeeAPI.Model.OrderItemAttribute:
     properties:
       Id:
         description: The internal id of this attribute
@@ -2803,7 +2796,7 @@ definitions:
         description: The attribute value. E.g. red
         type: string
     type: object
-  Billbee.Interfaces.BillbeeAPI.Models.OrderUser:
+  Billbee.Interfaces.BillbeeAPI.Model.OrderUser:
     properties:
       BillbeeShopId:
         description: The Billbee internal id of the shop connection
@@ -2835,7 +2828,7 @@ definitions:
         description: The name of the platform from which this customer originated
         type: string
     type: object
-  Billbee.Interfaces.BillbeeAPI.Models.ProductImage:
+  Billbee.Interfaces.BillbeeAPI.Model.ProductImage:
     properties:
       ExternalId:
         description: The id of this image from the original system
@@ -2851,7 +2844,8 @@ definitions:
         description: The url to the image
         type: string
     type: object
-  Billbee.Interfaces.BillbeeAPI.Models.Shipment:
+  Billbee.Interfaces.BillbeeAPI.Model.Shipment:
+    description: Represents a single shipment.
     properties:
       Created:
         description: The creation date
@@ -2864,7 +2858,7 @@ definitions:
         description: The id of this shipment
         type: string
     type: object
-  Billbee.Interfaces.BillbeeAPI.Models.ShipmentAddressApiModel:
+  Billbee.Interfaces.BillbeeAPI.Model.ShipmentAddressApiModel:
     properties:
       AddressAddition:
         type: string
@@ -2903,7 +2897,7 @@ definitions:
       Zip:
         type: string
     type: object
-  Billbee.Interfaces.BillbeeAPI.Models.SoldProduct:
+  Billbee.Interfaces.BillbeeAPI.Model.SoldProduct:
     properties:
       BillbeeId:
         description: The Billbee internal id of the linked product
@@ -2921,7 +2915,7 @@ definitions:
       Images:
         description: The images of this product
         items:
-          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.ProductImage'
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ProductImage'
         type: array
       IsDigital:
         description: 'True if the product is a digital good (download etc.), false if not'
@@ -2950,8 +2944,120 @@ definitions:
         format: int32
         type: integer
     type: object
+  Billbee.Interfaces.BillbeeAPI.Model.StockArticleApiModel:
+    properties:
+      Name:
+        type: string
+      StockCode:
+        type: string
+      StockCurrent:
+        format: double
+        type: number
+      StockDesired:
+        format: double
+        type: number
+      StockId:
+        format: int32
+        type: integer
+      StockWarning:
+        format: double
+        type: number
+      UnfulfilledAmount:
+        format: double
+        type: number
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Model.UpdateStockApiModel:
+    properties:
+      AutosubtractReservedAmount:
+        description: Automatically reduce the NewQuantity by the currently not fulfilled amount
+        type: boolean
+      BillbeeId:
+        description: Optional the ID of the Billbee product to update
+        format: int32
+        type: integer
+      DeltaQuantity:
+        description: This parameter is currently ignored
+        format: double
+        type: number
+      ForceSendStockToShops:
+        description: 'If true, every sent stockchange is stored and transmitted to the connected shop, even if the value has not changed'
+        type: boolean
+      NewQuantity:
+        description: The new absolute stock quantity for the product you want to set
+        format: double
+        type: number
+      OldQuantity:
+        description: This parameter is currently ignored
+        format: double
+        type: number
+      Reason:
+        description: Optional a reason text for the stock update
+        type: string
+      Sku:
+        description: The SKU of the product to update
+        type: string
+      StockId:
+        description: Optional the stock id if the feature multi stock is activated
+        format: int32
+        type: integer
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeApiModel:
+    properties:
+      BillbeeId:
+        format: int32
+        type: integer
+      Sku:
+        type: string
+      StockCode:
+        type: string
+      StockId:
+        format: int32
+        type: integer
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeResponseData:
+    properties: {}
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Model.UpdateStockResponseData:
+    properties:
+      CurrentStock:
+        description: The new value for current stock after the update
+        format: double
+        type: number
+      Message:
+        description: A human readable message that explains the result of the operation
+        type: string
+      SKU:
+        description: The SKU of the article to update the current stock
+        type: string
+      UnfulfilledAmount:
+        description: The value of the unfulfilled amount (reserved) of the article
+        format: double
+        type: number
+    type: object
+  Billbee.Interfaces.BillbeeAPI.Models.LayoutTemplate:
+    properties:
+      Id:
+        format: int32
+        type: integer
+      Name:
+        type: string
+      Type:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+        format: int32
+        type: integer
+    type: object
   Billbee.Interfaces.Order.Address:
     properties:
+      BillbeeId:
+        description: The Billbee internal ID of the address record
+        format: int32
+        type: integer
       City:
         description: The city
         type: string
@@ -3189,7 +3295,22 @@ definitions:
         format: int32
         type: integer
     type: object
-  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Models.Order]]':
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Order]]':
+    properties:
+      Page:
+        format: int32
+        type: integer
+      PageSize:
+        format: int32
+        type: integer
+      TotalPages:
+        format: int32
+        type: integer
+      TotalRows:
+        format: int32
+        type: integer
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Shipment]]':
     properties:
       Page:
         format: int32
@@ -3383,11 +3504,11 @@ definitions:
       Paging:
         $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.CustomerApiModel]]'
     type: object
-  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Models.Order]]':
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Order]]':
     properties:
       Data:
         items:
-          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.Order'
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.Order'
         type: array
       ErrorCode:
         enum:
@@ -3422,7 +3543,48 @@ definitions:
       ErrorMessage:
         type: string
       Paging:
-        $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Models.Order]]'
+        $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Order]]'
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Shipment]]':
+    properties:
+      Data:
+        items:
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.Shipment'
+        type: array
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          - 25
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+      Paging:
+        $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult.PagingInformation[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Model.Shipment]]'
     type: object
   'Rechnungsdruck.WebApp.Controllers.Api.ApiPagedResult[System.Collections.Generic.List[Rechnungsdruck.WebApp.Controllers.Api.Order]]':
     properties:
@@ -3724,6 +3886,43 @@ definitions:
       ErrorMessage:
         type: string
     type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.Order]':
+    properties:
+      Data:
+        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.Order'
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          - 25
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+    type: object
   'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Model.UpdateStockCodeResponseData]':
     properties:
       Data:
@@ -3765,43 +3964,6 @@ definitions:
     properties:
       Data:
         $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.UpdateStockResponseData'
-      ErrorCode:
-        enum:
-          - 0
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          - 11
-          - 12
-          - 13
-          - 14
-          - 15
-          - 16
-          - 17
-          - 18
-          - 19
-          - 20
-          - 21
-          - 22
-          - 23
-          - 24
-          - 25
-        format: int32
-        type: integer
-      ErrorMessage:
-        type: string
-    type: object
-  'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[Billbee.Interfaces.BillbeeAPI.Models.Order]':
-    properties:
-      Data:
-        $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.Order'
       ErrorCode:
         enum:
           - 0
@@ -3914,6 +4076,45 @@ definitions:
       Data:
         items:
           $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Model.ArticleImageRelationApiModel'
+        type: array
+      ErrorCode:
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+          - 10
+          - 11
+          - 12
+          - 13
+          - 14
+          - 15
+          - 16
+          - 17
+          - 18
+          - 19
+          - 20
+          - 21
+          - 22
+          - 23
+          - 24
+          - 25
+        format: int32
+        type: integer
+      ErrorMessage:
+        type: string
+    type: object
+  'Rechnungsdruck.WebApp.Controllers.Api.ApiResult[System.Collections.Generic.List[Billbee.Interfaces.BillbeeAPI.Models.LayoutTemplate]]':
+    properties:
+      Data:
+        items:
+          $ref: '#/definitions/Billbee.Interfaces.BillbeeAPI.Models.LayoutTemplate'
         type: array
       ErrorCode:
         enum:

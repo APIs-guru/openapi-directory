@@ -24,10 +24,6 @@ info:
 
     Your personal token can be found under the <a href="https://www.globalwinescore.com/account/api/" target="_blank">My account > API</a> section of the GlobalWineScore website
 
-    # Rate limit
-    Free users are limited to 500 requests per month.
-
-    If you need to upgrade your account, go to <a href="https://www.globalwinescore.com/plans" target="_blank">our plans</a>.
     # Format
     The API provides several rendering formats which you can control using the `Accept` header or `format` query parameter.
 
@@ -110,11 +106,11 @@ paths:
           name: vintage
           type: string
           x-example: '2000'
-        - description: The capitalized color of the wine.
+        - description: The lowercase color of the wine.
           enum:
-            - Red
-            - White
-            - Pink
+            - red
+            - white
+            - pink
           in: query
           name: color
           type: string
@@ -257,11 +253,11 @@ paths:
           name: vintage
           type: string
           x-example: '2000'
-        - description: The capitalized color of the wine.
+        - description: The lowercase color of the wine.
           enum:
-            - Red
-            - White
-            - Pink
+            - red
+            - white
+            - pink
           in: query
           name: color
           type: string

@@ -62,8 +62,12 @@ paths:
           name: end
           type: string
         - description: Specify a format for data retrieval.
+          enum:
+            - csv
+            - json
           in: query
           name: format
+          required: true
           type: string
       produces:
         - application/json
@@ -113,8 +117,12 @@ paths:
           name: end
           type: string
         - description: Specify a format for data retrieval.
+          enum:
+            - csv
+            - json
           in: query
           name: format
+          required: true
           type: string
       produces:
         - application/html
@@ -163,8 +171,12 @@ paths:
           name: end
           type: string
         - description: Specify a format for data retrieval.
+          enum:
+            - csv
+            - json
           in: query
           name: format
+          required: true
           type: string
       produces:
         - application/json
@@ -214,8 +226,12 @@ paths:
           name: end
           type: string
         - description: Specify a format for data retrieval.
+          enum:
+            - csv
+            - json
           in: query
           name: format
+          required: true
           type: string
       produces:
         - application/html

@@ -2111,7 +2111,7 @@ definitions:
         type: string
       name:
         description: The account name to use. This will identify the account and must be globally unique in the system.
-        pattern: '^[a-z0-9][a-z0-9_-]{1,126}[a-z0-9]$'
+        pattern: '^[a-zA-Z0-9][a-zA-Z0-9_-]{1,126}[a-zA-Z0-9]$'
         type: string
     required:
       - name
@@ -3109,7 +3109,7 @@ definitions:
         type: string
       username:
         description: The username to create
-        pattern: '^[a-z0-9][a-z0-9_-]{1,126}[a-z0-9]$'
+        pattern: '^[a-zA-Z0-9][a-zA-Z0-9_-]{1,126}[a-zA-Z0-9]$'
         type: string
     required:
       - username

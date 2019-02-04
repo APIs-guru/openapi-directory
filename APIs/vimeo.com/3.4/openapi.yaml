@@ -37,8 +37,8 @@ security:
       - video_files
 tags:
   - name: API Information
-  - name: Albums\Album Videos
-  - name: Albums\Custom Logos
+  - name: Albums\Album videos
+  - name: Albums\Custom album logos
   - name: Albums\Essentials
   - name: Authentication Extras\Essentials
   - name: Categories\Channels
@@ -371,7 +371,7 @@ paths:
               - conditional_featured
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -1850,7 +1850,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -2996,7 +2996,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -3364,33 +3364,33 @@ paths:
             schema:
               properties:
                 brand_color:
-                  description: 'Hexadecimal color code for the decorative color. For example, album videos use this color for player buttons.'
+                  description: The hexadecimal code for the color of the player buttons.
                   example: ff66ee
                   type: string
                 description:
-                  description: The album description.
+                  description: The description of the album.
                   example: Vimeo holiday videos!
                   type: string
                 hide_nav:
-                  description: Whether to hide the Vimeo navigation when viewing the album.
+                  description: Whether to hide Vimeo navigation when displaying the album.
                   example: 'true'
                   type: boolean
                 layout:
-                  description: The album's layout preference
+                  description: The type of layout for presenting the album.
                   enum:
                     - grid
                     - player
                   type: string
                 name:
-                  description: The album title.
+                  description: The name of the album.
                   example: Vimeo Holiday Videos!
                   type: string
                 password:
-                  description: The album's password. *Required only if `privacy` is `password`.
+                  description: The album's password. Required only if **privacy** is `password`.
                   example: hunter1
                   type: string
                 privacy:
-                  description: The album's privacy level.
+                  description: The privacy level of the album.
                   enum:
                     - anybody
                     - embed_only
@@ -3401,7 +3401,7 @@ paths:
                   example: 'true'
                   type: boolean
                 sort:
-                  description: The default sort order of an album's videos.
+                  description: The default sort order of the album's videos.
                   enum:
                     - added_first
                     - added_last
@@ -3414,7 +3414,7 @@ paths:
                     - plays
                   type: string
                 theme:
-                  description: The albums's color theme preference
+                  description: The color theme of the album.
                   enum:
                     - dark
                     - standard
@@ -3442,10 +3442,7 @@ paths:
             application/vnd.vimeo.album+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The token does not have the proper scopes.
-             * The authenticated user cannot create an album.
+          description: 'The supplied token doesn''t have the proper scopes, or the authenticated user can''t create an album.'
       security:
         - oauth2:
             - create
@@ -3471,16 +3468,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The token does not have the proper scopes.
-             * The authenticated user cannot delete this album.
+          description: 'The supplied token doesn''t have the proper scopes, or the authenticated user can''t delete the album.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       security:
         - oauth2:
             - delete
@@ -3509,7 +3503,7 @@ paths:
             application/vnd.vimeo.album+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       summary: Get a specific album
       tags:
         - Albums\Essentials
@@ -3529,33 +3523,38 @@ paths:
             schema:
               properties:
                 brand_color:
-                  description: 'Hexadecimal color code for the decorative color. For example, album videos use this color for player buttons.'
+                  description: The hexadecimal code for the color of the player buttons.
                   example: ff66ee
                   type: string
                 description:
                   description: The description of the album.
                   example: Vimeo holiday videos!
                   type: string
+                domain:
+                  description: The custom domain a user has selected for their album.
+                  example: mycustomdomain.com
+                  nullable: true
+                  type: string
                 hide_nav:
-                  description: Whether to hide the Vimeo navigation when viewing the album.
+                  description: Whether to hide Vimeo navigation when displaying the album.
                   example: 'true'
                   type: boolean
                 layout:
-                  description: The album's layout preference
+                  description: The type of layout for presenting the album.
                   enum:
                     - grid
                     - player
                   type: string
                 name:
-                  description: The title of the album.
+                  description: The name of the album.
                   example: Vimeo Holiday Videos!
                   type: string
                 password:
-                  description: The album's password. *Required only if `privacy` is `password`.
+                  description: The album's password. Required only if **privacy** is `password`.
                   example: hunter1
                   type: string
                 privacy:
-                  description: The album's privacy level.
+                  description: The privacy level of the album.
                   enum:
                     - anybody
                     - embed_only
@@ -3566,7 +3565,7 @@ paths:
                   example: 'true'
                   type: boolean
                 sort:
-                  description: The default sort order for album.
+                  description: The default sort order of the album's videos.
                   enum:
                     - added_first
                     - added_last
@@ -3579,11 +3578,20 @@ paths:
                     - plays
                   type: string
                 theme:
-                  description: The albums's color theme preference
+                  description: The color theme of the album.
                   enum:
                     - dark
                     - standard
                   type: string
+                url:
+                  description: The custom Vimeo URL a user has selected for their album.
+                  example: my-custom-url
+                  nullable: true
+                  type: string
+                use_custom_domain:
+                  description: Whether the user has opted in to use a custom domain for their album.
+                  example: 'true'
+                  type: boolean
               type: object
         required: false
       responses:
@@ -3604,11 +3612,13 @@ paths:
             application/vnd.vimeo.album+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are three ways that this status code can be encountered:
-             * The authenticated user does not own the album.
-             * The token does not have the proper scopes.
-             * The authenticated user cannot edit this album.
+          description: 'The authenticated user doesn''t own the album, the supplied token doesn''t have the proper scopes, or the authenticated user can''t edit the album.'
+        '404':
+          content:
+            application/vnd.vimeo.album+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: No such album exists.
       security:
         - oauth2:
             - edit
@@ -3651,7 +3661,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -3665,7 +3675,7 @@ paths:
           schema:
             example: 1
             type: number
-        - description: The album's password.
+        - description: The password of the album.
           in: query
           name: password
           required: false
@@ -3702,7 +3712,7 @@ paths:
               - modified_time
               - plays
             type: string
-        - description: Whether to include private videos in the search. (Please note that a separate search service provides this functionality. The service performs a partial text search on the video's name.)
+        - description: Whether to include private videos in the search. Please note that a separate search service provides this functionality. The service performs a partial text search on the video's name.
           in: query
           name: weak_search
           required: false
@@ -3723,13 +3733,13 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       summary: Get all the videos in an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
     put:
-      description: Replace or clear the videos in an album.
-      operationId: add_videos_to_album_alt1
+      description: This method replaces all the existing videos in an album with one or more videos.
+      operationId: replace_videos_in_album_alt1
       parameters:
         - description: The ID of the album.
           in: path
@@ -3759,19 +3769,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot create albums.
+          description: The authenticated user can't add videos to albums.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       security:
         - oauth2:
             - edit
-      summary: Add a list of videos to an album
+      summary: Replace all the videos in an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
   '/me/albums/{album_id}/videos/{video_id}':
     delete:
       operationId: remove_video_from_album_alt1
@@ -3798,24 +3808,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The token does not have the proper scopes.
-             * The authenticated user cannot edit the album.
+          description: 'The supplied token doesn''t have the proper scopes, or the authenticated user can''t edit the album.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       security:
         - oauth2:
             - edit
       summary: Remove a video from an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
     get:
-      description: Check if an album contains a video.
+      description: This method gets a single video from an album. You can use this method to determine whether the album contains the specified video.
       operationId: get_album_video_alt1
       parameters:
         - description: The ID of the album.
@@ -3832,7 +3839,7 @@ paths:
           schema:
             example: 196367152
             type: number
-        - description: The album's password.
+        - description: The password of the album.
           in: query
           name: password
           required: false
@@ -3851,13 +3858,10 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If album was not found.
-             * If video was not found in the album.
+          description: 'No such album exists, or the video wasn''t found in it.'
       summary: Get a specific video in an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
     put:
       operationId: add_video_to_album_alt1
       parameters:
@@ -3883,22 +3887,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The token does not have the proper scopes.
-             * The authenticated user cannot edit the album.
+          description: 'The supplied token doesn''t have the proper scopes, or the authenticated user can''t edit the album.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       security:
         - oauth2:
             - edit
       summary: Add a specific video to an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
   /me/appearances:
     get:
       operationId: get_appearances_alt1
@@ -3921,7 +3922,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -4771,7 +4772,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -5600,7 +5601,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -5923,7 +5924,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/folder'
+                  $ref: '#/components/schemas/project'
                 type: array
           description: The projects were returned.
         '401':
@@ -5958,7 +5959,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/folder'
+                $ref: '#/components/schemas/project'
           description: The project was created.
         '400':
           content:
@@ -5998,17 +5999,13 @@ paths:
           schema:
             example: 12345
             type: number
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                should_delete_clips:
-                  description: Whether to delete all the videos in the project along with the project itself.
-                  example: 'true'
-                  type: boolean
-              type: object
-        required: false
+        - description: Whether to delete all the videos in the project along with the project itself.
+          in: query
+          name: should_delete_clips
+          required: false
+          schema:
+            example: 'true'
+            type: boolean
       responses:
         '204':
           description: The project was deleted.
@@ -6051,7 +6048,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/folder'
+                $ref: '#/components/schemas/project'
           description: The project was returned.
         '401':
           content:
@@ -6099,7 +6096,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/folder'
+                $ref: '#/components/schemas/project'
           description: The project was edited.
         '400':
           content:
@@ -6145,23 +6142,20 @@ paths:
           schema:
             example: 12345
             type: number
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                should_delete_clips:
-                  description: Allow videos to be removed from folder or deleted.
-                  example: 'false'
-                  type: boolean
-                uris:
-                  description: A comma-separated list of video URIs to delete.
-                  example: '/videos/258684937,/videos/273576296'
-                  type: string
-              required:
-                - uris
-              type: object
-        required: true
+        - description: Allow videos to be removed from folder and deleted.
+          in: query
+          name: should_delete_clips
+          required: false
+          schema:
+            example: 'false'
+            type: boolean
+        - description: A comma-separated list of video URIs to delete.
+          in: query
+          name: uris
+          required: true
+          schema:
+            example: '/videos/258684937,/videos/273576296'
+            type: string
       responses:
         '204':
           description: The videos were deleted.
@@ -6272,17 +6266,13 @@ paths:
           schema:
             example: 12345
             type: number
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                uris:
-                  description: A comma-separated list of video URIs to add.
-                  example: '/videos/258684937,/videos/273576296'
-                  type: string
-              type: object
-        required: false
+        - description: A comma-separated list of video URIs to add.
+          in: query
+          name: uris
+          required: false
+          schema:
+            example: '/videos/258684937,/videos/273576296'
+            type: string
       responses:
         '204':
           description: The videos were added.
@@ -6394,7 +6384,7 @@ paths:
     get:
       operationId: get_videos_alt1
       parameters:
-        - description: The page that contains the video URI.
+        - description: The page that contains the video URI. Only available when not paired with `query`.
           in: query
           name: containing_uri
           required: false
@@ -6422,7 +6412,7 @@ paths:
               - featured
               - playable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -6473,13 +6463,6 @@ paths:
               - modified_time
               - plays
             type: string
-        - description: Whether to include private videos in the search. Please note that a separate search service provides this functionality. The service performs a partial text search on the video's name.
-          in: query
-          name: weak_search
-          required: false
-          schema:
-            example: 'false'
-            type: boolean
       responses:
         '200':
           content:
@@ -6953,7 +6936,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -9617,33 +9600,33 @@ paths:
             schema:
               properties:
                 brand_color:
-                  description: 'Hexadecimal color code for the decorative color. For example, album videos use this color for player buttons.'
+                  description: The hexadecimal code for the color of the player buttons.
                   example: ff66ee
                   type: string
                 description:
-                  description: The album description.
+                  description: The description of the album.
                   example: Vimeo holiday videos!
                   type: string
                 hide_nav:
-                  description: Whether to hide the Vimeo navigation when viewing the album.
+                  description: Whether to hide Vimeo navigation when displaying the album.
                   example: 'true'
                   type: boolean
                 layout:
-                  description: The album's layout preference
+                  description: The type of layout for presenting the album.
                   enum:
                     - grid
                     - player
                   type: string
                 name:
-                  description: The album title.
+                  description: The name of the album.
                   example: Vimeo Holiday Videos!
                   type: string
                 password:
-                  description: The album's password. *Required only if `privacy` is `password`.
+                  description: The album's password. Required only if **privacy** is `password`.
                   example: hunter1
                   type: string
                 privacy:
-                  description: The album's privacy level.
+                  description: The privacy level of the album.
                   enum:
                     - anybody
                     - embed_only
@@ -9654,7 +9637,7 @@ paths:
                   example: 'true'
                   type: boolean
                 sort:
-                  description: The default sort order of an album's videos.
+                  description: The default sort order of the album's videos.
                   enum:
                     - added_first
                     - added_last
@@ -9667,7 +9650,7 @@ paths:
                     - plays
                   type: string
                 theme:
-                  description: The albums's color theme preference
+                  description: The color theme of the album.
                   enum:
                     - dark
                     - standard
@@ -9695,10 +9678,7 @@ paths:
             application/vnd.vimeo.album+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The token does not have the proper scopes.
-             * The authenticated user cannot create an album.
+          description: 'The supplied token doesn''t have the proper scopes, or the authenticated user can''t create an album.'
       security:
         - oauth2:
             - create
@@ -9731,16 +9711,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The token does not have the proper scopes.
-             * The authenticated user cannot delete this album.
+          description: 'The supplied token doesn''t have the proper scopes, or the authenticated user can''t delete the album.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       security:
         - oauth2:
             - delete
@@ -9776,7 +9753,7 @@ paths:
             application/vnd.vimeo.album+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       summary: Get a specific album
       tags:
         - Albums\Essentials
@@ -9803,33 +9780,38 @@ paths:
             schema:
               properties:
                 brand_color:
-                  description: 'Hexadecimal color code for the decorative color. For example, album videos use this color for player buttons.'
+                  description: The hexadecimal code for the color of the player buttons.
                   example: ff66ee
                   type: string
                 description:
                   description: The description of the album.
                   example: Vimeo holiday videos!
                   type: string
+                domain:
+                  description: The custom domain a user has selected for their album.
+                  example: mycustomdomain.com
+                  nullable: true
+                  type: string
                 hide_nav:
-                  description: Whether to hide the Vimeo navigation when viewing the album.
+                  description: Whether to hide Vimeo navigation when displaying the album.
                   example: 'true'
                   type: boolean
                 layout:
-                  description: The album's layout preference
+                  description: The type of layout for presenting the album.
                   enum:
                     - grid
                     - player
                   type: string
                 name:
-                  description: The title of the album.
+                  description: The name of the album.
                   example: Vimeo Holiday Videos!
                   type: string
                 password:
-                  description: The album's password. *Required only if `privacy` is `password`.
+                  description: The album's password. Required only if **privacy** is `password`.
                   example: hunter1
                   type: string
                 privacy:
-                  description: The album's privacy level.
+                  description: The privacy level of the album.
                   enum:
                     - anybody
                     - embed_only
@@ -9840,7 +9822,7 @@ paths:
                   example: 'true'
                   type: boolean
                 sort:
-                  description: The default sort order for album.
+                  description: The default sort order of the album's videos.
                   enum:
                     - added_first
                     - added_last
@@ -9853,11 +9835,20 @@ paths:
                     - plays
                   type: string
                 theme:
-                  description: The albums's color theme preference
+                  description: The color theme of the album.
                   enum:
                     - dark
                     - standard
                   type: string
+                url:
+                  description: The custom Vimeo URL a user has selected for their album.
+                  example: my-custom-url
+                  nullable: true
+                  type: string
+                use_custom_domain:
+                  description: Whether the user has opted in to use a custom domain for their album.
+                  example: 'true'
+                  type: boolean
               type: object
         required: false
       responses:
@@ -9878,11 +9869,13 @@ paths:
             application/vnd.vimeo.album+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are three ways that this status code can be encountered:
-             * The authenticated user does not own the album.
-             * The token does not have the proper scopes.
-             * The authenticated user cannot edit this album.
+          description: 'The authenticated user doesn''t own the album, the supplied token doesn''t have the proper scopes, or the authenticated user can''t edit the album.'
+        '404':
+          content:
+            application/vnd.vimeo.album+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: No such album exists.
       security:
         - oauth2:
             - edit
@@ -9929,16 +9922,16 @@ paths:
                 items:
                   $ref: '#/components/schemas/picture'
                 type: array
-          description: The album logos were returned.
+          description: The custom logos were returned.
         '404':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       summary: Get all the custom logos of an album
       tags:
-        - Albums\Custom Logos
+        - Albums\Custom album logos
     post:
       operationId: create_album_logo
       parameters:
@@ -9962,27 +9955,28 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/picture'
-          description: The album logo was created.
+          description: The logo was added to the album.
         '403':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot modify this album.
+          description: The authenticated user can't modify this album.
         '404':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       security:
         - oauth2:
             - upload
       summary: Add a custom album logo
       tags:
-        - Albums\Custom Logos
+        - Albums\Custom album logos
   '/users/{user_id}/albums/{album_id}/logos/{logo_id}':
     delete:
+      description: This method removes a custom logo from the specified album.
       operationId: delete_album_logo
       parameters:
         - description: The ID of the album.
@@ -10008,32 +10002,25 @@ paths:
             type: number
       responses:
         '204':
-          content:
-            application/vnd.vimeo.picture+json:
-              schema:
-                $ref: '#/components/schemas/picture'
-          description: The album logo was deleted.
+          description: The custom logo was removed.
         '403':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If you are attempting to modify an album that you do not own.
+          description: The authenticated user can't modify this album.
         '404':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If album was not found.
-             * If album logo was not found.
+          description: 'No such album exists, or it doesn''t contain the specified custom logo.'
       security:
         - oauth2:
             - edit
       summary: Remove a custom album logo
       tags:
-        - Albums\Custom Logos
+        - Albums\Custom album logos
     get:
       operationId: get_album_logo
       parameters:
@@ -10064,27 +10051,24 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/picture'
-          description: The album logo was returned.
+          description: The custom logo was returned.
         '403':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot view another user's album logo.
+          description: The authenticated user can't view this custom logo.
         '404':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If album was not found.
-             * If album logo was not found.
+          description: 'No such album exists, or it doesn''t contain the specified custom logo.'
       summary: Get a specific custom album logo
       tags:
-        - Albums\Custom Logos
+        - Albums\Custom album logos
     patch:
-      operationId: edit_album_logo
+      operationId: replace_album_logo
       parameters:
         - description: The ID of the album.
           in: path
@@ -10124,28 +10108,25 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/picture'
-          description: The album logo was edited.
+          description: The custom logo was replaced.
         '403':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an album that you do not own.
+          description: The authenticated user can't modify this album.
         '404':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If album was not found.
-             * If album logo was not found.
+          description: 'No such album exists, or it doesn''t contain the specified custom logo.'
       security:
         - oauth2:
             - edit
-      summary: Edit a custom album logo
+      summary: Replace a custom album logo
       tags:
-        - Albums\Custom Logos
+        - Albums\Custom album logos
   '/users/{user_id}/albums/{album_id}/videos':
     get:
       operationId: get_album_videos
@@ -10189,7 +10170,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -10203,7 +10184,7 @@ paths:
           schema:
             example: 1
             type: number
-        - description: The album's password.
+        - description: The password of the album.
           in: query
           name: password
           required: false
@@ -10240,7 +10221,7 @@ paths:
               - modified_time
               - plays
             type: string
-        - description: Whether to include private videos in the search. (Please note that a separate search service provides this functionality. The service performs a partial text search on the video's name.)
+        - description: Whether to include private videos in the search. Please note that a separate search service provides this functionality. The service performs a partial text search on the video's name.
           in: query
           name: weak_search
           required: false
@@ -10261,13 +10242,13 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       summary: Get all the videos in an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
     put:
-      description: Replace or clear the videos in an album.
-      operationId: add_videos_to_album
+      description: This method replaces all the existing videos in an album with one or more videos.
+      operationId: replace_videos_in_album
       parameters:
         - description: The ID of the album.
           in: path
@@ -10304,19 +10285,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot create albums.
+          description: The authenticated user can't add videos to albums.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       security:
         - oauth2:
             - edit
-      summary: Add a list of videos to an album
+      summary: Replace all the videos in an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
   '/users/{user_id}/albums/{album_id}/videos/{video_id}':
     delete:
       operationId: remove_video_from_album
@@ -10350,24 +10331,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The token does not have the proper scopes.
-             * The authenticated user cannot edit the album.
+          description: 'The supplied token doesn''t have the proper scopes, or the authenticated user can''t edit the album.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       security:
         - oauth2:
             - edit
       summary: Remove a video from an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
     get:
-      description: Check if an album contains a video.
+      description: This method gets a single video from an album. You can use this method to determine whether the album contains the specified video.
       operationId: get_album_video
       parameters:
         - description: The ID of the album.
@@ -10391,7 +10369,7 @@ paths:
           schema:
             example: 196367152
             type: number
-        - description: The album's password.
+        - description: The password of the album.
           in: query
           name: password
           required: false
@@ -10410,13 +10388,10 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If album was not found.
-             * If video was not found in the album.
+          description: 'No such album exists, or the video wasn''t found in it.'
       summary: Get a specific video in an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
     put:
       operationId: add_video_to_album
       parameters:
@@ -10449,22 +10424,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The token does not have the proper scopes.
-             * The authenticated user cannot edit the album.
+          description: 'The supplied token doesn''t have the proper scopes, or the authenticated user can''t edit the album.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If album was not found.
+          description: No such album exists.
       security:
         - oauth2:
             - edit
       summary: Add a specific video to an album
       tags:
-        - Albums\Album Videos
+        - Albums\Album videos
   '/users/{user_id}/appearances':
     get:
       operationId: get_appearances
@@ -10494,7 +10466,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -11508,7 +11480,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -12346,7 +12318,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -12725,7 +12697,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/folder'
+                  $ref: '#/components/schemas/project'
                 type: array
           description: The projects were returned.
         '401':
@@ -12768,7 +12740,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/folder'
+                $ref: '#/components/schemas/project'
           description: The project was created.
         '400':
           content:
@@ -12815,17 +12787,13 @@ paths:
           schema:
             example: 152184
             type: number
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                should_delete_clips:
-                  description: Whether to delete all the videos in the project along with the project itself.
-                  example: 'true'
-                  type: boolean
-              type: object
-        required: false
+        - description: Whether to delete all the videos in the project along with the project itself.
+          in: query
+          name: should_delete_clips
+          required: false
+          schema:
+            example: 'true'
+            type: boolean
       responses:
         '204':
           description: The project was deleted.
@@ -12875,7 +12843,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/folder'
+                $ref: '#/components/schemas/project'
           description: The project was returned.
         '401':
           content:
@@ -12930,7 +12898,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/folder'
+                $ref: '#/components/schemas/project'
           description: The project was edited.
         '400':
           content:
@@ -12983,23 +12951,20 @@ paths:
           schema:
             example: 152184
             type: number
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                should_delete_clips:
-                  description: Allow videos to be removed from folder or deleted.
-                  example: 'false'
-                  type: boolean
-                uris:
-                  description: A comma-separated list of video URIs to delete.
-                  example: '/videos/258684937,/videos/273576296'
-                  type: string
-              required:
-                - uris
-              type: object
-        required: true
+        - description: Allow videos to be removed from folder and deleted.
+          in: query
+          name: should_delete_clips
+          required: false
+          schema:
+            example: 'false'
+            type: boolean
+        - description: A comma-separated list of video URIs to delete.
+          in: query
+          name: uris
+          required: true
+          schema:
+            example: '/videos/258684937,/videos/273576296'
+            type: string
       responses:
         '204':
           description: The videos were deleted.
@@ -13124,17 +13089,13 @@ paths:
           schema:
             example: 152184
             type: number
-      requestBody:
-        content:
-          application/json:
-            schema:
-              properties:
-                uris:
-                  description: A comma-separated list of video URIs to add.
-                  example: '/videos/258684937,/videos/273576296'
-                  type: string
-              type: object
-        required: false
+        - description: A comma-separated list of video URIs to add.
+          in: query
+          name: uris
+          required: false
+          schema:
+            example: '/videos/258684937,/videos/273576296'
+            type: string
       responses:
         '204':
           description: The videos were added.
@@ -13360,7 +13321,7 @@ paths:
           schema:
             example: 152184
             type: number
-        - description: The page that contains the video URI.
+        - description: The page that contains the video URI. Only available when not paired with `query`.
           in: query
           name: containing_uri
           required: false
@@ -13388,7 +13349,7 @@ paths:
               - featured
               - playable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -13439,13 +13400,6 @@ paths:
               - modified_time
               - plays
             type: string
-        - description: Whether to include private videos in the search. Please note that a separate search service provides this functionality. The service performs a partial text search on the video's name.
-          in: query
-          name: weak_search
-          required: false
-          schema:
-            example: 'false'
-            type: boolean
       responses:
         '200':
           content:
@@ -13871,7 +13825,7 @@ paths:
             enum:
               - embeddable
             type: string
-        - description: Whether to filter by all embeddable videos or by all videos that not embeddable. Required only if **filter** is `embeddable`.
+        - description: Whether to filter the results by embeddable videos (`true`) or non-embeddable videos (`false`). Required only if **filter** is `embeddable`.
           in: query
           name: filter_embeddable
           required: false
@@ -16390,6 +16344,10 @@ paths:
                       description: 'If your upload approach is pull, Vimeo will download the video hosted at this public URL. This URL must be valid for at least 24 hours.'
                       example: 'https://example.com'
                       type: string
+                    redirect_url:
+                      description: The app's redirect URL. Use this parameter when `approach` is `post`.
+                      example: 'https://example.com'
+                      type: string
                     size:
                       description: Upload size
                       example: '13623861'
@@ -16593,6 +16551,11 @@ components:
           example: Vimeo holiday videos!
           nullable: true
           type: string
+        domain:
+          description: The custom domain a user has selected for their album.
+          example: mycustomdomain.com
+          nullable: true
+          type: string
         duration:
           description: The total duration in seconds of all the videos in the album.
           example: 1163
@@ -16607,9 +16570,24 @@ components:
           required:
             - html
           type: object
+        embed_brand_color:
+          description: Whether to show the album's custom brand color in the player of the album's embedded playlist.
+          example: 'true'
+          nullable: true
+          type: boolean
+        embed_custom_logo:
+          description: Whether to show the album's custom logo in the player of the album's embedded playlist.
+          example: 'true'
+          nullable: true
+          type: boolean
         hide_nav:
           description: Whether to hide the Vimeo navigation when viewing the album.
           example: 'true'
+          type: boolean
+        hide_vimeo_logo:
+          description: Whether to hide the Vimeo logo in the player of the album's embedded playlist.
+          example: 'true'
+          nullable: true
           type: boolean
         layout:
           description: The album's layout preference
@@ -16765,6 +16743,15 @@ components:
           description: The album's URI.
           example: /albums/3706071
           type: string
+        url:
+          description: The custom Vimeo URL a user has selected for their album.
+          example: my-custom-url
+          nullable: true
+          type: string
+        use_custom_domain:
+          description: Whether the user has opted in to use a custom domain for their album.
+          example: 'false'
+          type: boolean
         user:
           allOf:
             - $ref: '#/components/schemas/user'
@@ -16774,9 +16761,13 @@ components:
         - created_time
         - custom_logo
         - description
+        - domain
         - duration
         - embed
+        - embed_brand_color
+        - embed_custom_logo
         - hide_nav
+        - hide_vimeo_logo
         - layout
         - link
         - metadata
@@ -16789,6 +16780,8 @@ components:
         - sort
         - theme
         - uri
+        - url
+        - use_custom_domain
         - user
       title: Album
       type: object
@@ -17730,75 +17723,6 @@ components:
         - error_code
         - link
       title: Error
-      type: object
-    folder:
-      properties:
-        created_time:
-          description: The time in ISO 8601 format when the folder was created.
-          example: '2017-05-23T14:36:22+00:00'
-          type: string
-        metadata:
-          description: The folder's metadata.
-          properties:
-            connections:
-              description: A list of resource URIs related to the folder.
-              properties:
-                videos:
-                  description: A standard connection object indicating how to get all the videos in this folder.
-                  properties:
-                    options:
-                      description: An array of HTTP methods permitted on this URI.
-                      items:
-                        type: string
-                      type: array
-                    total:
-                      description: The total number of videos on this connection.
-                      example: 12
-                      type: number
-                    uri:
-                      description: The API URI that resolves to the connection data.
-                      example: /users/152184/folders/12345/videos
-                      type: string
-                  required:
-                    - options
-                    - total
-                    - uri
-                  type: object
-              required:
-                - videos
-              type: object
-          required:
-            - connections
-          type: object
-        modified_time:
-          description: The time in ISO 8601 format when the folder was last modified.
-          example: '2017-05-23T14:36:22+00:00'
-          type: string
-        name:
-          description: The name of the folder.
-          example: Rough cuts
-          type: string
-        resource_key:
-          description: The resource key string of the folder.
-          example: dc724af18fbdd4e59189f5fe768a5f8311527050
-          type: string
-        uri:
-          description: The URI of the folder.
-          example: /me/projects/12345
-          type: string
-        user:
-          allOf:
-            - $ref: '#/components/schemas/user'
-          description: The owner of the folder.
-      required:
-        - created_time
-        - metadata
-        - modified_time
-        - name
-        - resource_key
-        - uri
-        - user
-      title: Folder
       type: object
     group:
       properties:
@@ -19484,6 +19408,75 @@ components:
         - uri
         - user
       title: Presets
+      type: object
+    project:
+      properties:
+        created_time:
+          description: The time in ISO 8601 format when the project was created.
+          example: '2017-05-23T14:36:22+00:00'
+          type: string
+        metadata:
+          description: The project's metadata.
+          properties:
+            connections:
+              description: A list of resource URIs related to the project.
+              properties:
+                videos:
+                  description: A standard connection object indicating how to get all the videos in this project.
+                  properties:
+                    options:
+                      description: An array of HTTP methods permitted on this URI.
+                      items:
+                        type: string
+                      type: array
+                    total:
+                      description: The total number of videos on this connection.
+                      example: 12
+                      type: number
+                    uri:
+                      description: The API URI that resolves to the connection data.
+                      example: /users/152184/projects/12345/videos
+                      type: string
+                  required:
+                    - options
+                    - total
+                    - uri
+                  type: object
+              required:
+                - videos
+              type: object
+          required:
+            - connections
+          type: object
+        modified_time:
+          description: The time in ISO 8601 format when the project was last modified.
+          example: '2017-05-23T14:36:22+00:00'
+          type: string
+        name:
+          description: The name of the folder.
+          example: Rough cuts
+          type: string
+        resource_key:
+          description: The resource key string of the project.
+          example: dc724af18fbdd4e59189f5fe768a5f8311527050
+          type: string
+        uri:
+          description: The URI of the project.
+          example: /me/projects/12345
+          type: string
+        user:
+          allOf:
+            - $ref: '#/components/schemas/user'
+          description: The owner of the project.
+      required:
+        - created_time
+        - metadata
+        - modified_time
+        - name
+        - resource_key
+        - uri
+        - user
+      title: Project
       type: object
     purchase-interaction:
       properties:
@@ -21206,7 +21199,7 @@ components:
           type: string
         parent_folder:
           allOf:
-            - $ref: '#/components/schemas/folder'
+            - $ref: '#/components/schemas/project'
           description: Information about the folder that contains this video.
           nullable: true
         pictures:
@@ -21531,6 +21524,7 @@ components:
         filesize:
           description: The size in byes of the video version file.
           example: 4025322521
+          nullable: true
           type: number
         metadata:
           description: The video version's metadata.

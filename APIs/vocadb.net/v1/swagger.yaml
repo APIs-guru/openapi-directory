@@ -262,7 +262,7 @@ paths:
           name: preferAccurateMatches
           required: false
           type: boolean
-        - description: 'Whether to search for deleted entries. If this is true, only deleted entries will be returned.'
+        - description: "Whether to search for deleted entries.\r\n            If this is true, only deleted entries will be returned.\r\n            If this is false (default), deleted entries are not returned."
           in: query
           name: deleted
           required: false
@@ -1228,7 +1228,8 @@ paths:
       deprecated: false
       operationId: CommentApi_GetComments
       parameters:
-        - enum:
+        - description: Entry type.
+          enum:
             - Undefined
             - Album
             - Artist
@@ -1276,7 +1277,8 @@ paths:
       deprecated: false
       operationId: CommentApi_PostNewComment
       parameters:
-        - enum:
+        - description: Entry type.
+          enum:
             - Undefined
             - Album
             - Artist
@@ -1321,7 +1323,8 @@ paths:
       description: "Normal users can delete their own comments, moderators can delete all comments.\r\n            Requires login."
       operationId: CommentApi_DeleteComment
       parameters:
-        - enum:
+        - description: Entry type.
+          enum:
             - Undefined
             - Album
             - Artist
@@ -1361,7 +1364,8 @@ paths:
       description: "Normal users can edit their own comments, moderators can edit all comments.\r\n            Requires login."
       operationId: CommentApi_PostEditComment
       parameters:
-        - enum:
+        - description: Entry type.
+          enum:
             - Undefined
             - Album
             - Artist
@@ -6323,6 +6327,8 @@ definitions:
           - Romaji
           - English
         type: string
+      deleted:
+        type: boolean
       description:
         type: string
       id:
@@ -7416,6 +7422,8 @@ definitions:
           - Romaji
           - English
         type: string
+      deleted:
+        type: boolean
       favoritedTimes:
         format: int32
         type: integer

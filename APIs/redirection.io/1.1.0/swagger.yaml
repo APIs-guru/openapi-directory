@@ -241,22 +241,6 @@ paths:
           required: false
           type: string
         - in: query
-          name: createdAt_gt
-          required: false
-          type: string
-        - in: query
-          name: createdAt_gte
-          required: false
-          type: string
-        - in: query
-          name: createdAt_lt
-          required: false
-          type: string
-        - in: query
-          name: createdAt_lte
-          required: false
-          type: string
-        - in: query
           name: source
           required: false
           type: string
@@ -266,22 +250,6 @@ paths:
           type: string
         - in: query
           name: statusCode
-          required: false
-          type: string
-        - in: query
-          name: statusCode_gt
-          required: false
-          type: string
-        - in: query
-          name: statusCode_gte
-          required: false
-          type: string
-        - in: query
-          name: statusCode_lt
-          required: false
-          type: string
-        - in: query
-          name: statusCode_lte
           required: false
           type: string
         - in: query
@@ -313,15 +281,39 @@ paths:
           required: false
           type: string
         - in: query
-          name: bool
-          required: false
-          type: string
-        - in: query
-          name: ignoreProjectType
-          required: false
-          type: string
-        - in: query
           name: excludeEmptyReferrer
+          required: false
+          type: string
+        - in: query
+          name: createdAt_gt
+          required: false
+          type: string
+        - in: query
+          name: createdAt_gte
+          required: false
+          type: string
+        - in: query
+          name: createdAt_lt
+          required: false
+          type: string
+        - in: query
+          name: createdAt_lte
+          required: false
+          type: string
+        - in: query
+          name: statusCode_gt
+          required: false
+          type: string
+        - in: query
+          name: statusCode_gte
+          required: false
+          type: string
+        - in: query
+          name: statusCode_lt
+          required: false
+          type: string
+        - in: query
+          name: statusCode_lte
           required: false
           type: string
       produces:
@@ -418,16 +410,9 @@ paths:
           required: true
           type: string
         - in: query
-          name: state
+          name: firstUrl
           required: false
           type: string
-        - collectionFormat: multi
-          in: query
-          items:
-            type: string
-          name: 'state[]'
-          required: false
-          type: array
         - in: query
           name: 'sort[createdAt]'
           required: false
@@ -499,10 +484,45 @@ paths:
         '200':
           description: Crawl resource response
           schema:
-            $ref: '#/definitions/Crawl-Read'
+            $ref: '#/definitions/Crawl-ReadDetails'
         '404':
           description: Resource not found
       summary: Retrieves a Crawl resource.
+      tags:
+        - Crawl
+  '/crawls/{id}/cancel':
+    post:
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      operationId: cancelCrawlItem
+      parameters:
+        - description: The new Crawl resource
+          in: body
+          name: crawl
+          schema:
+            $ref: '#/definitions/Crawl'
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '201':
+          description: Crawl resource created
+          schema:
+            $ref: '#/definitions/Crawl-ReadDetails'
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+      summary: Creates a Crawl resource.
       tags:
         - Crawl
   /explain-urls:
@@ -636,82 +656,6 @@ paths:
       summary: Retrieves the collection of Rule resources.
       tags:
         - Rule
-  /exports:
-    get:
-      operationId: getExportCollection
-      parameters:
-        - in: query
-          name: projectId
-          required: true
-          type: string
-      produces:
-        - application/ld+json
-        - application/json
-        - text/html
-        - text/csv
-      responses:
-        '200':
-          description: Export collection response
-          schema:
-            items:
-              $ref: '#/definitions/Export-Read'
-            type: array
-      summary: Retrieves the collection of Export resources.
-      tags:
-        - Export
-    post:
-      consumes:
-        - application/ld+json
-        - application/json
-        - text/html
-        - text/csv
-      operationId: postExportCollection
-      parameters:
-        - description: The new Export resource
-          in: body
-          name: export
-          schema:
-            $ref: '#/definitions/Export-Write'
-      produces:
-        - application/ld+json
-        - application/json
-        - text/html
-        - text/csv
-      responses:
-        '201':
-          description: Export resource created
-          schema:
-            $ref: '#/definitions/Export-Read'
-        '400':
-          description: Invalid input
-        '404':
-          description: Resource not found
-      summary: Creates a Export resource.
-      tags:
-        - Export
-  '/exports/{id}':
-    get:
-      operationId: getExportItem
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: string
-      produces:
-        - application/ld+json
-        - application/json
-        - text/html
-        - text/csv
-      responses:
-        '200':
-          description: Export resource response
-          schema:
-            $ref: '#/definitions/Export-Read'
-        '404':
-          description: Resource not found
-      summary: Retrieves a Export resource.
-      tags:
-        - Export
   /impact-rule-actions:
     post:
       consumes:
@@ -760,7 +704,7 @@ paths:
         '200':
           description: ImpactRuleAction resource response
           schema:
-            $ref: '#/definitions/ImpactRuleAction'
+            $ref: '#/definitions/ImpactRuleAction-Read'
         '404':
           description: Resource not found
       summary: Retrieves a ImpactRuleAction resource.
@@ -845,7 +789,11 @@ paths:
   /instances:
     get:
       operationId: getInstanceCollection
-      parameters: []
+      parameters:
+        - in: query
+          name: projectId
+          required: true
+          type: string
       produces:
         - application/ld+json
         - application/json
@@ -882,6 +830,40 @@ paths:
         '404':
           description: Resource not found
       summary: Retrieves a Instance resource.
+      tags:
+        - Instance
+    put:
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      operationId: loggingInstanceItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - description: The updated Instance resource
+          in: body
+          name: instance
+          schema:
+            $ref: '#/definitions/Instance-Write'
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Instance resource updated
+          schema:
+            $ref: '#/definitions/Instance-Read'
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+      summary: Replaces the Instance resource.
       tags:
         - Instance
   /invitations:
@@ -970,7 +952,7 @@ paths:
         '201':
           description: Invitation resource created
           schema:
-            $ref: '#/definitions/Invitation'
+            $ref: '#/definitions/Invitation-Read'
         '400':
           description: Invalid input
         '404':
@@ -1034,22 +1016,6 @@ paths:
           required: false
           type: string
         - in: query
-          name: createdAt_gt
-          required: false
-          type: string
-        - in: query
-          name: createdAt_gte
-          required: false
-          type: string
-        - in: query
-          name: createdAt_lt
-          required: false
-          type: string
-        - in: query
-          name: createdAt_lte
-          required: false
-          type: string
-        - in: query
           name: source
           required: false
           type: string
@@ -1059,22 +1025,6 @@ paths:
           type: string
         - in: query
           name: statusCode
-          required: false
-          type: string
-        - in: query
-          name: statusCode_gt
-          required: false
-          type: string
-        - in: query
-          name: statusCode_gte
-          required: false
-          type: string
-        - in: query
-          name: statusCode_lt
-          required: false
-          type: string
-        - in: query
-          name: statusCode_lte
           required: false
           type: string
         - in: query
@@ -1106,15 +1056,39 @@ paths:
           required: false
           type: string
         - in: query
-          name: bool
-          required: false
-          type: string
-        - in: query
-          name: ignoreProjectType
-          required: false
-          type: string
-        - in: query
           name: excludeEmptyReferrer
+          required: false
+          type: string
+        - in: query
+          name: createdAt_gt
+          required: false
+          type: string
+        - in: query
+          name: createdAt_gte
+          required: false
+          type: string
+        - in: query
+          name: createdAt_lt
+          required: false
+          type: string
+        - in: query
+          name: createdAt_lte
+          required: false
+          type: string
+        - in: query
+          name: statusCode_gt
+          required: false
+          type: string
+        - in: query
+          name: statusCode_gte
+          required: false
+          type: string
+        - in: query
+          name: statusCode_lt
+          required: false
+          type: string
+        - in: query
+          name: statusCode_lte
           required: false
           type: string
       produces:
@@ -1620,7 +1594,7 @@ paths:
         '200':
           description: PublishHistory resource response
           schema:
-            $ref: '#/definitions/PublishHistory'
+            $ref: '#/definitions/PublishHistory-Read'
         '404':
           description: Resource not found
       summary: Retrieves a PublishHistory resource.
@@ -1806,7 +1780,7 @@ paths:
         '201':
           description: RuleSetVersion resource created
           schema:
-            $ref: '#/definitions/RuleSetVersion'
+            $ref: '#/definitions/RuleSetVersion-Read'
         '400':
           description: Invalid input
         '404':
@@ -1843,7 +1817,7 @@ paths:
         '201':
           description: RuleSetVersion resource created
           schema:
-            $ref: '#/definitions/RuleSetVersion'
+            $ref: '#/definitions/RuleSetVersion-Read'
         '400':
           description: Invalid input
         '404':
@@ -2510,24 +2484,11 @@ definitions:
   Crawl:
     description: ''
     properties:
-      firstUrl: {}
-      includeSubdomain: {}
-      maxUrls: {}
-      project:
-        type: string
-      rate: {}
-    required:
-      - project
-      - firstUrl
-      - rate
-      - maxUrls
-      - includeSubdomain
-    type: object
-  Crawl-Read:
-    description: ''
-    properties:
       createdAt:
         format: date-time
+        readOnly: true
+        type: string
+      error:
         readOnly: true
         type: string
       finishedAt:
@@ -2540,26 +2501,92 @@ definitions:
       id:
         readOnly: true
         type: string
-      resourceBlockedCount:
+      includeSubdomain:
+        readOnly: true
+        type: boolean
+      maxUrls:
         readOnly: true
         type: integer
-      resourceCrawlableCount:
+      project:
+        $ref: '#/definitions/Project'
         readOnly: true
-        type: integer
-      resourceCrawledCount:
-        readOnly: true
-        type: integer
-      resourceExternalCount:
-        readOnly: true
-        type: integer
-      resourceSeenCount:
+      rate:
         readOnly: true
         type: integer
       state:
         readOnly: true
         type: string
       stats:
+        items:
+          type: string
+        type: array
+      timeouted:
         readOnly: true
+        type: boolean
+      updatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+    type: object
+  Crawl-Read:
+    description: ''
+    properties:
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      error:
+        readOnly: true
+        type: string
+      finishedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      firstUrl:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: string
+      state:
+        readOnly: true
+        type: string
+      stats:
+        items:
+          type: string
+        type: array
+      updatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+    type: object
+  Crawl-ReadDetails:
+    description: ''
+    properties:
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      error:
+        readOnly: true
+        type: string
+      finishedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      firstUrl:
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: string
+      state:
+        readOnly: true
+        type: string
+      stats:
+        items:
+          type: string
+        type: array
       updatedAt:
         format: date-time
         readOnly: true
@@ -2585,18 +2612,18 @@ definitions:
     description: ''
     properties:
       depth: {}
-      description: {}
       id: {}
       statusCode: {}
       title: {}
       url: {}
-      urlsTo: {}
     type: object
   ExplainUrl:
     description: ''
     properties:
-      explain: {}
-      id: {}
+      explain:
+        readOnly: true
+      id:
+        readOnly: true
       project:
         type: string
       url:
@@ -2616,72 +2643,6 @@ definitions:
       - url
       - project
     type: object
-  Export-Read:
-    description: ''
-    properties:
-      author:
-        type: string
-      completedAt:
-        format: date-time
-        type: string
-      exportDuration:
-        type: integer
-      filters:
-        items:
-          type: string
-        type: array
-      id:
-        readOnly: true
-        type: string
-      itemsCount:
-        type: integer
-      location:
-        type: string
-      message:
-        type: string
-      project:
-        type: string
-      sort:
-        items:
-          type: string
-        type: array
-      startedAt:
-        format: date-time
-        type: string
-      status:
-        type: integer
-      statusAsText:
-        readOnly: true
-        type: string
-      typeAsText:
-        type: string
-      updatedAt:
-        format: date-time
-        type: string
-    required:
-      - project
-      - author
-      - typeAsText
-    type: object
-  Export-Write:
-    description: ''
-    properties:
-      filters:
-        items:
-          type: string
-        type: array
-      project:
-        type: string
-      sort:
-        items:
-          type: string
-        type: array
-      typeAsText:
-        type: string
-    required:
-      - project
-      - typeAsText
-    type: object
   ForgotPasswordRequest:
     description: ''
     properties:
@@ -2690,23 +2651,11 @@ definitions:
     required:
       - email
     type: object
-  ImpactRuleAction:
-    description: ''
-    properties:
-      id: {}
-      impact: {}
-      project:
-        type: string
-      ruleAction:
-        type: string
-    required:
-      - project
-      - ruleAction
-    type: object
   ImpactRuleAction-Read:
     description: ''
     properties:
-      impact: {}
+      impact:
+        readOnly: true
     type: object
   ImpactRuleAction-Write:
     description: ''
@@ -2723,18 +2672,23 @@ definitions:
     description: ''
     properties:
       author:
+        readOnly: true
         type: string
       completedAt:
         format: date-time
+        readOnly: true
         type: string
       errorCount:
+        readOnly: true
         type: integer
       id:
         readOnly: true
         type: string
       importDuration:
+        readOnly: true
         type: integer
       message:
+        readOnly: true
         type: string
       project:
         type: string
@@ -2742,19 +2696,21 @@ definitions:
         type: boolean
       startedAt:
         format: date-time
+        readOnly: true
         type: string
       statusAsText:
         readOnly: true
       successCount:
+        readOnly: true
         type: integer
       typeAsText:
         type: string
       updatedAt:
         format: date-time
+        readOnly: true
         type: string
     required:
       - project
-      - author
       - typeAsText
     type: object
   Import-Write:
@@ -2835,38 +2791,7 @@ definitions:
     required:
       - name
     type: object
-  Invitation:
-    description: ''
-    properties:
-      accepted:
-        readOnly: true
-        type: boolean
-      createdAt:
-        format: date-time
-        readOnly: true
-        type: string
-      email:
-        readOnly: true
-        type: string
-      id:
-        readOnly: true
-        type: string
-      sender:
-        readOnly: true
-        type: string
-      target:
-        readOnly: true
-        type: string
-      targetId:
-        readOnly: true
-        type: string
-      targetType:
-        readOnly: true
-        type: string
-      token:
-        readOnly: true
-        type: string
-    type: object
+  Invitation: {}
   Invitation-Read:
     description: ''
     properties:
@@ -2952,6 +2877,29 @@ definitions:
       - type
       - name
     type: object
+  Marker-Read:
+    description: ''
+    properties:
+      maximumOccurrence:
+        type: integer
+      minimumOccurrence:
+        type: integer
+      name:
+        type: string
+      options:
+        items:
+          type: string
+        type: array
+      transformers:
+        items:
+          type: string
+        type: array
+      type:
+        type: string
+    required:
+      - type
+      - name
+    type: object
   Marker-Write:
     description: ''
     properties:
@@ -2992,6 +2940,44 @@ definitions:
         readOnly: true
         type: string
     type: object
+  Organization:
+    description: ''
+    properties:
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      id:
+        readOnly: true
+        type: string
+      isEnabled:
+        readOnly: true
+        type: boolean
+      name:
+        type: string
+      projects:
+        items:
+          $ref: '#/definitions/Project'
+        readOnly: true
+        type: array
+      slug:
+        readOnly: true
+        type: string
+      updatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      userOrganizations:
+        items:
+          $ref: '#/definitions/UserOrganization'
+        readOnly: true
+        type: array
+    required:
+      - name
+    type: object
+  Organization-CreationWrite:
+    description: ''
+    type: object
   Organization-List:
     description: ''
     properties:
@@ -3006,12 +2992,15 @@ definitions:
         type: string
       projects:
         items:
-          type: string
+          $ref: '#/definitions/Project-List'
+        readOnly: true
         type: array
       slug:
+        readOnly: true
         type: string
       updatedAt:
         format: date-time
+        readOnly: true
         type: string
     required:
       - name
@@ -3030,16 +3019,20 @@ definitions:
         type: string
       projects:
         items:
-          type: string
+          $ref: '#/definitions/Project-Read'
+        readOnly: true
         type: array
       slug:
+        readOnly: true
         type: string
       updatedAt:
         format: date-time
+        readOnly: true
         type: string
       userOrganizations:
         items:
-          type: string
+          $ref: '#/definitions/UserOrganization-Read'
+        readOnly: true
         type: array
     required:
       - name
@@ -3049,6 +3042,129 @@ definitions:
     properties:
       name:
         type: string
+    required:
+      - name
+    type: object
+  Project:
+    description: ''
+    properties:
+      complexRuleUpdatedAgo:
+        readOnly: true
+      complexRulesCount:
+        readOnly: true
+        type: integer
+      complexRulesUpdatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      crawling:
+        readOnly: true
+        type: boolean
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      currentVersion:
+        $ref: '#/definitions/RuleSetVersion'
+        readOnly: true
+      feature:
+        items:
+          type: string
+        readOnly: true
+        type: array
+      featureValue:
+        readOnly: true
+      features:
+        items:
+          type: string
+        readOnly: true
+        type: array
+      hasLegacyRuleSystem:
+        readOnly: true
+        type: boolean
+      id:
+        readOnly: true
+        type: string
+      ignoreProjectTypes:
+        items:
+          type: string
+        type: array
+      isEnabled:
+        readOnly: true
+        type: boolean
+      logExport:
+        readOnly: true
+        type: boolean
+      matchStatusOnResponse:
+        readOnly: true
+        type: boolean
+      name:
+        type: string
+      onboardingCompletedDemos:
+        items:
+          type: string
+        type: array
+      organization:
+        $ref: '#/definitions/Organization'
+        readOnly: true
+      password:
+        readOnly: true
+      plan:
+        readOnly: true
+        type: integer
+      planAsText:
+        readOnly: true
+      roles:
+        readOnly: true
+      rules:
+        items:
+          $ref: '#/definitions/Rule'
+        readOnly: true
+        type: array
+      rulesHash:
+        readOnly: true
+        type: string
+      salt:
+        readOnly: true
+      slug:
+        readOnly: true
+        type: string
+      straightRuleUpdatedAgo:
+        readOnly: true
+      straightRulesCount:
+        readOnly: true
+        type: integer
+      straightRulesUpdatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      token:
+        readOnly: true
+        type: string
+      updatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      userProjects:
+        items:
+          $ref: '#/definitions/UserProject'
+        readOnly: true
+        type: array
+      username:
+        readOnly: true
+      usersFlattened:
+        items:
+          $ref: '#/definitions/UserProjectFlattened'
+        readOnly: true
+        type: array
+      versions:
+        items:
+          $ref: '#/definitions/RuleSetVersion'
+        readOnly: true
+        type: array
+      workingVersion:
+        $ref: '#/definitions/RuleSetVersion'
+        readOnly: true
     required:
       - name
     type: object
@@ -3066,76 +3182,70 @@ definitions:
           type: string
         type: array
       organization:
-        type: string
+        $ref: '#/definitions/Organization-CreationWrite'
+        readOnly: true
     required:
       - name
-      - organization
+    type: object
+  Project-List:
+    description: ''
+    properties:
+      complexRulesCount:
+        readOnly: true
+        type: integer
+      id:
+        readOnly: true
+        type: string
+      name:
+        type: string
+      slug:
+        readOnly: true
+        type: string
+      straightRulesCount:
+        readOnly: true
+        type: integer
+      userProjects:
+        items:
+          $ref: '#/definitions/UserProject-List'
+        readOnly: true
+        type: array
+      usersFlattened:
+        items:
+          $ref: '#/definitions/UserProjectFlattened-List'
+        readOnly: true
+        type: array
+    required:
+      - name
     type: object
   Project-Read:
     description: ''
     properties:
       complexRulesCount:
+        readOnly: true
         type: integer
-      complexRulesUpdatedAt:
-        format: date-time
-        readOnly: true
-        type: string
-      createdAt:
-        format: date-time
-        readOnly: true
-        type: string
-      currentVersion:
-        type: string
-      features:
-        items:
-          type: string
-        type: array
       id:
+        readOnly: true
         type: string
-      ignoreProjectTypes:
-        items:
-          type: string
-        type: array
       name:
         type: string
-      onboardingCompletedDemos:
-        items:
-          type: string
-        type: array
-      organization:
-        type: string
-      plan:
-        type: integer
-      rulesHash:
-        readOnly: true
-        type: string
       slug:
+        readOnly: true
         type: string
       straightRulesCount:
-        type: integer
-      straightRulesUpdatedAt:
-        format: date-time
         readOnly: true
-        type: string
-      token:
-        type: string
-      updatedAt:
-        format: date-time
-        type: string
+        type: integer
       userProjects:
         items:
-          type: string
+          $ref: '#/definitions/UserProject-Read'
+        readOnly: true
         type: array
       usersFlattened:
         items:
-          type: string
+          $ref: '#/definitions/UserProjectFlattened-Read'
+        readOnly: true
         type: array
-      workingVersion:
-        type: string
     required:
       - name
-      - organization
-      - plan
     type: object
   Project-Write:
     description: ''
@@ -3159,7 +3269,7 @@ definitions:
       added:
         type: integer
       author:
-        type: string
+        $ref: '#/definitions/User'
       createdAt:
         format: date-time
         readOnly: true
@@ -3170,7 +3280,8 @@ definitions:
         readOnly: true
         type: string
       project:
-        type: string
+        $ref: '#/definitions/Project'
+        readOnly: true
       summary:
         type: string
       type:
@@ -3178,7 +3289,7 @@ definitions:
       updated:
         type: integer
       version:
-        type: string
+        $ref: '#/definitions/RuleSetVersion'
     type: object
   PublishHistory-Read:
     description: ''
@@ -3186,7 +3297,7 @@ definitions:
       added:
         type: integer
       author:
-        type: string
+        $ref: '#/definitions/User-Read'
       createdAt:
         format: date-time
         readOnly: true
@@ -3203,17 +3314,17 @@ definitions:
       updated:
         type: integer
       version:
-        type: string
+        $ref: '#/definitions/RuleSetVersion-Read'
     type: object
-  Rule-Read:
+  Rule:
     description: ''
     properties:
       actions:
         items:
-          type: string
+          $ref: '#/definitions/RuleAction'
         type: array
       currentAction:
-        type: string
+        $ref: '#/definitions/RuleAction'
       formattedSource:
         type: string
       id:
@@ -3222,7 +3333,51 @@ definitions:
         type: boolean
       markers:
         items:
+          $ref: '#/definitions/Marker'
+        type: array
+      markersString:
+        items:
           type: string
+        type: array
+      matchOnResponseStatus:
+        type: integer
+      project:
+        type: string
+      rank:
+        type: integer
+      redirectCode:
+        type: integer
+      redirect_code:
+        readOnly: true
+        type: string
+      source:
+        type: string
+      target:
+        type: string
+      updatedAt:
+        format: date-time
+        type: string
+      viewCount:
+        type: integer
+    type: object
+  Rule-Read:
+    description: ''
+    properties:
+      actions:
+        items:
+          $ref: '#/definitions/RuleAction-Read'
+        type: array
+      currentAction:
+        $ref: '#/definitions/RuleAction-Read'
+      formattedSource:
+        type: string
+      id:
+        type: string
+      isEnabled:
+        type: boolean
+      markers:
+        items:
+          $ref: '#/definitions/Marker-Read'
         type: array
       matchOnResponseStatus:
         type: integer
@@ -3240,13 +3395,14 @@ definitions:
       viewCount:
         type: integer
     type: object
-  RuleAction-Read:
+  RuleAction:
     description: ''
     properties:
       action:
         type: string
       author:
-        type: string
+        $ref: '#/definitions/User'
+        readOnly: true
       createdAt:
         format: date-time
         readOnly: true
@@ -3260,14 +3416,68 @@ definitions:
         type: boolean
       markers:
         items:
+          $ref: '#/definitions/Marker'
+        type: array
+      markersString:
+        items:
           type: string
+        readOnly: true
+        type: array
+      matchOnResponseStatus:
+        type: integer
+      project:
+        $ref: '#/definitions/Project'
+        readOnly: true
+      rank:
+        type: integer
+      ruleId:
+        type: string
+      source:
+        type: string
+      statusCode:
+        type: integer
+      target:
+        type: string
+      type:
+        readOnly: true
+        type: string
+      version:
+        $ref: '#/definitions/RuleSetVersion'
+        readOnly: true
+    required:
+      - action
+      - source
+      - statusCode
+      - isEnabled
+      - rank
+    type: object
+  RuleAction-Read:
+    description: ''
+    properties:
+      action:
+        type: string
+      author:
+        $ref: '#/definitions/User-Read'
+        readOnly: true
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      formattedSource:
+        type: string
+      id:
+        readOnly: true
+        type: string
+      isEnabled:
+        type: boolean
+      markers:
+        items:
+          $ref: '#/definitions/Marker-Read'
         type: array
       matchOnResponseStatus:
         type: integer
       rank:
         type: integer
-      ruleId:
-        type: string
       source:
         type: string
       statusCode:
@@ -3292,7 +3502,7 @@ definitions:
         type: boolean
       markers:
         items:
-          type: string
+          $ref: '#/definitions/Marker-Write'
         type: array
       matchOnResponseStatus:
         type: integer
@@ -3318,9 +3528,11 @@ definitions:
     properties:
       actions:
         items:
-          type: string
+          $ref: '#/definitions/RuleAction'
+        readOnly: true
         type: array
       added:
+        readOnly: true
         type: integer
       createdAt:
         format: date-time
@@ -3330,10 +3542,11 @@ definitions:
         readOnly: true
         type: boolean
       deleted:
+        readOnly: true
         type: integer
       histories:
         items:
-          type: string
+          $ref: '#/definitions/PublishHistory'
         readOnly: true
         type: array
       id:
@@ -3342,19 +3555,21 @@ definitions:
       isSnapshot:
         type: boolean
       lastAction:
-        type: string
+        $ref: '#/definitions/RuleAction'
+        readOnly: true
       name:
         type: string
       nexts:
         items:
-          type: string
+          $ref: '#/definitions/RuleSetVersion'
         readOnly: true
         type: array
       previous:
-        type: string
-      project:
+        $ref: '#/definitions/RuleSetVersion'
         readOnly: true
-        type: string
+      project:
+        $ref: '#/definitions/Project'
+        readOnly: true
       publishedAt:
         format: date-time
         type: string
@@ -3362,6 +3577,7 @@ definitions:
         readOnly: true
         type: boolean
       updated:
+        readOnly: true
         type: integer
       working:
         readOnly: true
@@ -3390,6 +3606,94 @@ definitions:
       working:
         readOnly: true
         type: boolean
+    type: object
+  User:
+    description: ''
+    properties:
+      accountNonExpired:
+        readOnly: true
+        type: boolean
+      accountNonLocked:
+        readOnly: true
+        type: boolean
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      credentialsNonExpired:
+        readOnly: true
+        type: boolean
+      currentPassword: {}
+      defaultOrganization:
+        $ref: '#/definitions/Organization'
+      disabled:
+        type: boolean
+      disabledAt:
+        format: date-time
+        type: string
+      email:
+        type: string
+      enabled:
+        readOnly: true
+        type: boolean
+      id:
+        readOnly: true
+        type: string
+      name:
+        type: string
+      newEmail:
+        type: string
+      newEmailToken:
+        type: string
+      newEmailTokenExpiredAt:
+        format: date-time
+        type: string
+      password:
+        type: string
+      plainPassword:
+        type: string
+      plainPasswordRepeat: {}
+      projectsFlattened:
+        description: Add projectsFlattened.
+        items:
+          type: string
+        type: array
+      resetToken:
+        readOnly: true
+        type: string
+      resetTokenExpiredAt:
+        format: date-time
+        readOnly: true
+        type: string
+      roles:
+        readOnly: true
+      salt:
+        readOnly: true
+      superAdmin:
+        type: boolean
+      updatedAt:
+        format: date-time
+        type: string
+      userOrganizations:
+        items:
+          $ref: '#/definitions/UserOrganization'
+        type: array
+      userProjects:
+        items:
+          type: string
+        type: array
+      userProjectsFlattened:
+        items:
+          $ref: '#/definitions/UserProjectFlattened'
+        readOnly: true
+        type: array
+      username:
+        readOnly: true
+      validNewEmailToken:
+        readOnly: true
+    required:
+      - email
+      - name
     type: object
   User-CreationWrite:
     description: ''
@@ -3434,22 +3738,35 @@ definitions:
   User-Read:
     description: ''
     properties:
-      defaultOrganization:
-        type: string
-      email:
-        type: string
       id:
         readOnly: true
         type: string
       name:
         type: string
-      userOrganizations:
+    required:
+      - name
+    type: object
+  UserOrganization:
+    description: ''
+    properties:
+      functionalRoles:
         items:
           type: string
         type: array
+      id:
+        readOnly: true
+        type: string
+      organization:
+        readOnly: true
+        type: string
+      organizationAdmin:
+        readOnly: true
+        type: boolean
+      user:
+        readOnly: true
+        type: string
     required:
-      - email
-      - name
+      - functionalRoles
     type: object
   UserOrganization-CreationWrite:
     description: ''
@@ -3459,12 +3776,12 @@ definitions:
           type: string
         type: array
       organization:
+        readOnly: true
         type: string
       user:
+        readOnly: true
         type: string
     required:
-      - user
-      - organization
       - functionalRoles
     type: object
   UserOrganization-Read:
@@ -3477,13 +3794,10 @@ definitions:
       id:
         readOnly: true
         type: string
-      organization:
-        type: string
       user:
+        readOnly: true
         type: string
     required:
-      - user
-      - organization
       - functionalRoles
     type: object
   UserOrganization-Write:
@@ -3495,6 +3809,25 @@ definitions:
         type: array
     required:
       - functionalRoles
+    type: object
+  UserProject:
+    description: ''
+    properties:
+      functionalRoles:
+        items:
+          type: string
+        type: array
+      id:
+        readOnly: true
+        type: string
+      project:
+        type: string
+      user:
+        type: string
+    required:
+      - functionalRoles
+      - user
+      - project
     type: object
   UserProject-CreationWrite:
     description: ''
@@ -3512,7 +3845,49 @@ definitions:
       - project
       - functionalRoles
     type: object
+  UserProject-List:
+    description: ''
+    properties:
+      functionalRoles:
+        items:
+          type: string
+        type: array
+      id:
+        readOnly: true
+        type: string
+      user:
+        type: string
+    required:
+      - user
+      - functionalRoles
+    type: object
   UserProject-Read:
+    description: ''
+    properties:
+      functionalRoles:
+        items:
+          type: string
+        type: array
+      id:
+        readOnly: true
+        type: string
+      user:
+        type: string
+    required:
+      - user
+      - functionalRoles
+    type: object
+  UserProject-Write:
+    description: ''
+    properties:
+      functionalRoles:
+        items:
+          type: string
+        type: array
+    required:
+      - functionalRoles
+    type: object
+  UserProjectFlattened:
     description: ''
     properties:
       functionalRoles:
@@ -3526,21 +3901,30 @@ definitions:
         type: string
       user:
         type: string
-    required:
-      - user
-      - project
-      - functionalRoles
     type: object
-  UserProject-Write:
+  UserProjectFlattened-List:
     description: ''
     properties:
       functionalRoles:
         items:
           type: string
         type: array
-    required:
-      - functionalRoles
+      id:
+        readOnly: true
+        type: string
+      user:
+        type: string
     type: object
   UserProjectFlattened-Read:
     description: ''
+    properties:
+      functionalRoles:
+        items:
+          type: string
+        type: array
+      id:
+        readOnly: true
+        type: string
+      user:
+        type: string
     type: object

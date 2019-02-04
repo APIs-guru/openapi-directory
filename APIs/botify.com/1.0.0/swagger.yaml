@@ -2838,16 +2838,13 @@ definitions:
       date_created:
         readOnly: true
         type: string
-      last_crawls_revisions:
+      has_log_analysis:
         readOnly: true
-        type: string
-      last_log_revision:
+        type: boolean
+      last_analysis:
         readOnly: true
-        type: string
+        type: object
       name:
-        type: string
-      permissions:
-        readOnly: true
         type: string
       pins_balance:
         format: int64
@@ -2871,9 +2868,6 @@ definitions:
         description: Revenue per conversion on tablet
         format: float
         type: number
-      roles:
-        readOnly: true
-        type: string
       settings_url:
         readOnly: true
         type: string
