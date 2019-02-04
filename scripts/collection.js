@@ -900,7 +900,10 @@ function fixSpec(swagger, errors) {
             swagger.definitions[decodeURI(ptr)] = {};
             fixed = true;
           }
-          else console.warn(path,typeof value);
+          else {
+            console.warn(swagger.info.title);
+            console.warn(path,typeof value);
+          }
         }
         break;
       case 'DUPLICATE_OPERATIONID':
