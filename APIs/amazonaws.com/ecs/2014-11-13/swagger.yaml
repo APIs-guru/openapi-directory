@@ -1835,7 +1835,7 @@ definitions:
         description: 'Specifies whether to enable Amazon ECS managed tags for the tasks within the service. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html">Tagging Your Amazon ECS Resources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
       propagateTags:
         $ref: '#/definitions/PropagateTags'
-        description: 'Specifies whether to propagate the tags from the task definition or the service to the tasks. If no value is specified, the tags are not propagated. Tags can only be propagated to the tasks within the service during service creation. To add tags to a task after service creation, use the <a>TagResource</a> API action.'
+        description: 'Specifies whether to propagate the tags from the task definition or the service to the tasks in the service. If no value is specified, the tags are not propagated. Tags can only be propagated to the tasks within the service during service creation. To add tags to a task after service creation, use the <a>TagResource</a> API action.'
   ClusterNotFoundException: {}
   UnsupportedFeatureException: {}
   PlatformUnknownException: {}
@@ -2595,6 +2595,9 @@ definitions:
       attributes:
         $ref: '#/definitions/Attributes'
         description: The container instance attributes that this container instance supports.
+      platformDevices:
+        $ref: '#/definitions/PlatformDevices'
+        description: The devices that are available on the container instance. The only supported device type is a GPU.
       tags:
         $ref: '#/definitions/Tags'
         description: 'The metadata that you apply to the container instance to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.'
@@ -2757,7 +2760,7 @@ definitions:
         description: 'Specifies whether to enable Amazon ECS managed tags for the task. For more information, see <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html">Tagging Your Amazon ECS Resources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.'
       propagateTags:
         $ref: '#/definitions/PropagateTags'
-        description: 'Specifies whether to propagate the tags from the task definition or the service to the task. If no value is specified, the tags are not propagated.'
+        description: '<p>Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the <a>TagResource</a> API action.</p> <note> <p>An error will be received if you specify the <code>SERVICE</code> option when running a task.</p> </note>'
   BlockedException: {}
   StartTaskResponse:
     type: object
@@ -3221,6 +3224,10 @@ definitions:
       - HEALTHY
       - UNHEALTHY
       - UNKNOWN
+  GpuIds:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Container:
     type: object
     properties:
@@ -3251,6 +3258,18 @@ definitions:
       healthStatus:
         $ref: '#/definitions/HealthStatus'
         description: 'The health status of the container. If health checks are not configured for this container in its task definition, then it reports the health status as <code>UNKNOWN</code>.'
+      cpu:
+        $ref: '#/definitions/String'
+        description: The number of CPU units set for the container. The value will be <code>0</code> if no value was specified in the container definition when the task definition was registered.
+      memory:
+        $ref: '#/definitions/String'
+        description: The hard limit (in MiB) of memory set for the container.
+      memoryReservation:
+        $ref: '#/definitions/String'
+        description: The soft limit (in MiB) of memory set for the container.
+      gpuIds:
+        $ref: '#/definitions/GpuIds'
+        description: The IDs of each GPU assigned to the container.
     description: A Docker container that is part of a task.
   RepositoryCredentials:
     type: object
@@ -3354,6 +3373,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/SystemControl'
+  ResourceRequirements:
+    type: array
+    items:
+      $ref: '#/definitions/ResourceRequirement'
   ContainerDefinition:
     type: object
     properties:
@@ -3456,6 +3479,9 @@ definitions:
       systemControls:
         $ref: '#/definitions/SystemControls'
         description: '<p>A list of namespaced kernel parameters to set in the container. This parameter maps to <code>Sysctls</code> in the <a href="https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate">Create a container</a> section of the <a href="https://docs.docker.com/engine/api/v1.35/">Docker Remote API</a> and the <code>--sysctl</code> option to <a href="https://docs.docker.com/engine/reference/run/">docker run</a>.</p> <note> <p>It is not recommended that you specify network-related <code>systemControls</code> parameters for multiple containers in a single task that also uses either the <code>awsvpc</code> or <code>host</code> network modes. For tasks that use the <code>awsvpc</code> network mode, the container that is started last determines which <code>systemControls</code> parameters take effect. For tasks that use the <code>host</code> network mode, it changes the container instance''s namespaced kernel parameters as well as the containers.</p> </note>'
+      resourceRequirements:
+        $ref: '#/definitions/ResourceRequirements'
+        description: The type and amount of a resource to assign to a container. The only supported resource is a GPU.
     description: Container definitions are used in task definitions to describe the different containers that are launched as part of a task.
   ContainerDefinitions:
     type: array
@@ -3570,6 +3596,9 @@ definitions:
       memoryReservation:
         $ref: '#/definitions/BoxedInteger'
         description: 'The soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.'
+      resourceRequirements:
+        $ref: '#/definitions/ResourceRequirements'
+        description: 'The type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU.'
     description: The overrides that should be sent to a container.
   ContainerOverrides:
     type: array
@@ -4157,6 +4186,27 @@ definitions:
       - random
       - spread
       - binpack
+  PlatformDeviceType:
+    type: string
+    enum:
+      - GPU
+  PlatformDevice:
+    type: object
+    required:
+      - id
+      - type
+    properties:
+      id:
+        $ref: '#/definitions/String'
+        description: The ID for the GPU(s) on the container instance. The available GPU IDs can also be obtained on the container instance in the <code>/var/lib/ecs/gpu/nvidia_gpu_info.json</code> file.
+      type:
+        $ref: '#/definitions/PlatformDeviceType'
+        description: The type of device that is available on the container instance. The only supported value is <code>GPU</code>.
+    description: The devices that are available on the container instance. The only supported device type is a GPU.
+  PlatformDevices:
+    type: array
+    items:
+      $ref: '#/definitions/PlatformDevice'
   PortMapping:
     type: object
     properties:
@@ -4204,6 +4254,23 @@ definitions:
         $ref: '#/definitions/StringList'
         description: 'When the <code>stringSetValue</code> type is set, the value of the resource must be a string type.'
     description: Describes the resources available for a container instance.
+  ResourceType:
+    type: string
+    enum:
+      - GPU
+  ResourceRequirement:
+    type: object
+    required:
+      - value
+      - type
+    properties:
+      value:
+        $ref: '#/definitions/String'
+        description: The number of GPUs to assign to a container.
+      type:
+        $ref: '#/definitions/ResourceType'
+        description: The type of resource a container desires. The only supported value is <code>GPU</code>.
+    description: The type and amount of a resource to assign to a container. The only supported resource is a GPU.
   TaskOverride:
     type: object
     properties:

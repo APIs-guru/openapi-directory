@@ -1984,34 +1984,38 @@ paths:
           schema:
             $ref: '#/definitions/InvalidCommitIdException'
         '488':
+          description: RepositoryNotAssociatedWithPullRequestException
+          schema:
+            $ref: '#/definitions/RepositoryNotAssociatedWithPullRequestException'
+        '489':
           description: RepositoryNameRequiredException
           schema:
             $ref: '#/definitions/RepositoryNameRequiredException'
-        '489':
+        '490':
           description: InvalidRepositoryNameException
           schema:
             $ref: '#/definitions/InvalidRepositoryNameException'
-        '490':
+        '491':
           description: RepositoryDoesNotExistException
           schema:
             $ref: '#/definitions/RepositoryDoesNotExistException'
-        '491':
+        '492':
           description: EncryptionIntegrityChecksFailedException
           schema:
             $ref: '#/definitions/EncryptionIntegrityChecksFailedException'
-        '492':
+        '493':
           description: EncryptionKeyAccessDeniedException
           schema:
             $ref: '#/definitions/EncryptionKeyAccessDeniedException'
-        '493':
+        '494':
           description: EncryptionKeyDisabledException
           schema:
             $ref: '#/definitions/EncryptionKeyDisabledException'
-        '494':
+        '495':
           description: EncryptionKeyNotFoundException
           schema:
             $ref: '#/definitions/EncryptionKeyNotFoundException'
-        '495':
+        '496':
           description: EncryptionKeyUnavailableException
           schema:
             $ref: '#/definitions/EncryptionKeyUnavailableException'
