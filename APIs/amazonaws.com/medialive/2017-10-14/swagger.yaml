@@ -515,6 +515,115 @@ paths:
           in: query
           description: Pagination token
           required: false
+  '/prod/tags/{resource-arn}':
+    post:
+      operationId: CreateTags
+      description: Create tags for a resource
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreateTagsRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteTags
+      description: Removes tags for a resource
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTagsRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
+    get:
+      operationId: ListTagsForResource
+      description: Produces list of tags that have been created for a resource
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: NotFoundException
+          schema:
+            $ref: '#/definitions/NotFoundException'
+        '481':
+          description: BadRequestException
+          schema:
+            $ref: '#/definitions/BadRequestException'
+        '482':
+          description: InternalServerErrorException
+          schema:
+            $ref: '#/definitions/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          schema:
+            $ref: '#/definitions/ForbiddenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
   '/prod/channels/{channelId}':
     delete:
       operationId: DeleteChannel
@@ -1500,6 +1609,9 @@ definitions:
       RoleArn:
         $ref: '#/definitions/__string'
         description: An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
     description: A request to create a channel
   ConflictException: {}
   CreateInputResponse:
@@ -1540,6 +1652,9 @@ definitions:
           The source URLs for a PULL-type input. Every PULL type input needs
           exactly two source URLs for redundancy.
           Only specify sources for PULL type Inputs. Leave Destinations empty.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
       Type:
         $ref: '#/definitions/InputType'
     description: The name of the input
@@ -1552,10 +1667,19 @@ definitions:
   CreateInputSecurityGroupRequest:
     type: object
     properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
       WhitelistRules:
         $ref: '#/definitions/__listOfInputWhitelistRuleCidr'
         description: List of IPv4 CIDR addresses to whitelist
     description: The IPv4 CIDRs to whitelist for this Input Security Group
+  CreateTagsRequest:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+    description: Placeholder documentation for CreateTagsRequest
   DeleteChannelResponse:
     type: object
     properties:
@@ -1595,6 +1719,9 @@ definitions:
         description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
       State:
         $ref: '#/definitions/ChannelState'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
     description: Placeholder documentation for DeleteChannelResponse
   DeleteChannelRequest:
     type: object
@@ -1675,6 +1802,10 @@ definitions:
     type: object
     properties: {}
     description: Placeholder documentation for DeleteReservationRequest
+  DeleteTagsRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for DeleteTagsRequest
   DescribeChannelResponse:
     type: object
     properties:
@@ -1714,6 +1845,9 @@ definitions:
         description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
       State:
         $ref: '#/definitions/ChannelState'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
     description: Placeholder documentation for DescribeChannelResponse
   DescribeChannelRequest:
     type: object
@@ -1751,6 +1885,9 @@ definitions:
         description: A list of the sources of the input (PULL-type).
       State:
         $ref: '#/definitions/InputState'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
       Type:
         $ref: '#/definitions/InputType'
     description: Placeholder documentation for DescribeInputResponse
@@ -1773,6 +1910,9 @@ definitions:
       State:
         $ref: '#/definitions/InputSecurityGroupState'
         description: The current state of the Input Security Group.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
       WhitelistRules:
         $ref: '#/definitions/__listOfInputWhitelistRule'
         description: Whitelist rules and their sync status
@@ -1960,6 +2100,16 @@ definitions:
     type: object
     properties: {}
     description: Placeholder documentation for ListReservationsRequest
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+    description: Placeholder documentation for ListTagsForResourceResponse
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+    description: Placeholder documentation for ListTagsForResourceRequest
   PurchaseOfferingResponse:
     type: object
     properties:
@@ -2023,6 +2173,9 @@ definitions:
         description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
       State:
         $ref: '#/definitions/ChannelState'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
     description: Placeholder documentation for StartChannelResponse
   StartChannelRequest:
     type: object
@@ -2067,6 +2220,9 @@ definitions:
         description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
       State:
         $ref: '#/definitions/ChannelState'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
     description: Placeholder documentation for StopChannelResponse
   StopChannelRequest:
     type: object
@@ -2145,6 +2301,9 @@ definitions:
   UpdateInputSecurityGroupRequest:
     type: object
     properties:
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
       WhitelistRules:
         $ref: '#/definitions/__listOfInputWhitelistRuleCidr'
         description: List of IPv4 CIDR addresses to whitelist
@@ -3446,6 +3605,16 @@ definitions:
       - DELETING
       - DELETED
     description: Placeholder documentation for ChannelState
+  Tags:
+    type: array
+    description: Placeholder documentation for Tags
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
   Channel:
     type: object
     properties:
@@ -3485,6 +3654,9 @@ definitions:
         description: The Amazon Resource Name (ARN) of the role assumed when running the Channel.
       State:
         $ref: '#/definitions/ChannelState'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
     description: Placeholder documentation for Channel
   ChannelEgressEndpoint:
     type: object
@@ -3589,6 +3761,9 @@ definitions:
         description: A list of the sources of the input (PULL-type).
       State:
         $ref: '#/definitions/InputState'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
       Type:
         $ref: '#/definitions/InputType'
     description: Placeholder documentation for Input
@@ -3612,6 +3787,9 @@ definitions:
       State:
         $ref: '#/definitions/InputSecurityGroupState'
         description: The current state of the Input Security Group.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: A collection of key-value pairs.
       WhitelistRules:
         $ref: '#/definitions/__listOfInputWhitelistRule'
         description: Whitelist rules and their sync status

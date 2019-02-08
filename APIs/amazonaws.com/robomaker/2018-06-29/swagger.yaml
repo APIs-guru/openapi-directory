@@ -35,6 +35,7 @@ externalDocs:
   url: 'https://aws.amazon.com/robomaker/'
 host: robomaker.amazonaws.com
 basePath: /
+x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -183,7 +184,7 @@ paths:
   /createDeploymentJob:
     post:
       operationId: CreateDeploymentJob
-      description: Creates a deployment job.
+      description: '<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html">Creating a Robot Application Version</a>. </p>'
       responses:
         '200':
           description: Success
@@ -1225,6 +1226,119 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists all tags on a AWS RoboMaker resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: resourceArn
+          type: string
+          in: path
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: '<p>Adds or edits tags for a AWS RoboMaker resource.</p> <p>Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings. </p> <p>For information about the rules that apply to tag keys and tag values, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html">User-Defined Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: resourceArn
+          type: string
+          in: path
+          required: true
+    delete:
+      operationId: UntagResource
+      description: '<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href="https://docs.aws.amazon.com/robomaker/latest/dg//API_Reference.htmlAPI_TagResource.html"> <code>TagResource</code> </a>. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceResponse'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '482':
+          description: InvalidParameterException
+          schema:
+            $ref: '#/definitions/InvalidParameterException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: resourceArn
+          type: string
+          in: path
+          required: true
   /registerRobot:
     post:
       operationId: RegisterRobot
@@ -1511,13 +1625,16 @@ definitions:
         description: The failure reason of the deployment job if it failed.
       failureCode:
         $ref: '#/definitions/DeploymentJobErrorCode'
-        description: The failure code of the deployment job if it failed.
+        description: '<p>The failure code of the simulation job if it failed:</p> <dl> <dt>BadPermissionError</dt> <dd> <p>AWS Greengrass requires a service-level role permission to access other services. The role must include the <a href="https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor"> <code>AWSGreengrassResourceAccessRolePolicy</code> managed policy</a>. </p> </dd> <dt>ExtractingBundleFailure</dt> <dd> <p>The robot application could not be extracted from the bundle.</p> </dd> <dt>FailureThresholdBreached</dt> <dd> <p>The percentage of robots that could not be updated exceeded the percentage set for the deployment.</p> </dd> <dt>GreengrassDeploymentFailed</dt> <dd> <p>The robot application could not be deployed to the robot.</p> </dd> <dt>GreengrassGroupVersionDoesNotExist</dt> <dd> <p>The AWS Greengrass group or version associated with a robot is missing.</p> </dd> <dt>InternalServerError</dt> <dd> <p>An internal error has occurred. Retry your request, but if the problem persists, contact us with details.</p> </dd> <dt>MissingRobotApplicationArchitecture</dt> <dd> <p>The robot application does not have a source that matches the architecture of the robot.</p> </dd> <dt>MissingRobotDeploymentResource</dt> <dd> <p>One or more of the resources specified for the robot application are missing. For example, does the robot application have the correct launch package and launch file?</p> </dd> <dt>PostLaunchFileFailure</dt> <dd> <p>The post-launch script failed.</p> </dd> <dt>PreLaunchFileFailure</dt> <dd> <p>The pre-launch script failed.</p> </dd> <dt>ResourceNotFound</dt> <dd> <p>One or more deployment resources are missing. For example, do robot application source bundles still exist? </p> </dd> <dt>RobotDeploymentNoResponse</dt> <dd> <p>There is no response from the robot. It might not be powered on or connected to the internet.</p> </dd> </dl>'
       createdAt:
         $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the fleet was created.'
       deploymentConfig:
         $ref: '#/definitions/DeploymentConfig'
         description: The deployment configuration.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the deployment job.
   CreateDeploymentJobRequest:
     type: object
     required:
@@ -1537,6 +1654,9 @@ definitions:
       deploymentApplicationConfigs:
         $ref: '#/definitions/DeploymentApplicationConfigs'
         description: The deployment application configuration.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the deployment job.
   LimitExceededException: {}
   ConcurrentDeploymentException: {}
   IdempotentParameterMismatchException: {}
@@ -1552,6 +1672,9 @@ definitions:
       createdAt:
         $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the fleet was created.'
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the fleet.
   CreateFleetRequest:
     type: object
     required:
@@ -1560,6 +1683,9 @@ definitions:
       name:
         $ref: '#/definitions/Name'
         description: The name of the fleet.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the fleet.
   CreateRobotResponse:
     type: object
     properties:
@@ -1578,6 +1704,9 @@ definitions:
       architecture:
         $ref: '#/definitions/Architecture'
         description: The target architecture of the robot.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the robot.
   CreateRobotRequest:
     type: object
     required:
@@ -1594,6 +1723,9 @@ definitions:
       greengrassGroupId:
         $ref: '#/definitions/Id'
         description: The Greengrass group id.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the robot.
   ResourceAlreadyExistsException: {}
   CreateRobotApplicationResponse:
     type: object
@@ -1619,6 +1751,9 @@ definitions:
       revisionId:
         $ref: '#/definitions/RevisionId'
         description: The revision id of the robot application.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the robot application.
   CreateRobotApplicationRequest:
     type: object
     required:
@@ -1635,6 +1770,9 @@ definitions:
       robotSoftwareSuite:
         $ref: '#/definitions/RobotSoftwareSuite'
         description: The robot software suite used by the robot application.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the robot application.
   CreateRobotApplicationVersionResponse:
     type: object
     properties:
@@ -1700,6 +1838,9 @@ definitions:
       revisionId:
         $ref: '#/definitions/RevisionId'
         description: The revision id of the simulation application.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the simulation application.
   CreateSimulationApplicationRequest:
     type: object
     required:
@@ -1724,6 +1865,9 @@ definitions:
       renderingEngine:
         $ref: '#/definitions/RenderingEngine'
         description: The rendering engine for the simulation application.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the simulation application.
   CreateSimulationApplicationVersionResponse:
     type: object
     properties:
@@ -1782,7 +1926,7 @@ definitions:
         description: the failure behavior for the simulation job.
       failureCode:
         $ref: '#/definitions/SimulationJobErrorCode'
-        description: The failure code of the simulation job if it failed.
+        description: '<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>'
       clientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -1804,6 +1948,9 @@ definitions:
       simulationApplications:
         $ref: '#/definitions/SimulationApplicationConfigs'
         description: The simulation application used by the simulation job.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the simulation job.
       vpcConfig:
         $ref: '#/definitions/VPCConfigResponse'
         description: Information about the vpc configuration.
@@ -1824,7 +1971,7 @@ definitions:
         description: 'The maximum simulation job duration in seconds (up to 14 days or 1,209,600 seconds. When <code>maxJobDurationInSeconds</code> is reached, the simulation job will status will transition to <code>Completed</code>.'
       iamRole:
         $ref: '#/definitions/IamRole'
-        description: 'The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href="https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials">specify AWS security credentials for your application</a>. '
+        description: 'The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. '
       failureBehavior:
         $ref: '#/definitions/FailureBehavior'
         description: <p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>
@@ -1834,6 +1981,9 @@ definitions:
       simulationApplications:
         $ref: '#/definitions/SimulationApplicationConfigs'
         description: The simulation application to use in the simulation job.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the simulation job.
       vpcConfig:
         $ref: '#/definitions/VPCConfig'
         description: 'If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. '
@@ -1938,6 +2088,9 @@ definitions:
       robotDeploymentSummary:
         $ref: '#/definitions/RobotDeploymentSummary'
         description: A list of robot deployment summaries.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the specified deployment job.
   DescribeDeploymentJobRequest:
     type: object
     required:
@@ -1970,6 +2123,9 @@ definitions:
       lastDeploymentTime:
         $ref: '#/definitions/CreatedAt'
         description: The time of the last deployment.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the specified fleet.
   DescribeFleetRequest:
     type: object
     required:
@@ -2008,6 +2164,9 @@ definitions:
       lastDeploymentTime:
         $ref: '#/definitions/CreatedAt'
         description: The time of the last deployment job.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the specified robot.
   DescribeRobotRequest:
     type: object
     required:
@@ -2040,6 +2199,9 @@ definitions:
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the robot application was last updated.'
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the specified robot application.
   DescribeRobotApplicationRequest:
     type: object
     required:
@@ -2081,6 +2243,9 @@ definitions:
       lastUpdatedAt:
         $ref: '#/definitions/LastUpdatedAt'
         description: 'The time, in milliseconds since the epoch, when the simulation application was last updated.'
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the specified simulation application.
   DescribeSimulationApplicationRequest:
     type: object
     required:
@@ -2112,7 +2277,10 @@ definitions:
         description: The failure behavior for the simulation job.
       failureCode:
         $ref: '#/definitions/SimulationJobErrorCode'
-        description: '<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally (segfault, etc.)</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally (segfault, etc.)</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation</p> </dd> </dl>'
+        description: '<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>'
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: 'Details about why the simulation job failed. For more information about troubleshooting, see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html">Troubleshooting</a>.'
       clientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
@@ -2134,6 +2302,9 @@ definitions:
       simulationApplications:
         $ref: '#/definitions/SimulationApplicationConfigs'
         description: A list of simulation applications.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the specified simulation job.
       vpcConfig:
         $ref: '#/definitions/VPCConfigResponse'
         description: The VPC configuration.
@@ -2279,6 +2450,15 @@ definitions:
       filters:
         $ref: '#/definitions/Filters'
         description: Optional filters to limit results.
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: The list of all tags added to the specified resource.
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   RegisterRobotResponse:
     type: object
     properties:
@@ -2334,7 +2514,7 @@ definitions:
         description: The failure reason if the job fails.
       failureCode:
         $ref: '#/definitions/DeploymentJobErrorCode'
-        description: The failure code if the job fails.
+        description: '<p>The failure code if the job fails:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>'
       createdAt:
         $ref: '#/definitions/CreatedAt'
         description: 'The time, in milliseconds since the epoch, when the fleet was created.'
@@ -2350,6 +2530,23 @@ definitions:
       fleet:
         $ref: '#/definitions/Arn'
         description: The target fleet for the synchronization.
+  TagResourceResponse:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the resource.
+  UntagResourceResponse:
+    type: object
+    properties: {}
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateRobotApplicationResponse:
     type: object
     properties:
@@ -2494,6 +2691,17 @@ definitions:
       $ref: '#/definitions/DeploymentApplicationConfig'
     minItems: 1
     maxItems: 1
+  TagMap:
+    type: array
+    minItems: 0
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
   DeploymentStatus:
     type: string
     enum:
@@ -2662,6 +2870,9 @@ definitions:
       - InvalidBundleSimulationApplication
       - RobotApplicationVersionMismatchedEtag
       - SimulationApplicationVersionMismatchedEtag
+      - WrongRegionS3Output
+      - WrongRegionRobotApplication
+      - WrongRegionSimulationApplication
   SimulationTimeMillis:
     type: integer
   VPCConfigResponse:
@@ -2680,6 +2891,11 @@ definitions:
         $ref: '#/definitions/Boolean'
         description: A boolean indicating if a public IP was assigned.
     description: VPC configuration associated with your simulation job.
+  DeploymentVersion:
+    type: string
+    pattern: '[0-9]*'
+    minLength: 1
+    maxLength: 255
   DeploymentLaunchConfig:
     type: object
     required:
@@ -2691,16 +2907,16 @@ definitions:
         description: The package name.
       preLaunchFile:
         $ref: '#/definitions/GenericString'
-        description: The deployment pre-launch file. This file will be executed prior to the deployment launch file.
+        description: The deployment pre-launch file. This file will be executed prior to the launch file.
       launchFile:
         $ref: '#/definitions/GenericString'
-        description: The deployment launch file.
+        description: The launch file name.
       postLaunchFile:
         $ref: '#/definitions/GenericString'
-        description: The deployment post-launch file. This file will be executed after the deployment launch file.
+        description: The deployment post-launch file. This file will be executed after the launch file.
       environmentVariables:
         $ref: '#/definitions/EnvironmentVariableMap'
-        description: An array of key/value pairs specifying environment variables for the deployment application.
+        description: An array of key/value pairs specifying environment variables for the robot application
     description: Configuration information for a deployment launch.
   DeploymentApplicationConfig:
     type: object
@@ -2711,13 +2927,13 @@ definitions:
     properties:
       application:
         $ref: '#/definitions/Arn'
-        description: The application.
+        description: The Amazon Resource Name (ARN) of the robot application.
       applicationVersion:
-        $ref: '#/definitions/Version'
+        $ref: '#/definitions/DeploymentVersion'
         description: The version of the application.
       launchConfig:
         $ref: '#/definitions/DeploymentLaunchConfig'
-        description: 'The launch configuration, usually <code>roslaunch</code>.'
+        description: The launch configuration.
     description: Information about a deployment application configuration.
   Percentage:
     type: integer
@@ -2858,7 +3074,7 @@ definitions:
         description: The package name.
       launchFile:
         $ref: '#/definitions/GenericString'
-        description: The launch file.
+        description: The launch file name.
       environmentVariables:
         $ref: '#/definitions/EnvironmentVariableMap'
         description: The environment variables for the application launch.
@@ -3087,6 +3303,9 @@ definitions:
       failureCode:
         $ref: '#/definitions/SimulationJobErrorCode'
         description: The failure code of the simulation job if it failed.
+      failureReason:
+        $ref: '#/definitions/GenericString'
+        description: The reason why the simulation job failed.
       clientRequestToken:
         $ref: '#/definitions/ClientRequestToken'
         description: A unique identifier for this <code>SimulationJob</code> request.
@@ -3108,6 +3327,9 @@ definitions:
       simulationApplications:
         $ref: '#/definitions/SimulationApplicationConfigs'
         description: A list of simulation applications.
+      tags:
+        $ref: '#/definitions/TagMap'
+        description: A map that contains tag keys and tag values that are attached to the simulation job.
       vpcConfig:
         $ref: '#/definitions/VPCConfigResponse'
         description: VPC configuration information.
@@ -3176,3 +3398,17 @@ definitions:
       $ref: '#/definitions/GenericString'
     minItems: 1
     maxItems: 16
+  TagKey:
+    type: string
+    pattern: '[a-zA-Z0-9 _.\-\/+=:]*'
+    minLength: 1
+    maxLength: 128
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
+  TagValue:
+    type: string
+    pattern: '[a-zA-Z0-9 _.\-\/+=:]*'
+    minLength: 0
+    maxLength: 256

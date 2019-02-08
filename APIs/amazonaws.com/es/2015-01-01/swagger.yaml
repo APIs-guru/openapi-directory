@@ -1713,6 +1713,9 @@ definitions:
       ZoneAwarenessEnabled:
         $ref: '#/definitions/Boolean'
         description: 'A boolean value to indicate whether zone awareness is enabled. See <a href="http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness" target="_blank">About Zone Awareness</a> for more information.'
+      ZoneAwarenessConfig:
+        $ref: '#/definitions/ZoneAwarenessConfig'
+        description: Specifies the zone awareness configuration for a domain when zone awareness is enabled.
       DedicatedMasterType:
         $ref: '#/definitions/ESPartitionInstanceType'
         description: The instance type for a dedicated master node.
@@ -2020,6 +2023,13 @@ definitions:
         $ref: '#/definitions/OptionStatus'
         description: ' Specifies the status of the EBS options for the specified Elasticsearch domain.'
     description: ' Status of the EBS options for the specified Elasticsearch domain.'
+  ZoneAwarenessConfig:
+    type: object
+    properties:
+      AvailabilityZoneCount:
+        $ref: '#/definitions/IntegerClass'
+        description: An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled
+    description: 'Specifies the zone awareness configuration for the domain cluster, such as the number of availability zones.'
   ElasticsearchClusterConfigStatus:
     type: object
     required:
