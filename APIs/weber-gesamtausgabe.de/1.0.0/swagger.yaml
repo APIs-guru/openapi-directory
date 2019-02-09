@@ -11,7 +11,7 @@ info:
     - open_data
   x-logo:
     backgroundColor: '#FFFFFF'
-    url: 'https://weber-gesamtausgabe.de/resources/img/logo_weber.png'
+    url: 'https://web.archive.org/web/20180313153846im_/https://weber-gesamtausgabe.de/resources/img/logo_weber.png'
   x-origin:
     - format: swagger
       url: 'https://weber-gesamtausgabe.de/api/v1/swagger.json'
@@ -134,7 +134,7 @@ paths:
   '/documents/findByAuthor/{authorID}':
     get:
       description: |
-        This endpoint returns a list of documents by a given author – optionally filtered by document type 
+        This endpoint returns a list of documents by a given author – optionally filtered by document type
       parameters:
         - default: A002068
           description: |
@@ -163,7 +163,7 @@ paths:
   /documents/findByDate:
     get:
       description: |
-        This endpoint returns a list of documents related to the given date – optionally filtered by document type. 
+        This endpoint returns a list of documents related to the given date – optionally filtered by document type.
       parameters:
         - default: '1786-11-18'
           description: The min date to search for
@@ -198,7 +198,7 @@ paths:
   '/documents/findByMention/{docID}':
     get:
       description: |
-        This endpoint returns a list of documents that reference a particular docID – optionally filtered by document type. 
+        This endpoint returns a list of documents that reference a particular docID – optionally filtered by document type.
       parameters:
         - default: A002068
           description: |
