@@ -48,12 +48,27 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.Resources/operations:
+    get:
+      description: Lists all of the available Microsoft.Resources REST API operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/OperationListResult'
+      tags:
+        - Operations
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Resources/links':
     get:
       description: Gets all the linked resources for the subscription.
       operationId: ResourceLinks_ListAtSubscription
       parameters:
-        - description: 'The filter to apply on the list resource links operation. The supported filter for list resource links is targetid. For example, $filter=targetid eq {value}'
+        - description: 'The filter to apply on the list resource links operation. The supported filter for list resource links is targetId. For example, $filter=targetId eq {value}'
           in: query
           name: $filter
           required: false
@@ -168,6 +183,39 @@ paths:
       x-ms-pageable:
         nextLinkName: nextLink
 definitions:
+  Operation:
+    description: Microsoft.Resources operation
+    properties:
+      display:
+        description: The object that represents the operation.
+        properties:
+          description:
+            description: Description of the operation.
+            type: string
+          operation:
+            description: 'Operation type: Read, write, delete, etc.'
+            type: string
+          provider:
+            description: 'Service provider: Microsoft.Resources'
+            type: string
+          resource:
+            description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
+            type: string
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}'
+        type: string
+    type: object
+  OperationListResult:
+    description: Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.
+    properties:
+      nextLink:
+        description: URL to get the next set of operation list results if there are any.
+        type: string
+      value:
+        description: List of Microsoft.Resources operations.
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
   ResourceLink:
     description: The resource link.
     properties:
@@ -182,6 +230,10 @@ definitions:
       properties:
         $ref: '#/definitions/ResourceLinkProperties'
         description: Properties for resource link.
+      type:
+        description: The resource link object.
+        readOnly: true
+        type: object
     x-ms-azure-resource: true
   ResourceLinkFilter:
     description: Resource link filter.

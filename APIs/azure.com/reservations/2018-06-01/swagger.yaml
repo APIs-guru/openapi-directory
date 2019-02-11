@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/reservations/resource-manager/Microsoft.Capacity/preview/2018-06-01/reservations.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: reservations
   x-tags:
@@ -1223,7 +1222,7 @@ definitions:
         $ref: '#/definitions/ReservationStatusCode'
     type: object
   InstanceFlexibility:
-    description: Allows reservation discount to be applied across skus within the same AutofitGroup. Not all skus support instance size flexibility.
+    description: Allows reservation discount to be applied across skus within the same Autofit group. Not all skus support instance size flexibility.
     enum:
       - 'On'
       - 'Off'

@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-03-01/trafficmanager.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: trafficmanager
   x-tags:
@@ -678,7 +677,7 @@ paths:
                     properties:
                       customHeaders:
                         - name: header-2
-                          value: value-2-overriden
+                          value: value-2-overridden
                       endpointLocation: North Europe
                       endpointStatus: Enabled
                       target: foobar.contoso.com
@@ -723,7 +722,7 @@ paths:
                       properties:
                         customHeaders:
                           - name: header-2
-                            value: value-2-overriden
+                            value: value-2-overridden
                         endpointLocation: North Europe
                         endpointMonitorStatus: CheckingEndpoint
                         endpointStatus: Enabled
@@ -764,7 +763,7 @@ paths:
                       properties:
                         customHeaders:
                           - name: header-2
-                            value: value-2-overriden
+                            value: value-2-overridden
                         endpointLocation: North Europe
                         endpointMonitorStatus: CheckingEndpoint
                         endpointStatus: Enabled
@@ -1823,7 +1822,7 @@ definitions:
         description: The name of the resource
         type: string
       type:
-        description: The type of the resource. Ex- Microsoft.Network/trafficmanagerProfiles.
+        description: The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
         type: string
     x-ms-azure-resource: true
   TrackedResource:

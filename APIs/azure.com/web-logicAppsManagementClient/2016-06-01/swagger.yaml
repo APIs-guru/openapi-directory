@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2016-06-01/logicAppsManagementClient.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-logicAppsManagementClient
   x-tags:
@@ -1386,7 +1385,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: custom API succesfully moved
+          description: custom API successfully moved
       summary: Moves the custom API
       tags:
         - Custom APIs
@@ -1470,7 +1469,7 @@ definitions:
         type: string
     type: object
   ApiOAuthSettings:
-    description: OAuth settings for the conenction provider
+    description: OAuth settings for the connection provider
     properties:
       clientId:
         description: Resource provider client id
@@ -1520,7 +1519,7 @@ definitions:
         description: Brand color
         type: string
       description:
-        description: The custom API desciption
+        description: The custom API description
         type: string
       displayName:
         description: The display name
@@ -1902,7 +1901,7 @@ definitions:
         description: Connection parameters
         type: object
       description:
-        description: The custom API desciption
+        description: The custom API description
         type: string
       displayName:
         description: The display name

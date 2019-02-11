@@ -5181,7 +5181,7 @@ definitions:
     description: Describes an Azure Service Fabric Cluster
     properties:
       clusterId:
-        description: Service Fabric cluster indentifier.
+        description: Service Fabric cluster identifier.
         type: string
       name:
         description: Service Fabric cluster name.
@@ -5384,7 +5384,7 @@ definitions:
     discriminator: kind
     properties:
       kind:
-        description: Additional hostring configuration type qualifier.
+        description: Additional hosting configuration type qualifier.
         enum:
           - 'provider:azure'
         type: string
@@ -6031,14 +6031,14 @@ definitions:
         description: File version.
         type: string
       firstPid:
-        description: The Operating System Process Idendifier (PID) of the first process in this process pool.
+        description: The Operating System Process Identifier (PID) of the first process in this process pool.
         format: int32
         type: integer
       internalName:
         description: Internal process name.
         type: string
       persistentKey:
-        description: 'A unique indentifier for a process, generally resilient to process restart, computed by Service Map.'
+        description: 'A unique identifier for a process, generally resilient to process restart, computed by Service Map.'
         type: string
       poolId:
         description: Represents the identity of the process pool assigned to the process by Dependency Agent.
@@ -6075,7 +6075,7 @@ definitions:
     discriminator: kind
     properties:
       kind:
-        description: Additional hostring configuration type qualifier.
+        description: Additional hosting configuration type qualifier.
         enum:
           - 'provider:azure'
         type: string
@@ -6225,13 +6225,13 @@ definitions:
         description: Timezone full name.
         type: string
   VirtualMachineConfiguration:
-    description: Describes the virtualizaton-related configuration of a machine.
+    description: Describes the virtualization-related configuration of a machine.
     properties:
       nativeHostMachineId:
         description: The unique identifier of the host of this virtual machine as reported by the underlying virtualization system.
         type: string
       nativeMachineId:
-        description: The unique identifier of the virtual machine as reported by the underlying virtualization sytem.
+        description: The unique identifier of the virtual machine as reported by the underlying virtualization system.
         type: string
       virtualMachineName:
         description: The Name of the virtual machine.

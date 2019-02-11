@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-AppServiceCertificateOrders
   x-tags:
@@ -217,7 +216,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Succesfully deleted certificate order.
+          description: Successfully deleted certificate order.
         '204':
           description: Certificate order does not exist.
       summary: Delete an existing certificate order.
@@ -298,7 +297,7 @@ paths:
           name: certificateOrderName
           required: true
           type: string
-        - description: Distinguished name to to use for the certificate order.
+        - description: Distinguished name to use for the certificate order.
           in: body
           name: certificateDistinguishedName
           required: true
@@ -373,7 +372,7 @@ paths:
           name: certificateOrderName
           required: true
           type: string
-        - description: Distinguished name to to use for the certificate order.
+        - description: Distinguished name to use for the certificate order.
           in: body
           name: certificateDistinguishedName
           required: true
@@ -527,7 +526,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Succesfully deleted certificate.
+          description: Successfully deleted certificate.
         '204':
           description: Certificate does not exist.
       summary: Delete the certificate associated with a certificate order.
@@ -1121,7 +1120,7 @@ definitions:
           name: KeyVaultSecretStatus
     type: object
   AppServiceCertificateCollection:
-    description: Collection of certitificateorder certificates.
+    description: Collection of certificate order certificates.
     properties:
       nextLink:
         description: Link to next page of resources.
@@ -1306,7 +1305,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   AppServiceCertificateOrderCollection:
-    description: Collection of certitificate orders.
+    description: Collection of certificate orders.
     properties:
       nextLink:
         description: Link to next page of resources.

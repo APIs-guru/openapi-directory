@@ -73,7 +73,7 @@ paths:
       description: Lists all of the functions under the specified streaming job.
       operationId: Functions_ListByStreamingJob
       parameters:
-        - description: 'The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or “*” to include all properties. By default, all properties are returned except diagnostics. Currently only accepts ''*'' as a valid value.'
+        - description: 'The $select OData query parameter. This is a comma-separated list of structural properties to include in the response, or "*" to include all properties. By default, all properties are returned except diagnostics. Currently only accepts ''*'' as a valid value.'
           in: query
           name: $select
           required: false
@@ -263,7 +263,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Function'
-        - description: The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes.
+        - description: The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
           in: header
           name: If-Match
           required: false
@@ -374,7 +374,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Function'
-        - description: The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes.
+        - description: The ETag of the function. Omit this value to always overwrite the current function. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
           in: header
           name: If-Match
           required: false

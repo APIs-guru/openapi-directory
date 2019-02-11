@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/preview/2015-05-01-preview/advisors.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: sql-advisors
   x-tags:
@@ -1906,7 +1905,7 @@ definitions:
         description: ARM proxy resource.
         properties: {}
         type: object
-    description: 'Database, Server or Elatic Pool Advisor.'
+    description: 'Database, Server or Elastic Pool Advisor.'
     properties:
       kind:
         description: Resource kind.
@@ -1947,7 +1946,7 @@ definitions:
           modelAsString: false
           name: AutoExecuteStatus
       autoExecuteStatusInheritedFrom:
-        description: 'Gets the resource from which current value of auto-execute status is inherited. Auto-execute status can be set on (and inhertied from) different levels in the resource heirarchy. Possible values are ''Subscription'', ''Server'', ''ElasticPool'', ''Database'' and ''Default'' (when status is not explicitly set on any level).'
+        description: 'Gets the resource from which current value of auto-execute status is inherited. Auto-execute status can be set on (and inherited from) different levels in the resource hierarchy. Possible values are ''Subscription'', ''Server'', ''ElasticPool'', ''Database'' and ''Default'' (when status is not explicitly set on any level).'
         enum:
           - Default
           - Subscription
@@ -2233,7 +2232,7 @@ definitions:
     description: 'Contains information of current state for an Azure SQL Database, Server or Elastic Pool Recommended Action.'
     properties:
       actionInitiatedBy:
-        description: 'Gets who initiated the execution of this recommended action. Possible Value are: User    -> When user explicity notified system to apply the recommended action. System  -> When auto-execute status of this advisor was set to ''Enabled'', in which case the system applied it.'
+        description: 'Gets who initiated the execution of this recommended action. Possible Value are: User    -> When user explicitly notified system to apply the recommended action. System  -> When auto-execute status of this advisor was set to ''Enabled'', in which case the system applied it.'
         enum:
           - User
           - System
@@ -2243,7 +2242,7 @@ definitions:
           modelAsString: false
           name: RecommendedActionInitiatedBy
       currentValue:
-        description: 'Current state the recommended action is in. Some commonly used states are: Active      -> recommended action is active and no action has been taken yet. Pending     -> recommended action is approved for and is awaiting execution. Executing   -> recommended action is being applied on the user database. Verifying   -> recommended action was applied and is being verified of its usefulness by the system. Success     -> recommended action was applied and improvement found during verification. Pending Revert  -> verification found little or no improvement so recommended action is queued for revert or user has manually reverted. Reverting   -> changes made while applying recommended action are being reverted on the user database. Reverted    -> succesfully reverted the changes made by recommended action on user database. Ignored     -> user explicitly ignored/discarded the recommended action. '
+        description: 'Current state the recommended action is in. Some commonly used states are: Active      -> recommended action is active and no action has been taken yet. Pending     -> recommended action is approved for and is awaiting execution. Executing   -> recommended action is being applied on the user database. Verifying   -> recommended action was applied and is being verified of its usefulness by the system. Success     -> recommended action was applied and improvement found during verification. Pending Revert  -> verification found little or no improvement so recommended action is queued for revert or user has manually reverted. Reverting   -> changes made while applying recommended action are being reverted on the user database. Reverted    -> successfully reverted the changes made by recommended action on user database. Ignored     -> user explicitly ignored/discarded the recommended action. '
         enum:
           - Active
           - Pending

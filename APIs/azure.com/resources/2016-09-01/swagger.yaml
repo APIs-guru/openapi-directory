@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2016-09-01/resources.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources
   x-tags:
@@ -133,7 +132,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: OK - Returns informatin about the resource provider.
+          description: OK - Returns information about the resource provider.
           schema:
             $ref: '#/definitions/Provider'
       tags:
@@ -184,7 +183,7 @@ paths:
       description: 'The resources to move must be in the same source resource group. The target resource group may be in a different subscription. When moving resources, both the source group and the target group are locked for the duration of the operation. Write and delete operations are blocked on the groups until the move completes. '
       operationId: Resources_MoveResources
       parameters:
-        - description: The name of the resource group containing the rsources to move.
+        - description: The name of the resource group containing the resources to move.
           in: path
           maxLength: 90
           minLength: 1
@@ -1489,7 +1488,7 @@ definitions:
           modelAsString: false
           name: DeploymentMode
       outputs:
-        description: Key/value pairs that represent deploymentoutput.
+        description: Key/value pairs that represent deployment output.
         type: object
       parameters:
         description: Deployment parameters. Use only one of Parameters or ParametersLink.
@@ -1598,7 +1597,7 @@ definitions:
           modelAsString: false
           name: ResourceIdentityType
   ParametersLink:
-    description: Entity representing the reference to the deployment paramaters.
+    description: Entity representing the reference to the deployment parameters.
     properties:
       contentVersion:
         description: 'If included, must match the ContentVersion in the template.'
@@ -1713,7 +1712,7 @@ definitions:
         readOnly: true
         type: string
       location:
-        description: The location of the resource group. It cannot be changed after the resource group has been created. It muct be one of the supported Azure locations.
+        description: The location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations.
         type: string
       managedBy:
         description: The ID of the resource that manages this resource group.

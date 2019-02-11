@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2018-02-01/resources.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: resources
   x-tags:
@@ -133,7 +132,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: OK - Returns informatin about the resource provider.
+          description: OK - Returns information about the resource provider.
           schema:
             $ref: '#/definitions/Provider'
       tags:
@@ -1528,7 +1527,7 @@ definitions:
         $ref: '#/definitions/OnErrorDeploymentExtended'
         description: The deployment on error behavior.
       outputs:
-        description: Key/value pairs that represent deploymentoutput.
+        description: Key/value pairs that represent deployment output.
         type: object
       parameters:
         description: Deployment parameters. Use only one of Parameters or ParametersLink.
@@ -1675,7 +1674,7 @@ definitions:
           modelAsString: false
           name: OnErrorDeploymentType
   ParametersLink:
-    description: Entity representing the reference to the deployment paramaters.
+    description: Entity representing the reference to the deployment parameters.
     properties:
       contentVersion:
         description: 'If included, must match the ContentVersion in the template.'

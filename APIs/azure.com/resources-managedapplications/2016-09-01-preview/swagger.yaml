@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources-managedapplications
   x-tags:
@@ -50,6 +49,21 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.Solutions/operations:
+    get:
+      description: Lists all of the available Microsoft.Solutions REST API operations.
+      operationId: ListOperations
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/OperationListResult'
+      tags:
+        - Operations
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/appliances':
     get:
       description: Gets all the appliances within a subscription.
@@ -107,7 +121,9 @@ paths:
               body:
                 value:
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myApplianceDef
+                    identity: null
                     location: East US 2
+                    managedBy: null
                     name: myApplianceDef
                     properties:
                       artifacts:
@@ -122,11 +138,16 @@ paths:
                           roleDefinitionId: validroleguid
                       description: myApplianceDef description
                       displayName: myApplianceDef
+                      lockLevel: null
                       packageFileUri: 'https://path/to/packagezipfile'
                     resourceGroup: rg
+                    sku: null
+                    tags: null
                     type: Microsoft.Solutions/applianceDefinitions
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myApplianceDef2
+                    identity: null
                     location: West US
+                    managedBy: null
                     name: myApplianceDef2
                     properties:
                       artifacts:
@@ -141,8 +162,11 @@ paths:
                           roleDefinitionId: validroleguid
                       description: myApplianceDef2 description
                       displayName: myApplianceDef2
+                      lockLevel: null
                       packageFileUri: 'https://path/to/packagezipfile'
                     resourceGroup: rg
+                    sku: null
+                    tags: null
                     type: Microsoft.Solutions/applianceDefinitions
               headers: {}
       x-ms-pageable:
@@ -228,7 +252,9 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myApplianceDef
+                identity: null
                 location: East US 2
+                managedBy: null
                 name: myApplianceDef
                 properties:
                   artifacts:
@@ -243,8 +269,11 @@ paths:
                       roleDefinitionId: validroleguid
                   description: myApplianceDef description
                   displayName: myApplianceDef
+                  lockLevel: null
                   packageFileUri: 'https://path/to/packagezipfile'
                 resourceGroup: rg
+                sku: null
+                tags: null
                 type: Microsoft.Solutions/applianceDefinitions
               headers: {}
     put:
@@ -310,7 +339,9 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myApplianceDef
+                identity: null
                 location: East US 2
+                managedBy: null
                 name: myApplianceDef
                 properties:
                   artifacts:
@@ -325,8 +356,11 @@ paths:
                       roleDefinitionId: validroleguid
                   description: myApplianceDef description
                   displayName: myApplianceDef
+                  lockLevel: null
                   packageFileUri: 'https://path/to/packagezipfile'
                 resourceGroup: rg
+                sku: null
+                tags: null
                 type: Microsoft.Solutions/applianceDefinitions
               headers: {}
       x-ms-long-running-operation: true
@@ -367,26 +401,40 @@ paths:
               body:
                 value:
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/appliances/myAppliance
+                    identity: null
                     kind: ServiceCatalog
                     location: East US 2
+                    managedBy: null
                     name: myAppliance
+                    plan: null
                     properties:
                       applianceDefinitionId: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myAppDef
                       managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                      outputs: null
+                      parameters: null
                       provisioningState: Created
                       uiDefinitionUri: 'https://path/to/applianceCreateUiDefinition.json'
                     resourceGroup: rg
+                    sku: null
+                    tags: null
                     type: Microsoft.Solutions/appliances
                   - id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/appliances/myAppliance2
+                    identity: null
                     kind: ServiceCatalog
                     location: West US
+                    managedBy: null
                     name: myAppliance2
+                    plan: null
                     properties:
                       applianceDefinitionId: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myAppDef2
                       managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                      outputs: null
+                      parameters: null
                       provisioningState: Created
                       uiDefinitionUri: 'https://path/to/applianceCreateUiDefinition.json'
                     resourceGroup: rg
+                    sku: null
+                    tags: null
                     type: Microsoft.Solutions/appliances
               headers: {}
       x-ms-pageable:
@@ -470,15 +518,22 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/appliances/myAppliance
+                identity: null
                 kind: ServiceCatalog
                 location: East US 2
+                managedBy: null
                 name: myAppliance
+                plan: null
                 properties:
                   applianceDefinitionId: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myAppDef
                   managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                  outputs: null
+                  parameters: null
                   provisioningState: Created
                   uiDefinitionUri: 'https://path/to/applianceCreateUiDefinition.json'
                 resourceGroup: rg
+                sku: null
+                tags: null
                 type: Microsoft.Solutions/appliances
               headers: {}
     patch:
@@ -578,15 +633,22 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/appliances/myAppliance
+                identity: null
                 kind: ServiceCatalog
                 location: East US 2
+                managedBy: null
                 name: myAppliance
+                plan: null
                 properties:
                   applianceDefinitionId: /subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myAppDef
                   managedResourceGroupId: /subscriptions/subid/resourceGroups/myManagedRG
+                  outputs: null
+                  parameters: null
                   provisioningState: Created
                   uiDefinitionUri: 'https://path/to/applianceCreateUiDefinition.json'
                 resourceGroup: rg
+                sku: null
+                tags: null
                 type: Microsoft.Solutions/appliances
               headers: {}
       x-ms-long-running-operation: true
@@ -798,9 +860,6 @@ definitions:
         $ref: '#/definitions/ApplianceProperties'
         description: The appliance properties.
         x-ms-client-flatten: true
-    required:
-      - properties
-      - kind
   ApplianceArtifact:
     description: Appliance artifact.
     properties:
@@ -971,7 +1030,7 @@ definitions:
       - principalId
       - roleDefinitionId
   ErrorResponse:
-    description: Error reponse indicates ARM appliance is not able to process the incoming request. The reason is provided in the error message.
+    description: Error response indicates ARM appliance is not able to process the incoming request. The reason is provided in the error message.
     properties:
       errorCode:
         description: Error code.
@@ -1016,6 +1075,36 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: ResourceIdentityType
+  Operation:
+    description: Microsoft.Solutions operation
+    properties:
+      display:
+        description: The object that represents the operation.
+        properties:
+          operation:
+            description: 'Operation type: Read, write, delete, etc.'
+            type: string
+          provider:
+            description: 'Service provider: Microsoft.Solutions'
+            type: string
+          resource:
+            description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
+            type: string
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}'
+        type: string
+    type: object
+  OperationListResult:
+    description: Result of the request to list Microsoft.Solutions operations. It contains a list of operations and a URL link to get the next set of results.
+    properties:
+      nextLink:
+        description: URL to get the next set of operation list results if there are any.
+        type: string
+      value:
+        description: List of Microsoft.Solutions operations.
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
   Plan:
     description: Plan for the appliance.
     properties:

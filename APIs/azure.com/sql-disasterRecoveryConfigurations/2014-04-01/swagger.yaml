@@ -32,23 +32,10 @@ securityDefinitions:
       user_impersonation: impersonate your user account
     type: oauth2
 parameters:
-  ApiVersionParameter:
-    description: The API version to use for the request.
-    in: query
-    name: api-version
-    required: true
-    type: string
   DisasterRecoveryConfigurationNameParameter:
     description: The name of the disaster recovery configuration.
     in: path
     name: disasterRecoveryConfigName
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  ResourceGroupParameter:
-    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-    in: path
-    name: resourceGroupName
     required: true
     type: string
     x-ms-parameter-location: method
@@ -59,21 +46,30 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The subscription ID that identifies an Azure subscription.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/disasterRecoveryConfiguration':
     get:
       description: Lists a server's disaster recovery configuration.
       operationId: DisasterRecoveryConfigurations_List
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
       responses:
         '200':
@@ -112,9 +108,24 @@ paths:
       description: Deletes a disaster recovery configuration.
       operationId: DisasterRecoveryConfigurations_Delete
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the disaster recovery configuration to be deleted.
           in: path
@@ -150,9 +161,24 @@ paths:
       description: Gets a disaster recovery configuration.
       operationId: DisasterRecoveryConfigurations_Get
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the disaster recovery configuration.
           in: path
@@ -193,9 +219,24 @@ paths:
       description: Creates or updates a disaster recovery configuration.
       operationId: DisasterRecoveryConfigurations_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the disaster recovery configuration to be created/updated.
           in: path
@@ -279,9 +320,24 @@ paths:
       description: Fails over from the current primary server to this server.
       operationId: DisasterRecoveryConfigurations_Failover
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the disaster recovery configuration to failover.
           in: path
@@ -312,9 +368,24 @@ paths:
       description: Fails over from the current primary server to this server. This operation might result in data loss.
       operationId: DisasterRecoveryConfigurations_FailoverAllowDataLoss
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the disaster recovery configuration to failover forcefully.
           in: path

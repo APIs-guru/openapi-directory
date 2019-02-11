@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-08-01/virtualWan.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network-virtualWan
   x-tags:
@@ -3917,7 +3916,7 @@ paths:
             '204': {}
       x-ms-long-running-operation: true
     get:
-      description: Retrieves the details of a VPNsite.
+      description: Retrieves the details of a VPN site.
       operationId: VpnSites_Get
       parameters:
         - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -4505,7 +4504,7 @@ definitions:
             type: array
       vpnClientConnectionHealth:
         $ref: '#/definitions/VpnClientConnectionHealth'
-        description: All P2S vpnclients' connection health status.
+        description: All P2S VPN clients' connection health status.
         readOnly: true
       vpnGatewayScaleUnit:
         description: The scale unit for this p2s vpn gateway.
@@ -4678,7 +4677,7 @@ definitions:
         description: A unique read-only string that changes whenever the resource is updated.
         type: string
       name:
-        description: The name of the P2SVpnServerConfiguration that is unique within a VirtualWan in a resource group. This name can be used to access the resource along with Paren VirtualWan resource name.
+        description: The name of the P2SVpnServerConfiguration that is unique within a VirtualWan in a resource group. This name can be used to access the resource along with Parent VirtualWan resource name.
         type: string
       p2SVpnGateways:
         items:
@@ -4718,7 +4717,7 @@ definitions:
         description: The radius server address property of the P2SVpnServerConfiguration resource for point to site client connection.
         type: string
       radiusServerSecret:
-        description: The radius secret property of the P2SVpnServerConfiguration resource for for point to site client connection.
+        description: The radius secret property of the P2SVpnServerConfiguration resource for point to site client connection.
         type: string
       vpnClientIpsecPolicies:
         description: VpnClientIpsecPolicies for P2SVpnServerConfiguration.
@@ -4843,7 +4842,7 @@ definitions:
             name: VpnGatewayTunnelingProtocol
         type: array
   ProvisioningState:
-    description: The current provisisoning state.
+    description: The current provisioning state.
     enum:
       - Succeeded
       - Updating

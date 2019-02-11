@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2017-03-01/trafficmanager.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: trafficmanager
   x-tags:
@@ -466,7 +465,7 @@ definitions:
         description: Gets or sets the relative DNS name provided by this Traffic Manager profile.  This value is combined with the DNS domain name used by Azure Traffic Manager to form the fully-qualified domain name (FQDN) of the profile.
         type: string
       ttl:
-        description: 'Gets or sets the DNS Ttime-To-Live (TTL), in seconds.  This informs the local DNS resolvers and DNS clients how long to cache DNS responses provided by this Traffic Manager profile.'
+        description: 'Gets or sets the DNS Time-To-Live (TTL), in seconds.  This informs the local DNS resolvers and DNS clients how long to cache DNS responses provided by this Traffic Manager profile.'
         format: int64
         type: integer
   Endpoint:

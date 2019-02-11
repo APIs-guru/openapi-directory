@@ -35,13 +35,13 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  ApiVersionParameter:
+  apiVersionParameter:
     description: Client API version.
     in: query
     name: api-version
     required: true
     type: string
-  IPFilterRuleNameParameter:
+  ipFilterRuleNameParameter:
     description: The IP Filter Rule name.
     in: path
     minLength: 1
@@ -49,7 +49,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  NamespaceNameParameter:
+  namespaceNameParameter:
     description: The namespace name
     in: path
     maxLength: 50
@@ -58,7 +58,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  ResourceGroupNameParameter:
+  resourceGroupNameParameter:
     description: Name of the Resource group within the Azure subscription.
     in: path
     maxLength: 90
@@ -67,7 +67,7 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SkipParameter:
+  skipParameter:
     description: 'Skip is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skip parameter that specifies a starting point to use for subsequent calls.'
     in: query
     maximum: 1000
@@ -76,7 +76,7 @@ parameters:
     required: false
     type: integer
     x-ms-parameter-location: method
-  SkuNameParameter:
+  skuNameParameter:
     description: The sku type.
     in: path
     maxLength: 50
@@ -85,13 +85,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
+  subscriptionIdParameter:
     description: Subscription credentials that uniquely identify a Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
     in: path
     name: subscriptionId
     required: true
     type: string
-  TopParameter:
+  topParameter:
     description: May be used to limit the number of results to the most recent N usageDetails.
     in: query
     maximum: 1000
@@ -100,7 +100,7 @@ parameters:
     required: false
     type: integer
     x-ms-parameter-location: method
-  VirtualNetworkRuleNameParameter:
+  virtualNetworkRuleNameParameter:
     description: The Virtual Network Rule name.
     in: path
     minLength: 1
@@ -109,6 +109,213 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  /providers/Microsoft.ServiceBus/operations:
+    get:
+      description: Lists all of the available ServiceBus REST API operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/OperationListResult'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Operations
+      x-ms-examples:
+        OperationsList:
+          parameters:
+            api-version: '2016-07-01'
+          responses:
+            '200':
+              body:
+                value:
+                  - display:
+                      operation: Get namespace availability.
+                      provider: Microsoft Azure ServiceBus
+                      resource: Non Resource Operation
+                    name: Microsoft.ServiceBus/checkNameAvailability/action
+                  - display:
+                      operation: Registers the ServiceBus Resource Provider
+                      provider: Microsoft Azure ServiceBus
+                      resource: ServiceBus Resource Provider
+                    name: Microsoft.ServiceBus/register/action
+                  - display:
+                      operation: 'Create Or Update Namespace '
+                      provider: Microsoft Azure ServiceBus
+                      resource: Namespace
+                    name: Microsoft.ServiceBus/namespaces/write
+                  - display:
+                      operation: Get Namespace Resource
+                      provider: Microsoft Azure ServiceBus
+                      resource: Namespace
+                    name: Microsoft.ServiceBus/namespaces/read
+                  - display:
+                      operation: Delete Namespace
+                      provider: Microsoft Azure ServiceBus
+                      resource: Namespace
+                    name: Microsoft.ServiceBus/namespaces/Delete
+                  - display:
+                      operation: Create or Update Namespace Authorization Rules
+                      provider: Microsoft Azure ServiceBus
+                      resource: AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/authorizationRules/write
+                  - display:
+                      operation: Get Namespace Authorization Rules
+                      provider: Microsoft Azure ServiceBus
+                      resource: AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/authorizationRules/read
+                  - display:
+                      operation: Delete Namespace Authorization Rule
+                      provider: Microsoft Azure ServiceBus
+                      resource: AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/authorizationRules/delete
+                  - display:
+                      operation: Get Namespace Listkeys
+                      provider: Microsoft Azure ServiceBus
+                      resource: AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/authorizationRules/listkeys/action
+                  - display:
+                      operation: Resource Regeneratekeys
+                      provider: Microsoft Azure ServiceBus
+                      resource: AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/authorizationRules/regenerateKeys/action
+                  - display:
+                      operation: Create or Update Queue
+                      provider: Microsoft Azure ServiceBus
+                      resource: Queue
+                    name: Microsoft.ServiceBus/namespaces/queues/write
+                  - display:
+                      operation: Get Queue
+                      provider: Microsoft Azure ServiceBus
+                      resource: Queue
+                    name: Microsoft.ServiceBus/namespaces/queues/read
+                  - display:
+                      operation: Delete Queue
+                      provider: Microsoft Azure ServiceBus
+                      resource: Queue
+                    name: Microsoft.ServiceBus/namespaces/queues/Delete
+                  - display:
+                      operation: Create or Update Queue Authorization Rule
+                      provider: Microsoft Azure ServiceBus
+                      resource: Queue AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/write
+                  - display:
+                      operation: ' Get Queue Authorization Rules'
+                      provider: Microsoft Azure ServiceBus
+                      resource: Queue AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/read
+                  - display:
+                      operation: Delete Queue Authorization Rules
+                      provider: Microsoft Azure ServiceBus
+                      resource: Queue AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/delete
+                  - display:
+                      operation: List Queue keys
+                      provider: Microsoft Azure ServiceBus
+                      resource: Queue AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/listkeys/action
+                  - display:
+                      operation: Resource Regeneratekeys
+                      provider: Microsoft Azure ServiceBus
+                      resource: Queue AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/queues/authorizationRules/regenerateKeys/action
+                  - display:
+                      operation: Create or Update Topic
+                      provider: Microsoft Azure ServiceBus
+                      resource: Topic
+                    name: Microsoft.ServiceBus/namespaces/topics/write
+                  - display:
+                      operation: Get Topic
+                      provider: Microsoft Azure ServiceBus
+                      resource: Topic
+                    name: Microsoft.ServiceBus/namespaces/topics/read
+                  - display:
+                      operation: Delete Topic
+                      provider: Microsoft Azure ServiceBus
+                      resource: Topic
+                    name: Microsoft.ServiceBus/namespaces/topics/Delete
+                  - display:
+                      operation: Create or Update Topic Authorization Rule
+                      provider: Microsoft Azure ServiceBus
+                      resource: Topic AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/write
+                  - display:
+                      operation: ' Get Topic Authorization Rules'
+                      provider: Microsoft Azure ServiceBus
+                      resource: Topic AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/read
+                  - display:
+                      operation: Delete Topic Authorization Rules
+                      provider: Microsoft Azure ServiceBus
+                      resource: Topic AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/delete
+                  - display:
+                      operation: List Topic keys
+                      provider: Microsoft Azure ServiceBus
+                      resource: Topic AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/listkeys/action
+                  - display:
+                      operation: Resource Regeneratekeys
+                      provider: Microsoft Azure ServiceBus
+                      resource: Topic AuthorizationRules
+                    name: Microsoft.ServiceBus/namespaces/topics/authorizationRules/regenerateKeys/action
+                  - display:
+                      operation: Create or Update TopicSubscription
+                      provider: Microsoft Azure ServiceBus
+                      resource: TopicSubscription
+                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/write
+                  - display:
+                      operation: Get TopicSubscription
+                      provider: Microsoft Azure ServiceBus
+                      resource: TopicSubscription
+                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/read
+                  - display:
+                      operation: Delete TopicSubscription
+                      provider: Microsoft Azure ServiceBus
+                      resource: TopicSubscription
+                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/Delete
+                  - display:
+                      operation: Create or Update Rule
+                      provider: Microsoft Azure ServiceBus
+                      resource: Rule
+                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/rules/write
+                  - display:
+                      operation: Get Rule
+                      provider: Microsoft Azure ServiceBus
+                      resource: Rule
+                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/rules/read
+                  - display:
+                      operation: Delete Rule
+                      provider: Microsoft Azure ServiceBus
+                      resource: Rule
+                    name: Microsoft.ServiceBus/namespaces/topics/subscriptions/rules/Delete
+                  - display:
+                      operation: Get Namespace metrics
+                      provider: Microsoft Azure ServiceBus
+                      resource: Namespace metrics
+                    name: Microsoft.ServiceBus/namespaces/metricDefinitions/read
+                  - display:
+                      operation: Get Namespace diagnostic settings
+                      provider: Microsoft Azure ServiceBus
+                      resource: Namespace diagnostic settings
+                    name: Microsoft.ServiceBus/namespaces/diagnosticSettings/read
+                  - display:
+                      operation: Create or Update Namespace diagnostic settings
+                      provider: Microsoft Azure ServiceBus
+                      resource: Namespace diagnostic settings
+                    name: Microsoft.ServiceBus/namespaces/diagnosticSettings/write
+                  - display:
+                      operation: Get Namespace logs
+                      provider: Microsoft Azure ServiceBus
+                      resource: Namespace logs
+                    name: Microsoft.ServiceBus/namespaces/logDefinitions/read
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.ServiceBus/namespaces':
     get:
       description: 'Gets all the available namespaces within the subscription, irrespective of the resource groups.'
@@ -116,8 +323,8 @@ paths:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx'
       operationId: Namespaces_List
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespaces successfully returned.
@@ -782,9 +989,9 @@ paths:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt639412.aspx'
       operationId: Namespaces_ListByResourceGroup
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespaces successfully returned.
@@ -831,10 +1038,10 @@ paths:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt639389.aspx'
       operationId: Namespaces_Delete
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace successfully deleted.
@@ -866,10 +1073,10 @@ paths:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt639379.aspx'
       operationId: Namespaces_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace successfully returned.
@@ -911,16 +1118,16 @@ paths:
       description: 'Updates a service namespace. Once created, this namespace''s resource manifest is immutable. This operation is idempotent.'
       operationId: Namespaces_Update
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
         - description: Parameters supplied to update a namespace resource.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/SBNamespaceUpdateParameters'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace updated successfully.
@@ -994,7 +1201,7 @@ paths:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt639408.aspx'
       operationId: Namespaces_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
         - description: The namespace name.
           in: path
           name: namespaceName
@@ -1006,8 +1213,8 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/SBNamespace'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace created successfully.
@@ -1084,10 +1291,10 @@ paths:
       description: Gets a list of IP Filter rules for a Namespace.
       operationId: Namespaces_ListIpFilterRules
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace IpFilterRule successfully returned.
@@ -1124,11 +1331,11 @@ paths:
       description: Deletes an IpFilterRule for a Namespace.
       operationId: Namespaces_DeleteIpFilterRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/IPFilterRuleNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ipFilterRuleNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace IpFilterRule successfully deleted.
@@ -1155,11 +1362,11 @@ paths:
       description: Gets an IpFilterRule for a Namespace by rule name.
       operationId: Namespaces_GetIpFilterRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/IPFilterRuleNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ipFilterRuleNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace IpFilterRule returned successfully.
@@ -1193,17 +1400,17 @@ paths:
       description: Creates or updates an IpFilterRule for a Namespace.
       operationId: Namespaces_CreateOrUpdateIpFilterRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/IPFilterRuleNameParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/ipFilterRuleNameParameter'
         - description: The Namespace IpFilterRule.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/IpFilterRule'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace IpFilterRule created
@@ -1238,15 +1445,156 @@ paths:
                   filterName: sdk-IPFilterRules-7337
                   ipMask: 13.78.143.246/32
                 type: Microsoft.ServiceBus/Namespaces/IpFilterRules
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkrulesets/default':
+    get:
+      description: Gets NetworkRuleSet for a Namespace.
+      operationId: Namespaces_GetNetworkRuleSet
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace NetworkRuleSet successfully returned.
+          schema:
+            $ref: '#/definitions/NetworkRuleSet'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        NameSpaceVirtualNetworkRuleSetget:
+          parameters:
+            api-version: 2018-01-01-preview
+            namespaceName: sdk-Namespace-6019
+            resourceGroupName: ResourceGroup
+            subscriptionId: Subscription
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subscriptionid/resourceGroups/Default-ServiceBus-AustraliaEast/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9659/networkruleset/default
+                name: default
+                properties:
+                  defaultAction: Deny
+                  ipRules:
+                    - action: Allow
+                      ipMask: 1.1.1.1
+                    - action: Allow
+                      ipMask: 1.1.1.2
+                    - action: Allow
+                      ipMask: 1.1.1.3
+                    - action: Allow
+                      ipMask: 1.1.1.4
+                    - action: Allow
+                      ipMask: 1.1.1.5
+                  virtualNetworkRules:
+                    - ignoreMissingVnetServiceEndpoint: true
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+                type: Microsoft.ServiceBus/Namespaces/NetworkRuleSet
+    put:
+      description: Gets NetworkRuleSet for a Namespace.
+      operationId: Namespaces_CreateOrUpdateNetworkRuleSet
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - description: The Namespace IpFilterRule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/NetworkRuleSet'
+      responses:
+        '200':
+          description: Namespace NetworkRuleSet successfully returned.
+          schema:
+            $ref: '#/definitions/NetworkRuleSet'
+        default:
+          description: ServiceBus error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        NameSpaceVirtualNetworkRuleSetCreate:
+          parameters:
+            api-version: 2018-01-01-preview
+            namespaceName: sdk-Namespace-6019
+            parameters:
+              properties:
+                defaultAction: Deny
+                ipRules:
+                  - action: Allow
+                    ipMask: 1.1.1.1
+                  - action: Allow
+                    ipMask: 1.1.1.2
+                  - action: Allow
+                    ipMask: 1.1.1.3
+                  - action: Allow
+                    ipMask: 1.1.1.4
+                  - action: Allow
+                    ipMask: 1.1.1.5
+                virtualNetworkRules:
+                  - ignoreMissingVnetServiceEndpoint: true
+                    subnet:
+                      id: /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                  - ignoreMissingVnetServiceEndpoint: false
+                    subnet:
+                      id: /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                  - ignoreMissingVnetServiceEndpoint: false
+                    subnet:
+                      id: /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+            resourceGroupName: ResourceGroup
+            subscriptionId: Subscription
+          responses:
+            '200':
+              body:
+                id: /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourceGroups/Default-ServiceBus-AustraliaEast/providers/Microsoft.ServiceBus/namespaces/sdk-Namespace-9659/networkruleset/default
+                name: default
+                properties:
+                  defaultAction: Deny
+                  ipRules:
+                    - action: Allow
+                      ipMask: 1.1.1.1
+                    - action: Allow
+                      ipMask: 1.1.1.2
+                    - action: Allow
+                      ipMask: 1.1.1.3
+                    - action: Allow
+                      ipMask: 1.1.1.4
+                    - action: Allow
+                      ipMask: 1.1.1.5
+                  virtualNetworkRules:
+                    - ignoreMissingVnetServiceEndpoint: true
+                      subnet:
+                        id: /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourcegroups/alitest/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+                type: Microsoft.ServiceBus/Namespaces/NetworkRuleSet
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/virtualnetworkrules':
     get:
       description: Gets a list of VirtualNetwork rules for a Namespace.
       operationId: Namespaces_ListVirtualNetworkRules
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace VirtualNetworkRule successfully returned.
@@ -1281,11 +1629,11 @@ paths:
       description: Deletes an VirtualNetworkRule for a Namespace.
       operationId: Namespaces_DeleteVirtualNetworkRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/VirtualNetworkRuleNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/virtualNetworkRuleNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace VirtualNetworkRule successfully deleted.
@@ -1312,11 +1660,11 @@ paths:
       description: Gets an VirtualNetworkRule for a Namespace by rule name.
       operationId: Namespaces_GetVirtualNetworkRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/VirtualNetworkRuleNameParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/virtualNetworkRuleNameParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace VirtualNetworkRule returned successfully.
@@ -1348,17 +1696,17 @@ paths:
       description: Creates or updates an VirtualNetworkRule for a Namespace.
       operationId: Namespaces_CreateOrUpdateVirtualNetworkRule
       parameters:
-        - $ref: '#/parameters/ResourceGroupNameParameter'
-        - $ref: '#/parameters/NamespaceNameParameter'
-        - $ref: '#/parameters/VirtualNetworkRuleNameParameter'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/namespaceNameParameter'
+        - $ref: '#/parameters/virtualNetworkRuleNameParameter'
         - description: The Namespace VirtualNetworkRule.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/VirtualNetworkRule'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
       responses:
         '200':
           description: Namespace VirtualNetworkRule created
@@ -1391,7 +1739,7 @@ paths:
                 type: Microsoft.ServiceBus/Namespaces/VirtualNetworkRules
 definitions:
   ErrorResponse:
-    description: Error reponse indicates ServiceBus service is not able to process the incoming request. The reason is provided in the error message.
+    description: Error response indicates ServiceBus service is not able to process the incoming request. The reason is provided in the error message.
     properties:
       code:
         description: Error code.
@@ -1435,6 +1783,95 @@ definitions:
         items:
           $ref: '#/definitions/IpFilterRule'
         type: array
+  NWRuleSetIpRules:
+    description: The response from the List namespace operation.
+    properties:
+      action:
+        description: The IP Filter Action
+        enum:
+          - Allow
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NetworkRuleIPAction
+      ipMask:
+        description: IP Mask
+        type: string
+    x-ms-client-flatten: true
+  NWRuleSetVirtualNetworkRules:
+    description: The response from the List namespace operation.
+    properties:
+      ignoreMissingVnetServiceEndpoint:
+        description: Value that indicates whether to ignore missing Vnet Service Endpoint
+        type: boolean
+      subnet:
+        $ref: '#/definitions/Subnet'
+        description: Subnet properties
+    x-ms-client-flatten: true
+  NetworkRuleSet:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of topic resource.
+    properties:
+      properties:
+        description: NetworkRuleSet properties
+        properties:
+          defaultAction:
+            description: Default Action for Network Rule Set
+            enum:
+              - Allow
+              - Deny
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: DefaultAction
+          ipRules:
+            description: List of IpRules
+            items:
+              $ref: '#/definitions/NWRuleSetIpRules'
+            type: array
+          virtualNetworkRules:
+            description: List VirtualNetwork Rules
+            items:
+              $ref: '#/definitions/NWRuleSetVirtualNetworkRules'
+            type: array
+        x-ms-client-flatten: true
+  Operation:
+    description: A ServiceBus REST API operation
+    properties:
+      display:
+        description: The object that represents the operation.
+        properties:
+          operation:
+            description: 'Operation type: Read, write, delete, etc.'
+            readOnly: true
+            type: string
+          provider:
+            description: 'Service provider: Microsoft.ServiceBus'
+            readOnly: true
+            type: string
+          resource:
+            description: 'Resource on which the operation is performed: Invoice, etc.'
+            readOnly: true
+            type: string
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}'
+        readOnly: true
+        type: string
+    type: object
+  OperationListResult:
+    description: Result of the request to list ServiceBus operations. It contains a list of operations and a URL link to get the next set of results.
+    properties:
+      nextLink:
+        description: URL to get the next set of operation list results if there are any.
+        readOnly: true
+        type: string
+      value:
+        description: List of ServiceBus operations supported by the Microsoft.ServiceBus resource provider.
+        items:
+          $ref: '#/definitions/Operation'
+        readOnly: true
+        type: array
   Resource:
     description: The Resource definition for other than namespace.
     properties:
@@ -1475,7 +1912,7 @@ definitions:
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/SBSku'
-        description: Porperties of Sku
+        description: Properties of SKU
   SBNamespaceListResult:
     description: The response of the List Namespace operation.
     properties:
@@ -1526,7 +1963,7 @@ definitions:
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/SBSku'
-        description: Porperties of Sku
+        description: Properties of SKU
   SBSku:
     description: SKU of the namespace.
     properties:
@@ -1557,6 +1994,12 @@ definitions:
     required:
       - name
     type: object
+  Subnet:
+    description: Properties supplied for Subnet
+    properties:
+      id:
+        description: Resource ID of Virtual Network Subnet
+        type: string
   TrackedResource:
     allOf:
       - $ref: '#/definitions/Resource'

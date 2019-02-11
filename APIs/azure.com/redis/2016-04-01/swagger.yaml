@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/redis/resource-manager/Microsoft.Cache/stable/2016-04-01/redis.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: redis
   x-tags:
@@ -1192,7 +1191,7 @@ definitions:
         pattern: ^\d+\.\d+\.\d+\.\d+$
         type: string
       subnetId:
-        description: 'The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1'
+        description: 'The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1'
         pattern: '^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$'
         type: string
       tenantSettings:

@@ -167,7 +167,7 @@ paths:
                       policyAssignmentScope: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/
                       policyDefinitionId: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyDefinitions/myPolicyDefinition2
                     trackedResourceId: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/exampleTrackedResourceName2
-        Query at management group scope using query paramters:
+        Query at management group scope using query parameters:
           parameters:
             $filter: PolicyAssignmentId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment' AND TrackedResourceId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/exampleTrackedResourceName'
             $top: 1
@@ -262,7 +262,7 @@ paths:
                       policyAssignmentScope: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/
                       policyDefinitionId: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyDefinitions/myPolicyDefinition2
                     trackedResourceId: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/exampleTrackedResourceName2
-        Query at subscription scope using query paramters:
+        Query at subscription scope using query parameters:
           parameters:
             $filter: PolicyAssignmentId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment' AND TrackedResourceId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/exampleTrackedResourceName'
             $top: 1
@@ -358,7 +358,7 @@ paths:
                       policyAssignmentScope: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/
                       policyDefinitionId: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyDefinitions/myPolicyDefinition2
                     trackedResourceId: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/exampleTrackedResourceName2
-        Query at resource group scope using query paramters:
+        Query at resource group scope using query parameters:
           parameters:
             $filter: PolicyAssignmentId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment' AND TrackedResourceId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/myResource/nestedResourceType/TrackedResource1'
             $top: 1
@@ -453,7 +453,7 @@ paths:
                       policyAssignmentScope: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/
                       policyDefinitionId: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyDefinitions/myPolicyDefinition2
                     trackedResourceId: /subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/myResource/nestedResourceType/TrackedResource2
-        Query at resource scope using query paramters:
+        Query at resource scope using query parameters:
           parameters:
             $filter: PolicyAssignmentId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment' AND TrackedResourceId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/myResource/nestedResourceType/TrackedResource1'
             $top: 1

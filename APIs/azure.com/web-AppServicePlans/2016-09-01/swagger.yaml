@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2016-09-01/AppServicePlans.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: web-AppServicePlans
   x-tags:
@@ -60,7 +59,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Web/serverfarms':
     get:
-      description: Get all App Service plans for a subcription.
+      description: Get all App Service plans for a subscription.
       operationId: AppServicePlans_List
       parameters:
         - description: |-
@@ -283,7 +282,7 @@ paths:
             required:
               - value
             type: object
-      summary: Get all App Service plans for a subcription.
+      summary: Get all App Service plans for a subscription.
       tags:
         - AppServicePlans
       x-ms-examples:
@@ -2536,7 +2535,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/metrics':
     get:
-      description: Get metrics for an App Serice plan.
+      description: Get metrics for an App Service plan.
       operationId: AppServicePlans_ListMetrics
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
@@ -2679,7 +2678,7 @@ paths:
             required:
               - value
             type: object
-      summary: Get metrics for an App Serice plan.
+      summary: Get metrics for an App Service plan.
       tags:
         - AppServicePlans
       x-ms-pageable:
@@ -2695,7 +2694,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: 'Specify <code>true</code> to performa a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps'
+        - description: 'Specify <code>true</code> to perform a soft restart, applies the configuration settings and restarts the apps if necessary. The default is <code>false</code>, which always restarts and reprovisions the apps'
           in: query
           name: softRestart
           type: boolean
@@ -2792,6 +2791,7 @@ paths:
                           description: Type of managed service identity.
                           enum:
                             - SystemAssigned
+                          type: string
                           x-ms-enum:
                             modelAsString: true
                             name: ManagedServiceIdentityType
@@ -3205,13 +3205,13 @@ paths:
                                           https://www.siteextensions.net/packages/TiPCallback/
                                         type: string
                                       changeIntervalInMinutes:
-                                        description: Specifies interval in mimuntes to reevaluate ReroutePercentage.
+                                        description: Specifies interval in minutes to reevaluate ReroutePercentage.
                                         format: int32
                                         type: integer
                                       changeStep:
                                         description: |-
-                                          In auto ramp up scenario this is the step to to add/remove from <code>ReroutePercentage</code> until it reaches 
-                                          <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.
+                                          In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches 
+                                          <code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.
                                           Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.
                                         format: double
                                         type: number
@@ -3500,7 +3500,7 @@ paths:
                               type: boolean
                           type: object
                         slotSwapStatus:
-                          description: The status of the last successfull slot swap operation.
+                          description: The status of the last successful slot swap operation.
                           properties:
                             destinationSlotName:
                               description: The destination slot of the last swap operation.
@@ -3614,7 +3614,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/skus':
     get:
-      description: Gets all selectable sku's for a given App Service Plan
+      description: Gets all selectable SKUs for a given App Service Plan
       operationId: AppServicePlans_GetServerFarmSkus
       parameters:
         - $ref: '#/parameters/resourceGroupNameParameter'
@@ -3630,7 +3630,7 @@ paths:
           description: OK
           schema:
             type: object
-      summary: Gets all selectable sku's for a given App Service Plan
+      summary: Gets all selectable SKUs for a given App Service Plan
       tags:
         - AppServicePlans
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/usages':
@@ -3689,7 +3689,7 @@ paths:
                       format: date-time
                       type: string
                     unit:
-                      description: Units of measurement for the quota resourse.
+                      description: Units of measurement for the quota resource.
                       type: string
                   type: object
                 type: array

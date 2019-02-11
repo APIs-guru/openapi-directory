@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/visualstudio/resource-manager/Microsoft.VisualStudio/preview/2014-04-01-preview/Csm.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: visualstudio-Csm
   x-tags:
@@ -804,6 +803,55 @@ paths:
                 tags: {}
                 type: Microsoft.VisualStudio/account
             '404': {}
+    patch:
+      description: Updates tags for Visual Studio Team Services account resource.
+      operationId: Accounts_Update
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+        - description: The request data.
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/AccountTagRequest'
+        - description: Name of the resource.
+          in: path
+          name: resourceName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The operation succeeded. The Visual Studio Team Services account resource was updated.
+          schema:
+            $ref: '#/definitions/AccountResource'
+        '404':
+          description: The Visual Studio Team Services account does not exist.
+      summary: Accounts_Update
+      tags:
+        - Accounts
+      x-ms-examples:
+        Create an account resource:
+          parameters:
+            api-version: 2014-04-01-preview
+            body:
+              tags:
+                tag1: value1
+            resourceGroupName: VS-Example-Group
+            resourceName: Example
+            subscriptionId: 0de7f055-dbea-498d-8e9e-da287eedca90
+          responses:
+            '200':
+              body:
+                id: /subscriptions/0de7f055-dbea-498d-8e9e-da287eedca90/resourceGroups/VS-Example-Group/providers/Microsoft.VisualStudio/account/Example
+                location: Central US
+                name: VS-Example-Group
+                properties:
+                  AccountURL: ''
+                tags: {}
+                type: Microsoft.VisualStudio/account
+            '404': {}
     put:
       description: Creates or updates a Visual Studio Team Services account resource.
       operationId: Accounts_CreateOrUpdate
@@ -902,6 +950,15 @@ definitions:
         description: The custom properties of the resource.
         type: object
         x-ms-client-flatten: true
+      tags:
+        additionalProperties:
+          type: string
+        description: The custom tags of the resource.
+        type: object
+    type: object
+  AccountTagRequest:
+    description: The body of a Patch request to add tags to a Visual Studio account resource.
+    properties:
       tags:
         additionalProperties:
           type: string

@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.DomainRegistration/stable/2018-02-01/DomainRegistrationProvider.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-DomainRegistrationProvider
   x-tags:
@@ -268,9 +267,9 @@ paths:
                     origin: 'user,system'
                   - display:
                       description: Check if a domain is available for purchase
-                      operation: Check Domain Availablity
+                      operation: Check Domain Availability
                       provider: Microsoft Domains
-                      resource: Domain Availablity Result
+                      resource: Domain Availability Result
                     name: Microsoft.DomainRegistration/checkDomainAvailability/Action
                     origin: 'user,system'
                   - display:

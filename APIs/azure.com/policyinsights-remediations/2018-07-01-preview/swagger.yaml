@@ -1497,7 +1497,7 @@ definitions:
         readOnly: true
         type: string
   RemediationDeploymentSummary:
-    description: The deployment status summary for all deplyoments created by the remediation.
+    description: The deployment status summary for all deployments created by the remediation.
     properties:
       failedDeployments:
         description: The number of deployments required by the remediation that have failed.
@@ -1552,7 +1552,7 @@ definitions:
         type: string
       deploymentStatus:
         $ref: '#/definitions/RemediationDeploymentSummary'
-        description: The deployment status summary for all deplyoments created by the remediation.
+        description: The deployment status summary for all deployments created by the remediation.
       filters:
         $ref: '#/definitions/RemediationFilters'
         description: The filters that will be applied to determine which resources to remediate.

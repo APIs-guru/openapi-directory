@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/virtualNetworkGateway.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-virtualNetworkGateway
   x-tags:
@@ -1986,7 +1985,7 @@ paths:
           type: string
       responses:
         '200':
-          description: Request successful. The operation sets the specificed vpnclient ipsec parameters for P2S client of the virtual network gateway.
+          description: Request successful. The operation sets the specified vpnclient ipsec parameters for P2S client of the virtual network gateway.
           schema:
             $ref: '#/definitions/VpnClientIPsecParameters'
         '202':
@@ -2528,7 +2527,7 @@ definitions:
           modelAsString: true
           name: VirtualNetworkGatewayConnectionStatus
       connectionType:
-        description: 'Gateway connection type. Possible values are: ''Ipsec'',''Vnet2Vnet'',''ExpressRoute'', and ''VPNClient.'
+        description: 'Gateway connection type. Possible values are: ''IPsec'',''Vnet2Vnet'',''ExpressRoute'', and ''VPNClient.'
         enum:
           - IPsec
           - Vnet2Vnet
@@ -2629,7 +2628,7 @@ definitions:
           modelAsString: true
           name: VirtualNetworkGatewayConnectionStatus
       connectionType:
-        description: 'Gateway connection type. Possible values are: ''Ipsec'',''Vnet2Vnet'',''ExpressRoute'', and ''VPNClient.'
+        description: 'Gateway connection type. Possible values are: ''IPsec'',''Vnet2Vnet'',''ExpressRoute'', and ''VPNClient.'
         enum:
           - IPsec
           - Vnet2Vnet

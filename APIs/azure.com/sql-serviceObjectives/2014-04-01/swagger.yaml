@@ -32,19 +32,6 @@ securityDefinitions:
       user_impersonation: impersonate your user account
     type: oauth2
 parameters:
-  ApiVersionParameter:
-    description: The API version to use for the request.
-    in: query
-    name: api-version
-    required: true
-    type: string
-  ResourceGroupParameter:
-    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-    in: path
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
   ServerNameParameter:
     description: The name of the server.
     in: path
@@ -52,21 +39,30 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The subscription ID that identifies an Azure subscription.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/serviceObjectives':
     get:
       description: Returns database service objectives.
       operationId: ServiceObjectives_ListByServer
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
       responses:
         '200':
@@ -571,9 +567,24 @@ paths:
       description: Gets a database service objective.
       operationId: ServiceObjectives_Get
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the service objective to retrieve.
           in: path

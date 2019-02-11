@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/timeseriesinsights/resource-manager/Microsoft.TimeSeriesInsights/stable/2017-11-15/timeseriesinsights.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: timeseriesinsights
   x-tags:
@@ -366,7 +365,7 @@ paths:
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
-          description: 'The environment definition was successfully updated and is in the response. If the environment was updated synchroneously, the response will include a provisioningState value of "Succeeded". If the environment was updated asynchroneously, the response will include a provisioningState value of "Updating".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.'
+          description: 'The environment definition was successfully updated and is in the response. If the environment was updated synchronously, the response will include a provisioningState value of "Succeeded". If the environment was updated asynchronously, the response will include a provisioningState value of "Updating".  You can periodically get your environment definition and monitor progress of the update via the provisioningState property.'
           schema:
             $ref: '#/definitions/EnvironmentResource'
         default:
@@ -429,7 +428,7 @@ paths:
           schema:
             $ref: '#/definitions/EnvironmentResource'
         '201':
-          description: The environment create request was accepted. Environment provisioning is an asynchroneous operation. You can periodically get your environment definition and monitor progress via the provisioningState property.
+          description: The environment create request was accepted. Environment provisioning is an asynchronous operation. You can periodically get your environment definition and monitor progress via the provisioningState property.
           schema:
             $ref: '#/definitions/EnvironmentResource'
         '404':
@@ -1335,7 +1334,7 @@ definitions:
     description: Describes a particular API error with an error code and a message.
     properties:
       code:
-        description: An error code that describes the error condition more precisely than an HTTP status code. Can be used to programatically handle specific error cases.
+        description: An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases.
         type: string
       details:
         description: Contains nested errors that are related to this error.
@@ -1437,7 +1436,7 @@ definitions:
   EnvironmentResource:
     allOf:
       - $ref: '#/definitions/TrackedResource'
-    description: 'An environment is a set of time-series data avaliable for query, and is the top level Azure Time Series Insights resource.'
+    description: 'An environment is a set of time-series data available for query, and is the top level Azure Time Series Insights resource.'
     properties:
       properties:
         $ref: '#/definitions/EnvironmentResourceProperties'
@@ -1469,7 +1468,7 @@ definitions:
     description: An object that contains the details about an environment's state.
     properties:
       code:
-        description: Contains the code that represents the reason of an environment being in a particular state. Can be used to programatically handle specific cases.
+        description: Contains the code that represents the reason of an environment being in a particular state. Can be used to programmatically handle specific cases.
         type: string
       message:
         description: A message that describes the state in detail.

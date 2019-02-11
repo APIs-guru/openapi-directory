@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/preview/2015-08-01-preview/logicAppsManagementClient.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: web-logicAppsManagementClient
   x-tags:
@@ -100,7 +99,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ApiEntity'
-      summary: Get managed Api
+      summary: Get managed API
       tags:
         - Managed Apis
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/connections':
@@ -316,7 +315,7 @@ definitions:
       properties:
         properties:
           apiDefinitionUrl:
-            description: Api definition Url - url where the swagger can be downloaded from
+            description: API definition Url - url where the swagger can be downloaded from
             type: string
           backendService:
             $ref: '#/definitions/BackendServiceDefinition'
@@ -353,7 +352,7 @@ definitions:
             type: string
           policies:
             $ref: '#/definitions/ApiPolicies'
-            description: Api polcies
+            description: API policies
           protocols:
             description: Protocols supported by the front end - http/https
             items:
@@ -367,7 +366,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   ApiOAuthSettings:
-    description: OAuth settings for the conenction provider
+    description: OAuth settings for the connection provider
     properties:
       clientId:
         description: Resource provider client id
@@ -411,7 +410,7 @@ definitions:
   ApiPolicies:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Api policies
+    description: API policies
     properties:
       properties:
         properties:
@@ -499,7 +498,7 @@ definitions:
   Connection:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Api Connection
+    description: API Connection
     properties:
       properties:
         properties:
@@ -558,7 +557,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   ConnectionCollection:
-    description: Collection of conenctions
+    description: Collection of connections
     properties:
       nextLink:
         description: Link to next page of resources
@@ -669,7 +668,7 @@ definitions:
   ConsentLinkInput:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Connection Constent Link payload
+    description: Connection Consent Link payload
     properties:
       properties:
         properties:
@@ -782,7 +781,7 @@ definitions:
         description: service url to use
         type: string
       useInternalRouting:
-        description: "When the backend url is in same ASE, for performance reason this flag can be set to true\r\n            If WebApp.DisableHostNames is also set it improves the security by making the back end accesible only \r\n            via API calls\r\n            Note: calls will fail if this option is used but back end is not on the same ASE"
+        description: "When the backend url is in same ASE, for performance reason this flag can be set to true\r\n            If WebApp.DisableHostNames is also set it improves the security by making the back end accessible only \r\n            via API calls\r\n            Note: calls will fail if this option is used but back end is not on the same ASE"
         type: boolean
     type: object
   ListConnectionKeysInput:

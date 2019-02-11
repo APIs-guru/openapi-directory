@@ -32,13 +32,6 @@ securityDefinitions:
       user_impersonation: impersonate your user account
     type: oauth2
 parameters:
-  ApiVersionParameter:
-    description: The API version to use for the request.
-    in: query
-    name: api-version
-    required: true
-    type: string
-    x-ms-parameter-location: client
   ConnectionPolicyNameParameter:
     description: The name of the connection policy.
     enum:
@@ -58,13 +51,6 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  ResourceGroupParameter:
-    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-    in: path
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
   ServerNameParameter:
     description: The name of the server.
     in: path
@@ -72,13 +58,6 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The subscription ID that identifies an Azure subscription.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
-    x-ms-parameter-location: client
   TableAuditingPolicyNameParameter:
     description: The name of the table auditing policy.
     enum:
@@ -95,13 +74,28 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/auditingPolicies':
     get:
       deprecated: true
-      description: 'Lists a servers''s table auditing policies. Table auditing is deprecated, use blob auditing instead.'
+      description: 'Lists a server''s table auditing policies. Table auditing is deprecated, use blob auditing instead.'
       operationId: ServerTableAuditingPolicies_ListByServer
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully retrieved the server table auditing policies.
@@ -143,11 +137,26 @@ paths:
       description: 'Gets a server''s table auditing policy. Table auditing is deprecated, use blob auditing instead.'
       operationId: ServerTableAuditingPolicies_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - $ref: '#/parameters/TableAuditingPolicyNameParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully retrieved the server table auditing policy.
@@ -185,10 +194,15 @@ paths:
                 type: Microsoft.Sql/servers/databases/auditingPolicies
     put:
       deprecated: true
-      description: 'Creates or updates a servers''s table auditing policy. Table auditing is deprecated, use blob auditing instead.'
+      description: 'Creates or updates a server''s table auditing policy. Table auditing is deprecated, use blob auditing instead.'
       operationId: ServerTableAuditingPolicies_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - $ref: '#/parameters/TableAuditingPolicyNameParameter'
         - description: The server table auditing policy.
@@ -197,8 +211,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ServerTableAuditingPolicy'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully set the server table auditing policy.
@@ -245,15 +269,30 @@ paths:
       description: 'Lists a database''s table auditing policies. Table auditing is deprecated, use blob auditing instead.'
       operationId: DatabaseTableAuditingPolicies_ListByDatabase
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database for which the table audit policy is defined.
           in: path
           name: databaseName
           required: true
           type: string
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully retrieved the database table auditing policies.
@@ -297,7 +336,12 @@ paths:
       description: 'Gets a database''s table auditing policy. Table auditing is deprecated, use blob auditing instead.'
       operationId: DatabaseTableAuditingPolicies_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database for which the table audit policy is defined.
           in: path
@@ -305,8 +349,18 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/TableAuditingPolicyNameParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully retrieved the database table auditing policy.
@@ -349,7 +403,12 @@ paths:
       description: 'Creates or updates a database''s table auditing policy. Table auditing is deprecated, use blob auditing instead.'
       operationId: DatabaseTableAuditingPolicies_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database for which the table auditing policy will be defined.
           in: path
@@ -363,8 +422,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DatabaseTableAuditingPolicy'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully set the database table auditing policy.
@@ -413,7 +482,12 @@ paths:
       description: 'Gets a database''s connection policy, which is used with table auditing. Table auditing is deprecated, use blob auditing instead.'
       operationId: DatabaseConnectionPolicies_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database for which the connection policy is defined.
           in: path
@@ -421,8 +495,18 @@ paths:
           required: true
           type: string
         - $ref: '#/parameters/ConnectionPolicyNameParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully retrieved the database connection policy.
@@ -460,7 +544,12 @@ paths:
       description: 'Creates or updates a database''s connection policy, which is used with table auditing. Table auditing is deprecated, use blob auditing instead.'
       operationId: DatabaseConnectionPolicies_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database for which the connection policy will be defined.
           in: path
@@ -474,8 +563,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DatabaseConnectionPolicy'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully set the database connection policy.

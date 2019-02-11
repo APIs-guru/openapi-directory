@@ -132,6 +132,45 @@ paths:
                       testKey: testValue
               headers: {}
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/providers/Microsoft.PowerBIDedicated/locations/{location}/checkNameAvailability':
+    post:
+      description: Check the name availability in the target location.
+      operationId: Capacities_CheckNameAvailability
+      parameters:
+        - description: The region name which the operation will lookup into.
+          in: path
+          name: location
+          required: true
+          type: string
+        - description: The name of the capacity.
+          in: body
+          name: capacityParameters
+          required: true
+          schema:
+            $ref: '#/definitions/CheckCapacityNameAvailabilityParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/CheckCapacityNameAvailabilityResult'
+      tags:
+        - Capacities
+      x-ms-examples:
+        Check name availability of a capacity:
+          parameters:
+            api-version: '2017-10-01'
+            capacityParameters:
+              name: azsdktest
+              type: Microsoft.PowerBIDedicated/capacities
+            location: West US
+            subscriptionId: 613192d7-503f-477a-9cfe-4efc3ee2bd60
+          responses:
+            '200':
+              body:
+                nameAvailable: true
+              headers: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.PowerBIDedicated/skus':
     get:
       description: Lists eligible SKUs for PowerBI Dedicated resource provider.
@@ -609,6 +648,33 @@ paths:
               headers: {}
       x-ms-long-running-operation: true
 definitions:
+  CheckCapacityNameAvailabilityParameters:
+    description: Details of capacity name request body.
+    properties:
+      name:
+        description: Name for checking availability.
+        maxLength: 63
+        minLength: 3
+        pattern: '^[a-z][a-z0-9]*$'
+        type: string
+      type:
+        default: Microsoft.PowerBIDedicated/capacities
+        description: The resource type of PowerBI dedicated.
+        type: string
+    type: object
+  CheckCapacityNameAvailabilityResult:
+    description: The checking result of capacity name availability.
+    properties:
+      message:
+        description: The detailed message of the request unavailability.
+        type: string
+      nameAvailable:
+        description: Indicator of availability of the capacity name.
+        type: boolean
+      reason:
+        description: The reason of unavailability.
+        type: string
+    type: object
   DedicatedCapacities:
     description: An array of Dedicated capacities resources.
     properties:
@@ -653,7 +719,7 @@ definitions:
     description: Properties of Dedicated Capacity resource.
     properties:
       provisioningState:
-        description: The current deployment state of PowerBI Dedicatedresource. The provisioningState is to indicate states for resource provisioning.
+        description: The current deployment state of PowerBI Dedicated resource. The provisioningState is to indicate states for resource provisioning.
         enum:
           - Deleting
           - Succeeded

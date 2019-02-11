@@ -76,7 +76,7 @@ paths:
           schema:
             $ref: '#/definitions/AvailableProviderOperations'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -995,7 +995,7 @@ paths:
           schema:
             $ref: '#/definitions/ManagerList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1054,7 +1054,7 @@ paths:
           schema:
             $ref: '#/definitions/ManagerList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1110,7 +1110,7 @@ paths:
         '204':
           description: The StorSimple manager is already in a deleted state
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1141,7 +1141,7 @@ paths:
           schema:
             $ref: '#/definitions/Manager'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1197,7 +1197,7 @@ paths:
           schema:
             $ref: '#/definitions/Manager'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1253,7 +1253,7 @@ paths:
           schema:
             $ref: '#/definitions/Manager'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1331,7 +1331,7 @@ paths:
           schema:
             $ref: '#/definitions/AccessControlRecordList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1376,7 +1376,7 @@ paths:
         '204':
           description: Successfully deleted the access control record.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1421,7 +1421,7 @@ paths:
           schema:
             $ref: '#/definitions/AccessControlRecord'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1473,7 +1473,7 @@ paths:
         '202':
           description: Accepted the request to create or update the access control record.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1541,7 +1541,7 @@ paths:
           schema:
             $ref: '#/definitions/AlertList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1550,7 +1550,7 @@ paths:
         AlertsListByManager:
           parameters:
             $filter: status%20eq%20'Active'%20and%20severity%20eq%20'Critical'
-            $top: '1'
+            $top: 1
             User-Agent:
               - FxVersion/4.6.26328.01
               - Microsoft.Azure.Management.StorSimple1200Series.StorSimple1200SeriesManagementClient/0.0.0.0
@@ -1617,7 +1617,7 @@ paths:
           schema:
             $ref: '#/definitions/BackupList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1796,7 +1796,7 @@ paths:
           schema:
             $ref: '#/definitions/UploadCertificateResponse'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1855,7 +1855,7 @@ paths:
         '204':
           description: Successfully cleared the alerts.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1864,7 +1864,7 @@ paths:
         AlertsClear:
           parameters:
             $filter: status%20eq%20'Active'%20and%20severity%20eq%20'Critical'
-            $top: '1'
+            $top: 1
             Content-Length:
               - '250'
             Content-Type:
@@ -1907,7 +1907,7 @@ paths:
           schema:
             $ref: '#/definitions/DeviceList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -1970,7 +1970,7 @@ paths:
         '204':
           description: Successfully deleted the device.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2013,7 +2013,7 @@ paths:
           schema:
             $ref: '#/definitions/Device'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2081,7 +2081,7 @@ paths:
         '202':
           description: Accepted the request to patch the device.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2140,7 +2140,7 @@ paths:
           schema:
             $ref: '#/definitions/AlertSettings'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2196,7 +2196,7 @@ paths:
         '202':
           description: Accepted the request to create or update the network settings.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2264,7 +2264,7 @@ paths:
           schema:
             $ref: '#/definitions/BackupScheduleGroupList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2315,7 +2315,7 @@ paths:
         '204':
           description: Successfully deleted the backup schedule group.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2366,7 +2366,7 @@ paths:
           schema:
             $ref: '#/definitions/BackupScheduleGroup'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2426,7 +2426,7 @@ paths:
         '202':
           description: Accepted the request to create or update the backup schedule group.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2509,7 +2509,7 @@ paths:
           schema:
             $ref: '#/definitions/BackupList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2589,7 +2589,7 @@ paths:
         '204':
           description: Successfully deleted the backup.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2653,7 +2653,7 @@ paths:
         '202':
           description: Accepted the request to clone.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2729,7 +2729,7 @@ paths:
           schema:
             $ref: '#/definitions/ChapSettingsList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2780,7 +2780,7 @@ paths:
         '204':
           description: Successfully deleted the chap setting.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2832,7 +2832,7 @@ paths:
           schema:
             $ref: '#/definitions/ChapSettings'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2893,7 +2893,7 @@ paths:
         '202':
           description: Accepted the request to create or update the chap setting.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2968,7 +2968,7 @@ paths:
         '204':
           description: Successfully deactivated the device.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -2989,7 +2989,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/disks':
     get:
       deprecated: false
-      description: Retrieves all the iscsi disks in a device.
+      description: Retrieves all the iSCSI disks in a device.
       operationId: IscsiDisks_ListByDevice
       parameters:
         - description: The device name.
@@ -3003,11 +3003,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: The collection of iscsi disks.
+          description: The collection of iSCSI disks.
           schema:
             $ref: '#/definitions/ISCSIDiskList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3059,7 +3059,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/download':
     post:
       deprecated: false
-      description: Downloads udpates on the device.
+      description: Downloads updates on the device.
       operationId: Devices_DownloadUpdates
       parameters:
         - description: The device name.
@@ -3077,7 +3077,7 @@ paths:
         '204':
           description: Successfully downloaded updates.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3122,7 +3122,7 @@ paths:
         '204':
           description: Successfully completed failover of the device.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3174,7 +3174,7 @@ paths:
           schema:
             $ref: '#/definitions/DeviceList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3257,7 +3257,7 @@ paths:
           schema:
             $ref: '#/definitions/FileServerList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3308,7 +3308,7 @@ paths:
         '204':
           description: Successfully deleted the file server.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3359,7 +3359,7 @@ paths:
           schema:
             $ref: '#/definitions/FileServer'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3420,7 +3420,7 @@ paths:
         '202':
           description: Accepted the request to create or update the file server.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3500,7 +3500,7 @@ paths:
         '204':
           description: Successfully completed backup of the file server.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3557,7 +3557,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3625,7 +3625,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricDefinitionList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3694,7 +3694,7 @@ paths:
           schema:
             $ref: '#/definitions/FileShareList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3763,7 +3763,7 @@ paths:
         '204':
           description: Successfully deleted the file share.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3820,7 +3820,7 @@ paths:
           schema:
             $ref: '#/definitions/FileShare'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3891,7 +3891,7 @@ paths:
         '202':
           description: Accepted the request to create or update the file share.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -3988,7 +3988,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4062,7 +4062,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricDefinitionList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4127,7 +4127,7 @@ paths:
         '204':
           description: Successfully installed updates.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4148,7 +4148,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers':
     get:
       deprecated: false
-      description: Retrieves all the iscsi in a device.
+      description: Retrieves all the iSCSI in a device.
       operationId: IscsiServers_ListByDevice
       parameters:
         - description: The device name.
@@ -4162,11 +4162,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: The collection of iscsi servers.
+          description: The collection of iSCSI servers.
           schema:
             $ref: '#/definitions/ISCSIServerList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4194,7 +4194,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}':
     delete:
       deprecated: false
-      description: Deletes the iscsi server.
+      description: Deletes the iSCSI server.
       operationId: IscsiServers_Delete
       parameters:
         - description: The device name.
@@ -4202,7 +4202,7 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
@@ -4213,11 +4213,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '202':
-          description: Accepted the request to delete the iscsi server.
+          description: Accepted the request to delete the iSCSI server.
         '204':
-          description: Successfully deleted the iscsi server.
+          description: Successfully deleted the iSCSI server.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4245,7 +4245,7 @@ paths:
       x-ms-long-running-operation: true
     get:
       deprecated: false
-      description: Returns the properties of the specified iscsi server name.
+      description: Returns the properties of the specified iSCSI server name.
       operationId: IscsiServers_Get
       parameters:
         - description: The device name.
@@ -4253,7 +4253,7 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
@@ -4264,11 +4264,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: The iscsi server.
+          description: The iSCSI server.
           schema:
             $ref: '#/definitions/ISCSIServer'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4298,7 +4298,7 @@ paths:
                 type: Microsoft.StorSimple/managers/devices/iscsiServers
     put:
       deprecated: false
-      description: Creates or updates the iscsi server.
+      description: Creates or updates the iSCSI server.
       operationId: IscsiServers_CreateOrUpdate
       parameters:
         - description: The device name.
@@ -4306,12 +4306,12 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
           type: string
-        - description: The iscsi server.
+        - description: The iSCSI server.
           in: body
           name: iscsiServer
           required: true
@@ -4323,13 +4323,13 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Successfully created or updated the iscsi server.
+          description: Successfully created or updated the iSCSI server.
           schema:
             $ref: '#/definitions/ISCSIServer'
         '202':
-          description: Accepted the request to create or update the iscsi server.
+          description: Accepted the request to create or update the iSCSI server.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4388,7 +4388,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/backup':
     post:
       deprecated: false
-      description: Backup the iscsi server now.
+      description: Backup the iSCSI server now.
       operationId: IscsiServers_BackupNow
       parameters:
         - description: The device name.
@@ -4396,7 +4396,7 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
@@ -4407,11 +4407,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '202':
-          description: Accepted the request to backup the iscsi server.
+          description: Accepted the request to backup the iSCSI server.
         '204':
-          description: Successfully completed backup of the iscsi server.
+          description: Successfully completed backup of the iSCSI server.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4440,7 +4440,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks':
     get:
       deprecated: false
-      description: Retrieves all the disks in a iscsi server.
+      description: Retrieves all the disks in a iSCSI server.
       operationId: IscsiDisks_ListByIscsiServer
       parameters:
         - description: The device name.
@@ -4448,7 +4448,7 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
@@ -4459,11 +4459,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: The collection of iscsi disks.
+          description: The collection of iSCSI disks.
           schema:
             $ref: '#/definitions/ISCSIDiskList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4516,7 +4516,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}':
     delete:
       deprecated: false
-      description: Deletes the iscsi disk.
+      description: Deletes the iSCSI disk.
       operationId: IscsiDisks_Delete
       parameters:
         - description: The device name.
@@ -4524,7 +4524,7 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
@@ -4540,11 +4540,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '202':
-          description: Accepted the request to delete the iscsi disk.
+          description: Accepted the request to delete the iSCSI disk.
         '204':
-          description: Successfully deleted the iscsi disk.
+          description: Successfully deleted the iSCSI disk.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4573,7 +4573,7 @@ paths:
       x-ms-long-running-operation: true
     get:
       deprecated: false
-      description: Returns the properties of the specified iscsi disk name.
+      description: Returns the properties of the specified iSCSI disk name.
       operationId: IscsiDisks_Get
       parameters:
         - description: The device name.
@@ -4581,7 +4581,7 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
@@ -4597,11 +4597,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: The iscsi disk.
+          description: The iSCSI disk.
           schema:
             $ref: '#/definitions/ISCSIDisk'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4636,7 +4636,7 @@ paths:
                 type: Microsoft.StorSimple/managers/devices/iscsiServers/disks
     put:
       deprecated: false
-      description: Creates or updates the iscsi disk.
+      description: Creates or updates the iSCSI disk.
       operationId: IscsiDisks_CreateOrUpdate
       parameters:
         - description: The device name.
@@ -4644,7 +4644,7 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
@@ -4654,7 +4654,7 @@ paths:
           name: diskName
           required: true
           type: string
-        - description: The iscsi disk.
+        - description: The iSCSI disk.
           in: body
           name: iscsiDisk
           required: true
@@ -4666,13 +4666,13 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Successfully created or updated the iscsi disk.
+          description: Successfully created or updated the iSCSI disk.
           schema:
             $ref: '#/definitions/ISCSIDisk'
         '202':
-          description: Accepted the request to create or update the iscsi disk.
+          description: Accepted the request to create or update the iSCSI disk.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4736,7 +4736,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}/metrics':
     get:
       deprecated: false
-      description: Gets the iscsi disk metrics
+      description: Gets the iSCSI disk metrics
       operationId: IscsiDisks_ListMetrics
       parameters:
         - description: The device name.
@@ -4744,12 +4744,12 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
           type: string
-        - description: The iscsi disk name.
+        - description: The iSCSI disk name.
           in: path
           name: diskName
           required: true
@@ -4769,7 +4769,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4815,7 +4815,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/disks/{diskName}/metricsDefinitions':
     get:
       deprecated: false
-      description: Retrieves metric definitions for all metric aggregated at the iscsi disk.
+      description: Retrieves metric definitions for all metric aggregated at the iSCSI disk.
       operationId: IscsiDisks_ListMetricDefinition
       parameters:
         - description: The device name.
@@ -4823,12 +4823,12 @@ paths:
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
           type: string
-        - description: The iscsi disk name.
+        - description: The iSCSI disk name.
           in: path
           name: diskName
           required: true
@@ -4843,7 +4843,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricDefinitionList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4890,15 +4890,15 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/metrics':
     get:
       deprecated: false
-      description: Gets the iscsi server metrics
+      description: Gets the iSCSI server metrics
       operationId: IscsiServers_ListMetrics
       parameters:
-        - description: The devie name.
+        - description: The device name.
           in: path
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
@@ -4918,7 +4918,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -4963,15 +4963,15 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/devices/{deviceName}/iscsiservers/{iscsiServerName}/metricsDefinitions':
     get:
       deprecated: false
-      description: Retrieves metric definitions for all metrics aggregated at iscsi server.
+      description: Retrieves metric definitions for all metrics aggregated at iSCSI server.
       operationId: IscsiServers_ListMetricDefinition
       parameters:
-        - description: The devie name.
+        - description: The device name.
           in: path
           name: deviceName
           required: true
           type: string
-        - description: The iscsi server name.
+        - description: The iSCSI server name.
           in: path
           name: iscsiServerName
           required: true
@@ -4986,7 +4986,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricDefinitionList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5055,7 +5055,7 @@ paths:
           schema:
             $ref: '#/definitions/JobList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5269,7 +5269,7 @@ paths:
           schema:
             $ref: '#/definitions/Job'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5340,7 +5340,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5452,7 +5452,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricDefinitionList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5540,7 +5540,7 @@ paths:
           schema:
             $ref: '#/definitions/NetworkSettings'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5599,7 +5599,7 @@ paths:
         '204':
           description: Successfully scanned for updates.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5652,7 +5652,7 @@ paths:
         '204':
           description: Successfully updated security settings.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5702,7 +5702,7 @@ paths:
         '204':
           description: Successfully sent the test email.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5711,7 +5711,7 @@ paths:
         AlertsSendTestEmail:
           parameters:
             $filter: status%20eq%20'Active'%20and%20severity%20eq%20'Critical'
-            $top: '1'
+            $top: 1
             Content-Length:
               - '58'
             Content-Type:
@@ -5755,7 +5755,7 @@ paths:
           schema:
             $ref: '#/definitions/FileShareList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5825,7 +5825,7 @@ paths:
           schema:
             $ref: '#/definitions/TimeSettings'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5875,7 +5875,7 @@ paths:
           schema:
             $ref: '#/definitions/Updates'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5928,7 +5928,7 @@ paths:
           schema:
             $ref: '#/definitions/EncryptionSettings'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -5970,7 +5970,7 @@ paths:
         '204':
           description: The extended information on the manager has been successfully deleted
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6000,7 +6000,7 @@ paths:
           schema:
             $ref: '#/definitions/ManagerExtendedInfo'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6055,7 +6055,7 @@ paths:
           schema:
             $ref: '#/definitions/ManagerExtendedInfo'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6107,7 +6107,7 @@ paths:
           schema:
             $ref: '#/definitions/ManagerExtendedInfo'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6153,7 +6153,7 @@ paths:
           schema:
             $ref: '#/definitions/FileServerList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6200,7 +6200,7 @@ paths:
           schema:
             $ref: '#/definitions/SymmetricEncryptedSecret'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6221,7 +6221,7 @@ paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorSimple/managers/{managerName}/iscsiservers':
     get:
       deprecated: false
-      description: Retrieves all the iscsi servers in a manager.
+      description: Retrieves all the iSCSI servers in a manager.
       operationId: IscsiServers_ListByManager
       parameters:
         - $ref: '#/parameters/subscriptionIdParameter'
@@ -6230,11 +6230,11 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: The collection of iscsi servers.
+          description: The collection of iSCSI servers.
           schema:
             $ref: '#/definitions/ISCSIServerList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6287,7 +6287,7 @@ paths:
           schema:
             $ref: '#/definitions/JobList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6511,7 +6511,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6641,7 +6641,7 @@ paths:
           schema:
             $ref: '#/definitions/MetricDefinitionList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6719,7 +6719,7 @@ paths:
           schema:
             $ref: '#/definitions/StorageAccountCredentialList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6773,7 +6773,7 @@ paths:
         '204':
           description: Successfully deleted the storage account credential.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6818,7 +6818,7 @@ paths:
           schema:
             $ref: '#/definitions/StorageAccountCredential'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6878,7 +6878,7 @@ paths:
         '202':
           description: Accepted the request to create or update the storage account credential.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -6953,7 +6953,7 @@ paths:
           schema:
             $ref: '#/definitions/StorageDomainList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -7005,7 +7005,7 @@ paths:
         '204':
           description: Successfully deleted the storage domain.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -7050,7 +7050,7 @@ paths:
           schema:
             $ref: '#/definitions/StorageDomain'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -7104,7 +7104,7 @@ paths:
         '202':
           description: Accepted the request to create or update the storage domain.
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -7201,7 +7201,7 @@ definitions:
       - properties
     type: object
   AlertErrorDetails:
-    description: Errordetails for the alert
+    description: Error details for the alert
     properties:
       errorCode:
         description: Error code.
@@ -7210,7 +7210,7 @@ definitions:
         description: Error Message
         type: string
       occurences:
-        description: Number of occurences.
+        description: Number of occurrences.
         format: int32
         type: integer
     type: object
@@ -7360,10 +7360,10 @@ definitions:
       - properties
     type: object
   AlertSettingsProperties:
-    description: Class containing the properties of Alertsettings
+    description: Class containing the properties of AlertSettings
     properties:
       additionalRecipientEmailList:
-        description: List of email addresses (apart from admin/coadmin of subscription) to whom the alert emails need to be sent
+        description: List of email addresses (apart from admin/co-admin of subscription) to whom the alert emails need to be sent
         items:
           type: string
         type: array
@@ -7671,7 +7671,7 @@ definitions:
   ChapSettings:
     allOf:
       - $ref: '#/definitions/BaseModel'
-    description: Challenge-Handshake Authentical Protocol (CHAP) setting
+    description: Challenge-Handshake Authentication Protocol (CHAP) setting
     properties:
       properties:
         $ref: '#/definitions/ChapProperties'
@@ -7728,7 +7728,7 @@ definitions:
         $ref: '#/definitions/FileShare'
         description: Share Object.
       targetAccessPointId:
-        description: Accesspoint Id on which clone job will performed.
+        description: Access point Id on which clone job will performed.
         type: string
       targetDeviceId:
         description: DeviceId of the device which will act as the Clone target
@@ -8105,7 +8105,7 @@ definitions:
         description: The gateway of the network adapter.
         type: string
       ipAddress:
-        description: 'The ipaddress of the network adapter, either ipv4 or ipv6.'
+        description: 'The IP address of the network adapter, either ipv4 or ipv6.'
         type: string
       prefixLength:
         description: The prefix length of the network adapter.
@@ -8118,7 +8118,7 @@ definitions:
   ISCSIDisk:
     allOf:
       - $ref: '#/definitions/BaseModel'
-    description: The iscsi disk.
+    description: The iSCSI disk.
     properties:
       properties:
         $ref: '#/definitions/ISCSIDiskProperties'
@@ -8139,7 +8139,7 @@ definitions:
       - value
     type: object
   ISCSIDiskProperties:
-    description: The iscsi disk properties.
+    description: The iSCSI disk properties.
     properties:
       accessControlRecords:
         description: The access control records.
@@ -8202,7 +8202,7 @@ definitions:
   ISCSIServer:
     allOf:
       - $ref: '#/definitions/BaseModel'
-    description: The iscsi server.
+    description: The iSCSI server.
     properties:
       properties:
         $ref: '#/definitions/ISCSIServerProperties'
@@ -8223,7 +8223,7 @@ definitions:
       - value
     type: object
   ISCSIServerProperties:
-    description: The iscsi server properties.
+    description: The iSCSI server properties.
     properties:
       backupScheduleGroupId:
         description: The backup policy id.
@@ -8545,7 +8545,7 @@ definitions:
       - algorithm
     type: object
   ManagerIntrinsicSettings:
-    description: Intrinsic settings which refers to the type of the Storsimple manager
+    description: Intrinsic settings which refers to the type of the StorSimple manager
     properties:
       type:
         description: Refers to the type of the StorSimple Manager
@@ -8560,7 +8560,7 @@ definitions:
       - type
     type: object
   ManagerList:
-    description: List of storsimple Managers under a particular resourceGroup
+    description: List of StorSimple Managers under a particular resourceGroup
     properties:
       value:
         description: List of Managers
@@ -9005,7 +9005,7 @@ definitions:
         description: Gets or sets the base64 encoded certificate raw data string
         type: string
       friendlyName:
-        description: Certificate friendlyname
+        description: Certificate friendly name
         type: string
       issuer:
         description: Certificate issuer
@@ -9024,7 +9024,7 @@ definitions:
         description: Certificate Subject Name
         type: string
       thumbprint:
-        description: Certificate thumbrprint
+        description: Certificate thumbprint
         type: string
       validFrom:
         description: Certificate Validity start Date time
@@ -9365,7 +9365,7 @@ definitions:
         format: date-time
         type: string
       rebootRequiredForInstall:
-        description: Set to true if RegularUpdatesAvailable is true and if atleast one of the updateItems detected has needs a reboot to install.
+        description: Set to true if RegularUpdatesAvailable is true and if at least one of the updateItems detected has needs a reboot to install.
         type: boolean
       regularUpdatesAvailable:
         description: Set to true if regular updates were detected for the current version of the device.

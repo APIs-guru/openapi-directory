@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/policyinsights/resource-manager/Microsoft.PolicyInsights/preview/2017-12-12-preview/policyEvents.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: policyinsights-policyEvents
   x-tags:
@@ -1382,7 +1381,7 @@ definitions:
         description: Flag which states whether the resource is compliant against the policy assignment it was evaluated against.
         type: boolean
       managementGroupIds:
-        description: 'Comma seperated list of management group IDs, which represent the hierarchy of the management groups the resource is under.'
+        description: 'Comma separated list of management group IDs, which represent the hierarchy of the management groups the resource is under.'
         type: string
       policyAssignmentId:
         description: Policy assignment ID.

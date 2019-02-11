@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Solutions/stable/2018-06-01/managedapplications.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources-managedapplications
   x-tags:
@@ -933,7 +932,7 @@ definitions:
       - principalId
       - roleDefinitionId
   ErrorResponse:
-    description: Error reponse indicates managed application is not able to process the incoming request. The reason is provided in the error message.
+    description: Error response indicates managed application is not able to process the incoming request. The reason is provided in the error message.
     properties:
       errorCode:
         description: Error code.

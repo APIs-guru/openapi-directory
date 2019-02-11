@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.DomainRegistration/stable/2015-04-01/Domains.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: web-Domains
   x-tags:
@@ -176,7 +175,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Succesfully deleted domain.
+          description: Successfully deleted domain.
         '204':
           description: Domain does not exist in Azure database probably because it has already been deleted
       summary: Delete a domain.
@@ -308,9 +307,9 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Succesfully deleted domain ownership identifier.
+          description: Successfully deleted domain ownership identifier.
         '204':
-          description: Domain ownership identifider does not exist.
+          description: Domain ownership identifier does not exist.
       summary: Delete ownership identifier for domain
       tags:
         - Domains
@@ -693,7 +692,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   DomainAvailablilityCheckResult:
-    description: Domain availablility check result.
+    description: Domain availability check result.
     properties:
       available:
         description: '<code>true</code> if domain can be purchased using CreateDomain API; otherwise, <code>false</code>.'

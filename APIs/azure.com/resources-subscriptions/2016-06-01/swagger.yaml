@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2016-06-01/subscriptions.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: resources-subscriptions
   x-tags:
@@ -51,6 +50,21 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  /providers/Microsoft.Resources/operations:
+    get:
+      description: Lists all of the available Microsoft.Resources REST API operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/OperationListResult'
+      tags:
+        - Operations
+      x-ms-pageable:
+        nextLinkName: nextLink
   /subscriptions:
     get:
       description: Gets all subscriptions for a tenant.
@@ -146,6 +160,39 @@ definitions:
         description: An array of locations.
         items:
           $ref: '#/definitions/Location'
+        type: array
+  Operation:
+    description: Microsoft.Resources operation
+    properties:
+      display:
+        description: The object that represents the operation.
+        properties:
+          description:
+            description: Description of the operation.
+            type: string
+          operation:
+            description: 'Operation type: Read, write, delete, etc.'
+            type: string
+          provider:
+            description: 'Service provider: Microsoft.Resources'
+            type: string
+          resource:
+            description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
+            type: string
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}'
+        type: string
+    type: object
+  OperationListResult:
+    description: Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.
+    properties:
+      nextLink:
+        description: URL to get the next set of operation list results if there are any.
+        type: string
+      value:
+        description: List of Microsoft.Resources operations.
+        items:
+          $ref: '#/definitions/Operation'
         type: array
   Subscription:
     description: Subscription information.

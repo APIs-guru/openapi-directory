@@ -49,7 +49,7 @@ paths:
           schema:
             $ref: '#/definitions/OperationList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -78,7 +78,7 @@ paths:
           schema:
             $ref: '#/definitions/CheckNameResponse'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -96,7 +96,7 @@ paths:
           schema:
             $ref: '#/definitions/WorkspaceCollectionList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -124,7 +124,7 @@ paths:
         '200':
           description: Migration completed successfully
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -147,7 +147,7 @@ paths:
           schema:
             $ref: '#/definitions/WorkspaceCollectionList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -174,7 +174,7 @@ paths:
         '202':
           description: Workspace collection deleted successfully
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -202,7 +202,7 @@ paths:
           schema:
             $ref: '#/definitions/WorkspaceCollection'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -235,7 +235,7 @@ paths:
           schema:
             $ref: '#/definitions/WorkspaceCollection'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -268,7 +268,7 @@ paths:
           schema:
             $ref: '#/definitions/WorkspaceCollection'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -296,7 +296,7 @@ paths:
           schema:
             $ref: '#/definitions/WorkspaceCollectionAccessKeys'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -330,7 +330,7 @@ paths:
           schema:
             $ref: '#/definitions/WorkspaceCollectionAccessKeys'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -358,7 +358,7 @@ paths:
           schema:
             $ref: '#/definitions/WorkspaceList'
         default:
-          description: Default Response. It will be deserialized as per the Error defintion specified in the schema. Exception will be thrown.
+          description: Default Response. It will be deserialized as per the Error definition specified in the schema. Exception will be thrown.
           schema:
             $ref: '#/definitions/Error'
       tags:
@@ -439,10 +439,10 @@ definitions:
         description: 'The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX. Default value is ''user,system'''
         type: string
       provider:
-        description: The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with “Microsoft” for 1st party services.
+        description: The localized friendly form of the resource provider name. This form is also expected to include the publisher/company responsible. Use Title Casing. Begin with "Microsoft" for 1st party services.
         type: string
       resource:
-        description: 'The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the “name” section.'
+        description: 'The localized friendly form of the resource type related to this action/operation. This form should match the public documentation for the resource provider. Use Title Casing. For examples, refer to the "name" section.'
         type: string
     type: object
   Error:

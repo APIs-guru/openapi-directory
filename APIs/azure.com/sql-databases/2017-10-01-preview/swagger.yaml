@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/preview/2017-10-01-preview/databases.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-databases
   x-tags:
@@ -330,7 +329,7 @@ paths:
 
              * 400 MissingMaxSizeBytes - MaxSizeBytes is required.
 
-             * 400 MissingSkuName - Sku name is rerquired.
+             * 400 MissingSkuName - Sku name is required.
 
              * 400 MissingSourceDatabaseId - Missing source database identifier.
 
@@ -398,7 +397,7 @@ paths:
 
              * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.
 
-             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currrently in progress.
+             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.
 
              * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.
 
@@ -486,11 +485,11 @@ paths:
 
              * 401 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured on server. Please contact support.
 
-             * 401 AzureKeyVaultMissingPermissions - The server is mising required permissions on the Azure Key Vault. 
+             * 401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. 
 
              * 401 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.
 
-             * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Serivce Principal not found error was encountered.
+             * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.
 
              * 404 OperationIdNotFound - The operation with Id does not exist.
 
@@ -646,7 +645,7 @@ paths:
 
              * 400 MissingMaxSizeBytes - MaxSizeBytes is required.
 
-             * 400 MissingSkuName - Sku name is rerquired.
+             * 400 MissingSkuName - Sku name is required.
 
              * 400 MissingSourceDatabaseId - Missing source database identifier.
 
@@ -714,7 +713,7 @@ paths:
 
              * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.
 
-             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currrently in progress.
+             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.
 
              * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.
 
@@ -802,11 +801,11 @@ paths:
 
              * 401 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured on server. Please contact support.
 
-             * 401 AzureKeyVaultMissingPermissions - The server is mising required permissions on the Azure Key Vault. 
+             * 401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. 
 
              * 401 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.
 
-             * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Serivce Principal not found error was encountered.
+             * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.
 
              * 404 OperationIdNotFound - The operation with Id does not exist.
 
@@ -1110,7 +1109,7 @@ paths:
                   tier: Standard
                 type: Microsoft.Sql/servers/databases
             '202': {}
-        Creates a database from recoverabelDatabaseId.:
+        Creates a database from recoverableDatabaseId.:
           parameters:
             api-version: 2017-03-01-preview
             databaseName: dbrestore
@@ -1625,7 +1624,7 @@ paths:
 
              * 400 AzureKeyVaultMalformedVaultUri - The provided Key Vault uri is not valid.
 
-             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currrently in progress.
+             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.
 
              * 400 CannotUseTrailingWhitespacesInDatabaseName - The database name validation failed.
 
@@ -1715,11 +1714,11 @@ paths:
 
              * 401 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured on server. Please contact support.
 
-             * 401 AzureKeyVaultMissingPermissions - The server is mising required permissions on the Azure Key Vault. 
+             * 401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault. 
 
              * 401 AdalGenericError - The operation could not be completed because an Azure Active Directory error was encountered.
 
-             * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Serivce Principal not found error was encountered.
+             * 401 AdalServicePrincipalNotFound - The operation could not be completed because an Azure Active Directory library Service Principal not found error was encountered.
 
              * 404 OperationIdNotFound - The operation with Id does not exist.
 

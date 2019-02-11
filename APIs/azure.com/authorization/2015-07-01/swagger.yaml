@@ -50,6 +50,17 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.Authorization/elevateAccess:
+    post:
+      description: Elevates access for a Global Administrator.
+      operationId: ElevateAccess_Post
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK - Returns an HttpResponseMessage with HttpStatusCode 200.
+      tags:
+        - ElevateAccess
   /providers/Microsoft.Authorization/providerOperations:
     get:
       description: Gets provider operations metadata for all resource providers.

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2018-05-01/resources.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources
   x-tags:
@@ -407,7 +406,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: OK - Returns informatin about the resource provider.
+          description: OK - Returns information about the resource provider.
           schema:
             $ref: '#/definitions/Provider'
       tags:
@@ -668,6 +667,29 @@ paths:
             $ref: '#/definitions/ResourceGroup'
       tags:
         - ResourceGroups
+      x-ms-examples:
+        Create or update a resource group:
+          parameters:
+            api-version: '2018-05-01'
+            parameters:
+              location: eastus
+            resourceGroupName: myResourceGroup
+            subscriptionId: '{subscription-id}'
+          responses:
+            '200':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup'
+                location: eastus
+                name: myResourceGroup
+                properties:
+                  provisioningState: Succeeded
+            '201':
+              body:
+                id: '/subscriptions/{subscription-id}/resourceGroups/myResourceGroup'
+                location: eastus
+                name: myResourceGroup
+                properties:
+                  provisioningState: Succeeded
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/deployments/{deploymentName}/operations':
     get:
       description: Gets all deployments operations for a deployment.
@@ -1666,6 +1688,10 @@ definitions:
       properties:
         $ref: '#/definitions/DeploymentPropertiesExtended'
         description: Deployment properties.
+      type:
+        description: The type of the deployment.
+        readOnly: true
+        type: string
     x-ms-azure-resource: true
   DeploymentExtendedFilter:
     description: Deployment filter.
@@ -1807,7 +1833,7 @@ definitions:
         $ref: '#/definitions/OnErrorDeploymentExtended'
         description: The deployment on error behavior.
       outputs:
-        description: Key/value pairs that represent deploymentoutput.
+        description: Key/value pairs that represent deployment output.
         type: object
       parameters:
         description: Deployment parameters. Use only one of Parameters or ParametersLink.
@@ -2001,7 +2027,7 @@ definitions:
           $ref: '#/definitions/Operation'
         type: array
   ParametersLink:
-    description: Entity representing the reference to the deployment paramaters.
+    description: Entity representing the reference to the deployment parameters.
     properties:
       contentVersion:
         description: 'If included, must match the ContentVersion in the template.'
@@ -2137,6 +2163,10 @@ definitions:
           type: string
         description: The tags attached to the resource group.
         type: object
+      type:
+        description: The type of the resource group.
+        readOnly: true
+        type: string
     required:
       - location
     x-ms-azure-resource: true

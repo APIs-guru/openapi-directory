@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2018-04-01/virtualWan.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-virtualWan
   x-tags:
@@ -2691,7 +2690,7 @@ paths:
             '204': {}
       x-ms-long-running-operation: true
     get:
-      description: Retrieves the details of a VPNsite.
+      description: Retrieves the details of a VPN site.
       operationId: VpnSites_Get
       parameters:
         - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
@@ -3205,7 +3204,7 @@ definitions:
         description: True if Vnet to Vnet traffic is allowed.
         type: boolean
   ProvisioningState:
-    description: The current provisisoning state.
+    description: The current provisioning state.
     enum:
       - Succeeded
       - Updating

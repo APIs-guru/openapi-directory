@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/signalr/resource-manager/Microsoft.SignalRService/preview/2018-03-01-preview/signalr.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: signalr
   x-tags:
@@ -311,7 +310,7 @@ paths:
         - $ref: '#/parameters/SignalRServiceName'
       responses:
         '200':
-          description: Success. The response describe the corresponding SingalR service.
+          description: Success. The response describe the corresponding SignalR service.
           schema:
             $ref: '#/definitions/SignalRResource'
       tags:
@@ -361,11 +360,11 @@ paths:
         - $ref: '#/parameters/SignalRServiceName'
       responses:
         '200':
-          description: Success. The response describes a SingalR service which is not up-to-date.
+          description: Success. The response describes a SignalR service which is not up-to-date.
           schema:
             $ref: '#/definitions/SignalRResource'
         '202':
-          description: Accepted. The response indicates the exiting SingalR service is now updating  and contains a Location header to query the operation result..
+          description: Accepted. The response indicates the exiting SignalR service is now updating  and contains a Location header to query the operation result..
       tags:
         - SignalR
       x-ms-examples:
@@ -430,7 +429,7 @@ paths:
           schema:
             $ref: '#/definitions/SignalRResource'
         '202':
-          description: Accepted. The response indicates the exiting SingalR service is now updating  and contains a Location header to query the operation result..
+          description: Accepted. The response indicates the exiting SignalR service is now updating  and contains a Location header to query the operation result..
       tags:
         - SignalR
       x-ms-examples:
@@ -525,7 +524,7 @@ paths:
         - $ref: '#/parameters/SignalRServiceName'
       responses:
         '201':
-          description: Created and an async operation is excuting in background to make the new key to take effect. The response contains new keys and a Location header to query the async operation result.
+          description: Created and an async operation is executing in background to make the new key to take effect. The response contains new keys and a Location header to query the async operation result.
           schema:
             $ref: '#/definitions/SignalRKeys'
       tags:
@@ -695,7 +694,7 @@ definitions:
         readOnly: true
         type: string
       name:
-        description: The name of the resouce.
+        description: The name of the resource.
         readOnly: true
         type: string
       type:
@@ -831,7 +830,7 @@ definitions:
         readOnly: true
         type: string
       name:
-        description: The name of the resouce.
+        description: The name of the resource.
         readOnly: true
         type: string
       properties:
@@ -914,7 +913,7 @@ definitions:
         description: Localized name of the usage.
         type: string
       value:
-        description: The indentifier of the usage.
+        description: The identifier of the usage.
         type: string
     type: object
   TrackedResource:

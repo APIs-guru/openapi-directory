@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2016-01-01/storage.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage
   x-tags:
@@ -84,7 +83,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: OK -- current usage acount and limit retrieved and returned successfully.
+          description: OK -- current usage account and limit retrieved and returned successfully.
           schema:
             $ref: '#/definitions/UsageListResult'
       tags:
@@ -312,7 +311,7 @@ definitions:
       name:
         description: Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source.
         type: string
-      useSubDomain:
+      useSubDomainName:
         description: Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates.
         type: boolean
     required:

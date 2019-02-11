@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/security/resource-manager/Microsoft.Security/preview/2017-08-01-preview/security.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: security
   x-tags:
@@ -156,7 +155,7 @@ parameters:
       $ref: '#/definitions/Setting'
     x-ms-parameter-location: method
   SettingName:
-    description: Name of setting
+    description: 'Name of setting: (MCAS/WDATP)'
     enum:
       - MCAS
       - WDATP
@@ -777,7 +776,7 @@ paths:
                 type: Microsoft.Security/settings
   '/subscriptions/{subscriptionId}/providers/Microsoft.Security/workspaceSettings':
     get:
-      description: Settings about where we should store your security data and logs
+      description: 'Settings about where we should store your security data and logs. If the result is empty, it means that no custom-workspace configuration was set'
       operationId: WorkspaceSettings_List
       parameters:
         - $ref: '#/parameters/ApiVersion'
@@ -842,7 +841,7 @@ paths:
           responses:
             '204': {}
     get:
-      description: Settings about where we should store your security data and logs
+      description: 'Settings about where we should store your security data and logs. If the result is empty, it means that no custom-workspace configuration was set'
       operationId: WorkspaceSettings_Get
       parameters:
         - $ref: '#/parameters/ApiVersion'
@@ -2054,25 +2053,30 @@ definitions:
     type: object
   Setting:
     allOf:
-      - $ref: '#/definitions/Resource'
-      - $ref: '#/definitions/SettingKind'
+      - $ref: '#/definitions/SettingResource'
     description: Represents a security setting in Azure Security Center.
     discriminator: kind
     properties: {}
     type: object
-  SettingKind:
+  SettingResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
     description: The kind of the security setting
     properties:
       kind:
-        description: the kind of the settings string
+        description: the kind of the settings string (DataExportSetting)
         enum:
           - DataExportSetting
+          - AlertSuppressionSetting
         type: string
         x-ms-enum:
           modelAsString: true
           name: SettingKind
           values:
             - value: DataExportSetting
+            - value: AlertSuppressionSetting
+    required:
+      - kind
     type: object
   SettingsList:
     description: Subscription settings list.

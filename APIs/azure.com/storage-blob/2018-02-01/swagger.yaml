@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2018-02-01/blob.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage-blob
   x-tags:
@@ -485,7 +484,7 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: The ImmutabilityPolicy Properties that will be extented for a blob container.
+        - description: The ImmutabilityPolicy Properties that will be extended for a blob container.
           in: body
           name: parameters
           schema:

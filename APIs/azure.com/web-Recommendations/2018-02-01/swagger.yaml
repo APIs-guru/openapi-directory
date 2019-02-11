@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2018-02-01/Recommendations.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-Recommendations
   x-tags:
@@ -372,7 +371,7 @@ paths:
           in: query
           name: updateSeen
           type: boolean
-        - description: The GUID of the recommedation object if you query an expired one. You don't need to specify it to query an active entry.
+        - description: The GUID of the recommendation object if you query an expired one. You don't need to specify it to query an active entry.
           in: query
           name: recommendationId
           type: string
@@ -585,7 +584,7 @@ definitions:
             format: date-time
             type: string
           states:
-            description: The list of states of this recommendation. If it's null then it shoud be considered "Active".
+            description: The list of states of this recommendation. If it's null then it should be considered "Active".
             items:
               type: string
             type: array

@@ -3,7 +3,7 @@ schemes:
   - https
 host: management.azure.com
 info:
-  description: The Windows Azure Network management API provides a RESTful set of web services that interact with Windows Azure Networks service to manage your network resrources. The API has entities that capture the relationship between an end user and the Windows Azure Networks service.
+  description: The Windows Azure Network management API provides a RESTful set of web services that interact with Windows Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Windows Azure Networks service.
   title: NetworkResourceProviderClient
   version: 2015-05-01-preview
   x-apisguru-categories:
@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/preview/2015-05-01-preview/network.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network
   x-tags:
@@ -53,7 +52,7 @@ parameters:
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGateways':
     get:
-      description: The List applicationgateway opertion retrieves all the applicationgateways in a subscription.
+      description: The List application gateway operation retrieves all the application gateways in a subscription.
       operationId: ApplicationGateways_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -69,7 +68,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteCircuits':
     get:
-      description: The List ExpressRouteCircuit opertion retrieves all the ExpressRouteCircuits in a subscription.
+      description: The List ExpressRouteCircuit operation retrieves all the ExpressRouteCircuits in a subscription.
       operationId: ExpressRouteCircuits_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -85,7 +84,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteServiceProviders':
     get:
-      description: The List ExpressRouteServiceProvider opertion retrieves all the available ExpressRouteServiceProviders.
+      description: The List ExpressRouteServiceProvider operation retrieves all the available ExpressRouteServiceProviders.
       operationId: ExpressRouteServiceProviders_List
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -101,7 +100,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/loadBalancers':
     get:
-      description: The List loadBalancer opertion retrieves all the loadbalancers in a subscription.
+      description: The List loadBalancer operation retrieves all the load balancers in a subscription.
       operationId: LoadBalancers_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -161,7 +160,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkInterfaces':
     get:
-      description: The List networkInterfaces opertion retrieves all the networkInterfaces in a subscription.
+      description: The List networkInterfaces operation retrieves all the networkInterfaces in a subscription.
       operationId: NetworkInterfaces_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -193,7 +192,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPAddresses':
     get:
-      description: The List publicIpAddress opertion retrieves all the publicIpAddresses in a subscription.
+      description: The List publicIpAddress operation retrieves all the publicIpAddresses in a subscription.
       operationId: PublicIpAddresses_ListAll
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
@@ -241,7 +240,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways':
     get:
-      description: The List ApplicationGateway opertion retrieves all the applicationgateways in a resource group.
+      description: The List ApplicationGateway operation retrieves all the application gateways in a resource group.
       operationId: ApplicationGateways_List
       parameters:
         - description: The name of the resource group.
@@ -262,7 +261,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}':
     delete:
-      description: The delete applicationgateway operation deletes the specified applicationgateway.
+      description: The delete application gateway operation deletes the specified application gateway.
       operationId: ApplicationGateways_Delete
       parameters:
         - description: The name of the resource group.
@@ -270,7 +269,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the applicationgateway.
+        - description: The name of the application gateway.
           in: path
           name: applicationGatewayName
           required: true
@@ -288,7 +287,7 @@ paths:
         - ApplicationGateways
       x-ms-long-running-operation: true
     get:
-      description: The Get applicationgateway operation retreives information about the specified applicationgateway.
+      description: The Get application gateway operation retrieves information about the specified application gateway.
       operationId: ApplicationGateways_Get
       parameters:
         - description: The name of the resource group.
@@ -296,7 +295,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the applicationgateway.
+        - description: The name of the application gateway.
           in: path
           name: applicationGatewayName
           required: true
@@ -346,7 +345,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/start':
     post:
-      description: The Start ApplicationGateway operation starts application gatewayin the specified resource group through Network resource provider.
+      description: The Start ApplicationGateway operation starts application gateway in the specified resource group through Network resource provider.
       operationId: ApplicationGateways_Start
       parameters:
         - description: The name of the resource group.
@@ -369,7 +368,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/stop':
     post:
-      description: The STOP ApplicationGateway operation stops application gatewayin the specified resource group through Network resource provider.
+      description: The STOP ApplicationGateway operation stops application gateway in the specified resource group through Network resource provider.
       operationId: ApplicationGateways_Stop
       parameters:
         - description: The name of the resource group.
@@ -446,7 +445,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the virtual network gateway conenction.
+        - description: The name of the virtual network gateway connection.
           in: path
           name: virtualNetworkGatewayConnectionName
           required: true
@@ -473,7 +472,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/':
     delete:
-      description: The Delete VirtualNetworkGatewayConnection operation deletes the specifed virtual network Gateway connection through Network resource provider.
+      description: The Delete VirtualNetworkGatewayConnection operation deletes the specified virtual network Gateway connection through Network resource provider.
       operationId: VirtualNetworkGatewayConnections_Delete
       parameters:
         - description: The name of the resource group.
@@ -536,7 +535,7 @@ paths:
           name: virtualNetworkGatewayConnectionName
           required: true
           type: string
-        - description: Parameters supplied to the Begin Set Virtual Network Gateway conection Shared key operation throughNetwork resource provider.
+        - description: Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation through Network resource provider.
           in: body
           name: parameters
           required: true
@@ -591,7 +590,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits':
     get:
-      description: The List ExpressRouteCircuit opertion retrieves all the ExpressRouteCircuits in a resource group.
+      description: The List ExpressRouteCircuit operation retrieves all the ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_List
       parameters:
         - description: The name of the resource group.
@@ -638,7 +637,7 @@ paths:
         - ExpressRouteCircuits
       x-ms-long-running-operation: true
     get:
-      description: The Get ExpressRouteCircuit operation retreives information about the specified ExpressRouteCircuit.
+      description: The Get ExpressRouteCircuit operation retrieves information about the specified ExpressRouteCircuit.
       operationId: ExpressRouteCircuits_Get
       parameters:
         - description: The name of the resource group.
@@ -704,7 +703,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the curcuit.
+        - description: The name of the circuit.
           in: path
           name: circuitName
           required: true
@@ -781,7 +780,7 @@ paths:
       tags:
         - ExpressRouteCircuitAuthorizations
     put:
-      description: The Put Authorization operation creates/updates an authorization in thespecified ExpressRouteCircuits
+      description: The Put Authorization operation creates/updates an authorization in the specified ExpressRouteCircuits
       operationId: ExpressRouteCircuitAuthorizations_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -829,7 +828,7 @@ paths:
           name: resourceGroupName
           required: true
           type: string
-        - description: The name of the curcuit.
+        - description: The name of the circuit.
           in: path
           name: circuitName
           required: true
@@ -906,7 +905,7 @@ paths:
       tags:
         - ExpressRouteCircuitPeerings
     put:
-      description: The Put Pering operation creates/updates an peering in the specified ExpressRouteCircuits
+      description: The Put Peering operation creates/updates an peering in the specified ExpressRouteCircuits
       operationId: ExpressRouteCircuitPeerings_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -946,7 +945,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}arpTable':
     get:
-      description: The ListArpTable from ExpressRouteCircuit opertion retrieves the currently advertised arp table associated with the ExpressRouteCircuits in a resource group.
+      description: The ListArpTable from ExpressRouteCircuit operation retrieves the currently advertised arp table associated with the ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_ListArpTable
       parameters:
         - description: The name of the resource group.
@@ -972,7 +971,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}routesTable':
     get:
-      description: The ListRoutesTable from ExpressRouteCircuit opertion retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
+      description: The ListRoutesTable from ExpressRouteCircuit operation retrieves the currently advertised routes table associated with the ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_ListRoutesTable
       parameters:
         - description: The name of the resource group.
@@ -998,7 +997,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}stats':
     get:
-      description: The Liststats ExpressRouteCircuit opertion retrieves all the stats from a ExpressRouteCircuits in a resource group.
+      description: The ListStats ExpressRouteCircuit operation retrieves all the stats from a ExpressRouteCircuits in a resource group.
       operationId: ExpressRouteCircuits_ListStats
       parameters:
         - description: The name of the resource group.
@@ -1024,7 +1023,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers':
     get:
-      description: The List loadBalancer opertion retrieves all the loadbalancers in a resource group.
+      description: The List loadBalancer operation retrieves all the load balancers in a resource group.
       operationId: LoadBalancers_List
       parameters:
         - description: The name of the resource group.
@@ -1071,7 +1070,7 @@ paths:
         - LoadBalancers
       x-ms-long-running-operation: true
     get:
-      description: The Get ntework interface operation retreives information about the specified network interface.
+      description: The Get network interface operation retrieves information about the specified network interface.
       operationId: LoadBalancers_Get
       parameters:
         - description: The name of the resource group.
@@ -1129,7 +1128,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways':
     get:
-      description: The List LocalNetworkGateways opertion retrieves all the local network gateways stored.
+      description: The List LocalNetworkGateways operation retrieves all the local network gateways stored.
       operationId: LocalNetworkGateways_List
       parameters:
         - description: The name of the resource group.
@@ -1208,7 +1207,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}/':
     delete:
-      description: The Delete LocalNetworkGateway operation deletes the specifed local network Gateway through Network resource provider.
+      description: The Delete LocalNetworkGateway operation deletes the specified local network Gateway through Network resource provider.
       operationId: LocalNetworkGateways_Delete
       parameters:
         - description: The name of the resource group.
@@ -1235,7 +1234,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces':
     get:
-      description: The List networkInterfaces opertion retrieves all the networkInterfaces in a resource group.
+      description: The List networkInterfaces operation retrieves all the networkInterfaces in a resource group.
       operationId: NetworkInterfaces_List
       parameters:
         - description: The name of the resource group.
@@ -1256,7 +1255,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}':
     delete:
-      description: The delete netwokInterface operation deletes the specified netwokInterface.
+      description: The delete networkInterface operation deletes the specified networkInterface.
       operationId: NetworkInterfaces_Delete
       parameters:
         - description: The name of the resource group.
@@ -1282,7 +1281,7 @@ paths:
         - NetworkInterfaces
       x-ms-long-running-operation: true
     get:
-      description: The Get ntework interface operation retreives information about the specified network interface.
+      description: The Get network interface operation retrieves information about the specified network interface.
       operationId: NetworkInterfaces_Get
       parameters:
         - description: The name of the resource group.
@@ -1361,7 +1360,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}':
     delete:
-      description: The Delete NetworkSecurityGroup operation deletes the specifed network security group
+      description: The Delete NetworkSecurityGroup operation deletes the specified network security group
       operationId: NetworkSecurityGroups_Delete
       parameters:
         - description: The name of the resource group.
@@ -1410,7 +1409,7 @@ paths:
       tags:
         - NetworkSecurityGroups
     put:
-      description: The Put NetworkSecurityGroup operation creates/updates a network security groupin the specified resource group.
+      description: The Put NetworkSecurityGroup operation creates/updates a network security group in the specified resource group.
       operationId: NetworkSecurityGroups_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -1445,7 +1444,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityGroups/{networkSecurityGroupName}/securityRules':
     get:
-      description: The List network security rule opertion retrieves all the security rules in a network security group.
+      description: The List network security rule operation retrieves all the security rules in a network security group.
       operationId: SecurityRules_List
       parameters:
         - description: The name of the resource group.
@@ -1502,7 +1501,7 @@ paths:
         - SecurityRules
       x-ms-long-running-operation: true
     get:
-      description: The Get NetworkSecurityRule operation retreives information about the specified network security rule.
+      description: The Get NetworkSecurityRule operation retrieves information about the specified network security rule.
       operationId: SecurityRules_Get
       parameters:
         - description: The name of the resource group.
@@ -1570,7 +1569,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses':
     get:
-      description: The List publicIpAddress opertion retrieves all the publicIpAddresses in a resource group.
+      description: The List publicIpAddress operation retrieves all the publicIpAddresses in a resource group.
       operationId: PublicIpAddresses_List
       parameters:
         - description: The name of the resource group.
@@ -1617,7 +1616,7 @@ paths:
         - PublicIpAddresses
       x-ms-long-running-operation: true
     get:
-      description: The Get publicIpAddress operation retreives information about the specified pubicIpAddress
+      description: The Get publicIpAddress operation retrieves information about the specified pubicIpAddress
       operationId: PublicIpAddresses_Get
       parameters:
         - description: The name of the resource group.
@@ -1696,7 +1695,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables/{routeTableName}':
     delete:
-      description: The Delete RouteTable operation deletes the specifed Route Table
+      description: The Delete RouteTable operation deletes the specified Route Table
       operationId: RouteTables_Delete
       parameters:
         - description: The name of the resource group.
@@ -1745,7 +1744,7 @@ paths:
       tags:
         - RouteTables
     put:
-      description: The Put RouteTable operation creates/updates a route tablein the specified resource group.
+      description: The Put RouteTable operation creates/updates a route table in the specified resource group.
       operationId: RouteTables_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -1780,7 +1779,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeTables/{routeTableName}/routes':
     get:
-      description: The List network security rule opertion retrieves all the routes in a route table.
+      description: The List network security rule operation retrieves all the routes in a route table.
       operationId: Routes_List
       parameters:
         - description: The name of the resource group.
@@ -1837,7 +1836,7 @@ paths:
         - Routes
       x-ms-long-running-operation: true
     get:
-      description: The Get route operation retreives information about the specified route from the route table.
+      description: The Get route operation retrieves information about the specified route from the route table.
       operationId: Routes_Get
       parameters:
         - description: The name of the resource group.
@@ -1883,7 +1882,7 @@ paths:
           name: routeName
           required: true
           type: string
-        - description: Parameters supplied to the create/update routeoperation
+        - description: Parameters supplied to the create/update route operation
           in: body
           name: routeParameters
           required: true
@@ -1905,7 +1904,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways':
     get:
-      description: The List VirtualNetworkGateways opertion retrieves all the virtual network gateways stored.
+      description: The List VirtualNetworkGateways operation retrieves all the virtual network gateways stored.
       operationId: VirtualNetworkGateways_List
       parameters:
         - description: The name of the resource group.
@@ -1926,7 +1925,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/':
     delete:
-      description: The Delete VirtualNetworkGateway operation deletes the specifed virtual network Gateway through Network resource provider.
+      description: The Delete VirtualNetworkGateway operation deletes the specified virtual network Gateway through Network resource provider.
       operationId: VirtualNetworkGateways_Delete
       parameters:
         - description: The name of the resource group.
@@ -2011,7 +2010,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworkgateways/{virtualNetworkGatewayName}/reset':
     post:
-      description: The Reset VirtualNetworkGateway operation resets the primary of the virtual network gatewayin the specified resource group through Network resource provider.
+      description: The Reset VirtualNetworkGateway operation resets the primary of the virtual network gateway in the specified resource group through Network resource provider.
       operationId: VirtualNetworkGateways_Reset
       parameters:
         - description: The name of the resource group.
@@ -2065,7 +2064,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}':
     delete:
-      description: The Delete VirtualNetwork operation deletes the specifed virtual network
+      description: The Delete VirtualNetwork operation deletes the specified virtual network
       operationId: VirtualNetworks_Delete
       parameters:
         - description: The name of the resource group.
@@ -2149,7 +2148,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualnetworks/{virtualNetworkName}/subnets':
     get:
-      description: The List subnets opertion retrieves all the subnets in a virtual network.
+      description: The List subnets operation retrieves all the subnets in a virtual network.
       operationId: Subnets_List
       parameters:
         - description: The name of the resource group.
@@ -2206,7 +2205,7 @@ paths:
         - Subnets
       x-ms-long-running-operation: true
     get:
-      description: The Get subnet operation retreives information about the specified subnet.
+      description: The Get subnet operation retrieves information about the specified subnet.
       operationId: Subnets_Get
       parameters:
         - description: The name of the resource group.
@@ -2234,7 +2233,7 @@ paths:
       tags:
         - Subnets
     put:
-      description: The Put Subnet operation creates/updates a subnet in thespecified virtual network
+      description: The Put Subnet operation creates/updates a subnet in the specified virtual network
       operationId: Subnets_CreateOrUpdate
       parameters:
         - description: The name of the resource group.
@@ -2331,7 +2330,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}':
     get:
-      description: The Get ntework interface operation retreives information about the specified network interface in a virtual machine scale set.
+      description: The Get network interface operation retrieves information about the specified network interface in a virtual machine scale set.
       operationId: NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface
       parameters:
         - description: The name of the resource group.
@@ -2586,7 +2585,7 @@ definitions:
         type: string
       subnet:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets the reference of the subnet resource.A subnet from where appliation gateway gets its private address '
+        description: 'Gets or sets the reference of the subnet resource.A subnet from where application gateway gets its private address '
   ApplicationGatewayListResult:
     description: Response for ListLoadBalancers Api service call
     properties:
@@ -2782,12 +2781,12 @@ definitions:
         description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
   AzureAsyncOperationResult:
-    description: 'The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is inprogress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure.'
+    description: 'The response body contains the status of the specified asynchronous operation, indicating whether it has succeeded, is in progress, or has failed. Note that this status is distinct from the HTTP status code returned for the Get Operation Status operation itself. If the asynchronous operation succeeded, the response body includes the HTTP status code for the successful request. If the asynchronous operation failed, the response body includes the HTTP status code for the failed request and error information regarding the failure.'
     properties:
       error:
         $ref: '#/definitions/Error'
       status:
-        description: Status of the AzureAsuncOperation
+        description: Status of the AzureAsyncOperation
         enum:
           - InProgress
           - Succeeded
@@ -2799,7 +2798,7 @@ definitions:
   BackendAddressPool:
     allOf:
       - $ref: '#/definitions/SubResource'
-    description: Pool of backend IP addresseses
+    description: Pool of backend IP addresses
     properties:
       etag:
         description: A unique read-only string that changes whenever the resource is updated
@@ -2836,7 +2835,7 @@ definitions:
         format: int64
         type: integer
   ConnectionSharedKey:
-    description: Response for GetConnectionSharedKey Api servive call
+    description: Response for GetConnectionSharedKey Api service call
     properties:
       value:
         description: The virtual network connection shared key value
@@ -2850,7 +2849,7 @@ definitions:
           type: string
         type: array
   DnsNameAvailabilityResult:
-    description: Response for CheckDnsNameAvailability Api servive call
+    description: Response for CheckDnsNameAvailability Api service call
     properties:
       available:
         description: Domain availability (True/False)
@@ -2940,7 +2939,7 @@ definitions:
         $ref: '#/definitions/ExpressRouteCircuitPeeringPropertiesFormat'
         x-ms-client-flatten: true
   ExpressRouteCircuitPeeringConfig:
-    description: Specfies the peering config
+    description: Specifies the peering config
     properties:
       advertisedPublicPrefixes:
         description: Gets or sets the reference of AdvertisedPublicPrefixes
@@ -2984,7 +2983,7 @@ definitions:
         type: integer
       microsoftPeeringConfig:
         $ref: '#/definitions/ExpressRouteCircuitPeeringConfig'
-        description: Gets or sets the mircosoft peering config
+        description: Gets or sets the Microsoft peering config
       peerASN:
         description: Gets or sets the peer ASN
         format: int32
@@ -3287,7 +3286,7 @@ definitions:
         description: Gets or sets the reference of the PublicIP resource
       subnet:
         $ref: '#/definitions/SubResource'
-        description: 'Gets or sets the reference of the subnet resource.A subnet from wher the load balancer gets its private frontend address '
+        description: 'Gets or sets the reference of the subnet resource.A subnet from where the load balancer gets its private frontend address '
   InboundNatPool:
     allOf:
       - $ref: '#/definitions/SubResource'
@@ -3306,22 +3305,22 @@ definitions:
     description: Properties of Inbound NAT pool
     properties:
       backendPort:
-        description: 'Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal compotnent on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to ''*'' to automatically assign an unallocated port that is discoverable using the runtime API'
+        description: 'Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal component on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to ''*'' to automatically assign an unallocated port that is discoverable using the runtime API'
         format: int32
         type: integer
       frontendIPConfiguration:
         $ref: '#/definitions/SubResource'
         description: Gets or sets a reference to frontend IP Addresses
       frontendPortRangeEnd:
-        description: 'Gets or sets the ending port range for the NAT pool. You can spcify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive'
+        description: 'Gets or sets the ending port range for the NAT pool. You can specify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive'
         format: int32
         type: integer
       frontendPortRangeStart:
-        description: 'Gets or sets the starting port range for the NAT pool. You can spcify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive'
+        description: 'Gets or sets the starting port range for the NAT pool. You can specify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive'
         format: int32
         type: integer
       protocol:
-        description: Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp
+        description: Gets or sets the transport protocol for the external endpoint. Possible values are Udp or Tcp
         enum:
           - Udp
           - Tcp
@@ -3358,7 +3357,7 @@ definitions:
         $ref: '#/definitions/SubResource'
         description: Gets or sets a reference to a private ip address defined on a NetworkInterface of a VM. Traffic sent to frontendPort of each of the frontendIPConfigurations is forwarded to the backed IP
       backendPort:
-        description: 'Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal compotnent on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to ''*'' to automatically assign an unallocated port that is discoverable using the runtime API'
+        description: 'Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal component on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to ''*'' to automatically assign an unallocated port that is discoverable using the runtime API'
         format: int32
         type: integer
       enableFloatingIP:
@@ -3368,15 +3367,15 @@ definitions:
         $ref: '#/definitions/SubResource'
         description: Gets or sets a reference to frontend IP Addresses
       frontendPort:
-        description: 'Gets or sets the port for the external endpoint. You can spcify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive'
+        description: 'Gets or sets the port for the external endpoint. You can specify any port number you choose, but the port numbers specified for each role in the service must be unique. Possible values range between 1 and 65535, inclusive'
         format: int32
         type: integer
       idleTimeoutInMinutes:
-        description: Gets or sets the timeout for the Tcp idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This emlement is only used when the protocol is set to Tcp
+        description: Gets or sets the timeout for the Tcp idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to Tcp
         format: int32
         type: integer
       protocol:
-        description: Gets or sets the transport potocol for the external endpoint. Possible values are Udp or Tcp
+        description: Gets or sets the transport protocol for the external endpoint. Possible values are Udp or Tcp
         enum:
           - Udp
           - Tcp
@@ -3417,7 +3416,7 @@ definitions:
     description: Properties of Load Balancer
     properties:
       backendAddressPools:
-        description: Gets or sets Pools of backend IP addresseses
+        description: Gets or sets Pools of backend IP addresses
         items:
           $ref: '#/definitions/BackendAddressPool'
         type: array
@@ -3437,7 +3436,7 @@ definitions:
           $ref: '#/definitions/InboundNatRule'
         type: array
       loadBalancingRules:
-        description: Gets or sets loadbalancing rules
+        description: Gets or sets load balancing rules
         items:
           $ref: '#/definitions/LoadBalancingRule'
         type: array
@@ -3478,7 +3477,7 @@ definitions:
         $ref: '#/definitions/SubResource'
         description: Gets or sets  a reference to a pool of DIPs. Inbound traffic is randomly load balanced across IPs in the backend IPs
       backendPort:
-        description: 'Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal compotnent on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to ''*'' to automatically assign an unallocated port that is discoverable using the runtime API'
+        description: 'Gets or sets a port used for internal connections on the endpoint. The localPort attribute maps the eternal port of the endpoint to an internal port on a role. This is useful in scenarios where a role must communicate to an internal component on a port that is different from the one that is exposed externally. If not specified, the value of localPort is the same as the port attribute. Set the value of localPort to ''*'' to automatically assign an unallocated port that is discoverable using the runtime API'
         format: int32
         type: integer
       enableFloatingIP:
@@ -3492,7 +3491,7 @@ definitions:
         format: int32
         type: integer
       idleTimeoutInMinutes:
-        description: Gets or sets the timeout for the Tcp idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This emlement is only used when the protocol is set to Tcp
+        description: Gets or sets the timeout for the Tcp idle connection. The value can be set between 4 and 30 minutes. The default value is 4 minutes. This element is only used when the protocol is set to Tcp
         format: int32
         type: integer
       loadDistribution:
@@ -3590,7 +3589,7 @@ definitions:
         description: Gets or sets the Internal DNS name
         type: string
       internalFqdn:
-        description: 'Gets or sets full IDNS name in the form, DnsName.VnetId.ZoneId.TopleveSuffix. This is set when the NIC is associated to a VM'
+        description: 'Gets or sets full IDNS name in the form, DnsName.VnetId.ZoneId.TopLevelSuffix. This is set when the NIC is associated to a VM'
         type: string
   NetworkInterfaceIpConfiguration:
     allOf:
@@ -3695,7 +3694,7 @@ definitions:
         $ref: '#/definitions/NetworkSecurityGroupPropertiesFormat'
         x-ms-client-flatten: true
   NetworkSecurityGroupListResult:
-    description: Response for ListNetworkSecurityGroups Api servive call
+    description: Response for ListNetworkSecurityGroups Api service call
     properties:
       nextLink:
         description: Gets the URL to get the next set of results.
@@ -3795,7 +3794,7 @@ definitions:
           $ref: '#/definitions/SubResource'
         type: array
       numberOfProbes:
-        description: 'Gets or sets the number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endponints to be taken out of rotation faster or slower than the typical times used in Azure. '
+        description: 'Gets or sets the number of probes where if no response, will result in stopping further traffic from being delivered to the endpoint. This values allows endpoints to be taken out of rotation faster or slower than the typical times used in Azure. '
         format: int32
         type: integer
       port:
@@ -3841,7 +3840,7 @@ definitions:
         description: 'Gets the FQDN, Fully qualified domain name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone.'
         type: string
       reverseFqdn:
-        description: 'Gets or Sests the Reverse FQDN. A user-visible, fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN. '
+        description: 'Gets or Sets the Reverse FQDN. A user-visible, fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN. '
         type: string
   PublicIpAddressListResult:
     description: Response for ListPublicIpAddresses Api service call
@@ -3861,7 +3860,7 @@ definitions:
         $ref: '#/definitions/PublicIpAddressDnsSettings'
         description: Gets or sets FQDN of the DNS record associated with the public IP address
       idleTimeoutInMinutes:
-        description: Gets or sets the Idletimeout of the public IP address
+        description: Gets or sets the idle timeout of the public IP address
         format: int32
         type: integer
       ipAddress:
@@ -3927,7 +3926,7 @@ definitions:
         $ref: '#/definitions/RoutePropertiesFormat'
         x-ms-client-flatten: true
   RouteListResult:
-    description: Response for ListRoute Api servive call
+    description: Response for ListRoute Api service call
     properties:
       nextLink:
         description: Gets the URL to get the next set of results.
@@ -3975,7 +3974,7 @@ definitions:
         $ref: '#/definitions/RouteTablePropertiesFormat'
         x-ms-client-flatten: true
   RouteTableListResult:
-    description: Response for ListRouteTable Api servive call
+    description: Response for ListRouteTable Api service call
     properties:
       nextLink:
         description: Gets the URL to get the next set of results.
@@ -4041,13 +4040,13 @@ definitions:
         description: Gets or sets a description for this rule. Restricted to 140 chars.
         type: string
       destinationAddressPrefix:
-        description: 'Gets or sets destination address prefix. CIDR or source IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. '
+        description: 'Gets or sets destination address prefix. CIDR or source IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. '
         type: string
       destinationPortRange:
-        description: Gets or sets Destination Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+        description: Gets or sets Destination Port or Range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
         type: string
       direction:
-        description: Gets or sets the direction of the rule.InBound or Outbound. The direction specifies if rule will be evaluated on incoming or outcoming traffic.
+        description: Gets or sets the direction of the rule.InBound or Outbound. The direction specifies if rule will be evaluated on incoming or outgoing traffic.
         enum:
           - Inbound
           - Outbound
@@ -4073,10 +4072,10 @@ definitions:
         description: Gets or sets Provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       sourceAddressPrefix:
-        description: 'Gets or sets source address prefix. CIDR or source IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
+        description: 'Gets or sets source address prefix. CIDR or source IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
         type: string
       sourcePortRange:
-        description: Gets or sets Source Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+        description: Gets or sets Source Port or Range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
         type: string
     required:
       - protocol
@@ -4093,7 +4092,7 @@ definitions:
   Subnet:
     allOf:
       - $ref: '#/definitions/SubResource'
-    description: Subnet in a VirtualNework resource
+    description: Subnet in a VirtualNetwork resource
     properties:
       etag:
         description: A unique read-only string that changes whenever the resource is updated
@@ -4228,7 +4227,7 @@ definitions:
           $ref: '#/definitions/VirtualNetworkGatewayConnection'
         type: array
   VirtualNetworkGatewayConnectionPropertiesFormat:
-    description: VirtualNeworkGatewayConnection properties
+    description: VirtualNetworkGatewayConnection properties
     properties:
       connectionStatus:
         description: Virtual network Gateway connection status
@@ -4242,7 +4241,7 @@ definitions:
           modelAsString: true
           name: VirtualNetworkGatewayConnectionStatus
       connectionType:
-        description: Gateway connection type -Ipsec/Dedicated/VpnClient/Vnet2Vnet
+        description: Gateway connection type IPsec/Dedicated/VpnClient/Vnet2Vnet
         enum:
           - IPsec
           - Vnet2Vnet
@@ -4276,7 +4275,7 @@ definitions:
         format: int32
         type: integer
       sharedKey:
-        description: The Ipsec share key.
+        description: The IPsec share key.
         type: string
       virtualNetworkGateway1:
         $ref: '#/definitions/VirtualNetworkGateway'
@@ -4332,7 +4331,7 @@ definitions:
           $ref: '#/definitions/VirtualNetworkGateway'
         type: array
   VirtualNetworkGatewayPropertiesFormat:
-    description: VirtualNeworkGateay properties
+    description: VirtualNetworkGateway properties
     properties:
       enableBgp:
         description: EnableBgp Flag
@@ -4370,7 +4369,7 @@ definitions:
           modelAsString: true
           name: VpnType
   VirtualNetworkListResult:
-    description: Response for ListVirtualNetworks Api servive call
+    description: Response for ListVirtualNetworks Api service call
     properties:
       nextLink:
         description: Gets the URL to get the next set of results.

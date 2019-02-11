@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/security/resource-manager/Microsoft.Security/preview/2015-06-01-preview/security.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: security
   x-tags:
@@ -306,6 +305,7 @@ paths:
                         resourceType: Virtual Machine
                         user Name: administrator
                       instanceId: f144ee95-a3e5-42da-a279-967d115809aa
+                      isIncident: false
                       remediationSteps: "verify that the user invoked this process\r\nrun antimalware scan of the VM"
                       reportedSeverity: High
                       reportedTimeUtc: '2018-05-02T05:36:12.2089889Z'
@@ -904,6 +904,7 @@ paths:
                         resourceType: Virtual Machine
                         user Name: administrator
                       instanceId: f144ee95-a3e5-42da-a279-967d115809aa
+                      isIncident: false
                       remediationSteps: "verify that the user invoked this process\r\nrun antimalware scan of the VM"
                       reportedSeverity: High
                       reportedTimeUtc: '2018-05-02T05:36:12.2089889Z'
@@ -1053,6 +1054,7 @@ paths:
                     resourceType: Virtual Machine
                     user Name: administrator
                   instanceId: f144ee95-a3e5-42da-a279-967d115809aa
+                  isIncident: false
                   remediationSteps: "verify that the user invoked this process\r\nrun antimalware scan of the VM"
                   reportedSeverity: High
                   reportedTimeUtc: '2018-05-02T05:36:12.2089889Z'
@@ -1585,7 +1587,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/alerts':
     get:
-      description: List all the alerts alerts that are associated with the resource group
+      description: List all the alerts that are associated with the resource group
       operationId: Alerts_ListByResourceGroup
       parameters:
         - $ref: '#/parameters/ApiVersion'
@@ -1657,6 +1659,7 @@ paths:
                         resourceType: Virtual Machine
                         user Name: administrator
                       instanceId: f144ee95-a3e5-42da-a279-967d115809aa
+                      isIncident: false
                       remediationSteps: "verify that the user invoked this process\r\nrun antimalware scan of the VM"
                       reportedSeverity: High
                       reportedTimeUtc: '2018-05-02T05:36:12.2089889Z'
@@ -1845,6 +1848,7 @@ paths:
                         resourceType: Virtual Machine
                         user Name: administrator
                       instanceId: f144ee95-a3e5-42da-a279-967d115809aa
+                      isIncident: false
                       remediationSteps: "verify that the user invoked this process\r\nrun antimalware scan of the VM"
                       reportedSeverity: High
                       reportedTimeUtc: '2018-05-02T05:36:12.2089889Z'
@@ -1928,6 +1932,7 @@ paths:
                     resourceType: Virtual Machine
                     user Name: administrator
                   instanceId: f144ee95-a3e5-42da-a279-967d115809aa
+                  isIncident: false
                   remediationSteps: "verify that the user invoked this process\r\nrun antimalware scan of the VM"
                   reportedSeverity: High
                   reportedTimeUtc: '2018-05-02T05:36:12.2089889Z'
@@ -2681,14 +2686,31 @@ definitions:
         description: Instance ID of the alert.
         readOnly: true
         type: string
+      isIncident:
+        description: Whether this alert is for incident type or not (otherwise - single alert)
+        readOnly: true
+        type: boolean
       remediationSteps:
         description: Recommended steps to reradiate the incident
         readOnly: true
         type: string
       reportedSeverity:
         description: Estimated severity of this alert
+        enum:
+          - Silent
+          - Information
+          - Low
+          - High
         readOnly: true
         type: string
+        x-ms-enum:
+          modelAsString: true
+          name: reportedSeverity
+          values:
+            - value: Silent
+            - value: Information
+            - value: Low
+            - value: High
       reportedTimeUtc:
         description: The time the incident was reported to Microsoft.Security in UTC
         format: date-time
@@ -2942,7 +2964,7 @@ definitions:
       - $ref: '#/definitions/Resource'
       - $ref: '#/definitions/ExternalSecuritySolutionKind'
       - $ref: '#/definitions/Location'
-    description: Represents a security solution external to Azure Security Center which sends information to an OMS workspace and whos data is displayed by Azure Security Center.
+    description: Represents a security solution external to Azure Security Center which sends information to an OMS workspace and whose data is displayed by Azure Security Center.
     discriminator: kind
     properties: {}
     type: object
@@ -3140,7 +3162,7 @@ definitions:
       allowedSourceAddressPrefixes:
         description: Mutually exclusive with the "allowedSourceAddressPrefix" parameter.
         items:
-          description: 'IP addess or CIDR, for example "192.168.0.3" or "192.168.0.0/16".'
+          description: 'IP address or CIDR, for example "192.168.0.3" or "192.168.0.0/16".'
           type: string
         type: array
       endTimeUtc:

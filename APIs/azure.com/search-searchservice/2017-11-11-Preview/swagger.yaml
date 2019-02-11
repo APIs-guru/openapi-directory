@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/search/data-plane/Microsoft.Azure.Search.Service/preview/2017-11-11-preview/searchservice.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: search-searchservice
   x-tags:
@@ -2182,7 +2181,7 @@ paths:
                     skills:
                       - '@odata.type': '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
                         categories:
-                          - Organization
+                          - organization
                         context: null
                         defaultLanguageCode: en
                         description: null
@@ -2264,7 +2263,7 @@ paths:
               skills:
                 - '@odata.type': '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
                   categories:
-                    - Organization
+                    - organization
                   defaultLanguageCode: en
                   inputs:
                     - name: text
@@ -2309,7 +2308,7 @@ paths:
                 skills:
                   - '@odata.type': '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
                     categories:
-                      - Organization
+                      - organization
                     context: null
                     defaultLanguageCode: en
                     description: null
@@ -2377,7 +2376,7 @@ paths:
         '404':
           description: The provided skillset name is not found.
       tags:
-        - skillsetName
+        - Skillsets
       x-ms-examples:
         SearchServiceDeleteSkillset:
           parameters:
@@ -2424,7 +2423,7 @@ paths:
                 skills:
                   - '@odata.type': '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
                     categories:
-                      - Organization
+                      - organization
                     context: null
                     defaultLanguageCode: en
                     description: null
@@ -2473,7 +2472,7 @@ paths:
                         targetName: keyPhrases
       x-ms-request-id: request-id
     put:
-      description: Creates a new cognitive skillset in an Azure Search service.
+      description: Creates a new cognitive skillset in an Azure Search service or updates the skillset if it already exists.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/update-skillset'
       operationId: Skillsets_CreateOrUpdate
@@ -2516,7 +2515,7 @@ paths:
               skills:
                 - '@odata.type': '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
                   categories:
-                    - Organization
+                    - organization
                   defaultLanguageCode: en
                   inputs:
                     - name: text
@@ -2561,7 +2560,7 @@ paths:
                 skills:
                   - '@odata.type': '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
                     categories:
-                      - Organization
+                      - organization
                     context: null
                     defaultLanguageCode: en
                     description: null
@@ -2615,7 +2614,7 @@ paths:
                 skills:
                   - '@odata.type': '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
                     categories:
-                      - Organization
+                      - organization
                     context: null
                     defaultLanguageCode: en
                     description: null
@@ -3010,6 +3009,26 @@ definitions:
         maximum: 300
         type: integer
     x-ms-discriminator-value: '#Microsoft.Azure.Search.ClassicTokenizer'
+  CognitiveServices:
+    description: Abstract base class for describing any cognitive service resource attached to the skillset.
+    discriminator: '@odata.type'
+    properties:
+      '@odata.type':
+        type: string
+      description:
+        type: string
+    required:
+      - '@odata.type'
+  CognitiveServicesByKey:
+    allOf:
+      - $ref: '#/definitions/CognitiveServices'
+    description: A cognitive service resource provisioned with a key that is attached to a skillset.
+    properties:
+      key:
+        type: string
+    required:
+      - key
+    x-ms-discriminator-value: '#Microsoft.Azure.Search.CognitiveServicesByKey'
   CommonGramTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -3045,7 +3064,7 @@ definitions:
           type: string
         type: array
       maxAgeInSeconds:
-        description: The duration for which browsers should cache CORS preflight responses. Defaults to 5 mintues.
+        description: The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes.
         format: int64
         type: integer
     required:
@@ -3165,6 +3184,11 @@ definitions:
       name:
         type: string
     x-ms-external: true
+  DefaultCognitiveServices:
+    allOf:
+      - $ref: '#/definitions/CognitiveServices'
+    description: An empty object that represents the default cognitive service resource for a skillset.
+    x-ms-discriminator-value: '#Microsoft.Azure.Search.DefaultCognitiveServices'
   DictionaryDecompounderTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -3324,6 +3348,47 @@ definitions:
           type: string
         type: array
     x-ms-discriminator-value: '#Microsoft.Azure.Search.ElisionTokenFilter'
+  EntityCategory:
+    description: A string indicating what entity categories to return.
+    enum:
+      - location
+      - organization
+      - person
+      - quantity
+      - datetime
+      - url
+      - email
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: EntityCategory
+  EntityRecognitionSkill:
+    allOf:
+      - $ref: '#/definitions/Skill'
+    description: Text analytics entity recognition.
+    externalDocs:
+      url: 'https://docs.microsoft.com/azure/search/cognitive-search-skill-entity-recognition'
+    properties:
+      categories:
+        description: A list of entity categories that should be extracted.
+        items:
+          $ref: '#/definitions/EntityCategory'
+          x-nullable: false
+        type: array
+      defaultLanguageCode:
+        $ref: '#/definitions/EntityRecognitionSkillLanguage'
+        description: A value indicating which language code to use. Default is en.
+      includeTypelessEntities:
+        description: 'Determines whether or not to include entities which are well known but don''t conform to a type. If this configuration is not set (default), set to null or set to false, entities which don''t have a type will not be surfaced.'
+        type: boolean
+        x-nullable: true
+    x-ms-discriminator-value: '#Microsoft.Skills.Text.EntityRecognitionSkill'
+  EntityRecognitionSkillLanguage:
+    description: The language codes supported for input text by EntityRecognitionSkill.
+    properties:
+      name:
+        type: string
+    x-ms-external: true
   Field:
     description: 'Represents a field in an index definition in Azure Search, which describes the name, data type, and search behavior of a field.'
     externalDocs:
@@ -3371,7 +3436,7 @@ definitions:
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Language-support'
       searchable:
-        description: A value indicating whether the field is included in full-text searches. Valid only forstring or string collection fields. Default is false.
+        description: A value indicating whether the field is included in full-text searches. Valid only for string or string collection fields. Default is false.
         type: boolean
         x-ms-client-name: isSearchable
         x-nullable: false
@@ -4225,13 +4290,11 @@ definitions:
       - organization
       - person
     type: string
-    x-ms-enum:
-      modelAsString: false
-      name: NamedEntityCategory
+    x-ms-external: true
   NamedEntityRecognitionSkill:
     allOf:
       - $ref: '#/definitions/Skill'
-    description: Text analytics named entity recognition.
+    description: Text analytics named entity recognition. This skill is deprecated in favor of EntityRecognitionSkill.
     externalDocs:
       url: 'https://docs.microsoft.com/azure/search/cognitive-search-skill-named-entity-recognition'
     properties:
@@ -4250,6 +4313,7 @@ definitions:
         type: number
         x-nullable: true
     x-ms-discriminator-value: '#Microsoft.Skills.Text.NamedEntityRecognitionSkill'
+    x-ms-external: true
   NamedEntityRecognitionSkillLanguage:
     description: The language codes supported for input text by NamedEntityRecognitionSkill.
     properties:
@@ -4738,6 +4802,9 @@ definitions:
         description: The ETag of the skillset.
         type: string
         x-ms-client-name: ETag
+      cognitiveServices:
+        $ref: '#/definitions/CognitiveServices'
+        description: Details about cognitive services to be used when running skills.
       description:
         description: The description of the skillset.
         type: string
@@ -4814,7 +4881,7 @@ definitions:
         description: The name of the column to use for soft-deletion detection.
         type: string
       softDeleteMarkerValue:
-        description: The marker value that indentifies an item as deleted.
+        description: The marker value that identifies an item as deleted.
         type: string
     x-ms-discriminator-value: '#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy'
   SplitSkill:

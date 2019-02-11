@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/capabilities.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-capabilities
   x-tags:
@@ -33,19 +32,6 @@ securityDefinitions:
       user_impersonation: impersonate your user account
     type: oauth2
 parameters:
-  ApiVersionParameter:
-    description: The API version to use for the request.
-    in: query
-    name: api-version
-    required: true
-    type: string
-  ResourceGroupParameter:
-    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-    in: path
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
   ServerNameParameter:
     description: The name of the server.
     in: path
@@ -53,20 +39,24 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The subscription ID that identifies an Azure subscription.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationId}/capabilities':
     get:
       description: Gets the capabilities available for the specified location.
       operationId: Capabilities_ListByLocation
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
         - description: The location id whose capabilities are retrieved.
           in: path
           name: locationId

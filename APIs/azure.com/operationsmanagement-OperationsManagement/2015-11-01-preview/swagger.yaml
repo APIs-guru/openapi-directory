@@ -148,7 +148,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.OperationsManagement/ManagementAssociations':
     get:
-      description: Retrieves the ManagementAssociatons list.
+      description: Retrieves the ManagementAssociations list.
       operationId: ManagementAssociations_ListBySubscription
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
@@ -162,7 +162,7 @@ paths:
           description: Error response definition.
           schema:
             $ref: '#/definitions/CodeMessageError'
-      summary: Retrieves the ManagementAssociatons list for the subscription
+      summary: Retrieves the ManagementAssociations list for the subscription
       tags:
         - ManagementAssociation
       x-ms-examples:
@@ -558,6 +558,7 @@ paths:
             subscriptionId: subid
           responses:
             '200': {}
+      x-ms-long-running-operation: true
     get:
       description: Retrieves the user solution.
       operationId: Solutions_Get
@@ -621,8 +622,8 @@ paths:
           schema:
             $ref: '#/definitions/Solution'
       responses:
-        '200':
-          description: OK response definition.
+        '201':
+          description: Created response definition.
           schema:
             $ref: '#/definitions/Solution'
         default:
@@ -655,7 +656,7 @@ paths:
             solutionName: solution1
             subscriptionId: subid
           responses:
-            '200':
+            '201':
               body:
                 id: subscriptions/subid/resourcegroups/rg1/providers/Microsoft.OperationsManagement/solutions/solution1
                 location: East US
@@ -675,6 +676,7 @@ paths:
                     - /subscriptions/sub2/resourceGroups/rg2/providers/provider2/resources/resource3
                   workspaceResourceId: /subscriptions/sub2/resourceGroups/rg2/providers/Microsoft.OperationalInsights/workspaces/ws1
                 type: Microsoft.OperationsManagement/solution
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.OperationsManagement/ManagementAssociations/{managementAssociationName}':
     delete:
       description: Deletes the ManagementAssociation in the subscription.
@@ -852,7 +854,7 @@ definitions:
     description: the list of ManagementAssociation response
     properties:
       value:
-        description: List of Management Association properites within the subscription.
+        description: List of Management Association properties within the subscription.
         items:
           $ref: '#/definitions/ManagementAssociation'
         type: array
@@ -908,7 +910,7 @@ definitions:
     description: the list of ManagementConfiguration response
     properties:
       value:
-        description: List of Management Configuration properites within the subscription.
+        description: List of Management Configuration properties within the subscription.
         items:
           $ref: '#/definitions/ManagementConfiguration'
         type: array
@@ -1007,7 +1009,7 @@ definitions:
     description: the list of solution response
     properties:
       value:
-        description: List of solution properites within the subscription.
+        description: List of solution properties within the subscription.
         items:
           $ref: '#/definitions/Solution'
         type: array

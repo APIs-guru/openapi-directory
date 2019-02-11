@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Resources/stable/2015-11-01/resources.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources
   x-tags:
@@ -1524,7 +1523,7 @@ definitions:
           modelAsString: false
           name: DeploymentMode
       outputs:
-        description: Gets or sets key/value pairs that represent deploymentoutput.
+        description: Gets or sets key/value pairs that represent deployment output.
         type: object
       parameters:
         description: Deployment parameters. Use only one of Parameters or ParametersLink.
@@ -1583,7 +1582,7 @@ definitions:
         description: Gets or sets the tag value.
         type: string
   ParametersLink:
-    description: Entity representing the reference to the deployment paramaters.
+    description: Entity representing the reference to the deployment parameters.
     properties:
       contentVersion:
         description: If included it must match the ContentVersion in the template.

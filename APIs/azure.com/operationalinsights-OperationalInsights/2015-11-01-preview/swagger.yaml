@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/operationalinsights/resource-manager/Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: operationalinsights-OperationalInsights
   x-tags:
@@ -3172,7 +3171,7 @@ definitions:
         x-ms-client-flatten: true
     x-ms-azure-resource: true
   WorkspaceListManagementGroupsResult:
-    description: The list workspace managmement groups operation response.
+    description: The list workspace management groups operation response.
     properties:
       value:
         description: Gets or sets a list of management groups attached to the workspace.

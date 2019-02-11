@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resourcehealth/resource-manager/Microsoft.ResourceHealth/stable/2015-01-01/resourcehealth.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resourcehealth
   x-tags:
@@ -361,6 +360,291 @@ paths:
                   rootCauseAttributionTime: '2016-03-29T09:13:00Z'
                   summary: 'We''re sorry, we couldn''t automatically recover your virtual machine'
                 type: Microsoft.ResourceHealth/AvailabilityStatuses
+  '/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses':
+    get:
+      description: Lists the historical availability statuses for a single child resource. Use the nextLink property in the response to get the next page of availability status
+      operationId: ChildAvailabilityStatuses_List
+      parameters:
+        - description: 'The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}'
+          in: path
+          name: resourceUri
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/FilterParameter'
+        - $ref: '#/parameters/ExpandParameter'
+      responses:
+        '200':
+          description: The body contains the list of the historical availability statuses for a single child resource
+          schema:
+            $ref: '#/definitions/availabilityStatusListResult'
+        default:
+          description: DefaultErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - ChildAvailabilityStatuses
+      x-ms-examples:
+        GetHealthHistoryByResource:
+          parameters:
+            api-version: '2015-01-01'
+            resourceUri: resourceUri
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/availabilityStatuses/current
+                    location: southcentralus
+                    name: current
+                    properties:
+                      availabilityState: Available
+                      detailedStatus: ''
+                      occuredTime: '2018-11-30T23:37:44Z'
+                      reasonChronicity: Transient
+                      reasonType: ''
+                      recommendedActions:
+                        - action: 'If you''re having problems, use the Troubleshoot tool to get recommended solutions.'
+                          actionUrl: '<#TroubleshootV2Blade>'
+                          actionUrlText: Troubleshoot tool
+                        - action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                          actionUrl: '<#SupportCase>'
+                          actionUrlText: contact support
+                      reportedTime: '2018-12-05T19:45:45.6640838Z'
+                      summary: There aren't any known Azure platform problems affecting this virtual machine
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/availabilityStatuses/2018-11-30+23%3a36%3a03Z
+                    location: southcentralus
+                    name: 2018-11-30+23%3a36%3a03Z
+                    properties:
+                      availabilityState: Unavailable
+                      detailedStatus: ''
+                      occuredTime: '2018-11-30T23:36:03Z'
+                      reasonChronicity: Transient
+                      reasonType: Customer Initiated
+                      recommendedActions:
+                        - action: Check back here for status updates
+                          actionUrl: ''
+                          actionUrlText: ''
+                        - action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                          actionUrl: '<#SupportCase>'
+                          actionUrlText: contact support
+                      resolutionETA: '2018-11-30T23:56:03Z'
+                      rootCauseAttributionTime: '2018-11-30T23:36:02.514Z'
+                      summary: This virtual machine is rebooting as requested by an authorized user or process. It will be back online after the reboot completes.
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/availabilityStatuses/2018-11-30+22%3a32%3a12Z
+                    location: southcentralus
+                    name: 2018-11-30+22%3a32%3a12Z
+                    properties:
+                      availabilityState: Available
+                      detailedStatus: ''
+                      occuredTime: '2018-11-30T22:32:12Z'
+                      reasonChronicity: Transient
+                      reasonType: ''
+                      recommendedActions:
+                        - action: 'If you''re having problems, use the Troubleshoot tool to get recommended solutions.'
+                          actionUrl: '<#TroubleshootV2Blade>'
+                          actionUrlText: Troubleshoot tool
+                        - action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                          actionUrl: '<#SupportCase>'
+                          actionUrlText: contact support
+                      summary: There aren't any known Azure platform problems affecting this virtual machine
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/availabilityStatuses/2018-11-30+22%3a30%3a23Z
+                    location: southcentralus
+                    name: 2018-11-30+22%3a30%3a23Z
+                    properties:
+                      availabilityState: Unavailable
+                      detailedStatus: ''
+                      occuredTime: '2018-11-30T22:30:23Z'
+                      reasonChronicity: Transient
+                      reasonType: Customer Initiated
+                      recommendedActions:
+                        - action: Check back here for status updates
+                          actionUrl: ''
+                          actionUrlText: ''
+                        - action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                          actionUrl: '<#SupportCase>'
+                          actionUrlText: contact support
+                      resolutionETA: '2018-11-30T22:50:23Z'
+                      rootCauseAttributionTime: '2018-11-30T22:30:22.256Z'
+                      summary: This virtual machine is rebooting as requested by an authorized user or process. It will be back online after the reboot completes.
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/availabilityStatuses/2018-11-21+00%3a00%3a00Z
+                    location: southcentralus
+                    name: 2018-11-21+00%3a00%3a00Z
+                    properties:
+                      availabilityState: Available
+                      detailedStatus: ''
+                      occuredTime: '2018-11-21T00:00:00Z'
+                      reasonChronicity: Transient
+                      reasonType: ''
+                      recommendedActions:
+                        - action: 'If you''re having problems, use the Troubleshoot tool to get recommended solutions.'
+                          actionUrl: '<#TroubleshootV2Blade>'
+                          actionUrlText: Troubleshoot tool
+                        - action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                          actionUrl: '<#SupportCase>'
+                          actionUrlText: contact support
+                      summary: There aren't any known Azure platform problems affecting this virtual machine
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses/current':
+    get:
+      description: Gets current availability status for a single resource
+      operationId: ChildAvailabilityStatuses_GetByResource
+      parameters:
+        - description: 'The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support one nesting level resource types : /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resource-provider-name}/{parentResourceType}/{parentResourceName}/{resourceType}/{resourceName}'
+          in: path
+          name: resourceUri
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/FilterParameter'
+        - $ref: '#/parameters/ExpandParameter'
+      responses:
+        '200':
+          description: The body contains the current availability status for a single resource
+          schema:
+            $ref: '#/definitions/availabilityStatus'
+        default:
+          description: DefaultErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - ChildAvailabilityStatuses
+      x-ms-examples:
+        GetCurrentHealthByResource:
+          parameters:
+            $expand: recommendedactions
+            api-version: '2015-01-01'
+            resourceUri: resourceUri
+          responses:
+            '200':
+              body:
+                id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current
+                location: southcentralus
+                name: current
+                properties:
+                  RecommendedActions:
+                    - Action: 'To start this virtual machine, open the resource blade and click Start'
+                      ActionUrl: '<#ResourceBlade>'
+                      ActionUrlText: resource blade
+                    - Action: 'If you are experiencing problems you believe are caused by Azure, contact support'
+                      ActionUrl: '<#SupportCase>'
+                      ActionUrlText: contact support
+                  availabilityState: Available
+                  detailedStatus: ''
+                  occuredTime: '2018-11-30T23:37:44Z'
+                  reasonChronicity: Persistent
+                  reasonType: ''
+                  reportedTime: '2018-12-04T01:19:11.955255Z'
+                  summary: There aren't any known Azure platform problems affecting this virtual machine
+                type: Microsoft.ResourceHealth/AvailabilityStatuses
+  '/{resourceUri}/providers/Microsoft.ResourceHealth/childResources':
+    get:
+      description: Lists the all the children and its current health status for a parent resource. Use the nextLink property in the response to get the next page of children current health
+      operationId: ChildResources_List
+      parameters:
+        - description: 'The fully qualified ID of the resource, including the resource name and resource type. Currently the API only support not nested parent resource type: /subscriptions/{subscriptionId}/resourceGroups/{resource-group-name}/providers/{resource-provider-name}/{resource-type}/{resource-name}'
+          in: path
+          name: resourceUri
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/FilterParameter'
+        - $ref: '#/parameters/ExpandParameter'
+      responses:
+        '200':
+          description: The body contains the list of the children's current availability statuses for a single resource which contains children
+          schema:
+            $ref: '#/definitions/availabilityStatusListResult'
+        default:
+          description: DefaultErrorResponse
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - ChildResources
+      x-ms-examples:
+        GetHealthHistoryByResource:
+          parameters:
+            api-version: '2015-01-01'
+            resourceUri: resourceUri
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/0/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current
+                    location: southcentralus
+                    name: rhctest_0
+                    properties:
+                      availabilityState: Available
+                      detailedStatus: ''
+                      isArmResource: true
+                      occuredTime: '2018-11-30T23:37:43Z'
+                      reasonChronicity: Persistent
+                      reasonType: ''
+                      reportedTime: '2018-12-04T01:18:25.575477Z'
+                      summary: There aren't any known Azure platform problems affecting this virtual machine
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/3/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current
+                    location: southcentralus
+                    name: rhctest_3
+                    properties:
+                      availabilityState: Available
+                      detailedStatus: ''
+                      isArmResource: true
+                      occuredTime: '2018-11-30T23:37:41Z'
+                      reasonChronicity: Persistent
+                      reasonType: ''
+                      reportedTime: '2018-12-04T01:18:25.575477Z'
+                      summary: There aren't any known Azure platform problems affecting this virtual machine
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/1/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current
+                    location: southcentralus
+                    name: rhctest_1
+                    properties:
+                      availabilityState: Available
+                      detailedStatus: ''
+                      isArmResource: true
+                      occuredTime: '2018-11-30T23:37:48Z'
+                      reasonChronicity: Persistent
+                      reasonType: ''
+                      reportedTime: '2018-12-04T01:18:25.575477Z'
+                      summary: There aren't any known Azure platform problems affecting this virtual machine
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/2/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current
+                    location: southcentralus
+                    name: rhctest_2
+                    properties:
+                      availabilityState: Available
+                      detailedStatus: ''
+                      isArmResource: true
+                      occuredTime: '2018-11-30T23:37:43Z'
+                      reasonChronicity: Persistent
+                      reasonType: ''
+                      reportedTime: '2018-12-04T01:18:25.575477Z'
+                      summary: There aren't any known Azure platform problems affecting this virtual machine
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+                  - id: /subscriptions/227b734f-e14f-4de6-b7fc-3190c21e69f6/resourceGroups/JUHACKETRHCTEST/providers/Microsoft.Compute/virtualMachineScaleSets/rhctest/virtualMachines/4/providers/Microsoft.ResourceHealth/child/availabilityStatuses/current
+                    location: southcentralus
+                    name: rhctest_4
+                    properties:
+                      availabilityState: Available
+                      detailedStatus: ''
+                      isArmResource: true
+                      occuredTime: '2018-11-30T23:37:44Z'
+                      reasonChronicity: Persistent
+                      reasonType: ''
+                      reportedTime: '2018-12-04T01:18:25.575477Z'
+                      summary: There aren't any known Azure platform problems affecting this virtual machine
+                    type: Microsoft.ResourceHealth/AvailabilityStatuses
+      x-ms-pageable:
+        nextLinkName: nextLink
 definitions:
   ErrorResponse:
     description: Error details.
@@ -406,6 +690,9 @@ definitions:
           detailedStatus:
             description: Details of the availability status.
             type: string
+          isArmResource:
+            description: 'flag to show if child resource need detail health. '
+            type: boolean
           occuredTime:
             description: Timestamp for when last change in health status occurred.
             format: date-time

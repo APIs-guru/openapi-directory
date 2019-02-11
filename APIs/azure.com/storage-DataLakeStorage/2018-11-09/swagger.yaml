@@ -17,7 +17,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/data-plane/Microsoft.StorageDataLake/stable/2018-11-09/DataLakeStorage.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: storage-DataLakeStorage
   x-tags:
@@ -272,7 +271,7 @@ paths:
           name: maxResults
           required: false
           type: integer
-        - description: 'Optional. Valid only when Hierarchical Namespace is enabled for the account. If "true", the identity values returned in the owner and group fields of each list entry will be transformed from Azure Active Directory Object IDs to User Principal Names.  If "false", the values will be returned as Azure Active Directory Object IDs. The default value is false.'
+        - description: 'Optional. Valid only when Hierarchical Namespace is enabled for the account. If "true", the user identity values returned in the owner and group fields of each list entry will be transformed from Azure Active Directory Object IDs to User Principal Names.  If "false", the values will be returned as Azure Active Directory Object IDs. The default value is false. Note that group and application Object IDs are not translated because they do not have unique friendly names.'
           in: query
           name: upn
           required: false
@@ -329,7 +328,7 @@ paths:
               description: 'A bool string indicates whether the namespace feature is enabled. If "true", the namespace is enabled for the filesystem.  '
               type: string
             x-ms-properties:
-              description: 'The user-defined properties associated with the filesystem.  A comma-separated list of name and value pairs in the format "n1=v1, n2=v2, ...", where each value is base64 encoded.'
+              description: 'The user-defined properties associated with the filesystem.  A comma-separated list of name and value pairs in the format "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.'
               type: string
             x-ms-request-id:
               description: A server-generated UUID recorded in the analytics logs for troubleshooting and correlation.
@@ -349,7 +348,7 @@ paths:
         maxLength: 63
         minLength: 3
         name: filesystem
-        pattern: '^[a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$'
+        pattern: '^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$'
         required: true
         type: string
       - description: The value must be "filesystem" for all filesystem operations.
@@ -386,7 +385,7 @@ paths:
       description: 'Set properties for the filesystem.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).'
       operationId: Filesystem_SetProperties
       parameters:
-        - description: 'Optional. User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is base64 encoded.  If the filesystem exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.'
+        - description: 'Optional. User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.  If the filesystem exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.'
           in: header
           name: x-ms-properties
           required: false
@@ -430,7 +429,7 @@ paths:
       description: 'Create a filesystem rooted at the specified location. If the filesystem already exists, the operation fails.  This operation does not support conditional HTTP requests.'
       operationId: Filesystem_Create
       parameters:
-        - description: 'User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is base64 encoded.'
+        - description: 'User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.'
           in: header
           name: x-ms-properties
           required: false
@@ -613,7 +612,7 @@ paths:
               description: The lease status of the resource.
               type: string
             x-ms-properties:
-              description: 'The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is base64 encoded.'
+              description: 'The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.'
               type: string
             x-ms-request-id:
               description: A server-generated UUID recorded in the analytics logs for troubleshooting and correlation.
@@ -674,7 +673,7 @@ paths:
               description: The lease status of the resource.
               type: string
             x-ms-properties:
-              description: 'The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is base64 encoded.'
+              description: 'The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.'
               type: string
             x-ms-request-id:
               description: A server-generated UUID recorded in the analytics logs for troubleshooting and correlation.
@@ -708,7 +707,7 @@ paths:
           x-ms-enum:
             modelAsString: false
             name: PathGetPropertiesAction
-        - description: 'Optional. Valid only when Hierarchical Namespace is enabled for the account. If "true", the identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names.  If "false", the values will be returned as Azure Active Directory Object IDs. The default value is false.'
+        - description: 'Optional. Valid only when Hierarchical Namespace is enabled for the account. If "true", the user identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names.  If "false", the values will be returned as Azure Active Directory Object IDs. The default value is false. Note that group and application Object IDs are not translated because they do not have unique friendly names.'
           in: query
           name: upn
           required: false
@@ -799,7 +798,7 @@ paths:
               description: 'The POSIX access permissions for the file owner, the file owning group, and others. Included in the response if Hierarchical Namespace is enabled for the account.'
               type: string
             x-ms-properties:
-              description: 'The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is base64 encoded.'
+              description: 'The user-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.'
               type: string
             x-ms-request-id:
               description: A server-generated UUID recorded in the analytics logs for troubleshooting and correlation.
@@ -822,7 +821,7 @@ paths:
         maxLength: 63
         minLength: 3
         name: filesystem
-        pattern: '^[a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$'
+        pattern: '^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$'
         required: true
         type: string
       - description: The file or directory path.
@@ -881,6 +880,11 @@ paths:
           name: retainUncommittedData
           required: false
           type: boolean
+        - description: 'Azure Storage Events allow applications to receive notifications when files change. When Azure Storage Events are enabled, a file changed event is raised. This event has a property indicating whether this is the final change to distinguish the difference between an intermediate flush to a file stream and the final close of a file stream. The close query parameter is valid only when the action is "flush" and change notifications are enabled. If the value of close is "true" and the flush operation completes successfully, the service raises a file change notification with a property indicating that this is the final update (the file stream has been closed). If "false" a change notification is raised indicating the file has changed. The default is false. This query parameter is set to true by the Hadoop ABFS driver to indicate that the file stream has been closed."'
+          in: query
+          name: close
+          required: false
+          type: boolean
         - description: Required for "Append Data" and "Flush Data".  Must be 0 for "Flush Data".  Must be the length of the request content in bytes for "Append Data".
           format: int64
           in: header
@@ -919,7 +923,7 @@ paths:
           name: x-ms-content-language
           required: false
           type: string
-        - description: 'Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is base64 encoded.  Valid only for the setProperties operation.  If the file or directory exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.'
+        - description: 'Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set. Valid only for the setProperties operation. If the file or directory exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.'
           in: header
           name: x-ms-properties
           required: false
@@ -1010,7 +1014,7 @@ paths:
               description: The data and time the file or directory was last modified.  Write operations on the file or directory update the last modified time.
               type: string
             x-ms-properties:
-              description: 'User-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is base64 encoded.'
+              description: 'User-defined properties associated with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.'
               type: string
             x-ms-request-id:
               description: A server-generated UUID recorded in the analytics logs for troubleshooting and correlation.
@@ -1248,7 +1252,7 @@ paths:
           name: x-ms-content-disposition
           required: false
           type: string
-        - description: 'An optional file or directory to be renamed.  The value must have the following format: "/{filesystem}/{path}".  If "x-ms-properties" is specified, the properties will overwrite the existing properties; otherwise, the existing properties will be preserved.'
+        - description: 'An optional file or directory to be renamed.  The value must have the following format: "/{filesystem}/{path}".  If "x-ms-properties" is specified, the properties will overwrite the existing properties; otherwise, the existing properties will be preserved. This value must be a URL percent-encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.'
           in: header
           name: x-ms-rename-source
           required: false
@@ -1265,7 +1269,7 @@ paths:
           pattern: '^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$'
           required: false
           type: string
-        - description: 'Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is base64 encoded.'
+        - description: 'Optional.  User-defined properties to be stored with the file or directory, in the format of a comma-separated list of name and value pairs "n1=v1, n2=v2, ...", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.'
           in: header
           name: x-ms-properties
           required: false

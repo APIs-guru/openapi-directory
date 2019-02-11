@@ -199,6 +199,9 @@ paths:
                     properties:
                       article:
                         articleContent: <html>An outage alert is being investigated. More information will be provided as it is known</html>
+                      enableChatWithUs: false
+                      enableMicrosoftSupport: true
+                      eventLevel: Informational
                       eventSource: ResourceHealth
                       eventType: ServiceIssue
                       faqs:
@@ -216,6 +219,8 @@ paths:
                           impactedService: Virtual Machines
                       impactMitigationTime: '2018-11-08T00:00:00Z'
                       impactStartTime: '2018-11-07T00:00:00Z'
+                      isHIR: false
+                      lastUpdateTime: '2018-11-08T00:00:00Z'
                       level: Warning
                       links:
                         - bladeName: RequestRCABlade
@@ -235,6 +240,7 @@ paths:
                           parameters:
                             trackingId: BC_1-FXZ
                           type: Button
+                      priority: 2
                       recommendedActions:
                         actions:
                           - action 1
@@ -537,6 +543,9 @@ paths:
                     properties:
                       article:
                         articleContent: <html>An outage alert is being investigated. More information will be provided as it is known</html>
+                      enableChatWithUs: false
+                      enableMicrosoftSupport: true
+                      eventLevel: Informational
                       eventSource: ResourceHealth
                       eventType: ServiceIssue
                       faqs:
@@ -554,6 +563,8 @@ paths:
                           impactedService: Virtual Machines
                       impactMitigationTime: '2018-11-08T00:00:00Z'
                       impactStartTime: '2018-11-07T00:00:00Z'
+                      isHIR: false
+                      lastUpdateTime: '2018-11-08T00:00:00Z'
                       level: Warning
                       links:
                         - bladeName: RequestRCABlade
@@ -573,6 +584,7 @@ paths:
                           parameters:
                             trackingId: BC_1-FXZ
                           type: Button
+                      priority: 2
                       recommendedActions:
                         actions:
                           - action 1
@@ -746,6 +758,22 @@ definitions:
                 description: Article content of event.
                 type: string
             type: object
+          enableChatWithUs:
+            description: Tells if we want to enable or disable Microsoft Support for this event.
+            type: boolean
+          enableMicrosoftSupport:
+            description: Tells if we want to enable or disable Microsoft Support for this event.
+            type: boolean
+          eventLevel:
+            description: Level of event.
+            enum:
+              - Critical
+              - Warning
+              - Informational
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: EventLevelValues
           eventSource:
             description: Source of event.
             enum:
@@ -787,8 +815,15 @@ definitions:
             description: It provides the Timestamp for when the health impacting event started.
             format: date-time
             type: string
+          isHIR:
+            description: It provides information if the event is High incident rate event or not.
+            type: boolean
+          lastUpdateTime:
+            description: It provides the Timestamp for when the health impacting event was last updated.
+            format: date-time
+            type: string
           level:
-            description: Level of event.
+            description: Level of insight.
             enum:
               - Critical
               - Warning
@@ -801,6 +836,9 @@ definitions:
             items:
               $ref: '#/definitions/link'
             type: array
+          priority:
+            description: Priority level of the event.
+            type: integer
           recommendedActions:
             description: Recommended actions of event.
             properties:

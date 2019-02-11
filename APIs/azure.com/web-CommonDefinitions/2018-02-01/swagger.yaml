@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2018-02-01/CommonDefinitions.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-CommonDefinitions
   x-tags:
@@ -566,6 +565,12 @@ definitions:
         items:
           type: string
         type: array
+      supportCredentials:
+        description: |-
+          Gets or sets whether CORS requests with credentials are allowed. See 
+          https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
+          for more details.
+        type: boolean
     type: object
   CsmOperationCollection:
     description: Collection of Azure resource manager operation metadata.
@@ -1729,7 +1734,7 @@ definitions:
         description: '<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.'
         type: boolean
       ipSecurityRestrictions:
-        description: IP security restrictions.
+        description: IP security restrictions for main.
         items:
           $ref: '#/definitions/IpSecurityRestriction'
         type: array
@@ -1839,6 +1844,14 @@ definitions:
         maximum: 10
         minimum: 0
         type: integer
+      scmIpSecurityRestrictions:
+        description: IP security restrictions for scm.
+        items:
+          $ref: '#/definitions/IpSecurityRestriction'
+        type: array
+      scmIpSecurityRestrictionsUseMain:
+        description: IP security restrictions for scm to use main.
+        type: boolean
       scmType:
         description: SCM type.
         enum:
@@ -2242,6 +2255,9 @@ definitions:
           dnsServers:
             description: DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.
             type: string
+          isSwift:
+            description: Flag that is used to denote if this is VNET injection
+            type: boolean
           resyncRequired:
             description: '<code>true</code> if a resync is required; otherwise, <code>false</code>.'
             readOnly: true

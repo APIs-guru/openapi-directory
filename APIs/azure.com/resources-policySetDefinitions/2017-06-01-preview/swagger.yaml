@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Authorization/preview/2017-06-01-preview/policySetDefinitions.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: resources-policySetDefinitions
   x-tags:
@@ -646,7 +645,7 @@ paths:
               headers: {}
 definitions:
   ErrorResponse:
-    description: Error reponse indicates ARM is not able to process the incoming request. The reason is provided in the error message.
+    description: Error response indicates ARM is not able to process the incoming request. The reason is provided in the error message.
     properties:
       errorCode:
         description: Error code.

@@ -198,7 +198,8 @@ paths:
           name: locationName
           required: true
           type: string
-        - in: path
+        - description: The name of the server
+          in: path
           name: longTermRetentionServerName
           required: true
           type: string
@@ -272,11 +273,13 @@ paths:
           name: locationName
           required: true
           type: string
-        - in: path
+        - description: The name of the server
+          in: path
           name: longTermRetentionServerName
           required: true
           type: string
-        - in: path
+        - description: The name of the database
+          in: path
           name: longTermRetentionDatabaseName
           required: true
           type: string
@@ -351,11 +354,13 @@ paths:
           name: locationName
           required: true
           type: string
-        - in: path
+        - description: The name of the server
+          in: path
           name: longTermRetentionServerName
           required: true
           type: string
-        - in: path
+        - description: The name of the database
+          in: path
           name: longTermRetentionDatabaseName
           required: true
           type: string
@@ -401,11 +406,13 @@ paths:
           name: locationName
           required: true
           type: string
-        - in: path
+        - description: The name of the server
+          in: path
           name: longTermRetentionServerName
           required: true
           type: string
-        - in: path
+        - description: The name of the database
+          in: path
           name: longTermRetentionDatabaseName
           required: true
           type: string
@@ -600,10 +607,11 @@ paths:
             api-version: '2017-03-01'
             databaseName: testDatabase
             parameters:
-              monthlyRetention: P1Y
-              weekOfYear: 5
-              weeklyRetention: P1M
-              yearlyRetention: P5Y
+              properties:
+                monthlyRetention: P1Y
+                weekOfYear: 5
+                weeklyRetention: P1M
+                yearlyRetention: P5Y
             policyName: default
             resourceGroupName: resourceGroup
             serverName: testserver
@@ -681,7 +689,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   LongTermRetentionBackupListResult:
-    description: A list of long term retention bacukps.
+    description: A list of long term retention backups.
     properties:
       nextLink:
         description: Link to retrieve next page of results.

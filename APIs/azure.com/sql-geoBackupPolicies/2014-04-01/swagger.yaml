@@ -32,12 +32,6 @@ securityDefinitions:
       user_impersonation: impersonate your user account
     type: oauth2
 parameters:
-  ApiVersionParameter:
-    description: The API version to use for the request.
-    in: query
-    name: api-version
-    required: true
-    type: string
   GeoBackupPolicyNameParameter:
     description: The name of the geo backup policy.
     enum:
@@ -50,13 +44,6 @@ parameters:
       modelAsString: true
       name: GeoBackupPolicyName
     x-ms-parameter-location: method
-  ResourceGroupParameter:
-    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-    in: path
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
   ServerNameParameter:
     description: The name of the server.
     in: path
@@ -64,21 +51,30 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The subscription ID that identifies an Azure subscription.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies':
     get:
       description: Returns a list of geo backup policies.
       operationId: GeoBackupPolicies_ListByDatabase
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database.
           in: path
@@ -118,9 +114,24 @@ paths:
       description: Gets a geo backup policy.
       operationId: GeoBackupPolicies_Get
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database.
           in: path
@@ -159,9 +170,24 @@ paths:
       description: Updates a database geo backup policy.
       operationId: GeoBackupPolicies_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database.
           in: path

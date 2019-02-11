@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/servicefabricmesh/resource-manager/Microsoft.ServiceFabricMesh/preview/2018-09-01-preview/servicefabricmesh.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: servicefabricmesh
   x-tags:
@@ -1760,7 +1759,7 @@ paths:
           description: Error
           schema:
             $ref: '#/definitions/ErrorModel'
-      summary: List names of all values of the the specified secret resource.
+      summary: List names of all values of the specified secret resource.
       tags:
         - SecretValues
       x-ms-examples:
@@ -2532,7 +2531,7 @@ definitions:
         description: The name of the code package.
         type: string
       reliableCollectionsRefs:
-        description: A list of ReliableCollection resources used by this particular code package. Please refer to ReliablecollectionsRef for more details.
+        description: A list of ReliableCollection resources used by this particular code package. Please refer to ReliableCollectionsRef for more details.
         items:
           $ref: '#/definitions/ReliableCollectionsRef'
         type: array
@@ -2883,7 +2882,7 @@ definitions:
         description: http hostname config name.
         type: string
       routes:
-        description: Route information to use for routing. Routes are processed in the order they are specified. Specify routes that are more specific before routes that can hamdle general cases.
+        description: Route information to use for routing. Routes are processed in the order they are specified. Specify routes that are more specific before routes that can handle general cases.
         items:
           $ref: '#/definitions/HttpRouteConfig'
         type: array
@@ -3234,7 +3233,7 @@ definitions:
           value: Upgrading
         - description: Indicates the resource is being created. The value is 3.
           value: Creating
-        - description: Indicates the resource is being deletd. The value is 4.
+        - description: Indicates the resource is being deleted. The value is 4.
           value: Deleting
         - description: Indicates the resource is not functional due to persistent failures. See statusDetails property for more details. The value is 5.
           value: Failed
@@ -3329,7 +3328,7 @@ definitions:
     required:
       - properties
   SecretValueResourceDescriptionList:
-    description: A pageable list of values of a secret resource. The information does not include only the name of the value and not the actual unecrypted value.
+    description: A pageable list of values of a secret resource. The information does not include only the name of the value and not the actual unencrypted value.
     properties:
       nextLink:
         description: URI to fetch the next page of the list.

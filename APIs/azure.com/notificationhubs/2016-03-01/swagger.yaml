@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/notificationhubs/resource-manager/Microsoft.NotificationHubs/stable/2016-03-01/notificationhubs.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: notificationhubs
   x-tags:
@@ -68,7 +67,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Checks if the Namespace name is a valid availabile name
+          description: Checks if the Namespace name is a valid available name
           schema:
             $ref: '#/definitions/CheckAvailabilityResult'
       tags:
@@ -329,7 +328,7 @@ paths:
           name: namespaceName
           required: true
           type: string
-        - description: Aauthorization Rule Name.
+        - description: Authorization Rule Name.
           in: path
           name: authorizationRuleName
           required: true
@@ -444,7 +443,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Checks if the NotificationHub name is a valid availabile name
+          description: Checks if the NotificationHub name is a valid available name
           schema:
             $ref: '#/definitions/CheckAvailabilityResult'
       tags:
@@ -854,7 +853,7 @@ definitions:
         description: The endpoint of this credential.
         type: string
       thumbprint:
-        description: The Apns certificate Thumbprint
+        description: The APNS certificate Thumbprint
         type: string
   BaiduCredential:
     description: Description of a NotificationHub BaiduCredential.
@@ -909,7 +908,7 @@ definitions:
   CheckAvailabilityResult:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Description of a CheckAvailibility resource.
+    description: Description of a CheckAvailability resource.
     properties:
       isAvailiable:
         description: True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false.
@@ -947,7 +946,7 @@ definitions:
         description: The MPNS certificate.
         type: string
       thumbprint:
-        description: The Mpns certificate Thumbprint
+        description: The MPNS certificate Thumbprint
         type: string
   NamespaceCreateOrUpdateParameters:
     allOf:
@@ -1229,7 +1228,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
-        description: Pproperties of the Namespace AuthorizationRule.
+        description: Properties of the Namespace AuthorizationRule.
         x-ms-client-flatten: true
   Sku:
     description: The Sku description for a namespace

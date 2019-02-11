@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/search/data-plane/Microsoft.Azure.Search.Data/preview/2017-11-11-preview/searchindex.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: search-searchindex
   x-tags:
@@ -70,12 +69,58 @@ parameters:
     x-ms-parameter-location: client
     x-ms-skip-url-encoding: true
 paths:
+  '/docs(''{key}'')':
+    get:
+      description: Retrieves a document from the Azure Search index.
+      externalDocs:
+        url: 'https://docs.microsoft.com/rest/api/searchservice/lookup-document'
+      operationId: Documents_Get
+      parameters:
+        - description: The key of the document to retrieve.
+          in: path
+          name: key
+          required: true
+          type: string
+        - description: List of field names to retrieve for the document; Any field not retrieved will be missing from the returned document.
+          in: query
+          items:
+            type: string
+          name: $select
+          type: array
+          x-ms-client-name: SelectedFields
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ClientRequestIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+      tags:
+        - Documents
+      x-ms-examples:
+        SearchIndexGetDocument:
+          parameters:
+            $select:
+              - docId
+              - title
+              - description
+            api-version: 2017-11-11-Preview
+            indexName: myindex
+            key: '1'
+            searchDnsSuffix: search.windows.net
+            searchServiceName: myservice
+          responses:
+            '200':
+              body:
+                description: Cheapest hotel in town
+                docId: '1'
+                title: Nice Hotel
   /docs/$count:
     get:
       description: Queries the number of documents in the Azure Search index.
       externalDocs:
         url: 'https://docs.microsoft.com/rest/api/searchservice/Count-Documents'
-      operationId: DocumentsProxy_Count
+      operationId: Documents_Count
       parameters:
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
@@ -86,7 +131,7 @@ paths:
             format: int64
             type: integer
       tags:
-        - DocumentsProxy
+        - Documents
       x-ms-examples:
         SearchIndexCountDocuments:
           parameters:
@@ -101,7 +146,9 @@ paths:
   /docs/autocomplete:
     get:
       description: Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.
-      operationId: DocumentsProxy_AutocompleteGet
+      externalDocs:
+        url: 'https://docs.microsoft.com/rest/api/searchservice/autocomplete'
+      operationId: Documents_AutocompleteGet
       parameters:
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
@@ -148,7 +195,7 @@ paths:
           type: string
           x-ms-parameter-grouping:
             name: AutocompleteParameters
-        - description: A number between 0 and 100 indicating the percentage of the index that must be covered by am autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.
+        - description: A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.
           format: double
           in: query
           name: minimumCoverage
@@ -177,9 +224,9 @@ paths:
             $ref: '#/definitions/AutocompleteResult'
             description: The result of Autocomplete query.
       tags:
-        - Autocomplete
+        - Documents
       x-ms-examples:
-        SearchIndexGetAutocomplete:
+        SearchIndexAutocompleteDocumentsGet:
           parameters:
             api-version: 2017-11-11-Preview
             autocompleteMode: oneTerm
@@ -190,10 +237,12 @@ paths:
             minimumCoverage: 80
             search: washington medic
             searchDnsSuffix: search.windows.net
-            searchFields: 'title,description'
+            searchFields:
+              - title
+              - description
             searchServiceName: myservice
             suggesterName: sg
-            top: '10'
+            top: 10
           responses:
             '200':
               body:
@@ -206,13 +255,15 @@ paths:
       x-ms-request-id: request-id
     post:
       description: Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.
-      operationId: DocumentsProxy_AutocompletePost
+      externalDocs:
+        url: 'https://docs.microsoft.com/rest/api/searchservice/autocomplete'
+      operationId: Documents_AutocompletePost
       parameters:
         - $ref: '#/parameters/ClientRequestIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - description: The definition of the Autocomplete request.
           in: body
-          name: AutocompleteRequest
+          name: autocompleteRequest
           required: true
           schema:
             $ref: '#/definitions/AutocompleteRequest'
@@ -224,9 +275,9 @@ paths:
             $ref: '#/definitions/AutocompleteResult'
             description: The result of Autocomplete query.
       tags:
-        - Autocomplete
+        - Documents
       x-ms-examples:
-        SearchIndexPostAutocomplete:
+        SearchIndexAutocompleteDocumentsPost:
           parameters:
             api-version: 2017-11-11-Preview
             autocompleteRequest:
@@ -237,7 +288,7 @@ paths:
               search: washington medic
               searchFields: 'title,description'
               suggesterName: sg
-              top: '10'
+              top: 10
             indexName: myindex
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -288,7 +339,7 @@ definitions:
         description: 'A string tag that is prepended to hit highlights. Must be set with HighlightPostTag. If omitted, hit highlighting is disabled.'
         type: string
       minimumCoverage:
-        description: A number between 0 and 100 indicating the percentage of the index that must be covered by am autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.
+        description: A number between 0 and 100 indicating the percentage of the index that must be covered by an autocomplete query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 80.
         format: double
         type: number
       search:
@@ -306,7 +357,7 @@ definitions:
         format: int32
         type: integer
   AutocompleteResult:
-    description: The result of Autocomlete query.
+    description: The result of Autocomplete query.
     properties:
       value:
         description: The list of returned Autocompleted items.
@@ -406,14 +457,14 @@ definitions:
         format: double
         type: number
       orderby:
-        description: 'The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to the geo.distance() function. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses.'
+        description: 'The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses.'
         type: string
         x-ms-client-name: OrderBy
       queryType:
         $ref: '#/definitions/QueryType'
         description: Gets or sets a value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax.
       scoringParameters:
-        description: 'The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name:value. For example, if the scoring profile defines a function with a parameter called ''mylocation'' the parameter string would be "mylocation:-122.2,44.8"(without the quotes).'
+        description: 'The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called ''mylocation'' the parameter string would be "mylocation--122.2,44.8"(without the quotes).'
         items:
           type: string
         type: array
@@ -421,7 +472,7 @@ definitions:
         description: The name of a scoring profile to evaluate match scores for matching documents in order to sort the results.
         type: string
       search:
-        description: A full-text search query expression; Use null or "*" to match all documents.
+        description: A full-text search query expression; Use "*" or omit this parameter to match all documents.
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Simple-query-syntax-in-Azure-Search'
         type: string
@@ -466,7 +517,7 @@ definitions:
         format: double
         type: number
       orderby:
-        description: 'The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to the geo.distance() function. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses.'
+        description: 'The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 Orderby clauses.'
         type: string
         x-ms-client-name: OrderBy
       search:

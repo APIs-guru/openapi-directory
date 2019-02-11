@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/keyvault/resource-manager/Microsoft.KeyVault/stable/2018-02-14/keyvault.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: keyvault
   x-tags:
@@ -1610,7 +1609,7 @@ definitions:
     description: Properties of the vault
     properties:
       accessPolicies:
-        description: An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.
+        description: 'An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault''s tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required.'
         items:
           $ref: '#/definitions/AccessPolicyEntry'
         type: array

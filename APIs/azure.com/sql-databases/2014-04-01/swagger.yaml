@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/databases.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-databases
   x-tags:
@@ -33,24 +32,11 @@ securityDefinitions:
       user_impersonation: impersonate your user account
     type: oauth2
 parameters:
-  ApiVersionParameter:
-    description: The API version to use for the request.
-    in: query
-    name: api-version
-    required: true
-    type: string
   DatabaseExpandParameter:
     description: 'A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.'
     in: query
     name: $expand
     required: false
-    type: string
-    x-ms-parameter-location: method
-  ResourceGroupParameter:
-    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-    in: path
-    name: resourceGroupName
-    required: true
     type: string
     x-ms-parameter-location: method
   ServerNameParameter:
@@ -60,12 +46,6 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The subscription ID that identifies an Azure subscription.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
   TransparentDataEncryptionNameParameter:
     description: The name of the transparent data encryption configuration.
     enum:
@@ -84,9 +64,24 @@ paths:
       description: Returns a list of databases in a server.
       operationId: Databases_ListByServer
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - $ref: '#/parameters/DatabaseExpandParameter'
         - description: An OData filter expression that describes a subset of databases to return.
@@ -267,9 +262,24 @@ paths:
       description: Deletes a database.
       operationId: Databases_Delete
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database to be deleted.
           in: path
@@ -300,9 +310,24 @@ paths:
       description: Gets a database.
       operationId: Databases_Get
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database to be retrieved.
           in: path
@@ -357,9 +382,24 @@ paths:
       description: Updates an existing database.
       operationId: Databases_Update
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database to be updated.
           in: path
@@ -469,9 +509,24 @@ paths:
       description: Creates a new database or updates an existing database.
       operationId: Databases_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the database to be operated on (updated or created).
           in: path
@@ -1276,9 +1331,24 @@ paths:
       description: Pauses a data warehouse.
       operationId: Databases_Pause
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the data warehouse to pause.
           in: path
@@ -1311,9 +1381,24 @@ paths:
       description: Resumes a data warehouse.
       operationId: Databases_Resume
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the data warehouse to resume.
           in: path
@@ -1346,9 +1431,24 @@ paths:
       description: Returns a list of databases in an elastic pool.
       operationId: Databases_ListByElasticPool
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the elastic pool to be retrieved.
           in: path
@@ -1495,9 +1595,24 @@ paths:
       description: Gets a database inside of an elastic pool.
       operationId: Databases_GetByElasticPool
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the elastic pool to be retrieved.
           in: path
@@ -1555,12 +1670,27 @@ paths:
                 type: Microsoft.Sql/servers/databases
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases':
     get:
-      description: Returns a list of databases inside a recommented elastic pool.
+      description: Returns a list of databases inside a recommended elastic pool.
       operationId: Databases_ListByRecommendedElasticPool
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the recommended elastic pool to be retrieved.
           in: path
@@ -1704,12 +1834,27 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases/{databaseName}':
     get:
-      description: Gets a database inside of a recommented elastic pool.
+      description: Gets a database inside of a recommended elastic pool.
       operationId: Databases_GetByRecommendedElasticPool
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the elastic pool to be retrieved.
           in: path

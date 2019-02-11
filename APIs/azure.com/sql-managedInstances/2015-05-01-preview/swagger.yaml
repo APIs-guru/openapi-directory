@@ -139,6 +139,8 @@ paths:
                       dnsZone: 1b4e2caff2530
                       fullyQualifiedDomainName: testcl.1b4e2caff2530.database.windows.net
                       licenseType: Full
+                      proxyOverride: Proxy
+                      publicDataEndpointEnabled: false
                       state: Ready
                       storageSizeInGB: 1024
                       vCores: 8
@@ -156,6 +158,8 @@ paths:
                       dnsZone: 1b4e2caff2530
                       fullyQualifiedDomainName: testcl2.1b4e2caff2530.database.windows.net
                       licenseType: Full
+                      proxyOverride: ''
+                      publicDataEndpointEnabled: false
                       state: Ready
                       storageSizeInGB: 1024
                       vCores: 8
@@ -223,6 +227,8 @@ paths:
                       dnsZone: 1b4e2caff2530
                       fullyQualifiedDomainName: testcl.1b4e2caff2530.database.windows.net
                       licenseType: Full
+                      proxyOverride: Redirect
+                      publicDataEndpointEnabled: false
                       state: Ready
                       storageSizeInGB: 1024
                       vCores: 8
@@ -241,6 +247,8 @@ paths:
                       dnsZone: 1b4e2caff2530
                       fullyQualifiedDomainName: testcl2.1b4e2caff2530.database.windows.net
                       licenseType: Full
+                      proxyOverride: ''
+                      publicDataEndpointEnabled: false
                       state: Ready
                       storageSizeInGB: 1024
                       vCores: 8
@@ -372,6 +380,8 @@ paths:
                   dnsZone: 1b4e2caff2530
                   fullyQualifiedDomainName: testcl.1b4e2caff2530.database.windows.net
                   licenseType: Full
+                  proxyOverride: Default
+                  publicDataEndpointEnabled: false
                   state: Ready
                   storageSizeInGB: 1024
                   vCores: 8
@@ -513,6 +523,8 @@ paths:
                 administratorLogin: dummylogin
                 administratorLoginPassword: Un53cuRE!
                 fullyQualifiedDomainName: testinstance.1b4e2caff2530.database.windows.net
+                proxyOverride: Redirect
+                publicDataEndpointEnabled: false
                 subnetId: /subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
               sku:
                 capacity: 1
@@ -533,6 +545,8 @@ paths:
                   collation: SQL_Latin1_General_CP1_CI_AS
                   dnsZone: 1b4e2caff2530
                   fullyQualifiedDomainName: testinstance.1b4e2caff2530.database.windows.net
+                  proxyOverride: Redirect
+                  publicDataEndpointEnabled: false
                   state: Ready
                   subnetId: /subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
                 sku:
@@ -715,6 +729,8 @@ paths:
                 dnsZonePartner: /subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testinstance
                 fullyQualifiedDomainName: testinstance.1b4e2caff2530.database.windows.net
                 licenseType: Full
+                proxyOverride: Redirect
+                publicDataEndpointEnabled: false
                 storageSizeInGB: 1024
                 subnetId: /subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
                 vCores: 8
@@ -737,6 +753,8 @@ paths:
                   collation: SQL_Latin1_General_CP1_CI_AS
                   dnsZone: 1b4e2caff2530
                   fullyQualifiedDomainName: testinstance.1b4e2caff2530.database.windows.net
+                  proxyOverride: Redirect
+                  publicDataEndpointEnabled: false
                   state: Ready
                   subnetId: /subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
                 sku:
@@ -951,6 +969,19 @@ definitions:
       licenseType:
         description: The license type. Possible values are 'LicenseIncluded' and 'BasePrice'.
         type: string
+      proxyOverride:
+        description: Connection type used for connecting to the instance.
+        enum:
+          - Proxy
+          - Redirect
+          - Default
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ManagedInstanceProxyOverride
+      publicDataEndpointEnabled:
+        description: Whether or not the public data endpoint is enabled.
+        type: boolean
       state:
         description: The state of the managed instance.
         readOnly: true

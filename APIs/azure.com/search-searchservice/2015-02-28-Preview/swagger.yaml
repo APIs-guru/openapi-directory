@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/search/data-plane/Microsoft.Azure.Search.Service/preview/2015-02-28-preview/searchservice.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: search-searchservice
   x-tags:
@@ -901,7 +900,7 @@ definitions:
           type: string
         type: array
       maxAgeInSeconds:
-        description: The duration for which browsers should cache CORS preflight responses. Defaults to 5 mintues.
+        description: The duration for which browsers should cache CORS preflight responses. Defaults to 5 minutes.
         format: int64
         type: integer
     required:
@@ -1222,7 +1221,7 @@ definitions:
         externalDocs:
           url: 'https://msdn.microsoft.com/library/azure/dn879793.aspx'
       searchable:
-        description: A value indicating whether the field is included in full-text searches. Valid only forstring or string collection fields. Default is false.
+        description: A value indicating whether the field is included in full-text searches. Valid only for string or string collection fields. Default is false.
         type: boolean
         x-ms-client-name: isSearchable
       sortable:
@@ -2305,7 +2304,7 @@ definitions:
         description: The name of the column to use for soft-deletion detection.
         type: string
       softDeleteMarkerValue:
-        description: The marker value that indentifies an item as deleted.
+        description: The marker value that identifies an item as deleted.
         type: string
     x-ms-discriminator-value: '#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy'
   SqlIntegratedChangeTrackingPolicy:

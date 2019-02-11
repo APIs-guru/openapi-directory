@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/servicefabric/data-plane/Microsoft.ServiceFabric/stable/6.3/servicefabric.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: servicefabric
   x-tags:
@@ -855,7 +854,7 @@ parameters:
       modelAsString: true
       name: NodeStatusFilter
       values:
-        - description: This filter value will match all of the nodes excepts the ones with with status as Unknown or Removed.
+        - description: This filter value will match all of the nodes excepts the ones with status as Unknown or Removed.
           value: default
         - description: This filter value will match all of the nodes.
           value: all
@@ -2269,7 +2268,7 @@ paths:
           description: This example shows how to exclude application parameter in the result when getting the information about application types that are provisioned or being provisioned in the cluster.
           operationId: GetApplicationTypeInfoList
           parameters:
-            ExcludeApplicationParameters: 'true'
+            ExcludeApplicationParameters: true
             api-version: '6.0'
           responses:
             '200':
@@ -2520,7 +2519,7 @@ paths:
               headers: {}
   '/ApplicationTypes/{applicationTypeName}/$/GetServiceTypes/{serviceTypeName}':
     get:
-      description: 'Gets the information about a specific service type that is supported by a provisioned application type in a Service Fabric cluster. The provided application type must exist. Otherwise, a 404 status is returned. A 204 response is returned if the specificed service type is not found in the cluster.'
+      description: 'Gets the information about a specific service type that is supported by a provisioned application type in a Service Fabric cluster. The provided application type must exist. Otherwise, a 404 status is returned. A 204 response is returned if the specified service type is not found in the cluster.'
       operationId: GetServiceTypeInfoByName
       parameters:
         - $ref: '#/parameters/ApiVersion_6-0_RequiredQueryParam'
@@ -2544,7 +2543,7 @@ paths:
         - ServiceType
       x-ms-examples:
         Get information about all nodes.:
-          description: This example shows how to get information about a specific service type. A 204 response is returned if the specificed service type is not found in the cluster.
+          description: This example shows how to get information about a specific service type. A 204 response is returned if the specified service type is not found in the cluster.
           operationId: GetServiceTypeInfoByName
           parameters:
             ApplicationTypeVersion: 1.0.0
@@ -3301,7 +3300,7 @@ paths:
                 Count: 1
                 Names:
                   - '0'
-                PartitionScheme: NamedParitionSchemeDescription
+                PartitionScheme: NamedPartitionSchemeDescription
               ScalingPolicies:
                 - ScalingMechanism:
                     Kind: AddRemoveIncrementalNamedPartition
@@ -3805,7 +3804,7 @@ paths:
         - $ref: '#/parameters/TimeoutOptionalQueryParam'
       responses:
         '201':
-          description: A sucessful operation returns 201 status code and creates a new backup policy.
+          description: A successful operation returns 201 status code and creates a new backup policy.
         default:
           description: The detailed error response.
           schema:
@@ -3994,7 +3993,7 @@ paths:
         - $ref: '#/parameters/TimeoutOptionalQueryParam'
       responses:
         '200':
-          description: A sucessful operation resturns 200 status code and updates the backup policy description.
+          description: A successful operation returns 200 status code and updates the backup policy description.
         default:
           description: The detailed error response.
           schema:
@@ -5753,7 +5752,7 @@ paths:
           schema:
             $ref: '#/definitions/SuccessfulPropertyBatchInfo'
         '409':
-          description: 'A 409 response means that one of the property batch operations failed, and contains more information about the failure. None of the operations were commited.'
+          description: 'A 409 response means that one of the property batch operations failed, and contains more information about the failure. None of the operations were committed.'
           schema:
             $ref: '#/definitions/FailedPropertyBatchInfo'
         default:
@@ -6434,7 +6433,7 @@ paths:
           description: This example shows how to include the health state of each deployed application when getting information about applications deployed on a specific node.
           operationId: GetDeployedApplicationInfoList
           parameters:
-            IncludeHealthState: 'true'
+            IncludeHealthState: true
             api-version: '6.1'
             nodeName: _Node_0
           responses:
@@ -6546,7 +6545,7 @@ paths:
           description: 'This example shows how to get information about an application deployed on a specified node by using an application identifier. If the application is found it''s information is returned with 200 status code. An empty response with status code 204 is returned, if the specified application is not deployed on the node.'
           operationId: GetDeployedApplicationInfoList
           parameters:
-            IncludeHealthState: 'true'
+            IncludeHealthState: true
             api-version: '6.1'
             applicationId: samples~CalculatorApp
             nodeName: _Node_0
@@ -6703,7 +6702,7 @@ paths:
           operationId: GetContainerLogsDeployedOnNode
           parameters:
             CodePackageName: Code
-            Previous: 'true'
+            Previous: true
             ServiceManifestName: SimpleHttpServerSvcPkg
             api-version: '6.2'
             applicationId: SimpleHttpServerApp
@@ -8299,7 +8298,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/PagedServiceResourceReplicaDescriptionList'
-      summary: Gets replicas of a given service in an applciation resource.
+      summary: Gets replicas of a given service in an application resource.
       tags:
         - ApplicationResource
       x-ms-examples:
@@ -10618,7 +10617,7 @@ definitions:
         description: The current configuration number of this Epoch. The configuration number is an increasing value that is updated whenever the configuration of this replica set changes.
         type: string
       DataLossNumber:
-        description: 'The current dataloss number of this Epoch. The data loss number property is an increasing value which is updated whenever data loss is suspected, as when loss of a quorum of replicas in the replica set that includes the Primary replica.'
+        description: 'The current data loss number of this Epoch. The data loss number property is an increasing value which is updated whenever data loss is suspected, as when loss of a quorum of replicas in the replica set that includes the Primary replica.'
         type: string
     type: object
   BackupInfo:
@@ -11424,7 +11423,7 @@ definitions:
       modelAsString: true
       name: ChaosScheduleStatus
       values:
-        - description: Indicates an invalid Chaos Schedule status. All Service Fabric enumerations have the invalid type. The valus is zero.
+        - description: Indicates an invalid Chaos Schedule status. All Service Fabric enumerations have the invalid type. The value is zero.
           value: Invalid
         - description: Indicates that the schedule is stopped and not being used to schedule runs of chaos. The value is one.
           value: Stopped
@@ -11498,7 +11497,7 @@ definitions:
       modelAsString: true
       name: ChaosStatus
       values:
-        - description: Indicates an invalid Chaos status. All Service Fabric enumerations have the invalid type. The valus is zero.
+        - description: Indicates an invalid Chaos status. All Service Fabric enumerations have the invalid type. The value is zero.
           value: Invalid
         - description: Indicates that Chaos is not stopped. The value is one.
           value: Running
@@ -11528,7 +11527,7 @@ definitions:
     properties:
       ApplicationInclusionList:
         description: |-
-          A list of application URI's to include in Chaos faults.
+          A list of application URIs to include in Chaos faults.
           All replicas belonging to services of these applications are amenable to replica faults (restart replica, remove replica, move primary, and move secondary) by Chaos.
           Chaos may restart a code package only if the code package hosts replicas of these applications only.
           If an application does not appear in this list, it can still be faulted in some Chaos iteration if the application ends up on a node of a node type that is included in NodeTypeInclusionList.
@@ -11541,7 +11540,7 @@ definitions:
         description: |-
           A list of node types to include in Chaos faults.
           All types of faults (restart node, restart code package, remove replica, restart replica, move primary, and move secondary) are enabled for the nodes of these node types.
-          If a nodetype (say NodeTypeX) does not appear in the NodeTypeInclusionList, then node level faults (like NodeRestart) will never be enabled for the nodes of
+          If a node type (say NodeTypeX) does not appear in the NodeTypeInclusionList, then node level faults (like NodeRestart) will never be enabled for the nodes of
           NodeTypeX, but code package and replica faults can still be enabled for NodeTypeX if an application in the ApplicationInclusionList.
           happens to reside on a node of NodeTypeX.
           At most 100 node type names can be included in this list, to increase this number, a config upgrade is required for MaxNumberOfNodeTypesInChaosEntityFilter configuration.
@@ -13877,7 +13876,7 @@ definitions:
         description: The current configuration number of this Epoch. The configuration number is an increasing value that is updated whenever the configuration of this replica set changes.
         type: string
       DataLossVersion:
-        description: 'The current dataloss number of this Epoch. The data loss number property is an increasing value which is updated whenever data loss is suspected, as when loss of a quorum of replicas in the replica set that includes the Primary replica.'
+        description: 'The current data loss number of this Epoch. The data loss number property is an increasing value which is updated whenever data loss is suspected, as when loss of a quorum of replicas in the replica set that includes the Primary replica.'
         type: string
     type: object
   EventHealthEvaluation:
@@ -14053,7 +14052,7 @@ definitions:
           - "FABRIC_E_SINGLE_INSTANCE_APPLICATION_ALREADY_EXISTS"
           - "FABRIC_E_SINGLE_INSTANCE_APPLICATION_NOT_FOUND"
           - "FABRIC_E_VOLUME_ALREADY_EXISTS"
-          - "ABRIC_E_VOLUME_NOT_FOUND"
+          - "FABRIC_E_VOLUME_NOT_FOUND"
           - "SerializationError"
 
         - Possible values of the error code for HTTP status code 503 (Service Unavailable)
@@ -14330,7 +14329,7 @@ definitions:
               - "FABRIC_E_SINGLE_INSTANCE_APPLICATION_ALREADY_EXISTS"
               - "FABRIC_E_SINGLE_INSTANCE_APPLICATION_NOT_FOUND"
               - "FABRIC_E_VOLUME_ALREADY_EXISTS"
-              - "ABRIC_E_VOLUME_NOT_FOUND"
+              - "FABRIC_E_VOLUME_NOT_FOUND"
               - "SerializationError"
 
             - Possible values of the error code for HTTP status code 503 (Service Unavailable)
@@ -19780,7 +19779,7 @@ definitions:
       MaxPercentUnhealthyServices:
         default: 0
         description: |-
-          The maximum maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.
+          The maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.
 
           The percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.
           If the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.

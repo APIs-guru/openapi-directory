@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2018-02-01/AppServicePlans.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: web-AppServicePlans
   x-tags:
@@ -3896,6 +3895,12 @@ paths:
                                   items:
                                     type: string
                                   type: array
+                                supportCredentials:
+                                  description: |-
+                                    Gets or sets whether CORS requests with credentials are allowed. See 
+                                    https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Requests_with_credentials
+                                    for more details.
+                                  type: boolean
                               type: object
                             defaultDocuments:
                               description: Default documents.
@@ -3989,7 +3994,7 @@ paths:
                               description: '<code>true</code> if HTTP logging is enabled; otherwise, <code>false</code>.'
                               type: boolean
                             ipSecurityRestrictions:
-                              description: IP security restrictions.
+                              description: IP security restrictions for main.
                               items:
                                 description: IP security restriction on an app.
                                 properties:
@@ -4202,6 +4207,50 @@ paths:
                               maximum: 10
                               minimum: 0
                               type: integer
+                            scmIpSecurityRestrictions:
+                              description: IP security restrictions for scm.
+                              items:
+                                description: IP security restriction on an app.
+                                properties:
+                                  action:
+                                    description: Allow or Deny access for this IP range.
+                                    type: string
+                                  description:
+                                    description: IP restriction rule description.
+                                    type: string
+                                  ipAddress:
+                                    description: |-
+                                      IP address the security restriction is valid for.
+                                      It can be in form of pure ipv4 address (required SubnetMask property) or
+                                      CIDR notation such as ipv4/mask (leading bit match). For CIDR,
+                                      SubnetMask property must not be specified.
+                                    type: string
+                                  name:
+                                    description: IP restriction rule name.
+                                    type: string
+                                  priority:
+                                    description: Priority of IP restriction rule.
+                                    format: int32
+                                    type: integer
+                                  subnetMask:
+                                    description: Subnet mask for the range of IP addresses the restriction is valid for.
+                                    type: string
+                                  tag:
+                                    description: Defines what this IP filter will be used for. This is to support IP filtering on proxies.
+                                    enum:
+                                      - Default
+                                      - XffProxy
+                                    type: string
+                                    x-ms-enum:
+                                      modelAsString: false
+                                      name: IpFilterTag
+                                required:
+                                  - ipAddress
+                                type: object
+                              type: array
+                            scmIpSecurityRestrictionsUseMain:
+                              description: IP security restrictions for scm to use main.
+                              type: boolean
                             scmType:
                               description: SCM type.
                               enum:
@@ -4610,6 +4659,9 @@ paths:
                     dnsServers:
                       description: DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.
                       type: string
+                    isSwift:
+                      description: Flag that is used to denote if this is VNET injection
+                      type: boolean
                     resyncRequired:
                       description: '<code>true</code> if a resync is required; otherwise, <code>false</code>.'
                       readOnly: true
@@ -4780,6 +4832,9 @@ paths:
                   dnsServers:
                     description: DNS servers to be used by this Virtual Network. This should be a comma-separated list of IP addresses.
                     type: string
+                  isSwift:
+                    description: Flag that is used to denote if this is VNET injection
+                    type: boolean
                   resyncRequired:
                     description: '<code>true</code> if a resync is required; otherwise, <code>false</code>.'
                     readOnly: true

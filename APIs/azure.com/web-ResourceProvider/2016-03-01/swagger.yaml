@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2016-03-01/ResourceProvider.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: web-ResourceProvider
   x-tags:
@@ -87,7 +86,7 @@ paths:
                     readOnly: true
                     type: string
                 x-ms-azure-resource: true
-            description: User crendentials used for publishing activity.
+            description: User credentials used for publishing activity.
             properties:
               properties:
                 description: User resource specific properties
@@ -144,7 +143,7 @@ paths:
                     readOnly: true
                     type: string
                 x-ms-azure-resource: true
-            description: User crendentials used for publishing activity.
+            description: User credentials used for publishing activity.
             properties:
               properties:
                 description: User resource specific properties
@@ -196,7 +195,7 @@ paths:
                     readOnly: true
                     type: string
                 x-ms-azure-resource: true
-            description: User crendentials used for publishing activity.
+            description: User credentials used for publishing activity.
             properties:
               properties:
                 description: User resource specific properties
@@ -1177,7 +1176,7 @@ definitions:
       - value
     type: object
   ResourceNameAvailability:
-    description: Information regarding availbility of a resource name.
+    description: Information regarding availability of a resource name.
     properties:
       message:
         description: 'If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that resource name is already in use, and direct them to select a different name.'
@@ -1297,7 +1296,7 @@ definitions:
     description: App properties used for validation.
     properties:
       capacity:
-        description: Target capacity of the App Service plan (number of VM's).
+        description: Target capacity of the App Service plan (number of VMs).
         format: int32
         minimum: 1
         type: integer

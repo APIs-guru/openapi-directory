@@ -467,9 +467,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -537,9 +537,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -654,9 +654,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -775,9 +775,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -954,7 +954,7 @@ paths:
 
              * 400 AgListDoesNotMatch - SQL Availability group list does not match the list of virtual machines in SQL Virtual machine group.
 
-             * 400 NoIpProvided - Atleast one IP needs to be provided.
+             * 400 NoIpProvided - At least one IP needs to be provided.
 
              * 400 MoreIpProvided - Only one IP needs to be provided.
 
@@ -1008,9 +1008,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -1096,7 +1096,7 @@ paths:
 
              * 400 AgListDoesNotMatch - SQL Availability group list does not match the list of virtual machines in SQL Virtual machine group.
 
-             * 400 NoIpProvided - Atleast one IP needs to be provided.
+             * 400 NoIpProvided - At least one IP needs to be provided.
 
              * 400 MoreIpProvided - Only one IP needs to be provided.
 
@@ -1150,9 +1150,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -1262,7 +1262,7 @@ paths:
 
              * 400 AgListDoesNotMatch - SQL Availability group list does not match the list of virtual machines in SQL Virtual machine group.
 
-             * 400 NoIpProvided - Atleast one IP needs to be provided.
+             * 400 NoIpProvided - At least one IP needs to be provided.
 
              * 400 MoreIpProvided - Only one IP needs to be provided.
 
@@ -1316,9 +1316,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -1460,7 +1460,7 @@ paths:
 
              * 400 VmLocationMismatch - VM location does not match that of SQL virtual machine.
 
-             * 400 SqlSkuMismatchWithGroup - SQL kku set on the SQL virtual machine group does not match that of the SQL virtual machine.
+             * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL virtual machine group does not match that of the SQL virtual machine.
 
              * 400 VmLoadBalancerAssociated - LB already associated with the NIC.
 
@@ -1484,9 +1484,11 @@ paths:
 
              * 400 MismatchSqlVmAndVmRgName - SQL virtual machine resource group name is not same as the virtual machine resource group name provided on VirtualMachineResourceId property.
 
+             * 400 NotSupportedSqlVmOSVersion - Virtual machine OS type is not Windows. Only Windows OS versions are supported
+
              * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL virtual machine group.
 
-             * 400 VmOSVersionMismatchWithGroup - OSversion mismatch with group.
+             * 400 VmOSVersionMismatchWithGroup - OS version mismatch with group.
 
              * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as auto backup setting.
 
@@ -1494,7 +1496,7 @@ paths:
 
              * 400 BackupStorageCredentialsNotSpecified - Backup storage credentials are not specified.
 
-             * 400 KeyvaultCredentialsNotSpecified - Key vault credentials not specified.
+             * 400 KeyVaultCredentialsNotSpecified - Key vault credentials not specified.
 
              * 400 SqlCredentialsNotSpecified - SQL Server credentials are not specified.
 
@@ -1536,9 +1538,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -1611,9 +1613,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -1676,7 +1678,7 @@ paths:
 
              * 400 VmLocationMismatch - VM location does not match that of SQL virtual machine.
 
-             * 400 SqlSkuMismatchWithGroup - SQL kku set on the SQL virtual machine group does not match that of the SQL virtual machine.
+             * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL virtual machine group does not match that of the SQL virtual machine.
 
              * 400 VmLoadBalancerAssociated - LB already associated with the NIC.
 
@@ -1700,9 +1702,11 @@ paths:
 
              * 400 MismatchSqlVmAndVmRgName - SQL virtual machine resource group name is not same as the virtual machine resource group name provided on VirtualMachineResourceId property.
 
+             * 400 NotSupportedSqlVmOSVersion - Virtual machine OS type is not Windows. Only Windows OS versions are supported
+
              * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL virtual machine group.
 
-             * 400 VmOSVersionMismatchWithGroup - OSversion mismatch with group.
+             * 400 VmOSVersionMismatchWithGroup - OS version mismatch with group.
 
              * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as auto backup setting.
 
@@ -1710,7 +1714,7 @@ paths:
 
              * 400 BackupStorageCredentialsNotSpecified - Backup storage credentials are not specified.
 
-             * 400 KeyvaultCredentialsNotSpecified - Key vault credentials not specified.
+             * 400 KeyVaultCredentialsNotSpecified - Key vault credentials not specified.
 
              * 400 SqlCredentialsNotSpecified - SQL Server credentials are not specified.
 
@@ -1752,9 +1756,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -1826,7 +1830,7 @@ paths:
 
              * 400 VmLocationMismatch - VM location does not match that of SQL virtual machine.
 
-             * 400 SqlSkuMismatchWithGroup - SQL kku set on the SQL virtual machine group does not match that of the SQL virtual machine.
+             * 400 SqlSkuMismatchWithGroup - SQL sku set on the SQL virtual machine group does not match that of the SQL virtual machine.
 
              * 400 VmLoadBalancerAssociated - LB already associated with the NIC.
 
@@ -1850,9 +1854,11 @@ paths:
 
              * 400 MismatchSqlVmAndVmRgName - SQL virtual machine resource group name is not same as the virtual machine resource group name provided on VirtualMachineResourceId property.
 
+             * 400 NotSupportedSqlVmOSVersion - Virtual machine OS type is not Windows. Only Windows OS versions are supported
+
              * 400 SqlVersionMismatchWithGroup - SQL version mismatch with SQL virtual machine group.
 
-             * 400 VmOSVersionMismatchWithGroup - OSversion mismatch with group.
+             * 400 VmOSVersionMismatchWithGroup - OS version mismatch with group.
 
              * 400 AutoBackupEncryptionPasswordNotSpecified - Password not provided when enabling encryption as auto backup setting.
 
@@ -1860,7 +1866,7 @@ paths:
 
              * 400 BackupStorageCredentialsNotSpecified - Backup storage credentials are not specified.
 
-             * 400 KeyvaultCredentialsNotSpecified - Key vault credentials not specified.
+             * 400 KeyVaultCredentialsNotSpecified - Key vault credentials not specified.
 
              * 400 SqlCredentialsNotSpecified - SQL Server credentials are not specified.
 
@@ -1902,9 +1908,9 @@ paths:
 
              * 409 ResourceAlreadyExists - Resource already exists.
 
-             * 409 SqlExtnNotInstalled - SQL extension not installed.
+             * 409 SqlExtensionNotInstalled - SQL extension not installed.
 
-             * 500 UnExpectedErrorOccured - Unexpected error occured.
+             * 500 UnExpectedErrorOccurred - Unexpected error occurred.
 
              * 500 OperationTimeout - Operation timed out.
 
@@ -1952,7 +1958,7 @@ paths:
                   sqlVirtualMachineGroupResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup
                   virtualMachineResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Compute/virtualMachines/testvm2
                 type: Microsoft.SqlVirtualMachine/sqlVirtualMachines
-        Creates or updates a SQL virtual machine with max paramenters.:
+        Creates or updates a SQL virtual machine with max parameters.:
           parameters:
             api-version: 2017-03-01-preview
             parameters:
@@ -1989,6 +1995,7 @@ paths:
                   SQLStorageUpdateSettings:
                     DiskConfigurationType: NEW
                     DiskCount: 1
+                    StartingDeviceId: 2
                   SQLWorkloadTypeUpdateSettings:
                     SQLWorkloadType: OLTP
                 sqlServerLicenseType: PAYG
@@ -2057,9 +2064,6 @@ definitions:
   AdditionalFeaturesServerConfigurations:
     description: Additional SQL Server feature settings.
     properties:
-      backupPermissionsForAzureBackupSvc:
-        description: Enable or disable Azure Backup service.
-        type: boolean
       isRServicesEnabled:
         description: Enable or disable R services (SQL 2016 onwards).
         type: boolean
@@ -2198,7 +2202,7 @@ definitions:
         format: int32
         type: integer
       provisioningState:
-        description: Provisioning state to track the aysnc operation status.
+        description: Provisioning state to track the async operation status.
         readOnly: true
         type: string
     type: object
@@ -2228,7 +2232,7 @@ definitions:
     description: A load balancer configuration for an availability group listener.
     properties:
       loadBalancerResourceId:
-        description: Subnet used to include private IP.
+        description: Resource id of the load balancer.
         type: string
       privateIpAddress:
         $ref: '#/definitions/PrivateIPAddress'
@@ -2425,6 +2429,10 @@ definitions:
         description: Virtual machine disk count.
         format: int32
         type: integer
+      startingDeviceId:
+        description: Device id of the first disk to be updated.
+        format: int32
+        type: integer
     type: object
   SqlVirtualMachine:
     allOf:
@@ -2492,7 +2500,7 @@ definitions:
           modelAsString: true
           name: ClusterManagerType
       provisioningState:
-        description: Provisioning state to track the aysnc operation status.
+        description: Provisioning state to track the async operation status.
         readOnly: true
         type: string
       scaleType:
@@ -2514,14 +2522,11 @@ definitions:
         description: SQL image sku.
         enum:
           - Developer
-          - Express
-          - Standard
           - Enterprise
-          - Web
         type: string
         x-ms-enum:
           modelAsString: true
-          name: SqlImageSku
+          name: SqlVmGroupImageSku
         x-ms-mutability:
           - read
           - create
@@ -2568,7 +2573,7 @@ definitions:
         $ref: '#/definitions/KeyVaultCredentialSettings'
         description: Key vault credential settings.
       provisioningState:
-        description: Provisioning state to track the aysnc operation status.
+        description: Provisioning state to track the async operation status.
         readOnly: true
         type: string
       serverConfigurationsManagementSettings:

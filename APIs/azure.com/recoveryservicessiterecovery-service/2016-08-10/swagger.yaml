@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2016-08-10/service.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: recoveryservicessiterecovery-service
   x-tags:
@@ -1343,11 +1342,11 @@ paths:
             $ref: '#/definitions/Fabric'
         '202':
           description: Accepted
-      summary: Creates an Azure Site Recoery fabric.
+      summary: Creates an Azure Site Recovery fabric.
       tags:
         - ReplicationFabrics
       x-ms-examples:
-        Creates an Azure Site Recoery fabric.:
+        Creates an Azure Site Recovery fabric.:
           parameters:
             api-version: '2016-08-10'
             fabricName: cloud1
@@ -4623,7 +4622,7 @@ paths:
           name: fabricName
           required: true
           type: string
-        - description: Storage classfication name.
+        - description: Storage classification name.
           in: path
           name: storageClassificationName
           required: true
@@ -4964,7 +4963,7 @@ paths:
           name: fabricName
           required: true
           type: string
-        - description: vCeneter name
+        - description: vCenter name
           in: path
           name: vCenterName
           required: true
@@ -5317,7 +5316,7 @@ paths:
         - $ref: '#/parameters/ResourceName'
         - $ref: '#/parameters/ResourceGroupName'
         - $ref: '#/parameters/SubscriptionId'
-        - description: Job indentifier.
+        - description: Job identifier.
           in: path
           name: jobName
           required: true
@@ -7723,7 +7722,7 @@ definitions:
         type: array
     type: object
   AlertProperties:
-    description: The proprties of an alert.
+    description: The properties of an alert.
     properties:
       customEmailAddresses:
         description: The custom email address for sending emails.
@@ -7831,7 +7830,7 @@ definitions:
   AzureToAzureCreateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificCreateNetworkMappingInput'
-    description: Create network mappings input properties/behaviour specific to Azure to Azure Network mapping.
+    description: Create network mappings input properties/behavior specific to Azure to Azure Network mapping.
     properties:
       primaryNetworkId:
         description: The primary azure vnet Id.
@@ -7910,7 +7909,7 @@ definitions:
     discriminator: instanceType
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -7939,7 +7938,7 @@ definitions:
   ConsistencyCheckTaskDetails:
     allOf:
       - $ref: '#/definitions/TaskTypeDetails'
-    description: This class contains monitoring details of all the inconsistent Protected Entites in Vmm.
+    description: This class contains monitoring details of all the inconsistent Protected Entities in Vmm.
     properties:
       vmDetails:
         description: The list of inconsistent Vm details.
@@ -8071,7 +8070,7 @@ definitions:
         type: string
     type: object
   DataStore:
-    description: The datastore details of the MT.
+    description: The data store details of the MT.
     properties:
       capacity:
         description: The capacity of data store in GBs.
@@ -8141,7 +8140,7 @@ definitions:
         type: string
     type: object
   DiskDetails:
-    description: Onprem disk details data.
+    description: On-prem disk details data.
     properties:
       maxSizeMB:
         description: The hard disk max size in MB.
@@ -8279,7 +8278,7 @@ definitions:
         description: The severity of the event.
         type: string
       timeOfOccurrence:
-        description: The time of occurence of the event.
+        description: The time of occurrence of the event.
         format: date-time
         type: string
     type: object
@@ -8288,7 +8287,7 @@ definitions:
     discriminator: instanceType
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -8324,7 +8323,7 @@ definitions:
     discriminator: instanceType
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -8444,7 +8443,7 @@ definitions:
     discriminator: instanceType
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -9615,7 +9614,7 @@ definitions:
         format: double
         type: number
       datastores:
-        description: The datastores of the on-premise machine. Value can be list of strings that contain datastore names.
+        description: The data stores of the on-premise machine. Value can be list of strings that contain data store names.
         items:
           type: string
         type: array
@@ -9893,7 +9892,7 @@ definitions:
     description: VMware Azure specific enable protection input.
     properties:
       datastoreName:
-        description: The target datastore name.
+        description: The target data store name.
         type: string
       diskExclusionInput:
         $ref: '#/definitions/InMageDiskExclusionInput'
@@ -10087,7 +10086,7 @@ definitions:
         description: The collection of Consistency points.
         type: object
       datastores:
-        description: The datastores of the on-premise machine Value can be list of strings that contain datastore names
+        description: The data stores of the on-premise machine Value can be list of strings that contain data store names
         items:
           type: string
         type: array
@@ -10207,7 +10206,7 @@ definitions:
     description: InMageAzureV2 specific provider input.
     properties:
       datastoreName:
-        description: The target datastore name.
+        description: The target data store name.
         type: string
       diskExclusionInput:
         $ref: '#/definitions/InMageDiskExclusionInput'
@@ -10461,7 +10460,7 @@ definitions:
           type: string
         type: array
       endTime:
-        description: Date time to get jobs upto.
+        description: Date time to get jobs up to.
         type: string
       fabricId:
         description: The Id of the fabric to search jobs under.
@@ -10657,7 +10656,7 @@ definitions:
   NetworkMapping:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: 'Network Mapping model. Ideally it should have been possible to inherit this class from prev version in InheritedModels as long as there is no difference in structure or method signature. Since there were no base Models for certain fields and methods viz NetworkMappingProperties and Load with required return type, the class has been introduced in its entirety with references to base models to facilitate exensions in subsequent versions.'
+    description: 'Network Mapping model. Ideally it should have been possible to inherit this class from prev version in InheritedModels as long as there is no difference in structure or method signature. Since there were no base Models for certain fields and methods viz NetworkMappingProperties and Load with required return type, the class has been introduced in its entirety with references to base models to facilitate extensions in subsequent versions.'
     properties:
       properties:
         $ref: '#/definitions/NetworkMappingProperties'
@@ -11045,7 +11044,7 @@ definitions:
     description: Base class for fabric specific details of container.
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -11113,7 +11112,7 @@ definitions:
     description: Container mapping provider specific details.
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -12053,7 +12052,7 @@ definitions:
           $ref: '#/definitions/HealthErrorSummary'
         type: array
       resourceCount:
-        description: The count of total resources umder the container.
+        description: The count of total resources under the container.
         format: int32
         type: integer
     type: object
@@ -12196,7 +12195,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/StorageClassificationProperties'
-        description: Proprties of the storage object.
+        description: Properties of the storage object.
     type: object
   StorageClassificationCollection:
     description: Collection of storage details.
@@ -12217,7 +12216,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/StorageClassificationMappingProperties'
-        description: Proprties of the storage mappping object.
+        description: Properties of the storage mapping object.
     type: object
   StorageClassificationMappingCollection:
     description: Collection of storage mapping details.
@@ -12463,7 +12462,7 @@ definitions:
         description: Recovery plan update properties.
     type: object
   UpdateRecoveryPlanInputProperties:
-    description: Recovery plan updation properties.
+    description: Recovery plan update properties.
     properties:
       groups:
         description: The recovery plan groups.
@@ -12546,7 +12545,7 @@ definitions:
         description: The process server Id from where the update can be orchestrated.
         type: string
       runAsAccountId:
-        description: The CS account Id which has priviliges to update the vCenter.
+        description: The CS account Id which has privileges to update the vCenter.
         type: string
     type: object
   VCenter:
@@ -12592,7 +12591,7 @@ definitions:
         description: The IP address of the vCenter.
         type: string
       lastHeartbeat:
-        description: The time when the last heartbeat was reveived by vCenter.
+        description: The time when the last heartbeat was received by vCenter.
         format: date-time
         type: string
       port:
@@ -12825,7 +12824,7 @@ definitions:
         description: The agent version.
         type: string
       discoveryType:
-        description: A value inidicating the discovery type of the machine. Value can be vCenter or physical.
+        description: A value indicating the discovery type of the machine. Value can be vCenter or physical.
         type: string
       diskDetails:
         description: The disk details.
@@ -12917,7 +12916,7 @@ definitions:
   VmmToAzureCreateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificCreateNetworkMappingInput'
-    description: Create network mappings input properties/behaviour specific to Vmm to Azure Network mapping.
+    description: Create network mappings input properties/behavior specific to Vmm to Azure Network mapping.
     properties: {}
     type: object
     x-ms-discriminator-value: VmmToAzure
@@ -12931,14 +12930,14 @@ definitions:
   VmmToAzureUpdateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificUpdateNetworkMappingInput'
-    description: Update network mappings input properties/behaviour specific to vmm to azure.
+    description: Update network mappings input properties/behavior specific to vmm to azure.
     properties: {}
     type: object
     x-ms-discriminator-value: VmmToAzure
   VmmToVmmCreateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificCreateNetworkMappingInput'
-    description: Create network mappings input properties/behaviour specific to vmm to vmm Network mapping.
+    description: Create network mappings input properties/behavior specific to vmm to vmm Network mapping.
     properties: {}
     type: object
     x-ms-discriminator-value: VmmToVmm
@@ -12952,7 +12951,7 @@ definitions:
   VmmToVmmUpdateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificUpdateNetworkMappingInput'
-    description: Update network mappings input properties/behaviour specific to vmm to vmm.
+    description: Update network mappings input properties/behavior specific to vmm to vmm.
     properties: {}
     type: object
     x-ms-discriminator-value: VmmToVmm

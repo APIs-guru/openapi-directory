@@ -249,14 +249,14 @@ definitions:
     discriminator: authType
     properties:
       authType:
-        description: This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.
+        description: This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
         type: string
       certificate:
         description: The base64 encoded certificate raw data string.
         format: byte
         type: string
       friendlyName:
-        description: Certificate friendlyname.
+        description: Certificate friendly name.
         type: string
       issuer:
         description: Certificate issuer.

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/servicebus/resource-manager/Microsoft.ServiceBus/stable/2015-08-01/servicebus.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: servicebus
   x-tags:
@@ -49,7 +48,7 @@ parameters:
     required: true
     type: string
   authorizationRuleNameParameter:
-    description: The authorizationrule name.
+    description: The authorization rule name.
     in: path
     maxLength: 50
     minLength: 1
@@ -729,7 +728,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAutorizationRuleListAll:
+        NameSpaceAuthorizationRuleListAll:
           parameters:
             api-version: '2015-08-01'
             namespaceName: sdk-Namespace8341
@@ -777,7 +776,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAutorizationRuleDelete:
+        NameSpaceAuthorizationRuleDelete:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-RelayAuthRules-01
@@ -806,7 +805,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAutorizationRuleGet:
+        NameSpaceAuthorizationRuleGet:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules9875
@@ -932,7 +931,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAuthorizationRuleRegenrateKey:
+        NameSpaceAuthorizationRuleRegenerateKey:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-RelayAuthRules-01
@@ -1179,7 +1178,7 @@ paths:
       tags:
         - Queues
       x-ms-examples:
-        QueueAutorizationRuleListAll:
+        QueueAuthorizationRuleListAll:
           parameters:
             api-version: '2015-08-01'
             namespaceName: sdk-Namespace6556
@@ -1220,7 +1219,7 @@ paths:
       tags:
         - Queues
       x-ms-examples:
-        QueueAutorizationRuleDelete:
+        QueueAuthorizationRuleDelete:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules7319
@@ -1251,7 +1250,7 @@ paths:
       tags:
         - Queues
       x-ms-examples:
-        QueueAutorizationRuleGet:
+        QueueAuthorizationRuleGet:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules7319
@@ -1289,7 +1288,7 @@ paths:
       tags:
         - Queues
       x-ms-examples:
-        QueueAutorizationRuleGet:
+        QueueAuthorizationRuleGet:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules7319
@@ -1418,7 +1417,7 @@ paths:
       tags:
         - Queues
       x-ms-examples:
-        QueueAuthorizationRuleRegenrateKey:
+        QueueAuthorizationRuleRegenerateKey:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules7319
@@ -1650,7 +1649,7 @@ paths:
       tags:
         - Topics
       x-ms-examples:
-        TopicAutorizationRuleListAll:
+        TopicAuthorizationRuleListAll:
           parameters:
             api-version: '2015-08-01'
             namespaceName: sdk-Namespace8408
@@ -1691,7 +1690,7 @@ paths:
       tags:
         - Topics
       x-ms-examples:
-        TopicAutorizationRuleDelete:
+        TopicAuthorizationRuleDelete:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules5067
@@ -1722,7 +1721,7 @@ paths:
       tags:
         - Topics
       x-ms-examples:
-        TopicAutorizationRuleGet:
+        TopicAuthorizationRuleGet:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules5067
@@ -1760,7 +1759,7 @@ paths:
       tags:
         - Topics
       x-ms-examples:
-        TopicAutorizationRuleGet:
+        TopicAuthorizationRuleGet:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules5067
@@ -1779,7 +1778,7 @@ paths:
                     - Send
                 type: Microsoft.ServiceBus/AuthorizationRules
     put:
-      description: Creates an authorizatio rule for the specified topic.
+      description: Creates an authorization rule for the specified topic.
       externalDocs:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx'
       operationId: Topics_CreateOrUpdateAuthorizationRule
@@ -1891,7 +1890,7 @@ paths:
       tags:
         - Topics
       x-ms-examples:
-        TopicAuthorizationRuleRegenrateKey:
+        TopicAuthorizationRuleRegenerateKey:
           parameters:
             api-version: '2015-08-01'
             authorizationRuleName: sdk-Authrules5067
@@ -2112,7 +2111,7 @@ definitions:
     description: Description of a Check Name availability request properties.
     properties:
       name:
-        description: 'The Name to check the namespce name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number.'
+        description: 'The Name to check the namespace name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number.'
         type: string
     required:
       - name
@@ -2679,7 +2678,7 @@ definitions:
           $ref: '#/definitions/TopicResource'
         type: array
   TopicProperties:
-    description: The Tpoic Properties definition.
+    description: The Topic Properties definition.
     properties:
       accessedAt:
         description: 'Last time the message was sent, or a request was received, for this topic.'

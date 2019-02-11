@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2016-03-01/Certificates.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: web-Certificates
   x-tags:
@@ -185,7 +184,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Succesfully deleted certificate.
+          description: Successfully deleted certificate.
         '204':
           description: Certificate does not exist.
       summary: Delete a certificate.
@@ -411,7 +410,7 @@ definitions:
             readOnly: true
             type: string
           expirationDate:
-            description: Certificate expriration date.
+            description: Certificate expiration date.
             format: date-time
             readOnly: true
             type: string
@@ -563,7 +562,7 @@ definitions:
             readOnly: true
             type: string
           expirationDate:
-            description: Certificate expriration date.
+            description: Certificate expiration date.
             format: date-time
             readOnly: true
             type: string

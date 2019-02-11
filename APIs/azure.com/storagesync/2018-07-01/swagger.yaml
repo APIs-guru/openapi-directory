@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storagesync/resource-manager/Microsoft.StorageSync/stable/2018-07-01/storagesync.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storagesync
   x-tags:
@@ -840,7 +839,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -1023,7 +1022,7 @@ paths:
           schema:
             $ref: '#/definitions/RegisteredServer'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -1150,7 +1149,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -1614,7 +1613,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -1806,7 +1805,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudEndpoint'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -1934,7 +1933,7 @@ paths:
           schema:
             $ref: '#/definitions/PostBackupResponse'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2030,7 +2029,7 @@ paths:
         '200':
           description: Ok
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2144,7 +2143,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2237,7 +2236,7 @@ paths:
         '200':
           description: Ok
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2543,7 +2542,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2742,7 +2741,7 @@ paths:
           schema:
             $ref: '#/definitions/ServerEndpoint'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -2877,7 +2876,7 @@ paths:
           schema:
             $ref: '#/definitions/ServerEndpoint'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -2961,7 +2960,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}/recallAction':
     post:
-      description: Recall a serverendpoint.
+      description: Recall a server endpoint.
       operationId: ServerEndpoints_recallAction
       parameters:
         - description: The ID of the target subscription.
@@ -3017,7 +3016,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -3899,7 +3898,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/ServerEndpointUpdateProperties'
-        description: The properties of the serverendpoint.
+        description: The properties of the server endpoint.
         x-ms-client-flatten: true
   ServerEndpointUpdateProperties:
     description: ServerEndpoint Update Properties object.

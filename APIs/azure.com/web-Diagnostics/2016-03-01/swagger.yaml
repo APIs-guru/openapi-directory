@@ -13,7 +13,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/web/resource-manager/Microsoft.Web/stable/2016-03-01/Diagnostics.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: web-Diagnostics
   x-tags:
@@ -1267,7 +1266,7 @@ definitions:
           type: object
         type: array
       instructions:
-        description: Instrunctions if any for the data source
+        description: Instructions if any for the data source
         items:
           type: string
         type: array
@@ -1308,7 +1307,7 @@ definitions:
     description: Class representing Abnormal Time Period detected.
     properties:
       endTime:
-        description: End time of the corelated event
+        description: End time of the correlated event
         format: date-time
         type: string
       message:
@@ -1342,7 +1341,7 @@ definitions:
         description: Represents the name of the Detector
         type: string
       startTime:
-        description: Start time of the corelated event
+        description: Start time of the correlated event
         format: date-time
         type: string
       type:
@@ -1631,7 +1630,7 @@ definitions:
             readOnly: true
             type: string
         x-ms-azure-resource: true
-    description: Class representing Reponse from Diagnostic Detectors
+    description: Class representing Response from Diagnostic Detectors
     properties:
       properties:
         description: DiagnosticDetectorResponse resource specific properties

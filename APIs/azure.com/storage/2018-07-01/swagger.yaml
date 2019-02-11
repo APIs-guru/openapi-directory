@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2018-07-01/storage.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage
   x-tags:
@@ -4556,7 +4555,7 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - description: 'May be used to expand the properties within account''s properties. By default, data is not included when fecthing properties. Currently we only support geoReplicationStats.'
+        - description: 'May be used to expand the properties within account''s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats.'
           enum:
             - geoReplicationStats
           in: query
@@ -4592,6 +4591,7 @@ paths:
                   azureFilesAadIntegration: true
                   creationTime: '2017-06-01T02:42:41.7633306Z'
                   geoReplicationStats:
+                    canFailover: true
                     lastSyncTime: '2018-10-30T00:25:34Z'
                     status: Live
                   isHnsEnabled: true
@@ -5125,13 +5125,13 @@ definitions:
       name:
         description: Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source.
         type: string
-      useSubDomain:
+      useSubDomainName:
         description: Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates.
         type: boolean
     required:
       - name
   Dimension:
-    description: 'Dimension of blobs, possiblly be blob type or access tier.'
+    description: 'Dimension of blobs, possibly be blob type or access tier.'
     properties:
       displayName:
         description: Display name of dimension.
@@ -5219,6 +5219,10 @@ definitions:
   GeoReplicationStats:
     description: 'Statistics related to replication for storage account''s Blob, Table, Queue and File services. It is only available when geo-redundant replication is enabled for the storage account.'
     properties:
+      canFailover:
+        description: A boolean flag which indicates whether or not account failover is supported for the account.
+        readOnly: true
+        type: boolean
       lastSyncTime:
         description: 'All primary writes preceding this UTC date/time value are guaranteed to be available for read operations. Primary writes following this point in time may or may not be available for reads. Element may be default value if value of LastSyncTime is not available, this can happen if secondary is offline or we are in bootstrap.'
         format: date-time
@@ -5300,7 +5304,7 @@ definitions:
     description: The List service SAS credentials operation response.
     properties:
       serviceSasToken:
-        description: List service SAS credentials of speicific resource.
+        description: List service SAS credentials of specific resource.
         readOnly: true
         type: string
   MetricSpecification:
@@ -5442,10 +5446,10 @@ definitions:
         readOnly: true
         type: array
   SKUCapability:
-    description: 'The capability information in the specified sku, including file encryption, network acls, change notification, etc.'
+    description: 'The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.'
     properties:
       name:
-        description: 'The name of capability, The capability information in the specified sku, including file encryption, network acls, change notification, etc.'
+        description: 'The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.'
         readOnly: true
         type: string
       value:
@@ -5453,7 +5457,7 @@ definitions:
         readOnly: true
         type: string
   ServiceSasParameters:
-    description: The parameters to list service SAS credentials of a speicific resource.
+    description: The parameters to list service SAS credentials of a specific resource.
     properties:
       canonicalizedResource:
         description: The canonical path to the signed resource.
@@ -5568,7 +5572,7 @@ definitions:
     description: The SKU of the storage account.
     properties:
       capabilities:
-        description: 'The capability information in the specified sku, including file encryption, network acls, change notification, etc.'
+        description: 'The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc.'
         items:
           $ref: '#/definitions/SKUCapability'
         readOnly: true
@@ -5593,7 +5597,7 @@ definitions:
         readOnly: true
         type: array
       name:
-        description: 'Gets or sets the sku name. Required for account creation; optional for update. Note that in older versions, sku name was called accountType.'
+        description: 'Gets or sets the SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.'
         enum:
           - Standard_LRS
           - Standard_GRS
@@ -5615,7 +5619,7 @@ definitions:
           $ref: '#/definitions/Restriction'
         type: array
       tier:
-        description: Gets the sku tier. This is based on the SKU name.
+        description: Gets the SKU tier. This is based on the SKU name.
         enum:
           - Standard
           - Premium
@@ -5689,7 +5693,7 @@ definitions:
         description: Gets the SKU.
         readOnly: true
   StorageAccountCheckNameAvailabilityParameters:
-    description: The parameters used to check the availabity of the storage account name.
+    description: The parameters used to check the availability of the storage account name.
     properties:
       name:
         description: The storage account name.
@@ -5732,7 +5736,7 @@ definitions:
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/Sku'
-        description: Required. Gets or sets the sku name.
+        description: Required. Gets or sets the SKU name.
       tags:
         additionalProperties:
           type: string
@@ -5954,7 +5958,7 @@ definitions:
     description: The parameters used to regenerate the storage account key.
     properties:
       keyName:
-        description: 'The name of storage keys that want to be regenerated, possible vaules are key1, key2.'
+        description: 'The name of storage keys that want to be regenerated, possible values are key1, key2.'
         type: string
     required:
       - keyName
@@ -5982,7 +5986,7 @@ definitions:
         x-ms-client-flatten: true
       sku:
         $ref: '#/definitions/Sku'
-        description: 'Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those sku names be updated to any other value.'
+        description: 'Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value.'
       tags:
         additionalProperties:
           type: string

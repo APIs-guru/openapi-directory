@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/operationalinsights/resource-manager/Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: operationalinsights-OperationalInsights
   x-tags:
@@ -37,13 +36,13 @@ security:
       - user_impersonation
 parameters:
   ApiVersionParameter:
-    description: Client Api Version.
+    description: The client API version.
     in: query
     name: api-version
     required: true
     type: string
   ResourceGroupNameParameter:
-    description: The name of the resource group to get. The name is case insensitive.
+    description: The Resource Group name.
     in: path
     maxLength: 90
     minLength: 1
@@ -53,13 +52,13 @@ parameters:
     type: string
     x-ms-parameter-location: method
   SubscriptionIdParameter:
-    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    description: The Subscription ID.
     in: path
     name: subscriptionId
     required: true
     type: string
   WorkspaceNameParameter:
-    description: Log Analytics workspace name
+    description: The Log Analytics Workspace name.
     in: path
     name: workspaceName
     required: true
@@ -1403,6 +1402,35 @@ paths:
                   customerId: customer id
                   location: East US
                   workspaceName: workspaceName
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/operations/{purgeId}':
+    get:
+      description: Gets status of an ongoing purge operation.
+      operationId: Workspaces_GetPurgeStatus
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/WorkspacePurgeIdParameter'
+      responses:
+        '200':
+          description: 'Returns status of purge operation in body of response. e.g.:  running, completed.'
+          schema:
+            $ref: '#/definitions/WorkspacePurgeStatusResponse'
+      tags:
+        - Workspaces
+      x-ms-examples:
+        WorkspacePurgeOperation:
+          parameters:
+            api-version: '2015-03-20'
+            purgeId: purge-970318e7-b859-4edb-8903-83b1b54d0b74
+            resourceGroupName: OIAutoRest5123
+            subscriptionId: 00000000-0000-0000-0000-00000000000
+            workspaceName: aztest5048
+          responses:
+            '200':
+              body:
+                status: completed
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purge':
     post:
       description: Purges data in an Log Analytics workspace by a set of user-defined filters.
@@ -1414,12 +1442,12 @@ paths:
         - $ref: '#/parameters/WorkspaceNameParameter'
         - $ref: '#/parameters/WorkspacePurgeParameter'
       responses:
-        '200':
-          description: 'Returns status of purge operation in body of response. e.g.:  running, completed.'
-          schema:
-            $ref: '#/definitions/WorkspacePurgeStatusResponse'
         '202':
           description: Accepted request for purging an Log Analytics workspace.
+          headers:
+            x-ms-status-location:
+              description: The location from which to request the operation status.
+              type: string
           schema:
             $ref: '#/definitions/WorkspacePurgeResponse'
       tags:
@@ -1427,7 +1455,7 @@ paths:
       x-ms-examples:
         WorkspacePurge:
           parameters:
-            api-version: '2015-03-02'
+            api-version: '2015-03-20'
             body:
               filters:
                 - column: TimeGenerated
@@ -1438,29 +1466,79 @@ paths:
             subscriptionId: 00000000-0000-0000-0000-00000000000
             workspaceName: aztest5048
           responses:
-            '200':
-              body:
-                status: Completed
             '202':
               body:
                 operationId: 7d7cf277-9113-4ab3-8359-d0364b74d01d
-      x-ms-long-running-operation: true
+              headers:
+                x-ms-status-location: 'https://management.azure.com/subscriptions/b96161de-b34a-480f-7343-59b099299283/resourceGroups/example/providers/microsoft.operationalinsights/workspaces/test/operations/purge-970318e7-b859-4edb-8903-83b1b54d0b74?api-version=2015-03-20'
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/listKeys':
+    post:
+      description: Gets the shared keys for a Log Analytics Workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace.
+      operationId: Workspaces_ListKeys
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Returns the shared keys associated with the Log Analytics Workspace.
+          schema:
+            $ref: '#/definitions/SharedKeys'
+      tags:
+        - Workspaces
+      x-ms-examples:
+        SharedKeysList:
+          parameters:
+            api-version: '2015-03-20'
+            resourceGroupName: rg1
+            subscriptionId: 00000000-0000-0000-0000-00000000000
+            workspaceName: workspace1
+          responses:
+            '200':
+              body:
+                primarySharedKey: BozLY1JnZbxu0jWUQSY8iRPEM8ObmpP8rW+8bUl3+HpDJI+n689SxXgTgU7k1qdxo/WugRLxechxbolAfHM5uA==
+                secondarySharedKey: 7tDt5W0JBrCQKtQA3igfFltLSzJeyr9LmuT+B/ibzd8cdC1neZ1ePOQLBx5NUzc0q2VUIK0cLhWNyFvo/hT8Ww==
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey':
+    post:
+      description: Regenerates the shared keys for a Log Analytics Workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace.
+      operationId: Workspaces_RegenerateSharedKeys
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Returns the new shared keys associated with the Log Analytics Workspace.
+          schema:
+            $ref: '#/definitions/SharedKeys'
+      tags:
+        - Workspaces
+      x-ms-examples:
+        SharedKeysList:
+          parameters:
+            api-version: '2015-03-20'
+            resourceGroupName: rg1
+            subscriptionId: 00000000-0000-0000-0000-00000000000
+            workspaceName: workspace1
+          responses:
+            '200':
+              body:
+                primarySharedKey: BozLY1JnZbxu0jWUQSY8iRPEM8ObmpP8rW+8bUl3+HpDJI+n689SxXgTgU7k1qdxo/WugRLxechxbolAfHM5uA==
+                secondarySharedKey: 7tDt5W0JBrCQKtQA3igfFltLSzJeyr9LmuT+B/ibzd8cdC1neZ1ePOQLBx5NUzc0q2VUIK0cLhWNyFvo/hT8Ww==
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches':
     get:
       description: Gets the saved searches for a given Log Analytics Workspace
       operationId: SavedSearches_ListByWorkspace
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics workspace name
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: OK response definition.
+          description: Returns the list of saved searches for the given Log Analytics Workspace.
           schema:
             $ref: '#/definitions/SavedSearchesListResult'
       tags:
@@ -1485,24 +1563,20 @@ paths:
                       - Name: Group
                         Value: Computer
                     Version: 1
-  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchName}':
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchId}':
     delete:
       description: Deletes the specified saved search in a given workspace.
       operationId: SavedSearches_Delete
       parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics workspace name
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - description: The id of the saved search.
           in: path
-          name: workspaceName
-          required: true
-          type: string
-        - description: Name of the saved search.
-          in: path
-          name: savedSearchName
+          name: savedSearchId
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK response definition.
@@ -1522,19 +1596,15 @@ paths:
       description: Gets the specified saved search for a given workspace.
       operationId: SavedSearches_Get
       parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics workspace name
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - description: The id of the saved search.
           in: path
-          name: savedSearchName
+          name: savedSearchId
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK response definition.
@@ -1564,25 +1634,21 @@ paths:
       description: Creates or updates a saved search for a given workspace.
       operationId: SavedSearches_CreateOrUpdate
       parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics workspace name
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - description: The id of the saved search.
           in: path
-          name: savedSearchName
+          name: savedSearchId
           required: true
           type: string
+        - $ref: '#/parameters/ApiVersionParameter'
         - description: The parameters required to save a search.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/SavedSearch'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
           description: OK response definition.
@@ -1617,20 +1683,16 @@ paths:
                   displayName: Create or Update Saved Search Test
                   query: '* | measure Count() by Computer'
                   version: 1
-  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchName}/results':
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchId}/results':
     get:
       description: Gets the results from a saved search for a given workspace.
       operationId: SavedSearches_GetResults
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics workspace name
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - description: The id of the saved search.
           in: path
-          name: workspaceName
-          required: true
-          type: string
-        - description: The name of the saved search.
-          in: path
-          name: savedSearchName
+          name: savedSearchId
           required: true
           type: string
         - $ref: '#/parameters/ApiVersionParameter'
@@ -1643,7 +1705,7 @@ paths:
       tags:
         - SavedSearches
       x-ms-examples:
-        SaveSearchsListResults:
+        SaveSearchesListResults:
           parameters:
             api-version: '2015-03-02'
             resourceGroupName: mms-eus
@@ -1674,11 +1736,7 @@ paths:
       operationId: Workspaces_GetSchema
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics workspace name
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -1747,11 +1805,7 @@ paths:
       operationId: Workspaces_GetSearchResults
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics workspace name
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - description: The parameters required to execute a search query.
           in: body
           name: parameters
@@ -5758,11 +5812,7 @@ paths:
       operationId: Workspaces_UpdateSearchResults
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics workspace name
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - description: The id of the search that will have results updated. You can get the id from the response of the GetResults call.
           in: path
           name: id
@@ -5793,11 +5843,7 @@ paths:
       operationId: StorageInsights_ListByWorkspace
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics Workspace name that will contain the storageInsightsConfigs resource
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -5838,11 +5884,7 @@ paths:
       operationId: StorageInsights_Delete
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics Workspace name that contains the storageInsightsConfigs resource
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - description: Name of the storageInsightsConfigs resource
           in: path
           name: storageInsightName
@@ -5873,11 +5915,7 @@ paths:
       operationId: StorageInsights_Get
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics Workspace name that contains the storageInsightsConfigs resource
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - description: Name of the storageInsightsConfigs resource
           in: path
           name: storageInsightName
@@ -5922,11 +5960,7 @@ paths:
       operationId: StorageInsights_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/ResourceGroupNameParameter'
-        - description: Log Analytics Workspace name that will contain the storageInsightsConfigs resource
-          in: path
-          name: workspaceName
-          required: true
-          type: string
+        - $ref: '#/parameters/WorkspaceNameParameter'
         - description: Name of the storageInsightsConfigs resource
           in: path
           name: storageInsightName
@@ -6032,7 +6066,7 @@ definitions:
         description: The DNS valid workspace name.
         type: string
   Operation:
-    description: Supported operation of OperationsManagement resource provider.
+    description: Supported operation of OperationalInsights resource provider.
     properties:
       display:
         description: Display metadata associated with the operation.
@@ -6041,7 +6075,7 @@ definitions:
             description: 'Type of operation: get, read, delete, etc.'
             type: string
           provider:
-            description: 'Service provider: Microsoft OperationsManagement.'
+            description: 'Service provider: OperationalInsights.'
             type: string
           resource:
             description: Resource on which the operation is performed etc.
@@ -6050,10 +6084,10 @@ definitions:
         description: 'Operation name: {provider}/{resource}/{operation}'
         type: string
   OperationListResult:
-    description: Result of the request to list solution operations.
+    description: Result of the request to list OperationalInsights operations.
     properties:
       value:
-        description: List of solution operations supported by the OperationsManagement resource provider.
+        description: List of operations supported by the OperationalInsights resource provider.
         items:
           $ref: '#/definitions/Operation'
         type: array
@@ -6107,7 +6141,7 @@ definitions:
     description: Value object for saved search results.
     properties:
       eTag:
-        description: The etag of the saved search.
+        description: The ETag of the saved search.
         type: string
       id:
         description: The id of the saved search.
@@ -6119,7 +6153,7 @@ definitions:
         type: string
       properties:
         $ref: '#/definitions/SavedSearchProperties'
-        description: Gets or sets properties of the saved search.
+        description: The properties of the saved search.
         x-ms-client-flatten: true
       type:
         description: The type of the saved search.
@@ -6146,20 +6180,19 @@ definitions:
           $ref: '#/definitions/Tag'
         type: array
       version:
-        description: The version number of the query lanuage. Only verion 1 is allowed here.
+        description: The version number of the query language. The current version is 2 and is the default.
         format: int64
-        maximum: 1
+        maximum: 2
         minimum: 1
         type: integer
     required:
       - category
       - displayName
       - query
-      - version
   SavedSearchesListResult:
-    description: The saved search operation response.
+    description: The saved search list operation response.
     properties:
-      metaData:
+      __metadata:
         $ref: '#/definitions/SearchMetadata'
         description: The metadata from search results.
         x-ms-client-name: Metadata
@@ -6283,7 +6316,7 @@ definitions:
         type: string
       highlight:
         $ref: '#/definitions/SearchHighlight'
-        description: The highlight that looks for all occurences of a string.
+        description: The highlight that looks for all occurrences of a string.
       query:
         description: The query to search.
         type: string
@@ -6361,6 +6394,15 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: SearchSortEnum
+  SharedKeys:
+    description: The shared keys for a workspace.
+    properties:
+      primarySharedKey:
+        description: The primary shared key of a workspace.
+        type: string
+      secondarySharedKey:
+        description: The secondary shared key of a workspace.
+        type: string
   StorageAccount:
     description: Describes a storage account connection.
     properties:
@@ -6394,7 +6436,7 @@ definitions:
         type: string
         x-ms-client-name: odataNextLink
       value:
-        description: Gets or sets a list of storage insight instances.
+        description: A list of storage insight items.
         items:
           $ref: '#/definitions/StorageInsight'
         type: array
@@ -6469,6 +6511,9 @@ definitions:
       column:
         description: The column of the table over which the given query should run
         type: string
+      key:
+        description: 'When filtering over custom dimensions, this key will be used as the name of the custom dimension.'
+        type: string
       operator:
         description: A query operator to evaluate over the provided column and value(s).
         type: string
@@ -6488,8 +6533,8 @@ definitions:
       status:
         description: Status of the operation represented by the requested Id.
         enum:
-          - Pending
-          - Completed
+          - pending
+          - completed
         type: string
         x-ms-enum:
           modelAsString: true

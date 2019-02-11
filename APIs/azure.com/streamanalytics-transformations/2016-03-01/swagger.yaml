@@ -118,7 +118,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Transformation'
-        - description: The ETag of the transformation. Omit this value to always overwrite the current transformation. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes.
+        - description: The ETag of the transformation. Omit this value to always overwrite the current transformation. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
           in: header
           name: If-Match
           required: false
@@ -172,7 +172,7 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Transformation'
-        - description: The ETag of the transformation. Omit this value to always overwrite the current transformation. Specify the last-seen ETag value to prevent accidentally overwritting concurrent changes.
+        - description: The ETag of the transformation. Omit this value to always overwrite the current transformation. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.
           in: header
           name: If-Match
           required: false

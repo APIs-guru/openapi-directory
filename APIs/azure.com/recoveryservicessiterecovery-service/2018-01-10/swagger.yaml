@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/recoveryservicessiterecovery/resource-manager/Microsoft.RecoveryServices/stable/2018-01-10/service.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: recoveryservicessiterecovery-service
   x-tags:
@@ -2401,6 +2400,711 @@ paths:
             '202': {}
             '204': {}
       x-ms-long-running-operation: true
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems':
+    get:
+      description: Gets the list of ASR migration items in the protection container.
+      operationId: ReplicationMigrationItems_ListByReplicationProtectionContainers
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationItemCollection'
+      summary: Gets the list of migration items in the protection container.
+      tags:
+        - ReplicationMigrationItems
+      x-ms-examples:
+        Gets the list of migration items in the protection container.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1
+                    name: virtualmachine1
+                    properties:
+                      allowedOperations:
+                        - Migrate
+                        - DisableMigration
+                        - TestMigrate
+                        - TestMigrateCleanup
+                      currentJob:
+                        jobId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None
+                        jobName: None
+                        startTime: '2017-04-26T06:37:50.8082715Z'
+                      machineName: vm-0520-2
+                      migrationState: Replicating
+                      migrationStateDescription: Ready to migrate
+                      policyFriendlyName: vmwarepolicy1
+                      policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
+                      providerSpecificDetails:
+                        instanceType: VMwareCbt
+                      recoveryServicesProviderId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/45b55118-f42d-505f-8bde-f3745258171f
+                      testMigrateState: None
+                      testMigrateStateDescription: None
+                    type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}':
+    delete:
+      description: The operation to delete an ASR migration item.
+      operationId: ReplicationMigrationItems_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Migration item name.
+          in: path
+          name: migrationItemName
+          required: true
+          type: string
+        - description: The delete option.
+          in: query
+          name: deleteOption
+          required: false
+          type: string
+      responses:
+        '202':
+          description: Accepted
+        '204':
+          description: NoContent
+      summary: Delete the migration item.
+      tags:
+        - ReplicationMigrationItems
+      x-ms-examples:
+        Delete the migration item.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            migrationItemName: virtualmachine1
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '202': {}
+            '204': {}
+      x-ms-long-running-operation: true
+    get:
+      operationId: ReplicationMigrationItems_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric unique name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Migration item name.
+          in: path
+          name: migrationItemName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationItem'
+      summary: Gets the details of a migration item.
+      tags:
+        - ReplicationMigrationItems
+      x-ms-examples:
+        Gets the details of a migration item.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            migrationItemName: virtualmachine1
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1
+                name: virtualmachine1
+                properties:
+                  allowedOperations:
+                    - Migrate
+                    - DisableMigration
+                    - TestMigrate
+                    - TestMigrateCleanup
+                  currentJob:
+                    jobId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None
+                    jobName: None
+                    startTime: '2017-04-26T06:37:50.8082715Z'
+                  machineName: vm-0520-2
+                  migrationState: Replicating
+                  migrationStateDescription: Ready to migrate
+                  policyFriendlyName: vmwarepolicy1
+                  policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
+                  providerSpecificDetails:
+                    instanceType: VMwareCbt
+                  recoveryServicesProviderId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/45b55118-f42d-505f-8bde-f3745258171f
+                  testMigrateState: None
+                  testMigrateStateDescription: None
+                type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems
+    patch:
+      description: The operation to update the recovery settings of an ASR migration item.
+      operationId: ReplicationMigrationItems_Update
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Migration item name.
+          in: path
+          name: migrationItemName
+          required: true
+          type: string
+        - description: Update migration item input.
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateMigrationItemInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationItem'
+        '202':
+          description: Accepted
+      summary: Updates migration item.
+      tags:
+        - ReplicationMigrationItems
+      x-ms-examples:
+        Updates migration item.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            input:
+              properties:
+                providerSpecificDetails:
+                  instanceType: VMwareCbt
+            migrationItemName: virtualmachine1
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1
+                name: virtualmachine1
+                properties:
+                  allowedOperations:
+                    - Migrate
+                    - DisableMigration
+                    - TestMigrate
+                    - TestMigrateCleanup
+                  currentJob:
+                    jobId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None
+                    jobName: None
+                    startTime: '2017-04-26T06:37:50.8082715Z'
+                  machineName: vm-0520-2
+                  migrationState: Replicating
+                  migrationStateDescription: Ready to migrate
+                  policyFriendlyName: vmwarepolicy1
+                  policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
+                  providerSpecificDetails:
+                    instanceType: VMwareCbt
+                  recoveryServicesProviderId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/45b55118-f42d-505f-8bde-f3745258171f
+                  testMigrateState: None
+                  testMigrateStateDescription: None
+                type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems
+            '202': {}
+      x-ms-long-running-operation: true
+    put:
+      description: The operation to create an ASR migration item (enable migration).
+      operationId: ReplicationMigrationItems_Create
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Migration item name.
+          in: path
+          name: migrationItemName
+          required: true
+          type: string
+        - description: Enable migration input.
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/EnableMigrationInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationItem'
+        '202':
+          description: Accepted
+      summary: Enables migration.
+      tags:
+        - ReplicationMigrationItems
+      x-ms-examples:
+        Enables migration.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            input:
+              properties:
+                policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
+                providerSpecificDetails:
+                  instanceType: VMwareCbt
+            migrationItemName: virtualmachine1
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1
+                name: virtualmachine1
+                properties:
+                  allowedOperations:
+                    - Migrate
+                    - DisableMigration
+                    - TestMigrate
+                    - TestMigrateCleanup
+                  currentJob:
+                    jobId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None
+                    jobName: None
+                    startTime: '2017-04-26T06:37:50.8082715Z'
+                  machineName: vm-0520-2
+                  migrationState: Replicating
+                  migrationStateDescription: Ready to migrate
+                  policyFriendlyName: vmwarepolicy1
+                  policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
+                  providerSpecificDetails:
+                    instanceType: VMwareCbt
+                  recoveryServicesProviderId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/45b55118-f42d-505f-8bde-f3745258171f
+                  testMigrateState: None
+                  testMigrateStateDescription: None
+                type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems
+            '202': {}
+      x-ms-long-running-operation: true
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/migrate':
+    post:
+      description: The operation to initiate migration of the item.
+      operationId: ReplicationMigrationItems_Migrate
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Migration item name.
+          in: path
+          name: migrationItemName
+          required: true
+          type: string
+        - description: Migrate input.
+          in: body
+          name: migrateInput
+          required: true
+          schema:
+            $ref: '#/definitions/MigrateInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationItem'
+        '202':
+          description: Accepted
+      summary: Migrate item.
+      tags:
+        - ReplicationMigrationItems
+      x-ms-examples:
+        Migrate item.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            migrateInput:
+              properties:
+                providerSpecificDetails:
+                  instanceType: VMwareCbt
+            migrationItemName: virtualmachine1
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1
+                name: virtualmachine1
+                properties:
+                  allowedOperations:
+                    - Migrate
+                    - DisableMigration
+                    - TestMigrate
+                    - TestMigrateCleanup
+                  currentJob:
+                    jobId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None
+                    jobName: None
+                    startTime: '2017-04-26T06:37:50.8082715Z'
+                  machineName: vm-0520-2
+                  migrationState: Replicating
+                  migrationStateDescription: Ready to migrate
+                  policyFriendlyName: vmwarepolicy1
+                  policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
+                  providerSpecificDetails:
+                    instanceType: VMwareCbt
+                  recoveryServicesProviderId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/45b55118-f42d-505f-8bde-f3745258171f
+                  testMigrateState: None
+                  testMigrateStateDescription: None
+                type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems
+            '202': {}
+      x-ms-long-running-operation: true
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/migrationRecoveryPoints':
+    get:
+      operationId: MigrationRecoveryPoints_ListByReplicationMigrationItems
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric unique name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Migration item name.
+          in: path
+          name: migrationItemName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationRecoveryPointCollection'
+      summary: Gets the recovery points for a migration item.
+      tags:
+        - MigrationRecoveryPoints
+      x-ms-examples:
+        Gets the recovery points for a migration item.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            migrationItemName: virtualmachine1
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1/migrationRecoveryPoints/648336ef-2d70-4d98-b100-8c299f97cd41
+                    name: 648336ef-2d70-4d98-b100-8c299f97cd41
+                    properties:
+                      recoveryPointTime: '2017-04-26T06:37:50.8082715Z'
+                      recoveryPointType: CrashConsistent
+                    type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems/migrationRecoveryPoints
+                  - id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1/migrationRecoveryPoints/34cb2d05-e730-4d3f-b96b-a60a5e92acb2
+                    name: 34cb2d05-e730-4d3f-b96b-a60a5e92acb2
+                    properties:
+                      recoveryPointTime: '2017-04-26T07:37:30.9722019Z'
+                      recoveryPointType: CrashConsistent
+                    type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems/migrationRecoveryPoints
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/migrationRecoveryPoints/{migrationRecoveryPointName}':
+    get:
+      operationId: MigrationRecoveryPoints_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric unique name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Migration item name.
+          in: path
+          name: migrationItemName
+          required: true
+          type: string
+        - description: The migration recovery point name.
+          in: path
+          name: migrationRecoveryPointName
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationRecoveryPoint'
+      summary: Gets a recovery point for a migration item.
+      tags:
+        - MigrationRecoveryPoints
+      x-ms-examples:
+        Gets a recovery point for a migration item.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            migrationItemName: virtualmachine1
+            migrationRecoveryPointName: b22134ea-620c-474b-9fa5-3c1cb47708e3
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1/migrationRecoveryPoints/b22134ea-620c-474b-9fa5-3c1cb47708e3
+                name: b22134ea-620c-474b-9fa5-3c1cb47708e3
+                properties:
+                  recoveryPointTime: '2017-04-26T06:37:50.8082715Z'
+                  recoveryPointType: CrashConsistent
+                type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems/migrationRecoveryPoints
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/testMigrate':
+    post:
+      description: The operation to initiate test migration of the item.
+      operationId: ReplicationMigrationItems_TestMigrate
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Migration item name.
+          in: path
+          name: migrationItemName
+          required: true
+          type: string
+        - description: Test migrate input.
+          in: body
+          name: testMigrateInput
+          required: true
+          schema:
+            $ref: '#/definitions/TestMigrateInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationItem'
+        '202':
+          description: Accepted
+      summary: Test migrate item.
+      tags:
+        - ReplicationMigrationItems
+      x-ms-examples:
+        Test migrate item.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            migrationItemName: virtualmachine1
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+            testMigrateInput:
+              properties:
+                providerSpecificDetails:
+                  instanceType: VMwareCbt
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1
+                name: virtualmachine1
+                properties:
+                  allowedOperations:
+                    - Migrate
+                    - DisableMigration
+                    - TestMigrate
+                    - TestMigrateCleanup
+                  currentJob:
+                    jobId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None
+                    jobName: None
+                    startTime: '2017-04-26T06:37:50.8082715Z'
+                  machineName: vm-0520-2
+                  migrationState: Replicating
+                  migrationStateDescription: Ready to migrate
+                  policyFriendlyName: vmwarepolicy1
+                  policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
+                  providerSpecificDetails:
+                    instanceType: VMwareCbt
+                  recoveryServicesProviderId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/45b55118-f42d-505f-8bde-f3745258171f
+                  testMigrateState: None
+                  testMigrateStateDescription: None
+                type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems
+            '202': {}
+      x-ms-long-running-operation: true
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationMigrationItems/{migrationItemName}/testMigrateCleanup':
+    post:
+      description: The operation to initiate test migrate cleanup.
+      operationId: ReplicationMigrationItems_TestMigrateCleanup
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Protection container name.
+          in: path
+          name: protectionContainerName
+          required: true
+          type: string
+        - description: Migration item name.
+          in: path
+          name: migrationItemName
+          required: true
+          type: string
+        - description: Test migrate cleanup input.
+          in: body
+          name: testMigrateCleanupInput
+          required: true
+          schema:
+            $ref: '#/definitions/TestMigrateCleanupInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationItem'
+        '202':
+          description: Accepted
+      summary: Test migrate cleanup.
+      tags:
+        - ReplicationMigrationItems
+      x-ms-examples:
+        Test migrate cleanup.:
+          parameters:
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            migrationItemName: virtualmachine1
+            protectionContainerName: vmwareContainer1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+            testMigrateCleanupInput:
+              properties:
+                comments: Test Failover Cleanup
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1
+                name: virtualmachine1
+                properties:
+                  allowedOperations:
+                    - Migrate
+                    - DisableMigration
+                    - TestMigrate
+                    - TestMigrateCleanup
+                  currentJob:
+                    jobId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None
+                    jobName: None
+                    startTime: '2017-04-26T06:37:50.8082715Z'
+                  machineName: vm-0520-2
+                  migrationState: Replicating
+                  migrationStateDescription: Ready to migrate
+                  policyFriendlyName: vmwarepolicy1
+                  policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
+                  providerSpecificDetails:
+                    instanceType: VMwareCbt
+                  recoveryServicesProviderId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/45b55118-f42d-505f-8bde-f3745258171f
+                  testMigrateState: None
+                  testMigrateStateDescription: None
+                type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems
+            '202': {}
+      x-ms-long-running-operation: true
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectableItems':
     get:
       description: Lists the protectable items in a protection container.
@@ -4572,6 +5276,84 @@ paths:
                   providerVersionState: Latest
                   serverVersion: 3.2.7510.0
                 type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders
+    put:
+      description: The operation to add a recovery services provider.
+      operationId: ReplicationRecoveryServicesProviders_Create
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: Fabric name.
+          in: path
+          name: fabricName
+          required: true
+          type: string
+        - description: Recovery services provider name.
+          in: path
+          name: providerName
+          required: true
+          type: string
+        - description: Add provider input.
+          in: body
+          name: addProviderInput
+          required: true
+          schema:
+            $ref: '#/definitions/AddRecoveryServicesProviderInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecoveryServicesProvider'
+        '202':
+          description: Accepted
+      summary: Adds a recovery services provider.
+      tags:
+        - ReplicationRecoveryServicesProviders
+      x-ms-examples:
+        Adds a recovery services provider.:
+          parameters:
+            addProviderInput:
+              properties:
+                authenticationIdentityInput:
+                  aadAuthority: 'https://login.microsoftonline.com'
+                  applicationId: f66fce08-c0c6-47a1-beeb-0ede5ea94f90
+                  audience: 'https://microsoft.onmicrosoft.com/cf19e349-644c-4c6a-bcae-9c8f35357874'
+                  objectId: 141360b8-5686-4240-a027-5e24e6affeba
+                  tenantId: 72f988bf-86f1-41af-91ab-2d7cd011db47
+                machineName: vmwareprovider1
+                resourceAccessIdentityInput:
+                  aadAuthority: 'https://login.microsoftonline.com'
+                  applicationId: f66fce08-c0c6-47a1-beeb-0ede5ea94f90
+                  audience: 'https://microsoft.onmicrosoft.com/cf19e349-644c-4c6a-bcae-9c8f35357874'
+                  objectId: 141360b8-5686-4240-a027-5e24e6affeba
+                  tenantId: 72f988bf-86f1-41af-91ab-2d7cd011db47
+            api-version: '2018-01-10'
+            fabricName: vmwarefabric1
+            providerName: vmwareprovider1
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '200':
+              body:
+                id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/vmwareprovider1
+                name: vmwareprovider1
+                properties:
+                  allowedScenarios:
+                    - Refresh
+                  connectionStatus: Connected
+                  fabricFriendlyName: vmwarefabric1
+                  fabricType: VMwareV2
+                  friendlyName: vmwareprovider1
+                  lastHeartBeat: '2017-04-27T09:16:04.9405768Z'
+                  protectedItemCount: 2
+                  providerVersion: 5.1.3688.0
+                  providerVersionState: Latest
+                  serverVersion: 3.2.7510.0
+                type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationRecoveryServicesProviders
+            '202': {}
+      x-ms-long-running-operation: true
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationRecoveryServicesProviders/{providerName}/refreshProvider':
     post:
       description: The operation to refresh the information from the recovery services provider.
@@ -4769,7 +5551,7 @@ paths:
           name: fabricName
           required: true
           type: string
-        - description: Storage classfication name.
+        - description: Storage classification name.
           in: path
           name: storageClassificationName
           required: true
@@ -5110,7 +5892,7 @@ paths:
           name: fabricName
           required: true
           type: string
-        - description: vCeneter name
+        - description: vCenter name
           in: path
           name: vCenterName
           required: true
@@ -5448,7 +6230,7 @@ paths:
         - $ref: '#/parameters/ResourceName'
         - $ref: '#/parameters/ResourceGroupName'
         - $ref: '#/parameters/SubscriptionId'
-        - description: Job indentifier.
+        - description: Job identifier.
           in: path
           name: jobName
           required: true
@@ -5671,6 +6453,69 @@ paths:
                   tasks: []
             '202': {}
       x-ms-long-running-operation: true
+  '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationMigrationItems':
+    get:
+      operationId: ReplicationMigrationItems_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/ResourceName'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/SubscriptionId'
+        - description: The pagination token.
+          in: query
+          name: skipToken
+          required: false
+          type: string
+        - description: OData filter options.
+          in: query
+          name: $filter
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MigrationItemCollection'
+      summary: Gets the list of migration items in the vault.
+      tags:
+        - ReplicationMigrationItems
+      x-ms-examples:
+        Gets the list of migration items in the vault.:
+          parameters:
+            api-version: '2018-01-10'
+            resourceGroupName: resourcegroup1
+            resourceName: migrationvault
+            subscriptionId: cb53d0c3-bd59-4721-89bc-06916a9147ef
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationProtectionContainers/vmwareContainer1/replicationMigrationItems/virtualmachine1
+                    name: virtualmachine1
+                    properties:
+                      allowedOperations:
+                        - Migrate
+                        - DisableMigration
+                        - TestMigrate
+                        - TestMigrateCleanup
+                      currentJob:
+                        jobId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationJobs/None
+                        jobName: None
+                        startTime: '2017-04-26T06:37:50.8082715Z'
+                      machineName: vm-0520-2
+                      migrationState: Replicating
+                      migrationStateDescription: Ready to migrate
+                      policyFriendlyName: vmwarepolicy1
+                      policyId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationPolicies/vmwarepolicy1
+                      providerSpecificDetails:
+                        instanceType: VMwareCbt
+                      recoveryServicesProviderId: /Subscriptions/cb53d0c3-bd59-4721-89bc-06916a9147ef/resourceGroups/resourcegroup1/providers/Microsoft.RecoveryServices/vaults/migrationvault/replicationFabrics/vmwarefabric1/replicationRecoveryServicesProviders/45b55118-f42d-505f-8bde-f3745258171f
+                      testMigrateState: None
+                      testMigrateStateDescription: None
+                    type: Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationMigrationItems
+      x-ms-odata: '#/definitions/MigrationItemsQueryParameter'
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationNetworkMappings':
     get:
       description: Lists all ASR network mappings in the vault.
@@ -7299,6 +8144,9 @@ definitions:
       - $ref: '#/definitions/EnableProtectionProviderSpecificInput'
     description: A2A enable protection input.
     properties:
+      diskEncryptionInfo:
+        $ref: '#/definitions/DiskEncryptionInfo'
+        description: The recovery disk encryption information.
       fabricObjectId:
         description: The fabric specific object Id of the virtual machine.
         type: string
@@ -7437,6 +8285,9 @@ definitions:
         description: The data pending for replication in MB at staging account.
         format: double
         type: number
+      dekKeyVaultArmId:
+        description: The KeyVault resource id for secret (BEK).
+        type: string
       diskCapacityInBytes:
         description: The disk capacity in bytes.
         format: int64
@@ -7449,6 +8300,18 @@ definitions:
         type: string
       diskUri:
         description: The disk uri.
+        type: string
+      isDiskEncrypted:
+        description: A value indicating whether vm has encrypted os disk or not.
+        type: boolean
+      isDiskKeyEncrypted:
+        description: A value indicating whether disk key got encrypted or not.
+        type: boolean
+      kekKeyVaultArmId:
+        description: The KeyVault resource id for key (KEK).
+        type: string
+      keyIdentifier:
+        description: The key URL / identifier (KEK).
         type: string
       monitoringJobType:
         description: The type of the monitoring job. The progress is contained in MonitoringPercentageCompletion property.
@@ -7472,6 +8335,9 @@ definitions:
       resyncRequired:
         description: A value indicating whether resync is required for this disk.
         type: boolean
+      secretIdentifier:
+        description: The secret URL / identifier (BEK).
+        type: string
     type: object
   A2AProtectedManagedDiskDetails:
     description: A2A protected managed disk details.
@@ -7484,6 +8350,9 @@ definitions:
         description: The data pending for replication in MB at staging account.
         format: double
         type: number
+      dekKeyVaultArmId:
+        description: The KeyVault resource id for secret (BEK).
+        type: string
       diskCapacityInBytes:
         description: The disk capacity in bytes.
         format: int64
@@ -7496,6 +8365,18 @@ definitions:
         type: string
       diskType:
         description: The type of disk.
+        type: string
+      isDiskEncrypted:
+        description: A value indicating whether vm has encrypted os disk or not.
+        type: boolean
+      isDiskKeyEncrypted:
+        description: A value indicating whether disk key got encrypted or not.
+        type: boolean
+      kekKeyVaultArmId:
+        description: The KeyVault resource id for key (KEK).
+        type: string
+      keyIdentifier:
+        description: The key URL / identifier (KEK).
         type: string
       monitoringJobType:
         description: The type of the monitoring job. The progress is contained in MonitoringPercentageCompletion property.
@@ -7525,6 +8406,9 @@ definitions:
       resyncRequired:
         description: A value indicating whether resync is required for this disk.
         type: boolean
+      secretIdentifier:
+        description: The secret URL / identifier (BEK).
+        type: string
     type: object
   A2AProtectionContainerMappingDetails:
     allOf:
@@ -7715,6 +8599,9 @@ definitions:
       - $ref: '#/definitions/SwitchProtectionProviderSpecificInput'
     description: A2A specific switch protection input.
     properties:
+      diskEncryptionInfo:
+        $ref: '#/definitions/DiskEncryptionInfo'
+        description: The recovery disk encryption information.
       policyId:
         description: The Policy Id.
         type: string
@@ -7769,6 +8656,9 @@ definitions:
       - $ref: '#/definitions/UpdateReplicationProtectedItemProviderInput'
     description: InMage Azure V2 input to update replication protected item.
     properties:
+      diskEncryptionInfo:
+        $ref: '#/definitions/DiskEncryptionInfo'
+        description: The recovery os disk encryption information.
       managedDiskUpdateDetails:
         description: Managed disk update details.
         items:
@@ -7876,6 +8766,32 @@ definitions:
         description: The type of task. Details in CustomDetails property depend on this type.
         type: string
     type: object
+  AddRecoveryServicesProviderInput:
+    description: Input required to add a provider.
+    properties:
+      properties:
+        $ref: '#/definitions/AddRecoveryServicesProviderInputProperties'
+        description: The properties of an add provider request.
+    required:
+      - properties
+    type: object
+  AddRecoveryServicesProviderInputProperties:
+    description: The properties of an add provider request.
+    properties:
+      authenticationIdentityInput:
+        $ref: '#/definitions/IdentityProviderInput'
+        description: The identity provider input for DRA authentication.
+      machineName:
+        description: The name of the machine where the provider is getting added.
+        type: string
+      resourceAccessIdentityInput:
+        $ref: '#/definitions/IdentityProviderInput'
+        description: The identity provider input for resource access.
+    required:
+      - machineName
+      - authenticationIdentityInput
+      - resourceAccessIdentityInput
+    type: object
   AddVCenterRequest:
     description: Input required to add vCenter.
     properties:
@@ -7924,7 +8840,7 @@ definitions:
         type: array
     type: object
   AlertProperties:
-    description: The proprties of an alert.
+    description: The properties of an alert.
     properties:
       customEmailAddresses:
         description: The custom email address for sending emails.
@@ -8032,7 +8948,7 @@ definitions:
   AzureToAzureCreateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificCreateNetworkMappingInput'
-    description: Create network mappings input properties/behaviour specific to Azure to Azure Network mapping.
+    description: Create network mappings input properties/behavior specific to Azure to Azure Network mapping.
     properties:
       primaryNetworkId:
         description: The primary azure vnet Id.
@@ -8121,7 +9037,7 @@ definitions:
     discriminator: instanceType
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -8150,7 +9066,7 @@ definitions:
   ConsistencyCheckTaskDetails:
     allOf:
       - $ref: '#/definitions/TaskTypeDetails'
-    description: This class contains monitoring details of all the inconsistent Protected Entites in Vmm.
+    description: This class contains monitoring details of all the inconsistent Protected Entities in Vmm.
     properties:
       vmDetails:
         description: The list of inconsistent Vm details.
@@ -8267,6 +9183,20 @@ definitions:
       - recoveryFabricId
       - groups
     type: object
+  CurrentJobDetails:
+    description: Current job details of the migration item.
+    properties:
+      jobId:
+        description: The ARM Id of the job being executed.
+        type: string
+      jobName:
+        description: The job name.
+        type: string
+      startTime:
+        description: The start time of the job.
+        format: date-time
+        type: string
+    type: object
   CurrentScenarioDetails:
     description: Current scenario details of the protected entity.
     properties:
@@ -8282,7 +9212,7 @@ definitions:
         type: string
     type: object
   DataStore:
-    description: The datastore details of the MT.
+    description: The data store details of the MT.
     properties:
       capacity:
         description: The capacity of data store in GBs.
@@ -8352,7 +9282,7 @@ definitions:
         type: string
     type: object
   DiskDetails:
-    description: Onprem disk details data.
+    description: On-prem disk details data.
     properties:
       maxSizeMB:
         description: The hard disk max size in MB.
@@ -8366,6 +9296,26 @@ definitions:
         type: string
       vhdType:
         description: The type of the volume.
+        type: string
+    type: object
+  DiskEncryptionInfo:
+    description: Recovery disk encryption info (BEK and KEK).
+    properties:
+      diskEncryptionKeyInfo:
+        $ref: '#/definitions/DiskEncryptionKeyInfo'
+        description: The recovery KeyVault reference for secret.
+      keyEncryptionKeyInfo:
+        $ref: '#/definitions/KeyEncryptionKeyInfo'
+        description: The recovery KeyVault reference for key.
+    type: object
+  DiskEncryptionKeyInfo:
+    description: Disk Encryption Key Information (BitLocker Encryption Key (BEK) on Windows).
+    properties:
+      keyVaultResourceArmId:
+        description: "The\_KeyVault resource ARM id for secret."
+        type: string
+      secretIdentifier:
+        description: "The\_secret url / identifier."
         type: string
     type: object
   DiskVolumeDetails:
@@ -8393,6 +9343,38 @@ definitions:
       resource:
         description: 'The resource. The localized friendly form of the resource related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing. This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent’s display.resource field). e.g. "Virtual Machines" or "Scheduler Job Collections", or "Virtual Machine VM Sizes" or "Scheduler Jobs"'
         type: string
+    type: object
+  EnableMigrationInput:
+    description: Enable migration input.
+    properties:
+      properties:
+        $ref: '#/definitions/EnableMigrationInputProperties'
+        description: Enable migration input properties.
+    required:
+      - properties
+    type: object
+  EnableMigrationInputProperties:
+    description: Enable migration input properties.
+    properties:
+      policyId:
+        description: The policy Id.
+        type: string
+      providerSpecificDetails:
+        $ref: '#/definitions/EnableMigrationProviderSpecificInput'
+        description: The provider specific details.
+    required:
+      - policyId
+      - providerSpecificDetails
+    type: object
+  EnableMigrationProviderSpecificInput:
+    description: Enable migration provider specific input.
+    discriminator: instanceType
+    properties:
+      instanceType:
+        description: The class type.
+        type: string
+    required:
+      - instanceType
     type: object
   EnableProtectionInput:
     description: Enable protection input.
@@ -8490,7 +9472,7 @@ definitions:
         description: The severity of the event.
         type: string
       timeOfOccurrence:
-        description: The time of occurence of the event.
+        description: The time of occurrence of the event.
         format: date-time
         type: string
     type: object
@@ -8499,7 +9481,7 @@ definitions:
     discriminator: instanceType
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -8535,7 +9517,7 @@ definitions:
     discriminator: instanceType
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -9573,8 +10555,8 @@ definitions:
         type: string
     type: object
     x-ms-discriminator-value: HyperVVirtualMachine
-  IdentityInformation:
-    description: Identity details.
+  IdentityProviderDetails:
+    description: Identity provider details.
     properties:
       aadAuthority:
         description: The base authority for Azure Active Directory authentication.
@@ -9585,23 +10567,37 @@ definitions:
       audience:
         description: The intended Audience of the service principal with which the on-premise management/data plane components would communicate with our Azure services.
         type: string
-      certificateThumbprint:
-        description: The certificate thumbprint. Applicable only if IdentityProviderType is RecoveryServicesActiveDirectory.
-        type: string
-      identityProviderType:
-        description: The identity provider type. Value is the ToString() of a IdentityProviderType value.
-        enum:
-          - RecoveryServicesActiveDirectory
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: IdentityProviderType
       objectId:
         description: The object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.
         type: string
       tenantId:
         description: The tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.
         type: string
+    type: object
+  IdentityProviderInput:
+    description: Identity provider input.
+    properties:
+      aadAuthority:
+        description: The base authority for Azure Active Directory authentication.
+        type: string
+      applicationId:
+        description: The application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.
+        type: string
+      audience:
+        description: The intended Audience of the service principal with which the on-premise management/data plane components would communicate with our Azure services.
+        type: string
+      objectId:
+        description: The object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.
+        type: string
+      tenantId:
+        description: The tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.
+        type: string
+    required:
+      - tenantId
+      - applicationId
+      - objectId
+      - audience
+      - aadAuthority
     type: object
   InMageAgentDetails:
     description: The details of the InMage agent.
@@ -9903,7 +10899,7 @@ definitions:
         format: double
         type: number
       datastores:
-        description: The datastores of the on-premise machine. Value can be list of strings that contain datastore names.
+        description: The data stores of the on-premise machine. Value can be list of strings that contain data store names.
         items:
           type: string
         type: array
@@ -10184,7 +11180,7 @@ definitions:
     description: VMware Azure specific enable protection input.
     properties:
       datastoreName:
-        description: The target datastore name.
+        description: The target data store name.
         type: string
       diskExclusionInput:
         $ref: '#/definitions/InMageDiskExclusionInput'
@@ -10378,7 +11374,7 @@ definitions:
         description: The collection of Consistency points.
         type: object
       datastores:
-        description: The datastores of the on-premise machine Value can be list of strings that contain datastore names
+        description: The data stores of the on-premise machine Value can be list of strings that contain data store names
         items:
           type: string
         type: array
@@ -10498,7 +11494,7 @@ definitions:
     description: InMageAzureV2 specific provider input.
     properties:
       datastoreName:
-        description: The target datastore name.
+        description: The target data store name.
         type: string
       diskExclusionInput:
         $ref: '#/definitions/InMageDiskExclusionInput'
@@ -10779,7 +11775,7 @@ definitions:
         description: The type of objects.
         type: string
       endTime:
-        description: Date time to get jobs upto.
+        description: Date time to get jobs up to.
         type: string
       fabricId:
         description: The Id of the fabric to search jobs under.
@@ -10820,6 +11816,16 @@ definitions:
         description: The job entity.
     type: object
     x-ms-discriminator-value: JobTaskDetails
+  KeyEncryptionKeyInfo:
+    description: Key Encryption Key (KEK) information.
+    properties:
+      keyIdentifier:
+        description: "The\_key url / identifier."
+        type: string
+      keyVaultResourceArmId:
+        description: "The\_KeyVault resource ARM id for key."
+        type: string
+    type: object
   LogicalNetwork:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -10943,6 +11949,206 @@ definitions:
         description: Version status
         type: string
     type: object
+  MigrateInput:
+    description: Input for migrate.
+    properties:
+      properties:
+        $ref: '#/definitions/MigrateInputProperties'
+        description: Migrate input properties.
+    required:
+      - properties
+    type: object
+  MigrateInputProperties:
+    description: Migrate input properties.
+    properties:
+      providerSpecificDetails:
+        $ref: '#/definitions/MigrateProviderSpecificInput'
+        description: The provider specific details.
+    required:
+      - providerSpecificDetails
+    type: object
+  MigrateProviderSpecificInput:
+    description: Migrate provider specific input.
+    discriminator: instanceType
+    properties:
+      instanceType:
+        description: The class type.
+        type: string
+    required:
+      - instanceType
+    type: object
+  MigrationItem:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Migration item.
+    properties:
+      properties:
+        $ref: '#/definitions/MigrationItemProperties'
+        description: The migration item properties.
+    type: object
+  MigrationItemCollection:
+    description: Migration item collection.
+    properties:
+      nextLink:
+        description: The value of next link.
+        type: string
+      value:
+        description: The list of migration items.
+        items:
+          $ref: '#/definitions/MigrationItem'
+        type: array
+    type: object
+  MigrationItemProperties:
+    description: Migration item properties.
+    properties:
+      allowedOperations:
+        description: 'The allowed operations on the migration item, based on the current migration state of the item.'
+        items:
+          enum:
+            - DisableMigration
+            - TestMigrate
+            - TestMigrateCleanup
+            - Migrate
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: MigrationItemOperation
+        readOnly: true
+        type: array
+      currentJob:
+        $ref: '#/definitions/CurrentJobDetails'
+        description: The current job details.
+        readOnly: true
+      health:
+        description: The consolidated health.
+        readOnly: true
+        type: string
+      healthErrors:
+        description: The list of health errors.
+        items:
+          $ref: '#/definitions/HealthError'
+        readOnly: true
+        type: array
+      machineName:
+        description: The on-premise virtual machine name.
+        readOnly: true
+        type: string
+      migrationState:
+        description: The migration status.
+        enum:
+          - None
+          - EnableMigrationInProgress
+          - EnableMigrationFailed
+          - DisableMigrationInProgress
+          - DisableMigrationFailed
+          - InitialSeedingInProgress
+          - InitialSeedingFailed
+          - Replicating
+          - MigrationInProgress
+          - MigrationSucceeded
+          - MigrationFailed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationState
+      migrationStateDescription:
+        description: The migration state description.
+        readOnly: true
+        type: string
+      policyFriendlyName:
+        description: The name of policy governing this item.
+        readOnly: true
+        type: string
+      policyId:
+        description: The ARM Id of policy governing this item.
+        readOnly: true
+        type: string
+      providerSpecificDetails:
+        $ref: '#/definitions/MigrationProviderSpecificSettings'
+        description: The migration provider custom settings.
+      recoveryServicesProviderId:
+        description: The recovery services provider ARM Id.
+        readOnly: true
+        type: string
+      testMigrateState:
+        description: The test migrate state.
+        enum:
+          - None
+          - TestMigrationInProgress
+          - TestMigrationSucceeded
+          - TestMigrationFailed
+          - TestMigrationCleanupInProgress
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: TestMigrationState
+      testMigrateStateDescription:
+        description: The test migrate state description.
+        readOnly: true
+        type: string
+    type: object
+  MigrationItemsQueryParameter:
+    description: Query parameter to enumerate migration items.
+    properties:
+      instanceType:
+        description: The replication provider type.
+        type: string
+      sourceFabricName:
+        description: The source fabric name filter.
+        type: string
+    type: object
+  MigrationProviderSpecificSettings:
+    description: Migration provider specific settings.
+    discriminator: instanceType
+    properties:
+      instanceType:
+        description: Gets the instance type.
+        readOnly: true
+        type: string
+    type: object
+  MigrationRecoveryPoint:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Recovery point for a migration item.
+    properties:
+      properties:
+        $ref: '#/definitions/MigrationRecoveryPointProperties'
+        description: Recovery point properties.
+    type: object
+  MigrationRecoveryPointCollection:
+    description: Collection of migration recovery points.
+    properties:
+      nextLink:
+        description: The value of next link.
+        type: string
+      value:
+        description: The migration recovery point details.
+        items:
+          $ref: '#/definitions/MigrationRecoveryPoint'
+        type: array
+    type: object
+  MigrationRecoveryPointProperties:
+    description: Migration item recovery point properties.
+    properties:
+      recoveryPointTime:
+        description: The recovery point time.
+        format: date-time
+        readOnly: true
+        type: string
+      recoveryPointType:
+        description: The recovery point type.
+        enum:
+          - NotSpecified
+          - ApplicationConsistent
+          - CrashConsistent
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationRecoveryPointType
+    type: object
   MobilityServiceUpdate:
     description: The Mobility Service update details.
     properties:
@@ -10980,7 +12186,7 @@ definitions:
   NetworkMapping:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: 'Network Mapping model. Ideally it should have been possible to inherit this class from prev version in InheritedModels as long as there is no difference in structure or method signature. Since there were no base Models for certain fields and methods viz NetworkMappingProperties and Load with required return type, the class has been introduced in its entirety with references to base models to facilitate exensions in subsequent versions.'
+    description: 'Network Mapping model. Ideally it should have been possible to inherit this class from prev version in InheritedModels as long as there is no difference in structure or method signature. Since there were no base Models for certain fields and methods viz NetworkMappingProperties and Load with required return type, the class has been introduced in its entirety with references to base models to facilitate extensions in subsequent versions.'
     properties:
       properties:
         $ref: '#/definitions/NetworkMappingProperties'
@@ -11399,7 +12605,7 @@ definitions:
     description: Base class for fabric specific details of container.
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -11468,7 +12674,7 @@ definitions:
     discriminator: instanceType
     properties:
       instanceType:
-        description: Gets the class type. Overriden in derived classes.
+        description: Gets the class type. Overridden in derived classes.
         readOnly: true
         type: string
     type: object
@@ -12164,6 +13370,9 @@ definitions:
         items:
           type: string
         type: array
+      authenticationIdentityDetails:
+        $ref: '#/definitions/IdentityProviderDetails'
+        description: The authentication identity details.
       connectionStatus:
         description: A value indicating whether DRA is responsive.
         type: string
@@ -12184,9 +13393,6 @@ definitions:
         items:
           $ref: '#/definitions/HealthError'
         type: array
-      identityDetails:
-        $ref: '#/definitions/IdentityInformation'
-        description: The identity details.
       lastHeartBeat:
         description: Time when last heartbeat was sent by the DRA.
         format: date-time
@@ -12208,6 +13414,9 @@ definitions:
       providerVersionState:
         description: DRA version status.
         type: string
+      resourceAccessIdentityDetails:
+        $ref: '#/definitions/IdentityProviderDetails'
+        description: The resource access identity details.
       serverVersion:
         description: The fabric provider.
         type: string
@@ -12427,7 +13636,7 @@ definitions:
           $ref: '#/definitions/HealthErrorSummary'
         type: array
       resourceCount:
-        description: The count of total resources umder the container.
+        description: The count of total resources under the container.
         format: int32
         type: integer
     type: object
@@ -12570,7 +13779,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/StorageClassificationProperties'
-        description: Proprties of the storage object.
+        description: Properties of the storage object.
     type: object
   StorageClassificationCollection:
     description: Collection of storage details.
@@ -12591,7 +13800,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/StorageClassificationMappingProperties'
-        description: Proprties of the storage mappping object.
+        description: Properties of the storage mapping object.
     type: object
   StorageClassificationMappingCollection:
     description: Collection of storage mapping details.
@@ -12823,6 +14032,50 @@ definitions:
         type: string
     type: object
     x-ms-discriminator-value: TestFailoverJobDetails
+  TestMigrateCleanupInput:
+    description: Input for test migrate cleanup.
+    properties:
+      properties:
+        $ref: '#/definitions/TestMigrateCleanupInputProperties'
+        description: Test migrate cleanup input properties.
+    required:
+      - properties
+    type: object
+  TestMigrateCleanupInputProperties:
+    description: Test migrate cleanup input properties.
+    properties:
+      comments:
+        description: Test migrate cleanup comments.
+        type: string
+    type: object
+  TestMigrateInput:
+    description: Input for test migrate.
+    properties:
+      properties:
+        $ref: '#/definitions/TestMigrateInputProperties'
+        description: Test migrate input properties.
+    required:
+      - properties
+    type: object
+  TestMigrateInputProperties:
+    description: Test migrate input properties.
+    properties:
+      providerSpecificDetails:
+        $ref: '#/definitions/TestMigrateProviderSpecificInput'
+        description: The provider specific details.
+    required:
+      - providerSpecificDetails
+    type: object
+  TestMigrateProviderSpecificInput:
+    description: Test migrate provider specific input.
+    discriminator: instanceType
+    properties:
+      instanceType:
+        description: The class type.
+        type: string
+    required:
+      - instanceType
+    type: object
   UnplannedFailoverInput:
     description: Input definition for planned failover.
     properties:
@@ -12841,6 +14094,30 @@ definitions:
         description: Provider specific settings
       sourceSiteOperations:
         description: Source site operations status
+        type: string
+    type: object
+  UpdateMigrationItemInput:
+    description: Update migration item input.
+    properties:
+      properties:
+        $ref: '#/definitions/UpdateMigrationItemInputProperties'
+        description: Update migration item input properties.
+    type: object
+  UpdateMigrationItemInputProperties:
+    description: Update migration item input properties.
+    properties:
+      providerSpecificDetails:
+        $ref: '#/definitions/UpdateMigrationItemProviderSpecificInput'
+        description: The provider specific input to update migration item.
+    required:
+      - providerSpecificDetails
+    type: object
+  UpdateMigrationItemProviderSpecificInput:
+    description: Update migration item provider specific input.
+    discriminator: instanceType
+    properties:
+      instanceType:
+        description: The class type.
         type: string
     type: object
   UpdateMobilityServiceRequest:
@@ -12913,7 +14190,7 @@ definitions:
         description: Recovery plan update properties.
     type: object
   UpdateRecoveryPlanInputProperties:
-    description: Recovery plan updation properties.
+    description: Recovery plan update properties.
     properties:
       groups:
         description: The recovery plan groups.
@@ -12999,7 +14276,7 @@ definitions:
         description: The process server Id from where the update can be orchestrated.
         type: string
       runAsAccountId:
-        description: The CS account Id which has priviliges to update the vCenter.
+        description: The CS account Id which has privileges to update the vCenter.
         type: string
     type: object
   VCenter:
@@ -13050,7 +14327,7 @@ definitions:
         description: The IP address of the vCenter.
         type: string
       lastHeartbeat:
-        description: The time when the last heartbeat was reveived by vCenter.
+        description: The time when the last heartbeat was received by vCenter.
         format: date-time
         type: string
       port:
@@ -13066,6 +14343,9 @@ definitions:
   VMNicDetails:
     description: Hyper V VM network details.
     properties:
+      enableAcceleratedNetworkingOnRecovery:
+        description: A value indicating whether the NIC has accelerated networking enabled.
+        type: boolean
       ipAddressType:
         description: Ip address type.
         type: string
@@ -13106,6 +14386,9 @@ definitions:
   VMNicInputDetails:
     description: Hyper V VM network input details.
     properties:
+      enableAcceleratedNetworkingOnRecovery:
+        description: Whether the NIC has accelerated networking enabled.
+        type: boolean
       nicId:
         description: The nic Id.
         type: string
@@ -13119,10 +14402,289 @@ definitions:
         description: Selection type for failover.
         type: string
     type: object
+  VMwareCbtContainerCreationInput:
+    allOf:
+      - $ref: '#/definitions/ReplicationProviderSpecificContainerCreationInput'
+    description: VMwareCbt container creation input.
+    properties: {}
+    type: object
+    x-ms-discriminator-value: 6c7da455-506f-43ff-a16a-8eb101aebb70
+  VMwareCbtContainerMappingInput:
+    allOf:
+      - $ref: '#/definitions/ReplicationProviderSpecificContainerMappingInput'
+    description: VMwareCbt container mapping input.
+    properties:
+      keyVaultId:
+        description: The target key vault ARM Id.
+        type: string
+      keyVaultUri:
+        description: The target key vault URL.
+        type: string
+      serviceBusConnectionStringSecretName:
+        description: The secret name of the service bus connection string.
+        type: string
+      storageAccountId:
+        description: The storage account ARM Id.
+        type: string
+      storageAccountSasSecretName:
+        description: The secret name of the storage account.
+        type: string
+      targetLocation:
+        description: The target location.
+        type: string
+    required:
+      - keyVaultId
+      - keyVaultUri
+      - storageAccountId
+      - storageAccountSasSecretName
+      - serviceBusConnectionStringSecretName
+      - targetLocation
+    type: object
+    x-ms-discriminator-value: VMwareCbt
+  VMwareCbtDiskInput:
+    description: VMwareCbt disk input.
+    properties:
+      diskId:
+        description: The disk Id.
+        type: string
+      diskType:
+        description: The disk type.
+        enum:
+          - Standard_LRS
+          - Premium_LRS
+          - StandardSSD_LRS
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DiskAccountType
+      isOSDisk:
+        description: A value indicating whether the disk is the OS disk.
+        type: string
+      logStorageAccountId:
+        description: The log storage account ARM Id.
+        type: string
+      logStorageAccountSasSecretName:
+        description: The key vault secret name of the log storage account.
+        type: string
+    required:
+      - diskId
+      - isOSDisk
+      - logStorageAccountId
+      - logStorageAccountSasSecretName
+    type: object
+  VMwareCbtEnableMigrationInput:
+    allOf:
+      - $ref: '#/definitions/EnableMigrationProviderSpecificInput'
+    description: VMwareCbt specific enable migration input.
+    properties:
+      dataMoverRunAsAccountId:
+        description: The data mover RunAs account Id.
+        type: string
+      disksToInclude:
+        description: The disks to include list.
+        items:
+          $ref: '#/definitions/VMwareCbtDiskInput'
+        type: array
+      licenseType:
+        description: License type.
+        enum:
+          - NotSpecified
+          - NoLicenseType
+          - WindowsServer
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: LicenseType
+      snapshotRunAsAccountId:
+        description: The snapshot RunAs account Id.
+        type: string
+      targetAvailabilitySetId:
+        description: The target availability set ARM Id.
+        type: string
+      targetBootDiagnosticsStorageAccountId:
+        description: The target boot diagnostics storage account ARM Id.
+        type: string
+      targetNetworkId:
+        description: The target network ARM Id.
+        type: string
+      targetResourceGroupId:
+        description: The target resource group ARM Id.
+        type: string
+      targetSubnetName:
+        description: The target subnet name.
+        type: string
+      targetVmName:
+        description: The target VM name.
+        type: string
+      targetVmSize:
+        description: The target VM size.
+        type: string
+      vmwareMachineId:
+        description: The ARM Id of the VM discovered in VMware.
+        type: string
+    required:
+      - vmwareMachineId
+      - disksToInclude
+      - dataMoverRunAsAccountId
+      - snapshotRunAsAccountId
+      - targetResourceGroupId
+      - targetNetworkId
+      - instanceType
+    type: object
+    x-ms-discriminator-value: VMwareCbt
+  VMwareCbtMigrateInput:
+    allOf:
+      - $ref: '#/definitions/MigrateProviderSpecificInput'
+    description: VMwareCbt specific migrate input.
+    properties:
+      performShutdown:
+        description: A value indicating whether VM is to be shutdown.
+        type: string
+    required:
+      - performShutdown
+      - instanceType
+    type: object
+    x-ms-discriminator-value: VMwareCbt
+  VMwareCbtMigrationDetails:
+    allOf:
+      - $ref: '#/definitions/MigrationProviderSpecificSettings'
+    description: VMwareCbt provider specific settings
+    properties:
+      dataMoverRunAsAccountId:
+        description: The data mover RunAs account Id.
+        readOnly: true
+        type: string
+      lastRecoveryPointReceived:
+        description: The last recovery point received time.
+        format: date-time
+        readOnly: true
+        type: string
+      licenseType:
+        description: License Type of the VM to be used.
+        type: string
+      migrationRecoveryPointId:
+        description: The recovery point Id to which the VM was migrated.
+        readOnly: true
+        type: string
+      osType:
+        description: The type of the OS on the VM.
+        readOnly: true
+        type: string
+      protectedDisks:
+        description: The list of protected disks.
+        items:
+          $ref: '#/definitions/VMwareCbtProtectedDiskDetails'
+        type: array
+      snapshotRunAsAccountId:
+        description: The snapshot RunAs account Id.
+        readOnly: true
+        type: string
+      targetAvailabilitySetId:
+        description: The target availability set Id.
+        type: string
+      targetBootDiagnosticsStorageAccountId:
+        description: The target boot diagnostics storage account ARM Id.
+        type: string
+      targetLocation:
+        description: The target location.
+        readOnly: true
+        type: string
+      targetNetworkId:
+        description: The target network Id.
+        type: string
+      targetResourceGroupId:
+        description: The target resource group Id.
+        type: string
+      targetVmName:
+        description: Target VM name.
+        type: string
+      targetVmSize:
+        description: The target VM size.
+        type: string
+      vmNics:
+        description: The network details.
+        items:
+          $ref: '#/definitions/VMwareCbtNicDetails'
+        type: array
+      vmwareMachineId:
+        description: The ARM Id of the VM discovered in VMware.
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: VMwareCbt
+  VMwareCbtNicDetails:
+    description: VMwareCbt NIC details.
+    properties:
+      isPrimaryNic:
+        description: A value indicating whether this is the primary NIC.
+        type: string
+      isSelectedForMigration:
+        description: A value indicating whether this NIC is selected for migration.
+        type: string
+      nicId:
+        description: The NIC Id.
+        readOnly: true
+        type: string
+      sourceIPAddress:
+        description: The source IP address.
+        readOnly: true
+        type: string
+      sourceIPAddressType:
+        description: The source IP address type.
+        enum:
+          - Dynamic
+          - Static
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: EthernetAddressType
+      sourceNetworkId:
+        description: Source network Id.
+        readOnly: true
+        type: string
+      targetIPAddress:
+        description: The target IP address.
+        type: string
+      targetIPAddressType:
+        description: The target IP address type.
+        enum:
+          - Dynamic
+          - Static
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: EthernetAddressType
+      targetSubnetName:
+        description: Target subnet name.
+        type: string
+    type: object
+  VMwareCbtNicInput:
+    description: VMwareCbt NIC input.
+    properties:
+      isPrimaryNic:
+        description: A value indicating whether this is the primary NIC.
+        type: string
+      isSelectedForMigration:
+        description: A value indicating whether this NIC is selected for migration.
+        type: string
+      nicId:
+        description: The NIC Id.
+        type: string
+      targetStaticIPAddress:
+        description: The static IP address.
+        type: string
+      targetSubnetName:
+        description: Target subnet name.
+        type: string
+    required:
+      - nicId
+      - isPrimaryNic
+    type: object
   VMwareCbtPolicyCreationInput:
     allOf:
       - $ref: '#/definitions/PolicyProviderSpecificInput'
-    description: VMware Cbt Policy creation input.
+    description: VMware Cbt policy creation input.
     properties:
       appConsistentFrequencyInMinutes:
         description: The app consistent snapshot frequency (in minutes).
@@ -13132,10 +14694,149 @@ definitions:
         description: The crash consistent snapshot frequency (in minutes).
         format: int32
         type: integer
-      recoveryPointHistory:
+      recoveryPointHistoryInMinutes:
         description: The duration in minutes until which the recovery points need to be stored.
         format: int32
         type: integer
+    type: object
+    x-ms-discriminator-value: VMwareCbt
+  VMwareCbtProtectedDiskDetails:
+    description: VMwareCbt protected disk details.
+    properties:
+      capacityInBytes:
+        description: The disk capacity in bytes.
+        format: int64
+        readOnly: true
+        type: integer
+      diskId:
+        description: The disk id.
+        readOnly: true
+        type: string
+      diskName:
+        description: The disk name.
+        readOnly: true
+        type: string
+      diskPath:
+        description: The disk path.
+        readOnly: true
+        type: string
+      diskType:
+        description: The disk type.
+        enum:
+          - Standard_LRS
+          - Premium_LRS
+          - StandardSSD_LRS
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DiskType
+      isOSDisk:
+        description: A value indicating whether the disk is the OS disk.
+        readOnly: true
+        type: string
+      logStorageAccountId:
+        description: The log storage account ARM Id.
+        readOnly: true
+        type: string
+      logStorageAccountSasSecretName:
+        description: The key vault secret name of the log storage account.
+        readOnly: true
+        type: string
+      seedManagedDiskId:
+        description: The ARM Id of the seed managed disk.
+        readOnly: true
+        type: string
+      targetManagedDiskId:
+        description: The ARM Id of the target managed disk.
+        readOnly: true
+        type: string
+    type: object
+  VMwareCbtProtectionContainerMappingDetails:
+    allOf:
+      - $ref: '#/definitions/ProtectionContainerMappingProviderSpecificDetails'
+    description: VMwareCbt provider specific container mapping details.
+    properties:
+      keyVaultId:
+        description: The target key vault ARM Id.
+        readOnly: true
+        type: string
+      keyVaultUri:
+        description: The target key vault URI.
+        readOnly: true
+        type: string
+      serviceBusConnectionStringSecretName:
+        description: The secret name of the service bus connection string.
+        readOnly: true
+        type: string
+      storageAccountId:
+        description: The storage account ARM Id.
+        readOnly: true
+        type: string
+      storageAccountSasSecretName:
+        description: The secret name of the storage account.
+        readOnly: true
+        type: string
+      targetLocation:
+        description: The target location.
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: VMwareCbt
+  VMwareCbtTestMigrateInput:
+    allOf:
+      - $ref: '#/definitions/TestMigrateProviderSpecificInput'
+    description: VMwareCbt specific test migrate input.
+    properties:
+      networkId:
+        description: The test network Id.
+        type: string
+      recoveryPointId:
+        description: The recovery point Id.
+        type: string
+    required:
+      - recoveryPointId
+      - networkId
+      - instanceType
+    type: object
+    x-ms-discriminator-value: VMwareCbt
+  VMwareCbtUpdateMigrationItemInput:
+    allOf:
+      - $ref: '#/definitions/UpdateMigrationItemProviderSpecificInput'
+    description: VMwareCbt specific update migration item input.
+    properties:
+      licenseType:
+        description: The license type.
+        enum:
+          - NotSpecified
+          - NoLicenseType
+          - WindowsServer
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: LicenseType
+      targetAvailabilitySetId:
+        description: The target availability set ARM Id.
+        type: string
+      targetBootDiagnosticsStorageAccountId:
+        description: The target boot diagnostics storage account ARM Id.
+        type: string
+      targetNetworkId:
+        description: The target network ARM Id.
+        type: string
+      targetResourceGroupId:
+        description: The target resource group ARM Id.
+        type: string
+      targetVmName:
+        description: The target VM name.
+        type: string
+      targetVmSize:
+        description: The target VM size.
+        type: string
+      vmNics:
+        description: The list of NIC details.
+        items:
+          $ref: '#/definitions/VMwareCbtNicInput'
+        type: array
     type: object
     x-ms-discriminator-value: VMwareCbt
   VMwareDetails:
@@ -13258,32 +14959,35 @@ definitions:
   VMwareV2FabricCreationInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificCreationInput'
-    description: Fabric provider specific settings.
+    description: VMwareV2 fabric provider specific settings.
     properties:
-      keyVaultResourceArmId:
-        description: The Key Vault ARM Id.
+      migrationSolutionId:
+        description: The ARM Id of the migration solution.
         type: string
-      keyVaultUrl:
-        description: The Key Vault URL.
+      vmwareSiteId:
+        description: The ARM Id of the VMware site.
         type: string
+    required:
+      - vmwareSiteId
+      - migrationSolutionId
     type: object
     x-ms-discriminator-value: VMwareV2
   VMwareV2FabricSpecificDetails:
     allOf:
       - $ref: '#/definitions/FabricSpecificDetails'
-    description: VMwareV2 fabric Specific Details.
+    description: VMwareV2 fabric specific details.
     properties:
-      keyVaultResourceArmId:
-        description: The Key Vault ARM Id.
+      migrationSolutionId:
+        description: The Migration solution ARM Id.
+        readOnly: true
         type: string
-      keyVaultUrl:
-        description: The Key Vault URL.
+      serviceEndpoint:
+        description: The service endpoint.
+        readOnly: true
         type: string
-      rcmServiceEndpoint:
-        description: The endpoint for making requests to the RCM Service.
-        type: string
-      srsServiceEndpoint:
-        description: The endpoint for making requests to the SRS Service.
+      vmwareSiteId:
+        description: The ARM Id of the VMware site.
+        readOnly: true
         type: string
     type: object
     x-ms-discriminator-value: VMwareV2
@@ -13302,7 +15006,7 @@ definitions:
         description: The agent version.
         type: string
       discoveryType:
-        description: A value inidicating the discovery type of the machine. Value can be vCenter or physical.
+        description: A value indicating the discovery type of the machine. Value can be vCenter or physical.
         type: string
       diskDetails:
         description: The disk details.
@@ -13420,7 +15124,7 @@ definitions:
   VmmToAzureCreateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificCreateNetworkMappingInput'
-    description: Create network mappings input properties/behaviour specific to Vmm to Azure Network mapping.
+    description: Create network mappings input properties/behavior specific to Vmm to Azure Network mapping.
     properties: {}
     type: object
     x-ms-discriminator-value: VmmToAzure
@@ -13434,14 +15138,14 @@ definitions:
   VmmToAzureUpdateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificUpdateNetworkMappingInput'
-    description: Update network mappings input properties/behaviour specific to vmm to azure.
+    description: Update network mappings input properties/behavior specific to vmm to azure.
     properties: {}
     type: object
     x-ms-discriminator-value: VmmToAzure
   VmmToVmmCreateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificCreateNetworkMappingInput'
-    description: Create network mappings input properties/behaviour specific to vmm to vmm Network mapping.
+    description: Create network mappings input properties/behavior specific to vmm to vmm Network mapping.
     properties: {}
     type: object
     x-ms-discriminator-value: VmmToVmm
@@ -13455,7 +15159,7 @@ definitions:
   VmmToVmmUpdateNetworkMappingInput:
     allOf:
       - $ref: '#/definitions/FabricSpecificUpdateNetworkMappingInput'
-    description: Update network mappings input properties/behaviour specific to vmm to vmm.
+    description: Update network mappings input properties/behavior specific to vmm to vmm.
     properties: {}
     type: object
     x-ms-discriminator-value: VmmToVmm
@@ -13523,12 +15227,8 @@ definitions:
         description: The crash consistent snapshot frequency in minutes.
         format: int32
         type: integer
-      recoveryPointHistory:
+      recoveryPointHistoryInMinutes:
         description: The duration in minutes until which the recovery points need to be stored.
-        format: int32
-        type: integer
-      recoveryPointThresholdInMinutes:
-        description: The recovery point threshold in minutes.
         format: int32
         type: integer
     type: object

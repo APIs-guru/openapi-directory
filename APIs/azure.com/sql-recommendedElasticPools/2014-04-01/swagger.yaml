@@ -144,7 +144,7 @@ paths:
       x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}':
     get:
-      description: Gets a recommented elastic pool.
+      description: Gets a recommended elastic pool.
       operationId: RecommendedElasticPools_Get
       parameters:
         - description: The API version to use for the request.
@@ -215,7 +215,7 @@ paths:
                 type: Microsoft.Sql/servers/recommendedElasticPools
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/metrics':
     get:
-      description: Returns recommented elastic pool metrics.
+      description: Returns recommended elastic pool metrics.
       operationId: RecommendedElasticPools_ListMetrics
       parameters:
         - description: The API version to use for the request.
@@ -291,11 +291,11 @@ definitions:
         description: ARM proxy resource.
         properties: {}
         type: object
-    description: Represents a recommented elastic pool.
+    description: Represents a recommended elastic pool.
     properties:
       properties:
         $ref: '#/definitions/RecommendedElasticPoolProperties'
-        description: The properites representing the resource.
+        description: The properties representing the resource.
         x-ms-client-flatten: true
   RecommendedElasticPoolListMetricsResult:
     description: Represents the response to a list recommended elastic pool metrics request.
@@ -333,7 +333,7 @@ definitions:
         format: double
         type: number
   RecommendedElasticPoolProperties:
-    description: Represents the properties of a recommented elastic pool.
+    description: Represents the properties of a recommended elastic pool.
     properties:
       databaseDtuMax:
         description: The maximum DTU for the database.

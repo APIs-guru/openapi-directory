@@ -886,7 +886,7 @@ definitions:
         description: Link to the next chunk of the response
         type: string
       value:
-        description: List of available operationss.
+        description: List of available operations.
         items:
           $ref: '#/definitions/ClientDiscoveryValueForSingleApi'
         type: array
@@ -1025,7 +1025,7 @@ definitions:
           modelAsString: true
           name: VaultUpgradeState
       triggerType:
-        description: The way the vault upgradation was triggered.
+        description: The way the vault upgrade was triggered.
         enum:
           - UserTriggered
           - ForcedUpgrade

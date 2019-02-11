@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/advisors.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-advisors
   x-tags:
@@ -40,24 +39,10 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  ApiVersionParameter:
-    description: The API version to use for the request.
-    in: query
-    name: api-version
-    required: true
-    type: string
-    x-ms-parameter-location: client
   DatabaseNameParameter:
     description: The name of the database.
     in: path
     name: databaseName
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  ResourceGroupParameter:
-    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-    in: path
-    name: resourceGroupName
     required: true
     type: string
     x-ms-parameter-location: method
@@ -68,23 +53,31 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The subscription ID that identifies an Azure subscription.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
-    x-ms-parameter-location: client
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/advisors':
     get:
       description: Gets a list of server advisors.
       operationId: ServerAdvisors_ListByServer
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully retrieved the list of server advisors.
@@ -140,15 +133,30 @@ paths:
       description: Gets a server advisor.
       operationId: ServerAdvisors_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the Server Advisor.
           in: path
           name: advisorName
           required: true
           type: string
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully retrieved details of specified server advisor.
@@ -190,7 +198,12 @@ paths:
       description: Updates a server advisor.
       operationId: ServerAdvisors_Update
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the Server Advisor.
           in: path
@@ -203,8 +216,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Advisor'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully updated the specified server advisor.
@@ -249,7 +272,12 @@ paths:
       description: Creates or updates a server advisor.
       operationId: ServerAdvisors_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - description: The name of the Server Advisor.
           in: path
@@ -262,8 +290,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Advisor'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully updated the specified server advisor.
@@ -296,11 +334,26 @@ paths:
       description: Returns a list of database advisors.
       operationId: DatabaseAdvisors_ListByDatabase
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - $ref: '#/parameters/DatabaseNameParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully retrieved the list of database advisors.
@@ -365,12 +418,27 @@ paths:
       description: Returns details of a Database Advisor.
       operationId: DatabaseAdvisors_Get
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - $ref: '#/parameters/DatabaseNameParameter'
         - $ref: '#/parameters/AdvisorNameParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully retrieved details of specified database advisor.
@@ -402,7 +470,12 @@ paths:
       description: Creates or updates a database advisor.
       operationId: DatabaseAdvisors_CreateOrUpdate
       parameters:
-        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - $ref: '#/parameters/ServerNameParameter'
         - $ref: '#/parameters/DatabaseNameParameter'
         - $ref: '#/parameters/AdvisorNameParameter'
@@ -412,8 +485,18 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/Advisor'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: Successfully updated the specified database advisor.

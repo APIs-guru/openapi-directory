@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/notificationhubs/resource-manager/Microsoft.NotificationHubs/stable/2017-04-01/notificationhubs.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: notificationhubs
   x-tags:
@@ -247,7 +246,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Checks if the Namespace name is a valid availabile name
+          description: Checks if the Namespace name is a valid available name
           schema:
             $ref: '#/definitions/CheckAvailabilityResult'
       tags:
@@ -257,7 +256,6 @@ paths:
           parameters:
             api-version: '2017-04-01'
             parameters:
-              location: West Europe
               name: sdk-Namespace-2924
             subscriptionId: 29cfa613-cbbc-4512-b1d6-1b3a92c7fa40
           responses:
@@ -1336,7 +1334,7 @@ paths:
           name: namespaceName
           required: true
           type: string
-        - description: Aauthorization Rule Name.
+        - description: Authorization Rule Name.
           in: path
           name: authorizationRuleName
           required: true
@@ -1474,7 +1472,7 @@ paths:
       tags:
         - Namespaces
       x-ms-examples:
-        NameSpaceAuthorizationRuleRegenrateKey:
+        NameSpaceAuthorizationRuleRegenerateKey:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: RootManageSharedAccessKey
@@ -1516,7 +1514,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: Checks if the NotificationHub name is a valid availabile name
+          description: Checks if the NotificationHub name is a valid available name
           schema:
             $ref: '#/definitions/CheckAvailabilityResult'
       tags:
@@ -1565,7 +1563,7 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubListByNameSpace:
+        NotificationHubListByNameSpace:
           parameters:
             api-version: '2017-04-01'
             namespaceName: nh-sdk-ns
@@ -1614,7 +1612,7 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubDelete:
+        NotificationHubDelete:
           parameters:
             api-version: '2017-04-01'
             namespaceName: nh-sdk-ns
@@ -1652,12 +1650,66 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubGet:
+        NotificationHubGet:
           parameters:
             api-version: '2017-04-01'
             namespaceName: nh-sdk-ns
             notificationHubName: nh-sdk-hub
             resourceGroupName: 5ktrial
+            subscriptionId: 29cfa613-cbbc-4512-b1d6-1b3a92c7fa40
+          responses:
+            '200':
+              body:
+                id: /subscriptions/29cfa613-cbbc-4512-b1d6-1b3a92c7fa40/resourceGroups/sdkresourceGroup/providers/Microsoft.NotificationHubs/namespaces/nh-sdk-ns/notificationHubs/nh-sdk-hub
+                location: South Central US
+                name: nh-sdk-hub
+                properties:
+                  authorizationRules: []
+                  registrationTtl: '10675199.02:48:05.4775807'
+                tags: null
+                type: Microsoft.NotificationHubs/namespaces/notificationHubs
+    patch:
+      description: Patch a NotificationHub in a namespace.
+      operationId: NotificationHubs_Patch
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          type: string
+        - description: Parameters supplied to patch a NotificationHub Resource.
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/NotificationHubPatchParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: NotificationHub is patched
+          schema:
+            $ref: '#/definitions/NotificationHubResource'
+      tags:
+        - NotificationHubs
+      x-ms-examples:
+        NotificationHubPatch:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: nh-sdk-ns
+            notificationHubName: sdk-notificationHubs-8708
+            parameters: {}
+            resourceGroupName: sdkresourceGroup
             subscriptionId: 29cfa613-cbbc-4512-b1d6-1b3a92c7fa40
           responses:
             '200':
@@ -1709,7 +1761,7 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubCreate:
+        NotificationHubCreate:
           parameters:
             api-version: '2017-04-01'
             namespaceName: nh-sdk-ns
@@ -1769,7 +1821,7 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubAuthorizationRuleListAll:
+        NotificationHubAuthorizationRuleListAll:
           parameters:
             api-version: '2017-04-01'
             namespaceName: nh-sdk-ns
@@ -1849,7 +1901,7 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubAuthorizationRuleDelete:
+        NotificationHubAuthorizationRuleDelete:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: DefaultListenSharedAccessSignature
@@ -1894,7 +1946,7 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubAuthorizationRuleGet:
+        NotificationHubAuthorizationRuleGet:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: DefaultListenSharedAccessSignature
@@ -1960,7 +2012,7 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubAuthorizationRuleCreate:
+        NotificationHubAuthorizationRuleCreate:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: DefaultListenSharedAccessSignature
@@ -2026,7 +2078,7 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubAuthorizationRuleListKey:
+        NotificationHubAuthorizationRuleListKey:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: sdk-AuthRules-5800
@@ -2083,7 +2135,7 @@ paths:
       tags:
         - NotificationHubs
       x-ms-examples:
-        notificationhubAuthorizationRuleRegenrateKey:
+        NotificationHubAuthorizationRuleRegenrateKey:
           parameters:
             api-version: '2017-04-01'
             authorizationRuleName: DefaultListenSharedAccessSignature
@@ -2101,6 +2153,64 @@ paths:
                 primaryKey: '#################################'
                 secondaryConnectionString: 'Endpoint=sb://nh-sdk-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=#################################'
                 secondaryKey: '#################################'
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/debugsend':
+    post:
+      description: test send a push notification
+      operationId: NotificationHubs_DebugSend
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The namespace name.
+          in: path
+          name: namespaceName
+          required: true
+          type: string
+        - description: The notification hub name.
+          in: path
+          name: notificationHubName
+          required: true
+          type: string
+        - description: Debug send parameters
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/DebugSendParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '201':
+          description: push send status
+          schema:
+            $ref: '#/definitions/DebugSendResponse'
+      tags:
+        - NotificationHubs
+      x-ms-examples:
+        debugsend:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: nh-sdk-ns
+            notificationHubName: nh-sdk-hub
+            parameters:
+              data:
+                message: Hello
+            resourceGroupName: 5ktrial
+            subscriptionId: 29cfa613-cbbc-4512-b1d6-1b3a92c7fa40
+          responses:
+            '201':
+              body:
+                id: /subscriptions/29cfa613-cbbc-4512-b1d6-1b3a92c7fa40/resourceGroups/sdkresourceGroup/providers/Microsoft.NotificationHubs/namespaces/nh-sdk-ns/notificationHubs/nh-sdk-hub
+                location: South Central US
+                name: nh-sdk-hub
+                properties:
+                  failure: 0
+                  results: null
+                  success: 1
+                tags: null
+                type: Microsoft.NotificationHubs/namespaces/notificationHubs
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NotificationHubs/namespaces/{namespaceName}/notificationHubs/{notificationHubName}/pnsCredentials':
     post:
       description: Lists the PNS Credentials associated with a notification hub .
@@ -2199,7 +2309,7 @@ definitions:
         description: 'A 10-character key identifier (kid) key, obtained from your developer account'
         type: string
       thumbprint:
-        description: The Apns certificate Thumbprint
+        description: The APNS certificate Thumbprint
         type: string
       token:
         description: 'Provider Authentication Token, obtained through your developer account'
@@ -2253,17 +2363,40 @@ definitions:
         type: string
     required:
       - name
-      - location
   CheckAvailabilityResult:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Description of a CheckAvailibility resource.
+    description: Description of a CheckAvailability resource.
     properties:
       isAvailiable:
         description: True if the name is available and can be used to create new Namespace/NotificationHub. Otherwise false.
         type: boolean
+  DebugSendParameters:
+    description: Debug Send payload
+    type: object
+  DebugSendResponse:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of a NotificationHub Resource.
+    properties:
+      properties:
+        $ref: '#/definitions/DebugSendResult'
+        description: Properties of the NotificationHub.
+        x-ms-client-flatten: true
+  DebugSendResult:
+    properties:
+      failure:
+        description: send failure
+        type: number
+      results:
+        description: actual failure description
+        type: object
+      success:
+        description: successful send
+        type: number
+    x-ms-azure-resource: true
   ErrorResponse:
-    description: Error reponse indicates NotificationHubs service is not able to process the incoming request. The reason is provided in the error message.
+    description: Error response indicates NotificationHubs service is not able to process the incoming request. The reason is provided in the error message.
     properties:
       code:
         description: Error code.
@@ -2305,7 +2438,7 @@ definitions:
         description: The MPNS certificate.
         type: string
       thumbprint:
-        description: The Mpns certificate Thumbprint
+        description: The MPNS certificate Thumbprint
         type: string
   NamespaceCreateOrUpdateParameters:
     allOf:
@@ -2431,6 +2564,15 @@ definitions:
         items:
           $ref: '#/definitions/NotificationHubResource'
         type: array
+  NotificationHubPatchParameters:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Parameters supplied to the patch NotificationHub operation.
+    properties:
+      properties:
+        $ref: '#/definitions/NotificationHubProperties'
+        description: Properties of the NotificationHub.
+        x-ms-client-flatten: true
   NotificationHubProperties:
     description: NotificationHub properties.
     properties:
@@ -2661,7 +2803,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/SharedAccessAuthorizationRuleProperties'
-        description: Pproperties of the Namespace AuthorizationRule.
+        description: Properties of the Namespace AuthorizationRule.
         x-ms-client-flatten: true
   Sku:
     description: The Sku description for a namespace

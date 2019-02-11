@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2016-12-01/storage.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage
   x-tags:
@@ -95,7 +94,7 @@ paths:
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
         '200':
-          description: OK -- current usage acount and limit retrieved and returned successfully.
+          description: OK -- current usage account and limit retrieved and returned successfully.
           schema:
             $ref: '#/definitions/UsageListResult'
       tags:
@@ -416,7 +415,7 @@ definitions:
       name:
         description: Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source.
         type: string
-      useSubDomain:
+      useSubDomainName:
         description: Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates.
         type: boolean
     required:
@@ -492,7 +491,7 @@ definitions:
     description: The List service SAS credentials operation response.
     properties:
       serviceSasToken:
-        description: List service SAS credentials of speicific resource.
+        description: List service SAS credentials of specific resource.
         readOnly: true
         type: string
   Resource:
@@ -520,7 +519,7 @@ definitions:
         type: string
     x-ms-azure-resource: true
   ServiceSasParameters:
-    description: The parameters to list service SAS credentials of a speicific resource.
+    description: The parameters to list service SAS credentials of a specific resource.
     properties:
       canonicalizedResource:
         description: The canonical path to the signed resource.
@@ -668,7 +667,7 @@ definitions:
         description: Gets the SKU.
         readOnly: true
   StorageAccountCheckNameAvailabilityParameters:
-    description: The parameters used to check the availabity of the storage account name.
+    description: The parameters used to check the availability of the storage account name.
     properties:
       name:
         type: string

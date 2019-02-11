@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: postgresql
   x-tags:
@@ -731,8 +730,8 @@ paths:
                 sourceServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforPostgreSQL/servers/sourceserver
               sku:
                 capacity: 2
-                family: Gen4
-                name: B_Gen4_2
+                family: Gen5
+                name: B_Gen5_2
                 tier: Basic
               tags:
                 ElasticServer: '1'
@@ -758,8 +757,8 @@ paths:
                   version: '9.6'
                 sku:
                   capacity: 2
-                  family: Gen4
-                  name: B_Gen4_2
+                  family: Gen5
+                  name: B_Gen5_2
                   tier: Basic
                 tags:
                   ElasticServer: '1'
@@ -782,8 +781,8 @@ paths:
                   version: '9.6'
                 sku:
                   capacity: 2
-                  family: Gen4
-                  name: B_Gen4_2
+                  family: Gen5
+                  name: B_Gen5_2
                   tier: Basic
                 tags:
                   ElasticServer: '1'
@@ -805,8 +804,8 @@ paths:
                   storageMB: 128000
               sku:
                 capacity: 2
-                family: Gen4
-                name: B_Gen4_2
+                family: Gen5
+                name: B_Gen5_2
                 tier: Basic
               tags:
                 ElasticServer: '1'
@@ -832,8 +831,8 @@ paths:
                   version: '9.6'
                 sku:
                   capacity: 2
-                  family: Gen4
-                  name: B_Gen4_2
+                  family: Gen5
+                  name: B_Gen5_2
                   tier: Basic
                 tags:
                   ElasticServer: '1'
@@ -856,8 +855,8 @@ paths:
                   version: '9.6'
                 sku:
                   capacity: 2
-                  family: Gen4
-                  name: B_Gen4_2
+                  family: Gen5
+                  name: B_Gen5_2
                   tier: Basic
                 tags:
                   ElasticServer: '1'
@@ -867,14 +866,14 @@ paths:
           parameters:
             api-version: '2017-12-01'
             parameters:
-              location: Japan West
+              location: westus
               properties:
                 createMode: GeoRestore
                 sourceServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/SourceResourceGroup/providers/Microsoft.DBforPostgreSQL/servers/sourceserver
               sku:
                 capacity: 2
-                family: Gen4
-                name: GP_Gen4_2
+                family: Gen5
+                name: GP_Gen5_2
                 tier: GeneralPurpose
               tags:
                 ElasticServer: '1'
@@ -900,8 +899,8 @@ paths:
                   version: '9.6'
                 sku:
                   capacity: 2
-                  family: Gen4
-                  name: GP_Gen4_2
+                  family: Gen5
+                  name: GP_Gen5_2
                   tier: GeneralPurpose
                 tags:
                   ElasticServer: '1'
@@ -924,8 +923,8 @@ paths:
                   version: '9.6'
                 sku:
                   capacity: 2
-                  family: Gen4
-                  name: GP_Gen4_2
+                  family: Gen5
+                  name: GP_Gen5_2
                   tier: GeneralPurpose
                 tags:
                   ElasticServer: '1'
@@ -3092,7 +3091,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   ServerUpdateParameters:
-    description: Parameters allowd to update for a server.
+    description: Parameters allowed to update for a server.
     properties:
       properties:
         description: The properties that can be updated for a server.

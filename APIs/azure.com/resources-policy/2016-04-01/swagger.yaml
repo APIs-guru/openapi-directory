@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-04-01/policy.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: resources-policy
   x-tags:
@@ -240,7 +239,7 @@ paths:
         nextLinkName: nextLink
   '/{policyAssignmentId}':
     delete:
-      description: 'When providing a scope for the assigment, use ''/subscriptions/{subscription-id}/'' for subscriptions, ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'' for resource groups, and ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}'' for resources.'
+      description: 'When providing a scope for the assignment, use ''/subscriptions/{subscription-id}/'' for subscriptions, ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'' for resource groups, and ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}'' for resources.'
       operationId: PolicyAssignments_DeleteById
       parameters:
         - description: 'The ID of the policy assignment to delete. Use the format ''/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}''.'
@@ -259,7 +258,7 @@ paths:
       tags:
         - PolicyAssignments
     get:
-      description: 'When providing a scope for the assigment, use ''/subscriptions/{subscription-id}/'' for subscriptions, ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'' for resource groups, and ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}'' for resources.'
+      description: 'When providing a scope for the assignment, use ''/subscriptions/{subscription-id}/'' for subscriptions, ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'' for resource groups, and ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}'' for resources.'
       operationId: PolicyAssignments_GetById
       parameters:
         - description: 'The ID of the policy assignment to get. Use the format ''/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}''.'
@@ -278,7 +277,7 @@ paths:
       tags:
         - PolicyAssignments
     put:
-      description: 'Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assigment, use ''/subscriptions/{subscription-id}/'' for subscriptions, ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'' for resource groups, and ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}'' for resources.'
+      description: 'Policy assignments are inherited by child resources. For example, when you apply a policy to a resource group that policy is assigned to all resources in the group. When providing a scope for the assignment, use ''/subscriptions/{subscription-id}/'' for subscriptions, ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}'' for resource groups, and ''/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider-namespace}/{resource-type}/{resource-name}'' for resources.'
       operationId: PolicyAssignments_CreateById
       parameters:
         - description: 'The ID of the policy assignment to create. Use the format ''/{scope}/providers/Microsoft.Authorization/policyAssignments/{policy-assignment-name}''.'

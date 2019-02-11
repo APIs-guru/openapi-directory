@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/preview/2018-03-01-preview/storage.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage
   x-tags:
@@ -5321,13 +5320,13 @@ definitions:
       name:
         description: Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source.
         type: string
-      useSubDomain:
+      useSubDomainName:
         description: Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates.
         type: boolean
     required:
       - name
   Dimension:
-    description: 'Dimension of blobs, possiblly be blob type or access tier.'
+    description: 'Dimension of blobs, possibly be blob type or access tier.'
     properties:
       displayName:
         description: Display name of dimension.
@@ -5477,7 +5476,7 @@ definitions:
     description: The List service SAS credentials operation response.
     properties:
       serviceSasToken:
-        description: List service SAS credentials of speicific resource.
+        description: List service SAS credentials of specific resource.
         readOnly: true
         type: string
   ManagementPoliciesRules:
@@ -5643,7 +5642,7 @@ definitions:
         readOnly: true
         type: string
   ServiceSasParameters:
-    description: The parameters to list service SAS credentials of a speicific resource.
+    description: The parameters to list service SAS credentials of a specific resource.
     properties:
       canonicalizedResource:
         description: The canonical path to the signed resource.
@@ -5874,7 +5873,7 @@ definitions:
         description: Gets the SKU.
         readOnly: true
   StorageAccountCheckNameAvailabilityParameters:
-    description: The parameters used to check the availabity of the storage account name.
+    description: The parameters used to check the availability of the storage account name.
     properties:
       name:
         description: The storage account name.
@@ -6153,7 +6152,7 @@ definitions:
     description: The parameters used to regenerate the storage account key.
     properties:
       keyName:
-        description: 'The name of storage keys that want to be regenerated, possible vaules are key1, key2.'
+        description: 'The name of storage keys that want to be regenerated, possible values are key1, key2.'
         type: string
     required:
       - keyName

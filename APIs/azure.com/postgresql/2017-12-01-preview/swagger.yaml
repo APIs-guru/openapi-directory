@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/postgresql/resource-manager/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: postgresql
   x-tags:
@@ -415,7 +414,7 @@ paths:
               body:
                 value:
                   - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver
-                    location: onebox
+                    location: eastus
                     name: testserver
                     properties:
                       administratorLogin: cloudsa
@@ -437,7 +436,7 @@ paths:
                       elasticServer: '1'
                     type: Microsoft.DBforPostgreSQL/servers
                   - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver1
-                    location: onebox
+                    location: eastus
                     name: testserver1
                     properties:
                       administratorLogin: cloudsa
@@ -459,7 +458,7 @@ paths:
                       elasticServer: '1'
                     type: Microsoft.DBforPostgreSQL/servers
                   - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver2
-                    location: onebox
+                    location: eastus
                     name: testserver2
                     properties:
                       administratorLogin: cloudsa
@@ -507,7 +506,7 @@ paths:
               body:
                 value:
                   - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver
-                    location: onebox
+                    location: eastus
                     name: testserver
                     properties:
                       administratorLogin: cloudsa
@@ -529,7 +528,7 @@ paths:
                       elasticServer: '1'
                     type: Microsoft.DBforPostgreSQL/servers
                   - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver1
-                    location: onebox
+                    location: eastus
                     name: testserver1
                     properties:
                       administratorLogin: cloudsa
@@ -551,7 +550,7 @@ paths:
                       elasticServer: '1'
                     type: Microsoft.DBforPostgreSQL/servers
                   - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver2
-                    location: onebox
+                    location: eastus
                     name: testserver2
                     properties:
                       administratorLogin: cloudsa
@@ -629,7 +628,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver
-                location: onebox
+                location: eastus
                 name: testserver
                 properties:
                   administratorLogin: cloudsa
@@ -688,7 +687,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver
-                location: onebox
+                location: eastus
                 name: testserver
                 properties:
                   administratorLogin: cloudsa
@@ -742,7 +741,7 @@ paths:
           parameters:
             api-version: 2017-12-01-preview
             parameters:
-              location: OneBox
+              location: eastus
               properties:
                 administratorLogin: cloudsa
                 administratorLoginPassword: password
@@ -754,8 +753,8 @@ paths:
                   storageMB: 128000
               sku:
                 capacity: 2
-                family: Gen4
-                name: SkuName
+                family: Gen5
+                name: B_Gen5_2
                 tier: Basic
               tags:
                 ElasticServer: '1'
@@ -766,7 +765,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver
-                location: onebox
+                location: eastus
                 name: testserver
                 properties:
                   administratorLogin: cloudsa
@@ -790,7 +789,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/servers/testserver
-                location: onebox
+                location: eastus
                 name: testserver
                 properties:
                   administratorLogin: cloudsa
@@ -804,8 +803,8 @@ paths:
                   userVisibleState: Ready
                 sku:
                   capacity: 2
-                  family: Gen4
-                  name: PGSQL_B_Gen4_2
+                  family: Gen5
+                  name: B_Gen5_2
                   size: null
                   tier: Basic
                 tags:
@@ -2527,7 +2526,7 @@ definitions:
       - restorePointInTime
     x-ms-discriminator-value: PointInTimeRestore
   ServerUpdateParameters:
-    description: Parameters allowd to update for a server.
+    description: Parameters allowed to update for a server.
     properties:
       properties:
         description: The properties that can be updated for a server.

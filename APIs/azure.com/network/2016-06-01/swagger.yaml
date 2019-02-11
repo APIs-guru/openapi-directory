@@ -2,7 +2,6 @@ swagger: '2.0'
 schemes:
   - https
 host: management.azure.com
-x-hasEquivalentPaths: true
 info:
   description: The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.
   title: NetworkManagementClient
@@ -15,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2016-06-01/network.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: network
   x-tags:
@@ -416,30 +414,6 @@ paths:
         - VirtualNetworkGatewayConnections
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{connectionSharedKeyName}/sharedkey':
-    get:
-      description: The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.
-      operationId: VirtualNetworkGatewayConnections_GetSharedKey
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The virtual network gateway connection shared key name.
-          in: path
-          name: connectionSharedKeyName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: ''
-          schema:
-            $ref: '#/definitions/ConnectionSharedKeyResult'
-      tags:
-        - VirtualNetworkGatewayConnections
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}':
     delete:
       description: The Delete VirtualNetworkGatewayConnection operation deletes the specified virtual network Gateway connection through Network resource provider.
@@ -525,6 +499,29 @@ paths:
         - VirtualNetworkGatewayConnections
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey':
+    get:
+      description: The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.
+      operationId: VirtualNetworkGatewayConnections_GetSharedKey
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The virtual network gateway connection shared key name.
+          in: path
+          name: virtualNetworkGatewayConnectionName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ConnectionSharedKeyResult'
+      tags:
+        - VirtualNetworkGatewayConnections
     put:
       description: The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.
       operationId: VirtualNetworkGatewayConnections_SetSharedKey
@@ -1349,7 +1346,7 @@ paths:
         nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}':
     delete:
-      description: The delete netwokInterface operation deletes the specified netwokInterface.
+      description: The delete networkInterface operation deletes the specified networkInterface.
       operationId: NetworkInterfaces_Delete
       parameters:
         - description: The name of the resource group.
@@ -1465,7 +1462,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable':
     post:
-      description: The get effective routetable operation retrieves all the route tables applied on a networkInterface.
+      description: Retrieves all the route tables applied on a networkInterface.
       operationId: NetworkInterfaces_GetEffectiveRouteTable
       parameters:
         - description: The name of the resource group.
@@ -3337,7 +3334,7 @@ definitions:
       error:
         $ref: '#/definitions/Error'
       status:
-        description: Status of the AzureAsuncOperation
+        description: Status of the AzureAsyncOperation
         enum:
           - InProgress
           - Succeeded
@@ -3721,7 +3718,7 @@ definitions:
         type: string
       microsoftPeeringConfig:
         $ref: '#/definitions/ExpressRouteCircuitPeeringConfig'
-        description: Gets or sets the mircosoft peering config
+        description: Gets or sets the Microsoft peering config
       peerASN:
         description: Gets or sets the peer ASN
         format: int32
@@ -4688,7 +4685,7 @@ definitions:
         $ref: '#/definitions/PublicIPAddressDnsSettings'
         description: Gets or sets FQDN of the DNS record associated with the public IP address
       idleTimeoutInMinutes:
-        description: Gets or sets the Idletimeout of the public IP address
+        description: Gets or sets the idle timeout of the public IP address
         format: int32
         type: integer
       ipAddress:
@@ -4900,13 +4897,13 @@ definitions:
         description: Gets or sets a description for this rule. Restricted to 140 chars.
         type: string
       destinationAddressPrefix:
-        description: 'Gets or sets destination address prefix. CIDR or source IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. '
+        description: 'Gets or sets destination address prefix. CIDR or source IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. '
         type: string
       destinationPortRange:
-        description: Gets or sets Destination Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+        description: Gets or sets Destination Port or Range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
         type: string
       direction:
-        description: Gets or sets the direction of the rule.InBound or Outbound. The direction specifies if rule will be evaluated on incoming or outcoming traffic.
+        description: Gets or sets the direction of the rule.InBound or Outbound. The direction specifies if rule will be evaluated on incoming or outgoing traffic.
         enum:
           - Inbound
           - Outbound
@@ -4932,10 +4929,10 @@ definitions:
         description: Gets provisioning state of the PublicIP resource Updating/Deleting/Failed
         type: string
       sourceAddressPrefix:
-        description: 'Gets or sets source address prefix. CIDR or source IP range. Asterix ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
+        description: 'Gets or sets source address prefix. CIDR or source IP range. Asterisk ''*'' can also be used to match all source IPs. Default tags such as ''VirtualNetwork'', ''AzureLoadBalancer'' and ''Internet'' can also be used. If this is an ingress rule, specifies where network traffic originates from. '
         type: string
       sourcePortRange:
-        description: Gets or sets Source Port or Range. Integer or range between 0 and 65535. Asterix '*' can also be used to match all ports.
+        description: Gets or sets Source Port or Range. Integer or range between 0 and 65535. Asterisk '*' can also be used to match all ports.
         type: string
     required:
       - protocol
@@ -4952,7 +4949,7 @@ definitions:
   Subnet:
     allOf:
       - $ref: '#/definitions/SubResource'
-    description: Subnet in a VirtualNework resource
+    description: Subnet in a VirtualNetwork resource
     properties:
       etag:
         description: A unique read-only string that changes whenever the resource is updated
@@ -5108,7 +5105,7 @@ definitions:
           modelAsString: true
           name: VirtualNetworkGatewayConnectionStatus
       connectionType:
-        description: Gateway connection type -Ipsec/Dedicated/VpnClient/Vnet2Vnet
+        description: Gateway connection type IPsec/Dedicated/VpnClient/Vnet2Vnet
         enum:
           - IPsec
           - Vnet2Vnet
@@ -5145,7 +5142,7 @@ definitions:
         format: int32
         type: integer
       sharedKey:
-        description: The Ipsec share key.
+        description: The IPsec share key.
         type: string
       virtualNetworkGateway1:
         $ref: '#/definitions/VirtualNetworkGateway'
@@ -5290,7 +5287,7 @@ definitions:
   VirtualNetworkPeering:
     allOf:
       - $ref: '#/definitions/SubResource'
-    description: Peerings in a VirtualNework resource
+    description: Peerings in a VirtualNetwork resource
     properties:
       etag:
         description: A unique read-only string that changes whenever the resource is updated

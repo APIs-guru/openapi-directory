@@ -78,7 +78,7 @@ paths:
   /providers/Microsoft.StorSimple/operations:
     get:
       deprecated: false
-      description: Lists all of the available REST API operations of the Microsoft.Storsimple provider
+      description: Lists all of the available REST API operations of the Microsoft.StorSimple provider
       operationId: Operations_List
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
@@ -1482,7 +1482,7 @@ paths:
         AlertsListByManager:
           parameters:
             $filter: 'status%20eq%20''Active''%20and%20appearedOnTime%20ge%20''2017-06-09T18:30:00Z''%20and%20appearedOnTime%20le%20''2017-06-19T18:30:00Z''%20and%20sourceType%20eq%20''Device''%20and%20sourceName%20eq%20''Device05ForSDKTest'''
-            $top: '100'
+            $top: 100
             api-version: '2017-06-01'
             managerName: ManagerForSDKTest1
             resourceGroupName: ResourceGroupForSDKTest
@@ -1831,7 +1831,7 @@ paths:
         AlertsClear:
           parameters:
             $filter: 'status%20eq%20''Active''%20and%20appearedOnTime%20ge%20''2017-06-09T18:30:00Z''%20and%20appearedOnTime%20le%20''2017-06-19T18:30:00Z''%20and%20sourceType%20eq%20''Device''%20and%20sourceName%20eq%20''Device05ForSDKTest'''
-            $top: '100'
+            $top: 100
             api-version: '2017-06-01'
             managerName: ManagerForSDKTest1
             parameters:
@@ -3444,7 +3444,7 @@ paths:
         - $ref: '#/parameters/apiVersionParameter'
       responses:
         '200':
-          description: Returns the list of failoversets on the given device.
+          description: Returns the list of failover sets on the given device.
           schema:
             $ref: '#/definitions/FailoverSetsList'
       tags:
@@ -6727,7 +6727,7 @@ definitions:
         description: The error message
         type: string
       occurences:
-        description: The number of occurences
+        description: The number of occurrences
         format: int32
         type: integer
     type: object
@@ -7128,7 +7128,7 @@ definitions:
         readOnly: true
         type: string
       scheduledBackupStatus:
-        description: Indicates whether atleast one of the schedules in the backup policy is active or not.
+        description: Indicates whether at least one of the schedules in the backup policy is active or not.
         enum:
           - Disabled
           - Enabled
@@ -7308,7 +7308,7 @@ definitions:
         type: integer
       start:
         $ref: '#/definitions/Time'
-        description: The start time of the schdule.
+        description: The start time of the schedule.
       stop:
         $ref: '#/definitions/Time'
         description: The stop time of the schedule.
@@ -8013,7 +8013,7 @@ definitions:
         format: int64
         type: integer
       dataContainersCount:
-        description: The count of datacontainers on the device.
+        description: The count of data containers on the device.
         format: int32
         type: integer
       deviceId:
@@ -8437,7 +8437,7 @@ definitions:
       - algorithm
     type: object
   ManagerIntrinsicSettings:
-    description: Intrinsic settings which refers to the type of the Storsimple Manager.
+    description: Intrinsic settings which refers to the type of the StorSimple Manager.
     properties:
       type:
         description: The type of StorSimple Manager.
@@ -8455,7 +8455,7 @@ definitions:
     description: The list of StorSimple Managers.
     properties:
       value:
-        description: The list of storsimple managers.
+        description: The list of StorSimple managers.
         items:
           $ref: '#/definitions/Manager'
         type: array

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/resources/resource-manager/Microsoft.Authorization/stable/2016-09-01/locks.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: resources-locks
   x-tags:
@@ -49,6 +48,21 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.Authorization/operations:
+    get:
+      description: Lists all of the available Microsoft.Authorization REST API operations.
+      operationId: AuthorizationOperations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/OperationListResult'
+      tags:
+        - Operations
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/locks':
     get:
       description: Gets all the management locks for a subscription.
@@ -566,6 +580,7 @@ definitions:
         type: string
       name:
         description: The name of the lock.
+        readOnly: true
         type: string
       properties:
         $ref: '#/definitions/ManagementLockProperties'
@@ -607,3 +622,33 @@ definitions:
         type: array
     required:
       - level
+  Operation:
+    description: Microsoft.Authorization operation
+    properties:
+      display:
+        description: The object that represents the operation.
+        properties:
+          operation:
+            description: 'Operation type: Read, write, delete, etc.'
+            type: string
+          provider:
+            description: 'Service provider: Microsoft.Authorization'
+            type: string
+          resource:
+            description: 'Resource on which the operation is performed: Profile, endpoint, etc.'
+            type: string
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}'
+        type: string
+    type: object
+  OperationListResult:
+    description: Result of the request to list Microsoft.Authorization operations. It contains a list of operations and a URL link to get the next set of results.
+    properties:
+      nextLink:
+        description: URL to get the next set of operation list results if there are any.
+        type: string
+      value:
+        description: List of Microsoft.Authorization operations.
+        items:
+          $ref: '#/definitions/Operation'
+        type: array

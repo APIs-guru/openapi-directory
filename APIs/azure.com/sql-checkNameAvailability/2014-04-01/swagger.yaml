@@ -32,24 +32,11 @@ securityDefinitions:
       user_impersonation: impersonate your user account
     type: oauth2
 parameters:
-  ApiVersionParameter:
-    description: The API version to use for the request.
-    in: query
-    name: api-version
-    required: true
-    type: string
   DatabaseExpandParameter:
     description: 'A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.'
     in: query
     name: $expand
     required: false
-    type: string
-    x-ms-parameter-location: method
-  ResourceGroupParameter:
-    description: The name of the resource group that contains the resource. You can obtain this value from the Azure Resource Manager API or the portal.
-    in: path
-    name: resourceGroupName
-    required: true
     type: string
     x-ms-parameter-location: method
   ServerNameParameter:
@@ -59,12 +46,6 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  SubscriptionIdParameter:
-    description: The subscription ID that identifies an Azure subscription.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
   TransparentDataEncryptionNameParameter:
     description: The name of the transparent data encryption configuration.
     enum:
@@ -83,8 +64,18 @@ paths:
       description: Determines whether a resource can be created with the specified name.
       operationId: Servers_CheckNameAvailability
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
+        - description: The subscription ID that identifies an Azure subscription.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+          x-ms-parameter-location: client
         - description: The parameters to request for name availability.
           in: body
           name: parameters

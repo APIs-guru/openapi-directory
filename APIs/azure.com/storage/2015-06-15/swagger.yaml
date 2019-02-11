@@ -16,7 +16,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/resource-manager/Microsoft.Storage/stable/2015-06-15/storage.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage
   x-tags:
@@ -304,7 +303,7 @@ definitions:
       name:
         description: The custom domain name. Name is the CNAME source.
         type: string
-      useSubDomain:
+      useSubDomainName:
         description: Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates
         type: boolean
     required:
@@ -357,7 +356,7 @@ definitions:
         $ref: '#/definitions/StorageAccountProperties'
         x-ms-client-flatten: true
   StorageAccountCheckNameAvailabilityParameters:
-    description: The parameters used to check the availabity of the storage account name.
+    description: The parameters used to check the availability of the storage account name.
     properties:
       name:
         type: string

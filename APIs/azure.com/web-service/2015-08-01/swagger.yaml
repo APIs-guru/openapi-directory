@@ -764,7 +764,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ServerFarmCollection'
-      summary: Gets all App Service Plans for a subcription
+      summary: Gets all App Service Plans for a subscription
       tags:
         - Global
       x-ms-pageable:
@@ -1351,7 +1351,7 @@ paths:
             items:
               $ref: '#/definitions/CertificateEmail'
             type: array
-      summary: Retrive email history
+      summary: Retrieve email history
       tags:
         - CertificateOrders
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/verifyDomainOwnership':
@@ -1700,7 +1700,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Object'
-      summary: Delete a certificate by name in a specificed subscription and resourcegroup.
+      summary: Delete a certificate by name in a specified subscription and resourcegroup.
       tags:
         - Certificates
     get:
@@ -2512,7 +2512,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/WorkerPool'
-      summary: Get properties of a multiRool pool.
+      summary: Get properties of a multiRole pool.
       tags:
         - HostingEnvironments
     put:
@@ -3986,7 +3986,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/ResourceMetricCollection'
-      summary: Queries for App Serice Plan metrics
+      summary: Queries for App Service Plan metrics
       tags:
         - ServerFarms
       x-ms-pageable:
@@ -4135,7 +4135,7 @@ paths:
             items:
               $ref: '#/definitions/VnetInfo'
             type: array
-      summary: Gets list of vnets associated with App Service Plan
+      summary: Gets list of VNets associated with App Service Plan
       tags:
         - ServerFarms
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/virtualNetworkConnections/{vnetName}':
@@ -5603,7 +5603,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: Request body that contains the configuraiton setting for the web app
+        - description: Request body that contains the configuration setting for the web app
           in: body
           name: siteConfig
           required: true
@@ -5642,7 +5642,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: Request body that contains the configuraiton setting for the web app
+        - description: Request body that contains the configuration setting for the web app
           in: body
           name: siteConfig
           required: true
@@ -5983,7 +5983,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RelayServiceConnectionEntity'
-      summary: Retrieves all Biztalk Hybrid Connections associated with this web app.
+      summary: Retrieves all BizTalk Hybrid Connections associated with this web app.
       tags:
         - Sites
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hybridconnection/{entityName}':
@@ -6019,7 +6019,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Object'
-      summary: 'Removes the association to a Biztalk Hybrid Connection, identified by its entity name.'
+      summary: 'Removes the association to a BizTalk Hybrid Connection, identified by its entity name.'
       tags:
         - Sites
     get:
@@ -6054,7 +6054,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RelayServiceConnectionEntity'
-      summary: Retrieves a Biztalk Hybrid Connection identified by its entity name.
+      summary: Retrieves a BizTalk Hybrid Connection identified by its entity name.
       tags:
         - Sites
     patch:
@@ -6098,7 +6098,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RelayServiceConnectionEntity'
-      summary: 'Creates a new association to a Biztalk Hybrid Connection, or updates an existing one.'
+      summary: 'Creates a new association to a BizTalk Hybrid Connection, or updates an existing one.'
       tags:
         - Sites
     put:
@@ -6142,7 +6142,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RelayServiceConnectionEntity'
-      summary: 'Creates a new association to a Biztalk Hybrid Connection, or updates an existing one.'
+      summary: 'Creates a new association to a BizTalk Hybrid Connection, or updates an existing one.'
       tags:
         - Sites
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances':
@@ -7958,7 +7958,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: Request body that contains the configuraiton setting for the web app
+        - description: Request body that contains the configuration setting for the web app
           in: body
           name: siteConfig
           required: true
@@ -8002,7 +8002,7 @@ paths:
           name: name
           required: true
           type: string
-        - description: Request body that contains the configuraiton setting for the web app
+        - description: Request body that contains the configuration setting for the web app
           in: body
           name: siteConfig
           required: true
@@ -8393,7 +8393,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RelayServiceConnectionEntity'
-      summary: Retrieves all Biztalk Hybrid Connections associated with this web app.
+      summary: Retrieves all BizTalk Hybrid Connections associated with this web app.
       tags:
         - Sites
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/hybridconnection/{entityName}':
@@ -8434,7 +8434,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/Object'
-      summary: 'Removes the association to a Biztalk Hybrid Connection, identified by its entity name.'
+      summary: 'Removes the association to a BizTalk Hybrid Connection, identified by its entity name.'
       tags:
         - Sites
     get:
@@ -8474,7 +8474,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RelayServiceConnectionEntity'
-      summary: Retrieves a Biztalk Hybrid Connection identified by its entity name.
+      summary: Retrieves a BizTalk Hybrid Connection identified by its entity name.
       tags:
         - Sites
     patch:
@@ -8523,7 +8523,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RelayServiceConnectionEntity'
-      summary: 'Creates a new association to a Biztalk Hybrid Connection, or updates an existing one.'
+      summary: 'Creates a new association to a BizTalk Hybrid Connection, or updates an existing one.'
       tags:
         - Sites
     put:
@@ -8572,7 +8572,7 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/RelayServiceConnectionEntity'
-      summary: 'Creates a new association to a Biztalk Hybrid Connection, or updates an existing one.'
+      summary: 'Creates a new association to a BizTalk Hybrid Connection, or updates an existing one.'
       tags:
         - Sites
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances':
@@ -11385,7 +11385,7 @@ definitions:
             description: Raw bytes of .cer file
             type: string
           expirationDate:
-            description: Certificate expriration date
+            description: Certificate expiration date
             format: date-time
             type: string
           friendlyName:
@@ -11655,7 +11655,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   CertificateOrderCertificateCollection:
-    description: Collection of ceritificateorder certificates
+    description: Collection of certificate order certificates
     properties:
       nextLink:
         description: Link to next page of resources
@@ -11667,7 +11667,7 @@ definitions:
         type: array
     type: object
   CertificateOrderCollection:
-    description: Collection of ceritificate orders
+    description: Collection of certificate orders
     properties:
       nextLink:
         description: Link to next page of resources
@@ -11794,7 +11794,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   Contact:
-    description: Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information will be  be made publicly available through the Whois directories as per ICANN requirements.
+    description: Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information will be made publicly available through the Whois directories as per ICANN requirements.
     properties:
       addressMailing:
         $ref: '#/definitions/Address'
@@ -11851,7 +11851,7 @@ definitions:
         type: string
     type: object
   CsmSiteRecoveryEntity:
-    description: Class containting details about site recovery operation.
+    description: Class containing details about site recovery operation.
     properties:
       recoverConfig:
         description: 'If true, then the website''s configuration will be reverted to its state at SnapshotTime'
@@ -11896,7 +11896,7 @@ definitions:
         format: date-time
         type: string
       unit:
-        description: Units of measurement for the quota resourse
+        description: Units of measurement for the quota resource
         type: string
     type: object
   CsmUsageQuotaCollection:
@@ -11934,7 +11934,7 @@ definitions:
             description: PFX password
             type: string
           pfxBlob:
-            description: PFX certifcate of created certificate
+            description: PFX certificate of created certificate
             type: string
           publicKeyHash:
             description: Hash of the certificates public key
@@ -12111,7 +12111,7 @@ definitions:
   Deployment:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Represents user crendentials used for publishing activity
+    description: Represents user credentials used for publishing activity
     properties:
       properties:
         properties:
@@ -12951,7 +12951,7 @@ definitions:
         type: array
     type: object
   MetricAvailabilily:
-    description: Class repesenting metrics availability and retention
+    description: Class representing metrics availability and retention
     properties:
       retention:
         description: 'Retention period for the current {Microsoft.Web.Hosting.Administration.MetricAvailabilily.TimeGrain}'
@@ -12963,7 +12963,7 @@ definitions:
   MetricDefinition:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Class repesenting metadata for the metrics
+    description: Class representing metadata for the metrics
     properties:
       properties:
         properties:
@@ -12987,7 +12987,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   MetricDefinitionCollection:
-    description: Collection of metric defintions
+    description: Collection of metric definitions
     properties:
       nextLink:
         description: Link to next page of resources
@@ -13098,11 +13098,11 @@ definitions:
         description: "Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified. See TiPCallback site extension for the scaffold and contracts.\r\n            https://www.siteextensions.net/packages/TiPCallback/"
         type: string
       changeIntervalInMinutes:
-        description: '[Optional] Specifies interval in mimuntes to reevaluate ReroutePercentage'
+        description: '[Optional] Specifies interval in minutes to reevaluate ReroutePercentage'
         format: int32
         type: integer
       changeStep:
-        description: "[Optional] In auto ramp up scenario this is the step to to add/remove from {Microsoft.Web.Hosting.Administration.RampUpRule.ReroutePercentage} until it reaches \r\n            {Microsoft.Web.Hosting.Administration.RampUpRule.MinReroutePercentage} or {Microsoft.Web.Hosting.Administration.RampUpRule.MaxReroutePercentage}. Site metrics are checked every N minutes specificed in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeIntervalInMinutes}.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeDecisionCallbackUrl}"
+        description: "[Optional] In auto ramp up scenario this is the step to add/remove from {Microsoft.Web.Hosting.Administration.RampUpRule.ReroutePercentage} until it reaches \r\n            {Microsoft.Web.Hosting.Administration.RampUpRule.MinReroutePercentage} or {Microsoft.Web.Hosting.Administration.RampUpRule.MaxReroutePercentage}. Site metrics are checked every N minutes specified in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeIntervalInMinutes}.\r\n            Custom decision algorithm can be provided in TiPCallback site extension which Url can be specified in {Microsoft.Web.Hosting.Administration.RampUpRule.ChangeDecisionCallbackUrl}"
         format: double
         type: number
       maxReroutePercentage:
@@ -13284,7 +13284,7 @@ definitions:
   RelayServiceConnectionEntity:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Class that represents a Biztalk Hybrid Connection
+    description: Class that represents a BizTalk Hybrid Connection
     properties:
       properties:
         properties:
@@ -13476,7 +13476,7 @@ definitions:
             description: Name of a blob which contains the backup
             type: string
           databases:
-            description: Collection of databses which should be restored. This list has to match the list of databases included in the backup.
+            description: Collection of databases which should be restored. This list has to match the list of databases included in the backup.
             items:
               $ref: '#/definitions/DatabaseBackupSetting'
             type: array
@@ -13576,7 +13576,7 @@ definitions:
             description: Enables creation of a Linux App Service Plan
             type: boolean
           resourceGroup:
-            description: Resource group of the serverfarm
+            description: Resource group of the server farm
             readOnly: true
             type: string
           status:
@@ -13947,7 +13947,7 @@ definitions:
             type: string
           experiments:
             $ref: '#/definitions/Experiments'
-            description: This is work around for polymophic types
+            description: This is work around for polymorphic types
           handlerMappings:
             description: Handler mappings
             items:
@@ -14342,7 +14342,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   SourceControlCollection:
-    description: Collection of soure controls
+    description: Collection of source controls
     properties:
       nextLink:
         description: Link to next page of resources
@@ -14499,7 +14499,7 @@ definitions:
     description: Options for retrieving the list of top level domain legal agreements
     properties:
       includePrivacy:
-        description: If true then the list of agreements will inclue agreements for domain privacy as well.
+        description: If true then the list of agreements will include agreements for domain privacy as well.
         type: boolean
     type: object
   TopLevelDomainCollection:
@@ -14575,7 +14575,7 @@ definitions:
   User:
     allOf:
       - $ref: '#/definitions/Resource'
-    description: Represents user crendentials used for publishing activity
+    description: Represents user credentials used for publishing activity
     properties:
       properties:
         properties:

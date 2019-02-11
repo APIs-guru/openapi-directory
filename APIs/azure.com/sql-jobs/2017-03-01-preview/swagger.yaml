@@ -346,7 +346,7 @@ paths:
 
              * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.
 
-             * 400 MissingSkuName - Sku name is rerquired.
+             * 400 MissingSkuName - Sku name is required.
 
              * 400 InvalidDatabaseResourceId - Invalid database resource identifier.
 
@@ -1342,7 +1342,7 @@ paths:
                   startTime: '2017-12-21T19:12:00.8707045Z'
                 type: Microsoft.Sql/servers/jobAgents/executions
     put:
-      description: Creates or updatess a job execution.
+      description: Creates or updates a job execution.
       operationId: JobExecutions_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/ResourceGroupParameter'
@@ -3580,7 +3580,7 @@ definitions:
         format: date-time
         type: string
       interval:
-        description: 'Value of the schedule''s recurring interval, if the scheduletype is recurring. ISO8601 duration format.'
+        description: 'Value of the schedule''s recurring interval, if the schedule type is recurring. ISO8601 duration format.'
         type: string
       startTime:
         default: '0001-01-01T00:00:00Z'

@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/preview/2017-03-01-preview/databases.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: sql-databases
   x-tags:
@@ -313,7 +312,7 @@ paths:
 
              * 400 MissingMaxSizeBytes - MaxSizeBytes is required.
 
-             * 400 MissingSkuName - Sku name is rerquired.
+             * 400 MissingSkuName - Sku name is required.
 
              * 400 MissingSourceDatabaseId - Missing source database identifier.
 
@@ -367,7 +366,7 @@ paths:
 
              * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.
 
-             * 400 PartnerServerNotCompetible - The user is attempting to copy a database from a SAWA V1 server to a Sterling server or vice versa.
+             * 400 PartnerServerNotCompatible - The user is attempting to copy a database from a SAWA V1 server to a Sterling server or vice versa.
 
              * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.
 
@@ -411,7 +410,7 @@ paths:
 
              * 400 ChangeUnsupportedOnEntity - User attempted an unsupported create/update/delete operation on a given entity.
 
-             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currrently in progress.
+             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.
 
              * 400 UpdateNotAllowedInCurrentReplicationState - The operation is disallowed on the database in its current replication state.
 
@@ -569,7 +568,7 @@ paths:
 
              * 400 MissingMaxSizeBytes - MaxSizeBytes is required.
 
-             * 400 MissingSkuName - Sku name is rerquired.
+             * 400 MissingSkuName - Sku name is required.
 
              * 400 MissingSourceDatabaseId - Missing source database identifier.
 
@@ -623,7 +622,7 @@ paths:
 
              * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.
 
-             * 400 PartnerServerNotCompetible - The user is attempting to copy a database from a SAWA V1 server to a Sterling server or vice versa.
+             * 400 PartnerServerNotCompatible - The user is attempting to copy a database from a SAWA V1 server to a Sterling server or vice versa.
 
              * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.
 
@@ -667,7 +666,7 @@ paths:
 
              * 400 ChangeUnsupportedOnEntity - User attempted an unsupported create/update/delete operation on a given entity.
 
-             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currrently in progress.
+             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.
 
              * 400 UpdateNotAllowedInCurrentReplicationState - The operation is disallowed on the database in its current replication state.
 
@@ -909,7 +908,7 @@ paths:
                   tier: Standard
                 type: Microsoft.Sql/servers/databases
             '202': {}
-        Creates a database from recoverabelDatabaseId.:
+        Creates a database from recoverable DatabaseId.:
           parameters:
             api-version: 2017-03-01-preview
             databaseName: dbrestore
@@ -1422,7 +1421,7 @@ paths:
 
              * 400 ElasticPoolOverStorageUsage - Attempting to write data to a database when the storage limit of the elastic pool has been reached.
 
-             * 400 PartnerServerNotCompetible - The user is attempting to copy a database from a SAWA V1 server to a Sterling server or vice versa.
+             * 400 PartnerServerNotCompatible - The user is attempting to copy a database from a SAWA V1 server to a Sterling server or vice versa.
 
              * 400 IncorrectReplicationLinkState - The operation expects the database to be in an expected state on the replication link.
 
@@ -1466,7 +1465,7 @@ paths:
 
              * 400 ChangeUnsupportedOnEntity - User attempted an unsupported create/update/delete operation on a given entity.
 
-             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currrently in progress.
+             * 400 UpdateNotAllowedIfGeoDrOperationInProgress - The operation is disallowed because copy or failover operation for database '{0}' on server '{1}' is currently in progress.
 
              * 400 UpdateNotAllowedInCurrentReplicationState - The operation is disallowed on the database in its current replication state.
 
@@ -1666,111 +1665,6 @@ definitions:
           $ref: '#/definitions/Database'
         readOnly: true
         type: array
-    type: object
-  DatabaseOperation:
-    allOf:
-      - allOf:
-          - description: ARM resource.
-            properties:
-              id:
-                description: Resource ID.
-                readOnly: true
-                type: string
-              name:
-                description: Resource name.
-                readOnly: true
-                type: string
-              type:
-                description: Resource type.
-                readOnly: true
-                type: string
-            type: object
-            x-ms-azure-resource: true
-        description: ARM proxy resource.
-        properties: {}
-        type: object
-    description: A database operation.
-    properties:
-      properties:
-        $ref: '#/definitions/DatabaseOperationProperties'
-        description: Resource properties.
-        x-ms-client-flatten: true
-    type: object
-  DatabaseOperationListResult:
-    description: The response to a list database operations request
-    properties:
-      nextLink:
-        description: Link to retrieve next page of results.
-        readOnly: true
-        type: string
-      value:
-        description: Array of results.
-        items:
-          $ref: '#/definitions/DatabaseOperation'
-        readOnly: true
-        type: array
-    type: object
-  DatabaseOperationProperties:
-    description: The properties of a database operation.
-    properties:
-      databaseName:
-        description: The name of the database the operation is being performed on.
-        readOnly: true
-        type: string
-      errorCode:
-        description: The operation error code.
-        format: int32
-        readOnly: true
-        type: integer
-      errorDescription:
-        description: The operation error description.
-        readOnly: true
-        type: string
-      errorSeverity:
-        description: The operation error severity.
-        format: int32
-        readOnly: true
-        type: integer
-      isUserError:
-        description: Whether or not the error is a user error.
-        readOnly: true
-        type: boolean
-      operation:
-        description: The name of operation.
-        readOnly: true
-        type: string
-      operationFriendlyName:
-        description: The friendly name of operation.
-        readOnly: true
-        type: string
-      percentComplete:
-        description: The percentage of the operation completed.
-        format: int32
-        readOnly: true
-        type: integer
-      serverName:
-        description: The name of the server.
-        readOnly: true
-        type: string
-      startTime:
-        description: The operation start time.
-        format: date-time
-        readOnly: true
-        type: string
-      state:
-        description: The operation state.
-        enum:
-          - Pending
-          - InProgress
-          - Succeeded
-          - Failed
-          - CancelInProgress
-          - Cancelled
-        readOnly: true
-        type: string
-        x-ms-enum:
-          modelAsString: true
-          name: ManagementOperationState
     type: object
   DatabaseProperties:
     description: The database's properties.

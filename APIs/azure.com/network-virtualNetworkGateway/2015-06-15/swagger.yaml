@@ -2,7 +2,6 @@ swagger: '2.0'
 schemes:
   - https
 host: management.azure.com
-x-hasEquivalentPaths: true
 info:
   description: The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.
   title: NetworkManagementClient
@@ -15,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/network/resource-manager/Microsoft.Network/stable/2015-06-15/virtualNetworkGateway.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: network-virtualNetworkGateway
   x-tags:
@@ -73,30 +71,6 @@ paths:
         - VirtualNetworkGatewayConnections
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{connectionSharedKeyName}/sharedkey':
-    get:
-      description: The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.
-      operationId: VirtualNetworkGatewayConnections_GetSharedKey
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-        - description: The virtual network gateway connection shared key name.
-          in: path
-          name: connectionSharedKeyName
-          required: true
-          type: string
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-      responses:
-        '200':
-          description: ''
-          schema:
-            $ref: '#/definitions/ConnectionSharedKeyResult'
-      tags:
-        - VirtualNetworkGatewayConnections
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}':
     delete:
       description: Deletes the specified virtual network Gateway connection.
@@ -182,6 +156,29 @@ paths:
         - VirtualNetworkGatewayConnections
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey':
+    get:
+      description: The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.
+      operationId: VirtualNetworkGatewayConnections_GetSharedKey
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The virtual network gateway connection shared key name.
+          in: path
+          name: virtualNetworkGatewayConnectionName
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/ConnectionSharedKeyResult'
+      tags:
+        - VirtualNetworkGatewayConnections
     put:
       description: The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.
       operationId: VirtualNetworkGatewayConnections_SetSharedKey
@@ -196,7 +193,7 @@ paths:
           name: virtualNetworkGatewayConnectionName
           required: true
           type: string
-        - description: Parameters supplied to the Begin Set Virtual Network Gateway conection Shared key operation throughNetwork resource provider.
+        - description: Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider.
           in: body
           name: parameters
           required: true
@@ -543,13 +540,13 @@ definitions:
         format: int64
         type: integer
   ConnectionSharedKey:
-    description: Response for GetConnectionSharedKey Api servive call
+    description: Response for GetConnectionSharedKey API service call
     properties:
       value:
         description: The virtual network connection shared key value
         type: string
   ConnectionSharedKeyResult:
-    description: Response for CheckConnectionSharedKey Api servive call
+    description: Response for CheckConnectionSharedKey API service call
     properties:
       value:
         description: The virtual network connection shared key value
@@ -713,7 +710,7 @@ definitions:
           modelAsString: true
           name: VirtualNetworkGatewayConnectionStatus
       connectionType:
-        description: 'Gateway connection type. Possible values are: ''Ipsec'',''Vnet2Vnet'',''ExpressRoute'', and ''VPNClient.'
+        description: 'Gateway connection type. Possible values are: ''IPsec'',''Vnet2Vnet'',''ExpressRoute'', and ''VPNClient.'
         enum:
           - IPsec
           - Vnet2Vnet

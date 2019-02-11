@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: sql-restorePoints
   x-tags:
@@ -442,7 +441,7 @@ definitions:
         x-ms-client-flatten: true
     type: object
   RestorePointListResult:
-    description: A list of long term retention bacukps.
+    description: A list of long term retention backups.
     properties:
       nextLink:
         description: Link to retrieve next page of results.

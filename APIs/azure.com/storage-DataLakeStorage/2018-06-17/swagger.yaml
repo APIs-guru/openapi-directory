@@ -17,7 +17,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storage/data-plane/Microsoft.StorageDataLake/preview/2018-06-17/DataLakeStorage.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: storage-DataLakeStorage
   x-tags:
@@ -63,7 +62,7 @@ responses:
       * 400 Bad Request, InvalidPropertyName, "A property name cannot be empty."
       * 400 Bad Request, InvalidPropertyName, "The property name contains invalid characters."
       * 400 Bad Request, InvalidQueryParameterValue, "Value for one of the query parameters specified in the request URI is invalid."
-      * 400 Bad Request, InvalidResourceName, "The specifed resource name contains invalid characters."
+      * 400 Bad Request, InvalidResourceName, "The specified resource name contains invalid characters."
       * 400 Bad Request, InvalidSourceUri, "The source URI is invalid."
       * 400 Bad Request, InvalidUri, "The request URI is invalid."
       * 400 Bad Request, MissingRequiredHeader, "An HTTP header that's mandatory for this request is not specified."
@@ -1226,7 +1225,7 @@ paths:
           name: x-ms-content-disposition
           required: false
           type: string
-        - description: 'An optional file or directory to be renamed.  The value must have the following format: "/{filesysystem}/{path}".  If "x-ms-properties" is specified, the properties will overwrite the existing properties; otherwise, the existing properties will be preserved.'
+        - description: 'An optional file or directory to be renamed.  The value must have the following format: "/{filesystem}/{path}".  If "x-ms-properties" is specified, the properties will overwrite the existing properties; otherwise, the existing properties will be preserved.'
           in: header
           name: x-ms-rename-source
           required: false

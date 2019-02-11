@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/search/resource-manager/Microsoft.Search/stable/2015-08-19/search.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: azure.com
   x-serviceName: search
   x-tags:
@@ -698,7 +697,7 @@ definitions:
     description: Describes a particular API error with an error code and a message.
     properties:
       code:
-        description: An error code that describes the error condition more precisely than an HTTP status code. Can be used to programatically handle specific error cases.
+        description: An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases.
         type: string
       details:
         description: Contains nested errors that are related to this error.
@@ -713,6 +712,27 @@ definitions:
         type: string
     type: object
     x-ms-external: true
+  Identity:
+    description: Identity for the resource.
+    properties:
+      principalId:
+        description: The principal ID of resource identity.
+        readOnly: true
+        type: string
+      tenantId:
+        description: The tenant ID of resource.
+        readOnly: true
+        type: string
+      type:
+        description: The identity type.
+        enum:
+          - SystemAssigned
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: IdentityType
+    required:
+      - type
   ListQueryKeysResult:
     description: Response containing the query API keys for a given Azure Search service.
     properties:
@@ -784,6 +804,9 @@ definitions:
           url: 'https://aka.ms/search-linked-resources'
         readOnly: true
         type: string
+      identity:
+        $ref: '#/definitions/Identity'
+        description: The identity of the resource.
       location:
         description: 'The geographic location of the resource. This must be one of the supported and registered Azure Geo Regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.'
         externalDocs:

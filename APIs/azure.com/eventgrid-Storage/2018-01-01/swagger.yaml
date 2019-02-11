@@ -35,6 +35,7 @@ definitions:
         type: string
       contentLength:
         description: The size of the blob in bytes. This is the same as what would be returned in the Content-Length header from the blob.
+        format: int64
         type: integer
       contentType:
         description: The content type of the blob. This is the same as what would be returned in the Content-Type header from the blob.

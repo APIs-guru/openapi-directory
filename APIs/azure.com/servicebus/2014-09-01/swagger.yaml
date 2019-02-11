@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/servicebus/resource-manager/Microsoft.ServiceBus/stable/2014-09-01/servicebus.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: servicebus
   x-tags:
@@ -49,7 +48,7 @@ parameters:
     required: true
     type: string
   authorizationRuleNameParameter:
-    description: The authorizationrule name.
+    description: The authorization rule name.
     in: path
     maxLength: 50
     minLength: 1
@@ -844,7 +843,7 @@ paths:
       tags:
         - Topics
     put:
-      description: Creates an authorizatio rule for the specified topic.
+      description: Creates an authorization rule for the specified topic.
       externalDocs:
         url: 'https://msdn.microsoft.com/en-us/library/azure/mt720678.aspx'
       operationId: Topics_CreateOrUpdateAuthorizationRule
@@ -958,7 +957,7 @@ definitions:
     description: Description of a Check Name availability request properties.
     properties:
       name:
-        description: 'The Name to check the namespce name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number.'
+        description: 'The Name to check the namespace name availability and The namespace name can contain only letters, numbers, and hyphens. The namespace must start with a letter, and it must end with a letter or number.'
         type: string
     required:
       - name
@@ -1574,7 +1573,7 @@ definitions:
           $ref: '#/definitions/TopicResource'
         type: array
   TopicProperties:
-    description: The Tpoic Properties definition.
+    description: The Topic Properties definition.
     properties:
       accessedAt:
         description: 'Last time the message was sent, or a request was received, for this topic.'

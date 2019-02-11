@@ -14,7 +14,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/sql/resource-manager/Microsoft.Sql/stable/2014-04-01/operations.json'
       version: '2.0'
-  x-preferred: false
   x-providerName: azure.com
   x-serviceName: sql-operations
   x-tags:
@@ -32,26 +31,19 @@ securityDefinitions:
     scopes:
       user_impersonation: impersonate your user account
     type: oauth2
-parameters:
-  ApiVersionParameter:
-    description: The API version to use for the request.
-    in: query
-    name: api-version
-    required: true
-    type: string
-  SubscriptionIdParameter:
-    description: The subscription ID that identifies an Azure subscription.
-    in: path
-    name: subscriptionId
-    required: true
-    type: string
+parameters: {}
 paths:
   /providers/Microsoft.Sql/operations:
     get:
       description: Lists all of the available SQL Rest API operations.
       operationId: Operations_List
       parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
+        - description: The API version to use for the request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+          x-ms-parameter-location: client
       responses:
         '200':
           description: OK. The request has succeeded.
@@ -175,13 +167,13 @@ paths:
                     resource: Server Upgrade Operation Result
                   name: Microsoft.Sql/servers/operationResults/delete
                 - display:
-                    description: Return server DTU quota and current DTU consuption by all databases within the server
+                    description: Return server DTU quota and current DTU consumption by all databases within the server
                     operation: Get server usage details
                     provider: Microsoft SQL Database
                     resource: Server Usage
                   name: Microsoft.Sql/servers/usages/read
                 - display:
-                    description: Retrieve recommendation for elastic database pools to reduce cost or improve performance based on historica resource utilization
+                    description: Retrieve recommendation for elastic database pools to reduce cost or improve performance based on historical resource utilization
                     operation: Get recommended elastic database pools
                     provider: Microsoft SQL Database
                     resource: Recommended Elastic Database Pool
@@ -265,7 +257,7 @@ paths:
                     resource: Database
                   name: Microsoft.Sql/servers/databases/export/action
                 - display:
-                    description: Return database maxiumum size that can be reached and current size occupied by data
+                    description: Return database maximum size that can be reached and current size occupied by data
                     operation: Get database usage details
                     provider: Microsoft SQL Database
                     resource: Database Usage
