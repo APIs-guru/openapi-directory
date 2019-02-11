@@ -38,6 +38,7 @@ var fromLeads = false;
 var newBlackList = [];
 
 var warnings = [];
+var moved = [];
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -249,7 +250,7 @@ function updateCollection(dir, command) {
               if (swagger.openapi) target = 'openapi.yaml';
               var newFilename = util.getSwaggerPath(swagger,target);
               if (newFilename !== filename)
-                warnings.push(`Spec was moved from "${filename}" to "${newFilename}"`);
+                moved.push(`Spec was moved from "${filename}" to "${newFilename}"`);
             }
             else {
               // we might have thrown a SpecError and converted it to a warning
@@ -902,7 +903,7 @@ function fixSpec(swagger, errors) {
           }
           else {
             console.warn(swagger.info.title);
-            console.warn(path,typeof value);
+            console.warn(path,typeof value,value,newValue);
           }
         }
         break;
@@ -1265,9 +1266,11 @@ function logYaml(json) {
 
 process.on('exit', function() {
   if (warnings.length) {
-    //process.exitCode = 1;
     for (var w of warnings) {
-      console.log(w);
+      console.warn(w);
+    }
+    for (var m of moved) {
+      console.info(m);
     }
   }
   if (!process.exitCode && specSources.deletions.length) {
