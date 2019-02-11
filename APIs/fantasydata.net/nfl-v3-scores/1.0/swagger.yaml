@@ -149,6 +149,27 @@ paths:
           schema:
             type: integer
       summary: Week Current
+  '/{format}/FreeAgents':
+    get:
+      operationId: PlayerDetailsByFreeAgents
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Player Details by Free Agents
   '/{format}/GameStats/{season}':
     get:
       operationId: GameStatsBySeasonDeprecatedUseTeamGameStatsInstead
@@ -385,6 +406,77 @@ paths:
           schema:
             type: 'null'
       summary: X Ping
+  '/{format}/Player/{playerid}':
+    get:
+      operationId: PlayerDetailsByPlayer
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'Each NFL player has a unique ID assigned by FantasyData. Player IDs can be determined by pulling player related data. Example:<code>732</code>.'
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/PlayerDetail'
+      summary: Player Details by Player
+  '/{format}/Players':
+    get:
+      operationId: PlayerDetailsByAvailable
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Player Details by Available
+  '/{format}/Players/{team}':
+    get:
+      operationId: PlayerDetailsByTeam
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'Abbreviation of the team. Example: <code>WAS</code>.'
+          in: path
+          name: team
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/PlayerDetail'
+            type: array
+      summary: Player Details by Team
   '/{format}/Schedules/{season}':
     get:
       description: Game schedule for a specified season.
@@ -1223,6 +1315,588 @@ definitions:
         type: string
       Url:
         type: string
+  Player:
+    properties:
+      Active:
+        type: boolean
+      Age:
+        type: integer
+      AverageDraftPosition:
+        type: number
+      BirthDate:
+        type: string
+      BirthDateString:
+        type: string
+      ByeWeek:
+        type: integer
+      College:
+        type: string
+      CollegeDraftPick:
+        type: integer
+      CollegeDraftRound:
+        type: integer
+      CollegeDraftTeam:
+        type: string
+      CollegeDraftYear:
+        type: integer
+      CurrentStatus:
+        type: string
+      CurrentTeam:
+        type: string
+      DeclaredInactive:
+        type: boolean
+      DepthDisplayOrder:
+        type: integer
+      DepthOrder:
+        type: integer
+      DepthPosition:
+        type: string
+      DepthPositionCategory:
+        type: string
+      DraftKingsName:
+        type: string
+      DraftKingsPlayerID:
+        type: integer
+      Experience:
+        type: integer
+      ExperienceString:
+        type: string
+      FanDuelName:
+        type: string
+      FanDuelPlayerID:
+        type: integer
+      FantasyAlarmPlayerID:
+        type: integer
+      FantasyDraftName:
+        type: string
+      FantasyDraftPlayerID:
+        type: integer
+      FantasyPosition:
+        type: string
+      FantasyPositionDepthOrder:
+        type: integer
+      FirstName:
+        type: string
+      GlobalTeamID:
+        type: integer
+      Height:
+        type: string
+      HeightFeet:
+        type: integer
+      HeightInches:
+        type: integer
+      InjuryBodyPart:
+        type: string
+      InjuryNotes:
+        type: string
+      InjuryPractice:
+        type: string
+      InjuryPracticeDescription:
+        type: string
+      InjuryStartDate:
+        type: string
+      InjuryStatus:
+        type: string
+      IsUndraftedFreeAgent:
+        type: boolean
+      LastName:
+        type: string
+      Name:
+        type: string
+      Number:
+        type: integer
+      PhotoUrl:
+        type: string
+      PlayerID:
+        type: integer
+      Position:
+        type: string
+      PositionCategory:
+        type: string
+      RotoWirePlayerID:
+        type: integer
+      RotoworldPlayerID:
+        type: integer
+      ShortName:
+        type: string
+      SportRadarPlayerID:
+        type: string
+      SportsDirectPlayerID:
+        type: integer
+      StatsPlayerID:
+        type: integer
+      Status:
+        type: string
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      UpcomingDraftKingsSalary:
+        type: integer
+      UpcomingFanDuelSalary:
+        type: integer
+      UpcomingGameOpponent:
+        type: string
+      UpcomingGameWeek:
+        type: integer
+      UpcomingOpponentPositionRank:
+        type: integer
+      UpcomingOpponentRank:
+        type: integer
+      UpcomingSalary:
+        type: integer
+      UpcomingYahooSalary:
+        type: integer
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
+        type: integer
+      Weight:
+        type: integer
+      XmlTeamPlayerID:
+        type: integer
+      YahooName:
+        type: string
+      YahooPlayerID:
+        type: integer
+  PlayerDetail:
+    properties:
+      Active:
+        type: boolean
+      Age:
+        type: integer
+      AverageDraftPosition:
+        type: number
+      BirthDate:
+        type: string
+      BirthDateString:
+        type: string
+      ByeWeek:
+        type: integer
+      College:
+        type: string
+      CollegeDraftPick:
+        type: integer
+      CollegeDraftRound:
+        type: integer
+      CollegeDraftTeam:
+        type: string
+      CollegeDraftYear:
+        type: integer
+      CurrentStatus:
+        type: string
+      CurrentTeam:
+        type: string
+      DeclaredInactive:
+        type: boolean
+      DepthDisplayOrder:
+        type: integer
+      DepthOrder:
+        type: integer
+      DepthPosition:
+        type: string
+      DepthPositionCategory:
+        type: string
+      DraftKingsName:
+        type: string
+      DraftKingsPlayerID:
+        type: integer
+      Experience:
+        type: integer
+      ExperienceString:
+        type: string
+      FanDuelName:
+        type: string
+      FanDuelPlayerID:
+        type: integer
+      FantasyAlarmPlayerID:
+        type: integer
+      FantasyDraftName:
+        type: string
+      FantasyDraftPlayerID:
+        type: integer
+      FantasyPosition:
+        type: string
+      FantasyPositionDepthOrder:
+        type: integer
+      FirstName:
+        type: string
+      GlobalTeamID:
+        type: integer
+      Height:
+        type: string
+      HeightFeet:
+        type: integer
+      HeightInches:
+        type: integer
+      InjuryBodyPart:
+        type: string
+      InjuryNotes:
+        type: string
+      InjuryPractice:
+        type: string
+      InjuryPracticeDescription:
+        type: string
+      InjuryStartDate:
+        type: string
+      InjuryStatus:
+        type: string
+      IsUndraftedFreeAgent:
+        type: boolean
+      LastName:
+        type: string
+      LatestNews:
+        items:
+          $ref: '#/definitions/News'
+        type: array
+      Name:
+        type: string
+      Number:
+        type: integer
+      PhotoUrl:
+        type: string
+      PlayerID:
+        type: integer
+      PlayerSeason:
+        $ref: '#/definitions/PlayerSeason'
+      Position:
+        type: string
+      PositionCategory:
+        type: string
+      RotoWirePlayerID:
+        type: integer
+      RotoworldPlayerID:
+        type: integer
+      ShortName:
+        type: string
+      SportRadarPlayerID:
+        type: string
+      SportsDirectPlayerID:
+        type: integer
+      StatsPlayerID:
+        type: integer
+      Status:
+        type: string
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      UpcomingDraftKingsSalary:
+        type: integer
+      UpcomingFanDuelSalary:
+        type: integer
+      UpcomingGameOpponent:
+        type: string
+      UpcomingGameWeek:
+        type: integer
+      UpcomingOpponentPositionRank:
+        type: integer
+      UpcomingOpponentRank:
+        type: integer
+      UpcomingSalary:
+        type: integer
+      UpcomingYahooSalary:
+        type: integer
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
+        type: integer
+      Weight:
+        type: integer
+      XmlTeamPlayerID:
+        type: integer
+      YahooName:
+        type: string
+      YahooPlayerID:
+        type: integer
+  PlayerSeason:
+    properties:
+      Activated:
+        type: integer
+      AssistedTackles:
+        type: number
+      AuctionValue:
+        type: number
+      AuctionValuePPR:
+        type: number
+      AverageDraftPosition:
+        type: number
+      AverageDraftPosition2QB:
+        type: number
+      AverageDraftPositionDynasty:
+        type: number
+      AverageDraftPositionPPR:
+        type: number
+      AverageDraftPositionRookie:
+        type: number
+      BlockedKickReturnTouchdowns:
+        type: number
+      BlockedKickReturnYards:
+        type: number
+      BlockedKicks:
+        type: number
+      DefensiveSnapsPlayed:
+        type: integer
+      DefensiveTeamSnaps:
+        type: integer
+      DefensiveTouchdowns:
+        type: number
+      ExtraPointsAttempted:
+        type: number
+      ExtraPointsHadBlocked:
+        type: number
+      ExtraPointsMade:
+        type: number
+      FantasyPoints:
+        type: number
+      FantasyPointsDraftKings:
+        type: number
+      FantasyPointsFanDuel:
+        type: number
+      FantasyPointsFantasyDraft:
+        type: number
+      FantasyPointsPPR:
+        type: number
+      FantasyPointsYahoo:
+        type: number
+      FantasyPosition:
+        type: string
+      FieldGoalPercentage:
+        type: number
+      FieldGoalReturnTouchdowns:
+        type: number
+      FieldGoalReturnYards:
+        type: number
+      FieldGoalsAttempted:
+        type: number
+      FieldGoalsHadBlocked:
+        type: number
+      FieldGoalsLongestMade:
+        type: number
+      FieldGoalsMade:
+        type: number
+      FieldGoalsMade0to19:
+        type: number
+      FieldGoalsMade20to29:
+        type: number
+      FieldGoalsMade30to39:
+        type: number
+      FieldGoalsMade40to49:
+        type: number
+      FieldGoalsMade50Plus:
+        type: number
+      FumbleReturnTouchdowns:
+        type: number
+      FumbleReturnYards:
+        type: number
+      Fumbles:
+        type: number
+      FumblesForced:
+        type: number
+      FumblesLost:
+        type: number
+      FumblesOutOfBounds:
+        type: number
+      FumblesOwnRecoveries:
+        type: number
+      FumblesRecovered:
+        type: number
+      GlobalTeamID:
+        type: integer
+      Humidity:
+        type: integer
+      InterceptionReturnTouchdowns:
+        type: number
+      InterceptionReturnYards:
+        type: number
+      Interceptions:
+        type: number
+      KickReturnFairCatches:
+        type: number
+      KickReturnLong:
+        type: number
+      KickReturnTouchdowns:
+        type: number
+      KickReturnYards:
+        type: number
+      KickReturnYardsPerAttempt:
+        type: number
+      KickReturns:
+        type: number
+      MiscAssistedTackles:
+        type: number
+      MiscFumblesForced:
+        type: number
+      MiscFumblesRecovered:
+        type: number
+      MiscSoloTackles:
+        type: number
+      Name:
+        type: string
+      Number:
+        type: integer
+      OffensiveSnapsPlayed:
+        type: integer
+      OffensiveTeamSnaps:
+        type: integer
+      OffensiveTouchdowns:
+        type: number
+      PassesDefended:
+        type: number
+      PassingAttempts:
+        type: number
+      PassingCompletionPercentage:
+        type: number
+      PassingCompletions:
+        type: number
+      PassingInterceptions:
+        type: number
+      PassingLong:
+        type: number
+      PassingRating:
+        type: number
+      PassingSackYards:
+        type: number
+      PassingSacks:
+        type: number
+      PassingTouchdowns:
+        type: number
+      PassingYards:
+        type: number
+      PassingYardsPerAttempt:
+        type: number
+      PassingYardsPerCompletion:
+        type: number
+      Played:
+        type: integer
+      PlayerID:
+        type: integer
+      PlayerSeasonID:
+        type: integer
+      Position:
+        type: string
+      PositionCategory:
+        type: string
+      PuntAverage:
+        type: number
+      PuntInside20:
+        type: number
+      PuntLong:
+        type: number
+      PuntNetAverage:
+        type: number
+      PuntNetYards:
+        type: number
+      PuntReturnFairCatches:
+        type: number
+      PuntReturnLong:
+        type: number
+      PuntReturnTouchdowns:
+        type: number
+      PuntReturnYards:
+        type: number
+      PuntReturnYardsPerAttempt:
+        type: number
+      PuntReturns:
+        type: number
+      PuntTouchbacks:
+        type: number
+      PuntYards:
+        type: number
+      Punts:
+        type: number
+      PuntsHadBlocked:
+        type: number
+      QuarterbackHits:
+        type: number
+      ReceivingLong:
+        type: number
+      ReceivingTargets:
+        type: number
+      ReceivingTouchdowns:
+        type: number
+      ReceivingYards:
+        type: number
+      ReceivingYardsPerReception:
+        type: number
+      ReceivingYardsPerTarget:
+        type: number
+      ReceptionPercentage:
+        type: number
+      Receptions:
+        type: number
+      RushingAttempts:
+        type: number
+      RushingLong:
+        type: number
+      RushingTouchdowns:
+        type: number
+      RushingYards:
+        type: number
+      RushingYardsPerAttempt:
+        type: number
+      SackYards:
+        type: number
+      Sacks:
+        type: number
+      Safeties:
+        type: number
+      SafetiesAllowed:
+        type: number
+      ScoringDetails:
+        items:
+          $ref: '#/definitions/ScoringDetail'
+        type: array
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      ShortName:
+        type: string
+      SoloTackles:
+        type: number
+      SpecialTeamsAssistedTackles:
+        type: number
+      SpecialTeamsFumblesForced:
+        type: number
+      SpecialTeamsFumblesRecovered:
+        type: number
+      SpecialTeamsSnapsPlayed:
+        type: integer
+      SpecialTeamsSoloTackles:
+        type: number
+      SpecialTeamsTeamSnaps:
+        type: integer
+      SpecialTeamsTouchdowns:
+        type: number
+      Started:
+        type: integer
+      Tackles:
+        type: number
+      TacklesForLoss:
+        type: number
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      Temperature:
+        type: integer
+      Touchdowns:
+        type: number
+      TwoPointConversionPasses:
+        type: number
+      TwoPointConversionReceptions:
+        type: number
+      TwoPointConversionReturns:
+        type: number
+      TwoPointConversionRuns:
+        type: number
+      WindSpeed:
+        type: integer
   Schedule:
     properties:
       AwayTeam:
@@ -1419,6 +2093,30 @@ definitions:
         type: integer
       YardLineTerritory:
         type: string
+  ScoringDetail:
+    properties:
+      GameKey:
+        type: string
+      Length:
+        type: integer
+      PlayerGameID:
+        type: integer
+      PlayerID:
+        type: integer
+      ScoreID:
+        type: integer
+      ScoringDetailID:
+        type: integer
+      ScoringType:
+        type: string
+      Season:
+        type: integer
+      SeasonType:
+        type: integer
+      Team:
+        type: string
+      Week:
+        type: integer
   Stadium:
     properties:
       Capacity:

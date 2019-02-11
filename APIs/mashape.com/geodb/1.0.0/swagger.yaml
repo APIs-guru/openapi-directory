@@ -82,9 +82,14 @@ paths:
           name: distanceUnit
           required: false
           type: string
-        - description: Only cities in these time-zones
+        - description: Only cities in these time-zones (comma-delimited)
           in: query
           name: timeZoneIds
+          required: false
+          type: string
+        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
+          in: query
+          name: types
           required: false
           type: string
         - default: false
@@ -261,6 +266,11 @@ paths:
           name: minPopulation
           required: false
           type: integer
+        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
+          in: query
+          name: types
+          required: false
+          type: string
         - description: The location radius within which to find cities
           format: int32
           in: query
@@ -581,6 +591,11 @@ paths:
           name: minPopulation
           required: false
           type: integer
+        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
+          in: query
+          name: types
+          required: false
+          type: string
         - default: false
           description: Display results using ASCII characters
           in: query
@@ -655,6 +670,11 @@ paths:
           name: minPopulation
           required: false
           type: integer
+        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
+          in: query
+          name: types
+          required: false
+          type: string
         - description: The location radius within which to find cities
           format: int32
           in: query

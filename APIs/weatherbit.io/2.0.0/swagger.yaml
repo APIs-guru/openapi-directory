@@ -22,6 +22,46 @@ info:
 produces:
   - application/json
 paths:
+  '/alerts?lat={lat}&lon={lon}':
+    get:
+      description: 'Returns severe weather alerts issued by meteorological agencies - given a lat, and a lon.'
+      parameters:
+        - description: Latitude component of location.
+          format: double
+          in: path
+          name: lat
+          required: true
+          type: number
+        - description: Longitude component of location.
+          format: double
+          in: path
+          name: lon
+          required: true
+          type: number
+        - description: Wraps return in jsonp callback - Example - callback=func
+          format: string
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: Your registered API key.
+          format: string
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Weather Alert Object.
+          schema:
+            $ref: '#/definitions/WeatherAlert'
+        default:
+          description: No Data.
+          schema:
+            $ref: '#/definitions/Error'
+      summary: Returns severe weather alerts issued by meteorological agencies - Given a lat/lon.
+      tags:
+        - Alerts
   '/bulk/files/{file}':
     get:
       description: '**(Advanceed/Enterprise plans only)** Downloads bulk data files - OPTIONS: ( current.json.gz - Current observations for cities > 1000 population). Units are Metric (Celcius, m/s, etc).'
@@ -4902,6 +4942,10 @@ paths:
       tags:
         - IP Geolocation API
 definitions:
+  AlertRegionGroup:
+    description: List of impacted regions
+    example: 'St Louis, MO'
+    type: string
   CurrentObs:
     properties:
       app_temp:
@@ -5937,4 +5981,75 @@ definitions:
         description: Wind Speed (Default m/s)
         example: 14.7
         type: number
+    type: object
+  WeatherAlert:
+    properties:
+      alerts:
+        items:
+          $ref: '#/definitions/WeatherAlertGroup'
+        type: array
+      lat:
+        description: Latitude
+        example: 38
+        type: number
+      lon:
+        description: Longitude
+        example: -78.25
+        type: number
+    type: object
+  WeatherAlertGroup:
+    properties:
+      alerts:
+        items:
+          $ref: '#/definitions/AlertRegionGroup'
+        type: array
+      description:
+        description: Full description of weather alert
+        example: |-
+          Mississippi River at Chester
+
+          .This Flood Warning is a result of 1-2 inches of rainfall across
+          the basin earlier this week...
+          The Flood Warning continues for
+          the Mississippi River at Chester
+          * until Tuesday morning.
+          * At  8:30 PM Friday the stage was 26.8 feet.
+          * Flood stage is 27.0 feet.
+          * Minor flooding is forecast.
+          * The river is forecast to rise above flood stage by tonight and to
+          crest near 29.0 feet by Saturday evening. The river is forecast to
+          fall below flood stage by Monday morning.
+          * Impact:  At 28.0 feet...Unleveed islands near Chester and the prison
+          farm floods.
+          * Impact:  At 27.0 feet...Flood Stage.  Unprotected farmland on right
+          bank begins to flood.
+        type: string
+      effective_local:
+        description: Issued time local
+        example: '2019-02-08T21:51:00'
+        type: string
+      effective_utc:
+        description: Issued time UTC
+        example: '2019-02-09T02:51:00'
+        type: string
+      expires_local:
+        description: Expiration time local
+        example: '2019-02-09T21:51:00'
+        type: string
+      expires_utc:
+        description: Expiration time UTC
+        example: '2019-02-10T02:51:00'
+        type: string
+      severity:
+        description: Severity of weather. (Advisory | Watch | Warning)
+        example: Warning
+        type: string
+      title:
+        description: Brief description of weather alert
+        example: 'Flood Warning issued February 8 at 8:51PM CST expiring February 12 at 8:24AM CST by NWS St Louis MO'
+        type: string
+      uri:
+        description: URI to weather alert
+        example: 'https://api.weather.gov/alerts/NWS-IDP-PROD-3361975-2942026'
+        type: string
     type: object

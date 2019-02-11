@@ -21,6 +21,8 @@ consumes: []
 produces:
   - application/json
   - text/json
+  - application/xml
+  - text/xml
 securityDefinitions:
   apiKey:
     description: ApiKey Authentication
@@ -31,10 +33,10 @@ securityDefinitions:
     description: Basic HTTP Authentication
     type: basic
 paths:
-  '/v3/reporting/{shortName}/{branchID}/applicantsregisteredbystaffmember':
+  '/v3/reporting/{shortName}/mortgagesbycreateddate':
     get:
       deprecated: false
-      operationId: ReportingController_ApplicantsRegisteredByStaffMember
+      operationId: ReportingController_MortgagesByCreatedDate
       parameters:
         - description: The unique client short-name
           in: path
@@ -42,16 +44,16 @@ paths:
           required: true
           type: string
         - description: The unique ID of the Branch
-          in: path
+          in: query
           name: branchID
           required: true
           type: string
-        - description: Number of days to search
-          format: double
+        - description: The date to search from.
+          format: date-time
           in: query
-          name: days
+          name: startDate
           required: true
-          type: number
+          type: string
         - description: The index of the first item to return
           format: int32
           in: query
@@ -68,68 +70,445 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/ApplicantsRegisteredByStaffMemberModelResults'
-      summary: A call to return all prospects created in the previous number of days.
+            $ref: '#/definitions/ReportingPropertyMortgageModelResults'
+      summary: Return a collection of mortgages by created date from a specific date
+      tags:
+        - ReportingController
+  '/v3/reporting/{shortName}/mortgagesbyupdateddate':
+    get:
+      deprecated: false
+      operationId: ReportingController_MortgagesByUpdatedDate
+      parameters:
+        - description: The unique client short-name
+          in: path
+          name: shortName
+          required: true
+          type: string
+        - description: The unique ID of the Branch
+          in: query
+          name: branchID
+          required: true
+          type: string
+        - description: The date to search from.
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: The index of the first item to return
+          format: int32
+          in: query
+          name: offset
+          required: true
+          type: integer
+        - description: The maximum number of items to return (up to 1000 per request)
+          format: int32
+          in: query
+          name: count
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReportingPropertyMortgageModelResults'
+      summary: Return a collection of all mortgages updated from a specific date
+      tags:
+        - ReportingController
+  '/v3/reporting/{shortName}/repossesionsbycreateddate':
+    get:
+      deprecated: false
+      operationId: ReportingController_RepossessionsByCreatedDate
+      parameters:
+        - description: The unique client short-name
+          in: path
+          name: shortName
+          required: true
+          type: string
+        - description: The unique ID of the Branch
+          in: query
+          name: branchID
+          required: true
+          type: string
+        - description: The date to search from.
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: The index of the first item to return
+          format: int32
+          in: query
+          name: offset
+          required: true
+          type: integer
+        - description: The maximum number of items to return (up to 1000 per request)
+          format: int32
+          in: query
+          name: count
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReportingReceivershipCaseModelResults'
+      summary: Return a collection of repossessions by created date from a specific date
+      tags:
+        - ReportingController
+  '/v3/reporting/{shortName}/repossesionsbyupdateddate':
+    get:
+      deprecated: false
+      operationId: ReportingController_RepossessionsByUpdatedDate
+      parameters:
+        - description: The unique client short-name
+          in: path
+          name: shortName
+          required: true
+          type: string
+        - description: The unique ID of the Branch
+          in: query
+          name: branchID
+          required: true
+          type: string
+        - description: The date to search from.
+          format: date-time
+          in: query
+          name: startDate
+          required: true
+          type: string
+        - description: The index of the first item to return
+          format: int32
+          in: query
+          name: offset
+          required: true
+          type: integer
+        - description: The maximum number of items to return (up to 1000 per request)
+          format: int32
+          in: query
+          name: count
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ReportingReceivershipCaseModelResults'
+      summary: Return a collection of all reposessions updated from a specific date
       tags:
         - ReportingController
 definitions:
-  ApplicantDetailsModel:
-    description: A model containing the representation structure of a prospect
+  ReportingPropertyMortgageModel:
+    description: Represents an receivership case.
     properties:
-      Name:
-        description: Name
+      Amount:
+        description: Amount.
+        format: double
+        type: number
+      BorrowersAccountName:
+        description: Borrowers Account Name
         type: string
-      OID:
-        description: OID
+      CreatedAt:
+        description: The created at date.
+        format: date-time
         type: string
-      Postcode:
-        description: Postcode
+      DisplayType:
+        description: Friendly type name.
+        readOnly: true
+        type: string
+      ExtraNotes:
+        description: Extra notes.
+        type: string
+      From:
+        description: The from date.
+        format: date-time
+        type: string
+      IntrestRate:
+        description: The mortgages intrest rate.
+        format: double
+        type: number
+      MarketValue:
+        description: The property market value.
+        format: double
+        type: number
+      MonthlyPayment:
+        description: The mortgages monthly payment.
+        format: double
+        type: number
+      MortgageAccountNumber:
+        description: Mortgage account number.
+        type: string
+      MortgageProvider:
+        description: Mortgages provider.
+        type: string
+      PropertyOwnableID:
+        description: The unique Property Ownable identifier.
+        type: string
+      SalesInstructionID:
+        description: The unique Sales Instruction identifier.
+        type: string
+      Type:
+        description: The mortgages type.
+        enum:
+          - InterestOnlyFixedRate
+          - InterestOnlySVR
+          - InterestOnlyDiscountMortgage
+          - InterestOnlyTracker
+          - InterestOnlyCapped
+          - InterestOnlyOffset
+          - CapitalRepaymentFixedRate
+          - CapitalRepaymentSVR
+          - CapitalRepaymentDiscountMortgage
+          - CapitalRepaymentTracker
+          - CapitalRepaymentCapped
+          - CapitalRepaymentOffset
+        type: string
+      ValuationDate:
+        description: The mortgages valuation date.
+        format: date-time
         type: string
     type: object
-  ApplicantsRegisteredByStaffMemberData:
-    description: Sort the prospect and staff data into a list
-    properties:
-      Staff:
-        description: A list of staff member objects.
-        items:
-          $ref: '#/definitions/StaffDetailsModel'
-        type: array
-    type: object
-  ApplicantsRegisteredByStaffMemberModelResults:
-    description: A call containing the main pagination results model for the "ApplicantsRegisteredByStaffMemberModel" method
+  ReportingPropertyMortgageModelResults:
+    description: Results model to store receivership case results.
     properties:
       Count:
-        description: 'The total number of results available for all pages:-'
+        description: The total number of results available for all pages
         format: int32
         type: integer
       Data:
-        $ref: '#/definitions/ApplicantsRegisteredByStaffMemberData'
-        description: 'The formatted data returned:-'
-    type: object
-  StaffDetailsModel:
-    description: A model containing the representation structure of a staff member
-    properties:
-      ApplicantRegisteredPerDay:
-        description: Applicant Registered Per Day
-        format: double
-        type: number
-      ApplicantRegisteredWithPostcode:
-        description: The number of applicants logged that contain an address.
-        format: double
-        type: number
-      LinkedApplicants:
-        description: 'Linked Applicants, A list of prospect objects'
+        description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/ApplicantDetailsModel'
+          $ref: '#/definitions/ReportingPropertyMortgageModel'
         type: array
-      OID:
-        description: The OID of the staff member
+    type: object
+  ReportingReceivershipCaseDetailsModel:
+    description: Helper Model - Case Details
+    properties:
+      AppointmentDate:
+        description: Appointment Date
+        format: date-time
         type: string
-      StaffName:
-        description: The staff name
+      ClosedDate:
+        description: Closed Date
+        format: date-time
         type: string
-      TotalRegisteredApplicants:
-        description: Total Registered Applicants
+      ClosedReason:
+        description: Closed Reason
+        enum:
+          - PropertySold
+          - HandedBackToBorrower
+          - AppointmentIssues
+          - LenderSeekingPossession
+          - Other
+        type: string
+      CreatedAt:
+        description: Created At
+        format: date-time
+        type: string
+      DisplayFirstReceiver:
+        description: Display First Receiver (ApplicationStaff)
+        type: string
+      DisplayFreeholdBlockManager:
+        description: Display Freehold Block Manager
+        type: string
+      DisplaySecondReceiver:
+        description: Display Second Receiver (ApplicationStaff)
+        type: string
+      DisplayValidatingSolicitor:
+        description: Display Validating Solicitor
+        type: string
+      ExtraNotes:
+        description: Extra Notes
+        type: string
+      FirstReceiverID:
+        description: First Receiver ID (ApplicationStaff)
+        type: string
+      FreeholdBlockManagerID:
+        description: Freehold Block Manager ID
+        type: string
+      PassedToLenderDate:
+        description: Passed to Lender Date
+        format: date-time
+        type: string
+      PropertyOwnableID:
+        description: The unique Property Ownable identifier
+        type: string
+      SecondReceiverID:
+        description: Second Receiver ID (ApplicationStaff)
+        type: string
+      Status:
+        description: Status
+        enum:
+          - Opened
+          - Litigation
+          - Closed
+        type: string
+      Tenure:
+        description: Tenure
+        enum:
+          - Freehold
+          - Leasehold
+          - Commonhold
+          - ShareOfFreehold
+          - FlyingFreehold
+          - ShareTransfer
+          - Unknown
+        type: string
+      ValidatingSolicitorID:
+        description: The unique Validating Solicitor identifier
+        type: string
+      ValuationDate:
+        description: Valuation Date
+        format: date-time
+        type: string
+    type: object
+  ReportingReceivershipCaseModel:
+    description: Represents an receivership case.
+    properties:
+      CaseDetails:
+        $ref: '#/definitions/ReportingReceivershipCaseDetailsModel'
+        description: Case Details
+      ExitStrategy:
+        $ref: '#/definitions/ReportingReceivershipExitStrategyModel'
+        description: Exit Strategy
+      Litigation:
+        $ref: '#/definitions/ReportingReceivershipLitigationModel'
+        description: Litigation
+    type: object
+  ReportingReceivershipCaseModelResults:
+    description: Results model to store receivership case results.
+    properties:
+      Count:
+        description: The total number of results available for all pages
         format: int32
         type: integer
+      Data:
+        description: The resulting data returned from the paged query range
+        items:
+          $ref: '#/definitions/ReportingReceivershipCaseModel'
+        type: array
+    type: object
+  ReportingReceivershipExitStrategyModel:
+    description: Helper Model - Exit Strategy
+    properties:
+      Compiled:
+        description: The date Compiled
+        format: date-time
+        type: string
+      CompiledByID:
+        description: Compiled By ID (ApplicationStaff)
+        type: string
+      DisplayCompiledByID:
+        description: Compiled By ID
+        type: string
+      ExtraNotes:
+        description: Extra Notes
+        type: string
+      LenderResponse:
+        description: Lender Response
+        enum:
+          - AgreeLet
+          - AgreeSell
+          - AgreeDisposalRec
+          - AgreeOther
+          - DisagreeLet
+          - DisagreeSell
+          - DisagreeDisposalRec
+          - DisagreeOther
+        type: string
+      LenderResponseDate:
+        description: Lender Response Date
+        format: date-time
+        type: string
+      LockChanged:
+        description: Lock Changed
+        format: date-time
+        type: string
+      MortgageArrears:
+        description: Mortgage Arrears
+        format: double
+        type: number
+      MortgageBalance:
+        description: Mortgage Balance
+        format: double
+        type: number
+      MortgageCMI:
+        description: Mortgage CMI
+        format: double
+        type: number
+      Recommendation:
+        description: Recommendation
+        enum:
+          - Let
+          - Sell
+          - DisposalRec
+          - PendingExit
+          - Other
+        type: string
+      ReviewDate:
+        description: The Review Date
+        format: date-time
+        type: string
+      SentToLender:
+        description: Sent To Lender
+        format: date-time
+        type: string
+    type: object
+  ReportingReceivershipLitigationModel:
+    description: Helper Model - Litigation
+    properties:
+      ClosedLitigationDate:
+        description: Closed Litigation Date
+        format: date-time
+        type: string
+      ClosedLitigationReason:
+        description: Closed Litigation Reason
+        enum:
+          - PossessionObtained
+          - TenantVacated
+          - LitigationCancelled
+          - Other
+        type: string
+      CompiledBySolicitorID:
+        description: Compiled By Solicitor ID (SalesSolicitor)
+        type: string
+      DisplayCompiledBySolicitor:
+        description: Display Compiled By Solicitor
+        type: string
+      EvictionDate:
+        description: Eviction Date
+        format: date-time
+        type: string
+      EvictionOutcome:
+        description: Eviction Outcome
+        enum:
+          - EvictionComplete
+          - EvictionCancelled
+          - Other
+        type: string
+      ExtraNotes:
+        description: Extra Notes
+        type: string
+      HearingDate:
+        description: Hearing Date
+        format: date-time
+        type: string
+      HearingOutcome:
+        description: Hearing Outcome
+        type: string
+      LitigationType:
+        description: Litigation Type
+        type: string
+      NoticeExpiryDate:
+        description: Notice Expiry Date
+        format: date-time
+        type: string
+      NoticeServedDate:
+        description: Notice Served Date
+        format: date-time
+        type: string
+      ProceedingsIssuedDate:
+        description: Proceedings Issued Date
+        format: date-time
+        type: string
     type: object

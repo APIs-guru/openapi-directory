@@ -232,6 +232,55 @@ securityDefinitions:
     tokenUrl: 'https://api.paylocity.com/IdentityServer/connect/token'
     type: oauth2
 paths:
+  '/v2/companies/{companyId}/codes/{codeResource}':
+    get:
+      description: Get All Company Codes for the selected company and resource
+      operationId: Get All Company Codes and Descriptions by Resource
+      parameters:
+        - description: Bearer + JWT
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: 'Type of Company Code. Common values costcenter1, costcenter2, costcenter3, deductions, earnings, taxes, paygrade, positions.'
+          in: path
+          name: codeResource
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved
+          schema:
+            items:
+              $ref: '#/definitions/companyCodes'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Invalid Code Resource
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+        '500':
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Get All Company Codes
+      tags:
+        - Company Codes
   '/v2/companies/{companyId}/customfields/{category}':
     get:
       description: Get All Custom Fields for the selected company
@@ -489,6 +538,57 @@ paths:
       summary: Update employee
       tags:
         - Employee
+  '/v2/companies/{companyId}/employees/{employeeId}/additionalRates':
+    put:
+      description: Sends new or updated employee additional rates information directly to Web Pay.
+      operationId: Add or update additional rates
+      parameters:
+        - description: Bearer + JWT
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Additional Rate Model
+          in: body
+          name: json
+          required: true
+          schema:
+            $ref: '#/definitions/additionalRate'
+        - description: Company Id
+          in: path
+          name: companyId
+          required: true
+          type: string
+        - description: Employee Id
+          in: path
+          name: employeeId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully added or updated
+        '400':
+          description: Bad Request
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '500':
+          description: Internal Server Error
+          schema:
+            items:
+              $ref: '#/definitions/error'
+            type: array
+      security:
+        - paylocity_auth:
+            - WebLinkAPI
+      summary: Add/update additional rates
+      tags:
+        - Additional Rates
   '/v2/companies/{companyId}/employees/{employeeId}/benefitSetup':
     put:
       description: Sends new or updated employee benefit setup information directly to Web Pay.
@@ -1229,6 +1329,73 @@ definitions:
     required:
       - code
     type: object
+  additionalRate:
+    additionalProperties: false
+    description: The additional pay rate model
+    properties:
+      changeReason:
+        description: 'Not required. If populated, must match one of the system coded values available in the Additional Rates Change Reason drop down.<br />'
+        type:
+          - string
+          - 'null'
+      costCenter1:
+        description: Not required. Valid values must match one of the system coded cost centers available in the Additional Rates Cost Center level 1 drop down. This cell must be in a text format.<br />
+        type:
+          - string
+          - 'null'
+      costCenter2:
+        description: Not required. Valid values must match one of the system coded cost centers available in the Additional Rates Cost Center level 2 drop down. This cell must be in a text format.<br />
+        type:
+          - string
+          - 'null'
+      costCenter3:
+        description: Not required. Valid values must match one of the system coded cost centers available in the Additional Rates Cost Center level 3 drop down. This cell must be in a text format.<br />
+        type:
+          - string
+          - 'null'
+      effectiveDate:
+        description: 'Required. Common formats include *MM-DD-CCYY*, *CCYY-MM-DD*.<br />'
+        format: paylocity-date
+        type:
+          - string
+          - 'null'
+      endCheckDate:
+        description: 'Not required. Must match one of the system coded check dates available in the Additional Rates End Check Date drop down. Common formats include *MM-DD-CCYY*, *CCYY-MM-DD*.<br />'
+        format: paylocity-date
+        type:
+          - string
+          - 'null'
+      job:
+        description: 'Not required. If populated, must match one of the system coded values available in the Additional Rates Job drop down.<br />'
+        type:
+          - string
+          - 'null'
+      rate:
+        description: Required. Enter dollar amount that corresponds to the Per selection.<br />
+        type:
+          - number
+          - 'null'
+      rateCode:
+        description: 'Required. If populated, must match one of the system coded values available in the Additional Rates Rate Code drop down.<br />'
+        type:
+          - string
+          - 'null'
+      rateNotes:
+        description: 'Not required.<br  />Max length: 4000<br />'
+        type:
+          - string
+          - 'null'
+      ratePer:
+        description: Required. Valid values are HOUR or WEEK.<br />
+        type:
+          - string
+          - 'null'
+      shift:
+        description: 'Not required. If populated, must match one of the system coded values available in the Additional Rates Shift drop down.<br />'
+        type:
+          - string
+          - 'null'
+    type: object
   benefitSetup:
     additionalProperties: false
     description: The benefit setup model
@@ -1264,6 +1431,21 @@ definitions:
         description: Only valid for HR Enhanced clients and Benefit Classes that are ACA Employment Type of Full Time.
         type:
           - boolean
+          - 'null'
+    type: object
+  companyCodes:
+    additionalProperties: false
+    description: The Company Codes model
+    properties:
+      code:
+        description: 'Code.<br  /> Max length: 40'
+        type:
+          - string
+          - 'null'
+      description:
+        description: 'Description. <br  /> Max length: 150'
+        type:
+          - string
           - 'null'
     type: object
   customFieldDefinition:
@@ -1477,6 +1659,76 @@ definitions:
                 - 'null'
           type: object
         maxItems: 19
+        type: array
+      additionalRate:
+        description: Add Additional Rates.
+        items:
+          additionalProperties: false
+          description: The additional pay rate model
+          properties:
+            changeReason:
+              description: 'Not required. If populated, must match one of the system coded values available in the Additional Rates Change Reason drop down.<br />'
+              type:
+                - string
+                - 'null'
+            costCenter1:
+              description: Not required. Valid values must match one of the system coded cost centers available in the Additional Rates Cost Center level 1 drop down. This cell must be in a text format.<br />
+              type:
+                - string
+                - 'null'
+            costCenter2:
+              description: Not required. Valid values must match one of the system coded cost centers available in the Additional Rates Cost Center level 2 drop down. This cell must be in a text format.<br />
+              type:
+                - string
+                - 'null'
+            costCenter3:
+              description: Not required. Valid values must match one of the system coded cost centers available in the Additional Rates Cost Center level 3 drop down. This cell must be in a text format.<br />
+              type:
+                - string
+                - 'null'
+            effectiveDate:
+              description: 'Required. Common formats include *MM-DD-CCYY*, *CCYY-MM-DD*.<br />'
+              format: paylocity-date
+              type:
+                - string
+                - 'null'
+            endCheckDate:
+              description: 'Not required. Must match one of the system coded check dates available in the Additional Rates End Check Date drop down. Common formats include *MM-DD-CCYY*, *CCYY-MM-DD*.<br />'
+              format: paylocity-date
+              type:
+                - string
+                - 'null'
+            job:
+              description: 'Not required. If populated, must match one of the system coded values available in the Additional Rates Job drop down.<br />'
+              type:
+                - string
+                - 'null'
+            rate:
+              description: Required. Enter dollar amount that corresponds to the Per selection.<br />
+              type:
+                - number
+                - 'null'
+            rateCode:
+              description: 'Required. If populated, must match one of the system coded values available in the Additional Rates Rate Code drop down.<br />'
+              type:
+                - string
+                - 'null'
+            rateNotes:
+              description: 'Not required.<br  />Max length: 4000<br />'
+              type:
+                - string
+                - 'null'
+            ratePer:
+              description: Required. Valid values are HOUR or WEEK.<br />
+              type:
+                - string
+                - 'null'
+            shift:
+              description: 'Not required. If populated, must match one of the system coded values available in the Additional Rates Shift drop down.<br />'
+              type:
+                - string
+                - 'null'
+          type: object
         type: array
       benefitSetup:
         additionalProperties: false
@@ -1815,7 +2067,7 @@ definitions:
           - string
           - 'null'
       employeeId:
-        description: 'Leave blank to have Web Pay automatically assign the next available employee ID.<br  /> Max length: 10'
+        description: 'Leave blank to have Web Pay automatically assign the next available employee ID.<br  />Max length: 10'
         type:
           - string
           - 'null'

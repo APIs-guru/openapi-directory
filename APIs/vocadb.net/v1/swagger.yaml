@@ -703,6 +703,94 @@ paths:
       summary: Posts a new comment.
       tags:
         - AlbumApi
+  '/api/albums/{id}/reviews':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: AlbumApi_GetReviews
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: query
+          name: languageCode
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AlbumReviewContract'
+            type: array
+      tags:
+        - AlbumApi
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: AlbumApi_PostReview
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: reviewContract
+          required: true
+          schema:
+            $ref: '#/definitions/AlbumReviewContract'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlbumReviewContract'
+      tags:
+        - AlbumApi
+  '/api/albums/{id}/reviews/{reviewId}':
+    delete:
+      consumes: []
+      deprecated: false
+      operationId: AlbumApi_DeleteReview
+      parameters:
+        - format: int32
+          in: path
+          name: reviewId
+          required: true
+          type: integer
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces: []
+      responses:
+        '204':
+          description: No Content
+      tags:
+        - AlbumApi
   '/api/albums/{id}/tracks':
     get:
       consumes: []
@@ -810,6 +898,43 @@ paths:
               type: object
             type: array
       summary: Gets tracks for an album formatted using the CSV format string.
+      tags:
+        - AlbumApi
+  '/api/albums/{id}/user-collections':
+    get:
+      consumes: []
+      deprecated: false
+      operationId: AlbumApi_GetUserCollections
+      parameters:
+        - format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - enum:
+            - Default
+            - Japanese
+            - Romaji
+            - English
+          in: query
+          name: languagePreference
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - text/javascript
+        - application/javascript
+        - application/json-p
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AlbumForUserForApiContract'
+            type: array
       tags:
         - AlbumApi
   /api/artists:
@@ -6135,11 +6260,33 @@ definitions:
       rating:
         format: int32
         type: integer
+      user:
+        $ref: '#/definitions/UserForApiContract'
     type: object
   AlbumIdentifierContract:
     properties:
       value:
         type: string
+    type: object
+  AlbumReviewContract:
+    properties:
+      albumId:
+        format: int32
+        type: integer
+      date:
+        format: date-time
+        type: string
+      id:
+        format: int32
+        type: integer
+      languageCode:
+        type: string
+      text:
+        type: string
+      title:
+        type: string
+      user:
+        $ref: '#/definitions/UserForApiContract'
     type: object
   ArchivedObjectVersionForApiContract:
     properties:

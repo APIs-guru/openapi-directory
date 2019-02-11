@@ -39,18 +39,19 @@ tags:
   - name: API Information
   - name: Albums\Album videos
   - name: Albums\Custom album logos
+  - name: Albums\Custom album thumbnails
   - name: Albums\Essentials
   - name: Authentication Extras\Essentials
   - name: Categories\Channels
   - name: Categories\Essentials
   - name: Categories\Groups
-  - name: Categories\Subscription
+  - name: Categories\Subscriptions
   - name: Categories\Videos
   - name: Channels\Categories
   - name: Channels\Essentials
   - name: Channels\Moderators
   - name: Channels\Private channel members
-  - name: Channels\Subscriptions and Subscribers
+  - name: Channels\Subscriptions and subscribers
   - name: Channels\Tags
   - name: Channels\Videos
   - name: Embed Presets\Custom Logos
@@ -120,7 +121,7 @@ paths:
         - API Information
   /categories:
     get:
-      description: Get a collection of every top-level category.
+      description: This method gets all existing categories.
       operationId: get_categories
       parameters:
         - description: The sort direction of the results.
@@ -191,7 +192,7 @@ paths:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If category was not found.
+          description: No such category exists.
       summary: Get a specific category
       tags:
         - Categories\Essentials
@@ -262,7 +263,7 @@ paths:
             application/vnd.vimeo.channel+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If category was not found.
+          description: No such category exists.
       summary: Get all the channels in a category
       tags:
         - Categories\Channels
@@ -333,7 +334,7 @@ paths:
             application/vnd.vimeo.group+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If category was not found.
+          description: No such category exists.
       summary: Get all the groups in a category
       tags:
         - Categories\Groups
@@ -428,7 +429,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If category was not found.
+          description: No such category exists.
       summary: Get all the videos in a category
       tags:
         - Categories\Videos
@@ -462,10 +463,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If category was not found.
-             * If video was not found in the category.
+          description: 'No such category exists, or the video doesn''t belong to it.'
       summary: Check for a video in a category
       tags:
         - Categories\Videos
@@ -547,6 +545,7 @@ paths:
       tags:
         - Channels\Essentials
     post:
+      description: This method creates a new channel.
       operationId: create_channel
       requestBody:
         content:
@@ -554,19 +553,19 @@ paths:
             schema:
               properties:
                 description:
-                  description: The description of the new channel.
+                  description: The description of the channel.
                   example: 'We really love videos, and these are the videos we really, really love.'
                   type: string
                 link:
-                  description: 'The link to access the channel. You may use a custom name in the URL in place of a numeric channel ID, as in `/channels/{url_custom}`.'
+                  description: 'The link to access the channel. You can use a custom name in the URL in place of a numeric channel ID, as in `/channels/{url_custom}`.'
                   example: staffpicks
                   type: string
                 name:
-                  description: The name of the new channel.
+                  description: The name of the channel.
                   example: Vimeo Staff Picks
                   type: string
                 privacy:
-                  description: The privacy level of the new channel.
+                  description: The privacy level of the channel.
                   enum:
                     - anybody
                     - moderators
@@ -595,7 +594,7 @@ paths:
             application/vnd.vimeo.channel+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot create a channel.
+          description: The authenticated user can't create a channel.
       security:
         - oauth2:
             - create
@@ -621,7 +620,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The user does not own this channel.
+          description: The authenticated user doesn't own this channel.
       security:
         - oauth2:
             - delete
@@ -649,6 +648,7 @@ paths:
       tags:
         - Channels\Essentials
     patch:
+      description: This method edits the specified channel.
       operationId: edit_channel
       parameters:
         - description: The ID of the channel.
@@ -668,7 +668,7 @@ paths:
                   example: 'We really love videos, and these are the videos we really, really love.'
                   type: string
                 link:
-                  description: 'The link to access the channel. You may use a custom name in the URL in place of a numeric channel ID, as in `/channels/{url_custom}`. Submitting `""` for this field removes the link alias.'
+                  description: 'The link to access the channel. You can use a custom name in the URL in place of a numeric channel ID, as in `/channels/{url_custom}`. Submitting `""` for this field removes the link alias.'
                   example: staffpicks
                   type: string
                 name:
@@ -676,7 +676,7 @@ paths:
                   example: Vimeo Staff Picks
                   type: string
                 privacy:
-                  description: The channel's privacy level.
+                  description: The privacy level of the channel.
                   enum:
                     - anybody
                     - moderators
@@ -705,6 +705,7 @@ paths:
         - Channels\Essentials
   '/channels/{channel_id}/categories':
     get:
+      description: This method gets all the categories in the specified channel.
       operationId: get_channel_categories
       parameters:
         - description: The ID of the channel.
@@ -728,11 +729,12 @@ paths:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       summary: Get all the categories in a channel
       tags:
         - Channels\Categories
     put:
+      description: This method adds multiple categories to the specified channel.
       operationId: add_channel_categories
       parameters:
         - description: The ID of the channel.
@@ -766,31 +768,32 @@ paths:
                 $ref: '#/components/schemas/error'
           description: |-
             There are two ways that this status code can be encountered:
-             * There was no request body, or the request body was malformed. Returns a unique error code of `2205`.
-             * The maximum number of channel categories was exceeded. Returns a unique error code of `2204`.
+             * There was no request body, or the request body is malformed. Returns a unique error code of `2205`.
+             * You exceeded the maximum number of channel categories. Returns a unique error code of `2204`.
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: Invalid user credentials were supplied. Returns a unique error code of `8003`.
+          description: The user credentials are invalid. Returns a unique error code of `8003`.
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user cannot add categories to the channel. Returns a unique error code of `3200`.
+          description: The authenticated user can't add categories to the channel. Returns a unique error code of `3200`.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       summary: Add a list of categories to a channel
       tags:
         - Channels\Categories
   '/channels/{channel_id}/categories/{category}':
     delete:
+      description: This method removes a single category from the specified channel.
       operationId: delete_channel_category
       parameters:
         - description: The name of the category.
@@ -809,25 +812,25 @@ paths:
             type: number
       responses:
         '204':
-          description: The category was deleted.
+          description: The channel was removed.
         '401':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials were invalid. Returns a unique error code of `8003`.
+          description: The user credentials are invalid. Returns a unique error code of `8003`.
         '403':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user either does not own the channel or is not a channel moderator. Returns a unique error code of `3200`.
+          description: The authenticated user doesn't own the channel or isn't a channel moderator. Returns a unique error code of `3200`.
         '404':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel or category was not found.
+          description: No such channel or category exists.
       security:
         - oauth2:
             - edit
@@ -835,6 +838,7 @@ paths:
       tags:
         - Channels\Categories
     put:
+      description: This method adds a channel to a category.
       operationId: categorize_channel
       parameters:
         - description: The name of the category.
@@ -859,25 +863,25 @@ paths:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The maximum number of channel categories was exceeded. Returns a unique error code of `2204`.
+          description: You exceeded the maximum number of channel categories. Returns a unique error code of `2204`.
         '401':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: Invalid user credentials were supplied. Returns a unique error code of `8003`.
+          description: The user credentials are invalid. Returns a unique error code of `8003`.
         '403':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user either does not own the channel or is not a channel moderator. Returns a unique error code of `3200`.
+          description: The authenticated user doesn't own the channel or isn't a channel moderator. Returns a unique error code of `3200`.
         '404':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel or category was not found.
+          description: No such channel or category exists.
       security:
         - oauth2:
             - edit
@@ -901,7 +905,7 @@ paths:
             schema:
               properties:
                 user_uri:
-                  description: The URI of the user to remove as a moderator
+                  description: The URI of a user to remove as a moderator.
                   example: /users/152184
                   type: string
               required:
@@ -920,20 +924,13 @@ paths:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are three ways that this status code can be encountered:
-             * You do not own this channel.
-             * The user is not a moderator of this channel.
-             * You cannot remove the owner of the channel.
+          description: 'The authenticated user doesn''t own the channel, the user isn''t a moderator of the channel, or you tried to remove the owner of the channel.'
         '404':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If channel was not found.
-             * If user was not found.
+          description: 'No such channel exists, or no such user exists.'
       security:
         - oauth2:
             - edit
@@ -1018,7 +1015,7 @@ paths:
             schema:
               properties:
                 user_uri:
-                  description: The URI of the user to add.
+                  description: The URI of the user to add as a moderator.
                   example: /users/152184
                   type: string
               required:
@@ -1033,7 +1030,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/user'
                 type: array
-          description: The moderators were removed.
+          description: The moderators were replaced.
         '400':
           content:
             application/json:
@@ -1045,13 +1042,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You do not own the channel.
+          description: The authenticated user owns this channel.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       security:
         - oauth2:
             - edit
@@ -1074,7 +1071,7 @@ paths:
             schema:
               properties:
                 user_uri:
-                  description: The URI of the user to add as a moderator.
+                  description: The URI of a user to add as a moderator.
                   example: /users/152184
                   type: string
               required:
@@ -1095,20 +1092,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are three ways that this status code can be encountered:
-             * You are not the owner of the channel.
-             * The user is already a moderator of the channel.
-             * You tried to add a user that you do not follow.
+          description: 'The authenticated user doesn''t own the channel, a user is already a moderator of the channel, or you tried to add a user that the authenticated user doesn''t follow.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If channel was not found.
-             * If user was not found.
+          description: 'No such channel exists, or no such user exists.'
       security:
         - oauth2:
             - edit
@@ -1135,30 +1125,19 @@ paths:
             type: number
       responses:
         '204':
-          content:
-            application/vnd.vimeo.user+json:
-              schema:
-                $ref: '#/components/schemas/user'
-          description: Standard request.
+          description: The moderator was removed.
         '403':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are three ways that this status code can be encountered:
-             * If you are not the owner of the channel.
-             * If the user you are trying to remove is not a moderator of the channel.
-             * If you are trying to remove the owner of the channel.
+          description: 'The authenticated user doesn''t own the channel, the user isn''t a moderator of the channel, or you tried to remove the owner of the channel.'
         '404':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If channel was not found.
-             * If user was not found.
+          description: 'No such channel exists, or no such user exists.'
       security:
         - oauth2:
             - edit
@@ -1215,20 +1194,13 @@ paths:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are three ways that this status code can be encountered:
-             * You are not the owner of the channel.
-             * The user is already a moderator of the channel.
-             * You attempted to add a user that you do not follow.
+          description: 'The authenticated user doesn''t own the channel, a user is already a moderator of the channel, or you tried to add a user that the authenticated user doesn''t follow.'
         '404':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If channel was not found.
-             * If user was not found.
+          description: 'No such channel exists, or no such user exists.'
       security:
         - oauth2:
             - edit
@@ -1237,6 +1209,7 @@ paths:
         - Channels\Moderators
   '/channels/{channel_id}/privacy/users':
     get:
+      description: This method gets all the users who have access to the specified private channel.
       operationId: get_channel_privacy_users
       parameters:
         - description: The ID of the channel.
@@ -1290,17 +1263,18 @@ paths:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You do not own this channel. Returns a unique error code of `3200`.
+          description: The authenticated user doesn't own this channel. Returns a unique error code of `3200`.
         '404':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot add this user to a channel of this type. Returns a unique error code of `2204`.
+          description: You can't add this user to a channel of this type. Returns a unique error code of `2204`.
       summary: Get all the users who can view a private channel
       tags:
         - Channels\Private channel members
     put:
+      description: This method gives multiple users access to the specified private channel.
       operationId: set_channel_privacy_users
       parameters:
         - description: The ID of the channel.
@@ -1316,7 +1290,7 @@ paths:
             schema:
               properties:
                 users:
-                  description: An array of either user URIs or user IDs.
+                  description: The array of either the user URIs or the user IDs to permit to view the private channel.
                   items:
                     type: string
                   type: array
@@ -1332,7 +1306,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/user'
                 type: array
-          description: The users were set.
+          description: The users can now view the private channel.
         '400':
           content:
             application/vnd.vimeo.user+json:
@@ -1340,8 +1314,8 @@ paths:
                 $ref: '#/components/schemas/error'
           description: |-
             There are two ways that this status code can be encountered:
-             * There is no request body, or the request body is malformed. Returns a unique error code of `2205`.
-             * A user in the list does not exist. Returns a unique error code of `2900`.
+             * There was no request body, or the request body is malformed. Returns a unique error code of `2205`.
+             * At least one of the specified user accounts doesn't exist. Returns a unique error code of `2900`.
         '401':
           content:
             application/vnd.vimeo.user+json:
@@ -1353,13 +1327,13 @@ paths:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You do not own this channel. Returns a unique error code of `3200`.
+          description: The authenticated user doesn't own this channel. Returns a unique error code of `3200`.
         '404':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot add this user to a channel of this type. Returns a unique error code of `2204`.
+          description: You can't add one or more of these users to a channel of this type. Returns a unique error code of `2204`.
       security:
         - oauth2:
             - edit
@@ -1368,6 +1342,7 @@ paths:
         - Channels\Private channel members
   '/channels/{channel_id}/privacy/users/{user_id}':
     delete:
+      description: This method prevents a single user from being able to access the specified private channel.
       operationId: delete_channel_privacy_user
       parameters:
         - description: The ID of the channel.
@@ -1386,7 +1361,7 @@ paths:
             type: number
       responses:
         '204':
-          description: The user was disallowed.
+          description: The user can no longer view the private channel.
         '401':
           content:
             application/json:
@@ -1398,13 +1373,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You do not own this channel. Returns a unique error code of `3200`.
+          description: The authenticated user doesn't own this channel. Returns a unique error code of `3200`.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot add this user to a channel of this type. Returns a unique error code of `2204`.
+          description: You can't add this user to a channel of this type. Returns a unique error code of `2204`.
       security:
         - oauth2:
             - edit
@@ -1412,6 +1387,7 @@ paths:
       tags:
         - Channels\Private channel members
     put:
+      description: This method gives a single user access to the specified private channel.
       operationId: set_channel_privacy_user
       parameters:
         - description: The ID of the channel.
@@ -1442,13 +1418,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You do not own this channel. Returns a unique error code of `3200`.
+          description: The authenticated user doesn't own this channel. Returns a unique error code of `3200`.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot add this user to a channel of this type. Returns a unique error code of `2204`.
+          description: You can't add this user to a channel of this type. Returns a unique error code of `2204`.
       security:
         - oauth2:
             - edit
@@ -1457,6 +1433,7 @@ paths:
         - Channels\Private channel members
   '/channels/{channel_id}/tags':
     get:
+      description: This method gets all the tags that have been added to the specified channel.
       operationId: get_channel_tags
       parameters:
         - description: The ID of the channel.
@@ -1480,11 +1457,12 @@ paths:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       summary: Get all the tags that have been added to a channel
       tags:
         - Channels\Tags
     put:
+      description: This method adds multiple tags to the specified channel.
       operationId: add_tags_to_channel
       parameters:
         - description: The ID of the channel.
@@ -1523,59 +1501,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * If channel was not found.
-             * A parameter is invalid.
-             * The user attempted to add more than 20 tags to the channel. Returns a unique error code of `2501`.
-             * There was no request body, or the API could not parse the proper parameters from the request body. Returns a unique error code of `2205`.
-        '401':
-          content:
-            application/vnd.vimeo.tag+json:
-              schema:
-                $ref: '#/components/schemas/error'
-          description: Invalid user credentials were supplied. Returns a unique error code of `8003`.
-        '403':
-          content:
-            application/vnd.vimeo.tag+json:
-              schema:
-                $ref: '#/components/schemas/error'
-          description: The user cannot add tags to this channel. Returns a unique error code of `3200`.
-      security:
-        - oauth2:
-            - edit
-      summary: Add a list of tags to a channel
-      tags:
-        - Channels\Tags
-  '/channels/{channel_id}/tags/{word}':
-    delete:
-      operationId: delete_tag_from_channel
-      parameters:
-        - description: The ID of the channel.
-          in: path
-          name: channel_id
-          required: true
-          schema:
-            example: 927
-            type: number
-        - description: The tag word.
-          in: path
-          name: word
-          required: true
-          schema:
-            example: awesome
-            type: string
-      responses:
-        '204':
-          description: The tag was deleted.
-        '400':
-          content:
-            application/vnd.vimeo.tag+json:
-              schema:
-                $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The tag is invalid.
-             * The parameter is invalid.
+            There are three ways that this status code can be encountered:
+             * No such channel exists, or a parameter is invalid.
+             * You tried to add more than 20 tags to the channel. Returns a unique error code of `2501`.
+             * There was no request body, or the request body is malformed. Returns a unique error code of `2205`.
         '401':
           content:
             application/vnd.vimeo.tag+json:
@@ -1587,7 +1516,53 @@ paths:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user cannot delete tags from this channel. Returns a unique error code of `3200`.
+          description: The authenticated user can't add tags to this channel. Returns a unique error code of `3200`.
+      security:
+        - oauth2:
+            - edit
+      summary: Add a list of tags to a channel
+      tags:
+        - Channels\Tags
+  '/channels/{channel_id}/tags/{word}':
+    delete:
+      description: This method removes a single tag from the specified channel.
+      operationId: delete_tag_from_channel
+      parameters:
+        - description: The ID of the channel.
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            example: 927
+            type: number
+        - description: The word to use as the tag.
+          in: path
+          name: word
+          required: true
+          schema:
+            example: awesome
+            type: string
+      responses:
+        '204':
+          description: The tag was removed.
+        '400':
+          content:
+            application/vnd.vimeo.tag+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: 'The tag is invalid, or a parameter is invalid.'
+        '401':
+          content:
+            application/vnd.vimeo.tag+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: The user credentials are invalid. Returns a unique error code of `8003`.
+        '403':
+          content:
+            application/vnd.vimeo.tag+json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: The authenticated user can't remove tags from this channel. Returns a unique error code of `3200`.
       security:
         - oauth2:
             - edit
@@ -1595,6 +1570,7 @@ paths:
       tags:
         - Channels\Tags
     get:
+      description: This method determines whether a specific tag has been added to the channel in question.
       operationId: check_if_channel_has_tag
       parameters:
         - description: The ID of the channel.
@@ -1604,7 +1580,7 @@ paths:
           schema:
             example: 927
             type: number
-        - description: The tag word.
+        - description: The word to use as the tag.
           in: path
           name: word
           required: true
@@ -1613,23 +1589,24 @@ paths:
             type: string
       responses:
         '204':
-          description: The tag has been added.
+          description: The tag has been added to the channel.
         '400':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found in the word.
+          description: No such tag exists.
         '404':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: 'The word is valid, but the channel has not been tagged by it. Returns a unique error code of `5000`.'
+          description: 'The tag exists, but the channel isn''t tagged by it. Returns a unique error code of `5000`.'
       summary: Check if a tag has been added to a channel
       tags:
         - Channels\Tags
     put:
+      description: This method adds a single tag to the specified channel.
       operationId: add_channel_tag
       parameters:
         - description: The ID of the channel.
@@ -1639,7 +1616,7 @@ paths:
           schema:
             example: 927
             type: number
-        - description: The tag word.
+        - description: The word to use as the tag.
           in: path
           name: word
           required: true
@@ -1655,22 +1632,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are three ways that this status code can be encountered:
-             * The tag is invalid.
-             * A parameter is invalid.
-             * The user attempted to add more than 20 tags to a channel. Returns a unique error code of `2501`.
+            There are two ways that this status code can be encountered:
+             * The tag is invalid, or a parameter is invalid.
+             * The channel has already reached its maximum number of 20 tags. Returns a unique error code of `2501`.
         '401':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: Invalid user credentials were supplied. Returns a unique error code of `8003`.
+          description: The user credentials are invalid. Returns a unique error code of `8003`.
         '403':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user cannot add tags to this channel. Returns a unique error code of `3200`.
+          description: The authenticated user can't add tags to this channel. Returns a unique error code of `3200`.
       security:
         - oauth2:
             - edit
@@ -1701,7 +1677,7 @@ paths:
         - description: The attribute by which to filter the results.
           in: query
           name: filter
-          required: false
+          required: true
           schema:
             enum:
               - moderators
@@ -1745,21 +1721,15 @@ paths:
                   $ref: '#/components/schemas/user'
                 type: array
           description: The followers were returned.
-        '400':
-          content:
-            application/vnd.vimeo.user+json:
-              schema:
-                $ref: '#/components/schemas/legacy-error'
-          description: The search query does not have the `moderators` filter. This feature is not yet supported.
         '404':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       summary: Get all the followers of a channel
       tags:
-        - Channels\Subscriptions and Subscribers
+        - Channels\Subscriptions and subscribers
   '/channels/{channel_id}/videos':
     delete:
       operationId: remove_videos_from_channel
@@ -1777,7 +1747,7 @@ paths:
             schema:
               properties:
                 video_uri:
-                  description: The URI of the video to delete.
+                  description: The URI of a video to remove.
                   example: /videos/258684937
                   type: string
               required:
@@ -1796,19 +1766,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The authenticated user is not a moderator of this channel.
-             * You cannot remove this video from the channel.
+          description: 'The authenticated user isn''t a moderator of this channel, or you can''t remove this video from the channel.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If channel was not found.
-             * If user was not found.
+          description: 'No such channel exists, or no such user exists.'
       security:
         - oauth2:
             - edit
@@ -1911,13 +1875,13 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: 'The `sort` field is `default`, but the `direction` field has a value.'
+          description: 'The **sort** field is `default`, but the **direction** field has a value.'
         '404':
           content:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       summary: Get all the videos in a channel
       tags:
         - Channels\Videos
@@ -1937,7 +1901,7 @@ paths:
             schema:
               properties:
                 video_uri:
-                  description: The URI of the video to add.
+                  description: The URI of a video to add.
                   example: /videos/258684937
                   type: string
               required:
@@ -1952,19 +1916,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The authenticated user is not a moderator of the channel.
-             * The video cannot be added to the channel.
+          description: 'The authenticated user isn''t a moderator of the channel, or the video can''t be added to the channel.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If channel was not found.
-             * If user was not found.
+          description: 'No such channel exists, or no such user exists.'
       security:
         - oauth2:
             - edit
@@ -1991,22 +1949,19 @@ paths:
             type: number
       responses:
         '204':
-          description: The video was deleted.
+          description: The video was removed.
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user is not a moderator of the channel.
+          description: The authenticated user isn't a moderator of this channel.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If channel was not found.
-             * If video was not found.
+          description: 'No such channel exists, or no such video exists.'
       security:
         - oauth2:
             - edit
@@ -2014,7 +1969,7 @@ paths:
       tags:
         - Channels\Videos
     get:
-      description: Check if this channel contains a video.
+      description: This method returns a specific video in a channel. You can use it to determine whether the video is in the channel.
       operationId: get_channel_video
       parameters:
         - description: The ID of the channel.
@@ -2043,7 +1998,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       summary: Get a specific video in a channel
       tags:
         - Channels\Videos
@@ -2072,19 +2027,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * The video cannot be added to a channel.
-             * The authenticated user is not a moderator of the channel.
+          description: 'The video can''t be added to channels, or the authenticated user isn''t the moderator of this channel.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If channel was not found.
-             * If video was not found.
+          description: 'No such channel exists, or no such video exists.'
       security:
         - oauth2:
             - edit
@@ -4033,7 +3982,7 @@ paths:
             - private
       summary: Get all the categories that a user follows
       tags:
-        - Categories\Subscription
+        - Categories\Subscriptions
   '/me/categories/{category}':
     delete:
       operationId: unsubscribe_from_category_alt1
@@ -4053,7 +4002,7 @@ paths:
             - interact
       summary: Unsubscribe a user from a category
       tags:
-        - Categories\Subscription
+        - Categories\Subscriptions
     get:
       operationId: check_if_user_subscribed_to_category_alt1
       parameters:
@@ -4072,7 +4021,7 @@ paths:
             - private
       summary: Check if a user follows a category
       tags:
-        - Categories\Subscription
+        - Categories\Subscriptions
     put:
       operationId: subscribe_to_category_alt1
       parameters:
@@ -4091,7 +4040,7 @@ paths:
             - interact
       summary: Subscribe a user to a single category
       tags:
-        - Categories\Subscription
+        - Categories\Subscriptions
   /me/channels:
     get:
       operationId: get_channel_subscriptions_alt1
@@ -4173,19 +4122,19 @@ paths:
             type: number
       responses:
         '204':
-          description: The user was unsubscribed to the channel.
+          description: The user is no longer a follower of the channel.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       security:
         - oauth2:
             - interact
-      summary: Unsubscribe a user from a channel
+      summary: Unsubscribe a user from a specific channel
       tags:
-        - Channels\Subscriptions and Subscribers
+        - Channels\Subscriptions and subscribers
     get:
       operationId: check_if_user_subscribed_to_channel_alt1
       parameters:
@@ -4204,10 +4153,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       summary: Check if a user follows a channel
       tags:
-        - Channels\Subscriptions and Subscribers
+        - Channels\Subscriptions and subscribers
     put:
       operationId: subscribe_to_channel_alt1
       parameters:
@@ -4220,19 +4169,19 @@ paths:
             type: number
       responses:
         '204':
-          description: The user was subscribed to the channel.
+          description: The user is now a follower of the channel.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       security:
         - oauth2:
             - interact
-      summary: Subscribe a user to a single channel
+      summary: Subscribe a user to a specific channel
       tags:
-        - Channels\Subscriptions and Subscribers
+        - Channels\Subscriptions and subscribers
   /me/customlogos:
     get:
       operationId: get_custom_logos_alt1
@@ -9882,6 +9831,251 @@ paths:
       summary: Edit an album
       tags:
         - Albums\Essentials
+  '/users/{user_id}/albums/{album_id}/custom_thumbnails':
+    get:
+      operationId: get_album_custom_thumbs
+      parameters:
+        - description: The ID of the album.
+          in: path
+          name: album_id
+          required: true
+          schema:
+            example: 3706071
+            type: number
+        - description: The ID of the user.
+          in: path
+          name: user_id
+          required: true
+          schema:
+            example: 152184
+            type: number
+        - description: The page number of the results to show.
+          in: query
+          name: page
+          required: false
+          schema:
+            example: 1
+            type: number
+        - description: 'The number of items to show on each page of results, up to a maximum of 100.'
+          in: query
+          name: per_page
+          required: false
+          schema:
+            example: 10
+            type: number
+      responses:
+        '200':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/picture'
+                type: array
+          description: The custom uploaded thumbnails were returned.
+        '404':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: No such album exists.
+      summary: Get all the custom upload thumbnails of an album
+      tags:
+        - Albums\Custom album thumbnails
+    post:
+      operationId: create_album_custom_thumb
+      parameters:
+        - description: The ID of the album.
+          in: path
+          name: album_id
+          required: true
+          schema:
+            example: 3706071
+            type: number
+        - description: The ID of the user.
+          in: path
+          name: user_id
+          required: true
+          schema:
+            example: 152184
+            type: number
+      responses:
+        '201':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/picture'
+          description: The custom thumbnail was added to the album.
+        '403':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: The authenticated user can't modify this album.
+        '404':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: No such album exists.
+      security:
+        - oauth2:
+            - upload
+      summary: Add a custom uploaded thumbnail
+      tags:
+        - Albums\Custom album thumbnails
+  '/users/{user_id}/albums/{album_id}/custom_thumbnails/{thumbnail_id}':
+    delete:
+      description: This method removes a custom uploaded thumbnail from the specified album.
+      operationId: delete_album_custom_thumbnail
+      parameters:
+        - description: The ID of the album.
+          in: path
+          name: album_id
+          required: true
+          schema:
+            example: 3706071
+            type: number
+        - description: The ID of the custom thumbnail.
+          in: path
+          name: thumbnail_id
+          required: true
+          schema:
+            example: 12345
+            type: number
+        - description: The ID of the user.
+          in: path
+          name: user_id
+          required: true
+          schema:
+            example: 152184
+            type: number
+      responses:
+        '204':
+          description: The custom thumbnail was removed.
+        '403':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: The authenticated user can't modify this album.
+        '404':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: 'No such album exists, or it doesn''t contain the specified custom thumbnail.'
+      security:
+        - oauth2:
+            - edit
+      summary: Remove a custom uploaded album thumbnail
+      tags:
+        - Albums\Custom album thumbnails
+    get:
+      operationId: get_album_custom_thumbnail
+      parameters:
+        - description: The ID of the album.
+          in: path
+          name: album_id
+          required: true
+          schema:
+            example: 3706071
+            type: number
+        - description: The ID of the custom thumbnail.
+          in: path
+          name: thumbnail_id
+          required: true
+          schema:
+            example: 12345
+            type: number
+        - description: The ID of the user.
+          in: path
+          name: user_id
+          required: true
+          schema:
+            example: 152184
+            type: number
+      responses:
+        '200':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/picture'
+          description: The custom thumbnail was returned.
+        '403':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: The authenticated user can't view this custom thumbnail.
+        '404':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: 'No such album exists, or it doesn''t contain the specified custom thumbnail.'
+      summary: Get a specific custom uploaded album thumbnail
+      tags:
+        - Albums\Custom album thumbnails
+    patch:
+      operationId: replace_album_custom_thumb
+      parameters:
+        - description: The ID of the album.
+          in: path
+          name: album_id
+          required: true
+          schema:
+            example: 3706071
+            type: number
+        - description: The ID of the custom thumbnail.
+          in: path
+          name: thumbnail_id
+          required: true
+          schema:
+            example: 12345
+            type: number
+        - description: The ID of the user.
+          in: path
+          name: user_id
+          required: true
+          schema:
+            example: 152184
+            type: number
+      requestBody:
+        content:
+          application/vnd.vimeo.picture+json:
+            schema:
+              properties:
+                active:
+                  description: Whether to make this the active album thumbnail.
+                  example: 'true'
+                  type: boolean
+              type: object
+        required: false
+      responses:
+        '200':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/picture'
+          description: The custom thumbnail was replaced.
+        '403':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: The authenticated user can't modify this album.
+        '404':
+          content:
+            application/vnd.vimeo.picture+json:
+              schema:
+                $ref: '#/components/schemas/legacy-error'
+          description: 'No such album exists, or it doesn''t contain the specified custom thumbnail.'
+      security:
+        - oauth2:
+            - edit
+      summary: Replace a custom uploaded album thumbnail
+      tags:
+        - Albums\Custom album thumbnails
   '/users/{user_id}/albums/{album_id}/logos':
     get:
       operationId: get_album_logos
@@ -10584,7 +10778,7 @@ paths:
             - private
       summary: Get all the categories that a user follows
       tags:
-        - Categories\Subscription
+        - Categories\Subscriptions
   '/users/{user_id}/categories/{category}':
     delete:
       operationId: unsubscribe_from_category
@@ -10611,7 +10805,7 @@ paths:
             - interact
       summary: Unsubscribe a user from a category
       tags:
-        - Categories\Subscription
+        - Categories\Subscriptions
     get:
       operationId: check_if_user_subscribed_to_category
       parameters:
@@ -10637,7 +10831,7 @@ paths:
             - private
       summary: Check if a user follows a category
       tags:
-        - Categories\Subscription
+        - Categories\Subscriptions
     put:
       operationId: subscribe_to_category
       parameters:
@@ -10663,7 +10857,7 @@ paths:
             - interact
       summary: Subscribe a user to a single category
       tags:
-        - Categories\Subscription
+        - Categories\Subscriptions
   '/users/{user_id}/channels':
     get:
       operationId: get_channel_subscriptions
@@ -10759,19 +10953,19 @@ paths:
             type: number
       responses:
         '204':
-          description: The user was unsubscribed to the channel.
+          description: The user is no longer a follower of the channel.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       security:
         - oauth2:
             - interact
-      summary: Unsubscribe a user from a channel
+      summary: Unsubscribe a user from a specific channel
       tags:
-        - Channels\Subscriptions and Subscribers
+        - Channels\Subscriptions and subscribers
     get:
       operationId: check_if_user_subscribed_to_channel
       parameters:
@@ -10797,10 +10991,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       summary: Check if a user follows a channel
       tags:
-        - Channels\Subscriptions and Subscribers
+        - Channels\Subscriptions and subscribers
     put:
       operationId: subscribe_to_channel
       parameters:
@@ -10820,19 +11014,19 @@ paths:
             type: number
       responses:
         '204':
-          description: The user was subscribed to the channel.
+          description: The user is now a follower of the channel.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If channel was not found.
+          description: No such channel exists.
       security:
         - oauth2:
             - interact
-      summary: Subscribe a user to a single channel
+      summary: Subscribe a user to a specific channel
       tags:
-        - Channels\Subscriptions and Subscribers
+        - Channels\Subscriptions and subscribers
   '/users/{user_id}/customlogos':
     get:
       operationId: get_custom_logos
@@ -14470,14 +14664,14 @@ paths:
             application/vnd.vimeo.channel+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The user cannot add or remove this video from any channel.
+          description: The authenticated user can't add or remove this video from any channel.
         '404':
           content:
             application/vnd.vimeo.channel+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The user cannot moderate any channels.
-      summary: Get all the channels to which a user can add or remove videos
+          description: The authenticated user can't moderate channels.
+      summary: Get all the channels to which a user can add or remove a specific video
       tags:
         - Channels\Videos
   '/videos/{video_id}/categories':
@@ -14505,14 +14699,14 @@ paths:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If video was not found.
+          description: No such video exists.
       summary: Get all the categories to which a video belongs
       tags:
         - Categories\Videos
     put:
       description: |-
-        You may suggest up to two categories and one subcategory for each video. Vimeo makes the final determination
-        about whether the video belongs in these categories.
+        With this method, you can suggest up to two categories and one subcategory for a video. Vimeo makes the final determination about whether the video
+        belongs in these categories.
       operationId: suggest_video_category
       parameters:
         - description: The ID of the video.
@@ -14528,7 +14722,7 @@ paths:
             schema:
               properties:
                 category:
-                  description: An array of category names.
+                  description: The array of the names of the categories that you're suggesting.
                   items:
                     type: string
                   type: array
@@ -14548,16 +14742,13 @@ paths:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You do not own this video.
+          description: You don't own this video.
         '404':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If video was not found.
-             * If category was not found.
+          description: 'No such video exists, or no such category exists.'
       security:
         - oauth2:
             - edit
@@ -16183,7 +16374,7 @@ paths:
             schema:
               properties:
                 active:
-                  description: 'Whether the text track is active, meaning that it appears in the player. Only one text track per language can be active.'
+                  description: 'Whether the text track is active, meaning that it appears in the player. Only one text track per language, and type, can be active.'
                   example: 'true'
                   type: boolean
                 language:
@@ -16532,6 +16723,18 @@ components:
       type: object
     album:
       properties:
+        allow_continuous_play:
+          description: Whether an album should allow continuous play.
+          example: 'true'
+          type: boolean
+        allow_downloads:
+          description: Whether an album should allow downloads.
+          example: 'true'
+          type: boolean
+        allow_share:
+          description: Whether an album should allow sharing.
+          example: 'true'
+          type: boolean
         brand_color:
           description: 'Hexadecimal color code for the decorative color. For example, album videos use this color for player buttons.'
           example: ff66ee
@@ -16634,6 +16837,22 @@ components:
               description: A list of resource URIs related to the album.
               nullable: true
               properties:
+                add_custom_thumbnails:
+                  description: An action indicating that the authenticated user is an admin of the album and may therefore add custom thumbnails. This data requires a bearer token with the `private` scope.
+                  properties:
+                    options:
+                      description: An array of HTTP methods permitted on this URI. This data requires a bearer token with the `private` scope.
+                      items:
+                        type: string
+                      type: array
+                    uri:
+                      description: The API URI that resolves to the connection data. This data requires a bearer token with the `private` scope.
+                      example: /users/123456/albums/654321/custom_thumbnails
+                      type: string
+                  required:
+                    - options
+                    - uri
+                  type: object
                 add_logos:
                   description: An action indicating that the authenticated user is an admin of the album and may therefore add custom logos. This data requires a bearer token with the `private` scope.
                   properties:
@@ -16667,6 +16886,7 @@ components:
                     - uri
                   type: object
               required:
+                - add_custom_thumbnails
                 - add_logos
                 - add_videos
               type: object
@@ -16756,7 +16976,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/user'
           description: The owner of the album.
+        web_brand_color:
+          description: Whether an album should show the brand color in the web layout.
+          example: 'true'
+          type: boolean
+        web_custom_logo:
+          description: Whether an album's custom logo should be shown in the web layout.
+          example: 'true'
+          type: boolean
       required:
+        - allow_continuous_play
+        - allow_downloads
+        - allow_share
         - brand_color
         - created_time
         - custom_logo
@@ -16783,6 +17014,8 @@ components:
         - url
         - use_custom_domain
         - user
+        - web_brand_color
+        - web_custom_logo
       title: Album
       type: object
     api-app:

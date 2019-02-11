@@ -69,7 +69,7 @@ paths:
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ViewingBookingModel'
+              $ref: '#/definitions/DiaryBookingModel'
             type: array
       summary: Get a list of all available allocations for a date + 7 days for a specified appointment type
       tags:
@@ -126,7 +126,7 @@ paths:
           name: appointmentDetails
           required: true
           schema:
-            $ref: '#/definitions/AppointmentDetails'
+            $ref: '#/definitions/DiaryAppointmentDetails'
         - description: Sales or Lettings property?
           in: query
           name: lettings
@@ -165,7 +165,7 @@ paths:
           name: appointmentDetails
           required: true
           schema:
-            $ref: '#/definitions/AppointmentDetails'
+            $ref: '#/definitions/DiaryAppointmentDetails'
         - description: Sales or Lettings property?
           in: query
           name: lettings
@@ -267,11 +267,11 @@ paths:
       tags:
         - DiaryController
 definitions:
-  AppointmentDetails:
-    description: Helper Model - Structure to submit the appointment details
+  DiaryAppointmentDetails:
+    description: Submission Model - Structure to submit the appointment details
     properties:
       AllocationDetails:
-        $ref: '#/definitions/ViewingBookingModel'
+        $ref: '#/definitions/DiaryBookingModel'
         description: Allocation details to link the appointment too
       AppointmentType:
         description: The Appointment Type ID
@@ -282,7 +282,7 @@ definitions:
       Guests:
         description: A collection of guests linked to the appointment. If none leave empty
         items:
-          $ref: '#/definitions/GuestDetails'
+          $ref: '#/definitions/DiaryGuestDetails'
         type: array
       Subject:
         description: The subject of the appointment
@@ -408,8 +408,26 @@ definitions:
           $ref: '#/definitions/DiaryAppointmentTypeModel'
         type: array
     type: object
-  GuestDetails:
-    description: Helper Model – Structure to submit appointment guest details
+  DiaryBookingModel:
+    description: Represents a viewing booking slot
+    properties:
+      End:
+        description: The end time of the booking
+        format: date-time
+        type: string
+      StaffID:
+        description: The unique ID of the staff member this booking is with
+        type: string
+      StaffName:
+        description: The name of the staff member this booking is with
+        type: string
+      Start:
+        description: The start time of the booking
+        format: date-time
+        type: string
+    type: object
+  DiaryGuestDetails:
+    description: Submission Model - Structure to submit appointment guest details
     properties:
       EmailAddress:
         description: Email address
@@ -539,23 +557,5 @@ definitions:
         type: string
       Title:
         description: Title
-        type: string
-    type: object
-  ViewingBookingModel:
-    description: Represents a viewing booking slot
-    properties:
-      End:
-        description: The end time of the booking
-        format: date-time
-        type: string
-      StaffID:
-        description: The unique ID of the staff member this booking is with
-        type: string
-      StaffName:
-        description: The name of the staff member this booking is with
-        type: string
-      Start:
-        description: The start time of the booking
-        format: date-time
         type: string
     type: object

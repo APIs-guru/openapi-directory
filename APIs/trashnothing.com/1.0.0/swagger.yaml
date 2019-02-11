@@ -546,7 +546,7 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days. <br /><br /> NOTE: It's not recommended to request posts older than 30 days as this will cause the request to take longer.
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
           format: date-time
           in: query
           name: date_min
@@ -556,6 +556,12 @@ paths:
           format: date-time
           in: query
           name: date_max
+          required: false
+          type: string
+        - description: |
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+          in: query
+          name: satisfied
           required: false
           type: string
       produces:
@@ -926,7 +932,7 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days. <br /><br /> NOTE: It's not recommended to request posts older than 30 days as this will cause the request to take longer.
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
           format: date-time
           in: query
           name: date_min
@@ -936,6 +942,12 @@ paths:
           format: date-time
           in: query
           name: date_max
+          required: false
+          type: string
+        - description: |
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+          in: query
+          name: satisfied
           required: false
           type: string
       produces:
@@ -1179,7 +1191,7 @@ paths:
         '200':
           description: The reply has been sent.
         '400':
-          description: Missing message parameter.
+          description: Missing message parameter or post has been satisfied.
         '403':
           description: The user doesn't have permission to reply to the post.
         '404':
@@ -1313,15 +1325,9 @@ paths:
           required: false
           type: integer
         - description: |
-            Whether or not the user will receive digest emails summarizing the new posts. Set to 1 to enable and 0 to disable.
+            The frequency of digest emails sent to this user. One of: daily, 12_hours, 8_hours, 6_hours, 4_hours, 2_hours, hourly <br /><br /> To disable digests, set this to an empty string. <br /><br /> NOTE: A weekly option with the value 'weekly' will probably be added in the future so clients should recognize weekly as a valid value that can be displayed and set if it is ever returned.
           in: formData
-          name: digest_enabled
-          required: false
-          type: integer
-        - description: |
-            The frequency of digest emails sent to this user. One of: daily, 12_hours, 8_hours, 6_hours, 4_hours, 2_hours, hourly <br /><br /> NOTE: A weekly option with the value 'weekly' will probably be added in the future so clients should recognize weekly as a valid value that can be displayed and set if it is ever returned.
-          in: formData
-          name: digest_frequency
+          name: digest
           required: false
           type: string
         - description: |
@@ -1362,7 +1368,7 @@ paths:
         - description: |
             A comma separated list of the sources to show public posts from. Currently only 'trashnothing' is supported.
             If not passed, all sources will be enabled.
-            If set to an empty string, no sources will be enabled which effectively disables public posts for the user.
+            If set to an empty string, no sources will be enabled which effectively disables public posts for the user so that the user will only see posts from the groups they are a member of.
           in: formData
           name: public_post_sources
           required: false
@@ -1753,7 +1759,7 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days. <br /><br /> NOTE: It's not recommended to request posts older than 30 days as this will cause the request to take longer.
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
           format: date-time
           in: query
           name: date_min
@@ -1763,6 +1769,12 @@ paths:
           format: date-time
           in: query
           name: date_max
+          required: false
+          type: string
+        - description: |
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+          in: query
+          name: satisfied
           required: false
           type: string
       produces:
@@ -1890,7 +1902,7 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days. <br /><br /> NOTE: It's not recommended to request posts older than 30 days as this will cause the request to take longer.
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
           format: date-time
           in: query
           name: date_min
@@ -1900,6 +1912,12 @@ paths:
           format: date-time
           in: query
           name: date_max
+          required: false
+          type: string
+        - description: |
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+          in: query
+          name: satisfied
           required: false
           type: string
       produces:
@@ -2141,6 +2159,12 @@ paths:
           name: date_max
           required: false
           type: string
+        - description: |
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+          in: query
+          name: satisfied
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -2290,6 +2314,12 @@ paths:
           name: date_max
           required: false
           type: string
+        - description: |
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+          in: query
+          name: satisfied
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -2431,19 +2461,9 @@ definitions:
     allOf:
       - $ref: '#/definitions/User'
       - properties:
-          contributed_recently:
+          digest:
             description: |
-              Whether or not this user has contributed money recently to support the site using the page at: https://trashnothing.com/payment
-            type: boolean
-          digest_enabled:
-            description: Whether or not digest emails are enabled for this user.
-            type: boolean
-          digest_frequency:
-            description: |
-              The frequency of digest emails sent to this user. One of: daily, 12_hours, 8_hours, 6_hours, 4_hours, 2_hours, hourly <br /><br /> NOTE: A weekly option with the value 'weekly' will probably be added in the future so clients should recognize weekly as a valid value that can be displayed and set if it is ever returned.
-            type: string
-          digest_timezone:
-            description: The timezone used for emailing digests to this user (may be null if digests are disabled).
+              If digest emails are enabled, this is the frequency of digest emails sent to this user. One of: daily, 12_hours, 8_hours, 6_hours, 4_hours, 2_hours, hourly <br /><br /> If digest emails are disabled, this will be null. <br /><br /> NOTE: A weekly option with the value 'weekly' will probably be added in the future so clients should recognize weekly as a valid value that can be displayed and set if it is ever returned.
             type: string
           email_bouncing:
             description: Whether or not the users' primary email address is bouncing emails sent to it.
@@ -2452,13 +2472,12 @@ definitions:
             description: Whether or not emails have been stopped because of a spam complaint from the users' email account.
             type: boolean
           filter_group_posts_by_location:
-            description: Whether or not group posts should be filtered by their location to only include posts defined by the users' location field.
+            description: Whether or not group posts should be filtered to only include posts in the area defined by the users' location field.
             type: boolean
           has_password:
-            description: Whether or not the user has a password (accounts created using 3rd party providers like Facebook don't have passwords set).
-            type: boolean
-          hide_ads:
-            description: Whether or not advertisements (eg. Google Ads) should be shown to this user.
+            description: |
+              Whether or not the user has a password (accounts created using 3rd party providers like Facebook don't have passwords set).
+              When has_password is false, the only way to set a password on the users' account is to send the user a password reset email.
             type: boolean
           last_listings_view:
             description: |
@@ -2466,7 +2485,7 @@ definitions:
             format: date-time
             type: string
           location:
-            description: The users' preference for what public posts they want to see outside of the groups they are a member of (may be null).
+            description: The users' location.  The location is used to determine what (if any) public posts are shown to the user (may be null).
             properties:
               latitude:
                 type: number
@@ -2506,7 +2525,7 @@ definitions:
             type: boolean
           public_post_sources:
             description: |
-              A list of the public post sources the user is interested in seeing posts from (currently only 'trashnothing' is supported). <br /><br /> NOTE: Additional sources may be added in the future so clients should take care to support arbitrary sources being returned.
+              A list of the public post sources the user is interested in seeing posts from (currently only 'trashnothing' is supported). If the array is empty, no sources are enabled and the user will only see posts from the groups they are a member of. <br /><br /> NOTE: Additional sources may be added in the future so clients should take care to support arbitrary sources being returned.
             items:
               type: string
             type: array
@@ -2522,17 +2541,13 @@ definitions:
             type: boolean
         type: object
     example:
-      contributed_recently: false
       country: US
-      digest_enabled: true
-      digest_frequency: 6_hours
-      digest_timezone: America/Denver
+      digest: 6_hours
       email_bouncing: false
       email_spam_stop: false
       filter_group_posts_by_location: true
       firstname: Jack
       has_password: false
-      hide_ads: false
       last_listings_view: '2018-02-15T15:04:47.000Z'
       lastname: Carter
       location:

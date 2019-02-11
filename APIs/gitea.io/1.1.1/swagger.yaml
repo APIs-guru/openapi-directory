@@ -263,6 +263,12 @@ responses:
       items:
         $ref: '#/definitions/Status'
       type: array
+  TagList:
+    description: TagList
+    schema:
+      items:
+        $ref: '#/definitions/Tag'
+      type: array
   Team:
     description: Team
     schema:
@@ -1492,6 +1498,18 @@ paths:
           name: sha
           required: true
           type: string
+        - description: show all directories and files
+          in: query
+          name: recursive
+          type: boolean
+        - description: 'page number; the ''truncated'' field in the response will be true if there are still more items after this page, false if the last page'
+          in: query
+          name: page
+          type: integer
+        - description: number of items per page; default is 1000 or what is set in app.ini as DEFAULT_GIT_TREES_PER_PAGE
+          in: query
+          name: per_page
+          type: integer
       produces:
         - application/json
       responses:
@@ -1682,6 +1700,10 @@ paths:
         - description: whether issue is open or closed
           in: query
           name: state
+          type: string
+        - description: comma separated list of labels. Fetch only issues that have any of this labels. Non existent labels are discarded
+          in: query
+          name: labels
           type: string
         - description: page number of requested issues
           in: query
@@ -2266,6 +2288,78 @@ paths:
         '204':
           $ref: '#/responses/empty'
       summary: Remove a label from an issue
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/stopwatch/start':
+    post:
+      consumes:
+        - application/json
+      operationId: issueStartStopWatch
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue to create the stopwatch on
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/empty'
+        '403':
+          description: 'Not repo writer, user does not have rights to toggle stopwatch'
+        '404':
+          description: Issue not found
+        '409':
+          description: Cannot start a stopwatch again if it already exists
+      summary: Start stopwatch on an issue.
+      tags:
+        - issue
+  '/repos/{owner}/{repo}/issues/{index}/stopwatch/stop':
+    post:
+      consumes:
+        - application/json
+      operationId: issueStopWatch
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the issue to stop the stopwatch on
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '201':
+          $ref: '#/responses/empty'
+        '403':
+          description: 'Not repo writer, user does not have rights to toggle stopwatch'
+        '404':
+          description: Issue not found
+        '409':
+          description: Cannot stop a non existent stopwatch
+      summary: Stop an issue's existing stopwatch.
       tags:
         - issue
   '/repos/{owner}/{repo}/keys':
@@ -2865,6 +2959,10 @@ paths:
           name: index
           required: true
           type: integer
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MergePullRequestOption'
       produces:
         - application/json
       responses:
@@ -3374,6 +3472,28 @@ paths:
         '200':
           $ref: '#/responses/WatchInfo'
       summary: Watch a repo
+      tags:
+        - repository
+  '/repos/{owner}/{repo}/tags':
+    get:
+      operationId: repoListTags
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          $ref: '#/responses/TagList'
+      summary: List a repository's tags
       tags:
         - repository
   '/repos/{owner}/{repo}/times':
@@ -5332,9 +5452,17 @@ definitions:
   GitTreeResponse:
     description: GitTreeResponse returns a git tree
     properties:
+      page:
+        format: int64
+        type: integer
+        x-go-name: Page
       sha:
         type: string
         x-go-name: SHA
+      total_count:
+        format: int64
+        type: integer
+        x-go-name: TotalCount
       tree:
         items:
           $ref: '#/definitions/GitEntry'
@@ -5479,6 +5607,25 @@ definitions:
         type: boolean
     type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  MergePullRequestOption:
+    description: MergePullRequestForm form for merging Pull Request
+    properties:
+      Do:
+        enum:
+          - merge
+          - rebase
+          - rebase-merge
+          - squash
+        type: string
+      MergeMessageField:
+        type: string
+      MergeTitleField:
+        type: string
+    required:
+      - Do
+    type: object
+    x-go-name: MergePullRequestForm
+    x-go-package: code.gitea.io/gitea/modules/auth
   MigrateRepoForm:
     description: MigrateRepoForm form for migrating repository
     properties:
@@ -6042,6 +6189,30 @@ definitions:
       StatusState holds the state of a Status
       It can be "pending", "success", "error", "failure", and "warning"
     type: string
+    x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
+  Tag:
+    description: Tag represents a repository tag
+    properties:
+      commit:
+        properties:
+          sha:
+            type: string
+            x-go-name: SHA
+          url:
+            type: string
+            x-go-name: URL
+        type: object
+        x-go-name: Commit
+      name:
+        type: string
+        x-go-name: Name
+      tarball_url:
+        type: string
+        x-go-name: TarballURL
+      zipball_url:
+        type: string
+        x-go-name: ZipballURL
+    type: object
     x-go-package: code.gitea.io/gitea/vendor/code.gitea.io/sdk/gitea
   Team:
     description: Team represents a team in an organization

@@ -95,6 +95,27 @@ paths:
           schema:
             $ref: '#/definitions/Season'
       summary: Current Season
+  '/{format}/FreeAgents':
+    get:
+      operationId: PlayerDetailsByFreeAgent
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Player Details by Free Agent
   '/{format}/Games/{season}':
     get:
       operationId: Schedules
@@ -226,6 +247,51 @@ paths:
               $ref: '#/definitions/News'
             type: array
       summary: News by Player
+  '/{format}/Player/{playerid}':
+    get:
+      operationId: PlayerDetailsByPlayer
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'Unique FantasyData Player ID. Example:<code>20000571</code>.'
+          in: path
+          name: playerid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Player'
+      summary: Player Details by Player
+  '/{format}/Players':
+    get:
+      operationId: PlayerDetailsByActive
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Player Details by Active
   '/{format}/Stadiums':
     get:
       operationId: Stadiums
@@ -572,6 +638,100 @@ definitions:
       UsageRatePercentage:
         type: number
       Wins:
+        type: integer
+  Player:
+    properties:
+      BirthCity:
+        type: string
+      BirthCountry:
+        type: string
+      BirthDate:
+        type: string
+      BirthState:
+        type: string
+      College:
+        type: string
+      DepthChartOrder:
+        type: integer
+      DepthChartPosition:
+        type: string
+      DraftKingsName:
+        type: string
+      DraftKingsPlayerID:
+        type: integer
+      Experience:
+        type: integer
+      FanDuelName:
+        type: string
+      FanDuelPlayerID:
+        type: integer
+      FantasyAlarmPlayerID:
+        type: integer
+      FantasyDraftName:
+        type: string
+      FantasyDraftPlayerID:
+        type: integer
+      FirstName:
+        type: string
+      GlobalTeamID:
+        type: integer
+      Height:
+        type: integer
+      HighSchool:
+        type: string
+      InjuryBodyPart:
+        type: string
+      InjuryNotes:
+        type: string
+      InjuryStartDate:
+        type: string
+      InjuryStatus:
+        type: string
+      Jersey:
+        type: integer
+      LastName:
+        type: string
+      PhotoUrl:
+        type: string
+      PlayerID:
+        type: integer
+      Position:
+        type: string
+      PositionCategory:
+        type: string
+      RotoWirePlayerID:
+        type: integer
+      RotoworldPlayerID:
+        type: integer
+      Salary:
+        type: integer
+      SportRadarPlayerID:
+        type: string
+      SportsDataID:
+        type: string
+      SportsDirectPlayerID:
+        type: integer
+      StatsPlayerID:
+        type: integer
+      Status:
+        type: string
+      Team:
+        type: string
+      TeamID:
+        type: integer
+      UsaTodayHeadshotNoBackgroundUrl:
+        type: string
+      UsaTodayHeadshotUrl:
+        type: string
+      UsaTodayPlayerID:
+        type: integer
+      Weight:
+        type: integer
+      XmlTeamPlayerID:
+        type: integer
+      YahooName:
+        type: string
+      YahooPlayerID:
         type: integer
   Quarter:
     properties:
