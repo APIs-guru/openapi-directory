@@ -324,6 +324,23 @@ definitions:
         description: Android package name of the app.
         type: string
     type: object
+  AppPreview:
+    description: |-
+      Customizable parameters on the app preview page.
+      The text fields no longer need translation.
+    properties:
+      openButtonText:
+        description: |-
+          Text that appears on the button to open up the app. Optional
+          Defaults to "Open"
+        type: string
+      savePositionText:
+        description: |-
+          Text that asks if user wants to save place in app. Optional.
+          Defaults to "Save my place in the app. A link will be copied to continue
+          to this page"
+        type: string
+    type: object
   CreateManagedShortLinkRequest:
     description: Request to create a managed Short Dynamic Link.
     properties:
@@ -485,6 +502,9 @@ definitions:
         description: |-
           Android related information. See Android related parameters in the
           [documentation](https://firebase.google.com/docs/dynamic-links/create-manually).
+      appPreview:
+        $ref: '#/definitions/AppPreview'
+        description: Optional customizable parameters on the app preview page
       desktopInfo:
         $ref: '#/definitions/DesktopInfo'
         description: |-

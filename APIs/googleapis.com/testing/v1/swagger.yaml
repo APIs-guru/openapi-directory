@@ -1353,6 +1353,10 @@ definitions:
         $ref: '#/definitions/LauncherActivityIntent'
       startActivity:
         $ref: '#/definitions/StartActivityIntent'
+      timeout:
+        description: Timeout in seconds for each intent.
+        format: google-duration
+        type: string
     type: object
   StartActivityIntent:
     description: 'A starting intent specified by an action, uri, and categories.'

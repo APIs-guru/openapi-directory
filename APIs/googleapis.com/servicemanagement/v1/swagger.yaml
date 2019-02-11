@@ -198,7 +198,9 @@ paths:
           in: query
           name: consumerId
           type: string
-        - description: Requested size of the next page of data.
+        - description: |-
+            The max number of items to include in the response list. Page size is 50
+            if not specified. Maximum value is 100.
           in: query
           name: pageSize
           type: integer
@@ -399,7 +401,9 @@ paths:
         from the newest to the oldest.
       operationId: servicemanagement.services.configs.list
       parameters:
-        - description: The max number of items to include in the response list.
+        - description: |-
+            The max number of items to include in the response list. Page size is 50
+            if not specified. Maximum value is 100.
           in: query
           name: pageSize
           type: integer
@@ -607,7 +611,9 @@ paths:
           in: query
           name: filter
           type: string
-        - description: The max number of items to include in the response list.
+        - description: |-
+            The max number of items to include in the response list. Page size is 50
+            if not specified. Maximum value is 100.
           in: query
           name: pageSize
           type: integer

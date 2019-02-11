@@ -149,19 +149,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes an uptime check configuration. Note that this method will fail if the uptime check configuration is referenced by an alert policy or other dependent configs that would be rendered invalid by the deletion.
-      operationId: monitoring.projects.uptimeCheckConfigs.delete
+      description: Deletes an existing group.
+      operationId: monitoring.projects.groups.delete
       parameters:
-        - description: 'If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, channels that are still referenced by an existing alerting policy will fail to be deleted in a delete operation.'
-          in: query
-          name: force
-          type: boolean
-        - description: 'The uptime check configuration to delete. The format  is projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
+        - description: 'The group to delete. The format is "projects/{project_id_or_number}/groups/{group_id}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
+        - description: 'If this field is true, then the request means to delete a group with all its descendants. Otherwise, the request means to delete a group only when it has no descendants. The default value is false.'
+          in: query
+          name: recursive
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -175,10 +175,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single uptime check configuration.
-      operationId: monitoring.projects.uptimeCheckConfigs.get
+      description: Gets a single group.
+      operationId: monitoring.projects.groups.get
       parameters:
-        - description: 'The uptime check configuration to retrieve. The format  is projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
+        - description: 'The group to retrieve. The format is "projects/{project_id_or_number}/groups/{group_id}".'
           in: path
           name: name
           required: true
@@ -188,7 +188,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/UptimeCheckConfig'
+            $ref: '#/definitions/Group'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

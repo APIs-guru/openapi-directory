@@ -152,14 +152,14 @@ paths:
       tags:
         - spaces
     get:
-      description: Returns a membership.
-      operationId: chat.spaces.members.get
+      description: Returns a message.
+      operationId: chat.spaces.messages.get
       parameters:
         - description: |-
-            Required. Resource name of the membership to be retrieved, in the form
-            "spaces/*/members/*".
+            Required. Resource name of the message to be retrieved, in the form
+            "spaces/*/messages/*".
 
-            Example: spaces/AAAAMpdlehY/members/105115627578887013105
+            Example: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4
           in: path
           name: name
           required: true
@@ -169,7 +169,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Membership'
+            $ref: '#/definitions/Message'
       tags:
         - spaces
     parameters:

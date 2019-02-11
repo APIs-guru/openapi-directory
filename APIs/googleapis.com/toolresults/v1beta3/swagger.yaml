@@ -1823,6 +1823,21 @@ definitions:
           For example, a mobile test requires provisioning a device where the test executes, and that provisioning can fail.
         type: boolean
     type: object
+  IndividualOutcome:
+    description: Step Id and outcome of each individual step that was run as a group with other steps with the same configuration.
+    properties:
+      outcomeSummary:
+        enum:
+          - failure
+          - flaky
+          - inconclusive
+          - skipped
+          - success
+          - unset
+        type: string
+      stepId:
+        type: string
+    type: object
   ListExecutionsResponse:
     properties:
       executions:
@@ -1925,6 +1940,20 @@ definitions:
       memoryTotalInKibibyte:
         description: Total memory available on the device in KiB
         format: int64
+        type: string
+    type: object
+  MultiStep:
+    description: Details when multiple steps are run with the same configuration as a group.
+    properties:
+      multistepNumber:
+        description: Unique int given to each step. Ranges from 0(inclusive) to total number of steps(exclusive). The primary step is 0.
+        format: int32
+        type: integer
+      primaryStep:
+        $ref: '#/definitions/PrimaryStep'
+        description: Present if it is a primary (original) step.
+      primaryStepId:
+        description: 'Step Id of the primary (original) step, which might be this step.'
         type: string
     type: object
   Outcome:
@@ -2052,6 +2081,25 @@ definitions:
         type: string
       stepId:
         description: A tool results step ID.
+        type: string
+    type: object
+  PrimaryStep:
+    description: Stores rollup test status of multiple steps that were run as a group and outcome of each individual step.
+    properties:
+      individualOutcome:
+        description: Step Id and outcome of each individual step.
+        items:
+          $ref: '#/definitions/IndividualOutcome'
+        type: array
+      rollUp:
+        description: Rollup test status of multiple steps that were run with the same configuration as a group.
+        enum:
+          - failure
+          - flaky
+          - inconclusive
+          - skipped
+          - success
+          - unset
         type: string
     type: object
   ProjectSettings:
@@ -2272,6 +2320,12 @@ definitions:
         items:
           $ref: '#/definitions/StepLabelsEntry'
         type: array
+      multiStep:
+        $ref: '#/definitions/MultiStep'
+        description: |-
+          Details when multiple steps are run with the same configuration as a group. These details can be used identify which group this step is part of. It also identifies the groups 'primary step' which indexes all the group members.
+
+          - In response: present if previously set. - In create request: optional, set iff this step was performed more than once. - In update request: optional
       name:
         description: |-
           A short human-readable name to display in the UI. Maximum of 100 characters. For example: Clean build

@@ -152,15 +152,14 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes a DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.delete
+        Deletes an InspectTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+      operationId: dlp.projects.inspectTemplates.delete
       parameters:
         - description: |-
-            Resource name of the organization and deidentify template to be deleted,
-            for example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of the organization and inspectTemplate to be deleted, for
+            example `organizations/433245324/inspectTemplates/432452342` or
+            projects/project-id/inspectTemplates/432452342.
           in: path
           name: name
           required: true
@@ -178,15 +177,14 @@ paths:
         - projects
     get:
       description: |-
-        Gets a DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.get
+        Gets an InspectTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+      operationId: dlp.projects.inspectTemplates.get
       parameters:
         - description: |-
-            Resource name of the organization and deidentify template to be read, for
-            example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of the organization and inspectTemplate to be read, for
+            example `organizations/433245324/inspectTemplates/432452342` or
+            projects/project-id/inspectTemplates/432452342.
           in: path
           name: name
           required: true
@@ -196,7 +194,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -216,19 +214,18 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.patch
+        Updates the InspectTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+      operationId: dlp.projects.inspectTemplates.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateInspectTemplateRequest'
         - description: |-
-            Resource name of organization and deidentify template to be updated, for
-            example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of organization and inspectTemplate to be updated, for
+            example `organizations/433245324/inspectTemplates/432452342` or
+            projects/project-id/inspectTemplates/432452342.
           in: path
           name: name
           required: true
@@ -238,7 +235,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -2534,6 +2531,11 @@ definitions:
   GooglePrivacyDlpV2InfoTypeDescription:
     description: InfoType description.
     properties:
+      description:
+        description: |-
+          Description of the infotype. Translated when language is provided in the
+          request.
+        type: string
       displayName:
         description: Human readable form of the infoType name.
         type: string

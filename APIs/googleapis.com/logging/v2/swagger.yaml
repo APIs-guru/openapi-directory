@@ -233,7 +233,7 @@ paths:
   '/v2/{logName}':
     delete:
       description: Deletes all the log entries in a log. The log reappears if it receives new entries. Log entries written shortly before the delete operation might not be deleted.
-      operationId: logging.billingAccounts.logs.delete
+      operationId: logging.folders.logs.delete
       parameters:
         - description: |-
             Required. The resource name of the log to delete:
@@ -258,7 +258,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -372,7 +372,7 @@ paths:
   '/v2/{name}':
     delete:
       description: Deletes an exclusion.
-      operationId: logging.billingAccounts.exclusions.delete
+      operationId: logging.exclusions.delete
       parameters:
         - description: |-
             Required. The resource name of an existing exclusion to delete:
@@ -397,10 +397,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - exclusions
     get:
       description: Gets the description of an exclusion.
-      operationId: logging.billingAccounts.exclusions.get
+      operationId: logging.exclusions.get
       parameters:
         - description: |-
             Required. The resource name of an existing exclusion:
@@ -429,7 +429,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - exclusions
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -444,7 +444,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Changes one or more properties of an existing exclusion.
-      operationId: logging.billingAccounts.exclusions.patch
+      operationId: logging.exclusions.patch
       parameters:
         - in: body
           name: body
@@ -477,11 +477,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - exclusions
   '/v2/{parent}/exclusions':
     get:
       description: Lists all the exclusions in a parent resource.
-      operationId: logging.billingAccounts.exclusions.list
+      operationId: logging.exclusions.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -517,7 +517,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - exclusions
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -532,7 +532,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new exclusion in a specified parent resource. Only log entries belonging to that resource can be excluded. You can have up to 10 exclusions in a resource.
-      operationId: logging.billingAccounts.exclusions.create
+      operationId: logging.exclusions.create
       parameters:
         - in: body
           name: body
@@ -561,11 +561,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - exclusions
   '/v2/{parent}/logs':
     get:
       description: 'Lists the logs in projects, organizations, folders, or billing accounts. Only logs that have entries are listed.'
-      operationId: logging.billingAccounts.logs.list
+      operationId: logging.folders.logs.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -601,7 +601,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - folders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -697,7 +697,7 @@ paths:
   '/v2/{parent}/sinks':
     get:
       description: Lists sinks.
-      operationId: logging.billingAccounts.sinks.list
+      operationId: logging.folders.sinks.list
       parameters:
         - description: Optional. The maximum number of results to return from this request. Non-positive values are ignored. The presence of nextPageToken in the response indicates that more results might be available.
           in: query
@@ -733,7 +733,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - folders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -748,7 +748,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Creates a sink that exports specified log entries to a destination. The export of newly-ingested log entries begins immediately, unless the sink''s writer_identity is not permitted to write to the destination. A sink can export log entries only from the resource owning the sink.'
-      operationId: logging.billingAccounts.sinks.create
+      operationId: logging.folders.sinks.create
       parameters:
         - in: body
           name: body
@@ -781,11 +781,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
   '/v2/{sinkName}':
     delete:
       description: 'Deletes a sink. If the sink has a unique writer_identity, then that service account is also deleted.'
-      operationId: logging.billingAccounts.sinks.delete
+      operationId: logging.folders.sinks.delete
       parameters:
         - description: |-
             Required. The full resource name of the sink to delete, including the parent resource and the sink identifier:
@@ -810,10 +810,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
     get:
       description: Gets a sink.
-      operationId: logging.billingAccounts.sinks.get
+      operationId: logging.folders.sinks.get
       parameters:
         - description: |-
             Required. The resource name of the sink:
@@ -842,7 +842,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.read'
       tags:
-        - billingAccounts
+        - folders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -857,7 +857,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter.The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.billingAccounts.sinks.patch
+      operationId: logging.folders.sinks.patch
       parameters:
         - in: body
           name: body
@@ -898,10 +898,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
     put:
       description: 'Updates a sink. This method replaces the following fields in the existing sink with values from the new sink: destination, and filter.The updated sink might also have a new writer_identity; see the unique_writer_identity field.'
-      operationId: logging.billingAccounts.sinks.update
+      operationId: logging.folders.sinks.update
       parameters:
         - in: body
           name: body
@@ -942,7 +942,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/logging.admin'
       tags:
-        - billingAccounts
+        - folders
 definitions:
   BucketOptions:
     description: 'BucketOptions describes the bucket boundaries used to create a histogram for the distribution. The buckets can be in a linear sequence, an exponential sequence, or each bucket can be specified explicitly. BucketOptions does not include the number of values in each bucket.A bucket has an inclusive lower bound and exclusive upper bound for the values that are counted for that bucket. The upper bound of a bucket must be strictly greater than the lower bound. The sequence of N buckets for a distribution consists of an underflow bucket (number 0), zero or more finite buckets (number 1 through N - 2) and an overflow bucket (number N - 1). The buckets are contiguous: the lower bound of bucket i (i > 0) is the same as the upper bound of bucket i - 1. The buckets span the whole range of finite values: lower bound of the underflow bucket is -infinity and the upper bound of the overflow bucket is +infinity. The finite buckets are so-called because both bounds are finite.'

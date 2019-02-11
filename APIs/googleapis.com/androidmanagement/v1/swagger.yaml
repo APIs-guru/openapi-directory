@@ -183,10 +183,10 @@ paths:
         - signupUrls
   '/v1/{name}':
     delete:
-      description: 'Deletes an enrollment token. This operation invalidates the token, preventing its future use.'
-      operationId: androidmanagement.enterprises.enrollmentTokens.delete
+      description: 'Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED.'
+      operationId: androidmanagement.enterprises.devices.operations.delete
       parameters:
-        - description: 'The name of the enrollment token in the form enterprises/{enterpriseId}/enrollmentTokens/{enrollmentTokenId}.'
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -214,14 +214,14 @@ paths:
       tags:
         - enterprises
     get:
-      description: Gets info about an application.
-      operationId: androidmanagement.enterprises.applications.get
+      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
+      operationId: androidmanagement.enterprises.devices.operations.get
       parameters:
         - description: 'The preferred language for localized application info, as a BCP47 tag (e.g. "en-US", "de"). If not specified the default language of the application will be used.'
           in: query
           name: languageCode
           type: string
-        - description: 'The name of the application in the form enterprises/{enterpriseId}/applications/{package_name}.'
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -231,7 +231,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Application'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
@@ -250,14 +250,14 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates or creates a policy.
-      operationId: androidmanagement.enterprises.policies.patch
+      description: Updates a device.
+      operationId: androidmanagement.enterprises.devices.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Policy'
-        - description: 'The name of the policy in the form enterprises/{enterpriseId}/policies/{policyId}.'
+            $ref: '#/definitions/Device'
+        - description: 'The name of the device in the form enterprises/{enterpriseId}/devices/{deviceId}.'
           in: path
           name: name
           required: true
@@ -271,7 +271,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Policy'
+            $ref: '#/definitions/Device'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/androidmanagement'
@@ -611,6 +611,7 @@ definitions:
           - FORCE_INSTALLED
           - BLOCKED
           - AVAILABLE
+          - REQUIRED_FOR_SETUP
         type: string
       lockTaskAllowed:
         description: Whether the app is allowed to lock itself in full-screen mode.
@@ -1170,6 +1171,13 @@ definitions:
           format: float
           type: number
         type: array
+    type: object
+  LaunchAppAction:
+    description: An action to launch an app.
+    properties:
+      packageName:
+        description: Package name of app to be launched
+        type: string
     type: object
   ListDevicesResponse:
     description: Response to a request to list devices for a given enterprise.
@@ -1748,6 +1756,11 @@ definitions:
       setWallpaperDisabled:
         description: Whether changing the wallpaper is disabled.
         type: boolean
+      setupActions:
+        description: Actions to take during the setup process.
+        items:
+          $ref: '#/definitions/SetupAction'
+        type: array
       shareLocationDisabled:
         description: Whether location sharing is disabled.
         type: boolean
@@ -1805,7 +1818,7 @@ definitions:
         description: Whether configuring Wi-Fi access points is disabled.
         type: boolean
       wifiConfigsLockdownEnabled:
-        description: Whether Wi-Fi networks defined in Open Network Configuration are locked so they can't be edited by the user.
+        description: DEPRECATED - Use wifi_config_disabled.
         type: boolean
     type: object
   PowerManagementEvent:
@@ -1850,6 +1863,19 @@ definitions:
         description: The port of the direct proxy.
         format: int32
         type: integer
+    type: object
+  SetupAction:
+    description: An action executed during setup.
+    properties:
+      description:
+        $ref: '#/definitions/UserFacingMessage'
+        description: Description of this action.
+      launchApp:
+        $ref: '#/definitions/LaunchAppAction'
+        description: An action to launch an app.
+      title:
+        $ref: '#/definitions/UserFacingMessage'
+        description: Title of this action.
     type: object
   SigninDetail:
     description: A resource containing sign in details for an enterprise.

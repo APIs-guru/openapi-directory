@@ -186,21 +186,13 @@ paths:
   '/v1/{name}':
     delete:
       description: |-
-        Permanently deletes a ProductSet. Products and ReferenceImages in the
-        ProductSet are not deleted.
-
-        The actual image files are not deleted from Google Cloud Storage.
-
-        Possible errors:
-
-        * Returns NOT_FOUND if the ProductSet does not exist.
-      operationId: vision.projects.locations.productSets.delete
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: vision.operations.delete
       parameters:
-        - description: |-
-            Resource name of the ProductSet to delete.
-
-            Format is:
-            `projects/PROJECT_ID/locations/LOC_ID/productSets/PRODUCT_SET_ID`
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -217,21 +209,15 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-vision'
       tags:
-        - projects
+        - operations
     get:
       description: |-
-        Gets information associated with a ProductSet.
-
-        Possible errors:
-
-        * Returns NOT_FOUND if the ProductSet does not exist.
-      operationId: vision.projects.locations.productSets.get
+        Gets the latest state of a long-running operation.  Clients can use this
+        method to poll the operation result at intervals as recommended by the API
+        service.
+      operationId: vision.operations.get
       parameters:
-        - description: |-
-            Resource name of the ProductSet to get.
-
-            Format is:
-            `projects/PROJECT_ID/locations/LOG_ID/productSets/PRODUCT_SET_ID`
+        - description: The name of the operation resource.
           in: path
           name: name
           required: true
@@ -241,14 +227,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/ProductSet'
+            $ref: '#/definitions/Operation'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-vision'
       tags:
-        - projects
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -901,7 +887,7 @@ definitions:
   AnnotateImageRequest:
     description: |-
       Request for performing Google Cloud Vision API tasks over a user-provided
-      image, with user-requested features.
+      image, with user-requested features, and with context information.
     properties:
       features:
         description: Requested features.

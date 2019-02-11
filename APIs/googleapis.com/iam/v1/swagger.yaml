@@ -327,7 +327,7 @@ paths:
         Existing Bindings remains, but are inactive. The Role can be undeleted
         within 7 days. After 7 days the Role is deleted and all Bindings associated
         with the role are removed.
-      operationId: iam.projects.roles.delete
+      operationId: iam.organizations.roles.delete
       parameters:
         - description: Used to perform a consistent read-modify-write.
           in: query
@@ -351,10 +351,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     get:
       description: Gets a Role definition.
-      operationId: iam.projects.roles.get
+      operationId: iam.organizations.roles.get
       parameters:
         - description: |-
             The resource name of the role in one of the following formats:
@@ -385,7 +385,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -400,7 +400,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a Role definition.
-      operationId: iam.projects.roles.patch
+      operationId: iam.organizations.roles.patch
       parameters:
         - in: body
           name: body
@@ -429,7 +429,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     put:
       description: |-
         Updates a ServiceAccount.
@@ -643,7 +643,12 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Signs a blob using a service account's system-managed private key.
+      description: |-
+        **Note**: This method is in the process of being deprecated. Call the
+        [`signBlob()`](/iam/credentials/reference/rest/v1/projects.serviceAccounts/signBlob)
+        method of the Cloud IAM Service Account Credentials API instead.
+
+        Signs a blob using a service account's system-managed private key.
       operationId: iam.projects.serviceAccounts.signBlob
       parameters:
         - in: body
@@ -686,6 +691,10 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
+        **Note**: This method is in the process of being deprecated. Call the
+        [`signJwt()`](/iam/credentials/reference/rest/v1/projects.serviceAccounts/signJwt)
+        method of the Cloud IAM Service Account Credentials API instead.
+
         Signs a JWT using a service account's system-managed private key.
 
         If no expiry time (`exp`) is provided in the `SignJwtRequest`, IAM sets an
@@ -733,7 +742,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.projects.roles.undelete
+      operationId: iam.organizations.roles.undelete
       parameters:
         - in: body
           name: body
@@ -757,11 +766,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{parent}/roles':
     get:
       description: Lists the Roles defined on a resource.
-      operationId: iam.projects.roles.list
+      operationId: iam.organizations.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
           in: query
@@ -782,9 +791,6 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: Include Roles that have been deleted.
-          enum:
-            - BASIC
-            - FULL
           in: query
           name: showDeleted
           type: boolean
@@ -804,7 +810,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -819,7 +825,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new Role.
-      operationId: iam.projects.roles.create
+      operationId: iam.organizations.roles.create
       parameters:
         - in: body
           name: body
@@ -843,7 +849,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'

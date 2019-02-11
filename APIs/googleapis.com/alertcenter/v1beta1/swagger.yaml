@@ -202,12 +202,12 @@ paths:
       tags:
         - alerts
     get:
-      description: Gets the specified alert.
+      description: |-
+        Gets the specified alert. Attempting to get a nonexistent alert returns
+        `NOT_FOUND` error.
       operationId: alertcenter.alerts.get
       parameters:
-        - description: |-
-            Required. The identifier of the alert to retrieve.
-            Returns a NOT_FOUND error if no such alert.
+        - description: Required. The identifier of the alert to retrieve.
           in: path
           name: alertId
           required: true
@@ -243,13 +243,14 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1beta1/alerts/{alertId}/feedback':
     get:
-      description: Lists all the feedback for an alert.
+      description: |-
+        Lists all the feedback for an alert. Attempting to list feedbacks for
+        a non-existent alert returns `NOT_FOUND` error.
       operationId: alertcenter.alerts.feedback.list
       parameters:
         - description: |-
             Required. The alert identifier.
             The "-" wildcard could be used to represent all alerts.
-            If alert does not exist returns a `NOT_FOUND` error.
           in: path
           name: alertId
           required: true
@@ -293,12 +294,12 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Creates new feedback for an alert.
+      description: |-
+        Creates new feedback for an alert. Attempting to create a feedback for
+        a non-existent alert returns `NOT_FOUND` error.
       operationId: alertcenter.alerts.feedback.create
       parameters:
-        - description: |-
-            Required. The identifier of the alert this feedback belongs to.
-            Returns a `NOT_FOUND` error if no such alert.
+        - description: Required. The identifier of the alert this feedback belongs to.
           in: path
           name: alertId
           required: true
@@ -400,7 +401,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Update the customer-level settings.
+      description: Updates the customer-level settings.
       operationId: alertcenter.updateSettings
       parameters:
         - in: body
@@ -443,9 +444,7 @@ definitions:
           * User suspended (suspicious activity)
     type: object
   Alert:
-    description: |-
-      An alert affecting a customer.
-      All fields are read-only once created.
+    description: An alert affecting a customer.
     properties:
       alertId:
         description: Output only. The unique identifier for the alert.
@@ -483,6 +482,7 @@ definitions:
       source:
         description: |-
           Required. A unique identifier for the system that reported the alert.
+          This is output only after alert is created.
 
           Supported sources are any of the following:
 
@@ -502,6 +502,7 @@ definitions:
       type:
         description: |-
           Required. The type of the alert.
+          This is output only after alert is created.
           For a list of available alert types see
           [G Suite Alert types](/admin-sdk/alertcenter/reference/alert-types).
         type: string
@@ -533,6 +534,15 @@ definitions:
           - SOMEWHAT_USEFUL
           - VERY_USEFUL
         type: string
+    type: object
+  AppMakerSqlSetupNotification:
+    description: Alerts from App Maker to notify admins to set up default SQL instance.
+    properties:
+      requestInfo:
+        description: List of applications with requests for default SQL set up.
+        items:
+          $ref: '#/definitions/RequestInfo'
+        type: array
     type: object
   Attachment:
     description: Attachment with application-specific information about an alert.
@@ -845,6 +855,26 @@ definitions:
         items:
           $ref: '#/definitions/GmailMessageInfo'
         type: array
+    type: object
+  RequestInfo:
+    description: Requests for one application that needs default SQL setup.
+    properties:
+      appDeveloperEmail:
+        description: |-
+          List of app developers who triggered notifications for above
+          application.
+        items:
+          type: string
+        type: array
+      appName:
+        description: Required. The application that requires the SQL setup.
+        type: string
+      numberOfRequests:
+        description: |-
+          Required. Number of requests sent for this application to set up default
+          SQL instance.
+        format: int64
+        type: string
     type: object
   Settings:
     description: Customer-level settings.

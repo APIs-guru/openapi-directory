@@ -183,20 +183,13 @@ paths:
           required: true
           type: string
           x-reservedExpansion: true
-        - collectionFormat: multi
-          description: |-
+        - description: |-
             End time of the time window (inclusive).
             Current timestamp if not specified.
           in: query
-          items:
-            type: string
           name: readTimeWindow.endTime
           type: string
         - description: Start time of the time window (exclusive).
-          enum:
-            - CONTENT_TYPE_UNSPECIFIED
-            - RESOURCE
-            - IAM_POLICY
           in: query
           name: readTimeWindow.startTime
           type: string

@@ -749,8 +749,10 @@ definitions:
         enum:
           - HEALTH_UNSPECIFIED
           - HEALTHY
-          - UNHEALTHY
+          - DEPRECATED_UNHEALTHY
           - TIMEOUT
+          - UNHEALTHY_TENSORFLOW
+          - UNHEALTHY_MAINTENANCE
         type: string
       healthDescription:
         description: |-

@@ -107,12 +107,10 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the specified version.
-      operationId: firebasehosting.sites.versions.delete
+      description: Deletes the existing domain mapping on the specified site.
+      operationId: firebasehosting.sites.domains.delete
       parameters:
-        - description: |-
-            Required. The name of the version to be deleted, in the format:
-            <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
+        - description: Required. The name of the domain association to delete.
           in: path
           name: name
           required: true
@@ -604,6 +602,23 @@ definitions:
           challenge.
         type: string
     type: object
+  CloudRunRewrite:
+    description: |-
+      A configured rewrite that will direct any requests to a Cloud Run service. If
+      the Cloud Run service does not exist when setting or updating your Firebase
+      Hosting configuration then the request will fail. Any errors from the Cloud
+      Run service (including when the service has been deleted) will be passed back
+      down to the end user.
+    properties:
+      region:
+        description: |-
+          Optional. The region where the Cloud Run service is hosted.  Defaults to
+          `us-central1` if not supplied.
+        type: string
+      serviceId:
+        description: Required. User supplied ID of the Cloud Run service.
+        type: string
+    type: object
   Domain:
     description: The intended behavior and status information of a domain.
     properties:
@@ -895,6 +910,9 @@ definitions:
       path:
         description: The URL path to rewrite the request to.
         type: string
+      run:
+        $ref: '#/definitions/CloudRunRewrite'
+        description: The request will be forwarded to Cloud Run.
     type: object
   ServingConfig:
     description: |-

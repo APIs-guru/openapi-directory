@@ -2901,6 +2901,9 @@ definitions:
         default: 'androidenterprise#administratorWebTokenSpec'
         description: 'Identifies what kind of resource this is. Value: the fixed string "androidenterprise#administratorWebTokenSpec".'
         type: string
+      managedConfigurations:
+        $ref: '#/definitions/AdministratorWebTokenSpecManagedConfigurations'
+        description: Options for displaying the Managed Configuration page.
       parent:
         description: 'The URI of the parent frame hosting the iframe. To prevent XSS, the iframe may not be hosted at other URIs. This URI must be https.'
         type: string
@@ -2921,6 +2924,12 @@ definitions:
       webApps:
         $ref: '#/definitions/AdministratorWebTokenSpecWebApps'
         description: Options for displaying the Web Apps page.
+    type: object
+  AdministratorWebTokenSpecManagedConfigurations:
+    properties:
+      enabled:
+        description: Whether the Managed Configuration page is displayed. Default is true.
+        type: boolean
     type: object
   AdministratorWebTokenSpecPlaySearch:
     properties:
@@ -3088,7 +3097,7 @@ definitions:
         type: string
     type: object
   AutoInstallConstraint:
-    description: The Auto install constraint. Defines a set of restrictions for installation. At least one of the fields must be set.
+    description: The auto-install constraint. Defines a set of restrictions for installation. At least one of the fields must be set.
     properties:
       chargingStateConstraint:
         description: Charging state constraint.
@@ -3103,7 +3112,7 @@ definitions:
   AutoInstallPolicy:
     properties:
       autoInstallConstraint:
-        description: Constraints for auto-installing the app. You can specify a maximum of one constraint.
+        description: The constraints for auto-installing the app. You can specify a maximum of one constraint.
         items:
           $ref: '#/definitions/AutoInstallConstraint'
         type: array
@@ -3819,7 +3828,7 @@ definitions:
     properties:
       autoInstallPolicy:
         $ref: '#/definitions/AutoInstallPolicy'
-        description: The auto install policy for the product.
+        description: The auto-install policy for the product.
       productId:
         description: 'The ID of the product. For example, "app:com.google.android.gm".'
         type: string

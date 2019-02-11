@@ -152,12 +152,21 @@ paths:
       tags:
         - projects
     get:
-      description: GetBinding returns the binding information.
-      operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.get
+      description: |-
+        Gets the given service instance from the system.
+        The API call accepts both OSB style API and standard google style API
+        resource path.
+        i.e. both `projects/*/brokers/*/instances/*`
+         and `projects/*/brokers/*/v2/service_instances/*` are acceptable paths.
+      operationId: servicebroker.projects.brokers.instances.get
       parameters:
         - description: |-
+            The resource name of the instance to return.
             Name must match
-            `projects/[PROJECT_ID]/brokers/[BROKER_ID]/v2/service_instances/[INSTANCE_ID]/service_bindings`.
+            `projects/[PROJECT_ID]/brokers/[BROKER_ID]/` +
+            `v2/service_instances/[INSTANCE_ID]`
+            or
+            `projects/[PROJECT_ID]/brokers/[BROKER_ID]/instances/[INSTANCE_ID]`.
           in: path
           name: name
           required: true
@@ -175,7 +184,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudServicebrokerV1beta1__GetBindingResponse'
+            $ref: '#/definitions/GoogleCloudServicebrokerV1beta1__ServiceInstance'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -230,7 +239,7 @@ paths:
       description: |-
         Returns the state of the last operation for the binding.
         Only last (or current) operation can be polled.
-      operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.getLast_operation
+      operationId: servicebroker.projects.brokers.instances.bindings.getLast_operation
       parameters:
         - description: |-
             Name must match

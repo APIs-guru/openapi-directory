@@ -2386,7 +2386,7 @@ definitions:
         description: 'Google Compute Engine network where the virtual machines are created. Specify the short name, not the resource path.Defaults to default.'
         type: string
       sessionAffinity:
-        description: Enable session affinity.
+        description: Enable session affinity. Only applicable in the App Engine flexible environment.
         type: boolean
       subnetworkName:
         description: |-

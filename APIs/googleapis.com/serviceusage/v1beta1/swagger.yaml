@@ -162,13 +162,15 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1beta1/{name}':
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: serviceusage.operations.get
+      description: Returns the service configuration and enabled state for a given service.
+      operationId: serviceusage.services.get
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            Name of the consumer and service to get the `ConsumerState` for.
+
+            An example name would be:
+            `projects/123/services/serviceusage.googleapis.com`
+            where `123` is the project number (not project ID).
           in: path
           name: name
           required: true
@@ -178,14 +180,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Service'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/service.management'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
-        - operations
+        - services
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

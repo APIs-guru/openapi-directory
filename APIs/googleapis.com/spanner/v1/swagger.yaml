@@ -344,12 +344,13 @@ paths:
       tags:
         - projects
     get:
-      description: Gets information about a particular instance configuration.
-      operationId: spanner.projects.instanceConfigs.get
+      description: |-
+        Gets a session. Returns `NOT_FOUND` if the session does not exist.
+        This is mainly useful for determining whether a session is still
+        alive.
+      operationId: spanner.projects.instances.databases.sessions.get
       parameters:
-        - description: |-
-            Required. The name of the requested instance configuration. Values are of
-            the form `projects/<project>/instanceConfigs/<config>`.
+        - description: Required. The name of the session to retrieve.
           in: path
           name: name
           required: true
@@ -359,12 +360,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/InstanceConfig'
+            $ref: '#/definitions/Session'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/spanner.admin'
+            - 'https://www.googleapis.com/auth/spanner.data'
       tags:
         - projects
     parameters:
