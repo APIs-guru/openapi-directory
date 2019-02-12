@@ -226,7 +226,7 @@ paths:
   '/#CreateWebhook':
     post:
       operationId: CreateWebhook
-      description: '<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> <important> <p>If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in <a href="http://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console">Change a Build Project''s Settings</a>.</p> </important>'
+      description: '<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> <important> <p>If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console">Change a Build Project''s Settings</a>.</p> </important>'
       responses:
         '200':
           description: Success
@@ -982,7 +982,7 @@ definitions:
         description: ' The number of minutes a build is allowed to be queued before it times out. '
       encryptionKey:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
       tags:
         $ref: '#/definitions/TagList'
         description: <p>A set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
@@ -1013,7 +1013,10 @@ definitions:
         description: The name of the AWS CodeBuild project.
       branchFilter:
         $ref: '#/definitions/String'
-        description: 'A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.'
+        description: '<p>A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.</p> <note> <p> It is recommended that you use <code>filterGroups</code> instead of <code>branchFilter</code>. </p> </note>'
+      filterGroups:
+        $ref: '#/definitions/FilterGroups'
+        description: '<p> An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p> For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>'
   OAuthProviderException: {}
   ResourceNotFoundException: {}
   DeleteProjectOutput:
@@ -1317,7 +1320,7 @@ definitions:
         description: ' The number of minutes a build is allowed to be queued before it times out. '
       encryptionKey:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The replacement AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN)of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
       tags:
         $ref: '#/definitions/TagList'
         description: <p>The replacement set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
@@ -1346,7 +1349,10 @@ definitions:
         description: The name of the AWS CodeBuild project.
       branchFilter:
         $ref: '#/definitions/String'
-        description: 'A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.'
+        description: '<p>A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.</p> <note> <p> It is recommended that you use <code>filterGroups</code> instead of <code>branchFilter</code>. </p> </note>'
+      filterGroups:
+        $ref: '#/definitions/FilterGroups'
+        description: ' An array of arrays of <code>WebhookFilter</code> objects used to determine if a webhook event can trigger a build. A filter group must pcontain at least one <code>EVENT</code> <code>WebhookFilter</code>. '
       rotateSecret:
         $ref: '#/definitions/Boolean'
         description: ' A boolean value that specifies whether the associated GitHub repository''s secret token should be updated. If you use Bitbucket for your repository, <code>rotateSecret</code> is ignored. '
@@ -1660,7 +1666,7 @@ definitions:
         description: Describes a network interface.
       encryptionKey:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
     description: Information about a build.
   WrapperBoolean:
     type: boolean
@@ -1736,10 +1742,10 @@ definitions:
         description: '<p>The current status of the logs in Amazon CloudWatch Logs for a build project. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: Amazon CloudWatch Logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: Amazon CloudWatch Logs are not enabled for this build project.</p> </li> </ul>'
       groupName:
         $ref: '#/definitions/String'
-        description: ' The group name of the logs in Amazon CloudWatch Logs. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with Log Groups and Log Streams</a>. '
+        description: ' The group name of the logs in Amazon CloudWatch Logs. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with Log Groups and Log Streams</a>. '
       streamName:
         $ref: '#/definitions/String'
-        description: ' The prefix of the stream name of the Amazon CloudWatch Logs. For more information, see <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with Log Groups and Log Streams</a>. '
+        description: ' The prefix of the stream name of the Amazon CloudWatch Logs. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html">Working with Log Groups and Log Streams</a>. '
     description: ' Information about Amazon CloudWatch Logs for a build project. '
   ComputeType:
     type: string
@@ -1856,7 +1862,7 @@ definitions:
         description: ' The number of minutes a build is allowed to be queued before it times out. '
       encryptionKey:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
       tags:
         $ref: '#/definitions/TagList'
         description: <p>The tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
@@ -1879,6 +1885,10 @@ definitions:
         $ref: '#/definitions/LogsConfig'
         description: ' Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an S3 bucket, or both. '
     description: Information about a build project.
+  FilterGroups:
+    type: array
+    items:
+      $ref: '#/definitions/FilterGroup'
   Webhook:
     type: object
     properties:
@@ -1893,7 +1903,10 @@ definitions:
         description: <p> The secret token of the associated repository. </p> <note> <p> A Bitbucket webhook does not support <code>secret</code>. </p> </note>
       branchFilter:
         $ref: '#/definitions/String'
-        description: 'A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.'
+        description: '<p>A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If <code>branchFilter</code> is empty, then all branches are built.</p> <note> <p> It is recommended that you use <code>filterGroups</code> instead of <code>branchFilter</code>. </p> </note>'
+      filterGroups:
+        $ref: '#/definitions/FilterGroups'
+        description: '<p> An array of arrays of <code>WebhookFilter</code> objects used to determine which webhooks are triggered. At least one <code>WebhookFilter</code> in the array must specify <code>EVENT</code> as its <code>type</code>. </p> <p> For a build to be triggered, at least one filter group in the <code>filterGroups</code> array must pass. For a filter group to pass, each of its filters must pass. </p>'
       lastModifiedSecret:
         $ref: '#/definitions/Timestamp'
         description: ' A timestamp that indicates the last time a repository''s secret token was modified. '
@@ -2001,6 +2014,26 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/EnvironmentVariable'
+  WebhookFilter:
+    type: object
+    required:
+      - type
+      - pattern
+    properties:
+      type:
+        $ref: '#/definitions/WebhookFilterType'
+        description: '<p> The type of webhook filter. There are five webhook filter types: <code>EVENT</code>, <code>ACTOR_ACCOUNT_ID</code>, <code>HEAD_REF</code>, <code>BASE_REF</code>, and <code>FILE_PATH</code>. </p> <dl> <dt> EVENT </dt> <dd> <p> A webhook event triggers a build when the provided <code>pattern</code> matches one of four event types: <code>PUSH</code>, <code>PULL_REQUEST_CREATED</code>, <code>PULL_REQUEST_UPDATED</code>, and <code>PULL_REQUEST_REOPENED</code>. The <code>EVENT</code> patterns are specified as a comma-separated string. For example, <code>PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED</code> filters all push, pull request created, and pull request updated events. </p> <note> <p> The <code>PULL_REQUEST_REOPENED</code> works with GitHub and GitHub Enterprise only. </p> </note> </dd> <dt> ACTOR_ACCOUNT_ID </dt> <dd> <p> A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket account ID matches the regular expression <code>pattern</code>. </p> </dd> <dt> HEAD_REF </dt> <dd> <p> A webhook event triggers a build when the head reference matches the regular expression <code>pattern</code>. For example, <code>refs/heads/branch-name</code> and <code>refs/tags/tag-name</code>. </p> <p> Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request events. </p> </dd> <dt> BASE_REF </dt> <dd> <p> A webhook event triggers a build when the base reference matches the regular expression <code>pattern</code>. For example, <code>refs/heads/branch-name</code>. </p> <note> <p> Works with pull request events only. </p> </note> </dd> <dt> FILE_PATH </dt> <dd> <p> A webhook triggers a build when the path of a changed file matches the regular expression <code>pattern</code>. </p> <note> <p> Works with GitHub and GitHub Enterprise push events only. </p> </note> </dd> </dl>'
+      pattern:
+        $ref: '#/definitions/String'
+        description: '<p> For a <code>WebHookFilter</code> that uses <code>EVENT</code> type, a comma-separated string that specifies one or more events. For example, the webhook filter <code>PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED</code> allows all push, pull request created, and pull request updated events to trigger a build. </p> <p> For a <code>WebHookFilter</code> that uses any of the other filter types, a regular expression pattern. For example, a <code>WebHookFilter</code> that uses <code>HEAD_REF</code> for its <code>type</code> and the pattern <code>^refs/heads/</code> triggers a build when the head reference is a branch with a reference name <code>refs/heads/branch-name</code>. </p>'
+      excludeMatchedPattern:
+        $ref: '#/definitions/WrapperBoolean'
+        description: ' Used to indicate that the <code>pattern</code> determines which webhook events do not trigger a build. If true, then a webhook event that does not match the <code>pattern</code> triggers a build. If false, then a webhook event that matches the <code>pattern</code> triggers a build. '
+    description: ' A filter used to determine which webhooks trigger a build. '
+  FilterGroup:
+    type: array
+    items:
+      $ref: '#/definitions/WebhookFilter'
   GitCloneDepth:
     type: integer
     minimum: 0
@@ -2083,7 +2116,7 @@ definitions:
       credentialProvider:
         $ref: '#/definitions/CredentialProviderType'
         description: ' The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for AWS Secrets Manager. '
-    description: '<p> Information about credentials that provide access to a private Docker registry. When this is set: </p> <ul> <li> <p> <code>imagePullCredentialsType</code> must be set to <code>SERVICE_ROLE</code>. </p> </li> <li> <p> images cannot be curated or an Amazon ECR image.</p> </li> </ul> <p> For more information, see <a href="http://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html">Private Registry with AWS Secrets Manager Samle for AWS CodeBuild</a>. </p>'
+    description: '<p> Information about credentials that provide access to a private Docker registry. When this is set: </p> <ul> <li> <p> <code>imagePullCredentialsType</code> must be set to <code>SERVICE_ROLE</code>. </p> </li> <li> <p> images cannot be curated or an Amazon ECR image.</p> </li> </ul> <p> For more information, see <a href="https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html">Private Registry with AWS Secrets Manager Sample for AWS CodeBuild</a>. </p>'
   ProjectSourceVersion:
     type: object
     required:
@@ -2161,3 +2194,11 @@ definitions:
         $ref: '#/definitions/ValueInput'
         description: The tag's value.
     description: '<p>A tag, consisting of a key and a value.</p> <p>This tag is available for use by AWS services that support tags in AWS CodeBuild.</p>'
+  WebhookFilterType:
+    type: string
+    enum:
+      - EVENT
+      - BASE_REF
+      - HEAD_REF
+      - ACTOR_ACCOUNT_ID
+      - FILE_PATH

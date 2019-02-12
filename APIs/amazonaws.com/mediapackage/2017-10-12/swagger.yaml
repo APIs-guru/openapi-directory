@@ -1160,6 +1160,9 @@ definitions:
     properties:
       Encryption:
         $ref: '#/definitions/DashEncryption'
+      ManifestLayout:
+        description: 'Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.'
+        $ref: '#/definitions/ManifestLayout'
       ManifestWindowSeconds:
         description: Time window (in seconds) contained in each manifest.
         $ref: '#/definitions/__integer'
@@ -1184,6 +1187,9 @@ definitions:
           Duration (in seconds) of each segment. Actual segments will be
           rounded to the nearest multiple of the source segment duration.
         $ref: '#/definitions/__integer'
+      SegmentTemplateFormat:
+        description: 'Determines the type of SegmentTimeline included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs.'
+        $ref: '#/definitions/SegmentTemplateFormat'
       StreamSelection:
         $ref: '#/definitions/StreamSelection'
       SuggestedPresentationDelaySeconds:
@@ -1268,6 +1274,11 @@ definitions:
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
     description: A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.
+  ManifestLayout:
+    enum:
+      - FULL
+      - COMPACT
+    type: string
   __listOf__PeriodTriggersElement:
     type: array
     items:
@@ -1276,6 +1287,11 @@ definitions:
     enum:
       - NONE
       - HBBTV_1_5
+    type: string
+  SegmentTemplateFormat:
+    enum:
+      - NUMBER_WITH_TIMELINE
+      - TIME_WITH_TIMELINE
     type: string
   EncryptionMethod:
     enum:
