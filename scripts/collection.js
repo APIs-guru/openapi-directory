@@ -1090,6 +1090,12 @@ function patchSwagger(swagger, exPatch) {
   if (swagger.info.logo && swagger.host === 'api.nytimes.com')
     delete swagger.info.logo;
 
+  if (swagger.info['x-logo'] && swagger.info['x-logo'].url) {
+    if (!swagger.info['x-logo'].url.startsWith('http')) {
+      swagger.info['x-logo'].url = url.resolve(util.getOriginUrl(swagger),swagger.info['x-logo'].url);
+    }
+  }
+
   //swagger-converter if title is absent use host as default - makes invalid
   //if (swagger.info.title === swagger.host)
   //  delete swagger.info.title;
