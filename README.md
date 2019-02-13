@@ -67,6 +67,7 @@ Existing integrations
  - [Paw](https://luckymarmot.com/paw) - The most powerful HTTP client for Mac - You can import definitions and directly play with the APIs, [see how](https://luckymarmot.com/paw/doc/examples/search-apis)
  - [Bitscoop](https://bitscoop.com/) - A better way to create and maintain integrations
  - [WinSwag](https://github.com/SvenEV/WinSwag) - A UWP app for loading Swagger definitions and exploring REST APIs
+ - [OpenAPI-Directory-JS](https://github.com/httptoolkit/openapi-directory-js) - The OpenAPI directory precompiled & indexed for JS usage & searching.
 
 Also used as test suite in the following projects:
  - [ReDoc](https://github.com/Rebilly/ReDoc) - **Swagger-generated API Reference Documentation**
