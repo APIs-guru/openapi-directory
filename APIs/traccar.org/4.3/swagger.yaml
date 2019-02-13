@@ -15,7 +15,6 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/tananaev/traccar/master/swagger.json'
       version: '2.0'
-  x-preferred: true
   x-providerName: traccar.org
 consumes:
   - application/json
@@ -342,14 +341,12 @@ paths:
       parameters:
         - $ref: '#/parameters/all'
         - $ref: '#/parameters/userId'
-        - collectionFormat: multi
-          description: To fetch one or more devices. Multiple params can be passed like `id=31&id=42`
+        - description: To fetch one or more devices. Multiple params can be passed like `id=31&id=42`
           in: query
           name: id
           required: false
           type: integer
-        - collectionFormat: multi
-          description: To fetch one or more devices. Multiple params can be passed like `uniqueId=333331&uniqieId=44442`
+        - description: To fetch one or more devices. Multiple params can be passed like `uniqueId=333331&uniqieId=44442`
           in: query
           name: uniqueId
           required: false
@@ -696,8 +693,7 @@ paths:
           name: to
           required: false
           type: string
-        - collectionFormat: multi
-          description: To fetch one or more positions. Multiple params can be passed like `id=31&id=42`
+        - description: To fetch one or more positions. Multiple params can be passed like `id=31&id=42`
           in: query
           name: id
           required: false
