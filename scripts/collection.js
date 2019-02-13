@@ -314,6 +314,7 @@ function validateCollection(dir, command) {
             fs.unlinkSync(filename);
           }
           else {
+            process.exitCode = 1;
             warnings.push('Validation errors detected '+filename);
           }
         }
