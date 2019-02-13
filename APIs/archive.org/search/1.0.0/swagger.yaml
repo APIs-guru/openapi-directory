@@ -37,7 +37,6 @@ parameters:
     required: false
     type: string
   field:
-    collectionFormat: multi
     default: identifier
     description: Metadata field
     in: query
@@ -61,7 +60,6 @@ parameters:
     required: false
     type: integer
   sort:
-    collectionFormat: multi
     description: sort collations
     in: query
     maxLength: 250
