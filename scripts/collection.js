@@ -17,6 +17,7 @@ const jsonPatch = require('json-merge-patch');
 const jiff = require('jiff');
 const YAML = require('js-yaml');
 const Promise = require('bluebird');
+const recurse = require('reftools/lib/recurse.js').recurse;
 
 const makeRequest = require('makeRequest');
 const util = require('./util');
@@ -545,6 +546,7 @@ function writeSpec(source, format, exPatch, command) {
 
       expandPathTemplates(swagger);
       replaceSpacesInSchemaNames(swagger);
+      fixCollectionFormats(swagger);
       extractApiKeysFromParameters(swagger);
       simplifyProduceConsume(swagger);
 
@@ -809,6 +811,16 @@ function replaceSpacesInSchemaNames(swagger) {
 
   swagger.definitions = _.mapKeys(swagger.definitions, function (value, key) {
     return replaceSpaces(key);
+  });
+}
+
+function fixCollectionFormats(swagger) {
+  recurse(swagger,{},function(obj, key, state) {
+    if (typeof obj.collectionFormat === 'string') {
+      if ((typeof obj.type === 'string') && (obj.type !== 'array')) {
+        delete obj.collectionFormat; // is it better to change param to array?
+      }
+    }
   });
 }
 
