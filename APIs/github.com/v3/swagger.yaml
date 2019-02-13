@@ -14,7 +14,7 @@ info:
     - collaboration
     - developer_tools
   x-logo:
-    url: 'http://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png'
+    url: 'https://twitter.com/github/profile_image?size=original'
   x-origin:
     - format: swagger
       url: 'https://raw.githubusercontent.com/APIs-guru/unofficial_openapi_specs/master/github.com/v3/swagger.yaml'
@@ -4394,7 +4394,7 @@ paths:
     delete:
       description: |
         Delete a Reference
-        Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a 
+        Example: Deleting a branch: DELETE /repos/octocat/Hello-World/git/refs/heads/feature-a
         Example: Deleting a tag:        DELETE /repos/octocat/Hello-World/git/refs/tags/v1.0
       parameters:
         - description: Name of repository owner.
