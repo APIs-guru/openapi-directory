@@ -17,6 +17,7 @@ info:
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: servicefabric
+  x-preferred: false
   x-tags:
     - Azure
     - Microsoft
@@ -155,20 +156,20 @@ parameters:
   ApplicationsHealthStateFilterOptionalQueryParam:
     default: 0
     description: |
-      Allows filtering of the application health state objects returned in the result of cluster health 
+      Allows filtering of the application health state objects returned in the result of cluster health
       query based on their health state.
       The possible values for this parameter include integer value obtained from members or bitwise operations
-      on members of HealthStateFilter enumeration. Only applications that match the filter are returned. 
+      on members of HealthStateFilter enumeration. Only applications that match the filter are returned.
       All applications are used to evaluate the aggregated health state. If not specified, all entries are returned.
       The state values are flag based enumeration, so the value could be a combination of these values obtained using bitwise 'OR' operator.
       For example, if the provided value is 6 then health state of applications with HealthState value of OK (2) and Warning (4) are returned.
-        
-      - Default - Default value. Matches any HealthState. The value is zero. 
-      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. 
-      - Ok - Filter that matches input with HealthState value Ok. The value is 2. 
-      - Warning - Filter that matches input with HealthState value Warning. The value is 4. 
-      - Error - Filter that matches input with HealthState value Error. The value is 8. 
-      - All - Filter that matches input with any HealthState value. The value is 65535. 
+
+      - Default - Default value. Matches any HealthState. The value is zero.
+      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.
+      - Ok - Filter that matches input with HealthState value Ok. The value is 2.
+      - Warning - Filter that matches input with HealthState value Warning. The value is 4.
+      - Error - Filter that matches input with HealthState value Error. The value is 8.
+      - All - Filter that matches input with any HealthState value. The value is 65535.
     in: query
     name: ApplicationsHealthStateFilter
     required: false
@@ -269,8 +270,8 @@ parameters:
     description: |
       This enum is passed to the StartDataLoss API to indicate what type of data loss to induce.
       - Invalid - Reserved.  Do not pass into API.
-      - PartialDataLoss - PartialDataLoss option will cause a quorum of replicas to go down, triggering an OnDataLoss event in the system for the given partition. 
-      - FullDataLoss - FullDataLoss option will drop all the replicas which means that all the data will be lost. 
+      - PartialDataLoss - PartialDataLoss option will cause a quorum of replicas to go down, triggering an OnDataLoss event in the system for the given partition.
+      - FullDataLoss - FullDataLoss option will drop all the replicas which means that all the data will be lost.
     enum:
       - Invalid
       - PartialDataLoss
@@ -303,14 +304,14 @@ parameters:
       The possible values for this parameter include integer value of one of the following health states. Only deployed applications that match the filter will be returned.\
       All deployed applications are used to evaluate the aggregated health state. If not specified, all entries are returned.
       The state values are flag based enumeration, so the value could be a combination of these value obtained using bitwise 'OR' operator.
-      For example, if the provided value is 6 then health state of deployed applications with HealthState value of OK (2) and Warning (4) are returned. 
-        
-      - Default - Default value. Matches any HealthState. The value is zero. 
-      - None - Filter that doesn't match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. 
-      - Ok - Filter that matches input with HealthState value Ok. The value is 2. 
-      - Warning - Filter that matches input with HealthState value Warning. The value is 4. 
-      - Error - Filter that matches input with HealthState value Error. The value is 8. 
-      - All - Filter that matches input with any HealthState value. The value is 65535. 
+      For example, if the provided value is 6 then health state of deployed applications with HealthState value of OK (2) and Warning (4) are returned.
+
+      - Default - Default value. Matches any HealthState. The value is zero.
+      - None - Filter that doesn't match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.
+      - Ok - Filter that matches input with HealthState value Ok. The value is 2.
+      - Warning - Filter that matches input with HealthState value Warning. The value is 4.
+      - Error - Filter that matches input with HealthState value Error. The value is 8.
+      - All - Filter that matches input with any HealthState value. The value is 65535.
     in: query
     name: DeployedApplicationsHealthStateFilter
     required: false
@@ -324,14 +325,14 @@ parameters:
       Only deployed service packages that match the filter are returned. All deployed service packages are used to evaluate the aggregated health state of the deployed application.
       If not specified, all entries are returned.
       The state values are flag based enumeration, so the value can be a combination of these value obtained using bitwise 'OR' operator.
-      For example, if the provided value is 6 then health state of service packages with HealthState value of OK (2) and Warning (4) are returned. 
-        
-      - Default - Default value. Matches any HealthState. The value is zero. 
-      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. 
-      - Ok - Filter that matches input with HealthState value Ok. The value is 2. 
-      - Warning - Filter that matches input with HealthState value Warning. The value is 4. 
-      - Error - Filter that matches input with HealthState value Error. The value is 8. 
-      - All - Filter that matches input with any HealthState value. The value is 65535. 
+      For example, if the provided value is 6 then health state of service packages with HealthState value of OK (2) and Warning (4) are returned.
+
+      - Default - Default value. Matches any HealthState. The value is zero.
+      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.
+      - Ok - Filter that matches input with HealthState value Ok. The value is 2.
+      - Warning - Filter that matches input with HealthState value Warning. The value is 4.
+      - Error - Filter that matches input with HealthState value Error. The value is 8.
+      - All - Filter that matches input with any HealthState value. The value is 65535.
     in: query
     name: DeployedServicePackagesHealthStateFilter
     required: false
@@ -358,13 +359,13 @@ parameters:
       The possible values for this parameter include integer value of one of the following health states.
       Only events that match the filter are returned. All events are used to evaluate the aggregated health state.
       If not specified, all entries are returned. The state values are flag based enumeration, so the value could be a combination of these value obtained using bitwise 'OR' operator. For example, If the provided value is 6 then all of the events with HealthState value of OK (2) and Warning (4) are returned.
-        
-      - Default - Default value. Matches any HealthState. The value is zero. 
-      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. 
-      - Ok - Filter that matches input with HealthState value Ok. The value is 2. 
-      - Warning - Filter that matches input with HealthState value Warning. The value is 4. 
-      - Error - Filter that matches input with HealthState value Error. The value is 8. 
-      - All - Filter that matches input with any HealthState value. The value is 65535. 
+
+      - Default - Default value. Matches any HealthState. The value is zero.
+      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.
+      - Ok - Filter that matches input with HealthState value Ok. The value is 2.
+      - Warning - Filter that matches input with HealthState value Warning. The value is 4.
+      - Error - Filter that matches input with HealthState value Error. The value is 8.
+      - All - Filter that matches input with any HealthState value. The value is 65535.
     in: query
     name: EventsHealthStateFilter
     required: false
@@ -473,7 +474,7 @@ parameters:
     default: default
     description: |
       Allows filtering the nodes based on the NodeStatus. Only the nodes that are matching the specified filter value will be returned. The filter value can be one of the following.
-        
+
         - default - This filter value will match all of the nodes excepts the ones with with status as Unknown or Removed.
         - all - This filter value will match all of the nodes.
         - up - This filter value will match nodes that are Up.
@@ -500,7 +501,7 @@ parameters:
     x-ms-parameter-location: method
   NodeTransitionTypeRequiredQueryParam:
     description: |
-      Indicates the type of transition to perform.  NodeTransitionType.Start will start a stopped node.  NodeTransitionType.Stop will stop a node that is up.      
+      Indicates the type of transition to perform.  NodeTransitionType.Start will start a stopped node.  NodeTransitionType.Stop will stop a node that is up.
         - Invalid - Reserved.  Do not pass into API.
         - Start - Transition a stopped node to up.
         - Stop - Transition an up node to stopped.
@@ -516,19 +517,19 @@ parameters:
   NodesHealthStateFilterOptionalQueryParam:
     default: 0
     description: |
-      Allows filtering of the node health state objects returned in the result of cluster health query 
-      based on their health state. The possible values for this parameter include integer value of one of the 
+      Allows filtering of the node health state objects returned in the result of cluster health query
+      based on their health state. The possible values for this parameter include integer value of one of the
       following health states. Only nodes that match the filter are returned. All nodes are used to evaluate the aggregated health state.
       If not specified, all entries are returned.
       The state values are flag based enumeration, so the value could be a combination of these values obtained using bitwise 'OR' operator.
       For example, if the provided value is 6 then health state of nodes with HealthState value of OK (2) and Warning (4) are returned.
-        
-      - Default - Default value. Matches any HealthState. The value is zero. 
-      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. 
-      - Ok - Filter that matches input with HealthState value Ok. The value is 2. 
-      - Warning - Filter that matches input with HealthState value Warning. The value is 4. 
-      - Error - Filter that matches input with HealthState value Error. The value is 8. 
-      - All - Filter that matches input with any HealthState value. The value is 65535. 
+
+      - Default - Default value. Matches any HealthState. The value is zero.
+      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.
+      - Ok - Filter that matches input with HealthState value Ok. The value is 2.
+      - Warning - Filter that matches input with HealthState value Warning. The value is 4.
+      - Error - Filter that matches input with HealthState value Error. The value is 8.
+      - All - Filter that matches input with any HealthState value. The value is 65535.
     in: query
     name: NodesHealthStateFilter
     required: false
@@ -577,14 +578,14 @@ parameters:
       The possible values for this parameter include integer value of one of the following health states.
       Only partitions that match the filter are returned. All partitions are used to evaluate the aggregated health state.
       If not specified, all entries are returned. The state values are flag based enumeration, so the value could be a combination of these value
-      obtained using bitwise 'OR' operator. For example, if the provided value is 6 then health state of partitions with HealthState value of OK (2) and Warning (4) will be returned. 
-        
-      - Default - Default value. Matches any HealthState. The value is zero. 
-      - None - Filter that doesn't match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. 
-      - Ok - Filter that matches input with HealthState value Ok. The value is 2. 
-      - Warning - Filter that matches input with HealthState value Warning. The value is 4. 
-      - Error - Filter that matches input with HealthState value Error. The value is 8. 
-      - All - Filter that matches input with any HealthState value. The value is 65535. 
+      obtained using bitwise 'OR' operator. For example, if the provided value is 6 then health state of partitions with HealthState value of OK (2) and Warning (4) will be returned.
+
+      - Default - Default value. Matches any HealthState. The value is zero.
+      - None - Filter that doesn't match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.
+      - Ok - Filter that matches input with HealthState value Ok. The value is 2.
+      - Warning - Filter that matches input with HealthState value Warning. The value is 4.
+      - Error - Filter that matches input with HealthState value Error. The value is 8.
+      - All - Filter that matches input with any HealthState value. The value is 65535.
     in: query
     name: PartitionsHealthStateFilter
     required: false
@@ -617,7 +618,7 @@ parameters:
       This enum is passed to the StartQuorumLoss API to indicate what type of quorum loss to induce.
         - Invalid - Reserved.  Do not pass into API.
         - QuorumReplicas - Partial Quorum loss mode : Minimum number of replicas for a partition will be down that will cause a quorum loss.
-        - AllReplicas- Full Quorum loss mode : All replicas for a partition will be down that will cause a quorum loss. 
+        - AllReplicas- Full Quorum loss mode : All replicas for a partition will be down that will cause a quorum loss.
     enum:
       - Invalid
       - QuorumReplicas
@@ -652,14 +653,14 @@ parameters:
   ReplicasHealthStateFilerOptionalQueryParam:
     default: 0
     description: |
-      Allows filtering the collection of ReplicaHealthState objects on the partition. The value can be obtained from members or bitwise operations on members of HealthStateFilter. Only replicas that match the filter will be returned. All replicas will be used to evaluate the aggregated health state. If not specified, all entries will be returned.The state values are flag based enumeration, so the value could be a combination of these value obtained using bitwise 'OR' operator. For example, If the provided value is 6 then all of the events with HealthState value of OK (2) and Warning (4) will be returned. The possible values for this parameter include integer value of one of the following health states.    
-        
-      - Default - Default value. Matches any HealthState. The value is zero. 
-      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. 
-      - Ok - Filter that matches input with HealthState value Ok. The value is 2. 
-      - Warning - Filter that matches input with HealthState value Warning. The value is 4. 
-      - Error - Filter that matches input with HealthState value Error. The value is 8. 
-      - All - Filter that matches input with any HealthState value. The value is 65535. 
+      Allows filtering the collection of ReplicaHealthState objects on the partition. The value can be obtained from members or bitwise operations on members of HealthStateFilter. Only replicas that match the filter will be returned. All replicas will be used to evaluate the aggregated health state. If not specified, all entries will be returned.The state values are flag based enumeration, so the value could be a combination of these value obtained using bitwise 'OR' operator. For example, If the provided value is 6 then all of the events with HealthState value of OK (2) and Warning (4) will be returned. The possible values for this parameter include integer value of one of the following health states.
+
+      - Default - Default value. Matches any HealthState. The value is zero.
+      - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.
+      - Ok - Filter that matches input with HealthState value Ok. The value is 2.
+      - Warning - Filter that matches input with HealthState value Warning. The value is 4.
+      - Error - Filter that matches input with HealthState value Error. The value is 8.
+      - All - Filter that matches input with any HealthState value. The value is 65535.
     in: query
     name: ReplicasHealthStateFilter
     required: false
@@ -699,7 +700,7 @@ parameters:
     description: |
       - Invalid - Reserved.  Do not pass into API.
       - AllReplicasOrInstances - All replicas or instances in the partition are restarted at once.
-      - OnlyActiveSecondaries - Only the secondary replicas are restarted. 
+      - OnlyActiveSecondaries - Only the secondary replicas are restarted.
     enum:
       - Invalid
       - AllReplicasOrInstances
@@ -787,14 +788,14 @@ parameters:
       The possible values for this parameter include integer value of one of the following health states.
       Only services that match the filter are returned. All services are used to evaluate the aggregated health state.
       If not specified, all entries are returned. The state values are flag based enumeration, so the value could be a combination of these value
-      obtained using bitwise 'OR' operator. For example, if the provided value is 6 then health state of services with HealthState value of OK (2) and Warning (4) will be returned. 
-        
-      - Default - Default value. Matches any HealthState. The value is zero. 
-      - None - Filter that doesn�t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. 
-      - Ok - Filter that matches input with HealthState value Ok. The value is 2. 
-      - Warning - Filter that matches input with HealthState value Warning. The value is 4. 
-      - Error - Filter that matches input with HealthState value Error. The value is 8. 
-      - All - Filter that matches input with any HealthState value. The value is 65535. 
+      obtained using bitwise 'OR' operator. For example, if the provided value is 6 then health state of services with HealthState value of OK (2) and Warning (4) will be returned.
+
+      - Default - Default value. Matches any HealthState. The value is zero.
+      - None - Filter that doesn�t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.
+      - Ok - Filter that matches input with HealthState value Ok. The value is 2.
+      - Warning - Filter that matches input with HealthState value Warning. The value is 4.
+      - Error - Filter that matches input with HealthState value Error. The value is 8.
+      - All - Filter that matches input with any HealthState value. The value is 65535.
     in: query
     name: ServicesHealthStateFilter
     required: false
@@ -927,7 +928,7 @@ paths:
         Gets the health of a Service Fabric cluster.
         Use EventsHealthStateFilter to filter the collection of health events reported on the cluster based on the health state.
         Similarly, use NodesHealthStateFilter and ApplicationsHealthStateFilter to filter the collection of nodes and applications returned based on their aggregated health state.
-        Use ClusterHealthPolicies to override the health policies used to evaluate the health. 
+        Use ClusterHealthPolicies to override the health policies used to evaluate the health.
       operationId: GetClusterHealthUsingPolicy
       parameters:
         - $ref: '#/parameters/ApiVersionRequiredQueryParam'
@@ -1953,10 +1954,10 @@ paths:
         may be left behind.  Specifying force as true should be used with care.  Calling this API with force set to true is not allowed until this API has already
         been called on the same test command with force set to false first, or unless the test command already has an OperationState of OperationState.RollingBack.
         Clarification: OperationState.RollingBack means that the system will/is be cleaning up internal system state caused by executing the command.  It will not restore data if the
-        test command was to cause data loss.  For example, if you call StartDataLoss then call this API, the system will only clean up internal state from running the command.  
+        test command was to cause data loss.  For example, if you call StartDataLoss then call this API, the system will only clean up internal state from running the command.
         It will not restore the target partition's data, if the command progressed far enough to cause data loss.
 
-        Important note:  if this API is invoked with force==true, internal state may be left behind. 
+        Important note:  if this API is invoked with force==true, internal state may be left behind.
       operationId: CancelOperation
       parameters:
         - $ref: '#/parameters/ApiVersionRequiredQueryParam'
@@ -2028,7 +2029,7 @@ paths:
   '/Faults/Nodes/{nodeName}/$/StartTransition/':
     post:
       description: |
-        Starts or stops a cluster node.  A cluster node is a process, not the OS instance itself.  To start a node, pass in "Start" for the NodeTransitionType parameter.      
+        Starts or stops a cluster node.  A cluster node is a process, not the OS instance itself.  To start a node, pass in "Start" for the NodeTransitionType parameter.
         To stop a node, pass in "Stop" for the NodeTransitionType parameter.  This API starts the operation - when the API returns the node may not have finished transitioning yet.
         Call GetNodeTransitionProgress with the same OperationId to get the progress of the operation.
       operationId: StartNodeTransition
@@ -2108,7 +2109,7 @@ paths:
   '/Faults/Services/{serviceId}/$/GetPartitions/{partitionId}/$/GetQuorumLossProgress':
     get:
       description: |
-        Gets the progress of a quorum loss operation started with StartQuorumLoss, using the provided OperationId.  
+        Gets the progress of a quorum loss operation started with StartQuorumLoss, using the provided OperationId.
       operationId: GetQuorumLossProgress
       parameters:
         - $ref: '#/parameters/ApiVersionRequiredQueryParam'
@@ -2208,7 +2209,7 @@ paths:
         This API will induce data loss for the specified partition. It will trigger a call to the OnDataLoss API of the partition.
         Actual data loss will depend on the specified DataLossMode
         PartialDataLoss - Only a quorum of replicas are removed and OnDataLoss is triggered for the partition but actual data loss depends on the presence of in-flight replication.
-        FullDataLoss - All replicas are removed hence all data is lost and OnDataLoss is triggered.            
+        FullDataLoss - All replicas are removed hence all data is lost and OnDataLoss is triggered.
 
         This API should only be called with a stateful service as the target.
 
@@ -2217,7 +2218,7 @@ paths:
         Note:  Once this API has been called, it cannot be reversed. Calling CancelOperation will only stop execution and clean up internal system state.
         It will not restore data if the command has progressed far enough to cause data loss.
 
-        Call the GetDataLossProgress API with the same OperationId to return information on the operation started with this API.               
+        Call the GetDataLossProgress API with the same OperationId to return information on the operation started with this API.
       operationId: StartDataLoss
       parameters:
         - $ref: '#/parameters/ApiVersionRequiredQueryParam'
@@ -2267,10 +2268,10 @@ paths:
     post:
       description: |
         This API is useful for testing failover.
-              
-        If used to target a stateless service partition, RestartPartitionMode must be AllReplicasOrInstances. 
 
-        Call the GetPartitionRestartProgress API using the same OperationId to get the progress.     
+        If used to target a stateless service partition, RestartPartitionMode must be AllReplicasOrInstances.
+
+        Call the GetPartitionRestartProgress API using the same OperationId to get the progress.
       operationId: StartPartitionRestart
       parameters:
         - $ref: '#/parameters/ApiVersionRequiredQueryParam'
@@ -3258,8 +3259,8 @@ paths:
   '/Partitions/{partitionId}/$/GetLoadInformation':
     get:
       description: |
-        Returns information about the specified partition. 
-        The response includes a list of load information. 
+        Returns information about the specified partition.
+        The response includes a list of load information.
         Each information includes load metric name, value and last reported time in UTC.
       operationId: GetPartitionLoadInformation
       parameters:
@@ -3948,7 +3949,7 @@ definitions:
       MaxPercentUnhealthyDeployedApplications:
         default: 0
         description: |
-          The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.        
+          The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.
           The percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.
           This is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.
           The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
@@ -4114,10 +4115,10 @@ definitions:
     properties:
       MaximumCapacity:
         description: |
-          The maximum node capacity for Service Fabric application. 
-          This is the maximum Load for an instance of this application on a single node. Even if the capacity of node is greater than this value, Service Fabric will limit the total load of services within the application on each node to this value. 
-          If set to zero, capacity for this metric is unlimited on each node. 
-          When creating a new application with application capacity defined, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity. 
+          The maximum node capacity for Service Fabric application.
+          This is the maximum Load for an instance of this application on a single node. Even if the capacity of node is greater than this value, Service Fabric will limit the total load of services within the application on each node to this value.
+          If set to zero, capacity for this metric is unlimited on each node.
+          When creating a new application with application capacity defined, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.
           When updating existing application with application capacity, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.
         format: int64
         type: integer
@@ -4126,18 +4127,18 @@ definitions:
         type: string
       ReservationCapacity:
         description: |
-          The node reservation capacity for Service Fabric application. 
-          This is the amount of load which is reserved on nodes which have instances of this application. 
-          If MinimumNodes is specified, then the product of these values will be the capacity reserved in the cluster for the application. 
-          If set to zero, no capacity is reserved for this metric. 
-          When setting application capacity or when updating application capacity; this value must be smaller than or equal to MaximumCapacity for each metric. 
+          The node reservation capacity for Service Fabric application.
+          This is the amount of load which is reserved on nodes which have instances of this application.
+          If MinimumNodes is specified, then the product of these values will be the capacity reserved in the cluster for the application.
+          If set to zero, no capacity is reserved for this metric.
+          When setting application capacity or when updating application capacity; this value must be smaller than or equal to MaximumCapacity for each metric.
         format: int64
         type: integer
       TotalApplicationCapacity:
         description: |
-          The total metric capacity for Service Fabric application. 
-          This is the total metric capacity for this application in the cluster. Service Fabric will try to limit the sum of loads of services within the application to this value. 
-          When creating a new application with application capacity defined, the product of MaximumNodes and MaximumCapacity must always be smaller than or equal to this value. 
+          The total metric capacity for Service Fabric application.
+          This is the total metric capacity for this application in the cluster. Service Fabric will try to limit the sum of loads of services within the application to this value.
+          When creating a new application with application capacity defined, the product of MaximumNodes and MaximumCapacity must always be smaller than or equal to this value.
         format: int64
         type: integer
     type: object
@@ -4415,8 +4416,8 @@ definitions:
   ChaosContext:
     description: |
       Describes a map, which is a collection of (string, string) type key-value pairs. The map can be used to record information about
-      the Chaos run. There cannot be more than 100 such pairs and each string (key or value) can be at most 4095 characters long. 
-      This map is set by the starter of the Chaos run to optionally store the context about the specific run. 
+      the Chaos run. There cannot be more than 100 such pairs and each string (key or value) can be at most 4095 characters long.
+      This map is set by the starter of the Chaos run to optionally store the context about the specific run.
     properties:
       Map:
         $ref: '#/definitions/ChaosContextMap'
@@ -4501,7 +4502,7 @@ definitions:
       MaxClusterStabilizationTimeoutInSeconds:
         default: 60
         description: |
-          The maximum amount of time to wait for all cluster entities to become stable and healthy. Chaos executes in iterations and at the start of each iteration it validates the health of cluster entities. 
+          The maximum amount of time to wait for all cluster entities to become stable and healthy. Chaos executes in iterations and at the start of each iteration it validates the health of cluster entities.
           During validation if a cluster entity is not stable and healthy within MaxClusterStabilizationTimeoutInSeconds, Chaos generates a validation failed event.
         format: int64
         maximum: 4294967295
@@ -4521,9 +4522,9 @@ definitions:
       TimeToRunInSeconds:
         default: '4294967295'
         description: |
-          Total time (in seconds) for which Chaos will run before automatically stopping. The maximum allowed value is 4,294,967,295 (System.UInt32.MaxValue). 
-          Depending on other time settings, the actual running time of Chaos can be larger than the TimeToRunInSeconds. 
-          To be conservative, we should expect Chaos to automatically stop after 
+          Total time (in seconds) for which Chaos will run before automatically stopping. The maximum allowed value is 4,294,967,295 (System.UInt32.MaxValue).
+          Depending on other time settings, the actual running time of Chaos can be larger than the TimeToRunInSeconds.
+          To be conservative, we should expect Chaos to automatically stop after
           (MaxClusterStabilizationTimeoutInSeconds + MaxConcurrentFaults * WaitTimeBetweenFaultsInSeconds + WaitTimeBetweenIterationsInSeconds) seconds.
         type: string
       WaitTimeBetweenFaultsInSeconds:
@@ -4661,7 +4662,7 @@ definitions:
       MaxPercentUnhealthyApplications:
         default: 0
         description: |
-          The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10. 
+          The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.
 
           The percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.
           If the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.
@@ -4671,12 +4672,12 @@ definitions:
       MaxPercentUnhealthyNodes:
         default: 0
         description: |
-          The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10. 
+          The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.
 
           The percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.
           If the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.
           The percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.
-          The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero. 
+          The computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.
 
           In large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.
         type: integer
@@ -4990,7 +4991,7 @@ definitions:
               The types of the unhealthy evaluations can be DeployedServicePackagesHealthEvaluation or EventHealthEvaluation.
         type: object
     description: |
-      Represents health evaluation for a deployed application, containing information about the data and the algorithm used by the health store to evaluate health. 
+      Represents health evaluation for a deployed application, containing information about the data and the algorithm used by the health store to evaluate health.
     x-ms-discriminator-value: DeployedApplication
   DeployedApplicationHealthState:
     allOf:
@@ -5638,8 +5639,8 @@ definitions:
           - "FABRIC_E_KEY_TOO_LARGE"
           - "FABRIC_E_SERVICE_AFFINITY_CHAIN_NOT_SUPPORTED"
           - "FABRIC_E_INVALID_ATOMIC_GROUP"
-          - "FABRIC_E_VALUE_EMPTY" 
-        
+          - "FABRIC_E_VALUE_EMPTY"
+
         - Possible values of the error code for HTTP status code 404 (Not Found)
           - "FABRIC_E_NODE_NOT_FOUND"
           - "FABRIC_E_APPLICATION_TYPE_NOT_FOUND"
@@ -5661,7 +5662,7 @@ definitions:
           - "FABRIC_E_SERVICE_MANIFEST_NOT_FOUND"
           - "FABRIC_E_KEY_NOT_FOUND"
           - "FABRIC_E_HEALTH_ENTITY_NOT_FOUND"
-          
+
         - Possible values of the error code for HTTP status code 409 (Conflict)
           - "FABRIC_E_APPLICATION_TYPE_ALREADY_EXISTS"
           - "FABRIC_E_APPLICATION_ALREADY_EXISTS"
@@ -5684,10 +5685,10 @@ definitions:
           - "FABRIC_E_SEQUENCE_NUMBER_CHECK_FAILED"
           - "FABRIC_E_NODE_HAS_NOT_STOPPED_YET"
           - "FABRIC_E_INSTANCE_ID_MISMATCH"
-          
+
         - Possible values of the error code for HTTP status code 413 (Request Entity Too Large)
           - "FABRIC_E_VALUE_TOO_LARGE"
-          
+
         - Possible values of the error code for HTTP status code 500 (Internal Server Error)
           - "FABRIC_E_NODE_IS_UP"
 
@@ -5699,12 +5700,12 @@ definitions:
           - "FABRIC_E_SERVICE_OFFLINE"
           - "E_ABORT"
           - "FABRIC_E_VALUE_TOO_LARGE"
-            
+
         - Possible values of the error code for HTTP status code 504 (Gateway Timeout)
           - "FABRIC_E_COMMUNICATION_ERROR"
           - "FABRIC_E_OPERATION_NOT_COMPLETE"
           - "FABRIC_E_TIMEOUT"
-            
+
     enum:
       - FABRIC_E_INVALID_PARTITION_KEY
       - FABRIC_E_IMAGEBUILDER_VALIDATION_ERROR
@@ -6342,7 +6343,7 @@ definitions:
         - SafetyCheckInProgress - When a node is deactivated Service Fabric performs checks to ensure that the operation is safe to proceed to ensure avaiablity of the service and reliability of the state. This value indicates that one or more safety checks are in progress. The value is 1.
         - SafetyCheckComplete - When a node is deactivated Service Fabric performs checks to ensure that the operation is safe to proceed to ensure avaiablity of the service and reliability of the state. This value indicates that all safety checks have been completed. The value is 2.
         - Completed - The task is completed. The value is 3.
-        
+
     enum:
       - None
       - SafetyCheckInProgress
@@ -6461,13 +6462,13 @@ definitions:
           If not specified, default value is None, unless the node name is specified. If the filter has default value and node name is specified, the matching node is returned.
           The state values are flag based enumeration, so the value could be a combination of these values obtained using bitwise 'OR' operator.
           For example, if the provided value is 6, it matches nodes with HealthState value of OK (2) and Warning (4).
-            
-          - Default - Default value. Matches any HealthState. The value is zero. 
-          - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1. 
-          - Ok - Filter that matches input with HealthState value Ok. The value is 2. 
-          - Warning - Filter that matches input with HealthState value Warning. The value is 4. 
-          - Error - Filter that matches input with HealthState value Error. The value is 8. 
-          - All - Filter that matches input with any HealthState value. The value is 65535. 
+
+          - Default - Default value. Matches any HealthState. The value is zero.
+          - None - Filter that doesn’t match any HealthState value. Used in order to return no results on a given collection of states. The value is 1.
+          - Ok - Filter that matches input with HealthState value Ok. The value is 2.
+          - Warning - Filter that matches input with HealthState value Warning. The value is 4.
+          - Error - Filter that matches input with HealthState value Error. The value is 8.
+          - All - Filter that matches input with any HealthState value. The value is 65535.
         type: integer
       NodeNameFilter:
         description: |
@@ -6607,7 +6608,7 @@ definitions:
   NodeTransitionProgress:
     description: |
       Information about an NodeTransition operation.  This class contains an OperationState and a NodeTransitionResult.  The NodeTransitionResult is not valid until OperationState
-      is Completed or Faulted.     
+      is Completed or Faulted.
     properties:
       NodeTransitionResult:
         $ref: '#/definitions/NodeTransitionResult'
@@ -6681,7 +6682,7 @@ definitions:
       - Running - The operation is in progress.
       - RollingBack -  The operation is rolling back internal system state because it encountered a fatal error or was cancelled by the user.  "RollingBack"
          does not refer to user state.  For example, if CancelOperation is called on a command of type PartitionDataLoss,
-         a state of "RollingBack" does not mean service data is being restored (assuming the command has progressed far enough to cause data loss).  
+         a state of "RollingBack" does not mean service data is being restored (assuming the command has progressed far enough to cause data loss).
          It means the system is rolling back/cleaning up internal system state associated with the command.
       - Completed - The operation has completed successfully and is no longer running.
       - Faulted - The operation has failed and is no longer running.
@@ -6830,7 +6831,7 @@ definitions:
       Specifies the access status of the partition. Possible values are following.
         - Invalid - Indicates that the read or write operation access status is not valid. This value is not returned to the caller.
         - Granted - Indicates that the read or write operation access is granted and the operation is allowed.
-        - ReconfigurationPending - Indicates that the client should try again later, because a reconfiguration is in progress. 
+        - ReconfigurationPending - Indicates that the client should try again later, because a reconfiguration is in progress.
         - NotPrimary - Indicates that this client request was received by a replica that is not a Primary replica.
         - NoWriteQuorum - Indicates that no write quorum is available and, therefore, no write operation can be accepted.
     enum:
@@ -7107,7 +7108,7 @@ definitions:
     type: object
   RemoteReplicatorStatus:
     description: |
-      Represents the state of the secondary replicator from the primary replicator’s point of view. 
+      Represents the state of the secondary replicator from the primary replicator’s point of view.
     properties:
       IsInBuild:
         description: A value that indicates whether the secondary replica is in the process of being built.
@@ -7375,7 +7376,7 @@ definitions:
     description: |
       Provides various statistics of the queue used in the service fabric replicator.
       Contains information about the service fabric replicator like the replication/copy queue utilization, last acknowledgement received timestamp, etc.
-      Depending on the role of the replicator, the properties in this type imply different meanings. 
+      Depending on the role of the replicator, the properties in this type imply different meanings.
     properties:
       CommittedSequenceNumber:
         description: |
@@ -7725,7 +7726,7 @@ definitions:
         - Invalid - Indicates the service endpoint role is invalid. All Service Fabric enumerations have the invalid type. The value is zero.
         - Stateless - Indicates that the service endpoint is of a stateless service. The value is 1.
         - StatefulPrimary - Indicates that the service endpoint is of a primary replica of a stateful service. The value is 2.
-        - StatefulSecondary -  Indicates that the service endpoint is of a secondary replica of a stateful service. The value is 3. 
+        - StatefulSecondary -  Indicates that the service endpoint is of a secondary replica of a stateful service. The value is 3.
     enum:
       - Invalid
       - Stateless
@@ -8220,7 +8221,7 @@ definitions:
     description: |
       Defines a ServiceTypeHealthPolicy per service type name.
 
-      The entries in the map replace the default service type health policy for each specified service type. For example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently. With policy per service type, there's more granular control of the health of the service. 
+      The entries in the map replace the default service type health policy for each specified service type. For example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently. With policy per service type, there's more granular control of the health of the service.
 
       If no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.
     items:
@@ -8297,7 +8298,7 @@ definitions:
           This property can be a combination of those flags obtained using bitwise 'OR' operator.
           For example, if the provided value is 6 then the flags for ReplicaRestartWaitDuration (2) and QuorumLossWaitDuration (4) are set.
 
-          - None - Does not indicate any other properties are set. The value is zero. 
+          - None - Does not indicate any other properties are set. The value is zero.
           - TargetReplicaSetSize/InstanceCount - Indicates whether the TargetReplicaSetSize property (for Stateful services) or the InstanceCount property (for Stateless services) is set. The value is 1.
           - ReplicaRestartWaitDuration - Indicates the ReplicaRestartWaitDuration property is set. The value is  2.
           - QuorumLossWaitDuration - Indicates the QuorumLossWaitDuration property is set. The value is 4.
@@ -8391,10 +8392,10 @@ definitions:
           This property can be a combination of those flags obtained using bitwise 'OR' operator.
           For example, if the provided value is 6 then the flags for QuorumLossWaitDuration (2) and StandByReplicaKeepDuration(4) are set.
 
-          - None - Does not indicate any other properties are set. The value is zero. 
-          - ReplicaRestartWaitDuration - Indicates the ReplicaRestartWaitDuration property is set. The value is 1. 
-          - QuorumLossWaitDuration - Indicates the QuorumLossWaitDuration property is set. The value is 2. 
-          - StandByReplicaKeepDuration - Indicates the StandByReplicaKeepDuration property is set. The value is 4. 
+          - None - Does not indicate any other properties are set. The value is zero.
+          - ReplicaRestartWaitDuration - Indicates the ReplicaRestartWaitDuration property is set. The value is 1.
+          - QuorumLossWaitDuration - Indicates the QuorumLossWaitDuration property is set. The value is 2.
+          - StandByReplicaKeepDuration - Indicates the StandByReplicaKeepDuration property is set. The value is 4.
         type: integer
       HasPersistedState:
         description: 'A flag indicating whether this is a persistent service which stores states on the local disk. If it is then the value of this property is true, if not it is false.'
@@ -8692,12 +8693,12 @@ definitions:
         type: integer
       HighKey:
         description: |
-          String indicating the upper bound of the partition key range that 
+          String indicating the upper bound of the partition key range that
           should be split between the partition ‘Count’
         type: string
       LowKey:
         description: |
-          String indicating the lower bound of the partition key range that 
+          String indicating the lower bound of the partition key range that
           should be split between the partition ‘Count’
         type: string
     required:
