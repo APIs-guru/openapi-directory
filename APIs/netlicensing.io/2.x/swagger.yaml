@@ -675,8 +675,7 @@ paths:
           name: active
           required: true
           type: boolean
-        - collectionFormat: multi
-          description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
+        - description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
           in: formData
           items:
             default: FEATURE
@@ -849,8 +848,7 @@ paths:
           name: active
           required: false
           type: boolean
-        - collectionFormat: multi
-          description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
+        - description: 'type of licenses created from this license template. Supported types: FEATURE, TIMEVOLUME, FLOATING, QUANTITY'
           in: formData
           items:
             default: FEATURE
@@ -1323,8 +1321,7 @@ paths:
           name: name
           required: true
           type: string
-        - collectionFormat: multi
-          description: Licensing model applied to this product module. Defines what license templates can be configured for the product module and how licenses for this product module are processed during validation.
+        - description: Licensing model applied to this product module. Defines what license templates can be configured for the product module and how licenses for this product module are processed during validation.
           in: formData
           items:
             default: Subscription
@@ -1475,8 +1472,7 @@ paths:
           name: name
           required: false
           type: string
-        - collectionFormat: multi
-          description: Licensing model applied to this product module. Defines what license templates can be configured for the product module and how licenses for this product module are processed during validation.
+        - description: Licensing model applied to this product module. Defines what license templates can be configured for the product module and how licenses for this product module are processed during validation.
           in: formData
           items:
             default: Subscription
@@ -1568,8 +1564,7 @@ paths:
       description: Create token by tokenType and additional token parameters
       operationId: createToken
       parameters:
-        - collectionFormat: multi
-          description: Token type to be generated
+        - description: Token type to be generated
           enum:
             - DEFAULT
             - SHOP
@@ -1721,8 +1716,7 @@ paths:
           name: active
           required: true
           type: boolean
-        - collectionFormat: multi
-          enum:
+        - enum:
             - CANCELLED
             - CLOSED
             - PENDING
@@ -1730,8 +1724,7 @@ paths:
           name: status
           required: true
           type: string
-        - collectionFormat: multi
-          description: AUTO transaction for internal use only
+        - description: AUTO transaction for internal use only
           enum:
             - SHOP
           in: formData
@@ -1819,8 +1812,7 @@ paths:
           name: active
           required: false
           type: boolean
-        - collectionFormat: multi
-          enum:
+        - enum:
             - CANCELLED
             - CLOSED
             - PENDING
@@ -1828,8 +1820,7 @@ paths:
           name: status
           required: false
           type: string
-        - collectionFormat: multi
-          description: AUTO transaction for internal use only
+        - description: AUTO transaction for internal use only
           enum:
             - SHOP
           in: formData
