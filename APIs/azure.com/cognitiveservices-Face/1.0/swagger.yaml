@@ -48,7 +48,6 @@ parameters:
     type: array
     x-ms-parameter-location: method
   faceListId:
-    collectionFormat: csv
     description: Id referencing a particular face list.
     in: path
     maxLength: 64
@@ -58,7 +57,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
   faceUserData:
-    collectionFormat: csv
     description: User-specified data about the face for any purpose. The maximum length is 1KB.
     in: query
     maxLength: 1024
@@ -67,7 +65,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
   largeFaceListId:
-    collectionFormat: csv
     description: Id referencing a particular large face list.
     in: path
     maxLength: 64
@@ -77,7 +74,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
   largePersonGroupId:
-    collectionFormat: csv
     description: Id referencing a particular large person group.
     in: path
     maxLength: 64
@@ -87,7 +83,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
   operationId:
-    collectionFormat: csv
     description: Id referencing a particular take/apply snapshot operation.
     format: uuid
     in: path
@@ -96,7 +91,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
   persistedFaceId:
-    collectionFormat: csv
     description: Id referencing a particular persistedFaceId of an existing face.
     format: uuid
     in: path
@@ -105,7 +99,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
   personGroupId:
-    collectionFormat: csv
     description: Id referencing a particular person group.
     in: path
     maxLength: 64
@@ -115,7 +108,6 @@ parameters:
     type: string
     x-ms-parameter-location: method
   personId:
-    collectionFormat: csv
     description: Id referencing a particular person.
     format: uuid
     in: path
@@ -153,7 +145,6 @@ parameters:
     type: array
     x-ms-parameter-location: method
   snapshotId:
-    collectionFormat: csv
     description: Id referencing a particular snapshot.
     format: uuid
     in: path
