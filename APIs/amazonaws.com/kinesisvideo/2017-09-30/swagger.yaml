@@ -101,7 +101,7 @@ paths:
   /createStream:
     post:
       operationId: CreateStream
-      description: '<p>Creates a new Kinesis video stream. </p> <p>When you create a new stream, Kinesis Video Streams assigns it a version number. When you change the stream''s metadata, Kinesis Video Streams updates the version. </p> <p> <code>CreateStream</code> is an asynchronous operation.</p> <p>For information about how the service works, see <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html">How it Works</a>. </p> <p>You must have permissions for the <code>KinesisVideo:CreateStream</code> action.</p>'
+      description: '<p>Creates a new Kinesis video stream. </p> <p>When you create a new stream, Kinesis Video Streams assigns it a version number. When you change the stream''s metadata, Kinesis Video Streams updates the version. </p> <p> <code>CreateStream</code> is an asynchronous operation.</p> <p>For information about how the service works, see <a href="https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/how-it-works.html">How it Works</a>. </p> <p>You must have permissions for the <code>KinesisVideo:CreateStream</code> action.</p>'
       responses:
         '200':
           description: Success
@@ -131,6 +131,10 @@ paths:
           description: ClientLimitExceededException
           schema:
             $ref: '#/definitions/ClientLimitExceededException'
+        '486':
+          description: TagsPerResourceExceededLimitException
+          schema:
+            $ref: '#/definitions/TagsPerResourceExceededLimitException'
       parameters:
         - name: body
           in: body
@@ -172,6 +176,10 @@ paths:
           description: NotAuthorizedException
           schema:
             $ref: '#/definitions/NotAuthorizedException'
+        '484':
+          description: VersionMismatchException
+          schema:
+            $ref: '#/definitions/VersionMismatchException'
       parameters:
         - name: body
           in: body
@@ -351,7 +359,7 @@ paths:
   /tagStream:
     post:
       operationId: TagStream
-      description: '<p>Adds one or more tags to a stream. A <i>tag</i> is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see <a href="http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p> <p>You must provide either the <code>StreamName</code> or the <code>StreamARN</code>.</p> <p>This operation requires permission for the <code>KinesisVideo:TagStream</code> action.</p> <p>Kinesis video streams support up to 50 tags.</p>'
+      description: '<p>Adds one or more tags to a stream. A <i>tag</i> is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p> <p>You must provide either the <code>StreamName</code> or the <code>StreamARN</code>.</p> <p>This operation requires permission for the <code>KinesisVideo:TagStream</code> action.</p> <p>Kinesis video streams support up to 50 tags.</p>'
       responses:
         '200':
           description: Success
@@ -560,49 +568,23 @@ definitions:
         description: '<p>A name for the stream that you are creating.</p> <p>The stream name is an identifier for the stream, and must be unique for each account and region.</p>'
       MediaType:
         $ref: '#/definitions/MediaType'
-        description: '<p>The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a> for guidelines.</p> <p>To play video on the console, the media must be H.264 encoded, and you need to specify this video type in this parameter as <code>video/h264</code>. </p> <p>This parameter is optional; the default value is <code>null</code> (or empty in JSON).</p>'
+        description: '<p>The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">Media Types</a>. If you choose to specify the <code>MediaType</code>, see <a href="https://tools.ietf.org/html/rfc6838#section-4.2">Naming Requirements</a> for guidelines.</p> <p>Example valid values include "video/h264" and "video/h264,audio/aac".</p> <p>This parameter is optional; the default value is <code>null</code> (or empty in JSON).</p>'
       KmsKeyId:
         $ref: '#/definitions/KmsKeyId'
-        description: '<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="http://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
+        description: '<p>The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis Video Streams to use to encrypt stream data.</p> <p>If no key ID is specified, the default, Kinesis Video-managed key (<code>aws/kinesisvideo</code>) is used.</p> <p> For more information, see <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters">DescribeKey</a>. </p>'
       DataRetentionInHours:
         $ref: '#/definitions/DataRetentionInHours'
         description: '<p>The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p> <p>The default value is 0, indicating that the stream does not persist data.</p> <p>When the <code>DataRetentionInHours</code> value is 0, consumers can still consume the fragments that remain in the service host buffer, which has a retention time limit of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the buffer when either limit is reached.</p>'
-  AccountStreamLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The number of streams created for the account is too high.
-  DeviceStreamLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'Not implemented. '
-  ResourceInUseException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The stream is currently not available for this operation.
-  InvalidDeviceException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Not implemented.
-  InvalidArgumentException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The value for this input parameter is invalid.
-  ClientLimitExceededException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Kinesis Video Streams has throttled the request because you have exceeded the limit of allowed client calls. Try making the call later.
+      Tags:
+        $ref: '#/definitions/ResourceTags'
+        description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
+  AccountStreamLimitExceededException: {}
+  DeviceStreamLimitExceededException: {}
+  ResourceInUseException: {}
+  InvalidDeviceException: {}
+  InvalidArgumentException: {}
+  ClientLimitExceededException: {}
+  TagsPerResourceExceededLimitException: {}
   DeleteStreamOutput:
     type: object
     properties: {}
@@ -617,18 +599,9 @@ definitions:
       CurrentVersion:
         $ref: '#/definitions/Version'
         description: '<p>Optional: The version of the stream that you want to delete. </p> <p>Specify the version as a safeguard to ensure that your are deleting the correct stream. To get the stream version, use the <code>DescribeStream</code> API.</p> <p>If not specified, only the <code>CreationTime</code> is checked before deleting the stream.</p>'
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: Amazon Kinesis Video Streams can't find the stream that you specified.
-  NotAuthorizedException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The caller is not authorized to perform this operation.
+  ResourceNotFoundException: {}
+  NotAuthorizedException: {}
+  VersionMismatchException: {}
   DescribeStreamOutput:
     type: object
     properties:
@@ -706,12 +679,7 @@ definitions:
       StreamName:
         $ref: '#/definitions/StreamName'
         description: The name of the stream that you want to list tags for.
-  InvalidResourceFormatException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: The format of the <code>StreamARN</code> is invalid.
+  InvalidResourceFormatException: {}
   TagStreamOutput:
     type: object
     properties: {}
@@ -729,12 +697,6 @@ definitions:
       Tags:
         $ref: '#/definitions/ResourceTags'
         description: A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
-  TagsPerResourceExceededLimitException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'You have exceeded the limit of tags that you can associate with the resource. Kinesis video streams support up to 50 tags. '
   UntagStreamOutput:
     type: object
     properties: {}
@@ -776,13 +738,7 @@ definitions:
         description: Indicates whether you want to increase or decrease the retention period.
       DataRetentionChangeInHours:
         $ref: '#/definitions/DataRetentionChangeInHours'
-        description: 'The retention period, in hours. The value you specify replaces the current value.'
-  VersionMismatchException:
-    type: object
-    properties:
-      Message:
-        $ref: '#/definitions/ErrorMessage'
-    description: 'The stream version that you specified is not the latest version. To get the latest version, use the <a href="http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_DescribeStream.html">DescribeStream</a> API.'
+        description: 'The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).'
   UpdateStreamOutput:
     type: object
     properties: {}
@@ -814,8 +770,6 @@ definitions:
       - LIST_FRAGMENTS
       - GET_MEDIA_FOR_FRAGMENT_LIST
       - GET_HLS_STREAMING_SESSION_URL
-  ErrorMessage:
-    type: string
   ComparisonOperator:
     type: string
     enum:
@@ -832,7 +786,7 @@ definitions:
     maxLength: 256
   MediaType:
     type: string
-    pattern: '[\w\-\.\+]+/[\w\-\.\+]+'
+    pattern: '[\w\-\.\+]+/[\w\-\.\+]+(,[\w\-\.\+]+/[\w\-\.\+]+)*'
     minLength: 1
     maxLength: 128
   KmsKeyId:
@@ -842,6 +796,17 @@ definitions:
   DataRetentionInHours:
     type: integer
     minimum: 0
+  ResourceTags:
+    type: array
+    minItems: 1
+    maxItems: 50
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/TagKey'
+        value:
+          $ref: '#/definitions/TagValue'
   ResourceARN:
     type: string
     pattern: 'arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+'
@@ -910,17 +875,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/StreamInfo'
-  ResourceTags:
-    type: array
-    minItems: 1
-    maxItems: 50
-    items:
-      type: object
-      properties:
-        key:
-          $ref: '#/definitions/TagKey'
-        value:
-          $ref: '#/definitions/TagValue'
   TagKey:
     type: string
     minLength: 1

@@ -9464,6 +9464,9 @@ definitions:
       ClientToken:
         $ref: '#/definitions/String'
         description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html"> How to Ensure Idempotency</a>.'
+      TagSpecifications:
+        $ref: '#/definitions/TagSpecificationList'
+        description: The tags to apply to the Client VPN endpoint during creation.
   CreateClientVpnRouteResult:
     type: object
     properties:
@@ -9902,7 +9905,7 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ClientToken:
         $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.'
+        description: '<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p> <p>Constraint: Maximum 128 ASCII characters.</p>'
       LaunchTemplateName:
         $ref: '#/definitions/LaunchTemplateName'
         description: A name for the launch template.
@@ -9952,7 +9955,7 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ClientToken:
         $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.'
+        description: '<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p> <p>Constraint: Maximum 128 ASCII characters.</p>'
       LaunchTemplateId:
         $ref: '#/definitions/String'
         description: The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
@@ -12524,7 +12527,7 @@ definitions:
         description: 'Scopes the images by users with explicit launch permissions. Specify an AWS account ID, <code>self</code> (the sender of the request), or <code>all</code> (public AMIs).'
       Filters:
         $ref: '#/definitions/FilterList'
-        description: '<p>One or more filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - String value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the image owner.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>sriov-net-support</code> - A value of <code>simple</code> indicates that enhanced networking with the Intel 82599 VF interface is enabled.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>'
+        description: '<p>One or more filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the EBS volume is encrypted.</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - String value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the image owner.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>sriov-net-support</code> - A value of <code>simple</code> indicates that enhanced networking with the Intel 82599 VF interface is enabled.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>'
       ImageIds:
         $ref: '#/definitions/ImageIdStringList'
         description: '<p>One or more image IDs.</p> <p>Default: Describes all images available to you.</p>'
@@ -15617,7 +15620,7 @@ definitions:
         description: '<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>The CMK identifier may be provided in any of the following formats: </p> <ul> <li> <p>Key ID</p> </li> <li> <p>Key alias, in the form <code>alias/<i>ExampleAlias</i> </code> </p> </li> <li> <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p> </li> <li> <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure. </p> <p>The specified CMK must exist in the region that the AMI is being copied to. </p>'
       LicenseType:
         $ref: '#/definitions/String'
-        description: '<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p> <p> <b>Note:</b> You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image">Prerequisites</a> in the VM Import/Export User Guide.</p> <p>Valid values: <code>AWS</code> | <code>BYOL</code> </p>'
+        description: '<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p> <p> <b>Note:</b> You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see <a href="https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image">Prerequisites</a> in the VM Import/Export User Guide.</p> <p>Valid values include:</p> <ul> <li> <p> <code>Auto</code> - Detects the source-system operating system (OS) and applies the appropriate license.</p> </li> <li> <p> <code>AWS</code> - Replaces the source-system license with an AWS license, if appropriate.</p> </li> <li> <p> <code>BYOL</code> - Retains the source-system license, if appropriate.</p> </li> </ul> <p>Default value: <code>Auto</code> </p>'
       Platform:
         $ref: '#/definitions/String'
         description: '<p>The operating system of the virtual machine.</p> <p>Valid values: <code>Windows</code> | <code>Linux</code> </p>'
@@ -16113,7 +16116,7 @@ definitions:
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
       ClientToken:
         $ref: '#/definitions/String'
-        description: 'Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.'
+        description: '<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">Ensuring Idempotency</a>.</p> <p>Constraint: Maximum 128 ASCII characters.</p>'
       LaunchTemplateId:
         $ref: '#/definitions/String'
         description: The ID of the launch template. You must specify either the launch template ID or launch template name in the request.
@@ -17411,10 +17414,10 @@ definitions:
         description: '<p>The instance type. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Default: <code>m1.small</code> </p>'
       Ipv6AddressCount:
         $ref: '#/definitions/Integer'
-        description: '[EC2-VPC] A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. You cannot specify this option and the option to assign specific IPv6 addresses in the same request. You can specify this option if you''ve specified a minimum number of instances to launch.'
+        description: '<p>[EC2-VPC] A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. You cannot specify this option and the option to assign specific IPv6 addresses in the same request. You can specify this option if you''ve specified a minimum number of instances to launch.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>'
       Ipv6Addresses:
         $ref: '#/definitions/InstanceIpv6AddressList'
-        description: '[EC2-VPC] Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface. You cannot specify this option and the option to assign a number of IPv6 addresses in the same request. You cannot specify this option if you''ve specified a minimum number of instances to launch.'
+        description: '<p>[EC2-VPC] Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface. You cannot specify this option and the option to assign a number of IPv6 addresses in the same request. You cannot specify this option if you''ve specified a minimum number of instances to launch.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>'
       KernelId:
         $ref: '#/definitions/String'
         description: '<p>The ID of the kernel.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html"> PV-GRUB</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </important>'
@@ -17438,13 +17441,13 @@ definitions:
         description: '<p>The ID of the RAM disk.</p> <important> <p>We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html"> PV-GRUB</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> </important>'
       SecurityGroupIds:
         $ref: '#/definitions/SecurityGroupIdStringList'
-        description: '<p>One or more security group IDs. You can create a security group using <a>CreateSecurityGroup</a>.</p> <p>Default: Amazon EC2 uses the default security group.</p>'
+        description: '<p>One or more security group IDs. You can create a security group using <a>CreateSecurityGroup</a>.</p> <p>Default: Amazon EC2 uses the default security group.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>'
       SecurityGroups:
         $ref: '#/definitions/SecurityGroupStringList'
-        description: '<p>[EC2-Classic, default VPC] One or more security group names. For a nondefault VPC, you must use security group IDs instead.</p> <p>Default: Amazon EC2 uses the default security group.</p>'
+        description: '<p>[EC2-Classic, default VPC] One or more security group names. For a nondefault VPC, you must use security group IDs instead.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p> <p>Default: Amazon EC2 uses the default security group.</p>'
       SubnetId:
         $ref: '#/definitions/String'
-        description: '[EC2-VPC] The ID of the subnet to launch the instance into.'
+        description: '<p>[EC2-VPC] The ID of the subnet to launch the instance into.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>'
       UserData:
         $ref: '#/definitions/String'
         description: 'The user data to make available to the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html">Running Commands on Your Linux Instance at Launch</a> (Linux) and <a href="https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data">Adding User Data</a> (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text.'
@@ -17471,10 +17474,10 @@ definitions:
         description: '<p>Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).</p> <p>Default: <code>stop</code> </p>'
       NetworkInterfaces:
         $ref: '#/definitions/InstanceNetworkInterfaceSpecificationList'
-        description: One or more network interfaces.
+        description: <p>One or more network interfaces.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>
       PrivateIpAddress:
         $ref: '#/definitions/String'
-        description: '<p>[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.</p> <p>Only one private IP address can be designated as primary. You can''t specify this option if you''ve specified the option to designate a private IP address as the primary IP address in a network interface specification. You cannot specify this option if you''re launching more than one instance in the request.</p>'
+        description: '<p>[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.</p> <p>Only one private IP address can be designated as primary. You can''t specify this option if you''ve specified the option to designate a private IP address as the primary IP address in a network interface specification. You cannot specify this option if you''re launching more than one instance in the request.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>'
       ElasticGpuSpecification:
         $ref: '#/definitions/ElasticGpuSpecifications'
         description: An elastic GPU to associate with the instance.
@@ -19059,16 +19062,19 @@ definitions:
         description: The date and time the Client VPN endpoint was created.
       DeletionTime:
         $ref: '#/definitions/String'
-        description: 'The date and time the Client VPN endpoint was deleted, if applicable. Information about deleted Client VPN endpoints is retained for 24 hours, unless a new Client VPN is created with the same name.'
+        description: 'The date and time the Client VPN endpoint was deleted, if applicable.'
       DnsName:
         $ref: '#/definitions/String'
-        description: The DNS name to be used by clients when establishing a connection.
+        description: The DNS name to be used by clients when connecting to the Client VPN endpoint.
       ClientCidrBlock:
         $ref: '#/definitions/String'
         description: 'The IPv4 address range, in CIDR notation, from which client IP addresses are assigned.'
+      DnsServers:
+        $ref: '#/definitions/ValueStringList'
+        description: 'Information about the DNS servers to be used for DNS resolution. '
       SplitTunnel:
         $ref: '#/definitions/Boolean'
-        description: ' <b>Indicates whether VPN split tunneling is supported.</b> '
+        description: Indicates whether VPN split tunneling is supported.
       VpnProtocol:
         $ref: '#/definitions/VpnProtocol'
         description: The protocol used by the VPN session.
@@ -19077,7 +19083,7 @@ definitions:
         description: ' <b>The transport protocol used by the Client VPN endpoint.</b> '
       AssociatedTargetNetworks:
         $ref: '#/definitions/AssociatedTargetNetworkSet'
-        description: Information about the associated target networks. A target network is a subnet in a VPC.
+        description: 'Information about the associated target networks. A target network is a subnet in a VPC.This property is deprecated. To view the target networks associated with a Client VPN endpoint, call DescribeClientVpnTargetNetworks and inspect the clientVpnTargetNetworks response element.'
       ServerCertificateArn:
         $ref: '#/definitions/String'
         description: The ARN of the server certificate.
@@ -19087,6 +19093,9 @@ definitions:
       ConnectionLogOptions:
         $ref: '#/definitions/ConnectionLogResponseOptions'
         description: Information about the client connection logging options for the Client VPN endpoint.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: Any tags assigned to the Client VPN endpoint.
     description: Describes a Client VPN endpoint.
   ClientVpnEndpointStatusCode:
     type: string
@@ -19609,6 +19618,7 @@ definitions:
       - m5.4xlarge
       - m5.12xlarge
       - m5.24xlarge
+      - m5.metal
       - m5a.large
       - m5a.xlarge
       - m5a.2xlarge
@@ -19621,6 +19631,7 @@ definitions:
       - m5d.4xlarge
       - m5d.12xlarge
       - m5d.24xlarge
+      - m5d.metal
       - h1.2xlarge
       - h1.4xlarge
       - h1.8xlarge
@@ -19631,6 +19642,7 @@ definitions:
       - z1d.3xlarge
       - z1d.6xlarge
       - z1d.12xlarge
+      - z1d.metal
       - u-6tb1.metal
       - u-9tb1.metal
       - u-12tb1.metal
@@ -24159,6 +24171,7 @@ definitions:
   ResourceType:
     type: string
     enum:
+      - client-vpn-endpoint
       - customer-gateway
       - dedicated-host
       - dhcp-options
