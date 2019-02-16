@@ -3,7 +3,7 @@ info:
   version: '2015-05-28'
   x-release: v4
   title: AWS IoT
-  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href="http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p> <p>For information about how to use the credentials provider for AWS IoT, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html">Authorizing Direct Calls to AWS Services</a>.</p>'
+  description: '<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href="https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html">Developer Guide</a>.</p> <p>For information about how to use the credentials provider for AWS IoT, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html">Authorizing Direct Calls to AWS Services</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -2894,7 +2894,7 @@ paths:
   '/things/{thingName}':
     post:
       operationId: CreateThing
-      description: '<p>Creates a thing record in the registry.</p> <note> <p>This is a control plane operation. See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
+      description: '<p>Creates a thing record in the registry.</p> <note> <p>This is a control plane operation. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -3085,7 +3085,7 @@ paths:
   '/thing-groups/{thingGroupName}':
     post:
       operationId: CreateThingGroup
-      description: '<p>Create a thing group.</p> <note> <p>This is a control plane operation. See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
+      description: '<p>Create a thing group.</p> <note> <p>This is a control plane operation. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html">Authorization</a> for information about authorizing control plane actions.</p> </note>'
       responses:
         '200':
           description: Success
@@ -5767,7 +5767,7 @@ paths:
   /principal-policies:
     get:
       operationId: ListPrincipalPolicies
-      description: '<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href="http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax">AmazonCognito Identity format</a>.</p> <p> <b>Note:</b> This API is deprecated. Please use <a>ListAttachedPolicies</a> instead.</p>'
+      description: '<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href="https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax">AmazonCognito Identity format</a>.</p> <p> <b>Note:</b> This API is deprecated. Please use <a>ListAttachedPolicies</a> instead.</p>'
       responses:
         '200':
           description: Success
@@ -7595,7 +7595,7 @@ definitions:
         description: '<p>The dynamic thing group index name.</p> <note> <p>Currently one index is supported: "AWS_Things".</p> </note>'
       queryString:
         $ref: '#/definitions/QueryString'
-        description: '<p>The dynamic thing group search query string.</p> <p>See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html">Query Syntax</a> for information about query string syntax.</p>'
+        description: '<p>The dynamic thing group search query string.</p> <p>See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html">Query Syntax</a> for information about query string syntax.</p>'
       queryVersion:
         $ref: '#/definitions/QueryVersion'
         description: '<p>The dynamic thing group query version.</p> <note> <p>Currently one query version is supported: "2017-09-30". If not specified, the query version defaults to this value.</p> </note>'
@@ -7812,6 +7812,9 @@ definitions:
       targetCheckNames:
         $ref: '#/definitions/TargetAuditCheckNames'
         description: Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)
+      tags:
+        $ref: '#/definitions/TagList'
+        description: Metadata which can be used to manage the scheduled audit.
   CreateSecurityProfileResponse:
     type: object
     properties:
@@ -9245,10 +9248,10 @@ definitions:
     properties:
       templateBody:
         $ref: '#/definitions/TemplateBody'
-        description: 'The provisioning template. See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
+        description: 'The provisioning template. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
       parameters:
         $ref: '#/definitions/Parameters'
-        description: 'The parameters for provisioning a thing. See <a href="http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
+        description: 'The parameters for provisioning a thing. See <a href="https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html">Programmatic Provisioning</a> for more information.'
   ResourceRegistrationFailureException: {}
   RejectCertificateTransferRequest:
     type: object
@@ -9984,7 +9987,7 @@ definitions:
         description: The ARN of the IAM role that grants access.
       messageFormat:
         $ref: '#/definitions/MessageFormat'
-        description: '(Optional) The message format of the message to publish. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href="http://docs.aws.amazon.com/sns/latest/dg/json-formats.html">http://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.'
+        description: '(Optional) The message format of the message to publish. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href="https://docs.aws.amazon.com/sns/latest/dg/json-formats.html">https://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.'
     description: Describes an action to publish to an Amazon SNS topic.
   SqsAction:
     type: object
@@ -10049,7 +10052,7 @@ definitions:
         description: The object key.
       cannedAcl:
         $ref: '#/definitions/CannedAccessControlList'
-        description: 'The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl">S3 canned ACLs</a>.'
+        description: 'The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl">S3 canned ACLs</a>.'
     description: Describes an action to write data to an Amazon S3 bucket.
   FirehoseAction:
     type: object
@@ -10090,10 +10093,10 @@ definitions:
         description: The CloudWatch metric value.
       metricUnit:
         $ref: '#/definitions/String'
-        description: 'The <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit">metric unit</a> supported by CloudWatch.'
+        description: 'The <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit">metric unit</a> supported by CloudWatch.'
       metricTimestamp:
         $ref: '#/definitions/String'
-        description: 'An optional <a href="http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp">Unix timestamp</a>.'
+        description: 'An optional <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp">Unix timestamp</a>.'
     description: Describes an action that captures a CloudWatch metric.
   CloudwatchAlarmAction:
     type: object
@@ -10872,13 +10875,13 @@ definitions:
     properties:
       comparisonOperator:
         $ref: '#/definitions/ComparisonOperator'
-        description: The operator that relates the thing measured (<code>metric</code>) to the criteria (<code>value</code>).
+        description: The operator that relates the thing measured (<code>metric</code>) to the criteria (containing a <code>value</code>.
       value:
         $ref: '#/definitions/MetricValue'
         description: The value to be compared with the <code>metric</code>.
       durationSeconds:
         $ref: '#/definitions/DurationSeconds'
-        description: 'Use this to specify the period of time over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>).'
+        description: 'Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>). '
     description: The criteria by which the behavior is determined to be normal.
   ComparisonOperator:
     type: string
@@ -11471,7 +11474,7 @@ definitions:
     properties:
       sql:
         $ref: '#/definitions/SQL'
-        description: 'The SQL statement used to query the topic. For more information, see <a href="http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
+        description: 'The SQL statement used to query the topic. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
       description:
         $ref: '#/definitions/Description'
         description: The description of the rule.
@@ -11616,13 +11619,13 @@ definitions:
         description: The ARN of the thing on which the job execution is running.
       queuedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job execution was queued.'
+        description: 'The time, in seconds since the epoch, when the job execution was queued.'
       startedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job execution started.'
+        description: 'The time, in seconds since the epoch, when the job execution started.'
       lastUpdatedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job execution was last updated.'
+        description: 'The time, in seconds since the epoch, when the job execution was last updated.'
       executionNumber:
         $ref: '#/definitions/ExecutionNumber'
         description: 'A string (consisting of the digits "0" through "9") which identifies this particular job execution on this particular device. It can be used in commands which return or update job execution information. '
@@ -11674,13 +11677,13 @@ definitions:
         description: Configuration for criteria to abort the job.
       createdAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job was created.'
+        description: 'The time, in seconds since the epoch, when the job was created.'
       lastUpdatedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job was last updated.'
+        description: 'The time, in seconds since the epoch, when the job was last updated.'
       completedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job was completed.'
+        description: 'The time, in seconds since the epoch, when the job was completed.'
       jobProcessDetails:
         $ref: '#/definitions/JobProcessDetails'
         description: Details about the job process.
@@ -12201,13 +12204,13 @@ definitions:
         description: The status of the job execution.
       queuedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job execution was queued.'
+        description: 'The time, in seconds since the epoch, when the job execution was queued.'
       startedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job execution started.'
+        description: 'The time, in seconds since the epoch, when the job execution started.'
       lastUpdatedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job execution was last updated.'
+        description: 'The time, in seconds since the epoch, when the job execution was last updated.'
       executionNumber:
         $ref: '#/definitions/ExecutionNumber'
         description: A string (consisting of the digits "0" through "9") which identifies this particular job execution on this particular device. It can be used later in commands which return or update job execution information.
@@ -12277,13 +12280,13 @@ definitions:
         description: The job summary status.
       createdAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job was created.'
+        description: 'The time, in seconds since the epoch, when the job was created.'
       lastUpdatedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job was last updated.'
+        description: 'The time, in seconds since the epoch, when the job was last updated.'
       completedAt:
         $ref: '#/definitions/DateType'
-        description: 'The time, in milliseconds since the epoch, when the job completed.'
+        description: 'The time, in seconds since the epoch, when the job completed.'
     description: The job summary.
   JobSummaryList:
     type: array
