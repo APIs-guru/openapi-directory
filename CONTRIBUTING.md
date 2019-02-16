@@ -78,6 +78,10 @@ Check the `info.contact` section of the API definition or the `x-origin` to see 
 
 If you do this, your changes will be overwritten the next time the API update scripts are run.
 
+The exception to this are APIs.guru-specific specification extensions (aka vendor extensions). Some of these are round-tripped between the modified API definitions on each update.
+
+These extensions are [documented in the Wiki](https://github.com/APIs-guru/openapi-directory/wiki/specification-extensions#apisguru-extensions).
+
 #### Creating a fixup.yaml patch
 
 To do this, you will need to fork the repository and clone your fork locally.
