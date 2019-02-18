@@ -4339,6 +4339,9 @@ definitions:
       isDefault:
         description: '<code>true</code> if this is the default minor version; otherwise, <code>false</code>.'
         type: boolean
+      isRemoteDebuggingEnabled:
+        description: '<code>true</code> if this supports Remote Debugging, otherwise <code>false</code>.'
+        type: boolean
       runtimeVersion:
         description: Application stack minor version (runtime only).
         type: string

@@ -391,6 +391,7 @@ paths:
           parameters:
             api-version: '2018-06-01'
             parameters:
+              location: eastus
               properties:
                 dnsSettings:
                   domainNameLabel: dnslbl
@@ -401,7 +402,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
-                location: westus
+                location: eastus
                 name: testDNS-ip
                 properties:
                   dnsSettings:
@@ -417,7 +418,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
-                location: westus
+                location: eastus
                 name: testDNS-ip
                 properties:
                   dnsSettings:
@@ -434,6 +435,7 @@ paths:
           parameters:
             api-version: '2018-06-01'
             parameters:
+              location: eastus
               properties:
                 idleTimeoutInMinutes: 10
                 publicIPAddressVersion: IPv4
@@ -449,7 +451,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
-                location: westus
+                location: eastus
                 name: testDNS-ip
                 properties:
                   idleTimeoutInMinutes: 10
@@ -466,7 +468,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
-                location: westus
+                location: eastus
                 name: testDNS-ip
                 properties:
                   idleTimeoutInMinutes: 10
@@ -483,7 +485,8 @@ paths:
         Create public IP address defaults:
           parameters:
             api-version: '2018-06-01'
-            parameters: {}
+            parameters:
+              location: eastus
             publicIpAddressName: test-ip
             resourceGroupName: rg1
             subscriptionId: subid
@@ -491,7 +494,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
-                location: westus
+                location: eastus
                 name: testDNS-ip
                 properties:
                   idleTimeoutInMinutes: 4
@@ -506,7 +509,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip
-                location: westus
+                location: eastus
                 name: testDNS-ip
                 properties:
                   idleTimeoutInMinutes: 4

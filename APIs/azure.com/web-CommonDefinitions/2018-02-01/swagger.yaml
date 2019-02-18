@@ -240,9 +240,6 @@ definitions:
       properties:
         description: AppServicePlan resource specific properties
         properties:
-          adminSiteName:
-            description: App Service plan administration site.
-            type: string
           freeOfferExpirationTime:
             description: The time when the server farm free offer expires.
             format: date-time
@@ -790,6 +787,17 @@ definitions:
           $ref: '#/definitions/RampUpRule'
         type: array
     type: object
+  GeoDistribution:
+    description: A global distribution definition.
+    properties:
+      location:
+        description: Location.
+        type: string
+      numberOfWorkers:
+        description: NumberOfWorkers.
+        format: int32
+        type: integer
+    type: object
   HandlerMapping:
     description: |-
       The IIS handler mappings used to define which handler processes HTTP requests with certain extension. 
@@ -970,6 +978,10 @@ definitions:
       subnetMask:
         description: Subnet mask for the range of IP addresses the restriction is valid for.
         type: string
+      subnetTrafficTag:
+        description: (internal) Subnet traffic tag
+        format: int32
+        type: integer
       tag:
         description: Defines what this IP filter will be used for. This is to support IP filtering on proxies.
         enum:
@@ -979,8 +991,13 @@ definitions:
         x-ms-enum:
           modelAsString: false
           name: IpFilterTag
-    required:
-      - ipAddress
+      vnetSubnetResourceId:
+        description: Virtual network resource id
+        type: string
+      vnetTrafficTag:
+        description: (internal) Vnet traffic tag
+        format: int32
+        type: integer
     type: object
   LocalizableString:
     description: Localizable string object containing the name and a localized value.
@@ -1506,6 +1523,9 @@ definitions:
           clientCertEnabled:
             description: '<code>true</code> to enable client certificate authentication (TLS mutual authentication); otherwise, <code>false</code>. Default is <code>false</code>.'
             type: boolean
+          clientCertExclusionPaths:
+            description: client certificate authentication comma-separated exclusion paths
+            type: string
           cloningInfo:
             $ref: '#/definitions/CloningInfo'
             description: 'If specified during app creation, the app is cloned from a source app.'
@@ -1533,6 +1553,11 @@ definitions:
             items:
               type: string
             readOnly: true
+            type: array
+          geoDistributions:
+            description: GeoDistributions for this site
+            items:
+              $ref: '#/definitions/GeoDistribution'
             type: array
           hostNameSslStates:
             description: Hostname SSL states are used to manage the SSL bindings for app's hostnames.
@@ -1568,6 +1593,12 @@ definitions:
             x-ms-mutability:
               - create
               - read
+          inProgressOperationId:
+            description: Specifies an operation id if this site has a pending operation.
+            example: 00000000-0000-0000-0000-000000000000
+            format: uuid
+            readOnly: true
+            type: string
           isDefaultContainer:
             description: '<code>true</code> if the app is a default container; otherwise, <code>false</code>.'
             readOnly: true
@@ -1599,6 +1630,18 @@ definitions:
             description: List of IP addresses that the app uses for outbound connections (e.g. database access). Includes VIPs from all tenants. Read-only.
             readOnly: true
             type: string
+          redundancyMode:
+            description: Site redundancy mode
+            enum:
+              - None
+              - Manual
+              - Failover
+              - ActiveActive
+              - GeoRedundant
+            type: string
+            x-ms-enum:
+              modelAsString: false
+              name: RedundancyMode
           repositorySiteName:
             description: Name of the repository site.
             readOnly: true

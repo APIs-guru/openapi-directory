@@ -336,7 +336,8 @@ paths:
         Create route table:
           parameters:
             api-version: '2017-11-01'
-            parameters: {}
+            parameters:
+              location: westus
             resourceGroupName: rg1
             routeTableName: testrt
             subscriptionId: subid
@@ -365,6 +366,7 @@ paths:
           parameters:
             api-version: '2017-11-01'
             parameters:
+              location: westus
               properties:
                 disableBgpRoutePropagation: true
                 routes:

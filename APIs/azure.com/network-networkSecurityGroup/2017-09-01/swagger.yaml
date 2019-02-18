@@ -802,14 +802,15 @@ paths:
           parameters:
             api-version: '2017-09-01'
             networkSecurityGroupName: testnsg
-            parameters: {}
+            parameters:
+              location: eastus
             resourceGroupName: rg1
             subscriptionId: subid
           responses:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg
-                location: westus
+                location: eastus
                 name: testnsg
                 properties:
                   defaultSecurityRules:
@@ -897,7 +898,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg
-                location: westus
+                location: eastus
                 name: testnsg
                 properties:
                   defaultSecurityRules:
@@ -987,6 +988,7 @@ paths:
             api-version: '2017-09-01'
             networkSecurityGroupName: testnsg
             parameters:
+              location: eastus
               properties:
                 securityRules:
                   - name: rule1
@@ -1005,7 +1007,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg
-                location: westus
+                location: eastus
                 name: testnsg
                 properties:
                   defaultSecurityRules:
@@ -1105,7 +1107,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg
-                location: westus
+                location: eastus
                 name: testnsg
                 properties:
                   defaultSecurityRules:

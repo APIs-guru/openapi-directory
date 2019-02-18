@@ -42,6 +42,13 @@ parameters:
     name: api-version
     required: true
     type: string
+  GatewayIdParameter:
+    description: The Log Analytics gateway Id.
+    in: path
+    name: gatewayId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   ResourceGroupNameParameter:
     description: The Resource Group name.
     in: path
@@ -1472,6 +1479,31 @@ paths:
                 operationId: 7d7cf277-9113-4ab3-8359-d0364b74d01d
               headers:
                 x-ms-status-location: 'https://management.azure.com/subscriptions/b96161de-b34a-480f-7343-59b099299283/resourceGroups/example/providers/microsoft.operationalinsights/workspaces/test/operations/purge-970318e7-b859-4edb-8903-83b1b54d0b74?api-version=2015-03-20'
+  '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/gateways/{gatewayId}':
+    delete:
+      description: Delete a Log Analytics gateway.
+      operationId: Workspaces_DeleteGateways
+      parameters:
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/WorkspaceNameParameter'
+        - $ref: '#/parameters/GatewayIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: The specified gateway was deleted successfully.
+      tags:
+        - Workspaces
+      x-ms-examples:
+        DeleteGateways:
+          parameters:
+            api-version: '2015-03-02'
+            gatewayId: 00000000-0000-0000-0000-00000000000
+            resourceGroupName: OIAutoRest5123
+            subscriptionId: 00000000-0000-0000-0000-00000000000
+            workspaceName: aztest5048
+          responses:
+            '200': {}
   '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/listKeys':
     post:
       description: Gets the shared keys for a Log Analytics Workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace.
@@ -1517,7 +1549,7 @@ paths:
       tags:
         - Workspaces
       x-ms-examples:
-        SharedKeysList:
+        RegenerateSharedKeys:
           parameters:
             api-version: '2015-03-20'
             resourceGroupName: rg1

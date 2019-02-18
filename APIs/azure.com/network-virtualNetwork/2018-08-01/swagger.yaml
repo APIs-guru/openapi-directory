@@ -480,8 +480,8 @@ paths:
         Create virtual network:
           parameters:
             api-version: '2018-08-01'
-            location: westus
             parameters:
+              location: eastus
               properties:
                 addressSpace:
                   addressPrefixes:
@@ -493,7 +493,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet
-                location: westus
+                location: eastus
                 name: test-vnet
                 properties:
                   addressSpace:
@@ -506,7 +506,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet
-                location: westus
+                location: eastus
                 name: test-vnet
                 properties:
                   addressSpace:
@@ -520,6 +520,7 @@ paths:
           parameters:
             api-version: '2018-08-01'
             parameters:
+              location: eastus
               properties:
                 addressSpace:
                   addressPrefixes:
@@ -539,7 +540,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet
-                location: westus
+                location: eastus
                 name: test-vnet
                 properties:
                   addressSpace:
@@ -565,7 +566,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet
-                location: westus
+                location: eastus
                 name: test-vnet
                 properties:
                   addressSpace:
@@ -592,6 +593,7 @@ paths:
           parameters:
             api-version: '2018-08-01'
             parameters:
+              location: eastus
               properties:
                 addressSpace:
                   addressPrefixes:
@@ -609,7 +611,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1
-                location: westus
+                location: eastus
                 name: vnet1
                 properties:
                   addressSpace:
@@ -635,7 +637,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/vnetTest/providers/Microsoft.Network/virtualNetworks/vnet1
-                location: westus
+                location: eastus
                 name: vnet1
                 properties:
                   addressSpace:
@@ -662,6 +664,7 @@ paths:
           parameters:
             api-version: '2018-08-01'
             parameters:
+              location: eastus
               properties:
                 addressSpace:
                   addressPrefixes:
@@ -677,7 +680,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet
-                location: westus
+                location: eastus
                 name: test-vnet
                 properties:
                   addressSpace:
@@ -695,7 +698,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet
-                location: westus
+                location: eastus
                 name: test-vnet
                 properties:
                   addressSpace:
@@ -714,6 +717,7 @@ paths:
           parameters:
             api-version: '2018-08-01'
             parameters:
+              location: eastus
               properties:
                 addressSpace:
                   addressPrefixes:
@@ -731,7 +735,7 @@ paths:
             '200':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet
-                location: westus
+                location: eastus
                 name: test-vnet
                 properties:
                   addressSpace:
@@ -751,7 +755,7 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet
-                location: westus
+                location: eastus
                 name: test-vnet
                 properties:
                   addressSpace:

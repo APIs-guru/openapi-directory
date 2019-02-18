@@ -160,6 +160,313 @@ paths:
       summary: Disables the specified rule so it will not apply to a subscription in the future.
       tags:
         - Recommendations
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendationHistory':
+    get:
+      description: 'Get past recommendations for an app, optionally specified by the time range.'
+      operationId: Recommendations_ListHistoryForHostingEnvironment
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the hosting environment.
+          in: path
+          name: hostingEnvironmentName
+          required: true
+          type: string
+        - description: 'Specify <code>false</code> to return all recommendations. The default is <code>true</code>, which returns only expired recommendations.'
+          in: query
+          name: expiredOnly
+          type: boolean
+        - description: 'Filter is specified by using OData syntax. Example: $filter=channel eq ''Api'' or channel eq ''Notification'' and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration''[PT1H|PT1M|P1D]'
+          in: query
+          name: $filter
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendationCollection'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: 'Get past recommendations for an app, optionally specified by the time range.'
+      tags:
+        - Recommendations
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations':
+    get:
+      description: Get all recommendations for an app.
+      operationId: Recommendations_ListRecommendedRulesForHostingEnvironment
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the app.
+          in: path
+          name: hostingEnvironmentName
+          required: true
+          type: string
+        - description: 'Specify <code>true</code> to return only the most critical recommendations. The default is <code>false</code>, which returns all recommendations.'
+          in: query
+          name: featured
+          type: boolean
+        - description: 'Return only channels specified in the filter. Filter is specified by using OData syntax. Example: $filter=channel eq ''Api'' or channel eq ''Notification'''
+          in: query
+          name: $filter
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendationCollection'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Get all recommendations for an app.
+      tags:
+        - Recommendations
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations/disable':
+    post:
+      description: Disable all recommendations for an app.
+      operationId: Recommendations_DisableAllForHostingEnvironment
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the app.
+          in: query
+          name: environmentName
+          required: true
+          type: string
+        - in: path
+          name: hostingEnvironmentName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: No Content
+      summary: Disable all recommendations for an app.
+      tags:
+        - Recommendations
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations/reset':
+    post:
+      description: Reset all recommendation opt-out settings for an app.
+      operationId: Recommendations_ResetAllFiltersForHostingEnvironment
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the app.
+          in: query
+          name: environmentName
+          required: true
+          type: string
+        - in: path
+          name: hostingEnvironmentName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '204':
+          description: No Content
+      summary: Reset all recommendation opt-out settings for an app.
+      tags:
+        - Recommendations
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations/{name}':
+    get:
+      description: Get a recommendation rule for an app.
+      operationId: Recommendations_GetRuleDetailsByHostingEnvironment
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Name of the hosting environment.
+          in: path
+          name: hostingEnvironmentName
+          required: true
+          type: string
+        - description: Name of the recommendation.
+          in: path
+          name: name
+          required: true
+          type: string
+        - description: Specify <code>true</code> to update the last-seen timestamp of the recommendation object.
+          in: query
+          name: updateSeen
+          type: boolean
+        - description: The GUID of the recommendation object if you query an expired one. You don't need to specify it to query an active entry.
+          in: query
+          name: recommendationId
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RecommendationRule'
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Get a recommendation rule for an app.
+      tags:
+        - Recommendations
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{hostingEnvironmentName}/recommendations/{name}/disable':
+    post:
+      description: Disables the specific rule for a web site permanently.
+      operationId: Recommendations_DisableRecommendationForHostingEnvironment
+      parameters:
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - description: Site name
+          in: query
+          name: environmentName
+          required: true
+          type: string
+        - description: Rule name
+          in: path
+          name: name
+          required: true
+          type: string
+        - in: path
+          name: hostingEnvironmentName
+          required: true
+          type: string
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Successfully disabled recommendations.
+      summary: Disables the specific rule for a web site permanently.
+      tags:
+        - Recommendations
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/recommendationHistory':
     get:
       description: 'Get past recommendations for an app, optionally specified by the time range.'

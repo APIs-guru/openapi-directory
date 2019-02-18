@@ -1175,6 +1175,71 @@ paths:
                 type: object
             type: object
       summary: Validate if a resource can be created.
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validateContainerSettings':
+    post:
+      description: Validate if the container settings are correct.
+      operationId: ValidateContainerSettings
+      parameters:
+        - description: ''
+          in: body
+          name: validateContainerSettingsRequest
+          required: true
+          schema:
+            $ref: '#/definitions/ValidateContainerSettingsRequest'
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        default:
+          description: App Service error response.
+          schema:
+            description: App Service error response.
+            properties:
+              error:
+                description: Error model.
+                properties:
+                  code:
+                    description: Standardized string to programmatically identify the error.
+                    readOnly: true
+                    type: string
+                  details:
+                    items:
+                      description: Detailed errors.
+                      properties:
+                        code:
+                          description: Standardized string to programmatically identify the error.
+                          readOnly: true
+                          type: string
+                        message:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                        target:
+                          description: Detailed error description and debugging information.
+                          readOnly: true
+                          type: string
+                      readOnly: true
+                    type: array
+                  innererror:
+                    description: More information to debug error.
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                  target:
+                    description: Detailed error description and debugging information.
+                    readOnly: true
+                    type: string
+                readOnly: true
+                type: object
+            type: object
+      summary: Validate if the container settings are correct.
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources':
     post:
       description: Validate whether a resource can be moved.
@@ -1938,6 +2003,28 @@ definitions:
         type: array
     required:
       - value
+    type: object
+  ValidateContainerSettingsRequest:
+    description: Container settings validation request context
+    properties:
+      baseUrl:
+        description: Base URL of the container registry
+        type: string
+      password:
+        description: Password for to access the container registry
+        type: string
+      platform:
+        description: Platform (windows or linux)
+        type: string
+      repository:
+        description: Repository name (image name)
+        type: string
+      tag:
+        description: Image tag
+        type: string
+      username:
+        description: Username for to access the container registry
+        type: string
     type: object
   ValidateProperties:
     description: App properties used for validation.

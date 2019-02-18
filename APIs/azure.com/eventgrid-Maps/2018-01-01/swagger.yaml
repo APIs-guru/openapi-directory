@@ -21,35 +21,6 @@ info:
     - Microsoft
 paths: {}
 definitions:
-  MapsGeofenceDetail:
-    description: Lists detail generated during processing.
-    properties:
-      code:
-        description: The detail code which identifies each detail item being returned.
-        enum:
-          - ExpiredGeofencingData
-          - GeofencingEventPublished
-          - InvalidTimeGeofencingData
-        type: string
-        x-ms-enum:
-          name: MapsGeofenceDetailCodeType
-      message:
-        description: Text description of the detail.
-        type: string
-      type:
-        description: The type of the detail.
-        enum:
-          - Information
-          - Warning
-        type: string
-        x-ms-enum:
-          name: MapsGeofenceDetailType
-          values:
-            - description: Useful information to inform clients.
-              value: Information
-            - description: The detail serves as a warning to client.
-              value: Warning
-    type: object
   MapsGeofenceEnteredEventData:
     allOf:
       - $ref: '#/definitions/MapsGeofenceEventProperties'
@@ -58,16 +29,24 @@ definitions:
   MapsGeofenceEventProperties:
     description: 'Schema of the Data property of an EventGridEvent for a Geofence event (GeofenceEntered, GeofenceExited, GeofenceResult).'
     properties:
-      details:
-        description: List details generated during processing.
+      expiredGeofenceGeometryId:
+        description: Lists of the geometry ID of the geofence which is expired relative to the user time in the request.
         items:
-          $ref: '#/definitions/MapsGeofenceDetail'
+          type: string
         type: array
       geometries:
         description: Lists the fence geometries that either fully contain the coordinate position or have an overlap with the searchBuffer around the fence.
         items:
           $ref: '#/definitions/MapsGeofenceGeometry'
         type: array
+      invalidPeriodGeofenceGeometryId:
+        description: Lists of the geometry ID of the geofence which is in invalid period relative to the user time in the request.
+        items:
+          type: string
+        type: array
+      isEventPublished:
+        description: 'True if at least one event is published to the Azure Maps event subscriber, false if no event is published to the Azure Maps event subscriber.'
+        type: boolean
     type: object
   MapsGeofenceExitedEventData:
     allOf:
@@ -77,20 +56,23 @@ definitions:
   MapsGeofenceGeometry:
     description: The geofence geometry.
     properties:
+      deviceId:
+        description: ID of the device.
+        type: string
       distance:
-        description: 'Distance from the coordinate to the closest border line of the polygon, point or point on the polyline. If the coordinate is outside, then the distance is positive. Negative means the coordinate is inside. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest polygon border line, point or polyline, then the value is -999. A value of -999 means that there is great confidence the coordinate is well within the geofence.'
+        description: 'Distance from the coordinate to the closest border of the geofence. Positive means the coordinate is outside of the geofence. If the coordinate is outside of the geofence, but more than the value of searchBuffer away from the closest geofence border, then the value is 999. Negative means the coordinate is inside of the geofence. If the coordinate is inside the polygon, but more than the value of searchBuffer away from the closest geofencing border,then the value is -999. A value of 999 means that there is great confidence the coordinate is well outside the geofence. A value of -999 means that there is great confidence the coordinate is well within the geofence.'
         type: number
       geometryId:
         description: The unique ID for the geofence geometry.
         type: string
       nearestLat:
-        description: Latitude of the nearest point of the geometry/geometry border. Void if distance = -999.
+        description: Latitude of the nearest point of the geometry.
         type: number
       nearestLon:
-        description: Longitude of the nearest point of the geometry/geometry border. Void if distance = -999.
+        description: Longitude of the nearest point of the geometry.
         type: number
       udId:
-        description: The unique ID returned from user upload service when uploading a geofence.
+        description: The unique id returned from user upload service when uploading a geofence. Will not be included in geofencing post API.
         type: string
     type: object
   MapsGeofenceResultEventData:

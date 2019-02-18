@@ -314,280 +314,6 @@ paths:
                     type: Microsoft.Network/frontDoor
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}':
-    delete:
-      description: Deletes an existing frontend endpoint with the specified parameters.
-      operationId: FrontendEndpoints_Delete
-      parameters:
-        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/frontDoorNameParameter'
-        - $ref: '#/parameters/frontendEndpointNameParameter'
-        - description: Client API version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '202':
-          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
-        '204':
-          description: No Content. The request has been accepted but the Backend Pool was not found.
-        default:
-          description: Front Door error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      tags:
-        - FrontDoors
-      x-ms-examples:
-        Delete Backend Pool:
-          parameters:
-            api-version: '2018-08-01'
-            frontDoorName: frontDoor1
-            frontendEndpointName: frontendEndpoint1
-            resourceGroupName: rg1
-            subscriptionId: subid
-          responses:
-            '202': {}
-            '204': {}
-      x-ms-long-running-operation: true
-    get:
-      description: Gets a Frontend endpoint with the specified name within the specified Front Door.
-      operationId: FrontendEndpoints_Get
-      parameters:
-        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/frontDoorNameParameter'
-        - $ref: '#/parameters/frontendEndpointNameParameter'
-        - description: Client API version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK. The request has succeeded.
-          schema:
-            $ref: '#/definitions/FrontendEndpoint'
-        default:
-          description: Front Door error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      tags:
-        - FrontDoors
-      x-ms-examples:
-        Get Frontend Endpoint:
-          parameters:
-            api-version: '2018-08-01'
-            frontDoorName: frontDoor1
-            frontendEndpointName: frontendEndpoint1
-            resourceGroupName: rg1
-            subscriptionId: subid
-          responses:
-            '200':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1
-                name: frontendEndpoint1
-                properties:
-                  hostName: www.contoso.com
-                  sessionAffinityEnabledState: Enabled
-                  sessionAffinityTtlSeconds: 60
-                  webApplicationFirewallPolicyLink:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
-    put:
-      description: Creates a new frontend endpoint with the specified host name within the specified Front Door.
-      operationId: FrontendEndpoints_CreateOrUpdate
-      parameters:
-        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/frontDoorNameParameter'
-        - $ref: '#/parameters/frontendEndpointNameParameter'
-        - description: Frontend endpoint properties needed to create a new endpoint.
-          in: body
-          name: frontendEndpointParameters
-          required: true
-          schema:
-            $ref: '#/definitions/FrontendEndpoint'
-        - description: Client API version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK. The request has succeeded.
-          schema:
-            $ref: '#/definitions/FrontendEndpoint'
-        '201':
-          description: Created. The request has been fulfilled and a new frontend endpoint has been created.
-          schema:
-            $ref: '#/definitions/FrontendEndpoint'
-        '202':
-          description: Accepted and the operation will complete asynchronously.
-          schema:
-            $ref: '#/definitions/FrontendEndpoint'
-        default:
-          description: Front Door error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      tags:
-        - FrontDoors
-      x-ms-examples:
-        Create or update specific Frontend Endpoint:
-          parameters:
-            api-version: '2018-08-01'
-            frontDoorName: frontDoor1
-            frontendEndpointName: frontDoorEndpoint1
-            frontendEndpointParameters:
-              name: frontendEndpoint1
-              properties:
-                hostName: www.contoso.com
-                sessionAffinityEnabledState: Enabled
-                sessionAffinityTtlSeconds: 60
-                webApplicationFirewallPolicyLink:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
-            resourceGroupName: rg1
-            subscriptionId: subid
-          responses:
-            '200':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1
-                name: frontendEndpoint1
-                properties:
-                  hostName: www.contoso.com
-                  sessionAffinityEnabledState: Enabled
-                  sessionAffinityTtlSeconds: 60
-                  webApplicationFirewallPolicyLink:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
-            '201':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1
-                name: frontendEndpoint1
-                properties:
-                  hostName: www.contoso.com
-                  sessionAffinityEnabledState: Enabled
-                  sessionAffinityTtlSeconds: 60
-                  webApplicationFirewallPolicyLink:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
-            '202':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1
-                name: frontendEndpoint1
-                properties:
-                  hostName: www.contoso.com
-                  sessionAffinityEnabledState: Enabled
-                  sessionAffinityTtlSeconds: 60
-                  webApplicationFirewallPolicyLink:
-                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
-      x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}/disableHttps':
-    post:
-      description: Disables a frontendEndpoint for HTTPS traffic
-      operationId: FrontendEndpoints_DisableHttps
-      parameters:
-        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/frontDoorNameParameter'
-        - $ref: '#/parameters/frontendEndpointNameParameter'
-        - description: Client API version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK. The request has succeeded.
-        '202':
-          description: Accepted and the operation will complete asynchronously.
-        default:
-          description: Front Door error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      tags:
-        - FrontDoors
-      x-ms-examples:
-        FrontendEndpoints_DisableHttps:
-          parameters:
-            api-version: '2018-08-01'
-            frontDoorName: frontDoor1
-            frontendEndpointName: frontendEndpoint1
-            resourceGroupName: rg1
-            subscriptionId: subid
-          responses:
-            '200': {}
-            '202': {}
-      x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/provider/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}/enableHttps':
-    post:
-      description: Enables a frontendEndpoint for HTTPS traffic
-      operationId: FrontendEndpoints_EnableHttps
-      parameters:
-        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/frontDoorNameParameter'
-        - $ref: '#/parameters/frontendEndpointNameParameter'
-        - description: The configuration specifying how to enable HTTPS
-          in: body
-          name: customHttpsConfiguration
-          required: true
-          schema:
-            $ref: '#/definitions/CustomHttpsConfiguration'
-        - description: Client API version.
-          in: query
-          name: api-version
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK. The request has succeeded.
-        '202':
-          description: Accepted and the operation will complete asynchronously.
-        default:
-          description: Front Door error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      tags:
-        - FrontDoors
-      x-ms-examples:
-        FrontendEndpoints_EnableHttps:
-          parameters:
-            api-version: '2018-08-01'
-            customHttpsConfiguration:
-              certificateSource: AzureKeyVault
-              keyVaultCertificateSourceParameters:
-                secretName: secret1
-                secretVersion: 00000000-0000-0000-0000-000000000000
-                vault:
-                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/vault1
-              protocolType: ServerNameIndication
-            frontDoorName: frontDoor1
-            frontendEndpointName: frontendEndpoint1
-            resourceGroupName: rg1
-            subscriptionId: subid
-          responses:
-            '200': {}
-            '202': {}
-      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors':
     get:
       description: Lists all of the Front Doors within a resource group under a subscription.
@@ -1601,6 +1327,280 @@ paths:
                         id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}':
+    delete:
+      description: Deletes an existing frontend endpoint with the specified parameters.
+      operationId: FrontendEndpoints_Delete
+      parameters:
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/frontDoorNameParameter'
+        - $ref: '#/parameters/frontendEndpointNameParameter'
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '202':
+          description: Accepted. The request has been accepted for processing and the operation will complete asynchronously.
+        '204':
+          description: No Content. The request has been accepted but the Backend Pool was not found.
+        default:
+          description: Front Door error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - FrontDoors
+      x-ms-examples:
+        Delete Backend Pool:
+          parameters:
+            api-version: '2018-08-01'
+            frontDoorName: frontDoor1
+            frontendEndpointName: frontendEndpoint1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '202': {}
+            '204': {}
+      x-ms-long-running-operation: true
+    get:
+      description: Gets a Frontend endpoint with the specified name within the specified Front Door.
+      operationId: FrontendEndpoints_Get
+      parameters:
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/frontDoorNameParameter'
+        - $ref: '#/parameters/frontendEndpointNameParameter'
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/FrontendEndpoint'
+        default:
+          description: Front Door error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - FrontDoors
+      x-ms-examples:
+        Get Frontend Endpoint:
+          parameters:
+            api-version: '2018-08-01'
+            frontDoorName: frontDoor1
+            frontendEndpointName: frontendEndpoint1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1
+                name: frontendEndpoint1
+                properties:
+                  hostName: www.contoso.com
+                  sessionAffinityEnabledState: Enabled
+                  sessionAffinityTtlSeconds: 60
+                  webApplicationFirewallPolicyLink:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
+    put:
+      description: Creates a new frontend endpoint with the specified host name within the specified Front Door.
+      operationId: FrontendEndpoints_CreateOrUpdate
+      parameters:
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/frontDoorNameParameter'
+        - $ref: '#/parameters/frontendEndpointNameParameter'
+        - description: Frontend endpoint properties needed to create a new endpoint.
+          in: body
+          name: frontendEndpointParameters
+          required: true
+          schema:
+            $ref: '#/definitions/FrontendEndpoint'
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/FrontendEndpoint'
+        '201':
+          description: Created. The request has been fulfilled and a new frontend endpoint has been created.
+          schema:
+            $ref: '#/definitions/FrontendEndpoint'
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+          schema:
+            $ref: '#/definitions/FrontendEndpoint'
+        default:
+          description: Front Door error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - FrontDoors
+      x-ms-examples:
+        Create or update specific Frontend Endpoint:
+          parameters:
+            api-version: '2018-08-01'
+            frontDoorName: frontDoor1
+            frontendEndpointName: frontDoorEndpoint1
+            frontendEndpointParameters:
+              name: frontendEndpoint1
+              properties:
+                hostName: www.contoso.com
+                sessionAffinityEnabledState: Enabled
+                sessionAffinityTtlSeconds: 60
+                webApplicationFirewallPolicyLink:
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1
+                name: frontendEndpoint1
+                properties:
+                  hostName: www.contoso.com
+                  sessionAffinityEnabledState: Enabled
+                  sessionAffinityTtlSeconds: 60
+                  webApplicationFirewallPolicyLink:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1
+                name: frontendEndpoint1
+                properties:
+                  hostName: www.contoso.com
+                  sessionAffinityEnabledState: Enabled
+                  sessionAffinityTtlSeconds: 60
+                  webApplicationFirewallPolicyLink:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
+            '202':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1
+                name: frontendEndpoint1
+                properties:
+                  hostName: www.contoso.com
+                  sessionAffinityEnabledState: Enabled
+                  sessionAffinityTtlSeconds: 60
+                  webApplicationFirewallPolicyLink:
+                    id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}/disableHttps':
+    post:
+      description: Disables a frontendEndpoint for HTTPS traffic
+      operationId: FrontendEndpoints_DisableHttps
+      parameters:
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/frontDoorNameParameter'
+        - $ref: '#/parameters/frontendEndpointNameParameter'
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+        default:
+          description: Front Door error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - FrontDoors
+      x-ms-examples:
+        FrontendEndpoints_DisableHttps:
+          parameters:
+            api-version: '2018-08-01'
+            frontDoorName: frontDoor1
+            frontendEndpointName: frontendEndpoint1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/frontendEndpoints/{frontendEndpointName}/enableHttps':
+    post:
+      description: Enables a frontendEndpoint for HTTPS traffic
+      operationId: FrontendEndpoints_EnableHttps
+      parameters:
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - $ref: '#/parameters/resourceGroupNameParameter'
+        - $ref: '#/parameters/frontDoorNameParameter'
+        - $ref: '#/parameters/frontendEndpointNameParameter'
+        - description: The configuration specifying how to enable HTTPS
+          in: body
+          name: customHttpsConfiguration
+          required: true
+          schema:
+            $ref: '#/definitions/CustomHttpsConfiguration'
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+        '202':
+          description: Accepted and the operation will complete asynchronously.
+        default:
+          description: Front Door error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - FrontDoors
+      x-ms-examples:
+        FrontendEndpoints_EnableHttps:
+          parameters:
+            api-version: '2018-08-01'
+            customHttpsConfiguration:
+              certificateSource: AzureKeyVault
+              keyVaultCertificateSourceParameters:
+                secretName: secret1
+                secretVersion: 00000000-0000-0000-0000-000000000000
+                vault:
+                  id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/vault1
+              protocolType: ServerNameIndication
+            frontDoorName: frontDoor1
+            frontendEndpointName: frontendEndpoint1
+            resourceGroupName: rg1
+            subscriptionId: subid
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/frontDoors/{frontDoorName}/healthProbeSettings':
     get:
       description: Lists all of the HealthProbeSettings within a Front Door.
