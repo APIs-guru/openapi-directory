@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/sqladmin/v1beta4/rest'
       version: v1
@@ -1991,9 +1991,7 @@ definitions:
     description: Database instance export context.
     properties:
       csvExportOptions:
-        description: |-
-          Options for exporting data as CSV.
-          Exporting in CSV format using the Cloud SQL Admin API is not supported for PostgreSQL instances.
+        description: Options for exporting data as CSV.
         properties:
           selectQuery:
             description: The select query used to extract the data.
@@ -2003,7 +2001,7 @@ definitions:
         description: |-
           Databases to be exported.
           MySQL instances: If fileType is SQL and no database is specified, all databases are exported, except for the mysql system database. If fileType is CSV, you can specify one database, either by using this property or by using the csvExportOptions.selectQuery property, which takes precedence over this property.
-          PostgreSQL instances: If fileType is SQL, you must specify one database to be exported. A fileType of CSV is not supported for PostgreSQL instances.
+          PostgreSQL instances: Specify exactly one database to be exported. If fileType is CSV, this database must match the database used in the csvExportOptions.selectQuery property.
         items:
           type: string
         type: array
@@ -2012,7 +2010,6 @@ definitions:
           The file type for the specified uri.
           SQL: The file contains SQL statements.
           CSV: The file contains CSV data.
-          CSV is not supported for PostgreSQL instances.
         type: string
       kind:
         default: 'sql#exportContext'
@@ -2067,6 +2064,9 @@ definitions:
         items:
           type: string
         type: array
+      inBeta:
+        description: True if the flag is only released in Beta.
+        type: boolean
       kind:
         default: 'sql#flag'
         description: 'This is always sql#flag.'
@@ -2106,9 +2106,7 @@ definitions:
     description: Database instance import context.
     properties:
       csvImportOptions:
-        description: |-
-          Options for importing data as CSV.
-          Importing CSV data using the Cloud SQL Admin API is not supported for PostgreSQL instances.
+        description: Options for importing data as CSV.
         properties:
           columns:
             description: 'The columns to which CSV data is imported. If not specified, all columns of the database table are loaded with CSV data.'
@@ -2127,10 +2125,9 @@ definitions:
           The file type for the specified uri.
           SQL: The file contains SQL statements.
           CSV: The file contains CSV data.
-          Importing CSV data using the Cloud SQL Admin API is not supported for PostgreSQL instances.
         type: string
       importUser:
-        description: The PostgreSQL user for this import operation. Defaults to cloudsqlsuperuser. PostgreSQL instances only.
+        description: The PostgreSQL user for this import operation. PostgreSQL instances only.
         type: string
       kind:
         default: 'sql#importContext'

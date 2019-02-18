@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://dataflow.googleapis.com/$discovery/rest?version=v1b3'
       version: v1
@@ -149,7 +149,15 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs':
     get:
-      description: List the jobs of a project in a given region.
+      description: |-
+        List the jobs of a project.
+
+        To list the jobs of a project in a region, we recommend using
+        `projects.locations.jobs.get` with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To
+        list the all jobs across all regions, use `projects.jobs.aggregated`. Using
+        `projects.jobs.list` is not recommended, as you can only get the list of
+        jobs that are running in `us-central1`.
       operationId: dataflow.projects.jobs.list
       parameters:
         - description: The kind of filter to use.
@@ -161,7 +169,10 @@ paths:
           in: query
           name: filter
           type: string
-        - description: The location that contains this job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains this job.
           in: query
           name: location
           type: string
@@ -221,14 +232,24 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Creates a Cloud Dataflow job.
+      description: |-
+        Creates a Cloud Dataflow job.
+
+        To create a job, we recommend using `projects.locations.jobs.create` with a
+        [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.create` is not recommended, as your job will always start
+        in `us-central1`.
       operationId: dataflow.projects.jobs.create
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Job'
-        - description: The location that contains this job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains this job.
           in: query
           name: location
           type: string
@@ -268,7 +289,14 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs/{jobId}':
     get:
-      description: Gets the state of the specified Cloud Dataflow job.
+      description: |-
+        Gets the state of the specified Cloud Dataflow job.
+
+        To get the state of a job, we recommend using `projects.locations.jobs.get`
+        with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.get` is not recommended, as you can only get the state of
+        jobs that are running in `us-central1`.
       operationId: dataflow.projects.jobs.get
       parameters:
         - description: The job ID.
@@ -276,7 +304,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location that contains this job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains this job.
           in: query
           name: location
           type: string
@@ -323,7 +354,14 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates the state of an existing Cloud Dataflow job.
+      description: |-
+        Updates the state of an existing Cloud Dataflow job.
+
+        To update the state of an existing job, we recommend using
+        `projects.locations.jobs.update` with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.update` is not recommended, as you can only update the state
+        of jobs that are running in `us-central1`.
       operationId: dataflow.projects.jobs.update
       parameters:
         - in: body
@@ -335,7 +373,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location that contains this job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains this job.
           in: query
           name: location
           type: string
@@ -456,7 +497,14 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/jobs/{jobId}/messages':
     get:
-      description: Request the job status.
+      description: |-
+        Request the job status.
+
+        To request the status of a job, we recommend using
+        `projects.locations.jobs.messages.list` with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.messages.list` is not recommended, as you can only request
+        the status of jobs that are running in `us-central1`.
       operationId: dataflow.projects.jobs.messages.list
       parameters:
         - description: |-
@@ -470,7 +518,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location which contains the job specified by job_id.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains the job specified by job_id.
           in: query
           name: location
           type: string
@@ -540,7 +591,14 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/jobs/{jobId}/metrics':
     get:
-      description: Request the job status.
+      description: |-
+        Request the job status.
+
+        To request the status of a job, we recommend using
+        `projects.locations.jobs.getMetrics` with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.getMetrics` is not recommended, as you can only request the
+        status of jobs that are running in `us-central1`.
       operationId: dataflow.projects.jobs.getMetrics
       parameters:
         - description: The job to get messages for.
@@ -548,7 +606,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location which contains the job specified by job_id.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains the job specified by job_id.
           in: query
           name: location
           type: string
@@ -746,7 +807,10 @@ paths:
           in: query
           name: filter
           type: string
-        - description: The location that contains this job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains this job.
           in: query
           name: location
           type: string
@@ -826,7 +890,10 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/SendWorkerMessagesRequest'
-        - description: The location which contains the job
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains the job.
           in: path
           name: location
           required: true
@@ -854,7 +921,15 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/locations/{location}/jobs':
     get:
-      description: List the jobs of a project in a given region.
+      description: |-
+        List the jobs of a project.
+
+        To list the jobs of a project in a region, we recommend using
+        `projects.locations.jobs.get` with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). To
+        list the all jobs across all regions, use `projects.jobs.aggregated`. Using
+        `projects.jobs.list` is not recommended, as you can only get the list of
+        jobs that are running in `us-central1`.
       operationId: dataflow.projects.locations.jobs.list
       parameters:
         - description: The kind of filter to use.
@@ -866,7 +941,10 @@ paths:
           in: query
           name: filter
           type: string
-        - description: The location that contains this job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains this job.
           in: path
           name: location
           required: true
@@ -927,14 +1005,24 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Creates a Cloud Dataflow job.
+      description: |-
+        Creates a Cloud Dataflow job.
+
+        To create a job, we recommend using `projects.locations.jobs.create` with a
+        [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.create` is not recommended, as your job will always start
+        in `us-central1`.
       operationId: dataflow.projects.locations.jobs.create
       parameters:
         - in: body
           name: body
           schema:
             $ref: '#/definitions/Job'
-        - description: The location that contains this job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains this job.
           in: path
           name: location
           required: true
@@ -975,7 +1063,14 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}':
     get:
-      description: Gets the state of the specified Cloud Dataflow job.
+      description: |-
+        Gets the state of the specified Cloud Dataflow job.
+
+        To get the state of a job, we recommend using `projects.locations.jobs.get`
+        with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.get` is not recommended, as you can only get the state of
+        jobs that are running in `us-central1`.
       operationId: dataflow.projects.locations.jobs.get
       parameters:
         - description: The job ID.
@@ -983,7 +1078,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location that contains this job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains this job.
           in: path
           name: location
           required: true
@@ -1031,7 +1129,14 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates the state of an existing Cloud Dataflow job.
+      description: |-
+        Updates the state of an existing Cloud Dataflow job.
+
+        To update the state of an existing job, we recommend using
+        `projects.locations.jobs.update` with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.update` is not recommended, as you can only update the state
+        of jobs that are running in `us-central1`.
       operationId: dataflow.projects.locations.jobs.update
       parameters:
         - in: body
@@ -1043,7 +1148,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location that contains this job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains this job.
           in: path
           name: location
           required: true
@@ -1095,7 +1203,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location which contains the job specified by job_id.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains the job specified by job_id.
           in: path
           name: location
           required: true
@@ -1147,7 +1258,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location which contains the job specified by job_id.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains the job specified by job_id.
           in: path
           name: location
           required: true
@@ -1175,7 +1289,14 @@ paths:
         - projects
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/messages':
     get:
-      description: Request the job status.
+      description: |-
+        Request the job status.
+
+        To request the status of a job, we recommend using
+        `projects.locations.jobs.messages.list` with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.messages.list` is not recommended, as you can only request
+        the status of jobs that are running in `us-central1`.
       operationId: dataflow.projects.locations.jobs.messages.list
       parameters:
         - description: |-
@@ -1189,7 +1310,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location which contains the job specified by job_id.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains the job specified by job_id.
           in: path
           name: location
           required: true
@@ -1260,7 +1384,14 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v1b3/projects/{projectId}/locations/{location}/jobs/{jobId}/metrics':
     get:
-      description: Request the job status.
+      description: |-
+        Request the job status.
+
+        To request the status of a job, we recommend using
+        `projects.locations.jobs.getMetrics` with a [regional endpoint]
+        (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints). Using
+        `projects.jobs.getMetrics` is not recommended, as you can only request the
+        status of jobs that are running in `us-central1`.
       operationId: dataflow.projects.locations.jobs.getMetrics
       parameters:
         - description: The job to get messages for.
@@ -1268,7 +1399,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location which contains the job specified by job_id.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains the job specified by job_id.
           in: path
           name: location
           required: true
@@ -1338,7 +1472,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location which contains the WorkItem's job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains the WorkItem's job.
           in: path
           name: location
           required: true
@@ -1390,7 +1527,10 @@ paths:
           name: jobId
           required: true
           type: string
-        - description: The location which contains the WorkItem's job.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+            contains the WorkItem's job.
           in: path
           name: location
           required: true
@@ -1489,7 +1629,10 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/CreateJobFromTemplateRequest'
-        - description: The location to which to direct the request.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
+            which to direct the request.
           in: path
           name: location
           required: true
@@ -1527,7 +1670,10 @@ paths:
           in: query
           name: gcsPath
           type: string
-        - description: The location to which to direct the request.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
+            which to direct the request.
           in: path
           name: location
           required: true
@@ -1611,7 +1757,10 @@ paths:
           in: query
           name: gcsPath
           type: string
-        - description: The location to which to direct the request.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
+            which to direct the request.
           in: path
           name: location
           required: true
@@ -1697,7 +1846,10 @@ paths:
           in: query
           name: gcsPath
           type: string
-        - description: The location to which to direct the request.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
+            which to direct the request.
           in: query
           name: location
           type: string
@@ -1780,7 +1932,10 @@ paths:
           in: query
           name: gcsPath
           type: string
-        - description: The location to which to direct the request.
+        - description: |-
+            The [regional endpoint]
+            (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
+            which to direct the request.
           in: query
           name: location
           type: string
@@ -2255,7 +2410,10 @@ definitions:
         description: Required. The job name to use for the created job.
         type: string
       location:
-        description: The location to which to direct the request.
+        description: |-
+          The [regional endpoint]
+          (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) to
+          which to direct the request.
         type: string
       parameters:
         additionalProperties:
@@ -2476,6 +2634,13 @@ definitions:
         items:
           type: string
         type: array
+      flexResourceSchedulingGoal:
+        description: Which Flexible Resource Scheduling mode to run in.
+        enum:
+          - FLEXRS_UNSPECIFIED
+          - FLEXRS_SPEED_OPTIMIZED
+          - FLEXRS_COST_OPTIMIZED
+        type: string
       internalExperiments:
         additionalProperties:
           description: Properties of the object. Contains field @type with type URL.
@@ -2603,10 +2768,16 @@ definitions:
         type: array
     type: object
   FailedLocation:
-    description: Indicates which location failed to respond to a request for data.
+    description: |-
+      Indicates which [regional endpoint]
+      (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) failed
+      to respond to a request for data.
     properties:
       name:
-        description: The name of the failed location.
+        description: |-
+          The name of the [regional endpoint]
+          (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+          failed to respond.
         type: string
     type: object
   FileIODetails:
@@ -2655,7 +2826,10 @@ definitions:
           requested.
         type: string
       location:
-        description: The location which contains the job specified by job_id.
+        description: |-
+          The [regional endpoint]
+          (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+          contains the job specified by job_id.
         type: string
       workerId:
         description: 'The worker id, i.e., VM hostname.'
@@ -2879,7 +3053,10 @@ definitions:
           size.
         type: object
       location:
-        description: The location that contains this job.
+        description: |-
+          The [regional endpoint]
+          (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+          contains this job.
         type: string
       name:
         description: |-
@@ -3052,7 +3229,7 @@ definitions:
   JobMetadata:
     description: |-
       Metadata available primarily for filtering jobs. Will be included in the
-      ListJob response and Job SUMMARY view+.
+      ListJob response and Job SUMMARY view.
     properties:
       bigTableDetails:
         description: Identification of a BigTable source used in the Dataflow job.
@@ -3090,7 +3267,7 @@ definitions:
     type: object
   JobMetrics:
     description: |-
-      JobMetrics contains a collection of metrics descibing the detailed progress
+      JobMetrics contains a collection of metrics describing the detailed progress
       of a Dataflow job. Metrics correspond to user-defined and system-defined
       metrics in the job.
 
@@ -3191,7 +3368,10 @@ definitions:
         format: google-datetime
         type: string
       location:
-        description: The location which contains the WorkItem's job.
+        description: |-
+          The [regional endpoint]
+          (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+          contains the WorkItem's job.
         type: string
       requestedLeaseDuration:
         description: The initial lease period.
@@ -3257,7 +3437,10 @@ definitions:
       response, depending on the page size in the ListJobsRequest.
     properties:
       failedLocation:
-        description: Zero or more messages describing locations that failed to respond.
+        description: |-
+          Zero or more messages describing the [regional endpoints]
+          (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+          failed to respond.
         items:
           $ref: '#/definitions/FailedLocation'
         type: array
@@ -3603,7 +3786,7 @@ definitions:
     description: |-
       A descriptive representation of submitted pipeline as well as the executed
       form.  This data is provided by the Dataflow service for ease of visualizing
-      the pipeline and interpretting Dataflow provided metrics.
+      the pipeline and interpreting Dataflow provided metrics.
     properties:
       displayData:
         description: Pipeline level display data.
@@ -3716,7 +3899,10 @@ definitions:
         format: google-datetime
         type: string
       location:
-        description: The location which contains the WorkItem's job.
+        description: |-
+          The [regional endpoint]
+          (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+          contains the WorkItem's job.
         type: string
       unifiedWorkerRequest:
         additionalProperties:
@@ -3851,7 +4037,7 @@ definitions:
         type: string
     type: object
   SdkVersion:
-    description: The version of the SDK used to run the jobl
+    description: The version of the SDK used to run the job.
     properties:
       sdkSupportStatus:
         description: The support status for this SDK version.
@@ -3866,7 +4052,7 @@ definitions:
         description: The version of the SDK used to run the job.
         type: string
       versionDisplayName:
-        description: A readable string describing the version of the sdk.
+        description: A readable string describing the version of the SDK.
         type: string
     type: object
   SendDebugCaptureRequest:
@@ -3879,7 +4065,10 @@ definitions:
         description: The encoded debug information.
         type: string
       location:
-        description: The location which contains the job specified by job_id.
+        description: |-
+          The [regional endpoint]
+          (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+          contains the job specified by job_id.
         type: string
       workerId:
         description: 'The worker id, i.e., VM hostname.'
@@ -3895,7 +4084,10 @@ definitions:
     description: A request for sending worker messages to the service.
     properties:
       location:
-        description: The location which contains the job
+        description: |-
+          The [regional endpoint]
+          (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
+          contains the job.
         type: string
       workerMessages:
         description: The WorkerMessages to send.
@@ -4544,6 +4736,10 @@ definitions:
   StreamingConfigTask:
     description: A task that carries configuration information for streaming computations.
     properties:
+      maxWorkItemCommitBytes:
+        description: Maximum size for work item commit supported windmill storage layer.
+        format: int64
+        type: string
       streamingComputationConfigs:
         description: Set of computation configuration information.
         items:
@@ -4631,7 +4827,7 @@ definitions:
     properties:
       messageKey:
         description: |-
-          Idenfier for this message type.  Used by external systems to
+          Identifier for this message type.  Used by external systems to
           internationalize or personalize message.
         type: string
       messageText:

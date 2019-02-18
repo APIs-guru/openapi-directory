@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://dlp.googleapis.com/$discovery/rest?version=v2'
       version: v1
@@ -152,14 +152,15 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.delete
+        Deletes a stored infoType.
+        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+        learn more.
+      operationId: dlp.organizations.storedInfoTypes.delete
       parameters:
         - description: |-
-            Resource name of the organization and inspectTemplate to be deleted, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of the organization and storedInfoType to be deleted, for
+            example `organizations/433245324/storedInfoTypes/432452342` or
+            projects/project-id/storedInfoTypes/432452342.
           in: path
           name: name
           required: true
@@ -174,17 +175,18 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     get:
       description: |-
-        Gets an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.get
+        Gets a stored infoType.
+        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+        learn more.
+      operationId: dlp.organizations.storedInfoTypes.get
       parameters:
         - description: |-
-            Resource name of the organization and inspectTemplate to be read, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of the organization and storedInfoType to be read, for
+            example `organizations/433245324/storedInfoTypes/432452342` or
+            projects/project-id/storedInfoTypes/432452342.
           in: path
           name: name
           required: true
@@ -194,12 +196,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -214,18 +216,20 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.patch
+        Updates the stored infoType by creating a new version. The existing version
+        will continue to be used until the new version is ready.
+        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+        learn more.
+      operationId: dlp.organizations.storedInfoTypes.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateInspectTemplateRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
         - description: |-
-            Resource name of organization and inspectTemplate to be updated, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of organization and storedInfoType to be updated, for
+            example `organizations/433245324/storedInfoTypes/432452342` or
+            projects/project-id/storedInfoTypes/432452342.
           in: path
           name: name
           required: true
@@ -235,7 +239,48 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+      tags:
+        - organizations
+  '/v2/{name}:activate':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: |-
+        Activate a job trigger. Causes the immediate execute of a trigger
+        instead of waiting on the trigger event to occur.
+      operationId: dlp.projects.jobTriggers.activate
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2ActivateJobTriggerRequest'
+        - description: |-
+            Resource name of the trigger to activate, for example
+            `projects/dlp-test-project/jobTriggers/53234423`.
+          in: path
+          name: name
+          required: true
+          type: string
+          x-reservedExpansion: true
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/GooglePrivacyDlpV2DlpJob'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -421,7 +466,7 @@ paths:
         Lists DeidentifyTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.projects.deidentifyTemplates.list
+      operationId: dlp.organizations.deidentifyTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -469,7 +514,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -488,7 +533,7 @@ paths:
         for de-identifying content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.projects.deidentifyTemplates.create
+      operationId: dlp.organizations.deidentifyTemplates.create
       parameters:
         - in: body
           name: body
@@ -511,7 +556,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v2/{parent}/dlpJobs':
     get:
       description: |-
@@ -689,7 +734,7 @@ paths:
       description: |-
         Lists InspectTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.list
+      operationId: dlp.organizations.inspectTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -737,7 +782,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -755,7 +800,7 @@ paths:
         Creates an InspectTemplate for re-using frequently used configuration
         for inspecting content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.create
+      operationId: dlp.organizations.inspectTemplates.create
       parameters:
         - in: body
           name: body
@@ -778,7 +823,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v2/{parent}/jobTriggers':
     get:
       description: |-
@@ -905,7 +950,7 @@ paths:
         Lists stored infoTypes.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.projects.storedInfoTypes.list
+      operationId: dlp.organizations.storedInfoTypes.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -954,7 +999,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -972,7 +1017,7 @@ paths:
         Creates a pre-built stored infoType to be used for inspection.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.projects.storedInfoTypes.create
+      operationId: dlp.organizations.storedInfoTypes.create
       parameters:
         - in: body
           name: body
@@ -995,7 +1040,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
 definitions:
   GooglePrivacyDlpV2Action:
     description: |-
@@ -1016,6 +1061,10 @@ definitions:
       saveFindings:
         $ref: '#/definitions/GooglePrivacyDlpV2SaveFindings'
         description: Save resulting findings in a provided location.
+    type: object
+  GooglePrivacyDlpV2ActivateJobTriggerRequest:
+    description: Request message for ActivateJobTrigger.
+    properties: {}
     type: object
   GooglePrivacyDlpV2AnalyzeDataSourceRiskDetails:
     description: Result of a risk analysis operation request.
@@ -1376,6 +1425,7 @@ definitions:
             - FILE_TYPE_UNSPECIFIED
             - BINARY_FILE
             - TEXT_FILE
+            - IMAGE
           type: string
         type: array
       filesLimitPercent:

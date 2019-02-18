@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/bigquery/v2/rest'
       version: v1
@@ -1186,6 +1186,11 @@ definitions:
       friendlyName:
         description: '[Optional] The friendly name for the destination table. This will only be used if the destination table is newly created. If the table already exists and a value different than the current friendly name is provided, the job will fail.'
         type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: '[Optional] The labels associated with this table. You can use these to organize and group your tables. This will only be used if the destination table is newly created. If the table already exists and labels are different than the current labels are provided, the job will fail.'
+        type: object
     type: object
   EncryptionConfiguration:
     properties:
@@ -2004,6 +2009,10 @@ definitions:
           format: int64
           type: string
         type: array
+      inputBytes:
+        description: '[Output-only] Number of user bytes extracted into the result. This is the byte count as computed by BigQuery for billing purposes.'
+        format: int64
+        type: string
     type: object
   JobStatus:
     properties:

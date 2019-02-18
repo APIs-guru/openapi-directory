@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://cloudsearch.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -1095,7 +1095,7 @@ paths:
         - query
   /v1/settings/datasources:
     get:
-      description: Lists data sources.
+      description: Lists datasources.
       operationId: cloudsearch.settings.datasources.list
       parameters:
         - description: |-
@@ -1105,7 +1105,7 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Maximum number of data sources to fetch in a request.
+            Maximum number of datasources to fetch in a request.
             The max value is 100.
             <br />The default value is 10
           in: query
@@ -1142,7 +1142,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     post:
-      description: Creates data source.
+      description: Creates a datasource.
       operationId: cloudsearch.settings.datasources.create
       parameters:
         - in: body
@@ -1234,7 +1234,7 @@ paths:
         - settings
   '/v1/settings/{name}':
     delete:
-      description: Deletes a data source.
+      description: Deletes a datasource.
       operationId: cloudsearch.settings.datasources.delete
       parameters:
         - description: |-
@@ -1244,7 +1244,7 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the data source.
+            Name of the datasource.
             Format: datasources/{source_id}.
           in: path
           name: name
@@ -1266,7 +1266,7 @@ paths:
       tags:
         - settings
     get:
-      description: Gets a data source.
+      description: Gets a datasource.
       operationId: cloudsearch.settings.datasources.get
       parameters:
         - description: |-
@@ -1276,7 +1276,7 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the data source resource.
+            Name of the datasource resource.
             Format: datasources/{source_id}.
           in: path
           name: name
@@ -1310,7 +1310,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates a data source.
+      description: Updates a datasource.
       operationId: cloudsearch.settings.datasources.update
       parameters:
         - in: body
@@ -1318,9 +1318,9 @@ paths:
           schema:
             $ref: '#/definitions/UpdateDataSourceRequest'
         - description: |-
-            Name of the data source resource.
+            Name of the datasource resource.
             Format: datasources/{source_id}.
-            <br />The name is ignored when creating a data source.
+            <br />The name is ignored when creating a datasource.
           in: path
           name: name
           required: true
@@ -1612,13 +1612,13 @@ definitions:
     type: object
   DataSource:
     description: |-
-      Data source is a logical namespace for items to be indexed.
-      All items must belong to a data source.  This is the prerequisite before
+      Datasource is a logical namespace for items to be indexed.
+      All items must belong to a datasource.  This is the prerequisite before
       items can be indexed into Cloud Search.
     properties:
       disableModifications:
         description: |-
-          If true, Indexing API rejects any modification calls to this data source
+          If true, Indexing API rejects any modification calls to this datasource
           such as create, update, and delete.
           Disabling this does not imply halting process of previously
           accepted data.
@@ -1628,7 +1628,7 @@ definitions:
         type: boolean
       displayName:
         description: |-
-          Required. Display name of the data source
+          Required. Display name of the datasource
           The maximum length is 300 characters.
         type: string
       indexingServiceAccounts:
@@ -1638,20 +1638,20 @@ definitions:
         type: array
       itemsVisibility:
         description: |-
-          This restricts visibility to items at a data source level to the
-          disjunction of users/groups mentioned with the field. Note that, this
-          does not ensure access to a specific item, as users need to have ACL
-          permissions on the contained items. This ensures a high level access
-          on the entire data source, and that the individual items are not shared
-          outside this visibility.
+          This field restricts visibility to items at the datasource level. Items
+          within the datasource are restricted to the union of users and groups
+          included in this field. Note that, this does not ensure access to a
+          specific item, as users need to have ACL permissions on the contained
+          items. This ensures a high level access on the entire datasource, and
+          that the individual items are not shared outside this visibility.
         items:
           $ref: '#/definitions/GSuitePrincipal'
         type: array
       name:
         description: |-
-          Name of the data source resource.
+          Name of the datasource resource.
           Format: datasources/{source_id}.
-          <br />The name is ignored when creating a data source.
+          <br />The name is ignored when creating a datasource.
         type: string
       operationIds:
         description: IDs of the Long Running Operations (LROs) currently running for this schema.
@@ -1663,7 +1663,7 @@ definitions:
           A short name or alias for the source.  This value will be used to match the
           'source' operator. For example, if the short name is *&lt;value&gt;* then
           queries like *source:&lt;value&gt;* will only return results for this
-          source. The value must be unique across all data sources. The value must
+          source. The value must be unique across all datasources. The value must
           only contain alphanumeric characters (a-zA-Z0-9). The value cannot start
           with 'google' and cannot be one of the following: mail, gmail, docs, drive,
           groups, sites, calendar, hangouts, gplus, keep, people, teams.
@@ -2145,8 +2145,8 @@ definitions:
     properties:
       freshnessDuration:
         description: |-
-          The duration (in seconds) after which an object should be considered
-          stale.
+          The duration after which an object should be considered
+          stale. The default value is 180 days (in seconds).
         format: google-duration
         type: string
       freshnessProperty:
@@ -2162,6 +2162,9 @@ definitions:
           updateTime
           as the freshness indicator.
           The maximum length is 256 characters.
+
+          When a property is used to calculate fresheness, the value defaults
+          to 2 years from the current time.
         type: string
     type: object
   GSuitePrincipal:
@@ -2193,6 +2196,82 @@ definitions:
         items:
           $ref: '#/definitions/DataSourceIndexStats'
         type: array
+    type: object
+  GmailActionRestrict:
+    description: Gmail Action restricts (i.e. read/replied/snoozed).
+    properties:
+      type:
+        enum:
+          - UNSPECIFIED
+          - UNREAD
+          - READ
+          - REPLIED_TO
+          - MUTED
+        type: string
+    type: object
+  GmailAttachmentRestrict:
+    description: 'Gmail Attachment restricts (i.e. has:attachment, has:drive, filename:pdf).'
+    properties:
+      type:
+        enum:
+          - UNSPECIFIED
+          - HAS_ATTACHMENT
+          - HAS_PHOTO
+          - HAS_DRIVE
+          - HAS_DOCUMENT
+          - HAS_SPREADSHEET
+          - HAS_PRESENTATION
+          - HAS_YOUTUBE
+          - HAS_PDF
+        type: string
+    type: object
+  GmailFolderRestrict:
+    description: Gmail Folder restricts (i.e. in Drafts/Sent/Chats/User Generated Labels).
+    properties:
+      type:
+        enum:
+          - UNSPECIFIED
+          - IN_SENT
+          - IN_DRAFT
+          - CHATS
+          - IN_TRASH
+          - USER_GENERATED_LABEL
+        type: string
+    type: object
+  GmailIntelligentRestrict:
+    description: 'Gmail Intelligent restricts (i.e. smartlabels, important).'
+    properties:
+      type:
+        enum:
+          - UNSPECIFIED
+          - SOCIAL
+          - UPDATES
+          - FORUMS
+          - PROMOTIONS
+          - IMPORTANT
+          - FLIGHT_RESERVATION
+          - LODGING_RESERVATION
+          - CAR_RESERVATION
+          - BUS_RESERVATION
+        type: string
+    type: object
+  GmailTimeRestrict:
+    description: 'Gmail Time restricts (i.e. received today, this week).'
+    properties:
+      type:
+        enum:
+          - UNSPECIFIED
+          - FROM_THIS_WEEK
+          - OLDER_THAN_ONE_YEAR
+          - FROM_TODAY
+          - FROM_YESTERDAY
+          - FROM_THIS_MONTH
+          - FROM_CERTAIN_MONTH
+          - OLDER_THAN_TODAY
+          - OLDER_THAN_YESTERDAY
+          - OLDER_THAN_A_WEEK
+          - OLDER_THAN_A_MONTH
+        type: string
     type: object
   HtmlOperatorOptions:
     description: |-
@@ -2773,7 +2852,11 @@ definitions:
         $ref: '#/definitions/Source'
         description: 'The named source for the result, such as Gmail.'
       updateTime:
-        description: The last modified date for the object in the search result.
+        description: |-
+          The last modified date for the object in the search result. If not
+          set in the item, the value returned here is empty. When
+          `updateTime` is used for calculating freshness and is not set, this
+          value defaults to 2 years from the current time.
         format: google-datetime
         type: string
     type: object
@@ -3437,16 +3520,31 @@ definitions:
   RestrictItem:
     description: |-
       Information relevant only to a restrict entry.
-      NextId: 7
+      NextId: 12
     properties:
       driveFollowUpRestrict:
         $ref: '#/definitions/DriveFollowUpRestrict'
+        description: LINT.ThenChange(//depot/google3/java/com/google/apps/search/quality/itemsuggest/utils/SubtypeRerankingUtils.java)
       driveLocationRestrict:
         $ref: '#/definitions/DriveLocationRestrict'
       driveMimeTypeRestrict:
         $ref: '#/definitions/DriveMimeTypeRestrict'
+        description: |-
+          LINT.IfChange
+          Drive Types.
       driveTimeSpanRestrict:
         $ref: '#/definitions/DriveTimeSpanRestrict'
+      gmailActionRestrict:
+        $ref: '#/definitions/GmailActionRestrict'
+      gmailAttachmentRestrict:
+        $ref: '#/definitions/GmailAttachmentRestrict'
+      gmailFolderRestrict:
+        $ref: '#/definitions/GmailFolderRestrict'
+        description: Gmail Types.
+      gmailIntelligentRestrict:
+        $ref: '#/definitions/GmailIntelligentRestrict'
+      gmailTimeRestrict:
+        $ref: '#/definitions/GmailTimeRestrict'
       searchOperator:
         description: 'The search restrict (e.g. "after:2017-09-11 before:2017-09-12").'
         type: string
@@ -3630,7 +3728,8 @@ definitions:
       quality:
         description: |-
           An indication of the quality of the item, used to influence search quality.
-          Value should be between 0.0 (lowest quality) and 1.0 (highest quality).
+          Value should be between 0.0 (lowest quality) and 1.0 (highest quality). The
+          default value is 0.0.
         format: double
         type: number
     type: object

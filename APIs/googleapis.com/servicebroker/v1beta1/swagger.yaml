@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://servicebroker.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -152,21 +152,12 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the given service instance from the system.
-        The API call accepts both OSB style API and standard google style API
-        resource path.
-        i.e. both `projects/*/brokers/*/instances/*`
-         and `projects/*/brokers/*/v2/service_instances/*` are acceptable paths.
-      operationId: servicebroker.projects.brokers.instances.get
+      description: GetBinding returns the binding information.
+      operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.get
       parameters:
         - description: |-
-            The resource name of the instance to return.
             Name must match
-            `projects/[PROJECT_ID]/brokers/[BROKER_ID]/` +
-            `v2/service_instances/[INSTANCE_ID]`
-            or
-            `projects/[PROJECT_ID]/brokers/[BROKER_ID]/instances/[INSTANCE_ID]`.
+            `projects/[PROJECT_ID]/brokers/[BROKER_ID]/v2/service_instances/[INSTANCE_ID]/service_bindings`.
           in: path
           name: name
           required: true
@@ -184,7 +175,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleCloudServicebrokerV1beta1__ServiceInstance'
+            $ref: '#/definitions/GoogleCloudServicebrokerV1beta1__GetBindingResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -239,7 +230,7 @@ paths:
       description: |-
         Returns the state of the last operation for the binding.
         Only last (or current) operation can be polled.
-      operationId: servicebroker.projects.brokers.instances.bindings.getLast_operation
+      operationId: servicebroker.projects.brokers.v2.service_instances.service_bindings.getLast_operation
       parameters:
         - description: |-
             Name must match

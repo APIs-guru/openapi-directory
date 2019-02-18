@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://tpu.googleapis.com/$discovery/rest?version=v1alpha1'
       version: v1
@@ -124,8 +124,8 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the details of a node.
-      operationId: tpu.projects.locations.nodes.get
+      description: Gets TensorFlow Version.
+      operationId: tpu.projects.locations.tensorflowVersions.get
       parameters:
         - description: The resource name.
           in: path
@@ -137,7 +137,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Node'
+            $ref: '#/definitions/TensorFlowVersion'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/androidpublisher/v2/rest'
       version: v1
@@ -1124,7 +1124,10 @@ paths:
       - $ref: '#/parameters/userIp'
     post:
       consumes:
+        - image/aces
         - image/apng
+        - image/avci
+        - image/avcs
         - image/bmp
         - image/cgm
         - image/dicom-rle
@@ -1132,6 +1135,10 @@ paths:
         - image/fits
         - image/g3fax
         - image/gif
+        - image/heic
+        - image/heic-sequence
+        - image/heif
+        - image/heif-sequence
         - image/ief
         - image/jls
         - image/jp2

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2.1/rest'
       version: v1
@@ -90,6 +90,7 @@ tags:
   - name: pos
   - name: products
   - name: productstatuses
+  - name: regionalinventory
   - name: shippingsettings
 paths:
   /accounts/authinfo:
@@ -377,6 +378,33 @@ paths:
             - 'https://www.googleapis.com/auth/content'
       tags:
         - productstatuses
+  /regionalinventory/batch:
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Updates regional inventory for multiple products or regions in a single request.
+      operationId: content.regionalinventory.custombatch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionalinventoryCustomBatchRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RegionalinventoryCustomBatchResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - regionalinventory
   /shippingsettings/batch:
     parameters:
       - $ref: '#/parameters/alt'
@@ -2517,6 +2545,43 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{merchantId}/products/{productId}/regionalinventory':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: 'Update the regional inventory of a product in your Merchant Center account. If a regional inventory with the same region ID already exists, this method updates that entry.'
+      operationId: content.regionalinventory.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionalInventory'
+        - description: The ID of the account that contains the product. This account cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          type: string
+        - description: The REST id of the product for which to update the regional inventory.
+          in: path
+          name: productId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/RegionalInventory'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/content'
+      tags:
+        - regionalinventory
   '/{merchantId}/productstatuses':
     get:
       description: Lists the statuses of the products in your Merchant Center account.
@@ -3893,7 +3958,7 @@ definitions:
         format: uint32
         type: integer
       maxTransitTimeInDays:
-        description: 'Maximum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Must be greater than or equal to minTransitTimeInDays. Required.'
+        description: 'Maximum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Must be greater than or equal to minTransitTimeInDays.'
         format: uint32
         type: integer
       minHandlingTimeInDays:
@@ -3901,9 +3966,12 @@ definitions:
         format: uint32
         type: integer
       minTransitTimeInDays:
-        description: 'Minimum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Required.'
+        description: 'Minimum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Either {min,max}transitTimeInDays or transitTimeTable must be set, but not both.'
         format: uint32
         type: integer
+      transitTimeTable:
+        $ref: '#/definitions/TransitTable'
+        description: 'Transit time table, number of business days spent in transit based on row and column dimensions. Either {min,max}transitTimeInDays or transitTimeTable can be set, but not both.'
     type: object
   Error:
     description: An error returned by the API.
@@ -3963,7 +4031,7 @@ definitions:
         type: string
     type: object
   Headers:
-    description: 'A non-empty list of row or column headers for a table. Exactly one of prices, weights, numItems, postalCodeGroupNames, or locations must be set.'
+    description: 'A non-empty list of row or column headers for a table. Exactly one of prices, weights, numItems, postalCodeGroupNames, or location must be set.'
     properties:
       locations:
         description: A list of location ID sets. Must be non-empty. Can only be set if all other fields are not set.
@@ -4049,26 +4117,9 @@ definitions:
         items:
           $ref: '#/definitions/InvoiceSummaryAdditionalChargeSummary'
         type: array
-      customerBalance:
-        $ref: '#/definitions/Amount'
-        description: |-
-          [required] Customer balance on this invoice. A negative amount means the customer is paying, a positive one means the customer is receiving money. Note: the sum of merchant_balance, customer_balance and google_balance must always be zero.
-
-          Furthermore the absolute value of this amount is expected to be equal to the sum of product amount and additional charges, minus promotions.
-      googleBalance:
-        $ref: '#/definitions/Amount'
-        description: '[required] Google balance on this invoice. A negative amount means Google is paying, a positive one means Google is receiving money. Note: the sum of merchant_balance, customer_balance and google_balance must always be zero.'
-      merchantBalance:
-        $ref: '#/definitions/Amount'
-        description: '[required] Merchant balance on this invoice. A negative amount means the merchant is paying, a positive one means the merchant is receiving money. Note: the sum of merchant_balance, customer_balance and google_balance must always be zero.'
       productTotal:
         $ref: '#/definitions/Amount'
         description: '[required] Total price for the product.'
-      promotionSummaries:
-        description: Summary for each promotion.
-        items:
-          $ref: '#/definitions/Promotion'
-        type: array
     type: object
   InvoiceSummaryAdditionalChargeSummary:
     properties:
@@ -4411,9 +4462,12 @@ definitions:
       merchantOrderId:
         description: Merchant-provided id of the order.
         type: string
-      netAmount:
+      netPriceAmount:
         $ref: '#/definitions/Price'
-        description: 'The net amount for the order. For example, if an order was originally for a grand total of $100 and a refund was issued for $20, the net amount will be $80.'
+        description: 'The net amount for the order (price part). For example, if an order was originally for $100 and a refund was issued for $20, the net amount will be $80.'
+      netTaxAmount:
+        $ref: '#/definitions/Price'
+        description: The net amount for the order (tax part). Note that in certain cases due to taxable base adjustment netTaxAmount might not match to a sum of tax field across all lineItems and refunds.
       paymentStatus:
         description: The status of the payment.
         type: string
@@ -6397,15 +6451,6 @@ definitions:
           $ref: '#/definitions/ProductStatus'
         type: array
     type: object
-  Promotion:
-    properties:
-      promotionAmount:
-        $ref: '#/definitions/Amount'
-        description: '[required] Amount of the promotion. The values here are the promotion applied to the unit price pretax and to the total of the tax amounts.'
-      promotionId:
-        description: '[required] ID of the promotion.'
-        type: string
-    type: object
   RateGroup:
     properties:
       applicableShippingLabels:
@@ -6440,9 +6485,97 @@ definitions:
       reasonCode:
         type: string
     type: object
+  RegionalInventory:
+    description: Regional inventory resource. contains the regional name and all attributes which are overridden for the specified region.
+    properties:
+      availability:
+        description: The availability of the product.
+        type: string
+      customAttributes:
+        description: A list of custom (merchant-provided) attributes. It can also be used for submitting any attribute of the feed specification in its generic form.
+        items:
+          $ref: '#/definitions/CustomAttribute'
+        type: array
+      kind:
+        default: 'content#regionalInventory'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#regionalInventory".'
+        type: string
+      price:
+        $ref: '#/definitions/Price'
+        description: The price of the product.
+      regionId:
+        description: The id (name) of the region.
+        type: string
+      salePrice:
+        $ref: '#/definitions/Price'
+        description: The sale price of the product. Mandatory if sale_price_effective_date is defined.
+      salePriceEffectiveDate:
+        description: 'A date range represented by a pair of ISO 8601 dates separated by a space, comma, or slash. Both dates might be specified as ''null'' if undecided.'
+        type: string
+    type: object
+  RegionalinventoryCustomBatchRequest:
+    properties:
+      entries:
+        description: The request entries to be processed in the batch.
+        items:
+          $ref: '#/definitions/RegionalinventoryCustomBatchRequestEntry'
+        type: array
+    type: object
+  RegionalinventoryCustomBatchRequestEntry:
+    description: A batch entry encoding a single non-batch regional inventory request.
+    properties:
+      batchId:
+        description: 'An entry ID, unique within the batch request.'
+        format: uint32
+        type: integer
+      merchantId:
+        description: The ID of the managing account.
+        format: uint64
+        type: string
+      method:
+        type: string
+      productId:
+        description: The ID of the product for which to update price and availability.
+        type: string
+      regionalInventory:
+        $ref: '#/definitions/RegionalInventory'
+        description: Price and availability of the product.
+    type: object
+  RegionalinventoryCustomBatchResponse:
+    properties:
+      entries:
+        description: The result of the execution of the batch requests.
+        items:
+          $ref: '#/definitions/RegionalinventoryCustomBatchResponseEntry'
+        type: array
+      kind:
+        default: 'content#regionalinventoryCustomBatchResponse'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#regionalinventoryCustomBatchResponse".'
+        type: string
+    type: object
+  RegionalinventoryCustomBatchResponseEntry:
+    description: A batch entry encoding a single non-batch regional inventory response.
+    properties:
+      batchId:
+        description: The ID of the request entry this entry responds to.
+        format: uint32
+        type: integer
+      errors:
+        $ref: '#/definitions/Errors'
+        description: A list of errors defined if and only if the request failed.
+      kind:
+        default: 'content#regionalinventoryCustomBatchResponseEntry'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "content#regionalinventoryCustomBatchResponseEntry".'
+        type: string
+      regionalInventory:
+        $ref: '#/definitions/RegionalInventory'
+        description: Price and availability of the product.
+    type: object
   ReturnShipment:
     properties:
       creationDate:
+        type: string
+      deliveryDate:
         type: string
       returnMethodType:
         type: string
@@ -6452,6 +6585,10 @@ definitions:
         items:
           $ref: '#/definitions/ShipmentTrackingInfo'
         type: array
+      shippingDate:
+        type: string
+      state:
+        type: string
     type: object
   Row:
     properties:
@@ -6693,10 +6830,7 @@ definitions:
         type: array
       shippingCost:
         $ref: '#/definitions/Price'
-        description: The total cost of shipping for all items.
-      shippingCostTax:
-        $ref: '#/definitions/Price'
-        description: The tax for the total shipping cost.
+        description: 'The price of shipping for all items. Shipping tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied. Note that shipping is not taxed in certain states.'
       shippingOption:
         description: The requested shipping option.
         type: string
@@ -6782,17 +6916,47 @@ definitions:
           $ref: '#/definitions/OrderLineItemProductVariantAttribute'
         type: array
     type: object
+  TransitTable:
+    properties:
+      postalCodeGroupNames:
+        description: 'A list of postal group names. The last value can be "all other locations". Example: ["zone 1", "zone 2", "all other locations"]. The referred postal code groups must match the delivery country of the service.'
+        items:
+          type: string
+        type: array
+      rows:
+        items:
+          $ref: '#/definitions/TransitTableTransitTimeRow'
+        type: array
+      transitTimeLabels:
+        description: 'A list of transit time labels. The last value can be "all other labels". Example: ["food", "electronics", "all other labels"].'
+        items:
+          type: string
+        type: array
+    type: object
+  TransitTableTransitTimeRow:
+    properties:
+      values:
+        items:
+          $ref: '#/definitions/TransitTableTransitTimeRowTransitTimeValue'
+        type: array
+    type: object
+  TransitTableTransitTimeRowTransitTimeValue:
+    properties:
+      maxTransitTimeInDays:
+        description: Must be greater than or equal to minTransitTimeInDays.
+        format: uint32
+        type: integer
+      minTransitTimeInDays:
+        description: 'Transit time range (min-max) in business days. 0 means same day delivery, 1 means next day delivery.'
+        format: uint32
+        type: integer
+    type: object
   UnitInvoice:
     properties:
       additionalCharges:
         description: 'Additional charges for a unit, e.g. shipping costs.'
         items:
           $ref: '#/definitions/UnitInvoiceAdditionalCharge'
-        type: array
-      promotions:
-        description: Promotions applied to a unit.
-        items:
-          $ref: '#/definitions/Promotion'
         type: array
       unitPrice:
         $ref: '#/definitions/Price'
@@ -6808,11 +6972,6 @@ definitions:
       additionalChargeAmount:
         $ref: '#/definitions/Amount'
         description: '[required] Amount of the additional charge.'
-      additionalChargePromotions:
-        description: Promotions applied to the additional charge.
-        items:
-          $ref: '#/definitions/Promotion'
-        type: array
       type:
         description: '[required] Type of the additional charge.'
         type: string

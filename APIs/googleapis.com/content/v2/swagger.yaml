@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.25
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2/rest'
       version: v1
@@ -4585,7 +4585,7 @@ definitions:
         format: uint32
         type: integer
       maxTransitTimeInDays:
-        description: 'Maximum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Must be greater than or equal to minTransitTimeInDays. Required.'
+        description: 'Maximum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Must be greater than or equal to minTransitTimeInDays.'
         format: uint32
         type: integer
       minHandlingTimeInDays:
@@ -4593,9 +4593,12 @@ definitions:
         format: uint32
         type: integer
       minTransitTimeInDays:
-        description: 'Minimum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Required.'
+        description: 'Minimum number of business days that is spent in transit. 0 means same day delivery, 1 means next day delivery. Either {min,max}transitTimeInDays or transitTimeTable must be set, but not both.'
         format: uint32
         type: integer
+      transitTimeTable:
+        $ref: '#/definitions/TransitTable'
+        description: 'Transit time table, number of business days spent in transit based on row and column dimensions. Either {min,max}transitTimeInDays or transitTimeTable can be set, but not both.'
     type: object
   Error:
     description: An error returned by the API.
@@ -4655,7 +4658,7 @@ definitions:
         type: string
     type: object
   Headers:
-    description: 'A non-empty list of row or column headers for a table. Exactly one of prices, weights, numItems, postalCodeGroupNames, or locations must be set.'
+    description: 'A non-empty list of row or column headers for a table. Exactly one of prices, weights, numItems, postalCodeGroupNames, or location must be set.'
     properties:
       locations:
         description: A list of location ID sets. Must be non-empty. Can only be set if all other fields are not set.
@@ -4919,21 +4922,18 @@ definitions:
         type: array
       customerBalance:
         $ref: '#/definitions/Amount'
-        description: |-
-          [required] Customer balance on this invoice. A negative amount means the customer is paying, a positive one means the customer is receiving money. Note: the sum of merchant_balance, customer_balance and google_balance must always be zero.
-
-          Furthermore the absolute value of this amount is expected to be equal to the sum of product amount and additional charges, minus promotions.
+        description: Deprecated.
       googleBalance:
         $ref: '#/definitions/Amount'
-        description: '[required] Google balance on this invoice. A negative amount means Google is paying, a positive one means Google is receiving money. Note: the sum of merchant_balance, customer_balance and google_balance must always be zero.'
+        description: Deprecated.
       merchantBalance:
         $ref: '#/definitions/Amount'
-        description: '[required] Merchant balance on this invoice. A negative amount means the merchant is paying, a positive one means the merchant is receiving money. Note: the sum of merchant_balance, customer_balance and google_balance must always be zero.'
+        description: Deprecated.
       productTotal:
         $ref: '#/definitions/Amount'
         description: '[required] Total price for the product.'
       promotionSummaries:
-        description: Summary for each promotion.
+        description: Deprecated.
         items:
           $ref: '#/definitions/Promotion'
         type: array
@@ -7914,6 +7914,8 @@ definitions:
     properties:
       creationDate:
         type: string
+      deliveryDate:
+        type: string
       returnMethodType:
         type: string
       shipmentId:
@@ -7922,6 +7924,10 @@ definitions:
         items:
           $ref: '#/definitions/ShipmentTrackingInfo'
         type: array
+      shippingDate:
+        type: string
+      state:
+        type: string
     type: object
   Row:
     properties:
@@ -8163,10 +8169,10 @@ definitions:
         type: array
       shippingCost:
         $ref: '#/definitions/Price'
-        description: The total cost of shipping for all items.
+        description: 'The price of shipping for all items. Shipping tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied. Note that shipping is not taxed in certain states.'
       shippingCostTax:
         $ref: '#/definitions/Price'
-        description: The tax for the total shipping cost.
+        description: Deprecated. Ignored if provided.
       shippingOption:
         description: The requested shipping option.
         type: string
@@ -8212,7 +8218,7 @@ definitions:
         description: Details of the requested shipping for the line item.
       unitTax:
         $ref: '#/definitions/Price'
-        description: 'Deprecated. Ignored if provided. Tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied.'
+        description: Deprecated. Ignored if provided.
     type: object
   TestOrderLineItemProduct:
     properties:
@@ -8278,6 +8284,41 @@ definitions:
         description: The type of instrument. Note that real orders might have different values than the four values accepted by createTestOrder.
         type: string
     type: object
+  TransitTable:
+    properties:
+      postalCodeGroupNames:
+        description: 'A list of postal group names. The last value can be "all other locations". Example: ["zone 1", "zone 2", "all other locations"]. The referred postal code groups must match the delivery country of the service.'
+        items:
+          type: string
+        type: array
+      rows:
+        items:
+          $ref: '#/definitions/TransitTableTransitTimeRow'
+        type: array
+      transitTimeLabels:
+        description: 'A list of transit time labels. The last value can be "all other labels". Example: ["food", "electronics", "all other labels"].'
+        items:
+          type: string
+        type: array
+    type: object
+  TransitTableTransitTimeRow:
+    properties:
+      values:
+        items:
+          $ref: '#/definitions/TransitTableTransitTimeRowTransitTimeValue'
+        type: array
+    type: object
+  TransitTableTransitTimeRowTransitTimeValue:
+    properties:
+      maxTransitTimeInDays:
+        description: Must be greater than or equal to minTransitTimeInDays.
+        format: uint32
+        type: integer
+      minTransitTimeInDays:
+        description: 'Transit time range (min-max) in business days. 0 means same day delivery, 1 means next day delivery.'
+        format: uint32
+        type: integer
+    type: object
   UnitInvoice:
     properties:
       additionalCharges:
@@ -8286,7 +8327,7 @@ definitions:
           $ref: '#/definitions/UnitInvoiceAdditionalCharge'
         type: array
       promotions:
-        description: Promotions applied to a unit.
+        description: Deprecated.
         items:
           $ref: '#/definitions/Promotion'
         type: array
@@ -8305,7 +8346,7 @@ definitions:
         $ref: '#/definitions/Amount'
         description: '[required] Amount of the additional charge.'
       additionalChargePromotions:
-        description: Promotions applied to the additional charge.
+        description: Deprecated.
         items:
           $ref: '#/definitions/Promotion'
         type: array
