@@ -3460,6 +3460,10 @@ definitions:
         type: integer
       product_option:
         $ref: '#/definitions/ProductOption'
+      variants:
+        items:
+          $ref: '#/definitions/Variant'
+        type: array
     type: object
   Promotion:
     properties:

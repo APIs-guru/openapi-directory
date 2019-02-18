@@ -2,7 +2,7 @@ swagger: '2.0'
 schemes:
   - https
 host: api.taxrates.io
-basePath: /api/v3
+basePath: /api/v1
 info:
   contact:
     name: apiteam@taxrates.io
@@ -21,7 +21,6 @@ info:
     - format: swagger
       url: 'https://api.taxrates.io/taxrates_io_API.yaml'
       version: '2.0'
-  x-preferred: true
   x-providerName: taxrates.io
 consumes:
   - application/json

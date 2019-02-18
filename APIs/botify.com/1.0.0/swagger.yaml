@@ -2910,71 +2910,9 @@ definitions:
         items:
           type: string
         type: array
-      compare_crawl:
-        type: boolean
-      crawl_gzip:
-        type: boolean
-      extra_headers:
-        type: string
-      google_analytics_account_email:
-        description: Keep email in case user delete his social auth connection
-        type: string
-      google_analytics_nb_days:
-        format: int64
-        maximum: 90
-        minimum: 1
-        type: integer
-      google_analytics_site_id:
-        format: int64
-        maximum: 2147483647
-        minimum: -2147483648
-        type: integer
-      google_social_auth_id:
-        format: int64
-        maximum: 2147483647
-        minimum: -2147483648
-        type: integer
-      has_robots_txt:
-        readOnly: true
-        type: string
-      header_settings:
-        items:
-          type: string
-        type: array
-      max_depth:
-        format: int64
-        maximum: 2147483647
-        minimum: 0
-        type: integer
-      max_nb_pages:
-        format: int64
-        maximum: 2147483647
-        minimum: 1
-        type: integer
-      max_pages_per_sec:
-        format: int64
-        maximum: 2147483647
-        minimum: 1
-        type: integer
-      respect_nofollow:
-        type: boolean
-      sitemaps:
-        items:
-          type: string
-        type: array
-      start_urls:
-        items:
-          type: string
-        type: array
-      user_agent:
-        type: string
     required:
-      - start_urls
-      - max_nb_pages
       - blacklisted_domains
       - allowed_domains
-      - sitemaps
-      - header_settings
     type: object
   ProjectsPaths:
     description: Projects paths

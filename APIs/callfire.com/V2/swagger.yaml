@@ -1478,6 +1478,16 @@ paths:
           name: text
           required: false
           type: boolean
+        - description: '~'
+          in: query
+          name: inboundCall
+          required: false
+          type: boolean
+        - description: '~'
+          in: query
+          name: inboundText
+          required: false
+          type: boolean
         - collectionFormat: multi
           description: '~'
           in: query
@@ -2302,7 +2312,7 @@ paths:
       x-sample-php-url: /php/keywords/getKeywordLease.php
       x-sample-python-url: /python/keywords/getKeywordLease.py
     put:
-      description: Updates a keyword lease. Turns the autoRenew on/off.
+      description: Updates a keyword lease. Turns the autoRenew on/off. Configure double opt in feature. Add/remove contact list from keyword.
       operationId: updateKeywordLease
       parameters:
         - description: To update a keyword lease
@@ -3262,7 +3272,7 @@ paths:
       x-sample-python-url: /python/numbers/updateNumberLease.py
   /numbers/local:
     get:
-      description: Searches for numbers available for purchase in CallFire local numbers catalog . At least one additional parameter is required. User may filter local numbers by their region information.
+      description: Searches for numbers available for purchase in CallFire local numbers catalog . At least one additional parameter is required. User may filter local numbers by their region information. If all numbers with desirable zip code is already busy search will return available numbers with nearest zip code.
       operationId: findNumbersLocal
       parameters:
         - default: 100
@@ -4690,6 +4700,12 @@ definitions:
       call:
         description: 'If set to true add all given numbers to Do-Not-Call list. Default value: true'
         type: boolean
+      inboundCall:
+        description: '~'
+        type: boolean
+      inboundText:
+        description: '~'
+        type: boolean
       numbers:
         description: 'A list of phone numbers in E.164 format (11-digit), example: 12132000384, 14142777322'
         items:
@@ -5725,6 +5741,12 @@ definitions:
         format: int64
         readOnly: true
         type: integer
+      inboundCall:
+        description: '~'
+        type: boolean
+      inboundText:
+        description: '~'
+        type: boolean
       number:
         description: 'A single DNC number in E.164 format (11-digit). Example: 12132000384'
         type: string
@@ -5841,6 +5863,13 @@ definitions:
       autoRenew:
         description: Enables the auto renewal of a keyword lease at the end of each billing cycle
         type: boolean
+      contactListId:
+        description: Existing contact list ID
+        format: int64
+        type: integer
+      doubleOptInEnabled:
+        description: Enable/disable double opt in feature
+        type: boolean
       keyword:
         description: A text used as a keyword
         type: string
@@ -5852,6 +5881,9 @@ definitions:
         description: 'A date and time when the keyword lease is finishes. Timestamp, formatted in unix time milliseconds (read only). Example: 1473781817000'
         format: int64
         type: integer
+      optInConfirmationMessage:
+        description: Opt in confirmation message
+        type: string
       shortCode:
         description: 'A short code assigned to keyword. Example: 67076'
         type: string

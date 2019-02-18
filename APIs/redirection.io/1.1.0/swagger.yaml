@@ -2283,6 +2283,21 @@ paths:
       tags:
         - User
   '/users/{id}':
+    delete:
+      operationId: deleteUserItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '204':
+          description: User resource deleted
+        '404':
+          description: Resource not found
+      summary: Removes the User resource.
+      tags:
+        - User
     get:
       operationId: getUserItem
       parameters:
@@ -2738,6 +2753,8 @@ definitions:
       agentVersionStatus:
         readOnly: true
         type: string
+      config:
+        type: string
       createdAt:
         format: date-time
         type: string
@@ -2783,6 +2800,8 @@ definitions:
     description: ''
     properties:
       agentVersion:
+        type: string
+      config:
         type: string
       misconfigured:
         type: boolean

@@ -120,7 +120,7 @@ parameters:
     x-nullable: false
   VisualFeatures:
     collectionFormat: csv
-    description: 'A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories - categorizes image content according to a taxonomy defined in documentation. Tags - tags the image with a detailed list of words related to the image content. Description - describes the image content with a complete English sentence. Faces - detects if faces are present. If present, generate coordinates, gender and age. ImageType - detects if image is clipart or a line drawing. Color - determines the accent color, dominant color, and whether an image is black&white. Adult - detects if the image is pornographic in nature (depicts nudity or a sex act).  Sexually suggestive content is also detected. Objects - detects various objects within an image, including the approximate location. The Objects argument is only available in English.'
+    description: 'A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories - categorizes image content according to a taxonomy defined in documentation. Tags - tags the image with a detailed list of words related to the image content. Description - describes the image content with a complete English sentence. Faces - detects if faces are present. If present, generate coordinates, gender and age. ImageType - detects if image is clipart or a line drawing. Color - determines the accent color, dominant color, and whether an image is black&white. Adult - detects if the image is pornographic in nature (depicts nudity or a sex act).  Sexually suggestive content is also detected. Objects - detects various objects within an image, including the approximate location. The Objects argument is only available in English. Brands - detects various brands within an image, including the approximate location. The Brands argument is only available in English.'
     in: query
     items:
       enum:
@@ -132,6 +132,7 @@ parameters:
         - Tags
         - Description
         - Objects
+        - Brands
       type: string
       x-ms-enum:
         modelAsString: false
@@ -198,6 +199,7 @@ paths:
               - Color
               - ImageType
               - Objects
+              - Brands
           responses:
             '200':
               body:
@@ -206,6 +208,21 @@ paths:
                   isAdultContent: false
                   isRacyContent: false
                   racyScore: 0.06861349195241928
+                brands:
+                  - confidence: 0.857
+                    name: Pepsi
+                    rectangle:
+                      h: 177
+                      w: 161
+                      x: 489
+                      'y': 79
+                  - confidence: 0.893
+                    name: Coca-Cola
+                    rectangle:
+                      h: 372
+                      w: 171
+                      x: 216
+                      'y': 55
                 categories:
                   - name: abstract_
                     score: 0.00390625
@@ -894,6 +911,26 @@ definitions:
         x-nullable: true
     type: object
     x-nullable: true
+  DetectedBrand:
+    description: A brand detected in an image.
+    properties:
+      confidence:
+        description: 'Confidence score of having observed the brand in the image, as a value ranging from 0 to 1.'
+        format: double
+        readOnly: true
+        type: number
+        x-nullable: false
+      name:
+        description: Label for the brand.
+        readOnly: true
+        type: string
+        x-nullable: true
+      rectangle:
+        $ref: '#/definitions/BoundingRect'
+        description: Approximate location of the detected brand.
+        readOnly: true
+    type: object
+    x-nullable: true
   DetectedObject:
     description: An object detected in an image.
     properties:
@@ -984,6 +1021,12 @@ definitions:
       adult:
         $ref: '#/definitions/AdultInfo'
         description: An object describing whether the image contains adult-oriented content and/or is racy.
+      brands:
+        description: Array of brands detected in the image.
+        items:
+          $ref: '#/definitions/DetectedBrand'
+        type: array
+        x-nullable: true
       categories:
         description: An array indicating identified categories.
         items:
@@ -1354,6 +1397,7 @@ x-ms-paths:
               - Color
               - ImageType
               - Objects
+              - Brands
           responses:
             '200':
               body:
@@ -1362,6 +1406,21 @@ x-ms-paths:
                   isAdultContent: false
                   isRacyContent: false
                   racyScore: 0.06861349195241928
+                brands:
+                  - confidence: 0.857
+                    name: Pepsi
+                    rectangle:
+                      h: 177
+                      w: 161
+                      x: 489
+                      'y': 79
+                  - confidence: 0.893
+                    name: Coca-Cola
+                    rectangle:
+                      h: 372
+                      w: 171
+                      x: 216
+                      'y': 55
                 categories:
                   - name: abstract_
                     score: 0.00390625

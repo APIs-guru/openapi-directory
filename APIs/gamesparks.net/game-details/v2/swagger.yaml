@@ -38,6 +38,8 @@ tags:
     name: scripts
   - description: Experiment Rest Controller
     name: experiments
+  - description: Billing Details Rest V 2 Controller
+    name: billingDetails
   - description: Manage Restv 2 Controller
     name: manage
   - description: Analytics Restv 2 Controller
@@ -257,6 +259,71 @@ paths:
       summary: Returns the percentage of user retention over the last 30 days
       tags:
         - analytics
+  '/restv2/game/{apiKey}/admin/billingDetails':
+    get:
+      consumes:
+        - application/json
+      description: Retrieves the Billing Details.
+      operationId: getBillingDetails
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BillingDetailsModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+      summary: Retrieves the Billing Details
+      tags:
+        - billingDetails
+    put:
+      consumes:
+        - application/json
+      description: Updates the Billing Details.
+      operationId: putBillingDetails
+      parameters:
+        - description: apiKey
+          in: path
+          name: apiKey
+          required: true
+          type: string
+        - description: billingDetails
+          in: body
+          name: billingDetails
+          required: true
+          schema:
+            $ref: '#/definitions/BillingDetailsModel'
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BillingDetailsModel'
+        '400':
+          description: json error
+          schema:
+            $ref: '#/definitions/MessageModel'
+        '403':
+          description: not allowed
+        '404':
+          description: not found
+      summary: Updates the Billing Details
+      tags:
+        - billingDetails
   '/restv2/game/{apiKey}/admin/notifications/summary':
     get:
       consumes:
@@ -3278,6 +3345,53 @@ definitions:
       _id:
         type: string
     type: object
+  BillingDetailsModel:
+    properties:
+      building:
+        type: string
+      city:
+        type: string
+      companyName:
+        type: string
+      country:
+        type: string
+      email1:
+        type: string
+      email2:
+        type: string
+      email3:
+        type: string
+      firstName1:
+        type: string
+      firstName2:
+        type: string
+      firstName3:
+        type: string
+      lastName1:
+        type: string
+      lastName2:
+        type: string
+      lastName3:
+        type: string
+      postcode:
+        type: string
+      state:
+        type: string
+      street:
+        type: string
+      taxNumber:
+        type: string
+    required:
+      - building
+      - city
+      - companyName
+      - country
+      - email1
+      - firstName1
+      - lastName1
+      - postcode
+      - street
+    type: object
   DeletedGameModel:
     properties:
       apiKey:
@@ -3298,6 +3412,8 @@ definitions:
     properties:
       active:
         type: boolean
+      changedFieldsAndInitialValues:
+        type: object
       complete:
         type: boolean
       config:

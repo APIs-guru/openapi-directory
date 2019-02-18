@@ -482,7 +482,7 @@ paths:
   /posts:
     get:
       description: |
-        Only posts from the last 30 days will be returned. <br /><br /> NOTE: Passing the latitude, longitude and radius parameters filters all posts by their location and so these parameters will temporarily override the current users' location preferences. When latitude, longitude and radius are not specified, public posts will be filtered by the current users' location preferences.
+        NOTE: Passing the latitude, longitude and radius parameters filters all posts by their location and so these parameters will temporarily override the current users' location preferences. When latitude, longitude and radius are not specified, public posts will be filtered by the current users' location preferences.
       operationId: get_posts
       parameters:
         - description: |
@@ -492,7 +492,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing, open_archive_groups. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. The open_archive_groups source provides a way to easily request posts from groups that have open_archives set to true without having to pass a group_ids parameter.  When passed, it will automatically return posts from open archive groups that are within the area specified by the latitude, longitude and radius parameters (or the current users' location if latitude, longitude and radius aren't passed). <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source or the open_archive_groups source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -576,7 +576,7 @@ paths:
                 type: integer
               group_ids:
                 description: |
-                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.  If the open_archive_groups source is used, these IDs may include the IDs of open archive groups that weren't present in the group_ids parameter of the request.
                 items:
                   type: string
                 type: array
@@ -856,7 +856,7 @@ paths:
   /posts/search:
     get:
       description: |
-        Searching posts takes the same arguments as listing posts except for the addition of the search and sort_by parameters. <br /><br /> Only posts from the last 30 days will be returned.
+        Searching posts takes the same arguments as listing posts except for the addition of the search and sort_by parameters.
       operationId: search_posts
       parameters:
         - description: The search query used to find posts.
@@ -878,7 +878,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing, open_archive_groups. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. The open_archive_groups source provides a way to easily request posts from groups that have open_archives set to true without having to pass a group_ids parameter.  When passed, it will automatically return posts from open archive groups that are within the area specified by the latitude, longitude and radius parameters (or the current users' location if latitude, longitude and radius aren't passed). <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source or the open_archive_groups source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -962,7 +962,7 @@ paths:
                 type: integer
               group_ids:
                 description: |
-                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.  If the open_archive_groups source is used, these IDs may include the IDs of open archive groups that weren't present in the group_ids parameter of the request.
                 items:
                   type: string
                 type: array
@@ -1072,6 +1072,10 @@ paths:
                 items:
                   $ref: '#/definitions/Post'
                 type: array
+              user_can_reply:
+                description: |
+                  Whether or not the current user (if any) can reply to this post. Unverified users cannot reply to posts until they verify their account.
+                type: boolean
             type: object
         '403':
           description: The user doesn't have permission to access the post.
@@ -1360,12 +1364,6 @@ paths:
           required: false
           type: string
         - description: |
-            Whether or not group posts should be filtered by their location to only include posts defined by the users' location field. Set to 1 to enable and 0 to disable.
-          in: formData
-          name: filter_group_posts_by_location
-          required: false
-          type: integer
-        - description: |
             A comma separated list of the sources to show public posts from. Currently only 'trashnothing' is supported.
             If not passed, all sources will be enabled.
             If set to an empty string, no sources will be enabled which effectively disables public posts for the user so that the user will only see posts from the groups they are a member of.
@@ -1449,29 +1447,15 @@ paths:
       summary: Delete an email alert
       tags:
         - users
-  /users/me/emails:
-    get:
-      operationId: get_emails
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The users emails addresses.
-          schema:
-            items:
-              $ref: '#/definitions/Email'
-            type: array
-      summary: List email addresses
-      tags:
-        - users
-    put:
+  /users/me/email:
+    post:
       consumes:
         - multipart/form-data
       description: |
-        Add a new email address to the current users' account.  The first time an email address is added to a users account, a verification link will be sent to the email address to verify the address.
-      operationId: add_email
+        Change the users' current email address.  A verification link will be emailed to the new email address to verify that the email account belongs to the user.  The email change will not take effect until the user clicks the link in the verification email.
+      operationId: change_email
       parameters:
-        - description: The email address to add.
+        - description: The new email address.
           in: formData
           name: address
           required: true
@@ -1480,123 +1464,27 @@ paths:
         - application/json
       responses:
         '200':
-          description: The new email.
-          schema:
-            $ref: '#/definitions/Email'
+          description: A verification email was sent to the new email address.
         '400':
           description: Invalid email address.
-        '403':
-          description: The email address is already associated with another account.  This usually means that the user has created multiple accounts by accident.
-      summary: Add email address
+      summary: Change email address
       tags:
         - users
-  '/users/me/emails/{email_id}':
-    delete:
-      description: |
-        Delete an existing email address from the current users' account. If the email being deleted is the last email address the user has or if the email address is the primary email for the user, deleting the email will fail. In order to delete a users' primary email, another email must first be made the primary email.
-      operationId: delete_email
-      parameters:
-        - description: The ID of the email address to delete.
-          in: path
-          name: email_id
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The users emails updated to reflect the deleted email.
-          schema:
-            items:
-              $ref: '#/definitions/Email'
-            type: array
-        '400':
-          description: Neither the last email address or the primary email address can be deleted.
-        '403':
-          description: The user doesn't have permission to access the email.
-        '404':
-          description: Email not found.
-      summary: Delete email address
-      tags:
-        - users
-  '/users/me/emails/{email_id}/not-bouncing':
+  /users/me/email/not-bouncing:
     put:
       description: |
-        Resets an email address bouncing state to false.  The email address may be automatically marked as bouncing if further emails sent to it are bounced.
+        Resets an email address bouncing state to false.  The users' email address may be automatically marked as bouncing again if further emails sent to it are bounced.
       operationId: set_email_not_bouncing
-      parameters:
-        - description: The ID of the email to set as not bouncing.
-          in: path
-          name: email_id
-          required: true
-          type: string
       produces:
         - application/json
       responses:
         '200':
-          description: The updated email.
+          description: The updated user.
           schema:
-            $ref: '#/definitions/Email'
+            $ref: '#/definitions/CurrentUser'
         '400':
           description: Email not yet verified.
-        '403':
-          description: The user doesn't have permission to access the email.
-        '404':
-          description: Email not found.
-      summary: Set email not bouncing
-      tags:
-        - users
-  '/users/me/emails/{email_id}/resend-verification':
-    post:
-      description: Resends the verification email to one of the users' unverified email addresses.
-      operationId: resend_email_verification_email
-      parameters:
-        - description: The ID of the email to resend the verification email to.
-          in: path
-          name: email_id
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Verification email was resent.
-        '400':
-          description: Email already verified.
-        '403':
-          description: The user doesn't have permission to access the email.
-        '404':
-          description: Email not found.
-      summary: Resend email verification
-      tags:
-        - users
-  '/users/me/emails/{email_id}/set-primary':
-    put:
-      consumes:
-        - multipart/form-data
-      operationId: update_primary_email
-      parameters:
-        - description: The ID of the email address to make the primary email address for the user.
-          in: path
-          name: email_id
-          required: true
-          type: string
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: The users emails updated to reflect the new primary email.
-          schema:
-            items:
-              $ref: '#/definitions/Email'
-            type: array
-        '400':
-          description: Email not yet verified.
-        '403':
-          description: The user doesn't have permission to access the email.
-        '404':
-          description: Email not found.
-      summary: Update primary email
+      summary: Set users' email address as not bouncing
       tags:
         - users
   /users/me/groups:
@@ -1630,7 +1518,7 @@ paths:
       consumes:
         - multipart/form-data
       description: |
-        Update the current users' location. The location is used to determine what (if any) public posts are shown to the user.
+        Update the current users' location. The location is used to determine which posts are shown to the user (both public posts and group posts).
       operationId: update_location
       parameters:
         - description: A name that describes the location specified by the given latitude and longitude (must be <= 128 characters).
@@ -1659,7 +1547,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: The user with the updated public post location.
+          description: The user with the updated location.
           schema:
             $ref: '#/definitions/CurrentUser'
         '400':
@@ -1695,7 +1583,7 @@ paths:
   /users/me/posts:
     get:
       description: |
-        Only posts from the last 30 days will be returned. <br /><br /> NOTE: In order to make it easier to see all a users&#39; posts, the current users&#39; location preferences are not applied when listing or searching posts from a single user.  If location based filtering of the posts is needed, the latitude, longitude and radius parameters may be used.
+        NOTE: In order to make it easier to see all a users&#39; posts, the current users&#39; location preferences are not applied when listing or searching posts from a single user.  If location based filtering of the posts is needed, the latitude, longitude and radius parameters may be used.
       operationId: get_current_user_posts
       parameters:
         - description: |
@@ -1705,7 +1593,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing, open_archive_groups. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. The open_archive_groups source provides a way to easily request posts from groups that have open_archives set to true without having to pass a group_ids parameter.  When passed, it will automatically return posts from open archive groups that are within the area specified by the latitude, longitude and radius parameters (or the current users' location if latitude, longitude and radius aren't passed). <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source or the open_archive_groups source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -1759,13 +1647,13 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
+            Only posts newer than this UTC date and time will be returned.
           format: date-time
           in: query
           name: date_min
           required: false
           type: string
-        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+        - description: Only posts older than this UTC date and time will be returned.
           format: date-time
           in: query
           name: date_max
@@ -1789,7 +1677,7 @@ paths:
                 type: integer
               group_ids:
                 description: |
-                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.  If the open_archive_groups source is used, these IDs may include the IDs of open archive groups that weren't present in the group_ids parameter of the request.
                 items:
                   type: string
                 type: array
@@ -1826,7 +1714,7 @@ paths:
   /users/me/posts/search:
     get:
       description: |
-        Searching posts takes the same arguments as listing posts except for the addition of the search and sort_by parameters. <br /><br /> Only posts from the last 30 days will be returned.
+        Searching posts takes the same arguments as listing posts except for the addition of the search and sort_by parameters.
       operationId: search_current_user_posts
       parameters:
         - description: The search query used to find posts.
@@ -1848,7 +1736,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing, open_archive_groups. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. The open_archive_groups source provides a way to easily request posts from groups that have open_archives set to true without having to pass a group_ids parameter.  When passed, it will automatically return posts from open archive groups that are within the area specified by the latitude, longitude and radius parameters (or the current users' location if latitude, longitude and radius aren't passed). <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source or the open_archive_groups source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -1902,13 +1790,13 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
+            Only posts newer than this UTC date and time will be returned.
           format: date-time
           in: query
           name: date_min
           required: false
           type: string
-        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+        - description: Only posts older than this UTC date and time will be returned.
           format: date-time
           in: query
           name: date_max
@@ -1932,7 +1820,7 @@ paths:
                 type: integer
               group_ids:
                 description: |
-                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.  If the open_archive_groups source is used, these IDs may include the IDs of open archive groups that weren't present in the group_ids parameter of the request.
                 items:
                   type: string
                 type: array
@@ -2077,7 +1965,7 @@ paths:
   '/users/{user_id}/posts':
     get:
       description: |
-        Only posts from the last 30 days will be returned. <br /><br /> NOTE: In order to make it easier to see all a users&#39; posts, the current users&#39; location preferences are not applied when listing or searching posts from a single user.  If location based filtering of the posts is needed, the latitude, longitude and radius parameters may be used.
+        NOTE: In order to make it easier to see all a users&#39; posts, the current users&#39; location preferences are not applied when listing or searching posts from a single user.  If location based filtering of the posts is needed, the latitude, longitude and radius parameters may be used.
       operationId: get_user_posts
       parameters:
         - description: |
@@ -2093,7 +1981,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing, open_archive_groups. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. The open_archive_groups source provides a way to easily request posts from groups that have open_archives set to true without having to pass a group_ids parameter.  When passed, it will automatically return posts from open archive groups that are within the area specified by the latitude, longitude and radius parameters (or all the open archive groups the requested user has posted to if latitude, longitude and radius aren't passed). <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source or the open_archive_groups source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -2147,13 +2035,13 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
+            Only posts newer than this UTC date and time will be returned.
           format: date-time
           in: query
           name: date_min
           required: false
           type: string
-        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+        - description: Only posts older than this UTC date and time will be returned.
           format: date-time
           in: query
           name: date_max
@@ -2177,7 +2065,7 @@ paths:
                 type: integer
               group_ids:
                 description: |
-                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.  If the open_archive_groups source is used, these IDs may include the IDs of open archive groups that weren't present in the group_ids parameter of the request.
                 items:
                   type: string
                 type: array
@@ -2220,7 +2108,7 @@ paths:
   '/users/{user_id}/posts/search':
     get:
       description: |
-        Searching posts takes the same arguments as listing posts except for the addition of the search and sort_by parameters. <br /><br /> Only posts from the last 30 days will be returned.
+        Searching posts takes the same arguments as listing posts except for the addition of the search and sort_by parameters.
       operationId: search_user_posts
       parameters:
         - description: |
@@ -2248,7 +2136,7 @@ paths:
           required: true
           type: string
         - description: |
-            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source makes the latitude, longitude and radius parameters required.
+            A comma separated list of the post sources to retrieve posts from. The available sources are: groups, trashnothing, open_archive_groups. The trashnothing source is for public posts that are posted on trash nothing but are not associated with any group. The open_archive_groups source provides a way to easily request posts from groups that have open_archives set to true without having to pass a group_ids parameter.  When passed, it will automatically return posts from open archive groups that are within the area specified by the latitude, longitude and radius parameters (or all the open archive groups the requested user has posted to if latitude, longitude and radius aren't passed). <br /><br /> NOTE: For requests using an api key instead of oauth, passing the trashnothing source or the open_archive_groups source makes the latitude, longitude and radius parameters required.
           in: query
           name: sources
           required: true
@@ -2302,13 +2190,13 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
+            Only posts newer than this UTC date and time will be returned.
           format: date-time
           in: query
           name: date_min
           required: false
           type: string
-        - description: 'Only posts older than this UTC date and time will be returned.  If unset, defaults to the current date and time.'
+        - description: Only posts older than this UTC date and time will be returned.
           format: date-time
           in: query
           name: date_max
@@ -2332,7 +2220,7 @@ paths:
                 type: integer
               group_ids:
                 description: |
-                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.
+                  The IDs of the groups that the posts were retrieved from (will be null when no group IDs were used). These IDs may be a subset of the requested group IDs when a request includes group IDs for groups that are not open archives and that the current user is not a member of.  If the open_archive_groups source is used, these IDs may include the IDs of open archive groups that weren't present in the group_ids parameter of the request.
                 items:
                   type: string
                 type: array
@@ -2465,15 +2353,21 @@ definitions:
             description: |
               If digest emails are enabled, this is the frequency of digest emails sent to this user. One of: daily, 12_hours, 8_hours, 6_hours, 4_hours, 2_hours, hourly <br /><br /> If digest emails are disabled, this will be null. <br /><br /> NOTE: A weekly option with the value 'weekly' will probably be added in the future so clients should recognize weekly as a valid value that can be displayed and set if it is ever returned.
             type: string
-          email_bouncing:
-            description: Whether or not the users' primary email address is bouncing emails sent to it.
-            type: boolean
-          email_spam_stop:
-            description: Whether or not emails have been stopped because of a spam complaint from the users' email account.
-            type: boolean
-          filter_group_posts_by_location:
-            description: Whether or not group posts should be filtered to only include posts in the area defined by the users' location field.
-            type: boolean
+          email:
+            description: Data related to the users' email address.
+            properties:
+              address:
+                description: The email address.
+                type: string
+              bouncing:
+                description: |
+                  Whether or not this email address has been bouncing emails that are sent to it.  When bouncing is true, no emails will be sent to the user.  If the user thinks that their email account shouldn't be bouncing emails, use the email not bouncing endpoint to reset bouncing to false.
+                type: boolean
+              spam_stop:
+                description: |
+                  Whether or not emails have been stopped because of a spam complaint from the users' email account. When spam_stop is first set to true, it indicates that all emails have been automatically disabled for the users' account (eg. digest and alerts).  The user will need to re-enable digests and re-add any alerts that they had previously set up.
+                type: boolean
+            type: object
           has_password:
             description: |
               Whether or not the user has a password (accounts created using 3rd party providers like Facebook don't have passwords set).
@@ -2485,7 +2379,7 @@ definitions:
             format: date-time
             type: string
           location:
-            description: The users' location.  The location is used to determine what (if any) public posts are shown to the user (may be null).
+            description: The users' location.  The location is used to determine which posts are shown to the user (may be null).
             properties:
               latitude:
                 type: number
@@ -2537,15 +2431,18 @@ definitions:
             description: 'Whether or not the user used the Fair Offer Policy (see https://trashnothing.com/fair_offer_policy ) the last time they posted.'
             type: boolean
           verified:
-            description: Whether or not the user has verified their account.
+            description: |
+              Whether or not the user has verified their account. The user account will be limited (eg. they will not be able to reply to posts) until their account is verified.
             type: boolean
         type: object
     example:
       country: US
       digest: 6_hours
-      email_bouncing: false
-      email_spam_stop: false
-      filter_group_posts_by_location: true
+      email:
+        address: johndoe@example.com
+        bouncing: false
+        spam_stop: false
+        verified: true
       firstname: Jack
       has_password: false
       last_listings_view: '2018-02-15T15:04:47.000Z'
@@ -2571,33 +2468,6 @@ definitions:
       username: captainjack
       uses_fair_offer_policy: true
       verified: true
-  Email:
-    description: Contains information about a user email address.
-    example:
-      address: johndoe@example.com
-      bouncing: false
-      email_id: 4729
-      is_primary: true
-      user_id: 1817
-      verified: true
-    properties:
-      address:
-        description: The email address.
-        type: string
-      bouncing:
-        description: Whether or not this email address has been bouncing emails that are sent to it.
-        type: boolean
-      email_id:
-        type: string
-      is_primary:
-        description: Whether or not this email is the primary email on the user account.
-        type: boolean
-      user_id:
-        type: string
-      verified:
-        description: Whether or not this email address has been verified.
-        type: boolean
-    type: object
   GeolocateBounds:
     description: |
       Two bounding boxes that make using Google Maps' geocoder easier. <br /><br /> The default bounding box defines the area in which the post is probably located.  This is useful for providing a bounds to Google Maps geocoder. <br /><br /> The limit bounding box is a larger bounding box that contains the default bounding box. This is useful for discarding Google Maps geocoding results that are outside of this bounding box.
@@ -2856,7 +2726,7 @@ definitions:
         type: boolean
       source:
         description: |
-          The source of the post.  One of: groups, trashnothing.  A value of groups indicates the post is from a group and the group_id field will contain the ID of the group. A value of trashnothing indicates the post is a public post not associated with any group.
+          The source of the post.  One of: groups, trashnothing, open_archive_groups.  A value of groups or open_archive_groups indicates the post is from a group and the group_id field will contain the ID of the group. A value of trashnothing indicates the post is a public post not associated with any group.
         type: string
       title:
         type: string

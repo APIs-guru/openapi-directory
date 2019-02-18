@@ -134,7 +134,7 @@ paths:
         '201':
           description: Created
           schema:
-            $ref: '#/definitions/PaymentWithAllLinks'
+            $ref: '#/definitions/CreatePaymentResult'
         '400':
           description: Bad request
           schema:
@@ -161,15 +161,17 @@ paths:
       description: 'Return information about the payment The Authorisation token needs to be specified in the ''authorization'' header as ''authorization: Bearer YOUR_API_KEY_HERE'''
       operationId: getPayment
       parameters:
-        - in: path
+        - description: Payment identifier
+          in: path
           name: paymentId
           required: true
           type: string
+          x-example: hu20sqlact5260q2nanm0q8u93
       responses:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/PaymentDetailForSearch'
+            $ref: '#/definitions/GetPaymentResult'
         '401':
           description: Credentials are required to access this resource
         '404':
@@ -192,10 +194,12 @@ paths:
       description: 'Cancel a payment based on the provided payment ID and the Authorisation token. The Authorisation token needs to be specified in the ''authorization'' header as ''authorization: Bearer YOUR_API_KEY_HERE''. A payment can only be cancelled if it''s in a state that isn''t finished.'
       operationId: cancelPayment
       parameters:
-        - in: path
+        - description: Payment identifier
+          in: path
           name: paymentId
           required: true
           type: string
+          x-example: hu20sqlact5260q2nanm0q8u93
       responses:
         '204':
           description: No Content
@@ -229,10 +233,12 @@ paths:
       description: 'Capture a payment based on the provided payment ID and the Authorisation token. The Authorisation token needs to be specified in the ''authorization'' header as ''authorization: Bearer YOUR_API_KEY_HERE''. A payment can only be captured if it''s in ''submitted'' state'
       operationId: capturePayment
       parameters:
-        - in: path
+        - description: Payment identifier
+          in: path
           name: paymentId
           required: true
           type: string
+          x-example: hu20sqlact5260q2nanm0q8u93
       responses:
         '204':
           description: No Content
@@ -266,10 +272,12 @@ paths:
       description: 'Return payment events information about a certain payment The Authorisation token needs to be specified in the ''authorization'' header as ''authorization: Bearer YOUR_API_KEY_HERE'''
       operationId: getPaymentEvents
       parameters:
-        - in: path
+        - description: Payment identifier
+          in: path
           name: paymentId
           required: true
           type: string
+          x-example: hu20sqlact5260q2nanm0q8u93
       responses:
         '200':
           description: OK
@@ -461,7 +469,7 @@ definitions:
         readOnly: true
         type: string
       country:
-        example: UK
+        example: GB
         readOnly: true
         type: string
       line1:
@@ -504,46 +512,6 @@ definitions:
         readOnly: true
         type: string
     type: object
-  CardPayment:
-    allOf:
-      - $ref: '#/definitions/Payment'
-      - properties:
-          card_brand:
-            description: Card Brand
-            example: Visa
-            readOnly: true
-            type: string
-          card_details:
-            $ref: '#/definitions/CardDetails'
-            readOnly: true
-          corporate_card_surcharge:
-            example: 250
-            format: int64
-            readOnly: true
-            type: integer
-          delayed_capture:
-            description: delayed capture flag
-            example: false
-            readOnly: true
-            type: boolean
-          language:
-            enum:
-              - en
-              - cy
-            example: en
-            type: string
-          refund_summary:
-            $ref: '#/definitions/RefundSummary'
-            readOnly: true
-          settlement_summary:
-            $ref: '#/definitions/SettlementSummary'
-            readOnly: true
-          total_amount:
-            example: 1450
-            format: int64
-            readOnly: true
-            type: integer
-        type: object
   CreatePaymentRequest:
     properties:
       amount:
@@ -583,10 +551,47 @@ definitions:
       - reference
       - return_url
     type: object
-  DirectDebitPayment:
-    allOf:
-      - $ref: '#/definitions/Payment'
-      - type: object
+  CreatePaymentResult:
+    properties:
+      _links:
+        $ref: '#/definitions/PaymentLinks'
+      amount:
+        example: 1200
+        format: int64
+        type: integer
+      created_date:
+        example: '2016-01-21T17:15:00Z'
+        type: string
+      delayed_capture:
+        type: boolean
+      description:
+        example: Your Service Description
+        type: string
+      language:
+        enum:
+          - ENGLISH
+          - WELSH
+        example: en
+        type: string
+      paymentId:
+        example: hu20sqlact5260q2nanm0q8u93
+        type: string
+      payment_provider:
+        example: worldpay
+        type: string
+      reference:
+        example: your-reference
+        type: string
+      refund_summary:
+        $ref: '#/definitions/RefundSummary'
+      return_url:
+        example: 'http://your.service.domain/your-reference'
+        type: string
+      settlement_summary:
+        $ref: '#/definitions/SettlementSummary'
+      state:
+        $ref: '#/definitions/PaymentState'
+    type: object
   EmbeddedRefunds:
     properties:
       refunds:
@@ -604,34 +609,47 @@ definitions:
         example: Too many requests
         type: string
     type: object
-  Link:
-    description: A link related to a payment
+  GetPaymentResult:
     properties:
-      href:
-        example: 'https://an.example.link/from/payment/platform'
-        readOnly: true
-        type: string
-      method:
-        example: GET
-        readOnly: true
-        type: string
-    type: object
-  Payment:
-    discriminator: paymentType
-    properties:
+      _links:
+        $ref: '#/definitions/PaymentLinks'
       amount:
         example: 1200
         format: int64
         type: integer
-      created_date:
-        example: '2016-01-21T17:15:00Z'
+      card_brand:
+        description: Card Brand
+        example: Visa
         readOnly: true
         type: string
+      card_details:
+        $ref: '#/definitions/CardDetails'
+        readOnly: true
+      corporate_card_surcharge:
+        example: 250
+        format: int64
+        readOnly: true
+        type: integer
+      created_date:
+        example: '2016-01-21T17:15:000Z'
+        readOnly: true
+        type: string
+      delayed_capture:
+        description: delayed capture flag
+        example: false
+        readOnly: true
+        type: boolean
       description:
         example: Your Service Description
         type: string
       email:
         example: your email
+        type: string
+      language:
+        enum:
+          - en
+          - cy
+        example: en
         type: string
       payment_id:
         example: hu20sqlact5260q2nanm0q8u93
@@ -644,12 +662,35 @@ definitions:
       reference:
         example: your-reference
         type: string
+      refund_summary:
+        $ref: '#/definitions/RefundSummary'
+        readOnly: true
       return_url:
         example: 'http://your.service.domain/your-reference'
         readOnly: true
         type: string
+      settlement_summary:
+        $ref: '#/definitions/SettlementSummary'
+        readOnly: true
       state:
         $ref: '#/definitions/PaymentState'
+      total_amount:
+        example: 1450
+        format: int64
+        readOnly: true
+        type: integer
+    type: object
+  Link:
+    description: A link related to a payment
+    properties:
+      href:
+        example: 'https://an.example.link/from/payment/platform'
+        readOnly: true
+        type: string
+      method:
+        example: GET
+        readOnly: true
+        type: string
     type: object
   PaymentDetailForSearch:
     properties:
@@ -674,7 +715,7 @@ definitions:
         readOnly: true
         type: integer
       created_date:
-        example: '2016-01-21T17:15:00Z'
+        example: '2016-01-21T17:15:000Z'
         readOnly: true
         type: string
       delayed_capture:
@@ -907,43 +948,6 @@ definitions:
         readOnly: true
         type: string
     type: object
-  PaymentWithAllLinks:
-    properties:
-      _links:
-        $ref: '#/definitions/PaymentLinks'
-        readOnly: true
-      amount:
-        example: 1200
-        format: int64
-        type: integer
-      created_date:
-        example: '2016-01-21T17:15:00Z'
-        readOnly: true
-        type: string
-      description:
-        example: Your Service Description
-        type: string
-      email:
-        example: your email
-        type: string
-      payment_id:
-        example: hu20sqlact5260q2nanm0q8u93
-        readOnly: true
-        type: string
-      payment_provider:
-        example: worldpay
-        readOnly: true
-        type: string
-      reference:
-        example: your-reference
-        type: string
-      return_url:
-        example: 'http://your.service.domain/your-reference'
-        readOnly: true
-        type: string
-      state:
-        $ref: '#/definitions/PaymentState'
-    type: object
   PostLink:
     description: A POST link related to a payment
     properties:
@@ -1079,6 +1083,7 @@ definitions:
     properties:
       amount_available:
         description: Amount available for refund in pence
+        example: 100
         format: int64
         readOnly: true
         type: integer
@@ -1116,7 +1121,7 @@ definitions:
     properties:
       capture_submit_time:
         description: Date and time capture request has been submitted (may be null if capture request was not immediately acknowledged by payment gateway)
-        example: '2016-01-21T17:15:00Z'
+        example: '2016-01-21T17:15:000Z'
         readOnly: true
         type: string
       captured_date:
