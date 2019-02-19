@@ -610,9 +610,9 @@ function writeSpec(source, format, exPatch, command) {
         if (resolverContext.anyDiff || (!e.message.startsWith('Warning'))) {
           //throw new SpecError(e, context);
           process.exitCode = 1;
-          warnings.push(e.message);
+          warnings.push(e.message||e.context.message); // FIXME openapi_3
         }
-        console.log(e.message);
+        else console.log(e.message||e.context.message); // FIXME openapi_3
       }
       else {
         newBlackList.push(resolverContext.source);
@@ -1216,7 +1216,9 @@ function parseHost(swagger, altSource) {
     swHost = u.hostname;
   }
 
-  if ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('github.io')) || (swHost.indexOf('example.com')>=0) || (swHost.indexOf('foo.bar')>=0) || (swHost.startsWith('localhost')) || (swHost === 'host')) {
+  if (!swHost) swHost = altSource;
+
+  if (swHost && ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('github.io')) || (swHost.indexOf('example.com')>=0) || (swHost.indexOf('foo.bar')>=0) || (swHost.startsWith('localhost')) || (swHost === 'host'))) {
     let port = '';
     if (swHost.indexOf(':')>=0) port = swHost.split(':')[1];
     swHost = altSource;
