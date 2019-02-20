@@ -1657,6 +1657,8 @@ definitions:
         description: A collection of key-value pairs.
       Type:
         $ref: '#/definitions/InputType'
+      Vpc:
+        $ref: '#/definitions/InputVpcRequest'
     description: The name of the input
   CreateInputSecurityGroupResponse:
     type: object
@@ -1879,7 +1881,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
       SecurityGroups:
         $ref: '#/definitions/__listOf__string'
-        description: A list of IDs for all the security groups attached to the input.
+        description: A list of IDs for all the Input Security Groups attached to the input.
       Sources:
         $ref: '#/definitions/__listOfInputSource'
         description: A list of the sources of the input (PULL-type).
@@ -3729,6 +3731,26 @@ definitions:
       - MP4_FILE
       - MEDIACONNECT
     description: Placeholder documentation for InputType
+  InputVpcRequest:
+    type: object
+    required:
+      - SubnetIds
+    properties:
+      SecurityGroupIds:
+        $ref: '#/definitions/__listOf__string'
+        description: |
+          A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
+          Requires subnetIds. If none are specified then the VPC default security group will be used.
+      SubnetIds:
+        $ref: '#/definitions/__listOf__string'
+        description: |
+          A list of 2 VPC subnet IDs from the same VPC.
+          Subnet IDs must be mapped to two unique availability zones (AZ).
+    description: |
+      Settings for a private VPC Input.
+      When this property is specified, the input destination addresses will be created in a VPC rather than with public Internet addresses.
+      This property requires setting the roleArn property on Input creation.
+      Not compatible with the inputSecurityGroups property.
   Input:
     type: object
     properties:
@@ -3755,7 +3777,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the role this input assumes during and after creation.
       SecurityGroups:
         $ref: '#/definitions/__listOf__string'
-        description: A list of IDs for all the security groups attached to the input.
+        description: A list of IDs for all the Input Security Groups attached to the input.
       Sources:
         $ref: '#/definitions/__listOfInputSource'
         description: A list of the sources of the input (PULL-type).
@@ -5170,6 +5192,18 @@ definitions:
       - DISABLED
       - ENABLED
     description: Placeholder documentation for InputDenoiseFilter
+  InputDestinationVpc:
+    type: object
+    properties:
+      AvailabilityZone:
+        $ref: '#/definitions/__string'
+        description: |
+          The availability zone of the Input destination.
+      NetworkInterfaceId:
+        $ref: '#/definitions/__string'
+        description: |
+          The network interface ID of the Input destination in the VPC.
+    description: The properties for a VPC type input destination.
   InputDestination:
     type: object
     properties:
@@ -5186,6 +5220,8 @@ definitions:
         description: |
           This represents the endpoint that the customer stream will be
           pushed to.
+      Vpc:
+        $ref: '#/definitions/InputDestinationVpc'
     description: The settings for a PUSH type input.
   InputDestinationRequest:
     type: object
