@@ -2472,6 +2472,9 @@ definitions:
       ConnectSettings:
         $ref: '#/definitions/DirectoryConnectSettings'
         description: A <a>DirectoryConnectSettings</a> object that contains additional information for the operation.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The tags to be assigned to AD Connector.
     description: Contains the inputs for the <a>ConnectDirectory</a> operation.
   DirectoryLimitExceededException: {}
   CreateAliasResult:
@@ -2582,6 +2585,9 @@ definitions:
       VpcSettings:
         $ref: '#/definitions/DirectoryVpcSettings'
         description: A <a>DirectoryVpcSettings</a> object that contains additional information for the operation.
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The tags to be assigned to the Simple AD directory.
     description: 'Contains the inputs for the <a>CreateDirectory</a> operation. '
   CreateLogSubscriptionResult:
     type: object
@@ -2631,6 +2637,9 @@ definitions:
       Edition:
         $ref: '#/definitions/DirectoryEdition'
         description: 'AWS Managed Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.'
+      Tags:
+        $ref: '#/definitions/Tags'
+        description: The tags to be assigned to the AWS Managed Microsoft AD directory.
     description: Creates an AWS Managed Microsoft AD directory.
   CreateSnapshotResult:
     type: object

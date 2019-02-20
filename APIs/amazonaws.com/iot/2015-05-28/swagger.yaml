@@ -599,7 +599,7 @@ paths:
   '/things/{thingName}/principals':
     put:
       operationId: AttachThingPrincipal
-      description: Attaches the specified principal to the specified thing.
+      description: 'Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.'
       responses:
         '200':
           description: Success
@@ -651,7 +651,7 @@ paths:
       - $ref: '#/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DetachThingPrincipal
-      description: <p>Detaches the specified principal from the specified thing.</p> <note> <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p> </note>
+      description: '<p>Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.</p> <note> <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p> </note>'
       responses:
         '200':
           description: Success
@@ -693,7 +693,7 @@ paths:
           required: true
     get:
       operationId: ListThingPrincipals
-      description: Lists the principals associated with the specified thing.
+      description: 'Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.'
       responses:
         '200':
           description: Success
@@ -5816,7 +5816,7 @@ paths:
   /principals/things:
     get:
       operationId: ListPrincipalThings
-      description: Lists the things associated with the specified principal.
+      description: 'Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. '
       responses:
         '200':
           description: Success
@@ -7826,8 +7826,6 @@ definitions:
         description: The ARN of the security profile.
   CreateSecurityProfileRequest:
     type: object
-    required:
-      - behaviors
     properties:
       securityProfileDescription:
         $ref: '#/definitions/SecurityProfileDescription'
@@ -7838,6 +7836,9 @@ definitions:
       alertTargets:
         $ref: '#/definitions/AlertTargets'
         description: Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.
+      additionalMetricsToRetain:
+        $ref: '#/definitions/AdditionalMetricsToRetainList'
+        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
       tags:
         $ref: '#/definitions/TagList'
         description: Metadata which can be used to manage the security profile.
@@ -8305,6 +8306,9 @@ definitions:
       alertTargets:
         $ref: '#/definitions/AlertTargets'
         description: Where the alerts are sent. (Alerts are always sent to the console.)
+      additionalMetricsToRetain:
+        $ref: '#/definitions/AdditionalMetricsToRetainList'
+        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
       version:
         $ref: '#/definitions/Version'
         description: The version of the security profile. A new version is generated whenever the security profile is updated.
@@ -9732,6 +9736,9 @@ definitions:
       alertTargets:
         $ref: '#/definitions/AlertTargets'
         description: Where the alerts are sent. (Alerts are always sent to the console.)
+      additionalMetricsToRetain:
+        $ref: '#/definitions/AdditionalMetricsToRetainList'
+        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
       version:
         $ref: '#/definitions/Version'
         description: The updated version of the security profile.
@@ -9753,6 +9760,18 @@ definitions:
       alertTargets:
         $ref: '#/definitions/AlertTargets'
         description: Where the alerts are sent. (Alerts are always sent to the console.)
+      additionalMetricsToRetain:
+        $ref: '#/definitions/AdditionalMetricsToRetainList'
+        description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code> but it is also retained for any metric specified here.'
+      deleteBehaviors:
+        $ref: '#/definitions/DeleteBehaviors'
+        description: 'If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are defined in the current invocation an exception occurs.'
+      deleteAlertTargets:
+        $ref: '#/definitions/DeleteAlertTargets'
+        description: 'If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code> are defined in the current invocation an exception occurs.'
+      deleteAdditionalMetricsToRetain:
+        $ref: '#/definitions/DeleteAdditionalMetricsToRetain'
+        description: 'If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.'
   UpdateStreamResponse:
     type: object
     properties:
@@ -10360,6 +10379,12 @@ definitions:
     type: string
   OverrideDynamicGroups:
     type: boolean
+  BehaviorMetric:
+    type: string
+  AdditionalMetricsToRetainList:
+    type: array
+    items:
+      $ref: '#/definitions/BehaviorMetric'
   AttributeKey:
     type: string
   Value:
@@ -10868,20 +10893,27 @@ definitions:
     pattern: '[a-zA-Z0-9:_-]+'
     minLength: 1
     maxLength: 128
-  BehaviorMetric:
-    type: string
   BehaviorCriteria:
     type: object
     properties:
       comparisonOperator:
         $ref: '#/definitions/ComparisonOperator'
-        description: The operator that relates the thing measured (<code>metric</code>) to the criteria (containing a <code>value</code>.
+        description: The operator that relates the thing measured (<code>metric</code>) to the criteria (containing a <code>value</code> or <code>statisticalThreshold</code>).
       value:
         $ref: '#/definitions/MetricValue'
         description: The value to be compared with the <code>metric</code>.
       durationSeconds:
         $ref: '#/definitions/DurationSeconds'
-        description: 'Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>). '
+        description: 'Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>). For a <code>statisticalThreshhold</code> metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank.'
+      consecutiveDatapointsToAlarm:
+        $ref: '#/definitions/ConsecutiveDatapointsToAlarm'
+        description: 'If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.'
+      consecutiveDatapointsToClear:
+        $ref: '#/definitions/ConsecutiveDatapointsToClear'
+        description: 'If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.'
+      statisticalThreshold:
+        $ref: '#/definitions/StatisticalThreshold'
+        description: A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
     description: The criteria by which the behavior is determined to be normal.
   ComparisonOperator:
     type: string
@@ -10896,6 +10928,21 @@ definitions:
       - not-in-port-set
   DurationSeconds:
     type: integer
+  ConsecutiveDatapointsToAlarm:
+    type: integer
+    minimum: 1
+    maximum: 10
+  ConsecutiveDatapointsToClear:
+    type: integer
+    minimum: 1
+    maximum: 10
+  StatisticalThreshold:
+    type: object
+    properties:
+      statistic:
+        $ref: '#/definitions/EvaluationStatistic'
+        description: 'The percentile which resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (<code>durationSeconds</code>) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (<code>comparisonOperator</code>) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.'
+    description: A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
   Behaviors:
     type: array
     items:
@@ -11500,6 +11547,12 @@ definitions:
     type: string
   DeleteScheduledAudits:
     type: boolean
+  DeleteAdditionalMetricsToRetain:
+    type: boolean
+  DeleteAlertTargets:
+    type: boolean
+  DeleteBehaviors:
+    type: boolean
   OptionalVersion:
     type: integer
   ForceDelete:
@@ -11897,6 +11950,9 @@ definitions:
         $ref: '#/definitions/OTAUpdateErrorMessage'
         description: The error message.
     description: Error information.
+  EvaluationStatistic:
+    type: string
+    pattern: (p0|p0\.1|p0\.01|p1|p10|p50|p90|p99|p99\.9|p99\.99|p100)
   EventType:
     type: string
     enum:
