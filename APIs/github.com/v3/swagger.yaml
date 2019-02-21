@@ -1195,6 +1195,7 @@ paths:
               type: integer
   '/legacy/issues/search/{owner}/{repository}/{state}/{keyword}':
     get:
+      deprecated: true
       description: Find issues by state and keyword.
       parameters:
         - description: The search term.
@@ -1259,6 +1260,7 @@ paths:
               type: integer
   '/legacy/repos/search/{keyword}':
     get:
+      deprecated: true
       description: 'Find repositories by keyword. Note, this legacy method does not follow the v3 pagination pattern. This method returns up to 100 results per page and pages can be fetched using the start_page parameter.'
       parameters:
         - description: The search term
@@ -1331,6 +1333,7 @@ paths:
               type: integer
   '/legacy/user/email/{email}':
     get:
+      deprecated: true
       description: This API call is added for compatibility reasons only.
       parameters:
         - description: The email address
@@ -1379,6 +1382,7 @@ paths:
               type: integer
   '/legacy/user/search/{keyword}':
     get:
+      deprecated: true
       description: Find users by keyword.
       parameters:
         - description: The search term
@@ -3712,7 +3716,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/commitComments'
+            $ref: '#/definitions/commitComment'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -3774,7 +3778,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/commitComments'
+            $ref: '#/definitions/commitComment'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -4070,7 +4074,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/commitBody'
+            $ref: '#/definitions/commitCommentBody'
       responses:
         '201':
           description: Created
@@ -4088,7 +4092,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/commitComments'
+            $ref: '#/definitions/commitComment'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -4402,7 +4406,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/contributors'
+            $ref: '#/definitions/users'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -4652,6 +4656,7 @@ paths:
               type: integer
   '/repos/{owner}/{repo}/downloads':
     get:
+      deprecated: true
       description: Deprecated. List downloads for a repository.
       parameters:
         - description: Name of repository owner.
@@ -4705,6 +4710,7 @@ paths:
               type: integer
   '/repos/{owner}/{repo}/downloads/{downloadId}':
     delete:
+      deprecated: true
       description: Deprecated. Delete a download.
       parameters:
         - description: Name of repository owner.
@@ -4761,6 +4767,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
     get:
+      deprecated: true
       description: Deprecated. Get a single download.
       parameters:
         - description: Name of repository owner.
@@ -4799,7 +4806,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/downloads'
+            $ref: '#/definitions/download'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -4974,7 +4981,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/fork'
+            $ref: '#/definitions/repo'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -5542,7 +5549,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/tag'
+            $ref: '#/definitions/tagBody'
       responses:
         '201':
           description: Created
@@ -5560,7 +5567,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/tags'
+            $ref: '#/definitions/tag'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -6550,7 +6557,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/events'
+            $ref: '#/definitions/issueEvents'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -6608,7 +6615,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/event'
+            $ref: '#/definitions/issueEvent'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -6908,7 +6915,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/events'
+            $ref: '#/definitions/issueEvents'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -10454,7 +10461,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/subscribition'
+            $ref: '#/definitions/subscription'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -10493,7 +10500,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/subscribitionBody'
+            $ref: '#/definitions/subscriptionBody'
       responses:
         '200':
           description: OK
@@ -10511,7 +10518,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/subscribition'
+            $ref: '#/definitions/subscription'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -10793,7 +10800,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/repositories'
+            $ref: '#/definitions/repos'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -11311,6 +11318,7 @@ paths:
               type: integer
   '/teams/{teamId}/members/{username}':
     delete:
+      deprecated: true
       description: |
         The "Remove team member" API is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Remove team membership API instead. It allows you to remove both active and pending memberships.
 
@@ -11368,6 +11376,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
     get:
+      deprecated: true
       description: |
         The "Get team member" API is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Get team membership API instead. It allows you to get both active and pending memberships.
 
@@ -11438,6 +11447,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
     put:
+      deprecated: true
       description: |
         The API (described below) is deprecated and is scheduled for removal in the next major version of the API. We recommend using the Add team membership API instead. It allows you to invite new organization members to your teams.
 
@@ -13034,7 +13044,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/user-userId-subscribitions'
+            $ref: '#/definitions/repos'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -13054,6 +13064,7 @@ paths:
               type: integer
   '/user/subscriptions/{owner}/{repo}':
     delete:
+      deprecated: true
       description: Stop watching a repository
       parameters:
         - description: Name of the owner.
@@ -13104,6 +13115,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
     get:
+      deprecated: true
       description: Check if you are watching a repository.
       parameters:
         - description: Name of the owner.
@@ -13169,6 +13181,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
     put:
+      deprecated: true
       description: Watch a repository.
       parameters:
         - description: Name of the owner.
@@ -13269,7 +13282,7 @@ paths:
         Note: Pagination is powered exclusively by the since parameter. Use the Link
         header to get the URL for the next page of users.
       parameters:
-        - description: The integer ID of the last User that you've seen.
+        - description: The integer ID of the last user that you've seen.
           in: query
           name: since
           type: integer
@@ -13342,7 +13355,7 @@ paths:
             X-RateLimit-Reset:
               type: integer
           schema:
-            $ref: '#/definitions/users'
+            $ref: '#/definitions/user'
         '403':
           description: |
             API rate limit exceeded. See http://developer.github.com/v3/#rate-limiting
@@ -13876,6 +13889,91 @@ paths:
             X-RateLimit-Reset:
               type: integer
 definitions:
+  actor:
+    description: A user or organization
+    properties:
+      avatar_url:
+        type: string
+      bio:
+        type: string
+      blog:
+        description: The website URL from the profile page
+        type: string
+      collaborators:
+        type: integer
+      company:
+        type: string
+      created_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      disk_usage:
+        type: integer
+      email:
+        description: 'Note: The returned email is the user’s publicly visible email address (or null if the user has not specified a public email address in their profile).'
+        type: string
+      followers:
+        type: integer
+      followers_url:
+        type: string
+      following:
+        type: integer
+      following_url:
+        type: string
+      gists_url:
+        type: string
+      gravatar_id:
+        type: string
+      hireable:
+        type: boolean
+      html_url:
+        type: string
+      id:
+        type: integer
+      location:
+        type: string
+      login:
+        description: The account username
+        type: string
+      name:
+        description: The full account name
+        type: string
+      organizations_url:
+        type: string
+      owned_private_repos:
+        type: integer
+      plan:
+        properties:
+          collaborators:
+            type: integer
+          name:
+            type: string
+          private_repos:
+            type: integer
+          space:
+            type: integer
+        type: object
+      private_gists:
+        type: integer
+      public_gists:
+        type: integer
+      public_repos:
+        type: integer
+      starred_url:
+        type: string
+      subscriptions_url:
+        type: string
+      total_private_repos:
+        type: integer
+      type:
+        enum:
+          - User
+          - Organization
+      updated_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+        type: string
+      url:
+        type: string
+    type: object
   asset:
     properties:
       content_type:
@@ -13897,42 +13995,7 @@ definitions:
       updated_at:
         type: string
       uploader:
-        properties:
-          avatar_url:
-            type: string
-          events_url:
-            type: string
-          followers_url:
-            type: string
-          following_url:
-            type: string
-          gists_url:
-            type: string
-          gravatar_id:
-            type: string
-          html_url:
-            type: string
-          id:
-            type: number
-          login:
-            type: string
-          organizations_url:
-            type: string
-          received_events_url:
-            type: string
-          repos_url:
-            type: string
-          site_admin:
-            type: boolean
-          starred_url:
-            type: string
-          subscriptions_url:
-            type: string
-          type:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
       url:
         type: string
     type: object
@@ -13947,80 +14010,11 @@ definitions:
     type: object
   assets:
     items:
-      properties:
-        content_type:
-          type: string
-        created_at:
-          type: string
-        download_count:
-          type: number
-        id:
-          type: number
-        label:
-          type: string
-        name:
-          type: string
-        size:
-          type: number
-        state:
-          type: string
-        updated_at:
-          type: string
-        uploader:
-          properties:
-            avatar_url:
-              type: string
-            events_url:
-              type: string
-            followers_url:
-              type: string
-            following_url:
-              type: string
-            gists_url:
-              type: string
-            gravatar_id:
-              type: string
-            html_url:
-              type: string
-            id:
-              type: number
-            login:
-              type: string
-            organizations_url:
-              type: string
-            received_events_url:
-              type: string
-            repos_url:
-              type: string
-            site_admin:
-              type: boolean
-            starred_url:
-              type: string
-            subscriptions_url:
-              type: string
-            type:
-              type: string
-            url:
-              type: string
-          type: object
-        url:
-          type: string
-      type: object
+      $ref: '#/definitions/asset'
     type: array
   assignees:
     items:
-      properties:
-        avatar_url:
-          type: integer
-        gravatar_id:
-          type: string
-        id:
-          type: integer
-        login:
-          type: string
-        url:
-          type: string
-      type: object
+      $ref: '#/definitions/user'
     type: array
   blob:
     properties:
@@ -14052,18 +14046,7 @@ definitions:
       commit:
         properties:
           author:
-            properties:
-              avatar_url:
-                type: string
-              gravatar_id:
-                type: string
-              id:
-                type: integer
-              login:
-                type: string
-              url:
-                type: string
-            type: object
+            $ref: '#/definitions/user'
           commit:
             properties:
               author:
@@ -14098,18 +14081,7 @@ definitions:
                 type: string
             type: object
           committer:
-            properties:
-              avatar_url:
-                type: string
-              gravatar_id:
-                type: string
-              id:
-                type: integer
-              login:
-                type: string
-              url:
-                type: string
-            type: object
+            $ref: '#/definitions/user'
           parents:
             items:
               properties:
@@ -14145,21 +14117,6 @@ definitions:
     items:
       type: integer
     type: array
-  collaborators:
-    items:
-      properties:
-        avatar_url:
-          type: string
-        gravatar_id:
-          type: string
-        id:
-          type: integer
-        login:
-          type: string
-        url:
-          type: string
-      type: object
-    type: array
   comment:
     properties:
       body:
@@ -14185,35 +14142,13 @@ definitions:
         url:
           type: string
         user:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
       type: object
     type: array
   commit:
     properties:
       author:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
       commit:
         properties:
           author:
@@ -14249,18 +14184,7 @@ definitions:
             type: string
         type: object
       committer:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
       files:
         items:
           properties:
@@ -14318,30 +14242,7 @@ definitions:
           type: integer
       type: object
     type: array
-  commitBody:
-    properties:
-      body:
-        type: string
-      line:
-        description: Deprecated - Use position parameter instead.
-        type: string
-      number:
-        description: Line number in the file to comment on. Defaults to null.
-        type: string
-      path:
-        description: Relative path of the file to comment on.
-        type: string
-      position:
-        description: Line index in the diff to comment on.
-        type: integer
-      sha:
-        description: SHA of the commit to comment on.
-        type: string
-    required:
-      - sha
-      - body
-    type: object
-  commitComments:
+  commitComment:
     properties:
       body:
         type: string
@@ -14366,35 +14267,36 @@ definitions:
       url:
         type: string
       user:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
+    type: object
+  commitCommentBody:
+    properties:
+      body:
+        type: string
+      line:
+        description: Deprecated - Use position parameter instead.
+        type: string
+      number:
+        description: Line number in the file to comment on. Defaults to null.
+        type: string
+      path:
+        description: Relative path of the file to comment on.
+        type: string
+      position:
+        description: Line index in the diff to comment on.
+        type: integer
+      sha:
+        description: SHA of the commit to comment on.
+        type: string
+    required:
+      - sha
+      - body
     type: object
   commits:
     items:
       properties:
         author:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
         commit:
           properties:
             author:
@@ -14430,18 +14332,7 @@ definitions:
               type: string
           type: object
         committer:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
         parents:
           items:
             properties:
@@ -14464,42 +14355,7 @@ definitions:
       base_commit:
         properties:
           author:
-            properties:
-              avatar_url:
-                type: string
-              events_url:
-                type: string
-              followers_url:
-                type: string
-              following_url:
-                type: string
-              gists_url:
-                type: string
-              gravatar_id:
-                type: string
-              html_url:
-                type: string
-              id:
-                type: integer
-              login:
-                type: string
-              organizations_url:
-                type: string
-              received_events_url:
-                type: string
-              repos_url:
-                type: string
-              site_admin:
-                type: boolean
-              starred_url:
-                type: string
-              subscriptions_url:
-                type: string
-              type:
-                type: string
-              url:
-                type: string
-            type: object
+            $ref: '#/definitions/user'
           commit:
             properties:
               author:
@@ -14533,42 +14389,7 @@ definitions:
                 type: string
             type: object
           committer:
-            properties:
-              avatar_url:
-                type: string
-              events_url:
-                type: string
-              followers_url:
-                type: string
-              following_url:
-                type: string
-              gists_url:
-                type: string
-              gravatar_id:
-                type: string
-              html_url:
-                type: string
-              id:
-                type: integer
-              login:
-                type: string
-              organizations_url:
-                type: string
-              received_events_url:
-                type: string
-              repos_url:
-                type: string
-              site_admin:
-                type: boolean
-              starred_url:
-                type: string
-              subscriptions_url:
-                type: string
-              type:
-                type: string
-              url:
-                type: string
-            type: object
+            $ref: '#/definitions/user'
           parents:
             items:
               properties:
@@ -14589,42 +14410,7 @@ definitions:
         items:
           properties:
             author:
-              properties:
-                avatar_url:
-                  type: string
-                events_url:
-                  type: string
-                followers_url:
-                  type: string
-                following_url:
-                  type: string
-                gists_url:
-                  type: string
-                gravatar_id:
-                  type: string
-                html_url:
-                  type: string
-                id:
-                  type: integer
-                login:
-                  type: string
-                organizations_url:
-                  type: string
-                received_events_url:
-                  type: string
-                repos_url:
-                  type: string
-                site_admin:
-                  type: boolean
-                starred_url:
-                  type: string
-                subscriptions_url:
-                  type: string
-                type:
-                  type: string
-                url:
-                  type: string
-              type: object
+              $ref: '#/definitions/user'
             commit:
               properties:
                 author:
@@ -14658,42 +14444,7 @@ definitions:
                   type: string
               type: object
             committer:
-              properties:
-                avatar_url:
-                  type: string
-                events_url:
-                  type: string
-                followers_url:
-                  type: string
-                following_url:
-                  type: string
-                gists_url:
-                  type: string
-                gravatar_id:
-                  type: string
-                html_url:
-                  type: string
-                id:
-                  type: integer
-                login:
-                  type: string
-                organizations_url:
-                  type: string
-                received_events_url:
-                  type: string
-                repos_url:
-                  type: string
-                site_admin:
-                  type: boolean
-                starred_url:
-                  type: string
-                subscriptions_url:
-                  type: string
-                type:
-                  type: string
-                url:
-                  type: string
-              type: object
+              $ref: '#/definitions/user'
             parents:
               items:
                 properties:
@@ -14781,23 +14532,6 @@ definitions:
       url:
         type: string
     type: object
-  contributors:
-    items:
-      properties:
-        avatar_url:
-          type: string
-        contributions:
-          type: integer
-        gravatar_id:
-          type: string
-        id:
-          type: integer
-        login:
-          type: string
-        url:
-          type: string
-      type: object
-    type: array
   contributorsStats:
     items:
       properties:
@@ -14836,48 +14570,6 @@ definitions:
           type: array
       type: object
     type: array
-  createDownload:
-    properties:
-      accesskeyid:
-        type: string
-      acl:
-        type: string
-      bucket:
-        type: string
-      content_type:
-        type: string
-      description:
-        type: string
-      download_count:
-        type: integer
-      expirationdate:
-        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-        type: string
-      html_url:
-        type: string
-      id:
-        type: integer
-      mime_type:
-        type: string
-      name:
-        type: string
-      path:
-        type: string
-      policy:
-        type: string
-      prefix:
-        type: string
-      redirect:
-        type: boolean
-      s3_url:
-        type: string
-      signature:
-        type: string
-      size:
-        type: integer
-      url:
-        type: string
-    type: object
   createFile:
     properties:
       commit:
@@ -15054,42 +14746,7 @@ definitions:
       created_at:
         type: string
       creator:
-        properties:
-          avatar_url:
-            type: string
-          events_url:
-            type: string
-          followers_url:
-            type: string
-          following_url:
-            type: string
-          gists_url:
-            type: string
-          gravatar_id:
-            type: string
-          html_url:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          organizations_url:
-            type: string
-          received_events_url:
-            type: string
-          repos_url:
-            type: string
-          site_admin:
-            type: boolean
-          starred_url:
-            type: string
-          subscriptions_url:
-            type: string
-          type:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
       description:
         type: string
       id:
@@ -15111,42 +14768,7 @@ definitions:
         created_at:
           type: string
         creator:
-          properties:
-            avatar_url:
-              type: string
-            events_url:
-              type: string
-            followers_url:
-              type: string
-            following_url:
-              type: string
-            gists_url:
-              type: string
-            gravatar_id:
-              type: string
-            html_url:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            organizations_url:
-              type: string
-            received_events_url:
-              type: string
-            repos_url:
-              type: string
-            site_admin:
-              type: boolean
-            starred_url:
-              type: string
-            subscriptions_url:
-              type: string
-            type:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
         description:
           type: string
         id:
@@ -15172,22 +14794,7 @@ definitions:
       target_url:
         type: string
     type: object
-  downloadBody:
-    properties:
-      content_type:
-        type: string
-      description:
-        type: string
-      name:
-        type: string
-      size:
-        description: Size of file in bytes.
-        type: integer
-    required:
-      - name
-      - size
-    type: object
-  downloads:
+  download:
     properties:
       content_type:
         type: string
@@ -15206,6 +14813,10 @@ definitions:
       url:
         type: string
     type: object
+  downloads:
+    items:
+      $ref: '#/definitions/download'
+    type: array
   editTeam:
     properties:
       name:
@@ -15223,190 +14834,20 @@ definitions:
       type: string
     type: array
   emojis:
-    properties:
-      '100':
-        type: string
-      '1234':
-        type: string
-      '+1':
-        type: string
-      '-1':
-        type: string
-      8ball:
-        type: string
-      a:
-        type: string
-      ab:
-        type: string
+    additionalProperties:
+      description: A URL for an image representing this emoji
+      type: string
     type: object
   event:
     properties:
       actor:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
-      commit_id:
-        type: string
-      created_at:
-        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-        type: string
-      event:
-        type: string
-      issue:
-        properties:
-          assignee:
-            properties:
-              avatar_url:
-                type: string
-              gravatar_id:
-                type: string
-              id:
-                type: integer
-              login:
-                type: string
-              url:
-                type: string
-          body:
-            type: string
-          closed_at:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-            type: string
-          comments:
-            type: integer
-          created_at:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-            type: string
-          html_url:
-            type: string
-          labels:
-            items:
-              properties:
-                color:
-                  type: string
-                name:
-                  type: string
-                url:
-                  type: string
-              type: object
-            type: array
-          milestone:
-            properties:
-              closed_issues:
-                type: integer
-              created_at:
-                description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-                type: string
-              creator:
-                properties:
-                  avatar_url:
-                    type: string
-                  gravatar_id:
-                    type: string
-                  id:
-                    type: integer
-                  login:
-                    type: string
-                  url:
-                    type: string
-                type: object
-              description:
-                type: string
-              due_on:
-                description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-                type: string
-              number:
-                type: integer
-              open_issues:
-                type: integer
-              state:
-                enum:
-                  - open
-                  - closed
-              title:
-                type: string
-              url:
-                type: string
-            type: object
-          number:
-            type: integer
-          pull_request:
-            properties:
-              diff_url:
-                type: string
-              html_url:
-                type: string
-              patch_url:
-                type: string
-            type: object
-          state:
-            enum:
-              - open
-              - closed
-          title:
-            type: string
-          updated_at:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-            type: string
-          url:
-            type: string
-          user:
-            properties:
-              avatar_url:
-                type: string
-              gravatar_id:
-                type: string
-              id:
-                type: integer
-              login:
-                type: string
-              url:
-                type: string
-            type: object
-        type: object
-      url:
-        type: string
-    type: object
-  events:
-    properties:
-      actor:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/actor'
       created_at:
         type: object
       id:
         type: integer
       org:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/organization'
       payload:
         properties: {}
         type: object
@@ -15424,6 +14865,10 @@ definitions:
       type:
         type: string
     type: object
+  events:
+    items:
+      $ref: '#/definitions/event'
+    type: array
   feeds:
     properties:
       _links:
@@ -15483,155 +14928,13 @@ definitions:
       user_url:
         type: string
     type: object
-  fork:
-    properties:
-      clone_url:
-        type: string
-      created_at:
-        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-        type: string
-      description:
-        type: string
-      fork:
-        type: boolean
-      forks:
-        type: integer
-      forks_count:
-        type: integer
-      full_name:
-        type: string
-      git_url:
-        type: string
-      homepage:
-        type: string
-      html_url:
-        type: string
-      id:
-        type: integer
-      language:
-        type: string
-      master_branch:
-        type: string
-      mirror_url:
-        type: string
-      name:
-        type: string
-      open_issues:
-        type: integer
-      open_issues_count:
-        type: integer
-      owner:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
-      private:
-        type: boolean
-      pushed_at:
-        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-        type: string
-      size:
-        type: integer
-      ssh_url:
-        type: string
-      svn_url:
-        type: string
-      updated_at:
-        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-        type: string
-      url:
-        type: string
-      watchers:
-        type: integer
-      watchers_count:
-        type: integer
-    type: object
   forkBody:
     properties:
       organization:
         type: string
     type: object
   forks:
-    items:
-      properties:
-        clone_url:
-          type: string
-        created_at:
-          description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-          type: string
-        description:
-          type: string
-        fork:
-          type: boolean
-        forks:
-          type: integer
-        forks_count:
-          type: integer
-        full_name:
-          type: string
-        git_url:
-          type: string
-        homepage:
-          type: string
-        html_url:
-          type: string
-        id:
-          type: integer
-        language:
-          type: string
-        master_branch:
-          type: string
-        mirror_url:
-          type: string
-        name:
-          type: string
-        open_issues:
-          type: integer
-        open_issues_count:
-          type: integer
-        owner:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
-        private:
-          type: boolean
-        pushed_at:
-          description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-          type: string
-        size:
-          type: integer
-        ssh_url:
-          type: string
-        svn_url:
-          type: string
-        updated_at:
-          description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-          type: string
-        url:
-          type: string
-        watchers:
-          type: integer
-        watchers_count:
-          type: integer
-      type: object
-    type: array
+    $ref: '#/definitions/repos'
   gist:
     properties:
       comments:
@@ -15664,18 +14967,7 @@ definitions:
             url:
               type: string
             user:
-              properties:
-                avatar_url:
-                  type: string
-                gravatar_id:
-                  type: string
-                id:
-                  type: integer
-                login:
-                  type: string
-                url:
-                  type: string
-              type: object
+              $ref: '#/definitions/user'
           type: object
         type: array
       git_pull_url:
@@ -15700,18 +14992,7 @@ definitions:
             url:
               type: string
             user:
-              properties:
-                avatar_url:
-                  type: string
-                gravatar_id:
-                  type: string
-                id:
-                  type: integer
-                login:
-                  type: string
-                url:
-                  type: string
-              type: object
+              $ref: '#/definitions/user'
             version:
               type: string
           type: object
@@ -15725,18 +15006,7 @@ definitions:
       url:
         type: string
       user:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
     type: object
   gists:
     items:
@@ -15774,18 +15044,7 @@ definitions:
         url:
           type: string
         user:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
       type: object
     type: array
   gitCommit:
@@ -15839,36 +15098,6 @@ definitions:
       url:
         type: string
     type: object
-  headBranchBody:
-    properties:
-      force:
-        description: 'Boolean indicating whether to force the update or to make sure the update is a fast-forward update. The default is false, so leaving this out or setting it to false will make sure you’re not overwriting work.'
-        type: boolean
-      sha:
-        description: String of the SHA1 value to set this reference to.
-        type: string
-    required:
-      - sha
-      - force
-    type: object
-  heads:
-    items:
-      properties:
-        commit:
-          properties:
-            sha:
-              type: string
-            url:
-              type: string
-          type: object
-        name:
-          type: string
-        tarball_url:
-          type: string
-        zipball_url:
-          type: string
-      type: object
-    type: array
   hook:
     items:
       properties:
@@ -15938,37 +15167,108 @@ definitions:
       title:
         type: string
     type: object
-  issueBody:
+  issueEvent:
     properties:
-      assignee:
+      actor:
+        $ref: '#/definitions/actor'
+      commit_id:
         type: string
-      body:
+      created_at:
+        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
         type: string
-      labels:
-        items:
-          type: string
-        type: array
-      milestone:
-        type: number
-      title:
+      event:
+        type: string
+      issue:
+        properties:
+          assignee:
+            $ref: '#/definitions/user'
+          body:
+            type: string
+          closed_at:
+            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+            type: string
+          comments:
+            type: integer
+          created_at:
+            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+            type: string
+          html_url:
+            type: string
+          labels:
+            items:
+              properties:
+                color:
+                  type: string
+                name:
+                  type: string
+                url:
+                  type: string
+              type: object
+            type: array
+          milestone:
+            properties:
+              closed_issues:
+                type: integer
+              created_at:
+                description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+                type: string
+              creator:
+                $ref: '#/definitions/user'
+              description:
+                type: string
+              due_on:
+                description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+                type: string
+              number:
+                type: integer
+              open_issues:
+                type: integer
+              state:
+                enum:
+                  - open
+                  - closed
+              title:
+                type: string
+              url:
+                type: string
+            type: object
+          number:
+            type: integer
+          pull_request:
+            properties:
+              diff_url:
+                type: string
+              html_url:
+                type: string
+              patch_url:
+                type: string
+            type: object
+          state:
+            enum:
+              - open
+              - closed
+          title:
+            type: string
+          updated_at:
+            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+            type: string
+          url:
+            type: string
+          user:
+            $ref: '#/definitions/user'
+        type: object
+      url:
         type: string
     type: object
+  issueEvents:
+    items:
+      $ref: '#/definitions/issueEvent'
+    type: array
   issues:
     items:
       properties:
         assignee:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
         body:
           type: string
         closed_at:
@@ -16000,18 +15300,7 @@ definitions:
               description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
               type: string
             creator:
-              properties:
-                avatar_url:
-                  type: string
-                gravatar_id:
-                  type: string
-                id:
-                  type: integer
-                login:
-                  type: string
-                url:
-                  type: string
-              type: object
+              $ref: '#/definitions/user'
             description:
               type: string
             due_on:
@@ -16053,18 +15342,7 @@ definitions:
         url:
           type: string
         user:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
       type: object
     type: array
   issuesComment:
@@ -16084,18 +15362,7 @@ definitions:
       url:
         type: string
       user:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
     type: object
   issuesComments:
     items:
@@ -16137,38 +15404,9 @@ definitions:
         url:
           type: string
         user:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
       type: object
     type: array
-  key:
-    properties:
-      id:
-        type: integer
-      key:
-        type: string
-      title:
-        type: string
-      url:
-        type: string
-    type: object
-  keyBody:
-    properties:
-      key:
-        type: string
-      title:
-        type: string
-    type: object
   keys:
     items:
       properties:
@@ -16206,10 +15444,6 @@ definitions:
           type: string
       type: object
     type: array
-  labelsBody:
-    items:
-      type: string
-    type: array
   languages:
     additionalProperties:
       type: integer
@@ -16223,21 +15457,6 @@ definitions:
       text:
         type: string
     type: object
-  members:
-    items:
-      properties:
-        avatar_url:
-          type: string
-        gravatar_id:
-          type: string
-        id:
-          type: integer
-        login:
-          type: string
-        url:
-          type: string
-      type: object
-    type: array
   merge:
     properties:
       merged:
@@ -16270,40 +15489,7 @@ definitions:
   mergesSuccessful:
     properties:
       author:
-        properties:
-          avatar_url:
-            type: string
-          events_url:
-            type: string
-          followers_url:
-            type: string
-          following_url:
-            type: string
-          gists_url:
-            type: string
-          gravatar_id:
-            type: string
-          html_url:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          organizations_url:
-            type: string
-          received_events_url:
-            type: string
-          repos_url:
-            type: string
-          starred_url:
-            type: string
-          subscriptions_url:
-            type: string
-          type:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
       comments_url:
         type: string
       commit:
@@ -16341,40 +15527,7 @@ definitions:
             type: string
         type: object
       committer:
-        properties:
-          avatar_url:
-            type: string
-          events_url:
-            type: string
-          followers_url:
-            type: string
-          following_url:
-            type: string
-          gists_url:
-            type: string
-          gravatar_id:
-            type: string
-          html_url:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          organizations_url:
-            type: string
-          received_events_url:
-            type: string
-          repos_url:
-            type: string
-          starred_url:
-            type: string
-          subscriptions_url:
-            type: string
-          type:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
       merged:
         type: boolean
       message:
@@ -16414,18 +15567,7 @@ definitions:
         description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
         type: string
       creator:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
       description:
         type: string
       due_on:
@@ -16442,17 +15584,6 @@ definitions:
       title:
         type: string
       url:
-        type: string
-    type: object
-  milestoneBody:
-    properties:
-      description:
-        type: string
-      due_on:
-        type: string
-      state:
-        type: string
-      title:
         type: string
     type: object
   milestoneUpdate:
@@ -16494,18 +15625,7 @@ definitions:
           name:
             type: string
           owner:
-            properties:
-              avatar_url:
-                type: string
-              gravatar_id:
-                type: string
-              id:
-                type: integer
-              login:
-                type: string
-              url:
-                type: string
-            type: object
+            $ref: '#/definitions/actor'
           private:
             type: boolean
           url:
@@ -16529,47 +15649,6 @@ definitions:
       url:
         type: string
     type: object
-  orgMembers:
-    items:
-      properties:
-        avatar_url:
-          type: string
-        gravatar_id:
-          type: string
-        id:
-          type: integer
-        login:
-          type: string
-        url:
-          type: string
-      type: object
-    type: array
-  orgPublicMembers:
-    items:
-      properties:
-        avatar_url:
-          type: string
-        gravatar_id:
-          type: string
-        id:
-          type: integer
-        login:
-          type: string
-        url:
-          type: string
-      type: object
-    type: array
-  orgTeams:
-    items:
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        url:
-          type: string
-      type: object
-    type: array
   orgTeamsPost:
     properties:
       name:
@@ -16587,40 +15666,9 @@ definitions:
       - name
     type: object
   organization:
-    properties:
-      avatar_url:
-        type: string
-      blog:
-        type: string
-      company:
-        type: string
-      created_at:
-        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-        type: string
-      email:
-        type: string
-      followers:
-        type: integer
-      following:
-        type: integer
-      html_url:
-        type: string
-      id:
-        type: integer
-      location:
-        type: string
-      login:
-        type: string
-      name:
-        type: string
-      public_gists:
-        type: integer
-      public_repos:
-        type: integer
-      type:
-        type: string
-      url:
-        type: string
+    allOf:
+      - $ref: '#/definitions/actor'
+      - description: A GitHub organization
     type: object
   organizationAsTeamMember:
     properties:
@@ -16689,13 +15737,6 @@ definitions:
         type: string
       name:
         type: string
-    type: object
-  postComment:
-    properties:
-      body:
-        type: string
-    required:
-      - body
     type: object
   postGist:
     properties:
@@ -16778,73 +15819,7 @@ definitions:
           ref:
             type: string
           repo:
-            properties:
-              clone_url:
-                type: string
-              created_at:
-                type: string
-              description:
-                type: string
-              fork:
-                type: boolean
-              forks:
-                type: integer
-              forks_count:
-                type: integer
-              full_name:
-                type: string
-              git_url:
-                type: string
-              homepage:
-                type: string
-              html_url:
-                type: string
-              id:
-                type: integer
-              language:
-                type: 'null'
-              master_branch:
-                type: string
-              mirror_url:
-                type: string
-              name:
-                type: string
-              open_issues:
-                type: integer
-              open_issues_count:
-                type: integer
-              owner:
-                properties:
-                  avatar_url:
-                    type: string
-                  gravatar_id:
-                    type: string
-                  id:
-                    type: integer
-                  login:
-                    type: string
-                  url:
-                    type: string
-                type: object
-              private:
-                type: boolean
-              pushed_at:
-                type: string
-              size:
-                type: integer
-              ssh_url:
-                type: string
-              svn_url:
-                type: string
-              updated_at:
-                type: string
-              url:
-                type: string
-              watchers:
-                type: integer
-              watchers_count:
-                type: integer
-            type: object
+            $ref: '#/definitions/repo'
           sha:
             type: string
           user:
@@ -16884,73 +15859,7 @@ definitions:
           ref:
             type: string
           repo:
-            properties:
-              clone_url:
-                type: string
-              created_at:
-                type: string
-              description:
-                type: string
-              fork:
-                type: boolean
-              forks:
-                type: integer
-              forks_count:
-                type: integer
-              full_name:
-                type: string
-              git_url:
-                type: string
-              homepage:
-                type: string
-              html_url:
-                type: string
-              id:
-                type: integer
-              language:
-                type: 'null'
-              master_branch:
-                type: string
-              mirror_url:
-                type: string
-              name:
-                type: string
-              open_issues:
-                type: integer
-              open_issues_count:
-                type: integer
-              owner:
-                properties:
-                  avatar_url:
-                    type: string
-                  gravatar_id:
-                    type: string
-                  id:
-                    type: integer
-                  login:
-                    type: string
-                  url:
-                    type: string
-                type: object
-              private:
-                type: boolean
-              pushed_at:
-                type: string
-              size:
-                type: integer
-              ssh_url:
-                type: string
-              svn_url:
-                type: string
-              updated_at:
-                type: string
-              url:
-                type: string
-              watchers:
-                type: integer
-              watchers_count:
-                type: integer
-            type: object
+            $ref: '#/definitions/repo'
           sha:
             type: string
           user:
@@ -17060,76 +15969,7 @@ definitions:
             ref:
               type: string
             repo:
-              properties:
-                clone_url:
-                  type: string
-                created_at:
-                  description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-                  type: string
-                description:
-                  type: string
-                fork:
-                  type: boolean
-                forks:
-                  type: integer
-                forks_count:
-                  type: integer
-                full_name:
-                  type: string
-                git_url:
-                  type: string
-                homepage:
-                  type: string
-                html_url:
-                  type: string
-                id:
-                  type: integer
-                language:
-                  type: string
-                master_branch:
-                  type: string
-                mirror_url:
-                  type: string
-                name:
-                  type: string
-                open_issues:
-                  type: integer
-                open_issues_count:
-                  type: integer
-                owner:
-                  properties:
-                    avatar_url:
-                      type: string
-                    gravatar_id:
-                      type: string
-                    id:
-                      type: integer
-                    login:
-                      type: string
-                    url:
-                      type: string
-                  type: object
-                private:
-                  type: boolean
-                pushed_at:
-                  description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-                  type: string
-                size:
-                  type: integer
-                ssh_url:
-                  type: string
-                svn_url:
-                  type: string
-                updated_at:
-                  description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-                  type: string
-                url:
-                  type: string
-                watchers:
-                  type: integer
-                watchers_count:
-                  type: integer
-              type: object
+              $ref: '#/definitions/repo'
             sha:
               type: string
             user:
@@ -17163,76 +16003,7 @@ definitions:
             ref:
               type: string
             repo:
-              properties:
-                clone_url:
-                  type: string
-                created_at:
-                  description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-                  type: string
-                description:
-                  type: string
-                fork:
-                  type: boolean
-                forks:
-                  type: integer
-                forks_count:
-                  type: integer
-                full_name:
-                  type: string
-                git_url:
-                  type: string
-                homepage:
-                  type: string
-                html_url:
-                  type: string
-                id:
-                  type: integer
-                language:
-                  type: string
-                master_branch:
-                  type: string
-                mirror_url:
-                  type: string
-                name:
-                  type: string
-                open_issues:
-                  type: integer
-                open_issues_count:
-                  type: integer
-                owner:
-                  properties:
-                    avatar_url:
-                      type: string
-                    gravatar_id:
-                      type: string
-                    id:
-                      type: integer
-                    login:
-                      type: string
-                    url:
-                      type: string
-                  type: object
-                private:
-                  type: boolean
-                pushed_at:
-                  description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-                  type: string
-                size:
-                  type: integer
-                ssh_url:
-                  type: string
-                svn_url:
-                  type: string
-                updated_at:
-                  description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-                  type: string
-                url:
-                  type: string
-                watchers:
-                  type: integer
-                watchers_count:
-                  type: integer
-              type: object
+              $ref: '#/definitions/repo'
             sha:
               type: string
             user:
@@ -17414,10 +16185,6 @@ definitions:
       title:
         type: string
     type: object
-  punchCardStats:
-    items:
-      type: integer
-    type: array
   putSubscription:
     properties:
       created_at:
@@ -17443,38 +16210,6 @@ definitions:
             type: integer
           reset:
             type: integer
-    type: object
-  readme:
-    properties:
-      _links:
-        properties:
-          git:
-            type: string
-          html:
-            type: string
-          self:
-            type: string
-        type: object
-      content:
-        type: string
-      encoding:
-        type: string
-      git_url:
-        type: string
-      html_url:
-        type: string
-      name:
-        type: string
-      path:
-        type: string
-      sha:
-        type: string
-      size:
-        type: integer
-      type:
-        type: string
-      url:
-        type: string
     type: object
   ref:
     items:
@@ -17510,22 +16245,6 @@ definitions:
           type: string
       type: object
     type: array
-  refBody:
-    properties:
-      object:
-        properties:
-          sha:
-            type: string
-          type:
-            type: string
-          url:
-            type: string
-        type: object
-      ref:
-        type: string
-      url:
-        type: string
-    type: object
   refStatus:
     items:
       properties:
@@ -17611,42 +16330,7 @@ definitions:
             updated_at:
               type: string
             uploader:
-              properties:
-                avatar_url:
-                  type: string
-                events_url:
-                  type: string
-                followers_url:
-                  type: string
-                following_url:
-                  type: string
-                gists_url:
-                  type: string
-                gravatar_id:
-                  type: string
-                html_url:
-                  type: string
-                id:
-                  type: integer
-                login:
-                  type: string
-                organizations_url:
-                  type: string
-                received_events_url:
-                  type: string
-                repos_url:
-                  type: string
-                site_admin:
-                  type: boolean
-                starred_url:
-                  type: string
-                subscriptions_url:
-                  type: string
-                type:
-                  type: string
-                url:
-                  type: string
-              type: object
+              $ref: '#/definitions/user'
             url:
               type: string
           type: object
@@ -17654,42 +16338,7 @@ definitions:
       assets_url:
         type: string
       author:
-        properties:
-          avatar_url:
-            type: string
-          events_url:
-            type: string
-          followers_url:
-            type: string
-          following_url:
-            type: string
-          gists_url:
-            type: string
-          gravatar_id:
-            type: string
-          html_url:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          organizations_url:
-            type: string
-          received_events_url:
-            type: string
-          repos_url:
-            type: string
-          site_admin:
-            type: boolean
-          starred_url:
-            type: string
-          subscriptions_url:
-            type: string
-          type:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
       body:
         type: string
       created_at:
@@ -17759,42 +16408,7 @@ definitions:
               updated_at:
                 type: string
               uploader:
-                properties:
-                  avatar_url:
-                    type: string
-                  events_url:
-                    type: string
-                  followers_url:
-                    type: string
-                  following_url:
-                    type: string
-                  gists_url:
-                    type: string
-                  gravatar_id:
-                    type: string
-                  html_url:
-                    type: string
-                  id:
-                    type: integer
-                  login:
-                    type: string
-                  organizations_url:
-                    type: string
-                  received_events_url:
-                    type: string
-                  repos_url:
-                    type: string
-                  site_admin:
-                    type: boolean
-                  starred_url:
-                    type: string
-                  subscriptions_url:
-                    type: string
-                  type:
-                    type: string
-                  url:
-                    type: string
-                type: object
+                $ref: '#/definitions/user'
               url:
                 type: string
             type: object
@@ -17802,42 +16416,7 @@ definitions:
         assets_url:
           type: string
         author:
-          properties:
-            avatar_url:
-              type: string
-            events_url:
-              type: string
-            followers_url:
-              type: string
-            following_url:
-              type: string
-            gists_url:
-              type: string
-            gravatar_id:
-              type: string
-            html_url:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            organizations_url:
-              type: string
-            received_events_url:
-              type: string
-            repos_url:
-              type: string
-            site_admin:
-              type: boolean
-            starred_url:
-              type: string
-            subscriptions_url:
-              type: string
-            type:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
         body:
           type: string
         created_at:
@@ -17912,105 +16491,13 @@ definitions:
       open_issues_count:
         type: integer
       organization:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          type:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/organization'
       owner:
-        properties:
-          avatar_url:
-            type: string
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          login:
-            type: string
-          url:
-            type: string
-        type: object
+        $ref: '#/definitions/actor'
       parent:
-        description: Is present when the repo is a fork. Parent is the repo this repo was forked from.
-        properties:
-          clone_url:
-            type: string
-          created_at:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-            type: string
-          description:
-            type: string
-          fork:
-            type: boolean
-          forks:
-            type: integer
-          forks_count:
-            type: integer
-          full_name:
-            type: string
-          git_url:
-            type: string
-          homepage:
-            type: string
-          html_url:
-            type: string
-          id:
-            type: integer
-          language:
-            type: string
-          master_branch:
-            type: string
-          mirror_url:
-            type: string
-          name:
-            type: string
-          open_issues:
-            type: integer
-          open_issues_count:
-            type: integer
-          owner:
-            properties:
-              avatar_url:
-                type: string
-              gravatar_id:
-                type: string
-              id:
-                type: integer
-              login:
-                type: string
-              url:
-                type: string
-            type: object
-          private:
-            type: boolean
-          pushed_at:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-            type: string
-          size:
-            type: integer
-          ssh_url:
-            type: string
-          svn_url:
-            type: string
-          updated_at:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-            type: string
-          url:
-            type: string
-          watchers:
-            type: integer
-          watchers_count:
-            type: integer
-        type: object
+        allOf:
+          - $ref: '#/definitions/repo'
+          - description: Is present when the repo is a fork. Parent is the repo this repo was forked from.
       private:
         type: boolean
       pushed_at:
@@ -18019,77 +16506,9 @@ definitions:
       size:
         type: integer
       source:
-        description: Is present when the repo is a fork. Source is the ultimate source for the network.
-        properties:
-          clone_url:
-            type: string
-          created_at:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-            type: string
-          description:
-            type: string
-          fork:
-            type: boolean
-          forks:
-            type: integer
-          forks_count:
-            type: integer
-          full_name:
-            type: string
-          git_url:
-            type: string
-          homepage:
-            type: string
-          html_url:
-            type: string
-          id:
-            type: integer
-          language:
-            type: string
-          master_branch:
-            type: string
-          mirror_url:
-            type: string
-          name:
-            type: string
-          open_issues:
-            type: integer
-          open_issues_count:
-            type: integer
-          owner:
-            properties:
-              avatar_url:
-                type: string
-              gravatar_id:
-                type: string
-              id:
-                type: integer
-              login:
-                type: string
-              url:
-                type: string
-            type: object
-          private:
-            type: boolean
-          pushed_at:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-            type: string
-          size:
-            type: integer
-          ssh_url:
-            type: string
-          svn_url:
-            type: string
-          updated_at:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-            type: string
-          url:
-            type: string
-          watchers:
-            type: integer
-          watchers_count:
-            type: integer
-        type: object
+        allOf:
+          - $ref: '#/definitions/repo'
+          - description: Is present when the repo is a fork. Source is the ultimate source for the network.
       ssh_url:
         type: string
       svn_url:
@@ -18110,42 +16529,7 @@ definitions:
         created_at:
           type: string
         creator:
-          properties:
-            avatar_url:
-              type: string
-            events_url:
-              type: string
-            followers_url:
-              type: string
-            following_url:
-              type: string
-            gists_url:
-              type: string
-            gravatar_id:
-              type: string
-            html_url:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            organizations_url:
-              type: string
-            received_events_url:
-              type: string
-            repos_url:
-              type: string
-            site_admin:
-              type: boolean
-            starred_url:
-              type: string
-            subscriptions_url:
-              type: string
-            type:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
         description:
           type: string
         id:
@@ -18188,18 +16572,7 @@ definitions:
         url:
           type: string
         user:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/user'
       type: object
     type: array
   repoCommit:
@@ -18290,109 +16663,7 @@ definitions:
     type: object
   repos:
     items:
-      properties:
-        clone_url:
-          type: string
-        created_at:
-          description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-          type: string
-        description:
-          type: string
-        fork:
-          type: boolean
-        forks:
-          type: integer
-        forks_count:
-          type: integer
-        full_name:
-          type: string
-        git_url:
-          type: string
-        homepage:
-          type: string
-        html_url:
-          type: string
-        id:
-          type: integer
-        language:
-          type: string
-        master_branch:
-          type: string
-        mirror_url:
-          type: string
-        name:
-          type: string
-        open_issues:
-          type: integer
-        open_issues_count:
-          type: integer
-        owner:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
-        private:
-          type: boolean
-        pushed_at:
-          description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-          type: string
-        size:
-          type: integer
-        ssh_url:
-          type: string
-        svn_url:
-          type: string
-        updated_at:
-          description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-          type: string
-        url:
-          type: string
-        watchers:
-          type: integer
-        watchers_count:
-          type: integer
-    type: array
-  repositories:
-    items:
-      properties:
-        description:
-          type: string
-        fork:
-          type: boolean
-        full_name:
-          type: string
-        html_url:
-          type: string
-        id:
-          type: integer
-        name:
-          type: string
-        owner:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
-        private:
-          type: boolean
-        url:
-          type: string
-      type: object
+      $ref: '#/definitions/repo'
     type: array
   search-code:
     properties:
@@ -18474,40 +16745,7 @@ definitions:
                 notifications_url:
                   type: string
                 owner:
-                  properties:
-                    avatar_url:
-                      type: string
-                    events_url:
-                      type: string
-                    followers_url:
-                      type: string
-                    following_url:
-                      type: string
-                    gists_url:
-                      type: string
-                    gravatar_id:
-                      type: string
-                    html_url:
-                      type: string
-                    id:
-                      type: integer
-                    login:
-                      type: string
-                    organizations_url:
-                      type: string
-                    received_events_url:
-                      type: string
-                    repos_url:
-                      type: string
-                    starred_url:
-                      type: string
-                    subscriptions_url:
-                      type: string
-                    type:
-                      type: string
-                    url:
-                      type: string
-                  type: object
+                  $ref: '#/definitions/actor'
                 private:
                   type: boolean
                 pulls_url:
@@ -18600,40 +16838,7 @@ definitions:
             url:
               type: string
             user:
-              properties:
-                avatar_url:
-                  type: string
-                events_url:
-                  type: string
-                followers_url:
-                  type: string
-                following_url:
-                  type: string
-                gists_url:
-                  type: string
-                gravatar_id:
-                  type: string
-                html_url:
-                  type: string
-                id:
-                  type: integer
-                login:
-                  type: string
-                organizations_url:
-                  type: string
-                received_events_url:
-                  type: string
-                repos_url:
-                  type: string
-                starred_url:
-                  type: string
-                subscriptions_url:
-                  type: string
-                type:
-                  type: string
-                url:
-                  type: string
-              type: object
+              $ref: '#/definitions/user'
           type: object
         type: array
       total_count:
@@ -18679,74 +16884,7 @@ definitions:
     properties:
       items:
         items:
-          properties:
-            created_at:
-              description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-              type: string
-            default_branch:
-              type: string
-            description:
-              type: string
-            fork:
-              type: boolean
-            forks:
-              type: integer
-            forks_count:
-              type: integer
-            full_name:
-              type: string
-            homepage:
-              type: string
-            html_url:
-              type: string
-            id:
-              type: integer
-            language:
-              type: string
-            master_branch:
-              type: string
-            name:
-              type: string
-            open_issues:
-              type: integer
-            open_issues_count:
-              type: integer
-            owner:
-              properties:
-                avatar_url:
-                  type: string
-                gravatar_id:
-                  type: string
-                id:
-                  type: integer
-                login:
-                  type: string
-                received_events_url:
-                  type: string
-                type:
-                  type: string
-                url:
-                  type: string
-              type: object
-            private:
-              type: boolean
-            pushed_at:
-              description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-              type: string
-            score:
-              type: number
-            size:
-              type: integer
-            updated_at:
-              description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-              type: string
-            url:
-              type: string
-            watchers:
-              type: integer
-            watchers_count:
-              type: integer
-          type: object
+          $ref: '#/definitions/repo'
         type: array
       total_count:
         type: integer
@@ -18755,184 +16893,27 @@ definitions:
     properties:
       repositories:
         items:
-          properties:
-            created:
-              type: string
-            created_at:
-              type: string
-            description:
-              type: string
-            followers:
-              type: integer
-            fork:
-              type: boolean
-            forks:
-              type: integer
-            has_downloads:
-              type: boolean
-            has_issues:
-              type: boolean
-            has_wiki:
-              type: boolean
-            homepage:
-              type: string
-            language:
-              type: string
-            name:
-              type: string
-            open_issues:
-              type: integer
-            owner:
-              type: string
-            private:
-              type: boolean
-            pushed:
-              type: string
-            pushed_at:
-              type: string
-            score:
-              type: number
-            size:
-              type: integer
-            type:
-              type: string
-            url:
-              type: string
-            username:
-              type: string
-            watchers:
-              type: integer
-          type: object
+          $ref: '#/definitions/repo'
         type: array
     type: object
   search-user-by-email:
     properties:
       user:
-        properties:
-          blog:
-            type: string
-          company:
-            type: string
-          created:
-            type: string
-          created_at:
-            type: string
-          email:
-            type: string
-          followers_count:
-            type: integer
-          following_count:
-            type: integer
-          gravatar_id:
-            type: string
-          id:
-            type: integer
-          location:
-            type: string
-          login:
-            type: string
-          name:
-            type: string
-          public_gist_count:
-            type: integer
-          public_repo_count:
-            type: integer
-          type:
-            type: string
-        type: object
+        $ref: '#/definitions/user'
     type: object
   search-users:
     properties:
       items:
-        items:
-          properties:
-            avatar_url:
-              type: string
-            followers_url:
-              type: string
-            gravatar_id:
-              type: string
-            html_url:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            organizations_url:
-              type: string
-            received_events_url:
-              type: string
-            repos_url:
-              type: string
-            score:
-              type: number
-            subscriptions_url:
-              type: string
-            type:
-              type: string
-            url:
-              type: string
-          type: object
-        type: array
+        $ref: '#/definitions/users'
       total_count:
         type: integer
     type: object
   search-users-by-keyword:
     properties:
       users:
-        items:
-          properties:
-            created:
-              type: string
-            created_at:
-              type: string
-            followers:
-              type: integer
-            followers_count:
-              type: integer
-            fullname:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: string
-            language:
-              type: string
-            location:
-              type: string
-            login:
-              type: string
-            name:
-              type: string
-            public_repo_count:
-              type: integer
-            repos:
-              type: integer
-            score:
-              type: number
-            type:
-              type: string
-            username:
-              type: string
-          type: object
-        type: array
+        $ref: '#/definitions/users'
     type: object
-  stargazers:
-    items:
-      properties:
-        avatar_url:
-          type: string
-        gravatar_id:
-          type: string
-        id:
-          type: integer
-        login:
-          type: string
-        url:
-          type: string
-      type: object
-    type: array
-  subscribition:
+  subscription:
     properties:
       created_at:
         description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
@@ -18945,62 +16926,57 @@ definitions:
         type: string
       subscribed:
         type: boolean
-      url:
-        type: string
-    type: object
-  subscribitionBody:
-    properties:
-      ignored:
-        type: boolean
-      subscribed:
-        type: boolean
-    type: object
-  subscription:
-    properties:
-      created_at:
-        type: string
-      ignored:
-        type: boolean
-      reason:
-        type: boolean
-      subscribed:
-        type: boolean
       thread_url:
         type: string
       url:
         type: string
     type: object
+  subscriptionBody:
+    properties:
+      ignored:
+        type: boolean
+      subscribed:
+        type: boolean
+    type: object
   tag:
     properties:
       message:
+        description: String of the tag message.
         type: string
       object:
         properties:
           sha:
             type: string
           type:
-            type: string
+            description: String of the type of the tagged object. Normally this is a commit but it can also be a tree or a blob.
+            enum:
+              - commit
+              - tree
+              - blob
           url:
             type: string
         type: object
       sha:
         type: string
       tag:
+        description: 'The tag''s name. This is typically a version (e.g., "v0.0.1").'
         type: string
       tagger:
         properties:
           date:
-            description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
+            description: 'Timestamp of when this object was tagged, in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
             type: string
           email:
+            description: String of the email of the author of the tag.
             type: string
           name:
+            description: String of the name of the author of the tag.
             type: string
         type: object
       url:
         type: string
     type: object
-  tags:
+  tagBody:
     properties:
       message:
         description: String of the tag message.
@@ -19009,11 +16985,12 @@ definitions:
         description: String of the SHA of the git object this is tagging.
         type: string
       tag:
+        description: 'The tag''s name. This is typically a version (e.g., "v0.0.1").'
         type: string
       tagger:
         properties:
           date:
-            description: Timestamp of when this object was tagged.
+            description: 'Timestamp of when this object was tagged, in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
             type: string
           email:
             description: String of the email of the author of the tag.
@@ -19024,7 +17001,10 @@ definitions:
         type: object
       type:
         description: String of the type of the object we’re tagging. Normally this is a commit but it can also be a tree or a blob.
-        type: string
+        enum:
+          - commit
+          - tree
+          - blob
     required:
       - tag
       - message
@@ -19032,6 +17012,10 @@ definitions:
       - type
       - tagger
     type: object
+  tags:
+    items:
+      $ref: '#/definitions/tag'
+    type: array
   team:
     properties:
       id:
@@ -19055,75 +17039,7 @@ definitions:
         type: string
     type: object
   teamRepos:
-    items:
-      properties:
-        clone_url:
-          type: string
-        created_at:
-          type: string
-        description:
-          type: string
-        fork:
-          type: boolean
-        forks:
-          type: integer
-        forks_count:
-          type: integer
-        full_name:
-          type: string
-        git_url:
-          type: string
-        homepage:
-          type: string
-        html_url:
-          type: string
-        id:
-          type: integer
-        language:
-          type: 'null'
-        master_branch:
-          type: string
-        mirror_url:
-          type: string
-        name:
-          type: string
-        open_issues:
-          type: integer
-        open_issues_count:
-          type: integer
-        owner:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
-        private:
-          type: boolean
-        pushed_at:
-          type: string
-        size:
-          type: integer
-        ssh_url:
-          type: string
-        svn_url:
-          type: string
-        updated_at:
-          type: string
-        url:
-          type: string
-        watchers:
-          type: integer
-        watchers_count:
-          type: integer
-      type: object
-    type: array
+    $ref: '#/definitions/repos'
   teams:
     items:
       properties:
@@ -19171,14 +17087,26 @@ definitions:
         items:
           properties:
             mode:
+              description: 'One of 100644 for file (blob), 100755 for executable (blob), 040000 for subdirectory (tree), 160000 for submodule (commit) or 120000 for a blob that specifies the path of a symlink.'
+              enum:
+                - '100644'
+                - '100755'
+                - '040000'
+                - '160000'
+                - '120000'
               type: string
             path:
               type: string
             sha:
+              description: SHA1 checksum ID of the object in the tree.
               type: string
             size:
               type: integer
             type:
+              enum:
+                - blob
+                - tree
+                - commit
               type: string
             url:
               type: string
@@ -19196,106 +17124,19 @@ definitions:
         type: string
       tree:
         items:
-          properties:
-            mode:
-              description: 'One of 100644 for file (blob), 100755 for executable (blob), 040000 for subdirectory (tree), 160000 for submodule (commit) or 120000 for a blob that specifies the path of a symlink.'
-              enum:
-                - '100644'
-                - '100755'
-                - '040000'
-                - '160000'
-                - '120000'
-              type: string
-            path:
-              type: string
-            sha:
-              description: SHA1 checksum ID of the object in the tree.
-              type: string
-            type:
-              enum:
-                - blob
-                - tree
-                - commit
-              type: string
-            url:
-              type: string
-          type: object
+          $ref: '#/definitions/tree'
         type: array
       url:
         type: string
     type: object
   user:
-    properties:
-      avatar_url:
-        type: string
-      bio:
-        type: string
-      blog:
-        type: string
-      collaborators:
-        type: integer
-      company:
-        type: string
-      created_at:
-        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-        type: string
-      disk_usage:
-        type: integer
-      email:
-        type: string
-      followers:
-        type: integer
-      following:
-        type: integer
-      gravatar_id:
-        type: string
-      hireable:
-        type: boolean
-      html_url:
-        type: string
-      id:
-        type: integer
-      location:
-        type: string
-      login:
-        type: string
-      name:
-        type: string
-      owned_private_repos:
-        type: integer
-      plan:
-        properties:
-          collaborators:
-            type: integer
-          name:
-            type: string
-          private_repos:
-            type: integer
-          space:
-            type: integer
-        type: object
-      private_gists:
-        type: integer
-      public_gists:
-        type: integer
-      public_repos:
-        type: integer
-      total_private_repos:
-        type: integer
-      type:
-        type: string
-      url:
-        type: string
+    allOf:
+      - $ref: '#/definitions/actor'
+      - description: A GitHub user
     type: object
   user-emails:
     items:
       type: string
-    type: array
-  user-emails_final:
-    items: {}
-    type: array
-  user-keys:
-    items: {}
     type: array
   user-keys-keyId:
     properties:
@@ -19332,142 +17173,7 @@ definitions:
       name:
         type: string
     type: object
-  user-userId:
-    properties:
-      avatar_url:
-        type: string
-      bio:
-        type: string
-      blog:
-        type: string
-      company:
-        type: string
-      created_at:
-        description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-        type: string
-      email:
-        description: 'Note: The returned email is the user’s publicly visible email address (or null if the user has not specified a public email address in their profile).'
-        type: string
-      followers:
-        type: integer
-      following:
-        type: integer
-      gravatar_id:
-        type: string
-      hireable:
-        type: boolean
-      html_url:
-        type: string
-      id:
-        type: integer
-      location:
-        type: string
-      login:
-        type: string
-      name:
-        type: string
-      public_gists:
-        type: integer
-      public_repos:
-        type: integer
-      type:
-        type: string
-      url:
-        type: string
-    type: object
-  user-userId-starred:
-    items: {}
-    type: array
-  user-userId-subscribitions:
-    items:
-      properties:
-        clone_url:
-          type: string
-        created_at:
-          description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-          type: string
-        description:
-          type: string
-        fork:
-          type: boolean
-        forks:
-          type: integer
-        forks_count:
-          type: integer
-        full_name:
-          type: string
-        git_url:
-          type: string
-        homepage:
-          type: string
-        html_url:
-          type: string
-        id:
-          type: integer
-        language:
-          type: string
-        master_branch:
-          type: integer
-        mirror_url:
-          type: string
-        name:
-          type: string
-        open_issues:
-          type: integer
-        open_issues_count:
-          type: integer
-        owner:
-          properties:
-            avatar_url:
-              type: string
-            gravatar_id:
-              type: string
-            id:
-              type: integer
-            login:
-              type: string
-            url:
-              type: string
-          type: object
-        private:
-          type: boolean
-        pushed_at:
-          description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-          type: string
-        size:
-          type: integer
-        ssh_url:
-          type: string
-        svn_url:
-          type: string
-        updated_at:
-          description: 'ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ'
-          type: string
-        url:
-          type: string
-        watchers:
-          type: integer
-        watchers_count:
-          type: integer
-    type: array
   users:
     items:
-      properties:
-        avatar_url:
-          type: string
-        gravatar_id:
-          type: string
-        id:
-          type: integer
-        login:
-          type: string
-        url:
-          type: string
-      type: object
-    type: array
-  users-userId-keys:
-    items: {}
-    type: array
-  users-userId-orgs:
-    items: {}
+      $ref: '#/definitions/user'
     type: array
