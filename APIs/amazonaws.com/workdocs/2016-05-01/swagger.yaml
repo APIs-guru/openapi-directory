@@ -771,7 +771,7 @@ paths:
   '/api/v1/organizations/{OrganizationId}/subscriptions':
     post:
       operationId: CreateNotificationSubscription
-      description: '<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html">Subscribe to Notifications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>'
+      description: '<p>Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/workdocs/latest/developerguide/subscribe-notifications.html">Subscribe to Notifications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1785,7 +1785,7 @@ paths:
   /api/v1/me/root:
     get:
       operationId: DescribeRootFolders
-      description: '<p>Describes the current user''s special folders; the <code>RootFolder</code> and the <code>RecycleBin</code>. <code>RootFolder</code> is the root of user''s files and folders and <code>RecycleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.</p> <p>This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see <a href="http://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html">Authentication and Access Control for User Applications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>'
+      description: '<p>Describes the current user''s special folders; the <code>RootFolder</code> and the <code>RecycleBin</code>. <code>RootFolder</code> is the root of user''s files and folders and <code>RecycleBin</code> is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients.</p> <p>This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see <a href="https://docs.aws.amazon.com/workdocs/latest/developerguide/wd-auth-user.html">Authentication and Access Control for User Applications</a> in the <i>Amazon WorkDocs Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -2254,7 +2254,7 @@ definitions:
     properties:
       Endpoint:
         $ref: '#/definitions/SubscriptionEndPointType'
-        description: 'The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with "https://".'
+        description: 'The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with <code>https</code>.'
       Protocol:
         $ref: '#/definitions/SubscriptionProtocolType'
         description: 'The protocol to use. The supported value is https, which delivers JSON-encoded messages using HTTPS POST.'
