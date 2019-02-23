@@ -692,34 +692,13 @@ definitions:
       ownerArn:
         $ref: '#/definitions/UserArn'
         description: 'The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN of any AWS IAM principal. If this value is not specified, the ARN defaults to this environment''s creator.'
-  BadRequestException:
-    type: object
-    properties: {}
-    description: The target request is invalid.
-  ConflictException:
-    type: object
-    properties: {}
-    description: A conflict occurred.
-  NotFoundException:
-    type: object
-    properties: {}
-    description: The target resource cannot be found.
-  ForbiddenException:
-    type: object
-    properties: {}
-    description: An access permissions issue occurred.
-  TooManyRequestsException:
-    type: object
-    properties: {}
-    description: Too many service requests were made over the given time period.
-  LimitExceededException:
-    type: object
-    properties: {}
-    description: A service limit was exceeded.
-  InternalServerErrorException:
-    type: object
-    properties: {}
-    description: An internal server error occurred.
+  BadRequestException: {}
+  ConflictException: {}
+  NotFoundException: {}
+  ForbiddenException: {}
+  TooManyRequestsException: {}
+  LimitExceededException: {}
+  InternalServerErrorException: {}
   CreateEnvironmentMembershipResult:
     type: object
     example:
@@ -978,6 +957,7 @@ definitions:
   EnvironmentDescription:
     type: string
     maxLength: 200
+    format: password
   InstanceType:
     type: string
     pattern: '^[a-z][1-9][.][a-z0-9]+$'
@@ -989,7 +969,7 @@ definitions:
     maxLength: 30
   UserArn:
     type: string
-    pattern: 'arn:aws:(iam|sts)::\d+:\S+'
+    pattern: 'arn:aws:(iam|sts)::\d+:(root|user|federated-user|assumed-role)\/?\S*'
   MemberPermissions:
     type: string
     enum:
@@ -1047,6 +1027,19 @@ definitions:
     enum:
       - ssh
       - ec2
+  EnvironmentLifecycle:
+    type: object
+    properties:
+      status:
+        $ref: '#/definitions/EnvironmentLifecycleStatus'
+        description: '<p>The current creation or deletion lifecycle state of the environment.</p> <ul> <li> <p> <code>CREATED</code>: The environment was successfully created.</p> </li> <li> <p> <code>DELETE_FAILED</code>: The environment failed to delete.</p> </li> <li> <p> <code>DELETING</code>: The environment is in the process of being deleted.</p> </li> </ul>'
+      reason:
+        $ref: '#/definitions/String'
+        description: Any informational message about the lifecycle state of the environment.
+      failureResource:
+        $ref: '#/definitions/String'
+        description: 'If the environment failed to delete, the Amazon Resource Name (ARN) of the related AWS resource.'
+    description: Information about the current creation or deletion lifecycle state of an AWS Cloud9 development environment.
   Environment:
     type: object
     properties:
@@ -1068,11 +1061,20 @@ definitions:
       ownerArn:
         $ref: '#/definitions/String'
         description: The Amazon Resource Name (ARN) of the environment owner.
+      lifecycle:
+        $ref: '#/definitions/EnvironmentLifecycle'
+        description: The state of the environment in its creation or deletion lifecycle.
     description: Information about an AWS Cloud9 development environment.
   EnvironmentIdList:
     type: array
     items:
       $ref: '#/definitions/EnvironmentId'
+  EnvironmentLifecycleStatus:
+    type: string
+    enum:
+      - CREATED
+      - DELETING
+      - DELETE_FAILED
   Permissions:
     type: string
     enum:

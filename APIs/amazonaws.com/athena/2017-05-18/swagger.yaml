@@ -409,7 +409,7 @@ paths:
   '/#GetWorkGroup':
     post:
       operationId: GetWorkGroup
-      description: Returns information about the workgroup with the speficied name.
+      description: Returns information about the workgroup with the specified name.
       responses:
         '200':
           description: Success
@@ -525,6 +525,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListTagsForResource':
+    post:
+      operationId: ListTagsForResource
+      description: Lists the tags associated with this workgroup.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceOutput'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListWorkGroups':
     post:
       operationId: ListWorkGroups
@@ -628,6 +665,80 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StopQueryExecutionInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#TagResource':
+    post:
+      operationId: TagResource
+      description: 'Adds one or more tags to the resource, such as a workgroup. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize resources (workgroups) in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. For best practices, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>. The key length is from 1 (minimum) to 128 (maximum) Unicode characters in UTF-8. The tag value length is from 0 (minimum) to 256 (maximum) Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one, separate them by commas.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/TagResourceOutput'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UntagResource':
+    post:
+      operationId: UntagResource
+      description: 'Removes one or more tags from the workgroup resource. Takes as an input a list of TagKey Strings separated by commas, and removes their tags at the same time.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UntagResourceOutput'
+        '480':
+          description: InternalServerException
+          schema:
+            $ref: '#/definitions/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -756,6 +867,9 @@ definitions:
       Description:
         $ref: '#/definitions/WorkGroupDescriptionString'
         description: The workgroup description.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'One or more tags, separated by commas, that you want to attach to the workgroup as you create it.'
   DeleteNamedQueryOutput:
     type: object
     properties: {}
@@ -891,6 +1005,30 @@ definitions:
       WorkGroup:
         $ref: '#/definitions/WorkGroupName'
         description: The name of the workgroup from which queries are being returned.
+  ListTagsForResourceOutput:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: The list of tags associated with this workgroup.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: A token to be used by the next request if this request is truncated.
+  ListTagsForResourceInput:
+    type: object
+    required:
+      - ResourceARN
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: Lists the tags for the workgroup resource with the specified ARN.
+      NextToken:
+        $ref: '#/definitions/Token'
+        description: 'The token for the next set of results, or null if there are no additional results for this request, where the request lists the tags for the workgroup resource with the specified ARN.'
+      MaxResults:
+        $ref: '#/definitions/MaxTagsCount'
+        description: The maximum number of results to be returned per request that lists the tags for the workgroup resource.
+  ResourceNotFoundException: {}
   ListWorkGroupsOutput:
     type: object
     properties:
@@ -947,6 +1085,36 @@ definitions:
       QueryExecutionId:
         $ref: '#/definitions/QueryExecutionId'
         description: The unique ID of the query execution to stop.
+  TagResourceOutput:
+    type: object
+    properties: {}
+  TagResourceInput:
+    type: object
+    required:
+      - ResourceARN
+      - Tags
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: Requests that one or more tags are added to the resource (such as a workgroup) for the specified ARN.
+      Tags:
+        $ref: '#/definitions/TagList'
+        description: 'One or more tags, separated by commas, to be added to the resource, such as a workgroup.'
+  UntagResourceOutput:
+    type: object
+    properties: {}
+  UntagResourceInput:
+    type: object
+    required:
+      - ResourceARN
+      - TagKeys
+    properties:
+      ResourceARN:
+        $ref: '#/definitions/AmazonResourceName'
+        description: Removes one or more tags from the workgroup resource for the specified ARN.
+      TagKeys:
+        $ref: '#/definitions/TagKeyList'
+        description: Removes the tags associated with one or more tag keys from the workgroup resource.
   UpdateWorkGroupOutput:
     type: object
     properties: {}
@@ -967,6 +1135,10 @@ definitions:
       State:
         $ref: '#/definitions/WorkGroupState'
         description: The workgroup state that will be updated for the given workgroup.
+  AmazonResourceName:
+    type: string
+    minLength: 1
+    maxLength: 1011
   NamedQueryIdList:
     type: array
     items:
@@ -1098,6 +1270,10 @@ definitions:
     type: string
     minLength: 0
     maxLength: 1024
+  TagList:
+    type: array
+    items:
+      $ref: '#/definitions/Tag'
   Date:
     type: string
     format: date-time
@@ -1240,6 +1416,9 @@ definitions:
     type: integer
     minimum: 0
     maximum: 50
+  MaxTagsCount:
+    type: integer
+    minimum: 75
   MaxWorkGroupsCount:
     type: integer
     minimum: 1
@@ -1345,6 +1524,28 @@ definitions:
         $ref: '#/definitions/datumList'
         description: The data that populates a row in a query result table.
     description: The rows that comprise a query result table.
+  TagKey:
+    type: string
+    minLength: 1
+    maxLength: 128
+  TagValue:
+    type: string
+    minLength: 0
+    maxLength: 256
+  Tag:
+    type: object
+    properties:
+      Key:
+        $ref: '#/definitions/TagKey'
+        description: 'A tag key. The tag key length is from 1 to 128 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys are case-sensitive and must be unique per resource. '
+      Value:
+        $ref: '#/definitions/TagValue'
+        description: 'A tag value. The tag value length is from 0 to 256 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag values are case-sensitive. '
+    description: 'A tag that you can add to a resource. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize workgroups in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. The maximum tag key length is 128 Unicode characters in UTF-8. The maximum tag value length is 256 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. '
+  TagKeyList:
+    type: array
+    items:
+      $ref: '#/definitions/TagKey'
   UnprocessedNamedQueryId:
     type: object
     properties:
