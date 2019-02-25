@@ -3021,16 +3021,6 @@ paths:
           name: zipcode
           required: false
           type: string
-        - description: A local access and transport area (LATA)
-          in: query
-          name: lata
-          required: false
-          type: string
-        - description: 'A rate center. A rate center is a geographical area used by a Local Exchange Carrier (LEC) to determine the boundaries for local calling, billing and allocation of phone numbers'
-          in: query
-          name: rateCenter
-          required: false
-          type: string
         - description: A label name
           in: query
           name: labelName
@@ -3097,16 +3087,6 @@ paths:
         - description: A five-digit Zipcode
           in: query
           name: zipcode
-          required: false
-          type: string
-        - description: A local access and transport area (LATA)
-          in: query
-          name: lata
-          required: false
-          type: string
-        - description: 'A rate center. A rate center is a geographical area used by a Local Exchange Carrier (LEC) to determine the boundaries for local calling, billing and assigning phone numbers'
-          in: query
-          name: rateCenter
           required: false
           type: string
         - description: A label name
@@ -3302,16 +3282,6 @@ paths:
           name: zipcode
           required: false
           type: string
-        - description: A local access and transport area (LATA)
-          in: query
-          name: lata
-          required: false
-          type: string
-        - description: 'A rate center. A rate center is a geographical area used by a Local Exchange Carrier (LEC) to determine the boundaries for local calling, billing and assigning phone numbers.'
-          in: query
-          name: rateCenter
-          required: false
-          type: string
         - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
           in: query
           name: fields
@@ -3373,16 +3343,6 @@ paths:
         - description: A five-digit Zipcode
           in: query
           name: zipcode
-          required: false
-          type: string
-        - description: A local access and transport area (LATA)
-          in: query
-          name: lata
-          required: false
-          type: string
-        - description: 'A rate center. A rate center is a geographical area used by a Local Exchange Carrier (LEC) to determine the boundaries for local calling, billing and assigning phone numbers.'
-          in: query
-          name: rateCenter
           required: false
           type: string
         - description: 'Limit fields received in response. E.g. fields: id, name or fields items (id, name), see more at [partial response](https://developers.callfire.com/docs.html#partial-response) page.'
@@ -3485,7 +3445,7 @@ paths:
       description: Purchase numbers. There are many ways to purchase a number. Set either 'tollFreeCount' or 'localCount' along with some querying fields to purchase numbers by bulk query. Set the list of numbers to purchase by list. Available numbers will be purchased using CallFire credits owned by the user. Make sure the account has enough credits before trying to purchase
       operationId: orderNumbers
       parameters:
-        - description: 'Request object contains a list of numbers to buy, you can filter the numbers by their region information: city, state, zipcode, LATA, etc'
+        - description: 'Request object contains a list of numbers to buy, you can filter the numbers by their region information: city, state, zipcode, etc'
           in: body
           name: body
           required: false
@@ -6231,9 +6191,6 @@ definitions:
       city:
         description: City of requested numbers
         type: string
-      lata:
-        description: 'Local access and transport area of requested numbers '
-        type: string
       localCount:
         description: Total count of local numbers requested
         format: int32
@@ -6245,9 +6202,6 @@ definitions:
         type: array
       prefix:
         description: Country prefix of requested numbers
-        type: string
-      rateCenter:
-        description: A rate center of requested numbers
         type: string
       state:
         description: A two-letter state code of requested numbers
@@ -6320,9 +6274,6 @@ definitions:
       country:
         description: A country of a region
         type: string
-      lata:
-        description: A local access and transport area of region
-        type: string
       latitude:
         description: A latitude of a region
         format: float
@@ -6333,9 +6284,6 @@ definitions:
         type: number
       prefix:
         description: A country prefix of a region. 4-7 digit
-        type: string
-      rateCenter:
-        description: A rate center of a region
         type: string
       state:
         description: A two-letter state code of region

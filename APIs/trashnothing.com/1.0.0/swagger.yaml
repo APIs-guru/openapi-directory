@@ -235,7 +235,7 @@ paths:
       consumes:
         - multipart/form-data
       description: |
-        Request membership to one or more groups. <br /><br /> NOTE: Any group with a has_questions field set to true will also require answers to the groups' new member questionnaire to be submitted.  Groups waiting for answers will have their membership field set to 'pending-questions'.  And the questionnaire that needs to be answered can be found in the membership.questionnaire field of the group.
+        Request membership to one or more groups. <br /><br /> NOTE: Any group with a has_questions field set to true will also require answers to the groups' new member questionnaire to be submitted.  Groups waiting for answers will have their membership field set to 'pending-questions'.  And the questionnaire that needs to be answered can be found in the membership.questionnaire field of the group after a subscribe request is made to that group.
       operationId: join_groups
       parameters:
         - description: A comma separated list of the IDs of the groups to join.
@@ -546,7 +546,7 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 90 days.
           format: date-time
           in: query
           name: date_min
@@ -932,7 +932,7 @@ paths:
           required: false
           type: number
         - description: |
-            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 30 days.
+            Only posts newer than this UTC date and time will be returned.  If unset, defaults to the current date and time minus 90 days.
           format: date-time
           in: query
           name: date_min
@@ -1047,15 +1047,16 @@ paths:
               author:
                 $ref: '#/definitions/User'
               author_offer_count:
-                description: Count of offer posts made by the post author in the last 30 days.
+                description: Count of offer posts made by the post author in the last 90 days.
                 type: integer
               author_posts:
-                description: Other posts by the post author.
+                description: |
+                  Other active posts from the post author in the last 90 days. A maximum of 30 posts will be returned.
                 items:
                   $ref: '#/definitions/Post'
                 type: array
               author_wanted_count:
-                description: Count of wanted posts made by the post author in the last 30 days.
+                description: Count of wanted posts made by the post author in the last 90 days.
                 type: integer
               geolocate_bounds:
                 $ref: '#/definitions/GeolocateBounds'
@@ -2786,11 +2787,13 @@ definitions:
         description: The date and time when the user first became publicly active on a group (the date may be older than when the user signed up).
         type: string
       profile_image:
-        description: 'A URL to a profile image for the user.  Profile images sizes vary based on the source (Google, Facebook, Twitter, Gravatar, etc) and some can be as small as 64px by 64px.'
+        description: |
+          A URL to a profile image for the user.  Profile images sizes vary based on the source (Google, Facebook, Twitter, Gravatar, etc) and some can be as small as 64px by 64px.  Will be null for api key requests and requests where the oauth user doesn't belong to any of the same groups as this user.
         type: string
       user_id:
         type: string
       username:
-        description: A username that can be displayed for the user (the username is NOT guaranteed to be unique).
+        description: |
+          A username that can be displayed for the user (the username is NOT guaranteed to be unique). Will be null for api key requests and requests where the oauth user doesn't belong to any of the same groups as this user.
         type: string
     type: object

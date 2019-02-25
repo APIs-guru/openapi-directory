@@ -5,7 +5,7 @@ host: www.zoomconnect.com
 basePath: /app
 info:
   description: The world's greatest SMS API
-  title: Zoom Connect
+  title: www.zoomconnect.com
   version: '1'
   x-apisguru-categories:
     - messaging
@@ -15,7 +15,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
+        version: 2.7.31
       format: swagger
       url: 'https://www.zoomconnect.com/zoom/api-docs'
       version: '1.2'
@@ -980,6 +980,195 @@ paths:
       summary: all
       tags:
         - messages
+  /api/rest/v1/messages/analyse/full:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Returns full analysis of message
+      operationId: analyse-full
+      parameters:
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageAndRecipientNumber'
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/WebServiceAnalyseMessageResponse'
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: analyse-full
+      tags:
+        - messages
+  /api/rest/v1/messages/analyse/message-credit-cost:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Returns the number of credit which would be required to send the request message to the requested recipient number
+      operationId: analyse-message-credit-cost
+      parameters:
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageAndRecipientNumber'
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            format: double
+            type: number
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: analyse-message-credit-cost
+      tags:
+        - messages
+  /api/rest/v1/messages/analyse/message-encoding:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Returns the message encoding that would be required to send the requested message
+      operationId: analyse-message-encoding
+      parameters:
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageOnly'
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: analyse-message-encoding
+      tags:
+        - messages
+  /api/rest/v1/messages/analyse/message-length:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Returns the number of characters the requested message consists of
+      operationId: analyse-message-length
+      parameters:
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageOnly'
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            format: int32
+            type: integer
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: analyse-message-length
+      tags:
+        - messages
+  /api/rest/v1/messages/analyse/message-length-within-max-allowed:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Returns details for a single message
+      operationId: analyse-
+      parameters:
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageOnly'
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            type: boolean
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: analyse-
+      tags:
+        - messages
+  /api/rest/v1/messages/analyse/number-of-messages:
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      deprecated: false
+      description: Returns the number of SMS parts which would be sent when sending the requested message
+      operationId: analyse-number-of-messages
+      parameters:
+        - description: request
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageOnly'
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            format: int32
+            type: integer
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: analyse-number-of-messages
+      tags:
+        - messages
   '/api/rest/v1/messages/{messageId}':
     delete:
       consumes:
@@ -1808,6 +1997,41 @@ definitions:
         items:
           $ref: '#/definitions/WebServiceUserStatistics'
         type: array
+  WebServiceAnalyseMessageRequestMessageAndRecipientNumber:
+    description: WebServiceAnalyseMessageRequest
+    properties:
+      message:
+        type: string
+      recipientNumber:
+        type: string
+  WebServiceAnalyseMessageRequestMessageOnly:
+    description: WebServiceAnalyseMessageRequest
+    properties:
+      message:
+        type: string
+      recipientNumber:
+        type: string
+  WebServiceAnalyseMessageResponse:
+    description: WebServiceAnalyseMessageResponse
+    properties:
+      characterAnalysis:
+        items:
+          items: {}
+          type: array
+        type: array
+      messageCreditCost:
+        format: double
+        type: number
+      messageEncoding:
+        type: string
+      messageLength:
+        format: int32
+        type: integer
+      messageLengthWithinMaximumAllowed:
+        type: boolean
+      numberOfMessages:
+        format: int32
+        type: integer
   WebServiceCampaignStatistics:
     description: WebServiceCampaignStatistics
     properties:

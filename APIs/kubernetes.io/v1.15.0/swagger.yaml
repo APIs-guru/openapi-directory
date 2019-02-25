@@ -6,7 +6,7 @@ info:
   contact:
     x-twitter: kubernetesio
   title: Kubernetes
-  version: v1.14.0
+  version: v1.15.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -915,12 +915,12 @@ paths:
       description: read the specified ConfigMap
       operationId: readCoreV1NamespacedConfigMap
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -1300,12 +1300,12 @@ paths:
       description: read the specified Endpoints
       operationId: readCoreV1NamespacedEndpoints
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -1685,12 +1685,12 @@ paths:
       description: read the specified Event
       operationId: readCoreV1NamespacedEvent
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -2070,12 +2070,12 @@ paths:
       description: read the specified LimitRange
       operationId: readCoreV1NamespacedLimitRange
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -2455,12 +2455,12 @@ paths:
       description: read the specified PersistentVolumeClaim
       operationId: readCoreV1NamespacedPersistentVolumeClaim
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -2967,12 +2967,12 @@ paths:
       description: read the specified Pod
       operationId: readCoreV1NamespacedPod
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -4291,12 +4291,12 @@ paths:
       description: read the specified PodTemplate
       operationId: readCoreV1NamespacedPodTemplate
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -4676,12 +4676,12 @@ paths:
       description: read the specified ReplicationController
       operationId: readCoreV1NamespacedReplicationController
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -5315,12 +5315,12 @@ paths:
       description: read the specified ResourceQuota
       operationId: readCoreV1NamespacedResourceQuota
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -5827,12 +5827,12 @@ paths:
       description: read the specified Secret
       operationId: readCoreV1NamespacedSecret
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -6212,12 +6212,12 @@ paths:
       description: read the specified ServiceAccount
       operationId: readCoreV1NamespacedServiceAccount
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -6530,12 +6530,12 @@ paths:
       description: read the specified Service
       operationId: readCoreV1NamespacedService
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -7215,12 +7215,12 @@ paths:
       description: read the specified Namespace
       operationId: readCoreV1Namespace
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -7762,12 +7762,12 @@ paths:
       description: read the specified Node
       operationId: readCoreV1Node
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -8685,12 +8685,12 @@ paths:
       description: read the specified PersistentVolume
       operationId: readCoreV1PersistentVolume
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -13157,12 +13157,12 @@ paths:
       description: read the specified MutatingWebhookConfiguration
       operationId: readAdmissionregistrationV1beta1MutatingWebhookConfiguration
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -13530,12 +13530,12 @@ paths:
       description: read the specified ValidatingWebhookConfiguration
       operationId: readAdmissionregistrationV1beta1ValidatingWebhookConfiguration
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -14261,12 +14261,12 @@ paths:
       description: read the specified CustomResourceDefinition
       operationId: readApiextensionsV1beta1CustomResourceDefinition
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -14957,12 +14957,12 @@ paths:
       description: read the specified APIService
       operationId: readApiregistrationV1APIService
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -15630,12 +15630,12 @@ paths:
       description: read the specified APIService
       operationId: readApiregistrationV1beta1APIService
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -16557,12 +16557,12 @@ paths:
       description: read the specified ControllerRevision
       operationId: readAppsV1NamespacedControllerRevision
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -16942,12 +16942,12 @@ paths:
       description: read the specified DaemonSet
       operationId: readAppsV1NamespacedDaemonSet
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -17454,12 +17454,12 @@ paths:
       description: read the specified Deployment
       operationId: readAppsV1NamespacedDeployment
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -18093,12 +18093,12 @@ paths:
       description: read the specified ReplicaSet
       operationId: readAppsV1NamespacedReplicaSet
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -18732,12 +18732,12 @@ paths:
       description: read the specified StatefulSet
       operationId: readAppsV1NamespacedStatefulSet
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -20909,12 +20909,12 @@ paths:
       description: read the specified ControllerRevision
       operationId: readAppsV1beta1NamespacedControllerRevision
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -21294,12 +21294,12 @@ paths:
       description: read the specified Deployment
       operationId: readAppsV1beta1NamespacedDeployment
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -21996,12 +21996,12 @@ paths:
       description: read the specified StatefulSet
       operationId: readAppsV1beta1NamespacedStatefulSet
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -23687,12 +23687,12 @@ paths:
       description: read the specified ControllerRevision
       operationId: readAppsV1beta2NamespacedControllerRevision
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -24072,12 +24072,12 @@ paths:
       description: read the specified DaemonSet
       operationId: readAppsV1beta2NamespacedDaemonSet
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -24584,12 +24584,12 @@ paths:
       description: read the specified Deployment
       operationId: readAppsV1beta2NamespacedDeployment
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -25223,12 +25223,12 @@ paths:
       description: read the specified ReplicaSet
       operationId: readAppsV1beta2NamespacedReplicaSet
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -25862,12 +25862,12 @@ paths:
       description: read the specified StatefulSet
       operationId: readAppsV1beta2NamespacedStatefulSet
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -27906,12 +27906,12 @@ paths:
       description: read the specified AuditSink
       operationId: readAuditregistrationV1alpha1AuditSink
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -29222,12 +29222,12 @@ paths:
       description: read the specified HorizontalPodAutoscaler
       operationId: readAutoscalingV1NamespacedHorizontalPodAutoscaler
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -30075,12 +30075,12 @@ paths:
       description: read the specified HorizontalPodAutoscaler
       operationId: readAutoscalingV2beta1NamespacedHorizontalPodAutoscaler
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -30928,12 +30928,12 @@ paths:
       description: read the specified HorizontalPodAutoscaler
       operationId: readAutoscalingV2beta2NamespacedHorizontalPodAutoscaler
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -31804,12 +31804,12 @@ paths:
       description: read the specified Job
       operationId: readBatchV1NamespacedJob
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -32657,12 +32657,12 @@ paths:
       description: read the specified CronJob
       operationId: readBatchV1beta1NamespacedCronJob
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -33510,12 +33510,12 @@ paths:
       description: read the specified CronJob
       operationId: readBatchV2alpha1NamespacedCronJob
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -34305,12 +34305,12 @@ paths:
       description: read the specified CertificateSigningRequest
       operationId: readCertificatesV1beta1CertificateSigningRequest
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -35135,12 +35135,12 @@ paths:
       description: read the specified Lease
       operationId: readCoordinationV1NamespacedLease
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -35861,12 +35861,12 @@ paths:
       description: read the specified Lease
       operationId: readCoordinationV1beta1NamespacedLease
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -36610,12 +36610,12 @@ paths:
       description: read the specified Event
       operationId: readEventsV1beta1NamespacedEvent
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -37509,12 +37509,12 @@ paths:
       description: read the specified DaemonSet
       operationId: readExtensionsV1beta1NamespacedDaemonSet
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -38021,12 +38021,12 @@ paths:
       description: read the specified Deployment
       operationId: readExtensionsV1beta1NamespacedDeployment
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -38723,12 +38723,12 @@ paths:
       description: read the specified Ingress
       operationId: readExtensionsV1beta1NamespacedIngress
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -39235,12 +39235,12 @@ paths:
       description: read the specified NetworkPolicy
       operationId: readExtensionsV1beta1NamespacedNetworkPolicy
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -39620,12 +39620,12 @@ paths:
       description: read the specified ReplicaSet
       operationId: readExtensionsV1beta1NamespacedReplicaSet
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -40455,12 +40455,12 @@ paths:
       description: read the specified PodSecurityPolicy
       operationId: readExtensionsV1beta1PodSecurityPolicy
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -42326,12 +42326,12 @@ paths:
       description: read the specified NetworkPolicy
       operationId: readNetworkingV1NamespacedNetworkPolicy
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -42775,6 +42775,859 @@ paths:
         name: watch
         type: boolean
         uniqueItems: true
+  /apis/networking.k8s.io/v1beta1/:
+    get:
+      consumes:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      description: get available resources
+      operationId: getNetworkingV1beta1APIResources
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.APIResourceList'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+  /apis/networking.k8s.io/v1beta1/ingresses:
+    get:
+      consumes:
+        - '*/*'
+      description: list or watch objects of kind Ingress
+      operationId: listNetworkingV1beta1IngressForAllNamespaces
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+        - application/json;stream=watch
+        - application/vnd.kubernetes.protobuf;stream=watch
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.IngressList'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: list
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    parameters:
+      - description: |-
+          The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+          This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        in: query
+        name: continue
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        in: query
+        name: fieldSelector
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        in: query
+        name: labelSelector
+        type: string
+        uniqueItems: true
+      - description: |-
+          limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+          The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        in: query
+        name: limit
+        type: integer
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+      - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+        in: query
+        name: resourceVersion
+        type: string
+        uniqueItems: true
+      - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+        in: query
+        name: timeoutSeconds
+        type: integer
+        uniqueItems: true
+      - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+        in: query
+        name: watch
+        type: boolean
+        uniqueItems: true
+  '/apis/networking.k8s.io/v1beta1/namespaces/{namespace}/ingresses':
+    delete:
+      consumes:
+        - '*/*'
+      description: delete collection of Ingress
+      operationId: deleteNetworkingV1beta1CollectionNamespacedIngress
+      parameters:
+        - description: |-
+            The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+            This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+          in: query
+          name: continue
+          type: string
+          uniqueItems: true
+        - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+          in: query
+          name: fieldSelector
+          type: string
+          uniqueItems: true
+        - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+          in: query
+          name: labelSelector
+          type: string
+          uniqueItems: true
+        - description: |-
+            limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+            The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+          in: query
+          name: limit
+          type: integer
+          uniqueItems: true
+        - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+          in: query
+          name: resourceVersion
+          type: string
+          uniqueItems: true
+        - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+          in: query
+          name: timeoutSeconds
+          type: integer
+          uniqueItems: true
+        - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+          in: query
+          name: watch
+          type: boolean
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Status'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: deletecollection
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    get:
+      consumes:
+        - '*/*'
+      description: list or watch objects of kind Ingress
+      operationId: listNetworkingV1beta1NamespacedIngress
+      parameters:
+        - description: |-
+            The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+            This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+          in: query
+          name: continue
+          type: string
+          uniqueItems: true
+        - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+          in: query
+          name: fieldSelector
+          type: string
+          uniqueItems: true
+        - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+          in: query
+          name: labelSelector
+          type: string
+          uniqueItems: true
+        - description: |-
+            limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+            The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+          in: query
+          name: limit
+          type: integer
+          uniqueItems: true
+        - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+          in: query
+          name: resourceVersion
+          type: string
+          uniqueItems: true
+        - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+          in: query
+          name: timeoutSeconds
+          type: integer
+          uniqueItems: true
+        - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+          in: query
+          name: watch
+          type: boolean
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+        - application/json;stream=watch
+        - application/vnd.kubernetes.protobuf;stream=watch
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.IngressList'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: list
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    parameters:
+      - description: 'object name and auth scope, such as for teams and projects'
+        in: path
+        name: namespace
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+    post:
+      consumes:
+        - '*/*'
+      description: create an Ingress
+      operationId: createNetworkingV1beta1NamespacedIngress
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: post
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+  '/apis/networking.k8s.io/v1beta1/namespaces/{namespace}/ingresses/{name}':
+    delete:
+      consumes:
+        - '*/*'
+      description: delete an Ingress
+      operationId: deleteNetworkingV1beta1NamespacedIngress
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+        - description: 'The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.'
+          in: query
+          name: gracePeriodSeconds
+          type: integer
+          uniqueItems: true
+        - description: 'Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object''s finalizers list. Either this field or PropagationPolicy may be set, but not both.'
+          in: query
+          name: orphanDependents
+          type: boolean
+          uniqueItems: true
+        - description: 'Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: ''Orphan'' - orphan the dependents; ''Background'' - allow the garbage collector to delete the dependents in the background; ''Foreground'' - a cascading policy that deletes all dependents in the foreground.'
+          in: query
+          name: propagationPolicy
+          type: string
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Status'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Status'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: delete
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    get:
+      consumes:
+        - '*/*'
+      description: read the specified Ingress
+      operationId: readNetworkingV1beta1NamespacedIngress
+      parameters:
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
+          in: query
+          name: exact
+          type: boolean
+          uniqueItems: true
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
+          in: query
+          name: export
+          type: boolean
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: get
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    parameters:
+      - description: name of the Ingress
+        in: path
+        name: name
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'object name and auth scope, such as for teams and projects'
+        in: path
+        name: namespace
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+    patch:
+      consumes:
+        - application/json-patch+json
+        - application/merge-patch+json
+        - application/strategic-merge-patch+json
+      description: partially update the specified Ingress
+      operationId: patchNetworkingV1beta1NamespacedIngress
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Patch'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+        - description: Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+          in: query
+          name: force
+          type: boolean
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: patch
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    put:
+      consumes:
+        - '*/*'
+      description: replace the specified Ingress
+      operationId: replaceNetworkingV1beta1NamespacedIngress
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: put
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+  '/apis/networking.k8s.io/v1beta1/namespaces/{namespace}/ingresses/{name}/status':
+    get:
+      consumes:
+        - '*/*'
+      description: read status of the specified Ingress
+      operationId: readNetworkingV1beta1NamespacedIngressStatus
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: get
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    parameters:
+      - description: name of the Ingress
+        in: path
+        name: name
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'object name and auth scope, such as for teams and projects'
+        in: path
+        name: namespace
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+    patch:
+      consumes:
+        - application/json-patch+json
+        - application/merge-patch+json
+        - application/strategic-merge-patch+json
+      description: partially update status of the specified Ingress
+      operationId: patchNetworkingV1beta1NamespacedIngressStatus
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Patch'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+        - description: Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+          in: query
+          name: force
+          type: boolean
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: patch
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    put:
+      consumes:
+        - '*/*'
+      description: replace status of the specified Ingress
+      operationId: replaceNetworkingV1beta1NamespacedIngressStatus
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: put
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+  /apis/networking.k8s.io/v1beta1/watch/ingresses:
+    get:
+      consumes:
+        - '*/*'
+      description: 'watch individual changes to a list of Ingress. deprecated: use the ''watch'' parameter with a list operation instead.'
+      operationId: watchNetworkingV1beta1IngressListForAllNamespaces
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+        - application/json;stream=watch
+        - application/vnd.kubernetes.protobuf;stream=watch
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.WatchEvent'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: watchlist
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    parameters:
+      - description: |-
+          The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+          This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        in: query
+        name: continue
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        in: query
+        name: fieldSelector
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        in: query
+        name: labelSelector
+        type: string
+        uniqueItems: true
+      - description: |-
+          limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+          The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        in: query
+        name: limit
+        type: integer
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+      - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+        in: query
+        name: resourceVersion
+        type: string
+        uniqueItems: true
+      - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+        in: query
+        name: timeoutSeconds
+        type: integer
+        uniqueItems: true
+      - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+        in: query
+        name: watch
+        type: boolean
+        uniqueItems: true
+  '/apis/networking.k8s.io/v1beta1/watch/namespaces/{namespace}/ingresses':
+    get:
+      consumes:
+        - '*/*'
+      description: 'watch individual changes to a list of Ingress. deprecated: use the ''watch'' parameter with a list operation instead.'
+      operationId: watchNetworkingV1beta1NamespacedIngressList
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+        - application/json;stream=watch
+        - application/vnd.kubernetes.protobuf;stream=watch
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.WatchEvent'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: watchlist
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    parameters:
+      - description: |-
+          The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+          This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        in: query
+        name: continue
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        in: query
+        name: fieldSelector
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        in: query
+        name: labelSelector
+        type: string
+        uniqueItems: true
+      - description: |-
+          limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+          The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        in: query
+        name: limit
+        type: integer
+        uniqueItems: true
+      - description: 'object name and auth scope, such as for teams and projects'
+        in: path
+        name: namespace
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+      - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+        in: query
+        name: resourceVersion
+        type: string
+        uniqueItems: true
+      - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+        in: query
+        name: timeoutSeconds
+        type: integer
+        uniqueItems: true
+      - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+        in: query
+        name: watch
+        type: boolean
+        uniqueItems: true
+  '/apis/networking.k8s.io/v1beta1/watch/namespaces/{namespace}/ingresses/{name}':
+    get:
+      consumes:
+        - '*/*'
+      description: 'watch changes to an object of kind Ingress. deprecated: use the ''watch'' parameter with a list operation instead, filtered to a single item with the ''fieldSelector'' parameter.'
+      operationId: watchNetworkingV1beta1NamespacedIngress
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+        - application/json;stream=watch
+        - application/vnd.kubernetes.protobuf;stream=watch
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.WatchEvent'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - networking_v1beta1
+      x-kubernetes-action: watch
+      x-kubernetes-group-version-kind:
+        group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+    parameters:
+      - description: |-
+          The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+          This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        in: query
+        name: continue
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        in: query
+        name: fieldSelector
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        in: query
+        name: labelSelector
+        type: string
+        uniqueItems: true
+      - description: |-
+          limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+          The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        in: query
+        name: limit
+        type: integer
+        uniqueItems: true
+      - description: name of the Ingress
+        in: path
+        name: name
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'object name and auth scope, such as for teams and projects'
+        in: path
+        name: namespace
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+      - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+        in: query
+        name: resourceVersion
+        type: string
+        uniqueItems: true
+      - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+        in: query
+        name: timeoutSeconds
+        type: integer
+        uniqueItems: true
+      - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+        in: query
+        name: watch
+        type: boolean
+        uniqueItems: true
   /apis/policy/:
     get:
       consumes:
@@ -43075,12 +43928,12 @@ paths:
       description: read the specified PodDisruptionBudget
       operationId: readPolicyV1beta1NamespacedPodDisruptionBudget
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -43656,12 +44509,12 @@ paths:
       description: read the specified PodSecurityPolicy
       operationId: readPolicyV1beta1PodSecurityPolicy
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -51555,6 +52408,558 @@ paths:
         - https
       tags:
         - scheduling
+  /apis/scheduling.k8s.io/v1/:
+    get:
+      consumes:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      description: get available resources
+      operationId: getSchedulingV1APIResources
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.APIResourceList'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+  /apis/scheduling.k8s.io/v1/priorityclasses:
+    delete:
+      consumes:
+        - '*/*'
+      description: delete collection of PriorityClass
+      operationId: deleteSchedulingV1CollectionPriorityClass
+      parameters:
+        - description: |-
+            The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+            This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+          in: query
+          name: continue
+          type: string
+          uniqueItems: true
+        - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+          in: query
+          name: fieldSelector
+          type: string
+          uniqueItems: true
+        - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+          in: query
+          name: labelSelector
+          type: string
+          uniqueItems: true
+        - description: |-
+            limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+            The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+          in: query
+          name: limit
+          type: integer
+          uniqueItems: true
+        - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+          in: query
+          name: resourceVersion
+          type: string
+          uniqueItems: true
+        - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+          in: query
+          name: timeoutSeconds
+          type: integer
+          uniqueItems: true
+        - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+          in: query
+          name: watch
+          type: boolean
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Status'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+      x-kubernetes-action: deletecollection
+      x-kubernetes-group-version-kind:
+        group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+    get:
+      consumes:
+        - '*/*'
+      description: list or watch objects of kind PriorityClass
+      operationId: listSchedulingV1PriorityClass
+      parameters:
+        - description: |-
+            The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+            This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+          in: query
+          name: continue
+          type: string
+          uniqueItems: true
+        - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+          in: query
+          name: fieldSelector
+          type: string
+          uniqueItems: true
+        - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+          in: query
+          name: labelSelector
+          type: string
+          uniqueItems: true
+        - description: |-
+            limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+            The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+          in: query
+          name: limit
+          type: integer
+          uniqueItems: true
+        - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+          in: query
+          name: resourceVersion
+          type: string
+          uniqueItems: true
+        - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+          in: query
+          name: timeoutSeconds
+          type: integer
+          uniqueItems: true
+        - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+          in: query
+          name: watch
+          type: boolean
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+        - application/json;stream=watch
+        - application/vnd.kubernetes.protobuf;stream=watch
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClassList'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+      x-kubernetes-action: list
+      x-kubernetes-group-version-kind:
+        group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+    parameters:
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+    post:
+      consumes:
+        - '*/*'
+      description: create a PriorityClass
+      operationId: createSchedulingV1PriorityClass
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+      x-kubernetes-action: post
+      x-kubernetes-group-version-kind:
+        group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+  '/apis/scheduling.k8s.io/v1/priorityclasses/{name}':
+    delete:
+      consumes:
+        - '*/*'
+      description: delete a PriorityClass
+      operationId: deleteSchedulingV1PriorityClass
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+        - description: 'The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.'
+          in: query
+          name: gracePeriodSeconds
+          type: integer
+          uniqueItems: true
+        - description: 'Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object''s finalizers list. Either this field or PropagationPolicy may be set, but not both.'
+          in: query
+          name: orphanDependents
+          type: boolean
+          uniqueItems: true
+        - description: 'Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: ''Orphan'' - orphan the dependents; ''Background'' - allow the garbage collector to delete the dependents in the background; ''Foreground'' - a cascading policy that deletes all dependents in the foreground.'
+          in: query
+          name: propagationPolicy
+          type: string
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Status'
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Status'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+      x-kubernetes-action: delete
+      x-kubernetes-group-version-kind:
+        group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+    get:
+      consumes:
+        - '*/*'
+      description: read the specified PriorityClass
+      operationId: readSchedulingV1PriorityClass
+      parameters:
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
+          in: query
+          name: exact
+          type: boolean
+          uniqueItems: true
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
+          in: query
+          name: export
+          type: boolean
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+      x-kubernetes-action: get
+      x-kubernetes-group-version-kind:
+        group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+    parameters:
+      - description: name of the PriorityClass
+        in: path
+        name: name
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+    patch:
+      consumes:
+        - application/json-patch+json
+        - application/merge-patch+json
+        - application/strategic-merge-patch+json
+      description: partially update the specified PriorityClass
+      operationId: patchSchedulingV1PriorityClass
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.Patch'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+        - description: Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+          in: query
+          name: force
+          type: boolean
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+      x-kubernetes-action: patch
+      x-kubernetes-group-version-kind:
+        group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+    put:
+      consumes:
+        - '*/*'
+      description: replace the specified PriorityClass
+      operationId: replaceSchedulingV1PriorityClass
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        - description: 'When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed'
+          in: query
+          name: dryRun
+          type: string
+          uniqueItems: true
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+      x-kubernetes-action: put
+      x-kubernetes-group-version-kind:
+        group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+  /apis/scheduling.k8s.io/v1/watch/priorityclasses:
+    get:
+      consumes:
+        - '*/*'
+      description: 'watch individual changes to a list of PriorityClass. deprecated: use the ''watch'' parameter with a list operation instead.'
+      operationId: watchSchedulingV1PriorityClassList
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+        - application/json;stream=watch
+        - application/vnd.kubernetes.protobuf;stream=watch
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.WatchEvent'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+      x-kubernetes-action: watchlist
+      x-kubernetes-group-version-kind:
+        group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+    parameters:
+      - description: |-
+          The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+          This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        in: query
+        name: continue
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        in: query
+        name: fieldSelector
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        in: query
+        name: labelSelector
+        type: string
+        uniqueItems: true
+      - description: |-
+          limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+          The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        in: query
+        name: limit
+        type: integer
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+      - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+        in: query
+        name: resourceVersion
+        type: string
+        uniqueItems: true
+      - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+        in: query
+        name: timeoutSeconds
+        type: integer
+        uniqueItems: true
+      - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+        in: query
+        name: watch
+        type: boolean
+        uniqueItems: true
+  '/apis/scheduling.k8s.io/v1/watch/priorityclasses/{name}':
+    get:
+      consumes:
+        - '*/*'
+      description: 'watch changes to an object of kind PriorityClass. deprecated: use the ''watch'' parameter with a list operation instead, filtered to a single item with the ''fieldSelector'' parameter.'
+      operationId: watchSchedulingV1PriorityClass
+      produces:
+        - application/json
+        - application/yaml
+        - application/vnd.kubernetes.protobuf
+        - application/json;stream=watch
+        - application/vnd.kubernetes.protobuf;stream=watch
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.WatchEvent'
+        '401':
+          description: Unauthorized
+      schemes:
+        - https
+      tags:
+        - scheduling_v1
+      x-kubernetes-action: watch
+      x-kubernetes-group-version-kind:
+        group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+    parameters:
+      - description: |-
+          The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".
+
+          This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+        in: query
+        name: continue
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their fields. Defaults to everything.
+        in: query
+        name: fieldSelector
+        type: string
+        uniqueItems: true
+      - description: A selector to restrict the list of returned objects by their labels. Defaults to everything.
+        in: query
+        name: labelSelector
+        type: string
+        uniqueItems: true
+      - description: |-
+          limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.
+
+          The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+        in: query
+        name: limit
+        type: integer
+        uniqueItems: true
+      - description: name of the PriorityClass
+        in: path
+        name: name
+        required: true
+        type: string
+        uniqueItems: true
+      - description: 'If ''true'', then the output is pretty printed.'
+        in: query
+        name: pretty
+        type: string
+        uniqueItems: true
+      - description: 'When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it''s 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.'
+        in: query
+        name: resourceVersion
+        type: string
+        uniqueItems: true
+      - description: 'Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.'
+        in: query
+        name: timeoutSeconds
+        type: integer
+        uniqueItems: true
+      - description: 'Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.'
+        in: query
+        name: watch
+        type: boolean
+        uniqueItems: true
   /apis/scheduling.k8s.io/v1alpha1/:
     get:
       consumes:
@@ -51826,12 +53231,12 @@ paths:
       description: read the specified PriorityClass
       operationId: readSchedulingV1alpha1PriorityClass
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -52378,12 +53783,12 @@ paths:
       description: read the specified PriorityClass
       operationId: readSchedulingV1beta1PriorityClass
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -52959,12 +54364,12 @@ paths:
       description: read the specified PodPreset
       operationId: readSettingsV1alpha1NamespacedPodPreset
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -53702,12 +55107,12 @@ paths:
       description: read the specified StorageClass
       operationId: readStorageV1StorageClass
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -54075,12 +55480,12 @@ paths:
       description: read the specified VolumeAttachment
       operationId: readStorageV1VolumeAttachment
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -54904,12 +56309,12 @@ paths:
       description: read the specified VolumeAttachment
       operationId: readStorageV1alpha1VolumeAttachment
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -55456,12 +56861,12 @@ paths:
       description: read the specified StorageClass
       operationId: readStorageV1beta1StorageClass
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -55829,12 +57234,12 @@ paths:
       description: read the specified VolumeAttachment
       operationId: readStorageV1beta1VolumeAttachment
       parameters:
-        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'.
+        - description: Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
           in: query
           name: exact
           type: boolean
           uniqueItems: true
-        - description: Should this value be exported.  Export strips fields that a user can not specify.
+        - description: Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
           in: query
           name: export
           type: boolean
@@ -57462,7 +58867,7 @@ definitions:
     properties:
       maxSurge:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
-        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.'
+        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is at most 130% of desired pods.'
       maxUnavailable:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
         description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
@@ -58178,7 +59583,7 @@ definitions:
     properties:
       maxSurge:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
-        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.'
+        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is at most 130% of desired pods.'
       maxUnavailable:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
         description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
@@ -62004,7 +63409,7 @@ definitions:
         description: 'PostStart is called immediately after a container is created. If the handler fails, the container is terminated and restarted according to its restart policy. Other management of the container blocks until the hook completes. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks'
       preStop:
         $ref: '#/definitions/io.k8s.api.core.v1.Handler'
-        description: 'PreStop is called immediately before a container is terminated. The container is terminated after the handler completes. The reason for termination is passed to the handler. Regardless of the outcome of the handler, the container is eventually terminated. Other management of the container blocks until the hook completes. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks'
+        description: 'PreStop is called immediately before a container is terminated due to an API request or management event such as liveness probe failure, preemption, resource contention, etc. The handler is not called if the container crashes or exits. The reason for termination is passed to the handler. The Pod''s termination grace period countdown begins before the PreStop hooked is executed. Regardless of the outcome of the handler, the container will eventually terminate within the Pod''s termination grace period. Other management of the container blocks until the hook completes or until the termination grace period is reached. More info: https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks'
     type: object
   io.k8s.api.core.v1.LimitRange:
     description: LimitRange sets resource usage limits for each kind of resource in a Namespace.
@@ -64146,7 +65551,7 @@ definitions:
         $ref: '#/definitions/io.k8s.api.core.v1.SessionAffinityConfig'
         description: sessionAffinityConfig contains the configurations of session affinity.
       type:
-        description: 'type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. "ExternalName" maps to the specified externalName. "ClusterIP" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object. If clusterIP is "None", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a stable IP. "NodePort" builds on ClusterIP and allocates a port on every node which routes to the clusterIP. "LoadBalancer" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the clusterIP. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services---service-types'
+        description: 'type determines how the Service is exposed. Defaults to ClusterIP. Valid options are ExternalName, ClusterIP, NodePort, and LoadBalancer. "ExternalName" maps to the specified externalName. "ClusterIP" allocates a cluster-internal IP address for load-balancing to endpoints. Endpoints are determined by the selector or if that is not specified, by manual construction of an Endpoints object. If clusterIP is "None", no virtual IP is allocated and the endpoints are published as a set of endpoints rather than a stable IP. "NodePort" builds on ClusterIP and allocates a port on every node which routes to the clusterIP. "LoadBalancer" builds on NodePort and creates an external load-balancer (if supported in the current cloud) which routes to the clusterIP. More info: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types'
         type: string
     type: object
   io.k8s.api.core.v1.ServiceStatus:
@@ -64425,6 +65830,9 @@ definitions:
         type: boolean
       subPath:
         description: Path within the volume from which the container's volume should be mounted. Defaults to "" (volume's root).
+        type: string
+      subPathExpr:
+        description: Expanded path within the volume from which the container's volume should be mounted. Behaves similarly to SubPath but environment variable references $(VAR_NAME) are expanded using the container's environment. Defaults to "" (volume's root). SubPathExpr and SubPath are mutually exclusive. This field is alpha in 1.14.
         type: string
     required:
       - name
@@ -65034,7 +66442,7 @@ definitions:
       - cidr
     type: object
   io.k8s.api.extensions.v1beta1.Ingress:
-    description: 'Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc.'
+    description: 'Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc. DEPRECATED - This group version of Ingress is deprecated by networking.k8s.io/v1beta1 Ingress. See the release notes for more information.'
     properties:
       apiVersion:
         description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
@@ -65256,7 +66664,7 @@ definitions:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector'
         description: 'Selects the pods to which this NetworkPolicy object applies.  The array of ingress rules is applied to any pods selected by this field. Multiple network policies can select the same set of pods.  In this case, the ingress rules for each are combined additively. This field is NOT optional and follows standard label selector semantics. An empty podSelector matches all pods in this namespace.'
       policyTypes:
-        description: 'List of rule types that the NetworkPolicy relates to. Valid options are Ingress, Egress, or Ingress,Egress. If this field is not specified, it will default based on the existence of Ingress or Egress rules; policies that contain an Egress section are assumed to affect Egress, and all policies (whether or not they contain an Ingress section) are assumed to affect Ingress. If you want to write an egress-only policy, you must explicitly specify policyTypes [ "Egress" ]. Likewise, if you want to write a policy that specifies that no egress is allowed, you must specify a policyTypes value that include "Egress" (since such a policy would not include an Egress section and would otherwise default to just [ "Ingress" ]). This field is beta-level in 1.8'
+        description: 'List of rule types that the NetworkPolicy relates to. Valid options are "Ingress", "Egress", or "Ingress,Egress". If this field is not specified, it will default based on the existence of Ingress or Egress rules; policies that contain an Egress section are assumed to affect Egress, and all policies (whether or not they contain an Ingress section) are assumed to affect Ingress. If you want to write an egress-only policy, you must explicitly specify policyTypes [ "Egress" ]. Likewise, if you want to write a policy that specifies that no egress is allowed, you must specify a policyTypes value that include "Egress" (since such a policy would not include an Egress section and would otherwise default to just [ "Ingress" ]). This field is beta-level in 1.8'
         items:
           type: string
         type: array
@@ -65548,7 +66956,7 @@ definitions:
     properties:
       maxSurge:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
-        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. By default, a value of 1 is used. Example: when this is set to 30%, the new RC can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new RC can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.'
+        description: 'The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. By default, a value of 1 is used. Example: when this is set to 30%, the new RC can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new RC can be scaled up further, ensuring that total number of pods running at any time during the update is at most 130% of desired pods.'
       maxUnavailable:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
         description: 'The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. By default, a fixed value of 1 is used. Example: when this is set to 30%, the old RC can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.'
@@ -65786,12 +67194,140 @@ definitions:
         $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector'
         description: 'Selects the pods to which this NetworkPolicy object applies. The array of ingress rules is applied to any pods selected by this field. Multiple network policies can select the same set of pods. In this case, the ingress rules for each are combined additively. This field is NOT optional and follows standard label selector semantics. An empty podSelector matches all pods in this namespace.'
       policyTypes:
-        description: 'List of rule types that the NetworkPolicy relates to. Valid options are Ingress, Egress, or Ingress,Egress. If this field is not specified, it will default based on the existence of Ingress or Egress rules; policies that contain an Egress section are assumed to affect Egress, and all policies (whether or not they contain an Ingress section) are assumed to affect Ingress. If you want to write an egress-only policy, you must explicitly specify policyTypes [ "Egress" ]. Likewise, if you want to write a policy that specifies that no egress is allowed, you must specify a policyTypes value that include "Egress" (since such a policy would not include an Egress section and would otherwise default to just [ "Ingress" ]). This field is beta-level in 1.8'
+        description: 'List of rule types that the NetworkPolicy relates to. Valid options are "Ingress", "Egress", or "Ingress,Egress". If this field is not specified, it will default based on the existence of Ingress or Egress rules; policies that contain an Egress section are assumed to affect Egress, and all policies (whether or not they contain an Ingress section) are assumed to affect Ingress. If you want to write an egress-only policy, you must explicitly specify policyTypes [ "Egress" ]. Likewise, if you want to write a policy that specifies that no egress is allowed, you must specify a policyTypes value that include "Egress" (since such a policy would not include an Egress section and would otherwise default to just [ "Ingress" ]). This field is beta-level in 1.8'
         items:
           type: string
         type: array
     required:
       - podSelector
+    type: object
+  io.k8s.api.networking.v1beta1.HTTPIngressPath:
+    description: HTTPIngressPath associates a path regex with a backend. Incoming urls matching the path are forwarded to the backend.
+    properties:
+      backend:
+        $ref: '#/definitions/io.k8s.api.networking.v1beta1.IngressBackend'
+        description: Backend defines the referenced service endpoint to which the traffic will be forwarded to.
+      path:
+        description: 'Path is an extended POSIX regex as defined by IEEE Std 1003.1, (i.e this follows the egrep/unix syntax, not the perl syntax) matched against the path of an incoming request. Currently it can contain characters disallowed from the conventional "path" part of a URL as defined by RFC 3986. Paths must begin with a ''/''. If unspecified, the path defaults to a catch all sending traffic to the backend.'
+        type: string
+    required:
+      - backend
+    type: object
+  io.k8s.api.networking.v1beta1.HTTPIngressRuleValue:
+    description: 'HTTPIngressRuleValue is a list of http selectors pointing to backends. In the example: http://<host>/<path>?<searchpart> -> backend where where parts of the url correspond to RFC 3986, this resource will be used to match against everything after the last ''/'' and before the first ''?'' or ''#''.'
+    properties:
+      paths:
+        description: A collection of paths that map requests to backends.
+        items:
+          $ref: '#/definitions/io.k8s.api.networking.v1beta1.HTTPIngressPath'
+        type: array
+    required:
+      - paths
+    type: object
+  io.k8s.api.networking.v1beta1.Ingress:
+    description: 'Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a backend. An Ingress can be configured to give services externally-reachable urls, load balance traffic, terminate SSL, offer name based virtual hosting etc.'
+    properties:
+      apiVersion:
+        description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+        type: string
+      kind:
+        description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      metadata:
+        $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta'
+        description: 'Standard object''s metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      spec:
+        $ref: '#/definitions/io.k8s.api.networking.v1beta1.IngressSpec'
+        description: 'Spec is the desired state of the Ingress. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status'
+      status:
+        $ref: '#/definitions/io.k8s.api.networking.v1beta1.IngressStatus'
+        description: 'Status is the current state of the Ingress. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status'
+    type: object
+    x-kubernetes-group-version-kind:
+      - group: networking.k8s.io
+        kind: Ingress
+        version: v1beta1
+  io.k8s.api.networking.v1beta1.IngressBackend:
+    description: IngressBackend describes all endpoints for a given service and port.
+    properties:
+      serviceName:
+        description: Specifies the name of the referenced service.
+        type: string
+      servicePort:
+        $ref: '#/definitions/io.k8s.apimachinery.pkg.util.intstr.IntOrString'
+        description: Specifies the port of the referenced service.
+    required:
+      - serviceName
+      - servicePort
+    type: object
+  io.k8s.api.networking.v1beta1.IngressList:
+    description: IngressList is a collection of Ingress.
+    properties:
+      apiVersion:
+        description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+        type: string
+      items:
+        description: Items is the list of Ingress.
+        items:
+          $ref: '#/definitions/io.k8s.api.networking.v1beta1.Ingress'
+        type: array
+      kind:
+        description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      metadata:
+        $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta'
+        description: 'Standard object''s metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+    required:
+      - items
+    type: object
+    x-kubernetes-group-version-kind:
+      - group: networking.k8s.io
+        kind: IngressList
+        version: v1beta1
+  io.k8s.api.networking.v1beta1.IngressRule:
+    description: 'IngressRule represents the rules mapping the paths under a specified host to the related backend services. Incoming requests are first evaluated for a host match, then routed to the backend associated with the matching IngressRuleValue.'
+    properties:
+      host:
+        description: "Host is the fully qualified domain name of a network host, as defined by RFC 3986. Note the following deviations from the \"host\" part of the URI as defined in the RFC: 1. IPs are not allowed. Currently an IngressRuleValue can only apply to the\n\t  IP in the Spec of the parent Ingress.\n2. The `:` delimiter is not respected because ports are not allowed.\n\t  Currently the port of an Ingress is implicitly :80 for http and\n\t  :443 for https.\nBoth these may change in the future. Incoming requests are matched against the host before the IngressRuleValue. If the host is unspecified, the Ingress routes all traffic based on the specified IngressRuleValue."
+        type: string
+      http:
+        $ref: '#/definitions/io.k8s.api.networking.v1beta1.HTTPIngressRuleValue'
+    type: object
+  io.k8s.api.networking.v1beta1.IngressSpec:
+    description: IngressSpec describes the Ingress the user wishes to exist.
+    properties:
+      backend:
+        $ref: '#/definitions/io.k8s.api.networking.v1beta1.IngressBackend'
+        description: A default backend capable of servicing requests that don't match any rule. At least one of 'backend' or 'rules' must be specified. This field is optional to allow the loadbalancer controller or defaulting logic to specify a global default.
+      rules:
+        description: 'A list of host rules used to configure the Ingress. If unspecified, or no rule matches, all traffic is sent to the default backend.'
+        items:
+          $ref: '#/definitions/io.k8s.api.networking.v1beta1.IngressRule'
+        type: array
+      tls:
+        description: 'TLS configuration. Currently the Ingress only supports a single TLS port, 443. If multiple members of this list specify different hosts, they will be multiplexed on the same port according to the hostname specified through the SNI TLS extension, if the ingress controller fulfilling the ingress supports SNI.'
+        items:
+          $ref: '#/definitions/io.k8s.api.networking.v1beta1.IngressTLS'
+        type: array
+    type: object
+  io.k8s.api.networking.v1beta1.IngressStatus:
+    description: IngressStatus describe the current state of the Ingress.
+    properties:
+      loadBalancer:
+        $ref: '#/definitions/io.k8s.api.core.v1.LoadBalancerStatus'
+        description: LoadBalancer contains the current status of the load-balancer.
+    type: object
+  io.k8s.api.networking.v1beta1.IngressTLS:
+    description: IngressTLS describes the transport layer security associated with an Ingress.
+    properties:
+      hosts:
+        description: 'Hosts are a list of hosts included in the TLS certificate. The values in this list must match the name/s used in the tlsSecret. Defaults to the wildcard host setting for the loadbalancer controller fulfilling this Ingress, if left unspecified.'
+        items:
+          type: string
+        type: array
+      secretName:
+        description: 'SecretName is the name of the secret used to terminate SSL traffic on 443. Field is left optional to allow SSL routing based on SNI hostname alone. If the SNI host in a listener conflicts with the "Host" header field used by an IngressRule, the SNI host is used for termination and value of the Host header is used for routing.'
+        type: string
     type: object
   io.k8s.api.policy.v1beta1.AllowedFlexVolume:
     description: AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
@@ -66984,6 +68520,59 @@ definitions:
       - kind
       - name
     type: object
+  io.k8s.api.scheduling.v1.PriorityClass:
+    description: PriorityClass defines mapping from a priority class name to the priority integer value. The value can be any valid integer.
+    properties:
+      apiVersion:
+        description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+        type: string
+      description:
+        description: description is an arbitrary string that usually provides guidelines on when this priority class should be used.
+        type: string
+      globalDefault:
+        description: 'globalDefault specifies whether this PriorityClass should be considered as the default priority for pods that do not have any priority class. Only one PriorityClass can be marked as `globalDefault`. However, if more than one PriorityClasses exists with their `globalDefault` field set to true, the smallest value of such global default PriorityClasses will be used as the default priority.'
+        type: boolean
+      kind:
+        description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      metadata:
+        $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta'
+        description: 'Standard object''s metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      value:
+        description: The value of this priority class. This is the actual priority that pods receive when they have the name of this class in their pod spec.
+        format: int32
+        type: integer
+    required:
+      - value
+    type: object
+    x-kubernetes-group-version-kind:
+      - group: scheduling.k8s.io
+        kind: PriorityClass
+        version: v1
+  io.k8s.api.scheduling.v1.PriorityClassList:
+    description: PriorityClassList is a collection of priority classes.
+    properties:
+      apiVersion:
+        description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources'
+        type: string
+      items:
+        description: items is the list of PriorityClasses
+        items:
+          $ref: '#/definitions/io.k8s.api.scheduling.v1.PriorityClass'
+        type: array
+      kind:
+        description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      metadata:
+        $ref: '#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta'
+        description: 'Standard list metadata More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+    required:
+      - items
+    type: object
+    x-kubernetes-group-version-kind:
+      - group: scheduling.k8s.io
+        kind: PriorityClassList
+        version: v1
   io.k8s.api.scheduling.v1alpha1.PriorityClass:
     description: PriorityClass defines mapping from a priority class name to the priority integer value. The value can be any valid integer.
     properties:
@@ -68345,6 +69934,9 @@ definitions:
       - group: networking.k8s.io
         kind: DeleteOptions
         version: v1
+      - group: networking.k8s.io
+        kind: DeleteOptions
+        version: v1beta1
       - group: policy
         kind: DeleteOptions
         version: v1beta1
@@ -68357,6 +69949,9 @@ definitions:
       - group: rbac.authorization.k8s.io
         kind: DeleteOptions
         version: v1beta1
+      - group: scheduling.k8s.io
+        kind: DeleteOptions
+        version: v1
       - group: scheduling.k8s.io
         kind: DeleteOptions
         version: v1alpha1
@@ -68813,6 +70408,9 @@ definitions:
       - group: networking.k8s.io
         kind: WatchEvent
         version: v1
+      - group: networking.k8s.io
+        kind: WatchEvent
+        version: v1beta1
       - group: policy
         kind: WatchEvent
         version: v1beta1
@@ -68825,6 +70423,9 @@ definitions:
       - group: rbac.authorization.k8s.io
         kind: WatchEvent
         version: v1beta1
+      - group: scheduling.k8s.io
+        kind: WatchEvent
+        version: v1
       - group: scheduling.k8s.io
         kind: WatchEvent
         version: v1alpha1

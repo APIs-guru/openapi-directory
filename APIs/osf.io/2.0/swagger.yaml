@@ -11408,7 +11408,7 @@ paths:
                       type: boolean
                     pending_withdrawal:
                       description: Whether or not the registration is pending approval for withdrawal from project administrators.
-                      readOnly: true
+                      readOnly: false
                       type: boolean
                     preprint:
                       description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
@@ -11454,7 +11454,7 @@ paths:
                       type: boolean
                     withdrawal_justification:
                       description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
-                      readOnly: true
+                      readOnly: false
                       type: string
                     withdrawn:
                       description: Whether or not this registration has been withdrawn.
@@ -11725,7 +11725,7 @@ paths:
                     type: boolean
                   pending_withdrawal:
                     description: Whether or not the registration is pending approval for withdrawal from project administrators.
-                    readOnly: true
+                    readOnly: false
                     type: boolean
                   preprint:
                     description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
@@ -11771,7 +11771,7 @@ paths:
                     type: boolean
                   withdrawal_justification:
                     description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
-                    readOnly: true
+                    readOnly: false
                     type: string
                   withdrawn:
                     description: Whether or not this registration has been withdrawn.
@@ -14832,7 +14832,7 @@ paths:
                       type: boolean
                     pending_withdrawal:
                       description: Whether or not the registration is pending approval for withdrawal from project administrators.
-                      readOnly: true
+                      readOnly: false
                       type: boolean
                     preprint:
                       description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
@@ -14878,7 +14878,7 @@ paths:
                       type: boolean
                     withdrawal_justification:
                       description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
-                      readOnly: true
+                      readOnly: false
                       type: string
                     withdrawn:
                       description: Whether or not this registration has been withdrawn.
@@ -15149,7 +15149,7 @@ paths:
                     type: boolean
                   pending_withdrawal:
                     description: Whether or not the registration is pending approval for withdrawal from project administrators.
-                    readOnly: true
+                    readOnly: false
                     type: boolean
                   preprint:
                     description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
@@ -15195,7 +15195,7 @@ paths:
                     type: boolean
                   withdrawal_justification:
                     description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
-                    readOnly: true
+                    readOnly: false
                     type: string
                   withdrawn:
                     description: Whether or not this registration has been withdrawn.
@@ -15325,13 +15325,15 @@ paths:
       consumes:
         - application/json
       description: |-
-        Updates a registration's privacy from **private** to **public**.
+        Updates selected fields on a registration - only a selection of registration fields are editable.
 
-        Registrations can be updated with either a **PUT** or **PATCH** request. The `public` field is the only field that can be modified on a registration
+        Registrations can be updated with either a **PUT** or **PATCH** request. Some fields that can be edited include the `public`, `pending_withdrawal`, and `withdrawal_justification` fields.
 
         Registrations can only be turned from private to public, not vice versa.
+
+        You may request a registration to be withdrawn by providing a truthy value for `pending_withdrawal` in the data payload, along with an optional `withdrawal_justification`.
         #### Permissions
-        Only project administrators may update a registration.
+        Only project administrators may update most fields on a registration, but write contributors can edit certain fields like tags.
         #### Returns
         Returns a JSON object with a `data` key containing the new representation of the updated registration, if the request is successful.
 
@@ -15350,279 +15352,14 @@ paths:
             example:
               data:
                 attributes:
-                  children:
-                    - fsd2s
-                    - dwsa2
-                  draft_registration: '{draft_registration_id}'
-                  lift_embargo: '2017-05-10T20:44:03.185000'
-                  registration_choice: embargo
+                  pending_withdrawal: true
+                  withdrawal_justification: Methods found to be problematic.
+                id: '{registration_id}'
                 type: registrations
-            properties:
-              attributes:
-                description: The properties of the registration entity.
-                properties:
-                  category:
-                    description: The category of the registered node.
-                    enum:
-                      - analysis
-                      - communication
-                      - data
-                      - hypothesis
-                      - instrumentation
-                      - methods and measures
-                      - procedure
-                      - project
-                      - software
-                      - other
-                    readOnly: true
-                    type: string
-                  children:
-                    description: A list of guids for children of nodes to be registered. All children must have parents being registered.
-                    items:
-                      type: string
-                    readOnly: false
-                    type: array
-                  collection:
-                    description: Whether or not this registration represents a collection. This value should always be `false`. This field may be deprecated in future versions.
-                    readOnly: true
-                    type: boolean
-                  current_user_can_comment:
-                    description: Whether or not the current user has permission to post comments on this registration. Comments on registrations can be set to allow all users to comment or restricted to only contributors.
-                    readOnly: true
-                    type: boolean
-                  current_user_permissions:
-                    description: 'A list of strings representing the permissions for the current user on this registration. Valid permissions are "admin", "read", and "write".'
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
-                  date_created:
-                    description: 'The time at which the registered node was created, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  date_modified:
-                    description: 'The time at which the registered node was last modified, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  date_registered:
-                    description: 'The time at which this registration was created, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  date_withdrawn:
-                    description: 'The time at which this registration was withdrawn, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  description:
-                    description: The description of the registered node.
-                    readOnly: true
-                    type: string
-                  draft_registration:
-                    description: The ID of the draft registration from which the registration will be created.
-                    readOnly: false
-                    type: string
-                  embargo_end_date:
-                    description: 'The time at which the embargo on this registration will be lifted and the registration will become public, as an iso8601 formatted timestamp.'
-                    format: date-time
-                    readOnly: true
-                    type: string
-                  fork:
-                    description: Whether or not this registration represents a fork of another node.
-                    readOnly: true
-                    type: boolean
-                  lift_embargo:
-                    description: A future datetime when the registration will become public. This field should be set when "registration_choice" is set to "embargo" in the range from 2 days to 4 years.
-                    format: date-time
-                    readOnly: false
-                    type: string
-                  node_license:
-                    description: A dictionary containing the metadata (copyright year and holder) associated with the registered node license (required for certain license types).
-                    readOnly: true
-                    type: string
-                  pending_embargo_approval:
-                    description: Whether or not the embargo associated with this registration is pending approval from project administrators.
-                    readOnly: true
-                    type: boolean
-                  pending_registration_approval:
-                    description: Whether or not the registration is pending approval from project administrators.
-                    readOnly: true
-                    type: boolean
-                  pending_withdrawal:
-                    description: Whether or not the registration is pending approval for withdrawal from project administrators.
-                    readOnly: true
-                    type: boolean
-                  preprint:
-                    description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
-                    readOnly: true
-                    type: boolean
-                  public:
-                    description: Whether or not the registration is publicly visible.
-                    readOnly: true
-                    type: boolean
-                  registered_meta:
-                    description: A dictionary with supplemental registration questions and responses.
-                    readOnly: true
-                    type: string
-                  registration:
-                    description: Whether or not this is a registration. This value should always be `true`. This field may be deprecated in future versions.
-                    readOnly: true
-                    type: boolean
-                  registration_choice:
-                    description: 'Describes when the registration will become public, either "immediate" or "embargo". If this field is "embargo", you will need to supply a datetime in the "lift_embargo" field.'
-                    readOnly: false
-                    type: string
-                  registration_supplement:
-                    description: The title of the registration schema this registration conforms to.
-                    readOnly: true
-                    type: string
-                  tags:
-                    description: A list of strings that describe the registered node.
-                    items:
-                      type: string
-                    readOnly: true
-                    type: array
-                  template_from:
-                    description: 'The unique ID of the node from which the registered node was templated, if the registered node was created from a template.'
-                    readOnly: true
-                    type: string
-                  title:
-                    description: The title of the registered node.
-                    readOnly: true
-                    type: string
-                  wiki_enabled:
-                    description: Whether or not the registration has its wiki enabled.
-                    readOnly: true
-                    type: boolean
-                  withdrawal_justification:
-                    description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
-                    readOnly: true
-                    type: string
-                  withdrawn:
-                    description: Whether or not this registration has been withdrawn.
-                    readOnly: true
-                    type: boolean
-                readOnly: false
-                required:
-                  - draft_registration
-                  - registration_choice
-                title: Attributes
-                type: object
-              id:
-                description: The unique identifier of the registration.
-                readOnly: true
-                type: string
-              links:
-                description: URLs to alternative representations of the registrations entity.
-                properties:
-                  html:
-                    description: A link to the registration's page on the OSF.
-                    format: URL
-                    readOnly: true
-                    type: string
-                  self:
-                    description: A link to the canonical API endpoint of this registration.
-                    format: URL
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Links
-                type: object
-              relationships:
-                description: URLs to other entities or entity collections that have a relationship to the registration entity.
-                properties:
-                  affiliated_institutions:
-                    description: A link to the list of institutions this registration is affiliated with.
-                    readOnly: true
-                    type: string
-                  children:
-                    description: A link to the list of the registered node's children (components).
-                    readOnly: true
-                    type: string
-                  citation:
-                    description: A link to the citation details of this registration.
-                    readOnly: true
-                    type: string
-                  comments:
-                    description: A link to the list of comments on this registration.
-                    readOnly: true
-                    type: string
-                  contributors:
-                    description: A link to the list of contributors on this registration.
-                    readOnly: true
-                    type: string
-                  files:
-                    description: A link to the list of storage providers that have been enabled on this registration.
-                    readOnly: true
-                    type: string
-                  forks:
-                    description: A link to the list of nodes that are forks of this registration.
-                    readOnly: true
-                    type: string
-                  identifiers:
-                    description: A link to the list of identifiers for this registration (i.e. DOI identifiers).
-                    readOnly: true
-                    type: string
-                  linked_nodes:
-                    description: A link to the list of nodes that are linked to this registration.
-                    readOnly: true
-                    type: string
-                  logs:
-                    description: A link to the list of log actions pertaining to this registration.
-                    readOnly: true
-                    type: string
-                  node_links:
-                    description: A link to the list of nodes that are linked to this registration. This field is deprecated as of verson 2.1; use the linked_nodes link instead.
-                    readOnly: true
-                    type: string
-                  parent:
-                    description: 'A link to the node that is the direct parent of the current registration, if the current registration is a child registration.'
-                    readOnly: true
-                    type: string
-                  registered_by:
-                    description: A link to the user that initiated this registration.
-                    readOnly: true
-                    type: string
-                  registered_from:
-                    description: A link to the node that this registration was registered from.
-                    readOnly: true
-                    type: string
-                  registration_schema:
-                    description: A link to the metaschema that this registration conforms to.
-                    readOnly: true
-                    type: string
-                  root:
-                    description: 'A link to the node that is the top-level parent of the current registration. If the current registration is the top-level node, the root is the current registration.'
-                    readOnly: true
-                    type: string
-                  view_only_links:
-                    description: A link to the list of view only links that have been created for this registration.
-                    readOnly: true
-                    type: string
-                  wikis:
-                    description: A link to the list of wiki pages for this registration.
-                    readOnly: true
-                    type: string
-                readOnly: true
-                title: Relationships
-                type: object
-              type:
-                description: The type identifier of the registration entity (`registrations`).
-                readOnly: true
-                type: string
-            required:
-              - id
-              - type
-              - attributes
-              - relationships
-              - links
-            title: Registration
             type: object
       responses:
         '200':
-          description: Created
+          description: Updated
       summary: Update a registration
       tags:
         - Registrations
@@ -15909,7 +15646,7 @@ paths:
                       type: boolean
                     pending_withdrawal:
                       description: Whether or not the registration is pending approval for withdrawal from project administrators.
-                      readOnly: true
+                      readOnly: false
                       type: boolean
                     preprint:
                       description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
@@ -15955,7 +15692,7 @@ paths:
                       type: boolean
                     withdrawal_justification:
                       description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
-                      readOnly: true
+                      readOnly: false
                       type: string
                     withdrawn:
                       description: Whether or not this registration has been withdrawn.
@@ -17845,7 +17582,7 @@ paths:
                       type: boolean
                     pending_withdrawal:
                       description: Whether or not the registration is pending approval for withdrawal from project administrators.
-                      readOnly: true
+                      readOnly: false
                       type: boolean
                     preprint:
                       description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
@@ -17891,7 +17628,7 @@ paths:
                       type: boolean
                     withdrawal_justification:
                       description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
-                      readOnly: true
+                      readOnly: false
                       type: string
                     withdrawn:
                       description: Whether or not this registration has been withdrawn.
@@ -18152,7 +17889,7 @@ paths:
                     type: boolean
                   pending_withdrawal:
                     description: Whether or not the registration is pending approval for withdrawal from project administrators.
-                    readOnly: true
+                    readOnly: false
                     type: boolean
                   preprint:
                     description: 'Whether or not a preprint has been created from this node, or if this node was created for a preprint.'
@@ -18198,7 +17935,7 @@ paths:
                     type: boolean
                   withdrawal_justification:
                     description: 'The reasoning for why this registration was withdrawn, as entered by the administrator that initiated the withdrawal.'
-                    readOnly: true
+                    readOnly: false
                     type: string
                   withdrawn:
                     description: Whether or not this registration has been withdrawn.

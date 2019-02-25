@@ -618,6 +618,17 @@ paths:
           required: false
           type: string
         - in: query
+          name: viewCount
+          required: false
+          type: integer
+        - collectionFormat: multi
+          in: query
+          items:
+            type: integer
+          name: 'viewCount[]'
+          required: false
+          type: array
+        - in: query
           name: 'sort[id]'
           required: false
           type: string
@@ -1864,6 +1875,17 @@ paths:
           required: false
           type: string
         - in: query
+          name: viewCount
+          required: false
+          type: integer
+        - collectionFormat: multi
+          in: query
+          items:
+            type: integer
+          name: 'viewCount[]'
+          required: false
+          type: array
+        - in: query
           name: 'sort[id]'
           required: false
           type: string
@@ -3027,32 +3049,14 @@ definitions:
   Organization-Read:
     description: ''
     properties:
-      createdAt:
-        format: date-time
-        readOnly: true
-        type: string
       id:
         readOnly: true
         type: string
       name:
         type: string
-      projects:
-        items:
-          $ref: '#/definitions/Project-Read'
-        readOnly: true
-        type: array
       slug:
         readOnly: true
         type: string
-      updatedAt:
-        format: date-time
-        readOnly: true
-        type: string
-      userOrganizations:
-        items:
-          $ref: '#/definitions/UserOrganization-Read'
-        readOnly: true
-        type: array
     required:
       - name
     type: object
@@ -3242,10 +3246,43 @@ definitions:
       complexRulesCount:
         readOnly: true
         type: integer
+      complexRulesUpdatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      currentVersion:
+        $ref: '#/definitions/RuleSetVersion-Read'
+        readOnly: true
+      features:
+        items:
+          type: string
+        readOnly: true
+        type: array
       id:
         readOnly: true
         type: string
+      ignoreProjectTypes:
+        items:
+          type: string
+        type: array
       name:
+        type: string
+      onboardingCompletedDemos:
+        items:
+          type: string
+        type: array
+      organization:
+        $ref: '#/definitions/Organization-Read'
+        readOnly: true
+      plan:
+        readOnly: true
+        type: integer
+      rulesHash:
+        readOnly: true
         type: string
       slug:
         readOnly: true
@@ -3253,6 +3290,17 @@ definitions:
       straightRulesCount:
         readOnly: true
         type: integer
+      straightRulesUpdatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      token:
+        readOnly: true
+        type: string
+      updatedAt:
+        format: date-time
+        readOnly: true
+        type: string
       userProjects:
         items:
           $ref: '#/definitions/UserProject-Read'
@@ -3263,6 +3311,9 @@ definitions:
           $ref: '#/definitions/UserProjectFlattened-Read'
         readOnly: true
         type: array
+      workingVersion:
+        $ref: '#/definitions/RuleSetVersion-Read'
+        readOnly: true
     required:
       - name
     type: object
@@ -3473,8 +3524,6 @@ definitions:
   RuleAction-Read:
     description: ''
     properties:
-      action:
-        type: string
       author:
         $ref: '#/definitions/User-Read'
         readOnly: true
@@ -3482,33 +3531,9 @@ definitions:
         format: date-time
         readOnly: true
         type: string
-      formattedSource:
-        type: string
       id:
         readOnly: true
         type: string
-      isEnabled:
-        type: boolean
-      markers:
-        items:
-          $ref: '#/definitions/Marker-Read'
-        type: array
-      matchOnResponseStatus:
-        type: integer
-      rank:
-        type: integer
-      source:
-        type: string
-      statusCode:
-        type: integer
-      target:
-        type: string
-    required:
-      - action
-      - source
-      - statusCode
-      - isEnabled
-      - rank
     type: object
   RuleAction-Write:
     description: ''
@@ -3605,26 +3630,28 @@ definitions:
   RuleSetVersion-Read:
     description: ''
     properties:
+      added:
+        readOnly: true
+        type: integer
       createdAt:
         format: date-time
         readOnly: true
         type: string
-      current:
+      deleted:
         readOnly: true
-        type: boolean
+        type: integer
       id:
         readOnly: true
         type: string
-      isSnapshot:
-        type: boolean
-      name:
-        type: string
+      lastAction:
+        $ref: '#/definitions/RuleAction-Read'
+        readOnly: true
       publishedAt:
         format: date-time
         type: string
-      working:
+      updated:
         readOnly: true
-        type: boolean
+        type: integer
     type: object
   User:
     description: ''
@@ -3757,12 +3784,15 @@ definitions:
   User-Read:
     description: ''
     properties:
+      email:
+        type: string
       id:
         readOnly: true
         type: string
       name:
         type: string
     required:
+      - email
       - name
     type: object
   UserOrganization:
@@ -3811,6 +3841,9 @@ definitions:
           type: string
         type: array
       id:
+        readOnly: true
+        type: string
+      organization:
         readOnly: true
         type: string
       user:

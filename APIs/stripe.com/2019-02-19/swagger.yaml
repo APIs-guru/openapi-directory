@@ -11,7 +11,7 @@ info:
   description: 'The Stripe REST API. Please see https://stripe.com/docs/api for more details.'
   termsOfService: 'https://stripe.com/us/terms/'
   title: Stripe
-  version: '2019-02-11'
+  version: '2019-02-19'
   x-apisguru-categories:
     - financial
   x-logo:
@@ -167,108 +167,31 @@ paths:
                 type: string
               bank_account:
                 description: 'Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user''s bank account details.'
-              business_logo:
-                description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at least 128px x 128px)'
-                type: string
-              business_name:
-                description: The publicly sharable name for this account.
-                type: string
-              business_primary_color:
-                description: A CSS hex color value representing the primary branding color for this account.
-                type: string
-              business_url:
-                description: The URL that best shows the service or product provided by this account.
-                type: string
-              debit_negative_balances:
-                description: 'A Boolean indicating whether Stripe should try to reclaim negative balances from an attached bank account. For details, see [Understanding Connect Account Balances](/docs/connect/account-balances).'
-                type: boolean
-              decline_charge_on:
-                description: 'Account-level settings to automatically decline certain types of charges, regardless of the card issuer''s decision.'
+              business_profile:
+                description: Non-essential business information about the account
                 properties:
-                  avs_failure:
-                    type: boolean
-                  cvc_failure:
-                    type: boolean
-                title: decline_charge_on_specs
+                  mcc:
+                    type: integer
+                  name:
+                    type: string
+                  product_description:
+                    type: string
+                  support_email:
+                    type: string
+                  support_phone:
+                    type: string
+                  support_url:
+                    type: string
+                  url:
+                    type: string
+                title: business_profile_specs
                 type: object
-              default_currency:
-                description: 'Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account''s country](https://stripe.com/docs/payouts).'
+              business_type:
+                description: The business type. Can be `individual` or `company`.
                 type: string
-              email:
-                description: 'Email address of the account representative. For Standard accounts, this is used to ask them to claim their Stripe account. For Custom accounts, this only makes the account easier to identify to platforms; Stripe does not email the account representative.'
-                type: string
-              expand:
-                description: Specifies which fields in the response should be expanded.
-                items:
-                  type: string
-                type: array
-              external_account:
-                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
-              legal_entity:
-                description: 'Information about the legal entity itself, including information about the associated account representative.'
+              company:
+                description: Information about the company or business. This field is null unless `business_type` is set to `company`.
                 properties:
-                  additional_owners:
-                    items:
-                      properties:
-                        address:
-                          properties:
-                            city:
-                              type: string
-                            country:
-                              type: string
-                            line1:
-                              type: string
-                            line2:
-                              type: string
-                            postal_code:
-                              type: string
-                            state:
-                              type: string
-                          title: address_specs
-                          type: object
-                        dob:
-                          properties:
-                            day:
-                              type: integer
-                            month:
-                              type: integer
-                            year:
-                              type: integer
-                          required:
-                            - day
-                            - month
-                            - year
-                          title: date_of_birth_specs
-                          type: object
-                        email:
-                          type: string
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-                        maiden_name:
-                          type: string
-                        personal_id_number:
-                          type: string
-                        phone:
-                          type: string
-                        ssn_last_4:
-                          type: string
-                        verification:
-                          properties:
-                            document:
-                              type: string
-                            status:
-                              enum:
-                                - ''
-                                - pending
-                                - unverified
-                                - verified
-                              type: string
-                          title: account_person_verification_specs
-                          type: object
-                      title: account_owner_specs
-                      type: object
                   address:
                     properties:
                       city:
@@ -321,47 +244,43 @@ paths:
                         type: string
                     title: japan_address_kanji_specs
                     type: object
-                  business_name:
+                  directors_provided:
+                    type: boolean
+                  name:
                     type: string
-                  business_name_kana:
+                  name_kana:
                     type: string
-                  business_name_kanji:
+                  name_kanji:
                     type: string
-                  business_tax_id:
+                  owners_provided:
+                    type: boolean
+                  phone:
                     type: string
-                  business_vat_id:
+                  tax_id:
                     type: string
-                  dob:
-                    properties:
-                      day:
-                        type: integer
-                      month:
-                        type: integer
-                      year:
-                        type: integer
-                    required:
-                      - day
-                      - month
-                      - year
-                    title: date_of_birth_specs
-                    type: object
-                  first_name:
+                  tax_id_registrar:
                     type: string
-                  first_name_kana:
+                  vat_id:
                     type: string
-                  first_name_kanji:
-                    type: string
-                  gender:
-                    type: string
-                  last_name:
-                    type: string
-                  last_name_kana:
-                    type: string
-                  last_name_kanji:
-                    type: string
-                  maiden_name:
-                    type: string
-                  personal_address:
+                title: company_specs
+                type: object
+              default_currency:
+                description: 'Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account''s country](https://stripe.com/docs/payouts).'
+                type: string
+              email:
+                description: 'Email address of the account representative. For Standard accounts, this is used to ask them to claim their Stripe account. For Custom accounts, this only makes the account easier to identify to platforms; Stripe does not email the account representative.'
+                type: string
+              expand:
+                description: Specifies which fields in the response should be expanded.
+                items:
+                  type: string
+                type: array
+              external_account:
+                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
+              individual:
+                description: Information about the person represented by the account. This field is null unless `business_type` is set to `individual`.
+                properties:
+                  address:
                     properties:
                       city:
                         type: string
@@ -377,7 +296,7 @@ paths:
                         type: string
                     title: address_specs
                     type: object
-                  personal_address_kana:
+                  address_kana:
                     properties:
                       city:
                         type: string
@@ -395,7 +314,7 @@ paths:
                         type: string
                     title: japan_address_kana_specs
                     type: object
-                  personal_address_kanji:
+                  address_kanji:
                     properties:
                       city:
                         type: string
@@ -413,20 +332,56 @@ paths:
                         type: string
                     title: japan_address_kanji_specs
                     type: object
-                  personal_id_number:
+                  dob:
+                    properties:
+                      day:
+                        type: integer
+                      month:
+                        type: integer
+                      year:
+                        type: integer
+                    required:
+                      - day
+                      - month
+                      - year
+                    title: date_of_birth_specs
+                    type: object
+                  email:
                     type: string
-                  phone_number:
+                  first_name:
+                    type: string
+                  first_name_kana:
+                    type: string
+                  first_name_kanji:
+                    type: string
+                  gender:
+                    type: string
+                  id_number:
+                    type: string
+                  last_name:
+                    type: string
+                  last_name_kana:
+                    type: string
+                  last_name_kanji:
+                    type: string
+                  maiden_name:
+                    type: string
+                  metadata:
+                    type: object
+                  phone:
                     type: string
                   ssn_last_4:
-                    type: string
-                  tax_id_registrar:
-                    type: string
-                  type:
                     type: string
                   verification:
                     properties:
                       document:
-                        type: string
+                        properties:
+                          back:
+                            type: string
+                          front:
+                            type: string
+                        title: person_verification_document_specs
+                        type: object
                       status:
                         enum:
                           - ''
@@ -434,45 +389,13 @@ paths:
                           - unverified
                           - verified
                         type: string
-                    title: account_person_verification_specs
+                    title: person_verification_specs
                     type: object
-                title: account_legal_entity_specs
+                title: individual_specs
                 type: object
               metadata:
                 description: A set of key-value pairs that you can attach to an `Account` object. This can be useful for storing additional information about the account in a structured format.
                 type: object
-              payout_schedule:
-                description: 'Details on when funds from charges are available, and when they are paid out to an external account. For details, see our [Setting Bank and Debit Card Payouts](/docs/connect/bank-transfers#payout-information) documentation.'
-                properties:
-                  delay_days: {}
-                  interval:
-                    enum:
-                      - daily
-                      - four_times_monthly
-                      - manual
-                      - monthly
-                      - weekly
-                    type: string
-                  monthly_anchor:
-                    type: integer
-                  weekly_anchor:
-                    enum:
-                      - friday
-                      - monday
-                      - saturday
-                      - sunday
-                      - thursday
-                      - tuesday
-                      - wednesday
-                    type: string
-                title: transfer_schedule_specs
-                type: object
-              payout_statement_descriptor:
-                description: 'The text that appears on the bank account statement for payouts. If not set, this defaults to the platform''s bank descriptor as set in the Dashboard.'
-                type: string
-              product_description:
-                description: Internal-only description of the product sold or service provided by the business. It's used by Stripe for risk and underwriting purposes.
-                type: string
               requested_capabilities:
                 description: The set of capabilities you want to unlock for this account. Each capability will be inactive until you have provided its specific requirements and Stripe has verified them. An account may have some of its requested capabilities be active and some be inactive.
                 items:
@@ -481,18 +404,74 @@ paths:
                     - platform_payments
                   type: string
                 type: array
-              statement_descriptor:
-                description: 'The default text that appears on credit card statements when a charge is made [directly on the account](/docs/connect/direct-charges).'
-                type: string
-              support_email:
-                description: A publicly shareable support email address for the business.
-                type: string
-              support_phone:
-                description: A publicly shareable support phone number for the business.
-                type: string
-              support_url:
-                description: A publicly shareable URL that provides support for this account.
-                type: string
+              settings:
+                description: Options for customizing how the account functions within Stripe.
+                properties:
+                  branding:
+                    properties:
+                      icon:
+                        type: string
+                      logo:
+                        type: string
+                      primary_color:
+                        type: string
+                    title: branding_settings_specs
+                    type: object
+                  card_payments:
+                    properties:
+                      decline_on:
+                        properties:
+                          avs_failure:
+                            type: boolean
+                          cvc_failure:
+                            type: boolean
+                        title: decline_charge_on_specs
+                        type: object
+                      statement_descriptor_prefix:
+                        type: string
+                    title: card_payments_settings_specs
+                    type: object
+                  payments:
+                    properties:
+                      statement_descriptor:
+                        type: string
+                    title: payments_settings_specs
+                    type: object
+                  payouts:
+                    properties:
+                      debit_negative_balances:
+                        type: boolean
+                      schedule:
+                        properties:
+                          delay_days: {}
+                          interval:
+                            enum:
+                              - daily
+                              - four_times_monthly
+                              - manual
+                              - monthly
+                              - weekly
+                            type: string
+                          monthly_anchor:
+                            type: integer
+                          weekly_anchor:
+                            enum:
+                              - friday
+                              - monday
+                              - saturday
+                              - sunday
+                              - thursday
+                              - tuesday
+                              - wednesday
+                            type: string
+                        title: transfer_schedule_specs
+                        type: object
+                      statement_descriptor:
+                        type: string
+                    title: payout_settings_specs
+                    type: object
+                title: settings_specs
+                type: object
               tos_acceptance:
                 description: 'Details on the account''s acceptance of the [Stripe Services Agreement](/docs/connect/updating-accounts#tos-acceptance).'
                 properties:
@@ -1152,6 +1131,26 @@ paths:
               ssn_last_4:
                 description: The last 4 digits of the person's social security number.
                 type: string
+              verification:
+                description: The person's verification status.
+                properties:
+                  document:
+                    properties:
+                      back:
+                        type: string
+                      front:
+                        type: string
+                    title: person_verification_document_specs
+                    type: object
+                  status:
+                    enum:
+                      - ''
+                      - pending
+                      - unverified
+                      - verified
+                    type: string
+                title: person_verification_specs
+                type: object
             type: object
       responses:
         '200':
@@ -1348,6 +1347,26 @@ paths:
               ssn_last_4:
                 description: The last 4 digits of the person's social security number.
                 type: string
+              verification:
+                description: The person's verification status.
+                properties:
+                  document:
+                    properties:
+                      back:
+                        type: string
+                      front:
+                        type: string
+                    title: person_verification_document_specs
+                    type: object
+                  status:
+                    enum:
+                      - ''
+                      - pending
+                      - unverified
+                      - verified
+                    type: string
+                title: person_verification_specs
+                type: object
             type: object
       responses:
         '200':
@@ -1559,6 +1578,26 @@ paths:
               ssn_last_4:
                 description: The last 4 digits of the person's social security number.
                 type: string
+              verification:
+                description: The person's verification status.
+                properties:
+                  document:
+                    properties:
+                      back:
+                        type: string
+                      front:
+                        type: string
+                    title: person_verification_document_specs
+                    type: object
+                  status:
+                    enum:
+                      - ''
+                      - pending
+                      - unverified
+                      - verified
+                    type: string
+                title: person_verification_specs
+                type: object
             type: object
       responses:
         '200':
@@ -1755,6 +1794,26 @@ paths:
               ssn_last_4:
                 description: The last 4 digits of the person's social security number.
                 type: string
+              verification:
+                description: The person's verification status.
+                properties:
+                  document:
+                    properties:
+                      back:
+                        type: string
+                      front:
+                        type: string
+                    title: person_verification_document_specs
+                    type: object
+                  status:
+                    enum:
+                      - ''
+                      - pending
+                      - unverified
+                      - verified
+                    type: string
+                title: person_verification_specs
+                type: object
             type: object
       responses:
         '200':
@@ -1896,113 +1955,31 @@ paths:
                 type: string
               bank_account:
                 description: 'Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user''s bank account details.'
-              business_logo:
-                description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at least 128px x 128px)'
-                type: string
-              business_name:
-                description: The publicly sharable name for this account.
-                type: string
-              business_primary_color:
-                description: A CSS hex color value representing the primary branding color for this account.
-                type: string
-              business_url:
-                description: The URL that best shows the service or product provided by this account.
-                type: string
-              country:
-                description: 'The country in which the account holder resides, or in which the business is legally established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in the United States and the business for which you''re creating an account is legally represented in Canada, you would use `CA` as the country for the account being created.'
-                type: string
-              debit_negative_balances:
-                description: 'A Boolean indicating whether Stripe should try to reclaim negative balances from an attached bank account. For details, see [Understanding Connect Account Balances](/docs/connect/account-balances).'
-                type: boolean
-              decline_charge_on:
-                description: 'Account-level settings to automatically decline certain types of charges, regardless of the card issuer''s decision.'
+              business_profile:
+                description: Non-essential business information about the account
                 properties:
-                  avs_failure:
-                    type: boolean
-                  cvc_failure:
-                    type: boolean
-                title: decline_charge_on_specs
+                  mcc:
+                    type: integer
+                  name:
+                    type: string
+                  product_description:
+                    type: string
+                  support_email:
+                    type: string
+                  support_phone:
+                    type: string
+                  support_url:
+                    type: string
+                  url:
+                    type: string
+                title: business_profile_specs
                 type: object
-              default_currency:
-                description: 'Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account''s country](https://stripe.com/docs/payouts).'
+              business_type:
+                description: The business type. Can be `individual` or `company`.
                 type: string
-              email:
-                description: 'The email address of the account holder. For Standard accounts, Stripe will email your user with instructions on how to set up their account. For Custom accounts, this is only to make the account easier to identify to you: Stripe will never directly email your users.'
-                type: string
-              expand:
-                description: Specifies which fields in the response should be expanded.
-                items:
-                  type: string
-                type: array
-              external_account:
-                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
-              from_recipient:
-                type: string
-              legal_entity:
-                description: 'Information about the legal entity itself, including information about the associated account representative.'
+              company:
+                description: Information about the company or business. This field is null unless `business_type` is set to `company`.
                 properties:
-                  additional_owners:
-                    items:
-                      properties:
-                        address:
-                          properties:
-                            city:
-                              type: string
-                            country:
-                              type: string
-                            line1:
-                              type: string
-                            line2:
-                              type: string
-                            postal_code:
-                              type: string
-                            state:
-                              type: string
-                          title: address_specs
-                          type: object
-                        dob:
-                          properties:
-                            day:
-                              type: integer
-                            month:
-                              type: integer
-                            year:
-                              type: integer
-                          required:
-                            - day
-                            - month
-                            - year
-                          title: date_of_birth_specs
-                          type: object
-                        email:
-                          type: string
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-                        maiden_name:
-                          type: string
-                        personal_id_number:
-                          type: string
-                        phone:
-                          type: string
-                        ssn_last_4:
-                          type: string
-                        verification:
-                          properties:
-                            document:
-                              type: string
-                            status:
-                              enum:
-                                - ''
-                                - pending
-                                - unverified
-                                - verified
-                              type: string
-                          title: account_person_verification_specs
-                          type: object
-                      title: account_owner_specs
-                      type: object
                   address:
                     properties:
                       city:
@@ -2055,47 +2032,48 @@ paths:
                         type: string
                     title: japan_address_kanji_specs
                     type: object
-                  business_name:
+                  directors_provided:
+                    type: boolean
+                  name:
                     type: string
-                  business_name_kana:
+                  name_kana:
                     type: string
-                  business_name_kanji:
+                  name_kanji:
                     type: string
-                  business_tax_id:
+                  owners_provided:
+                    type: boolean
+                  phone:
                     type: string
-                  business_vat_id:
+                  tax_id:
                     type: string
-                  dob:
-                    properties:
-                      day:
-                        type: integer
-                      month:
-                        type: integer
-                      year:
-                        type: integer
-                    required:
-                      - day
-                      - month
-                      - year
-                    title: date_of_birth_specs
-                    type: object
-                  first_name:
+                  tax_id_registrar:
                     type: string
-                  first_name_kana:
+                  vat_id:
                     type: string
-                  first_name_kanji:
-                    type: string
-                  gender:
-                    type: string
-                  last_name:
-                    type: string
-                  last_name_kana:
-                    type: string
-                  last_name_kanji:
-                    type: string
-                  maiden_name:
-                    type: string
-                  personal_address:
+                title: company_specs
+                type: object
+              country:
+                description: 'The country in which the account holder resides, or in which the business is legally established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in the United States and the business for which you''re creating an account is legally represented in Canada, you would use `CA` as the country for the account being created.'
+                type: string
+              default_currency:
+                description: 'Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account''s country](https://stripe.com/docs/payouts).'
+                type: string
+              email:
+                description: 'The email address of the account holder. For Standard accounts, Stripe will email your user with instructions on how to set up their account. For Custom accounts, this is only to make the account easier to identify to you: Stripe will never directly email your users.'
+                type: string
+              expand:
+                description: Specifies which fields in the response should be expanded.
+                items:
+                  type: string
+                type: array
+              external_account:
+                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
+              from_recipient:
+                type: string
+              individual:
+                description: Information about the person represented by the account. This field is null unless `business_type` is set to `individual`.
+                properties:
+                  address:
                     properties:
                       city:
                         type: string
@@ -2111,7 +2089,7 @@ paths:
                         type: string
                     title: address_specs
                     type: object
-                  personal_address_kana:
+                  address_kana:
                     properties:
                       city:
                         type: string
@@ -2129,7 +2107,7 @@ paths:
                         type: string
                     title: japan_address_kana_specs
                     type: object
-                  personal_address_kanji:
+                  address_kanji:
                     properties:
                       city:
                         type: string
@@ -2147,20 +2125,56 @@ paths:
                         type: string
                     title: japan_address_kanji_specs
                     type: object
-                  personal_id_number:
+                  dob:
+                    properties:
+                      day:
+                        type: integer
+                      month:
+                        type: integer
+                      year:
+                        type: integer
+                    required:
+                      - day
+                      - month
+                      - year
+                    title: date_of_birth_specs
+                    type: object
+                  email:
                     type: string
-                  phone_number:
+                  first_name:
+                    type: string
+                  first_name_kana:
+                    type: string
+                  first_name_kanji:
+                    type: string
+                  gender:
+                    type: string
+                  id_number:
+                    type: string
+                  last_name:
+                    type: string
+                  last_name_kana:
+                    type: string
+                  last_name_kanji:
+                    type: string
+                  maiden_name:
+                    type: string
+                  metadata:
+                    type: object
+                  phone:
                     type: string
                   ssn_last_4:
-                    type: string
-                  tax_id_registrar:
-                    type: string
-                  type:
                     type: string
                   verification:
                     properties:
                       document:
-                        type: string
+                        properties:
+                          back:
+                            type: string
+                          front:
+                            type: string
+                        title: person_verification_document_specs
+                        type: object
                       status:
                         enum:
                           - ''
@@ -2168,57 +2182,89 @@ paths:
                           - unverified
                           - verified
                         type: string
-                    title: account_person_verification_specs
+                    title: person_verification_specs
                     type: object
-                title: account_legal_entity_specs
+                title: individual_specs
                 type: object
               metadata:
                 description: A set of key-value pairs that you can attach to an `Account` object. This can be useful for storing additional information about the account in a structured format.
                 type: object
-              payout_schedule:
-                description: 'Details on when funds from charges are available, and when they are paid out to an external account. For details, see our [Setting Bank and Debit Card Payouts](/docs/connect/bank-transfers#payout-information) documentation.'
+              requested_capabilities:
+                description: The set of capabilities you want to unlock for this account. Each capability will be inactive until you have provided its specific requirements and Stripe has verified them. An account may have some of its requested capabilities be active and some be inactive.
+                items:
+                  enum:
+                    - card_payments
+                    - platform_payments
+                  type: string
+                type: array
+              settings:
+                description: Options for customizing how the account functions within Stripe.
                 properties:
-                  delay_days: {}
-                  interval:
-                    enum:
-                      - daily
-                      - four_times_monthly
-                      - manual
-                      - monthly
-                      - weekly
-                    type: string
-                  monthly_anchor:
-                    type: integer
-                  weekly_anchor:
-                    enum:
-                      - friday
-                      - monday
-                      - saturday
-                      - sunday
-                      - thursday
-                      - tuesday
-                      - wednesday
-                    type: string
-                title: transfer_schedule_specs
+                  branding:
+                    properties:
+                      icon:
+                        type: string
+                      logo:
+                        type: string
+                      primary_color:
+                        type: string
+                    title: branding_settings_specs
+                    type: object
+                  card_payments:
+                    properties:
+                      decline_on:
+                        properties:
+                          avs_failure:
+                            type: boolean
+                          cvc_failure:
+                            type: boolean
+                        title: decline_charge_on_specs
+                        type: object
+                      statement_descriptor_prefix:
+                        type: string
+                    title: card_payments_settings_specs
+                    type: object
+                  payments:
+                    properties:
+                      statement_descriptor:
+                        type: string
+                    title: payments_settings_specs
+                    type: object
+                  payouts:
+                    properties:
+                      debit_negative_balances:
+                        type: boolean
+                      schedule:
+                        properties:
+                          delay_days: {}
+                          interval:
+                            enum:
+                              - daily
+                              - four_times_monthly
+                              - manual
+                              - monthly
+                              - weekly
+                            type: string
+                          monthly_anchor:
+                            type: integer
+                          weekly_anchor:
+                            enum:
+                              - friday
+                              - monday
+                              - saturday
+                              - sunday
+                              - thursday
+                              - tuesday
+                              - wednesday
+                            type: string
+                        title: transfer_schedule_specs
+                        type: object
+                      statement_descriptor:
+                        type: string
+                    title: payout_settings_specs
+                    type: object
+                title: settings_specs
                 type: object
-              payout_statement_descriptor:
-                description: 'The text that appears on the bank account statement for payouts. If not set, this defaults to the platform''s bank descriptor as set in the Dashboard.'
-                type: string
-              product_description:
-                description: Internal-only description of the product sold or service provided by the business. It's used by Stripe for risk and underwriting purposes.
-                type: string
-              statement_descriptor:
-                description: 'The default text that appears on credit card statements when a charge is made [directly on the account](/docs/connect/direct-charges).'
-                type: string
-              support_email:
-                description: A publicly shareable support email address for the business.
-                type: string
-              support_phone:
-                description: A publicly shareable support phone number for the business.
-                type: string
-              support_url:
-                description: A publicly shareable URL that provides support for this account.
-                type: string
               tos_acceptance:
                 description: 'Details on the account''s acceptance of the [Stripe Services Agreement](/docs/connect/updating-accounts#tos-acceptance).'
                 properties:
@@ -2320,108 +2366,31 @@ paths:
                 type: string
               bank_account:
                 description: 'Either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary containing a user''s bank account details.'
-              business_logo:
-                description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at least 128px x 128px)'
-                type: string
-              business_name:
-                description: The publicly sharable name for this account.
-                type: string
-              business_primary_color:
-                description: A CSS hex color value representing the primary branding color for this account.
-                type: string
-              business_url:
-                description: The URL that best shows the service or product provided by this account.
-                type: string
-              debit_negative_balances:
-                description: 'A Boolean indicating whether Stripe should try to reclaim negative balances from an attached bank account. For details, see [Understanding Connect Account Balances](/docs/connect/account-balances).'
-                type: boolean
-              decline_charge_on:
-                description: 'Account-level settings to automatically decline certain types of charges, regardless of the card issuer''s decision.'
+              business_profile:
+                description: Non-essential business information about the account
                 properties:
-                  avs_failure:
-                    type: boolean
-                  cvc_failure:
-                    type: boolean
-                title: decline_charge_on_specs
+                  mcc:
+                    type: integer
+                  name:
+                    type: string
+                  product_description:
+                    type: string
+                  support_email:
+                    type: string
+                  support_phone:
+                    type: string
+                  support_url:
+                    type: string
+                  url:
+                    type: string
+                title: business_profile_specs
                 type: object
-              default_currency:
-                description: 'Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account''s country](https://stripe.com/docs/payouts).'
+              business_type:
+                description: The business type. Can be `individual` or `company`.
                 type: string
-              email:
-                description: 'Email address of the account representative. For Standard accounts, this is used to ask them to claim their Stripe account. For Custom accounts, this only makes the account easier to identify to platforms; Stripe does not email the account representative.'
-                type: string
-              expand:
-                description: Specifies which fields in the response should be expanded.
-                items:
-                  type: string
-                type: array
-              external_account:
-                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
-              legal_entity:
-                description: 'Information about the legal entity itself, including information about the associated account representative.'
+              company:
+                description: Information about the company or business. This field is null unless `business_type` is set to `company`.
                 properties:
-                  additional_owners:
-                    items:
-                      properties:
-                        address:
-                          properties:
-                            city:
-                              type: string
-                            country:
-                              type: string
-                            line1:
-                              type: string
-                            line2:
-                              type: string
-                            postal_code:
-                              type: string
-                            state:
-                              type: string
-                          title: address_specs
-                          type: object
-                        dob:
-                          properties:
-                            day:
-                              type: integer
-                            month:
-                              type: integer
-                            year:
-                              type: integer
-                          required:
-                            - day
-                            - month
-                            - year
-                          title: date_of_birth_specs
-                          type: object
-                        email:
-                          type: string
-                        first_name:
-                          type: string
-                        last_name:
-                          type: string
-                        maiden_name:
-                          type: string
-                        personal_id_number:
-                          type: string
-                        phone:
-                          type: string
-                        ssn_last_4:
-                          type: string
-                        verification:
-                          properties:
-                            document:
-                              type: string
-                            status:
-                              enum:
-                                - ''
-                                - pending
-                                - unverified
-                                - verified
-                              type: string
-                          title: account_person_verification_specs
-                          type: object
-                      title: account_owner_specs
-                      type: object
                   address:
                     properties:
                       city:
@@ -2474,47 +2443,43 @@ paths:
                         type: string
                     title: japan_address_kanji_specs
                     type: object
-                  business_name:
+                  directors_provided:
+                    type: boolean
+                  name:
                     type: string
-                  business_name_kana:
+                  name_kana:
                     type: string
-                  business_name_kanji:
+                  name_kanji:
                     type: string
-                  business_tax_id:
+                  owners_provided:
+                    type: boolean
+                  phone:
                     type: string
-                  business_vat_id:
+                  tax_id:
                     type: string
-                  dob:
-                    properties:
-                      day:
-                        type: integer
-                      month:
-                        type: integer
-                      year:
-                        type: integer
-                    required:
-                      - day
-                      - month
-                      - year
-                    title: date_of_birth_specs
-                    type: object
-                  first_name:
+                  tax_id_registrar:
                     type: string
-                  first_name_kana:
+                  vat_id:
                     type: string
-                  first_name_kanji:
-                    type: string
-                  gender:
-                    type: string
-                  last_name:
-                    type: string
-                  last_name_kana:
-                    type: string
-                  last_name_kanji:
-                    type: string
-                  maiden_name:
-                    type: string
-                  personal_address:
+                title: company_specs
+                type: object
+              default_currency:
+                description: 'Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account''s country](https://stripe.com/docs/payouts).'
+                type: string
+              email:
+                description: 'Email address of the account representative. For Standard accounts, this is used to ask them to claim their Stripe account. For Custom accounts, this only makes the account easier to identify to platforms; Stripe does not email the account representative.'
+                type: string
+              expand:
+                description: Specifies which fields in the response should be expanded.
+                items:
+                  type: string
+                type: array
+              external_account:
+                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
+              individual:
+                description: Information about the person represented by the account. This field is null unless `business_type` is set to `individual`.
+                properties:
+                  address:
                     properties:
                       city:
                         type: string
@@ -2530,7 +2495,7 @@ paths:
                         type: string
                     title: address_specs
                     type: object
-                  personal_address_kana:
+                  address_kana:
                     properties:
                       city:
                         type: string
@@ -2548,7 +2513,7 @@ paths:
                         type: string
                     title: japan_address_kana_specs
                     type: object
-                  personal_address_kanji:
+                  address_kanji:
                     properties:
                       city:
                         type: string
@@ -2566,20 +2531,56 @@ paths:
                         type: string
                     title: japan_address_kanji_specs
                     type: object
-                  personal_id_number:
+                  dob:
+                    properties:
+                      day:
+                        type: integer
+                      month:
+                        type: integer
+                      year:
+                        type: integer
+                    required:
+                      - day
+                      - month
+                      - year
+                    title: date_of_birth_specs
+                    type: object
+                  email:
                     type: string
-                  phone_number:
+                  first_name:
+                    type: string
+                  first_name_kana:
+                    type: string
+                  first_name_kanji:
+                    type: string
+                  gender:
+                    type: string
+                  id_number:
+                    type: string
+                  last_name:
+                    type: string
+                  last_name_kana:
+                    type: string
+                  last_name_kanji:
+                    type: string
+                  maiden_name:
+                    type: string
+                  metadata:
+                    type: object
+                  phone:
                     type: string
                   ssn_last_4:
-                    type: string
-                  tax_id_registrar:
-                    type: string
-                  type:
                     type: string
                   verification:
                     properties:
                       document:
-                        type: string
+                        properties:
+                          back:
+                            type: string
+                          front:
+                            type: string
+                        title: person_verification_document_specs
+                        type: object
                       status:
                         enum:
                           - ''
@@ -2587,45 +2588,13 @@ paths:
                           - unverified
                           - verified
                         type: string
-                    title: account_person_verification_specs
+                    title: person_verification_specs
                     type: object
-                title: account_legal_entity_specs
+                title: individual_specs
                 type: object
               metadata:
                 description: A set of key-value pairs that you can attach to an `Account` object. This can be useful for storing additional information about the account in a structured format.
                 type: object
-              payout_schedule:
-                description: 'Details on when funds from charges are available, and when they are paid out to an external account. For details, see our [Setting Bank and Debit Card Payouts](/docs/connect/bank-transfers#payout-information) documentation.'
-                properties:
-                  delay_days: {}
-                  interval:
-                    enum:
-                      - daily
-                      - four_times_monthly
-                      - manual
-                      - monthly
-                      - weekly
-                    type: string
-                  monthly_anchor:
-                    type: integer
-                  weekly_anchor:
-                    enum:
-                      - friday
-                      - monday
-                      - saturday
-                      - sunday
-                      - thursday
-                      - tuesday
-                      - wednesday
-                    type: string
-                title: transfer_schedule_specs
-                type: object
-              payout_statement_descriptor:
-                description: 'The text that appears on the bank account statement for payouts. If not set, this defaults to the platform''s bank descriptor as set in the Dashboard.'
-                type: string
-              product_description:
-                description: Internal-only description of the product sold or service provided by the business. It's used by Stripe for risk and underwriting purposes.
-                type: string
               requested_capabilities:
                 description: The set of capabilities you want to unlock for this account. Each capability will be inactive until you have provided its specific requirements and Stripe has verified them. An account may have some of its requested capabilities be active and some be inactive.
                 items:
@@ -2634,18 +2603,74 @@ paths:
                     - platform_payments
                   type: string
                 type: array
-              statement_descriptor:
-                description: 'The default text that appears on credit card statements when a charge is made [directly on the account](/docs/connect/direct-charges).'
-                type: string
-              support_email:
-                description: A publicly shareable support email address for the business.
-                type: string
-              support_phone:
-                description: A publicly shareable support phone number for the business.
-                type: string
-              support_url:
-                description: A publicly shareable URL that provides support for this account.
-                type: string
+              settings:
+                description: Options for customizing how the account functions within Stripe.
+                properties:
+                  branding:
+                    properties:
+                      icon:
+                        type: string
+                      logo:
+                        type: string
+                      primary_color:
+                        type: string
+                    title: branding_settings_specs
+                    type: object
+                  card_payments:
+                    properties:
+                      decline_on:
+                        properties:
+                          avs_failure:
+                            type: boolean
+                          cvc_failure:
+                            type: boolean
+                        title: decline_charge_on_specs
+                        type: object
+                      statement_descriptor_prefix:
+                        type: string
+                    title: card_payments_settings_specs
+                    type: object
+                  payments:
+                    properties:
+                      statement_descriptor:
+                        type: string
+                    title: payments_settings_specs
+                    type: object
+                  payouts:
+                    properties:
+                      debit_negative_balances:
+                        type: boolean
+                      schedule:
+                        properties:
+                          delay_days: {}
+                          interval:
+                            enum:
+                              - daily
+                              - four_times_monthly
+                              - manual
+                              - monthly
+                              - weekly
+                            type: string
+                          monthly_anchor:
+                            type: integer
+                          weekly_anchor:
+                            enum:
+                              - friday
+                              - monday
+                              - saturday
+                              - sunday
+                              - thursday
+                              - tuesday
+                              - wednesday
+                            type: string
+                        title: transfer_schedule_specs
+                        type: object
+                      statement_descriptor:
+                        type: string
+                    title: payout_settings_specs
+                    type: object
+                title: settings_specs
+                type: object
               tos_acceptance:
                 description: 'Details on the account''s acceptance of the [Stripe Services Agreement](/docs/connect/updating-accounts#tos-acceptance).'
                 properties:
@@ -3349,6 +3374,26 @@ paths:
               ssn_last_4:
                 description: The last 4 digits of the person's social security number.
                 type: string
+              verification:
+                description: The person's verification status.
+                properties:
+                  document:
+                    properties:
+                      back:
+                        type: string
+                      front:
+                        type: string
+                    title: person_verification_document_specs
+                    type: object
+                  status:
+                    enum:
+                      - ''
+                      - pending
+                      - unverified
+                      - verified
+                    type: string
+                title: person_verification_specs
+                type: object
             type: object
       responses:
         '200':
@@ -3557,6 +3602,26 @@ paths:
               ssn_last_4:
                 description: The last 4 digits of the person's social security number.
                 type: string
+              verification:
+                description: The person's verification status.
+                properties:
+                  document:
+                    properties:
+                      back:
+                        type: string
+                      front:
+                        type: string
+                    title: person_verification_document_specs
+                    type: object
+                  status:
+                    enum:
+                      - ''
+                      - pending
+                      - unverified
+                      - verified
+                    type: string
+                title: person_verification_specs
+                type: object
             type: object
       responses:
         '200':
@@ -3776,6 +3841,26 @@ paths:
               ssn_last_4:
                 description: The last 4 digits of the person's social security number.
                 type: string
+              verification:
+                description: The person's verification status.
+                properties:
+                  document:
+                    properties:
+                      back:
+                        type: string
+                      front:
+                        type: string
+                    title: person_verification_document_specs
+                    type: object
+                  status:
+                    enum:
+                      - ''
+                      - pending
+                      - unverified
+                      - verified
+                    type: string
+                title: person_verification_specs
+                type: object
             type: object
       responses:
         '200':
@@ -3984,6 +4069,26 @@ paths:
               ssn_last_4:
                 description: The last 4 digits of the person's social security number.
                 type: string
+              verification:
+                description: The person's verification status.
+                properties:
+                  document:
+                    properties:
+                      back:
+                        type: string
+                      front:
+                        type: string
+                    title: person_verification_document_specs
+                    type: object
+                  status:
+                    enum:
+                      - ''
+                      - pending
+                      - unverified
+                      - verified
+                    type: string
+                title: person_verification_specs
+                type: object
             type: object
       responses:
         '200':
@@ -4935,9 +5040,9 @@ paths:
                 description: 'A positive integer representing how much to charge, in the [smallest currency unit](/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or `100` to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or [equivalent in charge currency](/docs/currencies#minimum-and-maximum-charge-amounts).'
                 type: integer
               application_fee:
-                description: 'A fee in %s that will be applied to the charge and transferred to the application owner''s Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in order to take an application fee. For more information, see the application fees [documentation](/docs/connect/direct-charges#collecting-fees).'
                 type: integer
               application_fee_amount:
+                description: 'A fee in %s that will be applied to the charge and transferred to the application owner''s Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in order to take an application fee. For more information, see the application fees [documentation](/docs/connect/direct-charges#collecting-fees).'
                 type: integer
               capture:
                 description: 'Whether to immediately capture the charge. Defaults to `true`. When `false`, the charge issues an authorization (or pre-authorization), and will need to be [captured](#capture_charge) later. Uncaptured charges expire in _seven days_. For more information, see the [authorizing charges and settling later](/docs/charges#auth-and-capture) documentation.'
@@ -4974,6 +5079,8 @@ paths:
                 type: object
               on_behalf_of:
                 description: 'The Stripe account ID for which these funds are intended. Automatically set if you use the `destination` parameter. For details, see [Creating Separate Charges and Transfers](/docs/connect/charges-transfers#on-behalf-of).'
+                type: string
+              payment_intent:
                 type: string
               receipt_email:
                 description: 'The email address to which this charge''s [receipt](/docs/dashboard/receipts) will be sent. The receipt will not be sent until the charge is paid, and no receipts will be sent for test mode charges. If this charge is for a [Customer](/docs/api/customers/object), the email address specified here will override the customer''s email address. If `receipt_email` is specified for a charge in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).'
@@ -5168,6 +5275,9 @@ paths:
                 type: integer
               application_fee:
                 description: An application fee to add on to this charge. Can only be used with Stripe Connect.
+                type: integer
+              application_fee_amount:
+                description: 'An application fee amount to add on to this charge, which must be less than or equal to the original amount. Can only be used with Stripe Connect.'
                 type: integer
               destination:
                 description: An optional dictionary containing a new destination amount to use. Can only be used with destination charges created with Stripe Connect.
@@ -5378,10 +5488,6 @@ paths:
                 type: integer
               description:
                 type: string
-              directive:
-                enum:
-                  - risk_refund
-                type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
                 items:
@@ -5490,8 +5596,6 @@ paths:
               amount:
                 type: integer
               description:
-                type: string
-              directive:
                 type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
@@ -5634,10 +5738,14 @@ paths:
               payment_intent_data:
                 description: A subset of parameters to be passed to PaymentIntent creation.
                 properties:
+                  application_fee_amount:
+                    type: integer
                   description:
                     type: string
                   metadata:
                     type: object
+                  on_behalf_of:
+                    type: string
                   receipt_email:
                     type: string
                   shipping:
@@ -5675,6 +5783,14 @@ paths:
                     type: object
                   statement_descriptor:
                     type: string
+                  transfer_data:
+                    properties:
+                      destination:
+                        type: string
+                    required:
+                      - destination
+                    title: transfer_data_params
+                    type: object
                 title: payment_intent_data_params
                 type: object
               payment_method_types:
@@ -5718,125 +5834,6 @@ paths:
           description: Successful response.
           schema:
             $ref: '#/definitions/checkout.session'
-        default:
-          description: Error response.
-          schema:
-            $ref: '#/definitions/error'
-  /v1/checkout_sessions:
-    post:
-      description: <p>Creates a CheckoutSession object.</p>
-      operationId: PostLegacy
-      parameters:
-        - description: Body parameters for the request.
-          in: body
-          name: payload
-          required: true
-          schema:
-            properties:
-              cancel_url:
-                description: The URL the customer will be directed to if they decide to go back to your website.
-                type: string
-              client_reference_id:
-                description: The reference to identify a payment made with Checkout. This reference will be echoed back in Checkout webhooks.
-                type: string
-              expand:
-                description: Specifies which fields in the response should be expanded.
-                items:
-                  type: string
-                type: array
-              line_items:
-                description: A list of items your customer is purchasing.
-                items:
-                  properties:
-                    amount:
-                      type: integer
-                    currency:
-                      type: string
-                    description:
-                      type: string
-                    images:
-                      items:
-                        type: string
-                      type: array
-                    name:
-                      type: string
-                    quantity:
-                      type: integer
-                  required:
-                    - amount
-                    - currency
-                    - name
-                    - quantity
-                  title: line_item_params
-                  type: object
-                type: array
-              payment_intent_data:
-                description: A subset of parameters to be passed to payment intent creation.
-                properties:
-                  description:
-                    type: string
-                  metadata:
-                    type: object
-                  receipt_email:
-                    type: string
-                  shipping:
-                    properties:
-                      address:
-                        properties:
-                          city:
-                            type: string
-                          country:
-                            type: string
-                          line1:
-                            type: string
-                          line2:
-                            type: string
-                          postal_code:
-                            type: string
-                          state:
-                            type: string
-                        required:
-                          - line1
-                        title: address
-                        type: object
-                      carrier:
-                        type: string
-                      name:
-                        type: string
-                      phone:
-                        type: string
-                      tracking_number:
-                        type: string
-                    required:
-                      - address
-                      - name
-                    title: shipping
-                    type: object
-                  statement_descriptor:
-                    type: string
-                title: payment_intent_data_params
-                type: object
-              payment_method_types:
-                description: The list of payment method types (e.g. card) that this CheckoutSession is allowed to use.
-                items:
-                  enum:
-                    - card
-                  type: string
-                type: array
-              success_url:
-                description: The URL the customer will be directed to after a successful payment.
-                type: string
-            required:
-              - cancel_url
-              - line_items
-              - payment_method_types
-              - success_url
-            type: object
-      responses:
-        '200':
-          description: Successful response.
-          schema:
-            $ref: '#/definitions/checkout_session'
         default:
           description: Error response.
           schema:
@@ -6215,9 +6212,6 @@ paths:
                 type: string
               customer:
                 type: string
-              default_source:
-                description: ID of the default payment source for the customer.
-                type: string
               description:
                 description: An arbitrary string that you can attach to a customer object. It is displayed alongside the customer in the dashboard.
                 type: string
@@ -6260,7 +6254,12 @@ paths:
               shipping:
                 description: The customer's shipping information. Appears on invoices emailed to this customer.
               source:
-                description: 'The source can either be a [Token](/docs/api#tokens) or a [Source](/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements), or a dictionary containing a user''s credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free. Passing `source` will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source, instead use the [card creation API](https://stripe.com/docs/api#create_card) to add the card and then the [customer update API](https://stripe.com/docs/api#update_customer) to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card.'
+                description: |-
+                  The source can be a [Token](/docs/api#tokens) or a [Source](/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free.
+
+                  Passing `source` will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source, instead use the [card creation API](https://stripe.com/docs/api#create_card) to add the card and then the [customer update API](https://stripe.com/docs/api#update_customer) to set it as the default.
+
+                  Whenever you attach a card to a customer, Stripe will automatically validate the card.
               tax_info:
                 description: The customer's tax information. Appears on invoices emailed to this customer.
                 properties:
@@ -6407,7 +6406,12 @@ paths:
               shipping:
                 description: The customer's shipping information. Appears on invoices emailed to this customer.
               source:
-                description: 'The source can either be a [Token](/docs/api#tokens) or a [Source](/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements), or a dictionary containing a user''s credit card details (with the options shown below). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free. Passing `source` will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source, instead use the [card creation API](https://stripe.com/docs/api#create_card) to add the card and then the [customer update API](https://stripe.com/docs/api#update_customer) to set it as the default. Whenever you attach a card to a customer, Stripe will automatically validate the card.'
+                description: |-
+                  The source can be a [Token](/docs/api#tokens) or a [Source](/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free.
+
+                  Passing `source` will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source, instead use the [card creation API](https://stripe.com/docs/api#create_card) to add the card and then the [customer update API](https://stripe.com/docs/api#update_customer) to set it as the default.
+
+                  Whenever you attach a card to a customer, Stripe will automatically validate the card.
               tax_info:
                 description: The customer's tax information. Appears on invoices emailed to this customer.
                 properties:
@@ -14596,8 +14600,6 @@ paths:
                 type: string
               description:
                 type: string
-              directive:
-                type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
                 items:
@@ -15660,6 +15662,8 @@ paths:
                 items:
                   type: string
                 type: array
+              is_permitted_source_usage:
+                type: boolean
               mandate:
                 description: Information about a mandate possibility attached to a source object (generally for bank debits) as well as its acceptance status.
                 properties:
@@ -17538,72 +17542,11 @@ paths:
           schema:
             properties:
               account:
-                description: The account information to be stored in this token.
                 properties:
-                  legal_entity:
+                  business_type:
+                    type: string
+                  company:
                     properties:
-                      additional_owners:
-                        items:
-                          properties:
-                            address:
-                              properties:
-                                city:
-                                  type: string
-                                country:
-                                  type: string
-                                line1:
-                                  type: string
-                                line2:
-                                  type: string
-                                postal_code:
-                                  type: string
-                                state:
-                                  type: string
-                              title: address_specs
-                              type: object
-                            dob:
-                              properties:
-                                day:
-                                  type: integer
-                                month:
-                                  type: integer
-                                year:
-                                  type: integer
-                              required:
-                                - day
-                                - month
-                                - year
-                              title: date_of_birth_specs
-                              type: object
-                            email:
-                              type: string
-                            first_name:
-                              type: string
-                            last_name:
-                              type: string
-                            maiden_name:
-                              type: string
-                            personal_id_number:
-                              type: string
-                            phone:
-                              type: string
-                            ssn_last_4:
-                              type: string
-                            verification:
-                              properties:
-                                document:
-                                  type: string
-                                status:
-                                  enum:
-                                    - ''
-                                    - pending
-                                    - unverified
-                                    - verified
-                                  type: string
-                              title: account_person_verification_specs
-                              type: object
-                          title: account_owner_specs
-                          type: object
                       address:
                         properties:
                           city:
@@ -17656,47 +17599,29 @@ paths:
                             type: string
                         title: japan_address_kanji_specs
                         type: object
-                      business_name:
+                      directors_provided:
+                        type: boolean
+                      name:
                         type: string
-                      business_name_kana:
+                      name_kana:
                         type: string
-                      business_name_kanji:
+                      name_kanji:
                         type: string
-                      business_tax_id:
+                      owners_provided:
+                        type: boolean
+                      phone:
                         type: string
-                      business_vat_id:
+                      tax_id:
                         type: string
-                      dob:
-                        properties:
-                          day:
-                            type: integer
-                          month:
-                            type: integer
-                          year:
-                            type: integer
-                        required:
-                          - day
-                          - month
-                          - year
-                        title: date_of_birth_specs
-                        type: object
-                      first_name:
+                      tax_id_registrar:
                         type: string
-                      first_name_kana:
+                      vat_id:
                         type: string
-                      first_name_kanji:
-                        type: string
-                      gender:
-                        type: string
-                      last_name:
-                        type: string
-                      last_name_kana:
-                        type: string
-                      last_name_kanji:
-                        type: string
-                      maiden_name:
-                        type: string
-                      personal_address:
+                    title: company_specs
+                    type: object
+                  individual:
+                    properties:
+                      address:
                         properties:
                           city:
                             type: string
@@ -17712,7 +17637,7 @@ paths:
                             type: string
                         title: address_specs
                         type: object
-                      personal_address_kana:
+                      address_kana:
                         properties:
                           city:
                             type: string
@@ -17730,7 +17655,7 @@ paths:
                             type: string
                         title: japan_address_kana_specs
                         type: object
-                      personal_address_kanji:
+                      address_kanji:
                         properties:
                           city:
                             type: string
@@ -17748,20 +17673,56 @@ paths:
                             type: string
                         title: japan_address_kanji_specs
                         type: object
-                      personal_id_number:
+                      dob:
+                        properties:
+                          day:
+                            type: integer
+                          month:
+                            type: integer
+                          year:
+                            type: integer
+                        required:
+                          - day
+                          - month
+                          - year
+                        title: date_of_birth_specs
+                        type: object
+                      email:
                         type: string
-                      phone_number:
+                      first_name:
+                        type: string
+                      first_name_kana:
+                        type: string
+                      first_name_kanji:
+                        type: string
+                      gender:
+                        type: string
+                      id_number:
+                        type: string
+                      last_name:
+                        type: string
+                      last_name_kana:
+                        type: string
+                      last_name_kanji:
+                        type: string
+                      maiden_name:
+                        type: string
+                      metadata:
+                        type: object
+                      phone:
                         type: string
                       ssn_last_4:
-                        type: string
-                      tax_id_registrar:
-                        type: string
-                      type:
                         type: string
                       verification:
                         properties:
                           document:
-                            type: string
+                            properties:
+                              back:
+                                type: string
+                              front:
+                                type: string
+                            title: person_verification_document_specs
+                            type: object
                           status:
                             enum:
                               - ''
@@ -17769,14 +17730,12 @@ paths:
                               - unverified
                               - verified
                             type: string
-                        title: account_person_verification_specs
+                        title: person_verification_specs
                         type: object
-                    title: account_legal_entity_specs
+                    title: individual_specs
                     type: object
                   tos_shown_and_accepted:
                     type: boolean
-                required:
-                  - legal_entity
                 title: connect_js_account_token_specs
                 type: object
               amount:
@@ -17806,13 +17765,13 @@ paths:
                 type: string
               pii:
                 properties:
-                  personal_id_number:
+                  id_number:
                     type: string
                   ssn_last_4:
                     type: string
                   tax_id:
                     type: string
-                title: pii_token_specs
+                title: new_pii_token_specs
                 type: object
               recipient:
                 type: string
@@ -19004,44 +18963,30 @@ definitions:
         type: string
       application_url:
         type: string
-      business_logo:
-        description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for this account (at least 128px x 128px).'
+      business_profile:
+        $ref: '#/definitions/account_business_profile'
+      business_type:
+        description: The business type. Can be `individual` or `company`.
         type: string
-        x-expansionResources:
-          oneOf:
-            - $ref: '#/definitions/file'
-      business_name:
-        description: The publicly visible name of the business.
-        type: string
-      business_primary_color:
-        description: A CSS hex color value representing the primary branding color for this account.
-        type: string
-      business_url:
-        description: The publicly visible website of the business.
-        type: string
+      capabilities:
+        $ref: '#/definitions/account_capabilities'
       charges_enabled:
         description: Whether the account can create live charges.
         type: boolean
+      company:
+        $ref: '#/definitions/legal_entity_company'
       country:
         description: The account's country.
         type: string
       created:
         description: Time at which the object was created. Measured in seconds since the Unix epoch.
         type: integer
-      debit_negative_balances:
-        description: 'A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](/docs/connect/account-balances) documentation for details.'
-        type: boolean
-      decline_charge_on:
-        $ref: '#/definitions/account_decline_charge_on'
       default_currency:
         description: 'Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account''s country](https://stripe.com/docs/payouts).'
         type: string
       details_submitted:
         description: Whether account details have been submitted. Standard accounts cannot receive payouts before this is true.
         type: boolean
-      display_name:
-        description: The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.
-        type: string
       email:
         description: The primary user's email address.
         type: string
@@ -19076,10 +19021,8 @@ definitions:
       id:
         description: Unique identifier for the object.
         type: string
-      keys:
-        $ref: '#/definitions/account_keys'
-      legal_entity:
-        $ref: '#/definitions/legal_entity'
+      individual:
+        $ref: '#/definitions/person'
       metadata:
         description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
         type: object
@@ -19088,57 +19031,132 @@ definitions:
         enum:
           - account
         type: string
-      payout_schedule:
-        $ref: '#/definitions/transfer_schedule'
-      payout_statement_descriptor:
-        description: 'The text that appears on the bank account statement for payouts. If not set, this defaults to the platform''s bank descriptor as set in the Dashboard.'
-        type: string
       payouts_enabled:
         description: Whether Stripe can send payouts to this account.
         type: boolean
-      product_description:
-        description: Internal-only description of the product sold or service provided by the business. It's used by Stripe for risk and underwriting purposes.
-        type: string
-      statement_descriptor:
-        description: 'The default text that appears on credit card statements when a charge is made [directly on the account](/docs/connect/direct-charges).'
-        type: string
-      support_address:
-        $ref: '#/definitions/address'
-      support_email:
-        description: A publicly shareable support email address for the business.
-        type: string
-      support_phone:
-        description: A publicly shareable support phone number for the business.
-        type: string
-      support_url:
-        description: A publicly available website for handling support issues.
-        type: string
-      timezone:
-        description: 'The timezone used in the Stripe Dashboard for this account. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).'
-        type: string
+      requirements:
+        $ref: '#/definitions/account_requirements'
+      settings:
+        $ref: '#/definitions/account_settings'
       tos_acceptance:
         $ref: '#/definitions/account_tos_acceptance'
       type:
         description: 'The Stripe account type. Can be `standard`, `express`, or `custom`.'
         type: string
-      verification:
-        $ref: '#/definitions/account_requirements'
     required:
       - id
       - object
     title: Account
     type: object
     x-expandableFields:
-      - business_logo
-      - decline_charge_on
+      - business_profile
+      - capabilities
+      - company
       - external_accounts
-      - keys
-      - legal_entity
-      - payout_schedule
-      - support_address
+      - individual
+      - requirements
+      - settings
       - tos_acceptance
-      - verification
     x-resourceId: account
+  account_branding_settings:
+    properties:
+      icon:
+        description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account. Must be square and at least 128px x 128px.'
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/file'
+      logo:
+        description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account that will be used in Checkout instead of the icon and without the account''s name next to it if provided. Must be at least 128px x 128px.'
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/file'
+      primary_color:
+        description: A CSS hex color value representing the primary branding color for this account
+        type: string
+    title: AccountBrandingSettings
+    type: object
+    x-expandableFields:
+      - icon
+      - logo
+  account_business_profile:
+    properties:
+      mcc:
+        description: The merchant category code for the account. MCCs are used to classify businesses based on the goods or services they provide.
+        type: string
+      name:
+        description: The customer-facing business name.
+        type: string
+      product_description:
+        description: Internal-only description of the product sold or service provided by the business. It's used by Stripe for risk and underwriting purposes.
+        type: string
+      support_address:
+        $ref: '#/definitions/address'
+      support_email:
+        description: A publicly available email address for sending support issues to.
+        type: string
+      support_phone:
+        description: A publicly available phone number to call with support issues.
+        type: string
+      support_url:
+        description: A publicly available website for handling support issues.
+        type: string
+      url:
+        description: The business's publicly available website.
+        type: string
+    title: AccountBusinessProfile
+    type: object
+    x-expandableFields:
+      - support_address
+  account_capabilities:
+    properties:
+      card_payments:
+        description: 'The status of the card payments capability of the account, or whether the account can directly process credit and debit card charges.'
+        enum:
+          - active
+          - inactive
+          - pending
+        type: string
+      legacy_payments:
+        description: The status of the legacy payments capability of the account.
+        enum:
+          - active
+          - inactive
+          - pending
+        type: string
+      platform_payments:
+        description: 'The status of the platform payments capability of the account, or whether your platform can process charges on behalf of the account.'
+        enum:
+          - active
+          - inactive
+          - pending
+        type: string
+    title: AccountCapabilities
+    type: object
+    x-expandableFields: []
+  account_card_payments_settings:
+    properties:
+      decline_on:
+        $ref: '#/definitions/account_decline_charge_on'
+      statement_descriptor_prefix:
+        description: The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge. `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic portion.
+        type: string
+    title: AccountCardPaymentsSettings
+    type: object
+    x-expandableFields:
+      - decline_on
+  account_dashboard_settings:
+    properties:
+      display_name:
+        description: The display name for this account. This is used on the Stripe Dashboard to differentiate between accounts.
+        type: string
+      timezone:
+        description: 'The timezone used in the Stripe Dashboard for this account. A list of possible time zone values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).'
+        type: string
+    title: AccountDashboardSettings
+    type: object
+    x-expandableFields: []
   account_decline_charge_on:
     properties:
       avs_failure:
@@ -19151,17 +19169,6 @@ definitions:
       - avs_failure
       - cvc_failure
     title: AccountDeclineChargeOn
-    type: object
-    x-expandableFields: []
-  account_keys:
-    properties:
-      publishable:
-        description: Key used to identify your account with Stripe. It can be publicly placed in your front-end or mobile client.
-        type: string
-      secret:
-        description: Confidential key used to perform API requests to Stripe. It should be kept confidential and only stored on your own servers.
-        type: string
-    title: AccountKeys
     type: object
     x-expandableFields: []
   account_link:
@@ -19189,24 +19196,82 @@ definitions:
     type: object
     x-expandableFields: []
     x-resourceId: account_link
+  account_payments_settings:
+    properties:
+      statement_descriptor:
+        description: The default text that appears on credit card statements when a charge is made. This field prefixes any dynamic `statement_descriptor` specified on the charge.
+        type: string
+    title: AccountPaymentsSettings
+    type: object
+    x-expandableFields: []
+  account_payout_settings:
+    properties:
+      debit_negative_balances:
+        description: 'A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](/docs/connect/account-balances) documentation for details. Default value is `true` for Express accounts and `false` for Custom accounts.'
+        type: boolean
+      schedule:
+        $ref: '#/definitions/transfer_schedule'
+      statement_descriptor:
+        description: 'The text that appears on the bank account statement for payouts. If not set, this defaults to the platform''s bank descriptor as set in the Dashboard.'
+        type: string
+    required:
+      - debit_negative_balances
+      - schedule
+    title: AccountPayoutSettings
+    type: object
+    x-expandableFields:
+      - schedule
   account_requirements:
     properties:
-      disabled_reason:
-        description: 'If the account is disabled, this string describes why the account can’t create charges or receive payouts. Can be `rejected.fraud`, `rejected.terms_of_service`, `rejected.listed`, `rejected.other`, `fields_needed`, `listed`, `under_review`, or `other`.'
-        type: string
-      due_by:
-        description: 'By what time the `fields_needed` must be provided. If this date is in the past, the account is already in bad standing, and providing `fields_needed` is necessary to re-enable payouts and prevent other consequences. If this date is in the future, `fields_needed` must be provided to ensure the account remains in good standing.'
+      current_deadline:
+        description: The date the fields in `currently_due` must be collected by to keep payouts enabled for the account. These fields might block payouts sooner if the next threshold is reached before these fields are collected.
         type: integer
-      fields_needed:
-        description: 'Field names that need to be provided for the account to remain in good standing. Nested fields are separated by `.` (for example, `legal_entity.first_name`).'
+      currently_due:
+        description: 'The fields that need to be collected to keep the account enabled. If not collected by the `current_deadline`, these fields are moved to `past_due` and the account is disabled.'
         items:
           type: string
         type: array
-    required:
-      - fields_needed
+      disabled_reason:
+        description: 'If the account is disabled, this string describes why the account can’t create charges or receive payouts. Can be `requirements.past_due`, `requirements.pending_verification`, `rejected.fraud`, `rejected.terms_of_service`, `rejected.listed`, `rejected.other`, `listed`, `under_review`, or `other`.'
+        type: string
+      eventually_due:
+        description: 'The fields that need to be collected assuming all volume thresholds are reached. As fields are needed, they are moved to `currently_due` and the `current_deadline` is set.'
+        items:
+          type: string
+        type: array
+      past_due:
+        description: The fields that weren't collected by the `current_deadline`. These fields need to be collected to enable payouts for the account.
+        items:
+          type: string
+        type: array
     title: AccountRequirements
     type: object
     x-expandableFields: []
+  account_settings:
+    properties:
+      branding:
+        $ref: '#/definitions/account_branding_settings'
+      card_payments:
+        $ref: '#/definitions/account_card_payments_settings'
+      dashboard:
+        $ref: '#/definitions/account_dashboard_settings'
+      payments:
+        $ref: '#/definitions/account_payments_settings'
+      payouts:
+        $ref: '#/definitions/account_payout_settings'
+    required:
+      - branding
+      - card_payments
+      - dashboard
+      - payments
+    title: AccountSettings
+    type: object
+    x-expandableFields:
+      - branding
+      - card_payments
+      - dashboard
+      - payments
+      - payouts
   account_tos_acceptance:
     properties:
       date:
@@ -19321,8 +19386,6 @@ definitions:
       param:
         description: 'If the error is parameter-specific, the parameter related to the error. For example, you can use this to display a message near the correct form field.'
         type: string
-      payment_method:
-        $ref: '#/definitions/payment_method'
       source:
         $ref: '#/definitions/card'
       type:
@@ -19341,7 +19404,6 @@ definitions:
     title: APIErrors
     type: object
     x-expandableFields:
-      - payment_method
       - source
   apple_pay_domain:
     properties:
@@ -19405,7 +19467,6 @@ definitions:
         description: Amount in %s refunded (can be less than the amount attribute on the fee if a partial refund was issued)
         type: integer
       application:
-        description: ID of the Connect application that earned the fee.
         type: string
         x-expansionResources:
           oneOf:
@@ -20017,14 +20078,8 @@ definitions:
         x-expansionResources:
           oneOf:
             - $ref: '#/definitions/application'
-      application_fee:
-        description: 'The application fee (if any) for the charge. [See the Connect documentation](/docs/connect/direct-charges#collecting-fees) for details.'
-        type: string
-        x-expansionResources:
-          oneOf:
-            - $ref: '#/definitions/application_fee'
       application_fee_amount:
-        description: The amount of the application fee (if any) for the resulting payment.
+        description: 'The amount of the application fee (if any) for the charge. [See the Connect documentation](/docs/connect/direct-charges#collecting-fees) for details.'
         type: integer
       balance_transaction:
         description: ID of the balance transaction that describes the impact of this charge on your account balance (not including refunds or disputes).
@@ -20203,7 +20258,6 @@ definitions:
     type: object
     x-expandableFields:
       - application
-      - application_fee
       - balance_transaction
       - customer
       - destination
@@ -20266,6 +20320,9 @@ definitions:
       - rule
   charge_transfer_data:
     properties:
+      amount:
+        description: 'The amount transferred to the destination account, if specified. By default, the entire charge amount is transferred to the destination account.'
+        type: integer
       destination:
         description: 'The account (if any) the charge was made on behalf of, with an automatic transfer. [See the Connect documentation](/docs/connect/destination-charges) for details.'
         type: string
@@ -20299,27 +20356,6 @@ definitions:
     type: object
     x-expandableFields: []
     x-resourceId: checkout.session
-  checkout_session:
-    properties:
-      id:
-        description: The token used to pass to `redirectToCheckout` in Stripe.js.
-        type: string
-      livemode:
-        description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-        type: boolean
-      object:
-        description: String representing the object's type. Objects of the same type share the same value.
-        enum:
-          - checkout_session
-        type: string
-    required:
-      - id
-      - livemode
-      - object
-    title: CheckoutSession
-    type: object
-    x-expandableFields: []
-    x-resourceId: checkout_session
   connect_collection_transfer:
     properties:
       amount:
@@ -21881,7 +21917,7 @@ definitions:
             - $ref: '#/definitions/card'
             - $ref: '#/definitions/source'
       description:
-        description: An arbitrary string attached to the object. Often useful for displaying to users.
+        description: An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
         type: string
       discount:
         $ref: '#/definitions/discount'
@@ -22987,134 +23023,50 @@ definitions:
     type: object
     x-expandableFields:
       - uncategorized_file
-  legal_entity:
+  legal_entity_company:
     properties:
-      additional_owners:
-        description: 'An array of any owners with at least 25% ownership of the company, excluding the individual responsible for the account.'
-        items:
-          $ref: '#/definitions/legal_entity_additional_owner'
-        type: array
       address:
         $ref: '#/definitions/address'
       address_kana:
         $ref: '#/definitions/legal_entity_japan_address'
       address_kanji:
         $ref: '#/definitions/legal_entity_japan_address'
-      business_name:
+      directors_provided:
+        description: Whether information was collected from the company's directors.
+        type: boolean
+      name:
         description: The company's legal name.
         type: string
-      business_name_kana:
-        description: The Kana variation of the company's legal name (Japan only).
+      name_kana:
+        description: The Kana variation of the company's legal name Japan only).
         type: string
-      business_name_kanji:
+      name_kanji:
         description: The Kanji variation of the company's legal name (Japan only).
         type: string
-      business_tax_id_provided:
-        description: Whether the business ID number of the legal entity was provided.
+      owners_provided:
+        description: Whether the company's owners have been provided.
         type: boolean
-      business_vat_id_provided:
-        description: Whether the business VAT number of the legal entity was provided.
-        type: boolean
-      dob:
-        $ref: '#/definitions/legal_entity_dob'
-      first_name:
-        description: The first name of the individual responsible for the account.
+      phone:
+        description: The company's phone number (used for verification).
         type: string
-      first_name_kana:
-        description: The Kana variation of the first name of the individual responsible for the account (Japan only).
-        type: string
-      first_name_kanji:
-        description: The Kanji variation of the first name of the individual responsible for the account (Japan only).
-        type: string
-      gender:
-        description: The gender of the individual responsible for the account (International regulations require either "male" or "female").
-        type: string
-      last_name:
-        description: The last name of the individual responsible for the account.
-        type: string
-      last_name_kana:
-        description: The Kana varation of the last name of the individual responsible for the account (Japan only).
-        type: string
-      last_name_kanji:
-        description: The Kanji varation of the last name of the individual responsible for the account (Japan only).
-        type: string
-      maiden_name:
-        description: The maiden name of the individual responsible for the account.
-        type: string
-      personal_address:
-        $ref: '#/definitions/address'
-      personal_address_kana:
-        $ref: '#/definitions/legal_entity_japan_address'
-      personal_address_kanji:
-        $ref: '#/definitions/legal_entity_japan_address'
-      personal_id_number_provided:
-        description: Whether the personal ID number of the individual responsible for the account was provided.
-        type: boolean
-      phone_number:
-        description: 'The company''s phone number, used for verification.'
-        type: string
-      ssn_last_4_provided:
-        description: Whether the last 4 ssn digits of the individual responsible for the account have been provided.
+      tax_id_provided:
+        description: Whether the company's business ID number was provided.
         type: boolean
       tax_id_registrar:
-        description: The jurisdiction in which the `business_tax_id` is registered (Germany-based companies only).
+        description: The jurisdiction in which the `tax_id` is registered (Germany-based companies only).
         type: string
-      type:
-        description: 'Either "individual" or "company", for what kind of legal entity the account owner is for.'
-        type: string
-      verification:
-        $ref: '#/definitions/legal_entity_verification'
-    title: LegalEntity
+      vat_id_provided:
+        description: Whether the company's business VAT number was provided.
+        type: boolean
+    required:
+      - directors_provided
+      - owners_provided
+    title: LegalEntityCompany
     type: object
     x-expandableFields:
-      - additional_owners
       - address
       - address_kana
       - address_kanji
-      - dob
-      - personal_address
-      - personal_address_kana
-      - personal_address_kanji
-      - verification
-  legal_entity_additional_owner:
-    properties:
-      address:
-        $ref: '#/definitions/address'
-      dob:
-        $ref: '#/definitions/legal_entity_dob'
-      email:
-        description: The email address of this additional owner.
-        type: string
-      first_name:
-        description: The first name of this additional owner.
-        type: string
-      last_name:
-        description: The last name of this additional owner.
-        type: string
-      maiden_name:
-        description: The maiden name of this additional owner.
-        type: string
-      personal_id_number_provided:
-        description: Whether the personal ID number of this additional owner was provided.
-        type: boolean
-      phone:
-        description: The phone number of this additional owner.
-        type: string
-      ssn_last_4_provided:
-        description: Whether the last 4 digits of this additional owner's SSN have been provided.
-        type: boolean
-      verification:
-        $ref: '#/definitions/legal_entity_verification'
-    required:
-      - dob
-      - ssn_last_4_provided
-      - verification
-    title: LegalEntityAdditionalOwner
-    type: object
-    x-expandableFields:
-      - address
-      - dob
-      - verification
   legal_entity_dob:
     properties:
       day:
@@ -23158,33 +23110,48 @@ definitions:
   legal_entity_verification:
     properties:
       details:
-        description: 'A user-displayable string describing the verification state for this legal entity. For example, if a document is uploaded and the picture is too fuzzy, this may say "Identity document is too unclear to read".'
+        description: 'A user-displayable string describing the verification state for the person. For example, this may say "Provided identity information could not be verified".'
         type: string
       details_code:
-        description: 'A machine-readable code specifying the verification state for this legal entity. One of `scan_corrupt`, `scan_not_readable`, `scan_failed_greyscale`, `scan_not_uploaded`, `scan_id_type_not_supported`, `scan_id_country_not_supported`, `scan_failed_other`, or `scan_failed_test_mode`.'
+        description: 'One of `scan_name_mismatch`, `failed_keyed_identity`, or `failed_other`. A machine-readable code specifying the verification state for the person.'
         type: string
       document:
-        description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A photo (jpg or png) of the front of an identifying document, either a passport or local ID card.'
-        type: string
-        x-expansionResources:
-          oneOf:
-            - $ref: '#/definitions/file'
-      document_back:
-        description: '(ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A photo (jpg or png) of the back of an identifying document, either a passport or local ID card.'
-        type: string
-        x-expansionResources:
-          oneOf:
-            - $ref: '#/definitions/file'
+        $ref: '#/definitions/legal_entity_verification_document'
       status:
-        description: 'The state of verification for this legal entity. Possible values are `unverified`, `pending`, or `verified`.'
+        description: 'The state of verification for the person. Possible values are `unverified`, `pending`, or `verified`.'
         type: string
     required:
+      - document
       - status
     title: LegalEntityVerification
     type: object
     x-expandableFields:
       - document
-      - document_back
+  legal_entity_verification_document:
+    properties:
+      back:
+        description: 'The back of an ID returned by a [file upload](#create_file) with a `purpose` value of `identity_document`.'
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/file'
+      details:
+        description: 'A user-displayable string describing the verification state of this document. For example, if a document is uploaded and the picture is too fuzzy, this may say "Identity document is too unclear to read".'
+        type: string
+      details_code:
+        description: 'One of `document_corrupt`, `document_failed_copy`, `document_not_readable`, `document_failed_greyscale`, `document_not_uploaded`, `document_id_type_not_supported`, `document_id_country_not_supported`, `document_failed_other`, `document_fraudulent`, `document_invalid`, `document_manipulated`, `document_missing_back`, `document_missing_front`, `document_photo_mismatch`, `document_too_large`, or `document_failed_test_mode`. A machine-readable code specifying the verification state for this document.'
+        type: string
+      front:
+        description: 'The front of an ID returned by a [file upload](#create_file) with a `purpose` value of `identity_document`.'
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/file'
+    title: LegalEntityVerificationDocument
+    type: object
+    x-expandableFields:
+      - back
+      - front
   light_account_logout:
     properties: {}
     title: LightAccountLogout
@@ -23558,54 +23525,6 @@ definitions:
     type: object
     x-expandableFields:
       - destination
-  payment_flows_payment_method_resource_billing_details:
-    properties:
-      address:
-        $ref: '#/definitions/address'
-      email:
-        description: Email address.
-        type: string
-      name:
-        description: Full name.
-        type: string
-      phone:
-        description: Billing phone number (including extension).
-        type: string
-    title: PaymentFlowsPaymentMethodResourceBillingDetails
-    type: object
-    x-expandableFields:
-      - address
-  payment_flows_private_payment_methods_card:
-    properties:
-      brand:
-        description: 'Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`, `UnionPay`, `Visa`, or `Unknown`.'
-        type: string
-      country:
-        type: string
-      exp_month:
-        description: Two-digit number representing the card's expiration month.
-        type: integer
-      exp_year:
-        description: Four-digit number representing the card's expiration year.
-        type: integer
-      fingerprint:
-        description: 'Uniquely identifies this particular card number. You can use this attribute to check whether two customers who''ve signed up with you are using the same card number, for example.'
-        type: string
-      funding:
-        description: 'Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.'
-        type: string
-      last4:
-        description: Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
-        type: string
-    required:
-      - brand
-      - exp_month
-      - exp_year
-      - funding
-      - last4
-    title: PaymentFlowsPrivatePaymentMethodsCard
-    type: object
-    x-expandableFields: []
   payment_intent:
     properties:
       amount:
@@ -23814,54 +23733,6 @@ definitions:
     title: PaymentIntentNextActionRedirectToUrl
     type: object
     x-expandableFields: []
-  payment_method:
-    properties:
-      billing_details:
-        $ref: '#/definitions/payment_flows_payment_method_resource_billing_details'
-      card:
-        $ref: '#/definitions/payment_flows_private_payment_methods_card'
-      created:
-        description: Time at which the object was created. Measured in seconds since the Unix epoch.
-        type: integer
-      customer:
-        description: The ID of the Customer to which this PaymentMethod is saved. This will not be set when the PaymentMethod has not been saved to a Customer.
-        type: string
-        x-expansionResources:
-          oneOf:
-            - $ref: '#/definitions/customer'
-      id:
-        description: Unique identifier for the object.
-        type: string
-      livemode:
-        description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
-        type: boolean
-      metadata:
-        description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
-        type: object
-      object:
-        description: String representing the object's type. Objects of the same type share the same value.
-        enum:
-          - payment_method
-        type: string
-      type:
-        description: 'The type of the PaymentMethod, one of `card`. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.'
-        enum:
-          - card
-        type: string
-    required:
-      - billing_details
-      - created
-      - id
-      - livemode
-      - metadata
-      - object
-      - type
-    title: PaymentMethod
-    type: object
-    x-expandableFields:
-      - billing_details
-      - card
-      - customer
   payment_source:
     properties:
       id:
@@ -24003,7 +23874,6 @@ definitions:
   person:
     properties:
       account:
-        description: The account the person is associated with.
         type: string
       address:
         $ref: '#/definitions/address'
@@ -24017,37 +23887,27 @@ definitions:
       dob:
         $ref: '#/definitions/legal_entity_dob'
       email:
-        description: The person's email address.
         type: string
       first_name:
-        description: The person's first name.
         type: string
       first_name_kana:
-        description: The Kana variation of the person's first name (Japan only).
         type: string
       first_name_kanji:
-        description: The Kanji variation of the person's first name (Japan only).
         type: string
       gender:
-        description: The person's gender (International regulations require either "male" or "female").
         type: string
       id:
         description: Unique identifier for the object.
         type: string
       id_number_provided:
-        description: Whether the person's `id_number` was provided.
         type: boolean
       last_name:
-        description: The person's last name.
         type: string
       last_name_kana:
-        description: The Kana variation of the person's last name (Japan only).
         type: string
       last_name_kanji:
-        description: The Kanji variation of the person's last name (Japan only).
         type: string
       maiden_name:
-        description: The person's maiden name.
         type: string
       metadata:
         description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
@@ -24058,14 +23918,12 @@ definitions:
           - person
         type: string
       phone:
-        description: The person's phone number.
         type: string
       relationship:
         $ref: '#/definitions/person_relationship'
       requirements:
         $ref: '#/definitions/person_requirements'
       ssn_last_4_provided:
-        description: Whether the last 4 digits of this person's SSN have been provided.
         type: boolean
       verification:
         $ref: '#/definitions/legal_entity_verification'
@@ -24817,8 +24675,9 @@ definitions:
         description: 'If `true`, the review needs action.'
         type: boolean
       opened_reason:
-        description: The reason the review was opened. One of `rule` or `manual`.
+        description: 'The reason the review was opened. One of `rule`, `manual`, or `issuer_fraud_record`.'
         enum:
+          - issuer_fraud_record
           - manual
           - rule
         type: string
@@ -24829,7 +24688,7 @@ definitions:
           oneOf:
             - $ref: '#/definitions/payment_intent'
       reason:
-        description: 'The reason the review is currently open or closed. One of `rule`, `manual`, `approved`, `refunded`, `refunded_as_fraud`, or `disputed`.'
+        description: 'The reason the review is currently open or closed. One of `rule`, `manual`, `issuer_fraud_record`, `approved`, `refunded`, `refunded_as_fraud`, or `disputed`.'
         type: string
       session:
         $ref: '#/definitions/radar_review_resource_session'

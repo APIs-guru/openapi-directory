@@ -1497,6 +1497,8 @@ definitions:
       AccountID:
         format: int32
         type: integer
+      AllowHidingCompletedTasksOnTimesheet:
+        type: boolean
       CompanyName:
         type: string
       LockApprovedTimesheets:
@@ -2769,6 +2771,8 @@ definitions:
       Title:
         type: string
       isArchived:
+        type: boolean
+      isTaskRequiredOnTimesheet:
         type: boolean
     type: object
   ProjectList:
