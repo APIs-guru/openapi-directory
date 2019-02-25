@@ -139,6 +139,62 @@ definitions:
       variableName:
         description: Name of the variable whose value needs to be appended to.
         type: string
+  AzureBlobFSSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure Data Lake Storage Gen2 sink.
+    properties:
+      copyBehavior:
+        $ref: '#/definitions/CopyBehaviorType'
+        description: The type of copy behavior for copy sink.
+    type: object
+  AzureBlobFSSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Azure BlobFS source.
+    properties:
+      recursive:
+        description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      skipHeaderLineCount:
+        description: 'Number of header lines to skip from each blob. Type: integer (or Expression with resultType integer).'
+        type: object
+      treatEmptyAsNull:
+        description: 'Treat empty as null. Type: boolean (or Expression with resultType boolean).'
+        type: object
+    type: object
+  AzureDataExplorerSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity Azure Data Explorer sink.
+    properties:
+      flushImmediately:
+        description: 'If set to true, any aggregation will be skipped. Default is false. Type: boolean.'
+        type: object
+      ingestionMappingAsJson:
+        description: 'An explicit column mapping description provided in a json format. Type: string.'
+        type: object
+      ingestionMappingName:
+        description: 'A name of a pre-created csv mapping that was defined on the target Kusto table. Type: string.'
+        type: object
+    type: object
+  AzureDataExplorerSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Azure Data Explorer (Kusto) source.
+    properties:
+      noTruncation:
+        description: The name of the Boolean option that controls whether truncation is applied to result-sets that go beyond a certain row-count limit.
+        type: object
+      query:
+        description: 'Database query. Should be a Kusto Query Language (KQL) query. Type: string (or Expression with resultType string).'
+        type: object
+      queryTimeout:
+        description: 'Query timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))..'
+        type: object
+    required:
+      - query
+    type: object
   AzureDataLakeStoreSink:
     allOf:
       - $ref: '#/definitions/CopySink'
@@ -519,6 +575,12 @@ definitions:
       parallelCopies:
         description: 'Maximum number of concurrent sessions opened on the source or sink to avoid overloading the data store. Type: integer (or Expression with resultType integer), minimum: 0.'
         type: object
+      preserveRules:
+        description: Preserve Rules.
+        items:
+          description: 'Type: string (or Expression with resultType string).'
+          type: object
+        type: array
       redirectIncompatibleRowSettings:
         $ref: '#/definitions/RedirectIncompatibleRowSettings'
         description: Redirect incompatible row settings when EnableSkipIncompatibleRow is true.
@@ -553,6 +615,9 @@ definitions:
     description: A copy activity sink.
     discriminator: type
     properties:
+      maxConcurrentConnections:
+        description: 'The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer).'
+        type: object
       sinkRetryCount:
         description: 'Sink retry count. Type: integer (or Expression with resultType integer).'
         type: object
@@ -577,6 +642,9 @@ definitions:
     description: A copy activity source.
     discriminator: type
     properties:
+      maxConcurrentConnections:
+        description: 'The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).'
+        type: object
       sourceRetryCount:
         description: 'Source retry count. Type: integer (or Expression with resultType integer).'
         type: object
@@ -600,6 +668,30 @@ definitions:
         type: string
     required:
       - type
+    type: object
+  CosmosDbMongoDbApiSink:
+    allOf:
+      - $ref: '#/definitions/CopySink'
+    description: A copy activity sink for a CosmosDB (MongoDB API) database.
+    properties:
+      writeBehavior:
+        description: 'Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is "insert". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  CosmosDbMongoDbApiSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for a CosmosDB (MongoDB API) database.
+    properties:
+      batchSize:
+        description: 'Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property�s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer).'
+        type: object
+      cursorMethods:
+        $ref: '#/definitions/MongoDbCursorMethodsProperties'
+        description: Cursor methods for Mongodb query.
+      filter:
+        description: 'Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string).'
+        type: object
     type: object
   CouchbaseSource:
     allOf:
@@ -706,6 +798,9 @@ definitions:
         required:
           - type
           - referenceName
+      retentionTimeInDays:
+        description: 'The retention time for the files submitted for custom activity. Type: double (or Expression with resultType double).'
+        type: object
     required:
       - command
   DataLakeAnalyticsUSQLActivity:
@@ -958,6 +1053,15 @@ definitions:
     allOf:
       - $ref: '#/definitions/CopySource'
     description: A copy activity Drill server source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  DynamicsAXSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Dynamics AX source.
     properties:
       query:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
@@ -1300,6 +1404,15 @@ definitions:
         type: array
     required:
       - dataset
+  GoogleAdWordsSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Google AdWords service source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   GoogleBigQuerySource:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -1947,6 +2060,24 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  MongoDbCursorMethodsProperties:
+    additionalProperties:
+      type: object
+    description: Cursor methods for Mongodb query
+    properties:
+      limit:
+        description: 'Specifies the maximum number of documents the server returns. limit() is analogous to the LIMIT statement in a SQL database. Type: integer (or Expression with resultType integer).'
+        type: object
+      project:
+        description: 'Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string).'
+        type: object
+      skip:
+        description: 'Specifies the how many documents skipped and where MongoDB begins returning results. This approach may be useful in implementing paginated results. Type: integer (or Expression with resultType integer).'
+        type: object
+      sort:
+        description: 'Specifies the order in which the query returns matching documents. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string).'
+        type: object
+    type: object
   MongoDbSource:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -1954,6 +2085,21 @@ definitions:
     properties:
       query:
         description: 'Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  MongoDbV2Source:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for a MongoDB database.
+    properties:
+      batchSize:
+        description: 'Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property�s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer).'
+        type: object
+      cursorMethods:
+        $ref: '#/definitions/MongoDbCursorMethodsProperties'
+        description: Cursor methods for Mongodb query
+      filter:
+        description: 'Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string).'
         type: object
     type: object
   NetezzaSource:
@@ -1972,6 +2118,21 @@ definitions:
     properties:
       preCopyScript:
         description: 'A query to execute before starting the copy. Type: string (or Expression with resultType string).'
+        type: object
+    type: object
+  Office365Source:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for an Office365 service.
+    properties: {}
+    type: object
+  OracleServiceCloudSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Oracle Service Cloud source.
+    properties:
+      query:
+        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
   OracleSink:
@@ -2195,6 +2356,18 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
+  RestSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity Rest service source.
+    properties:
+      httpRequestTimeout:
+        description: 'The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
+        type: object
+      requestInterval:
+        description: 'The time to await before sending next page request. '
+        type: object
+    type: object
   SSISConnectionManager:
     additionalProperties:
       $ref: '#/definitions/SSISExecutionParameter'
@@ -2344,6 +2517,12 @@ definitions:
       query:
         description: 'SAP ECC OData query. For example, "$top=1". Type: string (or Expression with resultType string).'
         type: string
+    type: object
+  SapOpenHubSource:
+    allOf:
+      - $ref: '#/definitions/CopySource'
+    description: A copy activity source for SAP Business Warehouse Open Hub Destination source.
+    properties: {}
     type: object
   ServiceNowSource:
     allOf:
@@ -2556,6 +2735,9 @@ definitions:
       - $ref: '#/definitions/CopyTranslator'
     description: A copy activity tabular translator.
     properties:
+      collectionReference:
+        description: 'The JSON Path of the Nested Array that is going to do cross-apply. Type: object (or Expression with resultType object).'
+        type: object
       columnMappings:
         description: 'Column mappings. Example: "UserId: MyUserId, Group: MyGroup, Name: MyName" Type: string (or Expression with resultType string).'
         type: object

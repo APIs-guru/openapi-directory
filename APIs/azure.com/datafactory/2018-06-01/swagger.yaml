@@ -4502,6 +4502,18 @@ paths:
           required: false
           type: string
           x-ms-parameter-location: method
+        - description: 'Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.'
+          in: query
+          name: isRecovery
+          required: false
+          type: boolean
+          x-ms-parameter-location: method
+        - description: 'In recovery mode, the rerun will start from this activity. If not specified, all activities will run.'
+          in: query
+          name: startActivityName
+          required: false
+          type: string
+          x-ms-parameter-location: method
         - description: Parameters of the pipeline run. These parameters will be used only if the runId is not specified.
           in: body
           name: parameters
@@ -6413,6 +6425,10 @@ definitions:
         $ref: '#/definitions/PipelineRunInvokedBy'
         description: Entity that started the pipeline run.
         readOnly: true
+      isLatest:
+        description: Indicates if the recovered pipeline run is the latest in its group.
+        readOnly: true
+        type: boolean
       lastUpdated:
         description: The last updated timestamp for the pipeline run event in ISO8601 format.
         format: date-time
@@ -6435,6 +6451,10 @@ definitions:
       runEnd:
         description: The end time of a pipeline run in ISO8601 format.
         format: date-time
+        readOnly: true
+        type: string
+      runGroupId:
+        description: Identifier that correlates all the recovery runs of a pipeline run.
         readOnly: true
         type: string
       runId:
@@ -6654,6 +6674,8 @@ definitions:
           - ActivityType
           - TriggerName
           - TriggerRunTimestamp
+          - RunGroupId
+          - LatestOnly
         type: string
         x-ms-enum:
           modelAsString: true

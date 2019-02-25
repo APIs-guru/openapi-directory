@@ -161,6 +161,9 @@ definitions:
         required:
           - type
         type: object
+      serviceUrl:
+        description: 'This value specifies the endpoint to access with the S3 Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string).'
+        type: object
   AzureBatchLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -223,6 +226,49 @@ definitions:
       - batchUri
       - poolName
       - linkedServiceName
+  AzureBlobFSLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Azure Data Lake Storage Gen2 linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureBlobFSLinkedServiceTypeProperties'
+        description: Azure Data Lake Storage Gen2 linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureBlobFS
+  AzureBlobFSLinkedServiceTypeProperties:
+    description: Azure Data Lake Storage Gen2 linked service properties.
+    properties:
+      accountKey:
+        description: 'Account key for the Azure Data Lake Storage Gen2 service. Type: string (or Expression with resultType string).'
+        type: object
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalId:
+        description: 'The ID of the application used to authenticate against the Azure Data Lake Storage Gen2 account. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalKey:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      tenant:
+        description: 'The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string).'
+        type: object
+      url:
+        description: 'Endpoint for the Azure Data Lake Storage Gen2 service. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - url
   AzureBlobStorageLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -353,6 +399,50 @@ definitions:
       tenant:
         description: 'The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string).'
         type: object
+  AzureDataExplorerLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Azure Data Explorer (Kusto) linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureDataExplorerLinkedServiceTypeProperties'
+        description: Azure Data Explorer (Kusto) linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureDataExplorer
+  AzureDataExplorerLinkedServiceTypeProperties:
+    description: Azure Data Explorer (Kusto) linked service properties.
+    properties:
+      database:
+        description: 'Database name for connection. Type: string (or Expression with resultType string).'
+        type: object
+      endpoint:
+        description: 'The endpoint of Azure Data Explorer (the engine''s endpoint). URL will be in the format https://<clusterName>.<regionName>.kusto.windows.net. Type: string (or Expression with resultType string)'
+        type: object
+      servicePrincipalId:
+        description: 'The ID of the service principal used to authenticate against Azure Data Explorer. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalKey:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      tenant:
+        description: 'The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - endpoint
+      - servicePrincipalId
+      - servicePrincipalKey
+      - database
+      - tenant
   AzureDataLakeAnalyticsLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -492,6 +582,15 @@ definitions:
           description: 'Type: string (or Expression with resultType string).'
           type: object
         description: Additional tags for cluster resources.
+        type: object
+      newClusterDriverNodeType:
+        description: 'The driver node type for the new cluster. Type: string (or Expression with resultType string).'
+        type: object
+      newClusterEnableElasticDisk:
+        description: 'Enable the elastic disk on the new cluster. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      newClusterInitScripts:
+        description: 'User-defined initialization scripts for the new cluster. Type: array of strings (or Expression with resultType array of strings).'
         type: object
       newClusterNodeType:
         description: 'The node types of new cluster. Type: string (or Expression with resultType string).'
@@ -1239,6 +1338,31 @@ definitions:
         type: object
     required:
       - connectionString
+  CosmosDbMongoDbApiLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Linked service for CosmosDB (MongoDB API) data source.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/CosmosDbMongoDbApiLinkedServiceTypeProperties'
+        description: CosmosDB (MongoDB API) linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: CosmosDbMongoDbApi
+  CosmosDbMongoDbApiLinkedServiceTypeProperties:
+    description: CosmosDB (MongoDB API) linked service properties.
+    properties:
+      connectionString:
+        description: 'The CosmosDB (MongoDB API) connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.'
+        type: object
+      database:
+        description: 'The name of the CosmosDB (MongoDB API) database that you want to access. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - connectionString
+      - database
   CouchbaseLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -1431,6 +1555,53 @@ definitions:
           - secretName
         type: object
         x-ms-discriminator-value: AzureKeyVaultSecret
+  DynamicsAXLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Dynamics AX linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DynamicsAXLinkedServiceTypeProperties'
+        description: Dynamics AX linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: DynamicsAX
+  DynamicsAXLinkedServiceTypeProperties:
+    description: Dynamics AX linked service properties.
+    properties:
+      aadResourceId:
+        description: 'Specify the resource you are requesting authorization. Type: string (or Expression with resultType string).'
+        type: object
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalId:
+        description: 'Specify the application''s client ID. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalKey:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      tenant:
+        description: 'Specify the tenant information (domain name or tenant ID) under which your application resides. Retrieve it by hovering the mouse in the top-right corner of the Azure portal. Type: string (or Expression with resultType string).'
+        type: object
+      url:
+        description: The Dynamics AX (or Dynamics 365 Finance and Operations) instance OData endpoint.
+        type: object
+    required:
+      - url
+      - servicePrincipalId
+      - servicePrincipalKey
+      - tenant
+      - aadResourceId
   DynamicsLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -1636,6 +1807,93 @@ definitions:
         type: object
     required:
       - host
+  GoogleAdWordsLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Google AdWords service linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GoogleAdWordsLinkedServiceTypeProperties'
+        description: Google AdWords service linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: GoogleAdWords
+  GoogleAdWordsLinkedServiceTypeProperties:
+    description: Google AdWords service linked service properties.
+    properties:
+      authenticationType:
+        description: The OAuth 2.0 authentication mechanism used for authentication. ServiceAuthentication can only be used on self-hosted IR.
+        enum:
+          - ServiceAuthentication
+          - UserAuthentication
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: GoogleAdWordsAuthenticationType
+      clientCustomerID:
+        description: The Client customer ID of the AdWords account that you want to fetch report data for.
+        type: object
+      clientId:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      clientSecret:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      developerToken:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      email:
+        description: The service account email ID that is used for ServiceAuthentication and can only be used on self-hosted IR.
+        type: object
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      keyFilePath:
+        description: The full path to the .p12 key file that is used to authenticate the service account email address and can only be used on self-hosted IR.
+        type: object
+      refreshToken:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      trustedCertPath:
+        description: The full path of the .pem file containing trusted CA certificates for verifying the server when connecting over SSL. This property can only be set when using SSL on self-hosted IR. The default value is the cacerts.pem file installed with the IR.
+        type: object
+      useSystemTrustStore:
+        description: Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false.
+        type: object
+    required:
+      - clientCustomerID
+      - developerToken
+      - authenticationType
   GoogleBigQueryLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -2775,6 +3033,31 @@ definitions:
     required:
       - server
       - databaseName
+  MongoDbV2LinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Linked service for MongoDB data source.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/MongoDbV2LinkedServiceTypeProperties'
+        description: MongoDB linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: MongoDbV2
+  MongoDbV2LinkedServiceTypeProperties:
+    description: MongoDB linked service properties.
+    properties:
+      connectionString:
+        description: 'The MongoDB connection string. Type: string, SecureString or AzureKeyVaultSecretReference. Type: string, SecureString or AzureKeyVaultSecretReference.'
+        type: object
+      database:
+        description: 'The name of the MongoDB database that you want to access. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - connectionString
+      - database
   MySqlLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -2930,11 +3213,26 @@ definitions:
   ODataLinkedServiceTypeProperties:
     description: OData linked service properties.
     properties:
+      aadResourceId:
+        description: 'Specify the resource you are requesting authorization to use Directory. Type: string (or Expression with resultType string).'
+        type: object
+      aadServicePrincipalCredentialType:
+        description: Specify the credential type (key or cert) is used for service principal.
+        enum:
+          - ServicePrincipalKey
+          - ServicePrincipalCert
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ODataAadServicePrincipalCredentialType
       authenticationType:
         description: Type of authentication used to connect to the OData service.
         enum:
           - Basic
           - Anonymous
+          - Windows
+          - AadServicePrincipal
+          - ManagedServiceIdentity
         type: string
         x-ms-enum:
           modelAsString: true
@@ -2951,6 +3249,42 @@ definitions:
             type: string
         required:
           - type
+        type: object
+      servicePrincipalEmbeddedCert:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      servicePrincipalEmbeddedCertPassword:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      servicePrincipalId:
+        description: 'Specify the application id of your application registered in Azure Active Directory. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalKey:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      tenant:
+        description: 'Specify the tenant information (domain name or tenant ID) under which your application resides. Type: string (or Expression with resultType string).'
         type: object
       url:
         description: 'The URL of the OData service endpoint. Type: string (or Expression with resultType string).'
@@ -3010,6 +3344,49 @@ definitions:
         type: object
     required:
       - connectionString
+  Office365LinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Office365 linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/Office365LinkedServiceTypeProperties'
+        description: Office365 linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: Office365
+  Office365LinkedServiceTypeProperties:
+    description: Office365 linked service properties.
+    properties:
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      office365TenantId:
+        description: 'Azure tenant ID to which the Office 365 account belongs. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalId:
+        description: 'Specify the application''s client ID. Type: string (or Expression with resultType string).'
+        type: object
+      servicePrincipalKey:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      servicePrincipalTenantId:
+        description: 'Specify the tenant information under which your Azure AD web application resides. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - office365TenantId
+      - servicePrincipalTenantId
+      - servicePrincipalId
+      - servicePrincipalKey
   OracleLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -3077,6 +3454,54 @@ definitions:
         x-ms-discriminator-value: AzureKeyVaultSecret
     required:
       - connectionString
+  OracleServiceCloudLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Oracle Service Cloud linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/OracleServiceCloudLinkedServiceTypeProperties'
+        description: Oracle Service Cloud linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: OracleServiceCloud
+  OracleServiceCloudLinkedServiceTypeProperties:
+    description: Oracle Service Cloud linked service properties.
+    properties:
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      host:
+        description: The URL of the Oracle Service Cloud instance.
+        type: object
+      password:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      useEncryptedEndpoints:
+        description: 'Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      useHostVerification:
+        description: 'Specifies whether to require the host name in the server''s certificate to match the host name of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      usePeerVerification:
+        description: 'Specifies whether to verify the identity of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      username:
+        description: The user name that you use to access Oracle Service Cloud server.
+        type: object
+    required:
+      - host
+      - username
+      - password
   PaypalLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -3458,6 +3883,77 @@ definitions:
     required:
       - endpoint
       - clientId
+  RestServiceLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: Rest Service linked service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/RestServiceLinkedServiceTypeProperties'
+        description: Rest Service linked service properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: RestService
+  RestServiceLinkedServiceTypeProperties:
+    description: Rest Service linked service properties.
+    properties:
+      aadResourceId:
+        description: The resource you are requesting authorization to use.
+        type: object
+      authenticationType:
+        description: Type of authentication used to connect to the REST service.
+        enum:
+          - Anonymous
+          - Basic
+          - AadServicePrincipal
+          - ManagedServiceIdentity
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: RestServiceAuthenticationType
+      enableServerCertificateValidation:
+        description: 'Whether to validate server side SSL certificate when connecting to the endpoint.The default value is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      password:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      servicePrincipalId:
+        description: The application's client ID used in AadServicePrincipal authentication type.
+        type: object
+      servicePrincipalKey:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      tenant:
+        description: The tenant information (domain name or tenant ID) used in AadServicePrincipal authentication type under which your application resides.
+        type: object
+      url:
+        description: The base URL of the REST service.
+        type: object
+      userName:
+        description: The user name used in Basic authentication type.
+        type: object
+    required:
+      - url
+      - authenticationType
   SalesforceLinkedService:
     allOf:
       - $ref: '#/definitions/LinkedService'
@@ -3711,6 +4207,54 @@ definitions:
         type: object
     required:
       - server
+  SapOpenHubLinkedService:
+    allOf:
+      - $ref: '#/definitions/LinkedService'
+    description: SAP Business Warehouse Open Hub Destination Linked Service.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SapOpenHubLinkedServiceTypeProperties'
+        description: Properties specific to SAP Business Warehouse Open Hub Destination linked service type.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: SapOpenHub
+  SapOpenHubLinkedServiceTypeProperties:
+    description: Properties specific to SAP Business Warehouse Open Hub Destination linked service type.
+    properties:
+      clientId:
+        description: 'Client ID of the client on the BW system where the open hub destination is located. (Usually a three-digit decimal number represented as a string) Type: string (or Expression with resultType string).'
+        type: object
+      encryptedCredential:
+        description: 'The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).'
+        type: object
+      language:
+        description: 'Language of the BW system where the open hub destination is located. The default value is EN. Type: string (or Expression with resultType string).'
+        type: object
+      password:
+        description: The base definition of a secret type.
+        discriminator: type
+        properties:
+          type:
+            description: Type of the secret.
+            type: string
+        required:
+          - type
+        type: object
+      server:
+        description: 'Host name of the SAP BW instance where the open hub destination is located. Type: string (or Expression with resultType string).'
+        type: object
+      systemNumber:
+        description: 'System number of the BW system where the open hub destination is located. (Usually a two-digit decimal number represented as a string.) Type: string (or Expression with resultType string).'
+        type: object
+      userName:
+        description: 'Username to access the SAP BW server where the open hub destination is located. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - server
+      - systemNumber
+      - clientId
   ScriptAction:
     description: Custom script action to run on HDI ondemand cluster once it's up.
     properties:

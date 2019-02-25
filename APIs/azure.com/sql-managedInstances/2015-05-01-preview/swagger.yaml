@@ -143,6 +143,7 @@ paths:
                       publicDataEndpointEnabled: false
                       state: Ready
                       storageSizeInGB: 1024
+                      timezoneId: UTC
                       vCores: 8
                     sku:
                       capacity: 1
@@ -162,6 +163,7 @@ paths:
                       publicDataEndpointEnabled: false
                       state: Ready
                       storageSizeInGB: 1024
+                      timezoneId: UTC
                       vCores: 8
                     sku:
                       capacity: 22
@@ -231,6 +233,7 @@ paths:
                       publicDataEndpointEnabled: false
                       state: Ready
                       storageSizeInGB: 1024
+                      timezoneId: UTC
                       vCores: 8
                     sku:
                       capacity: 1
@@ -251,6 +254,7 @@ paths:
                       publicDataEndpointEnabled: false
                       state: Ready
                       storageSizeInGB: 1024
+                      timezoneId: UTC
                       vCores: 8
                     sku:
                       capacity: 22
@@ -384,6 +388,7 @@ paths:
                   publicDataEndpointEnabled: false
                   state: Ready
                   storageSizeInGB: 1024
+                  timezoneId: UTC
                   vCores: 8
                 sku:
                   capacity: 1
@@ -549,6 +554,7 @@ paths:
                   publicDataEndpointEnabled: false
                   state: Ready
                   subnetId: /subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+                  timezoneId: UTC
                 sku:
                   capacity: 1
                   name: CLS3
@@ -578,6 +584,7 @@ paths:
                   dnsZone: 1b4e2caff2530
                   fullyQualifiedDomainName: testinstance.1b4e2caff2530.database.windows.net
                   state: Ready
+                  timezoneId: UTC
                 sku:
                   capacity: 1
                   name: CLS3
@@ -733,6 +740,7 @@ paths:
                 publicDataEndpointEnabled: false
                 storageSizeInGB: 1024
                 subnetId: /subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+                timezoneId: UTC
                 vCores: 8
               sku:
                 capacity: 1
@@ -757,6 +765,7 @@ paths:
                   publicDataEndpointEnabled: false
                   state: Ready
                   subnetId: /subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+                  timezoneId: UTC
                 sku:
                   capacity: 1
                   name: CLS3
@@ -776,6 +785,7 @@ paths:
                   fullyQualifiedDomainName: testinstance.1b4e2caff2530.database.windows.net
                   state: Ready
                   subnetId: /subscriptions/20D7082A-0FC7-4468-82BD-542694D5042B/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1
+                  timezoneId: UTC
                 sku:
                   capacity: 1
                   name: CLS3
@@ -807,6 +817,7 @@ paths:
                   dnsZone: 1b4e2caff2530
                   fullyQualifiedDomainName: testinstance.1b4e2caff2530.database.windows.net
                   state: Ready
+                  timezoneId: UTC
                 sku:
                   capacity: 1
                   name: CLS3
@@ -823,6 +834,7 @@ paths:
                   dnsZone: 1b4e2caff2530
                   fullyQualifiedDomainName: testinstance.1b4e2caff2530.database.windows.net
                   state: Ready
+                  timezoneId: UTC
                 sku:
                   capacity: 1
                   name: CLS3
@@ -993,6 +1005,12 @@ definitions:
       subnetId:
         description: Subnet resource ID for the managed instance.
         type: string
+      timezoneId:
+        description: "Id of the timezone. Allowed values are timezones supported by Windows.\r\nWinodws keeps details on supported timezones, including the id, in registry under\r\nKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Time Zones.\r\nYou can get those registry values via SQL Server by querying SELECT name AS timezone_id FROM sys.time_zone_info.\r\nList of Ids can also be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.\r\nAn example of valid timezone id is \"Pacific Standard Time\" or \"W. Europe Standard Time\"."
+        type: string
+        x-ms-mutability:
+          - read
+          - create
       vCores:
         description: The number of VCores.
         format: int32

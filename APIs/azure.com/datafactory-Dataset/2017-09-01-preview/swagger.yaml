@@ -59,6 +59,12 @@ definitions:
       key:
         description: 'The key of the Amazon S3 object. Type: string (or Expression with resultType string).'
         type: object
+      modifiedDatetimeEnd:
+        description: 'The end of S3 object''s modified datetime. Type: string (or Expression with resultType string).'
+        type: object
+      modifiedDatetimeStart:
+        description: 'The start of S3 object''s modified datetime. Type: string (or Expression with resultType string).'
+        type: object
       prefix:
         description: 'The prefix filter for the S3 object name. Type: string (or Expression with resultType string).'
         type: object
@@ -100,9 +106,88 @@ definitions:
       format:
         $ref: '#/definitions/DatasetStorageFormat'
         description: The format of the Azure Blob storage.
+      modifiedDatetimeEnd:
+        description: 'The end of Azure Blob''s modified datetime. Type: string (or Expression with resultType string).'
+        type: object
+      modifiedDatetimeStart:
+        description: 'The start of Azure Blob''s modified datetime. Type: string (or Expression with resultType string).'
+        type: object
       tableRootLocation:
         description: 'The root of blob path. Type: string (or Expression with resultType string).'
         type: object
+  AzureBlobFSDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Azure Data Lake Storage Gen2 storage.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureBlobFSDatasetTypeProperties'
+        description: Azure Data Lake Storage Gen2 dataset properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AzureBlobFSFile
+  AzureBlobFSDatasetTypeProperties:
+    description: Azure Data Lake Storage Gen2 dataset properties.
+    properties:
+      compression:
+        $ref: '#/definitions/DatasetCompression'
+        description: The data compression method used for the blob storage.
+      fileName:
+        description: 'The name of the Azure Data Lake Storage Gen2. Type: string (or Expression with resultType string).'
+        type: object
+      folderPath:
+        description: 'The path of the Azure Data Lake Storage Gen2 storage. Type: string (or Expression with resultType string).'
+        type: object
+      format:
+        $ref: '#/definitions/DatasetStorageFormat'
+        description: The format of the Azure Data Lake Storage Gen2 storage.
+  AzureDataExplorerDatasetTypeProperties:
+    description: Azure Data Explorer (Kusto) dataset properties.
+    properties:
+      table:
+        description: 'The table name of the Azure Data Explorer database. Type: string (or Expression with resultType string).'
+        type: object
+  AzureDataExplorerTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Azure Data Explorer (Kusto) dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureDataExplorerDatasetTypeProperties'
+        description: Azure Data Explorer (Kusto) dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureDataExplorerTable
+  AzureDataLakeStoreCosmosStructuredStreamDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Azure Data Lake Store Cosmos Structured Stream dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/AzureDataLakeStoreCosmosStructuredStreamDatasetTypeProperties'
+        description: Azure Data Lake Store Cosmos Structured Stream dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: AzureDataLakeStoreCosmosStructuredStreamFile
+  AzureDataLakeStoreCosmosStructuredStreamDatasetTypeProperties:
+    description: Azure Data Lake Store Cosmos Structured Stream dataset properties.
+    properties:
+      fileName:
+        description: 'The name of the file in the Azure Data Lake Store. Type: string (or Expression with resultType string).'
+        type: object
+      folderPath:
+        description: 'Path to the folder in the Azure Data Lake Store. Type: string (or Expression with resultType string).'
+        type: object
+      generatedFromActivity:
+        description: 'Flag to indicate if this dataset is been generated from Compilation Activity. Type: boolean (or Expression with resultType boolean).'
+        type: object
+    required:
+      - folderPath
+      - fileName
   AzureDataLakeStoreDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -290,6 +375,27 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: ConcurObject
+  CosmosDbMongoDbApiCollectionDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The CosmosDB (MongoDB API) database dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/CosmosDbMongoDbApiCollectionDatasetTypeProperties'
+        description: CosmosDB (MongoDB API) database dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: CosmosDbMongoDbApiCollection
+  CosmosDbMongoDbApiCollectionDatasetTypeProperties:
+    description: CosmosDB (MongoDB API) database dataset properties.
+    properties:
+      collection:
+        description: 'The collection name of the CosmosDB (MongoDB API) database. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - collection
   CouchbaseTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -513,6 +619,27 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: DrillTable
+  DynamicsAXResourceDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The path of the Dynamics AX OData entity.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/DynamicsAXResourceDatasetTypeProperties'
+        description: Dynamics AX OData resource dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: DynamicsAXResource
+  DynamicsAXResourceDatasetTypeProperties:
+    description: Dynamics AX OData resource dataset properties.
+    properties:
+      path:
+        description: 'The path of the Dynamics AX OData entity. Type: string (or Expression with resultType string).'
+        type: string
+    required:
+      - path
   DynamicsEntityDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -574,12 +701,29 @@ definitions:
       format:
         $ref: '#/definitions/DatasetStorageFormat'
         description: The format of the files.
+      modifiedDatetimeEnd:
+        description: 'The end of file''s modified datetime. Type: string (or Expression with resultType string).'
+        type: object
+      modifiedDatetimeStart:
+        description: 'The start of file''s modified datetime. Type: string (or Expression with resultType string).'
+        type: object
   GenericDatasetTypeProperties:
     description: Properties specific to this dataset type.
     properties:
       tableName:
         description: 'The table name. Type: string (or Expression with resultType string).'
         type: object
+  GoogleAdWordsObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Google AdWords service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: GoogleAdWordsObject
   GoogleBigQueryObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -775,6 +919,27 @@ definitions:
         type: object
     required:
       - collectionName
+  MongoDbV2CollectionDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The MongoDB database dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/MongoDbV2CollectionDatasetTypeProperties'
+        description: MongoDB database dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: MongoDbV2Collection
+  MongoDbV2CollectionDatasetTypeProperties:
+    description: MongoDB database dataset properties.
+    properties:
+      collection:
+        description: 'The collection name of the MongoDB database. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - collection
   NetezzaTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -805,6 +970,41 @@ definitions:
       path:
         description: 'The OData resource path. Type: string (or Expression with resultType string).'
         type: object
+  Office365Dataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: The Office365 account.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/Office365DatasetTypeProperties'
+        description: Office365 dataset properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: Office365Table
+  Office365DatasetTypeProperties:
+    description: Office365 dataset properties.
+    properties:
+      predicate:
+        description: 'A predicate expression that can be used to filter the specific rows to extract from Office 365. Type: string (or Expression with resultType string).'
+        type: object
+      tableName:
+        description: 'Name of the dataset to extract from Office 365. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - tableName
+  OracleServiceCloudObjectDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Oracle Service Cloud dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/GenericDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: OracleServiceCloudObject
   OracleTableDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -910,6 +1110,35 @@ definitions:
         x-ms-client-flatten: true
     type: object
     x-ms-discriminator-value: ResponsysObject
+  RestResourceDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: A Rest service dataset.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/RestResourceDatasetTypeProperties'
+        description: Properties specific to this dataset type.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: RestResource
+  RestResourceDatasetTypeProperties:
+    description: Properties specific to this dataset type.
+    properties:
+      additionalHeaders:
+        description: 'The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string).'
+        type: object
+      paginationRules:
+        description: 'The pagination rules to compose next page requests. Type: string (or Expression with resultType string).'
+        type: object
+      relativeUrl:
+        description: 'The relative URL to the resource that the RESTful API provides. Type: string (or Expression with resultType string).'
+        type: object
+      requestBody:
+        description: 'The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string).'
+        type: object
+      requestMethod:
+        description: 'The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string).'
+        type: object
   SalesforceMarketingCloudObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'
@@ -982,6 +1211,33 @@ definitions:
         type: string
     required:
       - path
+  SapOpenHubTableDataset:
+    allOf:
+      - $ref: '#/definitions/Dataset'
+    description: Sap Business Warehouse Open Hub Destination Table properties.
+    properties:
+      typeProperties:
+        $ref: '#/definitions/SapOpenHubTableDatasetTypeProperties'
+        description: Sap Business Warehouse Open Hub Destination Table properties.
+        x-ms-client-flatten: true
+    required:
+      - typeProperties
+    type: object
+    x-ms-discriminator-value: SapOpenHubTable
+  SapOpenHubTableDatasetTypeProperties:
+    description: Sap Business Warehouse Open Hub Destination Table properties.
+    properties:
+      baseRequestId:
+        description: 'The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer ).'
+        type: object
+      excludeLastRequest:
+        description: 'Whether to exclude the records of the last request. The default value is true. Type: boolean (or Expression with resultType boolean).'
+        type: object
+      openHubDestinationName:
+        description: 'The name of the Open Hub Destination with destination type as Database Table. Type: string (or Expression with resultType string).'
+        type: object
+    required:
+      - openHubDestinationName
   ServiceNowObjectDataset:
     allOf:
       - $ref: '#/definitions/Dataset'

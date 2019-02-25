@@ -73,6 +73,20 @@ parameters:
     required: true
     type: string
 paths:
+  /providers/Microsoft.MachineLearning/operations:
+    get:
+      description: Lists all of the available Azure Machine Learning Studio Commitment Plan RP REST API operations.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/APIVersionParameter'
+      responses:
+        '200':
+          description: OK.
+          schema:
+            $ref: '#/definitions/OperationEntityListResult'
+      tags:
+        - Operation
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/commitmentPlans':
     get:
       description: Retrieve all Azure ML commitment plans in a subscription.
@@ -448,6 +462,47 @@ definitions:
       destinationPlanId:
         description: The ARM ID of the commitment plan to re-parent the commitment association to.
         type: string
+    type: object
+  OperationDisplayInfo:
+    description: The API operation info.
+    properties:
+      description:
+        description: The description of the operation.
+        readOnly: true
+        type: string
+      operation:
+        description: 'The action that users can perform, based on their permission level.'
+        readOnly: true
+        type: string
+      provider:
+        description: The service provider.
+        readOnly: true
+        type: string
+      resource:
+        description: The resource on which the operation is performed.
+        readOnly: true
+        type: string
+    type: object
+  OperationEntity:
+    description: An API operation.
+    properties:
+      display:
+        $ref: '#/definitions/OperationDisplayInfo'
+        description: The API operation info.
+      name:
+        description: 'Operation name: {provider}/{resource}/{operation}.'
+        readOnly: true
+        type: string
+    type: object
+  OperationEntityListResult:
+    description: The list of REST API operations.
+    properties:
+      value:
+        description: The list of operations.
+        items:
+          $ref: '#/definitions/OperationEntity'
+        readOnly: true
+        type: array
     type: object
   PlanQuantity:
     description: Represents the quantity a commitment plan provides of a metered resource.
