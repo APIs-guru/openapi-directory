@@ -258,7 +258,7 @@ paths:
   '/#DeleteLifecyclePolicy':
     post:
       operationId: DeleteLifecyclePolicy
-      description: Removes an object lifecycle policy from a container.
+      description: Removes an object lifecycle policy from a container. It takes up to 20 minutes for the change to take effect.
       responses:
         '200':
           description: Success
@@ -521,7 +521,7 @@ paths:
   '/#PutCorsPolicy':
     post:
       operationId: PutCorsPolicy
-      description: '<p>Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser''s XMLHttpRequest capability.</p> <p>To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.</p>'
+      description: '<p>Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser''s XMLHttpRequest capability.</p> <p>To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.</p> <p>To learn more about CORS, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html">Cross-Origin Resource Sharing (CORS) in AWS Elemental MediaStore</a>.</p>'
       responses:
         '200':
           description: Success
@@ -558,7 +558,7 @@ paths:
   '/#PutLifecyclePolicy':
     post:
       operationId: PutLifecyclePolicy
-      description: 'Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. '
+      description: '<p>Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. It takes up to 20 minutes for the change to take effect.</p> <p>For information about how to construct an object lifecycle policy, see <a href="https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html">Components of an Object Lifecycle Policy</a>.</p>'
       responses:
         '200':
           description: Success
@@ -582,6 +582,80 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutLifecyclePolicyInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartAccessLogging':
+    post:
+      operationId: StartAccessLogging
+      description: 'Starts access logging on the specified container. When you enable access logging on a container, MediaStore delivers access logs for objects stored in that container to Amazon CloudWatch Logs.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartAccessLoggingOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartAccessLoggingInput'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StopAccessLogging':
+    post:
+      operationId: StopAccessLogging
+      description: 'Stops access logging on the specified container. When you stop access logging on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs. These access logs are not saved and are not retrievable.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StopAccessLoggingOutput'
+        '480':
+          description: ContainerInUseException
+          schema:
+            $ref: '#/definitions/ContainerInUseException'
+        '481':
+          description: ContainerNotFoundException
+          schema:
+            $ref: '#/definitions/ContainerNotFoundException'
+        '482':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StopAccessLoggingInput'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -784,6 +858,28 @@ definitions:
       LifecyclePolicy:
         $ref: '#/definitions/LifecyclePolicy'
         description: The object lifecycle policy to apply to the container.
+  StartAccessLoggingOutput:
+    type: object
+    properties: {}
+  StartAccessLoggingInput:
+    type: object
+    required:
+      - ContainerName
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that you want to start access logging on.
+  StopAccessLoggingOutput:
+    type: object
+    properties: {}
+  StopAccessLoggingInput:
+    type: object
+    required:
+      - ContainerName
+    properties:
+      ContainerName:
+        $ref: '#/definitions/ContainerName'
+        description: The name of the container that you want to stop access logging on.
   Header:
     type: string
     pattern: '[\u0009\u000A\u000D\u0020-\u00FF]+'
@@ -844,6 +940,8 @@ definitions:
       - DELETING
     minLength: 1
     maxLength: 16
+  ContainerAccessLoggingEnabled:
+    type: boolean
   Container:
     type: object
     properties:
@@ -862,6 +960,9 @@ definitions:
       Status:
         $ref: '#/definitions/ContainerStatus'
         description: 'The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.'
+      AccessLoggingEnabled:
+        $ref: '#/definitions/ContainerAccessLoggingEnabled'
+        description: 'The state of access logging on the container. This value is <code>false</code> by default, indicating that AWS Elemental MediaStore does not send access logs to Amazon CloudWatch Logs. When you enable access logging on the container, MediaStore changes this value to <code>true</code>, indicating that the service delivers access logs for objects stored in that container to CloudWatch Logs.'
     description: This section describes operations that you can perform on an AWS Elemental MediaStore container.
   ContainerList:
     type: array
@@ -924,4 +1025,4 @@ definitions:
     type: string
     pattern: '[0-9A-Za-z=/+]+'
     minLength: 1
-    maxLength: 255
+    maxLength: 1024
