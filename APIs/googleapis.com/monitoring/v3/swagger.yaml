@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://monitoring.googleapis.com/$discovery/rest?version=v3'
       version: v1
@@ -149,14 +149,17 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
-      operationId: monitoring.projects.metricDescriptors.delete
+      description: Deletes an alerting policy.
+      operationId: monitoring.projects.alertPolicies.delete
       parameters:
         - description: 'If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, channels that are still referenced by an existing alerting policy will fail to be deleted in a delete operation.'
           in: query
           name: force
           type: boolean
-        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
+        - description: |-
+            The alerting policy to delete. The format is:
+            projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
+            For more information, see AlertPolicy.
           in: path
           name: name
           required: true
@@ -175,10 +178,12 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
-      operationId: monitoring.projects.metricDescriptors.get
+      description: Gets a single alerting policy.
+      operationId: monitoring.projects.alertPolicies.get
       parameters:
-        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example value of {metric_id} is "compute.googleapis.com/instance/disk/read_bytes_count".'
+        - description: |
+            The alerting policy to retrieve. The format is
+            projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
           in: path
           name: name
           required: true
@@ -188,7 +193,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/MetricDescriptor'
+            $ref: '#/definitions/AlertPolicy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

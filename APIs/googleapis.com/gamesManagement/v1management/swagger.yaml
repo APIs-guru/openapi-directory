@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/gamesManagement/v1management/rest'
       version: v1
@@ -34,7 +34,7 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
-      'https://www.googleapis.com/auth/games': Share your Google+ profile information and view and manage your game activity
+      'https://www.googleapis.com/auth/games': 'Create, edit, and delete your Google Play Games activity'
     type: oauth2
 parameters:
   alt:

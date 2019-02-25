@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://cloudidentity.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -171,11 +171,8 @@ paths:
       operationId: cloudidentity.groups.search
       parameters:
         - description: |-
-            The max number of groups to return.
-            GroupView | Default | Maximum
-            --------- | ------- | -------
-            BASIC     | 200     | 1000
-            FULL      | 50      | 500
+            The default page size is 200 (max 1000) for the BASIC view, and 50
+            (max 500) for the FULL view.
           in: query
           name: pageSize
           type: integer
@@ -316,12 +313,8 @@ paths:
       operationId: cloudidentity.groups.memberships.list
       parameters:
         - description: |-
-            Maximum number of Memberships to return.
-
-            MembershipView | Default | Maximum
-            -------------- | ------- | -------
-            BASIC          | 200     | 1000
-            FULL           | 50      | 500
+            The default page size is 200 (max 1000) for the BASIC view, and 50
+            (max 500) for the FULL view.
           in: query
           name: pageSize
           type: integer

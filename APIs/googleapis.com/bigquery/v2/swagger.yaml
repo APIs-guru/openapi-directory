@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/bigquery/v2/rest'
       version: v1
@@ -670,6 +670,10 @@ paths:
         - description: 'Page token, returned by a previous call, to request the next page of results'
           in: query
           name: pageToken
+          type: string
+        - description: 'If set, retrieves only jobs whose parent is this job. Otherwise, retrieves only jobs which have no parent.'
+          in: query
+          name: parentJobId
           type: string
         - description: Project ID of the jobs to list
           in: path
@@ -1851,6 +1855,13 @@ definitions:
       load:
         $ref: '#/definitions/JobStatistics3'
         description: '[Output-only] Statistics for a load job.'
+      numChildJobs:
+        description: '[Output-only] Number of child jobs executed.'
+        format: int64
+        type: string
+      parentJobId:
+        description: '[Output-only] If this is a child job, the id of the parent.'
+        type: string
       query:
         $ref: '#/definitions/JobStatistics2'
         description: '[Output-only] Statistics for a query job.'

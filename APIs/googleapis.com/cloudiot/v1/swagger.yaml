@@ -18,7 +18,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://cloudiot.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -433,10 +433,6 @@ paths:
             The fields of the `Device` resource to be returned in the response. The
             fields `id` and `num_id` are always returned, along with any
             other fields specified.
-          enum:
-            - GATEWAY_TYPE_UNSPECIFIED
-            - GATEWAY
-            - NON_GATEWAY
           in: query
           name: fieldMask
           type: string
@@ -446,6 +442,8 @@ paths:
             string (`id`). For example, if `456` is specified, returns only the
             gateways to which the device with `num_id` 456 is bound.
           in: query
+          items:
+            type: string
           name: gatewayListOptions.associationsDeviceId
           type: string
         - description: |-
@@ -481,9 +479,11 @@ paths:
             The value returned by the last `ListDevicesResponse`; indicates
             that this is a continuation of a prior `ListDevices` call and
             the system should return the next page of data.
+          enum:
+            - GATEWAY_TYPE_UNSPECIFIED
+            - GATEWAY
+            - NON_GATEWAY
           in: query
-          items:
-            type: string
           name: pageToken
           type: string
         - description: |-

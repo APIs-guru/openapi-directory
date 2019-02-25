@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://alertcenter.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -470,7 +470,7 @@ definitions:
         description: |-
           Optional. The time the event that caused this alert ceased being active.
           If provided, the end time must not be earlier than the start time.
-          If not provided, the end time defaults to the start time.
+          If not provided, it indicates an ongoing alert.
         format: google-datetime
         type: string
       securityInvestigationToolLink:

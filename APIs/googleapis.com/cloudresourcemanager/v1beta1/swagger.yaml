@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -1357,8 +1357,8 @@ definitions:
         type: string
       name:
         description: |-
-          The user-assigned display name of the Project.
-          It must be 4 to 30 characters.
+          The optional user-assigned display name of the Project.
+          When present it must be between 4 to 30 characters.
           Allowed characters are: lowercase and uppercase letters, numbers,
           hyphen, single-quote, double-quote, space, and exclamation point.
 

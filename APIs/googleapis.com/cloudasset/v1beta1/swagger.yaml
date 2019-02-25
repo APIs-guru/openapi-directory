@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://cloudasset.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -110,7 +110,7 @@ paths:
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: cloudasset.projects.operations.get
+      operationId: cloudasset.folders.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -127,7 +127,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - folders
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -150,7 +150,7 @@ paths:
         attached IAM POLICY both exist. This can create gaps in the output history.
         If a specified asset does not exist, this API returns an INVALID_ARGUMENT
         error.
-      operationId: cloudasset.projects.batchGetAssetsHistory
+      operationId: cloudasset.organizations.batchGetAssetsHistory
       parameters:
         - collectionFormat: multi
           description: |-
@@ -187,15 +187,9 @@ paths:
             End time of the time window (inclusive).
             Current timestamp if not specified.
           in: query
-          items:
-            type: string
           name: readTimeWindow.endTime
           type: string
         - description: Start time of the time window (exclusive).
-          enum:
-            - CONTENT_TYPE_UNSPECIFIED
-            - RESOURCE
-            - IAM_POLICY
           in: query
           name: readTimeWindow.startTime
           type: string
@@ -208,7 +202,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -240,7 +234,7 @@ paths:
         location. The output format is newline-delimited JSON.
         This API implements the google.longrunning.Operation API allowing you
         to keep track of the export.
-      operationId: cloudasset.projects.exportAssets
+      operationId: cloudasset.folders.exportAssets
       parameters:
         - in: body
           name: body
@@ -265,7 +259,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - folders
 definitions:
   Asset:
     description: |-

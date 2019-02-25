@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/fitness/v1/rest'
       version: v1
@@ -1050,7 +1050,10 @@ definitions:
         format: int64
         type: string
       originDataSourceId:
-        description: 'If the data point is contained in a dataset for a derived data source, this field will be populated with the data source stream ID that created the data point originally.'
+        description: |-
+          If the data point is contained in a dataset for a derived data source, this field will be populated with the data source stream ID that created the data point originally.
+
+          WARNING: do not rely on this field for anything other than debugging. The value of this field, if it is set at all, is an implementation detail and is not guaranteed to remain consistent.
         type: string
       rawTimestampNanos:
         description: The raw timestamp from the original SensorEvent.

@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://dataproc.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -655,16 +655,16 @@ paths:
       description: Retrieves the latest workflow template.Can retrieve previously instantiated template by specifying optional version parameter.
       operationId: dataproc.projects.locations.workflowTemplates.get
       parameters:
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
         - description: 'Required. The "resource name" of the workflow template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          type: integer
         - description: The standard list page token.
           in: query
           name: pageToken

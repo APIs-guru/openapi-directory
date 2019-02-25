@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://androiddeviceprovisioning.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -493,12 +493,12 @@ paths:
       tags:
         - customers
     get:
-      description: Gets a device.
-      operationId: androiddeviceprovisioning.partners.devices.get
+      description: Gets the details of a configuration.
+      operationId: androiddeviceprovisioning.customers.configurations.get
       parameters:
         - description: |-
-            Required. The device API resource name in the format
-            `partners/[PARTNER_ID]/devices/[DEVICE_ID]`.
+            Required. The configuration to get. An API resource name in the format
+            `customers/[CUSTOMER_ID]/configurations/[CONFIGURATION_ID]`.
           in: path
           name: name
           required: true
@@ -508,9 +508,9 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Device'
+            $ref: '#/definitions/Configuration'
       tags:
-        - partners
+        - customers
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://dlp.googleapis.com/$discovery/rest?version=v2'
       version: v1
@@ -152,15 +152,14 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes a stored infoType.
-        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-        learn more.
-      operationId: dlp.organizations.storedInfoTypes.delete
+        Deletes a long-running DlpJob. This method indicates that the client is
+        no longer interested in the DlpJob result. The job will be cancelled if
+        possible.
+        See https://cloud.google.com/dlp/docs/inspecting-storage and
+        https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+      operationId: dlp.projects.dlpJobs.delete
       parameters:
-        - description: |-
-            Resource name of the organization and storedInfoType to be deleted, for
-            example `organizations/433245324/storedInfoTypes/432452342` or
-            projects/project-id/storedInfoTypes/432452342.
+        - description: The name of the DlpJob resource to be deleted.
           in: path
           name: name
           required: true
@@ -175,18 +174,15 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     get:
       description: |-
-        Gets a stored infoType.
-        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-        learn more.
-      operationId: dlp.organizations.storedInfoTypes.get
+        Gets the latest state of a long-running DlpJob.
+        See https://cloud.google.com/dlp/docs/inspecting-storage and
+        https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
+      operationId: dlp.projects.dlpJobs.get
       parameters:
-        - description: |-
-            Resource name of the organization and storedInfoType to be read, for
-            example `organizations/433245324/storedInfoTypes/432452342` or
-            projects/project-id/storedInfoTypes/432452342.
+        - description: The name of the DlpJob resource.
           in: path
           name: name
           required: true
@@ -196,12 +192,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
+            $ref: '#/definitions/GooglePrivacyDlpV2DlpJob'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -216,20 +212,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the stored infoType by creating a new version. The existing version
-        will continue to be used until the new version is ready.
-        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-        learn more.
-      operationId: dlp.organizations.storedInfoTypes.patch
+        Updates the DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
         - description: |-
-            Resource name of organization and storedInfoType to be updated, for
-            example `organizations/433245324/storedInfoTypes/432452342` or
-            projects/project-id/storedInfoTypes/432452342.
+            Resource name of organization and deidentify template to be updated, for
+            example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -239,12 +234,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
+            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{name}:activate':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -466,7 +461,7 @@ paths:
         Lists DeidentifyTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.list
+      operationId: dlp.projects.deidentifyTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -514,7 +509,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -533,7 +528,7 @@ paths:
         for de-identifying content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.create
+      operationId: dlp.projects.deidentifyTemplates.create
       parameters:
         - in: body
           name: body
@@ -556,7 +551,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/dlpJobs':
     get:
       description: |-
@@ -734,7 +729,7 @@ paths:
       description: |-
         Lists InspectTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.list
+      operationId: dlp.projects.inspectTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -782,7 +777,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -800,7 +795,7 @@ paths:
         Creates an InspectTemplate for re-using frequently used configuration
         for inspecting content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.create
+      operationId: dlp.projects.inspectTemplates.create
       parameters:
         - in: body
           name: body
@@ -823,7 +818,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/jobTriggers':
     get:
       description: |-
@@ -950,7 +945,7 @@ paths:
         Lists stored infoTypes.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.list
+      operationId: dlp.projects.storedInfoTypes.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -999,7 +994,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1017,7 +1012,7 @@ paths:
         Creates a pre-built stored infoType to be used for inspection.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.create
+      operationId: dlp.projects.storedInfoTypes.create
       parameters:
         - in: body
           name: body
@@ -1040,7 +1035,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
 definitions:
   GooglePrivacyDlpV2Action:
     description: |-
@@ -1050,7 +1045,7 @@ definitions:
       jobNotificationEmails:
         $ref: '#/definitions/GooglePrivacyDlpV2JobNotificationEmails'
         description: |-
-          Enable email notification to project owners and editors on job‘s
+          Enable email notification to project owners and editors on job's
           completion/failure.
       pubSub:
         $ref: '#/definitions/GooglePrivacyDlpV2PublishToPubSub'
@@ -1536,7 +1531,8 @@ definitions:
     description: |-
       The field type of `value` and `field` do not need to match to be
       considered equal, but not all comparisons are possible.
-
+      EQUAL_TO and NOT_EQUAL_TO attempt to compare even with incompatible types,
+      but all other comparisons are invalid with incompatible types.
       A `value` of type:
 
       - `string` can be compared against all other types
@@ -2460,14 +2456,14 @@ definitions:
         description: |-
           Max number of findings that will be returned for each item scanned.
           When set within `InspectDataSourceRequest`,
-          the maximum returned is 1000 regardless if this is set higher.
+          the maximum returned is 2000 regardless if this is set higher.
           When set within `InspectContentRequest`, this field is ignored.
         format: int32
         type: integer
       maxFindingsPerRequest:
         description: |-
           Max number of findings that will be returned per request/job.
-          When set within `InspectContentRequest`, the maximum returned is 1000
+          When set within `InspectContentRequest`, the maximum returned is 2000
           regardless if this is set higher.
         format: int32
         type: integer

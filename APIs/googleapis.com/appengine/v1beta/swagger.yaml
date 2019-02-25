@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://appengine.googleapis.com/$discovery/rest?version=v1beta'
       version: v1
@@ -2451,30 +2451,6 @@ definitions:
         description: 'The normal response of the operation in case of success. If the original method returns no data on success, such as Delete, the response is google.protobuf.Empty. If the original method is standard Get/Create/Update, the response should be the resource. For other methods, the response should have the type XxxResponse, where Xxx is the original method name. For example, if the original method name is TakeSnapshot(), the inferred response type is TakeSnapshotResponse.'
         type: object
     type: object
-  OperationMetadata:
-    description: Metadata for the given google.longrunning.Operation.
-    properties:
-      endTime:
-        description: Timestamp that this operation completed.@OutputOnly
-        format: google-datetime
-        type: string
-      insertTime:
-        description: Timestamp that this operation was created.@OutputOnly
-        format: google-datetime
-        type: string
-      method:
-        description: 'API method that initiated this operation. Example: google.appengine.v1beta4.Version.CreateVersion.@OutputOnly'
-        type: string
-      operationType:
-        description: 'Type of this operation. Deprecated, use method field instead. Example: "create_version".@OutputOnly'
-        type: string
-      target:
-        description: 'Name of the resource that this operation is acting on. Example: apps/myapp/modules/default.@OutputOnly'
-        type: string
-      user:
-        description: User who requested this operation.@OutputOnly
-        type: string
-    type: object
   OperationMetadataV1:
     description: Metadata for the given google.longrunning.Operation.
     properties:
@@ -2567,27 +2543,6 @@ definitions:
         items:
           type: string
         type: array
-    type: object
-  OperationMetadataV1Beta5:
-    description: Metadata for the given google.longrunning.Operation.
-    properties:
-      endTime:
-        description: Timestamp that this operation completed.@OutputOnly
-        format: google-datetime
-        type: string
-      insertTime:
-        description: Timestamp that this operation was created.@OutputOnly
-        format: google-datetime
-        type: string
-      method:
-        description: 'API method name that initiated this operation. Example: google.appengine.v1beta5.Version.CreateVersion.@OutputOnly'
-        type: string
-      target:
-        description: 'Name of the resource that this operation is acting on. Example: apps/myapp/services/default.@OutputOnly'
-        type: string
-      user:
-        description: User who requested this operation.@OutputOnly
-        type: string
     type: object
   ReadinessCheck:
     description: Readiness checking configuration for VM instances. Unhealthy instances are removed from traffic rotation.
@@ -3007,7 +2962,7 @@ definitions:
         $ref: '#/definitions/VpcAccessConnector'
         description: Enables VPC connectivity for standard apps.
       zones:
-        description: The Google Compute Engine zones that are supported by this version in the App Engine flexible environment.
+        description: The Google Compute Engine zones that are supported by this version in the App Engine flexible environment. Deprecated.
         items:
           type: string
         type: array

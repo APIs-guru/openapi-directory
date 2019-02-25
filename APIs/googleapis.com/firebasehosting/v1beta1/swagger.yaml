@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://firebasehosting.googleapis.com/$discovery/rest?version=v1beta1'
       version: v1
@@ -107,10 +107,12 @@ tags:
 paths:
   '/v1beta1/{name}':
     delete:
-      description: Deletes the existing domain mapping on the specified site.
-      operationId: firebasehosting.sites.domains.delete
+      description: Deletes the specified version.
+      operationId: firebasehosting.sites.versions.delete
       parameters:
-        - description: Required. The name of the domain association to delete.
+        - description: |-
+            Required. The name of the version to be deleted, in the format:
+            <code>sites/<var>site-name</var>/versions/<var>versionID</var></code>
           in: path
           name: name
           required: true

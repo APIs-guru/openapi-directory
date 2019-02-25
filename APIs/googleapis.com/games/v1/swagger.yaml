@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/games/v1/rest'
       version: v1
@@ -35,7 +35,7 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/drive.appdata': View and manage its own configuration data in your Google Drive
-      'https://www.googleapis.com/auth/games': Share your Google+ profile information and view and manage your game activity
+      'https://www.googleapis.com/auth/games': 'Create, edit, and delete your Google Play Games activity'
       'https://www.googleapis.com/auth/plus.me': Know who you are on Google
     type: oauth2
 parameters:

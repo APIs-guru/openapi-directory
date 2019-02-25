@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://cloudsearch.googleapis.com/$discovery/rest?version=v1'
       version: v1
@@ -1234,8 +1234,8 @@ paths:
         - settings
   '/v1/settings/{name}':
     delete:
-      description: Deletes a datasource.
-      operationId: cloudsearch.settings.datasources.delete
+      description: Deletes a search application.
+      operationId: cloudsearch.settings.searchapplications.delete
       parameters:
         - description: |-
             If set, the request will enable debugging features of Cloud Search.
@@ -1244,8 +1244,8 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the datasource.
-            Format: datasources/{source_id}.
+            The name of the search application to be deleted.
+            <br />Format: applications/{application_id}.
           in: path
           name: name
           required: true
@@ -1262,12 +1262,12 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
     get:
-      description: Gets a datasource.
-      operationId: cloudsearch.settings.datasources.get
+      description: Gets the specified search application.
+      operationId: cloudsearch.settings.searchapplications.get
       parameters:
         - description: |-
             If set, the request will enable debugging features of Cloud Search.
@@ -1276,8 +1276,8 @@ paths:
           name: debugOptions.enableDebugging
           type: boolean
         - description: |-
-            Name of the datasource resource.
-            Format: datasources/{source_id}.
+            Name of the search application.
+            <br />Format: applications/{application_id}.
           in: path
           name: name
           required: true
@@ -1287,14 +1287,14 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/DataSource'
+            $ref: '#/definitions/SearchApplication'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search'
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
     parameters:
@@ -1310,17 +1310,16 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: Updates a datasource.
-      operationId: cloudsearch.settings.datasources.update
+      description: Updates a search application.
+      operationId: cloudsearch.settings.searchapplications.update
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/UpdateDataSourceRequest'
+            $ref: '#/definitions/SearchApplication'
         - description: |-
-            Name of the datasource resource.
-            Format: datasources/{source_id}.
-            <br />The name is ignored when creating a datasource.
+            Name of the Search Application.
+            <br />Format: searchapplications/{application_id}.
           in: path
           name: name
           required: true
@@ -1337,7 +1336,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud_search.settings'
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud_search.settings.indexing'
+            - 'https://www.googleapis.com/auth/cloud_search.settings.query'
       tags:
         - settings
   '/v1/settings/{name}:reset':
@@ -2314,6 +2313,14 @@ definitions:
           type: string
         type: array
     type: object
+  IndexItemOptions:
+    properties:
+      allowUnknownGsuitePrincipals:
+        description: |-
+          Specifies if the index request should allow gsuite principals that do not
+          exist or are deleted in the index request.
+        type: boolean
+    type: object
   IndexItemRequest:
     properties:
       connectorName:
@@ -2324,6 +2331,8 @@ definitions:
       debugOptions:
         $ref: '#/definitions/DebugOptions'
         description: Common debug options.
+      indexItemOptions:
+        $ref: '#/definitions/IndexItemOptions'
       item:
         $ref: '#/definitions/Item'
         description: |-
@@ -3213,13 +3222,13 @@ definitions:
         type: boolean
       isReturnable:
         description: |-
-          Indicates that the property identifies data that should be returned in search
-          results via the Query API. If set to *true*, indicates that Query API
-          users can use matching property fields in results. However, storing fields
-          requires more space allocation and uses more bandwidth for search queries,
-          which impacts performance over large datasets. Set to *true* here only if
-          the field is needed for search results. Cannot be true for properties
-          whose type is an object.
+          Indicates that the property identifies data that should be returned in
+          search results via the Query API. If set to *true*, indicates that Query
+          API users can use matching property fields in results. However, storing
+          fields requires more space allocation and uses more bandwidth for search
+          queries, which impacts performance over large datasets. Set to *true* here
+          only if the field is needed for search results. Cannot be true for
+          properties whose type is an object.
         type: boolean
       isSortable:
         description: |-
@@ -3682,8 +3691,8 @@ definitions:
         type: string
       operationIds:
         description: |-
-          IDs of the Long Running Operations (LROs) currently running for this schema.
-          Output only field.
+          IDs of the Long Running Operations (LROs) currently running for this
+          schema. Output only field.
         items:
           type: string
         type: array
@@ -4097,6 +4106,7 @@ definitions:
     properties:
       person:
         $ref: '#/definitions/Person'
+        description: Representation of a person
     type: object
   SuggestRequest:
     description: Request of suggest API.

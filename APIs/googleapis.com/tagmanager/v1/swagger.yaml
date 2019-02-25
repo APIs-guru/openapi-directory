@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/tagmanager/v1/rest'
       version: v1
@@ -442,43 +442,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-    patch:
-      description: Updates a GTM Environment. This method supports patch semantics.
-      operationId: tagmanager.accounts.containers.environments.patch
-      parameters:
-        - description: The GTM Account ID.
-          in: path
-          name: accountId
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Environment'
-        - description: The GTM Container ID.
-          in: path
-          name: containerId
-          required: true
-          type: string
-        - description: The GTM Environment ID.
-          in: path
-          name: environmentId
-          required: true
-          type: string
-        - description: 'When provided, this fingerprint must match the fingerprint of the environment in storage.'
-          in: query
-          name: fingerprint
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Environment'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
-      tags:
-        - accounts
     put:
       description: Updates a GTM Environment.
       operationId: tagmanager.accounts.containers.environments.update

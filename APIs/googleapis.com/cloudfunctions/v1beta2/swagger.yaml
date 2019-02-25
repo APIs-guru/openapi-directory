@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://cloudfunctions.googleapis.com/$discovery/rest?version=v1beta2'
       version: v1
@@ -471,11 +471,19 @@ paths:
 
         * Source file type should be a zip file.
         * Source file size should not exceed 100MB limit.
+        * No credentials should be attached - the signed URLs provide access to the
+          target bucket using internal service identity; if credentials were
+          attached, the identity from the credentials would be used, but that
+          identity does not have permissions to upload files to the URL.
 
         When making a HTTP PUT request, these two headers need to be specified:
 
         * `content-type: application/zip`
         * `x-goog-content-length-range: 0,104857600`
+
+        And this header SHOULD NOT be specified:
+
+        * `Authorization: Bearer YOUR_TOKEN`
       operationId: cloudfunctions.projects.locations.functions.generateUploadUrl
       parameters:
         - in: body
@@ -604,7 +612,9 @@ definitions:
           Node.js 6.
         type: string
       serviceAccount:
-        description: Output only. The service account of the function.
+        description: |-
+          The email of the function's service account. If empty, defaults to
+          {project_id}@appspot.gserviceaccount.com.
         type: string
       sourceArchiveUrl:
         description: |-
