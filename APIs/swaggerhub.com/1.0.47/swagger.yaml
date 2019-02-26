@@ -14,16 +14,16 @@ info:
     # Authentication
     Use your personal API Key: you can find it by visiting the [API Key page](https://app.swaggerhub.com/settings/apiKey).
   title: SwaggerHub Registry
-  version: 1.0.46
+  version: 1.0.47
   x-apisguru-categories:
     - developer_tools
   x-logo:
     url: 'https://twitter.com/SwaggerHub/profile_image?size=original'
   x-origin:
     - format: swagger
-      url: 'https://api.swaggerhub.com/apis/swagger-hub/registry-api/1.0.46'
+      url: 'https://api.swaggerhub.com/apis/swagger-hub/registry-api/1.0.47'
       version: '2.0'
-  x-preferred: true
+  x-preferred: false
   x-providerName: swaggerhub.com
 produces:
   - application/json
@@ -238,6 +238,20 @@ paths:
         - description: API version
           in: query
           name: version
+          required: false
+          type: string
+        - default: '2.0'
+          description: |
+            The OpenApi Specification (OAS)
+              version.
+            * 2.0 - For OAS2 (aka 'Swagger 2.0')
+            * 3.0.X - For OAS3
+          enum:
+            - '2.0'
+            - 3.0.0
+            - 3.0.1
+          in: query
+          name: oas
           required: false
           type: string
         - description: The Swagger definition of this API
