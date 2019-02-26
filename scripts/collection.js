@@ -1218,7 +1218,7 @@ function parseHost(swagger, altSource) {
 
   if (!swHost) swHost = altSource;
 
-  if (swHost && ((swHost === 'raw.githubusercontent.com') || (swHost.endsWith('github.io')) || (swHost.indexOf('example.com')>=0) || (swHost.indexOf('foo.bar')>=0) || (swHost.startsWith('localhost')) || (swHost === 'host'))) {
+  if (swHost && ((swHost === 'raw.githubusercontent.com') || (swHost.indexOf('virtserver.swaggerhub.com')>=0) || (swHost.endsWith('github.io')) || (swHost.indexOf('example.com')>=0) || (swHost.indexOf('foo.bar')>=0) || (swHost.startsWith('localhost')) || (swHost === 'host'))) {
     let port = '';
     if (swHost.indexOf(':')>=0) port = swHost.split(':')[1];
     swHost = altSource;
