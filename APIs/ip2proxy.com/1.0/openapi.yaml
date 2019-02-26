@@ -1,0 +1,57 @@
+openapi: 3.0.1
+servers:
+  - url: 'https://api.ip2proxy.com'
+info:
+  contact:
+    x-twitter: ip2location
+  description: 'IP2Proxy allows instant detection of anonymous proxy, VPN and TOR exit nodes by IP address. Visit https://www.ip2location.com/ip2proxy-web-service for further information.'
+  title: IP2Proxy Proxy Detection
+  version: '1.0'
+  x-apisguru-categories:
+    - location
+  x-logo:
+    url: 'https://twitter.com/ip2location/profile_image?size=original'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: openapi
+      url: 'https://api.swaggerhub.com/apis/ip2location/ip2proxy-proxy-detection/1.0'
+      version: '3.0'
+  x-providerName: ip2proxy.com
+paths:
+  /:
+    get:
+      description: Check if an IP address is proxy
+      parameters:
+        - in: query
+          name: package
+          schema:
+            type: string
+        - in: query
+          name: ip
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: format
+          schema:
+            enum:
+              - json
+              - xml
+            type: string
+        - in: query
+          name: key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            text/html; charset=UTF-8:
+              examples:
+                '0':
+                  value: '{"response": "","countryCode": "","countryName": "","regionName": "","cityName": "","isp": "","proxyType": "","isProxy": ""}'
+              schema:
+                type: string
+          description: Get response from IP2Proxy
