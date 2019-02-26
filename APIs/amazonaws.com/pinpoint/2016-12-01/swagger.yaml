@@ -3387,6 +3387,67 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/v1/tags/{resource-arn}':
+    get:
+      operationId: ListTagsForResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: ''
+      responses:
+        '204':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
+    delete:
+      operationId: UntagResource
+      description: ''
+      responses:
+        '204':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
   /v1/phone/number/validate:
     post:
       operationId: PhoneNumberValidate
@@ -4262,6 +4323,16 @@ definitions:
   GetVoiceChannelRequest:
     type: object
     properties: {}
+  ListTagsForResourceResponse:
+    type: object
+    required:
+      - TagsModel
+    properties:
+      TagsModel:
+        $ref: '#/definitions/TagsModel'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   PhoneNumberValidateResponse:
     type: object
     required:
@@ -4346,6 +4417,16 @@ definitions:
     properties:
       SendUsersMessageRequest:
         $ref: '#/definitions/SendUsersMessageRequest'
+  TagResourceRequest:
+    type: object
+    required:
+      - TagsModel
+    properties:
+      TagsModel:
+        $ref: '#/definitions/TagsModel'
+  UntagResourceRequest:
+    type: object
+    properties: {}
   UpdateAdmChannelResponse:
     type: object
     required:
@@ -5128,12 +5209,18 @@ definitions:
   ApplicationResponse:
     type: object
     properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The arn for the application.
       Id:
         $ref: '#/definitions/__string'
         description: The unique application ID.
       Name:
         $ref: '#/definitions/__string'
         description: The display name of the application.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: The Tags for the application.
     description: Application Response.
   CampaignHook:
     type: object
@@ -5534,6 +5621,9 @@ definitions:
       ApplicationId:
         $ref: '#/definitions/__string'
         description: The ID of the application to which the campaign applies.
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The arn for the campaign.
       CreationDate:
         $ref: '#/definitions/__string'
         description: The date the campaign was created in ISO 8601 format.
@@ -5582,6 +5672,9 @@ definitions:
           The campaign status.
 
           An A/B test campaign will have a status of COMPLETED only when all treatments have a status of COMPLETED.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: The Tags for the campaign.
       TreatmentDescription:
         $ref: '#/definitions/__string'
         description: A custom description for the treatment.
@@ -5686,6 +5779,9 @@ definitions:
       Name:
         $ref: '#/definitions/__string'
         description: The display name of the application. Used in the Amazon Pinpoint console.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: The Tags for the app.
     description: Application Request.
   WriteCampaignRequest:
     type: object
@@ -5723,6 +5819,9 @@ definitions:
       SegmentVersion:
         $ref: '#/definitions/__integer'
         description: The version of the segment to which the campaign sends messages.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: The Tags for the campaign.
       TreatmentDescription:
         $ref: '#/definitions/__string'
         description: A custom description for the treatment.
@@ -5890,6 +5989,9 @@ definitions:
       SegmentGroups:
         $ref: '#/definitions/SegmentGroupList'
         description: 'A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments. Your request can only include one segment group. Your request can include either a SegmentGroups object or a Dimensions object, but not both.'
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: The Tags for the segments.
     description: Segment definition.
   SegmentResponse:
     type: object
@@ -5897,6 +5999,9 @@ definitions:
       ApplicationId:
         $ref: '#/definitions/__string'
         description: The ID of the application that the segment applies to.
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The arn for the segment.
       CreationDate:
         $ref: '#/definitions/__string'
         description: The date and time when the segment was created.
@@ -5924,6 +6029,9 @@ definitions:
           The segment type:
           DIMENSIONAL - A dynamic segment built from selection criteria based on endpoint data reported by your app. You create this type of segment by using the segment builder in the Amazon Pinpoint console or by making a POST request to the segments resource.
           IMPORT - A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
+      tags:
+        $ref: '#/definitions/MapOf__string'
+        description: The Tags for the segment.
       Version:
         $ref: '#/definitions/__integer'
         description: The segment version number.
@@ -7074,6 +7182,13 @@ definitions:
         $ref: '#/definitions/MapOfEventItemResponse'
         description: 'A multipart response object that contains a key and value for each event ID in the request. In each object, the event ID is the key, and an EventItemResponse object is the value.'
     description: The response that's provided after registering the endpoint.
+  TagsModel:
+    type: object
+    required:
+      - tags
+    properties:
+      tags:
+        $ref: '#/definitions/MapOf__string'
   Message:
     type: object
     properties:

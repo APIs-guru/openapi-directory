@@ -151,7 +151,7 @@ paths:
   '/2017-08-29/jobs/{id}':
     delete:
       operationId: CancelJob
-      description: 'Permanently remove a job from a queue. Once you have canceled a job, you can''t start it again. You can''t delete a running job.'
+      description: 'Permanently cancel a job. Once you have canceled a job, you can''t start it again.'
       responses:
         '202':
           description: Success
@@ -1352,6 +1352,9 @@ definitions:
         description: 'Required. The IAM role you use for creating this job. For details about permissions, see the User Guide topic at the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.'
       Settings:
         $ref: '#/definitions/JobSettings'
+      StatusUpdateIntervalInSecs:
+        $ref: '#/definitions/__integerMin10Max600'
+        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
       UserMetadata:
         $ref: '#/definitions/__mapOf__string'
         description: User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
@@ -1383,6 +1386,9 @@ definitions:
         description: 'Optional. The queue that jobs created from this template are assigned to. If you don''t specify this, jobs will go to the default queue.'
       Settings:
         $ref: '#/definitions/JobTemplateSettings'
+      StatusUpdateIntervalInSecs:
+        $ref: '#/definitions/__integerMin10Max600'
+        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
       Tags:
         $ref: '#/definitions/__mapOf__string'
         description: The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
@@ -1620,6 +1626,9 @@ definitions:
         description: 'The new queue for the job template, if you are changing it.'
       Settings:
         $ref: '#/definitions/JobTemplateSettings'
+      StatusUpdateIntervalInSecs:
+        $ref: '#/definitions/__integerMin10Max600'
+        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
   UpdatePresetResponse:
     type: object
     properties:
@@ -1869,7 +1878,7 @@ definitions:
     enum:
       - DISABLED
       - ENABLED
-    description: Enable Anti-alias (AntiAlias) to enhance sharp edges in video output when your input resolution is much larger than your output resolution. Default is enabled.
+    description: You no longer need to specify the anti-alias filter. It's now automatically applied to all outputs. This property is deprecated.
   __string:
     type: string
   AudioCodec:
@@ -2642,7 +2651,7 @@ definitions:
     properties:
       Destination608ChannelNumber:
         $ref: '#/definitions/__integerMin1Max4'
-        description: 'Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. If you don''t specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. Channels must be unique and may only be combined in the following combinations: (1+3, 2+4, 1+4, 2+3).'
+        description: 'Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. Specify a different number for each output captions track. If you don''t specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. You can optionally combine two captions channels in your output. The two output channel numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3.'
     description: 'Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number.'
   SccDestinationSettings:
     type: object
@@ -3050,10 +3059,10 @@ definitions:
         description: The number of audio frames to insert for each PES packet.
       AudioPids:
         $ref: '#/definitions/__listOf__integerMin32Max8182'
-        description: 'Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.'
+        description: Specify the packet identifiers (PIDs) for any elementary audio streams you include in this output. Specify multiple PIDs as a JSON array. Default is the range 482-492.
       Bitrate:
         $ref: '#/definitions/__integerMin0Max2147483647'
-        description: 'The output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate. Other common values are 3750000, 7500000, and 15000000.'
+        description: 'Specify the output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate. Other common values are 3750000, 7500000, and 15000000.'
       BufferModel:
         $ref: '#/definitions/M2tsBufferModel'
       DvbNitSettings:
@@ -3062,12 +3071,12 @@ definitions:
         $ref: '#/definitions/DvbSdtSettings'
       DvbSubPids:
         $ref: '#/definitions/__listOf__integerMin32Max8182'
-        description: 'Packet Identifier (PID) for input source DVB Subtitle data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation.'
+        description: Specify the packet identifiers (PIDs) for DVB subtitle data included in this output. Specify multiple PIDs as a JSON array. Default is the range 460-479.
       DvbTdtSettings:
         $ref: '#/definitions/DvbTdtSettings'
       DvbTeletextPid:
         $ref: '#/definitions/__integerMin32Max8182'
-        description: Packet Identifier (PID) for input source DVB Teletext data to this output.
+        description: Specify the packet identifier (PID) for DVB teletext data you include in this output. Default is 499.
       EbpAudioInterval:
         $ref: '#/definitions/M2tsEbpAudioInterval'
       EbpPlacement:
@@ -3076,12 +3085,13 @@ definitions:
         $ref: '#/definitions/M2tsEsRateInPes'
       ForceTsVideoEbpOrder:
         $ref: '#/definitions/M2tsForceTsVideoEbpOrder'
+        description: 'Keep the default value (DEFAULT) unless you know that your audio EBP markers are incorrectly appearing before your video EBP markers. To correct this problem, set this value to Force (FORCE).'
       FragmentTime:
         $ref: '#/definitions/__doubleMin0'
-        description: The length in seconds of each fragment. Only used with EBP markers.
+        description: 'The length, in seconds, of each fragment. Only used with EBP markers.'
       MaxPcrInterval:
         $ref: '#/definitions/__integerMin0Max500'
-        description: Maximum time in milliseconds between Program Clock References (PCRs) inserted into the transport stream.
+        description: 'Specify the maximum time, in milliseconds, between Program Clock References (PCRs) inserted into the transport stream.'
       MinEbpInterval:
         $ref: '#/definitions/__integerMin0Max10000'
         description: 'When set, enforces that Encoder Boundary Points do not come within the specified time interval of each other by looking ahead at input video. If another EBP is going to come in within the specified time interval, the current EBP is not emitted, and the segment is "stretched" to the next marker. The lookahead value does not add latency to the system. The Live Event must be configured elsewhere to create sufficient latency to make the lookahead accurate.'
@@ -3097,24 +3107,27 @@ definitions:
         $ref: '#/definitions/M2tsPcrControl'
       PcrPid:
         $ref: '#/definitions/__integerMin32Max8182'
-        description: 'Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID.'
+        description: 'Specify the packet identifier (PID) for the program clock reference (PCR) in this output. If you do not specify a value, the service will use the value for Video PID (VideoPid).'
       PmtInterval:
         $ref: '#/definitions/__integerMin0Max1000'
-        description: The number of milliseconds between instances of this table in the output transport stream.
+        description: Specify the number of milliseconds between instances of the program map table (PMT) in the output transport stream.
       PmtPid:
         $ref: '#/definitions/__integerMin32Max8182'
-        description: Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream.
+        description: Specify the packet identifier (PID) for the program map table (PMT) itself. Default is 480.
       PrivateMetadataPid:
         $ref: '#/definitions/__integerMin32Max8182'
-        description: Packet Identifier (PID) of the private metadata stream in the transport stream.
+        description: Specify the packet identifier (PID) of the private metadata stream. Default is 503.
       ProgramNumber:
         $ref: '#/definitions/__integerMin0Max65535'
-        description: The value of the program number field in the Program Map Table.
+        description: 'Use Program number (programNumber) to specify the program number used in the program map table (PMT) for this output. Default is 1. Program numbers and program map tables are parts of MPEG-2 transport stream containers, used for organizing data.'
       RateMode:
         $ref: '#/definitions/M2tsRateMode'
+      Scte35Esam:
+        $ref: '#/definitions/M2tsScte35Esam'
+        description: Include this in your job settings to put SCTE-35 markers in your HLS and transport stream outputs at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
       Scte35Pid:
         $ref: '#/definitions/__integerMin32Max8182'
-        description: Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
+        description: Specify the packet identifier (PID) of the SCTE-35 stream in the transport stream.
       Scte35Source:
         $ref: '#/definitions/M2tsScte35Source'
       SegmentationMarkers:
@@ -3123,17 +3136,17 @@ definitions:
         $ref: '#/definitions/M2tsSegmentationStyle'
       SegmentationTime:
         $ref: '#/definitions/__doubleMin0'
-        description: The length in seconds of each segment. Required unless markers is set to _none_.
+        description: 'Specify the length, in seconds, of each segment. Required unless markers is set to _none_.'
       TimedMetadataPid:
         $ref: '#/definitions/__integerMin32Max8182'
-        description: Packet Identifier (PID) of the timed metadata stream in the transport stream.
+        description: Specify the packet identifier (PID) for timed metadata in this output. Default is 502.
       TransportStreamId:
         $ref: '#/definitions/__integerMin0Max65535'
-        description: The value of the transport stream ID field in the Program Map Table.
+        description: 'Specify the ID for the transport stream itself in the program map table for this output. Transport stream IDs and program map tables are parts of MPEG-2 transport stream containers, used for organizing data.'
       VideoPid:
         $ref: '#/definitions/__integerMin32Max8182'
-        description: Packet Identifier (PID) of the elementary video stream in the transport stream.
-    description: Settings for M2TS Container.
+        description: Specify the packet identifier (PID) of the elementary video stream in the transport stream.
+    description: 'MPEG-2 TS container settings. These apply to outputs in a File output group when the output''s container (ContainerType) is MPEG-2 Transport Stream (M2TS). In these assets, data is organized by the program map table (PMT). Each transport stream program contains subsets of data, including audio, video, and metadata. Each of these subsets of data has a numerical label called a packet identifier (PID). Each transport stream program corresponds to one MediaConvert output. The PMT lists the types of data in a program along with their PID. Downstream systems and players use the program map table to look up the PID for each type of data it accesses and then uses the PIDs to locate specific data within the asset.'
   M3u8Settings:
     type: object
     properties:
@@ -3234,6 +3247,9 @@ definitions:
       AvailBlanking:
         $ref: '#/definitions/AvailBlanking'
         description: 'Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.'
+      Esam:
+        $ref: '#/definitions/EsamSettings'
+        description: Settings for Event Signaling And Messaging (ESAM).
       Inputs:
         $ref: '#/definitions/__listOfInput'
         description: Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
@@ -3251,6 +3267,10 @@ definitions:
       TimedMetadataInsertion:
         $ref: '#/definitions/TimedMetadataInsertion'
     description: JobSettings contains all the transcode settings for a job.
+  __integerMin10Max600:
+    type: integer
+    minimum: 10
+    maximum: 600
   __mapOf__string:
     type: array
     items:
@@ -3302,6 +3322,9 @@ definitions:
         $ref: '#/definitions/JobSettings'
       Status:
         $ref: '#/definitions/JobStatus'
+      StatusUpdateIntervalInSecs:
+        $ref: '#/definitions/__integerMin10Max600'
+        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
       Timing:
         $ref: '#/definitions/Timing'
       UserMetadata:
@@ -3317,6 +3340,9 @@ definitions:
       AvailBlanking:
         $ref: '#/definitions/AvailBlanking'
         description: 'Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.'
+      Esam:
+        $ref: '#/definitions/EsamSettings'
+        description: Settings for Event Signaling And Messaging (ESAM).
       Inputs:
         $ref: '#/definitions/__listOfInputTemplate'
         description: 'Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.'
@@ -3366,6 +3392,9 @@ definitions:
         description: 'Optional. The queue that jobs created from this template are assigned to. If you don''t specify this, jobs will go to the default queue.'
       Settings:
         $ref: '#/definitions/JobTemplateSettings'
+      StatusUpdateIntervalInSecs:
+        $ref: '#/definitions/__integerMin10Max600'
+        description: 'Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.'
       Type:
         $ref: '#/definitions/Type'
         description: 'A job template can be of two types: system or custom. System or built-in job templates can''t be modified or deleted by the user.'
@@ -3838,6 +3867,43 @@ definitions:
         $ref: '#/definitions/__string'
         description: URL of endpoint
     description: Describes an account-specific API endpoint.
+  __stringPatternSNManifestConfirmConditionNotificationNS:
+    type: string
+    pattern: ^\s*<(.|\n)*ManifestConfirmConditionNotification(.|\n)*>\s*$
+  EsamManifestConfirmConditionNotification:
+    type: object
+    properties:
+      MccXml:
+        $ref: '#/definitions/__stringPatternSNManifestConfirmConditionNotificationNS'
+        description: Provide your ESAM ManifestConfirmConditionNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the Manifest Conditioning instructions in the message that you supply.
+    description: ESAM ManifestConfirmConditionNotification defined by OC-SP-ESAM-API-I03-131025.
+  __integerMin0Max30000:
+    type: integer
+    minimum: 0
+    maximum: 30000
+  EsamSignalProcessingNotification:
+    type: object
+    properties:
+      SccXml:
+        $ref: '#/definitions/__stringPatternSNSignalProcessingNotificationNS'
+        description: 'Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. If you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can''t do both.'
+    description: ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025.
+  EsamSettings:
+    type: object
+    properties:
+      ManifestConfirmConditionNotification:
+        $ref: '#/definitions/EsamManifestConfirmConditionNotification'
+        description: Specifies an ESAM ManifestConfirmConditionNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the manifest conditioning instructions that you provide in the setting MCC XML (mccXml).
+      ResponseSignalPreroll:
+        $ref: '#/definitions/__integerMin0Max30000'
+        description: 'Specifies the stream distance, in milliseconds, between the SCTE 35 messages that the transcoder places and the splice points that they refer to. If the time between the start of the asset and the SCTE-35 message is less than this value, then the transcoder places the SCTE-35 marker at the beginning of the stream.'
+      SignalProcessingNotification:
+        $ref: '#/definitions/EsamSignalProcessingNotification'
+        description: Specifies an ESAM SignalProcessingNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing instructions that you provide in the setting SCC XML (sccXml).
+    description: 'Settings for Event Signaling And Messaging (ESAM). If you don''t do ad insertion, you can ignore these settings.'
+  __stringPatternSNSignalProcessingNotificationNS:
+    type: string
+    pattern: ^\s*<(.|\n)*SignalProcessingNotification(.|\n)*>\s*$
   F4vMoovPlacement:
     type: string
     enum:
@@ -4392,7 +4458,7 @@ definitions:
     enum:
       - HVC1
       - HEV1
-    description: 'If HVC1, output that is H.265 will be marked as HVC1 and adhere to the ISO-IECJTC1-SC29_N13798_Text_ISOIEC_FDIS_14496-15_3rd_E spec which states that parameter set NAL units will be stored in the sample headers but not in the samples directly. If HEV1, then H.265 will be marked as HEV1 and parameter set NAL units will be written into the samples.'
+    description: 'Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with downstream systems and video players. If the location of parameter set NAL units don''t matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.'
   H265Settings:
     type: object
     properties:
@@ -4490,6 +4556,7 @@ definitions:
         $ref: '#/definitions/H265UnregisteredSeiTimecode'
       WriteMp4PackagingType:
         $ref: '#/definitions/H265WriteMp4PackagingType'
+        description: 'Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with downstream systems and video players. If the location of parameter set NAL units don''t matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.'
     description: Settings for H265 codec
   __integerMin0Max50000:
     type: integer
@@ -4560,6 +4627,12 @@ definitions:
       - INCLUDE
       - EXCLUDE
     description: 'The Initialization Vector is a 128-bit number used in conjunction with the key for encrypting blocks. If set to INCLUDE, Initialization Vector is listed in the manifest. Otherwise Initialization Vector is not in the manifest.'
+  HlsOfflineEncrypted:
+    type: string
+    enum:
+      - ENABLED
+      - DISABLED
+    description: Enable this setting to insert the EXT-X-SESSION-KEY element into the master playlist. This allows for offline Apple HLS FairPlay content protection.
   HlsKeyProviderType:
     type: string
     enum:
@@ -4576,6 +4649,8 @@ definitions:
         $ref: '#/definitions/HlsEncryptionType'
       InitializationVectorInManifest:
         $ref: '#/definitions/HlsInitializationVectorInManifest'
+      OfflineEncrypted:
+        $ref: '#/definitions/HlsOfflineEncrypted'
       SpekeKeyProvider:
         $ref: '#/definitions/SpekeKeyProvider'
       StaticKeyProvider:
@@ -4854,6 +4929,8 @@ definitions:
       ProgramNumber:
         $ref: '#/definitions/__integerMinNegative2147483648Max2147483647'
         description: Selects a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported.
+      Rotate:
+        $ref: '#/definitions/InputRotate'
     description: Selector for video.
   Input:
     type: object
@@ -4926,6 +5003,15 @@ definitions:
     pattern: '^[a-z-]{2,6}-(east|west|central|((north|south)(east|west)?))-[1-9]{1,2}$'
     minLength: 9
     maxLength: 19
+  InputRotate:
+    type: string
+    enum:
+      - DEGREE_0
+      - DEGREES_90
+      - DEGREES_180
+      - DEGREES_270
+      - AUTO
+    description: 'Use Rotate (InputRotate) to specify how the service rotates your video. You can choose automatic rotation or specify a rotation. You can specify a clockwise rotation of 0, 90, 180, or 270 degrees. If your input video container is .mov or .mp4 and your input has rotation metadata, you can choose Automatic to have the service rotate your video according to the rotation specified in the metadata. The rotation must be within one degree of 90, 180, or 270 degrees. If the rotation metadata specifies any other rotation, the service will default to no rotation. By default, the service does no rotation, even if your input video has rotation metadata. The service doesn''t pass through rotation metadata.'
   InputTemplate:
     type: object
     properties:
@@ -5206,7 +5292,7 @@ definitions:
     enum:
       - FORCE
       - DEFAULT
-    description: Keep the default value (DEFAULT) unless you know that your audio EBP markers are incorrectly appearing before your video EBP markers. Set this value to Force (FORCE) to correct this problem.
+    description: 'Keep the default value (DEFAULT) unless you know that your audio EBP markers are incorrectly appearing before your video EBP markers. To correct this problem, set this value to Force (FORCE).'
   M2tsNielsenId3:
     type: string
     enum:
@@ -5225,6 +5311,17 @@ definitions:
       - VBR
       - CBR
     description: 'When set to CBR, inserts null packets into transport stream to fill specified bitrate. When set to VBR, the bitrate setting acts as the maximum bitrate, but the output will not be padded up to that bitrate.'
+  __integerMin32Max8182:
+    type: integer
+    minimum: 32
+    maximum: 8182
+  M2tsScte35Esam:
+    type: object
+    properties:
+      Scte35EsamPid:
+        $ref: '#/definitions/__integerMin32Max8182'
+        description: Packet Identifier (PID) of the SCTE-35 stream in the transport stream generated by ESAM.
+    description: Settings for SCTE-35 signals from ESAM. Include this in your job settings to put SCTE-35 markers in your HLS and transport stream outputs at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
   M2tsScte35Source:
     type: string
     enum:
@@ -5251,10 +5348,6 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/__integerMin32Max8182'
-  __integerMin32Max8182:
-    type: integer
-    minimum: 32
-    maximum: 8182
   __integerMin0Max500:
     type: integer
     minimum: 0
@@ -5735,6 +5828,7 @@ definitions:
         $ref: '#/definitions/AfdSignaling'
       AntiAlias:
         $ref: '#/definitions/AntiAlias'
+        description: You no longer need to specify the anti-alias filter. It's now automatically applied to all outputs. This property is deprecated.
       CodecSettings:
         $ref: '#/definitions/VideoCodecSettings'
       ColorMetadata:
@@ -5759,7 +5853,7 @@ definitions:
         $ref: '#/definitions/ScalingBehavior'
       Sharpness:
         $ref: '#/definitions/__integerMin0Max100'
-        description: 'Use Sharpness (Sharpness)setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution, and if you set Anti-alias (AntiAlias) to ENABLED. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.'
+        description: 'Use Sharpness (Sharpness) setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.'
       TimecodeInsertion:
         $ref: '#/definitions/VideoTimecodeInsertion'
       VideoPreprocessors:
