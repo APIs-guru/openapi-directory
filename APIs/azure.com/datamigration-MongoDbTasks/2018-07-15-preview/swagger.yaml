@@ -1,0 +1,625 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: 2018-07-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MongoDbTasks.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: datamigration-MongoDbTasks
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  MongoDbCancelCommand:
+    allOf:
+      - description: 'Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.'
+        discriminator: commandType
+        properties:
+          commandType:
+            description: Command type.
+            type: string
+          errors:
+            description: Array of errors. This is ignored if submitted.
+            items:
+              description: Error information in OData format.
+              properties:
+                code:
+                  description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                  type: string
+                details:
+                  description: Inner errors that caused this error
+                  items:
+                    $ref: '#/definitions/ODataError'
+                  type: array
+                message:
+                  description: The human-readable description of the error
+                  type: string
+              type: object
+            readOnly: true
+            type: array
+          state:
+            description: The state of the command. This is ignored if submitted.
+            enum:
+              - Unknown
+              - Accepted
+              - Running
+              - Succeeded
+              - Failed
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: CommandState
+        required:
+          - commandType
+        type: object
+        x-ms-discriminator-value: Unknown
+    description: Properties for the command that cancels a migration in whole or in part
+    properties:
+      input:
+        $ref: '#/definitions/MongoDbCommandInput'
+        description: Command input
+    type: object
+    x-ms-discriminator-value: cancel
+  MongoDbClusterInfo:
+    description: Describes a MongoDB data source
+    properties:
+      databases:
+        description: A list of non-system databases in the cluster
+        items:
+          $ref: '#/definitions/MongoDbDatabaseInfo'
+        type: array
+      supportsSharding:
+        description: Whether the cluster supports sharded collections
+        type: boolean
+      type:
+        description: The type of data source
+        enum:
+          - BlobContainer
+          - CosmosDb
+          - MongoDb
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MongoDbClusterType
+      version:
+        description: The version of the data source in the form x.y.z (e.g. 3.6.7). Not used if Type is BlobContainer.
+        type: string
+    required:
+      - databases
+      - supportsSharding
+      - type
+      - version
+    type: object
+  MongoDbCollectionInfo:
+    allOf:
+      - $ref: '#/definitions/MongoDbObjectInfo'
+    description: Describes a supported collection within a MongoDB database
+    properties:
+      databaseName:
+        description: The name of the database containing the collection
+        type: string
+      isCapped:
+        description: Whether the collection is a capped collection (i.e. whether it has a fixed size and acts like a circular buffer)
+        type: boolean
+      isSystemCollection:
+        description: Whether the collection is system collection
+        type: boolean
+      isView:
+        description: Whether the collection is a view of another collection
+        type: boolean
+      shardKey:
+        $ref: '#/definitions/MongoDbShardKeyInfo'
+        description: 'The shard key on the collection, or null if the collection is not sharded'
+      supportsSharding:
+        description: Whether the database has sharding enabled. Note that the migration task will enable sharding on the target if necessary.
+        type: boolean
+      viewOf:
+        description: 'The name of the collection that this is a view of, if IsView is true'
+        type: string
+    required:
+      - databaseName
+      - isCapped
+      - isSystemCollection
+      - isView
+      - supportsSharding
+    type: object
+  MongoDbCollectionProgress:
+    allOf:
+      - $ref: '#/definitions/MongoDbProgress'
+    description: Describes the progress of a collection
+    type: object
+    x-ms-discriminator-value: Collection
+  MongoDbCollectionSettings:
+    description: Describes how an individual MongoDB collection should be migrated
+    properties:
+      canDelete:
+        description: Whether the migrator is allowed to drop the target collection in the course of performing a migration. The default is true.
+        type: boolean
+      shardKey:
+        $ref: '#/definitions/MongoDbShardKeySetting'
+      targetRUs:
+        description: 'The RUs that should be configured on a CosmosDB target, or null to use the default. This has no effect on non-CosmosDB targets.'
+        format: int32
+        type: integer
+    type: object
+  MongoDbCommandInput:
+    description: Describes the input to the 'cancel' and 'restart' MongoDB migration commands
+    properties:
+      objectName:
+        description: 'The qualified name of a database or collection to act upon, or null to act upon the entire migration'
+        type: string
+    type: object
+  MongoDbDatabaseInfo:
+    allOf:
+      - $ref: '#/definitions/MongoDbObjectInfo'
+    description: Describes a database within a MongoDB data source
+    properties:
+      collections:
+        description: A list of supported collections in a MongoDB database
+        items:
+          $ref: '#/definitions/MongoDbCollectionInfo'
+        type: array
+      supportsSharding:
+        description: Whether the database has sharding enabled. Note that the migration task will enable sharding on the target if necessary.
+        type: boolean
+    required:
+      - collections
+      - supportsSharding
+    type: object
+  MongoDbDatabaseProgress:
+    allOf:
+      - $ref: '#/definitions/MongoDbProgress'
+    description: Describes the progress of a database
+    properties:
+      collections:
+        additionalProperties:
+          $ref: '#/definitions/MongoDbCollectionProgress'
+        description: The progress of the collections in the database. The keys are the unqualified names of the collections
+        type: object
+    type: object
+    x-ms-discriminator-value: Database
+  MongoDbDatabaseSettings:
+    description: Describes how an individual MongoDB database should be migrated
+    properties:
+      collections:
+        additionalProperties:
+          $ref: '#/definitions/MongoDbCollectionSettings'
+        description: The collections on the source database to migrate to the target. The keys are the unqualified names of the collections.
+        type: object
+      targetRUs:
+        description: 'The RUs that should be configured on a CosmosDB target, or null to use the default, or 0 if throughput should not be provisioned for the database. This has no effect on non-CosmosDB targets.'
+        format: int32
+        type: integer
+    required:
+      - collections
+    type: object
+  MongoDbError:
+    description: Describes an error or warning that occurred during a MongoDB migration
+    properties:
+      code:
+        description: 'The non-localized, machine-readable code that describes the error or warning'
+        type: string
+      count:
+        description: The number of times the error or warning has occurred
+        format: int32
+        type: integer
+      message:
+        description: 'The localized, human-readable message that describes the error or warning'
+        type: string
+      type:
+        description: The type of error or warning
+        enum:
+          - Error
+          - ValidationError
+          - Warning
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MongoDbErrorType
+    type: object
+  MongoDbFinishCommand:
+    allOf:
+      - description: 'Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.'
+        discriminator: commandType
+        properties:
+          commandType:
+            description: Command type.
+            type: string
+          errors:
+            description: Array of errors. This is ignored if submitted.
+            items:
+              description: Error information in OData format.
+              properties:
+                code:
+                  description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                  type: string
+                details:
+                  description: Inner errors that caused this error
+                  items:
+                    $ref: '#/definitions/ODataError'
+                  type: array
+                message:
+                  description: The human-readable description of the error
+                  type: string
+              type: object
+            readOnly: true
+            type: array
+          state:
+            description: The state of the command. This is ignored if submitted.
+            enum:
+              - Unknown
+              - Accepted
+              - Running
+              - Succeeded
+              - Failed
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: CommandState
+        required:
+          - commandType
+        type: object
+        x-ms-discriminator-value: Unknown
+    description: Properties for the command that finishes a migration in whole or in part
+    properties:
+      input:
+        $ref: '#/definitions/MongoDbFinishCommandInput'
+        description: Command input
+    type: object
+    x-ms-discriminator-value: finish
+  MongoDbFinishCommandInput:
+    allOf:
+      - $ref: '#/definitions/MongoDbCommandInput'
+    description: Describes the input to the 'finish' MongoDB migration command
+    properties:
+      immediate:
+        description: 'If true, replication for the affected objects will be stopped immediately. If false, the migrator will finish replaying queued events before finishing the replication.'
+        type: boolean
+    required:
+      - immediate
+    type: object
+  MongoDbMigrationProgress:
+    allOf:
+      - $ref: '#/definitions/MongoDbProgress'
+    description: Describes the progress of the overall migration
+    properties:
+      databases:
+        additionalProperties:
+          $ref: '#/definitions/MongoDbDatabaseProgress'
+        description: The progress of the databases in the migration. The keys are the names of the databases
+        type: object
+    type: object
+    x-ms-discriminator-value: Migration
+  MongoDbMigrationSettings:
+    description: Describes how a MongoDB data migration should be performed
+    properties:
+      boostRUs:
+        description: 'The RU limit on a CosmosDB target that collections will be temporarily increased to (if lower) during the initial copy of a migration, from 10,000 to 1,000,000, or 0 to use the default boost (which is generally the maximum), or null to not boost the RUs. This setting has no effect on non-CosmosDB targets.'
+        format: int32
+        type: integer
+      databases:
+        additionalProperties:
+          $ref: '#/definitions/MongoDbDatabaseSettings'
+        description: The databases on the source cluster to migrate to the target. The keys are the names of the databases.
+        type: object
+      replication:
+        description: Describes how changes will be replicated from the source to the target. The default is OneTime.
+        enum:
+          - Disabled
+          - OneTime
+          - Continuous
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MongoDbReplication
+      source:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Describes a connection to a MongoDB data source
+        properties:
+          connectionString:
+            description: A MongoDB connection string or blob container URL. The user name and password can be specified here or in the userName and password properties
+            type: string
+        required:
+          - connectionString
+        type: object
+      target:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Describes a connection to a MongoDB data source
+        properties:
+          connectionString:
+            description: A MongoDB connection string or blob container URL. The user name and password can be specified here or in the userName and password properties
+            type: string
+        required:
+          - connectionString
+        type: object
+      throttling:
+        $ref: '#/definitions/MongoDbThrottlingSettings'
+        description: Settings used to limit the resource usage of the migration
+    required:
+      - databases
+      - source
+      - target
+    type: object
+  MongoDbObjectInfo:
+    description: Describes a database or collection within a MongoDB data source
+    properties:
+      averageDocumentSize:
+        description: 'The average document size, or -1 if the average size is unknown'
+        format: int64
+        type: integer
+      dataSize:
+        description: 'The estimated total data size, in bytes, or -1 if the size is unknown.'
+        format: int64
+        type: integer
+      documentCount:
+        description: 'The estimated total number of documents, or -1 if the document count is unknown'
+        format: int64
+        type: integer
+      name:
+        description: The unqualified name of the database or collection
+        type: string
+      qualifiedName:
+        description: 'The qualified name of the database or collection. For a collection, this is the database-qualified name.'
+        type: string
+    required:
+      - averageDocumentSize
+      - dataSize
+      - documentCount
+      - name
+      - qualifiedName
+    type: object
+  MongoDbProgress:
+    description: Base class for MongoDB migration outputs
+    discriminator: ResultType
+    properties:
+      bytesCopied:
+        description: The number of document bytes copied during the Copying stage
+        format: int64
+        type: integer
+      documentsCopied:
+        description: The number of documents copied during the Copying stage
+        format: int64
+        type: integer
+      elapsedTime:
+        description: 'The elapsed time in the format [ddd.]hh:mm:ss[.fffffff] (i.e. TimeSpan format)'
+        type: string
+      errors:
+        additionalProperties:
+          $ref: '#/definitions/MongoDbError'
+        description: The errors and warnings that have occurred for the current object. The keys are the error codes.
+        type: object
+      eventsPending:
+        description: The number of oplog events awaiting replay
+        format: int64
+        type: integer
+      eventsReplayed:
+        description: The number of oplog events replayed so far
+        format: int64
+        type: integer
+      lastEventTime:
+        description: 'The timestamp of the last oplog event received, or null if no oplog event has been received yet'
+        format: date-time
+        type: string
+      lastReplayTime:
+        description: 'The timestamp of the last oplog event replayed, or null if no oplog event has been replayed yet'
+        format: date-time
+        type: string
+      name:
+        description: 'The name of the progress object. For a collection, this is the unqualified collection name. For a database, this is the database name. For the overall migration, this is null.'
+        type: string
+      qualifiedName:
+        description: 'The qualified name of the progress object. For a collection, this is the database-qualified name. For a database, this is the database name. For the overall migration, this is null.'
+        type: string
+      resultType:
+        description: The type of progress object
+        enum:
+          - Migration
+          - Database
+          - Collection
+        type: string
+      state:
+        enum:
+          - NotStarted
+          - ValidatingInput
+          - Initializing
+          - Restarting
+          - Copying
+          - InitialReplay
+          - Replaying
+          - Finalizing
+          - Complete
+          - Canceled
+          - Failed
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MongoDbMigrationState
+      totalBytes:
+        description: 'The total number of document bytes on the source at the beginning of the Copying stage, or -1 if the total size was unknown'
+        format: int64
+        type: integer
+      totalDocuments:
+        description: 'The total number of documents on the source at the beginning of the Copying stage, or -1 if the total count was unknown'
+        format: int64
+        type: integer
+    required:
+      - bytesCopied
+      - documentsCopied
+      - elapsedTime
+      - errors
+      - eventsPending
+      - eventsReplayed
+      - resultType
+      - state
+      - totalBytes
+      - totalDocuments
+    type: object
+  MongoDbRestartCommand:
+    allOf:
+      - description: 'Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.'
+        discriminator: commandType
+        properties:
+          commandType:
+            description: Command type.
+            type: string
+          errors:
+            description: Array of errors. This is ignored if submitted.
+            items:
+              description: Error information in OData format.
+              properties:
+                code:
+                  description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                  type: string
+                details:
+                  description: Inner errors that caused this error
+                  items:
+                    $ref: '#/definitions/ODataError'
+                  type: array
+                message:
+                  description: The human-readable description of the error
+                  type: string
+              type: object
+            readOnly: true
+            type: array
+          state:
+            description: The state of the command. This is ignored if submitted.
+            enum:
+              - Unknown
+              - Accepted
+              - Running
+              - Succeeded
+              - Failed
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: CommandState
+        required:
+          - commandType
+        type: object
+        x-ms-discriminator-value: Unknown
+    description: Properties for the command that restarts a migration in whole or in part
+    properties:
+      input:
+        $ref: '#/definitions/MongoDbCommandInput'
+        description: Command input
+    type: object
+    x-ms-discriminator-value: restart
+  MongoDbShardKeyField:
+    description: Describes a field reference within a MongoDB shard key
+    properties:
+      name:
+        description: The name of the field
+        type: string
+      order:
+        description: The field ordering
+        enum:
+          - Forward
+          - Reverse
+          - Hashed
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MongoDbShardKeyOrder
+    required:
+      - name
+      - order
+    type: object
+  MongoDbShardKeyInfo:
+    description: Describes a MongoDB shard key
+    properties:
+      fields:
+        description: The fields within the shard key
+        items:
+          $ref: '#/definitions/MongoDbShardKeyField'
+        type: array
+      isUnique:
+        description: Whether the shard key is unique
+        type: boolean
+    required:
+      - fields
+      - isUnique
+    type: object
+  MongoDbShardKeySetting:
+    description: Describes a MongoDB shard key
+    properties:
+      fields:
+        description: The fields within the shard key
+        items:
+          $ref: '#/definitions/MongoDbShardKeyField'
+        type: array
+      isUnique:
+        description: Whether the shard key is unique
+        type: boolean
+    required:
+      - fields
+      - isUnique
+    type: object
+  MongoDbThrottlingSettings:
+    description: Specifies resource limits for the migration
+    properties:
+      maxParallelism:
+        description: The maximum number of work items (e.g. collection copies) that will be processed in parallel
+        format: int32
+        type: integer
+      minFreeCpu:
+        description: 'The percentage of CPU time that the migrator will try to avoid using, from 0 to 100'
+        format: int32
+        type: integer
+      minFreeMemoryMb:
+        description: The number of megabytes of RAM that the migrator will try to avoid using
+        format: int32
+        type: integer
+    type: object

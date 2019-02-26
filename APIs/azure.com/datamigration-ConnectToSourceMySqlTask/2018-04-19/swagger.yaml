@@ -1,0 +1,275 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: '2018-04-19'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/stable/2018-04-19/definitions/ConnectToSourceMySqlTask.json'
+      version: '2.0'
+  x-preferred: false
+  x-providerName: azure.com
+  x-serviceName: datamigration-ConnectToSourceMySqlTask
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  ConnectToSourceMySqlTaskInput:
+    description: Input for the task that validates MySQL database connection
+    properties:
+      checkPermissionsGroup:
+        description: Permission group for validations. These groups will run a set of permissions for validating user activity. Select the permission group for the activity that you are performing.
+        enum:
+          - Default
+          - MigrationFromSqlServerToAzureDB
+          - MigrationFromSqlServerToAzureMI
+          - MigrationFromMySQLToAzureDBForMySQL
+        type: string
+        x-ms-enum:
+          name: ServerLevelPermissionsGroup
+      sourceConnectionInfo:
+        allOf:
+          - description: Defines the connection properties of a server
+            discriminator: type
+            properties:
+              password:
+                description: Password credential.
+                type: string
+              type:
+                description: Type of connection info
+                type: string
+              userName:
+                description: User name
+                type: string
+            required:
+              - type
+            type: object
+            x-ms-discriminator-value: Unknown
+        description: Information for connecting to MySQL server
+        properties:
+          port:
+            description: Port for Server
+            type: integer
+          serverName:
+            description: Name of the server
+            type: string
+        required:
+          - serverName
+          - port
+        type: object
+        x-ms-discriminator-value: MySqlConnectionInfo
+      targetPlatform:
+        description: An enumeration of possible target types when migrating from MySQL
+        enum:
+          - SqlServer
+          - AzureDbForMySQL
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MySqlTargetPlatformType
+    required:
+      - sourceConnectionInfo
+    type: object
+  ConnectToSourceMySqlTaskProperties:
+    allOf:
+      - description: 'Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.'
+        discriminator: taskType
+        properties:
+          commands:
+            description: Array of command properties.
+            items:
+              description: 'Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.'
+              discriminator: commandType
+              properties:
+                commandType:
+                  description: Command type.
+                  type: string
+                errors:
+                  description: Array of errors. This is ignored if submitted.
+                  items:
+                    description: Error information in OData format.
+                    properties:
+                      code:
+                        description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                        readOnly: true
+                        type: string
+                      details:
+                        description: Inner errors that caused this error
+                        items:
+                          $ref: '#/definitions/ODataError'
+                        readOnly: true
+                        type: array
+                      message:
+                        description: The human-readable description of the error
+                        readOnly: true
+                        type: string
+                    type: object
+                  readOnly: true
+                  type: array
+                state:
+                  description: The state of the command. This is ignored if submitted.
+                  enum:
+                    - Unknown
+                    - Accepted
+                    - Running
+                    - Succeeded
+                    - Failed
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: CommandState
+              required:
+                - commandType
+              type: object
+              x-ms-discriminator-value: Unknown
+            readOnly: true
+            type: array
+          errors:
+            description: Array of errors. This is ignored if submitted.
+            items:
+              description: Error information in OData format.
+              properties:
+                code:
+                  description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                  readOnly: true
+                  type: string
+                details:
+                  description: Inner errors that caused this error
+                  items:
+                    $ref: '#/definitions/ODataError'
+                  readOnly: true
+                  type: array
+                message:
+                  description: The human-readable description of the error
+                  readOnly: true
+                  type: string
+              type: object
+            readOnly: true
+            type: array
+          state:
+            description: The state of the task. This is ignored if submitted.
+            enum:
+              - Unknown
+              - Queued
+              - Running
+              - Canceled
+              - Succeeded
+              - Failed
+              - FailedInputValidation
+              - Faulted
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: TaskState
+          taskType:
+            description: Task type.
+            type: string
+        required:
+          - taskType
+        type: object
+        x-ms-discriminator-value: Unknown
+    description: Properties for the task that validates MySQL database connection
+    properties:
+      input:
+        $ref: '#/definitions/ConnectToSourceMySqlTaskInput'
+        description: Task input
+      output:
+        description: Task output. This is ignored if submitted.
+        items:
+          description: 'Output for connect to Oracle, MySQL type source'
+          properties:
+            databases:
+              description: List of databases on the server
+              items:
+                type: string
+              readOnly: true
+              type: array
+            id:
+              description: Result identifier
+              readOnly: true
+              type: string
+            serverProperties:
+              description: 'Server properties for Oracle, MySQL type source'
+              properties:
+                serverDatabaseCount:
+                  description: Number of databases in the server
+                  readOnly: true
+                  type: integer
+                serverEdition:
+                  description: Edition of the database server
+                  readOnly: true
+                  type: string
+                serverName:
+                  description: Name of the server
+                  readOnly: true
+                  type: string
+                serverOperatingSystemVersion:
+                  description: Version of the operating system
+                  readOnly: true
+                  type: string
+                serverPlatform:
+                  description: Name of the server platform
+                  readOnly: true
+                  type: string
+                serverVersion:
+                  description: Version of the database server
+                  readOnly: true
+                  type: string
+              type: object
+            sourceServerBrandVersion:
+              description: Server brand version
+              readOnly: true
+              type: string
+            validationErrors:
+              description: Validation errors associated with the task
+              items:
+                description: Exception object for all custom exceptions
+                properties:
+                  actionableMessage:
+                    description: Actionable steps for this exception
+                    type: string
+                  filePath:
+                    description: The path to the file where exception occurred
+                    readOnly: true
+                    type: string
+                  hResult:
+                    description: Coded numerical value that is assigned to a specific exception
+                    readOnly: true
+                    type: integer
+                  lineNumber:
+                    description: The line number where exception occurred
+                    readOnly: true
+                    type: string
+                  message:
+                    description: Error message
+                    readOnly: true
+                    type: string
+                  stackTrace:
+                    description: Stack trace
+                    readOnly: true
+                    type: string
+                type: object
+              readOnly: true
+              type: array
+          type: object
+        readOnly: true
+        type: array
+    type: object
+    x-ms-discriminator-value: ConnectToSource.MySql

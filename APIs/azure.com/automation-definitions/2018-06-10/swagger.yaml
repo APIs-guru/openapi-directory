@@ -1,0 +1,124 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Common types
+  version: '2018-06-10'
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/automation/resource-manager/Microsoft.Automation/common/v1/definitions.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: automation-definitions
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  ApiVersionParameter:
+    description: Client Api Version.
+    in: query
+    name: api-version
+    required: true
+    type: string
+  AutomationAccountNameParameter:
+    description: The name of the automation account.
+    in: path
+    name: automationAccountName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupNameParameter:
+    description: Name of an Azure Resource group.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: resourceGroupName
+    pattern: '^[-\w\._]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionIdParameter:
+    description: Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+    in: path
+    name: subscriptionId
+    required: true
+    type: string
+  clientRequestId:
+    description: Identifies this specific client request.
+    in: header
+    name: clientRequestId
+    required: false
+    type: string
+    x-ms-parameter-location: method
+paths: {}
+definitions:
+  ErrorResponse:
+    description: Error response of an operation failure
+    properties:
+      code:
+        description: Error code
+        type: string
+      message:
+        description: Error message indicating why the operation failed.
+        type: string
+    type: object
+  ProxyResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: ARM proxy resource.
+    properties: {}
+    type: object
+  Resource:
+    description: The core properties of ARM resources
+    properties:
+      id:
+        description: Fully qualified resource Id for the resource
+        readOnly: true
+        type: string
+      name:
+        description: The name of the resource
+        readOnly: true
+        type: string
+      type:
+        description: The type of the resource.
+        readOnly: true
+        type: string
+    type: object
+    x-ms-azure-resource: true
+  TrackedResource:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: The resource model definition for a ARM tracked top level resource
+    properties:
+      location:
+        description: The Azure Region where the resource lives
+        type: string
+        x-ms-mutability:
+          - read
+          - create
+      tags:
+        additionalProperties:
+          type: string
+        description: Resource tags.
+        type: object
+        x-ms-mutability:
+          - read
+          - create
+          - update
+    type: object

@@ -1,0 +1,483 @@
+swagger: '2.0'
+schemes:
+  - https
+host: azure.local
+info:
+  title: Azure Database Migration Service Resource Provider
+  version: 2018-07-15-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datamigration/resource-manager/Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: datamigration-MigrateSchemaSqlServerSqlDbTask
+  x-tags:
+    - Azure
+    - Microsoft
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+paths: {}
+definitions:
+  MigrateSchemaSqlServerSqlDbDatabaseInput:
+    description: Database input for migrate schema Sql Server to Azure SQL Server scenario
+    properties:
+      name:
+        description: Name of source database
+        type: string
+      schemaSetting:
+        $ref: '#/definitions/SchemaMigrationSetting'
+        description: Database schema migration settings
+      targetDatabaseName:
+        description: Name of target database
+        type: string
+    type: object
+  MigrateSchemaSqlServerSqlDbTaskInput:
+    allOf:
+      - description: Base class for migration task input
+        properties:
+          sourceConnectionInfo:
+            allOf:
+              - description: Defines the connection properties of a server
+                discriminator: type
+                properties:
+                  password:
+                    description: Password credential.
+                    type: string
+                  type:
+                    description: Type of connection info
+                    type: string
+                  userName:
+                    description: User name
+                    type: string
+                required:
+                  - type
+                type: object
+                x-ms-discriminator-value: Unknown
+            description: Information for connecting to SQL database server
+            properties:
+              additionalSettings:
+                description: Additional connection settings
+                type: string
+              authentication:
+                description: An enumeration of possible authentication types when connecting
+                enum:
+                  - None
+                  - WindowsAuthentication
+                  - SqlAuthentication
+                  - ActiveDirectoryIntegrated
+                  - ActiveDirectoryPassword
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: AuthenticationType
+              dataSource:
+                description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+                type: string
+              encryptConnection:
+                default: true
+                description: Whether to encrypt the connection
+                type: boolean
+              platform:
+                description: An enumeration of source platform types
+                enum:
+                  - SqlOnPrem
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: SqlSourcePlatform
+              trustServerCertificate:
+                default: false
+                description: Whether to trust the server certificate
+                type: boolean
+            required:
+              - dataSource
+            type: object
+            x-ms-discriminator-value: SqlConnectionInfo
+          targetConnectionInfo:
+            allOf:
+              - description: Defines the connection properties of a server
+                discriminator: type
+                properties:
+                  password:
+                    description: Password credential.
+                    type: string
+                  type:
+                    description: Type of connection info
+                    type: string
+                  userName:
+                    description: User name
+                    type: string
+                required:
+                  - type
+                type: object
+                x-ms-discriminator-value: Unknown
+            description: Information for connecting to SQL database server
+            properties:
+              additionalSettings:
+                description: Additional connection settings
+                type: string
+              authentication:
+                description: An enumeration of possible authentication types when connecting
+                enum:
+                  - None
+                  - WindowsAuthentication
+                  - SqlAuthentication
+                  - ActiveDirectoryIntegrated
+                  - ActiveDirectoryPassword
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: AuthenticationType
+              dataSource:
+                description: 'Data source in the format Protocol:MachineName\SQLServerInstanceName,PortNumber'
+                type: string
+              encryptConnection:
+                default: true
+                description: Whether to encrypt the connection
+                type: boolean
+              platform:
+                description: An enumeration of source platform types
+                enum:
+                  - SqlOnPrem
+                type: string
+                x-ms-enum:
+                  modelAsString: true
+                  name: SqlSourcePlatform
+              trustServerCertificate:
+                default: false
+                description: Whether to trust the server certificate
+                type: boolean
+            required:
+              - dataSource
+            type: object
+            x-ms-discriminator-value: SqlConnectionInfo
+        required:
+          - sourceConnectionInfo
+          - targetConnectionInfo
+        type: object
+    description: Input for task that migrates Schema for SQL Server databases to Azure SQL databases
+    properties:
+      selectedDatabases:
+        description: Databases to migrate
+        items:
+          $ref: '#/definitions/MigrateSchemaSqlServerSqlDbDatabaseInput'
+        type: array
+    required:
+      - selectedDatabases
+    type: object
+  MigrateSchemaSqlServerSqlDbTaskOutput:
+    description: Output for the task that migrates Schema for SQL Server databases to Azure SQL databases
+    discriminator: resultType
+    properties:
+      id:
+        description: Result identifier
+        readOnly: true
+        type: string
+      resultType:
+        description: Result type
+        readOnly: true
+        type: string
+    type: object
+  MigrateSchemaSqlServerSqlDbTaskOutputDatabaseLevel:
+    allOf:
+      - $ref: '#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput'
+    properties:
+      databaseErrorResultPrefix:
+        description: Prefix string to use for querying errors for this database
+        readOnly: true
+        type: string
+      databaseName:
+        description: The name of the database
+        readOnly: true
+        type: string
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      fileId:
+        description: Identifier for the file resource containing the schema of this database
+        readOnly: true
+        type: string
+      numberOfFailedOperations:
+        description: Number of failed operations for this database
+        format: int64
+        readOnly: true
+        type: integer
+      numberOfSuccessfulOperations:
+        description: Number of successful operations for this database
+        format: int64
+        readOnly: true
+        type: integer
+      schemaErrorResultPrefix:
+        description: Prefix string to use for querying schema errors for this database
+        readOnly: true
+        type: string
+      stage:
+        description: Current stage of schema migration
+        enum:
+          - NotStarted
+          - ValidatingInputs
+          - CollectingObjects
+          - DownloadingScript
+          - GeneratingScript
+          - UploadingScript
+          - DeployingSchema
+          - Completed
+          - CompletedWithWarnings
+          - Failed
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SchemaMigrationStage
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: Current state of migration
+        enum:
+          - None
+          - InProgress
+          - Failed
+          - Warning
+          - Completed
+          - Skipped
+          - Stopped
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationState
+    type: object
+    x-ms-discriminator-value: DatabaseLevelOutput
+  MigrateSchemaSqlServerSqlDbTaskOutputError:
+    allOf:
+      - $ref: '#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput'
+    properties:
+      commandText:
+        description: Schema command which failed
+        readOnly: true
+        type: string
+      errorText:
+        description: Reason of failure
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: SchemaErrorOutput
+  MigrateSchemaSqlServerSqlDbTaskOutputMigrationLevel:
+    allOf:
+      - $ref: '#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput'
+    properties:
+      endedOn:
+        description: Migration end time
+        format: date-time
+        readOnly: true
+        type: string
+      sourceServerBrandVersion:
+        description: Source server brand version
+        readOnly: true
+        type: string
+      sourceServerVersion:
+        description: Source server version
+        readOnly: true
+        type: string
+      startedOn:
+        description: Migration start time
+        format: date-time
+        readOnly: true
+        type: string
+      state:
+        description: Current state of migration
+        enum:
+          - None
+          - InProgress
+          - Failed
+          - Warning
+          - Completed
+          - Skipped
+          - Stopped
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: MigrationState
+      targetServerBrandVersion:
+        description: Target server brand version
+        readOnly: true
+        type: string
+      targetServerVersion:
+        description: Target server version
+        readOnly: true
+        type: string
+    type: object
+    x-ms-discriminator-value: MigrationLevelOutput
+  MigrateSchemaSqlServerSqlDbTaskProperties:
+    allOf:
+      - description: 'Base class for all types of DMS task properties. If task is not supported by current client, this object is returned.'
+        discriminator: taskType
+        properties:
+          clientData:
+            additionalProperties:
+              type: string
+            description: Key value pairs of client data to attach meta data information to task
+            type: object
+          commands:
+            description: Array of command properties.
+            items:
+              description: 'Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.'
+              discriminator: commandType
+              properties:
+                commandType:
+                  description: Command type.
+                  type: string
+                errors:
+                  description: Array of errors. This is ignored if submitted.
+                  items:
+                    description: Error information in OData format.
+                    properties:
+                      code:
+                        description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                        type: string
+                      details:
+                        description: Inner errors that caused this error
+                        items:
+                          $ref: '#/definitions/ODataError'
+                        type: array
+                      message:
+                        description: The human-readable description of the error
+                        type: string
+                    type: object
+                  readOnly: true
+                  type: array
+                state:
+                  description: The state of the command. This is ignored if submitted.
+                  enum:
+                    - Unknown
+                    - Accepted
+                    - Running
+                    - Succeeded
+                    - Failed
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: CommandState
+              required:
+                - commandType
+              type: object
+              x-ms-discriminator-value: Unknown
+            readOnly: true
+            type: array
+          errors:
+            description: Array of errors. This is ignored if submitted.
+            items:
+              description: Error information in OData format.
+              properties:
+                code:
+                  description: 'The machine-readable description of the error, such as ''InvalidRequest'' or ''InternalServerError'''
+                  type: string
+                details:
+                  description: Inner errors that caused this error
+                  items:
+                    $ref: '#/definitions/ODataError'
+                  type: array
+                message:
+                  description: The human-readable description of the error
+                  type: string
+              type: object
+            readOnly: true
+            type: array
+          state:
+            description: The state of the task. This is ignored if submitted.
+            enum:
+              - Unknown
+              - Queued
+              - Running
+              - Canceled
+              - Succeeded
+              - Failed
+              - FailedInputValidation
+              - Faulted
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: TaskState
+          taskType:
+            description: Task type.
+            type: string
+        required:
+          - taskType
+        type: object
+        x-ms-discriminator-value: Unknown
+    description: Properties for task that migrates Schema for SQL Server databases to Azure SQL databases
+    properties:
+      input:
+        $ref: '#/definitions/MigrateSchemaSqlServerSqlDbTaskInput'
+        description: Task input
+      output:
+        description: Task output. This is ignored if submitted.
+        items:
+          $ref: '#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput'
+        readOnly: true
+        type: array
+    type: object
+    x-ms-discriminator-value: MigrateSchemaSqlServerSqlDb
+  MigrateSchemaSqlTaskOutputError:
+    allOf:
+      - $ref: '#/definitions/MigrateSchemaSqlServerSqlDbTaskOutput'
+    properties:
+      error:
+        description: Exception object for all custom exceptions
+        properties:
+          actionableMessage:
+            description: Actionable steps for this exception
+            type: string
+          filePath:
+            description: The path to the file where exception occurred
+            type: string
+          hResult:
+            description: Coded numerical value that is assigned to a specific exception
+            type: integer
+          lineNumber:
+            description: The line number where exception occurred
+            type: string
+          message:
+            description: Error message
+            type: string
+          stackTrace:
+            description: Stack trace
+            type: string
+        type: object
+    type: object
+    x-ms-discriminator-value: ErrorOutput
+  SchemaMigrationOption:
+    description: Option for how schema is extracted and applied to target
+    enum:
+      - None
+      - ExtractFromSource
+      - UseStorageFile
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: SchemaMigrationOption
+  SchemaMigrationSetting:
+    description: Settings for migrating schema from source to target
+    properties:
+      fileId:
+        description: Resource Identifier of a file resource containing the uploaded schema file
+        type: string
+      schemaOption:
+        $ref: '#/definitions/SchemaMigrationOption'
+        description: Option on how to migrate the schema
+    type: object

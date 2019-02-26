@@ -1,10 +1,10 @@
 swagger: '2.0'
 schemes:
   - https
-host: adminmanagement.local.azurestack.external
+host: management.local.azurestack.external
 info:
-  description: The Admin Subscriptions Management Client.
-  title: SubscriptionsManagementClient
+  description: The User Subscription Management Client.
+  title: SubscriptionClient
   version: '2015-11-01'
   x-apisguru-categories:
     - cloud
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/subscriptions/Microsoft.Subscriptions.Admin/preview/2015-11-01/Subscriptions.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/azsadmin/resource-manager/user-subscriptions/Microsoft.Subscriptions/preview/2015-11-01/Subscriptions.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: azsadmin-Subscriptions
@@ -42,49 +42,6 @@ parameters:
     name: api-version
     required: true
     type: string
-  CheckNameAvailabilityParameter:
-    description: Check name availability parameter
-    in: body
-    name: nameAvailabilityDefinition
-    required: true
-    schema:
-      $ref: '#/definitions/CheckNameAvailabilityDefinition'
-    x-ms-parameter-location: method
-  DelegatedProviderParameter:
-    description: DelegatedProvider identifier.
-    in: path
-    name: delegatedProvider
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  DelegatedProviderSubscriptionIdParameter:
-    description: Delegated provider subscription identifier.
-    in: path
-    name: delegatedProviderSubscriptionId
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  FilterParameter:
-    description: OData filter parameter.
-    in: query
-    name: $filter
-    type: string
-    x-ms-parameter-location: method
-  LocationParameter:
-    description: The AzureStack location.
-    in: path
-    name: location
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  MoveSubscriptionsParameter:
-    description: Move subscriptions parameter.
-    in: body
-    name: moveSubscriptionsDefinition
-    required: true
-    schema:
-      $ref: '#/definitions/MoveSubscriptionsDefinition'
-    x-ms-parameter-location: method
   NewSubscriptionParameter:
     description: Subscription parameter.
     in: body
@@ -93,387 +50,20 @@ parameters:
     schema:
       $ref: '#/definitions/Subscription'
     x-ms-parameter-location: method
-  OfferParameter:
-    description: Name of an offer.
-    in: path
-    name: offer
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  PlanParameter:
-    description: Name of the plan.
-    in: path
-    name: plan
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  ResourceGroupParameter:
-    description: The resource group the resource is located under.
-    in: path
-    name: resourceGroupName
-    required: true
-    type: string
-    x-ms-parameter-location: method
   SubscriptionIdParameter:
-    description: Subscription credentials which uniquely identify Microsoft Azure subscription.The subscription ID forms part of the URI for every service call.
+    description: Id of the subscription.
     in: path
     name: subscriptionId
     required: true
     type: string
-  SubscriptionParameter:
-    description: Subscription parameter.
-    in: path
-    name: subscription
-    required: true
-    type: string
     x-ms-parameter-location: method
 paths:
-  /providers/Microsoft.Subscriptions.Admin/operations:
-    get:
-      description: Get the list of Operations.
-      operationId: Operations_List
-      parameters:
-        - $ref: '#/parameters/ApiVersionParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/OperationList'
-      tags:
-        - Operations
-      x-ms-examples:
-        Get the list of Operations.:
-          parameters:
-            api-version: '2015-11-01'
-            location: local
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '200':
-              body:
-                value:
-                  - display:
-                      description: Gets or lists directory tenants.
-                      operation: Get Directory Tenant
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Directory Tenant
-                    name: Microsoft.Subscriptions.Admin/directoryTenants/read
-                  - display:
-                      description: Creates or updates a directory tenant.
-                      operation: Create Directory Tenant
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Directory Tenant
-                    name: Microsoft.Subscriptions.Admin/directoryTenants/write
-                  - display:
-                      description: Deletes a directory tenant.
-                      operation: Delete Directory Tenant
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Directory Tenant
-                    name: Microsoft.Subscriptions.Admin/directoryTenants/delete
-                  - display:
-                      description: Gets or lists delegated providers.
-                      operation: Get Delegated Provider
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Delegated Provider
-                    name: Microsoft.Subscriptions.Admin/delegatedProviders/read
-                  - display:
-                      description: Gets or lists delegated provider offers.
-                      operation: Get Delegated Provider Offer
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Delegated Provider Offer
-                    name: Microsoft.Subscriptions.Admin/delegatedProviders/offers/read
-                  - display:
-                      description: Gets or lists locations.
-                      operation: Get Location
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Location
-                    name: Microsoft.Subscriptions.Admin/locations/read
-                  - display:
-                      description: Creates or updates a location.
-                      operation: Create Location
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Location
-                    name: Microsoft.Subscriptions.Admin/locations/write
-                  - display:
-                      description: Gets quota for delegated providers.
-                      operation: Get Quota
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Quota
-                    name: Microsoft.Subscriptions.Admin/locations/quotas/read
-                  - display:
-                      description: Gets or lists offers.
-                      operation: Get Offer
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Offer
-                    name: Microsoft.Subscriptions.Admin/offers/read
-                  - display:
-                      description: Creates or updates an offer.
-                      operation: Create Offer
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Offer
-                    name: Microsoft.Subscriptions.Admin/offers/write
-                  - display:
-                      description: Deletes an offer.
-                      operation: Delete Offer
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Offer
-                    name: Microsoft.Subscriptions.Admin/offers/delete
-                  - display:
-                      description: Links a plan to an offer.
-                      operation: Links a base or add-on plan to an offer.
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Offer
-                    name: Microsoft.Subscriptions.Admin/offers/link/action
-                  - display:
-                      description: Unlinks a base or add-on plan from an offer.
-                      operation: Unlink Offer
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Offer
-                    name: Microsoft.Subscriptions.Admin/offers/unlink/action
-                  - display:
-                      description: Gets or lists the delegations of your offer to other delegated providers.
-                      operation: Get Offer Delegations
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Offer Delegation
-                    name: Microsoft.Subscriptions.Admin/offers/offerDelegations/read
-                  - display:
-                      description: Creates or updates a delegation of your offer to another delegated provider.
-                      operation: Create Offer Delegation
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Offer Delegation
-                    name: Microsoft.Subscriptions.Admin/offers/offerDelegations/write
-                  - display:
-                      description: Deletes a delegation of your offer to another delegated provider.
-                      operation: Delete Offer Delegation
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Offer Delegation
-                    name: Microsoft.Subscriptions.Admin/offers/offerDelegations/delete
-                  - display:
-                      description: Gets or lists plans.
-                      operation: Get Plan
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Plan
-                    name: Microsoft.Subscriptions.Admin/plans/read
-                  - display:
-                      description: Creates or updates a plan.
-                      operation: Create Plan
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Plan
-                    name: Microsoft.Subscriptions.Admin/plans/write
-                  - display:
-                      description: Deletes a plan.
-                      operation: Delete Plan
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Plan
-                    name: Microsoft.Subscriptions.Admin/plans/delete
-                  - display:
-                      description: Gets or lists subscriptions consuming your offers.
-                      operation: Get Subscriptions
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Subscription
-                    name: Microsoft.Subscriptions.Admin/subscriptions/read
-                  - display:
-                      description: Creates or updates a subscription consuming your offer.
-                      operation: Create Subscription
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Subscription
-                    name: Microsoft.Subscriptions.Admin/subscriptions/write
-                  - display:
-                      description: Deletes a subscription consuming your offer.
-                      operation: Delete Subscription
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Subscription
-                    name: Microsoft.Subscriptions.Admin/subscriptions/delete
-                  - display:
-                      description: Gets or lists the plans acquired by a subscription consuming your offer.
-                      operation: Get Acquired Plans
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Acquired Plan
-                    name: Microsoft.Subscriptions.Admin/subscriptions/acquiredPlans/read
-                  - display:
-                      description: Creates or updates a plan acquisition by a subscription consuming your offer.
-                      operation: Create Acquired Plan
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Acquired Plan
-                    name: Microsoft.Subscriptions.Admin/subscriptions/acquiredPlans/write
-                  - display:
-                      description: Deletes a plan acquisition for a subscription consuming your offer.
-                      operation: Delete Acquired Plan
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Acquired Plan
-                    name: Microsoft.Subscriptions.Admin/subscriptions/acquiredPlans/delete
-                  - display:
-                      description: Lists the supported operations.
-                      operation: List Operations
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Operation
-                    name: Microsoft.Subscriptions.Admin/operations/read
-                  - display:
-                      description: Restore data from a backup into the current deployment of Subscriptions Service.
-                      operation: Restore Subscriptions Data
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Restore Data
-                    name: Microsoft.Subscriptions.Admin/restoreData/action
-                  - display:
-                      description: Updates encryption of secrets.
-                      operation: Update Encryption
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Update Encryption
-                    name: Microsoft.Subscriptions.Admin/updateEncryption/action
-                  - display:
-                      description: Move user subscriptions to a delegated provider offer.
-                      operation: Move Subscriptions
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Move Subscriptions
-                    name: Microsoft.Subscriptions.Admin/moveSubscriptions/action
-                  - display:
-                      description: Get the global name availability for resource names requiring global uniqueness.
-                      operation: Check Global Name Availability
-                      provider: Microsoft Subscriptions Administration Service
-                      resource: Check Name Availability
-                    name: Microsoft.Subscriptions.Admin/checkNameAvailability/action
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkNameAvailability':
-    post:
-      description: Get the list of subscriptions.
-      operationId: Subscriptions_CheckNameAvailability
-      parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/CheckNameAvailabilityParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/CheckNameAvailabilityResponse'
-      tags:
-        - Subscriptions
-      x-ms-examples:
-        Checks name availability in the Microsoft.Subscriptions.Admin namespace:
-          parameters:
-            api-version: '2015-11-01'
-            location: local
-            name: subname
-            nameAvailabilityDefinition:
-              properties:
-                name: subname
-                resourceType: type
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '200':
-              body:
-                message: ''
-                nameAvailable: true
-      x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions':
-    post:
-      description: Move subscriptions between delegated provider offers.
-      operationId: Subscriptions_MoveSubscriptions
-      parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/MoveSubscriptionsParameter'
-      responses:
-        '202':
-          description: Accepted -- Move subscriptions request accepted; operation will complete asynchronously.
-        '204':
-          description: No Content -- The subscriptions were successfully moved to the target delegated provider offer.
-      tags:
-        - Subscriptions
-      x-ms-examples:
-        Move user subscriptions from a Delegated Provider to the Default Provider.:
-          parameters:
-            api-version: '2015-11-01'
-            moveSubscriptionsDefinition:
-              properties:
-                resources:
-                  - /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/5144634d-7e4d-443b-a304-d27e44220fc6
-                  - /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/55049d1c-9727-4f79-95b6-50d1f3ee2b28
-                targetDelegatedProviderOffer: null
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '202': {}
-            '204': {}
-        Move user subscriptions from the Default Provider to a Delegated Provider.:
-          parameters:
-            api-version: '2015-11-01'
-            moveSubscriptionsDefinition:
-              properties:
-                resources:
-                  - /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/5144634d-7e4d-443b-a304-d27e44220fc6
-                  - /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/55049d1c-9727-4f79-95b6-50d1f3ee2b28
-                targetDelegatedProviderOffer: /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/providers/Microsoft.Subscriptions.Admin/delegatedProviders/8bb14c82-7b09-40f4-ade3-e5c71308cfcd/offers/del1
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '202': {}
-            '204': {}
-      x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/restoreData':
-    post:
-      description: Restores the data
-      operationId: RestoreData
-      parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/SubscriptionList'
-      tags:
-        - Subscriptions
-      x-ms-examples:
-        Get the list of subscriptions.:
-          parameters:
-            api-version: '2015-11-01'
-            location: local
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '200':
-              body:
-                value:
-                  - delegatedProviderSubscriptionId: 8158498d-27b1-4ccf-9aa1-de0f925731e6
-                    displayName: sfsdf
-                    id: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/5144634d-7e4d-443b-a304-d27e44220fc6
-                    offerId: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourceGroups/balarg/providers/Microsoft.Subscriptions.Admin/offers/balaoffer
-                    owner: tenantadmin1@msazurestack.onmicrosoft.com
-                    routingResourceManagerType: Default
-                    state: Enabled
-                    subscriptionId: 5144634d-7e4d-443b-a304-d27e44220fc6
-                    tenantId: d9b782d5-d098-4374-8f2c-3907cc34611c
-                  - delegatedProviderSubscriptionId: 8158498d-27b1-4ccf-9aa1-de0f925731e6
-                    displayName: Test User-tenantadmin1@msazurestack.onmicrosoft.com
-                    id: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/55049d1c-9727-4f79-95b6-50d1f3ee2b28
-                    offerId: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourceGroups/TestRG-c895f7cb-18e0-41b4-a4e9-c29131dbbc48/providers/Microsoft.Subscriptions.Admin/offers/TestOffer-e9a634c1-8846-49f0-ab49-65d24262dc41
-                    owner: tenantadmin1@msazurestack.onmicrosoft.com
-                    routingResourceManagerType: Default
-                    state: Enabled
-                    subscriptionId: 55049d1c-9727-4f79-95b6-50d1f3ee2b28
-                    tenantId: d9b782d5-d098-4374-8f2c-3907cc34611c
-                  - delegatedProviderSubscriptionId: 8158498d-27b1-4ccf-9aa1-de0f925731e6
-                    displayName: cnur8007tenantsubscription352
-                    id: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/ad7e95b8-cb96-472e-b48d-46411ddce350
-                    offerId: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourceGroups/cnur8007subscrrg352/providers/Microsoft.Subscriptions.Admin/offers/cnur8007tenantoffer352
-                    owner: tenantadmin1@msazurestack.onmicrosoft.com
-                    routingResourceManagerType: Default
-                    state: Enabled
-                    subscriptionId: ad7e95b8-cb96-472e-b48d-46411ddce350
-                    tenantId: d9b782d5-d098-4374-8f2c-3907cc34611c
-                  - delegatedProviderSubscriptionId: 8158498d-27b1-4ccf-9aa1-de0f925731e6
-                    displayName: cnur8007tenantdefaultsubscription352
-                    id: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/c4d75460-5ea2-486a-a87f-85506f55daa6
-                    offerId: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourceGroups/cnur8007subscrrg352/providers/Microsoft.Subscriptions.Admin/offers/cnur8007tenantoffer352
-                    owner: tenantadmin1@msazurestack.onmicrosoft.com
-                    routingResourceManagerType: Default
-                    state: Enabled
-                    subscriptionId: c4d75460-5ea2-486a-a87f-85506f55daa6
-                    tenantId: d9b782d5-d098-4374-8f2c-3907cc34611c
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions':
+  /subscriptions:
     get:
       description: Get the list of subscriptions.
       operationId: Subscriptions_List
       parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/FilterParameter'
       responses:
         '200':
           description: OK
@@ -485,57 +75,28 @@ paths:
         Get the list of subscriptions.:
           parameters:
             api-version: '2015-11-01'
-            location: local
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
-                value:
-                  - delegatedProviderSubscriptionId: 8158498d-27b1-4ccf-9aa1-de0f925731e6
-                    displayName: sfsdf
-                    id: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/5144634d-7e4d-443b-a304-d27e44220fc6
-                    offerId: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourceGroups/balarg/providers/Microsoft.Subscriptions.Admin/offers/balaoffer
-                    owner: tenantadmin1@msazurestack.onmicrosoft.com
-                    routingResourceManagerType: Default
-                    state: Enabled
-                    subscriptionId: 5144634d-7e4d-443b-a304-d27e44220fc6
-                    tenantId: d9b782d5-d098-4374-8f2c-3907cc34611c
-                  - delegatedProviderSubscriptionId: 8158498d-27b1-4ccf-9aa1-de0f925731e6
-                    displayName: Test User-tenantadmin1@msazurestack.onmicrosoft.com
-                    id: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/55049d1c-9727-4f79-95b6-50d1f3ee2b28
-                    offerId: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourceGroups/TestRG-c895f7cb-18e0-41b4-a4e9-c29131dbbc48/providers/Microsoft.Subscriptions.Admin/offers/TestOffer-e9a634c1-8846-49f0-ab49-65d24262dc41
-                    owner: tenantadmin1@msazurestack.onmicrosoft.com
-                    routingResourceManagerType: Default
-                    state: Enabled
-                    subscriptionId: 55049d1c-9727-4f79-95b6-50d1f3ee2b28
-                    tenantId: d9b782d5-d098-4374-8f2c-3907cc34611c
-                  - delegatedProviderSubscriptionId: 8158498d-27b1-4ccf-9aa1-de0f925731e6
-                    displayName: cnur8007tenantsubscription352
-                    id: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/ad7e95b8-cb96-472e-b48d-46411ddce350
-                    offerId: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourceGroups/cnur8007subscrrg352/providers/Microsoft.Subscriptions.Admin/offers/cnur8007tenantoffer352
-                    owner: tenantadmin1@msazurestack.onmicrosoft.com
-                    routingResourceManagerType: Default
-                    state: Enabled
-                    subscriptionId: ad7e95b8-cb96-472e-b48d-46411ddce350
-                    tenantId: d9b782d5-d098-4374-8f2c-3907cc34611c
-                  - delegatedProviderSubscriptionId: 8158498d-27b1-4ccf-9aa1-de0f925731e6
-                    displayName: cnur8007tenantdefaultsubscription352
-                    id: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/c4d75460-5ea2-486a-a87f-85506f55daa6
-                    offerId: /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/resourceGroups/cnur8007subscrrg352/providers/Microsoft.Subscriptions.Admin/offers/cnur8007tenantoffer352
-                    owner: tenantadmin1@msazurestack.onmicrosoft.com
-                    routingResourceManagerType: Default
-                    state: Enabled
-                    subscriptionId: c4d75460-5ea2-486a-a87f-85506f55daa6
-                    tenantId: d9b782d5-d098-4374-8f2c-3907cc34611c
-      x-ms-odata: '#/definitions/Subscription'
+                - displayName: Test User-user1@contoso.com
+                  id: /subscriptions/17c22a2f-9a79-4f90-a34c-aa8d9b942071
+                  offerId: /delegatedProviders/default/offers/TestOffer-def2432b-81ef-4480-9211-c18e808c3d1b
+                  state: Enabled
+                  subscriptionId: 17c22a2f-9a79-4f90-a34c-aa8d9b942071
+                  tenantId: 1e64bce5-9f3b-4add-8be8-e550e05014d0
+                - displayName: Test User-user1@contoso.com
+                  id: /subscriptions/7d3c5374-0180-4743-b468-d87bec909693
+                  offerId: /delegatedProviders/default/offers/TestOffer-c2e9d93a-d8a2-4ec9-970e-3dcd8c47c525
+                  state: Disabled
+                  subscriptionId: 7d3c5374-0180-4743-b468-d87bec909693
+                  tenantId: 1e64bce5-9f3b-4add-8be8-e550e05014d0
       x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{subscription}':
+  '/subscriptions/{subscriptionId}':
     delete:
       description: Delete the specified subscription.
       operationId: Subscriptions_Delete
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/SubscriptionParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
@@ -545,7 +106,7 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        Delete the specified subscription.:
+        Delete the specified subscription:
           parameters:
             api-version: '2015-11-01'
             location: local
@@ -555,44 +116,37 @@ paths:
             '200': {}
             '204': {}
     get:
-      description: Get a specified subscription.
+      description: Gets details about particular subscription.
       operationId: Subscriptions_Get
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/SubscriptionParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
         '200':
-          description: OK
+          description: ''
           schema:
             $ref: '#/definitions/Subscription'
       tags:
         - Subscriptions
       x-ms-examples:
-        Get a specified subscription.:
+        Get the specified subscription.:
           parameters:
             api-version: '2015-11-01'
-            location: local
-            subscription: test
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
+            subscriptionId: 7d3c5374-0180-4743-b468-d87bec909693
           responses:
             '200':
               body:
-                delegatedProviderSubscriptionId: d16dfcf0-44cc-4498-9937-08b94159d27b
-                displayName: Test Subscription
-                id: /subscriptions/d16dfcf0-44cc-4498-9937-08b94159d27b/providers/Microsoft.Subscriptions.Admin/subscriptions/c79389af-4480-48cc-8fa2-ee8ced8e843d
-                offerId: /subscriptions/d16dfcf0-44cc-4498-9937-08b94159d27b/resourceGroups/planrg/providers/Microsoft.Subscriptions.Admin/offers/testoffer
-                owner: tenantadmin1@msazurestack.onmicrosoft.com
-                routingResourceManagerType: Default
-                state: Enabled
-                subscriptionId: c79389af-4480-48cc-8fa2-ee8ced8e843d
-                tenantId: 104edf09-7fc1-459f-8c4e-b062db480b90
+                displayName: Test User-user1@msazurestack.onmicrosoft.com
+                id: /subscriptions/7d3c5374-0180-4743-b468-d87bec909693
+                offerId: /delegatedProviders/default/offers/TestOffer-c2e9d93a-d8a2-4ec9-970e-3dcd8c47c525
+                state: Disabled
+                subscriptionId: 7d3c5374-0180-4743-b468-d87bec909693
+                tenantId: 1e64bce5-9f3b-4add-8be8-e550e05014d0
     put:
-      description: Creates or updates the specified subscription.
+      description: Create or updates a subscription.
       operationId: Subscriptions_CreateOrUpdate
       parameters:
         - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/SubscriptionParameter'
         - $ref: '#/parameters/NewSubscriptionParameter'
         - $ref: '#/parameters/ApiVersionParameter'
       responses:
@@ -607,372 +161,37 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        Creates or updates the specified subscription.:
+        Create or updates a subscription:
           parameters:
             api-version: '2015-11-01'
             location: local
             newSubscription:
               properties:
-                delegatedProviderSubscriptionId: d16dfcf0-44cc-4498-9937-08b94159d27b
-                displayName: Test Subscription
-                id: /subscriptions/d16dfcf0-44cc-4498-9937-08b94159d27b/providers/Microsoft.Subscriptions.Admin/subscriptions/c79389af-4480-48cc-8fa2-ee8ced8e843d
-                offerId: /subscriptions/d16dfcf0-44cc-4498-9937-08b94159d27b/resourceGroups/planrg/providers/Microsoft.Subscriptions.Admin/offers/testoffer
-                owner: tenantadmin1@msazurestack.onmicrosoft.com
-                routingResourceManagerType: Default
+                displayName: Test User-user1@contoso.com
+                id: ''
+                offerId: /delegatedProviders/default/offers/TestOffer-0892f99c-8d1c-48d1-a2b3-128a931afc09
                 state: Enabled
-            subscription: test
+                subscriptionId: a7aeb2dd-1b1d-458c-a3dc-09070c2ece5e
+                tenantId: ''
             subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
           responses:
             '200':
               body:
-                delegatedProviderSubscriptionId: d16dfcf0-44cc-4498-9937-08b94159d27b
-                displayName: Test Subscription
-                id: /subscriptions/d16dfcf0-44cc-4498-9937-08b94159d27b/providers/Microsoft.Subscriptions.Admin/subscriptions/c79389af-4480-48cc-8fa2-ee8ced8e843d
-                offerId: /subscriptions/d16dfcf0-44cc-4498-9937-08b94159d27b/resourceGroups/planrg/providers/Microsoft.Subscriptions.Admin/offers/testoffer
-                owner: tenantadmin1@msazurestack.onmicrosoft.com
-                routingResourceManagerType: Default
+                displayName: Test User-user1@contoso.com
+                id: /subscriptions/a7aeb2dd-1b1d-458c-a3dc-09070c2ece5e
+                offerId: /delegatedProviders/default/offers/TestOffer-0892f99c-8d1c-48d1-a2b3-128a931afc09
                 state: Enabled
-                subscriptionId: c79389af-4480-48cc-8fa2-ee8ced8e843d
-                tenantId: 104edf09-7fc1-459f-8c4e-b062db480b90
+                subscriptionId: a7aeb2dd-1b1d-458c-a3dc-09070c2ece5e
+                tenantId: 1e64bce5-9f3b-4add-8be8-e550e05014d0
             '201':
               body:
-                delegatedProviderSubscriptionId: d16dfcf0-44cc-4498-9937-08b94159d27b
-                displayName: Test Subscription
-                id: /subscriptions/d16dfcf0-44cc-4498-9937-08b94159d27b/providers/Microsoft.Subscriptions.Admin/subscriptions/c79389af-4480-48cc-8fa2-ee8ced8e843d
-                offerId: /subscriptions/d16dfcf0-44cc-4498-9937-08b94159d27b/resourceGroups/planrg/providers/Microsoft.Subscriptions.Admin/offers/testoffer
-                owner: tenantadmin1@msazurestack.onmicrosoft.com
-                routingResourceManagerType: Default
+                displayName: Test User-user1@contoso.com
+                id: /subscriptions/a7aeb2dd-1b1d-458c-a3dc-09070c2ece5e
+                offerId: /delegatedProviders/default/offers/TestOffer-0892f99c-8d1c-48d1-a2b3-128a931afc09
                 state: Enabled
-                subscriptionId: c79389af-4480-48cc-8fa2-ee8ced8e843d
-                tenantId: 104edf09-7fc1-459f-8c4e-b062db480b90
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/updateEncryption':
-    post:
-      description: Update the encryption settings.
-      operationId: UpdateEncryption
-      parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-      responses:
-        '200':
-          description: OK
-      tags:
-        - Subscriptions
-      x-ms-examples:
-        Update the encryption settings.:
-          parameters:
-            aggregationGranularity: ''
-            api-version: '2015-11-01'
-            continuationToken: ''
-            location: local
-            reportedEndTime: '2017-08-02T00:00:00.00Z'
-            reportedStartTime: '2017-08-01T00:00:00.00Z'
-            subscriberId: ''
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '200': {}
-  '/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/validateMoveSubscriptions':
-    post:
-      description: Validate that user subscriptions can be moved between delegated provider offers.
-      operationId: Subscriptions_ValidateMoveSubscriptions
-      parameters:
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/MoveSubscriptionsParameter'
-      responses:
-        '202':
-          description: Accepted -- Validate move subscriptions request accepted; operation will complete asynchronously.
-        '204':
-          description: No Content -- The subscriptions can be moved to the target delegated provider offer.
-      tags:
-        - Subscriptions
-      x-ms-examples:
-        Validate that user subscriptions can be moved from a Delegated Provider to the Default Provider.:
-          parameters:
-            api-version: '2015-11-01'
-            moveSubscriptionsDefinition:
-              properties:
-                resources:
-                  - /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/5144634d-7e4d-443b-a304-d27e44220fc6
-                  - /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/55049d1c-9727-4f79-95b6-50d1f3ee2b28
-                targetDelegatedProviderOffer: null
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '202': {}
-            '204': {}
-        Validate that user subscriptions can be moved from the Default Provider to a Delegated Provider.:
-          parameters:
-            api-version: '2015-11-01'
-            moveSubscriptionsDefinition:
-              properties:
-                resources:
-                  - /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/5144634d-7e4d-443b-a304-d27e44220fc6
-                  - /subscriptions/8158498d-27b1-4ccf-9aa1-de0f925731e6/providers/Microsoft.Subscriptions.Admin/subscriptions/55049d1c-9727-4f79-95b6-50d1f3ee2b28
-                targetDelegatedProviderOffer: /subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/providers/Microsoft.Subscriptions.Admin/delegatedProviders/8bb14c82-7b09-40f4-ade3-e5c71308cfcd/offers/del1
-            subscriptionId: 20ff7fc3-e762-44dd-bd96-b71116dcdc23
-          responses:
-            '202': {}
-            '204': {}
-      x-ms-long-running-operation: true
+                subscriptionId: a7aeb2dd-1b1d-458c-a3dc-09070c2ece5e
+                tenantId: 1e64bce5-9f3b-4add-8be8-e550e05014d0
 definitions:
-  CheckNameAvailabilityDefinition:
-    description: The check name availability action definition.
-    properties:
-      name:
-        description: The resource name to verify.
-        type: string
-      resourceType:
-        description: The resource type to verify.
-        type: string
-    type: object
-  CheckNameAvailabilityResponse:
-    description: The check name availability response definition
-    properties:
-      message:
-        description: The message explaining the reason.
-        type: string
-      nameAvailable:
-        description: A value indicating whether the name is available.
-        type: boolean
-      reason:
-        $ref: '#/definitions/NameUnavailabilityReason'
-        description: The reason for the unavailability of the name.
-    type: object
-  Metric:
-    description: The resource metric set that represents the metrics for a particular resource.
-    properties:
-      endTime:
-        description: End time of the metric.
-        format: date-time
-        type: string
-      metricUnit:
-        $ref: '#/definitions/MetricUnit'
-        description: Unit of metrics.
-      metricValues:
-        $ref: '#/definitions/MetricValueList'
-        description: Collected metric values in the timespan.
-      startTime:
-        description: Start time of the metric.
-        format: date-time
-        type: string
-      timeGrain:
-        description: Timespan of the metric.
-        type: string
-    type: object
-  MetricAvailability:
-    description: Metric Definition
-    properties:
-      retention:
-        description: the retention. Metrics may be queried for this interval.
-        type: string
-      timeGrain:
-        description: The time grain. Metrics will be available for this time grain.
-        type: string
-    type: object
-  MetricAvailabilityList:
-    description: List of metric definitions.
-    items:
-      $ref: '#/definitions/MetricAvailability'
-    type: array
-  MetricDefinition:
-    description: Metric Definition
-    properties:
-      metricAvailabilities:
-        $ref: '#/definitions/MetricAvailabilityList'
-        description: Metric availabilities.
-      name:
-        description: Metric definition name.
-        type: string
-      primaryAggregationType:
-        $ref: '#/definitions/MetricPrimaryAggregationType'
-        description: Type of the primary aggregation.
-      unit:
-        $ref: '#/definitions/MetricUnit'
-        description: Unit of metrics.
-    type: object
-  MetricDefinitionList:
-    description: List of metric definitions.
-    properties:
-      nextLink:
-        description: Continuation token
-        type: string
-      value:
-        description: Array of metric definitions.
-        items:
-          $ref: '#/definitions/MetricDefinition'
-        type: array
-  MetricList:
-    description: List of metrics.
-    properties:
-      nextLink:
-        description: Continuation token
-        type: string
-      value:
-        description: List of metrics.
-        items:
-          $ref: '#/definitions/Metric'
-        type: array
-  MetricPrimaryAggregationType:
-    description: The primary aggregation type for resource metric.
-    enum:
-      - None
-      - Average
-      - Total
-      - Minimum
-      - Maximum
-      - Last
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: MetricPrimaryAggregationType
-      values:
-        - description: No aggregation applied to resource.
-          name: None
-          value: None
-        - description: The average aggregation type.
-          name: Average
-          value: Average
-        - description: The total aggregation type.
-          name: Total
-          value: Total
-        - description: The minimum aggregation type.
-          name: Minimum
-          value: Minimum
-        - description: The maximum aggregation type.
-          name: Maximum
-          value: Maximum
-        - description: The last aggregation type.
-          name: Last
-          value: Last
-  MetricUnit:
-    description: The resource metric unit.
-    enum:
-      - Count
-      - Bytes
-      - Seconds
-      - CountPerSecond
-      - BytesPerSecond
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: MetricUnit
-      values:
-        - description: The count.
-          name: Count
-          value: Count
-        - description: The bytes.
-          name: Bytes
-          value: Bytes
-        - description: The seconds.
-          name: Seconds
-          value: Seconds
-        - description: The count per second.
-          name: CountPerSecond
-          value: CountPerSecond
-        - description: The bytes per second.
-          name: BytesPerSecond
-          value: BytesPerSecond
-  MetricValue:
-    description: Metric value
-    properties:
-      average:
-        description: Average value for metric sample period.
-        format: double
-        type: number
-      count:
-        description: Number of measurements for metric sample period.
-        type: integer
-      maximum:
-        description: Maximum value for metric sample period.
-        format: double
-        type: number
-      minimum:
-        description: Minimum value for metric sample period.
-        format: double
-        type: number
-      properties:
-        additionalProperties:
-          type: string
-        description: Extended properties.
-        type: object
-        x-ms-client-name: extendedProperties
-      timeStamp:
-        description: Timestamp of when the metric value was collected.
-        format: date-time
-        type: string
-      total:
-        description: Total value for metric sample period.
-        format: double
-        type: number
-    type: object
-  MetricValueList:
-    description: List of metric values.
-    items:
-      $ref: '#/definitions/MetricValue'
-    type: array
-  MoveSubscriptionsDefinition:
-    description: The move subscriptions action definition
-    properties:
-      resources:
-        description: A collection of subscriptions to move to the target delegated provider offer.
-        items:
-          type: string
-        type: array
-      targetDelegatedProviderOffer:
-        description: The delegated provider offer identifier (from the Admin context) that the subscriptions to be moved to.
-        type: string
-    required:
-      - resources
-    type: object
-  NameUnavailabilityReason:
-    description: The reason that the name is not available.
-    enum:
-      - Invalid
-      - AlreadyExists
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: NameUnavailabilityReason
-  Operation:
-    description: Supported REST operation.
-    properties:
-      display:
-        description: Display information for the operation.
-        properties:
-          description:
-            description: Description for the operation.
-            readOnly: true
-            type: string
-          operation:
-            description: Display name of the operation.
-            readOnly: true
-            type: string
-          provider:
-            description: Resource provider display name.
-            readOnly: true
-            type: string
-          resource:
-            description: Resource type display name related to the operation.
-            readOnly: true
-            type: string
-        type: object
-      name:
-        description: Name of the operation being performed on an object.
-        readOnly: true
-        type: string
-      origin:
-        description: Origin for the operation.
-        readOnly: true
-        type: string
-    type: object
-  OperationList:
-    description: List of supported operations.
-    properties:
-      value:
-        description: List of supported operations.
-        items:
-          $ref: '#/definitions/Operation'
-        type: array
-    type: object
   Resource:
     description: Base Resource Object
     properties:
@@ -999,26 +218,11 @@ definitions:
         type: string
     type: object
     x-ms-azure-resource: true
-  ResourceManagerType:
-    description: Resource manager type.
-    enum:
-      - Default
-      - Admin
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: ResourceManagerType
   Subscription:
     description: List of supported operations.
     properties:
-      delegatedProviderSubscriptionId:
-        description: Parent DelegatedProvider subscription identifier.
-        type: string
       displayName:
         description: Subscription name.
-        type: string
-      externalReferenceId:
-        description: External reference identifier.
         type: string
       id:
         description: Fully qualified identifier.
@@ -1026,12 +230,6 @@ definitions:
       offerId:
         description: Identifier of the offer under the scope of a delegated provider.
         type: string
-      owner:
-        description: Subscription owner.
-        type: string
-      routingResourceManagerType:
-        $ref: '#/definitions/ResourceManagerType'
-        description: Routing resource manager type.
       state:
         $ref: '#/definitions/SubscriptionState'
         description: Subscription state.
@@ -1062,34 +260,7 @@ definitions:
       - PastDue
       - Disabled
       - Deleted
-      - Deleting
-      - PartiallyDeleted
     type: string
     x-ms-enum:
       modelAsString: true
       name: SubscriptionState
-      values:
-        - description: Subscription is active. New resources can be created.
-          name: Enabled
-          value: Enabled
-        - description: This state is not used in Azure Stack.
-          name: PastDue
-          value: PastDue
-        - description: This state is not used in Azure Stack.
-          name: Warned
-          value: Warned
-        - description: 'Subscription is not active and usage is not reported. Resources are shut down (VMs stopped and deallocated, IP addresses are freed, etc). During this period, the Azure Stack Operator can re-enable the subscription which allows creation of new resources but doesn’t automatically restore disabled resources.'
-          name: Disabled
-          value: Disabled
-        - description: 'This state is unique to Azure Stack and is only visible to the Azure Stack Operator, and if used, to the respective Delegated Provider. Resources and Data are being deleted before subscription state is set to Deleted. This state cannot be reversed. It means that deletion is in progress.'
-          name: Deleting
-          value: Deleting
-        - description: Final state of subscription. All resources and data are deleted. This state cannot be reversed.
-          name: Deleted
-          value: Deleted
-        - description: This state is not used in Azure Stack.
-          name: NotDefined
-          value: NotDefined
-        - description: 'This state is unique to Azure Stack and is only visible to the Azure Stack Operator, and if used, to the respective Delegated Provider. It means that deletion failed.  You can’t reverse the deletion process, so in this state all you can do is restart deletion.  This state is not reported to RPs.'
-          name: PartiallyDeleted
-          value: PartiallyDeleted

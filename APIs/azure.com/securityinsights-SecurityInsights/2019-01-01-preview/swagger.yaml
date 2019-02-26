@@ -1,0 +1,2749 @@
+swagger: '2.0'
+schemes:
+  - https
+host: management.azure.com
+info:
+  description: API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider
+  title: Security Insights
+  version: 2019-01-01-preview
+  x-apisguru-categories:
+    - cloud
+  x-logo:
+    url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
+  x-origin:
+    - format: swagger
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/securityinsights/resource-manager/Microsoft.SecurityInsights/preview/2019-01-01-preview/SecurityInsights.json'
+      version: '2.0'
+  x-providerName: azure.com
+  x-serviceName: securityinsights-SecurityInsights
+  x-tags:
+    - Azure
+    - Microsoft
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  azure_auth:
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+security:
+  - azure_auth:
+      - user_impersonation
+parameters:
+  Action:
+    description: The action
+    in: body
+    name: action
+    required: true
+    schema:
+      $ref: '#/definitions/Action'
+    x-ms-parameter-location: method
+  ActionId:
+    description: Action ID
+    in: path
+    name: actionId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  AlertRule:
+    description: The alert rule
+    in: body
+    name: alertRule
+    required: true
+    schema:
+      $ref: '#/definitions/AlertRule'
+    x-ms-parameter-location: method
+  ApiVersion:
+    description: API version for the operation
+    enum:
+      - 2019-01-01-preview
+    in: query
+    name: api-version
+    required: true
+    type: string
+  Bookmark:
+    description: The bookmark
+    in: body
+    name: bookmark
+    required: true
+    schema:
+      $ref: '#/definitions/Bookmark'
+    x-ms-parameter-location: method
+  BookmarkId:
+    description: Bookmark ID
+    in: path
+    name: bookmarkId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  Case:
+    description: The case
+    in: body
+    name: case
+    required: true
+    schema:
+      $ref: '#/definitions/Case'
+    x-ms-parameter-location: method
+  CaseId:
+    description: Case ID
+    in: path
+    name: caseId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ConsentId:
+    description: consent ID
+    in: path
+    name: consentId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  DataConnector:
+    description: The data connector
+    in: body
+    name: dataConnector
+    required: true
+    schema:
+      $ref: '#/definitions/DataConnector'
+    x-ms-parameter-location: method
+  DataConnectorId:
+    description: Connector ID
+    in: path
+    name: dataConnectorId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  EntityId:
+    description: entity ID
+    in: path
+    name: entityId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  OperationalInsightsResourceProvider:
+    description: The namespace of workspaces resource provider- Microsoft.OperationalInsights.
+    in: path
+    name: operationalInsightsResourceProvider
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ResourceGroupName:
+    description: The name of the resource group within the user's subscription. The name is case insensitive.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: resourceGroupName
+    pattern: '^[-\w\._\(\)]+$'
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  RuleId:
+    description: Alert rule ID
+    in: path
+    name: ruleId
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  Settings:
+    description: The setting
+    in: body
+    name: settings
+    required: true
+    schema:
+      $ref: '#/definitions/Settings'
+    x-ms-parameter-location: method
+  SettingsName:
+    description: 'The setting name. Supports- Fusion, UEBA'
+    in: path
+    name: settingsName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  SubscriptionId:
+    description: Azure subscription ID
+    in: path
+    name: subscriptionId
+    pattern: '^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$'
+    required: true
+    type: string
+  WorkspaceName:
+    description: The name of the workspace.
+    in: path
+    maxLength: 90
+    minLength: 1
+    name: workspaceName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+paths:
+  /providers/Microsoft.SecurityInsights/operations:
+    get:
+      description: Lists all operations available Azure Security Insights Resource Provider.
+      operationId: Operations_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+      responses:
+        '200':
+          description: OK. Successfully retrieved operations list.
+          schema:
+            $ref: '#/definitions/operationsList'
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules':
+    get:
+      description: Gets all alert rules.
+      operationId: AlertRules_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlertRulesList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Alert Rules
+      x-ms-examples:
+        Get all scheduled alert rules.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                    kind: Scheduled
+                    name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                    properties:
+                      description: ''
+                      displayName: Rule2
+                      enabled: true
+                      lastModifiedUtc: '2019-01-01T13:15:30Z'
+                      query: ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden
+                      queryFrequency: PT1H
+                      queryPeriod: P2DT1H30M
+                      severity: High
+                      suppressionDuration: PT1H
+                      suppressionEnabled: false
+                      triggerOperator: GreaterThan
+                      triggerThreshold: 0
+                    type: Microsoft.SecurityInsights/alertRules
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}':
+    delete:
+      description: Delete the alert rule.
+      operationId: AlertRules_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/RuleId'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Alert Rules
+      x-ms-examples:
+        Delete a scheduled alert rule.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            ruleId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets the alert rule.
+      operationId: AlertRules_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/RuleId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlertRule'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Alert Rules
+      x-ms-examples:
+        Get a scheduled alert rule.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            ruleId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                kind: Scheduled
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  description: ''
+                  displayName: Rule2
+                  enabled: true
+                  lastModifiedUtc: '2019-01-01T13:15:30Z'
+                  query: ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden
+                  queryFrequency: PT1H
+                  queryPeriod: P2DT1H30M
+                  severity: High
+                  suppressionDuration: PT1H
+                  suppressionEnabled: false
+                  triggerOperator: GreaterThan
+                  triggerThreshold: 0
+                type: Microsoft.SecurityInsights/alertRules
+    put:
+      description: Creates or updates the alert rule.
+      operationId: AlertRules_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/RuleId'
+        - $ref: '#/parameters/AlertRule'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AlertRule'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/AlertRule'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Alert Rules
+      x-ms-examples:
+        Creates or updates a scheduled alert rule.:
+          parameters:
+            alertRule:
+              etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+              id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+              kind: Scheduled
+              name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+              properties:
+                description: ''
+                displayName: Rule2
+                enabled: true
+                query: ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden
+                queryFrequency: PT1H
+                queryPeriod: P2DT1H30M
+                severity: High
+                suppressionDuration: PT1H
+                suppressionEnabled: false
+                triggerOperator: GreaterThan
+                triggerThreshold: 0
+              type: Microsoft.SecurityInsights/alertRules
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            ruleId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                kind: Scheduled
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  description: ''
+                  displayName: Rule2
+                  enabled: true
+                  lastModifiedUtc: '2019-01-01T13:15:30Z'
+                  query: ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden
+                  queryFrequency: PT1H
+                  queryPeriod: P2DT1H30M
+                  severity: High
+                  suppressionDuration: PT1H
+                  suppressionEnabled: false
+                  triggerOperator: GreaterThan
+                  triggerThreshold: 0
+                type: Microsoft.SecurityInsights/alertRules
+            '201':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                kind: Scheduled
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  description: ''
+                  displayName: Rule2
+                  enabled: true
+                  query: ProtectionStatus | extend HostCustomEntity = Computer | extend IPCustomEntity = ComputerIP_Hidden
+                  queryFrequency: PT1H
+                  queryPeriod: P2DT1H30M
+                  severity: High
+                  suppressionDuration: PT1H
+                  suppressionEnabled: false
+                  triggerOperator: GreaterThan
+                  triggerThreshold: 0
+                type: Microsoft.SecurityInsights/alertRules
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions':
+    get:
+      description: Gets all actions of alert rule.
+      operationId: Actions_ListByAlertRule
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/RuleId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ActionsList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Actions
+      x-ms-examples:
+        Get all actions of alert rule.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            ruleId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5/actions/912bec42-cb66-4c03-ac63-1761b6898c3e
+                    name: 912bec42-cb66-4c03-ac63-1761b6898c3e
+                    properties:
+                      triggerUri: 'https://prod-31.northcentralus.logic.azure.com:443/workflows/cd3765391efd48549fd7681ded1d48d7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=signature'
+                    type: Microsoft.SecurityInsights/alertRules/actions
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}':
+    delete:
+      description: Delete the action of alert rule.
+      operationId: AlertRules_DeleteAction
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/RuleId'
+        - $ref: '#/parameters/ActionId'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Actions
+      x-ms-examples:
+        Delete an action of alert rule.:
+          parameters:
+            actionId: 912bec42-cb66-4c03-ac63-1761b6898c3e
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            ruleId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets the action of alert rule.
+      operationId: AlertRules_GetAction
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/RuleId'
+        - $ref: '#/parameters/ActionId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Action'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Actions
+      x-ms-examples:
+        Get an action of alert rule.:
+          parameters:
+            actionId: 912bec42-cb66-4c03-ac63-1761b6898c3e
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            ruleId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5/actions/912bec42-cb66-4c03-ac63-1761b6898c3e
+                name: 912bec42-cb66-4c03-ac63-1761b6898c3e
+                properties:
+                  triggerUri: 'https://prod-31.northcentralus.logic.azure.com:443/workflows/cd3765391efd48549fd7681ded1d48d7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=signature'
+                type: Microsoft.SecurityInsights/alertRules/actions
+    put:
+      description: Creates or updates the action of alert rule.
+      operationId: AlertRules_CreateOrUpdateAction
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/RuleId'
+        - $ref: '#/parameters/ActionId'
+        - $ref: '#/parameters/Action'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Action'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Action'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Actions
+      x-ms-examples:
+        Creates or updates an action of alert rule.:
+          parameters:
+            action:
+              etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+              id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5/actions/912bec42-cb66-4c03-ac63-1761b6898c3e
+              name: 912bec42-cb66-4c03-ac63-1761b6898c3e
+              properties:
+                triggerUri: 'https://prod-31.northcentralus.logic.azure.com:443/workflows/cd3765391efd48549fd7681ded1d48d7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=signature'
+              type: Microsoft.SecurityInsights/alertRules/actions
+            actionId: 912bec42-cb66-4c03-ac63-1761b6898c3e
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            ruleId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5/actions/912bec42-cb66-4c03-ac63-1761b6898c3e
+                name: 912bec42-cb66-4c03-ac63-1761b6898c3e
+                properties:
+                  triggerUri: 'https://prod-31.northcentralus.logic.azure.com:443/workflows/cd3765391efd48549fd7681ded1d48d7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=signature'
+                type: Microsoft.SecurityInsights/alertRules/actions
+            '201':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5/actions/912bec42-cb66-4c03-ac63-1761b6898c3e
+                name: 912bec42-cb66-4c03-ac63-1761b6898c3e
+                properties:
+                  triggerUri: 'https://prod-31.northcentralus.logic.azure.com:443/workflows/cd3765391efd48549fd7681ded1d48d7/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=signature'
+                type: Microsoft.SecurityInsights/alertRules/actions
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks':
+    get:
+      description: Gets all bookmarks.
+      operationId: Bookmarks_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BookmarkList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Bookmarks
+      x-ms-examples:
+        Get all bookmarks.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                    name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                    properties:
+                      createdBy:
+                        email: john@contoso.com
+                        name: john doe
+                        objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                      createdTimeUtc: '2019-01-01T13:15:30Z'
+                      displayName: My bookmark
+                      labels: '[''Tag1'', ''Tag2'']'
+                      lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                      notes: Found a suspicious activity
+                      query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                      updatedBy:
+                        email: john@contoso.com
+                        name: john doe
+                        objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                    type: Microsoft.SecurityInsights/cases
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}':
+    delete:
+      description: Delete the bookmark.
+      operationId: Bookmarks_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/BookmarkId'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Bookmarks
+      x-ms-examples:
+        Delete a bookmark.:
+          parameters:
+            api-version: 2019-01-01-preview
+            bookmarkId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets a bookmark.
+      operationId: Bookmarks_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/BookmarkId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Bookmark'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Bookmarks
+      x-ms-examples:
+        Get a bookmark.:
+          parameters:
+            api-version: 2019-01-01-preview
+            bookmarkId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                kind: Scheduled
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  createdBy:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  createdTimeUtc: '2019-01-01T13:15:30Z'
+                  displayName: My bookmark
+                  labels: '[''Tag1'', ''Tag2'']'
+                  lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                  notes: Found a suspicious activity
+                  query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                  updatedBy:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                type: Microsoft.SecurityInsights/bookmarks
+    put:
+      description: Creates or updates the bookmark.
+      operationId: Bookmarks_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/BookmarkId'
+        - $ref: '#/parameters/Bookmark'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Bookmark'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Bookmark'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Bookmarks
+      x-ms-examples:
+        Creates or updates a bookmark.:
+          parameters:
+            api-version: 2019-01-01-preview
+            bookmark:
+              etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+              id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+              name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+              properties:
+                createdBy:
+                  email: john@contoso.com
+                  name: john doe
+                  objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                createdTimeUtc: '2019-01-01T13:15:30Z'
+                displayName: My bookmark
+                labels: '[''Tag1'', ''Tag2'']'
+                lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                notes: Found a suspicious activity
+                query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                updatedBy:
+                  email: john@contoso.com
+                  name: john doe
+                  objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+              type: Microsoft.SecurityInsights/bookmarks
+            bookmarkId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  createdBy:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  createdTimeUtc: '2019-01-01T13:15:30Z'
+                  displayName: My bookmark
+                  labels: '[''Tag1'', ''Tag2'']'
+                  lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                  notes: Found a suspicious activity
+                  query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                  updatedBy:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                type: Microsoft.SecurityInsights/bookmarks
+            '201':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/bookmarks/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  createdBy:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  createdTimeUtc: '2019-01-01T13:15:30Z'
+                  displayName: My bookmark
+                  labels: '[''Tag1'', ''Tag2'']'
+                  lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                  notes: Found a suspicious activity
+                  query: SecurityEvent | where TimeGenerated > ago(1d) and TimeGenerated < ago(2d)
+                  updatedBy:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                type: Microsoft.SecurityInsights/bookmarks
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases':
+    get:
+      description: Gets all cases.
+      operationId: Cases_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CaseList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Cases
+      x-ms-examples:
+        Get all cases.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                    name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                    properties:
+                      assignedTo:
+                        email: john@contoso.com
+                        name: john doe
+                        objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                      closeReason: Resolved
+                      createdTimeUtc: '2019-01-01T13:15:30Z'
+                      description: This is a demo case
+                      endTimeUtc: '2019-01-01T13:05:30Z'
+                      labels: '[''Tag1'', ''Tag2'']'
+                      lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                      severity: High
+                      startTimeUtc: '2019-01-01T13:00:30Z'
+                      status: Closed
+                      title: My case
+                    type: Microsoft.SecurityInsights/cases
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}':
+    delete:
+      description: Delete the case.
+      operationId: Cases_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Cases
+      x-ms-examples:
+        Delete a case.:
+          parameters:
+            api-version: 2019-01-01-preview
+            caseId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets a case.
+      operationId: Cases_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Case'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Cases
+      x-ms-examples:
+        Get a case.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            ruleId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  assignedTo:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  closeReason: Resolved
+                  createdTimeUtc: '2019-01-01T13:15:30Z'
+                  description: This is a demo case
+                  endTimeUtc: '2019-01-01T13:05:30Z'
+                  labels: '[''Tag1'', ''Tag2'']'
+                  lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                  severity: High
+                  startTimeUtc: '2019-01-01T13:00:30Z'
+                  status: Closed
+                  title: My case
+                type: Microsoft.SecurityInsights/cases
+    put:
+      description: Creates or updates the case.
+      operationId: Cases_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/CaseId'
+        - $ref: '#/parameters/Case'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Case'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/Case'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Cases
+      x-ms-examples:
+        Creates or updates a case.:
+          parameters:
+            api-version: 2019-01-01-preview
+            case:
+              etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+              id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+              name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+              properties:
+                assignedTo:
+                  email: john@contoso.com
+                  name: john doe
+                  objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                closeReason: Resolved
+                createdTimeUtc: '2019-01-01T13:15:30Z'
+                description: This is a demo case
+                endTimeUtc: '2019-01-01T13:05:30Z'
+                labels: '[''Tag1'', ''Tag2'']'
+                lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                severity: High
+                startTimeUtc: '2019-01-01T13:00:30Z'
+                status: Closed
+                title: My case
+              type: Microsoft.SecurityInsights/cases
+            caseId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/cases/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  assignedTo:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  closeReason: Resolved
+                  createdTimeUtc: '2019-01-01T13:15:30Z'
+                  description: This is a demo case
+                  endTimeUtc: '2019-01-01T13:05:30Z'
+                  labels: '[''Tag1'', ''Tag2'']'
+                  lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                  severity: High
+                  startTimeUtc: '2019-01-01T13:00:30Z'
+                  status: Closed
+                  title: My case
+                type: Microsoft.SecurityInsights/cases
+            '201':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                kind: Scheduled
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  assignedTo:
+                    email: john@contoso.com
+                    name: john doe
+                    objectId: 2046feea-040d-4a46-9e2b-91c2941bfa70
+                  closeReason: Resolved
+                  createdTimeUtc: '2019-01-01T13:15:30Z'
+                  description: This is a demo case
+                  endTimeUtc: '2019-01-01T13:05:30Z'
+                  labels: '[''Tag1'', ''Tag2'']'
+                  lastUpdatedTimeUtc: '2019-01-01T13:15:30Z'
+                  severity: High
+                  startTimeUtc: '2019-01-01T13:00:30Z'
+                  status: Closed
+                  title: My case
+                type: Microsoft.SecurityInsights/alertRules
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors':
+    get:
+      description: Gets all data connectors.
+      operationId: DataConnectors_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DataConnectorList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Data Connectors
+      x-ms-examples:
+        Get all data connectors.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/763f9fa1-c2d3-4fa2-93e9-bccd4899aa12
+                    kind: AzureSecurityCenter
+                    name: 763f9fa1-c2d3-4fa2-93e9-bccd4899aa12
+                    properties:
+                      dataTypes:
+                        alerts:
+                          state: Enabled
+                      subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+                    type: Microsoft.SecurityInsights/dataConnectors
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/c345bf40-8509-4ed2-b947-50cb773aaf04
+                    kind: ThreatIntelligence
+                    name: c345bf40-8509-4ed2-b947-50cb773aaf04
+                    properties:
+                      dataTypes:
+                        indicators:
+                          state: Enabled
+                      tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                    type: Microsoft.SecurityInsights/dataConnectors
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/f0cd27d2-5f03-4c06-ba31-d2dc82dcb51d
+                    kind: AzureActiveDirectory
+                    name: f0cd27d2-5f03-4c06-ba31-d2dc82dcb51d
+                    properties:
+                      dataTypes:
+                        alerts:
+                          state: Enabled
+                      tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                    type: Microsoft.SecurityInsights/dataConnectors
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                    kind: Office365
+                    name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                    properties:
+                      dataTypes:
+                        exchange:
+                          state: Enabled
+                        sharePoint:
+                          state: Enabled
+                      tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                    type: Microsoft.SecurityInsights/dataConnectors
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/b96d014d-b5c2-4a01-9aba-a8058f629d42
+                    kind: MicrosoftCloudAppSecurity
+                    name: b96d014d-b5c2-4a01-9aba-a8058f629d42
+                    properties:
+                      dataTypes:
+                        alerts:
+                          state: Enabled
+                      tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                    type: Microsoft.SecurityInsights/dataConnectors
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors/{dataConnectorId}':
+    delete:
+      description: Delete the data connector.
+      operationId: DataConnectors_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/DataConnectorId'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Data Connectors
+      x-ms-examples:
+        Delete an Office365 data connector.:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnectorId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets a data connector.
+      operationId: DataConnectors_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/DataConnectorId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DataConnector'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Data Connectors
+      x-ms-examples:
+        Get a ASC data connector.:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnectorId: 763f9fa1-c2d3-4fa2-93e9-bccd4899aa12
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/763f9fa1-c2d3-4fa2-93e9-bccd4899aa12
+                kind: AzureSecurityCenter
+                name: 763f9fa1-c2d3-4fa2-93e9-bccd4899aa12
+                properties:
+                  dataTypes:
+                    alerts:
+                      state: Enabled
+                  subscriptionId: c0688291-89d7-4bed-87a2-a7b1bff43f4c
+                type: Microsoft.SecurityInsights/dataConnectors
+        Get a MCAS data connector.:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnectorId: b96d014d-b5c2-4a01-9aba-a8058f629d42
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/b96d014d-b5c2-4a01-9aba-a8058f629d42
+                kind: MicrosoftCloudAppSecurity
+                name: b96d014d-b5c2-4a01-9aba-a8058f629d42
+                properties:
+                  dataTypes:
+                    alerts:
+                      state: Enabled
+                  tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                type: Microsoft.SecurityInsights/dataConnectors
+        Get a TI data connector.:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnectorId: c345bf40-8509-4ed2-b947-50cb773aaf04
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/c345bf40-8509-4ed2-b947-50cb773aaf04
+                kind: ThreatIntelligence
+                name: c345bf40-8509-4ed2-b947-50cb773aaf04
+                properties:
+                  dataTypes:
+                    indicators:
+                      state: Enabled
+                  tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                type: Microsoft.SecurityInsights/dataConnectors
+        Get an AAD data connector.:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnectorId: f0cd27d2-5f03-4c06-ba31-d2dc82dcb51d
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/f0cd27d2-5f03-4c06-ba31-d2dc82dcb51d
+                kind: AzureActiveDirectory
+                name: f0cd27d2-5f03-4c06-ba31-d2dc82dcb51d
+                properties:
+                  dataTypes:
+                    alerts:
+                      state: Enabled
+                  tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                type: Microsoft.SecurityInsights/dataConnectors
+        Get an Office365 data connector.:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnectorId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                kind: Office365
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  dataTypes:
+                    exchange:
+                      state: Enabled
+                    sharePoint:
+                      state: Enabled
+                  tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                type: Microsoft.SecurityInsights/dataConnectors
+    put:
+      description: Creates or updates the data connector.
+      operationId: DataConnectors_CreateOrUpdate
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/DataConnectorId'
+        - $ref: '#/parameters/DataConnector'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DataConnector'
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/DataConnector'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Data Connectors
+      x-ms-examples:
+        Creates or updates an Office365 data connector.:
+          parameters:
+            api-version: 2019-01-01-preview
+            dataConnector:
+              etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+              id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+              kind: Office365
+              name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+              properties:
+                dataTypes:
+                  exchange:
+                    state: Enabled
+                  sharePoint:
+                    state: Enabled
+                tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+              type: Microsoft.SecurityInsights/dataConnectors
+            dataConnectorId: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                kind: Office365
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  dataTypes:
+                    exchange:
+                      state: Enabled
+                    sharePoint:
+                      state: Enabled
+                  tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                type: Microsoft.SecurityInsights/dataConnectors
+            '201':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/dataConnectors/73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                kind: Office365
+                name: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+                properties:
+                  dataTypes:
+                    exchange:
+                      state: Enabled
+                    sharePoint:
+                      state: Enabled
+                  tenantId: 2070ecc9-b4d5-4ae4-adaa-936fa1954fa8
+                type: Microsoft.SecurityInsights/dataConnectors
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities':
+    get:
+      description: Gets all entities.
+      operationId: Entities_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/EntityList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Entities
+      x-ms-examples:
+        Get all entities.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                    kind: Account
+                    name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                    properties:
+                      aadTenantId: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
+                      aadUserId: f7033626-2572-46b1-bba0-06646f4f95b3
+                      accountName: administrator
+                      isDomainJoined: true
+                      ntDomain: domain
+                      objectGuid: 11227b78-3c6e-436e-a2a2-02fc7662eca0
+                      puid: ee3cb2d8-14ba-45ef-8009-d6f1cacfa04d
+                      sid: S-1-5-18
+                      upnSuffix: contoso
+                    type: Microsoft.SecurityInsights/entities
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                    kind: Host
+                    name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                    properties:
+                      azureID: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1
+                      dnsDomain: contoso
+                      hostName: vm1
+                      isDomainJoined: true
+                      netBiosName: contoso
+                      ntDomain: domain
+                      omsAgentID: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
+                      osFamily: f7033626-2572-46b1-bba0-06646f4f95b3
+                      osVersion: ee3cb2d8-14ba-45ef-8009-d6f1cacfa04d
+                    type: Microsoft.SecurityInsights/entities
+                  - etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                    id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/af378b21-b4aa-4fe7-bc70-13f8621a322f
+                    kind: File
+                    name: af378b21-b4aa-4fe7-bc70-13f8621a322f
+                    properties:
+                      directory: 'C:\Windows\System32'
+                      fileName: cmd.exe
+                    type: Microsoft.SecurityInsights/entities
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}':
+    get:
+      description: Gets an entity.
+      operationId: Entities_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/EntityId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Entity'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Entities
+      x-ms-examples:
+        Get an account entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                kind: Account
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  aadTenantId: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
+                  aadUserId: f7033626-2572-46b1-bba0-06646f4f95b3
+                  accountName: administrator
+                  isDomainJoined: true
+                  ntDomain: domain
+                  objectGuid: 11227b78-3c6e-436e-a2a2-02fc7662eca0
+                  puid: ee3cb2d8-14ba-45ef-8009-d6f1cacfa04d
+                  sid: S-1-5-18
+                  upnSuffix: contoso
+                type: Microsoft.SecurityInsights/entities
+        Get an file entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: af378b21-b4aa-4fe7-bc70-13f8621a322f
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/af378b21-b4aa-4fe7-bc70-13f8621a322f
+                kind: File
+                name: af378b21-b4aa-4fe7-bc70-13f8621a322f
+                properties:
+                  directory: 'C:\Windows\System32'
+                  fileName: cmd.exe
+                type: Microsoft.SecurityInsights/entities
+        Get an host entity.:
+          parameters:
+            api-version: 2019-01-01-preview
+            entityId: e1d3d618-e11f-478b-98e3-bb381539a8e1
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1
+                kind: Host
+                name: e1d3d618-e11f-478b-98e3-bb381539a8e1
+                properties:
+                  azureID: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/vm1
+                  dnsDomain: contoso
+                  hostName: vm1
+                  isDomainJoined: true
+                  netBiosName: contoso
+                  ntDomain: domain
+                  omsAgentID: 70fbdad0-7441-4564-b2b5-2b8862d0fee0
+                  osFamily: f7033626-2572-46b1-bba0-06646f4f95b3
+                  osVersion: ee3cb2d8-14ba-45ef-8009-d6f1cacfa04d
+                type: Microsoft.SecurityInsights/entities
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents':
+    get:
+      description: Gets all office365 consents.
+      operationId: OfficeConsents_List
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OfficeConsentList'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Office Consents
+      x-ms-examples:
+        Get all office consents.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/officeConsents/04e5fd05-ff86-4b97-b8d2-1c20933cb46c
+                    name: 04e5fd05-ff86-4b97-b8d2-1c20933cb46c
+                    properties:
+                      tenantId: 5460b3d2-1e7b-4757-ad54-c858c7e3f252
+                      tenantName: Contoso
+                    type: Microsoft.SecurityInsights/officeConsents
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents/{consentId}':
+    delete:
+      description: Delete the office365 consent.
+      operationId: OfficeConsents_Delete
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/ConsentId'
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Office Consents
+      x-ms-examples:
+        Delete an office consent.:
+          parameters:
+            api-version: 2019-01-01-preview
+            consentId: 04e5fd05-ff86-4b97-b8d2-1c20933cb46c
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Gets an office365 consent.
+      operationId: OfficeConsents_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/ConsentId'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/OfficeConsent'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Office Consents
+      x-ms-examples:
+        Get an office consent.:
+          parameters:
+            api-version: 2019-01-01-preview
+            consentId: 04e5fd05-ff86-4b97-b8d2-1c20933cb46c
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/officeConsents/04e5fd05-ff86-4b97-b8d2-1c20933cb46c
+                name: 04e5fd05-ff86-4b97-b8d2-1c20933cb46c
+                properties:
+                  tenantId: 5460b3d2-1e7b-4757-ad54-c858c7e3f252
+                  tenantName: Contoso
+                type: Microsoft.SecurityInsights/officeConsents
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/settings/{settingsName}':
+    get:
+      description: Gets a setting.
+      operationId: ProductSettings_Get
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/SettingsName'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Settings'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Settings
+      x-ms-examples:
+        Get Fusion settings.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            settingsName: Fusion
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/settings/Fusion
+                kind: ToggleSettings
+                name: Fusion
+                properties:
+                  isEnabled: true
+                type: Microsoft.SecurityInsights/settings
+        Get UEBA settings.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalIinsights
+            resourceGroupName: myRg
+            settingsName: UEBA
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/settings/UEBA
+                kind: UebaSettings
+                name: UEBA
+                properties:
+                  atpLicenseStatus: Enabled
+                  isEnabled: true
+                  statusInMcas: Enabled
+                type: Microsoft.SecurityInsights/settings
+    put:
+      description: Updates the setting.
+      operationId: ProductSettings_Update
+      parameters:
+        - $ref: '#/parameters/ApiVersion'
+        - $ref: '#/parameters/SubscriptionId'
+        - $ref: '#/parameters/ResourceGroupName'
+        - $ref: '#/parameters/OperationalInsightsResourceProvider'
+        - $ref: '#/parameters/WorkspaceName'
+        - $ref: '#/parameters/SettingsName'
+        - $ref: '#/parameters/Settings'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Settings'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Settings
+      x-ms-examples:
+        Update UEBA settings.:
+          parameters:
+            api-version: 2019-01-01-preview
+            operationalInsightsResourceProvider: Microsoft.OperationalInsights
+            resourceGroupName: myRg
+            settings:
+              etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+              id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/settings/UEBA
+              kind: UebaSettings
+              name: UEBA
+              properties:
+                atpLicenseStatus: Enabled
+                isEnabled: true
+                statusInMcas: Enabled
+              type: Microsoft.SecurityInsights/settings
+            settingsName: UEBA
+            subscriptionId: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+            workspaceName: myWorkspace
+          responses:
+            '200':
+              body:
+                etag: '"0300bf09-0000-0000-0000-5c37296e0000"'
+                id: /subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/settings/UEBA
+                kind: UebaSettings
+                name: UEBA
+                properties:
+                  atpLicenseStatus: Enabled
+                  isEnabled: true
+                  statusInMcas: Enabled
+                type: Microsoft.SecurityInsights/settings
+definitions:
+  AADDataConnector:
+    allOf:
+      - $ref: '#/definitions/DataConnector'
+    description: Represents AAD (Azure Active Directory) data connector.
+    properties:
+      properties:
+        $ref: '#/definitions/AADDataConnectorProperties'
+        description: AAD (Azure Active Directory) data connector properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AzureActiveDirectory
+  AADDataConnectorProperties:
+    allOf:
+      - $ref: '#/definitions/DataConnectorTenantId'
+      - $ref: '#/definitions/DataConnectorWithAlertsProperties'
+    description: AAD (Azure Active Directory) data connector properties.
+    type: object
+  ASCDataConnector:
+    allOf:
+      - $ref: '#/definitions/DataConnector'
+    description: Represents ASC (Azure Security Center) data connector.
+    properties:
+      properties:
+        $ref: '#/definitions/ASCDataConnectorProperties'
+        description: ASC (Azure Security Center) data connector properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: AzureSecurityCenter
+  ASCDataConnectorProperties:
+    allOf:
+      - $ref: '#/definitions/DataConnectorWithAlertsProperties'
+    description: MCAS (Microsoft Cloud App Security) data connector properties.
+    properties:
+      subscriptionId:
+        description: 'The subscription id to connect to, and get the data from.'
+        type: string
+    type: object
+  AccountEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents an account entity.
+    properties:
+      properties:
+        $ref: '#/definitions/AccountEntityProperties'
+        description: Account entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Account
+  AccountEntityProperties:
+    description: Account entity property bag.
+    properties:
+      aadTenantId:
+        description: The Azure Active Directory tenant id.
+        readOnly: true
+        type: string
+      aadUserId:
+        description: The Azure Active Directory user id.
+        readOnly: true
+        type: string
+      accountName:
+        description: 'The name of the account. This field should hold only the name without any domain added to it, i.e. administrator.'
+        readOnly: true
+        type: string
+      isDomainJoined:
+        description: Determines whether this is a domain account.
+        readOnly: true
+        type: boolean
+      ntDomain:
+        description: 'The NetBIOS domain name as it appears in the alert format – domain\username. Examples: NT AUTHORITY.'
+        readOnly: true
+        type: string
+      objectGuid:
+        description: 'The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory.'
+        format: uuid
+        readOnly: true
+        type: string
+      puid:
+        description: The Azure Active Directory Passport User ID.
+        readOnly: true
+        type: string
+      sid:
+        description: 'The account security identifier, e.g. S-1-5-18.'
+        readOnly: true
+        type: string
+      upnSuffix:
+        description: 'The user principal name suffix for the account, in some cases it is also the domain name. Examples: contoso.com.'
+        readOnly: true
+        type: string
+    type: object
+  Action:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Action for alert rule.
+    properties:
+      etag:
+        description: Etag of the action.
+        type: string
+      properties:
+        $ref: '#/definitions/ActionProperties'
+        description: Action properties
+        x-ms-client-flatten: true
+    type: object
+  ActionProperties:
+    description: Action property bag.
+    properties:
+      triggerUri:
+        description: The uri for the action to trigger.
+        type: string
+    type: object
+  ActionsList:
+    description: List all the actions.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of actions.
+        readOnly: true
+        type: string
+      value:
+        description: Array of actions.
+        items:
+          $ref: '#/definitions/Action'
+        type: array
+    required:
+      - value
+  AlertRule:
+    allOf:
+      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/AlertRuleKind'
+    description: Alert rule.
+    discriminator: kind
+    properties:
+      etag:
+        description: Etag of the alert rule.
+        type: string
+    type: object
+  AlertRuleKind:
+    description: Describes an Azure resource with kind.
+    properties:
+      kind:
+        description: The kind of the alert rule
+        enum:
+          - Scheduled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AlertRuleKind
+          values:
+            - value: Scheduled
+    type: object
+  AlertRulesList:
+    description: List all the alert rules.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of alert rules.
+        readOnly: true
+        type: string
+      value:
+        description: Array of alert rules.
+        items:
+          $ref: '#/definitions/AlertRule'
+        type: array
+    required:
+      - value
+  AlertsDataTypeOfDataConnector:
+    description: Alerts data type for data connectors.
+    properties:
+      alerts:
+        allOf:
+          - $ref: '#/definitions/DataConnectorDataTypeCommon'
+        description: Alerts data type connection.
+        type: object
+    type: object
+  Bookmark:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents a bookmark in Azure Security Insights.
+    properties:
+      etag:
+        description: Etag of the bookmark.
+        type: string
+      properties:
+        $ref: '#/definitions/BookmarkProperties'
+        description: Bookmark properties
+        x-ms-client-flatten: true
+    type: object
+  BookmarkList:
+    description: List all the bookmarks.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of cases.
+        readOnly: true
+        type: string
+      value:
+        description: Array of bookmarks.
+        items:
+          $ref: '#/definitions/Bookmark'
+        type: array
+    required:
+      - value
+  BookmarkProperties:
+    description: Describes bookmark properties
+    properties:
+      createdBy:
+        $ref: '#/definitions/UserInfo'
+        description: Describes a user that created the bookmark
+        type: object
+      createdTimeUtc:
+        description: The time the bookmark was created
+        format: date-time
+        type: string
+      displayName:
+        description: The display name of the bookmark
+        type: string
+      labels:
+        description: List of labels relevant to this bookmark
+        items:
+          $ref: '#/definitions/Label'
+        type: array
+      lastUpdatedTimeUtc:
+        description: The last time the bookmark was updated
+        format: date-time
+        type: string
+      notes:
+        description: The notes of the bookmark
+        type: string
+      query:
+        description: The query of the bookmark.
+        type: string
+      updatedBy:
+        $ref: '#/definitions/UserInfo'
+        description: Describes a user that updated the bookmark
+        type: object
+    required:
+      - displayName
+      - query
+    type: object
+  Case:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Represents a case in Azure Security Insights.
+    properties:
+      etag:
+        description: Etag of the alert rule.
+        type: string
+      properties:
+        $ref: '#/definitions/CaseProperties'
+        description: Case properties
+        x-ms-client-flatten: true
+    type: object
+  CaseList:
+    description: List all the cases.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of cases.
+        readOnly: true
+        type: string
+      value:
+        description: Array of cases.
+        items:
+          $ref: '#/definitions/Case'
+        type: array
+    required:
+      - value
+  CaseProperties:
+    description: Describes case properties
+    properties:
+      assignedTo:
+        $ref: '#/definitions/UserInfo'
+        description: Describes a user that the case is assigned to
+        type: object
+      closeReason:
+        description: The reason the case was closed
+        enum:
+          - Resolved
+          - Dismissed
+          - Other
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CloseReason
+          values:
+            - description: Case was resolved
+              value: Resolved
+            - description: Case was dismissed
+              value: Dismissed
+            - description: Case was closed for another reason
+              value: Other
+      createdTimeUtc:
+        description: The time the case was created
+        format: date-time
+        type: string
+      description:
+        description: The description of the case
+        type: string
+      endTimeUtc:
+        description: The end time of the case
+        format: date-time
+        type: string
+      labels:
+        description: List of labels relevant to this case
+        items:
+          $ref: '#/definitions/Label'
+        type: array
+      lastUpdatedTimeUtc:
+        description: The last time the case was updated
+        format: date-time
+        type: string
+      severity:
+        description: The severity of the case
+        enum:
+          - Critical
+          - High
+          - Medium
+          - Low
+          - Informational
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CaseSeverity
+          values:
+            - description: Critical severity
+              value: Critical
+            - description: High severity
+              value: High
+            - description: Medium severity
+              value: Medium
+            - description: Low severity
+              value: Low
+            - description: Informational severity
+              value: Informational
+      startTimeUtc:
+        description: The start time of the case
+        format: date-time
+        type: string
+      status:
+        description: The status of the case
+        enum:
+          - Draft
+          - Open
+          - InProgress
+          - Closed
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CaseStatus
+          values:
+            - description: Case that wasn't promoted yet to active
+              value: Draft
+            - description: An active case which isn't handled currently
+              value: Open
+            - description: An active case which is handled
+              value: InProgress
+            - description: A non active case
+              value: Closed
+      title:
+        description: The title of the case
+        type: string
+    required:
+      - title
+      - severity
+      - status
+    type: object
+  CloudError:
+    description: Error response structure.
+    properties:
+      error:
+        $ref: '#/definitions/CloudErrorBody'
+        description: Error data
+        x-ms-client-flatten: true
+    type: object
+    x-ms-external: true
+  CloudErrorBody:
+    description: Error details.
+    properties:
+      code:
+        description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+        readOnly: true
+        type: string
+      message:
+        description: 'A message describing the error, intended to be suitable for display in a user interface.'
+        readOnly: true
+        type: string
+    type: object
+    x-ms-external: true
+  DataConnector:
+    allOf:
+      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/DataConnectorKind'
+    description: Data connector.
+    discriminator: kind
+    properties:
+      etag:
+        description: Etag of the data connector.
+        type: string
+    type: object
+  DataConnectorDataTypeCommon:
+    description: Common field for data type in data connectors.
+    properties:
+      state:
+        description: Describe whether this data type connection is enabled or not.
+        enum:
+          - Enabled
+          - Disabled
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DataTypeState
+    type: object
+  DataConnectorKind:
+    description: Describes an Azure resource with kind.
+    properties:
+      kind:
+        description: The kind of the data connector
+        enum:
+          - AzureActiveDirectory
+          - AzureSecurityCenter
+          - MicrosoftCloudAppSecurity
+          - ThreatIntelligence
+          - Office365
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DataConnectorKind
+          values:
+            - value: AzureActiveDirectory
+            - value: AzureSecurityCenter
+            - value: MicrosoftCloudAppSecurity
+            - value: ThreatIntelligence
+            - value: Office365
+    type: object
+  DataConnectorList:
+    description: List all the data connectors.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of data connectors.
+        readOnly: true
+        type: string
+      value:
+        description: Array of data connectors.
+        items:
+          $ref: '#/definitions/DataConnector'
+        type: array
+    required:
+      - value
+  DataConnectorTenantId:
+    description: Properties data connector on tenant level.
+    properties:
+      tenantId:
+        description: 'The tenant id to connect to, and get the data from.'
+        type: string
+    type: object
+  DataConnectorWithAlertsProperties:
+    description: Data connector properties.
+    properties:
+      dataTypes:
+        $ref: '#/definitions/AlertsDataTypeOfDataConnector'
+        description: The available data types for the connector.
+    type: object
+  Entity:
+    allOf:
+      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/EntityKind'
+    description: Specific entity.
+    discriminator: kind
+    type: object
+  EntityKind:
+    description: Describes an Azure resource with kind.
+    properties:
+      kind:
+        description: The kind of the entity
+        enum:
+          - Account
+          - Host
+          - File
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: EntityKind
+          values:
+            - description: Entity represents account in the system.
+              value: Account
+            - description: Entity represents host in the system.
+              value: Host
+            - description: Entity represents file in the system.
+              value: File
+    type: object
+  EntityList:
+    description: List of all the entities.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of entities.
+        readOnly: true
+        type: string
+      value:
+        description: Array of entities.
+        items:
+          $ref: '#/definitions/Entity'
+        type: array
+    required:
+      - value
+  FileEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a file entity.
+    properties:
+      properties:
+        $ref: '#/definitions/FileEntityProperties'
+        description: File entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: File
+  FileEntityProperties:
+    description: File entity property bag.
+    properties:
+      directory:
+        description: The full path to the file.
+        readOnly: true
+        type: string
+      fileName:
+        description: The file name without path (some alerts might not include path).
+        readOnly: true
+        type: string
+    type: object
+  HostEntity:
+    allOf:
+      - $ref: '#/definitions/Entity'
+    description: Represents a host entity.
+    properties:
+      properties:
+        $ref: '#/definitions/HostEntityProperties'
+        description: Host entity properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Host
+  HostEntityProperties:
+    description: Host entity property bag.
+    properties:
+      azureID:
+        description: The azure resource id of the VM.
+        readOnly: true
+        type: string
+      dnsDomain:
+        description: The DNS domain that this host belongs to. Should contain the compete DNS suffix for the domain
+        readOnly: true
+        type: string
+      hostName:
+        description: The hostname without the domain suffix.
+        readOnly: true
+        type: string
+      isDomainJoined:
+        description: Determines whether this host belongs to a domain.
+        readOnly: true
+        type: boolean
+      netBiosName:
+        description: The host name (pre-windows2000).
+        readOnly: true
+        type: string
+      ntDomain:
+        description: The NT domain that this host belongs to.
+        readOnly: true
+        type: string
+      omsAgentID:
+        description: 'The OMS agent id, if the host has OMS agent installed.'
+        readOnly: true
+        type: string
+      osFamily:
+        description: The operating system type.
+        enum:
+          - Linux
+          - Windows
+          - Android
+          - IOS
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: OSFamily
+          values:
+            - description: Host with Linux operating system.
+              value: Linux
+            - description: Host with Windows operating system.
+              value: Windows
+            - description: Host with Android operating system.
+              value: Android
+            - description: Host with IOS operating system.
+              value: IOS
+      osVersion:
+        description: A free text representation of the operating system. This field is meant to hold specific versions the are more fine grained than OSFamily or future values not supported by OSFamily enumeration
+        readOnly: true
+        type: string
+    type: object
+  Label:
+    description: Label that will be used to tag and filter on.
+    type: string
+  MCASDataConnector:
+    allOf:
+      - $ref: '#/definitions/DataConnector'
+    description: Represents MCAS (Microsoft Cloud App Security) data connector.
+    properties:
+      properties:
+        $ref: '#/definitions/MCASDataConnectorProperties'
+        description: MCAS (Microsoft Cloud App Security) data connector properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: MicrosoftCloudAppSecurity
+  MCASDataConnectorProperties:
+    allOf:
+      - $ref: '#/definitions/DataConnectorTenantId'
+      - $ref: '#/definitions/DataConnectorWithAlertsProperties'
+    description: MCAS (Microsoft Cloud App Security) data connector properties.
+    type: object
+  OfficeConsent:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Consent for Office365 tenant that already made.
+    properties:
+      properties:
+        $ref: '#/definitions/OfficeConsentProperties'
+        description: Office consent properties
+        x-ms-client-flatten: true
+    type: object
+  OfficeConsentList:
+    description: List of all the office365 consents.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of office consents.
+        readOnly: true
+        type: string
+      value:
+        description: Array of the consents.
+        items:
+          $ref: '#/definitions/OfficeConsent'
+        type: array
+    required:
+      - value
+  OfficeConsentProperties:
+    description: Consent property bag.
+    properties:
+      tenantId:
+        description: The tenantId of the Office365 with the consent.
+        type: string
+      tenantName:
+        description: The tenant name of the Office365 with the consent.
+        readOnly: true
+        type: string
+    type: object
+  OfficeDataConnector:
+    allOf:
+      - $ref: '#/definitions/DataConnector'
+    description: Represents office data connector.
+    properties:
+      properties:
+        $ref: '#/definitions/OfficeDataConnectorProperties'
+        description: Office data connector properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Office365
+  OfficeDataConnectorDataTypes:
+    description: The available data types for office data connector.
+    properties:
+      exchange:
+        allOf:
+          - $ref: '#/definitions/DataConnectorDataTypeCommon'
+        description: Exchange data type connection.
+        type: object
+      sharePoint:
+        allOf:
+          - $ref: '#/definitions/DataConnectorDataTypeCommon'
+        description: SharePoint data type connection.
+        type: object
+    type: object
+  OfficeDataConnectorProperties:
+    allOf:
+      - $ref: '#/definitions/DataConnectorTenantId'
+    description: Office data connector properties.
+    properties:
+      dataTypes:
+        $ref: '#/definitions/OfficeDataConnectorDataTypes'
+        description: The available data types for the connector.
+    type: object
+  Resource:
+    description: An azure resource object
+    properties:
+      id:
+        description: Azure resource Id
+        readOnly: true
+        type: string
+      name:
+        description: Azure resource name
+        readOnly: true
+        type: string
+      type:
+        description: Azure resource type
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  ScheduledAlertRule:
+    allOf:
+      - $ref: '#/definitions/AlertRule'
+    description: Represents scheduled alert rule.
+    properties:
+      properties:
+        $ref: '#/definitions/ScheduledAlertRuleProperties'
+        description: Scheduled alert rule properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: Scheduled
+  ScheduledAlertRuleProperties:
+    description: Alert rule property bag.
+    properties:
+      description:
+        description: The description of the alert rule.
+        type: string
+      displayName:
+        description: The display name for alerts created by this alert rule.
+        type: string
+      enabled:
+        description: Determines whether this alert rule is enabled or disabled.
+        type: boolean
+      lastModifiedUtc:
+        description: The last time that this alert has been modified.
+        readOnly: true
+        type: string
+      query:
+        description: The query that creates alerts for this rule.
+        type: string
+      queryFrequency:
+        description: The frequency (in ISO 8601 duration format) for this alert rule to run.
+        format: duration
+        type: string
+      queryPeriod:
+        description: The period (in ISO 8601 duration format) that this alert rule looks at.
+        format: duration
+        type: string
+      severity:
+        description: The severity for alerts created by this alert rule.
+        enum:
+          - High
+          - Medium
+          - Low
+          - Informational
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: AlertSeverity
+          values:
+            - description: High severity
+              value: High
+            - description: Medium severity
+              value: Medium
+            - description: Low severity
+              value: Low
+            - description: Informational severity
+              value: Informational
+      suppressionDuration:
+        description: The suppression (in ISO 8601 duration format) to wait since last time this alert rule been triggered.
+        format: duration
+        type: string
+      suppressionEnabled:
+        description: Determines whether the suppression for this alert rule is enabled or disabled.
+        type: boolean
+      triggerOperator:
+        description: The operation against the threshold that triggers alert rule.
+        enum:
+          - GreaterThan
+          - LessThan
+          - Equal
+          - NotEqual
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: TriggerOperator
+      triggerThreshold:
+        description: The threshold triggers this alert rule.
+        type: integer
+    required:
+      - displayName
+      - description
+      - severity
+      - enabled
+      - query
+      - queryFrequency
+      - queryPeriod
+      - triggerOperator
+      - triggerThreshold
+      - suppressionEnabled
+      - suppressionDuration
+    type: object
+  Settings:
+    allOf:
+      - $ref: '#/definitions/Resource'
+      - $ref: '#/definitions/SettingsKind'
+    description: The Setting.
+    discriminator: kind
+    type: object
+  SettingsKind:
+    description: Describes an Azure resource with kind.
+    properties:
+      kind:
+        description: The kind of the setting
+        enum:
+          - UebaSettings
+          - ToggleSettings
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: SettingKind
+    type: object
+  TIDataConnector:
+    allOf:
+      - $ref: '#/definitions/DataConnector'
+    description: Represents threat intelligence data connector.
+    properties:
+      properties:
+        $ref: '#/definitions/TIDataConnectorProperties'
+        description: TI (Threat Intelligence) data connector properties.
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: ThreatIntelligence
+  TIDataConnectorDataTypes:
+    description: The available data types for TI (Threat Intelligence) data connector.
+    properties:
+      indicators:
+        allOf:
+          - $ref: '#/definitions/DataConnectorDataTypeCommon'
+        description: Data type for indicators connection.
+        type: object
+    type: object
+  TIDataConnectorProperties:
+    allOf:
+      - $ref: '#/definitions/DataConnectorTenantId'
+    description: TI (Threat Intelligence) data connector properties.
+    properties:
+      dataTypes:
+        $ref: '#/definitions/TIDataConnectorDataTypes'
+        description: The available data types for the connector.
+    type: object
+  ToggleSettings:
+    allOf:
+      - $ref: '#/definitions/Settings'
+    description: Settings with single toggle.
+    properties:
+      properties:
+        $ref: '#/definitions/ToggleSettingsProperties'
+        description: toggle properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: ToggleSettings
+  ToggleSettingsProperties:
+    description: toggle property bag.
+    properties:
+      isEnabled:
+        description: Determines whether the setting is enable or disabled.
+        type: boolean
+    type: object
+  UebaSettings:
+    allOf:
+      - $ref: '#/definitions/Settings'
+    description: Represents settings for User and Entity Behavior Analytics enablement.
+    properties:
+      properties:
+        $ref: '#/definitions/UebaSettingsProperties'
+        description: User and Entity Behavior Analytics settings properties
+        x-ms-client-flatten: true
+    type: object
+    x-ms-discriminator-value: UebaSettings
+  UebaSettingsProperties:
+    description: User and Entity Behavior Analytics settings property bag.
+    properties:
+      atpLicenseStatus:
+        description: Determines whether the tenant has ATP (Advanced Threat Protection) license.
+        enum:
+          - Enabled
+          - Disabled
+        readOnly: true
+        type: boolean
+        x-ms-enum:
+          modelAsString: true
+          name: LicenseStatus
+      isEnabled:
+        description: Determines whether User and Entity Behavior Analytics is enabled for this workspace.
+        type: boolean
+      statusInMcas:
+        description: Determines whether User and Entity Behavior Analytics is enabled from MCAS (Microsoft Cloud App Security).
+        enum:
+          - Enabled
+          - Disabled
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: StatusInMcas
+    type: object
+  UserInfo:
+    description: User information that made some action
+    properties:
+      email:
+        description: The email of the user.
+        type: string
+      name:
+        description: The name of the user.
+        type: string
+      objectId:
+        description: The object id of the user.
+        format: uuid
+        type: string
+    type: object
+  operation:
+    description: Operation provided by provider
+    properties:
+      display:
+        description: Properties of the operation
+        properties:
+          description:
+            description: Description of the operation
+            type: string
+          operation:
+            description: Operation name
+            type: string
+          provider:
+            description: Provider name
+            type: string
+          resource:
+            description: Resource name
+            type: string
+        type: object
+      name:
+        description: Name of the operation
+        type: string
+  operationsList:
+    description: Lists the operations available in the SecurityInsights RP.
+    properties:
+      nextLink:
+        description: URL to fetch the next set of operations.
+        type: string
+      value:
+        description: Array of operations
+        items:
+          $ref: '#/definitions/operation'
+        type: array
+    required:
+      - value

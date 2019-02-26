@@ -11,7 +11,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Trigger.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/preview/2017-09-01-preview/entityTypes/Trigger.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: datafactory-Trigger
@@ -113,16 +113,6 @@ definitions:
     x-ms-enum:
       modelAsString: false
       name: DayOfWeek
-  DependencyReference:
-    description: Referenced dependency.
-    discriminator: type
-    properties:
-      type:
-        description: The type of dependency reference.
-        type: string
-    required:
-      - type
-    type: object
   MultiplePipelineTrigger:
     allOf:
       - $ref: '#/definitions/Trigger'
@@ -229,38 +219,6 @@ definitions:
         format: int32
         type: integer
     type: object
-  RerunTumblingWindowTrigger:
-    allOf:
-      - $ref: '#/definitions/Trigger'
-    description: Trigger that schedules pipeline reruns for all fixed time interval windows from a requested start time to requested end time.
-    properties:
-      typeProperties:
-        description: Rerun Trigger properties.
-        properties:
-          maxConcurrency:
-            description: The max number of parallel time windows (ready for execution) for which a rerun is triggered.
-            maximum: 50
-            minimum: 1
-            type: integer
-          parentTrigger:
-            description: The parent trigger reference.
-            type: object
-          requestedEndTime:
-            description: The end time for the time period for which restatement is initiated. Only UTC time is currently supported.
-            format: date-time
-            type: string
-          requestedStartTime:
-            description: The start time for the time period for which restatement is initiated. Only UTC time is currently supported.
-            format: date-time
-            type: string
-        required:
-          - requestedStartTime
-          - requestedEndTime
-          - maxConcurrency
-        x-ms-client-flatten: true
-    required:
-      - typeProperties
-    type: object
   RetryPolicy:
     description: Execution policy for an activity.
     properties:
@@ -316,26 +274,6 @@ definitions:
         description: The time zone.
         type: string
     type: object
-  SelfDependencyTumblingWindowTriggerReference:
-    allOf:
-      - $ref: '#/definitions/DependencyReference'
-    description: Self referenced tumbling window trigger dependency.
-    properties:
-      offset:
-        description: Timespan applied to the start time of a tumbling window when evaluating dependency.
-        maxLength: 15
-        minLength: 8
-        pattern: '((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
-        type: string
-      size:
-        description: The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used.
-        maxLength: 15
-        minLength: 8
-        pattern: '((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
-        type: string
-    required:
-      - offset
-    type: object
   Trigger:
     additionalProperties:
       type: object
@@ -354,32 +292,6 @@ definitions:
         type: string
     required:
       - type
-    type: object
-  TriggerDependencyReference:
-    allOf:
-      - $ref: '#/definitions/DependencyReference'
-    description: Trigger referenced dependency.
-    properties:
-      referenceTrigger:
-        $ref: '#/definitions/TriggerReference'
-        description: Referenced trigger.
-    required:
-      - referenceTrigger
-    type: object
-  TriggerReference:
-    description: Trigger reference type.
-    properties:
-      referenceName:
-        description: Reference trigger name.
-        type: string
-      type:
-        description: Trigger reference type.
-        enum:
-          - TriggerReference
-        type: string
-    required:
-      - type
-      - referenceName
     type: object
   TriggerRuntimeState:
     description: Enumerates possible state of Triggers.
@@ -436,11 +348,6 @@ definitions:
           delay:
             description: 'Specifies how long the trigger waits past due time before triggering new run. It doesn''t alter window start and end time. The default is 0. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
             type: object
-          dependsOn:
-            description: Triggers that this trigger depends on. Only tumbling window triggers are supported.
-            items:
-              $ref: '#/definitions/DependencyReference'
-            type: array
           endTime:
             description: The end time for the time period for the trigger during which events are fired for windows that are ready. Only UTC time is currently supported.
             format: date-time
@@ -473,22 +380,4 @@ definitions:
     required:
       - pipeline
       - typeProperties
-    type: object
-  TumblingWindowTriggerDependencyReference:
-    allOf:
-      - $ref: '#/definitions/TriggerDependencyReference'
-    description: Referenced tumbling window trigger dependency.
-    properties:
-      offset:
-        description: Timespan applied to the start time of a tumbling window when evaluating dependency.
-        maxLength: 15
-        minLength: 8
-        pattern: '((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
-        type: string
-      size:
-        description: The size of the window when evaluating the dependency. If undefined the frequency of the tumbling window will be used.
-        maxLength: 15
-        minLength: 8
-        pattern: '((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))'
-        type: string
     type: object

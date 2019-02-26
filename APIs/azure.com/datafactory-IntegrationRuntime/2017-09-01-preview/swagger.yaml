@@ -11,7 +11,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/IntegrationRuntime.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/preview/2017-09-01-preview/entityTypes/IntegrationRuntime.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: datafactory-IntegrationRuntime
@@ -175,7 +175,7 @@ definitions:
       cpuUtilization:
         description: CPU percentage on the integration runtime node.
         readOnly: true
-        type: integer
+        type: number
       maxConcurrentJobs:
         description: The maximum concurrent jobs in this integration runtime.
         readOnly: true
@@ -205,6 +205,15 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: IntegrationRuntimeAuthKeyName
+    type: object
+  IntegrationRuntimeRemoveNodeRequest:
+    additionalProperties:
+      type: object
+    description: Request to remove a node.
+    properties:
+      nodeName:
+        description: The name of the node to be removed.
+        type: string
     type: object
   IntegrationRuntimeSsisCatalogInfo:
     additionalProperties:
@@ -293,7 +302,6 @@ definitions:
       - Online
       - Limited
       - Offline
-      - AccessDenied
     readOnly: true
     type: string
     x-ms-enum:
@@ -363,10 +371,10 @@ definitions:
         readOnly: true
         type: string
     type: object
-  LinkedIntegrationRuntimeKeyAuthorization:
+  LinkedIntegrationRuntimeKey:
     allOf:
-      - $ref: '#/definitions/LinkedIntegrationRuntimeType'
-    description: The key authorization type integration runtime.
+      - $ref: '#/definitions/LinkedIntegrationRuntimeProperties'
+    description: The base definition of a secret type.
     properties:
       key:
         allOf:
@@ -392,27 +400,33 @@ definitions:
       - key
     type: object
     x-ms-discriminator-value: Key
-  LinkedIntegrationRuntimeRbacAuthorization:
+  LinkedIntegrationRuntimeProperties:
+    description: The base definition of a secret type.
+    discriminator: authorizationType
+    properties:
+      authorizationType:
+        description: Type of the secret.
+        type: string
+    required:
+      - authorizationType
+    type: object
+  LinkedIntegrationRuntimeRbac:
     allOf:
-      - $ref: '#/definitions/LinkedIntegrationRuntimeType'
-    description: The role based access control (RBAC) authorization type integration runtime.
+      - $ref: '#/definitions/LinkedIntegrationRuntimeProperties'
+    description: The base definition of a secret type.
     properties:
       resourceId:
-        description: The resource identifier of the integration runtime to be shared.
+        description: The resource ID of the integration runtime to be shared.
         type: string
     required:
       - resourceId
     type: object
     x-ms-discriminator-value: RBAC
-  LinkedIntegrationRuntimeType:
-    description: The base definition of a linked integration runtime.
-    discriminator: authorizationType
+  LinkedIntegrationRuntimeTypeProperties:
+    description: The base definition of a secret type.
     properties:
-      authorizationType:
-        description: The authorization type for integration runtime sharing.
-        type: string
-    required:
-      - authorizationType
+      linkedInfo:
+        $ref: '#/definitions/LinkedIntegrationRuntimeProperties'
     type: object
   ManagedIntegrationRuntime:
     allOf:
@@ -569,9 +583,11 @@ definitions:
     description: Self-hosted integration runtime.
     properties:
       typeProperties:
-        $ref: '#/definitions/SelfHostedIntegrationRuntimeTypeProperties'
+        $ref: '#/definitions/LinkedIntegrationRuntimeTypeProperties'
         description: 'When this property is not null, means this is a linked integration runtime. The property is used to access original integration runtime.'
         x-ms-client-flatten: true
+    required:
+      - typeProperties
     type: object
     x-ms-discriminator-value: SelfHosted
   SelfHostedIntegrationRuntimeNode:
@@ -630,7 +646,6 @@ definitions:
       lastUpdateResult:
         description: The result of the last integration runtime node update.
         enum:
-          - None
           - Succeed
           - Fail
         readOnly: true
@@ -698,11 +713,6 @@ definitions:
         $ref: '#/definitions/IntegrationRuntimeAutoUpdate'
         description: Whether Self-hosted integration runtime auto update has been turned on.
         readOnly: true
-      autoUpdateETA:
-        description: The estimated time when the self-hosted integration runtime will be updated.
-        format: date-time
-        readOnly: true
-        type: string
       capabilities:
         additionalProperties:
           type: string
@@ -725,10 +735,6 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: IntegrationRuntimeInternalChannelEncryptionMode
-      latestVersion:
-        description: The latest version on download center.
-        readOnly: true
-        type: string
       links:
         description: The list of linked integration runtimes that are created to share with this integration runtime.
         items:
@@ -743,10 +749,6 @@ definitions:
         items:
           $ref: '#/definitions/SelfHostedIntegrationRuntimeNode'
         type: array
-      pushedVersion:
-        description: The version that the integration runtime is going to update to.
-        readOnly: true
-        type: string
       scheduledUpdateDate:
         description: 'The date at which the integration runtime will be scheduled to update, in ISO8601 format.'
         format: date-time
@@ -776,50 +778,3 @@ definitions:
         readOnly: true
         type: string
     type: object
-  SelfHostedIntegrationRuntimeTypeProperties:
-    description: The self-hosted integration runtime properties.
-    properties:
-      linkedInfo:
-        $ref: '#/definitions/LinkedIntegrationRuntimeType'
-    type: object
-  SsisObjectMetadata:
-    description: SSIS object metadata.
-    discriminator: type
-    properties:
-      description:
-        description: Metadata description.
-        type: string
-      id:
-        description: Metadata id.
-        format: int64
-        type: integer
-      name:
-        description: Metadata name.
-        type: string
-      type:
-        $ref: '#/definitions/SsisObjectMetadataType'
-        description: Type of metadata.
-    type: object
-  SsisObjectMetadataListResponse:
-    description: A list of SSIS object metadata.
-    properties:
-      nextLink:
-        description: 'The link to the next page of results, if any remaining results exist.'
-        type: string
-      value:
-        description: List of SSIS object metadata.
-        items:
-          $ref: '#/definitions/SsisObjectMetadata'
-        type: array
-    type: object
-  SsisObjectMetadataType:
-    description: The type of SSIS object metadata.
-    enum:
-      - Folder
-      - Project
-      - Package
-      - Environment
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: SsisObjectMetadataType

@@ -14,7 +14,7 @@ info:
     name: StorageSyncManagementClient
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storagesync/resource-manager/Microsoft.StorageSync/preview/2018-10-01/storagesync.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/storagesync/resource-manager/Microsoft.StorageSync/stable/2018-10-01/storagesync.json'
       version: '2.0'
   x-preferred: true
   x-providerName: azure.com
@@ -783,7 +783,7 @@ paths:
                       provisioningState: Succeeded
                       resourceLocation: westus
                       serverId: '"3635ca8b-5cc8-4a5c-bd43-c2de5ad8dc64"'
-                      serverManagementtErrorCode: 0
+                      serverManagementErrorCode: 0
                       serverOSVersion: 10.0.14393.0
                       serverRole: Standalone
                       serviceLocation: westus
@@ -840,7 +840,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -960,7 +960,7 @@ paths:
                   provisioningState: Succeeded
                   resourceLocation: westus
                   serverId: '"3635ca8b-5cc8-4a5c-bd43-c2de5ad8dc64"'
-                  serverManagementtErrorCode: 0
+                  serverManagementErrorCode: 0
                   serverOSVersion: 10.0.14393.0
                   serverRole: Standalone
                   serviceLocation: westus
@@ -1023,7 +1023,7 @@ paths:
           schema:
             $ref: '#/definitions/RegisteredServer'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -1053,7 +1053,7 @@ paths:
                 agentVersion: 1.0.277.0
                 lastHeartBeat: '"2017-08-08T18:29:06.470652Z"'
                 serverCertificate: '"MIIDFjCCAf6gAwIBAgIQQS+DS8uhc4VNzUkTw7wbRjANBgkqhkiG9w0BAQ0FADAzMTEwLwYDVQQDEyhhbmt1c2hiLXByb2QzLnJlZG1vbmQuY29ycC5taWNyb3NvZnQuY29tMB4XDTE3MDgwMzE3MDQyNFoXDTE4MDgwNDE3MDQyNFowMzExMC8GA1UEAxMoYW5rdXNoYi1wcm9kMy5yZWRtb25kLmNvcnAubWljcm9zb2Z0LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALDRvV4gmsIy6jGDPiHsXmvgVP749NNP7DopdlbHaNhjFmYINHl0uWylyaZmgJrROt2mnxN/zEyJtGnqYHlzUr4xvGq/qV5pqgdB9tag/sw9i22gfe9PRZ0FmSOZnXMbLYgLiDFqLtut5gHcOuWMj03YnkfoBEKlFBxWbagvW2yxz/Sxi9OVSJOKCaXra0RpcIHrO/KFl6ho2eE1/7Ykmfa8hZvSdoPd5gHdLiQcMB/pxq+mWp1fI6c8vFZoDu7Atn+NXTzYPKUxKzaisF12TsaKpohUsJpbB3Wocb0F5frn614D2pg14ERB5otjAMWw1m65csQWPI6dP8KIYe0+QPkCAwEAAaMmMCQwIgYDVR0lAQH/BBgwFgYIKwYBBQUHAwIGCisGAQQBgjcKAwwwDQYJKoZIhvcNAQENBQADggEBAA4RhVIBkw34M1RwakJgHvtjsOFxF1tVQA941NtLokx1l2Z8+GFQkcG4xpZSt+UN6wLerdCbnNhtkCErWUDeaT0jxk4g71Ofex7iM04crT4iHJr8mi96/XnhnkTUs+GDk12VgdeeNEczMZz+8Mxw9dJ5NCnYgTwO0SzGlclRsDvjzkLo8rh2ZG6n/jKrEyNXXo+hOqhupij0QbRP2Tvexdfw201kgN1jdZify8XzJ8Oi0bTS0KpJf2pNPOlooK2bjMUei9ANtEdXwwfVZGWvVh6tJjdv6k14wWWJ1L7zhA1IIVb1J+sQUzJji5iX0DrezjTz1Fg+gAzITaA/WsuujlM="'
-                serverManagementtErrorCode: 0
+                serverManagementErrorCode: 0
                 serverOSVersion: 10.0.14393.0
                 serverRole: Standalone
               type: Microsoft.StorageSync/storageSyncServices/registeredServers
@@ -1079,7 +1079,7 @@ paths:
                   provisioningState: Succeeded
                   resourceLocation: westus
                   serverId: '"3635ca8b-5cc8-4a5c-bd43-c2de5ad8dc64"'
-                  serverManagementtErrorCode: 0
+                  serverManagementErrorCode: 0
                   serverOSVersion: 10.0.14393.0
                   serverRole: Standalone
                   serviceLocation: westus
@@ -1149,7 +1149,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -1613,7 +1613,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -1805,7 +1805,7 @@ paths:
           schema:
             $ref: '#/definitions/CloudEndpoint'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -1934,7 +1934,7 @@ paths:
           schema:
             $ref: '#/definitions/PostBackupResponse'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2030,7 +2030,7 @@ paths:
         '200':
           description: Ok
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2144,7 +2144,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2237,7 +2237,7 @@ paths:
         '200':
           description: Ok
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2455,6 +2455,7 @@ paths:
                           lastSyncSuccessTimestamp: '2018-06-11T23:28:33.9217334Z'
                           lastSyncTimestamp: '2018-06-11T23:28:33.9217334Z'
                         lastUpdatedTimestamp: '2018-06-11T23:32:51.1057915Z'
+                        offlineDataTransferStatus: NotRunning
                         uploadHealth: Error
                         uploadStatus:
                           lastSyncPerItemErrorCount: 69
@@ -2485,6 +2486,7 @@ paths:
                           lastSyncSuccessTimestamp: '2018-06-11T23:28:33.9217334Z'
                           lastSyncTimestamp: '2018-06-11T23:28:33.9217334Z'
                         lastUpdatedTimestamp: '2018-06-11T23:32:51.1057915Z'
+                        offlineDataTransferStatus: NotRunning
                         uploadHealth: Healthy
                         uploadStatus:
                           lastSyncPerItemErrorCount: 0
@@ -2550,7 +2552,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -2683,6 +2685,7 @@ paths:
                       lastSyncSuccessTimestamp: '2018-06-11T23:28:33.9217334Z'
                       lastSyncTimestamp: '2018-06-11T23:28:33.9217334Z'
                     lastUpdatedTimestamp: '2018-06-11T23:32:51.1057915Z'
+                    offlineDataTransferStatus: NotRunning
                     uploadHealth: Error
                     uploadStatus:
                       lastSyncPerItemErrorCount: 69
@@ -2753,7 +2756,7 @@ paths:
           schema:
             $ref: '#/definitions/ServerEndpoint'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -2816,6 +2819,7 @@ paths:
                       lastSyncSuccessTimestamp: '2018-06-11T23:28:33.9217334Z'
                       lastSyncTimestamp: '2018-06-11T23:28:33.9217334Z'
                     lastUpdatedTimestamp: '2018-06-11T23:32:51.1057915Z'
+                    offlineDataTransferStatus: NotRunning
                     uploadHealth: Error
                     uploadStatus:
                       lastSyncPerItemErrorCount: 69
@@ -2895,7 +2899,7 @@ paths:
           schema:
             $ref: '#/definitions/ServerEndpoint'
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Azure-AsyncOperation:
               description: Operation Status Location URI
@@ -2968,7 +2972,7 @@ paths:
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}/recallAction':
     post:
-      description: Recall a serverendpoint.
+      description: Recall a server endpoint.
       operationId: ServerEndpoints_recallAction
       parameters:
         - description: The ID of the target subscription.
@@ -3024,7 +3028,7 @@ paths:
               description: request id.
               type: string
         '202':
-          description: Asynchronuous Operation Status Location
+          description: Asynchronous Operation Status Location
           headers:
             Location:
               description: Operation Status Location URI
@@ -3438,6 +3442,23 @@ definitions:
       - 'on'
       - 'off'
     type: string
+  HealthState:
+    description: Type of the Health state
+    enum:
+      - Healthy
+      - Error
+      - SyncBlockedForRestore
+      - SyncBlockedForChangeDetectionPostRestore
+      - NoActivity
+    type: string
+  OfflineDataTransferState:
+    description: Type of the Health state
+    enum:
+      - InProgress
+      - Stopping
+      - NotRunning
+      - Complete
+    type: string
   OperationDirection:
     description: Type of the Operation Direction
     enum:
@@ -3737,7 +3758,7 @@ definitions:
       serverId:
         description: Registered Server serverId
         type: string
-      serverManagementtErrorCode:
+      serverManagementErrorCode:
         description: Registered Server Management Error Code
         type: integer
       serverOSVersion:
@@ -3869,6 +3890,35 @@ definitions:
         maximum: 100
         minimum: 0
         type: integer
+  ServerEndpointHealth:
+    description: ServerEndpoint Health object.
+    properties:
+      combinedHealth:
+        $ref: '#/definitions/HealthState'
+        description: Combined Health Status.
+      currentProgress:
+        $ref: '#/definitions/SyncProgressStatus'
+        description: Current progress
+      downloadHealth:
+        $ref: '#/definitions/HealthState'
+        description: Download Health Status.
+      downloadStatus:
+        $ref: '#/definitions/SyncSessionStatus'
+        description: Download Status
+      lastUpdatedTimestamp:
+        description: Last Updated Timestamp
+        format: date-time
+        type: string
+      offlineDataTransferStatus:
+        $ref: '#/definitions/OfflineDataTransferState'
+        description: Offline Data Transfer State
+      uploadHealth:
+        $ref: '#/definitions/HealthState'
+        description: Upload Health Status.
+      uploadStatus:
+        $ref: '#/definitions/SyncSessionStatus'
+        description: Upload Status
+    type: object
   ServerEndpointProperties:
     description: ServerEndpoint Properties object.
     properties:
@@ -3908,7 +3958,8 @@ definitions:
         $ref: '#/definitions/ResourceId'
         description: Server Resource Id.
       syncStatus:
-        description: Sync Health Status
+        $ref: '#/definitions/ServerEndpointHealth'
+        description: Server Endpoint properties.
         type: object
       tierFilesOlderThanDays:
         description: Tier files older than days.
@@ -3926,7 +3977,7 @@ definitions:
     properties:
       properties:
         $ref: '#/definitions/ServerEndpointUpdateProperties'
-        description: The properties of the serverendpoint.
+        description: The properties of the server endpoint.
         x-ms-client-flatten: true
   ServerEndpointUpdateProperties:
     description: ServerEndpoint Update Properties object.
@@ -4183,6 +4234,62 @@ definitions:
         type: string
       uniqueId:
         description: Unique Id
+        type: string
+    type: object
+  SyncProgressStatus:
+    description: Sync Session status object.
+    properties:
+      appliedBytes:
+        description: Applied bytes
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      appliedItemCount:
+        description: Applied item count.
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      perItemErrorCount:
+        description: Per item error count
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      progressTimestamp:
+        description: Progress timestamp
+        format: date-time
+        type: string
+      syncDirection:
+        $ref: '#/definitions/ProgressType'
+        description: Sync direction.
+      totalBytes:
+        description: Total bytes
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      totalItemCount:
+        description: Total item count
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+    type: object
+  SyncSessionStatus:
+    description: Sync Session status object.
+    properties:
+      lastSyncPerItemErrorCount:
+        description: Last sync per item error count.
+        maximum: 2147483647
+        minimum: 0
+        type: integer
+      lastSyncResult:
+        description: Last sync status
+        type: integer
+      lastSyncSuccessTimestamp:
+        description: Last sync success timestamp
+        format: date-time
+        type: string
+      lastSyncTimestamp:
+        description: Last sync timestamp
+        format: date-time
         type: string
     type: object
   TagsObject:

@@ -1,7 +1,7 @@
 swagger: '2.0'
 schemes:
   - https
-host: management.azure.com
+host: azure.local
 info:
   description: Use these REST APIs for performing operations on Backend entity in Azure API Management deployment. The Backend entity in API Management represents a backend service that is configured to skip certification chain validation when using a self-signed certificate to test mutual certificate authentication.
   title: ApiManagementClient
@@ -12,7 +12,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/resource-manager/Microsoft.ApiManagement/stable/2017-03-01/apimbackends.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/apimanagement/control-plane/Microsoft.ApiManagement/preview/2017-03-01/apimbackends.json'
       version: '2.0'
   x-preferred: false
   x-providerName: azure.com
@@ -25,16 +25,12 @@ consumes:
 produces:
   - application/json
 securityDefinitions:
-  azure_auth:
-    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
-    description: Azure Active Directory OAuth2 Flow.
-    flow: implicit
-    scopes:
-      user_impersonation: impersonate your user account
-    type: oauth2
+  apim_key:
+    in: header
+    name: Authorization
+    type: apiKey
 security:
-  - azure_auth:
-      - user_impersonation
+  - apim_key: []
 parameters:
   BackendIdParameter:
     description: Identifier of the Backend entity. Must be unique in the current API Management service instance.
@@ -47,26 +43,11 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends':
+  /backends:
     get:
       description: Lists a collection of backends in the specified service instance.
-      operationId: Backend_ListByService
+      operationId: Backend_List
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - description: |-
             | Field | Supported operators    | Supported functions                         |
             |-------|------------------------|---------------------------------------------|
@@ -95,11 +76,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -138,81 +114,113 @@ paths:
       x-ms-examples:
         ApiManagementListBackends:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
           responses:
             '200':
               body:
-                nextLink: ''
+                count: 4
                 value:
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend
-                    name: proxybackend
-                    properties:
-                      credentials:
-                        authorization:
-                          parameter: opensesma
-                          scheme: Basic
-                        header:
-                          x-my-1:
-                            - val1
-                            - val2
-                        query:
-                          sv:
-                            - xx
-                            - bb
-                            - cc
-                      description: description5308
-                      protocol: http
-                      proxy:
-                        password: opensesame
-                        url: 'http://192.168.1.1:8080'
-                        username: Contoso\admin
-                      tls:
-                        validateCertificateChain: false
-                        validateCertificateName: false
-                      url: 'https://backendname2644/'
-                    type: Microsoft.ApiManagement/service/backends
-                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sfbackend
-                    name: sfbackend
-                    properties:
-                      description: Service Fabric Test App 1
-                      properties:
-                        serviceFabricCluster:
-                          clientCertificatethumbprint: EBA029198AA3E76EF0D70482626E5BCF148594A6
-                          managementEndpoints:
-                            - 'https://somecluster.com'
-                          maxPartitionResolutionRetries: 5
-                          serverX509Names:
-                            - issuerCertificateThumbprint: IssuerCertificateThumbprint1
-                              name: ServerCommonName1
-                      protocol: http
-                      url: 'fabric:/mytestapp/mytestservice'
-                    type: Microsoft.ApiManagement/service/backends
+                  - credentials:
+                      authorization:
+                        parameter: opensesame
+                        scheme: Basic
+                      certificate:
+                        - FB085F34A60C2AD8EED59C58B961BD5FBEFC38BE
+                      header:
+                        x-my-1:
+                          - val1
+                          - val2
+                        x-my-2:
+                          - val1
+                          - val2
+                      query:
+                        se:
+                          - '2018-01-12'
+                        sv:
+                          - xx
+                          - bb
+                          - cc
+                    description: description
+                    id: /backends/5a58bb7ea40f7ef2e05be3d5
+                    protocol: http
+                    resourceId: 'https://manage.azure.com/subscriptions/xxx/blah'
+                    title: 5a58bb7ea40f7ef2e05be3d6
+                    tls:
+                      validateCertificateChain: false
+                      validateCertificateName: false
+                    url: 'https://5a58bb7ea40f7ef2e05be3d6/'
+                  - credentials:
+                      authorization:
+                        parameter: opensesame
+                        scheme: Basic
+                      certificate:
+                        - 61EF1C104C1949E219995A2F0628F3D66D595F32
+                      header:
+                        x-my-1:
+                          - val1
+                          - val2
+                        x-my-2:
+                          - val1
+                          - val2
+                      query:
+                        se:
+                          - '2018-01-12'
+                        sv:
+                          - xx
+                          - bb
+                          - cc
+                    description: description
+                    id: /backends/5a58bc74a40f7e1048929959
+                    protocol: http
+                    resourceId: 'https://manage.azure.com/subscriptions/xxx/blah'
+                    title: 5a58bc74a40f7e104892995c
+                    tls:
+                      validateCertificateChain: false
+                      validateCertificateName: false
+                    url: 'https://5a58bc74a40f7e104892995c/'
+                  - credentials:
+                      authorization:
+                        parameter: opensesame
+                        scheme: Basic
+                      certificate:
+                        - 61EF1C104C1949E219995A2F0628F3D66D595F32
+                      header:
+                        x-my-1:
+                          - val1
+                          - val2
+                        x-my-2:
+                          - val1
+                          - val2
+                      query:
+                        se:
+                          - '2018-01-12'
+                        sv:
+                          - xx
+                          - bb
+                          - cc
+                    description: description
+                    id: /backends/5a58bc74a40f7e104892995a
+                    protocol: http
+                    resourceId: 'https://manage.azure.com/subscriptions/xxx/blah'
+                    title: 5a58bc74a40f7e104892995d
+                    tls:
+                      validateCertificateChain: false
+                      validateCertificateName: false
+                    url: 'https://5a58bc74a40f7e104892995d/'
+                  - id: /backends/5a58bc74a40f7e104892995b
+                    protocol: http
+                    title: httpbin.org
+                    url: 'http://httpbin.org'
       x-ms-odata: '#/definitions/BackendContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}':
+  '/backends/{backendid}':
     delete:
       description: Deletes the specified backend.
       operationId: Backend_Delete
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/BackendIdParameter'
         - description: The entity state (Etag) version of the backend to delete. A value of "*" can be used for If-Match to unconditionally apply the operation.
           in: header
@@ -222,11 +230,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -261,44 +264,22 @@ paths:
       tags:
         - Backends
       x-ms-examples:
-        ApiManagementDeleteBackend:
+        ApiManagementDeleteBackends:
           parameters:
             If-Match: '*'
             api-version: '2017-03-01'
-            backendid: sfbackend
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            backendid: 5a58bad2a40f7ef2e05bcce3
           responses:
             '204': {}
     get:
       description: Gets the details of the backend specified by its identifier.
       operationId: Backend_Get
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/BackendIdParameter'
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -339,128 +320,31 @@ paths:
       tags:
         - Backends
       x-ms-examples:
-        ApiManagementGetBackend:
+        ApiManagementGetBackends:
           parameters:
+            Accept: application/json
             api-version: '2017-03-01'
-            backendid: sfbackend
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+            apimBaseUrl: apimservice1.management.azure-api.net
+            backendid: 5a58bb49a40f7ef2e05bd990
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sfbackend
-                name: sfbackend
+                description: 'Service Fabric Test App: 5a58bb49a40f7ef2e05bd990'
+                id: /backends/5a58bb49a40f7ef2e05bd990
                 properties:
-                  description: Service Fabric Test App 1
-                  properties:
-                    serviceFabricCluster:
-                      clientCertificatethumbprint: EBA029198AA3E76EF0D70482626E5BCF148594A6
-                      managementEndpoints:
-                        - 'https://somecluster.com'
-                      maxPartitionResolutionRetries: 5
-                      serverX509Names:
-                        - issuerCertificateThumbprint: IssuerCertificateThumbprint1
-                          name: ServerCommonName1
-                  protocol: http
-                  url: 'fabric:/mytestapp/mytestservice'
-                type: Microsoft.ApiManagement/service/backends
-    head:
-      description: Gets the entity state (Etag) version of the backend specified by its identifier.
-      operationId: Backend_GetEntityTag
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/BackendIdParameter'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Specified backend entity exists and current entity state version is present in the ETag header.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - Backends
-      x-ms-examples:
-        ApiManagementHeadBackend:
-          parameters:
-            api-version: '2017-03-01'
-            backendid: sfbackend
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              headers:
-                etag: AAAAAAAAAAa=
+                  serviceFabricCluster:
+                    clientCertificateThumbprint: C0F0AE5B3D8E1DF7A32FCB0BB1B43C8A704C54FF
+                    managementEndpoints:
+                      - 'http://somecluster.com'
+                    maxPartitionResolutionRetries: 5
+                    partitionResolutionRequestTimeout: PT5M
+                protocol: http
+                title: null
+                url: 'fabric:/mytestapp/mytestservice'
     patch:
       description: Updates an existing backend.
       operationId: Backend_Update
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/BackendIdParameter'
         - description: Update parameters.
           in: body
@@ -476,11 +360,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -515,41 +394,23 @@ paths:
       tags:
         - Backends
       x-ms-examples:
-        ApiManagementUpdateBackend:
+        ApiManagementPatchBackends:
           parameters:
-            If-Match: '*'
+            If-Match: '"AAAAAAAAHDE="'
             api-version: '2017-03-01'
-            backendid: proxybackend
+            apimBaseUrl: apimservice1.management.azure-api.net
+            backendid: 5a58bd45a40f7e104892a3aa
             parameters:
-              properties:
-                description: description5308
-                tls:
-                  validateCertificateChain: false
-                  validateCertificateName: true
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+              description: description5308
+              tls:
+                validateCertificateChain: false
+                validateCertificateName: true
           responses:
             '204': {}
     put:
       description: Creates or Updates a backend.
       operationId: Backend_CreateOrUpdate
       parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
         - $ref: '#/parameters/BackendIdParameter'
         - description: Create parameters.
           in: body
@@ -560,11 +421,6 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
           required: true
           type: string
       responses:
@@ -605,236 +461,55 @@ paths:
       tags:
         - Backends
       x-ms-examples:
-        ApiManagementCreateBackendProxyBackend:
+        ApiManagementPutBackends:
           parameters:
             api-version: '2017-03-01'
-            backendid: proxybackend
+            apimBaseUrl: apimservice1.management.azure-api.net
+            backendid: 5a58bb16a40f7ef2e05bd52d
             parameters:
+              description: 'Service Fabric Test App: 5a58bb16a40f7ef2e05bd52d'
               properties:
-                credentials:
-                  authorization:
-                    parameter: opensesma
-                    scheme: Basic
-                  header:
-                    x-my-1:
-                      - val1
-                      - val2
-                  query:
-                    sv:
-                      - xx
-                      - bb
-                      - cc
-                description: description5308
-                protocol: http
-                proxy:
-                  password: opensesame
-                  url: 'http://192.168.1.1:8080'
-                  username: Contoso\admin
-                tls:
-                  validateCertificateChain: true
-                  validateCertificateName: true
-                url: 'https://backendname2644/'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
+                serviceFabricCluster:
+                  clientCertificateThumbprint: C0F0AE5B3D8E1DF7A32FCB0BB1B43C8A704C54FF
+                  managementEndpoints:
+                    - 'https://somecluster.com'
+                  maxPartitionResolutionRetries: 5
+                  partitionResolutionRequestTimeout: PT5M
+                  serverCertificateThumbprints:
+                    - abcxyz123
+              protocol: http
+              url: 'fabric:/mytestapp/mytestservice'
           responses:
             '200':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend
-                name: proxybackend
-                properties:
-                  credentials:
-                    authorization:
-                      parameter: opensesma
-                      scheme: Basic
-                    header:
-                      x-my-1:
-                        - val1
-                        - val2
-                    query:
-                      sv:
-                        - xx
-                        - bb
-                        - cc
-                  description: description5308
-                  protocol: http
-                  proxy:
-                    password: opensesame
-                    url: 'http://192.168.1.1:8080'
-                    username: Contoso\admin
-                  tls:
-                    validateCertificateChain: false
-                    validateCertificateName: false
-                  url: 'https://backendname2644/'
-                type: Microsoft.ApiManagement/service/backends
-            '201':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend
-                name: proxybackend
-                properties:
-                  credentials:
-                    authorization:
-                      parameter: opensesma
-                      scheme: Basic
-                    header:
-                      x-my-1:
-                        - val1
-                        - val2
-                    query:
-                      sv:
-                        - xx
-                        - bb
-                        - cc
-                  description: description5308
-                  protocol: http
-                  proxy:
-                    password: opensesame
-                    url: 'http://192.168.1.1:8080'
-                    username: Contoso\admin
-                  tls:
-                    validateCertificateChain: false
-                    validateCertificateName: false
-                  url: 'https://backendname2644/'
-                type: Microsoft.ApiManagement/service/backends
-        ApiManagementCreateBackendServiceFabric:
-          parameters:
-            api-version: '2017-03-01'
-            backendid: sfbackend
-            parameters:
-              properties:
-                description: Service Fabric Test App 1
+                description: 'Service Fabric Test App: 5a58bb16a40f7ef2e05bd52d'
+                id: /backends/5a58bb16a40f7ef2e05bd52d
                 properties:
                   serviceFabricCluster:
-                    clientCertificatethumbprint: EBA029198AA3E76EF0D70482626E5BCF148594A6
+                    clientCertificateThumbprint: C0F0AE5B3D8E1DF7A32FCB0BB1B43C8A704C54FF
                     managementEndpoints:
                       - 'https://somecluster.com'
                     maxPartitionResolutionRetries: 5
-                    serverX509Names:
-                      - issuerCertificateThumbprint: IssuerCertificateThumbprint1
-                        name: ServerCommonName1
+                    partitionResolutionRequestTimeout: PT5M
+                    serverCertificateThumbprints:
+                      - abcxyz123
                 protocol: http
                 url: 'fabric:/mytestapp/mytestservice'
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sfbackend
-                name: sfbackend
-                properties:
-                  description: Service Fabric Test App 1
-                  properties:
-                    serviceFabricCluster:
-                      clientCertificatethumbprint: EBA029198AA3E76EF0D70482626E5BCF148594A6
-                      managementEndpoints:
-                        - 'https://somecluster.com'
-                      maxPartitionResolutionRetries: 5
-                      serverX509Names:
-                        - issuerCertificateThumbprint: IssuerCertificateThumbprint1
-                          name: ServerCommonName1
-                  protocol: http
-                  url: 'fabric:/mytestapp/mytestservice'
-                type: Microsoft.ApiManagement/service/backends
             '201':
               body:
-                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/sfbackend
-                name: sfbackend
+                description: 'Service Fabric Test App: 5a58bb16a40f7ef2e05bd52d'
+                id: /backends/5a58bb16a40f7ef2e05bd52d
                 properties:
-                  description: Service Fabric Test App 1
-                  properties:
-                    serviceFabricCluster:
-                      clientCertificatethumbprint: EBA029198AA3E76EF0D70482626E5BCF148594A6
-                      managementEndpoints:
-                        - 'https://somecluster.com'
-                      maxPartitionResolutionRetries: 5
-                      serverX509Names:
-                        - issuerCertificateThumbprint: IssuerCertificateThumbprint1
-                          name: ServerCommonName1
-                  protocol: http
-                  url: 'fabric:/mytestapp/mytestservice'
-                type: Microsoft.ApiManagement/service/backends
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}/reconnect':
-    post:
-      description: 'Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.'
-      operationId: Backend_Reconnect
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - $ref: '#/parameters/BackendIdParameter'
-        - description: Reconnect request parameters.
-          in: body
-          name: parameters
-          required: false
-          schema:
-            $ref: '#/definitions/BackendReconnectContract'
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '202':
-          description: Reconnect request accepted.
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Body contract.
-            properties:
-              code:
-                description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                type: string
-              details:
-                description: 'The list of invalid fields send in request, in case of validation error.'
-                items:
-                  description: Error Field contract.
-                  properties:
-                    code:
-                      description: Property level error code.
-                      type: string
-                    message:
-                      description: Human-readable representation of property-level error.
-                      type: string
-                    target:
-                      description: Property name.
-                      type: string
-                type: array
-              message:
-                description: Human-readable representation of the error.
-                type: string
-      tags:
-        - Backends
-      x-ms-examples:
-        ApiManagementBackendReconnect:
-          parameters:
-            api-version: '2017-03-01'
-            backendid: proxybackend
-            parameters:
-              properties:
-                after: PT3S
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '202': {}
+                  serviceFabricCluster:
+                    clientCertificateThumbprint: C0F0AE5B3D8E1DF7A32FCB0BB1B43C8A704C54FF
+                    managementEndpoints:
+                      - 'https://somecluster.com'
+                    maxPartitionResolutionRetries: 5
+                    partitionResolutionRequestTimeout: PT5M
+                    serverCertificateThumbprints:
+                      - abcxyz123
+                protocol: http
+                url: 'fabric:/mytestapp/mytestservice'
 definitions:
   BackendAuthorizationHeaderCredentials:
     description: Authorization header information.
@@ -885,6 +560,9 @@ definitions:
   BackendCollection:
     description: Paged Backend list representation.
     properties:
+      count:
+        description: Total number of entities
+        type: integer
       nextLink:
         description: Next page link if any.
         type: string
@@ -895,27 +573,12 @@ definitions:
         type: array
   BackendContract:
     allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
+      - $ref: '#/definitions/BackendContractProperties'
     description: Backend details.
     properties:
-      properties:
-        $ref: '#/definitions/BackendContractProperties'
-        description: Backend entity contract properties.
-        x-ms-client-flatten: true
+      id:
+        description: Identifier of the Backend entity.
+        type: string
   BackendContractProperties:
     allOf:
       - $ref: '#/definitions/BackendBaseParameters'
@@ -994,42 +657,10 @@ definitions:
         type: string
     required:
       - url
-  BackendReconnectContract:
-    allOf:
-      - description: The Resource definition.
-        properties:
-          id:
-            description: Resource ID.
-            readOnly: true
-            type: string
-          name:
-            description: Resource name.
-            readOnly: true
-            type: string
-          type:
-            description: Resource type for API Management resource.
-            readOnly: true
-            type: string
-        x-ms-azure-resource: true
-    description: Reconnect request parameters.
-    properties:
-      properties:
-        $ref: '#/definitions/BackendReconnectProperties'
-        description: Reconnect request properties.
-        x-ms-client-flatten: true
-  BackendReconnectProperties:
-    description: Properties to control reconnect requests.
-    properties:
-      after:
-        description: Duration in ISO8601 format after which reconnect will be initiated.
-        format: duration
-        maxLength: 2000
-        minLength: 1
-        type: string
   BackendServiceFabricClusterProperties:
     description: Properties of the Service Fabric Type Backend.
     properties:
-      clientCertificatethumbprint:
+      clientCertificateThumbprint:
         description: The client certificate thumbprint for the management endpoint.
         type: string
       managementEndpoints:
@@ -1041,6 +672,10 @@ definitions:
         description: Maximum number of retries while attempting resolve the partition.
         format: int32
         type: integer
+      partitionResolutionRequestTimeout:
+        description: 'Maximum time allowed to update partition resolution data. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601'
+        format: duration
+        type: string
       serverCertificateThumbprints:
         description: Thumbprints of certificates cluster management service uses for tls communication
         items:
@@ -1053,7 +688,7 @@ definitions:
         type: array
     required:
       - managementEndpoints
-      - clientCertificatethumbprint
+      - clientCertificateThumbprint
   BackendTlsProperties:
     description: Properties controlling TLS Certificate Validation.
     properties:
@@ -1065,7 +700,7 @@ definitions:
         default: true
         description: Flag indicating whether SSL certificate name validation should be done when using self-signed certificates for this backend host.
         type: boolean
-  BackendUpdateParameterProperties:
+  BackendUpdateParameters:
     allOf:
       - $ref: '#/definitions/BackendBaseParameters'
     description: Parameters supplied to the Update Backend operation.
@@ -1089,13 +724,6 @@ definitions:
         maxLength: 2000
         minLength: 1
         type: string
-  BackendUpdateParameters:
-    description: Backend update parameters.
-    properties:
-      properties:
-        $ref: '#/definitions/BackendUpdateParameterProperties'
-        description: Backend entity update contract properties.
-        x-ms-client-flatten: true
   X509CertificateName:
     description: Properties of server X509Names.
     externalDocs:
@@ -1107,3 +735,14 @@ definitions:
       name:
         description: Common Name of the Certificate.
         type: string
+x-ms-parameterized-host:
+  hostTemplate: '{apimBaseUrl}'
+  parameters:
+    - description: 'The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.'
+      in: path
+      name: apimBaseUrl
+      required: true
+      type: string
+      x-ms-skip-url-encoding: true
+  positionInOperation: first
+  useSchemePrefix: false

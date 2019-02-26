@@ -11,7 +11,7 @@ info:
     url: 'https://assets.onestore.ms/cdnfiles/onestorerolling-1606-01000/shell/v3/images/logo/microsoft.png'
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/entityTypes/Pipeline.json'
+      url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/datafactory/resource-manager/Microsoft.DataFactory/preview/2017-09-01-preview/entityTypes/Pipeline.json'
       version: '2.0'
   x-providerName: azure.com
   x-serviceName: datafactory-Pipeline
@@ -40,11 +40,6 @@ definitions:
       type:
         description: Type of activity.
         type: string
-      userProperties:
-        description: Activity user properties.
-        items:
-          $ref: '#/definitions/UserProperty'
-        type: array
     required:
       - name
       - type
@@ -87,9 +82,6 @@ definitions:
         maximum: 86400
         minimum: 30
         type: integer
-      secureInput:
-        description: 'When set to true, Input from activity is considered as secure and will not be logged to monitoring.'
-        type: boolean
       secureOutput:
         description: 'When set to true, Output from activity is considered as secure and will not be logged to monitoring.'
         type: boolean
@@ -118,83 +110,6 @@ definitions:
         $ref: '#/definitions/RedshiftUnloadSettings'
         description: 'The Amazon S3 settings needed for the interim Amazon S3 when copying from Amazon Redshift with unload. With this, data from Amazon Redshift source will be unloaded into S3 first and then copied into the targeted sink from the interim S3.'
     type: object
-  AppendVariableActivity:
-    allOf:
-      - $ref: '#/definitions/ControlActivity'
-    description: Append value for a Variable of type Array.
-    properties:
-      typeProperties:
-        $ref: '#/definitions/AppendVariableActivityTypeProperties'
-        description: Append Variable activity properties.
-        x-ms-client-flatten: true
-    required:
-      - typeProperties
-    x-ms-discriminator-value: AppendVariable
-  AppendVariableActivityTypeProperties:
-    description: AppendVariable activity properties.
-    properties:
-      value:
-        description: Value to be appended. Could be a static value or Expression
-        type: object
-      variableName:
-        description: Name of the variable whose value needs to be appended to.
-        type: string
-  AzureBlobFSSink:
-    allOf:
-      - $ref: '#/definitions/CopySink'
-    description: A copy activity Azure Data Lake Storage Gen2 sink.
-    properties:
-      copyBehavior:
-        $ref: '#/definitions/CopyBehaviorType'
-        description: The type of copy behavior for copy sink.
-    type: object
-  AzureBlobFSSource:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity Azure BlobFS source.
-    properties:
-      recursive:
-        description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
-        type: object
-      skipHeaderLineCount:
-        description: 'Number of header lines to skip from each blob. Type: integer (or Expression with resultType integer).'
-        type: object
-      treatEmptyAsNull:
-        description: 'Treat empty as null. Type: boolean (or Expression with resultType boolean).'
-        type: object
-    type: object
-  AzureDataExplorerSink:
-    allOf:
-      - $ref: '#/definitions/CopySink'
-    description: A copy activity Azure Data Explorer sink.
-    properties:
-      flushImmediately:
-        description: 'If set to true, any aggregation will be skipped. Default is false. Type: boolean.'
-        type: object
-      ingestionMappingAsJson:
-        description: 'An explicit column mapping description provided in a json format. Type: string.'
-        type: object
-      ingestionMappingName:
-        description: 'A name of a pre-created csv mapping that was defined on the target Kusto table. Type: string.'
-        type: object
-    type: object
-  AzureDataExplorerSource:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity Azure Data Explorer (Kusto) source.
-    properties:
-      noTruncation:
-        description: The name of the Boolean option that controls whether truncation is applied to result-sets that go beyond a certain row-count limit.
-        type: object
-      query:
-        description: 'Database query. Should be a Kusto Query Language (KQL) query. Type: string (or Expression with resultType string).'
-        type: object
-      queryTimeout:
-        description: 'Query timeout. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9]))..'
-        type: object
-    required:
-      - query
-    type: object
   AzureDataLakeStoreSink:
     allOf:
       - $ref: '#/definitions/CopySink'
@@ -213,50 +128,6 @@ definitions:
         description: 'If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean).'
         type: object
     type: object
-  AzureFunctionActivity:
-    allOf:
-      - $ref: '#/definitions/ExecutionActivity'
-    description: Azure Function activity.
-    properties:
-      typeProperties:
-        $ref: '#/definitions/AzureFunctionActivityTypeProperties'
-        description: Azure Function activity properties.
-        x-ms-client-flatten: true
-    required:
-      - typeProperties
-    x-ms-discriminator-value: AzureFunctionActivity
-  AzureFunctionActivityMethod:
-    description: The list of HTTP methods supported by a AzureFunctionActivity.
-    enum:
-      - GET
-      - POST
-      - PUT
-      - DELETE
-      - OPTIONS
-      - HEAD
-      - TRACE
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: AzureFunctionActivityMethod
-  AzureFunctionActivityTypeProperties:
-    description: Azure Function activity type properties.
-    properties:
-      body:
-        description: 'Represents the payload that will be sent to the endpoint. Required for POST/PUT method, not allowed for GET method Type: string (or Expression with resultType string).'
-        type: object
-      functionName:
-        description: 'Name of the Function that the Azure Function Activity will call. Type: string (or Expression with resultType string)'
-        type: object
-      headers:
-        description: 'Represents the headers that will be sent to the request. For example, to set the language and type on a request: "headers" : { "Accept-Language": "en-us", "Content-Type": "application/json" }. Type: string (or Expression with resultType string).'
-        type: object
-      method:
-        $ref: '#/definitions/AzureFunctionActivityMethod'
-        description: Rest API method for target endpoint.
-    required:
-      - method
-      - functionName
   AzureMLBatchExecutionActivity:
     allOf:
       - $ref: '#/definitions/ExecutionActivity'
@@ -563,8 +434,8 @@ definitions:
   CopyActivityTypeProperties:
     description: Copy activity properties.
     properties:
-      dataIntegrationUnits:
-        description: 'Maximum number of data integration units that can be used to perform this data movement. Type: integer (or Expression with resultType integer), minimum: 0.'
+      cloudDataMovementUnits:
+        description: 'Maximum number of cloud data movement units that can be used to perform this data movement. Type: integer (or Expression with resultType integer), minimum: 0.'
         type: object
       enableSkipIncompatibleRow:
         description: 'Whether to skip incompatible row. Default value is false. Type: boolean (or Expression with resultType boolean).'
@@ -575,12 +446,6 @@ definitions:
       parallelCopies:
         description: 'Maximum number of concurrent sessions opened on the source or sink to avoid overloading the data store. Type: integer (or Expression with resultType integer), minimum: 0.'
         type: object
-      preserveRules:
-        description: Preserve Rules.
-        items:
-          description: 'Type: string (or Expression with resultType string).'
-          type: object
-        type: array
       redirectIncompatibleRowSettings:
         $ref: '#/definitions/RedirectIncompatibleRowSettings'
         description: Redirect incompatible row settings when EnableSkipIncompatibleRow is true.
@@ -615,9 +480,6 @@ definitions:
     description: A copy activity sink.
     discriminator: type
     properties:
-      maxConcurrentConnections:
-        description: 'The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer).'
-        type: object
       sinkRetryCount:
         description: 'Sink retry count. Type: integer (or Expression with resultType integer).'
         type: object
@@ -642,9 +504,6 @@ definitions:
     description: A copy activity source.
     discriminator: type
     properties:
-      maxConcurrentConnections:
-        description: 'The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer).'
-        type: object
       sourceRetryCount:
         description: 'Source retry count. Type: integer (or Expression with resultType integer).'
         type: object
@@ -668,30 +527,6 @@ definitions:
         type: string
     required:
       - type
-    type: object
-  CosmosDbMongoDbApiSink:
-    allOf:
-      - $ref: '#/definitions/CopySink'
-    description: A copy activity sink for a CosmosDB (MongoDB API) database.
-    properties:
-      writeBehavior:
-        description: 'Specifies whether the document with same key to be overwritten (upsert) rather than throw exception (insert). The default value is "insert". Type: string (or Expression with resultType string). Type: string (or Expression with resultType string).'
-        type: object
-    type: object
-  CosmosDbMongoDbApiSource:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity source for a CosmosDB (MongoDB API) database.
-    properties:
-      batchSize:
-        description: 'Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property�s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer).'
-        type: object
-      cursorMethods:
-        $ref: '#/definitions/MongoDbCursorMethodsProperties'
-        description: Cursor methods for Mongodb query.
-      filter:
-        description: 'Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string).'
-        type: object
     type: object
   CouchbaseSource:
     allOf:
@@ -798,9 +633,6 @@ definitions:
         required:
           - type
           - referenceName
-      retentionTimeInDays:
-        description: 'The retention time for the files submitted for custom activity. Type: double (or Expression with resultType double).'
-        type: object
     required:
       - command
   DataLakeAnalyticsUSQLActivity:
@@ -882,136 +714,11 @@ definitions:
           type: object
         description: 'Base parameters to be used for each run of this job.If the notebook takes a parameter that is not specified, the default value from the notebook will be used.'
         type: object
-      libraries:
-        description: A list of libraries to be installed on the cluster that will execute the job.
-        items:
-          additionalProperties:
-            type: object
-          description: Databricks library definition.
-          type: object
-        type: array
       notebookPath:
         description: 'The absolute path of the notebook to be run in the Databricks Workspace. This path must begin with a slash. Type: string (or Expression with resultType string).'
         type: object
     required:
       - notebookPath
-  DatabricksSparkJarActivity:
-    allOf:
-      - $ref: '#/definitions/ExecutionActivity'
-    description: DatabricksSparkJar activity.
-    properties:
-      typeProperties:
-        $ref: '#/definitions/DatabricksSparkJarActivityTypeProperties'
-        description: Databricks SparkJar activity properties.
-        x-ms-client-flatten: true
-    required:
-      - typeProperties
-    x-ms-discriminator-value: DatabricksSparkJar
-  DatabricksSparkJarActivityTypeProperties:
-    description: Databricks SparkJar activity properties.
-    properties:
-      libraries:
-        description: A list of libraries to be installed on the cluster that will execute the job.
-        items:
-          additionalProperties:
-            type: object
-          description: Databricks library definition.
-          type: object
-        type: array
-      mainClassName:
-        description: 'The full name of the class containing the main method to be executed. This class must be contained in a JAR provided as a library. Type: string (or Expression with resultType string).'
-        type: object
-      parameters:
-        description: Parameters that will be passed to the main method.
-        items:
-          description: 'Type: string (or Expression with resultType string).'
-          type: object
-        type: array
-    required:
-      - mainClassName
-  DatabricksSparkPythonActivity:
-    allOf:
-      - $ref: '#/definitions/ExecutionActivity'
-    description: DatabricksSparkPython activity.
-    properties:
-      typeProperties:
-        $ref: '#/definitions/DatabricksSparkPythonActivityTypeProperties'
-        description: Databricks SparkPython activity properties.
-        x-ms-client-flatten: true
-    required:
-      - typeProperties
-    x-ms-discriminator-value: DatabricksSparkPython
-  DatabricksSparkPythonActivityTypeProperties:
-    description: Databricks SparkPython activity properties.
-    properties:
-      libraries:
-        description: A list of libraries to be installed on the cluster that will execute the job.
-        items:
-          additionalProperties:
-            type: object
-          description: Databricks library definition.
-          type: object
-        type: array
-      parameters:
-        description: Command line parameters that will be passed to the Python file.
-        items:
-          description: 'Type: string (or Expression with resultType string).'
-          type: object
-        type: array
-      pythonFile:
-        description: 'The URI of the Python file to be executed. DBFS paths are supported. Type: string (or Expression with resultType string).'
-        type: object
-    required:
-      - pythonFile
-  DeleteActivity:
-    allOf:
-      - $ref: '#/definitions/ExecutionActivity'
-    description: Delete activity.
-    properties:
-      typeProperties:
-        $ref: '#/definitions/DeleteActivityTypeProperties'
-        description: Delete activity properties.
-        x-ms-client-flatten: true
-    required:
-      - typeProperties
-    x-ms-discriminator-value: Delete
-  DeleteActivityTypeProperties:
-    description: Delete activity properties.
-    properties:
-      dataset:
-        description: Dataset reference type.
-        properties:
-          parameters:
-            additionalProperties:
-              type: object
-            description: An object mapping parameter names to argument values.
-            type: object
-          referenceName:
-            description: Reference dataset name.
-            type: string
-          type:
-            description: Dataset reference type.
-            enum:
-              - DatasetReference
-            type: string
-        required:
-          - type
-          - referenceName
-      enableLogging:
-        description: 'Whether to record detailed logs of delete-activity execution. Default value is false. Type: boolean (or Expression with resultType boolean).'
-        type: object
-      logStorageSettings:
-        $ref: '#/definitions/LogStorageSettings'
-        description: Log storage settings customer need to provide when enableLogging is true.
-      maxConcurrentConnections:
-        description: The max concurrent connections to connect data source at the same time.
-        minimum: 1
-        type: integer
-      recursive:
-        description: 'If true, files or sub-folders under current folder path will be deleted recursively. Default is false. Type: boolean (or Expression with resultType boolean).'
-        type: object
-    required:
-      - dataset
   DistcpSettings:
     description: Distcp settings.
     properties:
@@ -1053,15 +760,6 @@ definitions:
     allOf:
       - $ref: '#/definitions/CopySource'
     description: A copy activity Drill server source.
-    properties:
-      query:
-        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
-        type: object
-    type: object
-  DynamicsAXSource:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity Dynamics AX source.
     properties:
       query:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
@@ -1404,15 +1102,6 @@ definitions:
         type: array
     required:
       - dataset
-  GoogleAdWordsSource:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity Google AdWords service source.
-    properties:
-      query:
-        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
-        type: object
-    type: object
   GoogleBigQuerySource:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -1480,9 +1169,6 @@ definitions:
       getDebugInfo:
         $ref: '#/definitions/HDInsightActivityDebugInfoOption'
         description: Debug info option.
-      queryTimeout:
-        description: Query timeout value (in minutes).  Effective when the HDInsight cluster is with ESP (Enterprise Security Package)
-        type: integer
       scriptLinkedService:
         description: Linked service reference type.
         properties:
@@ -1526,12 +1212,6 @@ definitions:
           required:
             - type
             - referenceName
-        type: array
-      variables:
-        description: User specified arguments under hivevar namespace.
-        items:
-          description: 'Type: string (or Expression with resultType string).'
-          type: object
         type: array
   HDInsightMapReduceActivity:
     allOf:
@@ -1960,36 +1640,6 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
-  LogStorageSettings:
-    additionalProperties:
-      type: object
-    description: Log storage settings.
-    properties:
-      linkedServiceName:
-        description: Linked service reference type.
-        properties:
-          parameters:
-            additionalProperties:
-              type: object
-            description: An object mapping parameter names to argument values.
-            type: object
-          referenceName:
-            description: Reference LinkedService name.
-            type: string
-          type:
-            description: Linked service reference type.
-            enum:
-              - LinkedServiceReference
-            type: string
-        required:
-          - type
-          - referenceName
-      path:
-        description: 'The path to storage for storing detailed logs of activity execution. Type: string (or Expression with resultType string).'
-        type: object
-    required:
-      - linkedServiceName
-    type: object
   LookupActivity:
     allOf:
       - $ref: '#/definitions/ExecutionActivity'
@@ -2060,24 +1710,6 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
-  MongoDbCursorMethodsProperties:
-    additionalProperties:
-      type: object
-    description: Cursor methods for Mongodb query
-    properties:
-      limit:
-        description: 'Specifies the maximum number of documents the server returns. limit() is analogous to the LIMIT statement in a SQL database. Type: integer (or Expression with resultType integer).'
-        type: object
-      project:
-        description: 'Specifies the fields to return in the documents that match the query filter. To return all fields in the matching documents, omit this parameter. Type: string (or Expression with resultType string).'
-        type: object
-      skip:
-        description: 'Specifies the how many documents skipped and where MongoDB begins returning results. This approach may be useful in implementing paginated results. Type: integer (or Expression with resultType integer).'
-        type: object
-      sort:
-        description: 'Specifies the order in which the query returns matching documents. Type: string (or Expression with resultType string). Type: string (or Expression with resultType string).'
-        type: object
-    type: object
   MongoDbSource:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -2085,21 +1717,6 @@ definitions:
     properties:
       query:
         description: 'Database query. Should be a SQL-92 query expression. Type: string (or Expression with resultType string).'
-        type: object
-    type: object
-  MongoDbV2Source:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity source for a MongoDB database.
-    properties:
-      batchSize:
-        description: 'Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property�s main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer).'
-        type: object
-      cursorMethods:
-        $ref: '#/definitions/MongoDbCursorMethodsProperties'
-        description: Cursor methods for Mongodb query
-      filter:
-        description: 'Specifies selection filter using query operators. To return all documents in a collection, omit this parameter or pass an empty document ({}). Type: string (or Expression with resultType string).'
         type: object
     type: object
   NetezzaSource:
@@ -2118,21 +1735,6 @@ definitions:
     properties:
       preCopyScript:
         description: 'A query to execute before starting the copy. Type: string (or Expression with resultType string).'
-        type: object
-    type: object
-  Office365Source:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity source for an Office365 service.
-    properties: {}
-    type: object
-  OracleServiceCloudSource:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity Oracle Service Cloud source.
-    properties:
-      query:
-        description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
   OracleSink:
@@ -2194,13 +1796,6 @@ definitions:
       description:
         description: The description of the pipeline.
         type: string
-      folder:
-        description: 'The folder that this Pipeline is in. If not specified, Pipeline will appear at the root level.'
-        properties:
-          name:
-            description: The name of the folder that this Pipeline is in.
-            type: string
-        type: object
       parameters:
         additionalProperties:
           description: Definition of a single parameter for an entity.
@@ -2226,28 +1821,6 @@ definitions:
             - type
           type: object
         description: Definition of all parameters for an entity.
-        type: object
-      variables:
-        additionalProperties:
-          description: Definition of a single variable for a Pipeline.
-          properties:
-            defaultValue:
-              description: Default value of variable.
-              type: object
-            type:
-              description: Variable type.
-              enum:
-                - String
-                - Bool
-                - Array
-              type: string
-              x-ms-enum:
-                modelAsString: true
-                name: VariableType
-          required:
-            - type
-          type: object
-        description: Definition of variable for a Pipeline.
         type: object
     type: object
   PolybaseSettings:
@@ -2354,18 +1927,6 @@ definitions:
     properties:
       query:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
-        type: object
-    type: object
-  RestSource:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity Rest service source.
-    properties:
-      httpRequestTimeout:
-        description: 'The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\d+)\.)?(\d\d):(60|([0-5][0-9])):(60|([0-5][0-9])).'
-        type: object
-      requestInterval:
-        description: 'The time to await before sending next page request. '
         type: object
     type: object
   SSISConnectionManager:
@@ -2518,12 +2079,6 @@ definitions:
         description: 'SAP ECC OData query. For example, "$top=1". Type: string (or Expression with resultType string).'
         type: string
     type: object
-  SapOpenHubSource:
-    allOf:
-      - $ref: '#/definitions/CopySource'
-    description: A copy activity source for SAP Business Warehouse Open Hub Destination source.
-    properties: {}
-    type: object
   ServiceNowSource:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -2533,27 +2088,6 @@ definitions:
         description: 'A query to retrieve data from source. Type: string (or Expression with resultType string).'
         type: object
     type: object
-  SetVariableActivity:
-    allOf:
-      - $ref: '#/definitions/ControlActivity'
-    description: Set value for a Variable.
-    properties:
-      typeProperties:
-        $ref: '#/definitions/SetVariableActivityTypeProperties'
-        description: Set Variable activity properties.
-        x-ms-client-flatten: true
-    required:
-      - typeProperties
-    x-ms-discriminator-value: SetVariable
-  SetVariableActivityTypeProperties:
-    description: SetVariable activity properties.
-    properties:
-      value:
-        description: Value to be set. Could be a static value or Expression
-        type: object
-      variableName:
-        description: Name of the variable whose value needs to be set.
-        type: string
   ShopifySource:
     allOf:
       - $ref: '#/definitions/CopySource'
@@ -2716,6 +2250,8 @@ definitions:
       value:
         description: 'Stored procedure parameter value. Type: string (or Expression with resultType string).'
         type: object
+    required:
+      - value
     type: object
   StoredProcedureParameterType:
     description: Stored procedure parameter type.
@@ -2735,9 +2271,6 @@ definitions:
       - $ref: '#/definitions/CopyTranslator'
     description: A copy activity tabular translator.
     properties:
-      collectionReference:
-        description: 'The JSON Path of the Nested Array that is going to do cross-apply. Type: object (or Expression with resultType object).'
-        type: object
       columnMappings:
         description: 'Column mappings. Example: "UserId: MyUserId, Group: MyGroup, Name: MyName" Type: string (or Expression with resultType string).'
         type: object
@@ -2786,19 +2319,6 @@ definitions:
     required:
       - expression
       - activities
-  UserProperty:
-    description: User property.
-    properties:
-      name:
-        description: User property name.
-        type: string
-      value:
-        description: 'User property value. Type: string (or Expression with resultType string).'
-        type: object
-    required:
-      - name
-      - value
-    type: object
   VerticaSource:
     allOf:
       - $ref: '#/definitions/CopySource'
