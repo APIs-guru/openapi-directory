@@ -1,0 +1,84 @@
+openapi: 3.0.1
+servers:
+  - url: 'https://api.ipinfodb.com'
+info:
+  contact:
+    x-twitter: ipinfodb
+  description: 'The API returns the location of an IP address (country, region, city, zipcode, latitude, longitude) and the associated timezone in XML, JSON or plain text format.'
+  title: IPInfoDB IP Address Lookup
+  version: '1.0'
+  x-apisguru-categories:
+    - location
+  x-logo:
+    url: 'https://twitter.com/ipinfodb/profile_image?size=original'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: openapi
+      url: 'https://api.swaggerhub.com/apis/ipinfodb/ipinfodb-ip-address-lookup/1.0'
+      version: '3.0'
+  x-providerName: ipinfodb.com
+paths:
+  /v3/ip-city/:
+    get:
+      description: Get location of an IP address
+      parameters:
+        - in: query
+          name: ip
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: format
+          schema:
+            enum:
+              - json
+              - xml
+            type: string
+        - in: query
+          name: key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json; charset=utf-8:
+              examples:
+                '0':
+                  value: '{"statusCode" : "","statusMessage" : "","ipAddress" : "","countryCode" : "","countryName" : "","regionName" : "","cityName" : "","zipCode" : "","latitude" : "","longitude" : "","timeZone" : ""}'
+              schema:
+                type: string
+          description: Get location information
+  /v3/ip-country/:
+    get:
+      description: Get country of an IP address
+      parameters:
+        - in: query
+          name: ip
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: key
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: format
+          schema:
+            enum:
+              - json
+              - xml
+            type: string
+      responses:
+        '200':
+          content:
+            application/json; charset=utf-8:
+              examples:
+                '0':
+                  value: '{"statusCode" : "","statusMessage" : "","ipAddress" : "","countryCode" : "","countryName" : ""}'
+              schema:
+                type: string
+          description: Get country information
