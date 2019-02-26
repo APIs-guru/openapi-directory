@@ -1,0 +1,58 @@
+openapi: 3.0.1
+servers:
+  - url: 'https://api.ip2location.com'
+info:
+  contact:
+    x-twitter: ip2location
+  description: 'IP2Location web service providing a service to do a reverse lookup of an IP address to an ISO3166 country code, region or state, city, latitude and longitude, ZIP/Postal code, time zone, Internet Service Provider (ISP) or company name, domain name, net speed, area code, weather station code, weather station name, mobile country code (MCC), mobile network code (MNC) and carrier brand, elevation, and usage type. Refer to https://www.ip2location.com/web-service for further information.'
+  title: IP2Location IP Geolocation
+  version: '1.0'
+  x-apisguru-categories:
+    - location
+  x-logo:
+    url: 'https://twitter.com/ip2location/profile_image?size=original'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: openapi
+      url: 'https://api.swaggerhub.com/apis/ip2location/ip2location-ip-geolocation/1.0'
+      version: '3.0'
+  x-providerName: ip2location.com
+  x-serviceName: geolocation
+paths:
+  /:
+    get:
+      description: Get geolocation information via IP address
+      parameters:
+        - in: query
+          name: package
+          schema:
+            type: string
+        - in: query
+          name: ip
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: format
+          schema:
+            enum:
+              - json
+              - xml
+            type: string
+        - in: query
+          name: key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json; charset=utf-8:
+              examples:
+                '0':
+                  value: '{"country_code":"","country_name":"","region_name":"","city_name":"","latitude":"","longitude":"","zip_code":"","time_zone":"","isp":"","domain":"","net_speed":"","idd_code":"","area_code":"","weather_station_code":"","weather_station_name":"","mcc":"","mnc":"","mobile_brand":"","elevation":"","usage_type":""}'
+              schema:
+                type: string
+          description: Get response from IP lookup
