@@ -1,0 +1,102 @@
+openapi: 3.0.1
+servers:
+  - description: Send an SMS with verification code and a custom message for authentication purpose.
+    url: 'https://api.fraudlabspro.com'
+  - description: Verify that an OTP sent by the Send SMS Verification API is valid.
+    url: 'https://api.fraudlabspro.com'
+info:
+  contact:
+    x-twitter: fraudlabspro
+  description: 'Send an SMS with verification code and a custom message for authentication purpose. It helps merchants to minimize chargebacks and fraud for various kinds of payment method, such as credit card, paypal, cod and so on. Please visit https://www.fraudlabspro.com to learn more.'
+  title: FraudLabs Pro SMS Verification
+  version: '1.0'
+  x-apisguru-categories:
+    - telecom
+  x-logo:
+    url: 'https://twitter.com/fraudlabspro/profile_image?size=original'
+  x-origin:
+    - converter:
+        url: 'https://github.com/lucybot/api-spec-converter'
+        version: 2.7.31
+      format: openapi
+      url: 'https://api.swaggerhub.com/apis/fraudlabs-pro/fraudlabspro-sms-verification/1.0'
+      version: '3.0'
+  x-providerName: fraudlabspro.com
+  x-serviceName: sms-verification
+paths:
+  /v1/verification/result:
+    get:
+      description: Verify that an OTP sent by the Send SMS Verification API is valid.
+      parameters:
+        - in: query
+          name: tran_id
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: key
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: format
+          schema:
+            enum:
+              - json
+              - xml
+            type: string
+        - in: query
+          name: otp
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json; charset=utf-8:
+              examples:
+                '0':
+                  value: '{"result":"","error":""}'
+              schema:
+                type: string
+          description: Get verification response
+  /v1/verification/send:
+    post:
+      description: Send an SMS with verification code and a custom message for authentication purpose.
+      parameters:
+        - in: query
+          name: country_code
+          schema:
+            type: string
+        - in: query
+          name: format
+          schema:
+            enum:
+              - json
+              - xml
+            type: string
+        - in: query
+          name: tel
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: key
+          required: true
+          schema:
+            type: string
+        - allowEmptyValue: true
+          in: query
+          name: mesg
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json; charset=utf-8:
+              examples:
+                '0':
+                  value: '{"tran_id":"","credits_remaining":"0","error":""}'
+              schema:
+                type: string
+          description: send verification response
