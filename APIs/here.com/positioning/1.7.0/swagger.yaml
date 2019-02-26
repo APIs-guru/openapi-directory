@@ -1,0 +1,896 @@
+swagger: '2.0'
+schemes:
+  - https
+host: pos.api.here.com
+basePath: /positioning/v1
+info:
+  contact:
+    x-twitter: HERE
+  description: Positioning API for making location requests.
+  title: Positioning
+  version: 1.7.0
+  x-apisguru-categories:
+    - location
+  x-document-meta-data:
+    copyright: © 2019 HERE Europe B.V.
+    date-created: '2019-01-02T09:02:51+00:00'
+    document-id: 5ad3ee14-c41a-4245-9b90-cfc01a090025
+  x-logo:
+    url: 'https://twitter.com/HERE/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://developer.here.com/documentation/positioning/swagger/2.0/api_reference/positioning-v1-external-spec.json'
+      version: '2.0'
+  x-providerName: here.com
+  x-serviceName: positioning
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions: {}
+parameters:
+  body_observations_locate:
+    description: Request body containing cell and/or WLAN measurement data
+    in: body
+    name: observations_locate
+    required: true
+    schema:
+      $ref: '#/definitions/observations_locate'
+  header_content_encoding_gzip:
+    description: Indicates the data in the body is gzip encoded. Value must be 'gzip'.
+    enum:
+      - gzip
+    in: header
+    name: Content-Encoding
+    required: false
+    type: string
+  header_content_type_json:
+    description: Indicates the media-type of the request body. Value must be 'application/json'.
+    enum:
+      - application/json
+    in: header
+    name: Content-Type
+    required: true
+    type: string
+  querystring_app_code:
+    description: A 20-byte Base64 URL-safe encoded string used for the authentication of the client application.
+    in: query
+    name: app_code
+    required: true
+    type: string
+  querystring_app_id:
+    description: A 20-byte Base64 URL-safe encoded string used for the authentication of the client application.
+    in: query
+    name: app_id
+    required: true
+    type: string
+  querystring_confidence:
+    description: 'Confidence level in percent for the accuracy/uncertainty in the location estimate response. If not specified, the default is 68 (this corresponds to a 68% probability that the true position is within the accuracy/uncertainty radius of the location estimate: the higher the number, the greater the confidence level).'
+    in: query
+    maximum: 99
+    minimum: 50
+    name: confidence
+    required: false
+    type: integer
+  querystring_desired:
+    description: Comma-separated list of additional data fields that the service should include in the response if data is available. The query parameter supports the value 'altitude'.
+    enum:
+      - altitude
+    in: query
+    name: desired
+    required: false
+    type: string
+  querystring_fallback:
+    description: |
+      Acceptable fallback options for cell and WLAN positioning. Values 'area' and 'any' apply to cell based positioning, and value 'singleWifi' applies to WLAN based positioning. They may both be combined in the same request.
+      By default cell based positioning returns cell tower level location estimates only. If you allow a WGS-84 compliant geocoordinate location estimate based on LAC, RNC, TAC, NID, or RZ areas, use the fallback=area setting. If you use the fallback=any setting, the service uses all available cell fallback methods and therefore the location estimate in the response may be at the MNC, SID, or MCC level.
+      For privacy reasons precise positioning based on a single WLAN AP is not possible. You can use the fallback=singleWifi setting to allow less accurate positioning based on a single WLAN AP. In that case the center location of the position estimate will be deviated and the reported accuracy radius will be larger.
+    enum:
+      - any
+      - area
+      - singleWifi
+    in: query
+    name: fallback
+    required: false
+    type: string
+  querystring_required:
+    description: 'Comma-separated list of additional data fields that the service should include in the response. If the data is not available, the response contains an error message. The query parameter supports the value ''altitude''.'
+    enum:
+      - altitude
+    in: query
+    name: required
+    required: false
+    type: string
+paths:
+  /locate:
+    post:
+      description: Request WGS-84 compliant geocordinates for a location based on 2G/3G/4G cell and/or WLAN measurements.
+      parameters:
+        - $ref: '#/parameters/querystring_fallback'
+        - $ref: '#/parameters/querystring_desired'
+        - $ref: '#/parameters/querystring_required'
+        - $ref: '#/parameters/querystring_confidence'
+        - $ref: '#/parameters/querystring_app_id'
+        - $ref: '#/parameters/querystring_app_code'
+        - $ref: '#/parameters/header_content_encoding_gzip'
+        - $ref: '#/parameters/header_content_type_json'
+        - $ref: '#/parameters/body_observations_locate'
+      responses:
+        '200':
+          description: Request processed successfully and a WGS-84 compliant geocoordinate location estimate was included in the response.
+          schema:
+            $ref: '#/definitions/response_success_locate'
+        '400':
+          description: The request is malformed. Check the message in the response for additional troubleshooting information. The URL query parameters or the JSON POST body in the request is invalid.
+          examples:
+            application/json:
+              error:
+                code: 400
+                description: '''mnc'' must be less than or equal to 999'
+                message: Bad Request
+          schema:
+            $ref: '#/definitions/response_error'
+        '401':
+          description: Authentication has failed due to incorrect credentials. Check your app_id and app_code.
+          examples:
+            application/json:
+              error:
+                code: 401
+                description: 'The request is missing the app_id and app_code parameters. They must both be passed as query parameters. If you do not have app_id and app_code, please obtain them through your customer representative or at http://developer.here.com/myapps.'
+                message: Unauthorized
+          schema:
+            $ref: '#/definitions/response_error'
+        '403':
+          description: Authorization has failed. Access is not allowed with the app_id and app_code you provided.
+          examples:
+            application/json:
+              error:
+                code: 403
+                description: 'These credentials do not authorize access. Please contact your customer representative or submit a request here https://developer.here.com/contact-us to upgrade your account. You can also get valid credentials by registering for a free trial license on https://developer.here.com.'
+                message: Forbidden
+          schema:
+            $ref: '#/definitions/response_error'
+        '404':
+          description: |
+            The values provided in the request cannot produce any content for the response. The location of the WLANs and cells in the request is unknown or the locations of the radio measurements are so widely scattered that the location cannot be determined. Make sure that the network measurements are correct and consistent. Try allowing fallbacks 'area' or 'any' for cell positioning and 'singleWifi' for WLAN positioning.
+          examples:
+            application/json:
+              error:
+                code: 404
+                description: Position not found
+                message: Not Found
+          schema:
+            $ref: '#/definitions/response_error'
+        '405':
+          description: Method not allowed. Only POST is supported.
+          examples:
+            application/json:
+              error:
+                code: 405
+                description: Only HTTP POST method supported
+                message: Not supported
+          schema:
+            $ref: '#/definitions/response_error'
+        '500':
+          description: 'An unexpected server error has occurred, try again later.'
+          examples:
+            application/json:
+              error:
+                code: 500
+                description: Something unexpected happened. System administrators have been notified about the problem. Please try again later.
+                message: Internal Server Error
+          schema:
+            $ref: '#/definitions/response_error'
+      summary: Locate
+definitions:
+  cell_cdma_locate:
+    description: CDMA measurement
+    example:
+      bsid: 8583
+      nid: 10
+      nmr:
+        - channel: 0
+          pnoffset: 357
+        - channel: 0
+          pnoffset: 366
+      sid: 4162
+    properties:
+      bsid:
+        description: 'Base Station ID, BID'
+        example: 8583
+        maximum: 65535
+        minimum: 0
+        type: integer
+      channel:
+        description: 'CDMA channel frequency (Optional, you must specify a value for this item when you specify a value for pnoffset)'
+        example: 1
+        maximum: 2047
+        minimum: 0
+        type: integer
+      nid:
+        description: 'Network Id, NID'
+        example: 10
+        maximum: 65535
+        minimum: 0
+        type: integer
+      nmr:
+        description: CDMA Network measurements (Optional)
+        example:
+          - channel: 0
+            pnoffset: 357
+          - channel: 0
+            pnoffset: 366
+        items:
+          $ref: '#/definitions/cell_cdma_nmr'
+        maxItems: 32
+        type: array
+      pilotpower:
+        description: 'Pilot Power (dBm) (Optional). If Pilot Power is not available directly, it needs to be calculated from Total Power in the band and Pilot Strength with respect to the Total Power. Pilot power less than -142dBm should be mapped to -142. Pilot power greater than -49dBm should be mapped to -49.'
+        example: -96
+        maximum: -49
+        minimum: -142
+        type: integer
+      pnoffset:
+        description: 'Pseudonoise offset (Optional, you must specify a value for this item when you specify a value for channel)'
+        example: 367
+        maximum: 511
+        minimum: 0
+        type: integer
+      rz:
+        description: Registration zone (Optional)
+        example: 1234
+        maximum: 4095
+        minimum: 0
+        type: integer
+      sid:
+        description: 'System Id, SID'
+        example: 4162
+        maximum: 32767
+        minimum: 1
+        type: integer
+    required:
+      - sid
+      - nid
+      - bsid
+    type: object
+  cell_cdma_nmr:
+    description: CDMA Network measurement
+    example:
+      channel: 0
+      pnoffset: 357
+    properties:
+      bsid:
+        description: Base Station ID (Optional)
+        example: 8584
+        maximum: 65535
+        minimum: 0
+        type: integer
+      channel:
+        description: CDMA channel frequency
+        example: 1
+        maximum: 2047
+        minimum: 0
+        type: integer
+      pilotpower:
+        description: 'Pilot Power (dBm) (Optional). If Pilot Power is not available directly, it needs to be calculated from Total Power in the band and Pilot Strength with respect to the Total Power. Pilot power less than -142dBm should be mapped to -142. Pilot power greater than -49dBm should be mapped to -49.'
+        example: -99
+        maximum: -49
+        minimum: -142
+        type: integer
+      pnoffset:
+        description: Pseudonoise offset
+        example: 357
+        maximum: 511
+        minimum: 0
+        type: integer
+    required:
+      - pnoffset
+      - channel
+    type: object
+  cell_gsm_locate:
+    description: GSM measurement
+    example:
+      cid: 16504
+      lac: 5126
+      mcc: 262
+      mnc: 1
+      nmr:
+        - bcch: '82'
+          bsic: '6'
+        - bcch: '85'
+          bsic: '7'
+        - bcch: '93'
+          bsic: '12'
+        - bcch: '88'
+          bsic: '13'
+        - bcch: '88'
+          bsic: '19'
+    properties:
+      cid:
+        description: 'Cell Identifier, 16 bits. Mcc+mnc+lac+cid uniquely identifies the GSM cell.'
+        example: 16504
+        maximum: 65535
+        minimum: 0
+        type: integer
+      lac:
+        description: Location Area Code
+        example: 5126
+        maximum: 65535
+        minimum: 1
+        type: integer
+      mcc:
+        description: Mobile Country Code
+        example: 262
+        maximum: 999
+        minimum: 200
+        type: integer
+      mnc:
+        description: Mobile Network Code
+        example: 1
+        maximum: 999
+        minimum: 0
+        type: integer
+      nmr:
+        description: Network measurements (Optional)
+        example:
+          - bcch: '82'
+            bsic: '6'
+        items:
+          $ref: '#/definitions/cell_gsm_nmr'
+        maxItems: 16
+        type: array
+      rxlevel:
+        description: Received Signal power (dBm) (Optional). Power less than -110dBm should be mapped to -110. Power greater than -25dBm should be mapped to -25.
+        example: -78
+        maximum: -25
+        minimum: -110
+        type: integer
+      ta:
+        description: Timing advance (Optional). Expressed in the units of GSM bits equaling to 48/13 μs ~ 1107 meters.
+        example: 3
+        maximum: 63
+        minimum: 0
+        type: integer
+    required:
+      - mcc
+      - mnc
+      - lac
+      - cid
+    type: object
+  cell_gsm_nmr:
+    description: GSM Network measurement
+    example:
+      bcch: '82'
+      bsic: '6'
+    properties:
+      bcch:
+        description: Broadcast Control Channel (Synonymous to ARFCN = Absolute Radio Frequency Channel)
+        example: 82
+        maximum: 1023
+        minimum: 0
+        type: integer
+      bsic:
+        description: 'Base Station Identity Code (for instance, color code)'
+        example: 6
+        maximum: 63
+        minimum: 0
+        type: integer
+      cid:
+        description: Cell Identifier (Optional)
+        example: 16503
+        maximum: 65535
+        minimum: 0
+        type: integer
+      lac:
+        description: Location Area Code (Optional)
+        example: 5126
+        maximum: 65535
+        minimum: 1
+        type: integer
+      rxlevel:
+        description: Received Signal power (dBm) (Optional). Power less than -110dBm should be mapped to -110. Power greater than -25dBm should be mapped to -25.
+        example: -77
+        maximum: -25
+        minimum: -110
+        type: integer
+    required:
+      - bsic
+      - bcch
+    type: object
+  cell_lte_locate:
+    description: LTE measurement
+    example:
+      cid: 2898945
+      mcc: 262
+      mnc: 2
+      nmr:
+        - earfcn: 6300
+          pci: 237
+        - earfcn: 6300
+          pci: 442
+    properties:
+      cid:
+        description: 'E-UTRA Cell Identifier, 28 bits (20 bits eNodeB and 8 bits Cell id). Mcc+mnc+cid uniquely identifies the LTE cell, tac is optional.'
+        example: 2898945
+        maximum: 268435455
+        minimum: 0
+        type: integer
+      mcc:
+        description: Mobile Country Code
+        example: 262
+        maximum: 999
+        minimum: 200
+        type: integer
+      mnc:
+        description: Mobile Network Code
+        example: 2
+        maximum: 999
+        minimum: 0
+        type: integer
+      nmr:
+        description: LTE Network measurements (Optional)
+        example:
+          - earfcn: 6300
+            pci: 237
+          - earfcn: 6300
+            pci: 442
+        items:
+          $ref: '#/definitions/cell_lte_nmr'
+        maxItems: 16
+        type: array
+      rsrp:
+        description: 'Reference Signal Received Power = RSRP (dBm) (Optional, you must specify a value for this item when you specify a value for rsrq). Power less than -140dBm should be mapped to -140. Power greater than -44dBm should be mapped to -44.'
+        example: -95
+        maximum: -44
+        minimum: -140
+        type: integer
+      rsrq:
+        description: 'Reference Signal Received Quality = RSRQ (dB) (Optional). Values less than -19.5dB should be mapped to -19.5, and values greater than -3dB should be mapped to -3dB.'
+        example: -12
+        maximum: -3
+        minimum: -19.5
+        type: number
+      ta:
+        description: Timing Advance (Optional). Expressed in the units of 16*Ts (16 Basic time units) = 16/(15000*2048) seconds ~ 156meters. For reference see TS 36.213 and 36.211.
+        example: 40
+        maximum: 1282
+        minimum: 0
+        type: integer
+      tac:
+        description: Tracking Area Code (Optional)
+        example: 1
+        maximum: 65535
+        minimum: 0
+        type: integer
+    required:
+      - mcc
+      - mnc
+      - cid
+    type: object
+  cell_lte_nmr:
+    description: LTE Network measurement
+    example:
+      earfcn: 6300
+      pci: 237
+    properties:
+      cid:
+        description: E-UTRA Cell Identifier (Optional)
+        example: 2898945
+        maximum: 268435455
+        minimum: 0
+        type: integer
+      earfcn:
+        description: Evolved Absolute Radio Frequency Channel
+        example: 6300
+        maximum: 65535
+        minimum: 0
+        type: integer
+      pci:
+        description: Physical Cell Identity
+        example: 237
+        maximum: 503
+        minimum: 0
+        type: integer
+      rsrp:
+        description: 'Reference Signal Received Power = RSRP (dBm) (Optional, you must specify a value for this item when you specify a value for rsrq). Power less than -140dBm should be mapped to -140. Power greater than -44dBm should be mapped to -44.'
+        example: -95
+        maximum: -44
+        minimum: -140
+        type: integer
+      rsrq:
+        description: 'Reference Signal Received Quality = RSRQ (dB) (Optional). Values less than -19.5dB should be mapped to -19.5, and values greater than -3dB should be mapped to -3dB.'
+        example: -12
+        maximum: -3
+        minimum: -19.5
+        type: number
+    required:
+      - pci
+      - earfcn
+    type: object
+  cell_tdscdma_locate:
+    description: TD-SCDMA measurement
+    example:
+      cid: 18563770
+      mcc: 460
+      mnc: 0
+      nmr:
+        - cellparams: 86
+          uarfcn: 10100
+        - cellparams: 14
+          uarfcn: 10121
+    properties:
+      cid:
+        description: 'UTRAN Cell Identifier, 28 bits (12 bits RNC and 16 bits Cell id). Mcc+mnc+cid uniquely identifies the TDSCDMA cell, lac is optional.'
+        example: 18563770
+        maximum: 268435455
+        minimum: 0
+        type: integer
+      lac:
+        description: Location Area Code (Optional)
+        example: 1
+        maximum: 65535
+        minimum: 1
+        type: integer
+      mcc:
+        description: Mobile Country Code
+        example: 460
+        maximum: 999
+        minimum: 200
+        type: integer
+      mnc:
+        description: Mobile Network Code
+        example: 1
+        maximum: 999
+        minimum: 0
+        type: integer
+      nmr:
+        description: Network measurements (Optional). Maximum of 8 distinct uarfcn frequencies.
+        example:
+          - cellparams: 86
+            uarfcn: 10100
+          - cellparams: 14
+            uarfcn: 10121
+        items:
+          $ref: '#/definitions/cell_tdscdma_nmr'
+        maxItems: 32
+        type: array
+      ta:
+        description: 'Timing advance (Optional). Round-Trip distance presented in the units of 4*c/7.68e6 ~156 meters. That is, the scaling factor is 4 times the chip length at chip rate of 7.68 Mchips/s. Note that at chip rates 1.28 Mchips/s and 3.84 Mchips/s you need to scale according to chip length of 7.68 Mchips/s, that is, multiply by 6 or 2 if needed.'
+        example: 20
+        maximum: 1530
+        minimum: 0
+        type: integer
+    required:
+      - mcc
+      - mnc
+      - cid
+    type: object
+  cell_tdscdma_nmr:
+    description: TD-SCDMA Network measurement
+    example:
+      cellparams: 86
+      uarfcn: 10100
+    properties:
+      cellparams:
+        description: Cell Parameters ID (CDMA Spreading Code ID)
+        example: 86
+        maximum: 127
+        minimum: 0
+        type: integer
+      cid:
+        description: Cell Identifier (uc-id) (Optional)
+        example: 18563772
+        maximum: 268435455
+        minimum: 0
+        type: integer
+      pathloss:
+        description: 'UTRAN path loss (dB) (Optional, you must specify a value for this item when you specify a value for rscp).'
+        example: 80
+        maximum: 158
+        minimum: 46
+        type: integer
+      rscp:
+        description: 'Received Signal Code Power = RSCP (dBm) (Optional, you must specify a value for this item when you specify a value for pathloss). Power less than -120dBm should be mapped to -120. Power greater than -25dBm should be mapped to -25.'
+        example: -50
+        maximum: -25
+        minimum: -120
+        type: integer
+      uarfcn:
+        description: Carrier frequency of a UTRA-TDD Serving Cell
+        example: 10100
+        maximum: 16383
+        minimum: 0
+        type: integer
+    required:
+      - uarfcn
+      - cellparams
+    type: object
+  cell_wcdma_locate:
+    description: WCDMA measurement
+    example:
+      cid: 14674663
+      mcc: 262
+      mnc: 7
+      nmr:
+        - psc: 149
+          uarfcndl: 10786
+        - psc: 211
+          uarfcndl: 10762
+    properties:
+      cid:
+        description: 'UTRAN Cell Identifier, 28 bits (12 bits RNC and 16 bits Cell id). Mcc+mnc+cid uniquely identifies the WCDMA cell, lac is optional.'
+        example: 14674663
+        maximum: 268435455
+        minimum: 0
+        type: integer
+      lac:
+        description: Location Area Code (Optional)
+        example: 12345
+        maximum: 65535
+        minimum: 1
+        type: integer
+      mcc:
+        description: Mobile Country Code
+        example: 262
+        maximum: 999
+        minimum: 200
+        type: integer
+      mnc:
+        description: Mobile Network Code
+        example: 7
+        maximum: 999
+        minimum: 0
+        type: integer
+      nmr:
+        description: Network measurements (Optional). Maximum of 8 distinct uarfcndl frequencies.
+        example:
+          - psc: 149
+            uarfcndl: 10786
+          - psc: 211
+            uarfcndl: 10762
+        items:
+          $ref: '#/definitions/cell_wcdma_nmr'
+        maxItems: 32
+        type: array
+    required:
+      - mcc
+      - mnc
+      - cid
+    type: object
+  cell_wcdma_nmr:
+    description: WCDMA Network measurement
+    example:
+      psc: 149
+      uarfcndl: 10786
+    properties:
+      cid:
+        description: UTRAN Cell Identifier (uc-id) (Optional)
+        example: 14674662
+        maximum: 268435455
+        minimum: 0
+        type: integer
+      pathloss:
+        description: UTRAN path loss (dB) (Optional).
+        example: 90
+        maximum: 158
+        minimum: 46
+        type: integer
+      psc:
+        description: 'Primary Scrambling Code (Primary CPICH, Primary Control Pilot Channel)'
+        example: 149
+        maximum: 511
+        minimum: 0
+        type: integer
+      rscp:
+        description: Received Signal Code Power = RSCP (dBm) (Optional). Power less than -120dBm should be mapped to -120. Power greater than -25dBm should be mapped to -25.
+        example: -80
+        maximum: -25
+        minimum: -120
+        type: integer
+      uarfcndl:
+        description: Downlink frequency of a UTRA-FDD Serving Cell
+        example: 10786
+        maximum: 16383
+        minimum: 0
+        type: integer
+    required:
+      - uarfcndl
+      - psc
+    type: object
+  client_info:
+    description: Information about the client
+    example:
+      manufacturer: Lemon
+      model: Flagship X1
+      name: FinderApp
+      version: 2.0.31
+    properties:
+      firmware:
+        description: Device firmware version information
+        example: G506FXX453J1
+        maxLength: 150
+        minLength: 1
+        type: string
+      manufacturer:
+        description: Manufacturer of the device (hardware)
+        example: Lemon
+        maxLength: 50
+        minLength: 2
+        type: string
+      model:
+        description: Model of the device (hardware)
+        example: Flagship X1
+        maxLength: 50
+        minLength: 1
+        type: string
+      name:
+        description: Name of the client software accessing the HERE API
+        example: FinderApp
+        maxLength: 50
+        minLength: 3
+        type: string
+      platform:
+        description: 'Software platform information of the device, for example operating system name and version.'
+        example: Android 7.0
+        maxLength: 50
+        minLength: 3
+        type: string
+      version:
+        description: 'Version of the client software in format X.Y.Z, where X [0..255] is a major, Y [0..255] is a minor, and Z [0..65535] is a build version number. Increase the version/build number for each release of the client.'
+        example: 2.0.31
+        maxLength: 13
+        minLength: 3
+        type: string
+    required:
+      - manufacturer
+      - model
+      - name
+      - version
+    type: object
+  observations_locate:
+    description: 'Object wrapping the location data submitted in a request for a position. At least one gsm, wcdma, tdscdma, lte, cdma, or wlan elements is required. The elements must be unique within the request.'
+    example:
+      client:
+        manufacturer: Lemon
+        model: Flagship X1
+        name: FinderApp
+        version: 2.0.31
+      lte:
+        - cid: 2898945
+          mcc: 262
+          mnc: 2
+      wlan:
+        - mac: F4-55-95-11-2C-C1
+    properties:
+      cdma:
+        description: CDMA cells
+        items:
+          $ref: '#/definitions/cell_cdma_locate'
+        maxItems: 16
+        type: array
+      client:
+        $ref: '#/definitions/client_info'
+      gsm:
+        description: GSM cells (GERAN)
+        items:
+          $ref: '#/definitions/cell_gsm_locate'
+        maxItems: 16
+        type: array
+      lte:
+        description: 'LTE cells (E-UTRA, 4G)'
+        items:
+          $ref: '#/definitions/cell_lte_locate'
+        maxItems: 16
+        type: array
+      tdscdma:
+        description: 'TD-SCDMA cell (UTRA-TDD, 3G UMTS TDD)'
+        items:
+          $ref: '#/definitions/cell_tdscdma_locate'
+        maxItems: 16
+        type: array
+      wcdma:
+        description: 'WCDMA cells (UTRA-FDD, 3G UMTS)'
+        items:
+          $ref: '#/definitions/cell_wcdma_locate'
+        maxItems: 16
+        type: array
+      wlan:
+        description: WLAN access points
+        items:
+          $ref: '#/definitions/wlan_locate'
+        maxItems: 256
+        type: array
+  position_locate:
+    description: Object containing information on a location where a measurement was taken.
+    example:
+      accuracy: 829
+      alt: 142
+      altaccuracy: 20
+      lat: 61.4706194
+      lng: 23.72265816
+    properties:
+      accuracy:
+        description: Uncertainty circle radius in meters (degree of confidence according to the 'confidence' parameter).
+        example: 829
+        minimum: 1
+        type: number
+      alt:
+        description: Altitude in meters (referenced to the WGS-84 ellipsoid) negative or positive.
+        example: 142
+        type: integer
+      altaccuracy:
+        description: Uncertainty of the altitude estimate in meters (degree of confidence according to the 'confidence' parameter).
+        example: 20
+        minimum: 1
+        type: integer
+      lat:
+        description: 'Latitude in WGS-84 format, decimal representation ranging from -90 to 90.'
+        example: 61.4706194
+        maximum: 90
+        minimum: -90
+        type: number
+      lng:
+        description: 'Longitude in WGS-84 format, decimal representation ranging from -180 to 180.'
+        example: 23.72265816
+        maximum: 180
+        minimum: -180
+        type: number
+    required:
+      - lat
+      - lng
+      - accuracy
+    type: object
+  response_error:
+    description: Object wrapper for the error response to a request.
+    example:
+      error:
+        code: 400
+        description: '''mnc'' must be less than or equal to 999'
+        message: Bad Request
+    properties:
+      error:
+        description: Object containing information about the error that happened
+        properties:
+          code:
+            description: Same as the HTTP response status code
+            type: integer
+          description:
+            description: More detailed message
+            type: string
+          statusMessage:
+            description: Same as the HTTP status message
+            type: string
+        required:
+          - code
+          - statusMessage
+        type: object
+    required:
+      - error
+    type: object
+  response_success_locate:
+    description: Object wrapper for the response to a location request.
+    properties:
+      location:
+        $ref: '#/definitions/position_locate'
+    required:
+      - location
+    type: object
+  wlan_locate:
+    description: WLAN measurement
+    example:
+      mac: 8C-1A-BF-20-66-AD
+    properties:
+      mac:
+        description: |
+          The MAC address of the WLAN access point. MAC-48 address with colon (:) or hyphen (-) separators, upper or lower case hex digits. Note that if the SSID contains postfix "_nomap", the AP should not be used for positioning. For privacy reasons positioning based on a single WLAN AP is not possible; there has to be at least one other matching wlan or cell. Alternative you can allow fallbacks to less accurate single WLAN AP location estimates by using the setting fallback=singleWifi.
+        example: 8C-1A-BF-20-66-AD
+        type: string
+      powrx:
+        description: Received signal level (dBm) at the terminal (Optional)
+        example: -76
+        maximum: 0
+        minimum: -128
+        type: integer
+    required:
+      - mac
+    type: object
