@@ -9,7 +9,7 @@ info:
     url: 'https://google.com'
   description: The Cloud Filestore API is used for creating and managing cloud file servers.
   title: Cloud Filestore
-  version: v1beta1
+  version: v1
   x-apiClientRegistration:
     url: 'https://console.developers.google.com'
   x-logo:
@@ -19,9 +19,9 @@ info:
         url: 'https://github.com/lucybot/api-spec-converter'
         version: 2.7.31
       format: google
-      url: 'https://file.googleapis.com/$discovery/rest?version=v1beta1'
+      url: 'https://file.googleapis.com/$discovery/rest?version=v1'
       version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: file
 externalDocs:
@@ -102,7 +102,7 @@ parameters:
 tags:
   - name: projects
 paths:
-  '/v1beta1/{name}':
+  '/v1/{name}':
     delete:
       description: Deletes an instance.
       operationId: file.projects.locations.instances.delete
@@ -194,7 +194,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/v1beta1/{name}/locations':
+  '/v1/{name}/locations':
     get:
       description: Lists information about the supported locations for this service.
       operationId: file.projects.locations.list
@@ -239,7 +239,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v1beta1/{name}/operations':
+  '/v1/{name}/operations':
     get:
       description: |-
         Lists operations that match the specified filter in the request. If the
@@ -294,7 +294,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
-  '/v1beta1/{name}:cancel':
+  '/v1/{name}:cancel':
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -341,7 +341,7 @@ paths:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
         - projects
-  '/v1beta1/{parent}/instances':
+  '/v1/{parent}/instances':
     get:
       description: |-
         Lists all instances in a project for either a specified location
