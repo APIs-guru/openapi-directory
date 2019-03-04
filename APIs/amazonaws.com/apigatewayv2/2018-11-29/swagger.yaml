@@ -466,7 +466,7 @@ paths:
         '201':
           description: Success
           schema:
-            $ref: '#/definitions/CreateIntegrationResult'
+            $ref: '#/definitions/CreateIntegrationResponse'
         '480':
           description: NotFoundException
           schema:
@@ -699,7 +699,7 @@ paths:
         '201':
           description: Success
           schema:
-            $ref: '#/definitions/CreateRouteResult'
+            $ref: '#/definitions/CreateRouteResponse'
         '480':
           description: NotFoundException
           schema:
@@ -1489,7 +1489,7 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/GetIntegrationResult'
+            $ref: '#/definitions/GetIntegrationResponse'
         '480':
           description: NotFoundException
           schema:
@@ -1519,7 +1519,7 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/UpdateIntegrationResult'
+            $ref: '#/definitions/UpdateIntegrationResponse'
         '480':
           description: NotFoundException
           schema:
@@ -1822,7 +1822,7 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/GetRouteResult'
+            $ref: '#/definitions/GetRouteResponse'
         '480':
           description: NotFoundException
           schema:
@@ -1852,7 +1852,7 @@ paths:
         '200':
           description: Success
           schema:
-            $ref: '#/definitions/UpdateRouteResult'
+            $ref: '#/definitions/UpdateRouteResponse'
         '480':
           description: NotFoundException
           schema:
@@ -2156,7 +2156,10 @@ definitions:
     properties:
       ApiEndpoint:
         $ref: '#/definitions/__string'
-        description: 'The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The stage name is typically appended to this URI to form a complete path to a deployed API stage.'
+        description: |-
+          The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+           stage name is typically appended to this URI to form a complete path to a deployed
+           API stage.
       ApiId:
         $ref: '#/definitions/Id'
         description: The API ID.
@@ -2177,7 +2180,7 @@ definitions:
         description: The name of the API.
       ProtocolType:
         $ref: '#/definitions/ProtocolType'
-        description: 'The API protocol: HTTP or WEBSOCKET.'
+        description: 'The API protocol: Currently only WEBSOCKET is supported.'
       RouteSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The route selection expression for the API.
@@ -2186,7 +2189,9 @@ definitions:
         description: A version identifier for the API.
       Warnings:
         $ref: '#/definitions/__listOf__string'
-        description: The warning messages reported when failonwarnings is turned on during API import.
+        description: |-
+          The warning messages reported when failonwarnings is turned on during
+           API import.
   CreateApiRequest:
     type: object
     required:
@@ -2208,7 +2213,7 @@ definitions:
         description: The name of the API.
       ProtocolType:
         $ref: '#/definitions/ProtocolType'
-        description: 'The API protocol: HTTP or WEBSOCKET.'
+        description: 'The API protocol: Currently only WEBSOCKET is supported.'
       RouteSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The route selection expression for the API.
@@ -2254,31 +2259,71 @@ definitions:
     properties:
       AuthorizerCredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.'
+        description: |-
+          Specifies the required credentials as an IAM role for API Gateway to invoke the
+           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+           Resource Name (ARN). To use resource-based permissions on the Lambda function,
+           specify null.
       AuthorizerId:
         $ref: '#/definitions/Id'
         description: The authorizer identifier.
       AuthorizerResultTtlInSeconds:
         $ref: '#/definitions/IntegerWithLengthBetween0And3600'
-        description: 'The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.'
+        description: |-
+          The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+           authorization caching is disabled. If it is greater than 0, API Gateway will cache
+           authorizer responses. If this field is not set, the default value is 300. The maximum
+           value is 3600, or 1 hour.
       AuthorizerType:
         $ref: '#/definitions/AuthorizerType'
-        description: 'The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.'
+        description: |-
+          The authorizer type. Currently the only valid value is REQUEST, for a
+           Lambda function using incoming request parameters.
       AuthorizerUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: 'The authorizer''s Uniform Resource Identifier (URI). ForREQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.'
+        description: |-
+          The authorizer's Uniform Resource Identifier (URI).
+           ForREQUEST authorizers, this must be a
+           well-formed Lambda function URI, for example,
+           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+           In general, the URI has this form:
+           arn:aws:apigateway:{region}:lambda:path/{service_api}
+           , where {region} is the same as the region hosting the Lambda
+           function, path indicates that the remaining substring in the URI should be treated as
+           the path to the resource, including the initial /. For Lambda functions,
+           this is usually of the form
+           /2015-03-31/functions/[FunctionARN]/invocations.
       IdentitySource:
         $ref: '#/definitions/IdentitySourceList'
-        description: '<p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.</p>'
+        description: |-
+          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
+           caching is enabled. The value is a comma-separated string of one or more mapping
+           expressions of the specified request parameters. For example, if an Auth
+           header and a Name query string parameters are defined as identity
+           sources, this value is method.request.header.Auth,
+           method.request.querystring.Name. These parameters will be used to
+           derive the authorization caching key and to perform runtime validation of the
+           REQUEST authorizer by verifying all of the identity-related request
+           parameters are present, not null, and non-empty. Only when this is true does the
+           authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+           Unauthorized response without calling the Lambda function. The valid value
+           is a string of comma-separated mapping expressions of the specified request
+           parameters. When the authorization caching is not enabled, this property is
+           optional.</p>
       IdentityValidationExpression:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The validation expression does not apply to the REQUEST authorizer.
+        description: |-
+          The
+           validation expression does not apply to the REQUEST authorizer.
       Name:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The name of the authorizer.
       ProviderArns:
         $ref: '#/definitions/ProviderArnList'
-        description: 'For REQUEST authorizer, this is not defined.'
+        description: |-
+          For
+           REQUEST authorizer, this is not
+           defined.
   CreateAuthorizerRequest:
     type: object
     required:
@@ -2289,28 +2334,68 @@ definitions:
     properties:
       AuthorizerCredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.'
+        description: |-
+          Specifies the required credentials as an IAM role for API Gateway to invoke the
+           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+           Resource Name (ARN). To use resource-based permissions on the Lambda function,
+           specify null.
       AuthorizerResultTtlInSeconds:
         $ref: '#/definitions/IntegerWithLengthBetween0And3600'
-        description: 'The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.'
+        description: |-
+          The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+           authorization caching is disabled. If it is greater than 0, API Gateway will cache
+           authorizer responses. If this field is not set, the default value is 300. The maximum
+           value is 3600, or 1 hour.
       AuthorizerType:
         $ref: '#/definitions/AuthorizerType'
-        description: 'The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.'
+        description: |-
+          The authorizer type. Currently the only valid value is REQUEST, for a
+           Lambda function using incoming request parameters.
       AuthorizerUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: 'The authorizer''s Uniform Resource Identifier (URI). For REQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.'
+        description: |-
+          The authorizer's Uniform Resource Identifier (URI). For
+           REQUEST authorizers, this must be a
+           well-formed Lambda function URI, for example,
+           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+           In general, the URI has this form:
+           arn:aws:apigateway:{region}:lambda:path/{service_api}
+           , where {region} is the same as the region hosting the Lambda
+           function, path indicates that the remaining substring in the URI should be treated as
+           the path to the resource, including the initial /. For Lambda functions,
+           this is usually of the form
+           /2015-03-31/functions/[FunctionARN]/invocations.
       IdentitySource:
         $ref: '#/definitions/IdentitySourceList'
-        description: '<p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.</p>'
+        description: |-
+          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
+           caching is enabled. The value is a comma-separated string of one or more mapping
+           expressions of the specified request parameters. For example, if an Auth
+           header and a Name query string parameters are defined as identity
+           sources, this value is method.request.header.Auth,
+           method.request.querystring.Name. These parameters will be used to
+           derive the authorization caching key and to perform runtime validation of the
+           REQUEST authorizer by verifying all of the identity-related request
+           parameters are present, not null, and non-empty. Only when this is true does the
+           authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+           Unauthorized response without calling the Lambda function. The valid value
+           is a string of comma-separated mapping expressions of the specified request
+           parameters. When the authorization caching is not enabled, this property is
+           optional.</p>
       IdentityValidationExpression:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The validation expression does not apply to the REQUEST authorizer.
+        description: |-
+          The
+           validation expression does not apply to the REQUEST authorizer.
       Name:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The name of the authorizer.
       ProviderArns:
         $ref: '#/definitions/ProviderArnList'
-        description: 'For REQUEST authorizer, this is not defined.'
+        description: |-
+          For
+           REQUEST authorizer, this is not
+           defined.
   CreateDeploymentResponse:
     type: object
     properties:
@@ -2322,7 +2407,9 @@ definitions:
         description: The identifier for the deployment.
       DeploymentStatus:
         $ref: '#/definitions/DeploymentStatus'
-        description: 'The status of the deployment: PENDING, FAILED, or SUCCEEDED.'
+        description: |-
+          The status of the deployment: PENDING, FAILED, or
+           SUCCEEDED.
       DeploymentStatusMessage:
         $ref: '#/definitions/__string'
         description: May contain additional feedback on the status of an API deployment.
@@ -2337,7 +2424,9 @@ definitions:
         description: The description for the deployment resource.
       StageName:
         $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The name of the Stage resource for the Deployment resource to create.
+        description: |-
+          The name of the Stage resource for the Deployment
+           resource to create.
   CreateDomainNameResponse:
     type: object
     properties:
@@ -2361,21 +2450,39 @@ definitions:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
-  CreateIntegrationResult:
+  CreateIntegrationResponse:
     type: object
     properties:
       ConnectionId:
         $ref: '#/definitions/StringWithLengthBetween1And1024'
-        description: The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+        description: The connection ID.
       ConnectionType:
         $ref: '#/definitions/ConnectionType'
-        description: The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+        description: |-
+          The type of the network connection to the integration endpoint. Currently the only
+           valid value is INTERNET, for connections through the public routable
+           internet.
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       CredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To require that the caller''s identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.'
+        description: |-
+          Specifies the credentials required for the integration, if any. For AWS
+           integrations, three options are available. To specify an IAM Role for API Gateway to
+           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+           identity be passed through from the request, specify the string
+           arn:aws:iam::*:user/*. To use resource-based permissions on supported
+           AWS services, specify null.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: Represents the description of an integration.
@@ -2387,43 +2494,110 @@ definitions:
         description: Specifies the integration's HTTP method type.
       IntegrationResponseSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
-        description: ''
+        description: 'The integration response selection expression for the integration. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions">Integration Response Selection Expressions</a>.'
       IntegrationType:
         $ref: '#/definitions/IntegrationType'
-        description: '<p>The integration type of an integration. One of the following:</p><p> AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration.</p><p> AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p><p> HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration.</p><p> HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p><p> MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.</p>'
+        description: |-
+          <p>The integration type of an integration. One of the following:</p><p>
+           AWS: for integrating the route or method request with an AWS service
+           action, including the Lambda function-invoking action. With the Lambda
+           function-invoking action, this is referred to as the Lambda custom integration. With
+           any other AWS service action, this is known as AWS integration.</p><p>
+           AWS_PROXY: for integrating the route or method request with the Lambda
+           function-invoking action with the client request passed through as-is. This
+           integration is also referred to as Lambda proxy integration.</p><p>
+           HTTP: for integrating the route or method request with an HTTP
+           endpoint. This
+           integration is also referred to as the HTTP custom integration.</p><p>
+           HTTP_PROXY: for integrating route or method request with an HTTP
+           endpoint, with the client
+           request passed through as-is. This is also referred to as HTTP proxy
+           integration.</p><p>
+           MOCK: for integrating the route or method request with API Gateway as a
+           "loopback" endpoint without invoking any backend.</p>
       IntegrationUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: '<p>Specifies the Uniform Resource Identifier (URI) of the integration endpoint.</p><p>For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">RFC-3986 specification</a>, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.</p><p>For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</p>'
+        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
       PassthroughBehavior:
         $ref: '#/definitions/PassthroughBehavior'
-        description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER.</p><p> WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p><p> NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p><p> WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
+        description: |-
+          <p>Specifies the pass-through behavior for incoming requests based on the
+           Content-Type header in the request, and the available mapping
+           templates specified as the requestTemplates property on the
+           Integration resource. There are three valid values:
+           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+           NEVER.</p><p>
+           WHEN_NO_MATCH passes the request body for unmapped content types through
+           to the integration backend without transformation.</p><p>
+           NEVER rejects unmapped content types with an HTTP 415 Unsupported
+           Media Type response.</p><p>
+           WHEN_NO_TEMPLATES allows pass-through when the integration has no
+           content types mapped to templates. However, if there is at least one content type
+           defined, unmapped content types will be rejected with the same HTTP 415
+           Unsupported Media Type response.</p>
       RequestParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.'
+        description: |-
+          A key-value map specifying request parameters that are passed from the method
+           request to the backend. The key is an integration request parameter name and the
+           associated value is a method request parameter value or static value that must be
+           enclosed within single quotes and pre-encoded as required by the backend. The method
+           request parameter value must match the pattern of
+           method.request.{location}.{name}
+           , where 
+           {location}
+            is querystring, path, or header; and 
+           {name}
+            must be a valid and unique method request parameter name.
       RequestTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.'
+        description: |-
+          Represents a map of Velocity templates that are applied on the request payload
+           based on the value of the Content-Type header sent by the client. The content type
+           value is the key in this map, and the template (as a String) is the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expression for the integration.
       TimeoutInMillis:
         $ref: '#/definitions/IntegerWithLengthBetween50And29000'
-        description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.'
+        description: |-
+          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+           milliseconds or 29 seconds.
   CreateIntegrationRequest:
     type: object
+    required:
+      - IntegrationType
     properties:
       ConnectionId:
         $ref: '#/definitions/StringWithLengthBetween1And1024'
-        description: The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+        description: The connection ID.
       ConnectionType:
         $ref: '#/definitions/ConnectionType'
-        description: The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+        description: |-
+          The type of the network connection to the integration endpoint. Currently the only
+           valid value is INTERNET, for connections through the public routable
+           internet.
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       CredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To require that the caller''s identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.'
+        description: |-
+          Specifies the credentials required for the integration, if any. For AWS
+           integrations, three options are available. To specify an IAM Role for API Gateway to
+           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+           identity be passed through from the request, specify the string
+           arn:aws:iam::*:user/*. To use resource-based permissions on supported
+           AWS services, specify null.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description of the integration.
@@ -2432,31 +2606,87 @@ definitions:
         description: Specifies the integration's HTTP method type.
       IntegrationType:
         $ref: '#/definitions/IntegrationType'
-        description: '<p>The integration type of an integration. One of the following:</p><p> AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration.</p><p> AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p><p> HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration.</p><p> HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p><p> MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.</p>'
+        description: |-
+          <p>The integration type of an integration. One of the following:</p><p>
+           AWS: for integrating the route or method request with an AWS service
+           action, including the Lambda function-invoking action. With the Lambda
+           function-invoking action, this is referred to as the Lambda custom integration. With
+           any other AWS service action, this is known as AWS integration.</p><p>
+           AWS_PROXY: for integrating the route or method request with the Lambda
+           function-invoking action with the client request passed through as-is. This
+           integration is also referred to as Lambda proxy integration.</p><p>
+           HTTP: for integrating the route or method request with an HTTP
+           endpoint. This
+           integration is also referred to as HTTP custom integration.</p><p>
+           HTTP_PROXY: for integrating route or method request with an HTTP
+           endpoint, with the client
+           request passed through as-is. This is also referred to as HTTP proxy
+           integration.</p><p>
+           MOCK: for integrating the route or method request with API Gateway as a
+           "loopback" endpoint without invoking any backend.</p>
       IntegrationUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: '<p>Specifies the Uniform Resource Identifier (URI) of the integration endpoint.</p><p>For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">RFC-3986 specification</a>, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.</p><p>For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</p>'
+        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
       PassthroughBehavior:
         $ref: '#/definitions/PassthroughBehavior'
-        description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER.</p><p> WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p><p> NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p><p> WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
+        description: |-
+          <p>Specifies the pass-through behavior for incoming requests based on the
+           Content-Type header in the request, and the available mapping
+           templates specified as the requestTemplates property on the
+           Integration resource. There are three valid values:
+           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+           NEVER.</p><p>
+           WHEN_NO_MATCH passes the request body for unmapped content types through
+           to the integration backend without transformation.</p><p>
+           NEVER rejects unmapped content types with an HTTP 415 Unsupported
+           Media Type response.</p><p>
+           WHEN_NO_TEMPLATES allows pass-through when the integration has no
+           content types mapped to templates. However, if there is at least one content type
+           defined, unmapped content types will be rejected with the same HTTP 415
+           Unsupported Media Type response.</p>
       RequestParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.'
+        description: |-
+          A key-value map specifying request parameters that are passed from the method
+           request to the backend. The key is an integration request parameter name and the
+           associated value is a method request parameter value or static value that must be
+           enclosed within single quotes and pre-encoded as required by the backend. The method
+           request parameter value must match the pattern of
+           method.request.{location}.{name}
+           , where 
+           {location}
+            is querystring, path, or header; and 
+           {name}
+            must be a valid and unique method request parameter name.
       RequestTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.'
+        description: |-
+          Represents a map of Velocity templates that are applied on the request payload
+           based on the value of the Content-Type header sent by the client. The content type
+           value is the key in this map, and the template (as a String) is the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expression for the integration.
       TimeoutInMillis:
         $ref: '#/definitions/IntegerWithLengthBetween50And29000'
-        description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.'
+        description: |-
+          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+           milliseconds or 29 seconds.
   CreateIntegrationResponseResponse:
     type: object
     properties:
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       IntegrationResponseId:
         $ref: '#/definitions/Id'
         description: The integration response ID.
@@ -2465,10 +2695,22 @@ definitions:
         description: The integration response key.
       ResponseParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.'
+        description: |-
+          A key-value map specifying response parameters that are passed to the method
+           response from the backend. The key is a method response header parameter name and the
+           mapped value is an integration response header value, a static value enclosed within
+           a pair of single quotes, or a JSON expression from the integration response body. The
+           mapping key must match the pattern of method.response.header.{name}, where name is a
+           valid and unique header name. The mapped non-static value must match the pattern of
+           integration.response.header.{name} or integration.response.body.{JSON-expression},
+           where name is a valid and unique response header name and JSON-expression is a valid
+           JSON expression without the $ prefix.
       ResponseTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.'
+        description: |-
+          The collection of response templates for the integration response as a
+           string-to-string map of key-value pairs. Response templates are represented as a
+           key/value map, with a content-type as the key and a template as the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expressions for the integration response.
@@ -2479,16 +2721,39 @@ definitions:
     properties:
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       IntegrationResponseKey:
         $ref: '#/definitions/SelectionKey'
         description: The integration response key.
       ResponseParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where {name} is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where {name} is a valid and unique response header name and {JSON-expression} is a valid JSON expression without the $ prefix.'
+        description: |-
+          A key-value map specifying response parameters that are passed to the method
+           response from the backend. The key is a method response header parameter name and the
+           mapped value is an integration response header value, a static value enclosed within
+           a pair of single quotes, or a JSON expression from the integration response body. The
+           mapping key must match the pattern of method.response.header.{name},
+           where {name} is a valid and unique header name. The mapped non-static
+           value must match the pattern of integration.response.header.{name} or
+           integration.response.body.{JSON-expression}, where
+           {name} is a valid and unique response header name and
+           {JSON-expression} is a valid JSON expression without the $
+           prefix.
       ResponseTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.'
+        description: |-
+          The collection of response templates for the integration response as a
+           string-to-string map of key-value pairs. Response templates are represented as a
+           key/value map, with a content-type as the key and a template as the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expression for the integration response.
@@ -2509,10 +2774,13 @@ definitions:
         description: The name of the model. Must be alphanumeric.
       Schema:
         $ref: '#/definitions/StringWithLengthBetween0And32K'
-        description: 'The schema for the model. For application/json models, this should be JSON schema draft 4 model.'
+        description: |-
+          The schema for the model. For application/json models, this should be JSON schema
+           draft 4 model.
   CreateModelRequest:
     type: object
     required:
+      - Schema
       - Name
     properties:
       ContentType:
@@ -2526,8 +2794,10 @@ definitions:
         description: The name of the model. Must be alphanumeric.
       Schema:
         $ref: '#/definitions/StringWithLengthBetween0And32K'
-        description: 'The schema for the model. For application/json models, this should be JSON schema draft 4 model.'
-  CreateRouteResult:
+        description: |-
+          The schema for the model. For application/json models, this should be JSON schema
+           draft 4 model.
+  CreateRouteResponse:
     type: object
     properties:
       ApiKeyRequired:
@@ -2535,13 +2805,28 @@ definitions:
         description: Specifies whether an API key is required for this route.
       AuthorizationScopes:
         $ref: '#/definitions/AuthorizationScopes'
-        description: 'The authorization scopes supported by this route. '
+        description: |-
+          A list of authorization scopes configured on a route. The scopes are used with a
+           COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+           works by matching the route scopes against the scopes parsed from the access token in
+           the incoming request. The method invocation is authorized if any route scope matches
+           a claimed scope in the access token. Otherwise, the invocation is not authorized.
+           When the route scope is configured, the client must provide an access token instead
+           of an identity token for authorization purposes.
       AuthorizationType:
         $ref: '#/definitions/AuthorizationType'
-        description: 'The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.'
+        description: |-
+          The authorization type for the route. Valid values are NONE for open
+           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+           for using a Lambda
+           authorizer
       AuthorizerId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Authorizer resource to be associated with this route.
+        description: |-
+          The identifier of the Authorizer resource to be associated with this
+           route, if the authorizationType is CUSTOM
+           . The authorizer identifier is generated by API Gateway
+           when you created the authorizer.
       ModelSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The model selection expression for the route.
@@ -2576,13 +2861,23 @@ definitions:
         description: Specifies whether an API key is required for the route.
       AuthorizationScopes:
         $ref: '#/definitions/AuthorizationScopes'
-        description: The authorization scopes supported by this route.
+        description: |-
+          The authorization scopes supported by this
+           route.
       AuthorizationType:
         $ref: '#/definitions/AuthorizationType'
-        description: 'The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.'
+        description: |-
+          The authorization type for the route. Valid values are NONE for open
+           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+           for using a Lambda
+           authorizer.
       AuthorizerId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Authorizer resource to be associated with this route.
+        description: |-
+          The identifier of the Authorizer resource to be associated with this
+           route, if the authorizationType is CUSTOM
+           . The authorizer identifier is generated by API Gateway
+           when you created the authorizer.
       ModelSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The model selection expression for the route.
@@ -2656,7 +2951,9 @@ definitions:
         description: Default route settings for the stage.
       DeploymentId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Deployment that the Stage is associated with.
+        description: |-
+          The identifier of the Deployment that the Stage is
+           associated with.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description of the stage.
@@ -2671,7 +2968,10 @@ definitions:
         description: The name of the stage.
       StageVariables:
         $ref: '#/definitions/StageVariablesMap'
-        description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.'
+        description: |-
+          A map that defines the stage variables for a stage resource. Variable names can
+           have alphanumeric and underscore characters, and the values must match
+           [A-Za-z0-9-._~:/?#&=,]+.
   CreateStageRequest:
     type: object
     required:
@@ -2700,7 +3000,10 @@ definitions:
         description: The name of the stage.
       StageVariables:
         $ref: '#/definitions/StageVariablesMap'
-        description: 'A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.'
+        description: |-
+          A map that defines the stage variables for a Stage. Variable names
+           can have alphanumeric and underscore characters, and the values must match
+           [A-Za-z0-9-._~:/?#&=,]+.
   DeleteApiRequest:
     type: object
     properties: {}
@@ -2739,7 +3042,10 @@ definitions:
     properties:
       ApiEndpoint:
         $ref: '#/definitions/__string'
-        description: 'The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The stage name is typically appended to this URI to form a complete path to a deployed API stage.'
+        description: |-
+          The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+           stage name is typically appended to this URI to form a complete path to a deployed
+           API stage.
       ApiId:
         $ref: '#/definitions/Id'
         description: The API ID.
@@ -2760,7 +3066,7 @@ definitions:
         description: The name of the API.
       ProtocolType:
         $ref: '#/definitions/ProtocolType'
-        description: 'The API protocol: HTTP or WEBSOCKET.'
+        description: 'The API protocol: Currently only WEBSOCKET is supported.'
       RouteSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The route selection expression for the API.
@@ -2769,7 +3075,9 @@ definitions:
         description: A version identifier for the API.
       Warnings:
         $ref: '#/definitions/__listOf__string'
-        description: The warning messages reported when failonwarnings is turned on during API import.
+        description: |-
+          The warning messages reported when failonwarnings is turned on during
+           API import.
   GetApiRequest:
     type: object
     properties: {}
@@ -2794,18 +3102,14 @@ definitions:
   GetApiMappingsResponse:
     type: object
     properties:
-      ApiId:
-        $ref: '#/definitions/Id'
-        description: The API identifier.
-      ApiMappingId:
-        $ref: '#/definitions/Id'
-        description: The API mapping identifier.
-      ApiMappingKey:
-        $ref: '#/definitions/SelectionKey'
-        description: The API mapping key.
-      Stage:
-        $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The API stage.
+      Items:
+        $ref: '#/definitions/__listOfApiMapping'
+        description: The elements from this collection.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetApiMappingsRequest:
     type: object
     properties: {}
@@ -2817,7 +3121,9 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetApisRequest:
     type: object
     properties: {}
@@ -2826,31 +3132,71 @@ definitions:
     properties:
       AuthorizerCredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.'
+        description: |-
+          Specifies the required credentials as an IAM role for API Gateway to invoke the
+           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+           Resource Name (ARN). To use resource-based permissions on the Lambda function,
+           specify null.
       AuthorizerId:
         $ref: '#/definitions/Id'
         description: The authorizer identifier.
       AuthorizerResultTtlInSeconds:
         $ref: '#/definitions/IntegerWithLengthBetween0And3600'
-        description: 'The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.'
+        description: |-
+          The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+           authorization caching is disabled. If it is greater than 0, API Gateway will cache
+           authorizer responses. If this field is not set, the default value is 300. The maximum
+           value is 3600, or 1 hour.
       AuthorizerType:
         $ref: '#/definitions/AuthorizerType'
-        description: 'The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.'
+        description: |-
+          The authorizer type. Currently the only valid value is REQUEST, for a
+           Lambda function using incoming request parameters.
       AuthorizerUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: 'The authorizer''s Uniform Resource Identifier (URI). ForREQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.'
+        description: |-
+          The authorizer's Uniform Resource Identifier (URI).
+           ForREQUEST authorizers, this must be a
+           well-formed Lambda function URI, for example,
+           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+           In general, the URI has this form:
+           arn:aws:apigateway:{region}:lambda:path/{service_api}
+           , where {region} is the same as the region hosting the Lambda
+           function, path indicates that the remaining substring in the URI should be treated as
+           the path to the resource, including the initial /. For Lambda functions,
+           this is usually of the form
+           /2015-03-31/functions/[FunctionARN]/invocations.
       IdentitySource:
         $ref: '#/definitions/IdentitySourceList'
-        description: '<p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.</p>'
+        description: |-
+          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
+           caching is enabled. The value is a comma-separated string of one or more mapping
+           expressions of the specified request parameters. For example, if an Auth
+           header and a Name query string parameters are defined as identity
+           sources, this value is method.request.header.Auth,
+           method.request.querystring.Name. These parameters will be used to
+           derive the authorization caching key and to perform runtime validation of the
+           REQUEST authorizer by verifying all of the identity-related request
+           parameters are present, not null, and non-empty. Only when this is true does the
+           authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+           Unauthorized response without calling the Lambda function. The valid value
+           is a string of comma-separated mapping expressions of the specified request
+           parameters. When the authorization caching is not enabled, this property is
+           optional.</p>
       IdentityValidationExpression:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The validation expression does not apply to the REQUEST authorizer.
+        description: |-
+          The
+           validation expression does not apply to the REQUEST authorizer.
       Name:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The name of the authorizer.
       ProviderArns:
         $ref: '#/definitions/ProviderArnList'
-        description: 'For REQUEST authorizer, this is not defined.'
+        description: |-
+          For
+           REQUEST authorizer, this is not
+           defined.
   GetAuthorizerRequest:
     type: object
     properties: {}
@@ -2862,7 +3208,9 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetAuthorizersRequest:
     type: object
     properties: {}
@@ -2877,7 +3225,9 @@ definitions:
         description: The identifier for the deployment.
       DeploymentStatus:
         $ref: '#/definitions/DeploymentStatus'
-        description: 'The status of the deployment: PENDING, FAILED, or SUCCEEDED.'
+        description: |-
+          The status of the deployment: PENDING, FAILED, or
+           SUCCEEDED.
       DeploymentStatusMessage:
         $ref: '#/definitions/__string'
         description: May contain additional feedback on the status of an API deployment.
@@ -2895,7 +3245,9 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetDeploymentsRequest:
     type: object
     properties: {}
@@ -2922,25 +3274,45 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetDomainNamesRequest:
     type: object
     properties: {}
-  GetIntegrationResult:
+  GetIntegrationResponse:
     type: object
     properties:
       ConnectionId:
         $ref: '#/definitions/StringWithLengthBetween1And1024'
-        description: The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+        description: The connection ID.
       ConnectionType:
         $ref: '#/definitions/ConnectionType'
-        description: The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+        description: |-
+          The type of the network connection to the integration endpoint. Currently the only
+           valid value is INTERNET, for connections through the public routable
+           internet.
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       CredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To require that the caller''s identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.'
+        description: |-
+          Specifies the credentials required for the integration, if any. For AWS
+           integrations, three options are available. To specify an IAM Role for API Gateway to
+           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+           identity be passed through from the request, specify the string
+           arn:aws:iam::*:user/*. To use resource-based permissions on supported
+           AWS services, specify null.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: Represents the description of an integration.
@@ -2952,28 +3324,75 @@ definitions:
         description: Specifies the integration's HTTP method type.
       IntegrationResponseSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
-        description: ''
+        description: 'The integration response selection expression for the integration. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions">Integration Response Selection Expressions</a>.'
       IntegrationType:
         $ref: '#/definitions/IntegrationType'
-        description: '<p>The integration type of an integration. One of the following:</p><p> AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration.</p><p> AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p><p> HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration.</p><p> HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p><p> MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.</p>'
+        description: |-
+          <p>The integration type of an integration. One of the following:</p><p>
+           AWS: for integrating the route or method request with an AWS service
+           action, including the Lambda function-invoking action. With the Lambda
+           function-invoking action, this is referred to as the Lambda custom integration. With
+           any other AWS service action, this is known as AWS integration.</p><p>
+           AWS_PROXY: for integrating the route or method request with the Lambda
+           function-invoking action with the client request passed through as-is. This
+           integration is also referred to as Lambda proxy integration.</p><p>
+           HTTP: for integrating the route or method request with an HTTP
+           endpoint. This
+           integration is also referred to as the HTTP custom integration.</p><p>
+           HTTP_PROXY: for integrating route or method request with an HTTP
+           endpoint, with the client
+           request passed through as-is. This is also referred to as HTTP proxy
+           integration.</p><p>
+           MOCK: for integrating the route or method request with API Gateway as a
+           "loopback" endpoint without invoking any backend.</p>
       IntegrationUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: '<p>Specifies the Uniform Resource Identifier (URI) of the integration endpoint.</p><p>For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">RFC-3986 specification</a>, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.</p><p>For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</p>'
+        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
       PassthroughBehavior:
         $ref: '#/definitions/PassthroughBehavior'
-        description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER.</p><p> WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p><p> NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p><p> WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
+        description: |-
+          <p>Specifies the pass-through behavior for incoming requests based on the
+           Content-Type header in the request, and the available mapping
+           templates specified as the requestTemplates property on the
+           Integration resource. There are three valid values:
+           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+           NEVER.</p><p>
+           WHEN_NO_MATCH passes the request body for unmapped content types through
+           to the integration backend without transformation.</p><p>
+           NEVER rejects unmapped content types with an HTTP 415 Unsupported
+           Media Type response.</p><p>
+           WHEN_NO_TEMPLATES allows pass-through when the integration has no
+           content types mapped to templates. However, if there is at least one content type
+           defined, unmapped content types will be rejected with the same HTTP 415
+           Unsupported Media Type response.</p>
       RequestParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.'
+        description: |-
+          A key-value map specifying request parameters that are passed from the method
+           request to the backend. The key is an integration request parameter name and the
+           associated value is a method request parameter value or static value that must be
+           enclosed within single quotes and pre-encoded as required by the backend. The method
+           request parameter value must match the pattern of
+           method.request.{location}.{name}
+           , where 
+           {location}
+            is querystring, path, or header; and 
+           {name}
+            must be a valid and unique method request parameter name.
       RequestTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.'
+        description: |-
+          Represents a map of Velocity templates that are applied on the request payload
+           based on the value of the Content-Type header sent by the client. The content type
+           value is the key in this map, and the template (as a String) is the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expression for the integration.
       TimeoutInMillis:
         $ref: '#/definitions/IntegerWithLengthBetween50And29000'
-        description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.'
+        description: |-
+          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+           milliseconds or 29 seconds.
   GetIntegrationRequest:
     type: object
     properties: {}
@@ -2982,7 +3401,16 @@ definitions:
     properties:
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       IntegrationResponseId:
         $ref: '#/definitions/Id'
         description: The integration response ID.
@@ -2991,10 +3419,22 @@ definitions:
         description: The integration response key.
       ResponseParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.'
+        description: |-
+          A key-value map specifying response parameters that are passed to the method
+           response from the backend. The key is a method response header parameter name and the
+           mapped value is an integration response header value, a static value enclosed within
+           a pair of single quotes, or a JSON expression from the integration response body. The
+           mapping key must match the pattern of method.response.header.{name}, where name is a
+           valid and unique header name. The mapped non-static value must match the pattern of
+           integration.response.header.{name} or integration.response.body.{JSON-expression},
+           where name is a valid and unique response header name and JSON-expression is a valid
+           JSON expression without the $ prefix.
       ResponseTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.'
+        description: |-
+          The collection of response templates for the integration response as a
+           string-to-string map of key-value pairs. Response templates are represented as a
+           key/value map, with a content-type as the key and a template as the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expressions for the integration response.
@@ -3009,7 +3449,9 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetIntegrationResponsesRequest:
     type: object
     properties: {}
@@ -3021,7 +3463,9 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetIntegrationsRequest:
     type: object
     properties: {}
@@ -3042,7 +3486,9 @@ definitions:
         description: The name of the model. Must be alphanumeric.
       Schema:
         $ref: '#/definitions/StringWithLengthBetween0And32K'
-        description: 'The schema for the model. For application/json models, this should be JSON schema draft 4 model.'
+        description: |-
+          The schema for the model. For application/json models, this should be JSON schema
+           draft 4 model.
   GetModelRequest:
     type: object
     properties: {}
@@ -3063,11 +3509,13 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetModelsRequest:
     type: object
     properties: {}
-  GetRouteResult:
+  GetRouteResponse:
     type: object
     properties:
       ApiKeyRequired:
@@ -3075,13 +3523,28 @@ definitions:
         description: Specifies whether an API key is required for this route.
       AuthorizationScopes:
         $ref: '#/definitions/AuthorizationScopes'
-        description: 'The authorization scopes supported by this route. '
+        description: |-
+          A list of authorization scopes configured on a route. The scopes are used with a
+           COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+           works by matching the route scopes against the scopes parsed from the access token in
+           the incoming request. The method invocation is authorized if any route scope matches
+           a claimed scope in the access token. Otherwise, the invocation is not authorized.
+           When the route scope is configured, the client must provide an access token instead
+           of an identity token for authorization purposes.
       AuthorizationType:
         $ref: '#/definitions/AuthorizationType'
-        description: 'The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.'
+        description: |-
+          The authorization type for the route. Valid values are NONE for open
+           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+           for using a Lambda
+           authorizer
       AuthorizerId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Authorizer resource to be associated with this route.
+        description: |-
+          The identifier of the Authorizer resource to be associated with this
+           route, if the authorizationType is CUSTOM
+           . The authorizer identifier is generated by API Gateway
+           when you created the authorizer.
       ModelSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The model selection expression for the route.
@@ -3138,7 +3601,9 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetRouteResponsesRequest:
     type: object
     properties: {}
@@ -3150,7 +3615,9 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetRoutesRequest:
     type: object
     properties: {}
@@ -3171,7 +3638,9 @@ definitions:
         description: Default route settings for the stage.
       DeploymentId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Deployment that the Stage is associated with.
+        description: |-
+          The identifier of the Deployment that the Stage is
+           associated with.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description of the stage.
@@ -3186,7 +3655,10 @@ definitions:
         description: The name of the stage.
       StageVariables:
         $ref: '#/definitions/StageVariablesMap'
-        description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.'
+        description: |-
+          A map that defines the stage variables for a stage resource. Variable names can
+           have alphanumeric and underscore characters, and the values must match
+           [A-Za-z0-9-._~:/?#&=,]+.
   GetStageRequest:
     type: object
     properties: {}
@@ -3198,7 +3670,9 @@ definitions:
         description: The elements from this collection.
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The next page of elements from this collection. Not valid for the last element of the collection.
+        description: |-
+          The next page of elements from this collection. Not valid for the last element of
+           the collection.
   GetStagesRequest:
     type: object
     properties: {}
@@ -3207,7 +3681,10 @@ definitions:
     properties:
       ApiEndpoint:
         $ref: '#/definitions/__string'
-        description: 'The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The stage name is typically appended to this URI to form a complete path to a deployed API stage.'
+        description: |-
+          The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+           stage name is typically appended to this URI to form a complete path to a deployed
+           API stage.
       ApiId:
         $ref: '#/definitions/Id'
         description: The API ID.
@@ -3228,7 +3705,7 @@ definitions:
         description: The name of the API.
       ProtocolType:
         $ref: '#/definitions/ProtocolType'
-        description: 'The API protocol: HTTP or WEBSOCKET.'
+        description: 'The API protocol: Currently only WEBSOCKET is supported.'
       RouteSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The route selection expression for the API.
@@ -3237,7 +3714,9 @@ definitions:
         description: A version identifier for the API.
       Warnings:
         $ref: '#/definitions/__listOf__string'
-        description: The warning messages reported when failonwarnings is turned on during API import.
+        description: |-
+          The warning messages reported when failonwarnings is turned on during
+           API import.
   UpdateApiRequest:
     type: object
     properties:
@@ -3293,58 +3772,137 @@ definitions:
     properties:
       AuthorizerCredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.'
+        description: |-
+          Specifies the required credentials as an IAM role for API Gateway to invoke the
+           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+           Resource Name (ARN). To use resource-based permissions on the Lambda function,
+           specify null.
       AuthorizerId:
         $ref: '#/definitions/Id'
         description: The authorizer identifier.
       AuthorizerResultTtlInSeconds:
         $ref: '#/definitions/IntegerWithLengthBetween0And3600'
-        description: 'The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.'
+        description: |-
+          The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+           authorization caching is disabled. If it is greater than 0, API Gateway will cache
+           authorizer responses. If this field is not set, the default value is 300. The maximum
+           value is 3600, or 1 hour.
       AuthorizerType:
         $ref: '#/definitions/AuthorizerType'
-        description: 'The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.'
+        description: |-
+          The authorizer type. Currently the only valid value is REQUEST, for a
+           Lambda function using incoming request parameters.
       AuthorizerUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: 'The authorizer''s Uniform Resource Identifier (URI). ForREQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.'
+        description: |-
+          The authorizer's Uniform Resource Identifier (URI).
+           ForREQUEST authorizers, this must be a
+           well-formed Lambda function URI, for example,
+           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+           In general, the URI has this form:
+           arn:aws:apigateway:{region}:lambda:path/{service_api}
+           , where {region} is the same as the region hosting the Lambda
+           function, path indicates that the remaining substring in the URI should be treated as
+           the path to the resource, including the initial /. For Lambda functions,
+           this is usually of the form
+           /2015-03-31/functions/[FunctionARN]/invocations.
       IdentitySource:
         $ref: '#/definitions/IdentitySourceList'
-        description: '<p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.</p>'
+        description: |-
+          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
+           caching is enabled. The value is a comma-separated string of one or more mapping
+           expressions of the specified request parameters. For example, if an Auth
+           header and a Name query string parameters are defined as identity
+           sources, this value is method.request.header.Auth,
+           method.request.querystring.Name. These parameters will be used to
+           derive the authorization caching key and to perform runtime validation of the
+           REQUEST authorizer by verifying all of the identity-related request
+           parameters are present, not null, and non-empty. Only when this is true does the
+           authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+           Unauthorized response without calling the Lambda function. The valid value
+           is a string of comma-separated mapping expressions of the specified request
+           parameters. When the authorization caching is not enabled, this property is
+           optional.</p>
       IdentityValidationExpression:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The validation expression does not apply to the REQUEST authorizer.
+        description: |-
+          The
+           validation expression does not apply to the REQUEST authorizer.
       Name:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The name of the authorizer.
       ProviderArns:
         $ref: '#/definitions/ProviderArnList'
-        description: 'For REQUEST authorizer, this is not defined.'
+        description: |-
+          For
+           REQUEST authorizer, this is not
+           defined.
   UpdateAuthorizerRequest:
     type: object
     properties:
       AuthorizerCredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.'
+        description: |-
+          Specifies the required credentials as an IAM role for API Gateway to invoke the
+           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+           Resource Name (ARN). To use resource-based permissions on the Lambda function,
+           specify null.
       AuthorizerResultTtlInSeconds:
         $ref: '#/definitions/IntegerWithLengthBetween0And3600'
-        description: 'The time to live (TTL), in seconds, of cached authorizer results. If it is zero, authorization caching is disabled. If it is greater than zero, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.'
+        description: |-
+          The time to live (TTL), in seconds, of cached authorizer results. If it is zero,
+           authorization caching is disabled. If it is greater than zero, API Gateway will cache
+           authorizer responses. If this field is not set, the default value is 300. The maximum
+           value is 3600, or 1 hour.
       AuthorizerType:
         $ref: '#/definitions/AuthorizerType'
-        description: 'The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.'
+        description: |-
+          The authorizer type. Currently the only valid value is REQUEST, for a
+           Lambda function using incoming request parameters.
       AuthorizerUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: 'The authorizer''s Uniform Resource Identifier (URI). For REQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.'
+        description: |-
+          The authorizer's Uniform Resource Identifier (URI). For
+           REQUEST authorizers, this must be a
+           well-formed Lambda function URI, for example,
+           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+           In general, the URI has this form:
+           arn:aws:apigateway:{region}:lambda:path/{service_api}
+           , where {region} is the same as the region hosting the Lambda
+           function, path indicates that the remaining substring in the URI should be treated as
+           the path to the resource, including the initial /. For Lambda functions,
+           this is usually of the form
+           /2015-03-31/functions/[FunctionARN]/invocations.
       IdentitySource:
         $ref: '#/definitions/IdentitySourceList'
-        description: '<p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header, a Name query string parameter are defined as identity sources, this value is $method.request.header.Auth, $method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.</p>'
+        description: |-
+          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
+           caching is enabled. The value is a comma-separated string of one or more mapping
+           expressions of the specified request parameters. For example, if an Auth header, a
+           Name query string parameter are defined as identity sources, this value is
+           $method.request.header.Auth, $method.request.querystring.Name. These
+           parameters will be used to derive the authorization caching key and to perform
+           runtime validation of the REQUEST authorizer by verifying all of the
+           identity-related request parameters are present, not null and non-empty. Only when
+           this is true does the authorizer invoke the authorizer Lambda function, otherwise, it
+           returns a 401 Unauthorized response without calling the Lambda function.
+           The valid value is a string of comma-separated mapping expressions of the specified
+           request parameters. When the authorization caching is not enabled, this property is
+           optional.</p>
       IdentityValidationExpression:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The validation expression does not apply to the REQUEST authorizer.
+        description: |-
+          The
+           validation expression does not apply to the REQUEST authorizer.
       Name:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The name of the authorizer.
       ProviderArns:
         $ref: '#/definitions/ProviderArnList'
-        description: 'For REQUEST authorizer, this is not defined.'
+        description: |-
+          For
+           REQUEST authorizer, this is not
+           defined.
   UpdateDeploymentResponse:
     type: object
     properties:
@@ -3356,7 +3914,9 @@ definitions:
         description: The identifier for the deployment.
       DeploymentStatus:
         $ref: '#/definitions/DeploymentStatus'
-        description: 'The status of the deployment: PENDING, FAILED, or SUCCEEDED.'
+        description: |-
+          The status of the deployment: PENDING, FAILED, or
+           SUCCEEDED.
       DeploymentStatusMessage:
         $ref: '#/definitions/__string'
         description: May contain additional feedback on the status of an API deployment.
@@ -3387,21 +3947,39 @@ definitions:
       DomainNameConfigurations:
         $ref: '#/definitions/DomainNameConfigurations'
         description: The domain name configurations.
-  UpdateIntegrationResult:
+  UpdateIntegrationResponse:
     type: object
     properties:
       ConnectionId:
         $ref: '#/definitions/StringWithLengthBetween1And1024'
-        description: The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+        description: The connection ID.
       ConnectionType:
         $ref: '#/definitions/ConnectionType'
-        description: The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+        description: |-
+          The type of the network connection to the integration endpoint. Currently the only
+           valid value is INTERNET, for connections through the public routable
+           internet.
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       CredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To require that the caller''s identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.'
+        description: |-
+          Specifies the credentials required for the integration, if any. For AWS
+           integrations, three options are available. To specify an IAM Role for API Gateway to
+           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+           identity be passed through from the request, specify the string
+           arn:aws:iam::*:user/*. To use resource-based permissions on supported
+           AWS services, specify null.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: Represents the description of an integration.
@@ -3413,43 +3991,108 @@ definitions:
         description: Specifies the integration's HTTP method type.
       IntegrationResponseSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
-        description: ''
+        description: 'The integration response selection expression for the integration. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions">Integration Response Selection Expressions</a>.'
       IntegrationType:
         $ref: '#/definitions/IntegrationType'
-        description: '<p>The integration type of an integration. One of the following:</p><p> AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration.</p><p> AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p><p> HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration.</p><p> HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p><p> MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.</p>'
+        description: |-
+          <p>The integration type of an integration. One of the following:</p><p>
+           AWS: for integrating the route or method request with an AWS service
+           action, including the Lambda function-invoking action. With the Lambda
+           function-invoking action, this is referred to as the Lambda custom integration. With
+           any other AWS service action, this is known as AWS integration.</p><p>
+           AWS_PROXY: for integrating the route or method request with the Lambda
+           function-invoking action with the client request passed through as-is. This
+           integration is also referred to as Lambda proxy integration.</p><p>
+           HTTP: for integrating the route or method request with an HTTP
+           endpoint. This
+           integration is also referred to as the HTTP custom integration.</p><p>
+           HTTP_PROXY: for integrating route or method request with an HTTP
+           endpoint, with the client
+           request passed through as-is. This is also referred to as HTTP proxy
+           integration.</p><p>
+           MOCK: for integrating the route or method request with API Gateway as a
+           "loopback" endpoint without invoking any backend.</p>
       IntegrationUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: '<p>Specifies the Uniform Resource Identifier (URI) of the integration endpoint.</p><p>For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">RFC-3986 specification</a>, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.</p><p>For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</p>'
+        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
       PassthroughBehavior:
         $ref: '#/definitions/PassthroughBehavior'
-        description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER.</p><p> WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p><p> NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p><p> WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
+        description: |-
+          <p>Specifies the pass-through behavior for incoming requests based on the
+           Content-Type header in the request, and the available mapping
+           templates specified as the requestTemplates property on the
+           Integration resource. There are three valid values:
+           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+           NEVER.</p><p>
+           WHEN_NO_MATCH passes the request body for unmapped content types through
+           to the integration backend without transformation.</p><p>
+           NEVER rejects unmapped content types with an HTTP 415 Unsupported
+           Media Type response.</p><p>
+           WHEN_NO_TEMPLATES allows pass-through when the integration has no
+           content types mapped to templates. However, if there is at least one content type
+           defined, unmapped content types will be rejected with the same HTTP 415
+           Unsupported Media Type response.</p>
       RequestParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.'
+        description: |-
+          A key-value map specifying request parameters that are passed from the method
+           request to the backend. The key is an integration request parameter name and the
+           associated value is a method request parameter value or static value that must be
+           enclosed within single quotes and pre-encoded as required by the backend. The method
+           request parameter value must match the pattern of
+           method.request.{location}.{name}
+           , where 
+           {location}
+            is querystring, path, or header; and 
+           {name}
+            must be a valid and unique method request parameter name.
       RequestTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.'
+        description: |-
+          Represents a map of Velocity templates that are applied on the request payload
+           based on the value of the Content-Type header sent by the client. The content type
+           value is the key in this map, and the template (as a String) is the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expression for the integration.
       TimeoutInMillis:
         $ref: '#/definitions/IntegerWithLengthBetween50And29000'
-        description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.'
+        description: |-
+          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+           milliseconds or 29 seconds.
   UpdateIntegrationRequest:
     type: object
     properties:
       ConnectionId:
         $ref: '#/definitions/StringWithLengthBetween1And1024'
-        description: The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+        description: The connection ID.
       ConnectionType:
         $ref: '#/definitions/ConnectionType'
-        description: The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+        description: |-
+          The type of the network connection to the integration endpoint. Currently the only
+           valid value is INTERNET, for connections through the public routable
+           internet.
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       CredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To require that the caller''s identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.'
+        description: |-
+          Specifies the credentials required for the integration, if any. For AWS
+           integrations, three options are available. To specify an IAM Role for API Gateway to
+           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+           identity be passed through from the request, specify the string
+           arn:aws:iam::*:user/*. To use resource-based permissions on supported
+           AWS services, specify null.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description of the integration
@@ -3458,31 +4101,87 @@ definitions:
         description: Specifies the integration's HTTP method type.
       IntegrationType:
         $ref: '#/definitions/IntegrationType'
-        description: '<p>The integration type of an integration. One of the following:</p><p> AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration.</p><p> AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p><p> HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration.</p><p> HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p><p> MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.</p>'
+        description: |-
+          <p>The integration type of an integration. One of the following:</p><p>
+           AWS: for integrating the route or method request with an AWS service
+           action, including the Lambda function-invoking action. With the Lambda
+           function-invoking action, this is referred to as the Lambda custom integration. With
+           any other AWS service action, this is known as AWS integration.</p><p>
+           AWS_PROXY: for integrating the route or method request with the Lambda
+           function-invoking action with the client request passed through as-is. This
+           integration is also referred to as Lambda proxy integration.</p><p>
+           HTTP: for integrating the route or method request with an HTTP
+           endpoint. This
+           integration is also referred to as the HTTP custom integration.</p><p>
+           HTTP_PROXY: for integrating route or method request with an HTTP
+           endpoint, with the client
+           request passed through as-is. This is also referred to as HTTP proxy
+           integration.</p><p>
+           MOCK: for integrating the route or method request with API Gateway as a
+           "loopback" endpoint without invoking any backend.</p>
       IntegrationUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: '<p>Specifies the Uniform Resource Identifier (URI) of the integration endpoint.</p><p>For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">RFC-3986 specification</a>, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.</p><p>For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</p>'
+        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
       PassthroughBehavior:
         $ref: '#/definitions/PassthroughBehavior'
-        description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER.</p><p> WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p><p> NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p><p> WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
+        description: |-
+          <p>Specifies the pass-through behavior for incoming requests based on the
+           Content-Type header in the request, and the available mapping
+           templates specified as the requestTemplates property on the
+           Integration resource. There are three valid values:
+           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+           NEVER.</p><p>
+           WHEN_NO_MATCH passes the request body for unmapped content types through
+           to the integration backend without transformation.</p><p>
+           NEVER rejects unmapped content types with an HTTP 415 Unsupported
+           Media Type response.</p><p>
+           WHEN_NO_TEMPLATES allows pass-through when the integration has no
+           content types mapped to templates. However, if there is at least one content type
+           defined, unmapped content types will be rejected with the same HTTP 415
+           Unsupported Media Type response.</p>
       RequestParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.'
+        description: |-
+          A key-value map specifying request parameters that are passed from the method
+           request to the backend. The key is an integration request parameter name and the
+           associated value is a method request parameter value or static value that must be
+           enclosed within single quotes and pre-encoded as required by the backend. The method
+           request parameter value must match the pattern of
+           method.request.{location}.{name}
+           , where 
+           {location}
+            is querystring, path, or header; and 
+           {name}
+            must be a valid and unique method request parameter name.
       RequestTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.'
+        description: |-
+          Represents a map of Velocity templates that are applied on the request payload
+           based on the value of the Content-Type header sent by the client. The content type
+           value is the key in this map, and the template (as a String) is the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expression for the integration.
       TimeoutInMillis:
         $ref: '#/definitions/IntegerWithLengthBetween50And29000'
-        description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.'
+        description: |-
+          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+           milliseconds or 29 seconds.
   UpdateIntegrationResponseResponse:
     type: object
     properties:
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       IntegrationResponseId:
         $ref: '#/definitions/Id'
         description: The integration response ID.
@@ -3491,10 +4190,22 @@ definitions:
         description: The integration response key.
       ResponseParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.'
+        description: |-
+          A key-value map specifying response parameters that are passed to the method
+           response from the backend. The key is a method response header parameter name and the
+           mapped value is an integration response header value, a static value enclosed within
+           a pair of single quotes, or a JSON expression from the integration response body. The
+           mapping key must match the pattern of method.response.header.{name}, where name is a
+           valid and unique header name. The mapped non-static value must match the pattern of
+           integration.response.header.{name} or integration.response.body.{JSON-expression},
+           where name is a valid and unique response header name and JSON-expression is a valid
+           JSON expression without the $ prefix.
       ResponseTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.'
+        description: |-
+          The collection of response templates for the integration response as a
+           string-to-string map of key-value pairs. Response templates are represented as a
+           key/value map, with a content-type as the key and a template as the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expressions for the integration response.
@@ -3503,16 +4214,44 @@ definitions:
     properties:
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       IntegrationResponseKey:
         $ref: '#/definitions/SelectionKey'
         description: The integration response key.
       ResponseParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name} , where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name}  or integration.response.body.{JSON-expression} , where  {name}  is a valid and unique response header name and  {JSON-expression}  is a valid JSON expression without the $ prefix.'
+        description: |-
+          A key-value map specifying response parameters that are passed to the method
+           response from the backend. The key is a method response header parameter name and the
+           mapped value is an integration response header value, a static value enclosed within
+           a pair of single quotes, or a JSON expression from the integration response body. The
+           mapping key must match the pattern of
+           method.response.header.{name}
+           , where name is a valid and unique header name. The mapped non-static value
+           must match the pattern of
+           integration.response.header.{name}
+            or
+           integration.response.body.{JSON-expression}
+           , where 
+           {name}
+            is a valid and unique response header name and 
+           {JSON-expression}
+            is a valid JSON expression without the $ prefix.
       ResponseTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.'
+        description: |-
+          The collection of response templates for the integration response as a
+           string-to-string map of key-value pairs. Response templates are represented as a
+           key/value map, with a content-type as the key and a template as the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expression for the integration response.
@@ -3533,7 +4272,9 @@ definitions:
         description: The name of the model. Must be alphanumeric.
       Schema:
         $ref: '#/definitions/StringWithLengthBetween0And32K'
-        description: 'The schema for the model. For application/json models, this should be JSON schema draft 4 model.'
+        description: |-
+          The schema for the model. For application/json models, this should be JSON schema
+           draft 4 model.
   UpdateModelRequest:
     type: object
     properties:
@@ -3548,8 +4289,10 @@ definitions:
         description: The name of the model.
       Schema:
         $ref: '#/definitions/StringWithLengthBetween0And32K'
-        description: 'The schema for the model. For application/json models, this should be JSON schema draft 4 model.'
-  UpdateRouteResult:
+        description: |-
+          The schema for the model. For application/json models, this should be JSON schema
+           draft 4 model.
+  UpdateRouteResponse:
     type: object
     properties:
       ApiKeyRequired:
@@ -3557,13 +4300,28 @@ definitions:
         description: Specifies whether an API key is required for this route.
       AuthorizationScopes:
         $ref: '#/definitions/AuthorizationScopes'
-        description: 'The authorization scopes supported by this route. '
+        description: |-
+          A list of authorization scopes configured on a route. The scopes are used with a
+           COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+           works by matching the route scopes against the scopes parsed from the access token in
+           the incoming request. The method invocation is authorized if any route scope matches
+           a claimed scope in the access token. Otherwise, the invocation is not authorized.
+           When the route scope is configured, the client must provide an access token instead
+           of an identity token for authorization purposes.
       AuthorizationType:
         $ref: '#/definitions/AuthorizationType'
-        description: 'The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.'
+        description: |-
+          The authorization type for the route. Valid values are NONE for open
+           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+           for using a Lambda
+           authorizer
       AuthorizerId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Authorizer resource to be associated with this route.
+        description: |-
+          The identifier of the Authorizer resource to be associated with this
+           route, if the authorizationType is CUSTOM
+           . The authorizer identifier is generated by API Gateway
+           when you created the authorizer.
       ModelSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The model selection expression for the route.
@@ -3596,13 +4354,23 @@ definitions:
         description: Specifies whether an API key is required for the route.
       AuthorizationScopes:
         $ref: '#/definitions/AuthorizationScopes'
-        description: The authorization scopes supported by this route.
+        description: |-
+          The authorization scopes supported by this
+           route.
       AuthorizationType:
         $ref: '#/definitions/AuthorizationType'
-        description: 'The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.'
+        description: |-
+          The authorization type for the route. Valid values are NONE for open
+           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+           for using a Lambda
+           authorizer.
       AuthorizerId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Authorizer resource to be associated with this route.
+        description: |-
+          The identifier of the Authorizer resource to be associated with this
+           route, if the authorizationType is CUSTOM
+           . The authorizer identifier is generated by API Gateway
+           when you created the authorizer.
       ModelSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The model selection expression for the route.
@@ -3674,7 +4442,9 @@ definitions:
         description: Default route settings for the stage.
       DeploymentId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Deployment that the Stage is associated with.
+        description: |-
+          The identifier of the Deployment that the Stage is
+           associated with.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description of the stage.
@@ -3689,7 +4459,10 @@ definitions:
         description: The name of the stage.
       StageVariables:
         $ref: '#/definitions/StageVariablesMap'
-        description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.'
+        description: |-
+          A map that defines the stage variables for a stage resource. Variable names can
+           have alphanumeric and underscore characters, and the values must match
+           [A-Za-z0-9-._~:/?#&=,]+.
   UpdateStageRequest:
     type: object
     properties:
@@ -3713,7 +4486,10 @@ definitions:
         description: Route settings for the stage.
       StageVariables:
         $ref: '#/definitions/StageVariablesMap'
-        description: 'A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.'
+        description: |-
+          A map that defines the stage variables for a Stage. Variable names
+           can have alphanumeric and underscore characters, and the values must match
+           [A-Za-z0-9-._~:/?#&=,]+.
   Arn:
     type: string
     description: Represents an Amazon Resource Name (ARN).
@@ -3728,16 +4504,18 @@ definitions:
         description: The ARN of the CloudWatch Logs log group to receive access logs.
       Format:
         $ref: '#/definitions/StringWithLengthBetween1And1024'
-        description: 'A single line format of the access logs of data, as specified by selected $context variables. The format must include at least $context.requestId.'
+        description: |-
+          A single line format of the access logs of data, as specified by selected $context
+           variables. The format must include at least $context.requestId.
     description: Settings for logging access in a stage.
   __string:
     type: string
   Id:
     type: string
-    description: 'An API Gateway-generated, unique identifier.'
+    description: The identifier.
   SelectionExpression:
     type: string
-    description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html">Selection Expressions</a> for more information.'
+    description: 'An expression used to extract information at runtime. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for more information.'
   __timestampIso8601:
     type: string
     format: date-time
@@ -3770,7 +4548,10 @@ definitions:
     properties:
       ApiEndpoint:
         $ref: '#/definitions/__string'
-        description: 'The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The stage name is typically appended to this URI to form a complete path to a deployed API stage.'
+        description: |-
+          The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+           stage name is typically appended to this URI to form a complete path to a deployed
+           API stage.
       ApiId:
         $ref: '#/definitions/Id'
         description: The API ID.
@@ -3791,7 +4572,7 @@ definitions:
         description: The name of the API.
       ProtocolType:
         $ref: '#/definitions/ProtocolType'
-        description: 'The API protocol: HTTP or WEBSOCKET.'
+        description: 'The API protocol: Currently only WEBSOCKET is supported.'
       RouteSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The route selection expression for the API.
@@ -3800,11 +4581,45 @@ definitions:
         description: A version identifier for the API.
       Warnings:
         $ref: '#/definitions/__listOf__string'
-        description: The warning messages reported when failonwarnings is turned on during API import.
+        description: |-
+          The warning messages reported when failonwarnings is turned on during
+           API import.
     description: Represents an API.
+  SelectionKey:
+    type: string
+    description: |-
+      After evaulating a selection expression, the result is compared against one or
+       more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions">Selection Expressions</a> for a list of expressions and each expression's
+       associated selection key type.
+  ApiMapping:
+    type: object
+    required:
+      - Stage
+      - ApiId
+    properties:
+      ApiId:
+        $ref: '#/definitions/Id'
+        description: The API identifier.
+      ApiMappingId:
+        $ref: '#/definitions/Id'
+        description: The API mapping identifier.
+      ApiMappingKey:
+        $ref: '#/definitions/SelectionKey'
+        description: The API mapping key.
+      Stage:
+        $ref: '#/definitions/StringWithLengthBetween1And128'
+        description: The API stage.
+    description: Represents an API mapping.
   AuthorizationScopes:
     type: array
-    description: 'A list of authorization scopes configured on a route. The scopes are used with a COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization works by matching the route scopes against the scopes parsed from the access token in the incoming request. The method invocation is authorized if any route scope matches a claimed scope in the access token. Otherwise, the invocation is not authorized. When the route scope is configured, the client must provide an access token instead of an identity token for authorization purposes.'
+    description: |-
+      A list of authorization scopes configured on a route. The scopes are used with a
+       COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+       works by matching the route scopes against the scopes parsed from the access token in
+       the incoming request. The method invocation is authorized if any route scope matches
+       a claimed scope in the access token. Otherwise, the invocation is not authorized.
+       When the route scope is configured, the client must provide an access token instead
+       of an identity token for authorization purposes.
     items:
       $ref: '#/definitions/StringWithLengthBetween1And64'
   AuthorizationType:
@@ -3813,23 +4628,41 @@ definitions:
       - NONE
       - AWS_IAM
       - CUSTOM
-    description: 'The authorization type. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a Lambda authorizer.'
+    description: |-
+      The authorization type. Valid values are NONE for open access,
+       AWS_IAM for using AWS IAM permissions, and CUSTOM for
+       using a Lambda authorizer.
   IntegerWithLengthBetween0And3600:
     type: integer
     description: 'An integer with a value between [0-3600].'
-    minimum: 0
-    maximum: 3600
+    minimum: -2147483648
+    maximum: 2147483647
   AuthorizerType:
     type: string
     enum:
       - REQUEST
-    description: 'The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.'
+    description: |-
+      The authorizer type. Currently the only valid value is REQUEST, for a
+       Lambda function using incoming request parameters.
   UriWithLengthBetween1And2048:
     type: string
     description: 'A string representation of a URI with a length between [1-2048].'
   IdentitySourceList:
     type: array
-    description: '<p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header, a Name query string parameter are defined as identity sources, this value is $method.request.header.Auth, $method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.</p>'
+    description: |-
+      The identity source for which authorization is requested. For the REQUEST
+       authorizer, this is required when authorization caching is enabled. The value is a
+       comma-separated string of one or more mapping expressions of the specified request
+       parameters. For example, if an Auth header, a Name query string parameter are defined
+       as identity sources, this value is $method.request.header.Auth,
+       $method.request.querystring.Name. These parameters will be used to derive
+       the authorization caching key and to perform runtime validation of the REQUEST
+       authorizer by verifying all of the identity-related request parameters are present,
+       not null and non-empty. Only when this is true does the authorizer invoke the
+       authorizer Lambda function, otherwise, it returns a 401 Unauthorized
+       response without calling the Lambda function. The valid value is a string of
+       comma-separated mapping expressions of the specified request parameters. When the
+       authorization caching is not enabled, this property is optional.
     items:
       $ref: '#/definitions/__string'
   ProviderArnList:
@@ -3844,31 +4677,71 @@ definitions:
     properties:
       AuthorizerCredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.'
+        description: |-
+          Specifies the required credentials as an IAM role for API Gateway to invoke the
+           authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+           Resource Name (ARN). To use resource-based permissions on the Lambda function,
+           specify null.
       AuthorizerId:
         $ref: '#/definitions/Id'
         description: The authorizer identifier.
       AuthorizerResultTtlInSeconds:
         $ref: '#/definitions/IntegerWithLengthBetween0And3600'
-        description: 'The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.'
+        description: |-
+          The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+           authorization caching is disabled. If it is greater than 0, API Gateway will cache
+           authorizer responses. If this field is not set, the default value is 300. The maximum
+           value is 3600, or 1 hour.
       AuthorizerType:
         $ref: '#/definitions/AuthorizerType'
-        description: 'The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.'
+        description: |-
+          The authorizer type. Currently the only valid value is REQUEST, for a
+           Lambda function using incoming request parameters.
       AuthorizerUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: 'The authorizer''s Uniform Resource Identifier (URI). ForREQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.'
+        description: |-
+          The authorizer's Uniform Resource Identifier (URI).
+           ForREQUEST authorizers, this must be a
+           well-formed Lambda function URI, for example,
+           arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+           In general, the URI has this form:
+           arn:aws:apigateway:{region}:lambda:path/{service_api}
+           , where {region} is the same as the region hosting the Lambda
+           function, path indicates that the remaining substring in the URI should be treated as
+           the path to the resource, including the initial /. For Lambda functions,
+           this is usually of the form
+           /2015-03-31/functions/[FunctionARN]/invocations.
       IdentitySource:
         $ref: '#/definitions/IdentitySourceList'
-        description: '<p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.</p>'
+        description: |-
+          <p>The identity source for which authorization is requested.</p><p>For the REQUEST authorizer, this is required when authorization
+           caching is enabled. The value is a comma-separated string of one or more mapping
+           expressions of the specified request parameters. For example, if an Auth
+           header and a Name query string parameters are defined as identity
+           sources, this value is method.request.header.Auth,
+           method.request.querystring.Name. These parameters will be used to
+           derive the authorization caching key and to perform runtime validation of the
+           REQUEST authorizer by verifying all of the identity-related request
+           parameters are present, not null, and non-empty. Only when this is true does the
+           authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+           Unauthorized response without calling the Lambda function. The valid value
+           is a string of comma-separated mapping expressions of the specified request
+           parameters. When the authorization caching is not enabled, this property is
+           optional.</p>
       IdentityValidationExpression:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
-        description: The validation expression does not apply to the REQUEST authorizer.
+        description: |-
+          The
+           validation expression does not apply to the REQUEST authorizer.
       Name:
         $ref: '#/definitions/StringWithLengthBetween1And128'
         description: The name of the authorizer.
       ProviderArns:
         $ref: '#/definitions/ProviderArnList'
-        description: 'For REQUEST authorizer, this is not defined.'
+        description: |-
+          For
+           REQUEST authorizer, this is not
+           defined.
     description: Represents an authorizer.
   ConnectionType:
     type: string
@@ -3882,9 +4755,6 @@ definitions:
       - CONVERT_TO_BINARY
       - CONVERT_TO_TEXT
     description: Specifies how to handle response payload content type conversions.
-  SelectionKey:
-    type: string
-    description: 'After evaulating a selection expression, the result is compared against one or more selection keys to find a matching key. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html">Selection Expressions</a> for a list of expressions and each expression''s associated selection key type.'
   DeploymentStatus:
     type: string
     enum:
@@ -3918,7 +4788,16 @@ definitions:
     description: Represents passthrough behavior for an integration response.
   IntegrationParameters:
     type: array
-    description: 'A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.'
+    description: |-
+      A key-value map specifying response parameters that are passed to the method
+       response from the backend. The key is a method response header parameter name and the
+       mapped value is an integration response header value, a static value enclosed within
+       a pair of single quotes, or a JSON expression from the integration response body. The
+       mapping key must match the pattern of method.response.header.{name}, where name is a
+       valid and unique header name. The mapped non-static value must match the pattern of
+       integration.response.header.{name} or integration.response.body.{JSON-expression},
+       where name is a valid and unique response header name and JSON-expression is a valid
+       JSON expression without the $ prefix.
     items:
       type: object
       properties:
@@ -3928,7 +4807,10 @@ definitions:
           $ref: '#/definitions/StringWithLengthBetween1And512'
   TemplateMap:
     type: array
-    description: A mapping of identifier keys to templates. The value is an actual template script. The key is typically a SelectionKey which is chosen based on evaluating a selection expression.
+    description: |-
+      A mapping of identifier keys to templates. The value is an actual template script.
+       The key is typically a SelectionKey which is chosen based on evaluating
+       a selection expression.
     items:
       type: object
       properties:
@@ -3939,8 +4821,8 @@ definitions:
   IntegerWithLengthBetween50And29000:
     type: integer
     description: 'An integer with a value between [50-29000].'
-    minimum: 50
-    maximum: 29000
+    minimum: -2147483648
+    maximum: 2147483647
   StringWithLengthBetween1And256:
     type: string
     description: 'A string with a length between [1-256].'
@@ -3972,13 +4854,19 @@ definitions:
     properties:
       DataTraceEnabled:
         $ref: '#/definitions/__boolean'
-        description: Specifies whether (true) or not (false) data trace logging is enabled for this route. This property affects the log entries pushed to Amazon CloudWatch Logs.
+        description: |-
+          Specifies whether (true) or not (false) data trace
+           logging is enabled for this route. This property affects the log entries pushed to
+           Amazon CloudWatch Logs.
       DetailedMetricsEnabled:
         $ref: '#/definitions/__boolean'
         description: Specifies whether detailed metrics are enabled.
       LoggingLevel:
         $ref: '#/definitions/LoggingLevel'
-        description: 'Specifies the logging level for this route: DEBUG, INFO, or WARN. This property affects the log entries pushed to Amazon CloudWatch Logs.'
+        description: |-
+          Specifies the logging level for this route: DEBUG, INFO,
+           or WARN. This property affects the log entries pushed to Amazon
+           CloudWatch Logs.
       ThrottlingBurstLimit:
         $ref: '#/definitions/__integer'
         description: Specifies the throttling burst limit.
@@ -4017,14 +4905,19 @@ definitions:
         description: The identifier for the deployment.
       DeploymentStatus:
         $ref: '#/definitions/DeploymentStatus'
-        description: 'The status of the deployment: PENDING, FAILED, or SUCCEEDED.'
+        description: |-
+          The status of the deployment: PENDING, FAILED, or
+           SUCCEEDED.
       DeploymentStatusMessage:
         $ref: '#/definitions/__string'
         description: May contain additional feedback on the status of an API deployment.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description for the deployment.
-    description: An immutable representation of an API that can be called by users. A Deployment must be associated with a Stage for it to be callable over the internet.
+    description: |-
+      An immutable representation of an API that can be called by users. A
+       Deployment must be associated with a Stage for it to be
+       callable over the internet.
   DomainName:
     type: object
     required:
@@ -4054,27 +4947,39 @@ definitions:
         description: A domain name for the WebSocket API.
       CertificateArn:
         $ref: '#/definitions/Arn'
-        description: An AWS-managed certificate that will be used by the edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
+        description: |-
+          An AWS-managed certificate that will be used by the edge-optimized endpoint for
+           this domain name. AWS Certificate Manager is the only supported source.
       CertificateName:
         $ref: '#/definitions/StringWithLengthBetween1And128'
-        description: The user-friendly name of the certificate that will be used by the edge-optimized endpoint for this domain name.
+        description: |-
+          The user-friendly name of the certificate that will be used by the edge-optimized
+           endpoint for this domain name.
       CertificateUploadDate:
         $ref: '#/definitions/__timestampIso8601'
-        description: The timestamp when the certificate that was used by edge-optimized endpoint for this domain name was uploaded.
+        description: |-
+          The timestamp when the certificate that was used by edge-optimized endpoint for
+           this domain name was uploaded.
       EndpointType:
         $ref: '#/definitions/EndpointType'
         description: The endpoint type.
       HostedZoneId:
         $ref: '#/definitions/__string'
-        description: 'The Amazon Route 53 Hosted Zone ID of the endpoint. See <a href="docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region">AWS Regions and Endpoints for API Gateway</a>.'
+        description: The Amazon Route 53 Hosted Zone ID of the endpoint.
     description: The domain name configuration.
+  __listOfApiMapping:
+    type: array
+    items:
+      $ref: '#/definitions/ApiMapping'
+  NextToken:
+    type: string
+    description: |-
+      The next page of elements from this collection. Not valid for the last element of
+       the collection.
   __listOfApi:
     type: array
     items:
       $ref: '#/definitions/Api'
-  NextToken:
-    type: string
-    description: The next page of elements from this collection. Not valid for the last element of the collection.
   __listOfAuthorizer:
     type: array
     items:
@@ -4116,16 +5021,34 @@ definitions:
     properties:
       ConnectionId:
         $ref: '#/definitions/StringWithLengthBetween1And1024'
-        description: The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+        description: The connection ID.
       ConnectionType:
         $ref: '#/definitions/ConnectionType'
-        description: The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+        description: |-
+          The type of the network connection to the integration endpoint. Currently the only
+           valid value is INTERNET, for connections through the public routable
+           internet.
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       CredentialsArn:
         $ref: '#/definitions/Arn'
-        description: 'Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role''s Amazon Resource Name (ARN). To require that the caller''s identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.'
+        description: |-
+          Specifies the credentials required for the integration, if any. For AWS
+           integrations, three options are available. To specify an IAM Role for API Gateway to
+           assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+           identity be passed through from the request, specify the string
+           arn:aws:iam::*:user/*. To use resource-based permissions on supported
+           AWS services, specify null.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: Represents the description of an integration.
@@ -4137,28 +5060,75 @@ definitions:
         description: Specifies the integration's HTTP method type.
       IntegrationResponseSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
-        description: ''
+        description: 'The integration response selection expression for the integration. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions">Integration Response Selection Expressions</a>.'
       IntegrationType:
         $ref: '#/definitions/IntegrationType'
-        description: '<p>The integration type of an integration. One of the following:</p><p> AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration.</p><p> AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration.</p><p> HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration.</p><p> HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration.</p><p> MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.</p>'
+        description: |-
+          <p>The integration type of an integration. One of the following:</p><p>
+           AWS: for integrating the route or method request with an AWS service
+           action, including the Lambda function-invoking action. With the Lambda
+           function-invoking action, this is referred to as the Lambda custom integration. With
+           any other AWS service action, this is known as AWS integration.</p><p>
+           AWS_PROXY: for integrating the route or method request with the Lambda
+           function-invoking action with the client request passed through as-is. This
+           integration is also referred to as Lambda proxy integration.</p><p>
+           HTTP: for integrating the route or method request with an HTTP
+           endpoint. This
+           integration is also referred to as the HTTP custom integration.</p><p>
+           HTTP_PROXY: for integrating route or method request with an HTTP
+           endpoint, with the client
+           request passed through as-is. This is also referred to as HTTP proxy
+           integration.</p><p>
+           MOCK: for integrating the route or method request with API Gateway as a
+           "loopback" endpoint without invoking any backend.</p>
       IntegrationUri:
         $ref: '#/definitions/UriWithLengthBetween1And2048'
-        description: '<p>Specifies the Uniform Resource Identifier (URI) of the integration endpoint.</p><p>For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the <a href="https://en.wikipedia.org/wiki/Uniform_Resource_Identifier">RFC-3986 specification</a>, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.</p><p>For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}</p>'
+        description: 'For a Lambda proxy integration, this is the URI of the Lambda function.'
       PassthroughBehavior:
         $ref: '#/definitions/PassthroughBehavior'
-        description: '<p>Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER.</p><p> WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation.</p><p> NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response.</p><p> WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.</p>'
+        description: |-
+          <p>Specifies the pass-through behavior for incoming requests based on the
+           Content-Type header in the request, and the available mapping
+           templates specified as the requestTemplates property on the
+           Integration resource. There are three valid values:
+           WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+           NEVER.</p><p>
+           WHEN_NO_MATCH passes the request body for unmapped content types through
+           to the integration backend without transformation.</p><p>
+           NEVER rejects unmapped content types with an HTTP 415 Unsupported
+           Media Type response.</p><p>
+           WHEN_NO_TEMPLATES allows pass-through when the integration has no
+           content types mapped to templates. However, if there is at least one content type
+           defined, unmapped content types will be rejected with the same HTTP 415
+           Unsupported Media Type response.</p>
       RequestParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.'
+        description: |-
+          A key-value map specifying request parameters that are passed from the method
+           request to the backend. The key is an integration request parameter name and the
+           associated value is a method request parameter value or static value that must be
+           enclosed within single quotes and pre-encoded as required by the backend. The method
+           request parameter value must match the pattern of
+           method.request.{location}.{name}
+           , where 
+           {location}
+            is querystring, path, or header; and 
+           {name}
+            must be a valid and unique method request parameter name.
       RequestTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.'
+        description: |-
+          Represents a map of Velocity templates that are applied on the request payload
+           based on the value of the Content-Type header sent by the client. The content type
+           value is the key in this map, and the template (as a String) is the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expression for the integration.
       TimeoutInMillis:
         $ref: '#/definitions/IntegerWithLengthBetween50And29000'
-        description: 'Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.'
+        description: |-
+          Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+           milliseconds or 29 seconds.
     description: Represents an integration.
   IntegrationResponse:
     type: object
@@ -4167,7 +5137,16 @@ definitions:
     properties:
       ContentHandlingStrategy:
         $ref: '#/definitions/ContentHandlingStrategy'
-        description: '<p>Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:</p><p> CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob.</p><p> CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.</p>'
+        description: |-
+          <p>Specifies how to handle response payload content type conversions. Supported
+           values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+           following behaviors:</p><p>
+           CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+           string to the corresponding binary blob.</p><p>
+           CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+           Base64-encoded string.</p><p>If this property is not defined, the response payload will be passed through from
+           the integration response to the route response or method response without
+           modification.</p>
       IntegrationResponseId:
         $ref: '#/definitions/Id'
         description: The integration response ID.
@@ -4176,10 +5155,22 @@ definitions:
         description: The integration response key.
       ResponseParameters:
         $ref: '#/definitions/IntegrationParameters'
-        description: 'A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.'
+        description: |-
+          A key-value map specifying response parameters that are passed to the method
+           response from the backend. The key is a method response header parameter name and the
+           mapped value is an integration response header value, a static value enclosed within
+           a pair of single quotes, or a JSON expression from the integration response body. The
+           mapping key must match the pattern of method.response.header.{name}, where name is a
+           valid and unique header name. The mapped non-static value must match the pattern of
+           integration.response.header.{name} or integration.response.body.{JSON-expression},
+           where name is a valid and unique response header name and JSON-expression is a valid
+           JSON expression without the $ prefix.
       ResponseTemplates:
         $ref: '#/definitions/TemplateMap'
-        description: 'The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.'
+        description: |-
+          The collection of response templates for the integration response as a
+           string-to-string map of key-value pairs. Response templates are represented as a
+           key/value map, with a content-type as the key and a template as the value.
       TemplateSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The template selection expressions for the integration response.
@@ -4210,15 +5201,21 @@ definitions:
         description: The name of the model. Must be alphanumeric.
       Schema:
         $ref: '#/definitions/StringWithLengthBetween0And32K'
-        description: 'The schema for the model. For application/json models, this should be JSON schema draft 4 model.'
-    description: 'Represents a data model for an API. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html">Create Models and Mapping Templates for Request and Response Mappings</a>.'
+        description: |-
+          The schema for the model. For application/json models, this should be JSON schema
+           draft 4 model.
+    description: |-
+      Represents a data model for an API. See <a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html">Create Models and Mapping Templates for Request and Response
+       Mappings</a>.
   ParameterConstraints:
     type: object
     properties:
       Required:
         $ref: '#/definitions/__boolean'
         description: Whether or not the parameter is required.
-    description: 'Validation constraints imposed on parameters of a request (path, query string, headers).'
+    description: |-
+      Validation constraints imposed on parameters of a request (path, query string,
+       headers).
   Route:
     type: object
     required:
@@ -4229,13 +5226,28 @@ definitions:
         description: Specifies whether an API key is required for this route.
       AuthorizationScopes:
         $ref: '#/definitions/AuthorizationScopes'
-        description: 'The authorization scopes supported by this route. '
+        description: |-
+          A list of authorization scopes configured on a route. The scopes are used with a
+           COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+           works by matching the route scopes against the scopes parsed from the access token in
+           the incoming request. The method invocation is authorized if any route scope matches
+           a claimed scope in the access token. Otherwise, the invocation is not authorized.
+           When the route scope is configured, the client must provide an access token instead
+           of an identity token for authorization purposes.
       AuthorizationType:
         $ref: '#/definitions/AuthorizationType'
-        description: 'The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.'
+        description: |-
+          The authorization type for the route. Valid values are NONE for open
+           access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+           for using a Lambda
+           authorizer
       AuthorizerId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Authorizer resource to be associated with this route.
+        description: |-
+          The identifier of the Authorizer resource to be associated with this
+           route, if the authorizationType is CUSTOM
+           . The authorizer identifier is generated by API Gateway
+           when you created the authorizer.
       ModelSelectionExpression:
         $ref: '#/definitions/SelectionExpression'
         description: The model selection expression for the route.
@@ -4306,7 +5318,9 @@ definitions:
         description: Default route settings for the stage.
       DeploymentId:
         $ref: '#/definitions/Id'
-        description: The identifier of the Deployment that the Stage is associated with.
+        description: |-
+          The identifier of the Deployment that the Stage is
+           associated with.
       Description:
         $ref: '#/definitions/StringWithLengthBetween0And1024'
         description: The description of the stage.
@@ -4321,7 +5335,10 @@ definitions:
         description: The name of the stage.
       StageVariables:
         $ref: '#/definitions/StageVariablesMap'
-        description: 'A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.'
+        description: |-
+          A map that defines the stage variables for a stage resource. Variable names can
+           have alphanumeric and underscore characters, and the values must match
+           [A-Za-z0-9-._~:/?#&=,]+.
     description: Represents an API stage.
   StringWithLengthBetween0And2048:
     type: string
