@@ -152,14 +152,15 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes a long-running DlpJob. This method indicates that the client is
-        no longer interested in the DlpJob result. The job will be cancelled if
-        possible.
-        See https://cloud.google.com/dlp/docs/inspecting-storage and
-        https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
-      operationId: dlp.projects.dlpJobs.delete
+        Deletes a stored infoType.
+        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+        learn more.
+      operationId: dlp.organizations.storedInfoTypes.delete
       parameters:
-        - description: The name of the DlpJob resource to be deleted.
+        - description: |-
+            Resource name of the organization and storedInfoType to be deleted, for
+            example `organizations/433245324/storedInfoTypes/432452342` or
+            projects/project-id/storedInfoTypes/432452342.
           in: path
           name: name
           required: true
@@ -174,15 +175,18 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     get:
       description: |-
-        Gets the latest state of a long-running DlpJob.
-        See https://cloud.google.com/dlp/docs/inspecting-storage and
-        https://cloud.google.com/dlp/docs/compute-risk-analysis to learn more.
-      operationId: dlp.projects.dlpJobs.get
+        Gets a stored infoType.
+        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+        learn more.
+      operationId: dlp.organizations.storedInfoTypes.get
       parameters:
-        - description: The name of the DlpJob resource.
+        - description: |-
+            Resource name of the organization and storedInfoType to be read, for
+            example `organizations/433245324/storedInfoTypes/432452342` or
+            projects/project-id/storedInfoTypes/432452342.
           in: path
           name: name
           required: true
@@ -192,12 +196,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2DlpJob'
+            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -212,19 +216,20 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the DeidentifyTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
-        more.
-      operationId: dlp.projects.deidentifyTemplates.patch
+        Updates the stored infoType by creating a new version. The existing version
+        will continue to be used until the new version is ready.
+        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
+        learn more.
+      operationId: dlp.organizations.storedInfoTypes.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
         - description: |-
-            Resource name of organization and deidentify template to be updated, for
-            example `organizations/433245324/deidentifyTemplates/432452342` or
-            projects/project-id/deidentifyTemplates/432452342.
+            Resource name of organization and storedInfoType to be updated, for
+            example `organizations/433245324/storedInfoTypes/432452342` or
+            projects/project-id/storedInfoTypes/432452342.
           in: path
           name: name
           required: true
@@ -234,12 +239,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v2/{name}:activate':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -461,7 +466,7 @@ paths:
         Lists DeidentifyTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.projects.deidentifyTemplates.list
+      operationId: dlp.organizations.deidentifyTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -509,7 +514,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -528,7 +533,7 @@ paths:
         for de-identifying content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.projects.deidentifyTemplates.create
+      operationId: dlp.organizations.deidentifyTemplates.create
       parameters:
         - in: body
           name: body
@@ -551,7 +556,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v2/{parent}/dlpJobs':
     get:
       description: |-
@@ -729,7 +734,7 @@ paths:
       description: |-
         Lists InspectTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.list
+      operationId: dlp.organizations.inspectTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -777,7 +782,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -795,7 +800,7 @@ paths:
         Creates an InspectTemplate for re-using frequently used configuration
         for inspecting content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.create
+      operationId: dlp.organizations.inspectTemplates.create
       parameters:
         - in: body
           name: body
@@ -818,7 +823,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
   '/v2/{parent}/jobTriggers':
     get:
       description: |-
@@ -945,7 +950,7 @@ paths:
         Lists stored infoTypes.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.projects.storedInfoTypes.list
+      operationId: dlp.organizations.storedInfoTypes.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -994,7 +999,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1012,7 +1017,7 @@ paths:
         Creates a pre-built stored infoType to be used for inspection.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.projects.storedInfoTypes.create
+      operationId: dlp.organizations.storedInfoTypes.create
       parameters:
         - in: body
           name: body
@@ -1035,7 +1040,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - organizations
 definitions:
   GooglePrivacyDlpV2Action:
     description: |-

@@ -1024,7 +1024,7 @@ definitions:
              For example, `admins@example.com`.
 
 
-          * `domain:{domain}`: A Google Apps domain name that represents all the
+          * `domain:{domain}`: The G Suite domain (primary) that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
         items:
@@ -1487,7 +1487,7 @@ definitions:
         type: string
     type: object
   FixableTotalByDigest:
-    description: Per resource and severity counts of fixable and total vulnerabilites.
+    description: Per resource and severity counts of fixable and total vulnerabilities.
     properties:
       fixableCount:
         description: The number of fixable vulnerabilities associated with this resource.
@@ -1621,6 +1621,19 @@ definitions:
           severity.
         format: float
         type: number
+      effectiveSeverity:
+        description: |-
+          The distro assigned severity for this vulnerability when it is
+          available, and note provider assigned severity when distro has not yet
+          assigned a severity for this vulnerability.
+        enum:
+          - SEVERITY_UNSPECIFIED
+          - MINIMAL
+          - LOW
+          - MEDIUM
+          - HIGH
+          - CRITICAL
+        type: string
       longDescription:
         description: Output only. A detailed description of this vulnerability.
         type: string
@@ -1984,7 +1997,9 @@ definitions:
         $ref: '#/definitions/VulnerabilityLocation'
         description: The location of the available fix for vulnerability.
       severityName:
-        description: 'The severity (e.g., distro assigned severity) for this vulnerability.'
+        description: |-
+          Deprecated, use Details.effective_severity instead
+          The severity (e.g., distro assigned severity) for this vulnerability.
         type: string
     type: object
   PgpSignedAttestation:

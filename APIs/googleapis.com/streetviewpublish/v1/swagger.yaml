@@ -131,9 +131,8 @@ paths:
         Currently, the only way to set heading, pitch, and roll in CreatePhoto is
         through the [Photo Sphere XMP
         metadata](https://developers.google.com/streetview/spherical-metadata) in
-        the photo bytes. The `pose.heading`, `pose.pitch`, `pose.roll`,
-        `pose.altitude`, and `pose.level` fields in Pose are ignored for
-        CreatePhoto.
+        the photo bytes. CreatePhoto ignores the  `pose.heading`, `pose.pitch`,
+        `pose.roll`, `pose.altitude`, and `pose.level` fields in Pose.
 
         This method returns the following error codes:
 
@@ -182,11 +181,6 @@ paths:
         field are used. If `updateMask` is not present, the update applies to all
         fields.
 
-        <aside class="note"><b>Note:</b> To update
-        Pose.altitude,
-        Pose.latLngPair has to be
-        filled as well. Otherwise, the request will fail.</aside>
-
         This method returns the following error codes:
 
         * google.rpc.Code.PERMISSION_DENIED if the requesting user did not
@@ -209,7 +203,7 @@ paths:
         - description: |-
             Mask that identifies fields on the photo metadata to update.
             If not present, the old Photo
-            metadata will be entirely replaced with the
+            metadata is entirely replaced with the
             new Photo metadata in this request.
             The update fails if invalid fields are specified. Multiple fields can be
             specified in a comma-delimited list.
@@ -226,13 +220,13 @@ paths:
             * `places`
 
 
-            <aside class="note"><b>Note:</b> Repeated fields in
+            <aside class="note"><b>Note:</b> When
             updateMask
-            mean the entire set of repeated values will be replaced with the new
-            contents. For example, if
+            contains repeated fields, the entire set of repeated values get replaced
+            with the new contents. For example, if
             updateMask
             contains `connections` and `UpdatePhotoRequest.photo.connections` is empty,
-            all connections will be removed.</aside>
+            all connections are removed.</aside>
           in: query
           name: updateMask
           type: string
@@ -293,7 +287,7 @@ paths:
             information, see
             http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
             If language_code is unspecified, the user's language preference for Google
-            services will be used.
+            services is used.
           in: query
           name: languageCode
           type: string
@@ -348,13 +342,14 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Creates an upload session to start uploading photo bytes. The upload URL of
-        the returned UploadRef is used to
-        upload the bytes for the Photo.
+        Creates an upload session to start uploading photo bytes.  The method uses
+        the upload URL of the returned
+        UploadRef to upload the bytes for
+        the Photo.
 
         In addition to the photo requirements shown in
         https://support.google.com/maps/answer/7012050?hl=en&ref_topic=6275604,
-        the photo must also meet the following requirements:
+        the photo must meet the following requirements:
 
         * Photo Sphere XMP metadata must be included in the photo medadata. See
         https://developers.google.com/streetview/spherical-metadata for the
@@ -363,8 +358,8 @@ paths:
         https://support.google.com/maps/answer/7012050?hl=en&ref_topic=6275604, and
         the photo must be a full 360 horizontally.
 
-        After the upload is complete, the
-        UploadRef is used with
+        After the upload completes, the method uses
+        UploadRef with
         CreatePhoto
         to create the Photo object entry.
       operationId: streetviewpublish.photo.startUpload
@@ -405,14 +400,14 @@ paths:
             information, see
             http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
             If language_code is unspecified, the user's language preference for Google
-            services will be used.
+            services is used.
           in: query
           name: languageCode
           type: string
         - description: |-
             The maximum number of photos to return.
             `pageSize` must be non-negative. If `pageSize` is zero or is not provided,
-            the default page size of 100 will be used.
+            the default page size of 100 is used.
             The number of photos returned in the response may be less than `pageSize`
             if the number of photos that belong to the user is less than `pageSize`.
           in: query
@@ -478,11 +473,11 @@ paths:
 
         Note that if
         BatchDeletePhotos
-        fails, either critical fields are missing or there was an authentication
+        fails, either critical fields are missing or there is an authentication
         error. Even if
         BatchDeletePhotos
-        succeeds, there may have been failures for single photos in the batch.
-        These failures will be specified in each
+        succeeds, individual photos in the batch may have failures.
+        These failures are specified in each
         PhotoResponse.status
         in
         BatchDeletePhotosResponse.results.
@@ -513,11 +508,11 @@ paths:
 
         Note that if
         BatchGetPhotos
-        fails, either critical fields are missing or there was an authentication
+        fails, either critical fields are missing or there is an authentication
         error. Even if
         BatchGetPhotos
-        succeeds, there may have been failures for single photos in the batch.
-        These failures will be specified in each
+        succeeds, individual photos in the batch may have failures.
+        These failures are specified in each
         PhotoResponse.status
         in
         BatchGetPhotosResponse.results.
@@ -531,7 +526,7 @@ paths:
             information, see
             http://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
             If language_code is unspecified, the user's language preference for Google
-            services will be used.
+            services is used.
           in: query
           name: languageCode
           type: string
@@ -597,11 +592,11 @@ paths:
 
         Note that if
         BatchUpdatePhotos
-        fails, either critical fields are missing or there was an authentication
+        fails, either critical fields are missing or there is an authentication
         error. Even if
         BatchUpdatePhotos
-        succeeds, there may have been failures for single photos in the batch.
-        These failures will be specified in each
+        succeeds, individual photos in the batch may have failures.
+        These failures are specified in each
         PhotoResponse.status
         in
         BatchUpdatePhotosResponse.results.
@@ -646,8 +641,8 @@ definitions:
     properties:
       photoIds:
         description: |-
-          Required. IDs of the Photos. For HTTP
-          GET requests, the URL query parameter should be
+          Required. IDs of the Photos. HTTP
+          GET requests require the following syntax for the URL query parameter:
           `photoIds=<id1>&photoIds=<id2>&...`.
         items:
           type: string
@@ -772,9 +767,9 @@ definitions:
         type: string
       photos:
         description: |-
-          List of photos. The maximum number of items returned is based on the
+          List of photos. The
           pageSize field
-          in the request.
+          in the request determines the number of items returned.
         items:
           $ref: '#/definitions/Photo'
         type: array
@@ -850,7 +845,7 @@ definitions:
       mapsPublishStatus:
         description: |-
           Output only. Status in Google Maps, whether this photo was published, or
-          rejected for a possibly specified reason.
+          rejected.
         enum:
           - UNSPECIFIED_MAPS_PUBLISH_STATUS
           - PUBLISHED
@@ -974,10 +969,9 @@ definitions:
           Latitude and longitude pair of the pose, as explained here:
           https://cloud.google.com/datastore/docs/reference/rest/Shared.Types/LatLng
           When creating a Photo, if the
-          latitude and longitude pair are not provided here, the geolocation from the
-          exif header will be used. If the latitude and longitude pair is not
-          provided and cannot be found in the exif header, the create photo process
-          will fail.
+          latitude and longitude pair are not provided, the geolocation from the
+          exif header is used. A latitude and longitude pair not provided in the
+          photo or exif header causes the photo process to fail.
       level:
         $ref: '#/definitions/Level'
         description: Level (the floor in a building) used to configure vertical navigation.
@@ -1087,7 +1081,7 @@ definitions:
         description: |-
           Mask that identifies fields on the photo metadata to update.
           If not present, the old Photo
-          metadata will be entirely replaced with the
+          metadata is entirely replaced with the
           new Photo metadata in this request.
           The update fails if invalid fields are specified. Multiple fields can be
           specified in a comma-delimited list.
@@ -1104,13 +1098,13 @@ definitions:
           * `places`
 
 
-          <aside class="note"><b>Note:</b> Repeated fields in
+          <aside class="note"><b>Note:</b> When
           updateMask
-          mean the entire set of repeated values will be replaced with the new
-          contents. For example, if
+          contains repeated fields, the entire set of repeated values get replaced
+          with the new contents. For example, if
           updateMask
           contains `connections` and `UpdatePhotoRequest.photo.connections` is empty,
-          all connections will be removed.</aside>
+          all connections are removed.</aside>
         format: google-fieldmask
         type: string
     type: object

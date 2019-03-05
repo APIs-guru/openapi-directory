@@ -359,8 +359,8 @@ paths:
         - projects
   '/v1beta1/{name}':
     delete:
-      description: Deletes an index.
-      operationId: firestore.projects.databases.indexes.delete
+      description: Deletes a document.
+      operationId: firestore.projects.databases.documents.delete
       parameters:
         - description: |-
             When set to `true`, the target document must exist.
@@ -375,8 +375,8 @@ paths:
           name: currentDocument.updateTime
           type: string
         - description: |-
-            The index name. For example:
-            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
+            The resource name of the Document to delete. In the format:
+            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           in: path
           name: name
           required: true
@@ -395,8 +395,8 @@ paths:
       tags:
         - projects
     get:
-      description: Gets an index.
-      operationId: firestore.projects.databases.indexes.get
+      description: Gets a single document.
+      operationId: firestore.projects.databases.documents.get
       parameters:
         - collectionFormat: multi
           description: |-
@@ -408,8 +408,8 @@ paths:
           name: mask.fieldPaths
           type: array
         - description: |-
-            The name of the index. For example:
-            `projects/{project_id}/databases/{database_id}/indexes/{index_id}`
+            The resource name of the Document to get. In the format:
+            `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
           in: path
           name: name
           required: true
@@ -429,7 +429,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleFirestoreAdminV1beta1Index'
+            $ref: '#/definitions/Document'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

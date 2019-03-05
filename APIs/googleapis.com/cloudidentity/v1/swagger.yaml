@@ -26,6 +26,15 @@ info:
   x-serviceName: cloudidentity
 externalDocs:
   url: 'https://cloud.google.com/identity/'
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-identity.groups': 'See, change, create, and delete any of the Cloud Identity Groups that you can access, including the members of each group'
+      'https://www.googleapis.com/auth/cloud-identity.groups.readonly': 'See any Cloud Identity Groups that you can access, including group members and their emails'
+    type: oauth2
 parameters:
   $.xgafv:
     description: V1 error format.
@@ -128,6 +137,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListGroupsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
       tags:
         - groups
     parameters:
@@ -155,6 +169,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
       tags:
         - groups
   '/v1/groups:lookup':
@@ -186,6 +203,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/LookupGroupNameResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
       tags:
         - groups
     parameters:
@@ -236,6 +258,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/SearchGroupsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
       tags:
         - groups
     parameters:
@@ -272,6 +299,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
       tags:
         - groups
     get:
@@ -295,6 +325,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Membership'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
       tags:
         - groups
     parameters:
@@ -337,6 +372,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
       tags:
         - groups
   '/v1/{parent}/memberships':
@@ -378,6 +416,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/ListMembershipsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
       tags:
         - groups
     parameters:
@@ -414,6 +457,9 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
       tags:
         - groups
   '/v1/{parent}/memberships:lookup':
@@ -456,6 +502,11 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/LookupMembershipNameResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-identity.groups.readonly'
       tags:
         - groups
     parameters:
@@ -607,9 +658,9 @@ definitions:
       name:
         description: |-
           [Resource name](https://cloud.google.com/apis/design/resource_names) of the
-          Membership in the format: `groups/{group_id}/memberships/{member_id}`, where
-          group_id is the unique ID assigned to the Group to which Membership belongs
-          to, and member_id is the unique ID assigned to the member
+          Membership in the format: `groups/{group_id}/memberships/{member_id}`,
+          where group_id is the unique ID assigned to the Group to which Membership
+          belongs to, and member_id is the unique ID assigned to the member
 
           Must be left blank while creating a Membership.
         type: string

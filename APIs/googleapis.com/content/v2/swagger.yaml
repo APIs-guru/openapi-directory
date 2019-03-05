@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2/rest'
       version: v1
@@ -133,7 +133,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/AccountsCustomBatchRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -191,7 +191,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/AccounttaxCustomBatchRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -221,7 +221,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/DatafeedsCustomBatchRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -278,7 +278,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/InventoryCustomBatchRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -309,7 +309,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/LiasettingsCustomBatchRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -389,7 +389,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/PosCustomBatchRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -420,7 +420,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ProductsCustomBatchRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -482,7 +482,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ShippingsettingsCustomBatchRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -540,7 +540,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Account'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -569,7 +569,7 @@ paths:
           name: accountId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -636,7 +636,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Account'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -668,7 +668,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Account'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -926,7 +926,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/AccountTax'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -958,7 +958,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/AccountTax'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -1021,7 +1021,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Datafeed'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -1050,7 +1050,7 @@ paths:
           name: datafeedId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -1112,7 +1112,7 @@ paths:
           name: datafeedId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -1144,7 +1144,7 @@ paths:
           name: datafeedId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -1181,7 +1181,7 @@ paths:
           name: datafeedId
           required: true
           type: string
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -1294,7 +1294,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/InventorySetRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -1405,7 +1405,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/LiaSettings'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -1437,7 +1437,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/LiaSettings'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -2482,7 +2482,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sets (overrides) merchant provided annotations on the line item.
+      description: Sets (or overrides if it already exists) merchant provided annotations in the form of key-value pairs. A common use case would be to supply us with additional structured information about a line item that cannot be provided via other methods. Submitted key-value pairs can be retrieved as part of the orders resource.
       operationId: content.orders.setlineitemmetadata
       parameters:
         - in: body
@@ -2744,7 +2744,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/PosInventoryRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -2785,7 +2785,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/PosSaleRequest'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -2850,7 +2850,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/PosStore'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -2879,7 +2879,7 @@ paths:
       description: Deletes a store for the given merchant.
       operationId: content.pos.delete
       parameters:
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -2991,7 +2991,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/Product'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -3015,7 +3015,7 @@ paths:
       description: Deletes a product from your Merchant Center account.
       operationId: content.products.delete
       parameters:
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -3246,7 +3246,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ShippingSettings'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -3278,7 +3278,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/ShippingSettings'
-        - description: Flag to run the request in dry-run mode.
+        - description: 'Flag to simulate a request like in a live environment. If set to true, dry-run mode checks the validity of the request and returns errors (if any).'
           in: query
           name: dryRun
           type: boolean
@@ -5259,7 +5259,7 @@ definitions:
         $ref: '#/definitions/OrderDeliveryDetails'
         description: The details for the delivery.
       id:
-        description: The REST id of the order. Globally unique.
+        description: The REST ID of the order. Globally unique.
         type: string
       kind:
         default: 'content#order'
@@ -5274,7 +5274,7 @@ definitions:
         format: uint64
         type: string
       merchantOrderId:
-        description: Merchant-provided id of the order.
+        description: Merchant-provided ID of the order.
         type: string
       netAmount:
         $ref: '#/definitions/Price'
@@ -5310,7 +5310,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: The tax for the total shipping cost.
       shippingOption:
-        description: The requested shipping option.
+        description: Deprecated. Shipping details are provided with line items instead.
         type: string
       status:
         description: The status of the order.
@@ -5470,7 +5470,7 @@ definitions:
           $ref: '#/definitions/OrderCancellation'
         type: array
       id:
-        description: The id of the line item.
+        description: The ID of the line item.
         type: string
       price:
         $ref: '#/definitions/Price'
@@ -5540,7 +5540,7 @@ definitions:
         description: Global Trade Item Number (GTIN) of the item.
         type: string
       id:
-        description: The REST id of the product.
+        description: The REST ID of the product.
         type: string
       imageLink:
         description: URL of an image of the item.
@@ -5567,7 +5567,7 @@ definitions:
         description: The title of the product.
         type: string
       variantAttributes:
-        description: 'Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes here.'
+        description: 'Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes <a href="'
         items:
           $ref: '#/definitions/OrderLineItemProductVariantAttribute'
         type: array
@@ -5800,7 +5800,7 @@ definitions:
         description: 'Date on which the shipment has been delivered, in ISO 8601 format. Present only if status is delivered'
         type: string
       id:
-        description: The id of the shipment.
+        description: The ID of the shipment.
         type: string
       lineItems:
         description: The line items that are shipped.
@@ -5811,13 +5811,13 @@ definitions:
         description: The status of the shipment.
         type: string
       trackingId:
-        description: The tracking id for the shipment.
+        description: The tracking ID for the shipment.
         type: string
     type: object
   OrderShipmentLineItemShipment:
     properties:
       lineItemId:
-        description: The id of the line item that is shipped. Either lineItemId or productId is required.
+        description: The ID of the line item that is shipped. Either lineItemId or productId is required.
         type: string
       productId:
         description: The ID of the product to ship. This is the REST ID used in the products service. Either lineItemId or productId is required.
@@ -6204,7 +6204,7 @@ definitions:
         format: uint64
         type: string
       merchantOrderId:
-        description: The merchant order id. Required for updateMerchantOrderId and getByMerchantOrderId methods.
+        description: The merchant order ID. Required for updateMerchantOrderId and getByMerchantOrderId methods.
         type: string
       method:
         description: The method to apply.
@@ -6428,7 +6428,7 @@ definitions:
           $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
         type: array
       trackingId:
-        description: Deprecated. Please use shipmentInfo instead. The tracking id for the shipment.
+        description: Deprecated. Please use shipmentInfo instead. The tracking ID for the shipment.
         type: string
     type: object
   OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo:
@@ -6437,10 +6437,10 @@ definitions:
         description: 'The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       shipmentId:
-        description: The ID of the shipment.
+        description: The ID of the shipment. This is assigned by the merchant and is unique to each shipment.
         type: string
       trackingId:
-        description: The tracking id for the shipment.
+        description: The tracking ID for the shipment.
         type: string
     type: object
   OrdersCustomBatchRequestEntryUpdateLineItemShippingDetails:
@@ -6473,7 +6473,7 @@ definitions:
         description: New status for the shipment. Not updated if missing.
         type: string
       trackingId:
-        description: The tracking id for the shipment. Not updated if missing.
+        description: The tracking ID for the shipment. Not updated if missing.
         type: string
     type: object
   OrdersCustomBatchResponse:
@@ -6767,7 +6767,7 @@ definitions:
           $ref: '#/definitions/OrdersCustomBatchRequestEntryShipLineItemsShipmentInfo'
         type: array
       trackingId:
-        description: Deprecated. Please use shipmentInfo instead. The tracking id for the shipment.
+        description: Deprecated. Please use shipmentInfo instead. The tracking ID for the shipment.
         type: string
     type: object
   OrdersShipLineItemsResponse:
@@ -6845,7 +6845,7 @@ definitions:
         description: New status for the shipment. Not updated if missing.
         type: string
       trackingId:
-        description: The tracking id for the shipment. Not updated if missing.
+        description: The tracking ID for the shipment. Not updated if missing.
         type: string
     type: object
   OrdersUpdateShipmentResponse:

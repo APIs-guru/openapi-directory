@@ -122,21 +122,23 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates an existing topic. Note that certain properties of a
-        topic are not modifiable.
-      operationId: pubsub.projects.topics.patch
+        Updates an existing snapshot. Snapshots are used in
+        <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+        operations, which allow
+        you to manage message acknowledgments in bulk. That is, you can set the
+        acknowledgment state of messages in an existing subscription to the state
+        captured by a snapshot.<br><br>
+        <b>BETA:</b> This feature is part of a beta release. This API might be
+        changed in backward-incompatible ways and is not recommended for production
+        use. It is not subject to any SLA or deprecation policy.
+        Note that certain properties of a snapshot are not modifiable.
+      operationId: pubsub.projects.snapshots.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/UpdateTopicRequest'
-        - description: |-
-            The name of the topic. It must have the format
-            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
-            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
-            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
-            signs (`%`). It must be between 3 and 255 characters in length, and it
-            must not start with `"goog"`.
+            $ref: '#/definitions/UpdateSnapshotRequest'
+        - description: The name of the snapshot.
           in: path
           name: name
           required: true
@@ -146,7 +148,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/Snapshot'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -156,22 +158,41 @@ paths:
         - projects
     put:
       description: |-
-        Creates the given topic with the given name. See the
-        <a href="https://cloud.google.com/pubsub/docs/admin#resource_names">
-        resource name rules</a>.
-      operationId: pubsub.projects.topics.create
+        Creates a snapshot from the requested subscription. Snapshots are used in
+        <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
+        operations, which allow
+        you to manage message acknowledgments in bulk. That is, you can set the
+        acknowledgment state of messages in an existing subscription to the state
+        captured by a snapshot.
+        <br><br>
+        <b>BETA:</b> This feature is part of a beta release. This API might be
+        changed in backward-incompatible ways and is not recommended for production
+        use. It is not subject to any SLA or deprecation policy.<br><br>
+        If the snapshot already exists, returns `ALREADY_EXISTS`.
+        If the requested subscription doesn't exist, returns `NOT_FOUND`.
+        If the backlog in the subscription is too old -- and the resulting snapshot
+        would expire in less than 1 hour -- then `FAILED_PRECONDITION` is returned.
+        See also the `Snapshot.expire_time` field. If the name is not provided in
+        the request, the server will assign a random
+        name for this snapshot on the same project as the subscription, conforming
+        to the
+        [resource name format](https://cloud.google.com/pubsub/docs/admin#resource_names).
+        The generated name is populated in the returned Snapshot object. Note that
+        for REST API requests, you must specify a name in the request.
+      operationId: pubsub.projects.snapshots.create
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/CreateSnapshotRequest'
         - description: |-
-            The name of the topic. It must have the format
-            `"projects/{project}/topics/{topic}"`. `{topic}` must start with a letter,
-            and contain only letters (`[A-Za-z]`), numbers (`[0-9]`), dashes (`-`),
-            underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
-            signs (`%`). It must be between 3 and 255 characters in length, and it
-            must not start with `"goog"`.
+            Optional user-provided name for this snapshot.
+            If the name is not provided in the request, the server will assign a random
+            name for this snapshot on the same project as the subscription.
+            Note that for REST API requests, you must specify a name.  See the
+            <a href="https://cloud.google.com/pubsub/docs/admin#resource_names">
+            resource name rules</a>.
+            Format is `projects/{project}/snapshots/{snap}`.
           in: path
           name: name
           required: true
@@ -181,7 +202,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Topic'
+            $ref: '#/definitions/Snapshot'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -348,7 +369,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: pubsub.projects.topics.getIamPolicy
+      operationId: pubsub.projects.snapshots.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -399,7 +420,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: pubsub.projects.topics.setIamPolicy
+      operationId: pubsub.projects.snapshots.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -447,7 +468,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: pubsub.projects.topics.testIamPermissions
+      operationId: pubsub.projects.snapshots.testIamPermissions
       parameters:
         - in: body
           name: body

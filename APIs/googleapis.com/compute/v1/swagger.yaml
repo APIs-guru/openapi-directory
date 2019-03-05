@@ -16827,7 +16827,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Performs a reset on the instance. This is a hard reset; the VM does not do a graceful shutdown. For more information, see Resetting an instance.'
+      description: 'Performs a reset on the instance. This is a hard reset the VM does not do a graceful shutdown. For more information, see Resetting an instance.'
       operationId: compute.instances.reset
       parameters:
         - description: Name of the instance scoping this request.
@@ -19334,6 +19334,7 @@ definitions:
         enum:
           - DNS_RESOLVER
           - GCE_ENDPOINT
+          - NAT_AUTO
           - VPC_PEERING
         type: string
       region:
@@ -22898,7 +22899,7 @@ definitions:
               - TAR
             type: string
           sha1Checksum:
-            description: An optional SHA1 checksum of the disk image before unpackaging; provided by the client when the disk image is created.
+            description: An optional SHA1 checksum of the disk image before unpackaging provided by the client when the disk image is created.
             pattern: '[a-f0-9]{40}'
             type: string
           source:
@@ -24497,7 +24498,7 @@ definitions:
         description: '[Output Only] IP address configured on the Google side of the Interconnect link. This can be used only for ping tests.'
         type: string
       googleReferenceId:
-        description: '[Output Only] Google reference ID; to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.'
+        description: '[Output Only] Google reference ID to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.'
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -25797,6 +25798,9 @@ definitions:
       lastAttempt:
         $ref: '#/definitions/ManagedInstanceLastAttempt'
         description: '[Output Only] Information about the last attempt to create or delete the instance.'
+      version:
+        $ref: '#/definitions/ManagedInstanceVersion'
+        description: '[Output Only] Intended version of this instance.'
     type: object
   ManagedInstanceLastAttempt:
     properties:
@@ -25819,6 +25823,15 @@ definitions:
               type: object
             type: array
         type: object
+    type: object
+  ManagedInstanceVersion:
+    properties:
+      instanceTemplate:
+        description: '[Output Only] The intended template of the instance. This field is empty when current_action is one of { DELETING, ABANDONING }.'
+        type: string
+      name:
+        description: '[Output Only] Name of the version.'
+        type: string
     type: object
   Metadata:
     description: A metadata key/value entry.

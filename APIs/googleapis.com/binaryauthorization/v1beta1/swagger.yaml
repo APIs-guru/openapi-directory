@@ -280,7 +280,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: binaryauthorization.projects.attestors.getIamPolicy
+      operationId: binaryauthorization.projects.policy.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -329,7 +329,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: binaryauthorization.projects.attestors.setIamPolicy
+      operationId: binaryauthorization.projects.policy.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -375,7 +375,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: binaryauthorization.projects.attestors.testIamPermissions
+      operationId: binaryauthorization.projects.policy.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -477,23 +477,32 @@ definitions:
     type: object
   AttestorPublicKey:
     description: |-
-      An attestator public key that will be used to
-      verify attestations signed by this attestor.
+      An attestor public key that will be used to verify
+      attestations signed by this attestor.
     properties:
       asciiArmoredPgpPublicKey:
         description: |-
           ASCII-armored representation of a PGP public key, as the entire output by
           the command `gpg --export --armor foo@example.com` (either LF or CRLF
           line endings).
+          When using this field, `id` should be left blank.  The BinAuthz API
+          handlers will calculate the ID and fill it in automatically.  BinAuthz
+          computes this ID as the OpenPGP RFC4880 V4 fingerprint, represented as
+          upper-case hex.  If `id` is provided by the caller, it will be
+          overwritten by the API-calculated ID.
         type: string
       comment:
         description: Optional. A descriptive comment. This field may be updated.
         type: string
       id:
         description: |-
-          Output only. This field will be overwritten with key ID information, for
-          example, an identifier extracted from a PGP public key. This field may not
-          be updated.
+          The ID of this public key.
+          Signatures verified by BinAuthz must include the ID of the public key that
+          can be used to verify them, and that ID must match the contents of this
+          field exactly.
+          Additional restrictions on this field can be imposed based on which public
+          key type is encapsulated. See the documentation on `public_key` cases below
+          for details.
         type: string
     type: object
   Binding:
@@ -528,7 +537,7 @@ definitions:
              For example, `admins@example.com`.
 
 
-          * `domain:{domain}`: A Google Apps domain name that represents all the
+          * `domain:{domain}`: The G Suite domain (primary) that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
         items:
@@ -701,8 +710,8 @@ definitions:
       defaultAdmissionRule:
         $ref: '#/definitions/AdmissionRule'
         description: |-
-          Required. Default admission rule for a cluster without a per-cluster
-          admission rule.
+          Required. Default admission rule for a cluster without a per-cluster, per-
+          kubernetes-service-account, or per-istio-service-identity admission rule.
       description:
         description: Optional. A descriptive comment.
         type: string

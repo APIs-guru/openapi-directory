@@ -483,6 +483,10 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/SecurityPolicyAssociation'
+        - description: 'Indicates whether or not to replace it if an association of the attachment already exists. This is false by default, in which case an error will be returned if an assocation already exists.'
+          in: query
+          name: replaceExistingAssociation
+          type: boolean
         - description: |-
             An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
 
@@ -25894,7 +25898,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: 'Performs a reset on the instance. This is a hard reset; the VM does not do a graceful shutdown. For more information, see Resetting an instance.'
+      description: 'Performs a reset on the instance. This is a hard reset the VM does not do a graceful shutdown. For more information, see Resetting an instance.'
       operationId: compute.instances.reset
       parameters:
         - description: Name of the instance scoping this request.
@@ -30043,6 +30047,11 @@ definitions:
           type: string
         description: Labels to apply to this disk. These can be later modified by the disks.setLabels method. This field is only applicable for persistent disks.
         type: object
+      replicaZones:
+        description: URLs of the zones where the disk should be replicated to. Only applicable for regional resources.
+        items:
+          type: string
+        type: array
       sourceImage:
         description: |-
           The source image to create this disk. When creating a new instance, one of initializeParams.sourceImage or disks.source is required except for local SSD.
@@ -30137,12 +30146,12 @@ definitions:
     description: The authentication settings for the backend service.
     properties:
       origins:
-        description: 'List of authentication methods that can be used for origin authentication. Similar to peers, these will be evaluated in order; the first valid one will be used to set origin identity. If none of these methods pass, the request will be rejected with authentication failed error (401). Leave the list empty if origin authentication is not required.'
+        description: 'List of authentication methods that can be used for origin authentication. Similar to peers, these will be evaluated in order the first valid one will be used to set origin identity. If none of these methods pass, the request will be rejected with authentication failed error (401). Leave the list empty if origin authentication is not required.'
         items:
           $ref: '#/definitions/OriginAuthenticationMethod'
         type: array
       peers:
-        description: 'List of authentication methods that can be used for peer authentication. They will be evaluated in order; the first valid one will be used to set peer identity. If none of these methods pass, the request will be rejected with authentication failed error (401). Leave the list empty if peer authentication is not required.'
+        description: 'List of authentication methods that can be used for peer authentication. They will be evaluated in order the first valid one will be used to set peer identity. If none of these methods pass, the request will be rejected with authentication failed error (401). Leave the list empty if peer authentication is not required.'
         items:
           $ref: '#/definitions/PeerAuthenticationMethod'
         type: array
@@ -34830,7 +34839,7 @@ definitions:
               - TAR
             type: string
           sha1Checksum:
-            description: An optional SHA1 checksum of the disk image before unpackaging; provided by the client when the disk image is created.
+            description: An optional SHA1 checksum of the disk image before unpackaging provided by the client when the disk image is created.
             pattern: '[a-f0-9]{40}'
             type: string
           source:
@@ -35632,7 +35641,10 @@ definitions:
         type: integer
       maxUnavailable:
         $ref: '#/definitions/FixedOrPercent'
-        description: 'Maximum number of instances that can be unavailable when autohealing. The instance is considered available if all of the following conditions are satisfied: 1. Instance''s status is RUNNING. 2. Instance''s liveness health check result was observed to be HEALTHY at least once. By default, a percent value of 100% is used.'
+        description: |-
+          Maximum number of instances that can be unavailable when autohealing. When 'percent' is used, the value is rounded UP. The instance is considered available if all of the following conditions are satisfied: 1. Instance's status is RUNNING. 2. Instance's currentAction is NONE (in particular its liveness health check result was observed to be HEALTHY at least once as it passed VERIFYING). 3. There is no outgoing action on an instance triggered by IGM.
+
+          By default, number of concurrently autohealed instances is smaller than the managed instance group target size. However, if a zonal managed instance group has only one instance, or a regional managed instance group has only one instance per zone, autohealing will recreate these instances when they become unhealthy.
     type: object
   InstanceGroupManagerList:
     description: '[Output Only] A list of managed instance groups.'
@@ -36765,7 +36777,7 @@ definitions:
         description: '[Output Only] IP address configured on the Google side of the Interconnect link. This can be used only for ping tests.'
         type: string
       googleReferenceId:
-        description: '[Output Only] Google reference ID; to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.'
+        description: '[Output Only] Google reference ID to be used when raising support tickets with Google or otherwise to debug backend connectivity issues.'
         type: string
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
@@ -38788,6 +38800,7 @@ definitions:
         description: Type of network endpoints in this network endpoint group. Currently the only supported value is GCE_VM_IP_PORT.
         enum:
           - GCE_VM_IP_PORT
+          - NON_GCP_PRIVATE_IP_PORT
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -39255,8 +39268,14 @@ definitions:
       exportCustomRoutes:
         description: Whether to export the custom routes to peer network.
         type: boolean
+      exportSubnetRoutesWithPublicIp:
+        description: 'Whether subnet routes with public IP range are exported. The default value is true, all subnet routes are exported. The IPv4 special-use ranges (https://en.wikipedia.org/wiki/IPv4#Special_addresses) are always exported to peers and are not controlled by this field.'
+        type: boolean
       importCustomRoutes:
         description: Whether to import the custom routes from peer network.
+        type: boolean
+      importSubnetRoutesWithPublicIp:
+        description: 'Whether subnet routes with public IP range are imported. The default value is false. The IPv4 special-use ranges (https://en.wikipedia.org/wiki/IPv4#Special_addresses) are always imported from peers and are not controlled by this field.'
         type: boolean
       name:
         description: 'Name of this peering. Provided by the client when the peering is created. The name must comply with RFC1035. Specifically, the name must be 1-63 characters long and match regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all the following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
@@ -43613,6 +43632,9 @@ definitions:
         description: An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 2147483647. Rules are evaluated from highest to lowest priority where 0 is the highest priority and 2147483647 is the lowest prority.
         format: int32
         type: integer
+      rateLimitOptions:
+        $ref: '#/definitions/SecurityPolicyRuleRateLimitOptions'
+        description: Must be specified if the action is "rate_based_blacklist" or "throttle". Cannot be specified for any other actions.
       targetResources:
         description: |-
           A list of network resource URLs to which this rule applies. This field allows you to control which network?s VMs get this rule. If this field is left blank, all VMs within the organization will receive the rule.
@@ -43677,6 +43699,29 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  SecurityPolicyRuleRateLimitOptions:
+    properties:
+      blockDuration:
+        description: 'Can only be specifed if the action for the rule is "rate_based_blacklist" If specified, determines the time (in seconds) the traffic will continue to be blocked by the rate limit after the rate falls below the threshold. The default value is 0 seconds.'
+        format: int32
+        type: integer
+      conformAction:
+        description: 'Action to take when requests are under the given threshold. When requests are throttled, this is also the action for all requests which are not dropped. Valid options are "allow", "fairshare", and "drop_overload".'
+        type: string
+      enforceOnKey:
+        description: 'Determines the key to enforce the threshold_rps limit on. If key is "IP", each IP has this limit enforced separately, whereas "ALL_IPs" means a single limit is applied to all requests matching this rule.'
+        enum:
+          - ALL_IPS
+          - IP
+        type: string
+      exceedAction:
+        description: 'When a request is denied, returns the HTTP response code specified. Valid options are "deny()" where valid values for status are 403, 404, 429, and 502.'
+        type: string
+      thresholdRps:
+        description: Rate in requests per second at which to begin ratelimiting.
+        format: int32
+        type: integer
     type: object
   SecuritySettings:
     description: The authentication and authorization settings for a BackendService.

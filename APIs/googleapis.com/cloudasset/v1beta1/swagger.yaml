@@ -110,7 +110,7 @@ paths:
         Gets the latest state of a long-running operation.  Clients can use this
         method to poll the operation result at intervals as recommended by the API
         service.
-      operationId: cloudasset.folders.operations.get
+      operationId: cloudasset.projects.operations.get
       parameters:
         - description: The name of the operation resource.
           in: path
@@ -127,7 +127,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - folders
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -150,7 +150,7 @@ paths:
         attached IAM POLICY both exist. This can create gaps in the output history.
         If a specified asset does not exist, this API returns an INVALID_ARGUMENT
         error.
-      operationId: cloudasset.organizations.batchGetAssetsHistory
+      operationId: cloudasset.projects.batchGetAssetsHistory
       parameters:
         - collectionFormat: multi
           description: |-
@@ -187,9 +187,15 @@ paths:
             End time of the time window (inclusive).
             Current timestamp if not specified.
           in: query
+          items:
+            type: string
           name: readTimeWindow.endTime
           type: string
         - description: Start time of the time window (exclusive).
+          enum:
+            - CONTENT_TYPE_UNSPECIFIED
+            - RESOURCE
+            - IAM_POLICY
           in: query
           name: readTimeWindow.startTime
           type: string
@@ -202,7 +208,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -234,7 +240,7 @@ paths:
         location. The output format is newline-delimited JSON.
         This API implements the google.longrunning.Operation API allowing you
         to keep track of the export.
-      operationId: cloudasset.folders.exportAssets
+      operationId: cloudasset.projects.exportAssets
       parameters:
         - in: body
           name: body
@@ -259,7 +265,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - folders
+        - projects
 definitions:
   Asset:
     description: |-

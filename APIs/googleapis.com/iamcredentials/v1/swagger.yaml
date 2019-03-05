@@ -126,7 +126,8 @@ paths:
         - description: |-
             The resource name of the service account for which the credentials
             are requested, in the following format:
-            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`.
+            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
+            character is required; replacing it with a project ID is invalid.
           in: path
           name: name
           required: true
@@ -166,7 +167,8 @@ paths:
         - description: |-
             The resource name of the service account for which the credentials
             are requested, in the following format:
-            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`.
+            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
+            character is required; replacing it with a project ID is invalid.
           in: path
           name: name
           required: true
@@ -206,7 +208,8 @@ paths:
         - description: |-
             The resource name of the service account for which the credentials
             are requested, in the following format:
-            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`.
+            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
+            character is required; replacing it with a project ID is invalid.
           in: path
           name: name
           required: true
@@ -243,7 +246,8 @@ paths:
         - description: |-
             The resource name of the service account for which the credentials
             are requested, in the following format:
-            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`.
+            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
+            character is required; replacing it with a project ID is invalid.
           in: path
           name: name
           required: true
@@ -283,7 +287,8 @@ paths:
         - description: |-
             The resource name of the service account for which the credentials
             are requested, in the following format:
-            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`.
+            `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
+            character is required; replacing it with a project ID is invalid.
           in: path
           name: name
           required: true
@@ -312,7 +317,8 @@ definitions:
           request.
 
           The delegates must have the following format:
-          `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`
+          `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
+          character is required; replacing it with a project ID is invalid.
         items:
           type: string
         type: array
@@ -363,7 +369,8 @@ definitions:
           request.
 
           The delegates must have the following format:
-          `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`
+          `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
+          character is required; replacing it with a project ID is invalid.
         items:
           type: string
         type: array
@@ -464,7 +471,8 @@ definitions:
           request.
 
           The delegates must have the following format:
-          `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`
+          `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
+          character is required; replacing it with a project ID is invalid.
         items:
           type: string
         type: array
@@ -495,7 +503,8 @@ definitions:
           request.
 
           The delegates must have the following format:
-          `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`
+          `projects/-/serviceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
+          character is required; replacing it with a project ID is invalid.
         items:
           type: string
         type: array

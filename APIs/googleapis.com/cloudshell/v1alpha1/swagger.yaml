@@ -330,6 +330,12 @@ definitions:
       accessToken:
         description: The OAuth access token that should be sent to the environment.
         type: string
+      expireTime:
+        description: |-
+          The time when the token expires. If not set, defaults to one hour from when
+          the server received the request.
+        format: google-datetime
+        type: string
     type: object
   CreatePublicKeyRequest:
     description: Request message for CreatePublicKey.

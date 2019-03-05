@@ -132,13 +132,13 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: remotebuildexecution.projects.operations.get
+      description: Returns the specified worker pool.
+      operationId: remotebuildexecution.projects.instances.workerpools.get
       parameters:
-        - description: The name of the operation resource.
+        - description: |-
+            Name of the worker pool to retrieve.
+            Format:
+            `projects/[PROJECT_ID]/instances/[INSTANCE_ID]/workerpools/[POOL_ID]`.
           in: path
           name: name
           required: true
@@ -148,7 +148,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleLongrunningOperation'
+            $ref: '#/definitions/GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1196,6 +1196,10 @@ definitions:
           Indicates whether we are using a cached Docker image (true) or had to pull
           the Docker image (false) for this command.
         type: boolean
+      inputCacheMiss:
+        description: The input cache miss ratio.
+        format: float
+        type: number
       numErrors:
         description: The number of errors reported.
         format: uint64
@@ -1400,8 +1404,8 @@ definitions:
         type: string
       reserved:
         description: |-
-          Determines whether the worker is reserved (and therefore won't be
-          preempted).
+          Determines whether the worker is reserved (equivalent to a Compute Engine
+          on-demand VM and therefore won't be preempted).
           See [Preemptible VMs](https://cloud.google.com/preemptible-vms/) for more
           details.
         type: boolean

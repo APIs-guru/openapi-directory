@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.25
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/content/v2.1/rest'
       version: v1
@@ -1986,7 +1986,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Sets (overrides) merchant provided annotations on the line item.
+      description: Sets (or overrides if it already exists) merchant provided annotations in the form of key-value pairs. A common use case would be to supply us with additional structured information about a line item that cannot be provided via other methods. Submitted key-value pairs can be retrieved as part of the orders resource.
       operationId: content.orders.setlineitemmetadata
       parameters:
         - in: body
@@ -4445,7 +4445,7 @@ definitions:
         $ref: '#/definitions/OrderDeliveryDetails'
         description: The details for the delivery.
       id:
-        description: The REST id of the order. Globally unique.
+        description: The REST ID of the order. Globally unique.
         type: string
       kind:
         default: 'content#order'
@@ -4460,7 +4460,7 @@ definitions:
         format: uint64
         type: string
       merchantOrderId:
-        description: Merchant-provided id of the order.
+        description: Merchant-provided ID of the order.
         type: string
       netPriceAmount:
         $ref: '#/definitions/Price'
@@ -4495,9 +4495,6 @@ definitions:
       shippingCostTax:
         $ref: '#/definitions/Price'
         description: The tax for the total shipping cost.
-      shippingOption:
-        description: The requested shipping option.
-        type: string
       status:
         description: The status of the order.
         type: string
@@ -4606,7 +4603,7 @@ definitions:
           $ref: '#/definitions/OrderCancellation'
         type: array
       id:
-        description: The id of the line item.
+        description: The ID of the line item.
         type: string
       price:
         $ref: '#/definitions/Price'
@@ -4676,7 +4673,7 @@ definitions:
         description: Global Trade Item Number (GTIN) of the item.
         type: string
       id:
-        description: The REST id of the product.
+        description: The REST ID of the product.
         type: string
       imageLink:
         description: URL of an image of the item.
@@ -4703,7 +4700,7 @@ definitions:
         description: The title of the product.
         type: string
       variantAttributes:
-        description: 'Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes here.'
+        description: 'Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes <a href="'
         items:
           $ref: '#/definitions/OrderLineItemProductVariantAttribute'
         type: array
@@ -4948,7 +4945,7 @@ definitions:
         description: 'Date on which the shipment has been delivered, in ISO 8601 format. Present only if status is delivered'
         type: string
       id:
-        description: The id of the shipment.
+        description: The ID of the shipment.
         type: string
       lineItems:
         description: The line items that are shipped.
@@ -4959,13 +4956,13 @@ definitions:
         description: The status of the shipment.
         type: string
       trackingId:
-        description: The tracking id for the shipment.
+        description: The tracking ID for the shipment.
         type: string
     type: object
   OrderShipmentLineItemShipment:
     properties:
       lineItemId:
-        description: The id of the line item that is shipped. Either lineItemId or productId is required.
+        description: The ID of the line item that is shipped. Either lineItemId or productId is required.
         type: string
       productId:
         description: The ID of the product to ship. This is the REST ID used in the products service. Either lineItemId or productId is required.
@@ -5248,10 +5245,10 @@ definitions:
         description: 'The carrier handling the shipment. See shipments[].carrier in the  Orders resource representation for a list of acceptable values.'
         type: string
       shipmentId:
-        description: The ID of the shipment.
+        description: The ID of the shipment. This is assigned by the merchant and is unique to each shipment.
         type: string
       trackingId:
-        description: The tracking id for the shipment.
+        description: The tracking ID for the shipment.
         type: string
     type: object
   OrdersGetByMerchantOrderIdResponse:
@@ -5516,7 +5513,7 @@ definitions:
         description: New status for the shipment. Not updated if missing.
         type: string
       trackingId:
-        description: The tracking id for the shipment. Not updated if missing.
+        description: The tracking ID for the shipment. Not updated if missing.
         type: string
     type: object
   OrdersUpdateShipmentResponse:

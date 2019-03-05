@@ -441,9 +441,11 @@ paths:
             associated. The device ID can be numeric (`num_id`) or the user-defined
             string (`id`). For example, if `456` is specified, returns only the
             gateways to which the device with `num_id` 456 is bound.
+          enum:
+            - GATEWAY_TYPE_UNSPECIFIED
+            - GATEWAY
+            - NON_GATEWAY
           in: query
-          items:
-            type: string
           name: gatewayListOptions.associationsDeviceId
           type: string
         - description: |-
@@ -463,8 +465,6 @@ paths:
             - GATEWAY
             - NON_GATEWAY
           in: query
-          items:
-            type: string
           name: gatewayListOptions.gatewayType
           type: string
         - description: |-
@@ -473,16 +473,14 @@ paths:
             objects than requested. A non-empty `next_page_token` in the response
             indicates that more data is available.
           in: query
+          items:
+            type: string
           name: pageSize
           type: integer
         - description: |-
             The value returned by the last `ListDevicesResponse`; indicates
             that this is a continuation of a prior `ListDevices` call and
             the system should return the next page of data.
-          enum:
-            - GATEWAY_TYPE_UNSPECIFIED
-            - GATEWAY
-            - NON_GATEWAY
           in: query
           name: pageToken
           type: string

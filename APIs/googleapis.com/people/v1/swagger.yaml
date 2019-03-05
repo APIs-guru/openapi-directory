@@ -36,7 +36,7 @@ securityDefinitions:
     scopes:
       'https://www.googleapis.com/auth/contacts': 'See, edit, download, and permanently delete your contacts'
       'https://www.googleapis.com/auth/contacts.readonly': See and download your contacts
-      'https://www.googleapis.com/auth/plus.login': 'Know the list of people in your circles, your age range, and language'
+      'https://www.googleapis.com/auth/plus.login': 'View your basic profile info, including your age range and language'
       'https://www.googleapis.com/auth/user.addresses.read': View your street addresses
       'https://www.googleapis.com/auth/user.birthday.read': View your complete date of birth
       'https://www.googleapis.com/auth/user.emails.read': View your email addresses
@@ -1380,7 +1380,9 @@ definitions:
         description: The person's department at the organization.
         type: string
       domain:
-        description: 'The domain name associated with the organization; for example, `google.com`.'
+        description: |-
+          The domain name associated with the organization; for example,
+          `google.com`.
         type: string
       endDate:
         $ref: '#/definitions/Date'
@@ -1675,7 +1677,8 @@ definitions:
     properties:
       canonicalForm:
         description: |-
-          The read-only canonicalized [ITU-T E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf)
+          The read-only canonicalized [ITU-T
+          E.164](https://law.resource.org/pub/us/cfr/ibr/004/itu-t.E.164.1.2008.pdf)
           form of the phone number.
         type: string
       formattedType:

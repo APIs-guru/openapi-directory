@@ -254,7 +254,11 @@ paths:
           in: query
           name: showDeleted
           type: boolean
-        - description: Optional view for the returned Role objects.
+        - description: |-
+            Optional view for the returned Role objects. When `FULL` is specified,
+            the `includedPermissions` field is returned, which includes a list of all
+            permissions in the role. The default value is `BASIC`, which does not
+            return the `includedPermissions` field.
           enum:
             - BASIC
             - FULL
@@ -327,7 +331,7 @@ paths:
         Existing Bindings remains, but are inactive. The Role can be undeleted
         within 7 days. After 7 days the Role is deleted and all Bindings associated
         with the role are removed.
-      operationId: iam.organizations.roles.delete
+      operationId: iam.projects.roles.delete
       parameters:
         - description: Used to perform a consistent read-modify-write.
           in: query
@@ -351,10 +355,10 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     get:
       description: Gets a Role definition.
-      operationId: iam.organizations.roles.get
+      operationId: iam.roles.get
       parameters:
         - description: |-
             The resource name of the role in one of the following formats:
@@ -385,7 +389,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - roles
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -400,7 +404,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: Updates a Role definition.
-      operationId: iam.organizations.roles.patch
+      operationId: iam.projects.roles.patch
       parameters:
         - in: body
           name: body
@@ -429,9 +433,12 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     put:
       description: |-
+        Note: This method is in the process of being deprecated. Use
+        PatchServiceAccount instead.
+
         Updates a ServiceAccount.
 
         Currently, only the following fields are updatable:
@@ -742,7 +749,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Undelete a Role, bringing it back in its previous state.'
-      operationId: iam.organizations.roles.undelete
+      operationId: iam.projects.roles.undelete
       parameters:
         - in: body
           name: body
@@ -766,11 +773,11 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{parent}/roles':
     get:
       description: Lists the Roles defined on a resource.
-      operationId: iam.organizations.roles.list
+      operationId: iam.projects.roles.list
       parameters:
         - description: Optional limit on the number of roles to include in the response.
           in: query
@@ -791,13 +798,14 @@ paths:
           type: string
           x-reservedExpansion: true
         - description: Include Roles that have been deleted.
-          enum:
-            - BASIC
-            - FULL
           in: query
           name: showDeleted
           type: boolean
-        - description: Optional view for the returned Role objects.
+        - description: |-
+            Optional view for the returned Role objects. When `FULL` is specified,
+            the `includedPermissions` field is returned, which includes a list of all
+            permissions in the role. The default value is `BASIC`, which does not
+            return the `includedPermissions` field.
           enum:
             - BASIC
             - FULL
@@ -813,7 +821,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -828,7 +836,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates a new Role.
-      operationId: iam.organizations.roles.create
+      operationId: iam.projects.roles.create
       parameters:
         - in: body
           name: body
@@ -852,7 +860,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v1/{resource}:getIamPolicy':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -868,8 +876,20 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Returns the IAM access control policy for a
+        Returns the Cloud IAM access control policy for a
         ServiceAccount.
+
+        Note: Service accounts are both
+        [resources and identities](/iam/docs/service-accounts#service_account_permissions).
+        This method treats the service account as a resource. It returns the Cloud
+        IAM policy that reflects what members have access to the service account.
+
+        This method does not return what resources the service account has access
+        to. To see if a service account has access to a resource, call the
+        `getIamPolicy` method on the target resource. For example, to view grants
+        for a project, call the
+        [projects.getIamPolicy](/resource-manager/reference/rest/v1/projects/getIamPolicy)
+        method.
       operationId: iam.projects.serviceAccounts.getIamPolicy
       parameters:
         - description: |-
@@ -905,8 +925,22 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Sets the IAM access control policy for a
+        Sets the Cloud IAM access control policy for a
         ServiceAccount.
+
+        Note: Service accounts are both
+        [resources and identities](/iam/docs/service-accounts#service_account_permissions).
+        This method treats the service account as a resource. Use it to grant
+        members access to the service account, such as when they need to
+        impersonate it.
+
+        This method does not grant the service account access to other resources,
+        such as projects. To grant a service account access to resources, include
+        the service account in the Cloud IAM policy for the desired resource, then
+        call the appropriate `setIamPolicy` method on the target resource. For
+        example, to grant a service account access to a project, call the
+        [projects.setIamPolicy](/resource-manager/reference/rest/v1/projects/setIamPolicy)
+        method.
       operationId: iam.projects.serviceAccounts.setIamPolicy
       parameters:
         - in: body
@@ -1129,7 +1163,7 @@ definitions:
              For example, `admins@example.com`.
 
 
-          * `domain:{domain}`: A Google Apps domain name that represents all the
+          * `domain:{domain}`: The G Suite domain (primary) that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
         items:

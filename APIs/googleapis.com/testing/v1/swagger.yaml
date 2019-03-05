@@ -350,22 +350,22 @@ definitions:
       androidModelId:
         description: |-
           Required. The id of the Android device to be used.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         type: string
       androidVersionId:
         description: |-
           Required. The id of the Android OS version to be used.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         type: string
       locale:
         description: |-
           Required. The locale the test device used for testing.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         type: string
       orientation:
         description: |-
           Required. How the device is oriented during the test.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         type: string
     type: object
   AndroidDeviceCatalog:
@@ -476,28 +476,28 @@ definitions:
       androidModelIds:
         description: |-
           Required. The ids of the set of Android device to be used.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         items:
           type: string
         type: array
       androidVersionIds:
         description: |-
           Required. The ids of the set of Android OS version to be used.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         items:
           type: string
         type: array
       locales:
         description: |-
           Required. The set of locales the test device will enable for testing.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         items:
           type: string
         type: array
       orientations:
         description: |-
           Required. The set of orientations to test with.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         items:
           type: string
         type: array
@@ -994,22 +994,22 @@ definitions:
       iosModelId:
         description: |-
           Required. The id of the iOS device to be used.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         type: string
       iosVersionId:
         description: |-
           Required. The id of the iOS major software version to be used.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         type: string
       locale:
         description: |-
           Required. The locale the test device used for testing.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         type: string
       orientation:
         description: |-
           Required. How the device is oriented during the test.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
         type: string
     type: object
   IosDeviceCatalog:
@@ -1165,7 +1165,7 @@ definitions:
       xcodeVersion:
         description: |-
           The Xcode version that should be used for the test.
-          Use the EnvironmentDiscoveryService to get supported options.
+          Use the TestEnvironmentDiscoveryService to get supported options.
           Defaults to the latest Xcode version Firebase Test Lab supports.
         type: string
       xctestrun:
@@ -1497,6 +1497,8 @@ definitions:
           - NO_LAUNCHER_ACTIVITY
           - FORBIDDEN_PERMISSIONS
           - INVALID_ROBO_DIRECTIVES
+          - INVALID_RESOURCE_NAME
+          - INVALID_DIRECTIVE_ACTION
           - TEST_LOOP_INTENT_FILTER_NOT_FOUND
           - SCENARIO_LABEL_NOT_DECLARED
           - SCENARIO_LABEL_MALFORMED

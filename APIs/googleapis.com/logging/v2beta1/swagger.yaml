@@ -760,7 +760,7 @@ definitions:
         description: 'Optional. If present, then retrieve the next batch of results from the preceding call to this method. page_token must be the value of next_page_token from the previous response. The values of other method parameters should be identical to those in the previous call.'
         type: string
       projectIds:
-        description: 'Deprecated. Use resource_names instead. One or more project identifiers or project numbers from which to retrieve log entries. Example: "my-project-1A". If present, these project identifiers are converted to resource name format and added to the list of resources in resource_names.'
+        description: 'Deprecated. Use resource_names instead. One or more project identifiers or project numbers from which to retrieve log entries. Example: "my-project-1A".'
         items:
           type: string
         type: array

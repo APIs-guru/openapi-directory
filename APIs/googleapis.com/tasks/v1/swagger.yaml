@@ -7,7 +7,7 @@ info:
   contact:
     name: Google
     url: 'https://google.com'
-  description: Lets you manage your tasks and task lists.
+  description: Manages your tasks and task lists.
   title: Tasks
   version: v1
   x-apiClientRegistration:
@@ -19,7 +19,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/tasks/v1/rest'
       version: v1
@@ -128,7 +128,7 @@ paths:
           in: query
           name: dueMin
           type: string
-        - description: Maximum number of task lists returned on one page. Optional. The default is 100.
+        - description: 'Maximum number of task lists returned on one page. Optional. The default is 20 (max allowed: 100).'
           in: query
           name: maxResults
           type: string
@@ -367,7 +367,7 @@ paths:
       description: Returns all the authenticated user's task lists.
       operationId: tasks.tasklists.list
       parameters:
-        - description: Maximum number of task lists returned on one page. Optional. The default is 100.
+        - description: 'Maximum number of task lists returned on one page. Optional. The default is 20 (max allowed: 100).'
           in: query
           name: maxResults
           type: string

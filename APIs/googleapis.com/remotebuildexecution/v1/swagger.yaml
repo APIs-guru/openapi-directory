@@ -1254,6 +1254,10 @@ definitions:
           Indicates whether we are using a cached Docker image (true) or had to pull
           the Docker image (false) for this command.
         type: boolean
+      inputCacheMiss:
+        description: The input cache miss ratio.
+        format: float
+        type: number
       numErrors:
         description: The number of errors reported.
         format: uint64
@@ -1458,8 +1462,8 @@ definitions:
         type: string
       reserved:
         description: |-
-          Determines whether the worker is reserved (and therefore won't be
-          preempted).
+          Determines whether the worker is reserved (equivalent to a Compute Engine
+          on-demand VM and therefore won't be preempted).
           See [Preemptible VMs](https://cloud.google.com/preemptible-vms/) for more
           details.
         type: boolean
