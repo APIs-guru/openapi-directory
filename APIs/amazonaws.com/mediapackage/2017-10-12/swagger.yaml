@@ -567,6 +567,67 @@ paths:
           type: string
           in: path
           required: true
+  '/tags/{resource-arn}':
+    get:
+      operationId: ListTagsForResource
+      description: ''
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: ''
+      responses:
+        '204':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
+    delete:
+      operationId: UntagResource
+      description: ''
+      responses:
+        '204':
+          description: Success
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
   '/channels/{id}/credentials':
     put:
       operationId: RotateChannelCredentials
@@ -692,6 +753,8 @@ definitions:
       Id:
         description: The ID of the Channel.
         $ref: '#/definitions/__string'
+      Tags:
+        $ref: '#/definitions/Tags'
   CreateChannelRequest:
     required:
       - Id
@@ -705,6 +768,8 @@ definitions:
           The ID of the Channel. The ID must be unique within the region and it
           cannot be changed after a Channel is created.
         $ref: '#/definitions/__string'
+      Tags:
+        $ref: '#/definitions/Tags'
     description: A new Channel configuration.
   UnprocessableEntityException: {}
   InternalServerErrorException: {}
@@ -743,6 +808,8 @@ definitions:
           Maximum duration (seconds) of content to retain for startover playback.
           If not specified, startover playback will be disabled for the OriginEndpoint.
         $ref: '#/definitions/__integer'
+      Tags:
+        $ref: '#/definitions/Tags'
       TimeDelaySeconds:
         description: |
           Amount of delay (seconds) to enforce on the playback of live content.
@@ -789,6 +856,8 @@ definitions:
           Maximum duration (seconds) of content to retain for startover playback.
           If not specified, startover playback will be disabled for the OriginEndpoint.
         $ref: '#/definitions/__integer'
+      Tags:
+        $ref: '#/definitions/Tags'
       TimeDelaySeconds:
         description: |
           Amount of delay (seconds) to enforce on the playback of live content.
@@ -824,6 +893,8 @@ definitions:
       Id:
         description: The ID of the Channel.
         $ref: '#/definitions/__string'
+      Tags:
+        $ref: '#/definitions/Tags'
   DescribeChannelRequest:
     type: object
     properties: {}
@@ -858,6 +929,8 @@ definitions:
           Maximum duration (seconds) of content to retain for startover playback.
           If not specified, startover playback will be disabled for the OriginEndpoint.
         $ref: '#/definitions/__integer'
+      Tags:
+        $ref: '#/definitions/Tags'
       TimeDelaySeconds:
         description: |
           Amount of delay (seconds) to enforce on the playback of live content.
@@ -896,6 +969,14 @@ definitions:
   ListOriginEndpointsRequest:
     type: object
     properties: {}
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
   RotateChannelCredentialsResponse:
     type: object
     properties:
@@ -910,6 +991,8 @@ definitions:
       Id:
         description: The ID of the Channel.
         $ref: '#/definitions/__string'
+      Tags:
+        $ref: '#/definitions/Tags'
   RotateChannelCredentialsRequest:
     type: object
     properties: {}
@@ -927,7 +1010,19 @@ definitions:
       Id:
         description: The ID of the Channel.
         $ref: '#/definitions/__string'
+      Tags:
+        $ref: '#/definitions/Tags'
   RotateIngestEndpointCredentialsRequest:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    required:
+      - Tags
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+  UntagResourceRequest:
     type: object
     properties: {}
   UpdateChannelResponse:
@@ -944,6 +1039,8 @@ definitions:
       Id:
         description: The ID of the Channel.
         $ref: '#/definitions/__string'
+      Tags:
+        $ref: '#/definitions/Tags'
   UpdateChannelRequest:
     type: object
     properties:
@@ -982,6 +1079,8 @@ definitions:
           Maximum duration (seconds) of content to retain for startover playback.
           If not specified, startover playback will be disabled for the OriginEndpoint.
         $ref: '#/definitions/__integer'
+      Tags:
+        $ref: '#/definitions/Tags'
       TimeDelaySeconds:
         description: |
           Amount of delay (seconds) to enforce on the playback of live content.
@@ -1039,6 +1138,16 @@ definitions:
         description: A list of endpoints to which the source stream should be sent.
         $ref: '#/definitions/__listOfIngestEndpoint'
     description: An HTTP Live Streaming (HLS) ingest resource configuration.
+  Tags:
+    type: array
+    description: A collection of tags associated with a resource
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
   Channel:
     type: object
     properties:
@@ -1053,6 +1162,8 @@ definitions:
       Id:
         description: The ID of the Channel.
         $ref: '#/definitions/__string'
+      Tags:
+        $ref: '#/definitions/Tags'
     description: A Channel resource configuration.
   __integer:
     type: integer
@@ -1453,6 +1564,15 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OriginEndpoint'
+  __mapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
   MssEncryption:
     required:
       - SpekeKeyProvider
@@ -1492,6 +1612,8 @@ definitions:
           Maximum duration (seconds) of content to retain for startover playback.
           If not specified, startover playback will be disabled for the OriginEndpoint.
         $ref: '#/definitions/__integer'
+      Tags:
+        $ref: '#/definitions/Tags'
       TimeDelaySeconds:
         description: |
           Amount of delay (seconds) to enforce on the playback of live content.

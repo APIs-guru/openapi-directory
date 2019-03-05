@@ -2837,6 +2837,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#GetServiceSetting':
+    post:
+      operationId: GetServiceSetting
+      description: '<p> <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can''t use this feature unless they change the setting to "true" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define the default value for a <code>SettingId</code>. You can''t create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>UpdateServiceSetting</a> API action to change the default setting. Or use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the AWS service team.</p> <p>Query the current service setting for the account. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/GetServiceSettingResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: ServiceSettingNotFound
+          schema:
+            $ref: '#/definitions/ServiceSettingNotFound'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/GetServiceSettingRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#LabelParameterVersion':
     post:
       operationId: LabelParameterVersion
@@ -3839,6 +3872,43 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ResetServiceSetting':
+    post:
+      operationId: ResetServiceSetting
+      description: '<p> <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can''t use this feature unless they change the setting to "true" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define the default value for a <code>SettingId</code>. You can''t create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>GetServiceSetting</a> API action to view the current value. Use the <a>UpdateServiceSetting</a> API action to change the default setting. </p> <p>Reset the service setting for the account to the default value as provisioned by the AWS service team. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ResetServiceSettingResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: ServiceSettingNotFound
+          schema:
+            $ref: '#/definitions/ServiceSettingNotFound'
+        '482':
+          description: TooManyUpdates
+          schema:
+            $ref: '#/definitions/TooManyUpdates'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ResetServiceSettingRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ResumeSession':
     post:
       operationId: ResumeSession
@@ -4558,6 +4628,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/UpdatePatchBaselineRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#UpdateServiceSetting':
+    post:
+      operationId: UpdateServiceSetting
+      description: '<p> <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can''t use this feature unless they change the setting to "true" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define the default value for a <code>SettingId</code>. You can''t create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>GetServiceSetting</a> API action to view the current value. Or, use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the AWS service team.</p> <p>Update the service setting for the account. </p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/UpdateServiceSettingResult'
+        '480':
+          description: InternalServerError
+          schema:
+            $ref: '#/definitions/InternalServerError'
+        '481':
+          description: ServiceSettingNotFound
+          schema:
+            $ref: '#/definitions/ServiceSettingNotFound'
+        '482':
+          description: TooManyUpdates
+          schema:
+            $ref: '#/definitions/TooManyUpdates'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateServiceSettingRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -6530,6 +6637,23 @@ definitions:
       OperatingSystem:
         $ref: '#/definitions/OperatingSystem'
         description: Returns he operating system rule specified for patch groups using the patch baseline.
+  GetServiceSettingResult:
+    type: object
+    properties:
+      ServiceSetting:
+        $ref: '#/definitions/ServiceSetting'
+        description: The query result of the current service setting.
+    description: The query result body of the GetServiceSetting API action.
+  GetServiceSettingRequest:
+    type: object
+    required:
+      - SettingId
+    properties:
+      SettingId:
+        $ref: '#/definitions/ServiceSettingId'
+        description: The ID of the service setting to get.
+    description: The request body of the GetServiceSetting API action.
+  ServiceSettingNotFound: {}
   LabelParameterVersionResult:
     type: object
     properties:
@@ -7120,6 +7244,22 @@ definitions:
       TagKeys:
         $ref: '#/definitions/KeyList'
         description: Tag keys that you want to remove from the specified resource.
+  ResetServiceSettingResult:
+    type: object
+    properties:
+      ServiceSetting:
+        $ref: '#/definitions/ServiceSetting'
+        description: 'The current, effective service setting after calling the ResetServiceSetting API action.'
+    description: The result body of the ResetServiceSetting API action.
+  ResetServiceSettingRequest:
+    type: object
+    required:
+      - SettingId
+    properties:
+      SettingId:
+        $ref: '#/definitions/ServiceSettingId'
+        description: The ID of the service setting to reset.
+    description: The request body of the ResetServiceSetting API action.
   ResumeSessionResponse:
     type: object
     properties:
@@ -7786,6 +7926,23 @@ definitions:
       Replace:
         $ref: '#/definitions/Boolean'
         description: 'If True, then all fields that are required by the CreatePatchBaseline action are also required for this API request. Optional fields that are not specified are set to null.'
+  UpdateServiceSettingResult:
+    type: object
+    properties: {}
+    description: The result body of the UpdateServiceSetting API action.
+  UpdateServiceSettingRequest:
+    type: object
+    required:
+      - SettingId
+      - SettingValue
+    properties:
+      SettingId:
+        $ref: '#/definitions/ServiceSettingId'
+        description: The ID of the service setting to update.
+      SettingValue:
+        $ref: '#/definitions/ServiceSettingValue'
+        description: The new value to specify for the service setting.
+    description: The request body of the UpdateServiceSetting API action.
   Account:
     type: string
   AccountId:
@@ -10388,6 +10545,32 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PatchGroup'
+  ServiceSettingId:
+    type: string
+    minLength: 1
+    maxLength: 1000
+  ServiceSetting:
+    type: object
+    properties:
+      SettingId:
+        $ref: '#/definitions/ServiceSettingId'
+        description: The ID of the service setting.
+      SettingValue:
+        $ref: '#/definitions/ServiceSettingValue'
+        description: The value of the service setting.
+      LastModifiedDate:
+        $ref: '#/definitions/DateTime'
+        description: The last time the service setting was modified.
+      LastModifiedUser:
+        $ref: '#/definitions/String'
+        description: The ARN of the last modified user. This field is populated only if the setting value was overwritten.
+      ARN:
+        $ref: '#/definitions/String'
+        description: The ARN of the service setting.
+      Status:
+        $ref: '#/definitions/String'
+        description: '<p>The status of the service setting. The value can be Default, Customized or PendingUpdate.</p> <ul> <li> <p>Default: The current setting uses a default value provisioned by the AWS service team.</p> </li> <li> <p>Customized: The current setting use a custom value specified by the customer.</p> </li> <li> <p>PendingUpdate: The current setting uses a default or custom value, but a setting change request is pending approval.</p> </li> </ul>'
+    description: '<p>The service setting data structure.</p> <p> <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of "false". This means the user can''t use this feature unless they change the setting to "true" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define the default value for a <code>SettingId</code>. You can''t create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>UpdateServiceSetting</a> API action to change the default setting. Or, use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the AWS service team.</p>'
   IPAddress:
     type: string
     minLength: 1
@@ -11972,6 +12155,10 @@ definitions:
       - StartStep
       - StopStep
       - Resume
+  ServiceSettingValue:
+    type: string
+    minLength: 1
+    maxLength: 4096
   SessionStatus:
     type: string
     enum:
