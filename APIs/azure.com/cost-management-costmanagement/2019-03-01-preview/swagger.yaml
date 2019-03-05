@@ -13,7 +13,7 @@ info:
     - format: swagger
       url: 'https://raw.githubusercontent.com/Azure/azure-rest-api-specs/master/specification/cost-management/resource-manager/Microsoft.CostManagement/preview/2019-03-01-preview/costmanagement.json'
       version: '2.0'
-  x-preferred: false
+  x-preferred: true
   x-providerName: azure.com
   x-serviceName: cost-management-costmanagement
   x-tags:
@@ -107,6 +107,13 @@ parameters:
     description: Azure Resource Group Name.
     in: path
     name: resourceGroupName
+    required: true
+    type: string
+    x-ms-parameter-location: method
+  ruleNameParameter:
+    description: Showback rule name
+    in: path
+    name: ruleName
     required: true
     type: string
     x-ms-parameter-location: method
@@ -1294,6 +1301,153 @@ paths:
                     type: microsoft.consumption/dimensions
       x-ms-odata: '#/definitions/Dimension'
       x-ms-pageable: {}
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules':
+    get:
+      description: Get list all Showback Rules.
+      operationId: ShowbackRules_List
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/ShowbackRuleListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - ShowbackRules
+      x-ms-examples:
+        ShowbackRules_List:
+          parameters:
+            api-version: 2019-03-01-preview
+            billingAccountId: '100'
+          responses:
+            '200':
+              body:
+                value:
+                  - eTag: null
+                    id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showback/testRule
+                    name: testRule
+                    properties:
+                      assignedScopes: null
+                      creationTime: '2019-01-16T09:18:20.8665509Z'
+                      deprecationTime: '0001-01-01T00:00:00'
+                      description: This is a testRule
+                      details:
+                        AHUBenefits: true
+                        markup: null
+                        pricesheet: Pay-As-You-Go (0003P)
+                      id: testRule
+                      modificationTime: '0001-01-01T00:00:00'
+                      modificationUserName: null
+                      ruleType: CustomPrice
+                      status: NotActive
+                      version: 1
+                    type: Microsoft.CostManagement/showback
+  '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}':
+    get:
+      description: Gets the showback rule by rule name.
+      externalDocs:
+        url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
+      operationId: ShowbackRule_GetBillingAccountId
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/ruleNameParameter'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/ShowbackRule'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - ShowbackRules
+      x-ms-examples:
+        ShowbackRules:
+          parameters:
+            api-version: 2019-03-01-preview
+            billingAccountId: '100'
+            ruleId: testRule
+          responses:
+            '200':
+              body:
+                eTag: null
+                id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showback/testRule
+                name: testRule
+                properties:
+                  assignedScopes: null
+                  creationTime: '2019-01-16T09:18:20.8665509Z'
+                  deprecationTime: '0001-01-01T00:00:00'
+                  description: This is a testRule
+                  details:
+                    AHUBenefits: true
+                    markup: null
+                    pricesheet: Pay-As-You-Go (0003P)
+                  id: testRule
+                  modificationTime: '0001-01-01T00:00:00'
+                  modificationUserName: null
+                  ruleType: CustomPrice
+                  status: NotActive
+                  version: 1
+                type: Microsoft.CostManagement/showback
+    put:
+      description: Create/Update showback rule for billing account.
+      operationId: ShowbackRule_CreateUpdateRule
+      parameters:
+        - $ref: '#/parameters/apiVersionParameter'
+        - $ref: '#/parameters/billingAccountIdParameter'
+        - $ref: '#/parameters/ruleNameParameter'
+        - description: Showback rule to create or update.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/ShowbackRuleProperties'
+      responses:
+        '200':
+          description: OK. The request has succeeded.
+          schema:
+            $ref: '#/definitions/ShowbackRule'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - ShowbackRules
+      x-ms-examples:
+        ShowbackRules:
+          parameters:
+            api-version: 2019-03-01-preview
+            billingAccountId: '100'
+            ruleId: testRule
+          responses:
+            '200':
+              body:
+                eTag: null
+                id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showback/testRule
+                name: testRule
+                properties:
+                  assignedScopes: null
+                  creationTime: '2019-01-16T09:18:20.8665509Z'
+                  deprecationTime: '0001-01-01T00:00:00'
+                  description: This is a testRule
+                  details:
+                    AHUBenefits: true
+                    markup: null
+                    pricesheet: Pay-As-You-Go (0003P)
+                  id: testRule
+                  modificationTime: '0001-01-01T00:00:00'
+                  modificationUserName: null
+                  ruleType: CustomPrice
+                  status: NotActive
+                  version: 1
+                type: Microsoft.CostManagement/showback
   /providers/Microsoft.CostManagement/cloudConnectors:
     get:
       description: List all cloud connector definitions
@@ -3060,6 +3214,85 @@ definitions:
           - create
           - update
     type: object
+  CostAllocation:
+    allOf:
+      - $ref: '#/definitions/ShowbackRuleProperties'
+    description: Represents cost allocation showback rule model
+    properties:
+      details:
+        $ref: '#/definitions/CostAllocationProperties'
+    type: object
+    x-ms-discriminator-value: CostAllocation
+  CostAllocationProperties:
+    properties: {}
+    title: Cost allocation showback rule properties
+    type: object
+  CustomCharge:
+    allOf:
+      - $ref: '#/definitions/ShowbackRuleProperties'
+    description: Represents custom charge showback rule model
+    properties:
+      details:
+        $ref: '#/definitions/CustomChargeProperties'
+    type: object
+    x-ms-discriminator-value: CustomCharge
+  CustomChargeProperties:
+    properties:
+      ChargeValue:
+        type: string
+      EffectiveMonth:
+        format: date-time
+        type: string
+      EndMonth:
+        format: date-time
+        type: string
+      chargeType:
+        type: string
+      recurring:
+        description: Recurring of the charge.
+        enum:
+          - 'true'
+          - 'false'
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CustomChargeRecurring
+    title: Custom charge showback rule properties
+    type: object
+  CustomPrice:
+    allOf:
+      - $ref: '#/definitions/ShowbackRuleProperties'
+    description: Represents Custom price showback rule model
+    properties:
+      details:
+        $ref: '#/definitions/CustomPriceProperties'
+    type: object
+    x-ms-discriminator-value: CustomPrice
+  CustomPriceProperties:
+    properties:
+      benefits:
+        description: Array of benefits.
+        items:
+          enum:
+            - None
+            - All
+            - AHUB
+            - Reservations
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: FunctionType
+        type: array
+      markups:
+        description: List of markups.
+        items:
+          $ref: '#/definitions/Markup'
+        type: array
+      pricesheet:
+        type: string
+    title: Custom price showback rule properties
+    type: object
   Dimension:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -3350,6 +3583,12 @@ definitions:
         type: string
         x-ms-mutability:
           - read
+    type: object
+  Markup:
+    description: The Markup model definition
+    properties:
+      percentage:
+        type: string
     type: object
   Operation:
     description: A Cost management REST API operation.
@@ -3649,3 +3888,107 @@ definitions:
         readOnly: true
         type: string
     x-ms-azure-resource: true
+  Scope:
+    description: The Scope model definition
+    properties:
+      childScope:
+        $ref: '#/definitions/Scope'
+      id:
+        description: Scope id
+        type: string
+      name:
+        description: Scope name
+        type: string
+      type:
+        description: Scope type
+        type: string
+    type: object
+  ShowbackRule:
+    description: The showback rule model definition
+    properties:
+      id:
+        description: Rule id
+        readOnly: true
+        type: string
+      name:
+        description: Rule name
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/ShowbackRuleProperties'
+        description: Showback rule properties
+        x-ms-client-flatten: true
+      type:
+        description: Rule type
+        readOnly: true
+        type: string
+    type: object
+  ShowbackRuleListResult:
+    description: Result of listing showback rules. It contains a list of available rules in the scope provided.
+    properties:
+      value:
+        description: The list of showback rules.
+        items:
+          $ref: '#/definitions/ShowbackRule'
+        readOnly: true
+        type: array
+  ShowbackRuleProperties:
+    allOf:
+      - $ref: '#/definitions/ShowbackRulesKind'
+    description: The properties of a showback rule.
+    discriminator: RuleType
+    properties:
+      creationTime:
+        description: The time when the showback rule was created.
+        format: date-time
+        readOnly: true
+        type: string
+      deprecationTime:
+        description: The current time when showback rule was deprecate.
+        format: date-time
+        readOnly: true
+        type: string
+      description:
+        description: Description of a showback rule.
+        type: string
+      modificationTime:
+        description: The current status when showback rule was modified.
+        format: date-time
+        readOnly: true
+        type: string
+      scopes:
+        description: List of authorized assigned scopes.
+        items:
+          $ref: '#/definitions/Scope'
+        type: array
+      status:
+        description: The current status of the showback rule.
+        enum:
+          - NotActive
+          - Active
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ShowbackRuleStatus
+      version:
+        description: The current version of showback rule.
+        readOnly: true
+        type: integer
+  ShowbackRulesKind:
+    description: Describes Showback rule with rule type
+    properties:
+      RuleType:
+        description: The rule type of the showback rule solution
+        enum:
+          - CustomPrice
+          - CustomChange
+          - CostAllocation
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ShowbackRulesKind
+          values:
+            - value: CustomPrice
+            - value: CustomCharge
+            - value: CostAllocation
+    type: object

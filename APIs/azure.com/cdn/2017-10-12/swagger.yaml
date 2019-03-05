@@ -1383,6 +1383,12 @@ paths:
           name: customDomainName
           required: true
           type: string
+        - description: 'The configuration specifying how to enable HTTPS for the custom domain - using CDN managed certificate or user''s own certificate. If not specified, enabling ssl uses CDN managed certificate by default.'
+          in: body
+          name: customDomainHttpsParameters
+          required: false
+          schema:
+            $ref: '#/definitions/CustomDomainHttpsParameters'
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/apiVersionParameter'
       responses:
@@ -1399,10 +1405,39 @@ paths:
       tags:
         - CustomDomains
       x-ms-examples:
-        CustomDomains_EnableCustomHttps:
+        CustomDomains_EnableCustomHttpsUsingCDNManagedCertificate:
           parameters:
             api-version: '2017-10-12'
             customDomainName: www-someDomain-net
+            customHttpsParameters:
+              certificateSource: Cdn
+              certificateSourceParameters:
+                OData.type: '#Microsoft.Azure.Cdn.Models.CdnCertificateSourceParameters'
+                certificateType: Shared
+              protocolType: ServerNameIndication
+            endpointName: endpoint1
+            profileName: profile1
+            resourceGroupName: RG
+            subscriptionId: subid
+          responses:
+            '200':
+              body: {}
+        CustomDomains_EnableCustomHttpsUsingYourOwnCertificate:
+          parameters:
+            api-version: '2017-10-12'
+            customDomainName: www-someDomain-net
+            customHttpsParameters:
+              certificateSource: AzureKeyVault
+              certificateSourceParameters:
+                OData.type: '#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters'
+                deleteRule: NoAction
+                resourceGroupName: RG
+                secretName: secret1
+                secretVersion: 00000000-0000-0000-0000-000000000000
+                subscriptionId: subid
+                updateRule: NoAction
+                vaultName: kv
+              protocolType: ServerNameIndication
             endpointName: endpoint1
             profileName: profile1
             resourceGroupName: RG
@@ -1966,6 +2001,36 @@ definitions:
       - cacheBehavior
       - cacheType
       - '@odata.type'
+  CdnCertificateSourceParameters:
+    description: Defines the parameters for using CDN managed certificate for securing custom domain.
+    properties:
+      '@odata.type':
+        enum:
+          - '#Microsoft.Azure.Cdn.Models.CdnCertificateSourceParameters'
+        type: string
+      certificateType:
+        description: Type of certificate used
+        enum:
+          - Shared
+          - Dedicated
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CertificateType
+    required:
+      - '@odata.type'
+      - certificateType
+  CdnManagedHttpsParameters:
+    allOf:
+      - $ref: '#/definitions/CustomDomainHttpsParameters'
+    description: Defines the certificate source parameters using CDN managed certificate for enabling SSL.
+    properties:
+      certificateSourceParameters:
+        $ref: '#/definitions/CdnCertificateSourceParameters'
+        description: Defines the certificate source parameters using CDN managed certificate for enabling SSL.
+    required:
+      - certificateSourceParameters
+    x-ms-discriminator-value: Cdn
   CheckNameAvailabilityInput:
     description: Input of CheckNameAvailability API.
     properties:
@@ -2004,6 +2069,31 @@ definitions:
         $ref: '#/definitions/CustomDomainProperties'
         x-ms-client-flatten: true
     type: object
+  CustomDomainHttpsParameters:
+    description: The JSON object that contains the properties to secure a custom domain.
+    discriminator: certificateSource
+    properties:
+      certificateSource:
+        description: Defines the source of the SSL certificate.
+        enum:
+          - AzureKeyVault
+          - Cdn
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: CertificateSource
+      protocolType:
+        description: Defines the TLS extension protocol that is used for secure delivery.
+        enum:
+          - ServerNameIndication
+          - IPBased
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProtocolType
+    required:
+      - certificateSource
+      - protocolType
   CustomDomainListResult:
     description: Result of the request to list custom domains. It contains a list of custom domain objects and a URL link to get the next set of results.
     properties:
@@ -2405,6 +2495,53 @@ definitions:
           $ref: '#/definitions/cidrIpAddress'
         type: array
     type: object
+  KeyVaultCertificateSourceParameters:
+    description: Describes the parameters for using a user's KeyVault certificate for securing custom domain.
+    properties:
+      '@odata.type':
+        enum:
+          - '#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters'
+        type: string
+      deleteRule:
+        description: Describes the action that shall be taken when the certificate is removed from Key Vault.
+        enum:
+          - NoAction
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: DeleteRule
+      resourceGroupName:
+        description: Resource group of the user's Key Vault containing the SSL certificate
+        type: string
+      secretName:
+        description: The name of Key Vault Secret (representing the full certificate PFX) in Key Vault.
+        type: string
+      secretVersion:
+        description: The version(GUID) of Key Vault Secret in Key Vault.
+        type: string
+      subscriptionId:
+        description: Subscription Id of the user's Key Vault containing the SSL certificate
+        type: string
+      updateRule:
+        description: Describes the action that shall be taken when the certificate is updated in Key Vault.
+        enum:
+          - NoAction
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: UpdateRule
+      vaultName:
+        description: The name of the user's Key Vault containing the SSL certificate
+        type: string
+    required:
+      - '@odata.type'
+      - subscriptionId
+      - resourceGroupName
+      - vaultName
+      - secretName
+      - secretVersion
+      - updateRule
+      - deleteRule
   LoadParameters:
     description: Parameters required for content load.
     properties:
@@ -2775,6 +2912,17 @@ definitions:
       - path
       - matchType
       - '@odata.type'
+  UserManagedHttpsParameters:
+    allOf:
+      - $ref: '#/definitions/CustomDomainHttpsParameters'
+    description: Defines the certificate source parameters using user's keyvault certificate for enabling SSL.
+    properties:
+      certificateSourceParameters:
+        $ref: '#/definitions/KeyVaultCertificateSourceParameters'
+        description: Defines the certificate source parameters using user's keyvault certificate for enabling SSL.
+    required:
+      - certificateSourceParameters
+    x-ms-discriminator-value: AzureKeyVault
   ValidateCustomDomainInput:
     description: Input of the custom domain to be validated for DNS mapping.
     properties:

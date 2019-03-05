@@ -35,15 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  LocationNameParameter:
-    description: 'Location in which the API Management service is deployed. This is one of the Azure Regions like West US, East US, South Central US.'
-    in: path
-    minLength: 1
-    name: locationName
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/locations/{locationName}/networkstatus':
     get:
@@ -70,7 +62,13 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/LocationNameParameter'
+        - description: 'Location in which the API Management service is deployed. This is one of the Azure Regions like West US, East US, South Central US.'
+          in: path
+          minLength: 1
+          name: locationName
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version

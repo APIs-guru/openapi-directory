@@ -35,35 +35,11 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  AccessParameter:
-    description: The identifier of the Access configuration.
-    enum:
-      - access
-    in: path
-    name: accessName
-    required: true
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: AccessIdName
-    x-ms-parameter-location: method
-  ConfigurationParameter:
-    description: The identifier of the Git Configuration Operation.
-    enum:
-      - configuration
-    in: path
-    name: configurationName
-    required: true
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: configurationIdName
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}':
     get:
-      description: Get tenant access information details.
+      description: Get tenant access information details
       operationId: TenantAccess_Get
       parameters:
         - description: The name of the resource group.
@@ -91,7 +67,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/AccessParameter'
+        - description: The identifier of the Access configuration.
+          enum:
+            - access
+          in: path
+          name: accessName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AccessIdName
+          x-ms-parameter-location: method
       responses:
         '200':
           description: Tenant Access information.
@@ -101,6 +87,35 @@ paths:
               type: string
           schema:
             $ref: '#/definitions/AccessInformationContract'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
       tags:
         - TenantAccess
       x-ms-examples:
@@ -118,6 +133,94 @@ paths:
                 id: 5600b59375ff190048030003
                 primaryKey: qr5nbjNoZkgtLojXgU+OA/ntYMgko3XPSVyt+ObwR1sqp2ZkM9tGhwxkeEz7bfAuPS5ss61b2S3ZrZmqa9v3Mw==
                 secondaryKey: 2dCJv1CasJl286SZiKxyBFDiIYCUdbwM1YrFNDcFMXCjCKbFzomrGkv+exAbnV5E3DEk91VP4jbeJ2eV/qtejA==
+    head:
+      description: Tenant access metadata
+      operationId: TenantAccess_GetEntityTag
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+        - description: The identifier of the Access configuration.
+          enum:
+            - access
+          in: path
+          name: accessName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AccessIdName
+          x-ms-parameter-location: method
+      responses:
+        '200':
+          description: Operation completed successfully.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+      tags:
+        - TenantAccess
+      x-ms-examples:
+        ApiManagementHeadTenantAccess:
+          parameters:
+            accessName: access
+            api-version: 2018-06-01-preview
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+          responses:
+            '200': {}
     patch:
       description: Update tenant access information details.
       operationId: TenantAccess_Update
@@ -143,7 +246,17 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/AccessInformationUpdateParameters'
-        - $ref: '#/parameters/AccessParameter'
+        - description: The identifier of the Access configuration.
+          enum:
+            - access
+          in: path
+          name: accessName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AccessIdName
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -237,7 +350,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/AccessParameter'
+        - description: The identifier of the Access configuration.
+          enum:
+            - access
+          in: path
+          name: accessName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AccessIdName
+          x-ms-parameter-location: method
       responses:
         '200':
           description: Git Access Information for the Service.
@@ -323,7 +446,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/AccessParameter'
+        - description: The identifier of the Access configuration.
+          enum:
+            - access
+          in: path
+          name: accessName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AccessIdName
+          x-ms-parameter-location: method
       responses:
         '204':
           description: The primary key was successfully regenerated.
@@ -398,7 +531,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/AccessParameter'
+        - description: The identifier of the Access configuration.
+          enum:
+            - access
+          in: path
+          name: accessName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AccessIdName
+          x-ms-parameter-location: method
       responses:
         '204':
           description: The secondary key was successfully regenerated.
@@ -445,7 +588,7 @@ paths:
             '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/regeneratePrimaryKey':
     post:
-      description: Regenerate primary access key.
+      description: Regenerate primary access key
       operationId: TenantAccess_RegeneratePrimaryKey
       parameters:
         - description: The name of the resource group.
@@ -473,7 +616,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/AccessParameter'
+        - description: The identifier of the Access configuration.
+          enum:
+            - access
+          in: path
+          name: accessName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AccessIdName
+          x-ms-parameter-location: method
       responses:
         '204':
           description: The primary key was successfully regenerated.
@@ -520,7 +673,7 @@ paths:
             '204': {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tenant/{accessName}/regenerateSecondaryKey':
     post:
-      description: Regenerate secondary access key.
+      description: Regenerate secondary access key
       operationId: TenantAccess_RegenerateSecondaryKey
       parameters:
         - description: The name of the resource group.
@@ -548,7 +701,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/AccessParameter'
+        - description: The identifier of the Access configuration.
+          enum:
+            - access
+          in: path
+          name: accessName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: AccessIdName
+          x-ms-parameter-location: method
       responses:
         '204':
           description: The secondary key was successfully regenerated.
@@ -632,7 +795,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/ConfigurationParameter'
+        - description: The identifier of the Git Configuration Operation.
+          enum:
+            - configuration
+          in: path
+          name: configurationName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: configurationIdName
+          x-ms-parameter-location: method
       responses:
         '200':
           description: Result of applying changes from Git branch to database.
@@ -734,7 +907,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/ConfigurationParameter'
+        - description: The identifier of the Git Configuration Operation.
+          enum:
+            - configuration
+          in: path
+          name: configurationName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: configurationIdName
+          x-ms-parameter-location: method
       responses:
         '200':
           description: Result of creating a commit in the repository.
@@ -826,7 +1009,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/ConfigurationParameter'
+        - description: The identifier of the Git Configuration Operation.
+          enum:
+            - configuration
+          in: path
+          name: configurationName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: configurationIdName
+          x-ms-parameter-location: method
       responses:
         '200':
           description: Sync state result.
@@ -888,7 +1081,17 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/ConfigurationParameter'
+        - description: The identifier of the Git Configuration Operation.
+          enum:
+            - configuration
+          in: path
+          name: configurationName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: configurationIdName
+          x-ms-parameter-location: method
       responses:
         '200':
           description: Result of validating the changes in the specified Git branch.

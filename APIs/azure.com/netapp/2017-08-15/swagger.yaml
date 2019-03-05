@@ -68,7 +68,10 @@ parameters:
   ResourceGroup:
     description: The name of the resource group.
     in: path
-    name: resourceGroup
+    maxLength: 90
+    minLength: 1
+    name: resourceGroupName
+    pattern: '^[-\w\._\(\)]+$'
     required: true
     type: string
     x-ms-parameter-location: method
@@ -111,7 +114,7 @@ paths:
       tags:
         - Operations
       x-ms-pageable: {}
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts':
     get:
       description: Lists all NetApp accounts in the resource group
       operationId: Accounts_List
@@ -144,7 +147,7 @@ paths:
       - $ref: '#/parameters/SubscriptionId'
       - $ref: '#/parameters/ResourceGroup'
       - $ref: '#/parameters/ApiVersionParameter'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}':
     delete:
       description: Delete a NetApp account
       operationId: Accounts_Delete
@@ -276,7 +279,7 @@ paths:
                   provisioningState: Created
             '202': {}
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools':
     get:
       description: Lists all capacity pools in the NetApp Account
       operationId: Pools_List
@@ -314,7 +317,7 @@ paths:
       - $ref: '#/parameters/ResourceGroup'
       - $ref: '#/parameters/AccountName'
       - $ref: '#/parameters/ApiVersionParameter'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}':
     delete:
       description: Delete a capacity pool
       operationId: Pools_Delete
@@ -472,7 +475,7 @@ paths:
                   size: 4398046511104
             '202': {}
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes':
     get:
       description: List volumes
       operationId: Volumes_List
@@ -514,7 +517,7 @@ paths:
       - $ref: '#/parameters/AccountName'
       - $ref: '#/parameters/PoolName'
       - $ref: '#/parameters/ApiVersionParameter'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}':
     delete:
       description: Delete a volume
       operationId: Volumes_Delete
@@ -684,7 +687,7 @@ paths:
                   usageThreshold: 107374182400
             '202': {}
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets':
     get:
       description: List mount targets
       operationId: MountTargets_List
@@ -731,7 +734,7 @@ paths:
       - $ref: '#/parameters/PoolName'
       - $ref: '#/parameters/VolumeName'
       - $ref: '#/parameters/ApiVersionParameter'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots':
     get:
       description: List snapshots
       operationId: Snapshots_List
@@ -773,7 +776,7 @@ paths:
       - $ref: '#/parameters/PoolName'
       - $ref: '#/parameters/VolumeName'
       - $ref: '#/parameters/ApiVersionParameter'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}':
     delete:
       description: Delete snapshot
       operationId: Snapshots_Delete

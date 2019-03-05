@@ -3592,6 +3592,74 @@ paths:
                     uniqueIpAddresses: SampleUniqueIPAddresses
                     userId: SampleUser1
       x-ms-pageable: {}
+  '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/blobUris':
+    get:
+      description: Gets all Risky IP report URIs for the last 7 days.
+      operationId: services_listAllRiskyIpDownloadReport
+      parameters:
+        - description: The name of the service.
+          in: path
+          name: serviceName
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Risky IP report URIs for the last 7 days.
+          schema:
+            $ref: '#/definitions/RiskyIPBlobUris'
+      tags:
+        - Reports
+      x-ms-examples:
+        services_listAllRiskyIpDownloadReport:
+          parameters:
+            api-version: '2014-01-01'
+            serviceName: sampleServiceName
+          responses:
+            '200':
+              body:
+                value:
+                  - blobCreateDateTime: '2019-01-07T20:32:02+00:00'
+                    jobCompletionTime: '2019-01-07T20:32:05+00:00'
+                    resultSasUri: SAS Uri of the blob.
+                    serviceId: ServiceId of the tenant.
+                    status: status of the task.
+                    tenantId: TenantId of the tenant.
+      x-ms-pageable: {}
+  '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/reports/riskyIp/generateBlobUri':
+    post:
+      description: Initiate the generation of a new Risky IP report. Returns the URI for the new one.
+      operationId: services_listCurrentRiskyIpDownloadReport
+      parameters:
+        - description: The name of the service.
+          in: path
+          name: serviceName
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: The URI of the Risky IP report that was requested.
+          schema:
+            $ref: '#/definitions/RiskyIPBlobUris'
+      tags:
+        - Reports
+      x-ms-examples:
+        services_listCurrentRiskyIpDownloadReport:
+          parameters:
+            api-version: '2014-01-01'
+            serviceName: sampleServiceName
+          responses:
+            '200':
+              body:
+                value:
+                  - blobCreateDateTime: '2019-01-07T20:32:02+00:00'
+                    jobCompletionTime: '2019-01-07T20:32:05+00:00'
+                    resultSasUri: SAS Uri of the blob.
+                    serviceId: ServiceId of the tenant.
+                    status: status of the task.
+                    tenantId: TenantId of the tenant.
+      x-ms-pageable: {}
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers':
     get:
       description: 'Gets the details of the servers, for a given service, that are onboarded to Azure Active Directory Connect Health Service.'
@@ -6156,6 +6224,39 @@ definitions:
       value:
         description: The value.
         type: boolean
+    type: object
+  RiskyIPBlobUri:
+    description: The blob uri pointing to Risky IP Report.
+    properties:
+      blobCreateDateTime:
+        description: Time at which the the new Risky IP report was requested.
+        format: date-time
+        type: string
+      jobCompletionTime:
+        description: Time at which the blob creation job for the new Risky IP report was completed.
+        format: date-time
+        type: string
+      resultSasUri:
+        description: The blob uri for the report.
+        type: string
+      serviceId:
+        description: The service id for whom the report belongs to.
+        type: string
+      status:
+        description: Status of the Risky IP report generation.
+        type: string
+      tenantId:
+        description: The tenant id for whom the report belongs to.
+        type: string
+    type: object
+  RiskyIPBlobUris:
+    description: The list containing blob uris.
+    properties:
+      value:
+        description: The list of blob uris.
+        items:
+          $ref: '#/definitions/RiskyIPBlobUri'
+        type: array
     type: object
   RuleErrorInfo:
     description: The error details in legacy rule processing.

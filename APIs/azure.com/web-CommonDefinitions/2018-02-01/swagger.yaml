@@ -1022,12 +1022,6 @@ definitions:
   ManagedServiceIdentity:
     description: Managed service identity.
     properties:
-      identityIds:
-        description: Array of UserAssigned managed service identities.
-        items:
-          description: Resource Id for UserAssigned managed service identity
-          type: string
-        type: array
       principalId:
         description: Principal Id of managed service identity.
         readOnly: true
@@ -1045,6 +1039,20 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: ManagedServiceIdentityType
+      userAssignedIdentities:
+        additionalProperties:
+          properties:
+            clientId:
+              description: Client Id of user assigned identity
+              readOnly: true
+              type: string
+            principalId:
+              description: Principal Id of user assigned identity
+              readOnly: true
+              type: string
+          type: object
+        description: 'The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'
+        type: object
     type: object
   MetricAvailability:
     description: Retention policy of a resource metric.

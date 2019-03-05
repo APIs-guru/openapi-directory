@@ -209,6 +209,7 @@ paths:
                           localeCode: en
                           question: This is a question
                       header: Your service might have been impacted by an Azure service issue
+                      hirStage: resolved
                       impact:
                         - impactedRegions:
                             - impactedRegion: West US
@@ -243,11 +244,12 @@ paths:
                       priority: 2
                       recommendedActions:
                         actions:
-                          - action 1
-                          - action 2
-                        groupId: 2343
+                          - actionText: action 1
+                            groupId: '23243'
+                          - actionText: action 2
+                            groupId: '23432'
                         localeCode: en
-                        title: Recommended actions title
+                        message: Recommended actions title
                       status: Active
                       summary: An outage alert is being investigated. More information will be provided as it is known.
                       title: 'ACTIVE: Virtual machines in West US'
@@ -553,6 +555,7 @@ paths:
                           localeCode: en
                           question: This is a question
                       header: Your service might have been impacted by an Azure service issue
+                      hirStage: active
                       impact:
                         - impactedRegions:
                             - impactedRegion: West US
@@ -587,11 +590,12 @@ paths:
                       priority: 2
                       recommendedActions:
                         actions:
-                          - action 1
-                          - action 2
-                        groupId: 2343
+                          - actionText: action 1
+                            groupId: '23243'
+                          - actionText: action 2
+                            groupId: '23432'
                         localeCode: en
-                        title: Recommended actions title
+                        message: Recommended actions title
                       status: Active
                       summary: An outage alert is being investigated. More information will be provided as it is known.
                       title: 'ACTIVE: Virtual machines in West US'
@@ -802,6 +806,9 @@ definitions:
           header:
             description: Header text of event.
             type: string
+          hirStage:
+            description: Stage for HIR Document
+            type: string
           impact:
             description: List services impacted by the service health event.
             items:
@@ -846,15 +853,19 @@ definitions:
                 description: Recommended actions for the service health event.
                 items:
                   description: Recommended action for the service health event.
-                  type: string
+                  properties:
+                    actionText:
+                      description: Recommended action text
+                      type: string
+                    groupId:
+                      description: Recommended action group Id for the service health event.
+                      type: integer
+                  type: object
                 type: array
-              groupId:
-                description: Recommended action group Id for the service health event.
-                type: integer
               localeCode:
                 description: Recommended action locale for the service health event.
                 type: string
-              title:
+              message:
                 description: Recommended action title for the service health event.
                 type: string
             type: object

@@ -35,17 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  AuthenticationServerIdParameter:
-    description: Identifier of the authorization server.
-    in: path
-    maxLength: 80
-    minLength: 1
-    name: authsid
-    pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers':
     get:
@@ -67,11 +57,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field | Supported operators    | Supported functions                         |
-            |-------|------------------------|---------------------------------------------|
-            | id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           in: query
           name: $filter
           required: false
@@ -107,8 +93,37 @@ paths:
           description: A Collection of the Authorization Server entities for the specified API Management service instance.
           schema:
             $ref: '#/definitions/AuthorizationServerCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
       tags:
-        - AuthorizationServers
+        - AuthorizationServer
       x-ms-examples:
         ApiManagementListAuthorizationServers:
           parameters:
@@ -190,7 +205,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/AuthenticationServerIdParameter'
+        - description: Identifier of the authorization server.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: authsid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -242,7 +265,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - AuthorizationServers
+        - AuthorizationServer
       x-ms-examples:
         ApiManagementDeleteAuthorizationServer:
           parameters:
@@ -274,7 +297,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/AuthenticationServerIdParameter'
+        - description: Identifier of the authorization server.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: authsid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -324,7 +355,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - AuthorizationServers
+        - AuthorizationServer
       x-ms-examples:
         ApiManagementGetAuthorizationServer:
           parameters:
@@ -379,7 +410,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/AuthenticationServerIdParameter'
+        - description: Identifier of the authorization server.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: authsid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -427,7 +466,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - AuthorizationServers
+        - AuthorizationServer
       x-ms-examples:
         ApiManagementHeadAuthorizationServer:
           parameters:
@@ -459,7 +498,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/AuthenticationServerIdParameter'
+        - description: Identifier of the authorization server.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: authsid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: OAuth2 Server settings Update parameters.
           in: body
           name: parameters
@@ -515,7 +562,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - AuthorizationServers
+        - AuthorizationServer
       x-ms-examples:
         ApiManagementUpdateAuthorizationServer:
           parameters:
@@ -550,7 +597,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/AuthenticationServerIdParameter'
+        - description: Identifier of the authorization server.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: authsid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Create or update parameters.
           in: body
           name: parameters
@@ -576,10 +631,18 @@ paths:
       responses:
         '200':
           description: Authorization server is already registered.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/AuthorizationServerContract'
         '201':
           description: Authorization server was successfully registered.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/AuthorizationServerContract'
         default:
@@ -612,7 +675,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - AuthorizationServers
+        - AuthorizationServer
       x-ms-examples:
         ApiManagementCreateAuthorizationServer:
           parameters:

@@ -35,17 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  BackendIdParameter:
-    description: Identifier of the Backend entity. Must be unique in the current API Management service instance.
-    in: path
-    maxLength: 80
-    minLength: 1
-    name: backendid
-    pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends':
     get:
@@ -67,11 +57,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field | Supported operators    | Supported functions                         |
-            |-------|------------------------|---------------------------------------------|
-            | id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | host  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|title | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|url | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           in: query
           name: $filter
           required: false
@@ -137,7 +123,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Backends
+        - Backend
       x-ms-examples:
         ApiManagementListBackends:
           parameters:
@@ -196,7 +182,7 @@ paths:
       x-ms-odata: '#/definitions/BackendContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}':
     delete:
       description: Deletes the specified backend.
       operationId: Backend_Delete
@@ -216,7 +202,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/BackendIdParameter'
+        - description: Identifier of the Backend entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: backendId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -268,13 +262,13 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Backends
+        - Backend
       x-ms-examples:
         ApiManagementDeleteBackend:
           parameters:
             If-Match: '*'
             api-version: 2018-06-01-preview
-            backendid: sfbackend
+            backendId: sfbackend
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
@@ -300,7 +294,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/BackendIdParameter'
+        - description: Identifier of the Backend entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: backendId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -350,12 +352,12 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Backends
+        - Backend
       x-ms-examples:
         ApiManagementGetBackend:
           parameters:
             api-version: 2018-06-01-preview
-            backendid: sfbackend
+            backendId: sfbackend
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
@@ -397,7 +399,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/BackendIdParameter'
+        - description: Identifier of the Backend entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: backendId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -445,12 +455,12 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Backends
+        - Backend
       x-ms-examples:
         ApiManagementHeadBackend:
           parameters:
             api-version: 2018-06-01-preview
-            backendid: sfbackend
+            backendId: sfbackend
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
@@ -477,7 +487,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/BackendIdParameter'
+        - description: Identifier of the Backend entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: backendId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Update parameters.
           in: body
           name: parameters
@@ -533,13 +551,13 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Backends
+        - Backend
       x-ms-examples:
         ApiManagementUpdateBackend:
           parameters:
             If-Match: '*'
             api-version: 2018-06-01-preview
-            backendid: proxybackend
+            backendId: proxybackend
             parameters:
               properties:
                 description: description5308
@@ -570,7 +588,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/BackendIdParameter'
+        - description: Identifier of the Backend entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: backendId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Create parameters.
           in: body
           name: parameters
@@ -596,10 +622,18 @@ paths:
       responses:
         '200':
           description: The existing backend was successfully updated.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/BackendContract'
         '201':
           description: Backend was successfully created.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/BackendContract'
         default:
@@ -632,12 +666,12 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Backends
+        - Backend
       x-ms-examples:
         ApiManagementCreateBackendProxyBackend:
           parameters:
             api-version: 2018-06-01-preview
-            backendid: proxybackend
+            backendId: proxybackend
             parameters:
               properties:
                 credentials:
@@ -728,7 +762,7 @@ paths:
         ApiManagementCreateBackendServiceFabric:
           parameters:
             api-version: 2018-06-01-preview
-            backendid: sfbackend
+            backendId: sfbackend
             parameters:
               properties:
                 description: Service Fabric Test App 1
@@ -783,7 +817,7 @@ paths:
                   protocol: http
                   url: 'fabric:/mytestapp/mytestservice'
                 type: Microsoft.ApiManagement/service/backends
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendid}/reconnect':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/backends/{backendId}/reconnect':
     post:
       description: 'Notifies the APIM proxy to create a new connection to the backend after the specified timeout. If no timeout was specified, timeout of 2 minutes is used.'
       operationId: Backend_Reconnect
@@ -803,7 +837,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/BackendIdParameter'
+        - description: Identifier of the Backend entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: backendId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Reconnect request parameters.
           in: body
           name: parameters
@@ -853,12 +895,12 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Backends
+        - BackendReconnect
       x-ms-examples:
         ApiManagementBackendReconnect:
           parameters:
             api-version: 2018-06-01-preview
-            backendid: proxybackend
+            backendId: proxybackend
             parameters:
               properties:
                 after: PT3S

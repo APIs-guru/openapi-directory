@@ -2223,6 +2223,37 @@ paths:
                       url: 'https://wasd2stageneu1btlm4.file.core.windows.net/42679871f6cc4302b39ab9c2e3044df3/pg_log/postgresql-2017-06-22_020000.log?sv=2015-04-05&sr=f&sig=i99UWBlYfR0tKaxix8yHAOnfym4HV9Auto6BbZogyRs%3D&se=2017-06-22T03%3A21%3A09Z&sp=r'
                     type: Microsoft.DBforPostgreSQL/servers/logFiles
       x-ms-pageable: {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/restart':
+    post:
+      description: Restarts a server.
+      operationId: Servers_Restart
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+        '202':
+          description: Accepted
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - ServerRestart
+      x-ms-examples:
+        ServerRestart:
+          parameters:
+            api-version: '2017-12-01'
+            resourceGroupName: TestGroup
+            serverName: testserver
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200': {}
+            '202': {}
+      x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}':
     get:
       description: Get a server's security alert policy.
@@ -2615,6 +2646,30 @@ paths:
             '202': {}
       x-ms-long-running-operation: true
 definitions:
+  CloudError:
+    description: An error response from the Batch service.
+    properties:
+      error:
+        $ref: '#/definitions/CloudErrorBody'
+    x-ms-external: true
+  CloudErrorBody:
+    description: An error response from the Batch service.
+    properties:
+      code:
+        description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+        type: string
+      details:
+        description: A list of additional details about the error.
+        items:
+          $ref: '#/definitions/CloudErrorBody'
+        type: array
+      message:
+        description: 'A message describing the error, intended to be suitable for display in a user interface.'
+        type: string
+      target:
+        description: 'The target of the particular error. For example, the name of the property in error.'
+        type: string
+    x-ms-external: true
   Configuration:
     allOf:
       - $ref: '#/definitions/ProxyResource'

@@ -468,8 +468,12 @@ paths:
       responses:
         '200':
           description: Service was successfully deleted.
+        '202':
+          description: The service delete request was Accepted.
+          schema:
+            $ref: '#/definitions/ApiManagementServiceResource'
         '204':
-          description: Service is already deleted.
+          description: The service does not exist.
       tags:
         - ApiManagementService
       x-ms-examples:
@@ -481,7 +485,48 @@ paths:
             subscriptionId: subid
           responses:
             '200': {}
+            '202':
+              body:
+                etag: AAAAAAFfhHY=
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1
+                location: West US
+                name: apimService1
+                properties:
+                  createdAtUtc: '2016-12-20T19:41:21.5823069Z'
+                  customProperties:
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2: 'False'
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Ssl30: 'False'
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10: 'True'
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11: 'True'
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168: 'True'
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Ssl30: 'False'
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10: 'True'
+                    Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11: 'True'
+                  gatewayRegionalUrl: 'https://apimService1-westus-01.regional.azure-api.net'
+                  gatewayUrl: 'https://apimService1.azure-api.net'
+                  hostnameConfigurations: []
+                  managementApiUrl: 'https://apimService1.management.azure-api.net'
+                  notificationSenderEmail: apimgmt-noreply@mail.windowsazure.com
+                  portalUrl: 'https://apimService1.portal.azure-api.net'
+                  provisioningState: Succeeded
+                  publicIPAddresses:
+                    - 40.XX.XXX.168
+                  publisherEmail: sasolank@microsoft.com
+                  publisherName: Microsoft
+                  scmUrl: 'https://apimService1.scm.azure-api.net'
+                  targetProvisioningState: Deleting
+                  virtualNetworkConfiguration:
+                    subnetResourceId: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/BlockVNETSamir/subnets/default
+                  virtualNetworkType: External
+                sku:
+                  capacity: 1
+                  name: Developer
+                tags: {}
+                type: Microsoft.ApiManagement/service
+              headers:
+                location: 'https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/TGV2eTExMDZtMDJfVGVybV9jMmZlY2QwMA==?api-version=2018-06-01-preview'
             '204': {}
+      x-ms-long-running-operation: true
     get:
       description: Gets an API Management service resource description.
       operationId: ApiManagementService_Get

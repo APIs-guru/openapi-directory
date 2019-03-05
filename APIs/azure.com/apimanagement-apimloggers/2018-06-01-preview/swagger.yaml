@@ -35,16 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  LoggerIdParameter:
-    description: Logger identifier. Must be unique in the API Management service instance.
-    in: path
-    maxLength: 80
-    name: loggerid
-    pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers':
     get:
@@ -68,11 +59,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field | Supported operators    | Supported functions                         |
-            |-------|------------------------|---------------------------------------------|
-            | id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | type  | eq                     |                                             |
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|loggerType | eq |    |\n|resourceId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           in: query
           name: $filter
           required: false
@@ -138,7 +125,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Loggers
+        - Logger
       x-ms-examples:
         ApiManagementListLoggers:
           parameters:
@@ -175,7 +162,7 @@ paths:
       x-ms-odata: '#/definitions/LoggerContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerid}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/loggers/{loggerId}':
     delete:
       description: Deletes the specified logger.
       operationId: Logger_Delete
@@ -195,13 +182,25 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/LoggerIdParameter'
+        - description: Logger identifier. Must be unique in the API Management service instance.
+          in: path
+          maxLength: 256
+          name: loggerId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
           required: true
           type: string
           x-ms-parameter-location: method
+        - description: Force deletion even if diagnostic is attached.
+          in: query
+          name: force
+          required: false
+          type: boolean
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -247,13 +246,13 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Loggers
+        - Logger
       x-ms-examples:
         ApiManagementDeleteLogger:
           parameters:
             If-Match: '*'
             api-version: 2018-06-01-preview
-            loggerid: loggerId
+            loggerId: loggerId
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
@@ -279,7 +278,14 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/LoggerIdParameter'
+        - description: Logger identifier. Must be unique in the API Management service instance.
+          in: path
+          maxLength: 256
+          name: loggerId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -329,12 +335,12 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Loggers
+        - Logger
       x-ms-examples:
         ApiManagementGetLogger:
           parameters:
             api-version: 2018-06-01-preview
-            loggerid: templateLogger
+            loggerId: templateLogger
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
@@ -371,7 +377,14 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/LoggerIdParameter'
+        - description: Logger identifier. Must be unique in the API Management service instance.
+          in: path
+          maxLength: 256
+          name: loggerId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -419,12 +432,12 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Loggers
+        - Logger
       x-ms-examples:
         ApiManagementHeadLogger:
           parameters:
             api-version: 2018-06-01-preview
-            loggerid: templateLogger
+            loggerId: templateLogger
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
@@ -451,7 +464,14 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/LoggerIdParameter'
+        - description: Logger identifier. Must be unique in the API Management service instance.
+          in: path
+          maxLength: 256
+          name: loggerId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Update parameters.
           in: body
           name: parameters
@@ -507,13 +527,13 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Loggers
+        - Logger
       x-ms-examples:
         ApiManagementUpdateLogger:
           parameters:
             If-Match: '*'
             api-version: 2018-06-01-preview
-            loggerid: loggerId
+            loggerId: loggerId
             parameters:
               properties:
                 credentials:
@@ -543,7 +563,14 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/LoggerIdParameter'
+        - description: Logger identifier. Must be unique in the API Management service instance.
+          in: path
+          maxLength: 256
+          name: loggerId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Create parameters.
           in: body
           name: parameters
@@ -569,10 +596,18 @@ paths:
       responses:
         '200':
           description: The existing logger was successfully updated.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/LoggerContract'
         '201':
           description: Logger was successfully created.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/LoggerContract'
         default:
@@ -605,12 +640,12 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Loggers
+        - Logger
       x-ms-examples:
         ApiManagementCreateAILogger:
           parameters:
             api-version: 2018-06-01-preview
-            loggerid: loggerId
+            loggerId: loggerId
             parameters:
               properties:
                 credentials:
@@ -647,7 +682,7 @@ paths:
         ApiManagementCreateEHLogger:
           parameters:
             api-version: 2018-06-01-preview
-            loggerid: loggerId
+            loggerId: loggerId
             parameters:
               properties:
                 credentials:

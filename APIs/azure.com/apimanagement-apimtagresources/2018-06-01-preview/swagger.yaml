@@ -20,7 +20,8 @@ info:
   x-tags:
     - Azure
     - Microsoft
-consumes: []
+consumes:
+  - application/json
 produces:
   - application/json
 securityDefinitions:
@@ -56,22 +57,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field       | Supported operators    | Supported functions                         |
-            |-------------|------------------------|---------------------------------------------|
-            | id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | aid         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | apiName     | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | apiRevision | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | path        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | serviceUrl  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | method      | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | urlTemplate | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | terms       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | state       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | isCurrent   | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|aid | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|apiName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|apiRevision | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|path | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|serviceUrl | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|method | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|urlTemplate | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|terms | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|isCurrent | eq |    |\n"
           in: query
           name: $filter
           required: false
@@ -107,8 +93,37 @@ paths:
           description: Lists a collection of TagResource entities.
           schema:
             $ref: '#/definitions/TagResourceCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
       tags:
-        - TagResources
+        - TagResource
       x-ms-examples:
         ApiManagementListTagResources:
           parameters:

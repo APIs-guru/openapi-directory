@@ -35,17 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  CertificateIdParameter:
-    description: Identifier of the certificate entity. Must be unique in the current API Management service instance.
-    in: path
-    maxLength: 80
-    minLength: 1
-    name: certificateId
-    pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/certificates':
     get:
@@ -67,13 +57,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field          | Supported operators    | Supported functions                         |
-            |----------------|------------------------|---------------------------------------------|
-            | id             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | subject        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | thumbprint     | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | expirationDate | ge, le, eq, ne, gt, lt | N/A                                         |
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|subject | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|thumbprint | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|expirationDate | ge, le, eq, ne, gt, lt |    |\n"
           in: query
           name: $filter
           required: false
@@ -139,7 +123,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Certificates
+        - Certificate
       x-ms-examples:
         ApiManagementListCertificates:
           parameters:
@@ -182,7 +166,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/CertificateIdParameter'
+        - description: Identifier of the certificate entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: certificateId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -234,7 +226,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Certificates
+        - Certificate
       x-ms-examples:
         ApiManagementDeleteCertificate:
           parameters:
@@ -266,7 +258,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/CertificateIdParameter'
+        - description: Identifier of the certificate entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: certificateId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -316,7 +316,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Certificates
+        - Certificate
       x-ms-examples:
         ApiManagementGetCertificate:
           parameters:
@@ -354,7 +354,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/CertificateIdParameter'
+        - description: Identifier of the certificate entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: certificateId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -402,7 +410,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Certificates
+        - Certificate
       x-ms-examples:
         ApiManagementHeadCertificate:
           parameters:
@@ -437,7 +445,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/CertificateIdParameter'
+        - description: Identifier of the certificate entity. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: certificateId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Create or Update parameters.
           in: body
           name: parameters
@@ -463,10 +479,18 @@ paths:
       responses:
         '200':
           description: The certificate details were successfully updated.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/CertificateContract'
         '201':
           description: The new certificate was successfully added.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/CertificateContract'
         default:
@@ -499,7 +523,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Certificates
+        - Certificate
       x-ms-examples:
         ApiManagementCreateCertificate:
           parameters:

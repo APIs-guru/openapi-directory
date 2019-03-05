@@ -128,8 +128,7 @@ paths:
                         dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI
                         query: requests
                         queryType: ResultCount
-                    tags:
-                      'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI': Resource
+                    tags: {}
                     type: Microsoft.Insights/scheduledQueryRules
                   - id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo
                     location: West US
@@ -156,8 +155,7 @@ paths:
                         dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI
                         query: requests
                         queryType: ResultCount
-                    tags:
-                      'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI': Resource
+                    tags: {}
                     type: Microsoft.Insights/scheduledQueryRules
               headers: {}
       x-ms-odata: '#/definitions/LogSearchRuleResource'
@@ -222,8 +220,7 @@ paths:
                         dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI
                         query: requests
                         queryType: ResultCount
-                    tags:
-                      'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI': Resource
+                    tags: {}
                     type: Microsoft.Insights/scheduledQueryRules
                   - id: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo
                     location: West US
@@ -250,8 +247,7 @@ paths:
                         dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI
                         query: requests
                         queryType: ResultCount
-                    tags:
-                      'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI': Resource
+                    tags: {}
                     type: Microsoft.Insights/scheduledQueryRules
               headers: {}
       x-ms-odata: '#/definitions/LogSearchRuleResource'
@@ -344,8 +340,7 @@ paths:
                     dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI
                     query: requests
                     queryType: ResultCount
-                tags:
-                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI': Resource
+                tags: {}
                 type: Microsoft.Insights/scheduledQueryRules
               headers: {}
     patch:
@@ -416,8 +411,7 @@ paths:
                     dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI
                     query: requests
                     queryType: ResultCount
-                tags:
-                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI': Resource
+                tags: {}
                 type: Microsoft.Insights/scheduledQueryRules
               headers: {}
     put:
@@ -482,8 +476,7 @@ paths:
                   dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace
                   query: 'Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m)'
                   queryType: ResultCount
-              tags:
-                'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace': Resource
+              tags: {}
             resourceGroupName: Rac46PostSwapRG
             ruleName: logalertfoo
             subscriptionId: b67f7fec-69fc-4974-9099-a26bd6ffeda3
@@ -520,8 +513,7 @@ paths:
                     dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace
                     query: 'Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m)'
                     queryType: ResultCount
-                tags:
-                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace': Resource
+                tags: {}
                 type: Microsoft.Insights/scheduledQueryRules
               headers: {}
             '201':
@@ -551,8 +543,7 @@ paths:
                     dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace
                     query: Heartbeat
                     queryType: ResultCount
-                tags:
-                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.OperationalInsights/workspaces/sampleWorkspace': Resource
+                tags: {}
                 type: Microsoft.Insights/scheduledQueryRules
               headers: {}
         Create or Update rule - AlertingAction with Cross-Resource:
@@ -583,8 +574,7 @@ paths:
                   dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI
                   query: 'union requests, workspace("sampleWorkspace").Update'
                   queryType: ResultCount
-              tags:
-                'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI': Resource
+              tags: {}
             resourceGroupName: Rac46PostSwapRG
             ruleName: SampleCrossResourceAlert
             subscriptionId: b67f7fec-69fc-4974-9099-a26bd6ffeda3
@@ -619,8 +609,7 @@ paths:
                     dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI
                     query: 'union requests, workspace("sampleWorkspace").Update'
                     queryType: ResultCount
-                tags:
-                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI': Resource
+                tags: {}
                 type: Microsoft.Insights/scheduledQueryRules
               headers: {}
             '201':
@@ -653,8 +642,7 @@ paths:
                     dataSourceId: /subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI
                     query: 'union requests, workspace("sampleWorkspace").Update'
                     queryType: ResultCount
-                tags:
-                  'hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI': Resource
+                tags: {}
                 type: Microsoft.Insights/scheduledQueryRules
               headers: {}
         Create or Update rule - LogToMetricAction:
@@ -672,8 +660,7 @@ paths:
                 enabled: 'true'
                 source:
                   dataSourceId: /subscriptions/af52d502-a447-4bc6-8cb7-4780fbb00490/resourceGroups/alertsweu/providers/Microsoft.OperationalInsights/workspaces/alertsweu
-              tags:
-                'hidden-link:/subscriptions/af52d502-a447-4bc6-8cb7-4780fbb00490/resourceGroups/alertsweu/providers/Microsoft.OperationalInsights/workspaces/alertsweu': Resource
+              tags: {}
             resourceGroupName: alertsweu
             ruleName: logtometricfoo
             subscriptionId: af52d502-a447-4bc6-8cb7-4780fbb00490
@@ -698,8 +685,7 @@ paths:
                   source:
                     dataSourceId: /subscriptions/af52d502-a447-4bc6-8cb7-4780fbb00490/resourceGroups/alertsweu/providers/Microsoft.OperationalInsights/workspaces/alertsweu
                     query: null
-                tags:
-                  'hidden-link:/subscriptions/af52d502-a447-4bc6-8cb7-4780fbb00490/resourceGroups/alertsweu/providers/Microsoft.OperationalInsights/workspaces/alertsweu': Resource
+                tags: {}
                 type: microsoft.insights/scheduledqueryrules
               headers: {}
             '201':
@@ -721,8 +707,7 @@ paths:
                   source:
                     dataSourceId: /subscriptions/af52d502-a447-4bc6-8cb7-4780fbb00490/resourceGroups/alertsweu/providers/Microsoft.OperationalInsights/workspaces/alertsweu
                     query: null
-                tags:
-                  'hidden-link:/subscriptions/af52d502-a447-4bc6-8cb7-4780fbb00490/resourceGroups/alertsweu/providers/Microsoft.OperationalInsights/workspaces/alertsweu': Resource
+                tags: {}
                 type: microsoft.insights/scheduledqueryrules
               headers: {}
 definitions:
@@ -767,7 +752,6 @@ definitions:
         $ref: '#/definitions/TriggerCondition'
         description: The trigger condition that results in the alert rule being.
     required:
-      - aznsAction
       - trigger
       - severity
     type: object

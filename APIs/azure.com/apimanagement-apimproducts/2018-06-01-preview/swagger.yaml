@@ -35,17 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  ProductIdParameter:
-    description: Product identifier. Must be unique in the current API Management service instance.
-    in: path
-    maxLength: 80
-    minLength: 1
-    name: productId
-    pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products':
     get:
@@ -67,14 +57,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field       | Supported operators    | Supported functions                         |
-            |-------------|------------------------|---------------------------------------------|
-            | id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | terms       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | state       | eq                     |                                             |
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|terms | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|groups |     |    |\n"
           in: query
           name: $filter
           required: false
@@ -100,6 +83,11 @@ paths:
           name: expandGroups
           required: false
           type: boolean
+        - description: Products which are part of a specific tag.
+          in: query
+          name: tags
+          required: false
+          type: string
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -145,7 +133,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Products
+        - Product
       x-ms-examples:
         ApiManagementListProducts:
           parameters:
@@ -210,18 +198,26 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
-        - description: Delete existing subscriptions associated with the product or not.
-          in: query
-          name: deleteSubscriptions
-          required: false
-          type: boolean
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
           required: true
           type: string
           x-ms-parameter-location: method
+        - description: Delete existing subscriptions associated with the product or not.
+          in: query
+          name: deleteSubscriptions
+          required: false
+          type: boolean
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -234,9 +230,9 @@ paths:
           type: string
       responses:
         '200':
-          description: The product was successfully deleted.
+          description: Product was successfully removed.
         '204':
-          description: The product was successfully deleted.
+          description: Product was successfully removed by previous request or does not exist.
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -267,7 +263,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Products
+        - Product
       x-ms-examples:
         ApiManagementDeleteProduct:
           parameters:
@@ -300,7 +296,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -350,7 +354,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Products
+        - Product
       x-ms-examples:
         ApiManagementGetProduct:
           parameters:
@@ -391,7 +395,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -439,7 +451,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Products
+        - Product
       x-ms-examples:
         ApiManagementHeadProduct:
           parameters:
@@ -453,7 +465,7 @@ paths:
               headers:
                 etag: AAAAAAAAAAa=
     patch:
-      description: Update product.
+      description: Update existing product details.
       operationId: Product_Update
       parameters:
         - description: The name of the resource group.
@@ -471,7 +483,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Update parameters.
           in: body
           name: parameters
@@ -496,7 +516,7 @@ paths:
           type: string
       responses:
         '204':
-          description: No Content in case of Update Successful.
+          description: Product details was successfully updated.
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -527,9 +547,9 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Products
+        - Product
       x-ms-examples:
-        ApiManagementUpdateProductBasic:
+        ApiManagementUpdateProduct:
           parameters:
             If-Match: '*'
             api-version: 2018-06-01-preview
@@ -561,7 +581,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Create or update parameters.
           in: body
           name: parameters
@@ -587,10 +615,18 @@ paths:
       responses:
         '200':
           description: Product was successfully updated.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/ProductContract'
         '201':
           description: Product was successfully created.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/ProductContract'
         default:
@@ -623,9 +659,9 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Products
+        - Product
       x-ms-examples:
-        ApiManagementCreateProductBasic:
+        ApiManagementCreateProduct:
           parameters:
             api-version: 2018-06-01-preview
             parameters:
@@ -676,15 +712,16 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
-        - description: |
-            | Field       | Supported operators    | Supported functions                         |
-            |-------------|------------------------|---------------------------------------------|
-            | id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | serviceUrl  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | path        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|serviceUrl | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|path | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           in: query
           name: $filter
           required: false
@@ -929,7 +966,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - ProductApis
+        - ProductApi
       x-ms-examples:
         ApiManagementListProductApis:
           parameters:
@@ -978,7 +1015,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
           in: path
           maxLength: 256
@@ -1000,9 +1045,9 @@ paths:
           type: string
       responses:
         '200':
-          description: The API was successfully removed from the product.
+          description: API was successfully removed from product
         '204':
-          description: The API was successfully removed from the product.
+          description: API successfully removed by previous request or does not exist in product
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1033,7 +1078,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - ProductApis
+        - ProductApi
       x-ms-examples:
         ApiManagementDeleteProductApi:
           parameters:
@@ -1066,7 +1111,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
           in: path
           maxLength: 256
@@ -1089,8 +1142,6 @@ paths:
       responses:
         '204':
           description: Entity exists
-        '404':
-          description: API is not associated with the product.
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1121,7 +1172,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - ProductApis
+        - ProductApi
       x-ms-examples:
         ApiManagementHeadProductApi:
           parameters:
@@ -1133,7 +1184,6 @@ paths:
             subscriptionId: subid
           responses:
             '204': {}
-            '404': {}
     put:
       description: Adds an API to the specified product.
       operationId: ProductApi_CreateOrUpdate
@@ -1153,7 +1203,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
           in: path
           maxLength: 256
@@ -1548,7 +1606,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - ProductApis
+        - ProductApi
       x-ms-examples:
         ApiManagementCreateProductApi:
           parameters:
@@ -1613,14 +1671,16 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
-        - description: |-
-            | Field       | Supported operators    | Supported functions                         |
-            |-------------|------------------------|---------------------------------------------|
-            | id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | type        | eq, ne                 | N/A                                         |
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt |    |\n|displayName | eq, ne |    |\n|description | eq, ne |    |\n"
           in: query
           name: $filter
           required: false
@@ -1743,7 +1803,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - ProductGroups
+        - ProductGroup
       x-ms-examples:
         ApiManagementListProductGroups:
           parameters:
@@ -1804,13 +1864,21 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Group identifier. Must be unique in the current API Management service instance.
           in: path
-          maxLength: 80
+          maxLength: 256
           minLength: 1
           name: groupId
-          pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
+          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -1859,7 +1927,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - ProductGroups
+        - ProductGroup
       x-ms-examples:
         ApiManagementDeleteProductGroup:
           parameters:
@@ -1892,13 +1960,21 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Group identifier. Must be unique in the current API Management service instance.
           in: path
-          maxLength: 80
+          maxLength: 256
           minLength: 1
           name: groupId
-          pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
+          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -1915,8 +1991,6 @@ paths:
       responses:
         '204':
           description: The Group is associated with the Product.
-        '404':
-          description: The Group entity is not associated with the Product.
         default:
           description: Error response describing why the operation failed.
           schema:
@@ -1947,7 +2021,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - ProductGroups
+        - ProductGroup
       x-ms-examples:
         ApiManagementHeadProductGroup:
           parameters:
@@ -1959,7 +2033,6 @@ paths:
             subscriptionId: subid
           responses:
             '204': {}
-            '404': {}
     put:
       description: Adds the association between the specified developer group with the specified product.
       operationId: ProductGroup_CreateOrUpdate
@@ -1979,13 +2052,21 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Group identifier. Must be unique in the current API Management service instance.
           in: path
-          maxLength: 80
+          maxLength: 256
           minLength: 1
           name: groupId
-          pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
+          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -2134,7 +2215,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - ProductGroups
+        - ProductGroup
       x-ms-examples:
         ApiManagementCreateProductGroup:
           parameters:
@@ -2185,6 +2266,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -2195,14 +2285,9 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - $ref: '#/parameters/ProductIdParameter'
       responses:
         '200':
           description: Product Policy information.
-          headers:
-            ETag:
-              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-              type: string
           schema:
             description: The response of the list policy operation.
             properties:
@@ -2292,7 +2377,7 @@ paths:
       tags:
         - ProductPolicy
       x-ms-examples:
-        ApiManagementListProductPolicy:
+        ApiManagementListProductPolicies:
           parameters:
             api-version: 2018-06-01-preview
             productId: armTemplateProduct4
@@ -2329,7 +2414,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: The identifier of the Policy.
           enum:
             - policy
@@ -2425,17 +2518,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+        - description: Product identifier. Must be unique in the current API Management service instance.
           in: path
-          name: subscriptionId
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
-        - $ref: '#/parameters/ProductIdParameter'
+          x-ms-parameter-location: method
         - description: The identifier of the Policy.
           enum:
             - policy
@@ -2447,6 +2538,16 @@ paths:
             modelAsString: true
             name: PolicyIdName
           x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Product Policy information.
@@ -2569,17 +2670,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+        - description: Product identifier. Must be unique in the current API Management service instance.
           in: path
-          name: subscriptionId
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
-        - $ref: '#/parameters/ProductIdParameter'
+          x-ms-parameter-location: method
         - description: The identifier of the Policy.
           enum:
             - policy
@@ -2591,6 +2690,16 @@ paths:
             modelAsString: true
             name: PolicyIdName
           x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
       responses:
         '200':
           description: Product Policy Etag information.
@@ -2661,7 +2770,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: The identifier of the Policy.
           enum:
             - policy
@@ -2744,6 +2861,10 @@ paths:
       responses:
         '200':
           description: Product policy configuration of the tenant was successfully updated.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             allOf:
               - description: The Resource definition.
@@ -2794,6 +2915,10 @@ paths:
                   - policyContent
         '201':
           description: Product policy configuration was successfully created.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             allOf:
               - description: The Resource definition.
@@ -2921,16 +3046,16 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/ProductIdParameter'
-        - description: |-
-            | Field        | Supported operators    | Supported functions                         |
-            |--------------|------------------------|---------------------------------------------|
-            | id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | state        | eq                     |                                             |
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|ownerId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|scope | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|userId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|productId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|user |     |    |\n"
           in: query
           name: $filter
           required: false
@@ -3025,7 +3150,7 @@ paths:
                           format: date-time
                           type: string
                         ownerId:
-                          description: 'The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier.'
+                          description: 'The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{userId} where {userId} is a user identifier.'
                           type: string
                         primaryKey:
                           description: Subscription primary key.
@@ -3097,7 +3222,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - ProductSubscriptions
+        - ProductSubscription
       x-ms-examples:
         ApiManagementListProductSubscriptions:
           parameters:
@@ -3124,10 +3249,10 @@ paths:
       x-ms-odata: './apimsubscriptions.json#/definitions/SubscriptionContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/productsByTags':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags':
     get:
-      description: Lists a collection of products associated with tags.
-      operationId: Product_ListByTags
+      description: Lists all Tags associated with the Product.
+      operationId: Tag_ListByProduct
       parameters:
         - description: The name of the resource group.
           in: path
@@ -3144,14 +3269,16 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field       | Supported operators    | Supported functions                         |
-            |-------------|------------------------|---------------------------------------------|
-            | id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | terms       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | state       | eq                     | substringof, contains, startswith, endswith |
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           in: query
           name: $filter
           required: false
@@ -3182,283 +3309,590 @@ paths:
           name: subscriptionId
           required: true
           type: string
-        - default: false
-          description: Include not tagged products in response
-          in: query
-          name: includeNotTaggedProducts
-          required: false
-          type: boolean
       responses:
         '200':
-          description: Lists a collection of TagResource entities.
+          description: The operation returns a collection of tags associated with the Product entity.
           schema:
             description: Paged Tag list representation.
             properties:
-              count:
-                description: Total record count number across all pages.
-                format: int64
-                type: integer
               nextLink:
                 description: Next page link if any.
                 type: string
               value:
                 description: Page values.
                 items:
-                  description: TagResource contract properties.
+                  allOf:
+                    - description: The Resource definition.
+                      properties:
+                        id:
+                          description: Resource ID.
+                          readOnly: true
+                          type: string
+                        name:
+                          description: Resource name.
+                          readOnly: true
+                          type: string
+                        type:
+                          description: Resource type for API Management resource.
+                          readOnly: true
+                          type: string
+                      x-ms-azure-resource: true
+                  description: Tag Contract details.
                   properties:
-                    api:
-                      allOf:
-                        - description: API base contract details.
-                          properties:
-                            apiRevision:
-                              description: 'Describes the Revision of the Api. If no value is provided, default revision 1 is created'
-                              maxLength: 100
-                              minLength: 1
-                              type: string
-                            apiRevisionDescription:
-                              description: Description of the Api Revision.
-                              maxLength: 256
-                              type: string
-                            apiVersion:
-                              description: Indicates the Version identifier of the API if the API is versioned
-                              maxLength: 100
-                              type: string
-                            apiVersionDescription:
-                              description: Description of the Api Version.
-                              maxLength: 256
-                              type: string
-                            apiVersionSetId:
-                              description: A resource identifier for the related ApiVersionSet.
-                              type: string
-                            authenticationSettings:
-                              description: API Authentication Settings.
-                              properties:
-                                oAuth2:
-                                  description: API OAuth2 Authentication settings details.
-                                  properties:
-                                    authorizationServerId:
-                                      description: OAuth authorization server identifier.
-                                      type: string
-                                    scope:
-                                      description: operations scope.
-                                      type: string
-                                openid:
-                                  description: API OAuth2 Authentication settings details.
-                                  properties:
-                                    bearerTokenSendingMethods:
-                                      description: How to send token to the server.
-                                      items:
-                                        description: 'Form of an authorization grant, which the client uses to request the access token.'
-                                        enum:
-                                          - authorizationHeader
-                                          - query
-                                        type: string
-                                        x-ms-enum:
-                                          modelAsString: true
-                                          name: bearerTokenSendingMethods
-                                          values:
-                                            - description: Access token will be transmitted in the Authorization header using Bearer schema
-                                              value: authorizationHeader
-                                            - description: Access token will be transmitted as query parameters.
-                                              value: query
-                                      type: array
-                                    openidProviderId:
-                                      description: OAuth authorization server identifier.
-                                      type: string
-                                subscriptionKeyRequired:
-                                  description: 'Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products.'
-                                  type: boolean
-                            description:
-                              description: Description of the API. May include HTML formatting tags.
-                              type: string
-                            isCurrent:
-                              description: Indicates if API revision is current api revision.
-                              readOnly: true
-                              type: boolean
-                            isOnline:
-                              description: Indicates if API revision is accessible via the gateway.
-                              readOnly: true
-                              type: boolean
-                            subscriptionKeyParameterNames:
-                              description: Subscription key parameter names details.
-                              example:
-                                subscriptionKeyParameterNames:
-                                  header: customHeaderParameterName
-                                  query: customQueryParameterName
-                              properties:
-                                header:
-                                  description: Subscription key header name.
-                                  type: string
-                                query:
-                                  description: Subscription key query string parameter name.
-                                  type: string
-                            subscriptionRequired:
-                              description: Specifies whether an API or Product subscription is required for accessing the API.
-                              type: boolean
-                            type:
-                              description: Type of API.
-                              enum:
-                                - http
-                                - soap
-                              type: string
-                              x-ms-client-name: ApiType
-                              x-ms-enum:
-                                modelAsString: true
-                                name: ApiType
-                      description: API contract properties for the Tag Resources.
+                    properties:
+                      description: Tag contract Properties.
                       properties:
-                        id:
-                          description: 'API identifier in the form /apis/{apiId}.'
-                          type: string
-                        name:
-                          description: API name.
-                          maxLength: 300
-                          minLength: 1
-                          type: string
-                        path:
-                          description: Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
-                          maxLength: 400
-                          minLength: 0
-                          type: string
-                        protocols:
-                          description: Describes on which protocols the operations in this API can be invoked.
-                          items:
-                            enum:
-                              - http
-                              - https
-                            type: string
-                            x-ms-enum:
-                              modelAsString: false
-                              name: Protocol
-                          type: array
-                        serviceUrl:
-                          description: Absolute URL of the backend service implementing this API.
-                          maxLength: 2000
-                          minLength: 1
-                          type: string
-                    operation:
-                      description: Operation Entity contract Properties.
-                      properties:
-                        apiName:
-                          description: Api Name.
-                          readOnly: true
-                          type: string
-                        apiRevision:
-                          description: Api Revision.
-                          readOnly: true
-                          type: string
-                        apiVersion:
-                          description: Api Version.
-                          readOnly: true
-                          type: string
-                        description:
-                          description: Operation Description.
-                          readOnly: true
-                          type: string
-                        id:
-                          description: 'Identifier of the operation in form /operations/{operationId}.'
-                          type: string
-                        method:
-                          description: 'A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.'
-                          externalDocs:
-                            description: As defined by RFC.
-                            url: 'http://www.rfc-editor.org/rfc/rfc7230.txt'
-                          readOnly: true
-                          type: string
-                        name:
-                          description: Operation name.
-                          readOnly: true
-                          type: string
-                        urlTemplate:
-                          description: 'Relative URL template identifying the target resource for this operation. May include parameters. Example: /customers/{cid}/orders/{oid}/?date={date}'
-                          readOnly: true
-                          type: string
-                    product:
-                      allOf:
-                        - description: Product Entity Base Parameters
-                          properties:
-                            approvalRequired:
-                              description: 'whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of false.'
-                              type: boolean
-                            description:
-                              description: Product description. May include HTML formatting tags.
-                              maxLength: 1000
-                              minLength: 1
-                              type: string
-                            state:
-                              description: whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
-                              enum:
-                                - notPublished
-                                - published
-                              type: string
-                              x-ms-enum:
-                                modelAsString: false
-                                name: ProductState
-                            subscriptionRequired:
-                              description: 'Whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as "protected" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as "open" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it''s value is assumed to be true.'
-                              type: boolean
-                            subscriptionsLimit:
-                              description: Whether the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false.
-                              format: int32
-                              type: integer
-                            terms:
-                              description: Product terms of use. Developers trying to subscribe to the product will be presented and required to accept these terms before they can complete the subscription process.
-                              type: string
-                      description: Product profile.
-                      properties:
-                        id:
-                          description: 'Identifier of the product in the form of /products/{productId}'
-                          type: string
-                        name:
-                          description: Product name.
-                          maxLength: 300
-                          minLength: 1
-                          type: string
-                      required:
-                        - name
-                    tag:
-                      description: Contract defining the Tag property in the Tag Resource Contract
-                      properties:
-                        id:
-                          description: Tag identifier
-                          type: string
-                        name:
-                          description: Tag Name
+                        displayName:
+                          description: Tag name.
                           maxLength: 160
                           minLength: 1
                           type: string
-                  required:
-                    - tag
+                      required:
+                        - displayName
                 type: array
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
       tags:
-        - ProductsByTags
+        - ProductTag
       x-ms-examples:
-        ApiManagementListProductsByTags:
+        ApiManagementListProductTags:
           parameters:
             api-version: 2018-06-01-preview
+            productId: 57d2ef278aa04f0888cba3f1
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
           responses:
             '200':
               body:
-                count: 1
+                nextLink: ''
                 value:
-                  - product:
-                      approvalRequired: false
-                      description: Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.
-                      id: /products/starter
-                      name: Starter
-                      state: published
-                      subscriptionRequired: true
-                      subscriptionsLimit: 1
-                      terms: ''
-                    tag:
-                      id: /tags/apitag123
-                      name: awesomeTag
-      x-ms-odata: './apimtagresources.json#/definitions/TagResourceContract'
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/5600b539c53f5b0062060002
+                    name: 5600b539c53f5b0062060002
+                    properties:
+                      displayName: tag1
+                    type: Microsoft.ApiManagement/service/tags
+      x-ms-odata: './apimtags.json#/definitions/TagContract'
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/tags/{tagId}':
+    delete:
+      description: Detach the tag from the Product.
+      operationId: Tag_DetachFromProduct
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Tag identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: tagId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successfully detached the tag from the Product.
+        '204':
+          description: Successfully detached the tag from the Product.
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+      tags:
+        - ProductTag
+      x-ms-examples:
+        ApiManagementDeleteProductTag:
+          parameters:
+            If-Match: '*'
+            api-version: 2018-06-01-preview
+            productId: 59d5b28d1f7fab116c282650
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+            tagId: 59d5b28e1f7fab116402044e
+          responses:
+            '200': {}
+            '204': {}
+    get:
+      description: Get tag associated with the Product.
+      operationId: Tag_GetByProduct
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Tag identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: tagId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Gets the details of the tag specified by its identifier.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+          schema:
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Tag Contract details.
+            properties:
+              properties:
+                description: Tag contract Properties.
+                properties:
+                  displayName:
+                    description: Tag name.
+                    maxLength: 160
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+      tags:
+        - ProductTag
+      x-ms-examples:
+        ApiManagementGetProductTag:
+          parameters:
+            api-version: 2018-06-01-preview
+            productId: 59d6bb8f1f7fab13dc67ec9b
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+            tagId: 59306a29e4bbd510dc24e5f9
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/59306a29e4bbd510dc24e5f9
+                name: 59306a29e4bbd510dc24e5f9
+                properties:
+                  displayName: tag1
+                type: Microsoft.ApiManagement/service/tags
+    head:
+      description: Gets the entity state version of the tag specified by its identifier.
+      operationId: Tag_GetEntityStateByProduct
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Tag identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: tagId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Empty response body, ETag header entity state version.'
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+      tags:
+        - ProductTag
+      x-ms-examples:
+        ApiManagementHeadProductTag:
+          parameters:
+            api-version: 2018-06-01-preview
+            productId: 59306a29e4bbd510dc24e5f8
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+            tagId: 59306a29e4bbd510dc24e5f9
+          responses:
+            '200':
+              headers:
+                Etag: AAAAAAAACCI=
+    put:
+      description: Assign tag to the Product.
+      operationId: Tag_AssignToProduct
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Product identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: productId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Tag identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: tagId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Tag is already assigned to the Product.
+          schema:
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Tag Contract details.
+            properties:
+              properties:
+                description: Tag contract Properties.
+                properties:
+                  displayName:
+                    description: Tag name.
+                    maxLength: 160
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
+        '201':
+          description: Tag was assigned to the Product.
+          schema:
+            allOf:
+              - description: The Resource definition.
+                properties:
+                  id:
+                    description: Resource ID.
+                    readOnly: true
+                    type: string
+                  name:
+                    description: Resource name.
+                    readOnly: true
+                    type: string
+                  type:
+                    description: Resource type for API Management resource.
+                    readOnly: true
+                    type: string
+                x-ms-azure-resource: true
+            description: Tag Contract details.
+            properties:
+              properties:
+                description: Tag contract Properties.
+                properties:
+                  displayName:
+                    description: Tag name.
+                    maxLength: 160
+                    minLength: 1
+                    type: string
+                required:
+                  - displayName
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+      tags:
+        - ProductTag
+      x-ms-examples:
+        ApiManagementCreateProductTag:
+          parameters:
+            api-version: 2018-06-01-preview
+            productId: 5931a75ae4bbd512a88c680b
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+            tagId: tagId1
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/tagId1
+                name: tagId1
+                properties:
+                  displayName: tag1
+                type: Microsoft.ApiManagement/service/tags
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tags/tagId1
+                name: tagId1
+                properties:
+                  displayName: tag1
+                type: Microsoft.ApiManagement/service/tags
 definitions:
   ProductCollection:
     description: Paged Products list representation.

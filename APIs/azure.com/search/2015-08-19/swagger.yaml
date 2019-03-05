@@ -131,6 +131,67 @@ paths:
                 message: ''
                 nameAvailable: false
                 reason: AlreadyExists
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Search/searchServices':
+    get:
+      description: Gets a list of all Search services in the given subscription.
+      externalDocs:
+        url: 'https://aka.ms/search-manage'
+      operationId: Services_ListBySubscription
+      parameters:
+        - $ref: '#/parameters/ClientRequestIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: The operation succeeded. The response contains the list of all Search service definitions for the given subscription.
+          schema:
+            $ref: '#/definitions/SearchServiceListResult'
+        default:
+          description: An unexpected error occurred during the operation.
+          schema:
+            $ref: '#/definitions/CloudError'
+      tags:
+        - Services
+      x-ms-examples:
+        SearchListServicesBySubscription:
+          parameters:
+            api-version: '2015-08-19'
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                    location: westus
+                    name: mysearchservice
+                    properties:
+                      hostingMode: default
+                      partitionCount: 1
+                      provisioningState: succeeded
+                      replicaCount: 3
+                      status: running
+                      statusDetails: ''
+                    sku:
+                      name: standard
+                    tags:
+                      app-name: My e-commerce app
+                    type: Microsoft.Search/searchServices
+                  - id: /subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Search/searchServices/mysearchservice2
+                    location: eastus
+                    name: mysearchservice2
+                    properties:
+                      hostingMode: default
+                      partitionCount: 1
+                      provisioningState: succeeded
+                      replicaCount: 1
+                      status: running
+                      statusDetails: ''
+                    sku:
+                      name: basic
+                    tags:
+                      app-name: My e-commerce app
+                    type: Microsoft.Search/searchServices
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices':
     get:
       description: Gets a list of all Search services in the given resource group.

@@ -35,37 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  IdentityProviderNameParameter:
-    description: Identity Provider Type identifier.
-    enum:
-      - facebook
-      - google
-      - microsoft
-      - twitter
-      - aad
-      - aadB2C
-    in: path
-    name: identityProviderName
-    required: true
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: IdentityProviderType
-      values:
-        - description: Facebook as Identity provider.
-          value: facebook
-        - description: Google as Identity provider.
-          value: google
-        - description: Microsoft Live as Identity provider.
-          value: microsoft
-        - description: Twitter as Identity provider.
-          value: twitter
-        - description: Azure Active Directory as Identity provider.
-          value: aad
-        - description: Azure Active Directory B2C as Identity provider.
-          value: aadB2C
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders':
     get:
@@ -74,11 +44,6 @@ paths:
         url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-authorize-developer-accounts-using-azure-active-directory'
       operationId: IdentityProvider_ListByService
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
         - description: The name of the resource group.
           in: path
           name: resourceGroupName
@@ -97,6 +62,11 @@ paths:
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
           required: true
           type: string
       responses:
@@ -196,7 +166,35 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/IdentityProviderNameParameter'
+        - description: Identity Provider Type identifier.
+          enum:
+            - facebook
+            - google
+            - microsoft
+            - twitter
+            - aad
+            - aadB2C
+          in: path
+          name: identityProviderName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: IdentityProviderType
+            values:
+              - description: Facebook as Identity provider.
+                value: facebook
+              - description: Google as Identity provider.
+                value: google
+              - description: Microsoft Live as Identity provider.
+                value: microsoft
+              - description: Twitter as Identity provider.
+                value: twitter
+              - description: Azure Active Directory as Identity provider.
+                value: aad
+              - description: Azure Active Directory B2C as Identity provider.
+                value: aadB2C
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -265,11 +263,6 @@ paths:
       description: Gets the configuration details of the identity Provider configured in specified service instance.
       operationId: IdentityProvider_Get
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
         - description: The name of the resource group.
           in: path
           name: resourceGroupName
@@ -285,10 +278,43 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/IdentityProviderNameParameter'
+        - description: Identity Provider Type identifier.
+          enum:
+            - facebook
+            - google
+            - microsoft
+            - twitter
+            - aad
+            - aadB2C
+          in: path
+          name: identityProviderName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: IdentityProviderType
+            values:
+              - description: Facebook as Identity provider.
+                value: facebook
+              - description: Google as Identity provider.
+                value: google
+              - description: Microsoft Live as Identity provider.
+                value: microsoft
+              - description: Twitter as Identity provider.
+                value: twitter
+              - description: Azure Active Directory as Identity provider.
+                value: aad
+              - description: Azure Active Directory B2C as Identity provider.
+                value: aadB2C
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
           required: true
           type: string
       responses:
@@ -357,11 +383,6 @@ paths:
       description: Gets the entity state (Etag) version of the identityProvider specified by its identifier.
       operationId: IdentityProvider_GetEntityTag
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
         - description: The name of the resource group.
           in: path
           name: resourceGroupName
@@ -377,10 +398,43 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/IdentityProviderNameParameter'
+        - description: Identity Provider Type identifier.
+          enum:
+            - facebook
+            - google
+            - microsoft
+            - twitter
+            - aad
+            - aadB2C
+          in: path
+          name: identityProviderName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: IdentityProviderType
+            values:
+              - description: Facebook as Identity provider.
+                value: facebook
+              - description: Google as Identity provider.
+                value: google
+              - description: Microsoft Live as Identity provider.
+                value: microsoft
+              - description: Twitter as Identity provider.
+                value: twitter
+              - description: Azure Active Directory as Identity provider.
+                value: aad
+              - description: Azure Active Directory B2C as Identity provider.
+                value: aadB2C
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
           required: true
           type: string
       responses:
@@ -452,7 +506,35 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/IdentityProviderNameParameter'
+        - description: Identity Provider Type identifier.
+          enum:
+            - facebook
+            - google
+            - microsoft
+            - twitter
+            - aad
+            - aadB2C
+          in: path
+          name: identityProviderName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: IdentityProviderType
+            values:
+              - description: Facebook as Identity provider.
+                value: facebook
+              - description: Google as Identity provider.
+                value: google
+              - description: Microsoft Live as Identity provider.
+                value: microsoft
+              - description: Twitter as Identity provider.
+                value: twitter
+              - description: Azure Active Directory as Identity provider.
+                value: aad
+              - description: Azure Active Directory B2C as Identity provider.
+                value: aadB2C
+          x-ms-parameter-location: method
         - description: Update parameters.
           in: body
           name: parameters
@@ -508,7 +590,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - IdentityProviders
+        - IdentityProvider
       x-ms-examples:
         ApiManagementUpdateIdentityProvider:
           parameters:
@@ -543,7 +625,35 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/IdentityProviderNameParameter'
+        - description: Identity Provider Type identifier.
+          enum:
+            - facebook
+            - google
+            - microsoft
+            - twitter
+            - aad
+            - aadB2C
+          in: path
+          name: identityProviderName
+          required: true
+          type: string
+          x-ms-enum:
+            modelAsString: true
+            name: IdentityProviderType
+            values:
+              - description: Facebook as Identity provider.
+                value: facebook
+              - description: Google as Identity provider.
+                value: google
+              - description: Microsoft Live as Identity provider.
+                value: microsoft
+              - description: Twitter as Identity provider.
+                value: twitter
+              - description: Azure Active Directory as Identity provider.
+                value: aad
+              - description: Azure Active Directory B2C as Identity provider.
+                value: aadB2C
+          x-ms-parameter-location: method
         - description: Create parameters.
           in: body
           name: parameters
@@ -569,10 +679,18 @@ paths:
       responses:
         '200':
           description: The existing Identity Provider was successfully updated.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/IdentityProviderContract'
         '201':
           description: IdentityProvider configuration were successfully created.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/IdentityProviderContract'
         default:
@@ -647,6 +765,9 @@ definitions:
           type: string
         maxItems: 32
         type: array
+      authority:
+        description: OpenID Connect discovery endpoint hostname for AAD or AAD B2C.
+        type: string
       passwordResetPolicyName:
         description: Password Reset Policy Name. Only applies to AAD B2C Identity Provider.
         minLength: 1

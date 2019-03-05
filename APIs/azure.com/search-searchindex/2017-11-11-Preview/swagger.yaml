@@ -70,6 +70,221 @@ parameters:
     x-ms-parameter-location: client
     x-ms-skip-url-encoding: true
 paths:
+  /docs:
+    get:
+      description: Searches for documents in the Azure Search index.
+      externalDocs:
+        url: 'https://docs.microsoft.com/rest/api/searchservice/Search-Documents'
+      operationId: Documents_SearchGet
+      parameters:
+        - description: A full-text search query expression; Use "*" or omit this parameter to match all documents.
+          in: query
+          name: search
+          type: string
+          x-ms-client-name: SearchText
+        - description: A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation.
+          in: query
+          name: $count
+          type: boolean
+          x-ms-client-name: IncludeTotalResultCount
+          x-ms-parameter-grouping:
+            name: SearchParameters
+          x-nullable: false
+        - collectionFormat: multi
+          description: 'The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs.'
+          in: query
+          items:
+            type: string
+          name: facet
+          type: array
+          x-ms-client-name: Facets
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: The OData $filter expression to apply to the search query.
+          in: query
+          name: $filter
+          type: string
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: The list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.
+          in: query
+          items:
+            type: string
+          name: highlight
+          type: array
+          x-ms-client-name: HighlightFields
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: A string tag that is appended to hit highlights. Must be set with highlightPreTag. Default is &lt;/em&gt;.
+          in: query
+          name: highlightPostTag
+          type: string
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: A string tag that is prepended to hit highlights. Must be set with highlightPostTag. Default is &lt;em&gt;.
+          in: query
+          name: highlightPreTag
+          type: string
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: A number between 0 and 100 indicating the percentage of the index that must be covered by a search query in order for the query to be reported as a success. This parameter can be useful for ensuring search availability even for services with only one replica. The default is 100.
+          format: double
+          in: query
+          name: minimumCoverage
+          type: number
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: 'The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, and desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no OrderBy is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.'
+          in: query
+          items:
+            type: string
+          name: $orderby
+          type: array
+          x-ms-client-name: OrderBy
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax.
+          enum:
+            - simple
+            - full
+          in: query
+          name: queryType
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: QueryType
+          x-ms-parameter-grouping:
+            name: SearchParameters
+          x-nullable: false
+        - collectionFormat: multi
+          description: 'The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called ''mylocation'' the parameter string would be "mylocation--122.2,44.8" (without the quotes).'
+          in: query
+          items:
+            type: string
+          name: scoringParameter
+          type: array
+          x-ms-client-name: ScoringParameters
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: The name of a scoring profile to evaluate match scores for matching documents in order to sort the results.
+          in: query
+          name: scoringProfile
+          type: string
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: The list of field names to include in the full-text search.
+          in: query
+          items:
+            type: string
+          name: searchFields
+          type: array
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: A value that specifies whether any or all of the search terms must be matched in order to count the document as a match.
+          enum:
+            - any
+            - all
+          in: query
+          name: searchMode
+          type: string
+          x-ms-enum:
+            modelAsString: false
+            name: SearchMode
+          x-ms-parameter-grouping:
+            name: SearchParameters
+          x-nullable: false
+        - description: 'The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.'
+          in: query
+          items:
+            type: string
+          name: $select
+          type: array
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: 'The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead.'
+          format: int32
+          in: query
+          name: $skip
+          type: integer
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - description: 'The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results.'
+          format: int32
+          in: query
+          name: $top
+          type: integer
+          x-ms-parameter-grouping:
+            name: SearchParameters
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ClientRequestIdParameter'
+      responses:
+        '200':
+          description: Response containing documents that match the search criteria.
+          schema:
+            $ref: '#/definitions/DocumentSearchResult'
+      tags:
+        - Documents
+      x-ms-examples:
+        SearchIndexSearchDocumentsGet:
+          parameters:
+            $count: true
+            $filter: rating gt 10
+            $orderby:
+              - search.score() desc
+              - rating desc
+            $select:
+              - docId
+              - title
+              - description
+            $skip: 100
+            $top: 10
+            api-version: 2017-11-11-Preview
+            facet:
+              - 'category,count:10,sort:count'
+            highlight:
+              - title
+            highlightPostTag: </em>
+            highlightPreTag: <em>
+            indexName: myindex
+            minimumCoverage: 80
+            queryType: simple
+            scoringParameters:
+              - 'currentLocation--122.123,44.77233'
+            scoringProfile: sp
+            search: nice hotels
+            searchDnsSuffix: search.windows.net
+            searchFields:
+              - title
+              - description
+            searchMode: any
+            searchServiceName: myservice
+          responses:
+            '200':
+              body:
+                '@odata.count': 25
+                '@search.coverage': 80
+                '@search.facets':
+                  category:
+                    - count: 1
+                      value: Economy
+                    - count: 1
+                      value: Luxury
+                value:
+                  - '@search.highlights':
+                      title:
+                        - <em>Nice</em> <em>Hotel</em>
+                    '@search.score': 1.5
+                    description: Cheapest hotel in town
+                    docId: '1'
+                    title: Nice Hotel
+                  - '@search.highlights':
+                      title:
+                        - Fancy <em>Hotel</em>
+                    '@search.score': 0.7
+                    description: Best hotel in town
+                    docId: '2'
+                    title: Fancy Hotel
+      x-ms-request-id: request-id
   '/docs(''{key}'')':
     get:
       description: Retrieves a document from the Azure Search index.
@@ -158,13 +373,13 @@ paths:
           name: search
           required: true
           type: string
-          x-ms-client-name: searchText
+          x-ms-client-name: SearchText
         - description: The name of the suggester as specified in the suggesters collection that's part of the index definition.
           in: query
           name: suggesterName
           required: true
           type: string
-        - description: Autocomplete mode.
+        - description: Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms.
           enum:
             - oneTerm
             - twoTerms
@@ -177,6 +392,7 @@ paths:
             name: AutocompleteMode
           x-ms-parameter-grouping:
             name: AutocompleteParameters
+          x-nullable: false
         - description: 'A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there''s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.'
           in: query
           name: fuzzy
@@ -203,7 +419,7 @@ paths:
           type: number
           x-ms-parameter-grouping:
             name: AutocompleteParameters
-        - description: The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.
+        - description: The list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.
           in: query
           items:
             type: string
@@ -279,7 +495,7 @@ paths:
           schema:
             $ref: '#/definitions/DocumentIndexResult'
       tags:
-        - Document
+        - Documents
       x-ms-examples:
         SearchIndexIndexDocuments:
           parameters:
@@ -390,6 +606,103 @@ paths:
                 - queryPlusText: washington medicine
                   text: medicine
       x-ms-request-id: request-id
+  /docs/search.post.search:
+    post:
+      description: Searches for documents in the Azure Search index.
+      externalDocs:
+        url: 'https://docs.microsoft.com/rest/api/searchservice/Search-Documents'
+      operationId: Documents_SearchPost
+      parameters:
+        - description: The definition of the Search request.
+          in: body
+          name: searchRequest
+          required: true
+          schema:
+            $ref: '#/definitions/SearchRequest'
+            description: The Search request.
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/ClientRequestIdParameter'
+      responses:
+        '200':
+          description: Response containing documents that match the search criteria.
+          schema:
+            $ref: '#/definitions/DocumentSearchResult'
+      tags:
+        - Documents
+      x-ms-examples:
+        SearchIndexSearchDocumentsPost:
+          parameters:
+            api-version: 2017-11-11-Preview
+            indexName: myindex
+            searchDnsSuffix: search.windows.net
+            searchRequest:
+              count: true
+              facets:
+                - 'category,count:10,sort:count'
+              filter: rating gt 4.0
+              highlight: title
+              highlightPostTag: </em>
+              highlightPreTag: <em>
+              minimumCoverage: null
+              orderby: 'search.score() desc,rating desc'
+              queryType: simple
+              scoringParameters:
+                - 'currentLocation--122.123,44.77233'
+              scoringProfile: sp
+              search: nice hotels
+              searchFields: 'title,description'
+              searchMode: any
+              select: 'docId,title,description'
+              skip: 0
+              top: 10
+            searchServiceName: myservice
+          responses:
+            '200':
+              body:
+                '@odata.count': 25
+                '@odata.nextLink': 'https://myservice.search.windows.net/indexes(''myindex'')/docs/search.post.search?api-version=2017-11-11-Preview'
+                '@search.facets':
+                  category:
+                    - count: 1
+                      value: Economy
+                    - count: 1
+                      value: Luxury
+                '@search.nextPageParameters':
+                  count: true
+                  facets:
+                    - 'category,count:10,sort:count'
+                  filter: rating gt 4.0
+                  highlight: title
+                  highlightPostTag: </em>
+                  highlightPreTag: <em>
+                  minimumCoverage: null
+                  orderby: 'search.score() desc,rating desc'
+                  queryType: simple
+                  scoringParameters:
+                    - 'currentLocation--122.123,44.77233'
+                  scoringProfile: sp
+                  search: nice hotels
+                  searchFields: 'title,description'
+                  searchMode: any
+                  select: 'docId,title,description'
+                  skip: 2
+                  top: 8
+                value:
+                  - '@search.highlights':
+                      title:
+                        - <em>Nice</em> <em>Hotel</em>
+                    '@search.score': 1.5
+                    description: Cheapest hotel in town
+                    docId: '1'
+                    title: Nice Hotel
+                  - '@search.highlights':
+                      title:
+                        - Fancy <em>Hotel</em>
+                    '@search.score': 0.7
+                    description: Best hotel in town
+                    docId: '2'
+                    title: Fancy Hotel
+      x-ms-request-id: request-id
   /docs/search.post.suggest:
     post:
       description: Suggests documents in the Azure Search index that match the given partial query text.
@@ -454,7 +767,7 @@ paths:
           name: search
           required: true
           type: string
-          x-ms-client-name: searchText
+          x-ms-client-name: SearchText
         - description: The name of the suggester as specified in the suggesters collection that's part of the index definition.
           in: query
           name: suggesterName
@@ -493,7 +806,7 @@ paths:
           type: number
           x-ms-parameter-grouping:
             name: SuggestParameters
-        - description: 'The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.'
+        - description: 'The list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.'
           in: query
           items:
             type: string
@@ -502,7 +815,7 @@ paths:
           x-ms-client-name: OrderBy
           x-ms-parameter-grouping:
             name: SuggestParameters
-        - description: The list of comma-separated field names to search for the specified search text. Target fields must be included in the specified suggester.
+        - description: The list of field names to search for the specified search text. Target fields must be included in the specified suggester.
           in: query
           items:
             type: string
@@ -510,7 +823,7 @@ paths:
           type: array
           x-ms-parameter-grouping:
             name: SuggestParameters
-        - description: 'The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results.'
+        - description: 'The list of fields to retrieve. If unspecified, only the key field will be included in the results.'
           in: query
           items:
             type: string
@@ -577,9 +890,11 @@ definitions:
     properties:
       queryPlusText:
         description: The query along with the completed term.
+        readOnly: true
         type: string
       text:
         description: The completed term.
+        readOnly: true
         type: string
   AutocompleteMode:
     description: Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context in producing autocomplete terms.
@@ -614,7 +929,7 @@ definitions:
       search:
         description: The search text on which to base autocomplete results.
         type: string
-        x-ms-client-name: searchText
+        x-ms-client-name: SearchText
       searchFields:
         description: The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.
         type: string
@@ -645,21 +960,72 @@ definitions:
         readOnly: true
         type: array
         x-ms-client-name: Results
+  DocumentSearchResult:
+    description: Response containing search results from an Azure Search index.
+    properties:
+      '@odata.count':
+        description: 'The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if Azure Search can''t return all the requested documents in a single Search response.'
+        format: int64
+        readOnly: true
+        type: integer
+        x-ms-client-name: Count
+      '@odata.nextLink':
+        description: Continuation URL returned when Azure Search can't return all the requested results in a single Search response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response.
+        readOnly: true
+        type: string
+        x-ms-client-name: NextLink
+      '@search.coverage':
+        description: 'A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not specified in the request.'
+        format: double
+        readOnly: true
+        type: number
+        x-ms-client-name: Coverage
+      '@search.facets':
+        additionalProperties:
+          items:
+            $ref: '#/definitions/FacetResult'
+          type: array
+        description: 'The facet query results for the search operation, organized as a collection of buckets for each faceted field; null if the query did not include any facet expressions.'
+        readOnly: true
+        type: object
+        x-ms-client-name: Facets
+      '@search.nextPageParameters':
+        $ref: '#/definitions/SearchRequest'
+        description: Continuation JSON payload returned when Azure Search can't return all the requested results in a single Search response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response.
+        readOnly: true
+        x-ms-client-name: NextPageParameters
+      value:
+        description: The sequence of results returned by the query.
+        items:
+          $ref: '#/definitions/SearchResult'
+        readOnly: true
+        type: array
+        x-ms-client-name: Results
   DocumentSuggestResult:
     description: Response containing suggestion query results from an Azure Search index.
     properties:
       '@search.coverage':
         description: 'A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request.'
         format: double
+        readOnly: true
         type: number
         x-ms-client-name: Coverage
       value:
         description: The sequence of results returned by the query.
         items:
           $ref: '#/definitions/SuggestResult'
+        readOnly: true
         type: array
         x-ms-client-name: Results
-    type: object
+  FacetResult:
+    additionalProperties: true
+    description: A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval.
+    properties:
+      count:
+        description: The approximate count of documents falling within the bucket described by this facet.
+        format: int64
+        readOnly: true
+        type: integer
   IndexAction:
     additionalProperties: true
     description: Represents an index action that operates on a document.
@@ -717,6 +1083,7 @@ definitions:
       - full
     type: string
     x-ms-enum:
+      modelAsString: false
       name: QueryType
   SearchMode:
     description: Specifies whether any or all of the search terms must be matched in order to count the document as a match.
@@ -725,6 +1092,7 @@ definitions:
       - all
     type: string
     x-ms-enum:
+      modelAsString: false
       name: SearchMode
   SearchRequest:
     description: 'Parameters for filtering, sorting, faceting, paging, and other search query behaviors.'
@@ -732,6 +1100,7 @@ definitions:
       count:
         description: A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation.
         type: boolean
+        x-ms-client-name: IncludeTotalResultCount
       facets:
         description: 'The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs.'
         externalDocs:
@@ -747,6 +1116,7 @@ definitions:
       highlight:
         description: The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.
         type: string
+        x-ms-client-name: HighlightFields
       highlightPostTag:
         description: A string tag that is appended to hit highlights. Must be set with highlightPreTag. Default is &lt;/em&gt;.
         type: string
@@ -763,9 +1133,9 @@ definitions:
         x-ms-client-name: OrderBy
       queryType:
         $ref: '#/definitions/QueryType'
-        description: Gets or sets a value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax.
+        description: A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax.
       scoringParameters:
-        description: 'The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called ''mylocation'' the parameter string would be "mylocation--122.2,44.8"(without the quotes).'
+        description: 'The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called ''mylocation'' the parameter string would be "mylocation--122.2,44.8" (without the quotes).'
         items:
           type: string
         type: array
@@ -774,9 +1144,8 @@ definitions:
         type: string
       search:
         description: A full-text search query expression; Use "*" or omit this parameter to match all documents.
-        externalDocs:
-          url: 'https://docs.microsoft.com/rest/api/searchservice/Simple-query-syntax-in-Azure-Search'
         type: string
+        x-ms-client-name: SearchText
       searchFields:
         description: The comma-separated list of field names to include in the full-text search.
         type: string
@@ -787,15 +1156,33 @@ definitions:
         description: 'The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.'
         type: string
       skip:
-        description: 'The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use Skip due to this limitation, consider using $orderby on a totally-ordered key and Filter with a range query instead.'
+        description: 'The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use skip due to this limitation, consider using orderby on a totally-ordered key and filter with a range query instead.'
         format: int32
         type: integer
       top:
-        description: 'The number of search results to retrieve. This can be used in conjunction with Skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be passed to ContinueSearch to retrieve the next page of results. See DocumentSearchResponse.ContinuationToken for more information.'
-        externalDocs:
-          url: 'https://docs.microsoft.com/rest/api/searchservice/Search-Documents'
+        description: 'The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results.'
         format: int32
         type: integer
+  SearchResult:
+    additionalProperties: true
+    description: 'Contains a document found by a search query, plus associated metadata.'
+    properties:
+      '@search.highlights':
+        additionalProperties:
+          items:
+            type: string
+          type: array
+        description: 'Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query.'
+        readOnly: true
+        type: object
+        x-ms-client-name: Highlights
+      '@search.score':
+        description: The relevance score of the document compared to other documents returned by the query.
+        format: double
+        readOnly: true
+        type: number
+        x-ms-client-name: Score
+        x-nullable: false
   SuggestRequest:
     description: 'Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors.'
     properties:
@@ -807,6 +1194,7 @@ definitions:
       fuzzy:
         description: 'A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there''s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources.'
         type: boolean
+        x-ms-client-name: UseFuzzyMatching
       highlightPostTag:
         description: 'A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled.'
         type: string
@@ -824,6 +1212,7 @@ definitions:
       search:
         description: 'The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters.'
         type: string
+        x-ms-client-name: SearchText
       searchFields:
         description: The list of comma-separated field names to search for the specified search text. Target fields must be included in the specified suggester.
         type: string
@@ -843,9 +1232,9 @@ definitions:
     properties:
       '@search.text':
         description: The text of the suggestion result.
+        readOnly: true
         type: string
         x-ms-client-name: Text
-    type: object
 x-ms-parameterized-host:
   hostTemplate: 'https://{searchServiceName}.{searchDnsSuffix}/indexes(''{indexName}'')'
   parameters:

@@ -35,95 +35,8 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  UserIdParameter:
-    description: User identifier. Must be unique in the current API Management service instance.
-    in: path
-    maxLength: 80
-    minLength: 1
-    name: uid
-    pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identity':
-    get:
-      description: Returns calling user identity information.
-      operationId: User_GetIdentity
-      parameters:
-        - description: The name of the resource group.
-          in: path
-          name: resourceGroupName
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: The name of the API Management service.
-          in: path
-          maxLength: 50
-          minLength: 1
-          name: serviceName
-          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
-          required: true
-          type: string
-          x-ms-parameter-location: method
-        - description: Version of the API to be used with the client request.
-          in: query
-          name: api-version
-          required: true
-          type: string
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Current user APIM id.
-          schema:
-            $ref: '#/definitions/CurrentUserIdentity'
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            description: Error Response.
-            properties:
-              error:
-                description: Error Body contract.
-                properties:
-                  code:
-                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
-                    type: string
-                  details:
-                    description: 'The list of invalid fields send in request, in case of validation error.'
-                    items:
-                      description: Error Field contract.
-                      properties:
-                        code:
-                          description: Property level error code.
-                          type: string
-                        message:
-                          description: Human-readable representation of property-level error.
-                          type: string
-                        target:
-                          description: Property name.
-                          type: string
-                    type: array
-                  message:
-                    description: Human-readable representation of the error.
-                    type: string
-      tags:
-        - Users
-      x-ms-examples:
-        ApiManagementListUsers:
-          parameters:
-            api-version: 2018-06-01-preview
-            resourceGroupName: rg1
-            serviceName: apimService1
-            subscriptionId: subid
-          responses:
-            '200':
-              body:
-                id: '1'
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users':
     get:
       description: Lists a collection of registered users in the specified service instance.
@@ -144,16 +57,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field            | Supported operators    | Supported functions               |
-            |------------------|------------------------|-----------------------------------|
-            | id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | state            | eq                     | N/A                               |
-            | registrationDate | ge, le, eq, ne, gt, lt | N/A                               |
-            | note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|firstName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|lastName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|email | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|registrationDate | ge, le, eq, ne, gt, lt |    |\n|note | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|groups |     |    |\n"
           in: query
           name: $filter
           required: false
@@ -174,6 +78,9 @@ paths:
           required: false
           type: integer
           x-ms-parameter-location: method
+        - in: query
+          name: expandGroups
+          type: boolean
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -219,7 +126,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Users
+        - User
       x-ms-examples:
         ApiManagementListUsers:
           parameters:
@@ -271,7 +178,7 @@ paths:
       x-ms-odata: '#/definitions/UserContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}':
     delete:
       description: Deletes specific user.
       operationId: User_Delete
@@ -291,7 +198,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Whether to delete user's subscription or not.
           in: query
           name: deleteSubscriptions
@@ -353,7 +268,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Users
+        - User
       x-ms-examples:
         ApiManagementDeleteUser:
           parameters:
@@ -362,7 +277,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 5931a75ae4bbd512288c680b
+            userId: 5931a75ae4bbd512288c680b
           responses:
             '200': {}
             '204': {}
@@ -385,7 +300,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -435,7 +358,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Users
+        - User
       x-ms-examples:
         ApiManagementGetUser:
           parameters:
@@ -443,7 +366,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 5931a75ae4bbd512a88c680b
+            userId: 5931a75ae4bbd512a88c680b
           responses:
             '200':
               body:
@@ -478,7 +401,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -526,7 +457,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Users
+        - User
       x-ms-examples:
         ApiManagementHeadUser:
           parameters:
@@ -534,7 +465,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 5931a75ae4bbd512a88c680b
+            userId: 5931a75ae4bbd512a88c680b
           responses:
             '200':
               headers:
@@ -558,7 +489,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Update parameters.
           in: body
           name: parameters
@@ -585,12 +524,7 @@ paths:
         '204':
           description: The user details were successfully updated.
         default:
-          description: |-
-            *** Error Responses: ***
-
-             * 405 Administrator user cannot be modified
-
-             * 4XX Error response giving details why the operation failed.
+          description: Error response describing why the operation failed.
           schema:
             description: Error Response.
             properties:
@@ -619,9 +553,9 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Users
+        - User
       x-ms-examples:
-        ApiManagementUpdateUserBasic:
+        ApiManagementUpdateUser:
           parameters:
             If-Match: '*'
             api-version: 2018-06-01-preview
@@ -633,7 +567,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 5931a75ae4bbd512288c680b
+            userId: 5931a75ae4bbd512288c680b
           responses:
             '204': {}
     put:
@@ -655,7 +589,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Create or update parameters.
           in: body
           name: parameters
@@ -681,10 +623,18 @@ paths:
       responses:
         '200':
           description: User was successfully updated.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/UserContract'
         '201':
           description: User was successfully created.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/UserContract'
         default:
@@ -717,9 +667,9 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Users
+        - User
       x-ms-examples:
-        ApiManagementCreateUserBasic:
+        ApiManagementCreateUser:
           parameters:
             api-version: 2018-06-01-preview
             parameters:
@@ -731,7 +681,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 5931a75ae4bbd512288c680b
+            userId: 5931a75ae4bbd512288c680b
           responses:
             '200':
               body:
@@ -763,7 +713,90 @@ paths:
                   registrationDate: '2018-01-07T21:21:29.16Z'
                   state: active
                 type: Microsoft.ApiManagement/service/users
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/generateSsoUrl':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/confirmations/password/send':
+    post:
+      description: Sends confirmation
+      operationId: UserConfirmationPassword_Send
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: The name of the API Management service.
+          in: path
+          maxLength: 50
+          minLength: 1
+          name: serviceName
+          pattern: '^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Version of the API to be used with the client request.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '204':
+          description: Notification successfully sent
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
+      tags:
+        - UserConfirmationPasswordSend
+      x-ms-examples:
+        ApiManagementUserConfirmationPasswordSend:
+          parameters:
+            api-version: 2018-06-01-preview
+            resourceGroupName: rg1
+            serviceName: apimService1
+            subscriptionId: subid
+            userId: 57127d485157a511ace86ae7
+          responses:
+            '204': {}
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/generateSsoUrl':
     post:
       description: Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.
       operationId: User_GenerateSsoUrl
@@ -783,7 +816,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -832,18 +873,18 @@ paths:
       tags:
         - Users
       x-ms-examples:
-        ApiManagementUsersGenerateSsoUrl:
+        ApiManagementUserGenerateSsoUrl:
           parameters:
             api-version: 2018-06-01-preview
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 57127d485157a511ace86ae7
+            userId: 57127d485157a511ace86ae7
           responses:
             '200':
               body:
                 value: 'https://apimService1.portal.azure-api.net/signin-sso?token=57127d485157a511ace86ae7%26201706051624%267VY18MlwAom***********2bYr2bDQHg21OzQsNakExQ%3d%3d'
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/groups':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups':
     get:
       description: Lists all user groups.
       operationId: UserGroup_List
@@ -863,13 +904,16 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
-        - description: |-
-            | Field       | Supported operators    | Supported functions                         |
-            |-------------|------------------------|---------------------------------------------|
-            | id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           in: query
           name: $filter
           required: false
@@ -992,7 +1036,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - UserGroups
+        - UserGroup
       x-ms-examples:
         ApiManagementListUserGroups:
           parameters:
@@ -1000,7 +1044,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 57681833a40f7eb6c49f6acf
+            userId: 57681833a40f7eb6c49f6acf
           responses:
             '200':
               body:
@@ -1017,9 +1061,9 @@ paths:
       x-ms-odata: './apimgroups.json#/definitions/GroupContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/identities':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities':
     get:
-      description: Lists all user identities.
+      description: List of all user identities.
       operationId: UserIdentities_List
       parameters:
         - description: The name of the resource group.
@@ -1037,7 +1081,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -1083,15 +1135,15 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - UserIdentities
+        - UserIdentity
       x-ms-examples:
-        ApiManagementListUsersIdentities:
+        ApiManagementListUserIdentities:
           parameters:
             api-version: 2018-06-01-preview
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 57f2af53bb17172280f44057
+            userId: 57f2af53bb17172280f44057
           responses:
             '200':
               body:
@@ -1102,7 +1154,7 @@ paths:
                     provider: Microsoft
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/subscriptions':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions':
     get:
       description: Lists the collection of subscriptions of the specified user.
       operationId: UserSubscription_List
@@ -1122,16 +1174,16 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
-        - description: |-
-            | Field        | Supported operators    | Supported functions                         |
-            |--------------|------------------------|---------------------------------------------|
-            | id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | state        | eq                     |                                             |
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|ownerId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|scope | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|userId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|productId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           in: query
           name: $filter
           required: false
@@ -1226,7 +1278,7 @@ paths:
                           format: date-time
                           type: string
                         ownerId:
-                          description: 'The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier.'
+                          description: 'The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{userId} where {userId} is a user identifier.'
                           type: string
                         primaryKey:
                           description: Subscription primary key.
@@ -1298,7 +1350,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - UserSubscriptions
+        - UserSubscription
       x-ms-examples:
         ApiManagementListUserSubscriptions:
           parameters:
@@ -1306,7 +1358,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 57681833a40f7eb6c49f6acf
+            userId: 57681833a40f7eb6c49f6acf
           responses:
             '200':
               body:
@@ -1339,7 +1391,7 @@ paths:
       x-ms-odata: './apimsubscriptions.json#/definitions/SubscriptionContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/token':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/token':
     post:
       description: Gets the Shared Access Authorization Token for the User.
       operationId: User_GetSharedAccessToken
@@ -1359,7 +1411,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/UserIdParameter'
+        - description: User identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 80
+          minLength: 1
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Create Authorization Token parameters.
           in: body
           name: parameters
@@ -1412,9 +1472,9 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Users
+        - UserToken
       x-ms-examples:
-        ApiManagementUsersGetToken:
+        ApiManagementUserToken:
           parameters:
             api-version: 2018-06-01-preview
             parameters:
@@ -1423,7 +1483,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 57f2af53bb17172280f44057
+            userId: 57f2af53bb17172280f44057
           responses:
             '200':
               body:

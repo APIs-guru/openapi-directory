@@ -35,21 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  QuotaCounterKeyParameter:
-    description: 'Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key="boo" in the policy, then it’s accessible by "boo" counter key. But if it’s defined as counter-key="@("b"+"a")" then it will be accessible by "ba" key'
-    in: path
-    name: quotaCounterKey
-    required: true
-    type: string
-    x-ms-parameter-location: method
-  QuotaPeriodKeyParameter:
-    description: Quota period key identifier.
-    in: path
-    name: quotaPeriodKey
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}':
     get:
@@ -59,11 +45,6 @@ paths:
         url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies'
       operationId: QuotaByCounterKeys_ListByService
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
         - description: The name of the resource group.
           in: path
           name: resourceGroupName
@@ -79,10 +60,20 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/QuotaCounterKeyParameter'
+        - description: 'Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key="boo" in the policy, then it’s accessible by "boo" counter key. But if it’s defined as counter-key="@("b"+"a")" then it will be accessible by "ba" key'
+          in: path
+          name: quotaCounterKey
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
           required: true
           type: string
       responses:
@@ -161,7 +152,12 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/QuotaCounterKeyParameter'
+        - description: 'Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key="boo" in the policy, then it’s accessible by "boo" counter key. But if it’s defined as counter-key="@("b"+"a")" then it will be accessible by "ba" key'
+          in: path
+          name: quotaCounterKey
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: The value of the quota counter to be applied to all quota counter periods.
           in: body
           name: parameters
@@ -233,11 +229,6 @@ paths:
         url: 'https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-product-with-rules#a-namepolicies-ato-configure-call-rate-limit-and-quota-policies'
       operationId: QuotaByPeriodKeys_Get
       parameters:
-        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
-          in: path
-          name: subscriptionId
-          required: true
-          type: string
         - description: The name of the resource group.
           in: path
           name: resourceGroupName
@@ -253,11 +244,26 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/QuotaCounterKeyParameter'
-        - $ref: '#/parameters/QuotaPeriodKeyParameter'
+        - description: 'Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key="boo" in the policy, then it’s accessible by "boo" counter key. But if it’s defined as counter-key="@("b"+"a")" then it will be accessible by "ba" key'
+          in: path
+          name: quotaCounterKey
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Quota period key identifier.
+          in: path
+          name: quotaPeriodKey
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
+          required: true
+          type: string
+        - description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
           required: true
           type: string
       responses:
@@ -334,8 +340,18 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/QuotaCounterKeyParameter'
-        - $ref: '#/parameters/QuotaPeriodKeyParameter'
+        - description: 'Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key="boo" in the policy, then it’s accessible by "boo" counter key. But if it’s defined as counter-key="@("b"+"a")" then it will be accessible by "ba" key'
+          in: path
+          name: quotaCounterKey
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: Quota period key identifier.
+          in: path
+          name: quotaPeriodKey
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: The value of the Quota counter to be applied on the specified period.
           in: body
           name: parameters

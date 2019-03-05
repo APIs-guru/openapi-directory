@@ -35,26 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  NotifySubscriptionStateChangeParameter:
-    description: |-
-      Notify change in Subscription State. 
-       - If false, do not send any email notification for change of state of subscription 
-       - If true, send email notification of change of state of subscription 
-    in: query
-    name: notify
-    required: false
-    type: boolean
-    x-ms-parameter-location: method
-  SubscriptionEntityIdParameter:
-    description: Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
-    in: path
-    maxLength: 80
-    name: sid
-    pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions':
     get:
@@ -76,15 +57,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field        | Supported operators    | Supported functions                         |
-            |--------------|------------------------|---------------------------------------------|
-            | id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | ownerId      | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | scope        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | state        | eq                     |                                             |
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|ownerId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|scope | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|userId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|productId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|user |     |    |\n"
           in: query
           name: $filter
           required: false
@@ -150,7 +123,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Subscriptions
+        - Subscription
       x-ms-examples:
         ApiManagementListSubscriptions:
           parameters:
@@ -221,7 +194,14 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/SubscriptionEntityIdParameter'
+        - description: Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
+          in: path
+          maxLength: 256
+          name: sid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -273,7 +253,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Subscriptions
+        - Subscription
       x-ms-examples:
         ApiManagementDeleteSubscription:
           parameters:
@@ -305,7 +285,14 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/SubscriptionEntityIdParameter'
+        - description: Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
+          in: path
+          maxLength: 256
+          name: sid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -355,7 +342,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Subscriptions
+        - Subscription
       x-ms-examples:
         ApiManagementGetSubscription:
           parameters:
@@ -397,7 +384,14 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/SubscriptionEntityIdParameter'
+        - description: Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
+          in: path
+          maxLength: 256
+          name: sid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -445,7 +439,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Subscriptions
+        - Subscription
       x-ms-examples:
         ApiManagementHeadSubscription:
           parameters:
@@ -477,14 +471,29 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/SubscriptionEntityIdParameter'
+        - description: Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
+          in: path
+          maxLength: 256
+          name: sid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Update parameters.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/SubscriptionUpdateParameters'
-        - $ref: '#/parameters/NotifySubscriptionStateChangeParameter'
+        - description: |-
+            Notify change in Subscription State. 
+             - If false, do not send any email notification for change of state of subscription 
+             - If true, send email notification of change of state of subscription 
+          in: query
+          name: notify
+          required: false
+          type: boolean
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -534,7 +543,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Subscriptions
+        - Subscription
       x-ms-examples:
         ApiManagementUpdateSubscription:
           parameters:
@@ -568,14 +577,29 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/SubscriptionEntityIdParameter'
+        - description: Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
+          in: path
+          maxLength: 256
+          name: sid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Create parameters.
           in: body
           name: parameters
           required: true
           schema:
             $ref: '#/definitions/SubscriptionCreateParameters'
-        - $ref: '#/parameters/NotifySubscriptionStateChangeParameter'
+        - description: |-
+            Notify change in Subscription State. 
+             - If false, do not send any email notification for change of state of subscription 
+             - If true, send email notification of change of state of subscription 
+          in: query
+          name: notify
+          required: false
+          type: boolean
+          x-ms-parameter-location: method
         - description: 'ETag of the Entity. Not required when creating an entity, but required when updating an entity.'
           in: header
           name: If-Match
@@ -595,10 +619,18 @@ paths:
       responses:
         '200':
           description: The user already subscribed to the product.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/SubscriptionContract'
         '201':
           description: The user was successfully subscribed to the product.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/SubscriptionContract'
         default:
@@ -631,7 +663,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Subscriptions
+        - Subscription
       x-ms-examples:
         ApiManagementCreateSubscription:
           parameters:
@@ -691,7 +723,14 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/SubscriptionEntityIdParameter'
+        - description: Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
+          in: path
+          maxLength: 256
+          name: sid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -737,7 +776,7 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        ApiManagementSubscriptionRegenerateKey:
+        ApiManagementSubscriptionRegeneratePrimaryKey:
           parameters:
             api-version: 2018-06-01-preview
             resourceGroupName: rg1
@@ -766,7 +805,14 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/SubscriptionEntityIdParameter'
+        - description: Subscription entity Identifier. The entity represents the association between a user and a product in API Management.
+          in: path
+          maxLength: 256
+          name: sid
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -812,7 +858,7 @@ paths:
       tags:
         - Subscriptions
       x-ms-examples:
-        ApiManagementSubscriptionRegenerateKey:
+        ApiManagementSubscriptionRegenerateSecondaryKey:
           parameters:
             api-version: 2018-06-01-preview
             resourceGroupName: rg1
@@ -890,7 +936,7 @@ definitions:
         format: date-time
         type: string
       ownerId:
-        description: 'The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{uid} where {uid} is a user identifier.'
+        description: 'The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{userId} where {userId} is a user identifier.'
         type: string
       primaryKey:
         description: Subscription primary key.
@@ -943,7 +989,7 @@ definitions:
         minLength: 1
         type: string
       ownerId:
-        description: 'User (user id path) for whom subscription is being created in form /users/{uid}'
+        description: 'User (user id path) for whom subscription is being created in form /users/{userId}'
         type: string
       primaryKey:
         description: Primary subscription key. If not specified during request key will be generated automatically.
@@ -995,7 +1041,7 @@ definitions:
         format: date-time
         type: string
       ownerId:
-        description: 'User identifier path: /users/{uid}'
+        description: 'User identifier path: /users/{userId}'
         type: string
       primaryKey:
         description: Primary subscription key.

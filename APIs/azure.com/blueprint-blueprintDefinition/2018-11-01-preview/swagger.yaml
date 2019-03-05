@@ -2284,12 +2284,21 @@ definitions:
         maxLength: 90
         minLength: 1
         type: string
+      tags:
+        $ref: '#/definitions/ResourceGroupTagCollection'
+        description: Tags to be assigned to this resource group.
     type: object
   ResourceGroupDefinitionCollection:
     additionalProperties:
       $ref: '#/definitions/ResourceGroupDefinition'
       description: Named collection for resourceGroupDefinition.
     description: A dictionary which maps resource group placeholders to the resource groups which will be created.
+    properties: {}
+    type: object
+  ResourceGroupTagCollection:
+    additionalProperties:
+      type: string
+    description: A dictionary of resource group tag values.
     properties: {}
     type: object
   ResourceGroupValue:

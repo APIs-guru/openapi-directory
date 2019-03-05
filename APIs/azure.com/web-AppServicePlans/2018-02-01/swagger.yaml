@@ -2078,6 +2078,219 @@ paths:
                     type: string
                 type: object
             type: object
+        '201':
+          description: Created.
+          schema:
+            allOf:
+              - description: Azure resource. This resource is tracked in Azure Resource Manager
+                properties:
+                  id:
+                    description: Resource Id.
+                    readOnly: true
+                    type: string
+                  kind:
+                    description: Kind of resource.
+                    type: string
+                  location:
+                    description: Resource Location.
+                    type: string
+                  name:
+                    description: Resource Name.
+                    readOnly: true
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Resource tags.
+                    type: object
+                  type:
+                    description: Resource type.
+                    readOnly: true
+                    type: string
+                required:
+                  - location
+                x-ms-azure-resource: true
+            description: App Service plan.
+            properties:
+              properties:
+                description: AppServicePlan resource specific properties
+                properties:
+                  freeOfferExpirationTime:
+                    description: The time when the server farm free offer expires.
+                    format: date-time
+                    type: string
+                  geoRegion:
+                    description: Geographical location for the App Service plan.
+                    readOnly: true
+                    type: string
+                  hostingEnvironmentProfile:
+                    description: Specification for an App Service Environment to use for this resource.
+                    properties:
+                      id:
+                        description: Resource ID of the App Service Environment.
+                        type: string
+                      name:
+                        description: Name of the App Service Environment.
+                        readOnly: true
+                        type: string
+                      type:
+                        description: Resource type of the App Service Environment.
+                        readOnly: true
+                        type: string
+                    type: object
+                  hyperV:
+                    default: false
+                    description: 'If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.'
+                    type: boolean
+                    x-ms-mutability:
+                      - create
+                      - read
+                  isSpot:
+                    description: 'If <code>true</code>, this App Service Plan owns spot instances.'
+                    type: boolean
+                  isXenon:
+                    default: false
+                    description: 'Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.'
+                    type: boolean
+                    x-ms-mutability:
+                      - create
+                      - read
+                  maximumElasticWorkerCount:
+                    description: Maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan
+                    format: int32
+                    type: integer
+                  maximumNumberOfWorkers:
+                    description: Maximum number of instances that can be assigned to this App Service plan.
+                    format: int32
+                    readOnly: true
+                    type: integer
+                  numberOfSites:
+                    description: Number of apps assigned to this App Service plan.
+                    format: int32
+                    readOnly: true
+                    type: integer
+                  perSiteScaling:
+                    default: false
+                    description: |-
+                      If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
+                      If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
+                    type: boolean
+                  provisioningState:
+                    description: Provisioning state of the App Service Environment.
+                    enum:
+                      - Succeeded
+                      - Failed
+                      - Canceled
+                      - InProgress
+                      - Deleting
+                    readOnly: true
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: ProvisioningState
+                  reserved:
+                    default: false
+                    description: 'If Linux app service plan <code>true</code>, <code>false</code> otherwise.'
+                    type: boolean
+                    x-ms-mutability:
+                      - create
+                      - read
+                  resourceGroup:
+                    description: Resource group of the App Service plan.
+                    readOnly: true
+                    type: string
+                  spotExpirationTime:
+                    description: The time when the server farm expires. Valid only if it is a spot server farm.
+                    format: date-time
+                    type: string
+                  status:
+                    description: App Service plan status.
+                    enum:
+                      - Ready
+                      - Pending
+                      - Creating
+                    readOnly: true
+                    type: string
+                    x-ms-enum:
+                      modelAsString: false
+                      name: StatusOptions
+                  subscription:
+                    description: App Service plan subscription.
+                    readOnly: true
+                    type: string
+                  targetWorkerCount:
+                    description: Scaling worker count.
+                    format: int32
+                    type: integer
+                  targetWorkerSizeId:
+                    description: Scaling worker size ID.
+                    format: int32
+                    type: integer
+                  workerTierName:
+                    description: Target worker tier assigned to the App Service plan.
+                    type: string
+                x-ms-client-flatten: true
+              sku:
+                description: Description of a SKU for a scalable resource.
+                properties:
+                  capabilities:
+                    description: 'Capabilities of the SKU, e.g., is traffic manager enabled?'
+                    items:
+                      description: Describes the capabilities/features allowed for a specific SKU.
+                      properties:
+                        name:
+                          description: Name of the SKU capability.
+                          type: string
+                        reason:
+                          description: Reason of the SKU capability.
+                          type: string
+                        value:
+                          description: Value of the SKU capability.
+                          type: string
+                      type: object
+                    type: array
+                  capacity:
+                    description: Current number of instances assigned to the resource.
+                    format: int32
+                    type: integer
+                  family:
+                    description: Family code of the resource SKU.
+                    type: string
+                  locations:
+                    description: Locations of the SKU.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: Name of the resource SKU.
+                    type: string
+                  size:
+                    description: Size specifier of the resource SKU.
+                    type: string
+                  skuCapacity:
+                    description: Description of the App Service plan scale options.
+                    properties:
+                      default:
+                        description: Default number of workers for this App Service plan SKU.
+                        format: int32
+                        type: integer
+                      maximum:
+                        description: Maximum number of workers for this App Service plan SKU.
+                        format: int32
+                        type: integer
+                      minimum:
+                        description: Minimum number of workers for this App Service plan SKU.
+                        format: int32
+                        type: integer
+                      scaleType:
+                        description: Available scale configurations for an App Service plan.
+                        type: string
+                    type: object
+                  tier:
+                    description: Service tier of the resource SKU.
+                    type: string
+                type: object
+            type: object
         '202':
           description: Operation is in progress.
           schema:
@@ -2362,6 +2575,35 @@ paths:
             subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
           responses:
             '200':
+              body:
+                id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141
+                kind: app
+                location: East US
+                name: testsf6141
+                properties:
+                  currentNumberOfWorkers: 1
+                  currentWorkerSize: Default
+                  geoRegion: East US
+                  maximumNumberOfWorkers: 20
+                  mdmId: waws-prod-blu-033_4740
+                  name: testsf6141
+                  numberOfSites: 4
+                  numberOfWorkers: 1
+                  provisioningState: Succeeded
+                  reserved: false
+                  status: Ready
+                  targetWorkerCount: 0
+                  targetWorkerSizeId: 0
+                  workerSize: Default
+                sku:
+                  capacity: 1
+                  family: P
+                  name: P1
+                  size: P1
+                  tier: Premium
+                type: Microsoft.Web/serverfarms
+              headers: {}
+            '201':
               body:
                 id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141
                 kind: app
@@ -3418,12 +3660,6 @@ paths:
                     identity:
                       description: Managed service identity.
                       properties:
-                        identityIds:
-                          description: Array of UserAssigned managed service identities.
-                          items:
-                            description: Resource Id for UserAssigned managed service identity
-                            type: string
-                          type: array
                         principalId:
                           description: Principal Id of managed service identity.
                           readOnly: true
@@ -3441,6 +3677,20 @@ paths:
                           x-ms-enum:
                             modelAsString: true
                             name: ManagedServiceIdentityType
+                        userAssignedIdentities:
+                          additionalProperties:
+                            properties:
+                              clientId:
+                                description: Client Id of user assigned identity
+                                readOnly: true
+                                type: string
+                              principalId:
+                                description: Principal Id of user assigned identity
+                                readOnly: true
+                                type: string
+                            type: object
+                          description: 'The list of user assigned identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'
+                          type: object
                       type: object
                     properties:
                       description: Site resource specific properties

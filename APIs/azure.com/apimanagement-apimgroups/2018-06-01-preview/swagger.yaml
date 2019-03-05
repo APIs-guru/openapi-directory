@@ -35,17 +35,7 @@ securityDefinitions:
 security:
   - azure_auth:
       - user_impersonation
-parameters:
-  GroupIdParameter:
-    description: Group identifier. Must be unique in the current API Management service instance.
-    in: path
-    maxLength: 80
-    minLength: 1
-    name: groupId
-    pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
-    required: true
-    type: string
-    x-ms-parameter-location: method
+parameters: {}
 paths:
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups':
     get:
@@ -69,13 +59,7 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - description: |-
-            | Field       | Supported operators    | Supported functions                         |
-            |-------------|------------------------|---------------------------------------------|
-            | id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | type        | eq, ne                 | N/A                                         |
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|aadObjectId | eq |    |\n"
           in: query
           name: $filter
           required: false
@@ -111,8 +95,37 @@ paths:
           description: Lists a collection of Group entities.
           schema:
             $ref: '#/definitions/GroupCollection'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            description: Error Response.
+            properties:
+              error:
+                description: Error Body contract.
+                properties:
+                  code:
+                    description: Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.
+                    type: string
+                  details:
+                    description: 'The list of invalid fields send in request, in case of validation error.'
+                    items:
+                      description: Error Field contract.
+                      properties:
+                        code:
+                          description: Property level error code.
+                          type: string
+                        message:
+                          description: Human-readable representation of property-level error.
+                          type: string
+                        target:
+                          description: Property name.
+                          type: string
+                    type: array
+                  message:
+                    description: Human-readable representation of the error.
+                    type: string
       tags:
-        - Groups
+        - Group
       x-ms-examples:
         ApiManagementListGroups:
           parameters:
@@ -181,7 +194,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
+        - description: Group identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: groupId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
           in: header
           name: If-Match
@@ -233,7 +254,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Groups
+        - Group
       x-ms-examples:
         ApiManagementDeleteGroup:
           parameters:
@@ -265,7 +286,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
+        - description: Group identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: groupId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -315,7 +344,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Groups
+        - Group
       x-ms-examples:
         ApiManagementGetGroup:
           parameters:
@@ -355,7 +384,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
+        - description: Group identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: groupId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Version of the API to be used with the client request.
           in: query
           name: api-version
@@ -403,7 +440,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Groups
+        - Group
       x-ms-examples:
         ApiManagementHeadGroup:
           parameters:
@@ -435,7 +472,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
+        - description: Group identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: groupId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Update parameters.
           in: body
           name: parameters
@@ -491,7 +536,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Groups
+        - Group
       x-ms-examples:
         ApiManagementUpdateGroup:
           parameters:
@@ -525,7 +570,15 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
+        - description: Group identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: groupId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: Create parameters.
           in: body
           name: parameters
@@ -551,10 +604,18 @@ paths:
       responses:
         '200':
           description: Group already exists.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/GroupContract'
         '201':
           description: Group was created successfully.
+          headers:
+            ETag:
+              description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+              type: string
           schema:
             $ref: '#/definitions/GroupContract'
         default:
@@ -587,7 +648,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - Groups
+        - Group
       x-ms-examples:
         ApiManagementCreateGroup:
           parameters:
@@ -652,7 +713,7 @@ paths:
                 type: Microsoft.ApiManagement/service/groups
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users':
     get:
-      description: 'Lists a collection of the members of the group, specified by its identifier.'
+      description: Lists a collection of user entities associated with the group.
       operationId: GroupUser_List
       parameters:
         - description: The name of the resource group.
@@ -670,17 +731,16 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
-        - description: |-
-            | Field            | Supported operators    | Supported functions               |
-            |------------------|------------------------|-----------------------------------|
-            | id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
-            | state            | eq                     | N/A                               |
-            | registrationDate | ge, le, eq, ne, gt, lt | N/A                               |
-            | note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |
+        - description: Group identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: groupId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
+        - description: "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|firstName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|lastName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|email | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|registrationDate | ge, le, eq, ne, gt, lt |    |\n|note | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           in: query
           name: $filter
           required: false
@@ -863,7 +923,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - GroupUsers
+        - GroupUser
       x-ms-examples:
         ApiManagementListGroupUsers:
           parameters:
@@ -893,7 +953,7 @@ paths:
       x-ms-odata: './apimusers.json#/definitions/UserContract'
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{uid}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/groups/{groupId}/users/{userId}':
     delete:
       description: Remove existing user from existing group.
       operationId: GroupUser_Delete
@@ -913,13 +973,21 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
+        - description: Group identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: groupId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: User identifier. Must be unique in the current API Management service instance.
           in: path
           maxLength: 80
           minLength: 1
-          name: uid
-          pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -968,7 +1036,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - GroupUsers
+        - GroupUser
       x-ms-examples:
         ApiManagementDeleteGroupUser:
           parameters:
@@ -978,7 +1046,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 59307d350af58404d8a26300
+            userId: 59307d350af58404d8a26300
           responses:
             '200': {}
             '204': {}
@@ -1001,13 +1069,21 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
+        - description: Group identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: groupId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: User identifier. Must be unique in the current API Management service instance.
           in: path
           maxLength: 80
           minLength: 1
-          name: uid
-          pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -1056,7 +1132,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - GroupUsers
+        - GroupUser
       x-ms-examples:
         ApiManagementHeadGroupUser:
           parameters:
@@ -1065,12 +1141,12 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 5931a75ae4bbd512a88c680b
+            userId: 5931a75ae4bbd512a88c680b
           responses:
             '204': {}
             '404': {}
     put:
-      description: Adds a user to the specified group.
+      description: Add existing user to existing group
       operationId: GroupUser_Create
       parameters:
         - description: The name of the resource group.
@@ -1088,13 +1164,21 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
-        - $ref: '#/parameters/GroupIdParameter'
+        - description: Group identifier. Must be unique in the current API Management service instance.
+          in: path
+          maxLength: 256
+          minLength: 1
+          name: groupId
+          pattern: '^[^*#&+:<>?]+$'
+          required: true
+          type: string
+          x-ms-parameter-location: method
         - description: User identifier. Must be unique in the current API Management service instance.
           in: path
           maxLength: 80
           minLength: 1
-          name: uid
-          pattern: '(^[\w]+$)|(^[\w][\w\-]+[\w]$)'
+          name: userId
+          pattern: '^[^*#&+:<>?]+$'
           required: true
           type: string
           x-ms-parameter-location: method
@@ -1363,7 +1447,7 @@ paths:
                     description: Human-readable representation of the error.
                     type: string
       tags:
-        - GroupUsers
+        - GroupUser
       x-ms-examples:
         ApiManagementCreateGroupUser:
           parameters:
@@ -1372,7 +1456,7 @@ paths:
             resourceGroupName: rg1
             serviceName: apimService1
             subscriptionId: subid
-            uid: 59307d350af58404d8a26300
+            userId: 59307d350af58404d8a26300
           responses:
             '200':
               body:

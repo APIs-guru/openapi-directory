@@ -320,7 +320,8 @@ definitions:
         description: Lock mode.
         enum:
           - None
-          - AllResources
+          - AllResourcesReadOnly
+          - AllResourcesDoNotDelete
         type: string
         x-ms-enum:
           modelAsString: true
