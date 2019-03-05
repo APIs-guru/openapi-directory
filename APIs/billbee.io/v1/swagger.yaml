@@ -1122,6 +1122,38 @@ paths:
       summary: Updates/Sets the tags attached to an order
       tags:
         - Orders
+  '/api/v1/orders/{id}/trigger-event':
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      operationId: OrderApi_TriggerEvent
+      parameters:
+        - description: The id of the order
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/Rechnungsdruck.WebApp.Controllers.Api.OrderApiController.TriggerEventContainer'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+      summary: Triggers a rule event
+      tags:
+        - Orders
   /api/v1/products:
     get:
       consumes: []
@@ -4361,6 +4393,16 @@ definitions:
         items:
           $ref: '#/definitions/Billbee.Interfaces.Order.MultiLanguageString'
         type: array
+    type: object
+  Rechnungsdruck.WebApp.Controllers.Api.OrderApiController.TriggerEventContainer:
+    properties:
+      DelayInMinutes:
+        description: The delay in minutes until the rule is executed
+        format: int32
+        type: integer
+      Name:
+        description: Name of the event
+        type: string
     type: object
   Rechnungsdruck.WebApp.Controllers.Api.OrderStateUpdate:
     description: Specifies the parameters used to set the new state of an order

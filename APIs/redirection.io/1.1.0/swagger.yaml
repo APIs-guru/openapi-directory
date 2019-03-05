@@ -618,17 +618,6 @@ paths:
           required: false
           type: string
         - in: query
-          name: viewCount
-          required: false
-          type: integer
-        - collectionFormat: multi
-          in: query
-          items:
-            type: integer
-          name: 'viewCount[]'
-          required: false
-          type: array
-        - in: query
           name: 'sort[id]'
           required: false
           type: string
@@ -667,20 +656,20 @@ paths:
       summary: Retrieves the collection of Rule resources.
       tags:
         - Rule
-  /impact-rule-actions:
+  /impact-rule-changes:
     post:
       consumes:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
-      operationId: postImpactRuleActionCollection
+      operationId: postImpactRuleChangeCollection
       parameters:
-        - description: The new ImpactRuleAction resource
+        - description: The new ImpactRuleChange resource
           in: body
-          name: impactRuleAction
+          name: impactRuleChange
           schema:
-            $ref: '#/definitions/ImpactRuleAction-Write'
+            $ref: '#/definitions/ImpactRuleChange-Write'
       produces:
         - application/ld+json
         - application/json
@@ -688,19 +677,19 @@ paths:
         - text/csv
       responses:
         '201':
-          description: ImpactRuleAction resource created
+          description: ImpactRuleChange resource created
           schema:
-            $ref: '#/definitions/ImpactRuleAction-Read'
+            $ref: '#/definitions/ImpactRuleChange-Read'
         '400':
           description: Invalid input
         '404':
           description: Resource not found
-      summary: Creates a ImpactRuleAction resource.
+      summary: Creates a ImpactRuleChange resource.
       tags:
-        - ImpactRuleAction
-  '/impact-rule-actions/{id}':
+        - ImpactRuleChange
+  '/impact-rule-changes/{id}':
     get:
-      operationId: getImpactRuleActionItem
+      operationId: getImpactRuleChangeItem
       parameters:
         - in: path
           name: id
@@ -713,14 +702,14 @@ paths:
         - text/csv
       responses:
         '200':
-          description: ImpactRuleAction resource response
+          description: ImpactRuleChange resource response
           schema:
-            $ref: '#/definitions/ImpactRuleAction-Read'
+            $ref: '#/definitions/ImpactRuleChange-Read'
         '404':
           description: Resource not found
-      summary: Retrieves a ImpactRuleAction resource.
+      summary: Retrieves a ImpactRuleChange resource.
       tags:
-        - ImpactRuleAction
+        - ImpactRuleChange
   /imports:
     get:
       operationId: getImportCollection
@@ -1243,6 +1232,60 @@ paths:
       summary: Replaces the Marker resource.
       tags:
         - Marker
+  /matching-urls:
+    post:
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      operationId: postMatchingUrlCollection
+      parameters:
+        - description: The new MatchingUrl resource
+          in: body
+          name: matchingUrl
+          schema:
+            $ref: '#/definitions/MatchingUrl-Write'
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '201':
+          description: MatchingUrl resource created
+          schema:
+            $ref: '#/definitions/MatchingUrl-Read'
+        '400':
+          description: Invalid input
+        '404':
+          description: Resource not found
+      summary: Creates a MatchingUrl resource.
+      tags:
+        - MatchingUrl
+  '/matching-urls/{id}':
+    get:
+      operationId: getMatchingUrlItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: MatchingUrl resource response
+          schema:
+            $ref: '#/definitions/MatchingUrl-Read'
+        '404':
+          description: Resource not found
+      summary: Retrieves a MatchingUrl resource.
+      tags:
+        - MatchingUrl
   /notifications:
     get:
       operationId: getNotificationCollection
@@ -1442,6 +1485,24 @@ paths:
       tags:
         - AgentFlushRequest
   /projects:
+    get:
+      operationId: getProjectCollection
+      parameters: []
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: Project collection response
+          schema:
+            items:
+              $ref: '#/definitions/Project-List'
+            type: array
+      summary: Retrieves the collection of Project resources.
+      tags:
+        - Project
     post:
       consumes:
         - application/ld+json
@@ -1611,9 +1672,9 @@ paths:
       summary: Retrieves a PublishHistory resource.
       tags:
         - PublishHistory
-  /rule-actions:
+  /rule-changes:
     get:
-      operationId: getRuleActionCollection
+      operationId: getRuleChangeCollection
       parameters:
         - in: query
           name: versionId
@@ -1631,27 +1692,27 @@ paths:
         - text/csv
       responses:
         '200':
-          description: RuleAction collection response
+          description: RuleChange collection response
           schema:
             items:
-              $ref: '#/definitions/RuleAction-Read'
+              $ref: '#/definitions/RuleChange-Read'
             type: array
-      summary: Retrieves the collection of RuleAction resources.
+      summary: Retrieves the collection of RuleChange resources.
       tags:
-        - RuleAction
+        - RuleChange
     post:
       consumes:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
-      operationId: postRuleActionCollection
+      operationId: postRuleChangeCollection
       parameters:
-        - description: The new RuleAction resource
+        - description: The new RuleChange resource
           in: body
-          name: ruleAction
+          name: ruleChange
           schema:
-            $ref: '#/definitions/RuleAction-Write'
+            $ref: '#/definitions/RuleChange-Write'
       produces:
         - application/ld+json
         - application/json
@@ -1659,19 +1720,19 @@ paths:
         - text/csv
       responses:
         '201':
-          description: RuleAction resource created
+          description: RuleChange resource created
           schema:
-            $ref: '#/definitions/RuleAction-Read'
+            $ref: '#/definitions/RuleChange-Read'
         '400':
           description: Invalid input
         '404':
           description: Resource not found
-      summary: Creates a RuleAction resource.
+      summary: Creates a RuleChange resource.
       tags:
-        - RuleAction
-  '/rule-actions/{id}':
+        - RuleChange
+  '/rule-changes/{id}':
     delete:
-      operationId: deleteRuleActionItem
+      operationId: deleteRuleChangeItem
       parameters:
         - in: path
           name: id
@@ -1679,14 +1740,14 @@ paths:
           type: string
       responses:
         '204':
-          description: RuleAction resource deleted
+          description: RuleChange resource deleted
         '404':
           description: Resource not found
-      summary: Removes the RuleAction resource.
+      summary: Removes the RuleChange resource.
       tags:
-        - RuleAction
+        - RuleChange
     get:
-      operationId: getRuleActionItem
+      operationId: getRuleChangeItem
       parameters:
         - in: path
           name: id
@@ -1699,14 +1760,14 @@ paths:
         - text/csv
       responses:
         '200':
-          description: RuleAction resource response
+          description: RuleChange resource response
           schema:
-            $ref: '#/definitions/RuleAction-Read'
+            $ref: '#/definitions/RuleChange-Read'
         '404':
           description: Resource not found
-      summary: Retrieves a RuleAction resource.
+      summary: Retrieves a RuleChange resource.
       tags:
-        - RuleAction
+        - RuleChange
   /rule-set-versions:
     get:
       operationId: getRuleSetVersionCollection
@@ -1874,17 +1935,6 @@ paths:
           name: target
           required: false
           type: string
-        - in: query
-          name: viewCount
-          required: false
-          type: integer
-        - collectionFormat: multi
-          in: query
-          items:
-            type: integer
-          name: 'viewCount[]'
-          required: false
-          type: array
         - in: query
           name: 'sort[id]'
           required: false
@@ -2521,6 +2571,12 @@ definitions:
   Crawl:
     description: ''
     properties:
+      archived:
+        readOnly: true
+        type: boolean
+      concurrency:
+        readOnly: true
+        type: integer
       createdAt:
         format: date-time
         readOnly: true
@@ -2544,12 +2600,15 @@ definitions:
       maxUrls:
         readOnly: true
         type: integer
+      over:
+        readOnly: true
+        type: boolean
+      processing:
+        readOnly: true
+        type: boolean
       project:
         $ref: '#/definitions/Project'
         readOnly: true
-      rate:
-        readOnly: true
-        type: integer
       state:
         readOnly: true
         type: string
@@ -2568,6 +2627,9 @@ definitions:
   Crawl-Read:
     description: ''
     properties:
+      archived:
+        readOnly: true
+        type: boolean
       createdAt:
         format: date-time
         readOnly: true
@@ -2600,6 +2662,9 @@ definitions:
   Crawl-ReadDetails:
     description: ''
     properties:
+      archived:
+        readOnly: true
+        type: boolean
       createdAt:
         format: date-time
         readOnly: true
@@ -2632,16 +2697,16 @@ definitions:
   Crawl-Write:
     description: ''
     properties:
+      concurrency: {}
       firstUrl: {}
       includeSubdomain: {}
       maxUrls: {}
       project:
         type: string
-      rate: {}
     required:
       - project
       - firstUrl
-      - rate
+      - concurrency
       - maxUrls
       - includeSubdomain
     type: object
@@ -2688,22 +2753,22 @@ definitions:
     required:
       - email
     type: object
-  ImpactRuleAction-Read:
+  ImpactRuleChange-Read:
     description: ''
     properties:
       impact:
         readOnly: true
     type: object
-  ImpactRuleAction-Write:
+  ImpactRuleChange-Write:
     description: ''
     properties:
       project:
         type: string
-      ruleAction:
+      ruleChange:
         type: string
     required:
       - project
-      - ruleAction
+      - ruleChange
     type: object
   Import-Read:
     description: ''
@@ -2875,10 +2940,13 @@ definitions:
         type: boolean
       id: {}
       instanceName: {}
+      method: {}
       notFixedByVersions:
         items:
           type: string
         type: array
+      proxy:
+        type: string
       referrer: {}
       ruleId:
         type: string
@@ -2963,6 +3031,20 @@ definitions:
     required:
       - type
       - name
+    type: object
+  MatchingUrl-Read:
+    description: ''
+    properties:
+      matching:
+        readOnly: true
+    type: object
+  MatchingUrl-Write:
+    description: ''
+    properties:
+      project:
+        type: string
+      ruleChange:
+        type: string
     type: object
   Notification-Read:
     description: ''
@@ -3049,14 +3131,32 @@ definitions:
   Organization-Read:
     description: ''
     properties:
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
       id:
         readOnly: true
         type: string
       name:
         type: string
+      projects:
+        items:
+          $ref: '#/definitions/Project-Read'
+        readOnly: true
+        type: array
       slug:
         readOnly: true
         type: string
+      updatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      userOrganizations:
+        items:
+          $ref: '#/definitions/UserOrganization-Read'
+        readOnly: true
+        type: array
     required:
       - name
     type: object
@@ -3246,43 +3346,10 @@ definitions:
       complexRulesCount:
         readOnly: true
         type: integer
-      complexRulesUpdatedAt:
-        format: date-time
-        readOnly: true
-        type: string
-      createdAt:
-        format: date-time
-        readOnly: true
-        type: string
-      currentVersion:
-        $ref: '#/definitions/RuleSetVersion-Read'
-        readOnly: true
-      features:
-        items:
-          type: string
-        readOnly: true
-        type: array
       id:
         readOnly: true
         type: string
-      ignoreProjectTypes:
-        items:
-          type: string
-        type: array
       name:
-        type: string
-      onboardingCompletedDemos:
-        items:
-          type: string
-        type: array
-      organization:
-        $ref: '#/definitions/Organization-Read'
-        readOnly: true
-      plan:
-        readOnly: true
-        type: integer
-      rulesHash:
-        readOnly: true
         type: string
       slug:
         readOnly: true
@@ -3290,17 +3357,6 @@ definitions:
       straightRulesCount:
         readOnly: true
         type: integer
-      straightRulesUpdatedAt:
-        format: date-time
-        readOnly: true
-        type: string
-      token:
-        readOnly: true
-        type: string
-      updatedAt:
-        format: date-time
-        readOnly: true
-        type: string
       userProjects:
         items:
           $ref: '#/definitions/UserProject-Read'
@@ -3311,9 +3367,6 @@ definitions:
           $ref: '#/definitions/UserProjectFlattened-Read'
         readOnly: true
         type: array
-      workingVersion:
-        $ref: '#/definitions/RuleSetVersion-Read'
-        readOnly: true
     required:
       - name
     type: object
@@ -3389,12 +3442,16 @@ definitions:
   Rule:
     description: ''
     properties:
-      actions:
+      changes:
         items:
-          $ref: '#/definitions/RuleAction'
+          $ref: '#/definitions/RuleChange'
         type: array
-      currentAction:
-        $ref: '#/definitions/RuleAction'
+      currentChange:
+        $ref: '#/definitions/RuleChange'
+      examples:
+        items:
+          type: string
+        type: array
       formattedSource:
         type: string
       id:
@@ -3433,12 +3490,16 @@ definitions:
   Rule-Read:
     description: ''
     properties:
-      actions:
+      changes:
         items:
-          $ref: '#/definitions/RuleAction-Read'
+          $ref: '#/definitions/RuleChange-Read'
         type: array
-      currentAction:
-        $ref: '#/definitions/RuleAction-Read'
+      currentChange:
+        $ref: '#/definitions/RuleChange-Read'
+      examples:
+        items:
+          type: string
+        type: array
       formattedSource:
         type: string
       id:
@@ -3465,7 +3526,7 @@ definitions:
       viewCount:
         type: integer
     type: object
-  RuleAction:
+  RuleChange:
     description: ''
     properties:
       action:
@@ -3477,6 +3538,10 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      examples:
+        items:
+          type: string
+        type: array
       formattedSource:
         type: string
       id:
@@ -3521,9 +3586,11 @@ definitions:
       - isEnabled
       - rank
     type: object
-  RuleAction-Read:
+  RuleChange-Read:
     description: ''
     properties:
+      action:
+        type: string
       author:
         $ref: '#/definitions/User-Read'
         readOnly: true
@@ -3531,15 +3598,47 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      examples:
+        items:
+          type: string
+        type: array
+      formattedSource:
+        type: string
       id:
         readOnly: true
         type: string
+      isEnabled:
+        type: boolean
+      markers:
+        items:
+          $ref: '#/definitions/Marker-Read'
+        type: array
+      matchOnResponseStatus:
+        type: integer
+      rank:
+        type: integer
+      source:
+        type: string
+      statusCode:
+        type: integer
+      target:
+        type: string
+    required:
+      - action
+      - source
+      - statusCode
+      - isEnabled
+      - rank
     type: object
-  RuleAction-Write:
+  RuleChange-Write:
     description: ''
     properties:
       action:
         type: string
+      examples:
+        items:
+          type: string
+        type: array
       formattedSource:
         type: string
       isEnabled:
@@ -3570,14 +3669,14 @@ definitions:
   RuleSetVersion:
     description: ''
     properties:
-      actions:
-        items:
-          $ref: '#/definitions/RuleAction'
-        readOnly: true
-        type: array
       added:
         readOnly: true
         type: integer
+      changes:
+        items:
+          $ref: '#/definitions/RuleChange'
+        readOnly: true
+        type: array
       createdAt:
         format: date-time
         readOnly: true
@@ -3598,8 +3697,8 @@ definitions:
         type: string
       isSnapshot:
         type: boolean
-      lastAction:
-        $ref: '#/definitions/RuleAction'
+      lastChange:
+        $ref: '#/definitions/RuleChange'
         readOnly: true
       name:
         type: string
@@ -3630,28 +3729,26 @@ definitions:
   RuleSetVersion-Read:
     description: ''
     properties:
-      added:
-        readOnly: true
-        type: integer
       createdAt:
         format: date-time
         readOnly: true
         type: string
-      deleted:
+      current:
         readOnly: true
-        type: integer
+        type: boolean
       id:
         readOnly: true
         type: string
-      lastAction:
-        $ref: '#/definitions/RuleAction-Read'
-        readOnly: true
+      isSnapshot:
+        type: boolean
+      name:
+        type: string
       publishedAt:
         format: date-time
         type: string
-      updated:
+      working:
         readOnly: true
-        type: integer
+        type: boolean
     type: object
   User:
     description: ''
@@ -3784,15 +3881,12 @@ definitions:
   User-Read:
     description: ''
     properties:
-      email:
-        type: string
       id:
         readOnly: true
         type: string
       name:
         type: string
     required:
-      - email
       - name
     type: object
   UserOrganization:
@@ -3841,9 +3935,6 @@ definitions:
           type: string
         type: array
       id:
-        readOnly: true
-        type: string
-      organization:
         readOnly: true
         type: string
       user:

@@ -283,6 +283,50 @@ paths:
       summary: Retrieve Messages
       tags:
         - Message
+      x-code-samples:
+        - lang: 'C#'
+          source: |
+            using System;
+            using System.IO;
+            using System.Net;
+
+                class MainClass
+                {
+
+                    public static void Main(string[] args)
+                    {
+                        /** 
+                        Note in the query string 
+                        we have a filter to get only the 
+                        SENT messages
+                        */
+                        string myURI = "https://api.bulksms.com/v1/messages?filter=type%3DSENT";
+                        string myUsername = "username";
+                        string myPassword = "yourPassword";
+                        var request = WebRequest.Create(myURI);
+                        request.Credentials = new NetworkCredential(myUsername, myPassword);
+                    request.PreAuthenticate = true;
+                        request.Method = "GET";
+                        request.ContentType = "application/json";
+                        try
+                        {
+                            // make the call to the API
+                            var response = request.GetResponse();
+
+                            // read the response and print it to the console
+                            var reader = new StreamReader(response.GetResponseStream());
+                            Console.WriteLine(reader.ReadToEnd());
+
+                        }  catch (WebException ex) {
+                    // show the general message
+                    Console.WriteLine("An error occurred:" + ex.Message);
+
+                            // print the detail that come with the HTTP error 
+                            var reader = new StreamReader(ex.Response.GetResponseStream());
+                            Console.WriteLine("Error details:" + reader.ReadToEnd());
+                        }
+                }
+            }
     post:
       description: |
         Send messages to one or more recipients.
@@ -407,31 +451,33 @@ paths:
       x-code-samples:
         - lang: PHP
           source: |
+            <?
             // Your PHP installation needs cUrl support, which not all PHP installations
             // include by default.
+            // To run under docker:
+            // docker run -v $PWD:/code php:7.3.2-alpine php /code/code_sample.php
 
             $username = 'your_username';
             $password = 'your_password';
             $messages = array(
-                array('to'=>'+1233454567', 'body'=>'Hello World!'),
-                array('to'=>'+1233454568', 'body'=>'Hello World!')
+              array('to'=>'+1233454567', 'body'=>'Hello World!'),
+              array('to'=>'+1233454568', 'body'=>'Hello World!')
             );
 
             $result = send_message( json_encode($messages), 'https://api.bulksms.com/v1/messages', $username, $password );
 
             if ($result['http_status'] != 201) {
-                print "Error sending.  HTTP status " . $result['http_status'];
-                print " Response was " .$result['server_response'];
+              print "Error sending: " . ($result['error'] ? $result['error'] : "HTTP status ".$result['http_status']."; Response was " .$result['server_response']);
             } else {
-                print "Response " . $result['server_response'];
-                // Use json_decode($result['server_response']) to work with the response further
+              print "Response " . $result['server_response'];
+              // Use json_decode($result['server_response']) to work with the response further
             }
 
             function send_message ( $post_body, $url, $username, $password) {
               $ch = curl_init( );
               $headers = array(
-                  'Content-Type:application/json',
-                  'Authorization:Basic '. base64_encode("$username:$password")
+              'Content-Type:application/json',
+              'Authorization:Basic '. base64_encode("$username:$password")
               );
               curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
               curl_setopt ( $ch, CURLOPT_URL, $url );
@@ -446,9 +492,11 @@ paths:
               $output['server_response'] = curl_exec( $ch );
               $curl_info = curl_getinfo( $ch );
               $output['http_status'] = $curl_info[ 'http_code' ];
+              $output['error'] = curl_error($ch);
               curl_close( $ch );
               return $output;
-            }         
+            } 
+            ?>         
         - lang: 'C#'
           source: |
             using System;

@@ -888,6 +888,38 @@ paths:
       summary: Gets countries codes and names.
       tags:
         - Countries
+  /v3/customers/current:
+    get:
+      consumes: []
+      deprecated: false
+      description: "Returns the first, middle and last name of the authenticated user.\r\n\r\nYou'll need an API key and access token to use this resource. Please see our [Getting Started](http://developers.gettyimages.com/en/getting-started.html) page for more information on how to sign up for an API key. \r\n\t\r\nPlease consult our [Authorization FAQ](http://developers.gettyimages.com/en/authorization-faq.html) for more information on authorization tokens.\r\n"
+      operationId: Customers_GetCustomerInfo
+      parameters:
+        - description: 'Provide access token in the format of ''Bearer {token}''.'
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: Provide a header to specify the language of result values.
+          in: header
+          name: Accept-Language
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/GettyImages.Models.Customers.CustomerInfoResponse'
+        '401':
+          description: Unauthorized
+        '503':
+          description: ServiceUnavailable
+      summary: Returns information about the current user.
+      tags:
+        - Customers
   /v3/downloads:
     get:
       consumes: []
@@ -4725,11 +4757,11 @@ definitions:
     type: object
   GettyImages.Models.Customers.CustomerInfoResponse:
     properties:
-      email_address:
+      first_name:
         type: string
-      is_active:
-        type: boolean
-      user_name:
+      last_name:
+        type: string
+      middle_name:
         type: string
     type: object
   GettyImages.Models.Download:

@@ -135,11 +135,6 @@ paths:
           name: expand
           required: false
           type: array
-        - description: 'The identifier of the account to retrieve. If none is provided, the account associated with the API key is returned.'
-          in: query
-          name: account
-          required: false
-          type: string
       responses:
         '200':
           description: Successful response.
@@ -276,7 +271,7 @@ paths:
                   type: string
                 type: array
               external_account:
-                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
+                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
               individual:
                 description: Information about the person represented by the account. This field is null unless `business_type` is set to `individual`.
                 properties:
@@ -382,13 +377,6 @@ paths:
                             type: string
                         title: person_verification_document_specs
                         type: object
-                      status:
-                        enum:
-                          - ''
-                          - pending
-                          - unverified
-                          - verified
-                        type: string
                     title: person_verification_specs
                     type: object
                 title: individual_specs
@@ -473,7 +461,7 @@ paths:
                 title: settings_specs
                 type: object
               tos_acceptance:
-                description: 'Details on the account''s acceptance of the [Stripe Services Agreement](/docs/connect/updating-accounts#tos-acceptance).'
+                description: 'Details on the account''s acceptance of the [Stripe Services Agreement](https://stripe.com/docs/connect/updating-accounts#tos-acceptance).'
                 properties:
                   date:
                     type: integer
@@ -518,7 +506,7 @@ paths:
                   type: string
                 type: array
               external_account:
-                description: This string to be replaced by DocSpecGenerator.
+                description: 'Please refer to full [documentation](https://stripe.com/docs/api) instead.'
               metadata:
                 description: A set of key-value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
                 type: object
@@ -729,7 +717,7 @@ paths:
                   type: string
                 type: array
               external_account:
-                description: This string to be replaced by DocSpecGenerator.
+                description: 'Please refer to full [documentation](https://stripe.com/docs/api) instead.'
               metadata:
                 description: A set of key-value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
                 type: object
@@ -1142,13 +1130,6 @@ paths:
                         type: string
                     title: person_verification_document_specs
                     type: object
-                  status:
-                    enum:
-                      - ''
-                      - pending
-                      - unverified
-                      - verified
-                    type: string
                 title: person_verification_specs
                 type: object
             type: object
@@ -1358,13 +1339,6 @@ paths:
                         type: string
                     title: person_verification_document_specs
                     type: object
-                  status:
-                    enum:
-                      - ''
-                      - pending
-                      - unverified
-                      - verified
-                    type: string
                 title: person_verification_specs
                 type: object
             type: object
@@ -1589,13 +1563,6 @@ paths:
                         type: string
                     title: person_verification_document_specs
                     type: object
-                  status:
-                    enum:
-                      - ''
-                      - pending
-                      - unverified
-                      - verified
-                    type: string
                 title: person_verification_specs
                 type: object
             type: object
@@ -1805,13 +1772,6 @@ paths:
                         type: string
                     title: person_verification_document_specs
                     type: object
-                  status:
-                    enum:
-                      - ''
-                      - pending
-                      - unverified
-                      - verified
-                    type: string
                 title: person_verification_specs
                 type: object
             type: object
@@ -2067,7 +2027,7 @@ paths:
                   type: string
                 type: array
               external_account:
-                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
+                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
               from_recipient:
                 type: string
               individual:
@@ -2175,13 +2135,6 @@ paths:
                             type: string
                         title: person_verification_document_specs
                         type: object
-                      status:
-                        enum:
-                          - ''
-                          - pending
-                          - unverified
-                          - verified
-                        type: string
                     title: person_verification_specs
                     type: object
                 title: individual_specs
@@ -2266,7 +2219,7 @@ paths:
                 title: settings_specs
                 type: object
               tos_acceptance:
-                description: 'Details on the account''s acceptance of the [Stripe Services Agreement](/docs/connect/updating-accounts#tos-acceptance).'
+                description: 'Details on the account''s acceptance of the [Stripe Services Agreement](https://stripe.com/docs/connect/updating-accounts#tos-acceptance).'
                 properties:
                   date:
                     type: integer
@@ -2280,7 +2233,7 @@ paths:
                 title: tos_acceptance_specs
                 type: object
               type:
-                description: 'Whether you''d like to create a [Standard or Custom](/docs/connect/accounts) account. Standard accounts are normal Stripe accounts: Stripe will email the account holder to set up a username and password, and will handle all account management directly with them. Custom accounts have extra parameters available to them, and require that you, the platform, handle all communication with the account holder. Possible values are `standard` and `custom`.'
+                description: 'Whether you''d like to create a [Standard or Custom](https://stripe.com/docs/connect/accounts) account. Standard accounts are normal Stripe accounts: Stripe will email the account holder to set up a username and password, and will handle all account management directly with them. Custom accounts have extra parameters available to them, and require that you, the platform, handle all communication with the account holder. Possible values are `standard` and `custom`.'
                 enum:
                   - custom
                   - express
@@ -2475,7 +2428,7 @@ paths:
                   type: string
                 type: array
               external_account:
-                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
+                description: 'A card or bank account to attach to the account. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in the `external_account` parameter for [bank account](https://stripe.com/docs/api#account_create_bank_account) creation. <br><br>By default, providing an external account sets it as the new default external account for its currency, and deletes the old default if one exists. To add additional external accounts without replacing the existing default for the currency, use the bank account or card creation API.'
               individual:
                 description: Information about the person represented by the account. This field is null unless `business_type` is set to `individual`.
                 properties:
@@ -2581,13 +2534,6 @@ paths:
                             type: string
                         title: person_verification_document_specs
                         type: object
-                      status:
-                        enum:
-                          - ''
-                          - pending
-                          - unverified
-                          - verified
-                        type: string
                     title: person_verification_specs
                     type: object
                 title: individual_specs
@@ -2672,7 +2618,7 @@ paths:
                 title: settings_specs
                 type: object
               tos_acceptance:
-                description: 'Details on the account''s acceptance of the [Stripe Services Agreement](/docs/connect/updating-accounts#tos-acceptance).'
+                description: 'Details on the account''s acceptance of the [Stripe Services Agreement](https://stripe.com/docs/connect/updating-accounts#tos-acceptance).'
                 properties:
                   date:
                     type: integer
@@ -2721,7 +2667,7 @@ paths:
                   type: string
                 type: array
               external_account:
-                description: This string to be replaced by DocSpecGenerator.
+                description: 'Please refer to full [documentation](https://stripe.com/docs/api) instead.'
               metadata:
                 description: A set of key-value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
                 type: object
@@ -2952,7 +2898,7 @@ paths:
                   type: string
                 type: array
               external_account:
-                description: This string to be replaced by DocSpecGenerator.
+                description: 'Please refer to full [documentation](https://stripe.com/docs/api) instead.'
               metadata:
                 description: A set of key-value pairs that you can attach to an external account object. It can be useful for storing additional information about the external account in a structured format.
                 type: object
@@ -3385,13 +3331,6 @@ paths:
                         type: string
                     title: person_verification_document_specs
                     type: object
-                  status:
-                    enum:
-                      - ''
-                      - pending
-                      - unverified
-                      - verified
-                    type: string
                 title: person_verification_specs
                 type: object
             type: object
@@ -3613,13 +3552,6 @@ paths:
                         type: string
                     title: person_verification_document_specs
                     type: object
-                  status:
-                    enum:
-                      - ''
-                      - pending
-                      - unverified
-                      - verified
-                    type: string
                 title: person_verification_specs
                 type: object
             type: object
@@ -3852,13 +3784,6 @@ paths:
                         type: string
                     title: person_verification_document_specs
                     type: object
-                  status:
-                    enum:
-                      - ''
-                      - pending
-                      - unverified
-                      - verified
-                    type: string
                 title: person_verification_specs
                 type: object
             type: object
@@ -4080,13 +4005,6 @@ paths:
                         type: string
                     title: person_verification_document_specs
                     type: object
-                  status:
-                    enum:
-                      - ''
-                      - pending
-                      - unverified
-                      - verified
-                    type: string
                 title: person_verification_specs
                 type: object
             type: object
@@ -5037,15 +4955,15 @@ paths:
           schema:
             properties:
               amount:
-                description: 'A positive integer representing how much to charge, in the [smallest currency unit](/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or `100` to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or [equivalent in charge currency](/docs/currencies#minimum-and-maximum-charge-amounts).'
+                description: 'A positive integer representing how much to charge, in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or `100` to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or [equivalent in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).'
                 type: integer
               application_fee:
                 type: integer
               application_fee_amount:
-                description: 'A fee in %s that will be applied to the charge and transferred to the application owner''s Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in order to take an application fee. For more information, see the application fees [documentation](/docs/connect/direct-charges#collecting-fees).'
+                description: 'A fee in %s that will be applied to the charge and transferred to the application owner''s Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).'
                 type: integer
               capture:
-                description: 'Whether to immediately capture the charge. Defaults to `true`. When `false`, the charge issues an authorization (or pre-authorization), and will need to be [captured](#capture_charge) later. Uncaptured charges expire in _seven days_. For more information, see the [authorizing charges and settling later](/docs/charges#auth-and-capture) documentation.'
+                description: 'Whether to immediately capture the charge. Defaults to `true`. When `false`, the charge issues an authorization (or pre-authorization), and will need to be [captured](#capture_charge) later. Uncaptured charges expire in _seven days_. For more information, see the [authorizing charges and settling later](https://stripe.com/docs/charges#auth-and-capture) documentation.'
                 type: boolean
               card:
                 description: 'A token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe.js).'
@@ -5059,7 +4977,6 @@ paths:
                 description: 'An arbitrary string which you can attach to a `Charge` object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.'
                 type: string
               destination:
-                description: 'If specified, the charge will be attributed to the destination account for tax reporting, and the funds from the charge will be transferred to the destination account. The ID of the resulting transfer will be returned in the response''s `transfer` field. For details, see [Creating Destination Charges on Your Platform](/docs/connect/destination-charges).'
                 properties:
                   account:
                     type: string
@@ -5078,12 +4995,10 @@ paths:
                 description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
                 type: object
               on_behalf_of:
-                description: 'The Stripe account ID for which these funds are intended. Automatically set if you use the `destination` parameter. For details, see [Creating Separate Charges and Transfers](/docs/connect/charges-transfers#on-behalf-of).'
-                type: string
-              payment_intent:
+                description: 'The Stripe account ID for which these funds are intended. Automatically set if you use the `destination` parameter. For details, see [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers#on-behalf-of).'
                 type: string
               receipt_email:
-                description: 'The email address to which this charge''s [receipt](/docs/dashboard/receipts) will be sent. The receipt will not be sent until the charge is paid, and no receipts will be sent for test mode charges. If this charge is for a [Customer](/docs/api/customers/object), the email address specified here will override the customer''s email address. If `receipt_email` is specified for a charge in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).'
+                description: 'The email address to which this charge''s [receipt](https://stripe.com/docs/dashboard/receipts) will be sent. The receipt will not be sent until the charge is paid, and no receipts will be sent for test mode charges. If this charge is for a [Customer](https://stripe.com/docs/api/customers/object), the email address specified here will override the customer''s email address. If `receipt_email` is specified for a charge in live mode, a receipt will be sent regardless of your [email settings](https://dashboard.stripe.com/account/emails).'
                 type: string
               shipping:
                 description: Shipping information for the charge. Helps prevent fraud on charges for physical goods.
@@ -5120,12 +5035,23 @@ paths:
                 title: shipping
                 type: object
               source:
-                description: 'A payment source to be charged. This can be the ID of a [card](/docs/api#cards) (i.e., credit or debit card), a [bank account](/docs/api#bank_accounts), a [source](/docs/api#sources), a [token](/docs/api#tokens), or a [connected account](/docs/connect/account-debits#charging-a-connected-account). For certain sources---namely, [cards](/docs/api#cards), [bank accounts](/docs/api#bank_accounts), and attached [sources](/docs/api#sources)---you must also pass the ID of the associated customer.'
+                description: 'A payment source to be charged. This can be the ID of a [card](https://stripe.com/docs/api#cards) (i.e., credit or debit card), a [bank account](https://stripe.com/docs/api#bank_accounts), a [source](https://stripe.com/docs/api#sources), a [token](https://stripe.com/docs/api#tokens), or a [connected account](https://stripe.com/docs/connect/account-debits#charging-a-connected-account). For certain sources---namely, [cards](https://stripe.com/docs/api#cards), [bank accounts](https://stripe.com/docs/api#bank_accounts), and attached [sources](https://stripe.com/docs/api#sources)---you must also pass the ID of the associated customer.'
               statement_descriptor:
                 description: 'An arbitrary string to be displayed on your customer''s credit card statement. This can be up to _22 characters_. As an example, if your website is `RunClub` and the item you''re charging for is a race ticket, you might want to specify a `statement_descriptor` of `RunClub 5K race ticket`. The statement description must contain at least one letter, must not contain `<>"''` characters, and will appear on your customer''s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks and card issuers display this information consistently, some might display it incorrectly or not at all.'
                 type: string
+              transfer_data:
+                description: 'An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.'
+                properties:
+                  amount:
+                    type: integer
+                  destination:
+                    type: string
+                required:
+                  - destination
+                title: transfer_data_specs
+                type: object
               transfer_group:
-                description: 'A string that identifies this transaction as part of a group. For details, see [Grouping transactions](/docs/connect/charges-transfers#grouping-transactions).'
+                description: 'A string that identifies this transaction as part of a group. For details, see [Grouping transactions](https://stripe.com/docs/connect/charges-transfers#grouping-transactions).'
                 type: string
             type: object
       responses:
@@ -5240,7 +5166,7 @@ paths:
                 title: shipping
                 type: object
               transfer_group:
-                description: 'A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](/docs/connect/charges-transfers#grouping-transactions) for details.'
+                description: 'A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.'
                 type: string
             type: object
       responses:
@@ -5279,13 +5205,6 @@ paths:
               application_fee_amount:
                 description: 'An application fee amount to add on to this charge, which must be less than or equal to the original amount. Can only be used with Stripe Connect.'
                 type: integer
-              destination:
-                description: An optional dictionary containing a new destination amount to use. Can only be used with destination charges created with Stripe Connect.
-                properties:
-                  amount:
-                    type: integer
-                title: destination_specs
-                type: object
               expand:
                 description: Specifies which fields in the response should be expanded.
                 items:
@@ -5297,8 +5216,15 @@ paths:
               statement_descriptor:
                 description: 'An arbitrary string to be displayed on your customer''s credit card statement. This may be up to *22 characters*. As an example, if your website is `RunClub` and the item you''re charging for is a race ticket, you may want to specify a `statement_descriptor` of `RunClub 5K race ticket`. The statement description must contain at least one letter, may not include `<>"''` characters, and will appear on your customer''s statement in capital letters. Non-ASCII characters are automatically stripped. Updating this value will overwrite the previous statement descriptor of this charge. While most banks display this information consistently, some may display it incorrectly or not at all.'
                 type: string
+              transfer_data:
+                description: 'An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.'
+                properties:
+                  amount:
+                    type: integer
+                title: transfer_data_specs
+                type: object
               transfer_group:
-                description: 'A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](/docs/connect/charges-transfers#grouping-transactions) for details.'
+                description: 'A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.'
                 type: string
             type: object
       responses:
@@ -5704,6 +5630,9 @@ paths:
               client_reference_id:
                 description: The reference to identify a payment made with Checkout. This reference will be echoed back in Checkout webhooks.
                 type: string
+              customer_email:
+                description: 'The email address used to create the customer object. If you already know your customer''s email address, use this attribute to prefill it on Checkout.'
+                type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
                 items:
@@ -5735,6 +5664,25 @@ paths:
                   title: line_item_params
                   type: object
                 type: array
+              locale:
+                description: 'The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser''s locale is used. Supported values are `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`, `it`, `ja`, `nb`, `nl`, `pl`, `pt`, `sv`, or `zh`.'
+                enum:
+                  - auto
+                  - da
+                  - de
+                  - en
+                  - es
+                  - fi
+                  - fr
+                  - it
+                  - ja
+                  - nb
+                  - nl
+                  - pl
+                  - pt
+                  - sv
+                  - zh
+                type: string
               payment_intent_data:
                 description: A subset of parameters to be passed to PaymentIntent creation.
                 properties:
@@ -5817,6 +5765,10 @@ paths:
                     type: array
                   metadata:
                     type: object
+                  trial_end:
+                    type: integer
+                  trial_period_days:
+                    type: integer
                 required:
                   - items
                 title: subscription_data_params
@@ -5907,7 +5859,7 @@ paths:
           name: expand
           required: false
           type: array
-        - description: 'An ISO 3166-1 alpha-2 country code. Available country codes can be listed with the [List Country Specs](/docs/api#list_country_specs) endpoint.'
+        - description: 'An ISO 3166-1 alpha-2 country code. Available country codes can be listed with the [List Country Specs](https://stripe.com/docs/api#list_country_specs) endpoint.'
           in: path
           name: country
           required: true
@@ -6255,7 +6207,7 @@ paths:
                 description: The customer's shipping information. Appears on invoices emailed to this customer.
               source:
                 description: |-
-                  The source can be a [Token](/docs/api#tokens) or a [Source](/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free.
+                  The source can be a [Token](https://stripe.com/docs/api#tokens) or a [Source](https://stripe.com/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free.
 
                   Passing `source` will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source, instead use the [card creation API](https://stripe.com/docs/api#create_card) to add the card and then the [customer update API](https://stripe.com/docs/api#update_customer) to set it as the default.
 
@@ -6329,7 +6281,7 @@ paths:
             $ref: '#/definitions/error'
     post:
       description: |-
-        <p>Updates the specified customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the <strong>source</strong> parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges in the future. When you update a customer to a new valid card source by passing the <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the subscription bills automatically and is in the <code>past_due</code> state, then the latest unclosed invoice for the subscription will be retried. This retry will not count as an automatic retry, and will not affect the next regularly scheduled payment for the invoice. Changing the <strong>default_source</strong> for a customer will not trigger this behavior.</p>
+        <p>Updates the specified customer by setting the values of the parameters passed. Any parameters not provided will be left unchanged. For example, if you pass the <strong>source</strong> parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges in the future. When you update a customer to a new valid card source by passing the <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the subscription bills automatically and is in the <code>past_due</code> state, then the latest open invoice for the subscription with automatic collection enabled will be retried. This retry will not count as an automatic retry, and will not affect the next regularly scheduled payment for the invoice. Changing the <strong>default_source</strong> for a customer will not trigger this behavior.</p>
 
         <p>This request accepts mostly the same arguments as the customer creation call.</p>
       operationId: PostCustomersCustomer
@@ -6407,7 +6359,7 @@ paths:
                 description: The customer's shipping information. Appears on invoices emailed to this customer.
               source:
                 description: |-
-                  The source can be a [Token](/docs/api#tokens) or a [Source](/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free.
+                  The source can be a [Token](https://stripe.com/docs/api#tokens) or a [Source](https://stripe.com/docs/api#sources), as returned by [Elements](https://stripe.com/docs/elements). You must provide a source if the customer does not already have a valid source attached, and you are subscribing the customer to be charged automatically for a plan that is not free.
 
                   Passing `source` will create a new source object, make it the customer default source, and delete the old customer default if one exists. If you want to add an additional source, instead use the [card creation API](https://stripe.com/docs/api#create_card) to add the card and then the [customer update API](https://stripe.com/docs/api#update_customer) to set it as the default.
 
@@ -6539,7 +6491,7 @@ paths:
                 description: A set of key-value pairs that you can attach to a card object. It can be useful for storing additional information about the card in a structured format.
                 type: object
               source:
-                description: This string to be replaced by DocSpecGenerator.
+                description: 'Please refer to full [documentation](https://stripe.com/docs/api) instead.'
             type: object
       responses:
         '200':
@@ -6845,7 +6797,7 @@ paths:
                 description: A set of key-value pairs that you can attach to a card object. It can be useful for storing additional information about the card in a structured format.
                 type: object
               source:
-                description: This string to be replaced by DocSpecGenerator.
+                description: 'Please refer to full [documentation](https://stripe.com/docs/api) instead.'
             type: object
       responses:
         '200':
@@ -7156,7 +7108,7 @@ paths:
                 description: A set of key-value pairs that you can attach to a card object. It can be useful for storing additional information about the card in a structured format.
                 type: object
               source:
-                description: This string to be replaced by DocSpecGenerator.
+                description: 'Please refer to full [documentation](https://stripe.com/docs/api) instead.'
             type: object
       responses:
         '200':
@@ -7447,7 +7399,7 @@ paths:
                   - send_invoice
                 type: string
               billing_cycle_anchor:
-                description: 'A future timestamp to anchor the subscription''s [billing cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.'
+                description: 'A future timestamp to anchor the subscription''s [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.'
                 type: string
               billing_thresholds:
                 description: 'Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period. Pass an empty string to remove previously-defined thresholds.'
@@ -7488,7 +7440,7 @@ paths:
                 description: A set of key-value pairs that you can attach to a `Subscription` object. It can be useful for storing additional information about the subscription in a structured format.
                 type: object
               prorate:
-                description: 'Boolean (defaults to `true`) telling us whether to [credit for unused time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item''s `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no proration adjustments will be created.'
+                description: 'Boolean (defaults to `true`) telling us whether to [credit for unused time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item''s `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no proration adjustments will be created.'
                 type: boolean
               tax_percent:
                 description: 'A non-negative decimal (with at most four decimal places) between 0 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount in each billing period. For example, a plan which charges $10/month with a `tax_percent` of `20.0` will charge $12 per invoice. To unset a previously-set value, pass an empty string.'
@@ -7518,7 +7470,7 @@ paths:
 
         <p>Note, however, that any pending invoice items that you’ve created will still be charged for at the end of the period, unless manually <a href="#delete_invoiceitem">deleted</a>. If you’ve set the subscription to cancel at the end of the period, any pending prorations will also be left in place and collected at the end of the period. But if the subscription is set to cancel immediately, pending prorations will be removed.</p>
 
-        <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the customer. This is designed to prevent unexpected payment attempts after the customer has canceled a subscription. However, you can reopen the invoices manually after subscription cancellation to have us proceed with payment collection. Or, you could even re-attempt payment yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.</p>
+        <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all finalized invoices for the customer. This is intended to prevent unexpected payment attempts after the customer has canceled a subscription. However, you can resume automatic collection of the invoices manually after subscription cancellation to have us proceed. Or, you could check for unpaid invoices before allowing the customer to cancel the subscription at all.</p>
       operationId: DeleteCustomersCustomerSubscriptionsSubscriptionExposedId
       parameters:
         - in: path
@@ -7609,7 +7561,7 @@ paths:
                   - send_invoice
                 type: string
               billing_cycle_anchor:
-                description: 'Either `now` or `unchanged`. Setting the value to `now` resets the subscription''s billing cycle anchor to the current time. For more information, see the billing cycle [documentation](/docs/billing/subscriptions/billing-cycle).'
+                description: 'Either `now` or `unchanged`. Setting the value to `now` resets the subscription''s billing cycle anchor to the current time. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).'
                 type: string
               billing_thresholds:
                 description: 'Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period. Pass an empty string to remove previously-defined thresholds.'
@@ -7654,7 +7606,7 @@ paths:
                 description: A set of key-value pairs that you can attach to a subscription object. This can be useful for storing additional information about the subscription in a structured format.
                 type: object
               prorate:
-                description: 'Boolean (defaults to `true`) telling us whether to [credit for unused time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item''s `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no proration adjustments will be created.'
+                description: 'Boolean (defaults to `true`) telling us whether to [credit for unused time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item''s `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no proration adjustments will be created.'
                 type: boolean
               proration_date:
                 description: 'If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.'
@@ -8795,15 +8747,15 @@ paths:
           name: billing
           required: false
           type: string
+        - in: query
+          name: created
+          required: false
+          type: integer
         - description: Only return invoices for the customer specified by this customer ID.
           in: query
           name: customer
           required: false
           type: string
-        - in: query
-          name: date
-          required: false
-          type: integer
         - in: query
           name: due_date
           required: false
@@ -8871,10 +8823,10 @@ paths:
           schema:
             properties:
               application_fee_amount:
-                description: 'A fee in %s that will be applied to the invoice and transferred to the application owner''s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](/docs/connect/subscriptions#invoices).'
+                description: 'A fee in %s that will be applied to the invoice and transferred to the application owner''s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#invoices).'
                 type: integer
               auto_advance:
-                description: 'Controls whether Stripe will perform [automatic collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice''s state will not automatically advance without an explicit action.'
+                description: 'Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice''s state will not automatically advance without an explicit action.'
                 type: boolean
               billing:
                 description: 'Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions. Defaults to `charge_automatically`.'
@@ -8976,7 +8928,7 @@ paths:
           name: subscription
           required: false
           type: string
-        - description: 'For new subscriptions, a future timestamp to anchor the subscription''s [billing cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.'
+        - description: 'For new subscriptions, a future timestamp to anchor the subscription''s [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.'
           in: query
           name: subscription_billing_cycle_anchor
           required: false
@@ -9077,7 +9029,7 @@ paths:
           name: subscription
           required: false
           type: string
-        - description: 'For new subscriptions, a future timestamp to anchor the subscription''s [billing cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.'
+        - description: 'For new subscriptions, a future timestamp to anchor the subscription''s [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.'
           in: query
           name: subscription_billing_cycle_anchor
           required: false
@@ -9219,10 +9171,10 @@ paths:
           schema:
             properties:
               application_fee_amount:
-                description: 'A fee in %s that will be applied to the invoice and transferred to the application owner''s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](/docs/connect/subscriptions#invoices).'
+                description: 'A fee in %s that will be applied to the invoice and transferred to the application owner''s Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#invoices).'
                 type: integer
               auto_advance:
-                description: 'Controls whether Stripe will perform [automatic collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice.'
+                description: 'Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.'
                 type: boolean
               custom_fields:
                 description: 'A list of up to 4 custom fields to be displayed on the invoice. If a value for `custom_fields` is specified, the list specified will replace the existing custom field list on this invoice.'
@@ -9290,7 +9242,7 @@ paths:
           schema:
             properties:
               auto_advance:
-                description: 'Controls whether Stripe will perform [automatic collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice''s state will not automatically advance without an explicit action.'
+                description: 'Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice''s state will not automatically advance without an explicit action.'
                 type: boolean
               expand:
                 description: Specifies which fields in the response should be expanded.
@@ -10192,7 +10144,7 @@ paths:
           schema:
             properties:
               authorization_controls:
-                description: 'Spending rules that give you some control over how your cards can be used. Refer to our [authorizations](/docs/issuing/authorizations) documentation for more details.'
+                description: 'Spending rules that give you some control over how your cards can be used. Refer to our [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more details.'
                 properties:
                   allowed_categories:
                     items:
@@ -10779,7 +10731,7 @@ paths:
                 title: authorization_controls_param
                 type: object
               cardholder:
-                description: 'The [Cardholder](/docs/api#issuing_cardholder_object) object with which the card will be associated.'
+                description: 'The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object with which the card will be associated.'
                 type: string
               currency:
                 description: The currency for the card. This currently must be `usd`.
@@ -10888,7 +10840,7 @@ paths:
           schema:
             properties:
               authorization_controls:
-                description: 'Spending rules that give you some control over how your cards can be used. Refer to our [authorizations](/docs/issuing/authorizations) documentation for more details.'
+                description: 'Spending rules that give you some control over how your cards can be used. Refer to our [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more details.'
                 properties:
                   allowed_categories:
                     items:
@@ -11475,7 +11427,7 @@ paths:
                 title: authorization_controls_param
                 type: object
               cardholder:
-                description: 'The [Cardholder](/docs/api#issuing_cardholder_object) to associate the card with.'
+                description: 'The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) to associate the card with.'
                 type: string
               expand:
                 description: Specifies which fields in the response should be expanded.
@@ -12447,7 +12399,7 @@ paths:
                 title: shipping_tracking_params
                 type: object
               status:
-                description: 'Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More detail in the [Orders Guide](/docs/orders/guide#understanding-order-statuses).'
+                description: 'Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More detail in the [Orders Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).'
                 enum:
                   - canceled
                   - created
@@ -12499,7 +12451,7 @@ paths:
               shipping_method:
                 type: string
               source:
-                description: 'A [Token](/docs/api#tokens)''s or a [Source](/docs/api#sources)''s ID, as returned by [Elements](/docs/elements). If no customer was attached to the order at creation, either `source` or `customer is required. Otherwise, the specified source will be charged intead of the customer attached to the order.'
+                description: 'A [Token](https://stripe.com/docs/api#tokens)''s or a [Source](https://stripe.com/docs/api#sources)''s ID, as returned by [Elements](https://stripe.com/docs/elements). If no customer was attached to the order at creation, either `source` or `customer is required. Otherwise, the specified source will be charged intead of the customer attached to the order.'
             type: object
       responses:
         '200':
@@ -12643,7 +12595,7 @@ paths:
                   The amount of the application fee (if any) that will be applied to the payment and transferred to the
                   application owner's Stripe account. To use an application fee, the request must be made on
                   behalf of another account, using the `Stripe-Account` header or an OAuth key. For more
-                  information, see the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+                  information, see the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
                 type: integer
               capture_method:
                 description: 'Capture method of this PaymentIntent, one of `automatic` or `manual`.'
@@ -12672,7 +12624,7 @@ paths:
                 description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
                 type: object
               on_behalf_of:
-                description: 'The Stripe account ID for which these funds are intended. For details, see the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect).'
+                description: 'The Stripe account ID for which these funds are intended. For details, see the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).'
                 type: string
               payment_method_types:
                 description: The list of payment method types (e.g. card) that this PaymentIntent is allowed to use.
@@ -12734,7 +12686,7 @@ paths:
               transfer_data:
                 description: |-
                   The parameters used to automatically create a Transfer when the payment succeeds.
-                  For more information, see the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+                  For more information, see the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
                 properties:
                   destination:
                     type: string
@@ -12743,7 +12695,7 @@ paths:
                 title: transfer_data_creation_params
                 type: object
               transfer_group:
-                description: 'A string that identifies the resulting payment as part of a group. See the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.'
+                description: 'A string that identifies the resulting payment as part of a group. See the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.'
                 type: string
             required:
               - amount
@@ -12811,7 +12763,7 @@ paths:
                 description: Amount intended to be collected by this PaymentIntent
                 type: integer
               application_fee_amount:
-                description: 'The amount of the application fee (if any) for the resulting payment. See the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.'
+                description: 'The amount of the application fee (if any) for the resulting payment. See the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.'
                 type: integer
               currency:
                 description: 'Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).'
@@ -12879,7 +12831,7 @@ paths:
                 description: ID of the Source object to attach to this PaymentIntent.
                 type: string
               transfer_group:
-                description: 'A string that identifies the resulting payment as part of a group. `transfer_group` may only be provided if it has not been set. See the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.'
+                description: 'A string that identifies the resulting payment as part of a group. `transfer_group` may only be provided if it has not been set. See the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.'
                 type: string
             type: object
       responses:
@@ -12959,7 +12911,7 @@ paths:
                   application owner's Stripe account. To use an application fee, the
                   request must be made on behalf of another account, using the
                   `Stripe-Account` header or an OAuth key. For more
-                  information, see the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+                  information, see the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
                 type: integer
               expand:
                 description: Specifies which fields in the response should be expanded.
@@ -13446,7 +13398,7 @@ paths:
                 description: 'A brief description of the plan, hidden from customers.'
                 type: string
               product:
-                description: 'The product whose pricing the created plan will represent. This can either be the ID of an existing product, or a dictionary containing fields used to create a [service product](/docs/api#product_object-type).'
+                description: 'The product whose pricing the created plan will represent. This can either be the ID of an existing product, or a dictionary containing fields used to create a [service product](https://stripe.com/docs/api#product_object-type).'
                 properties:
                   active:
                     type: boolean
@@ -13503,7 +13455,7 @@ paths:
                 title: transform_usage_param
                 type: object
               trial_period_days:
-                description: 'Default number of trial days when subscribing a customer to this plan using [`trial_from_plan=true`](/docs/api#create_subscription-trial_from_plan).'
+                description: 'Default number of trial days when subscribing a customer to this plan using [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).'
                 type: integer
               usage_type:
                 description: 'Configures how the quantity per period should be determined, can be either `metered` or `licensed`. `licensed` will automatically bill the `quantity` set for a plan when adding it to a subscription, `metered` will aggregate the total usage based on usage records. Defaults to `licensed`.'
@@ -13606,7 +13558,7 @@ paths:
                 description: 'An arbitrary string to be displayed on your customer''s credit card statement. This may be up to 22 characters. The statement description may not include <>"'' characters, and will appear on your customer''s statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all. It must contain at least one letter.'
                 type: string
               trial_period_days:
-                description: 'Default number of trial days when subscribing a customer to this plan using [`trial_from_plan=true`](/docs/api#create_subscription-trial_from_plan).'
+                description: 'Default number of trial days when subscribing a customer to this plan using [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).'
                 type: integer
             type: object
       responses:
@@ -14376,9 +14328,9 @@ paths:
           schema:
             properties:
               bank_account:
-                description: 'A bank account to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user''s bank account details, with the options described below.'
+                description: 'A bank account to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user''s bank account details, with the options described below.'
               card:
-                description: 'A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit card is not valid, recipient creation will fail. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user''s debit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud.'
+                description: 'A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit card is not valid, recipient creation will fail. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user''s debit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud.'
               description:
                 description: An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside the recipient in the web interface.
                 type: string
@@ -14481,9 +14433,9 @@ paths:
           schema:
             properties:
               bank_account:
-                description: 'A bank account to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user''s bank account details, with the options described below.'
+                description: 'A bank account to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user''s bank account details, with the options described below.'
               card:
-                description: 'A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](/docs/stripe-js), or a dictionary containing a user''s debit card details, with the options described below. Passing `card` will create a new card, make it the new recipient default card, and delete the old recipient default (if one exists). If you want to add additional debit cards instead of replacing the existing default, use the [card creation API](#create_card). Whenever you attach a card to a recipient, Stripe will automatically validate the debit card.'
+                description: 'A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user''s debit card details, with the options described below. Passing `card` will create a new card, make it the new recipient default card, and delete the old recipient default (if one exists). If you want to add additional debit cards instead of replacing the existing default, use the [card creation API](#create_card). Whenever you attach a card to a recipient, Stripe will automatically validate the debit card.'
               default_card:
                 description: ID of the card to set as the recipient's new default for payouts.
                 type: string
@@ -14765,7 +14717,7 @@ paths:
                   type: string
                 type: array
               parameters:
-                description: 'Parameters specifying how the report should be run. Different Report Types have different required and optional parameters, listed in the [API Access to Reports](/docs/reporting/statements/api) documentation.'
+                description: 'Parameters specifying how the report should be run. Different Report Types have different required and optional parameters, listed in the [API Access to Reports](https://stripe.com/docs/reporting/statements/api) documentation.'
                 properties:
                   connected_account:
                     type: string
@@ -14790,6 +14742,7 @@ paths:
                       - fee
                       - financing_paydown
                       - financing_payout
+                      - financing_payout_reversal
                       - issuing_authorization_hold
                       - issuing_authorization_release
                       - issuing_transaction
@@ -14812,7 +14765,7 @@ paths:
                 title: run_parameter_specs
                 type: object
               report_type:
-                description: 'The ID of the [report type](/docs/reporting/statements/api#report-types) to run, such as `"balance.summary.1"`.'
+                description: 'The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as `"balance.summary.1"`.'
                 type: string
             required:
               - report_type
@@ -15592,7 +15545,7 @@ paths:
                 description: 'An optional token used to create the source. When passed, token properties will override source parameters.'
                 type: string
               type:
-                description: 'The `type` of the source to create. Required unless `customer` and `original_source` are specified (see the [Shared card Sources](/docs/sources/connect#shared-card-sources) guide)'
+                description: 'The `type` of the source to create. Required unless `customer` and `original_source` are specified (see the [Shared card Sources](https://stripe.com/docs/sources/connect#shared-card-sources) guide)'
                 type: string
               usage:
                 description: 'Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.'
@@ -16021,7 +15974,7 @@ paths:
                 description: The identifier of the plan to add to the subscription.
                 type: string
               prorate:
-                description: 'Flag indicating whether to [prorate](/docs/billing/subscriptions/prorations) switching plans during a billing cycle.'
+                description: 'Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations) switching plans during a billing cycle.'
                 type: boolean
               proration_date:
                 description: 'If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](#retrieve_customer_invoice) endpoint.'
@@ -16065,7 +16018,7 @@ paths:
                 description: Delete all usage for the given subscription item. Allowed only when the current plan's `usage_type` is `metered`.
                 type: boolean
               prorate:
-                description: 'Flag indicating whether to [prorate](/docs/billing/subscriptions/prorations) switching plans during a billing cycle.'
+                description: 'Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations) switching plans during a billing cycle.'
                 type: boolean
               proration_date:
                 description: 'If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](#retrieve_customer_invoice) endpoint.'
@@ -16133,7 +16086,7 @@ paths:
                 description: The identifier of the new plan for this subscription item.
                 type: string
               prorate:
-                description: 'Flag indicating whether to [prorate](/docs/billing/subscriptions/prorations) switching plans during a billing cycle.'
+                description: 'Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations) switching plans during a billing cycle.'
                 type: boolean
               proration_date:
                 description: 'If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](#retrieve_customer_invoice) endpoint.'
@@ -16241,7 +16194,7 @@ paths:
           schema:
             properties:
               action:
-                description: 'Valid values are `increment` (default) or `set`. When using `increment` the specified `quantity` will be added to the usage at the specified timestamp. The `set` action will overwrite the usage quantity at that timestamp. If the subscription has [billing thresholds](/docs/api/subscriptions/object#subscription_object-billing_thresholds), `increment` is the only allowed value.'
+                description: 'Valid values are `increment` (default) or `set`. When using `increment` the specified `quantity` will be added to the usage at the specified timestamp. The `set` action will overwrite the usage quantity at that timestamp. If the subscription has [billing thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds), `increment` is the only allowed value.'
                 enum:
                   - increment
                   - set
@@ -16873,7 +16826,7 @@ paths:
                   - send_invoice
                 type: string
               billing_cycle_anchor:
-                description: 'A future timestamp to anchor the subscription''s [billing cycle](/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.'
+                description: 'A future timestamp to anchor the subscription''s [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices.'
                 type: string
               billing_thresholds:
                 description: 'Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period. Pass an empty string to remove previously-defined thresholds.'
@@ -16917,7 +16870,7 @@ paths:
                 description: A set of key-value pairs that you can attach to a `Subscription` object. It can be useful for storing additional information about the subscription in a structured format.
                 type: object
               prorate:
-                description: 'Boolean (defaults to `true`) telling us whether to [credit for unused time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item''s `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no proration adjustments will be created.'
+                description: 'Boolean (defaults to `true`) telling us whether to [credit for unused time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item''s `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no proration adjustments will be created.'
                 type: boolean
               tax_percent:
                 description: 'A non-negative decimal (with at most four decimal places) between 0 and 100. This represents the percentage of the subscription invoice subtotal that will be calculated and added as tax to the final amount in each billing period. For example, a plan which charges $10/month with a `tax_percent` of `20.0` will charge $12 per invoice. To unset a previously-set value, pass an empty string.'
@@ -16949,7 +16902,7 @@ paths:
 
         <p>Note, however, that any pending invoice items that you’ve created will still be charged for at the end of the period, unless manually <a href="#delete_invoiceitem">deleted</a>. If you’ve set the subscription to cancel at the end of the period, any pending prorations will also be left in place and collected at the end of the period. But if the subscription is set to cancel immediately, pending prorations will be removed.</p>
 
-        <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the customer. This is designed to prevent unexpected payment attempts after the customer has canceled a subscription. However, you can reopen the invoices manually after subscription cancellation to have us proceed with payment collection. Or, you could even re-attempt payment yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.</p>
+        <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all finalized invoices for the customer. This is intended to prevent unexpected payment attempts after the customer has canceled a subscription. However, you can resume automatic collection of the invoices manually after subscription cancellation to have us proceed. Or, you could check for unpaid invoices before allowing the customer to cancel the subscription at all.</p>
       operationId: DeleteSubscriptionsSubscriptionExposedId
       parameters:
         - in: path
@@ -17025,7 +16978,7 @@ paths:
                   - send_invoice
                 type: string
               billing_cycle_anchor:
-                description: 'Either `now` or `unchanged`. Setting the value to `now` resets the subscription''s billing cycle anchor to the current time. For more information, see the billing cycle [documentation](/docs/billing/subscriptions/billing-cycle).'
+                description: 'Either `now` or `unchanged`. Setting the value to `now` resets the subscription''s billing cycle anchor to the current time. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).'
                 type: string
               billing_thresholds:
                 description: 'Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period. Pass an empty string to remove previously-defined thresholds.'
@@ -17070,7 +17023,7 @@ paths:
                 description: A set of key-value pairs that you can attach to a subscription object. This can be useful for storing additional information about the subscription in a structured format.
                 type: object
               prorate:
-                description: 'Boolean (defaults to `true`) telling us whether to [credit for unused time](/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item''s `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no proration adjustments will be created.'
+                description: 'Boolean (defaults to `true`) telling us whether to [credit for unused time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item''s `quantity` changes. If `false`, the anchor period will be free (similar to a trial) and no proration adjustments will be created.'
                 type: boolean
               proration_date:
                 description: 'If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply exactly the same proration that was previewed with [upcoming invoice](#retrieve_customer_invoice) endpoint. It can also be used to implement custom proration logic, such as prorating by day instead of by second, by providing the time that you wish to use for proration calculations.'
@@ -17542,6 +17495,7 @@ paths:
           schema:
             properties:
               account:
+                description: Information for the account this token will represent.
                 properties:
                   business_type:
                     type: string
@@ -17723,13 +17677,6 @@ paths:
                                 type: string
                             title: person_verification_document_specs
                             type: object
-                          status:
-                            enum:
-                              - ''
-                              - pending
-                              - unverified
-                              - verified
-                            type: string
                         title: person_verification_specs
                         type: object
                     title: individual_specs
@@ -17746,7 +17693,7 @@ paths:
               currency:
                 type: string
               customer:
-                description: 'The customer (owned by the application''s account) for which to create a token. For use only with [Stripe Connect](/docs/connect). Also, this can be used only with an [OAuth access token](/docs/connect/standard-accounts) or [Stripe-Account header](/docs/connect/authentication). For more details, see [Shared Customers](/docs/connect/shared-customers).'
+                description: 'The customer (owned by the application''s account) for which to create a token. For use only with [Stripe Connect](https://stripe.com/docs/connect). Also, this can be used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see [Shared Customers](https://stripe.com/docs/connect/shared-customers).'
                 type: string
               email:
                 type: string
@@ -17924,7 +17871,7 @@ paths:
                 description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
                 type: object
               source:
-                description: 'The ID of a source to transfer funds from. For most users, this should be left unspecified which will use the bank account that was set up in the dashboard for the specified currency. In test mode, this can be a test bank token (see [Testing Top-ups](/docs/connect/testing#testing-top-ups)).'
+                description: 'The ID of a source to transfer funds from. For most users, this should be left unspecified which will use the bank account that was set up in the dashboard for the specified currency. In test mode, this can be a test bank token (see [Testing Top-ups](https://stripe.com/docs/connect/testing#testing-top-ups)).'
                 type: string
               statement_descriptor:
                 description: Extra information about a top-up for the source's bank statement. Limited to 15 ASCII characters.
@@ -18124,7 +18071,7 @@ paths:
                 description: A positive integer in %s representing how much to transfer.
                 type: integer
               currency:
-                description: '3-letter [ISO code for currency](/docs/payouts).'
+                description: '3-letter [ISO code for currency](https://stripe.com/docs/payouts).'
                 type: string
               description:
                 description: An arbitrary string attached to the object. Often useful for displaying to users.
@@ -18141,7 +18088,7 @@ paths:
                 description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                 type: object
               source_transaction:
-                description: 'You can use this parameter to transfer funds from a charge before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available. [See the Connect documentation](/docs/connect/charges-transfers#transfer-availability) for details.'
+                description: 'You can use this parameter to transfer funds from a charge before they are added to your available balance. A pending balance will transfer immediately but the funds will not become available until the original charge becomes available. [See the Connect documentation](https://stripe.com/docs/connect/charges-transfers#transfer-availability) for details.'
                 type: string
               source_type:
                 description: 'The source balance to use for this transfer. One of `card`, `financing`, `bank_account`, or `alipay_account`. For most users, this will default to `card`.'
@@ -18155,7 +18102,7 @@ paths:
                   - stripe_account
                 type: string
               transfer_group:
-                description: 'A string that identifies this transaction as part of a group. See the [Connect documentation](/docs/connect/charges-transfers#grouping-transactions) for details.'
+                description: 'A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.'
                 type: string
             required:
               - amount
@@ -18485,6 +18432,96 @@ paths:
           required: true
           schema:
             properties:
+              api_version:
+                description: Events sent to this endpoint will be generated with this Stripe Version instead of your account's default Stripe Version.
+                enum:
+                  - '2011-01-01'
+                  - '2011-06-21'
+                  - '2011-06-28'
+                  - '2011-08-01'
+                  - '2011-09-15'
+                  - '2011-11-17'
+                  - '2012-02-23'
+                  - '2012-03-25'
+                  - '2012-06-18'
+                  - '2012-06-28'
+                  - '2012-07-09'
+                  - '2012-09-24'
+                  - '2012-10-26'
+                  - '2012-11-07'
+                  - '2013-02-11'
+                  - '2013-02-13'
+                  - '2013-07-05'
+                  - '2013-08-12'
+                  - '2013-08-13'
+                  - '2013-10-29'
+                  - '2013-12-03'
+                  - '2014-01-31'
+                  - '2014-03-13'
+                  - '2014-03-28'
+                  - '2014-05-19'
+                  - '2014-06-13'
+                  - '2014-06-17'
+                  - '2014-07-22'
+                  - '2014-07-26'
+                  - '2014-08-04'
+                  - '2014-08-20'
+                  - '2014-09-08'
+                  - '2014-10-07'
+                  - '2014-11-05'
+                  - '2014-11-20'
+                  - '2014-12-08'
+                  - '2014-12-17'
+                  - '2014-12-22'
+                  - '2015-01-11'
+                  - '2015-01-26'
+                  - '2015-02-10'
+                  - '2015-02-16'
+                  - '2015-02-18'
+                  - '2015-03-24'
+                  - '2015-04-07'
+                  - '2015-06-15'
+                  - '2015-07-07'
+                  - '2015-07-13'
+                  - '2015-07-28'
+                  - '2015-08-07'
+                  - '2015-08-19'
+                  - '2015-09-03'
+                  - '2015-09-08'
+                  - '2015-09-23'
+                  - '2015-10-01'
+                  - '2015-10-12'
+                  - '2015-10-16'
+                  - '2016-02-03'
+                  - '2016-02-19'
+                  - '2016-02-22'
+                  - '2016-02-23'
+                  - '2016-02-29'
+                  - '2016-03-07'
+                  - '2016-06-15'
+                  - '2016-07-06'
+                  - '2016-10-19'
+                  - '2017-01-27'
+                  - '2017-02-14'
+                  - '2017-04-06'
+                  - '2017-05-25'
+                  - '2017-06-05'
+                  - '2017-08-15'
+                  - '2017-12-14'
+                  - '2018-01-23'
+                  - '2018-02-05'
+                  - '2018-02-06'
+                  - '2018-02-28'
+                  - '2018-05-21'
+                  - '2018-07-27'
+                  - '2018-08-23'
+                  - '2018-09-06'
+                  - '2018-09-24'
+                  - '2018-10-31'
+                  - '2018-11-08'
+                  - '2019-02-11'
+                  - '2019-02-19'
+                type: string
               connect:
                 description: 'Whether this endpoint should receive events from connected accounts (`true`), or your account (`false`).'
                 type: boolean
@@ -18536,6 +18573,9 @@ paths:
                     - coupon.created
                     - coupon.deleted
                     - coupon.updated
+                    - credit_note.created
+                    - credit_note.updated
+                    - credit_note.voided
                     - customer.bank_account.created
                     - customer.bank_account.deleted
                     - customer.bank_account.updated
@@ -18548,9 +18588,6 @@ paths:
                     - customer.discount.created
                     - customer.discount.deleted
                     - customer.discount.updated
-                    - customer.payment_method.created
-                    - customer.payment_method.deleted
-                    - customer.payment_method.updated
                     - customer.source.contact_cardholder
                     - customer.source.created
                     - customer.source.deleted
@@ -18601,8 +18638,12 @@ paths:
                     - payment_intent.amount_capturable_updated
                     - payment_intent.created
                     - payment_intent.payment_failed
+                    - payment_intent.requires_authorization
                     - payment_intent.requires_capture
                     - payment_intent.succeeded
+                    - payment_method.attached
+                    - payment_method.card_automatically_updated
+                    - payment_method.detached
                     - payment_provider_balance_transaction.created
                     - payment_provider_transfer.updated
                     - payout.canceled
@@ -18800,6 +18841,9 @@ paths:
                     - coupon.created
                     - coupon.deleted
                     - coupon.updated
+                    - credit_note.created
+                    - credit_note.updated
+                    - credit_note.voided
                     - customer.bank_account.created
                     - customer.bank_account.deleted
                     - customer.bank_account.updated
@@ -18812,9 +18856,6 @@ paths:
                     - customer.discount.created
                     - customer.discount.deleted
                     - customer.discount.updated
-                    - customer.payment_method.created
-                    - customer.payment_method.deleted
-                    - customer.payment_method.updated
                     - customer.source.contact_cardholder
                     - customer.source.created
                     - customer.source.deleted
@@ -18865,8 +18906,12 @@ paths:
                     - payment_intent.amount_capturable_updated
                     - payment_intent.created
                     - payment_intent.payment_failed
+                    - payment_intent.requires_authorization
                     - payment_intent.requires_capture
                     - payment_intent.succeeded
+                    - payment_method.attached
+                    - payment_method.card_automatically_updated
+                    - payment_method.detached
                     - payment_provider_balance_transaction.created
                     - payment_provider_transfer.updated
                     - payout.canceled
@@ -19207,7 +19252,7 @@ definitions:
   account_payout_settings:
     properties:
       debit_negative_balances:
-        description: 'A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](/docs/connect/account-balances) documentation for details. Default value is `true` for Express accounts and `false` for Custom accounts.'
+        description: 'A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank account. See our [Understanding Connect Account Balances](https://stripe.com/docs/connect/account-balances) documentation for details. Default value is `true` for Express accounts and `false` for Custom accounts.'
         type: boolean
       schedule:
         $ref: '#/definitions/transfer_schedule'
@@ -19227,7 +19272,7 @@ definitions:
         description: The date the fields in `currently_due` must be collected by to keep payouts enabled for the account. These fields might block payouts sooner if the next threshold is reached before these fields are collected.
         type: integer
       currently_due:
-        description: 'The fields that need to be collected to keep the account enabled. If not collected by the `current_deadline`, these fields are moved to `past_due` and the account is disabled.'
+        description: 'The fields that need to be collected to keep the account enabled. If not collected by the `current_deadline`, these fields will appear in `past_due` as well, and the account will be disabled.'
         items:
           type: string
         type: array
@@ -19235,12 +19280,12 @@ definitions:
         description: 'If the account is disabled, this string describes why the account can’t create charges or receive payouts. Can be `requirements.past_due`, `requirements.pending_verification`, `rejected.fraud`, `rejected.terms_of_service`, `rejected.listed`, `rejected.other`, `listed`, `under_review`, or `other`.'
         type: string
       eventually_due:
-        description: 'The fields that need to be collected assuming all volume thresholds are reached. As fields are needed, they are moved to `currently_due` and the `current_deadline` is set.'
+        description: 'The fields that need to be collected assuming all volume thresholds are reached. As they become required, these fields will appear in `currently_due` as well, and the `current_deadline` will be set.'
         items:
           type: string
         type: array
       past_due:
-        description: The fields that weren't collected by the `current_deadline`. These fields need to be collected to enable payouts for the account.
+        description: The fields that weren't collected by the `current_deadline`. These fields need to be collected to re-enable the account.
         items:
           type: string
         type: array
@@ -19372,13 +19417,13 @@ definitions:
         description: 'For card errors, the ID of the failed charge.'
         type: string
       code:
-        description: 'For some errors that could be handled programmatically, a short string indicating the [error code](/docs/error-codes) reported.'
+        description: 'For some errors that could be handled programmatically, a short string indicating the [error code](https://stripe.com/docs/error-codes) reported.'
         type: string
       decline_code:
-        description: 'For card errors resulting from a card issuer decline, a short string indicating the [card issuer''s reason for the decline](/docs/declines#issuer-declines) if they provide one.'
+        description: 'For card errors resulting from a card issuer decline, a short string indicating the [card issuer''s reason for the decline](https://stripe.com/docs/declines#issuer-declines) if they provide one.'
         type: string
       doc_url:
-        description: 'A URL to more information about the [error code](/docs/error-codes) reported.'
+        description: 'A URL to more information about the [error code](https://stripe.com/docs/error-codes) reported.'
         type: string
       message:
         description: 'A human-readable message providing more details about the error. For card errors, these messages can be shown to your users.'
@@ -19467,6 +19512,7 @@ definitions:
         description: Amount in %s refunded (can be less than the amount attribute on the fee if a partial refund was issued)
         type: integer
       application:
+        description: ID of the Connect application that earned the fee.
         type: string
         x-expansionResources:
           oneOf:
@@ -20078,8 +20124,14 @@ definitions:
         x-expansionResources:
           oneOf:
             - $ref: '#/definitions/application'
+      application_fee:
+        description: 'The application fee (if any) for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.'
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/application_fee'
       application_fee_amount:
-        description: 'The amount of the application fee (if any) for the charge. [See the Connect documentation](/docs/connect/direct-charges#collecting-fees) for details.'
+        description: 'The amount of the application fee (if any) for the charge. [See the Connect documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.'
         type: integer
       balance_transaction:
         description: ID of the balance transaction that describes the impact of this charge on your account balance (not including refunds or disputes).
@@ -20106,12 +20158,6 @@ definitions:
       description:
         description: An arbitrary string attached to the object. Often useful for displaying to users.
         type: string
-      destination:
-        description: 'The account (if any) the charge was made on behalf of, with an automatic transfer. [See the Connect documentation](/docs/connect/destination-charges) for details.'
-        type: string
-        x-expansionResources:
-          oneOf:
-            - $ref: '#/definitions/account'
       dispute:
         description: Details about the dispute if the charge has been disputed.
         type: string
@@ -20119,7 +20165,7 @@ definitions:
           oneOf:
             - $ref: '#/definitions/dispute'
       failure_code:
-        description: 'Error code explaining reason for charge failure if available (see [the errors section](/docs/api#errors) for a list of codes).'
+        description: 'Error code explaining reason for charge failure if available (see [the errors section](https://stripe.com/docs/api#errors) for a list of codes).'
         type: string
       failure_message:
         description: Message to user further explaining reason for charge failure if available.
@@ -20147,7 +20193,7 @@ definitions:
           - charge
         type: string
       on_behalf_of:
-        description: 'The account (if any) the charge was made on behalf of without triggering an automatic transfer. See the [Connect documentation](/docs/connect/charges-transfers) for details.'
+        description: 'The account (if any) the charge was made on behalf of without triggering an automatic transfer. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers) for details.'
         type: string
         x-expansionResources:
           oneOf:
@@ -20216,7 +20262,7 @@ definitions:
       source:
         $ref: '#/definitions/account'
       source_transfer:
-        description: 'The transfer ID which created this charge. Only present if the charge came from another Stripe account. [See the Connect documentation](/docs/connect/destination-charges) for details.'
+        description: 'The transfer ID which created this charge. Only present if the charge came from another Stripe account. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.'
         type: string
         x-expansionResources:
           oneOf:
@@ -20236,7 +20282,7 @@ definitions:
       transfer_data:
         $ref: '#/definitions/charge_transfer_data'
       transfer_group:
-        description: 'A string that identifies this transaction as part of a group. See the [Connect documentation](/docs/connect/charges-transfers#grouping-transactions) for details.'
+        description: 'A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.'
         type: string
     required:
       - amount
@@ -20258,9 +20304,9 @@ definitions:
     type: object
     x-expandableFields:
       - application
+      - application_fee
       - balance_transaction
       - customer
-      - destination
       - dispute
       - fraud_details
       - invoice
@@ -20289,10 +20335,10 @@ definitions:
   charge_outcome:
     properties:
       network_status:
-        description: 'Possible values are `approved_by_network`, `declined_by_network`, `not_sent_to_network`, and `reversed_after_approval`. The value `reversed_after_approval` indicates the payment was [blocked by Stripe](/docs/declines#blocked-payments) after bank authorization, and may temporarily appear as "pending" on a cardholder''s statement.'
+        description: 'Possible values are `approved_by_network`, `declined_by_network`, `not_sent_to_network`, and `reversed_after_approval`. The value `reversed_after_approval` indicates the payment was [blocked by Stripe](https://stripe.com/docs/declines#blocked-payments) after bank authorization, and may temporarily appear as "pending" on a cardholder''s statement.'
         type: string
       reason:
-        description: 'An enumerated value providing a more detailed explanation of the outcome''s `type`. Charges blocked by Radar''s default block rule have the value `highest_risk_level`. Charges placed in review by Radar''s default review rule have the value `elevated_risk_level`. Charges authorized, blocked, or placed in review by custom rules have the value `rule`. See [understanding declines](/docs/declines) for more details.'
+        description: 'An enumerated value providing a more detailed explanation of the outcome''s `type`. Charges blocked by Radar''s default block rule have the value `highest_risk_level`. Charges placed in review by Radar''s default review rule have the value `elevated_risk_level`. Charges authorized, blocked, or placed in review by custom rules have the value `rule`. See [understanding declines](https://stripe.com/docs/declines) for more details.'
         type: string
       risk_level:
         description: 'Stripe''s evaluation of the riskiness of the payment. Possible values for evaluated payments are `normal`, `elevated`, `highest`. For non-card payments, and card-based payments predating the public assignment of risk levels, this field will have the value `not_assessed`. In the event of an error in the evaluation, this field will have the value `unknown`.'
@@ -20310,7 +20356,7 @@ definitions:
         description: 'A human-readable description of the outcome type and reason, designed for you (the recipient of the payment), not your customer.'
         type: string
       type:
-        description: 'Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and `invalid`. See [understanding declines](/docs/declines) and [Radar reviews](radar/review) for details.'
+        description: 'Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and `invalid`. See [understanding declines](https://stripe.com/docs/declines) and [Radar reviews](radar/review) for details.'
         type: string
     required:
       - type
@@ -20324,7 +20370,7 @@ definitions:
         description: 'The amount transferred to the destination account, if specified. By default, the entire charge amount is transferred to the destination account.'
         type: integer
       destination:
-        description: 'The account (if any) the charge was made on behalf of, with an automatic transfer. [See the Connect documentation](/docs/connect/destination-charges) for details.'
+        description: 'ID of an existing, connected Stripe account to transfer funds to if `transfer_data` was specified in the charge request.'
         type: string
         x-expansionResources:
           oneOf:
@@ -21279,7 +21325,7 @@ definitions:
           - dispute
         type: string
       reason:
-        description: 'Reason given by cardholder for dispute. Possible values are `duplicate`, `fraudulent`, `subscription_canceled`, `product_unacceptable`, `product_not_received`, `unrecognized`, `credit_not_processed`, `general`, `incorrect_account_details`, `insufficient_funds`, `bank_cannot_process`, `debit_not_authorized`, or `customer_initiated`. Read more about [dispute reasons](/docs/disputes/categories).'
+        description: 'Reason given by cardholder for dispute. Possible values are `bank_cannot_process`, `check_returned`, `credit_not_processed`, `customer_initiated`, `debit_not_authorized`, `duplicate`, `fraudulent`, `general`, `incorrect_account_details`, `insufficient_funds`, `product_not_received`, `product_unacceptable`, `subscription_canceled`, or `unrecognized`. Read more about [dispute reasons](https://stripe.com/docs/disputes/categories).'
         type: string
       status:
         description: 'Current status of dispute. Possible values are `warning_needs_response`, `warning_under_review`, `warning_closed`, `needs_response`, `under_review`, `charge_refunded`, `won`, or `lost`.'
@@ -21863,7 +21909,7 @@ definitions:
         description: 'Whether an attempt has been made to pay the invoice. An invoice is not attempted until 1 hour after the `invoice.created` webhook, for example, so you might not want to display that invoice as unpaid to your users.'
         type: boolean
       auto_advance:
-        description: 'Controls whether Stripe will perform [automatic collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice''s state will not automatically advance without an explicit action.'
+        description: 'Controls whether Stripe will perform [automatic collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the invoice''s state will not automatically advance without an explicit action.'
         type: boolean
       billing:
         description: 'Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.'
@@ -21889,6 +21935,9 @@ definitions:
         x-expansionResources:
           oneOf:
             - $ref: '#/definitions/charge'
+      created:
+        description: Time at which the object was created. Measured in seconds since the Unix epoch.
+        type: integer
       currency:
         description: 'Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).'
         type: string
@@ -22006,7 +22055,16 @@ definitions:
         type: string
       status:
         description: 'The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`.'
+        enum:
+          - deleted
+          - draft
+          - open
+          - paid
+          - uncollectible
+          - void
         type: string
+      status_transitions:
+        $ref: '#/definitions/invoices_status_transitions'
       subscription:
         description: 'The subscription that this invoice was prepared for, if any.'
         type: string
@@ -22031,7 +22089,7 @@ definitions:
         description: Total after discount.
         type: integer
       webhooks_delivered_at:
-        description: 'The time at which webhooks for this invoice were successfully delivered (if the invoice had no webhooks to deliver, this will match `date`). Invoice payment is delayed until webhooks are delivered, or until all webhook delivery attempts have been exhausted.'
+        description: 'The time at which webhooks for this invoice were successfully delivered (if the invoice had no webhooks to deliver, this will match `created`). Invoice payment is delayed until webhooks are delivered, or until all webhook delivery attempts have been exhausted.'
         type: integer
     required:
       - amount_due
@@ -22039,9 +22097,9 @@ definitions:
       - amount_remaining
       - attempt_count
       - attempted
+      - created
       - currency
       - customer
-      - date
       - lines
       - livemode
       - object
@@ -22049,6 +22107,7 @@ definitions:
       - period_end
       - period_start
       - starting_balance
+      - status_transitions
       - subtotal
       - total
     title: Invoice
@@ -22060,6 +22119,7 @@ definitions:
       - default_source
       - discount
       - lines
+      - status_transitions
       - subscription
       - threshold_reason
     x-resourceId: invoice
@@ -22232,6 +22292,23 @@ definitions:
       - plan
       - subscription
     x-resourceId: invoiceitem
+  invoices_status_transitions:
+    properties:
+      finalized_at:
+        description: The time that the invoice draft was finalized.
+        type: integer
+      marked_uncollectible_at:
+        description: The time that the invoice was marked uncollectible.
+        type: integer
+      paid_at:
+        description: The time that the invoice was paid.
+        type: integer
+      voided_at:
+        description: The time that the invoice was voided.
+        type: integer
+    title: InvoicesStatusTransitions
+    type: object
+    x-expandableFields: []
   issuer_fraud_record:
     properties:
       actionable:
@@ -22314,7 +22391,7 @@ definitions:
         description: 'The amount the authorization is expected to be in `held_currency`. When Stripe holds funds from you, this is the amount reserved for the authorization. This will be `0` when the object is created, and increase after it has been approved. For multi-currency transactions, `held_amount` can be used to determine the expected exchange rate.'
         type: integer
       held_currency:
-        description: 'The currency of the [held amount](/docs/api#issuing_authorization_object-held_amount). This will always be the card currency.'
+        description: 'The currency of the [held amount](https://stripe.com/docs/api#issuing_authorization_object-held_amount). This will always be the card currency.'
         type: string
       id:
         description: Unique identifier for the object.
@@ -22834,7 +22911,7 @@ definitions:
   issuing_authorization_merchant_data:
     properties:
       category:
-        description: 'A categorization of the seller''s type of business. See our [merchant categories guide](/docs/issuing/merchant-categories) for a list of possible values.'
+        description: 'A categorization of the seller''s type of business. See our [merchant categories guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.'
         type: string
       city:
         description: City where the seller is located
@@ -22878,7 +22955,7 @@ definitions:
         description: 'The amount Stripe held from your account to fund the authorization, if the request was approved'
         type: integer
       held_currency:
-        description: 'The currency of the [held amount](/docs/api#issuing_authorization_object-held_amount)'
+        description: 'The currency of the [held amount](https://stripe.com/docs/api#issuing_authorization_object-held_amount)'
         type: string
       reason:
         description: 'One of `authorization_controls`, `card_active`, `card_inactive`, `insufficient_funds`, `account_compliance_disabled`, `account_inactive`, `suspected_fraud`, `webhook_approved`, `webhook_declined`, or `webhook_timeout`.'
@@ -22915,17 +22992,17 @@ definitions:
   issuing_card_authorization_controls:
     properties:
       allowed_categories:
-        description: 'Array of strings containing [categories](/docs/api#issuing_authorization_object-merchant_data-category) of authorizations permitted on this card.'
+        description: 'Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations permitted on this card.'
         items:
           type: string
         type: array
       blocked_categories:
-        description: 'Array of strings containing [categories](/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to always decline on this card.'
+        description: 'Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to always decline on this card.'
         items:
           type: string
         type: array
       currency:
-        description: 'The currency of the card. See [max_amount](/docs/api#issuing_card_object-authorization_controls-max_amount)'
+        description: 'The currency of the card. See [max_amount](https://stripe.com/docs/api#issuing_card_object-authorization_controls-max_amount)'
         type: string
       max_amount:
         description: 'Maximum amount allowed per authorization on this card, in the currency of the card. Authorization amounts in a different currency will be converted to the card''s currency when evaluating this control.'
@@ -23364,7 +23441,7 @@ definitions:
           $ref: '#/definitions/shipping_method'
         type: array
       status:
-        description: 'Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More details in the [Orders Guide](/docs/orders/guide#understanding-order-statuses).'
+        description: 'Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More details in the [Orders Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).'
         type: string
       status_transitions:
         $ref: '#/definitions/status_transitions'
@@ -23543,7 +23620,7 @@ definitions:
           oneOf:
             - $ref: '#/definitions/application'
       application_fee_amount:
-        description: 'The amount of the application fee (if any) for the resulting payment. See the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.'
+        description: 'The amount of the application fee (if any) for the resulting payment. See the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.'
         type: integer
       canceled_at:
         description: 'Populated when `status` is `canceled`, this is the time at which the PaymentIntent was canceled. Measured in seconds since the Unix epoch.'
@@ -23591,7 +23668,7 @@ definitions:
         x-expandableFields:
           - data
       client_secret:
-        description: 'The client secret of this PaymentIntent. Used for client-side retrieval using a publishable key. Please refer to [dynamic authentication](/docs/payments/dynamic-authentication) guide on how `client_secret` should be handled.'
+        description: 'The client secret of this PaymentIntent. Used for client-side retrieval using a publishable key. Please refer to [dynamic authentication](https://stripe.com/docs/payments/dynamic-authentication) guide on how `client_secret` should be handled.'
         type: string
       confirmation_method:
         description: 'Confirmation method of this PaymentIntent, one of `secret` or `publishable`.'
@@ -23624,7 +23701,7 @@ definitions:
         description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
         type: boolean
       metadata:
-        description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+        description: 'Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. For more information, see the [documentation](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).'
         type: object
       next_action:
         $ref: '#/definitions/payment_intent_next_action'
@@ -23634,7 +23711,7 @@ definitions:
           - payment_intent
         type: string
       on_behalf_of:
-        description: 'The account (if any) for which the funds of the PaymentIntent are intended. See the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.'
+        description: 'The account (if any) for which the funds of the PaymentIntent are intended. See the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.'
         type: string
         x-expansionResources:
           oneOf:
@@ -23666,11 +23743,12 @@ definitions:
         description: Extra information about a PaymentIntent. This will appear on your customer's statement when this PaymentIntent succeeds in creating a charge.
         type: string
       status:
-        description: 'Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`.'
+        description: 'Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `requires_authorization`, `requires_capture`, `canceled`, or `succeeded`.'
         enum:
           - canceled
           - processing
           - requires_action
+          - requires_authorization
           - requires_capture
           - requires_confirmation
           - requires_payment_method
@@ -23679,7 +23757,7 @@ definitions:
       transfer_data:
         $ref: '#/definitions/payment_flows_payment_intent_resource_transfer_data'
       transfer_group:
-        description: 'A string that identifies the resulting payment as part of a group. See the PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.'
+        description: 'A string that identifies the resulting payment as part of a group. See the PaymentIntents [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.'
         type: string
     required:
       - amount
@@ -23769,7 +23847,7 @@ definitions:
         description: Date the payout is expected to arrive in the bank. This factors in delays like weekends or bank holidays.
         type: integer
       automatic:
-        description: 'Returns `true` if the payout was created by an [automated payout schedule](/docs/payouts#payout-schedule), and `false` if it was [requested manually](https://stripe.com/docs/payouts#manual-payouts).'
+        description: 'Returns `true` if the payout was created by an [automated payout schedule](https://stripe.com/docs/payouts#payout-schedule), and `false` if it was [requested manually](https://stripe.com/docs/payouts#manual-payouts).'
         type: boolean
       balance_transaction:
         description: ID of the balance transaction that describes the impact of this payout on your account balance.
@@ -23802,7 +23880,7 @@ definitions:
           oneOf:
             - $ref: '#/definitions/balance_transaction'
       failure_code:
-        description: 'Error code explaining reason for payout failure if available. See [Types of payout failures](/docs/api#payout_failures) for a list of failure codes.'
+        description: 'Error code explaining reason for payout failure if available. See [Types of payout failures](https://stripe.com/docs/api#payout_failures) for a list of failure codes.'
         type: string
       failure_message:
         description: Message to user further explaining reason for payout failure if available.
@@ -24064,7 +24142,7 @@ definitions:
       transform_usage:
         $ref: '#/definitions/transform_usage'
       trial_period_days:
-        description: 'Default number of trial days when subscribing a customer to this plan using [`trial_from_plan=true`](/docs/api#create_subscription-trial_from_plan).'
+        description: 'Default number of trial days when subscribing a customer to this plan using [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).'
         type: integer
       usage_type:
         description: 'Configures how the quantity per period should be determined, can be either `metered` or `licensed`. `licensed` will automatically bill the `quantity` set for a plan when adding it to a subscription, `metered` will aggregate the total usage based on usage records. Defaults to `licensed`.'
@@ -24397,7 +24475,7 @@ definitions:
         description: Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
         type: object
       migrated_to:
-        description: 'The ID of the [Custom account](/docs/connect/custom-accounts) this recipient was migrated to. If set, the recipient can no longer be updated, nor can transfers be made to it: use the Custom account instead.'
+        description: 'The ID of the [Custom account](https://stripe.com/docs/connect/custom-accounts) this recipient was migrated to. If set, the recipient can no longer be updated, nor can transfers be made to it: use the Custom account instead.'
         type: string
         x-expansionResources:
           oneOf:
@@ -24493,7 +24571,7 @@ definitions:
           oneOf:
             - $ref: '#/definitions/transfer_reversal'
       status:
-        description: 'Status of the refund. For credit card refunds, this can be `succeeded` or `failed`. For other types of refunds, it can be `pending`, `succeeded`, `failed`, or `canceled`. Refer to our [refunds](/docs/refunds#failed-refunds) documentation for more details.'
+        description: 'Status of the refund. For credit card refunds, this can be `succeeded` or `failed`. For other types of refunds, it can be `pending`, `succeeded`, `failed`, or `canceled`. Refer to our [refunds](https://stripe.com/docs/refunds#failed-refunds) documentation for more details.'
         type: string
       transfer_reversal:
         description: 'If the accompanying transfer was reversed, the transfer reversal object. Only applicable if the charge was created using the destination parameter.'
@@ -24541,7 +24619,7 @@ definitions:
       parameters:
         $ref: '#/definitions/financial_reporting_finance_report_run_run_parameters'
       report_type:
-        description: 'The ID of the [report type](/docs/reporting/statements/api#report-types) to run, such as `"balance.summary.1"`.'
+        description: 'The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to run, such as `"balance.summary.1"`.'
         type: string
       result:
         $ref: '#/definitions/file'
@@ -24981,7 +25059,7 @@ definitions:
       three_d_secure:
         $ref: '#/definitions/source_type_three_d_secure'
       type:
-        description: 'The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `p24`, `paper_check`, `sepa_credit_transfer`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](/docs/sources) used.'
+        description: 'The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `p24`, `paper_check`, `sepa_credit_transfer`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.'
         enum:
           - ach_credit_transfer
           - ach_debit
@@ -25749,6 +25827,12 @@ definitions:
         type: object
         x-expandableFields:
           - data
+      latest_invoice:
+        description: The most recent invoice this subscription has generated.
+        type: string
+        x-expansionResources:
+          oneOf:
+            - $ref: '#/definitions/invoice'
       livemode:
         description: Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
         type: boolean
@@ -25811,6 +25895,7 @@ definitions:
       - default_source
       - discount
       - items
+      - latest_invoice
       - plan
     x-resourceId: subscription
   subscription_billing_thresholds:
@@ -25845,7 +25930,7 @@ definitions:
       plan:
         $ref: '#/definitions/plan'
       quantity:
-        description: 'The [quantity](/docs/subscriptions/quantities) of the plan to which the customer should be subscribed.'
+        description: 'The [quantity](https://stripe.com/docs/subscriptions/quantities) of the plan to which the customer should be subscribed.'
         type: integer
       subscription:
         description: The `subscription` this `subscription_item` belongs to.
@@ -26338,7 +26423,7 @@ definitions:
         description: Date the funds are expected to arrive in your Stripe account for payouts. This factors in delays like weekends or bank holidays. May not be specified depending on status of top-up.
         type: integer
       failure_code:
-        description: 'Error code explaining reason for top-up failure if available (see [the errors section](/docs/api#errors) for a list of codes).'
+        description: 'Error code explaining reason for top-up failure if available (see [the errors section](https://stripe.com/docs/api#errors) for a list of codes).'
         type: string
       failure_message:
         description: Message to user further explaining reason for top-up failure if available.
@@ -26479,7 +26564,7 @@ definitions:
         description: 'The source balance this transfer came from. One of `card`, `financing`, `bank_account`, or `alipay_account`.'
         type: string
       transfer_group:
-        description: 'A string that identifies this transaction as part of a group. See the [Connect documentation](/docs/connect/charges-transfers#grouping-transactions) for details.'
+        description: 'A string that identifies this transaction as part of a group. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.'
         type: string
     required:
       - amount
@@ -26569,7 +26654,7 @@ definitions:
         description: The number of days charges for the account will be held before being paid out.
         type: integer
       interval:
-        description: 'How frequently funds will be paid out. One of `manual` (transfers only created via API call), `daily`, `weekly`, or `monthly`.'
+        description: 'How frequently funds will be paid out. One of `manual` (payouts only created via API call), `daily`, `weekly`, or `monthly`.'
         type: string
       monthly_anchor:
         description: The day of the month funds will be paid out. Only shown if `interval` is monthly. Payouts scheduled between the 29th and 31st of the month are sent on the last day of shorter months.
@@ -26671,6 +26756,9 @@ definitions:
     x-resourceId: usage_record_summary
   webhook_endpoint:
     properties:
+      api_version:
+        description: The API version events are rendered as for this webhook endpoint.
+        type: string
       application:
         description: The ID of the associated Connect application.
         type: string
@@ -26694,7 +26782,7 @@ definitions:
           - webhook_endpoint
         type: string
       secret:
-        description: 'The endpoint''s secret, used to generate [webhook signatures](/docs/webhooks/signatures). Only returned at creation.'
+        description: 'The endpoint''s secret, used to generate [webhook signatures](https://stripe.com/docs/webhooks/signatures). Only returned at creation.'
         type: string
       status:
         description: The status of the webhook. It can be `enabled` or `disabled`.

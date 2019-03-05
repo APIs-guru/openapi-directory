@@ -573,11 +573,14 @@ definitions:
           - WELSH
         example: en
         type: string
-      paymentId:
+      payment_id:
         example: hu20sqlact5260q2nanm0q8u93
         type: string
       payment_provider:
         example: worldpay
+        type: string
+      provider_id:
+        example: 'null'
         type: string
       reference:
         example: your-reference
@@ -657,6 +660,10 @@ definitions:
         type: string
       payment_provider:
         example: worldpay
+        readOnly: true
+        type: string
+      provider_id:
+        example: reference-from-payment-gateway
         readOnly: true
         type: string
       reference:
@@ -741,6 +748,10 @@ definitions:
         type: string
       payment_provider:
         example: worldpay
+        readOnly: true
+        type: string
+      provider_id:
+        example: reference-from-payment-gateway
         readOnly: true
         type: string
       reference:

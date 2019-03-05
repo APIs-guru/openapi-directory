@@ -477,6 +477,32 @@ paths:
               $ref: '#/definitions/PlayerDetail'
             type: array
       summary: Player Details by Team
+  '/{format}/Rookies/{season}':
+    get:
+      operationId: PlayerDetailsByRookieDraftYear
+      parameters:
+        - default: XML
+          description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          enum:
+            - XML
+            - JSON
+          in: path
+          name: format
+          required: true
+          type: string
+        - description: 'Year of the season.<br>Examples: <code>2018</code>, <code>2019</code>, etc.'
+          in: path
+          name: season
+          required: true
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            items:
+              $ref: '#/definitions/Player'
+            type: array
+      summary: Player Details by Rookie Draft Year
   '/{format}/Schedules/{season}':
     get:
       description: Game schedule for a specified season.

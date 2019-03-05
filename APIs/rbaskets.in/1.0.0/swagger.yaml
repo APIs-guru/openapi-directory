@@ -39,6 +39,11 @@ securityDefinitions:
     in: header
     name: Authorization
     type: apiKey
+  service_token:
+    description: Service master token
+    in: header
+    name: Authorization
+    type: apiKey
 tags:
   - description: Service information
     name: service
@@ -78,7 +83,7 @@ paths:
         '401':
           description: Unauthorized. Invalid or missing master token
       security:
-        - basket_token: []
+        - service_token: []
       summary: Get baskets
       tags:
         - baskets
@@ -379,7 +384,7 @@ paths:
         '401':
           description: Unauthorized. Invalid or missing master token
       security:
-        - basket_token: []
+        - service_token: []
       summary: Get baskets statistics
       tags:
         - baskets
@@ -424,7 +429,7 @@ paths:
         '401':
           description: Unauthorized. Invalid or missing master token
       security:
-        - basket_token: []
+        - service_token: []
       summary: Get baskets
       tags:
         - baskets
@@ -725,28 +730,38 @@ definitions:
           format (number of milliseconds elapsed since January 1, 1970 UTC).
 
           If no requests were collected by this basket `0` is returned.
+        example: 1550106301288
         format: int64
         type: integer
       name:
         description: Basket name
+        example: basket22
         type: string
       requests_count:
         description: Current number of collected HTTP requests held by basket
+        example: 62
         type: integer
       requests_total_count:
         description: Total number of all HTTP requests passed through this basket
+        example: 315
         type: integer
     type: object
   Baskets:
     properties:
       count:
         description: Total number of baskets in the system; not present if query is applied
+        example: 118
         type: integer
       has_more:
         description: Indicates if there are more baskets to fetch
+        example: true
         type: boolean
       names:
         description: Collection of basket names
+        example:
+          - basket22
+          - mybasket
+          - test123
         items:
           type: string
         type: array
@@ -758,22 +773,27 @@ definitions:
     properties:
       capacity:
         description: 'Baskets capacity, defines maximum number of requests to store'
+        example: 250
         type: integer
       expand_path:
         description: If set to `true` the forward URL path will be expanded when original HTTP request contains compound path.
+        example: true
         type: boolean
       forward_url:
         description: 'URL to forward all incoming requests of the basket, `empty` value disables forwarding'
+        example: 'https://myservice.example.com/events-collector'
         type: string
       insecure_tls:
         description: |
           If set to `true` the certificate verification will be disabled if forward URL indicates HTTPS scheme.
           **Warning:** enabling this feature has known security implications.
+        example: false
         type: boolean
       proxy_response:
         description: |
           If set to `true` this basket behaves as a full proxy: responses from underlying service configured in `forward_url`
           are passed back to clients of original requests. The configuration of basket responses is ignored in this case.
+        example: false
         type: boolean
     type: object
   Headers:
@@ -783,38 +803,54 @@ definitions:
         type: string
       type: array
     description: 'Map of HTTP headers, key represents name, value is array of values'
+    example:
+      Accept:
+        - application/json
+        - application/xml
+      Connection:
+        - close
+      Content-Type:
+        - application/json
     type: object
   Request:
     properties:
       body:
         description: Content of request body
+        example: user=abc_test&status=200
         type: string
       content_length:
         description: Content length of request
+        example: 24
         type: integer
       date:
         description: 'Date and time of request in Unix time ms. format (number of milliseconds elapsed since January 1, 1970 UTC)'
+        example: 1550300604712
         format: int64
         type: integer
       headers:
         $ref: '#/definitions/Headers'
       method:
         description: HTTP method of request
+        example: POST
         type: string
       path:
         description: URL path of request
+        example: /basket1/data
         type: string
       query:
         description: Query parameters of request
+        example: name=basket1&version=12
         type: string
     type: object
   Requests:
     properties:
       count:
         description: Current number of collected requests hold by basket; not present if query is applied
+        example: 200
         type: integer
       has_more:
         description: Indicates if there are more requests collected by basket to fetch
+        example: true
         type: boolean
       requests:
         description: Collection of collected requests
@@ -823,6 +859,7 @@ definitions:
         type: array
       total_count:
         description: Total number of all requests passed through this basket; not present if query is applied
+        example: 3023
         type: integer
     required:
       - requests
@@ -832,6 +869,7 @@ definitions:
     properties:
       body:
         description: Content of response body
+        example: Success
         type: string
       headers:
         $ref: '#/definitions/Headers'
@@ -839,30 +877,38 @@ definitions:
         description: |
           If set to `true` the body is treated as [HTML template](https://golang.org/pkg/html/template) that accepts
           input from request parameters.
+        example: false
         type: boolean
       status:
         description: The HTTP status code to reply with
+        example: 200
         type: integer
     type: object
   ServiceStats:
     properties:
       avg_basket_size:
         description: 'Average size of a basket in the system, empty baskets are not taken into account'
+        example: 217
         type: integer
       baskets_count:
         description: Total number of baskets managed by service
+        example: 28
         type: integer
       empty_baskets_count:
         description: Number of empty baskets
+        example: 12
         type: integer
       max_basket_size:
         description: Size of the biggest basket that processed the top most number of HTTP requests
+        example: 1027
         type: integer
       requests_count:
         description: Number of HTTP requests currently stored by service
+        example: 5120
         type: integer
       requests_total_count:
         description: Total number of HTTP requests processed by service
+        example: 21847
         type: integer
       top_baskets_recent:
         description: Collection of top baskets recently active
@@ -879,6 +925,7 @@ definitions:
     properties:
       token:
         description: 'Secure token to manage the basket, generated by system'
+        example: MJeIzgE1D6aze...
         type: string
     required:
       - token
@@ -887,17 +934,22 @@ definitions:
     properties:
       commit:
         description: Git commit this service is build from
+        example: 4cc08434223ff04fbe2e45f2f6eeb9b0a39a279e
         type: string
       commit_short:
         description: Short form of git commit this service is build from
+        example: 4cc0843
         type: string
       name:
         description: Service name
+        example: request-baskets
         type: string
       source_code:
         description: URL of the source code repository
+        example: 'https://github.com/darklynx/request-baskets'
         type: string
       version:
         description: Service version
+        example: v1.0.0
         type: string
     type: object

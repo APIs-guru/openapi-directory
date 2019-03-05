@@ -767,21 +767,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * There was no request body, or the request body is malformed. Returns a unique error code of `2205`.
-             * You exceeded the maximum number of channel categories. Returns a unique error code of `2204`.
+            * Error code 2205: There was no request body, or the request body is malformed.
+            * Error code 2204: You exceeded the maximum number of channel categories.
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user can't add categories to the channel. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t add categories to the channel.'
         '404':
           content:
             application/json:
@@ -818,13 +817,13 @@ paths:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user doesn't own the channel or isn't a channel moderator. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user doesn''t own the channel or isn''t a channel moderator.'
         '404':
           content:
             application/vnd.vimeo.category+json:
@@ -863,19 +862,19 @@ paths:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You exceeded the maximum number of channel categories. Returns a unique error code of `2204`.
+          description: 'Error code 2204: You exceeded the maximum number of channel categories.'
         '401':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user doesn't own the channel or isn't a channel moderator. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user doesn''t own the channel or isn''t a channel moderator.'
         '404':
           content:
             application/vnd.vimeo.category+json:
@@ -1036,7 +1035,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The list contains more than 100 users. Returns a unique error code of `2908`.
+          description: 'Error code 2908: The list contains more than 100 users.'
         '403':
           content:
             application/json:
@@ -1086,7 +1085,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The list contains more than 100 users. Returns a unique error code of `2908`.
+          description: 'Error code 2908: The list contains more than 100 users.'
         '403':
           content:
             application/json:
@@ -1257,19 +1256,19 @@ paths:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user doesn't own this channel. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user doesn''t own this channel.'
         '404':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You can't add this user to a channel of this type. Returns a unique error code of `2204`.
+          description: 'Error code 2204: You can''t add this user to a channel of this type.'
       summary: Get all the users who can view a private channel
       tags:
         - Channels\Private channel members
@@ -1313,27 +1312,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * There was no request body, or the request body is malformed. Returns a unique error code of `2205`.
-             * At least one of the specified user accounts doesn't exist. Returns a unique error code of `2900`.
+            * Error code 2205: There was no request body, or the request body is malformed.
+            * Error code 2900: At least one of the specified user accounts doesn't exist.
         '401':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user doesn't own this channel. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user doesn''t own this channel.'
         '404':
           content:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You can't add one or more of these users to a channel of this type. Returns a unique error code of `2204`.
+          description: 'Error code 2204: You can''t add one or more of these users to a channel of this type.'
       security:
         - oauth2:
             - edit
@@ -1367,19 +1365,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user doesn't own this channel. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user doesn''t own this channel.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You can't add this user to a channel of this type. Returns a unique error code of `2204`.
+          description: 'Error code 2204: You can''t add this user to a channel of this type.'
       security:
         - oauth2:
             - edit
@@ -1412,19 +1410,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user doesn't own this channel. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user doesn''t own this channel.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You can't add this user to a channel of this type. Returns a unique error code of `2204`.
+          description: 'Error code 2204: You can''t add this user to a channel of this type.'
       security:
         - oauth2:
             - edit
@@ -1501,22 +1499,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are three ways that this status code can be encountered:
-             * No such channel exists, or a parameter is invalid.
-             * You tried to add more than 20 tags to the channel. Returns a unique error code of `2501`.
-             * There was no request body, or the request body is malformed. Returns a unique error code of `2205`.
+            * No such channel exists, or a parameter is invalid.
+            * Error code 2501: You tried to add more than 20 tags to the channel.
+            * Error code 2205: There was no request body, or the request body is malformed.
         '401':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user can't add tags to this channel. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t add tags to this channel.'
       security:
         - oauth2:
             - edit
@@ -1556,13 +1553,13 @@ paths:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user can't remove tags from this channel. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t remove tags from this channel.'
       security:
         - oauth2:
             - edit
@@ -1601,7 +1598,7 @@ paths:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: 'The tag exists, but the channel isn''t tagged by it. Returns a unique error code of `5000`.'
+          description: 'Error code 5000: The tag exists, but the channel isn''t tagged by it.'
       summary: Check if a tag has been added to a channel
       tags:
         - Channels\Tags
@@ -1632,21 +1629,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The tag is invalid, or a parameter is invalid.
-             * The channel has already reached its maximum number of 20 tags. Returns a unique error code of `2501`.
+            * The tag is invalid, or a parameter is invalid.
+            * Error code 2501: The channel has already reached its maximum number of 20 tags.
         '401':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user can't add tags to this channel. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t add tags to this channel.'
       security:
         - oauth2:
             - edit
@@ -2136,24 +2132,23 @@ paths:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The comment text is missing. Returns a unique error code of `2207`.
+          description: 'Error code 2207: The comment text is missing.'
         '401':
           content:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * Comments are disabled for this video. Returns a unique error code of `3413`.
-             * The authenticated user is unverified. Returns a unique error code of `3411`.
-             * The authenticated user cannot comment. Returns a unique error code of `3412`.
-             * The comment was flagged as spam. Returns a unique error code of `3301`.
+            * Error code 3413: Comments are disabled for this video.
+            * Error code 3411: The authenticated user is unverified.
+            * Error code 3412: The authenticated user can't comment.
+            * Error code 3301: The comment was flagged as spam.
       security:
         - oauth2:
             - interact
@@ -2288,17 +2283,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * The credit was added.
-             * A parameter is invalid.
-             * The authenticated user has an unverified email address.
-             * There is a user block between the video owner and the person receiving credit.
+            * The credit was added.
+            * A parameter is invalid.
+            * The authenticated user has an unverified email address.
+            * There is a user block between the video owner and the person receiving credit.
         '403':
           content:
             application/vnd.vimeo.credit+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user does not own the video.
+          description: The authenticated user doesn't own the video.
       summary: Credit a user in a video
       tags:
         - Videos\Credits
@@ -2572,7 +2566,7 @@ paths:
             application/vnd.vimeo.video.texttrack+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If video was not found.
+          description: No such video exists.
       summary: Get all the text tracks of a video
       tags:
         - Videos\Text Tracks
@@ -2639,9 +2633,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The authenticated user cannot edit the text track.
-             * The request contains errors. Returns a unique error code of `2204`.
+            * The authenticated user can't edit the text track.
+            * Error code 2204: The request contains errors.
       security:
         - oauth2:
             - upload
@@ -2786,7 +2779,7 @@ paths:
             application/vnd.vimeo.group+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot create groups.
+          description: The authenticated user can't create groups.
       security:
         - oauth2:
             - create
@@ -2812,7 +2805,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user is not the group owner.
+          description: The authenticated user isn't the group owner.
       security:
         - oauth2:
             - delete
@@ -2912,7 +2905,7 @@ paths:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If group was not found.
+          description: No such group exists.
       summary: Get all the members of a group
       tags:
         - Groups\Users
@@ -3002,7 +2995,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If group was not found.
+          description: No such group exists.
       summary: Get all the videos in a group
       tags:
         - Groups\Videos
@@ -3032,7 +3025,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot modify this group's videos.
+          description: The authenticated user can't modify this group's videos.
       security:
         - oauth2:
             - edit
@@ -3069,10 +3062,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If group was not found.
-             * If video was not found in the group.
+          description: No such video or group exists.
       summary: Get a specific video in a group
       tags:
         - Groups\Videos
@@ -3108,9 +3098,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The video is already in the group.
-             * The user cannot add videos to the group.
+            * The video is already in the group.
+            * The user can't add videos to the group.
       security:
         - oauth2:
             - edit
@@ -3885,19 +3874,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user cannot edit the album. Returns a unique error code of `3429`.
+          description: 'Error code 3429: The authenticated user can''t edit the album.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: 'No such album, or user, or video exists. Returns a unique error code of `5000`.'
+          description: 'Error code 5000: No such album, or user, or video exists.'
         '500':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: Unexpected error while setting thumbnail. Returns a unique error code of `4016`.
+          description: 'Error code 4016: Unexpected error while setting thumbnail.'
       security:
         - oauth2:
             - edit
@@ -4031,7 +4020,7 @@ paths:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot view another user. Returns a unique error code of `3200`.
+          description: 'Error code 3200: You can''t view another user.'
       security:
         - oauth2:
             - private
@@ -4255,9 +4244,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The user cannot view this custom logo.
-             * The user cannot view custom logos.
+            * The user can't view this custom logo.
+            * The user can't view custom logos.
       summary: Get all the custom logos that belong to a user
       tags:
         - Embed Presets\Custom Logos
@@ -4276,9 +4264,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * You cannot upload pictures for another user's videos.
-             * The user cannot add a custom logo.
+            * You can't upload pictures for another user's videos.
+            * The user can't add a custom logo.
       security:
         - oauth2:
             - upload
@@ -4308,7 +4295,7 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The user cannot view custom logos.
+          description: The user can't view custom logos.
       summary: Get a specific custom logo
       tags:
         - Embed Presets\Custom Logos
@@ -4316,7 +4303,7 @@ paths:
     get:
       operationId: get_feed_alt1
       parameters:
-        - description: 'Necessary for proper pagination. Do not provide this value yourself. Instead, use the pagination links in the feed response.'
+        - description: 'Necessary for proper pagination. You shouldn''t provide this value yourself, and instead use the pagination links in the feed response. Please see our [pagination documentation](https://developer.vimeo.com/api/common-formats#using-the-pagination-parameter) for more information.'
           in: query
           name: offset
           required: false
@@ -4516,36 +4503,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are five ways that this status code can be encountered:
-             * The request body is empty. Returns a unique error code of `2205`.
-             * The `users` array is invalid. Returns a unique error code of `2205`.
-             * The list of users does not contain URIs. Returns a unique error code of `2205`.
-             * A user in the list does not exist. Returns a unique error code of `2900`.
-             * The list contains more than 100 users. Returns a unique error code of `2901`.
+            * Error code 2205: The request body is empty.
+            * Error code 2205: The `users` array is invalid.
+            * Error code 2205: The list of users doesn't contain URIs.
+            * Error code 2900: A user in the list doesn't exist.
+            * Error code 2901: The list contains more than 100 users.
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user access token is invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user access token is invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The current user cannot follow other users. Returns a unique error code of `3417`.
+          description: 'Error code 3417: The current user can''t follow other users.'
         '429':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The current user is rate-limited from following other users. Returns a unique error code of `9006`.
+          description: 'Error code 9006: The current user is rate-limited from following other users.'
         '500':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: An unexpected error occurred. Returns a unique error code of `4005`.
+          description: 'Error code 4005: An unexpected error occurred.'
       security:
         - oauth2:
             - interact
@@ -4590,7 +4576,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The user in question does not follow the authenticated user.
+          description: The user in question doesn't follow the authenticated user.
       summary: Check if a user is following another user
       tags:
         - Users\Follows
@@ -4612,7 +4598,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot add followers.
+          description: The authenticated user can't add followers.
       security:
         - oauth2:
             - interact
@@ -4730,9 +4716,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * If group was not found.
-             * The authenticated user is not a member of this group.
+            * No such group exists.
+            * The authenticated user isn't a member of this group.
       summary: Check if a user has joined a group
       tags:
         - Groups\Users
@@ -4755,9 +4740,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The authenticated user cannot join groups.
-             * The group prohibits the authenticated user from joining, either because the group is not public or because the group's privacy setting is `members`.
+            * The authenticated user can't join groups.
+            * The group prohibits the authenticated user from joining, either because the group is not public or because the group's privacy setting is `members`.
       security:
         - oauth2:
             - interact
@@ -4973,7 +4957,7 @@ paths:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If user was not found.
+          description: No such user exists.
       summary: Get all the On Demand pages of a user
       tags:
         - On Demand\Essentials
@@ -5337,7 +5321,7 @@ paths:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot view the purchases and rentals for another user's account.
+          description: The authenticated user can't view the purchases and rentals for another user's account.
       security:
         - oauth2:
             - purchased
@@ -5367,16 +5351,13 @@ paths:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The requested user is not the same as the authenticated user.
+          description: The requested user isn't the same as the authenticated user.
         '404':
           content:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If user was not found.
-             * If On Demand page was not found in the purchases.
+          description: No such user or On Demand page exists.
       security:
         - oauth2:
             - purchased
@@ -5840,9 +5821,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The preset does not exist.
-             * The authenticated user does not own the preset.
+            * The preset doesn't exist.
+            * The authenticated user doesn't own the preset.
       summary: Edit an embed preset
       tags:
         - Embed Presets\Essentials
@@ -5885,6 +5865,7 @@ paths:
         - Embed Presets\Videos
   /me/projects:
     get:
+      description: This method gets all the projects that belong to the specified user.
       operationId: get_projects_alt1
       parameters:
         - description: The sort direction of the results.
@@ -5936,14 +5917,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
       security:
         - oauth2:
             - private
-      summary: Get all projects that belong to a user
+      summary: Get all the projects that belong to a user
       tags:
         - Projects\Essentials
     post:
+      description: This method creates a new project for the specified user.
       operationId: create_project_alt1
       requestBody:
         content:
@@ -5971,21 +5953,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The input is empty. Returns a unique error code of `2205`.
-             * The input is invalid. Returns a unique error code of `2204`.
+            * Error code 2205: The input is empty.
+            * Error code 2204: The input is invalid.
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot create projects. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t create projects.'
       security:
         - oauth2:
             - create
@@ -5994,6 +5975,7 @@ paths:
         - Projects\Essentials
   '/me/projects/{project_id}':
     delete:
+      description: This method deletes a project and optionally also the videos that it contains.
       operationId: delete_project_alt1
       parameters:
         - description: The ID of the project.
@@ -6018,19 +6000,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot delete the project. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t delete the project.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - delete
@@ -6038,6 +6020,7 @@ paths:
       tags:
         - Projects\Essentials
     get:
+      description: This method gets a single project that belongs to the specified user.
       operationId: get_project_alt1
       parameters:
         - description: The ID of the project.
@@ -6059,13 +6042,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - private
@@ -6073,6 +6056,7 @@ paths:
       tags:
         - Projects\Essentials
     patch:
+      description: This method edits an existing project.
       operationId: edit_project_alt1
       parameters:
         - description: The ID of the project.
@@ -6108,27 +6092,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The input is invalid. Returns a unique error code of `2204`.
-             * The request body is invalid. Returns a unique error code of `2205`.
+            * Error code 2204: The input is invalid.
+            * Error code 2205: The input is empty.
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot edit the project. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t edit the project.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - edit
@@ -6137,6 +6120,7 @@ paths:
         - Projects\Essentials
   '/me/projects/{project_id}/videos':
     delete:
+      description: This method removed multiple videos from the specified project.
       operationId: remove_videos_from_project_alt1
       parameters:
         - description: The ID of the project.
@@ -6146,14 +6130,14 @@ paths:
           schema:
             example: 12345
             type: number
-        - description: Allow videos to be removed from folder and deleted.
+        - description: Whether to delete the videos when removing them from the project.
           in: query
           name: should_delete_clips
           required: false
           schema:
             example: 'false'
             type: boolean
-        - description: A comma-separated list of video URIs to delete.
+        - description: A comma-separated list of the video URIs to remove.
           in: query
           name: uris
           required: true
@@ -6162,25 +6146,25 @@ paths:
             type: string
       responses:
         '204':
-          description: The videos were deleted.
+          description: The videos were removed.
         '400':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The input is invalid. Returns a unique error code of `2204`.
+          description: 'Error code 2204: The input is invalid.'
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - interact
@@ -6188,6 +6172,7 @@ paths:
       tags:
         - Projects\Videos
     get:
+      description: This method gets all the videos that belong to the specified project.
       operationId: get_project_videos_alt1
       parameters:
         - description: The ID of the project.
@@ -6247,13 +6232,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - private
@@ -6261,6 +6246,7 @@ paths:
       tags:
         - Projects\Videos
     put:
+      description: This method adds multiple videos to the specified project.
       operationId: add_videos_to_project_alt1
       parameters:
         - description: The ID of the project.
@@ -6273,7 +6259,7 @@ paths:
         - description: A comma-separated list of video URIs to add.
           in: query
           name: uris
-          required: false
+          required: true
           schema:
             example: '/videos/258684937,/videos/273576296'
             type: string
@@ -6285,19 +6271,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The input is invalid. Returns a unique error code of `2204`.
+          description: 'Error code 2204: The input is invalid.'
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project or video was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project or video exists.'
       security:
         - oauth2:
             - interact
@@ -6306,6 +6292,7 @@ paths:
         - Projects\Videos
   '/me/projects/{project_id}/videos/{video_id}':
     delete:
+      description: This method removes a single video from the specified project.
       operationId: remove_video_from_project_alt1
       parameters:
         - description: The ID of the project.
@@ -6324,25 +6311,25 @@ paths:
             type: number
       responses:
         '204':
-          description: The video was deleted.
+          description: The video was removed.
         '400':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The input is invalid. Returns a unique error code of `2204`.
+          description: 'Error code 2204: The input is invalid.'
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If video was not found in the project. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such video exists in the project.'
       security:
         - oauth2:
             - delete
@@ -6350,6 +6337,7 @@ paths:
       tags:
         - Projects\Videos
     put:
+      description: This method adds a single video to the specified project.
       operationId: add_video_to_project_alt1
       parameters:
         - description: The ID of the project.
@@ -6374,10 +6362,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If project was not found in the user. Returns a unique error code of `5000`.
-             * If video was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such user, project, or video exists.'
       security:
         - oauth2:
             - interact
@@ -6477,7 +6462,7 @@ paths:
                 type: array
           description: The videos were returned.
         '304':
-          description: This user has not created any videos since the given `If-Modified-Since` header.
+          description: This user hasn't created any videos since the given `If-Modified-Since` header.
       summary: Get all the videos that a user has uploaded
       tags:
         - Videos\Essentials
@@ -6638,7 +6623,7 @@ paths:
                         - whitelist
                       type: string
                     view:
-                      description: 'The video''s privacy setting. When privacy is `users`, `application/json` is the only valid content type. Basic users cannot set privacy to `unlisted`.'
+                      description: 'The video''s privacy setting. When privacy is `users`, `application/json` is the only valid content type. Basic users can''t set privacy to `unlisted`.'
                       enum:
                         - anybody
                         - contacts
@@ -6791,33 +6776,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are five ways that this status code can be encountered:
-             * The body of the request is not formatted properly. Returns a unique error code of `2205`.
-             * The request contains invalid parameters. Returns a unique error code of `2204`.
-             * The request contains invalid body parameters. Returns a unique error code of `2204`.
-             * The upload type is invalid. Returns a unique error code of `2230`.
-             * If a `type` payload parameter was supplied instead of `upload.approach`. Returns a unique error code of `3116`.
+            * Error code 2205: The body of the request isn't formatted properly.
+            * Error code 2204: The request contains invalid parameters.
+            * Error code 2204: The request contains invalid body parameters.
+            * Error code 2230: The upload type is invalid.
+            * Error code 3116: If a `type` payload parameter was supplied instead of `upload.approach`.
         '401':
           content:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: No user is associated with the authentication token. Returns a unique error code of `8002`.
+          description: 'Error code 8002: No user is associated with the authentication token.'
         '403':
           content:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The user's allotted quota has been reached. Returns a unique error code of `4102`.
-             * The user's maximum disk space has been reached. Returns a unique error code of `4101`.
+            * Error code 4102: The user's allotted quota has been reached.
+            * Error code 4101: The user's maximum disk space has been reached.
         '500':
           content:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: There is a problem initiating the upload. Returns a unique error code of `4003`.
+          description: 'Error code 4003: There is a problem initiating the upload.'
       summary: Upload a video
       tags:
         - Videos\Upload
@@ -6844,7 +6827,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user does not own the video.
+          description: The authenticated user doesn't own the video.
       summary: Check if a user owns a video
       tags:
         - Videos\Essentials
@@ -6891,7 +6874,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The user cannot view another user's watch history.
+          description: The user can't view another user's watch history.
       security:
         - oauth2:
             - private
@@ -7106,10 +7089,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/auth-error'
           description: |-
-            There are three ways that this status code can be encountered:
-             * The grant type is invalid.
-             * The authorization code is invalid.
-             * The redirect URI does not match the URI to create the authorization code.
+            * The grant type is invalid.
+            * The authorization code is invalid.
+            * The redirect URI doesn't match the URI to create the authorization code.
       summary: Exchange an authorization code for an access token
       tags:
         - Authentication Extras\Essentials
@@ -7152,7 +7134,7 @@ paths:
             application/vnd.vimeo.auth+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If client secret was not found. Returns a unique error code of `8001`.
+          description: 'Error code 8001: No such client secret exists.'
       summary: Authorize a client with OAuth
       tags:
         - Authentication Extras\Essentials
@@ -7196,9 +7178,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/auth-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The token is invalid.
-             * The token has unauthorized scopes.
+            * The token is invalid.
+            * The token has unauthorized scopes.
       summary: Convert OAuth 1 access tokens to OAuth 2 access tokens
       tags:
         - Authentication Extras\Essentials
@@ -7217,7 +7198,7 @@ paths:
             application/vnd.vimeo.auth+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The token is not a valid OAuth 2 token.
+          description: The token isn't a valid OAuth 2 token.
       summary: Verify an OAuth 2 token
       tags:
         - Authentication Extras\Essentials
@@ -7259,7 +7240,7 @@ paths:
             application/vnd.vimeo.ondemand.genre+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand genre was not found.
+          description: No such On Demand genre exists.
       summary: Get a specific On Demand genre
       tags:
         - On Demand\Genres
@@ -7369,7 +7350,7 @@ paths:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found in the On Demand genre.
+          description: No such On Demand page or genre exists.
       summary: Get a specific On Demand page in a genre
       tags:
         - On Demand\Genres
@@ -7392,13 +7373,13 @@ paths:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       security:
         - oauth2:
             - delete
@@ -7427,7 +7408,7 @@ paths:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       summary: Get a specific On Demand page
       tags:
         - On Demand\Essentials
@@ -7487,13 +7468,13 @@ paths:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot edit the On Demand page.
+          description: The authenticated user can't edit the On Demand page.
         '404':
           content:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       security:
         - oauth2:
             - edit
@@ -7539,7 +7520,7 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       summary: Get all the backgrounds of an On Demand page
       tags:
         - On Demand\Backgrounds
@@ -7565,13 +7546,13 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       security:
         - oauth2:
             - upload
@@ -7608,16 +7589,13 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If you are attempting to modify an On Demand page you do not own.
+          description: If you are attempting to modify an On Demand page you don't own.
         '404':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If background image was not found.
+          description: No such On Demand page or background image exists.
       security:
         - oauth2:
             - edit
@@ -7653,16 +7631,13 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot view another user's On Demand page background.
+          description: You can't view another user's On Demand page background.
         '404':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand image was not found.
+          description: No such On Demand page or background image exists.
       summary: Get a specific background of an On Demand page
       tags:
         - On Demand\Backgrounds
@@ -7706,16 +7681,13 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand image was not found.
+          description: No such On Demand page or background image exists.
       security:
         - oauth2:
             - edit
@@ -7747,7 +7719,7 @@ paths:
             application/vnd.vimeo.ondemand.genre+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       summary: Get all the genres of an On Demand page
       tags:
         - On Demand\Genres
@@ -7783,16 +7755,13 @@ paths:
             application/vnd.vimeo.ondemand.genre+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.genre+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand genre was not found.
+          description: No such On Demand page or genre exists.
       security:
         - oauth2:
             - edit
@@ -7828,10 +7797,7 @@ paths:
             application/vnd.vimeo.ondemand.genre+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand genre was not found in the On Demand page.
+          description: No such On Demand page or genre exists.
       summary: Check whether an On Demand page belongs to a genre
       tags:
         - On Demand\Genres
@@ -7864,19 +7830,19 @@ paths:
             application/vnd.vimeo.ondemand.genre+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot add more than two genres to an On Demand page.
+          description: You can't add more than two genres to an On Demand page.
         '403':
           content:
             application/vnd.vimeo.ondemand.genre+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.genre+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page or genre exists.
       security:
         - oauth2:
             - edit
@@ -7989,7 +7955,7 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       summary: Get all the posters of an On Demand page
       tags:
         - On Demand\Posters
@@ -8015,7 +7981,7 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify another user's On Demand page.
+          description: You can't modify another user's On Demand page.
       security:
         - oauth2:
             - upload
@@ -8145,13 +8111,13 @@ paths:
             application/vnd.vimeo.ondemand.promotion+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot view promotions for an On Demand page that you do not own.
+          description: You can't view promotions for an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.promotion+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       security:
         - oauth2:
             - promo_codes
@@ -8175,11 +8141,11 @@ paths:
               properties:
                 access_type:
                   description: |
-                    The promotion access type, which is a purchase option that is not available on the container. VIP promotions always make the content free of charge. If you use this type, you must further define the promotion with the `download` or `stream_period` fields.
+                    The promotion access type, which is a purchase option that isn't available on the container. VIP promotions always make the content free of charge. If you use this type, you must further define the promotion with the `download` or `stream_period` fields.
 
                     Option descriptions:
                      * `default` - Promotions grant discount on the existing purchase options for an On Demand Container.
-                     * `vip` - Promotions can be used to grant free access to VOD content before it is released, or to offer a purchase option that is not available on the container. "vip" promotions will always make the content free, and must be further defined with the `download` or `stream_period` fields.
+                     * `vip` - Promotions can be used to grant free access to VOD content before it is released, or to offer a purchase option that isn't available on the container. "vip" promotions will always make the content free, and must be further defined with the `download` or `stream_period` fields.
                   enum:
                     - default
                     - vip
@@ -8204,7 +8170,7 @@ paths:
                   example: 'true'
                   type: boolean
                 end_time:
-                  description: 'The end of the promotion period. If you do not specify a value, the promotion will never expire.'
+                  description: 'The end of the promotion period. If you don''t specify a value, the promotion will never expire.'
                   example: '1526089920'
                   type: string
                 label:
@@ -8226,7 +8192,7 @@ paths:
                     - subscribe
                   type: string
                 start_time:
-                  description: 'The start of the promotion period. If you do not specify a value, the start time defaults to the time that the promotion was created.'
+                  description: 'The start of the promotion period. If you don''t specify a value, the start time defaults to the time that the promotion was created.'
                   example: '1526089920'
                   type: string
                 stream_period:
@@ -8276,21 +8242,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * There are errors in the request.
-             * The promo code already exists.
+            * There are errors in the request.
+            * The promo code already exists.
         '403':
           content:
             application/vnd.vimeo.ondemand.promotion+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot create promotions for an On Demand page that you do not own.
+          description: You can't create promotions for an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.promotion+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       security:
         - oauth2:
             - promo_codes
@@ -8324,16 +8289,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot delete a promotion for an On Demand page that you not own.
+          description: You can't delete a promotion for an On Demand page that you not own.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If promotion was not found.
+          description: No such On Demand page or promotion exists.
       security:
         - oauth2:
             - promo_codes
@@ -8370,16 +8332,13 @@ paths:
             application/vnd.vimeo.ondemand.promotion+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot view a promotion for an On Demand page that you do not own.
+          description: You can't view a promotion for an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.promotion+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If promotion was not found.
+          description: No such On Demand page or promotion exists.
       security:
         - oauth2:
             - promo_codes
@@ -8430,13 +8389,13 @@ paths:
             application/vnd.vimeo.ondemand.promocode+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot create promotions for an On Demand page that you do not own.
+          description: You can't create promotions for an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.promocode+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       security:
         - oauth2:
             - promo_codes
@@ -8480,16 +8439,13 @@ paths:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand region was not found.
+          description: No such On Demand page or region exists.
       security:
         - oauth2:
             - edit
@@ -8520,7 +8476,7 @@ paths:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       summary: Get all the regions of an On Demand page
       tags:
         - On Demand\Regions
@@ -8560,16 +8516,13 @@ paths:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand region was not found.
+          description: No such On Demand page or region exists.
       security:
         - oauth2:
             - edit
@@ -8602,16 +8555,13 @@ paths:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand region was not found.
+          description: No such On Demand page or region exists.
       security:
         - oauth2:
             - edit
@@ -8648,10 +8598,7 @@ paths:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand region was not found.
+          description: No such On Demand page or region exists.
       summary: Get a specific region of an On Demand page
       tags:
         - On Demand\Regions
@@ -8684,16 +8631,13 @@ paths:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
         '404':
           content:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand region was not found.
+          description: No such On Demand page or region exists.
       security:
         - oauth2:
             - edit
@@ -8766,7 +8710,7 @@ paths:
             application/vnd.vimeo.ondemand.season+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand page was not found.
+          description: No such On Demand page exists.
       summary: Get all the seasons on an On Demand page
       tags:
         - On Demand\Seasons
@@ -8800,10 +8744,7 @@ paths:
             application/vnd.vimeo.ondemand.season+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If On Demand page was not found.
-             * If On Demand season was not found in the On Demand page.
+          description: No such On Demand page or season exists.
       summary: Get a specific season on an On Demand page
       tags:
         - On Demand\Seasons
@@ -8948,9 +8889,8 @@ paths:
                   $ref: '#/components/schemas/video'
                 type: array
           description: |-
-            There are two ways that this status code can be encountered:
-             * The videos were returned.
-             * The videos were returned.
+            * The videos were returned.
+            * The videos were returned.
       summary: Get all the videos on an On Demand page
       tags:
         - On Demand\Videos
@@ -8980,7 +8920,7 @@ paths:
             application/vnd.vimeo.ondemand.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
       security:
         - oauth2:
             - edit
@@ -9175,13 +9115,13 @@ paths:
             application/vnd.vimeo.ondemand.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot add the video to this On Demand page.
+          description: You can't add the video to this On Demand page.
         '403':
           content:
             application/vnd.vimeo.ondemand.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot modify an On Demand page that you do not own.
+          description: You can't modify an On Demand page that you don't own.
       security:
         - oauth2:
             - edit
@@ -9226,7 +9166,7 @@ paths:
             application/vnd.vimeo.ondemand.region+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If On Demand region was not found.
+          description: No such On Demand region exists.
       summary: Get a specific On Demand region
       tags:
         - On Demand\Regions
@@ -9310,7 +9250,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If tag was not found.
+          description: No such tag exists.
       summary: Get all the videos with a specific tag
       tags:
         - Videos\Tags
@@ -9330,7 +9270,7 @@ paths:
             application/vnd.vimeo.auth+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: You cannot revoke access for an OAuth 1 token.
+          description: You can't revoke access for an OAuth 1 token.
       summary: Revoke the current access token
       tags:
         - Authentication Extras\Essentials
@@ -10729,19 +10669,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user cannot edit the album. Returns a unique error code of `3429`.
+          description: 'Error code 3429: The authenticated user can''t edit the album.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: 'No such album, or user, or video exists. Returns a unique error code of `5000`.'
+          description: 'Error code 5000: No such album, or user, or video exists.'
         '500':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: Unexpected error while setting thumbnail. Returns a unique error code of `4016`.
+          description: 'Error code 4016: Unexpected error while setting thumbnail.'
       security:
         - oauth2:
             - edit
@@ -10889,7 +10829,7 @@ paths:
             application/vnd.vimeo.category+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot view another user. Returns a unique error code of `3200`.
+          description: 'Error code 3200: You can''t view another user.'
       security:
         - oauth2:
             - private
@@ -11170,9 +11110,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The user cannot view this custom logo.
-             * The user cannot view custom logos.
+            * The user can't view this custom logo.
+            * The user can't view custom logos.
       summary: Get all the custom logos that belong to a user
       tags:
         - Embed Presets\Custom Logos
@@ -11199,9 +11138,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * You cannot upload pictures for another user's videos.
-             * The user cannot add a custom logo.
+            * You can't upload pictures for another user's videos.
+            * The user can't add a custom logo.
       security:
         - oauth2:
             - upload
@@ -11238,7 +11176,7 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The user cannot view custom logos.
+          description: The user can't view custom logos.
       summary: Get a specific custom logo
       tags:
         - Embed Presets\Custom Logos
@@ -11253,7 +11191,7 @@ paths:
           schema:
             example: 152184
             type: number
-        - description: 'Necessary for proper pagination. Do not provide this value yourself. Instead, use the pagination links in the feed response.'
+        - description: 'Necessary for proper pagination. You shouldn''t provide this value yourself, and instead use the pagination links in the feed response. Please see our [pagination documentation](https://developer.vimeo.com/api/common-formats#using-the-pagination-parameter) for more information.'
           in: query
           name: offset
           required: false
@@ -11475,36 +11413,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are five ways that this status code can be encountered:
-             * The request body is empty. Returns a unique error code of `2205`.
-             * The `users` array is invalid. Returns a unique error code of `2205`.
-             * The list of users does not contain URIs. Returns a unique error code of `2205`.
-             * A user in the list does not exist. Returns a unique error code of `2900`.
-             * The list contains more than 100 users. Returns a unique error code of `2901`.
+            * Error code 2205: The request body is empty.
+            * Error code 2205: The `users` array is invalid.
+            * Error code 2205: The list of users doesn't contain URIs.
+            * Error code 2900: A user in the list doesn't exist.
+            * Error code 2901: The list contains more than 100 users.
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user access token is invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user access token is invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The current user cannot follow other users. Returns a unique error code of `3417`.
+          description: 'Error code 3417: The current user can''t follow other users.'
         '429':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The current user is rate-limited from following other users. Returns a unique error code of `9006`.
+          description: 'Error code 9006: The current user is rate-limited from following other users.'
         '500':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: An unexpected error occurred. Returns a unique error code of `4005`.
+          description: 'Error code 4005: An unexpected error occurred.'
       security:
         - oauth2:
             - interact
@@ -11563,7 +11500,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The user in question does not follow the authenticated user.
+          description: The user in question doesn't follow the authenticated user.
       summary: Check if a user is following another user
       tags:
         - Users\Follows
@@ -11592,7 +11529,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user cannot add followers.
+          description: The authenticated user can't add followers.
       security:
         - oauth2:
             - interact
@@ -11731,9 +11668,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * If group was not found.
-             * The authenticated user is not a member of this group.
+            * No such group exists.
+            * The authenticated user isn't a member of this group.
       summary: Check if a user has joined a group
       tags:
         - Groups\Users
@@ -11763,9 +11699,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The authenticated user cannot join groups.
-             * The group prohibits the authenticated user from joining, either because the group is not public or because the group's privacy setting is `members`.
+            * The authenticated user can't join groups.
+            * The group prohibits the authenticated user from joining, either because the group is not public or because the group's privacy setting is `members`.
       security:
         - oauth2:
             - interact
@@ -12016,7 +11951,7 @@ paths:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If user was not found.
+          description: No such user exists.
       summary: Get all the On Demand pages of a user
       tags:
         - On Demand\Essentials
@@ -12334,16 +12269,13 @@ paths:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The requested user is not the same as the authenticated user.
+          description: The requested user isn't the same as the authenticated user.
         '404':
           content:
             application/vnd.vimeo.ondemand.page+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If user was not found.
-             * If On Demand page was not found in the purchases.
+          description: No such user or On Demand page exists.
       security:
         - oauth2:
             - purchased
@@ -12906,9 +12838,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The preset does not exist.
-             * The authenticated user does not own the preset.
+            * The preset doesn't exist.
+            * The authenticated user doesn't own the preset.
       summary: Edit an embed preset
       tags:
         - Embed Presets\Essentials
@@ -12958,6 +12889,7 @@ paths:
         - Embed Presets\Videos
   '/users/{user_id}/projects':
     get:
+      description: This method gets all the projects that belong to the specified user.
       operationId: get_projects
       parameters:
         - description: The ID of the user.
@@ -13016,14 +12948,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
       security:
         - oauth2:
             - private
-      summary: Get all projects that belong to a user
+      summary: Get all the projects that belong to a user
       tags:
         - Projects\Essentials
     post:
+      description: This method creates a new project for the specified user.
       operationId: create_project
       parameters:
         - description: The ID of the user.
@@ -13059,21 +12992,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The input is empty. Returns a unique error code of `2205`.
-             * The input is invalid. Returns a unique error code of `2204`.
+            * Error code 2205: The input is empty.
+            * Error code 2204: The input is invalid.
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot create projects. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t create projects.'
       security:
         - oauth2:
             - create
@@ -13082,6 +13014,7 @@ paths:
         - Projects\Essentials
   '/users/{user_id}/projects/{project_id}':
     delete:
+      description: This method deletes a project and optionally also the videos that it contains.
       operationId: delete_project
       parameters:
         - description: The ID of the project.
@@ -13113,19 +13046,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot delete the project. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t delete the project.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - delete
@@ -13133,6 +13066,7 @@ paths:
       tags:
         - Projects\Essentials
     get:
+      description: This method gets a single project that belongs to the specified user.
       operationId: get_project
       parameters:
         - description: The ID of the project.
@@ -13161,13 +13095,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - private
@@ -13175,6 +13109,7 @@ paths:
       tags:
         - Projects\Essentials
     patch:
+      description: This method edits an existing project.
       operationId: edit_project
       parameters:
         - description: The ID of the project.
@@ -13217,27 +13152,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The input is invalid. Returns a unique error code of `2204`.
-             * The request body is invalid. Returns a unique error code of `2205`.
+            * Error code 2204: The input is invalid.
+            * Error code 2205: The input is empty.
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '403':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: You cannot edit the project. Returns a unique error code of `3200`.
+          description: 'Error code 3200: The authenticated user can''t edit the project.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - edit
@@ -13246,6 +13180,7 @@ paths:
         - Projects\Essentials
   '/users/{user_id}/projects/{project_id}/videos':
     delete:
+      description: This method removed multiple videos from the specified project.
       operationId: remove_videos_from_project
       parameters:
         - description: The ID of the project.
@@ -13262,14 +13197,14 @@ paths:
           schema:
             example: 152184
             type: number
-        - description: Allow videos to be removed from folder and deleted.
+        - description: Whether to delete the videos when removing them from the project.
           in: query
           name: should_delete_clips
           required: false
           schema:
             example: 'false'
             type: boolean
-        - description: A comma-separated list of video URIs to delete.
+        - description: A comma-separated list of the video URIs to remove.
           in: query
           name: uris
           required: true
@@ -13278,25 +13213,25 @@ paths:
             type: string
       responses:
         '204':
-          description: The videos were deleted.
+          description: The videos were removed.
         '400':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The input is invalid. Returns a unique error code of `2204`.
+          description: 'Error code 2204: The input is invalid.'
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - interact
@@ -13304,6 +13239,7 @@ paths:
       tags:
         - Projects\Videos
     get:
+      description: This method gets all the videos that belong to the specified project.
       operationId: get_project_videos
       parameters:
         - description: The ID of the project.
@@ -13370,13 +13306,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project exists.'
       security:
         - oauth2:
             - private
@@ -13384,6 +13320,7 @@ paths:
       tags:
         - Projects\Videos
     put:
+      description: This method adds multiple videos to the specified project.
       operationId: add_videos_to_project
       parameters:
         - description: The ID of the project.
@@ -13403,7 +13340,7 @@ paths:
         - description: A comma-separated list of video URIs to add.
           in: query
           name: uris
-          required: false
+          required: true
           schema:
             example: '/videos/258684937,/videos/273576296'
             type: string
@@ -13415,19 +13352,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The input is invalid. Returns a unique error code of `2204`.
+          description: 'Error code 2204: The input is invalid.'
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If project or video was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such project or video exists.'
       security:
         - oauth2:
             - interact
@@ -13436,6 +13373,7 @@ paths:
         - Projects\Videos
   '/users/{user_id}/projects/{project_id}/videos/{video_id}':
     delete:
+      description: This method removes a single video from the specified project.
       operationId: remove_video_from_project
       parameters:
         - description: The ID of the project.
@@ -13461,25 +13399,25 @@ paths:
             type: number
       responses:
         '204':
-          description: The video was deleted.
+          description: The video was removed.
         '400':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The input is invalid. Returns a unique error code of `2204`.
+          description: 'Error code 2204: The input is invalid.'
         '401':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8000`.
+          description: 'Error code 8000: The user credentials are invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If video was not found in the project. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such video exists in the project.'
       security:
         - oauth2:
             - delete
@@ -13487,6 +13425,7 @@ paths:
       tags:
         - Projects\Videos
     put:
+      description: This method adds a single video to the specified project.
       operationId: add_video_to_project
       parameters:
         - description: The ID of the project.
@@ -13518,10 +13457,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If project was not found in the user. Returns a unique error code of `5000`.
-             * If video was not found. Returns a unique error code of `5000`.
+          description: 'Error code 5000: No such user, project, or video exists.'
       security:
         - oauth2:
             - interact
@@ -13568,23 +13504,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The format of the video file is invalid. Returns a unique error code of `2502`.
+          description: 'Error code 2502: The format of the video file is invalid.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are three ways that this status code can be encountered:
-             * The video file does not exist. Returns a unique error code of `5006`.
-             * The signature does not exist. Returns a unique error code of `5007`.
-             * The signature is invalid. Returns a unique error code of `8400`.
+            * Error code 5006: The video file doesn't exist.
+            * Error code 5007: The signature doesn't exist.
+            * Error code 8400: The signature is invalid.
         '500':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The upload server returns an HTTP status code other than 200. Returns a unique error code of `4011`.
+          description: 'Error code 4011: The upload server returns an HTTP status code other than 200.'
       security:
         - oauth2:
             - upload
@@ -13721,7 +13656,7 @@ paths:
                 type: array
           description: The videos were returned.
         '304':
-          description: This user has not created any videos since the given `If-Modified-Since` header.
+          description: This user hasn't created any videos since the given `If-Modified-Since` header.
       summary: Get all the videos that a user has uploaded
       tags:
         - Videos\Essentials
@@ -13890,7 +13825,7 @@ paths:
                         - whitelist
                       type: string
                     view:
-                      description: 'The video''s privacy setting. When privacy is `users`, `application/json` is the only valid content type. Basic users cannot set privacy to `unlisted`.'
+                      description: 'The video''s privacy setting. When privacy is `users`, `application/json` is the only valid content type. Basic users can''t set privacy to `unlisted`.'
                       enum:
                         - anybody
                         - contacts
@@ -14043,33 +13978,31 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are five ways that this status code can be encountered:
-             * The body of the request is not formatted properly. Returns a unique error code of `2205`.
-             * The request contains invalid parameters. Returns a unique error code of `2204`.
-             * The request contains invalid body parameters. Returns a unique error code of `2204`.
-             * The upload type is invalid. Returns a unique error code of `2230`.
-             * If a `type` payload parameter was supplied instead of `upload.approach`. Returns a unique error code of `3116`.
+            * Error code 2205: The body of the request isn't formatted properly.
+            * Error code 2204: The request contains invalid parameters.
+            * Error code 2204: The request contains invalid body parameters.
+            * Error code 2230: The upload type is invalid.
+            * Error code 3116: If a `type` payload parameter was supplied instead of `upload.approach`.
         '401':
           content:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: No user is associated with the authentication token. Returns a unique error code of `8002`.
+          description: 'Error code 8002: No user is associated with the authentication token.'
         '403':
           content:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The user's allotted quota has been reached. Returns a unique error code of `4102`.
-             * The user's maximum disk space has been reached. Returns a unique error code of `4101`.
+            * Error code 4102: The user's allotted quota has been reached.
+            * Error code 4101: The user's maximum disk space has been reached.
         '500':
           content:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: There is a problem initiating the upload. Returns a unique error code of `4003`.
+          description: 'Error code 4003: There is a problem initiating the upload.'
       summary: Upload a video
       tags:
         - Videos\Upload
@@ -14103,7 +14036,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user does not own the video.
+          description: The authenticated user doesn't own the video.
       summary: Check if a user owns a video
       tags:
         - Videos\Essentials
@@ -14382,18 +14315,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * Either the `uris` or `links` parameter has filtering or sorting arguments. Returns a unique error code of `2101`.
-             * There is a problem with the batch request. Returns a unique error code of `2204`.
+            * Error code 2101: Either the `uris` or `links` parameter has filtering or sorting arguments.
+            * Error code 2204: There is a problem with the batch request.
         '503':
           content:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * Search is disabled.
-             * There was an internal search error. Returns a unique error code of `7300`.
+            * Search is disabled.
+            * Error code 7300: There was an internal search error.
       summary: Search for videos
       tags:
         - Videos\Essentials
@@ -14416,7 +14347,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user does not own the video and cannot delete it.
+          description: The authenticated user doesn't own the video and can't delete it.
       security:
         - oauth2:
             - delete
@@ -14445,7 +14376,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If video was not found.
+          description: No such video exists.
       summary: Get a specific video
       tags:
         - Videos\Essentials
@@ -14613,7 +14544,7 @@ paths:
                         - whitelist
                       type: string
                     view:
-                      description: 'The video''s new privacy setting. When privacy is `users`, `application/json` is the only valid content type. Basic users cannot set privacy to `unlisted`.'
+                      description: 'The video''s new privacy setting. When privacy is `users`, `application/json` is the only valid content type. Basic users can''t set privacy to `unlisted`.'
                       enum:
                         - anybody
                         - contacts
@@ -14745,11 +14676,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * The authenticated user does not own the video.
-             * The `privacy` field is `disable` and the authenticated user cannot set extra embed options.
-             * The `privacy` field is `contacts` and the authenticated user cannot follow creators.
-             * The authenticated user has an opted-out PRO account and `privacy.view` is `users`, `password`, `nobody`, or `public`.
+            * The authenticated user doesn't own the video.
+            * The `privacy` field is `disable` and the authenticated user can't set extra embed options.
+            * The `privacy` field is `contacts` and the authenticated user can't follow creators.
+            * The authenticated user has an opted-out PRO account and `privacy.view` is `users`, `password`, `nobody`, or `public`.
       security:
         - oauth2:
             - edit
@@ -14954,24 +14884,23 @@ paths:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The comment text is missing. Returns a unique error code of `2207`.
+          description: 'Error code 2207: The comment text is missing.'
         '401':
           content:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The user credentials are invalid. Returns a unique error code of `8003`.
+          description: 'Error code 8003: The user credentials are invalid.'
         '403':
           content:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * Comments are disabled for this video. Returns a unique error code of `3413`.
-             * The authenticated user is unverified. Returns a unique error code of `3411`.
-             * The authenticated user cannot comment. Returns a unique error code of `3412`.
-             * The comment was flagged as spam. Returns a unique error code of `3301`.
+            * Error code 3413: Comments are disabled for this video.
+            * Error code 3411: The authenticated user is unverified.
+            * Error code 3412: The authenticated user can't comment.
+            * Error code 3301: The comment was flagged as spam.
       security:
         - oauth2:
             - interact
@@ -15004,17 +14933,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The authenticated user did not write this comment and cannot delete it. Returns a unique error code of `3415`.
+          description: 'Error code 3415: The authenticated user didn''t write this comment and can''t delete it.'
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are three ways that this status code can be encountered:
-             * If video was not found.
-             * If comment was not found.
-             * The deleted comment still exists. Returns a unique error code of `5000`.
+            * No such video or comment exists.
+            * Error code 5000: The deleted comment still exists.
       security:
         - oauth2:
             - delete
@@ -15050,10 +14977,7 @@ paths:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If comment was not found.
-             * If video was not found.
+          description: No such video or comment exists.
       summary: Get a specific video comment
       tags:
         - Videos\Comments
@@ -15099,18 +15023,17 @@ paths:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The comment text is missing. Returns a unique error code of `2207`.
+          description: 'Error code 2207: The comment text is missing.'
         '403':
           content:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * The authenticated user is unverified. Returns a unique error code of `3411`.
-             * The authenticated user cannot post comments. Returns a unique error code of `3412`.
-             * The authenticated user did not write the comment and cannot edit it. Returns a unique error code of `3414`.
-             * The supplied comment was flagged as spam. Returns a unique error code of `3301`.
+            * Error code 3411: The authenticated user is unverified.
+            * Error code 3412: The authenticated user can't post comments.
+            * Error code 3414: The authenticated user didn't write the comment and can't edit it.
+            * Error code 3301: The supplied comment was flagged as spam.
       security:
         - oauth2:
             - edit
@@ -15163,10 +15086,7 @@ paths:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If video was not found.
-             * If comment was not found.
+          description: No such video or comment exists.
       summary: Get all the replies to a video comment
       tags:
         - Videos\Comments
@@ -15212,18 +15132,17 @@ paths:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: The comment text is missing. Returns a unique error code of `2207`.
+          description: 'Error code 2207: The comment text is missing.'
         '403':
           content:
             application/vnd.vimeo.comment+json:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * Comments are disabled on this video. Returns a unique error code of `3413`.
-             * The authenticated user is unverified. Returns a unique error code of `3411`.
-             * The authenticated user cannot comment. Returns a unique error code of `3412`.
-             * The comment was flagged as spam. Returns a unique error code of `3301`.
+            * Error code 3413: Comments are disabled on this video.
+            * Error code 3411: The authenticated user is unverified.
+            * Error code 3412: The authenticated user can't comment.
+            * Error code 3301: The comment was flagged as spam.
       security:
         - oauth2:
             - interact
@@ -15344,17 +15263,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * The credit was added.
-             * A parameter is invalid.
-             * The authenticated user has an unverified email address.
-             * There is a user block between the video owner and the person receiving credit.
+            * The credit was added.
+            * A parameter is invalid.
+            * The authenticated user has an unverified email address.
+            * There is a user block between the video owner and the person receiving credit.
         '403':
           content:
             application/vnd.vimeo.credit+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The authenticated user does not own the video.
+          description: The authenticated user doesn't own the video.
       summary: Credit a user in a video
       tags:
         - Videos\Credits
@@ -15420,10 +15338,7 @@ paths:
             application/vnd.vimeo.credit+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If credit was not found.
-             * If video was not found.
+          description: No such video or credit exists.
       summary: Get a specific credited user in a video
       tags:
         - Videos\Credits
@@ -15477,7 +15392,7 @@ paths:
             application/vnd.vimeo.credit+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If credit was not found.
+          description: No such video or credit exists.
       security:
         - oauth2:
             - edit
@@ -15736,10 +15651,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If preset was not found.
-             * If video was not found.
+          description: No such video or embed preset exists.
       security:
         - oauth2:
             - edit
@@ -15771,10 +15683,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: |-
-            There are two ways that this status code can be encountered:
-             * If preset was not found.
-             * If video was not found.
+          description: No such video or embed preset exists.
       summary: Check if an embed preset has been added to a video
       tags:
         - Embed Presets\Videos
@@ -15873,13 +15782,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The video is not set to a user-defined access list.
+          description: The video isn't set to a user-defined access list.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If domain was not found.
+          description: No such domain exists.
       security:
         - oauth2:
             - edit
@@ -15912,7 +15821,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The video does not have a user-defined access list.
+          description: The video doesn't have a user-defined access list.
       security:
         - oauth2:
             - edit
@@ -16017,13 +15926,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The video is not set to a user-defined access list.
+          description: The video isn't set to a user-defined access list.
         '404':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If user was not found.
+          description: No such user exists.
       security:
         - oauth2:
             - edit
@@ -16061,7 +15970,7 @@ paths:
             application/vnd.vimeo.user+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The video does not have a user-defined access list.
+          description: The video doesn't have a user-defined access list.
       security:
         - oauth2:
             - edit
@@ -16137,19 +16046,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are three ways that this status code can be encountered:
-             * The request body was not supplied.
-             * A parameter is invalid.
-             * The request body is not a JSON-encoded list of tags.
+            * The request body wasn't supplied.
+            * A parameter is invalid.
+            * The request body isn't a JSON-encoded list of tags.
         '403':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The authenticated user cannot add tags to a video.
-             * The number of tags would exceed 20.
+            * The authenticated user can't add tags to a video.
+            * The number of tags would exceed 20.
       security:
         - oauth2:
             - edit
@@ -16183,9 +16090,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * A parameter is invalid.
-             * The tag is invalid.
+            * A parameter is invalid.
+            * The tag is invalid.
       security:
         - oauth2:
             - edit
@@ -16222,15 +16128,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * A parameter is invalid.
-             * The tag is invalid.
+            * A parameter is invalid.
+            * The tag is invalid.
         '404':
           content:
             application/vnd.vimeo.tag+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If tag was not found in the video.
+          description: No such tag exists within the video.
       summary: Check if a tag has been added to a video
       tags:
         - Videos\Tags
@@ -16264,9 +16169,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The tag is invalid.
-             * An unsupported parameter was supplied.
+            * The tag is invalid.
+            * An unsupported parameter was supplied.
         '403':
           content:
             application/vnd.vimeo.tag+json:
@@ -16304,7 +16208,7 @@ paths:
             application/vnd.vimeo.video.texttrack+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If video was not found.
+          description: No such video exists.
       summary: Get all the text tracks of a video
       tags:
         - Videos\Text Tracks
@@ -16364,9 +16268,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * The authenticated user cannot edit the text track.
-             * The request contains errors. Returns a unique error code of `2204`.
+            * The authenticated user can't edit the text track.
+            * Error code 2204: The request contains errors.
       security:
         - oauth2:
             - upload
@@ -16400,21 +16303,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * You don't have permission to access this text track. Returns a unique error code of `3430`.
-             * This text track is disabled. Returns a unique error code of `3431`.
+            * Error code 3430: You don't have permission to access this text track.
+            * Error code 3431: This text track is disabled.
         '404':
           content:
             application/vnd.vimeo.video.texttrack+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are five ways that this status code can be encountered:
-             * If text track was not found.
-             * If video was not found.
-             * The authenticated user cannot delete the text track.
-             * The text track that you specified doesn't exist. Returns a unique error code of `5014`.
-             * The text track that you specified belongs to a different video. Returns a unique error code of `5015`.
+            * No such video or text track exists.
+            * The authenticated user can't delete the text track.
+            * Error code 5014: The text track that you specified doesn't exist.
+            * Error code 5015: The text track that you specified belongs to a different video.
       security:
         - oauth2:
             - delete
@@ -16451,20 +16351,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * You don't have permission to access this text track. Returns a unique error code of `3430`.
-             * This text track is disabled. Returns a unique error code of `3431`.
+            * Error code 3430: You don't have permission to access this text track.
+            * Error code 3431: This text track is disabled.
         '404':
           content:
             application/vnd.vimeo.video.texttrack+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * If text track was not found.
-             * If video was not found.
-             * The text track that you specified doesn't exist. Returns a unique error code of `5014`.
-             * The text track that you specified belongs to a different video. Returns a unique error code of `5015`.
+            * No such video or text track exists.
+            * Error code 5014: The text track that you specified doesn't exist.
+            * Error code 5015: The text track that you specified belongs to a different video.
       summary: Get a specific text track
       tags:
         - Videos\Text Tracks
@@ -16526,22 +16423,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * The authenticated user cannot edit the text track.
-             * There are errors in the request. Returns a unique error code of `2204`.
-             * You don't have permission to access this text track. Returns a unique error code of `3430`.
-             * This text track is disabled. Returns a unique error code of `3431`.
+            * The authenticated user can't edit the text track.
+            * Error code 2204: There are errors in the request.
+            * Error code 3430: You don't have permission to access this text track.
+            * Error code 3431: This text track is disabled.
         '404':
           content:
             application/vnd.vimeo.video.texttrack+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
           description: |-
-            There are four ways that this status code can be encountered:
-             * If text track was not found.
-             * If video was not found.
-             * The text track that you specified doesn't exist. Returns a unique error code of `5014`.
-             * The text track that you specified belongs to a different video. Returns a unique error code of `5015`.
+            * No such video or text track exists.
+            * Error code 5014: The text track that you specified doesn't exist.
+            * Error code 5015: The text track that you specified belongs to a different video.
       security:
         - oauth2:
             - edit
@@ -16577,7 +16471,7 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If video was not found.
+          description: No such video exists.
       security:
         - oauth2:
             - upload
@@ -16614,7 +16508,7 @@ paths:
             application/vnd.vimeo.picture+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: If the user is not permitted to view this custom logo.
+          description: If the user isn't permitted to view this custom logo.
       summary: Get a custom video logo
       tags:
         - Embed Presets\Videos
@@ -16681,25 +16575,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are two ways that this status code can be encountered:
-             * If the request input contains invalid upload data. Returns a unique error code of `2204`.
-             * If the request input contains invalid versions data. Returns a unique error code of `2204`.
+            * Error code 2204: If the request input contains invalid upload data.
+            * Error code 2204: If the request input contains invalid versions data.
         '403':
           content:
             application/vnd.vimeo.video.version+json:
               schema:
                 $ref: '#/components/schemas/error'
-          description: If a user isn't permitted to edit the video Returns a unique error code of `3427`.
+          description: 'Error code 3427: If a user isn''t permitted to edit the video'
         '404':
           content:
             application/vnd.vimeo.video.version+json:
               schema:
                 $ref: '#/components/schemas/error'
           description: |-
-            There are three ways that this status code can be encountered:
-             * If an upload associated with the version isn't found. Returns a unique error code of `5011`.
-             * If a video associated with the upload isn't found. Returns a unique error code of `5012`.
-             * If the version of the API used is less than 3.4 and isn't of approach `tus`, the endpoint is not available. Returns a unique error code of `5013`.
+            * Error code 5011: If an upload associated with the version isn't found.
+            * Error code 5012: If a video associated with the upload isn't found.
+            * Error code 5013: If the version of the API used is less than 3.4 and isn't of approach `tus`, the endpoint isn't available.
       summary: Add a version to a video
       tags:
         - Videos\Versions
@@ -16750,7 +16642,7 @@ paths:
             application/vnd.vimeo.video+json:
               schema:
                 $ref: '#/components/schemas/legacy-error'
-          description: The value of `filter` is not `related`.
+          description: The value of `filter` isn' `related`.
       summary: Get all the related videos of a video
       tags:
         - Videos\Recommendations
@@ -16884,7 +16776,7 @@ components:
           description: Embed data for the album.
           properties:
             html:
-              description: The responsive HTML code to embed the playlist on a website. This is present only when `privacy.view` is not password and when the album has embeddable videos.
+              description: The responsive HTML code to embed the playlist on a website. This is present only when `privacy.view` isn't password and when the album has embeddable videos.
               nullable: true
               type: string
           required:
@@ -17405,7 +17297,7 @@ components:
             type: object
           type: array
         top_level:
-          description: Whether the category is not a subcategory of another category.
+          description: Whether the category isn't a subcategory of another category.
           example: 'true'
           type: boolean
         uri:
@@ -18863,7 +18755,7 @@ components:
 
             Option descriptions:
              * `default` - Grants discounts on existing product offerings.
-             * `vip` - Grants free access either to VOD content before it is released or to access types that are not part of the existing product offerings.
+             * `vip` - Grants free access either to VOD content before it is released or to access types that aren't part of the existing product offerings.
           enum:
             - default
             - vip
@@ -20055,11 +19947,11 @@ components:
             Option descriptions:
              * `basic` - The user has a Vimeo Basic subscription.
              * `business` - The user has a Vimeo Business subscription.
-             * `live_business` - The user has a Live Business subscription.
-             * `live_premium` - The user has a Live Premium subscription.
-             * `live_pro` - The user has a Live PRO subscription
+             * `live_business` - The user has a Vimeo Business Live subscription.
+             * `live_premium` - The user has a Vimeo Premium subscription.
+             * `live_pro` - The user has a Vimeo PRO Live subscription.
              * `plus` - The user has a Vimeo Plus subscription.
-             * `pro` - The user has a Vimeo PRO subscription.
+             * `pro` - The user has a Vimeo Pro subscription.
              * `pro_unlimited` - The user has a Vimeo PRO Unlimited subscription.
              * `producer` - The user has a Vimeo Producer subscription.
           enum:
