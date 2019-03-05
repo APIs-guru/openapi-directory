@@ -15,6 +15,9 @@ var MIME = new MimeLookup(require('mime-db'));
 var makeRequest = require('makeRequest');
 var util = require('./util');
 
+//Disable check of SSL certificates
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+
 sh.set('-e');
 sh.set('-v');
 
