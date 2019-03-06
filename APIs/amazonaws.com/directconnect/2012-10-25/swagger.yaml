@@ -1650,7 +1650,7 @@ definitions:
         description: The ID of the AWS account of the customer for whom the connection will be provisioned.
       interconnectId:
         $ref: '#/definitions/InterconnectId'
-        description: 'The ID of the interconnect on which the connection will be provisioned. For example, dxcon-456abc78.'
+        description: The ID of the interconnect on which the connection will be provisioned.
       vlan:
         $ref: '#/definitions/VLAN'
         description: The dedicated VLAN provisioned to the connection.
@@ -1793,10 +1793,10 @@ definitions:
     properties:
       connectionId:
         $ref: '#/definitions/ConnectionId'
-        description: 'The ID of the connection. For example, dxcon-abc123.'
+        description: The ID of the connection.
       lagId:
         $ref: '#/definitions/LagId'
-        description: 'The ID of the LAG with which to associate the connection. For example, dxlag-abc123.'
+        description: The ID of the LAG with which to associate the connection.
   AssociateHostedConnectionRequest:
     type: object
     required:
@@ -2424,10 +2424,10 @@ definitions:
     properties:
       connectionId:
         $ref: '#/definitions/ConnectionId'
-        description: 'The ID of the connection. For example, dxcon-abc123.'
+        description: The ID of the connection.
       lagId:
         $ref: '#/definitions/LagId'
-        description: 'The ID of the LAG. For example, dxlag-abc123.'
+        description: The ID of the LAG.
   TagResourceResponse:
     type: object
     properties: {}
@@ -2574,6 +2574,12 @@ definitions:
     type: string
   VirtualInterfaceId:
     type: string
+  PortSpeed:
+    type: string
+  AvailablePortSpeeds:
+    type: array
+    items:
+      $ref: '#/definitions/PortSpeed'
   AwsDevice:
     type: string
   AwsDeviceV2:
@@ -2947,6 +2953,9 @@ definitions:
       region:
         $ref: '#/definitions/Region'
         description: The AWS Region for the location.
+      availablePortSpeeds:
+        $ref: '#/definitions/AvailablePortSpeeds'
+        description: The available port speeds for the location.
     description: Information about an AWS Direct Connect location.
   LocationList:
     type: array

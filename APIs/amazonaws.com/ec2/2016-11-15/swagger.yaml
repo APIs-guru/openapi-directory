@@ -4118,6 +4118,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeInternetGatewaysRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -4278,6 +4288,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeNetworkAclsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5533,6 +5553,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeVpcPeeringConnectionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -5558,6 +5588,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeVpcsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -11845,10 +11885,10 @@ definitions:
         description: One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
       MaxResults:
         $ref: '#/definitions/Integer'
-        description: '<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the instance IDs parameter in the same request.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>'
+        description: '<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>'
       NextToken:
         $ref: '#/definitions/String'
-        description: The token to retrieve the next page of results.
+        description: The token for the next page of results.
   DescribeClientVpnAuthorizationRulesResult:
     type: object
     properties:
@@ -12079,7 +12119,7 @@ definitions:
         description: Information about the egress-only internet gateways.
       NextToken:
         $ref: '#/definitions/String'
-        description: The token to use to retrieve the next page of results.
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   DescribeEgressOnlyInternetGatewaysRequest:
     type: object
     properties:
@@ -12091,10 +12131,10 @@ definitions:
         description: One or more egress-only internet gateway IDs.
       MaxResults:
         $ref: '#/definitions/Integer'
-        description: 'The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned.'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
       NextToken:
         $ref: '#/definitions/String'
-        description: The token to retrieve the next page of results.
+        description: The token for the next page of results.
   DescribeElasticGpusResult:
     type: object
     properties:
@@ -12263,10 +12303,10 @@ definitions:
         description: One or more flow log IDs.
       MaxResults:
         $ref: '#/definitions/Integer'
-        description: 'The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the flow log IDs parameter in the same request.'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
       NextToken:
         $ref: '#/definitions/String'
-        description: The token to retrieve the next page of results.
+        description: The token for the next page of results.
   DescribeFpgaImageAttributeResult:
     type: object
     properties:
@@ -12826,6 +12866,9 @@ definitions:
       InternetGateways:
         $ref: '#/definitions/InternetGatewayList'
         description: Information about one or more internet gateways.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   DescribeInternetGatewaysRequest:
     type: object
     example:
@@ -12843,6 +12886,12 @@ definitions:
       InternetGatewayIds:
         $ref: '#/definitions/ValueStringList'
         description: '<p>One or more internet gateway IDs.</p> <p>Default: Describes all your internet gateways.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      MaxResults:
+        $ref: '#/definitions/DescribeInternetGatewaysMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   DescribeKeyPairsResult:
     type: object
     example:
@@ -13050,13 +13099,13 @@ definitions:
         description: '<p>One or more filters.</p> <ul> <li> <p> <code>nat-gateway-id</code> - The ID of the NAT gateway.</p> </li> <li> <p> <code>state</code> - The state of the NAT gateway (<code>pending</code> | <code>failed</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet in which the NAT gateway resides.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC in which the NAT gateway resides.</p> </li> </ul>'
       MaxResults:
         $ref: '#/definitions/Integer'
-        description: '<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value specified is greater than 1000, we return only 1000 items.</p>'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
       NatGatewayIds:
         $ref: '#/definitions/ValueStringList'
         description: One or more NAT gateway IDs.
       NextToken:
         $ref: '#/definitions/String'
-        description: The token to retrieve the next page of results.
+        description: The token for the next page of results.
   DescribeNetworkAclsResult:
     type: object
     example:
@@ -13084,6 +13133,9 @@ definitions:
       NetworkAcls:
         $ref: '#/definitions/NetworkAclList'
         description: Information about one or more network ACLs.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   DescribeNetworkAclsRequest:
     type: object
     example:
@@ -13099,6 +13151,12 @@ definitions:
       NetworkAclIds:
         $ref: '#/definitions/ValueStringList'
         description: '<p>One or more network ACL IDs.</p> <p>Default: Describes all your network ACLs.</p>'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      MaxResults:
+        $ref: '#/definitions/DescribeNetworkAclsMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   DescribeNetworkInterfaceAttributeResult:
     type: object
     example:
@@ -13261,7 +13319,7 @@ definitions:
     properties:
       NextToken:
         $ref: '#/definitions/String'
-        description: 'The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
       PrefixLists:
         $ref: '#/definitions/PrefixListSet'
         description: All available prefix lists.
@@ -13276,10 +13334,10 @@ definitions:
         description: '<p>One or more filters.</p> <ul> <li> <p> <code>prefix-list-id</code>: The ID of a prefix list.</p> </li> <li> <p> <code>prefix-list-name</code>: The name of a prefix list.</p> </li> </ul>'
       MaxResults:
         $ref: '#/definitions/Integer'
-        description: '<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value specified is greater than 1000, we return only 1000 items.</p>'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
       NextToken:
         $ref: '#/definitions/String'
-        description: The token for the next set of items to return. (You received this token from a prior call.)
+        description: The token for the next page of results.
       PrefixListIds:
         $ref: '#/definitions/ValueStringList'
         description: One or more prefix list IDs.
@@ -13539,10 +13597,10 @@ definitions:
         description: '<p>One or more route table IDs.</p> <p>Default: Describes all your route tables.</p>'
       NextToken:
         $ref: '#/definitions/String'
-        description: The token to retrieve the next page of results.
+        description: The token for the next page of results.
       MaxResults:
         $ref: '#/definitions/Integer'
-        description: 'The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <b>NextToken</b> value. This value can be between 5 and 100.'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   DescribeScheduledInstanceAvailabilityResult:
     type: object
     example:
@@ -14539,7 +14597,7 @@ definitions:
     properties:
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The token to use when requesting the next set of items.
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
       Vpcs:
         $ref: '#/definitions/ClassicLinkDnsSupportList'
         description: Information about the ClassicLink DNS support status of the VPCs.
@@ -14548,10 +14606,10 @@ definitions:
     properties:
       MaxResults:
         $ref: '#/definitions/MaxResults'
-        description: The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
       NextToken:
         $ref: '#/definitions/NextToken'
-        description: The token for the next set of items to return. (You received this token from a prior call.)
+        description: The token for the next page of results.
       VpcIds:
         $ref: '#/definitions/VpcClassicLinkIdList'
         description: One or more VPC IDs.
@@ -14746,10 +14804,10 @@ definitions:
         description: '<p>One or more VPC peering connection IDs.</p> <p>Default: Describes all your VPC peering connections.</p>'
       NextToken:
         $ref: '#/definitions/String'
-        description: The token to request the next page of results. (You received this token from a prior call.)
+        description: The token for the next page of results.
       MaxResults:
         $ref: '#/definitions/DescribeVpcPeeringConnectionsMaxResults'
-        description: The maximum number of results to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   DescribeVpcsResult:
     type: object
     example:
@@ -14767,6 +14825,9 @@ definitions:
       Vpcs:
         $ref: '#/definitions/VpcList'
         description: Information about one or more VPCs.
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
   DescribeVpcsRequest:
     type: object
     example:
@@ -14782,6 +14843,12 @@ definitions:
       DryRun:
         $ref: '#/definitions/Boolean'
         description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+      NextToken:
+        $ref: '#/definitions/String'
+        description: The token for the next page of results.
+      MaxResults:
+        $ref: '#/definitions/DescribeVpcsMaxResults'
+        description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
   DescribeVpnConnectionsResult:
     type: object
     properties:
@@ -18834,7 +18901,7 @@ definitions:
       Signature:
         $ref: '#/definitions/String'
         description: The signed authorization message for the prefix and account.
-    description: Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP).
+    description: 'Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP). For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip">Prepare to Bring Your Address Range to Your AWS Account</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
   CidrBlock:
     type: object
     properties:
@@ -21014,6 +21081,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Reservation'
+  DescribeInternetGatewaysMaxResults:
+    type: integer
+    minimum: 5
+    maximum: 1000
   InternetGatewayList:
     type: array
     items:
@@ -21046,6 +21117,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/NatGateway'
+  DescribeNetworkAclsMaxResults:
+    type: integer
+    minimum: 5
+    maximum: 1000
   NetworkAclList:
     type: array
     items:
@@ -21410,6 +21485,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/VpcPeeringConnection'
+  DescribeVpcsMaxResults:
+    type: integer
+    minimum: 5
+    maximum: 1000
   VpcIdStringList:
     type: array
     items:

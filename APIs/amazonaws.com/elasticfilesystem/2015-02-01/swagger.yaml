@@ -941,12 +941,17 @@ definitions:
     description: <p/>
   LifecycleConfigurationDescription:
     type: object
+    example:
+      LifecyclePolicies:
+        - TransitionToIA: AFTER_30_DAYS
     properties:
       LifecyclePolicies:
         $ref: '#/definitions/LifecyclePolicies'
         description: 'An array of lifecycle management policies. Currently, EFS supports a maximum of one policy per file system.'
   DescribeLifecycleConfigurationRequest:
     type: object
+    example:
+      FileSystemId: fs-01234567
     properties: {}
   DescribeMountTargetSecurityGroupsResponse:
     type: object
@@ -1034,6 +1039,10 @@ definitions:
     type: object
     required:
       - LifecyclePolicies
+    example:
+      FileSystemId: fs-01234567
+      LifecyclePolicies:
+        - TransitionToIA: AFTER_30_DAYS
     properties:
       LifecyclePolicies:
         $ref: '#/definitions/LifecyclePolicies'
