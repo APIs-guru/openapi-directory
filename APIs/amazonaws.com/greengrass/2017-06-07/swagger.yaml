@@ -2640,7 +2640,7 @@ definitions:
         description: The ID of the deployment if you wish to redeploy a previous deployment.
       DeploymentType:
         $ref: '#/definitions/DeploymentType'
-        description: 'The type of deployment. When used in ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
+        description: 'The type of deployment. When used for ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
       GroupVersionId:
         $ref: '#/definitions/__string'
         description: The ID of the group version to be deployed.
@@ -2751,7 +2751,7 @@ definitions:
     properties:
       DefaultConfig:
         $ref: '#/definitions/FunctionDefaultConfig'
-        description: Default configuration that will apply to all Lambda functions in this function definition version
+        description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
       Functions:
         $ref: '#/definitions/__listOfFunction'
         description: A list of Lambda functions in this function definition version.
@@ -3241,7 +3241,7 @@ definitions:
     properties:
       DeploymentStatus:
         $ref: '#/definitions/__string'
-        description: 'The status of the deployment: ''''Pending'''', ''''InProgress'''', ''''Success'''', or ''''Failure''''.'
+        description: 'The status of the deployment: ''''InProgress'''', ''''Building'''', ''''Success'''', or ''''Failure''''.'
       DeploymentType:
         $ref: '#/definitions/DeploymentType'
         description: The type of the deployment.
@@ -4016,7 +4016,7 @@ definitions:
       - Redeployment
       - ResetDeployment
       - ForceResetDeployment
-    description: The type of deployment.
+    description: 'The type of deployment. When used for ''''CreateDeployment'''', only ''''NewDeployment'''' and ''''Redeployment'''' are valid.'
   ErrorDetails:
     type: array
     description: A list of error details.
@@ -4036,7 +4036,7 @@ definitions:
         description: The ID of the group deployment.
       DeploymentStatus:
         $ref: '#/definitions/__string'
-        description: 'The current status of the group deployment: ''''Pending'''', ''''InProgress'''', ''''Success'''', or ''''Failure''''.'
+        description: 'The current status of the group deployment: ''''InProgress'''', ''''Building'''', ''''Success'''', or ''''Failure''''.'
       DeploymentType:
         $ref: '#/definitions/DeploymentType'
         description: The type of the deployment.
@@ -4162,7 +4162,7 @@ definitions:
     properties:
       DefaultConfig:
         $ref: '#/definitions/FunctionDefaultConfig'
-        description: Default configuration that will apply to all Lambda functions in this function definition version
+        description: The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
       Functions:
         $ref: '#/definitions/__listOfFunction'
         description: A list of Lambda functions in this function definition version.
@@ -4172,7 +4172,7 @@ definitions:
     properties:
       Execution:
         $ref: '#/definitions/FunctionDefaultExecutionConfig'
-    description: Default configuration that will apply to all Lambda functions in the group.
+    description: The default configuration that applies to all Lambda functions in the group. Individual Lambda functions can override these settings.
   __listOfFunction:
     type: array
     items:
@@ -4415,7 +4415,7 @@ definitions:
         $ref: '#/definitions/FunctionIsolationMode'
       RunAs:
         $ref: '#/definitions/FunctionRunAsConfig'
-    description: 'Configuration information that specifies how the Lambda function runs. '
+    description: 'Configuration information that specifies how a Lambda function runs. '
   __listOfResourceAccessPolicy:
     type: array
     items:
@@ -4425,7 +4425,9 @@ definitions:
     properties:
       IsolationMode:
         $ref: '#/definitions/FunctionIsolationMode'
-    description: Configuration that defines the default containerization used for when running Lambda functions in the group. Individual Lambda functions can be override this setting.
+      RunAs:
+        $ref: '#/definitions/FunctionRunAsConfig'
+    description: 'Configuration information that specifies how a Lambda function runs. '
   FunctionIsolationMode:
     type: string
     enum:
@@ -4437,11 +4439,11 @@ definitions:
     properties:
       Gid:
         $ref: '#/definitions/__integer'
-        description: The Group ID whose permissions are used to run a Lambda function.
+        description: The group ID whose permissions are used to run a Lambda function.
       Uid:
         $ref: '#/definitions/__integer'
-        description: The User ID whose permissions are used to run a Lambda function.
-    description: 'Specifies the user and/or group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values (ggc_user/ggc_group). We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set IsolationMode to NoContainer and you must update config.json in greengrass-root/config to set allowFunctionsToRunAsRoot to yes.'
+        description: The user ID whose permissions are used to run a Lambda function.
+    description: 'Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''''IsolationMode'''' to ''''NoContainer'''' and update config.json in ''''greengrass-root/config'''' to set ''''allowFunctionsToRunAsRoot'''' to ''''yes''''.'
   __listOfConnectivityInfo:
     type: array
     items:
@@ -4660,7 +4662,7 @@ definitions:
         description: 'The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'
       Subject:
         $ref: '#/definitions/__string'
-        description: The subject of the message.
+        description: The MQTT topic used to route the message.
       Target:
         $ref: '#/definitions/__string'
         description: 'Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, ''cloud'' (which represents the AWS IoT cloud), or ''GGShadowService''.'

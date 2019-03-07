@@ -4963,10 +4963,13 @@ definitions:
         description: Parameters that control interactions with the CDN.
       IFrameOnlyPlaylists:
         $ref: '#/definitions/IFrameOnlyPlaylistType'
-        description: 'If enabled, writes out I-Frame only playlists in addition to media playlists.'
+        description: |-
+          DISABLED: Do not create an I-frame-only manifest, but do create the master and media manifests (according to the Output Selection field).
+
+          STANDARD: Create an I-frame-only manifest for each output that contains video, as well as the other manifests (according to the Output Selection field). The I-frame manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or more #EXT-X-BYTERANGE entries identifying the I-frame position. For example, #EXT-X-BYTERANGE:160364@1461888"
       IndexNSegments:
         $ref: '#/definitions/__integerMin3'
-        description: 'If mode is "live", the number of segments to retain in the manifest (.m3u8) file. This number must be less than or equal to keepSegments. If mode is "vod", this parameter has no effect.'
+        description: 'Applies only if Mode field is LIVE. Specifies the maximum number of segments in the media manifest file. After this maximum, older segments are removed from the media manifest. This number must be less than or equal to the Keep Segments field.'
       InputLossAction:
         $ref: '#/definitions/InputLossActionForHlsOut'
         description: Parameter that control output group behavior on input loss.
@@ -5017,7 +5020,12 @@ definitions:
         description: 'Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.'
       RedundantManifest:
         $ref: '#/definitions/HlsRedundantManifest'
-        description: 'When set to "enabled", includes the media playlists from both pipelines in the master manifest (.m3u8) file.'
+        description: |-
+          ENABLED: The master manifest (.m3u8 file) for each pipeline includes information about both pipelines: first its own media files, then the media files of the other pipeline. This feature allows playout device that support stale manifest detection to switch from one manifest to the other, when the current manifest seems to be stale. There are still two destinations and two master manifests, but both master manifests reference the media files from both pipelines.
+
+          DISABLED: The master manifest (.m3u8 file) for each pipeline includes information about its own pipeline only.
+
+          For an HLS output group with MediaPackage as the destination, the DISABLED behavior is always followed. MediaPackage regenerates the manifests it serves to players so a redundant manifest from MediaLive is irrelevant.
       SegmentLength:
         $ref: '#/definitions/__integerMin1'
         description: 'Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.'
@@ -5647,6 +5655,26 @@ definitions:
         $ref: '#/definitions/__string'
         description: The ARN of the MediaConnect Flow that you want to use as a source.
     description: The settings for a MediaConnect Flow.
+  MediaPackageGroupSettings:
+    type: object
+    required:
+      - Destination
+    properties:
+      Destination:
+        $ref: '#/definitions/OutputLocationRef'
+        description: MediaPackage channel destination.
+    description: Media Package Group Settings
+  MediaPackageOutputDestinationSettings:
+    type: object
+    properties:
+      ChannelId:
+        $ref: '#/definitions/__stringMin1'
+        description: ID of the channel in MediaPackage that is the destination for this output group. You do not need to specify the individual inputs in MediaPackage; MediaLive will handle the connection of the two MediaLive pipelines to the two MediaPackage inputs. The MediaPackage channel and MediaLive channel must be in the same region.
+    description: Media Package Output Destination Settings
+  MediaPackageOutputSettings:
+    type: object
+    properties: {}
+    description: Media Package Output Settings
   Mp2CodingMode:
     type: string
     enum:
@@ -5841,6 +5869,8 @@ definitions:
         $ref: '#/definitions/FrameCaptureOutputSettings'
       HlsOutputSettings:
         $ref: '#/definitions/HlsOutputSettings'
+      MediaPackageOutputSettings:
+        $ref: '#/definitions/MediaPackageOutputSettings'
       MsSmoothOutputSettings:
         $ref: '#/definitions/MsSmoothOutputSettings'
       RtmpOutputSettings:
@@ -5869,6 +5899,11 @@ definitions:
         $ref: '#/definitions/__string'
         description: The name of the VideoDescription used as the source for this output.
     description: Output settings. There can be multiple outputs within a group.
+  __listOfMediaPackageOutputDestinationSettings:
+    type: array
+    description: Placeholder documentation for __listOfMediaPackageOutputDestinationSettings
+    items:
+      $ref: '#/definitions/MediaPackageOutputDestinationSettings'
   __listOfOutputDestinationSettings:
     type: array
     description: Placeholder documentation for __listOfOutputDestinationSettings
@@ -5880,9 +5915,12 @@ definitions:
       Id:
         $ref: '#/definitions/__string'
         description: User-specified id. This is used in an output group or an output.
+      MediaPackageSettings:
+        $ref: '#/definitions/__listOfMediaPackageOutputDestinationSettings'
+        description: Destination settings for a MediaPackage output; one destination for both encoders.
       Settings:
         $ref: '#/definitions/__listOfOutputDestinationSettings'
-        description: Destination settings for output; one for each redundant encoder.
+        description: Destination settings for a standard output; one destination for each redundant encoder.
     description: Placeholder documentation for OutputDestination
   OutputDestinationSettings:
     type: object
@@ -5913,6 +5951,8 @@ definitions:
         $ref: '#/definitions/FrameCaptureGroupSettings'
       HlsGroupSettings:
         $ref: '#/definitions/HlsGroupSettings'
+      MediaPackageGroupSettings:
+        $ref: '#/definitions/MediaPackageGroupSettings'
       MsSmoothGroupSettings:
         $ref: '#/definitions/MsSmoothGroupSettings'
       RtmpGroupSettings:
