@@ -982,7 +982,7 @@ definitions:
         description: ' The number of minutes a build is allowed to be queued before it times out. '
       encryptionKey:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
       tags:
         $ref: '#/definitions/TagList'
         description: <p>A set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
@@ -1215,6 +1215,9 @@ definitions:
       gitCloneDepthOverride:
         $ref: '#/definitions/GitCloneDepth'
         description: 'The user-defined depth of history, with a minimum value of 0, that overrides, for this build only, any previous depth of history defined in the build project.'
+      gitSubmodulesConfigOverride:
+        $ref: '#/definitions/GitSubmodulesConfig'
+        description: ' Information about the Git submodules configuration for this build of an AWS CodeBuild build project. '
       buildspecOverride:
         $ref: '#/definitions/String'
         description: 'A build spec declaration that overrides, for this build only, the latest one already defined in the build project.'
@@ -1320,7 +1323,7 @@ definitions:
         description: ' The number of minutes a build is allowed to be queued before it times out. '
       encryptionKey:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The replacement AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN)of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
       tags:
         $ref: '#/definitions/TagList'
         description: <p>The replacement set of tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
@@ -1438,7 +1441,10 @@ definitions:
         description: '<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, <code>location</code> should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline''s source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec (for example, <code>https://git-codecommit.<i>region-ID</i>.amazonaws.com/v1/repos/<i>repo-name</i> </code>).</p> </li> <li> <p>For source code in an Amazon Simple Storage Service (Amazon S3) input bucket, one of the following. </p> <ul> <li> <p> The path to the ZIP file that contains the source code (for example, <code> <i>bucket-name</i>/<i>path</i>/<i>to</i>/<i>object-name</i>.zip</code>). </p> </li> <li> <p> The path to the folder that contains the source code (for example, <code> <i>bucket-name</i>/<i>path</i>/<i>to</i>/<i>source-code</i>/<i>folder</i>/</code>). </p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec. You must connect your AWS account to your GitHub account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow AWS CodeBuild to have access to, and then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec. You must connect your AWS account to your Bitbucket account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket <b>Confirm access to your account</b> page, choose <b>Grant access</b>. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object''s <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul>'
       gitCloneDepth:
         $ref: '#/definitions/GitCloneDepth'
-        description: Information about the git clone depth for the build project.
+        description: Information about the Git clone depth for the build project.
+      gitSubmodulesConfig:
+        $ref: '#/definitions/GitSubmodulesConfig'
+        description: ' Information about the Git submodules configuration for the build project. '
       buildspec:
         $ref: '#/definitions/String'
         description: '<p>The build spec declaration to use for the builds in this build project.</p> <p>If this value is not specified, a build spec must be included along with the source code to be built.</p>'
@@ -1508,7 +1514,7 @@ definitions:
         description: '<p>Information about the cache location: </p> <ul> <li> <p> <code>NO_CACHE</code> or <code>LOCAL</code>: This value is ignored.</p> </li> <li> <p> <code>S3</code>: This is the S3 bucket name/prefix.</p> </li> </ul>'
       modes:
         $ref: '#/definitions/ProjectCacheModes'
-        description: '<p> If you use a <code>LOCAL</code> cache, the local cache mode. You can use one or more local cache modes at the same time. </p> <ul> <li> <p> <code>LOCAL_SOURCE_CACHE</code> mode caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket) and you choose this option, then it is ignored. </p> </li> <li> <p> <code>LOCAL_DOCKER_LAYER_CACHE</code> mode caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance hit that would be caused by pulling large Docker images down from the network. </p> <note> <ul> <li> <p> You can only use a Docker layer cache in the Linux enviornment. </p> </li> <li> <p> The <code>privileged</code> flag must be set so that your project has the necessary Docker privileges. </p> </li> <li> <p> You should consider the security implications before using a Docker layer cache. </p> </li> </ul> </note> </li> </ul> <ul> <li> <p> <code>LOCAL_CUSTOM_CACHE</code> mode caches directories you specify in the buildspec file. This mode is a good choice if your build scenario does not match one that works well with one of the other three local cache modes. If you use a custom cache: </p> <ul> <li> <p> Only directories can be specified for caching. You cannot specify individual files. </p> </li> <li> <p> Symlinks are used to reference cached directories. </p> </li> <li> <p> Cached directories are linked to your build before it downloads its project sources. Cached items are overriden if a source item has the same name. Directories are specified using cache paths in the buildspec file. </p> </li> </ul> </li> </ul>'
+        description: '<p> If you use a <code>LOCAL</code> cache, the local cache mode. You can use one or more local cache modes at the same time. </p> <ul> <li> <p> <code>LOCAL_SOURCE_CACHE</code> mode caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored. </p> </li> <li> <p> <code>LOCAL_DOCKER_LAYER_CACHE</code> mode caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network. </p> <note> <ul> <li> <p> You can use a Docker layer cache in the Linux enviornment only. </p> </li> <li> <p> The <code>privileged</code> flag must be set so that your project has the required Docker permissions. </p> </li> <li> <p> You should consider the security implications before you use a Docker layer cache. </p> </li> </ul> </note> </li> </ul> <ul> <li> <p> <code>LOCAL_CUSTOM_CACHE</code> mode caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache: </p> <ul> <li> <p> Only directories can be specified for caching. You cannot specify individual files. </p> </li> <li> <p> Symlinks are used to reference cached directories. </p> </li> <li> <p> Cached directories are linked to your build before it downloads its project sources. Cached items are overriden if a source item has the same name. Directories are specified using cache paths in the buildspec file. </p> </li> </ul> </li> </ul>'
     description: Information about the cache for the build project.
   ProjectEnvironment:
     type: object
@@ -1669,7 +1675,7 @@ definitions:
         description: Describes a network interface.
       encryptionKey:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
     description: Information about a build.
   WrapperBoolean:
     type: boolean
@@ -1872,7 +1878,7 @@ definitions:
         description: ' The number of minutes a build is allowed to be queued before it times out. '
       encryptionKey:
         $ref: '#/definitions/NonEmptyString'
-        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
+        description: '<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK''s alias (using the format <code>alias/<i>alias-name</i> </code>).</p>'
       tags:
         $ref: '#/definitions/TagList'
         description: <p>The tags for this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>
@@ -2047,6 +2053,15 @@ definitions:
   GitCloneDepth:
     type: integer
     minimum: 0
+  GitSubmodulesConfig:
+    type: object
+    required:
+      - fetchSubmodules
+    properties:
+      fetchSubmodules:
+        $ref: '#/definitions/WrapperBoolean'
+        description: ' Set to true to fetch Git submodules for your AWS CodeBuild build project. '
+    description: ' Information about the Git submodules configuration for an AWS CodeBuild build project. '
   ImagePullCredentialsType:
     type: string
     enum:
@@ -2064,7 +2079,7 @@ definitions:
       - GITHUB_ENTERPRISE
   KeyInput:
     type: string
-    pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=@+\-]*)$'
     minLength: 1
     maxLength: 127
   SortOrderType:
@@ -2093,6 +2108,9 @@ definitions:
       location:
         $ref: '#/definitions/String'
         description: ' The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>arn:aws:s3:::my-bucket/build-log</code>. '
+      encryptionDisabled:
+        $ref: '#/definitions/WrapperBoolean'
+        description: ' Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. '
     description: ' Information about S3 logs for a build project. '
   PhaseContext:
     type: object
@@ -2195,7 +2213,7 @@ definitions:
     maxItems: 16
   ValueInput:
     type: string
-    pattern: '^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$'
+    pattern: '^([\p{L}\p{Z}\p{N}_.:/=@+\-]*)$'
     minLength: 1
     maxLength: 255
   Tag:

@@ -3,6 +3,7 @@ info:
   version: '2006-03-01'
   x-release: s3
   title: Amazon Simple Storage Service
+  description: <p/>
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -717,7 +718,7 @@ paths:
   '/{Bucket}#GetBucketLifecycle':
     get:
       operationId: GetBucketLifecycle
-      description: 'Deprecated, see the GetBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html</p>'
+      description: ' No longer used, see the GetBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html</p>'
       responses:
         '200':
           description: Success
@@ -847,7 +848,7 @@ paths:
   '/{Bucket}#GetBucketNotification':
     get:
       operationId: GetBucketNotification
-      description: 'Deprecated, see the GetBucketNotificationConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html</p>'
+      description: ' No longer used, see the GetBucketNotificationConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html</p>'
       responses:
         '200':
           description: Success
@@ -1794,7 +1795,7 @@ paths:
   '/{Bucket}#PutBucketLifecycle':
     put:
       operationId: PutBucketLifecycle
-      description: 'Deprecated, see the PutBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html</p>'
+      description: ' No longer used, see the PutBucketLifecycleConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html</p>'
       responses:
         '200':
           description: Success
@@ -1890,7 +1891,7 @@ paths:
   '/{Bucket}#PutBucketNotification':
     put:
       operationId: PutBucketNotification
-      description: 'Deprecated, see the PutBucketNotificationConfiguraiton operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html</p>'
+      description: ' No longer used, see the PutBucketNotificationConfiguration operation.<p>http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html</p>'
       responses:
         '200':
           description: Success
@@ -2421,10 +2422,13 @@ definitions:
     properties:
       Location:
         $ref: '#/definitions/Location'
+        description: <p/>
       Bucket:
         $ref: '#/definitions/BucketName'
+        description: <p/>
       Key:
         $ref: '#/definitions/ObjectKey'
+        description: <p/>
       ETag:
         $ref: '#/definitions/ETag'
         description: Entity tag of the object.
@@ -2443,6 +2447,7 @@ definitions:
     properties:
       MultipartUpload:
         $ref: '#/definitions/CompletedMultipartUpload'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   CopyObjectOutput:
@@ -2454,6 +2459,7 @@ definitions:
     properties:
       CopyObjectResult:
         $ref: '#/definitions/CopyObjectResult'
+        description: <p/>
   CopyObjectRequest:
     type: object
     example:
@@ -2479,6 +2485,7 @@ definitions:
     properties:
       CreateBucketConfiguration:
         $ref: '#/definitions/CreateBucketConfiguration'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   BucketAlreadyExists: {}
@@ -2562,19 +2569,20 @@ definitions:
   DeleteObjectRequest:
     type: object
     example:
-      Bucket: ExampleBucket
-      Key: HappyFace.jpg
+      Bucket: examplebucket
+      Key: objectkey.jpg
     properties: {}
   DeleteObjectTaggingOutput:
     type: object
     example:
-      VersionId: 'null'
+      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
     properties: {}
   DeleteObjectTaggingRequest:
     type: object
     example:
       Bucket: examplebucket
       Key: HappyFace.jpg
+      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
     properties: {}
   DeleteObjectsOutput:
     type: object
@@ -2587,8 +2595,10 @@ definitions:
     properties:
       Deleted:
         $ref: '#/definitions/DeletedObjects'
+        description: <p/>
       Errors:
         $ref: '#/definitions/Errors'
+        description: <p/>
   DeleteObjectsRequest:
     type: object
     required:
@@ -2605,6 +2615,7 @@ definitions:
     properties:
       Delete:
         $ref: '#/definitions/Delete'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   DeletePublicAccessBlockRequest:
@@ -2624,6 +2635,7 @@ definitions:
     properties:
       Owner:
         $ref: '#/definitions/Owner'
+        description: <p/>
       Grants:
         $ref: '#/definitions/Grants'
         description: A list of grants.
@@ -2653,6 +2665,7 @@ definitions:
     properties:
       CORSRules:
         $ref: '#/definitions/CORSRules'
+        description: <p/>
   GetBucketCorsRequest:
     type: object
     example:
@@ -2687,6 +2700,7 @@ definitions:
     properties:
       Rules:
         $ref: '#/definitions/Rules'
+        description: <p/>
   GetBucketLifecycleRequest:
     type: object
     example:
@@ -2705,6 +2719,7 @@ definitions:
     properties:
       Rules:
         $ref: '#/definitions/LifecycleRules'
+        description: <p/>
   GetBucketLifecycleConfigurationRequest:
     type: object
     example:
@@ -2717,6 +2732,7 @@ definitions:
     properties:
       LocationConstraint:
         $ref: '#/definitions/BucketLocationConstraint'
+        description: <p/>
   GetBucketLocationRequest:
     type: object
     example:
@@ -2757,10 +2773,13 @@ definitions:
     properties:
       TopicConfiguration:
         $ref: '#/definitions/TopicConfigurationDeprecated'
+        description: <p/>
       QueueConfiguration:
         $ref: '#/definitions/QueueConfigurationDeprecated'
+        description: <p/>
       CloudFunctionConfiguration:
         $ref: '#/definitions/CloudFunctionConfiguration'
+        description: <p/>
   GetBucketNotificationConfigurationRequest:
     type: object
     example:
@@ -2771,10 +2790,13 @@ definitions:
     properties:
       TopicConfigurations:
         $ref: '#/definitions/TopicConfigurationList'
+        description: <p/>
       QueueConfigurations:
         $ref: '#/definitions/QueueConfigurationList'
+        description: <p/>
       LambdaFunctionConfigurations:
         $ref: '#/definitions/LambdaFunctionConfigurationList'
+        description: <p/>
     description: 'A container for specifying the notification configuration of the bucket. If this element is empty, notifications are turned off for the bucket.'
   GetBucketPolicyOutput:
     type: object
@@ -2843,6 +2865,7 @@ definitions:
     properties:
       TagSet:
         $ref: '#/definitions/TagSet'
+        description: <p/>
   GetBucketTaggingRequest:
     type: object
     example:
@@ -2875,12 +2898,16 @@ definitions:
     properties:
       RedirectAllRequestsTo:
         $ref: '#/definitions/RedirectAllRequestsTo'
+        description: <p/>
       IndexDocument:
         $ref: '#/definitions/IndexDocument'
+        description: <p/>
       ErrorDocument:
         $ref: '#/definitions/ErrorDocument'
+        description: <p/>
       RoutingRules:
         $ref: '#/definitions/RoutingRules'
+        description: <p/>
   GetBucketWebsiteRequest:
     type: object
     example:
@@ -2890,12 +2917,12 @@ definitions:
     type: object
     example:
       AcceptRanges: bytes
-      ContentLength: '10'
-      ContentRange: bytes 0-9/43
-      ContentType: text/plain
-      ETag: '"0d94420ffd0bc68cd3d152506b97a9cc"'
-      LastModified: 'Thu, 09 Oct 2014 22:57:28 GMT'
+      ContentLength: '3191'
+      ContentType: image/jpeg
+      ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
+      LastModified: 'Thu, 15 Dec 2016 01:19:41 GMT'
       Metadata: {}
+      TagCount: 2
       VersionId: 'null'
     properties:
       Body:
@@ -2908,8 +2935,7 @@ definitions:
     type: object
     example:
       Bucket: examplebucket
-      Key: SampleFile.txt
-      Range: bytes=0-9
+      Key: HappyFace.jpg
     properties: {}
   NoSuchKey: {}
   GetObjectAclOutput:
@@ -2942,6 +2968,7 @@ definitions:
     properties:
       Owner:
         $ref: '#/definitions/Owner'
+        description: <p/>
       Grants:
         $ref: '#/definitions/Grants'
         description: A list of grants.
@@ -2984,19 +3011,19 @@ definitions:
       - TagSet
     example:
       TagSet:
-        - Key: Key4
-          Value: Value4
-        - Key: Key3
-          Value: Value3
-      VersionId: 'null'
+        - Key: Key1
+          Value: Value1
+      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
     properties:
       TagSet:
         $ref: '#/definitions/TagSet'
+        description: <p/>
   GetObjectTaggingRequest:
     type: object
     example:
       Bucket: examplebucket
-      Key: HappyFace.jpg
+      Key: exampleobject
+      VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
     properties: {}
   GetObjectTorrentOutput:
     type: object
@@ -3004,6 +3031,7 @@ definitions:
     properties:
       Body:
         $ref: '#/definitions/Body'
+        description: <p/>
   GetObjectTorrentRequest:
     type: object
     example:
@@ -3115,8 +3143,10 @@ definitions:
     properties:
       Buckets:
         $ref: '#/definitions/Buckets'
+        description: <p/>
       Owner:
         $ref: '#/definitions/Owner'
+        description: <p/>
   ListMultipartUploadsOutput:
     type: object
     example:
@@ -3166,6 +3196,7 @@ definitions:
         description: 'When a prefix is provided in the request, this field contains the specified prefix. The result contains only keys starting with the specified prefix.'
       Delimiter:
         $ref: '#/definitions/Delimiter'
+        description: <p/>
       NextUploadIdMarker:
         $ref: '#/definitions/NextUploadIdMarker'
         description: 'When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request.'
@@ -3177,8 +3208,10 @@ definitions:
         description: Indicates whether the returned list of multipart uploads is truncated. A value of true indicates that the list was truncated. The list can be truncated if the number of multipart uploads exceeds the limit allowed or specified by max uploads.
       Uploads:
         $ref: '#/definitions/MultipartUploadList'
+        description: <p/>
       CommonPrefixes:
         $ref: '#/definitions/CommonPrefixList'
+        description: <p/>
       EncodingType:
         $ref: '#/definitions/EncodingType'
         description: Encoding type used by Amazon S3 to encode object keys in the response.
@@ -3223,6 +3256,7 @@ definitions:
         description: Marks the last Key returned in a truncated response.
       VersionIdMarker:
         $ref: '#/definitions/VersionIdMarker'
+        description: <p/>
       NextKeyMarker:
         $ref: '#/definitions/NextKeyMarker'
         description: Use this value for the key marker request parameter in a subsequent request.
@@ -3231,18 +3265,25 @@ definitions:
         description: Use this value for the next version id marker parameter in a subsequent request.
       Versions:
         $ref: '#/definitions/ObjectVersionList'
+        description: <p/>
       DeleteMarkers:
         $ref: '#/definitions/DeleteMarkers'
+        description: <p/>
       Name:
         $ref: '#/definitions/BucketName'
+        description: <p/>
       Prefix:
         $ref: '#/definitions/Prefix'
+        description: <p/>
       Delimiter:
         $ref: '#/definitions/Delimiter'
+        description: <p/>
       MaxKeys:
         $ref: '#/definitions/MaxKeys'
+        description: <p/>
       CommonPrefixes:
         $ref: '#/definitions/CommonPrefixList'
+        description: <p/>
       EncodingType:
         $ref: '#/definitions/EncodingType'
         description: Encoding type used by Amazon S3 to encode object keys in the response.
@@ -3279,21 +3320,28 @@ definitions:
         description: A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
       Marker:
         $ref: '#/definitions/Marker'
+        description: <p/>
       NextMarker:
         $ref: '#/definitions/NextMarker'
         description: 'When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.'
       Contents:
         $ref: '#/definitions/ObjectList'
+        description: <p/>
       Name:
         $ref: '#/definitions/BucketName'
+        description: <p/>
       Prefix:
         $ref: '#/definitions/Prefix'
+        description: <p/>
       Delimiter:
         $ref: '#/definitions/Delimiter'
+        description: <p/>
       MaxKeys:
         $ref: '#/definitions/MaxKeys'
+        description: <p/>
       CommonPrefixes:
         $ref: '#/definitions/CommonPrefixList'
+        description: <p/>
       EncodingType:
         $ref: '#/definitions/EncodingType'
         description: Encoding type used by Amazon S3 to encode object keys in the response.
@@ -3409,11 +3457,13 @@ definitions:
         description: Indicates whether the returned list of parts is truncated.
       Parts:
         $ref: '#/definitions/Parts'
+        description: <p/>
       Initiator:
         $ref: '#/definitions/Initiator'
         description: Identifies who initiated the multipart upload.
       Owner:
         $ref: '#/definitions/Owner'
+        description: <p/>
       StorageClass:
         $ref: '#/definitions/StorageClass'
         description: The class of storage used to store the object.
@@ -3443,6 +3493,7 @@ definitions:
     properties:
       AccessControlPolicy:
         $ref: '#/definitions/AccessControlPolicy'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketAnalyticsConfigurationRequest:
@@ -3485,6 +3536,7 @@ definitions:
     properties:
       CORSConfiguration:
         $ref: '#/definitions/CORSConfiguration'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketEncryptionRequest:
@@ -3511,6 +3563,7 @@ definitions:
     properties:
       LifecycleConfiguration:
         $ref: '#/definitions/LifecycleConfiguration'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketLifecycleConfigurationRequest:
@@ -3531,6 +3584,7 @@ definitions:
     properties:
       LifecycleConfiguration:
         $ref: '#/definitions/BucketLifecycleConfiguration'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketLoggingRequest:
@@ -3551,6 +3605,7 @@ definitions:
     properties:
       BucketLoggingStatus:
         $ref: '#/definitions/BucketLoggingStatus'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketMetricsConfigurationRequest:
@@ -3570,6 +3625,7 @@ definitions:
     properties:
       NotificationConfiguration:
         $ref: '#/definitions/NotificationConfigurationDeprecated'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketNotificationConfigurationRequest:
@@ -3629,6 +3685,7 @@ definitions:
     properties:
       RequestPaymentConfiguration:
         $ref: '#/definitions/RequestPaymentConfiguration'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketTaggingRequest:
@@ -3646,6 +3703,7 @@ definitions:
     properties:
       Tagging:
         $ref: '#/definitions/Tagging'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketVersioningRequest:
@@ -3660,6 +3718,7 @@ definitions:
     properties:
       VersioningConfiguration:
         $ref: '#/definitions/VersioningConfiguration'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutBucketWebsiteRequest:
@@ -3677,21 +3736,24 @@ definitions:
     properties:
       WebsiteConfiguration:
         $ref: '#/definitions/WebsiteConfiguration'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutObjectOutput:
     type: object
     example:
       ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
-      VersionId: Kirh.unyZwjQ69YxcQLA8z4F5j3kJJKr
+      ServerSideEncryption: AES256
+      VersionId: CG612hodqujkf8FaaNfp8U..FIhLROcp
     properties: {}
   PutObjectRequest:
     type: object
     example:
-      ACL: authenticated-read
-      Body: filetoupload
+      Body: HappyFace.jpg
       Bucket: examplebucket
-      Key: exampleobject
+      Key: HappyFace.jpg
+      ServerSideEncryption: AES256
+      StorageClass: STANDARD_IA
     properties:
       Body:
         $ref: '#/definitions/Body'
@@ -3714,6 +3776,7 @@ definitions:
     properties:
       AccessControlPolicy:
         $ref: '#/definitions/AccessControlPolicy'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutObjectLegalHoldOutput:
@@ -3770,6 +3833,7 @@ definitions:
     properties:
       Tagging:
         $ref: '#/definitions/Tagging'
+        description: <p/>
     xml:
       namespace: 'http://s3.amazonaws.com/doc/2006-03-01/'
   PutPublicAccessBlockRequest:
@@ -3806,6 +3870,7 @@ definitions:
     properties:
       Payload:
         $ref: '#/definitions/SelectObjectContentEventStream'
+        description: <p/>
   SelectObjectContentRequest:
     type: object
     required:
@@ -3829,7 +3894,7 @@ definitions:
       OutputSerialization:
         $ref: '#/definitions/OutputSerialization'
         description: Describes the format of the data that you want Amazon S3 to return in response.
-    description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records. It returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
+    description: 'Request to filter the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records. It returns only records that match the specified SQL expression. You must also specify the data serialization format for the response. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html">S3Select API Documentation</a>.'
   UploadPartOutput:
     type: object
     example:
@@ -3856,6 +3921,7 @@ definitions:
     properties:
       CopyPartResult:
         $ref: '#/definitions/CopyPartResult'
+        description: <p/>
   UploadPartCopyRequest:
     type: object
     example:
@@ -3907,6 +3973,7 @@ definitions:
       Status:
         $ref: '#/definitions/BucketAccelerateStatus'
         description: The accelerate configuration of the bucket.
+    description: <p/>
   AcceptRanges:
     type: string
   Grants:
@@ -3918,8 +3985,11 @@ definitions:
     properties:
       DisplayName:
         $ref: '#/definitions/DisplayName'
+        description: <p/>
       ID:
         $ref: '#/definitions/ID'
+        description: <p/>
+    description: <p/>
   AccessControlPolicy:
     type: object
     properties:
@@ -3928,6 +3998,8 @@ definitions:
         description: A list of grants.
       Owner:
         $ref: '#/definitions/Owner'
+        description: <p/>
+    description: <p/>
   OwnerOverride:
     type: string
     enum:
@@ -3984,6 +4056,7 @@ definitions:
       Tags:
         $ref: '#/definitions/TagSet'
         description: The list of tags to use when evaluating an AND predicate.
+    description: <p/>
     xml:
       wrapped: false
   AnalyticsId:
@@ -4000,12 +4073,14 @@ definitions:
       And:
         $ref: '#/definitions/AnalyticsAndOperator'
         description: 'A conjunction (logical AND) of predicates, which is used in evaluating an analytics filter. The operator must have at least two predicates.'
+    description: <p/>
   StorageClassAnalysis:
     type: object
     properties:
       DataExport:
         $ref: '#/definitions/StorageClassAnalysisDataExport'
         description: A container used to describe how data related to the storage class analysis should be exported.
+    description: <p/>
   AnalyticsConfiguration:
     type: object
     required:
@@ -4021,6 +4096,7 @@ definitions:
       StorageClassAnalysis:
         $ref: '#/definitions/StorageClassAnalysis'
         description: 'If present, it indicates that data related to access patterns will be collected and made available to analyze the tradeoffs between different storage classes.'
+    description: <p/>
   AnalyticsConfigurationList:
     type: array
     items:
@@ -4045,6 +4121,7 @@ definitions:
       Prefix:
         $ref: '#/definitions/Prefix'
         description: The prefix to use when exporting data. The exported data begins with this prefix.
+    description: <p/>
   AnalyticsExportDestination:
     type: object
     required:
@@ -4053,6 +4130,7 @@ definitions:
       S3BucketDestination:
         $ref: '#/definitions/AnalyticsS3BucketDestination'
         description: A destination signifying output to an S3 bucket.
+    description: <p/>
   Tag:
     type: object
     required:
@@ -4065,6 +4143,7 @@ definitions:
       Value:
         $ref: '#/definitions/Value'
         description: Value of the tag.
+    description: <p/>
   AnalyticsS3ExportFileFormat:
     type: string
     enum:
@@ -4083,6 +4162,7 @@ definitions:
       CreationDate:
         $ref: '#/definitions/CreationDate'
         description: Date the bucket was created.
+    description: <p/>
   BucketCannedACL:
     type: string
     enum:
@@ -4103,6 +4183,8 @@ definitions:
     properties:
       Rules:
         $ref: '#/definitions/LifecycleRules'
+        description: <p/>
+    description: <p/>
   BucketLocationConstraint:
     type: string
     enum:
@@ -4128,6 +4210,7 @@ definitions:
         description: 'Specifies the bucket where you want Amazon S3 to store server access logs. You can have your logs delivered to any bucket that you own, including the same bucket that is being logged. You can also configure multiple buckets to deliver their logs to the same target bucket. In this case you should choose a different TargetPrefix for each source bucket so that the delivered log files can be distinguished by key.'
       TargetGrants:
         $ref: '#/definitions/TargetGrants'
+        description: <p/>
       TargetPrefix:
         $ref: '#/definitions/TargetPrefix'
         description: This element lets you specify a prefix for the keys that the log files will be stored under.
@@ -4137,6 +4220,7 @@ definitions:
     properties:
       LoggingEnabled:
         $ref: '#/definitions/LoggingEnabled'
+    description: <p/>
   BucketLogsPermission:
     type: string
     enum:
@@ -4173,6 +4257,8 @@ definitions:
     properties:
       CORSRules:
         $ref: '#/definitions/CORSRules'
+        description: <p/>
+    description: <p/>
   ExposeHeaders:
     type: array
     items:
@@ -4202,6 +4288,7 @@ definitions:
       MaxAgeSeconds:
         $ref: '#/definitions/MaxAgeSeconds'
         description: The time in seconds that your browser is to cache the preflight response for the specified resource.
+    description: <p/>
   FileHeaderInfo:
     type: string
     enum:
@@ -4306,10 +4393,14 @@ definitions:
         $ref: '#/definitions/Event'
       Events:
         $ref: '#/definitions/EventList'
+        description: <p/>
       CloudFunction:
         $ref: '#/definitions/CloudFunction'
+        description: <p/>
       InvocationRole:
         $ref: '#/definitions/CloudFunctionInvocationRole'
+        description: <p/>
+    description: <p/>
   Code:
     type: string
   CommonPrefix:
@@ -4317,6 +4408,8 @@ definitions:
     properties:
       Prefix:
         $ref: '#/definitions/Prefix'
+        description: <p/>
+    description: <p/>
   CommonPrefixList:
     type: array
     items:
@@ -4344,6 +4437,8 @@ definitions:
     properties:
       Parts:
         $ref: '#/definitions/CompletedPartList'
+        description: <p/>
+    description: <p/>
   CompletedPartList:
     type: array
     items:
@@ -4361,6 +4456,7 @@ definitions:
       PartNumber:
         $ref: '#/definitions/PartNumber'
         description: 'Part number that identifies the part. This is a positive integer between 1 and 10,000.'
+    description: <p/>
   CompressionType:
     type: string
     enum:
@@ -4380,6 +4476,7 @@ definitions:
       KeyPrefixEquals:
         $ref: '#/definitions/KeyPrefixEquals'
         description: 'The object key name prefix when the redirect is applied. For example, to redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html. To redirect request for all pages with the prefix docs/, the key prefix will be /docs, which identifies all objects in the docs/ folder. Required when the parent element Condition is specified and sibling HttpErrorCodeReturnedEquals is not specified. If both conditions are specified, both must be true for the redirect to be applied.'
+    description: <p/>
   ConfirmRemoveSelfBucketAccess:
     type: boolean
   ContentDisposition:
@@ -4399,13 +4496,17 @@ definitions:
   ContinuationEvent:
     type: object
     properties: {}
+    description: <p/>
   CopyObjectResult:
     type: object
     properties:
       ETag:
         $ref: '#/definitions/ETag'
+        description: <p/>
       LastModified:
         $ref: '#/definitions/LastModified'
+        description: <p/>
+    description: <p/>
   CopySourceVersionId:
     type: string
   SSECustomerAlgorithm:
@@ -4513,6 +4614,7 @@ definitions:
       LastModified:
         $ref: '#/definitions/LastModified'
         description: Date and time at which the object was uploaded.
+    description: <p/>
   CopySourceRange:
     type: string
   CreateBucketConfiguration:
@@ -4520,7 +4622,8 @@ definitions:
     properties:
       LocationConstraint:
         $ref: '#/definitions/BucketLocationConstraint'
-        description: 'Specifies the region where the bucket will be created. If you don''t specify a region, the bucket will be created in US Standard.'
+        description: 'Specifies the region where the bucket will be created. If you don''t specify a region, the bucket is created in US East (N. Virginia) Region (us-east-1).'
+    description: <p/>
   GrantWrite:
     type: string
   ObjectLockEnabledForBucket:
@@ -4565,9 +4668,11 @@ definitions:
     properties:
       Objects:
         $ref: '#/definitions/ObjectIdentifierList'
+        description: <p/>
       Quiet:
         $ref: '#/definitions/Quiet'
         description: 'Element to enable quiet mode for the request. When you add this element, you must set its value to true.'
+    description: <p/>
   InventoryId:
     type: string
   MetricsId:
@@ -4581,6 +4686,7 @@ definitions:
     properties:
       Owner:
         $ref: '#/definitions/Owner'
+        description: <p/>
       Key:
         $ref: '#/definitions/ObjectKey'
         description: The object key.
@@ -4593,6 +4699,7 @@ definitions:
       LastModified:
         $ref: '#/definitions/LastModified'
         description: Date and time the object was last modified.
+    description: <p/>
   DeleteMarkerReplicationStatus:
     type: string
     enum:
@@ -4632,12 +4739,17 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/ObjectKey'
+        description: <p/>
       VersionId:
         $ref: '#/definitions/ObjectVersionId'
+        description: <p/>
       DeleteMarker:
         $ref: '#/definitions/DeleteMarker'
+        description: <p/>
       DeleteMarkerVersionId:
         $ref: '#/definitions/DeleteMarkerVersionId'
+        description: <p/>
+    description: <p/>
   Delimiter:
     type: string
   Description:
@@ -4703,6 +4815,7 @@ definitions:
   EndEvent:
     type: object
     properties: {}
+    description: <p/>
   Message:
     type: string
   Error:
@@ -4710,12 +4823,17 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/ObjectKey'
+        description: <p/>
       VersionId:
         $ref: '#/definitions/ObjectVersionId'
+        description: <p/>
       Code:
         $ref: '#/definitions/Code'
+        description: <p/>
       Message:
         $ref: '#/definitions/Message'
+        description: <p/>
+    description: <p/>
   ErrorDocument:
     type: object
     required:
@@ -4724,6 +4842,7 @@ definitions:
       Key:
         $ref: '#/definitions/ObjectKey'
         description: The object key name to use when a 4XX class error occurs.
+    description: <p/>
   ExpirationStatus:
     type: string
     enum:
@@ -4753,9 +4872,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/FilterRuleName'
-        description: 'The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum prefix length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+        description: 'The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum prefix length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
       Value:
         $ref: '#/definitions/FilterRuleValue'
+        description: <p/>
     description: A container for a key value pair that defines the criteria for the filter rule.
   FilterRuleList:
     type: array
@@ -4803,6 +4923,7 @@ definitions:
       Schedule:
         $ref: '#/definitions/InventorySchedule'
         description: Specifies the schedule for generating inventory results.
+    description: <p/>
   Rules:
     type: array
     items:
@@ -4820,6 +4941,7 @@ definitions:
       Filter:
         $ref: '#/definitions/MetricsFilter'
         description: 'Specifies a metrics configuration filter. The metrics configuration will only include objects that meet the filter''s criteria. A filter must be a prefix, a tag, or a conjunction (MetricsAndOperator).'
+    description: <p/>
   Policy:
     type: string
   PolicyStatus:
@@ -4863,6 +4985,7 @@ definitions:
       Protocol:
         $ref: '#/definitions/Protocol'
         description: 'Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request.'
+    description: <p/>
   IndexDocument:
     type: object
     required:
@@ -4871,6 +4994,7 @@ definitions:
       Suffix:
         $ref: '#/definitions/Suffix'
         description: A suffix that is appended to a request that is for a directory on the website endpoint (e.g. if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character.
+    description: <p/>
   RoutingRules:
     type: array
     items:
@@ -4957,6 +5081,7 @@ definitions:
       RestrictPublicBuckets:
         $ref: '#/definitions/Setting'
         description: '<p>Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to <code>TRUE</code> restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.</p> <p>Enabling this setting doesn''t affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.</p>'
+    description: <p/>
   Tier:
     type: string
     enum:
@@ -4971,6 +5096,7 @@ definitions:
       Tier:
         $ref: '#/definitions/Tier'
         description: Glacier retrieval tier at which the restore will be processed.
+    description: <p/>
   Grantee:
     type: object
     required:
@@ -4991,6 +5117,7 @@ definitions:
       URI:
         $ref: '#/definitions/URI'
         description: URI of the grantee group.
+    description: <p/>
     xml:
       namespace: 'http://www.w3.org/2001/XMLSchema-instance'
       attribute: true
@@ -5007,9 +5134,11 @@ definitions:
     properties:
       Grantee:
         $ref: '#/definitions/Grantee'
+        description: <p/>
       Permission:
         $ref: '#/definitions/Permission'
         description: Specifies the permission given to the grantee.
+    description: <p/>
   ID:
     type: string
   Type:
@@ -5038,15 +5167,18 @@ definitions:
       DisplayName:
         $ref: '#/definitions/DisplayName'
         description: Name of the Principal.
+    description: <p/>
   JSONInput:
     type: object
     properties:
       Type:
         $ref: '#/definitions/JSONType'
         description: 'The type of JSON. Valid values: Document, Lines.'
+    description: <p/>
   ParquetInput:
     type: object
     properties: {}
+    description: <p/>
   InputSerialization:
     type: object
     properties:
@@ -5071,6 +5203,7 @@ definitions:
       S3BucketDestination:
         $ref: '#/definitions/InventoryS3BucketDestination'
         description: 'Contains the bucket name, file format, bucket owner (optional), and prefix (optional) where inventory results are published.'
+    description: <p/>
   IsEnabled:
     type: boolean
   InventoryFilter:
@@ -5081,6 +5214,7 @@ definitions:
       Prefix:
         $ref: '#/definitions/Prefix'
         description: The prefix that an object must have to be included in the inventory results.
+    description: <p/>
   InventoryIncludedObjectVersions:
     type: string
     enum:
@@ -5098,6 +5232,7 @@ definitions:
       Frequency:
         $ref: '#/definitions/InventoryFrequency'
         description: Specifies how frequently inventory results are produced.
+    description: <p/>
   InventoryConfigurationList:
     type: array
     items:
@@ -5125,6 +5260,7 @@ definitions:
       Encryption:
         $ref: '#/definitions/InventoryEncryption'
         description: Contains the type of server-side encryption used to encrypt the inventory results.
+    description: <p/>
   SSES3:
     type: object
     properties: {}
@@ -5187,6 +5323,7 @@ definitions:
       RecordDelimiter:
         $ref: '#/definitions/RecordDelimiter'
         description: The value used to separate individual records in the output.
+    description: <p/>
   KeyCount:
     type: integer
   KeyMarker:
@@ -5198,7 +5335,7 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/S3KeyFilter'
-    description: 'A container for object key name filtering rules. For information about key name filtering, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
+    description: 'A container for object key name filtering rules. For information about key name filtering, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Configuring Event Notifications</a> in the <i>Amazon Simple Storage Service Developer Guide</i>.'
   LambdaFunctionConfiguration:
     type: object
     required:
@@ -5212,6 +5349,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the Lambda cloud function that Amazon S3 can invoke when it detects events of the specified type.
       Events:
         $ref: '#/definitions/EventList'
+        description: <p/>
       Filter:
         $ref: '#/definitions/NotificationConfigurationFilter'
     description: A container for specifying the configuration for AWS Lambda notifications.
@@ -5228,6 +5366,8 @@ definitions:
     properties:
       Rules:
         $ref: '#/definitions/Rules'
+        description: <p/>
+    description: <p/>
   LifecycleExpiration:
     type: object
     properties:
@@ -5240,6 +5380,7 @@ definitions:
       ExpiredObjectDeleteMarker:
         $ref: '#/definitions/ExpiredObjectDeleteMarker'
         description: 'Indicates whether Amazon S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.'
+    description: <p/>
   LifecycleRuleFilter:
     type: object
     properties:
@@ -5269,7 +5410,7 @@ definitions:
     properties:
       NoncurrentDays:
         $ref: '#/definitions/Days'
-        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
+        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
     description: 'Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object''s lifetime.'
   LifecycleRule:
     type: object
@@ -5278,12 +5419,13 @@ definitions:
     properties:
       Expiration:
         $ref: '#/definitions/LifecycleExpiration'
+        description: <p/>
       ID:
         $ref: '#/definitions/ID'
         description: Unique identifier for the rule. The value cannot be longer than 255 characters.
       Prefix:
         $ref: '#/definitions/Prefix'
-        description: Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.
+        description: Prefix identifying one or more objects to which the rule applies. This is No longer used; use Filter instead.
       Filter:
         $ref: '#/definitions/LifecycleRuleFilter'
       Status:
@@ -5291,17 +5433,21 @@ definitions:
         description: 'If ''Enabled'', the rule is currently being applied. If ''Disabled'', the rule is not currently being applied.'
       Transitions:
         $ref: '#/definitions/TransitionList'
+        description: <p/>
       NoncurrentVersionTransitions:
         $ref: '#/definitions/NoncurrentVersionTransitionList'
+        description: <p/>
       NoncurrentVersionExpiration:
         $ref: '#/definitions/NoncurrentVersionExpiration'
       AbortIncompleteMultipartUpload:
         $ref: '#/definitions/AbortIncompleteMultipartUpload'
+    description: <p/>
   LifecycleRuleAndOperator:
     type: object
     properties:
       Prefix:
         $ref: '#/definitions/Prefix'
+        description: <p/>
       Tags:
         $ref: '#/definitions/TagSet'
         description: All of these tags must exist in the object's tag set in order for the rule to apply.
@@ -5392,8 +5538,10 @@ definitions:
     properties:
       Name:
         $ref: '#/definitions/MetadataKey'
+        description: <p/>
       Value:
         $ref: '#/definitions/MetadataValue'
+        description: <p/>
     description: A metadata key-value pair to store with an object.
   MetricsAndOperator:
     type: object
@@ -5404,6 +5552,7 @@ definitions:
       Tags:
         $ref: '#/definitions/TagSet'
         description: The list of tags used when evaluating an AND predicate.
+    description: <p/>
     xml:
       wrapped: false
   MetricsFilter:
@@ -5418,6 +5567,7 @@ definitions:
       And:
         $ref: '#/definitions/MetricsAndOperator'
         description: 'A conjunction (logical AND) of predicates, which is used in evaluating a metrics filter. The operator must have at least two predicates, and an object must match all of the predicates in order for the filter to apply.'
+    description: <p/>
   MultipartUpload:
     type: object
     properties:
@@ -5435,9 +5585,11 @@ definitions:
         description: The class of storage used to store the object.
       Owner:
         $ref: '#/definitions/Owner'
+        description: <p/>
       Initiator:
         $ref: '#/definitions/Initiator'
         description: Identifies who initiated the multipart upload.
+    description: <p/>
   TransitionStorageClass:
     type: string
     enum:
@@ -5450,7 +5602,7 @@ definitions:
     properties:
       NoncurrentDays:
         $ref: '#/definitions/Days'
-        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
+        description: 'Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-access-control.html">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide.'
       StorageClass:
         $ref: '#/definitions/TransitionStorageClass'
         description: The class of storage used to store the object.
@@ -5474,12 +5626,14 @@ definitions:
         $ref: '#/definitions/NotificationId'
       Events:
         $ref: '#/definitions/EventList'
+        description: <p/>
       Event:
         $ref: '#/definitions/Event'
         description: Bucket event for which to send notifications.
       Topic:
         $ref: '#/definitions/TopicArn'
         description: Amazon SNS topic to which Amazon S3 will publish a message to report the specified events for the bucket.
+    description: <p/>
   QueueConfigurationDeprecated:
     type: object
     properties:
@@ -5489,8 +5643,11 @@ definitions:
         $ref: '#/definitions/Event'
       Events:
         $ref: '#/definitions/EventList'
+        description: <p/>
       Queue:
         $ref: '#/definitions/QueueArn'
+        description: <p/>
+    description: <p/>
   S3KeyFilter:
     type: object
     properties:
@@ -5513,17 +5670,23 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/ObjectKey'
+        description: <p/>
       LastModified:
         $ref: '#/definitions/LastModified'
+        description: <p/>
       ETag:
         $ref: '#/definitions/ETag'
+        description: <p/>
       Size:
         $ref: '#/definitions/Size'
+        description: <p/>
       StorageClass:
         $ref: '#/definitions/ObjectStorageClass'
         description: The class of storage used to store the object.
       Owner:
         $ref: '#/definitions/Owner'
+        description: <p/>
+    description: <p/>
   ObjectIdentifier:
     type: object
     required:
@@ -5535,6 +5698,7 @@ definitions:
       VersionId:
         $ref: '#/definitions/ObjectVersionId'
         description: VersionId for the specific version of the object to delete.
+    description: <p/>
   ObjectLockEnabled:
     type: string
     enum:
@@ -5557,6 +5721,7 @@ definitions:
     properties:
       ETag:
         $ref: '#/definitions/ETag'
+        description: <p/>
       Size:
         $ref: '#/definitions/Size'
         description: Size in bytes of the object.
@@ -5577,6 +5742,8 @@ definitions:
         description: Date and time the object was last modified.
       Owner:
         $ref: '#/definitions/Owner'
+        description: <p/>
+    description: <p/>
   S3Location:
     type: object
     required:
@@ -5639,6 +5806,7 @@ definitions:
       Size:
         $ref: '#/definitions/Size'
         description: Size in bytes of the uploaded part data.
+    description: <p/>
   Priority:
     type: integer
   Progress:
@@ -5653,12 +5821,14 @@ definitions:
       BytesReturned:
         $ref: '#/definitions/BytesReturned'
         description: The current number of bytes of records payload data returned.
+    description: <p/>
   ProgressEvent:
     type: object
     properties:
       Details:
         $ref: '#/definitions/Progress'
         description: The Progress event details.
+    description: <p/>
   Protocol:
     type: string
     enum:
@@ -5674,6 +5844,7 @@ definitions:
       Payer:
         $ref: '#/definitions/Payer'
         description: Specifies who pays for the download and request fees.
+    description: <p/>
   Tagging:
     type: object
     required:
@@ -5681,6 +5852,8 @@ definitions:
     properties:
       TagSet:
         $ref: '#/definitions/TagSet'
+        description: <p/>
+    description: <p/>
   VersioningConfiguration:
     type: object
     properties:
@@ -5690,17 +5863,23 @@ definitions:
       Status:
         $ref: '#/definitions/BucketVersioningStatus'
         description: The versioning state of the bucket.
+    description: <p/>
   WebsiteConfiguration:
     type: object
     properties:
       ErrorDocument:
         $ref: '#/definitions/ErrorDocument'
+        description: <p/>
       IndexDocument:
         $ref: '#/definitions/IndexDocument'
+        description: <p/>
       RedirectAllRequestsTo:
         $ref: '#/definitions/RedirectAllRequestsTo'
+        description: <p/>
       RoutingRules:
         $ref: '#/definitions/RoutingRules'
+        description: <p/>
+    description: <p/>
   QueueArn:
     type: string
   QueueConfiguration:
@@ -5716,6 +5895,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 will publish a message when it detects events of the specified type.
       Events:
         $ref: '#/definitions/EventList'
+        description: <p/>
       Filter:
         $ref: '#/definitions/NotificationConfigurationFilter'
     description: A container for specifying the configuration for publication of messages to an Amazon Simple Queue Service (Amazon SQS) queue.when Amazon S3 detects specified events.
@@ -5725,6 +5905,7 @@ definitions:
       Payload:
         $ref: '#/definitions/Body'
         description: 'The byte array of partial, one or more result records.'
+    description: <p/>
   ReplaceKeyPrefixWith:
     type: string
   ReplaceKeyWith:
@@ -5747,6 +5928,7 @@ definitions:
       ReplaceKeyWith:
         $ref: '#/definitions/ReplaceKeyWith'
         description: 'The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided.'
+    description: <p/>
   Role:
     type: string
   ReplicationRules:
@@ -5814,8 +5996,11 @@ definitions:
     properties:
       Prefix:
         $ref: '#/definitions/Prefix'
+        description: <p/>
       Tags:
         $ref: '#/definitions/TagSet'
+        description: <p/>
+    description: <p/>
     xml:
       wrapped: false
   RequestProgress:
@@ -5824,6 +6009,7 @@ definitions:
       Enabled:
         $ref: '#/definitions/EnableRequestProgress'
         description: 'Specifies whether periodic QueryProgress frames should be sent. Valid values: TRUE, FALSE. Default value: FALSE.'
+    description: <p/>
   RestoreOutputPath:
     type: string
   RestoreRequest:
@@ -5887,6 +6073,7 @@ definitions:
       Redirect:
         $ref: '#/definitions/Redirect'
         description: 'Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.'
+    description: <p/>
   Transition:
     type: object
     properties:
@@ -5899,6 +6086,7 @@ definitions:
       StorageClass:
         $ref: '#/definitions/TransitionStorageClass'
         description: The class of storage used to store the object.
+    description: <p/>
   Rule:
     type: object
     required:
@@ -5907,6 +6095,7 @@ definitions:
     properties:
       Expiration:
         $ref: '#/definitions/LifecycleExpiration'
+        description: <p/>
       ID:
         $ref: '#/definitions/ID'
         description: Unique identifier for the rule. The value cannot be longer than 255 characters.
@@ -5918,12 +6107,14 @@ definitions:
         description: 'If ''Enabled'', the rule is currently being applied. If ''Disabled'', the rule is not currently being applied.'
       Transition:
         $ref: '#/definitions/Transition'
+        description: <p/>
       NoncurrentVersionTransition:
         $ref: '#/definitions/NoncurrentVersionTransition'
       NoncurrentVersionExpiration:
         $ref: '#/definitions/NoncurrentVersionExpiration'
       AbortIncompleteMultipartUpload:
         $ref: '#/definitions/AbortIncompleteMultipartUpload'
+    description: <p/>
   UserMetadata:
     type: array
     items:
@@ -5934,6 +6125,7 @@ definitions:
       Details:
         $ref: '#/definitions/Stats'
         description: The Stats event details.
+    description: <p/>
   SelectObjectContentEventStream:
     type: object
     properties:
@@ -5952,6 +6144,7 @@ definitions:
       End:
         $ref: '#/definitions/EndEvent'
         description: The End Event.
+    description: <p/>
   ServerSideEncryptionByDefault:
     type: object
     required:
@@ -6003,6 +6196,7 @@ definitions:
       BytesReturned:
         $ref: '#/definitions/BytesReturned'
         description: The total number of bytes of records payload data returned.
+    description: <p/>
   StorageClassAnalysisDataExport:
     type: object
     required:
@@ -6015,6 +6209,7 @@ definitions:
       Destination:
         $ref: '#/definitions/AnalyticsExportDestination'
         description: The place to store the data for an analysis.
+    description: <p/>
   StorageClassAnalysisSchemaVersion:
     type: string
     enum:
@@ -6026,9 +6221,11 @@ definitions:
     properties:
       Grantee:
         $ref: '#/definitions/Grantee'
+        description: <p/>
       Permission:
         $ref: '#/definitions/BucketLogsPermission'
         description: Logging permissions assigned to the Grantee for the bucket.
+    description: <p/>
   TopicArn:
     type: string
   TopicConfiguration:
@@ -6044,6 +6241,7 @@ definitions:
         description: The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 will publish a message when it detects events of the specified type.
       Events:
         $ref: '#/definitions/EventList'
+        description: <p/>
       Filter:
         $ref: '#/definitions/NotificationConfigurationFilter'
     description: A container for specifying the configuration for publication of messages to an Amazon Simple Notification Service (Amazon SNS) topic.when Amazon S3 detects specified events.
