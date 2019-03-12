@@ -683,6 +683,67 @@ paths:
           type: string
           in: path
           required: true
+  '/accounts/{AwsAccountId}/namespaces/{Namespace}/user-principals/{PrincipalId}':
+    delete:
+      operationId: DeleteUserByPrincipalId
+      description: Deletes a user after locating the user by its principal ID.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteUserByPrincipalIdResponse'
+        '480':
+          description: AccessDeniedException
+          schema:
+            $ref: '#/definitions/AccessDeniedException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          schema:
+            $ref: '#/definitions/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+        '485':
+          description: ResourceUnavailableException
+          schema:
+            $ref: '#/definitions/ResourceUnavailableException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteUserByPrincipalIdRequest'
+        - name: AwsAccountId
+          type: string
+          in: path
+          required: true
+        - name: Namespace
+          type: string
+          in: path
+          required: true
+        - name: PrincipalId
+          type: string
+          in: path
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url':
     get:
       operationId: GetDashboardEmbedUrl
@@ -1103,6 +1164,18 @@ definitions:
   DeleteUserRequest:
     type: object
     properties: {}
+  DeleteUserByPrincipalIdResponse:
+    type: object
+    properties:
+      RequestId:
+        $ref: '#/definitions/String'
+        description: The AWS request ID for this operation.
+      Status:
+        $ref: '#/definitions/StatusCode'
+        description: The http status of the request.
+  DeleteUserByPrincipalIdRequest:
+    type: object
+    properties: {}
   DescribeGroupResponse:
     type: object
     properties:
@@ -1261,7 +1334,7 @@ definitions:
         $ref: '#/definitions/String'
         description: 'The ARN of the IAM user or role that you are registering with Amazon QuickSight. '
       SessionName:
-        $ref: '#/definitions/String'
+        $ref: '#/definitions/RoleSessionName'
         description: 'The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see <a href="https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> '
       UserName:
         $ref: '#/definitions/UserName'
@@ -1359,6 +1432,9 @@ definitions:
       Description:
         $ref: '#/definitions/GroupDescription'
         description: The group description.
+      PrincipalId:
+        $ref: '#/definitions/String'
+        description: The principal ID of the group.
     description: 'A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. Currently, an Amazon QuickSight subscription can''t contain more than 500 Amazon QuickSight groups.'
   UserName:
     type: string
@@ -1385,6 +1461,9 @@ definitions:
       Active:
         $ref: '#/definitions/Boolean'
         description: 'Active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an AD user, that user is inactive until they sign in and provide a password'
+      PrincipalId:
+        $ref: '#/definitions/String'
+        description: The principal ID of the user.
     description: 'A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription can''t contain more than 20 million users.'
   EmbeddingUrl:
     type: string
@@ -1424,3 +1503,8 @@ definitions:
       - READER
       - RESTRICTED_AUTHOR
       - RESTRICTED_READER
+  RoleSessionName:
+    type: string
+    pattern: '[\w+=.@-]*'
+    minLength: 2
+    maxLength: 64

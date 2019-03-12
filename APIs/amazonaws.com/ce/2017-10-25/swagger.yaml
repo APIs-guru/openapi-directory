@@ -393,6 +393,8 @@ definitions:
         description: The time period that is covered by the results in the response.
   GetCostAndUsageRequest:
     type: object
+    required:
+      - TimePeriod
     properties:
       TimePeriod:
         $ref: '#/definitions/DateInterval'
