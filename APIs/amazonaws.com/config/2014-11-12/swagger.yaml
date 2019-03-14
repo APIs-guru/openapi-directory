@@ -3,7 +3,7 @@ info:
   version: '2014-11-12'
   x-release: v4
   title: AWS Config
-  description: '<fullname>AWS Config</fullname> <p>AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resources</a>.</p> <p>You can access and manage AWS Config through the AWS Management Console, the AWS Command Line Interface (AWS CLI), the AWS Config API, or the AWS SDKs for AWS Config. This reference guide contains documentation for the AWS Config API and the AWS CLI commands that you can use to manage AWS Config. The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href="http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>. For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html">What Is AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
+  description: '<fullname>AWS Config</fullname> <p>AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resources</a>.</p> <p>You can access and manage AWS Config through the AWS Management Console, the AWS Command Line Interface (AWS CLI), the AWS Config API, or the AWS SDKs for AWS Config. This reference guide contains documentation for the AWS Config API and the AWS CLI commands that you can use to manage AWS Config. The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>. For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html">What Is AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -368,6 +368,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeleteRemediationConfiguration':
+    post:
+      operationId: DeleteRemediationConfiguration
+      description: Deletes the remediation configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DeleteRemediationConfigurationResponse'
+        '480':
+          description: NoSuchRemediationConfigurationException
+          schema:
+            $ref: '#/definitions/NoSuchRemediationConfigurationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteRemediationConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteRetentionConfiguration':
     post:
       operationId: DeleteRetentionConfiguration
@@ -657,7 +686,7 @@ paths:
   '/#DescribeConfigurationAggregatorSourcesStatus':
     post:
       operationId: DescribeConfigurationAggregatorSourcesStatus
-      description: 'Returns status information for sources within an aggregator. The status includes information about the last time AWS Config aggregated data from source accounts or AWS Config failed to aggregate data from source accounts with the related error code or message. '
+      description: ' Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. '
       responses:
         '200':
           description: Success
@@ -879,6 +908,70 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribePendingAggregationRequestsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeRemediationConfigurations':
+    post:
+      operationId: DescribeRemediationConfigurations
+      description: Returns the details of one or more remediation configuration.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRemediationConfigurationsResponse'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeRemediationConfigurationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribeRemediationExecutionStatus':
+    post:
+      operationId: DescribeRemediationExecutionStatus
+      description: 'Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution happen, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribeRemediationExecutionStatusResponse'
+        '480':
+          description: NoSuchRemediationConfigurationException
+          schema:
+            $ref: '#/definitions/NoSuchRemediationConfigurationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribeRemediationExecutionStatusRequest'
+        - name: Limit
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1414,7 +1507,7 @@ paths:
   '/#PutConfigRule':
     post:
       operationId: PutConfigRule
-      description: '<p>Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations.</p> <p>You can use this action for custom AWS Config rules and AWS managed Config rules. A custom AWS Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides.</p> <p>If you are adding a new custom AWS Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the <code>PutConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the <code>SourceIdentifier</code> key. This key is part of the <code>Source</code> object, which is part of the <code>ConfigRule</code> object. </p> <p>If you are adding an AWS managed Config rule, specify the rule''s identifier for the <code>SourceIdentifier</code> key. To reference AWS managed Config rule identifiers, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">About AWS Managed Config Rules</a>.</p> <p>For any new rule that you add, specify the <code>ConfigRuleName</code> in the <code>ConfigRule</code> object. Do not specify the <code>ConfigRuleArn</code> or the <code>ConfigRuleId</code>. These values are generated by AWS Config for new rules.</p> <p>If you are updating a rule that you added previously, you can specify the rule by <code>ConfigRuleName</code>, <code>ConfigRuleId</code>, or <code>ConfigRuleArn</code> in the <code>ConfigRule</code> data type that you use in this request.</p> <p>The maximum number of rules that AWS Config supports is 50.</p> <p>For information about requesting a rule limit increase, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config">AWS Config Limits</a> in the <i>AWS General Reference Guide</i>.</p> <p>For more information about developing and using AWS Config rules, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
+      description: '<p>Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations.</p> <p>You can use this action for custom AWS Config rules and AWS managed Config rules. A custom AWS Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides.</p> <p>If you are adding a new custom AWS Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the <code>PutConfigRule</code> action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the <code>SourceIdentifier</code> key. This key is part of the <code>Source</code> object, which is part of the <code>ConfigRule</code> object. </p> <p>If you are adding an AWS managed Config rule, specify the rule''s identifier for the <code>SourceIdentifier</code> key. To reference AWS managed Config rule identifiers, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">About AWS Managed Config Rules</a>.</p> <p>For any new rule that you add, specify the <code>ConfigRuleName</code> in the <code>ConfigRule</code> object. Do not specify the <code>ConfigRuleArn</code> or the <code>ConfigRuleId</code>. These values are generated by AWS Config for new rules.</p> <p>If you are updating a rule that you added previously, you can specify the rule by <code>ConfigRuleName</code>, <code>ConfigRuleId</code>, or <code>ConfigRuleArn</code> in the <code>ConfigRule</code> data type that you use in this request.</p> <p>The maximum number of rules that AWS Config supports is 150.</p> <p>For information about requesting a rule limit increase, see <a href="http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config">AWS Config Limits</a> in the <i>AWS General Reference Guide</i>.</p> <p>For more information about developing and using AWS Config rules, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1630,6 +1723,39 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#PutRemediationConfigurations':
+    post:
+      operationId: PutRemediationConfigurations
+      description: 'Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the <code>RemediationConfiguration</code> object for the AWS Config rule. AWS Config rule must already exist for you to add a remeduation configuration. The target (SSM document) must exist and have permissions to use the target. '
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/PutRemediationConfigurationsResponse'
+        '480':
+          description: InsufficientPermissionsException
+          schema:
+            $ref: '#/definitions/InsufficientPermissionsException'
+        '481':
+          description: InvalidParameterValueException
+          schema:
+            $ref: '#/definitions/InvalidParameterValueException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/PutRemediationConfigurationsRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#PutRetentionConfiguration':
     post:
       operationId: PutRetentionConfiguration
@@ -1725,6 +1851,39 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/StartConfigurationRecorderRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#StartRemediationExecution':
+    post:
+      operationId: StartRemediationExecution
+      description: <p>Runs an on-demand remediation for the specified AWS Config rules against the last known remediation configuration. It runs an execution against the current state of your resources. Remediation execution is asynchronous.</p> <p>You can specify up to 100 resource keys per request. An existing StartRemediationExecution call for the specified resource keys must complete before you can call the API again.</p>
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StartRemediationExecutionResponse'
+        '480':
+          description: InsufficientPermissionsException
+          schema:
+            $ref: '#/definitions/InsufficientPermissionsException'
+        '481':
+          description: NoSuchRemediationConfigurationException
+          schema:
+            $ref: '#/definitions/NoSuchRemediationConfigurationException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/StartRemediationExecutionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1882,6 +2041,21 @@ definitions:
       RequesterAwsRegion:
         $ref: '#/definitions/AwsRegion'
         description: The region requesting to aggregate data.
+  DeleteRemediationConfigurationResponse:
+    type: object
+    properties: {}
+  DeleteRemediationConfigurationRequest:
+    type: object
+    required:
+      - ConfigRuleName
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+        description: The name of the AWS Config rule for which you want to delete remediation configuration for.
+      ResourceType:
+        $ref: '#/definitions/String'
+        description: The type of a resource.
+  NoSuchRemediationConfigurationException: {}
   DeleteRetentionConfigurationRequest:
     type: object
     required:
@@ -1972,7 +2146,7 @@ definitions:
         description: Specify one or more AWS Config rule names to filter the results by rule.
       ComplianceTypes:
         $ref: '#/definitions/ComplianceTypes'
-        description: '<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code>.</p>'
+        description: <p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>
       NextToken:
         $ref: '#/definitions/String'
         description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
@@ -1998,7 +2172,7 @@ definitions:
         description: 'The ID of the AWS resource for which you want compliance information. You can specify only one resource ID. If you specify a resource ID, you must also specify a type for <code>ResourceType</code>.'
       ComplianceTypes:
         $ref: '#/definitions/ComplianceTypes'
-        description: <p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>
+        description: '<p>Filters the results by compliance.</p> <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code>.</p>'
       Limit:
         $ref: '#/definitions/Limit'
         description: 'The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
@@ -2170,6 +2344,46 @@ definitions:
       NextToken:
         $ref: '#/definitions/String'
         description: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+  DescribeRemediationConfigurationsResponse:
+    type: object
+    properties:
+      RemediationConfigurations:
+        $ref: '#/definitions/RemediationConfigurations'
+        description: Returns a remediation configuration object.
+  DescribeRemediationConfigurationsRequest:
+    type: object
+    required:
+      - ConfigRuleNames
+    properties:
+      ConfigRuleNames:
+        $ref: '#/definitions/ConfigRuleNames'
+        description: 'A list of AWS Config rule names of remediation configurations for which you want details. '
+  DescribeRemediationExecutionStatusResponse:
+    type: object
+    properties:
+      RemediationExecutionStatuses:
+        $ref: '#/definitions/RemediationExecutionStatuses'
+        description: Returns a list of remediation execution statuses object.
+      NextToken:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
+  DescribeRemediationExecutionStatusRequest:
+    type: object
+    required:
+      - ConfigRuleName
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+        description: A list of config rule names.
+      ResourceKeys:
+        $ref: '#/definitions/ResourceKeys'
+        description: 'A list of resource keys object. '
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: 'The maximum number of RemediationExecutionStatuses returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. '
+      NextToken:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
   DescribeRetentionConfigurationsResponse:
     type: object
     properties:
@@ -2623,6 +2837,20 @@ definitions:
         description: '<p>Use this parameter to specify a test run for <code>PutEvaluations</code>. You can verify whether your AWS Lambda function will deliver evaluation results to AWS Config. No updates occur to your existing evaluations, and evaluation results are not sent to AWS Config.</p> <note> <p>When <code>TestMode</code> is <code>true</code>, <code>PutEvaluations</code> doesn''t require a valid value for the <code>ResultToken</code> parameter, but the value cannot be null.</p> </note>'
     description: <p/>
   InvalidResultTokenException: {}
+  PutRemediationConfigurationsResponse:
+    type: object
+    properties:
+      FailedBatches:
+        $ref: '#/definitions/FailedRemediationBatches'
+        description: Returns a list of failed remediation batch objects.
+  PutRemediationConfigurationsRequest:
+    type: object
+    required:
+      - RemediationConfigurations
+    properties:
+      RemediationConfigurations:
+        $ref: '#/definitions/RemediationConfigurations'
+        description: A list of remediation configuration objects.
   PutRetentionConfigurationResponse:
     type: object
     properties:
@@ -2659,6 +2887,27 @@ definitions:
         description: The name of the recorder object that records each configuration change made to the resources.
     description: The input for the <a>StartConfigurationRecorder</a> action.
   NoAvailableDeliveryChannelException: {}
+  StartRemediationExecutionResponse:
+    type: object
+    properties:
+      FailureMessage:
+        $ref: '#/definitions/String'
+        description: 'Returns a failure message. For example, the resource is compliant.'
+      FailedItems:
+        $ref: '#/definitions/ResourceKeys'
+        description: For resources that have failed to start execuition the API returns a resource key object.
+  StartRemediationExecutionRequest:
+    type: object
+    required:
+      - ConfigRuleName
+      - ResourceKeys
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+        description: The list of names of AWS Config rules that you want to run remediation execution for.
+      ResourceKeys:
+        $ref: '#/definitions/ResourceKeys'
+        description: A list of resource key object.
   StopConfigurationRecorderRequest:
     type: object
     required:
@@ -3237,7 +3486,7 @@ definitions:
         description: Indicates whether AWS or the customer owns and manages the AWS Config rule.
       SourceIdentifier:
         $ref: '#/definitions/StringWithCharLimit256'
-        description: '<p>For AWS Config managed rules, a predefined identifier from a list. For example, <code>IAM_PASSWORD_POLICY</code> is a managed rule. To reference a managed rule, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">Using AWS Managed Config Rules</a>.</p> <p>For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule''s AWS Lambda function, such as <code>arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name</code>.</p>'
+        description: '<p>For AWS Config managed rules, a predefined identifier from a list. For example, <code>IAM_PASSWORD_POLICY</code> is a managed rule. To reference a managed rule, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html">Using AWS Managed Config Rules</a>.</p> <p>For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule''s AWS Lambda function, such as <code>arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name</code>.</p>'
       SourceDetails:
         $ref: '#/definitions/SourceDetails'
         description: Provides the source and type of the event that causes AWS Config to evaluate your AWS resources.
@@ -3296,7 +3545,7 @@ definitions:
       CreatedBy:
         $ref: '#/definitions/StringWithCharLimit256'
         description: <p>Service principal name of the service that created the rule.</p> <note> <p>The field is populated only if the service linked rule is created by a service. The field is empty if you create your own rule.</p> </note>
-    description: '<p>An AWS Config rule represents an AWS Lambda function that you create for a custom rule or a predefined function for an AWS managed rule. The function evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).</p> <note> <p>You can use the AWS CLI and AWS SDKs if you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </note> <p>For more information about developing and using AWS Config rules, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
+    description: '<p>An AWS Config rule represents an AWS Lambda function that you create for a custom rule or a predefined function for an AWS managed rule. The function evaluates configuration items to assess whether your AWS resources comply with your desired configurations. This function can run when AWS Config detects a configuration change to an AWS resource and at a periodic frequency that you choose (for example, every 24 hours).</p> <note> <p>You can use the AWS CLI and AWS SDKs if you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot. For more information, see <a>ConfigSnapshotDeliveryProperties</a>.</p> </note> <p>For more information about developing and using AWS Config rules, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html">Evaluating AWS Resource Configurations with AWS Config</a> in the <i>AWS Config Developer Guide</i>.</p>'
   ConfigRuleComplianceFilters:
     type: object
     properties:
@@ -3391,7 +3640,7 @@ definitions:
     properties:
       lastStatus:
         $ref: '#/definitions/DeliveryStatus'
-        description: '<p>Status of the last attempted delivery.</p> <p> <b>Note</b> Providing an SNS topic on a <a href="http://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html">DeliveryChannel</a> for AWS Config is optional. If the SNS delivery is turned off, the last status will be <b>Not_Applicable</b>.</p>'
+        description: '<p>Status of the last attempted delivery.</p> <p> <b>Note</b> Providing an SNS topic on a <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html">DeliveryChannel</a> for AWS Config is optional. If the SNS delivery is turned off, the last status will be <b>Not_Applicable</b>.</p>'
       lastErrorCode:
         $ref: '#/definitions/String'
         description: The error code from the last attempted delivery.
@@ -3518,7 +3767,7 @@ definitions:
         description: A mapping of key value tags associated with the resource.
       relatedEvents:
         $ref: '#/definitions/RelatedEventList'
-        description: '<p>A list of CloudTrail event IDs.</p> <p>A populated field indicates that the current configuration was initiated by the events recorded in the CloudTrail log. For more information about CloudTrail, see <a href="http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html">What Is AWS CloudTrail</a>.</p> <p>An empty field indicates that the current configuration was not initiated by any event.</p>'
+        description: '<p>A list of CloudTrail event IDs.</p> <p>A populated field indicates that the current configuration was initiated by the events recorded in the CloudTrail log. For more information about CloudTrail, see <a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html">What Is AWS CloudTrail</a>.</p> <p>An empty field indicates that the current configuration was not initiated by any event.</p>'
       relationships:
         $ref: '#/definitions/RelationshipList'
         description: A list of related AWS resources.
@@ -3548,8 +3797,8 @@ definitions:
         description: '<p>Specifies whether AWS Config includes all supported types of global resources (for example, IAM resources) with the resources that it records.</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>true</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of global resource, it starts recording resources of that type automatically.</p> <p>The configuration details for any global resource are the same in all regions. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources.</p>'
       resourceTypes:
         $ref: '#/definitions/ResourceTypeList'
-        description: '<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>false</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resource Types</a>.</p>'
-    description: '<p>Specifies the types of AWS resource for which AWS Config records configuration changes.</p> <p>In the recording group, you specify whether all supported types or specific types of resources are recorded.</p> <p>By default, AWS Config records configuration changes for all supported types of regional resources that AWS Config discovers in the region in which it is running. Regional resources are tied to a region and can be used only in that region. Examples of regional resources are EC2 instances and EBS volumes.</p> <p>You can also have AWS Config record configuration changes for supported types of global resources (for example, IAM resources). Global resources are not tied to an individual region and can be used in all regions.</p> <important> <p>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</p> </important> <p>If you don''t want AWS Config to record all resources, you can specify which types of resources it will record with the <code>resourceTypes</code> parameter.</p> <p>For a list of supported resource types, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported Resource Types</a>.</p> <p>For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/select-resources.html">Selecting Which Resources AWS Config Records</a>.</p>'
+        description: '<p>A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>).</p> <p>Before you can set this option to <code>true</code>, you must set the <code>allSupported</code> option to <code>false</code>.</p> <p>If you set this option to <code>true</code>, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group.</p> <p>For a list of valid <code>resourceTypes</code> values, see the <b>resourceType Value</b> column in <a href="https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported AWS Resource Types</a>.</p>'
+    description: '<p>Specifies the types of AWS resource for which AWS Config records configuration changes.</p> <p>In the recording group, you specify whether all supported types or specific types of resources are recorded.</p> <p>By default, AWS Config records configuration changes for all supported types of regional resources that AWS Config discovers in the region in which it is running. Regional resources are tied to a region and can be used only in that region. Examples of regional resources are EC2 instances and EBS volumes.</p> <p>You can also have AWS Config record configuration changes for supported types of global resources (for example, IAM resources). Global resources are not tied to an individual region and can be used in all regions.</p> <important> <p>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</p> </important> <p>If you don''t want AWS Config to record all resources, you can specify which types of resources it will record with the <code>resourceTypes</code> parameter.</p> <p>For a list of supported resource types, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources">Supported Resource Types</a>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html">Selecting Which Resources AWS Config Records</a>.</p>'
   ConfigurationRecorder:
     type: object
     properties:
@@ -3622,13 +3871,13 @@ definitions:
         description: 'The name of the delivery channel. By default, AWS Config assigns the name "default" when creating the delivery channel. To change the delivery channel name, you must use the DeleteDeliveryChannel action to delete your current delivery channel, and then you must use the PutDeliveryChannel command to create a delivery channel that has the desired name.'
       s3BucketName:
         $ref: '#/definitions/String'
-        description: '<p>The name of the Amazon S3 bucket to which AWS Config delivers configuration snapshots and configuration history files.</p> <p>If you specify a bucket that belongs to another AWS account, that bucket must have policies that grant access permissions to AWS Config. For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html">Permissions for the Amazon S3 Bucket</a> in the AWS Config Developer Guide.</p>'
+        description: '<p>The name of the Amazon S3 bucket to which AWS Config delivers configuration snapshots and configuration history files.</p> <p>If you specify a bucket that belongs to another AWS account, that bucket must have policies that grant access permissions to AWS Config. For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html">Permissions for the Amazon S3 Bucket</a> in the AWS Config Developer Guide.</p>'
       s3KeyPrefix:
         $ref: '#/definitions/String'
         description: The prefix for the specified Amazon S3 bucket.
       snsTopicARN:
         $ref: '#/definitions/String'
-        description: '<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends notifications about configuration changes.</p> <p>If you choose a topic from another account, the topic must have policies that grant access permissions to AWS Config. For more information, see <a href="http://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html">Permissions for the Amazon SNS Topic</a> in the AWS Config Developer Guide.</p>'
+        description: '<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends notifications about configuration changes.</p> <p>If you choose a topic from another account, the topic must have policies that grant access permissions to AWS Config. For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html">Permissions for the Amazon SNS Topic</a> in the AWS Config Developer Guide.</p>'
       configSnapshotDeliveryProperties:
         $ref: '#/definitions/ConfigSnapshotDeliveryProperties'
         description: The options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket.
@@ -3683,6 +3932,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/PendingAggregationRequest'
+  RemediationConfigurations:
+    type: array
+    items:
+      $ref: '#/definitions/RemediationConfiguration'
+    minItems: 0
+    maxItems: 25
+  RemediationExecutionStatuses:
+    type: array
+    items:
+      $ref: '#/definitions/RemediationExecutionStatus'
   RetentionConfigurationNameList:
     type: array
     items:
@@ -3776,6 +4035,20 @@ definitions:
     type: string
     enum:
       - aws.config
+  FailedRemediationBatch:
+    type: object
+    properties:
+      FailureMessage:
+        $ref: '#/definitions/String'
+        description: 'Returns a failure message. For example, the resource is compliant.'
+      FailedItems:
+        $ref: '#/definitions/RemediationConfigurations'
+        description: Returns remediation configurations of the failed items.
+    description: List of each of the failed remediation with specific reasons.
+  FailedRemediationBatches:
+    type: array
+    items:
+      $ref: '#/definitions/FailedRemediationBatch'
   ResourceCountFilters:
     type: object
     properties:
@@ -3924,6 +4197,138 @@ definitions:
         $ref: '#/definitions/RelationshipName'
         description: The type of relationship with the related resource.
     description: The relationship of the related resource to the main resource.
+  RemediationTargetType:
+    type: string
+    enum:
+      - SSM_DOCUMENT
+  RemediationParameters:
+    type: array
+    minItems: 0
+    maxItems: 25
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/StringWithCharLimit256'
+        value:
+          $ref: '#/definitions/RemediationParameterValue'
+  RemediationConfiguration:
+    type: object
+    required:
+      - ConfigRuleName
+      - TargetType
+      - TargetId
+    properties:
+      ConfigRuleName:
+        $ref: '#/definitions/StringWithCharLimit64'
+        description: The name of the AWS Config rule.
+      TargetType:
+        $ref: '#/definitions/RemediationTargetType'
+        description: 'The type of the target. Target executes remediation. For example, SSM document.'
+      TargetId:
+        $ref: '#/definitions/StringWithCharLimit256'
+        description: Public ID is document.
+      TargetVersion:
+        $ref: '#/definitions/String'
+        description: 'Version of the target. For example, version of the SSM document.'
+      Parameters:
+        $ref: '#/definitions/RemediationParameters'
+        description: An object of the RemediationParameterValue.
+      ResourceType:
+        $ref: '#/definitions/String'
+        description: 'The type of a resource. '
+    description: 'An object that represents the details about the remediation configuration that includes the remediation action, parameters, and data to execute the action.'
+  RemediationExecutionState:
+    type: string
+    enum:
+      - QUEUED
+      - IN_PROGRESS
+      - SUCCEEDED
+      - FAILED
+  ResourceKey:
+    type: object
+    required:
+      - resourceType
+      - resourceId
+    properties:
+      resourceType:
+        $ref: '#/definitions/ResourceType'
+        description: The resource type.
+      resourceId:
+        $ref: '#/definitions/ResourceId'
+        description: 'The ID of the resource (for example., sg-xxxxxx). '
+    description: 'The details that identify a resource within AWS Config, including the resource type and resource ID.'
+  RemediationExecutionSteps:
+    type: array
+    items:
+      $ref: '#/definitions/RemediationExecutionStep'
+  RemediationExecutionStatus:
+    type: object
+    properties:
+      ResourceKey:
+        $ref: '#/definitions/ResourceKey'
+      State:
+        $ref: '#/definitions/RemediationExecutionState'
+        description: ENUM of the values.
+      StepDetails:
+        $ref: '#/definitions/RemediationExecutionSteps'
+        description: Details of every step.
+      InvocationTime:
+        $ref: '#/definitions/Date'
+        description: Start time when the remediation was executed.
+      LastUpdatedTime:
+        $ref: '#/definitions/Date'
+        description: The time when the remediation execution was last updated.
+    description: Provides details of the current status of the invoked remediation action for that resource.
+  RemediationExecutionStepState:
+    type: string
+    enum:
+      - SUCCEEDED
+      - PENDING
+      - FAILED
+  RemediationExecutionStep:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/String'
+        description: The details of the step.
+      State:
+        $ref: '#/definitions/RemediationExecutionStepState'
+        description: The valid status of the step.
+      ErrorMessage:
+        $ref: '#/definitions/String'
+        description: An error message if the step was interupted during execution.
+      StartTime:
+        $ref: '#/definitions/Date'
+        description: The time when the step started.
+      StopTime:
+        $ref: '#/definitions/Date'
+        description: The time when the step stopped.
+    description: Name of the step from the SSM document.
+  ResourceValue:
+    type: object
+    properties:
+      Value:
+        $ref: '#/definitions/ResourceValueType'
+        description: The value is a resource ID.
+    description: The dynamic value of the resource.
+  StaticValue:
+    type: object
+    properties:
+      Values:
+        $ref: '#/definitions/StaticParameterValues'
+        description: 'A list of values. For example, the ARN of the assumed role. '
+    description: The static value of the resource.
+  RemediationParameterValue:
+    type: object
+    properties:
+      ResourceValue:
+        $ref: '#/definitions/ResourceValue'
+        description: The value is dynamic and changes at run-time.
+      StaticValue:
+        $ref: '#/definitions/StaticValue'
+        description: The value is static and does not change at run-time.
+    description: The value is either a dynamic (resource) value or a static value. You must select either a dynamic value or a static value.
   ResourceCount:
     type: object
     properties:
@@ -3953,19 +4358,10 @@ definitions:
         $ref: '#/definitions/ResourceDeletionTime'
         description: The time that the resource was deleted.
     description: 'The details that identify a resource that is discovered by AWS Config, including the resource type, ID, and (if available) the custom resource name.'
-  ResourceKey:
-    type: object
-    required:
-      - resourceType
-      - resourceId
-    properties:
-      resourceType:
-        $ref: '#/definitions/ResourceType'
-        description: The resource type.
-      resourceId:
-        $ref: '#/definitions/ResourceId'
-        description: 'The ID of the resource (for example., sg-xxxxxx). '
-    description: 'The details that identify a resource within AWS Config, including the resource type and resource ID.'
+  ResourceValueType:
+    type: string
+    enum:
+      - RESOURCE_ID
   StringWithCharLimit128:
     type: string
     minLength: 1
@@ -3989,6 +4385,12 @@ definitions:
         $ref: '#/definitions/MaximumExecutionFrequency'
         description: '<p>The frequency at which you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for <code>MaximumExecutionFrequency</code>, then <code>MessageType</code> must use the <code>ScheduledNotification</code> value.</p> <note> <p>By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the <code>MaximumExecutionFrequency</code> parameter.</p> <p>Based on the valid value you choose, AWS Config runs evaluations once for each valid value. For example, if you choose <code>Three_Hours</code>, AWS Config runs evaluations once every three hours. In this case, <code>Three_Hours</code> is the frequency of this rule. </p> </note>'
     description: 'Provides the source and the message types that trigger AWS Config to evaluate your AWS resources against a rule. It also provides the frequency with which you want AWS Config to run evaluations for the rule if the trigger type is periodic. You can specify the parameter values for <code>SourceDetail</code> only for custom rules. '
+  StaticParameterValues:
+    type: array
+    items:
+      $ref: '#/definitions/StringWithCharLimit256'
+    minItems: 0
+    maxItems: 25
   SupplementaryConfigurationName:
     type: string
   SupplementaryConfigurationValue:

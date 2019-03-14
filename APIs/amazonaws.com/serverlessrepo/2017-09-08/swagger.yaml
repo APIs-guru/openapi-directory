@@ -762,9 +762,7 @@ definitions:
         description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
         $ref: '#/definitions/__string'
-        description: |-
-          A URL with more information about the application, for example
-           the location of your GitHub repository for the application.
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
         $ref: '#/definitions/__listOf__string'
         description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
@@ -798,9 +796,7 @@ definitions:
         description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
         $ref: '#/definitions/__string'
-        description: |-
-          A URL with more information about the application, for example
-           the location of your GitHub repository for the application.
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
         $ref: '#/definitions/__listOf__string'
         description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
@@ -829,9 +825,12 @@ definitions:
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
+      SourceCodeArchiveUrl:
+        $ref: '#/definitions/__string'
+        description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
       SourceCodeUrl:
         $ref: '#/definitions/__string'
-        description: A link to a public repository for the source code of your application.
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
       SpdxLicenseId:
         $ref: '#/definitions/__string'
         description: 'A valid identifier from <a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>.'
@@ -868,7 +867,7 @@ definitions:
            account, for example, by creating new AWS Identity and Access Management (IAM) users.
            For those applications, you must explicitly acknowledge their capabilities by
            specifying this parameter.</p><p>The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
-           and CAPABILITY_RESOURCE_POLICY.</p><p>The following resources require you to specify CAPABILITY_IAM or
+           CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.</p><p>The following resources require you to specify CAPABILITY_IAM or
            CAPABILITY_NAMED_IAM:
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
@@ -882,10 +881,10 @@ definitions:
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS::TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS::TopicPolicy</a>.</p><p>Applications that contain one or more nested applications require you to specify
+           CAPABILITY_AUTO_EXPAND.</p><p>If your application template contains any of the above resources, we recommend that you review
            all permissions associated with the application before deploying. If you don't specify
-           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
-           </p>
+           this parameter for an application that requires capabilities, the call will fail.</p>
       ResourcesSupported:
         $ref: '#/definitions/__boolean'
         description: |-
@@ -897,18 +896,24 @@ definitions:
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
+      SourceCodeArchiveUrl:
+        $ref: '#/definitions/__string'
+        description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
       SourceCodeUrl:
         $ref: '#/definitions/__string'
-        description: A link to a public repository for the source code of your application.
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
       TemplateUrl:
         $ref: '#/definitions/__string'
         description: A link to the packaged AWS SAM template of your application.
   CreateApplicationVersionRequest:
     type: object
     properties:
+      SourceCodeArchiveUrl:
+        $ref: '#/definitions/__string'
+        description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
       SourceCodeUrl:
         $ref: '#/definitions/__string'
-        description: A link to a public repository for the source code of your application.
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
       TemplateBody:
         $ref: '#/definitions/__string'
         description: The raw packaged AWS SAM template of your application.
@@ -946,7 +951,7 @@ definitions:
            account, for example, by creating new AWS Identity and Access Management (IAM) users.
            For those applications, you must explicitly acknowledge their capabilities by
            specifying this parameter.</p><p>The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
-           and CAPABILITY_RESOURCE_POLICY.</p><p>The following resources require you to specify CAPABILITY_IAM or
+           CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.</p><p>The following resources require you to specify CAPABILITY_IAM or
            CAPABILITY_NAMED_IAM:
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
@@ -960,31 +965,43 @@ definitions:
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS:TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS:TopicPolicy</a>.</p><p>Applications that contain one or more nested applications require you to specify
+           CAPABILITY_AUTO_EXPAND.</p><p>If your application template contains any of the above resources, we recommend that you review
            all permissions associated with the application before deploying. If you don't specify
-           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
-           </p>
+           this parameter for an application that requires capabilities, the call will fail.</p>
       ChangeSetName:
         $ref: '#/definitions/__string'
-        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+           </i> API.
       ClientToken:
         $ref: '#/definitions/__string'
-        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+           </i> API.
       Description:
         $ref: '#/definitions/__string'
-        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+           </i> API.
       NotificationArns:
         $ref: '#/definitions/__listOf__string'
-        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+           </i> API.
       ParameterOverrides:
         $ref: '#/definitions/__listOfParameterValue'
         description: A list of parameter values for the parameters of the application.
       ResourceTypes:
         $ref: '#/definitions/__listOf__string'
-        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+           </i> API.
       RollbackConfiguration:
         $ref: '#/definitions/RollbackConfiguration'
-        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+           </i> API.
       SemanticVersion:
         $ref: '#/definitions/__string'
         description: |-
@@ -993,10 +1010,14 @@ definitions:
            </p>
       StackName:
         $ref: '#/definitions/__string'
-        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+           </i> API.
       Tags:
         $ref: '#/definitions/__listOfTag'
-        description: 'This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a></i> API.'
+        description: |-
+          This property corresponds to the parameter of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet">CreateChangeSet</a>
+           </i> API.
       TemplateId:
         $ref: '#/definitions/__string'
         description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
@@ -1022,7 +1043,9 @@ definitions:
            </p>
       Status:
         $ref: '#/definitions/Status'
-        description: '<p>Status of the template creation workflow.</p><p>Possible values: PREPARING | ACTIVE | EXPIRED</p>'
+        description: |-
+          <p>Status of the template creation workflow.</p><p>Possible values: PREPARING | ACTIVE | EXPIRED
+           </p>
       TemplateId:
         $ref: '#/definitions/__string'
         description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
@@ -1061,9 +1084,7 @@ definitions:
         description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
         $ref: '#/definitions/__string'
-        description: |-
-          A URL with more information about the application, for example
-           the location of your GitHub repository for the application.
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
         $ref: '#/definitions/__listOf__string'
         description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
@@ -1116,7 +1137,9 @@ definitions:
            </p>
       Status:
         $ref: '#/definitions/Status'
-        description: '<p>Status of the template creation workflow.</p><p>Possible values: PREPARING | ACTIVE | EXPIRED</p>'
+        description: |-
+          <p>Status of the template creation workflow.</p><p>Possible values: PREPARING | ACTIVE | EXPIRED
+           </p>
       TemplateId:
         $ref: '#/definitions/__string'
         description: '<p>The UUID returned by CreateCloudFormationTemplate.</p><p>Pattern: [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}</p>'
@@ -1195,9 +1218,7 @@ definitions:
         description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
         $ref: '#/definitions/__string'
-        description: |-
-          A URL with more information about the application, for example
-           the location of your GitHub repository for the application.
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
         $ref: '#/definitions/__listOf__string'
         description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
@@ -1227,9 +1248,7 @@ definitions:
         description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
         $ref: '#/definitions/__string'
-        description: |-
-          A URL with more information about the application, for example
-           the location of your GitHub repository for the application.
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
         $ref: '#/definitions/__listOf__string'
         description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
@@ -1271,7 +1290,7 @@ definitions:
            Permissions</a>.
       Principals:
         $ref: '#/definitions/__listOf__string'
-        description: 'An AWS account ID, or * to make the application public.'
+        description: 'An array of AWS account IDs, or * to make the application public.'
       StatementId:
         $ref: '#/definitions/__string'
         description: A unique ID for the statement.
@@ -1298,9 +1317,7 @@ definitions:
         description: <p>The description of the application.</p><p>Minimum length=1. Maximum length=256</p>
       HomePageUrl:
         $ref: '#/definitions/__string'
-        description: |-
-          A URL with more information about the application, for example
-           the location of your GitHub repository for the application.
+        description: 'A URL with more information about the application, for example the location of your GitHub repository for the application.'
       Labels:
         $ref: '#/definitions/__listOf__string'
         description: '<p>Labels to improve discovery of apps in search results.</p><p>Minimum length=1. Maximum length=127. Maximum number of labels: 10</p><p>Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";</p>'
@@ -1347,7 +1364,7 @@ definitions:
            account, for example, by creating new AWS Identity and Access Management (IAM) users.
            For those applications, you must explicitly acknowledge their capabilities by
            specifying this parameter.</p><p>The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
-           and CAPABILITY_RESOURCE_POLICY.</p><p>The following resources require you to specify CAPABILITY_IAM or
+           CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.</p><p>The following resources require you to specify CAPABILITY_IAM or
            CAPABILITY_NAMED_IAM:
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-group.html">AWS::IAM::Group</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-instanceprofile.html">AWS::IAM::InstanceProfile</a>,
@@ -1361,10 +1378,10 @@ definitions:
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-applicationautoscaling-scalingpolicy.html">AWS::ApplicationAutoScaling::ScalingPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-policy.html">AWS::S3::BucketPolicy</a>,
            <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sqs-policy.html">AWS::SQS::QueuePolicy</a>, and
-           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS::TopicPolicy</a>.</p><p>If your application template contains any of the above resources, we recommend that you review
+           <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-sns-policy.html">AWS::SNS::TopicPolicy</a>.</p><p>Applications that contain one or more nested applications require you to specify
+           CAPABILITY_AUTO_EXPAND.</p><p>If your application template contains any of the above resources, we recommend that you review
            all permissions associated with the application before deploying. If you don't specify
-           this parameter for an application that requires capabilities, the call will fail.</p><p>Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
-           </p>
+           this parameter for an application that requires capabilities, the call will fail.</p>
       ResourcesSupported:
         $ref: '#/definitions/__boolean'
         description: |-
@@ -1376,9 +1393,12 @@ definitions:
           <p>The semantic version of the application:</p><p>
            <a href="https://semver.org/">https://semver.org/</a>
            </p>
+      SourceCodeArchiveUrl:
+        $ref: '#/definitions/__string'
+        description: <p>A link to the S3 object that contains the ZIP archive of the source code for this version of your application.</p><p>Maximum size 50 MB</p>
       SourceCodeUrl:
         $ref: '#/definitions/__string'
-        description: A link to a public repository for the source code of your application.
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
       TemplateUrl:
         $ref: '#/definitions/__string'
         description: A link to the packaged AWS SAM template of your application.
@@ -1402,11 +1422,17 @@ definitions:
     properties:
       MonitoringTimeInMinutes:
         $ref: '#/definitions/__integer'
-        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+           </i> Data Type.
       RollbackTriggers:
         $ref: '#/definitions/__listOfRollbackTrigger'
-        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
-    description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a></i> Data Type.'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+           </i> Data Type.
+    description: |-
+      This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackConfiguration">RollbackConfiguration</a>
+       </i> Data Type.
   __listOfTag:
     type: array
     items:
@@ -1533,11 +1559,17 @@ definitions:
     properties:
       Arn:
         $ref: '#/definitions/__string'
-        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a></i> Data Type.'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+           </i> Data Type.
       Type:
         $ref: '#/definitions/__string'
-        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a></i> Data Type.'
-    description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a></i> Data Type.'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+           </i> Data Type.
+    description: |-
+      This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/RollbackTrigger">RollbackTrigger</a>
+       </i> Data Type.
   Tag:
     type: object
     required:
@@ -1546,7 +1578,9 @@ definitions:
     properties:
       Key:
         $ref: '#/definitions/__string'
-        description: 'This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a></i> Data Type.'
+        description: |-
+          This property corresponds to the content of the same name for the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
+           </i> Data Type.
       Value:
         $ref: '#/definitions/__string'
         description: |-
@@ -1554,7 +1588,9 @@ definitions:
            Tag</a>
            </i>
            Data Type.
-    description: 'This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a></i> Data Type.'
+    description: |-
+      This property corresponds to the <i>AWS CloudFormation <a href="https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/Tag">Tag</a>
+       </i> Data Type.
   VersionSummary:
     type: object
     required:
@@ -1576,5 +1612,5 @@ definitions:
            </p>
       SourceCodeUrl:
         $ref: '#/definitions/__string'
-        description: A link to a public repository for the source code of your application.
+        description: 'A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.'
     description: An application version summary.
