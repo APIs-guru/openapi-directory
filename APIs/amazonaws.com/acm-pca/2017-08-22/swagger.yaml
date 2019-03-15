@@ -3,7 +3,7 @@ info:
   version: '2017-08-22'
   x-release: v4
   title: AWS Certificate Manager Private Certificate Authority
-  description: '<p>You can use the ACM PCA API to create a private certificate authority (CA). You must first call the <a>CreateCertificateAuthority</a> operation. If successful, the operation returns an Amazon Resource Name (ARN) for your private CA. Use this ARN as input to the <a>GetCertificateAuthorityCsr</a> operation to retrieve the certificate signing request (CSR) for your private CA certificate. Sign the CSR using the root or an intermediate CA in your on-premises PKI hierarchy, and call the <a>ImportCertificateAuthorityCertificate</a> to import your signed private CA certificate into ACM PCA. </p> <p>Use your private CA to issue and revoke certificates. These are private certificates that identify and secure client computers, servers, applications, services, devices, and users over SSLS/TLS connections within your organization. Call the <a>IssueCertificate</a> operation to issue a certificate. Call the <a>RevokeCertificate</a> operation to revoke a certificate. </p> <note> <p>Certificates issued by your private CA can be trusted only within your organization, not publicly.</p> </note> <p>Your private CA can optionally create a certificate revocation list (CRL) to track the certificates you revoke. To create a CRL, you must specify a <a>RevocationConfiguration</a> object when you call the <a>CreateCertificateAuthority</a> operation. ACM PCA writes the CRL to an S3 bucket that you specify. You must specify a bucket policy that grants ACM PCA write permission. </p> <p>You can also call the <a>CreateCertificateAuthorityAuditReport</a> to create an optional audit report, which enumerates all of the issued, valid, expired, and revoked certificates from the CA.</p> <note> <p>Each ACM PCA API operation has a throttling limit which determines the number of times the operation can be called per second. For more information, see <a href="acm-pca/latest/userguide/PcaLimits.html#PcaLimits-api">API Rate Limits in ACM PCA</a> in the ACM PCA user guide.</p> </note>'
+  description: '<p>You can use the ACM PCA API to create a private certificate authority (CA). You must first call the <a>CreateCertificateAuthority</a> operation. If successful, the operation returns an Amazon Resource Name (ARN) for your private CA. Use this ARN as input to the <a>GetCertificateAuthorityCsr</a> operation to retrieve the certificate signing request (CSR) for your private CA certificate. Sign the CSR using the root or an intermediate CA in your on-premises PKI hierarchy, and call the <a>ImportCertificateAuthorityCertificate</a> to import your signed private CA certificate into ACM PCA. </p> <p>Use your private CA to issue and revoke certificates. These are private certificates that identify and secure client computers, servers, applications, services, devices, and users over SSLS/TLS connections within your organization. Call the <a>IssueCertificate</a> operation to issue a certificate. Call the <a>RevokeCertificate</a> operation to revoke a certificate. </p> <note> <p>Certificates issued by your private CA can be trusted only within your organization, not publicly.</p> </note> <p>Your private CA can optionally create a certificate revocation list (CRL) to track the certificates you revoke. To create a CRL, you must specify a <a>RevocationConfiguration</a> object when you call the <a>CreateCertificateAuthority</a> operation. ACM PCA writes the CRL to an S3 bucket that you specify. You must specify a bucket policy that grants ACM PCA write permission. </p> <p>You can also call the <a>CreateCertificateAuthorityAuditReport</a> to create an optional audit report, which enumerates all of the issued, valid, expired, and revoked certificates from the CA.</p> <note> <p>Each ACM PCA API operation has a throttling limit which determines the number of times the operation can be called per second. For more information, see <a href="https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaLimits.html#PcaLimits-api">API Rate Limits in ACM PCA</a> in the ACM PCA user guide.</p> </note>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -143,7 +143,7 @@ paths:
   '/#CreateCertificateAuthorityAuditReport':
     post:
       operationId: CreateCertificateAuthorityAuditReport
-      description: Creates an audit report that lists every time that the your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The <a>IssueCertificate</a> and <a>RevokeCertificate</a> operations use the private key. You can generate a new report every 30 minutes.
+      description: Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The <a>IssueCertificate</a> and <a>RevokeCertificate</a> operations use the private key. You can generate a new report every 30 minutes.
       responses:
         '200':
           description: Success
@@ -189,10 +189,57 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#CreatePermission':
+    post:
+      operationId: CreatePermission
+      description: '<p>Assigns permissions from a private CA to a designated AWS service. Services are specified by their service principals and can be given permission to create and retrieve certificates on a private CA. Services can also be given permission to list the active permissions that the private CA has granted. For ACM to automatically renew your private CA''s certificates, you must assign all possible permissions from the CA to the ACM service principal.</p> <p>At this time, you can only assign permissions to ACM (<code>acm.amazonaws.com</code>). Permissions can be revoked with the <a>DeletePermission</a> operation and listed with the <a>ListPermissions</a> operation.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '482':
+          description: PermissionAlreadyExistsException
+          schema:
+            $ref: '#/definitions/PermissionAlreadyExistsException'
+        '483':
+          description: LimitExceededException
+          schema:
+            $ref: '#/definitions/LimitExceededException'
+        '484':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
+        '485':
+          description: RequestFailedException
+          schema:
+            $ref: '#/definitions/RequestFailedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/CreatePermissionRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#DeleteCertificateAuthority':
     post:
       operationId: DeleteCertificateAuthority
-      description: '<p>Deletes a private certificate authority (CA). You must provide the ARN (Amazon Resource Name) of the private CA that you want to delete. You can find the ARN by calling the <a>ListCertificateAuthorities</a> operation. Before you can delete a CA, you must disable it. Call the <a>UpdateCertificateAuthority</a> operation and set the <b>CertificateAuthorityStatus</b> parameter to <code>DISABLED</code>. </p> <p>Additionally, you can delete a CA if you are waiting for it to be created (the <b>Status</b> field of the <a>CertificateAuthority</a> is <code>CREATING</code>). You can also delete it if the CA has been created but you haven''t yet imported the signed certificate (the <b>Status</b> is <code>PENDING_CERTIFICATE</code>) into ACM PCA. </p> <p>If the CA is in one of the aforementioned states and you call <a>DeleteCertificateAuthority</a>, the CA''s status changes to <code>DELETED</code>. However, the CA won''t be permentantly deleted until the restoration period has passed. By default, if you do not set the <code>PermanentDeletionTimeInDays</code> parameter, the CA remains restorable for 30 days. You can set the parameter from 7 to 30 days. The <a>DescribeCertificateAuthority</a> operation returns the time remaining in the restoration window of a Private CA in the <code>DELETED</code> state. To restore an eligable CA, call the <a>RestoreCertificateAuthority</a> operation.</p>'
+      description: '<p>Deletes a private certificate authority (CA). You must provide the ARN (Amazon Resource Name) of the private CA that you want to delete. You can find the ARN by calling the <a>ListCertificateAuthorities</a> operation. Before you can delete a CA, you must disable it. Call the <a>UpdateCertificateAuthority</a> operation and set the <b>CertificateAuthorityStatus</b> parameter to <code>DISABLED</code>. </p> <p>Additionally, you can delete a CA if you are waiting for it to be created (the <b>Status</b> field of the <a>CertificateAuthority</a> is <code>CREATING</code>). You can also delete it if the CA has been created but you haven''t yet imported the signed certificate (the <b>Status</b> is <code>PENDING_CERTIFICATE</code>) into ACM PCA. </p> <p>If the CA is in one of the previously mentioned states and you call <a>DeleteCertificateAuthority</a>, the CA''s status changes to <code>DELETED</code>. However, the CA won''t be permanently deleted until the restoration period has passed. By default, if you do not set the <code>PermanentDeletionTimeInDays</code> parameter, the CA remains restorable for 30 days. You can set the parameter from 7 to 30 days. The <a>DescribeCertificateAuthority</a> operation returns the time remaining in the restoration window of a Private CA in the <code>DELETED</code> state. To restore an eligible CA, call the <a>RestoreCertificateAuthority</a> operation.</p>'
       responses:
         '200':
           description: Success
@@ -218,6 +265,45 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DeleteCertificateAuthorityRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DeletePermission':
+    post:
+      operationId: DeletePermission
+      description: 'Revokes permissions that a private CA assigned to a designated AWS service. Permissions can be created with the <a>CreatePermission</a> operation and listed with the <a>ListPermissions</a> operation. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '482':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
+        '483':
+          description: RequestFailedException
+          schema:
+            $ref: '#/definitions/RequestFailedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DeletePermissionRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -568,6 +654,61 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ListPermissions':
+    post:
+      operationId: ListPermissions
+      description: 'Lists all the permissions, if any, that have been assigned by a private CA. Permissions can be granted with the <a>CreatePermission</a> operation and revoked with the <a>DeletePermission</a> operation.'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListPermissionsResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidArnException
+          schema:
+            $ref: '#/definitions/InvalidArnException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+        '483':
+          description: InvalidStateException
+          schema:
+            $ref: '#/definitions/InvalidStateException'
+        '484':
+          description: RequestFailedException
+          schema:
+            $ref: '#/definitions/RequestFailedException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListPermissionsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#ListTags':
     post:
       operationId: ListTags
@@ -591,6 +732,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListTagsRequest'
+        - name: MaxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -870,18 +1021,38 @@ definitions:
     properties:
       CertificateAuthorityArn:
         $ref: '#/definitions/Arn'
-        description: '<p>Amazon Resource Name (ARN) of the CA to be audited. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>.</p>'
+        description: '<p>The Amazon Resource Name (ARN) of the CA to be audited. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>.</p>'
       S3BucketName:
         $ref: '#/definitions/String'
-        description: Name of the S3 bucket that will contain the audit report.
+        description: The name of the S3 bucket that will contain the audit report.
       AuditReportResponseFormat:
         $ref: '#/definitions/AuditReportResponseFormat'
-        description: Format in which to create the report. This can be either <b>JSON</b> or <b>CSV</b>.
+        description: The format in which to create the report. This can be either <b>JSON</b> or <b>CSV</b>.
   RequestInProgressException: {}
   RequestFailedException: {}
   ResourceNotFoundException: {}
   InvalidArnException: {}
   InvalidStateException: {}
+  CreatePermissionRequest:
+    type: object
+    required:
+      - CertificateAuthorityArn
+      - Principal
+      - Actions
+    properties:
+      CertificateAuthorityArn:
+        $ref: '#/definitions/Arn'
+        description: '<p>The Amazon Resource Name (ARN) of the CA that grants the permissions. You can find the ARN by calling the <a>ListCertificateAuthorities</a> operation. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+      Principal:
+        $ref: '#/definitions/Principal'
+        description: 'The AWS service or identity that receives the permission. At this time, the only valid principal is <code>acm.amazonaws.com</code>.'
+      SourceAccount:
+        $ref: '#/definitions/AccountId'
+        description: The ID of the calling account.
+      Actions:
+        $ref: '#/definitions/ActionList'
+        description: 'The actions that the specified AWS service principal can use. These include <code>IssueCertificate</code>, <code>GetCertificate</code>, and <code>ListPermissions</code>.'
+  PermissionAlreadyExistsException: {}
   DeleteCertificateAuthorityRequest:
     type: object
     required:
@@ -894,6 +1065,21 @@ definitions:
         $ref: '#/definitions/PermanentDeletionTimeInDays'
         description: 'The number of days to make a CA restorable after it has been deleted. This can be anywhere from 7 to 30 days, with 30 being the default.'
   ConcurrentModificationException: {}
+  DeletePermissionRequest:
+    type: object
+    required:
+      - CertificateAuthorityArn
+      - Principal
+    properties:
+      CertificateAuthorityArn:
+        $ref: '#/definitions/Arn'
+        description: '<p>The Amazon Resource Number (ARN) of the private CA that issued the permissions. You can find the CA''s ARN by calling the <a>ListCertificateAuthorities</a> operation. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>'
+      Principal:
+        $ref: '#/definitions/Principal'
+        description: 'The AWS service or identity that will have its CA permissions revoked. At this time, the only valid service principal is <code>acm.amazonaws.com</code> '
+      SourceAccount:
+        $ref: '#/definitions/AccountId'
+        description: The AWS account that calls this operation.
   DescribeCertificateAuthorityResponse:
     type: object
     properties:
@@ -1054,6 +1240,29 @@ definitions:
         $ref: '#/definitions/MaxResults'
         description: 'Use this parameter when paginating results to specify the maximum number of items to return in the response on each page. If additional items exist beyond the number you specify, the <code>NextToken</code> element is sent in the response. Use this <code>NextToken</code> value in a subsequent request to retrieve additional items.'
   InvalidNextTokenException: {}
+  ListPermissionsResponse:
+    type: object
+    properties:
+      Permissions:
+        $ref: '#/definitions/PermissionList'
+        description: 'Summary information about each permission assigned by the specified private CA, including the action enabled, the policy provided, and the time of creation.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'When the list is truncated, this value is present and should be used for the <b>NextToken</b> parameter in a subsequent pagination request. '
+  ListPermissionsRequest:
+    type: object
+    required:
+      - CertificateAuthorityArn
+    properties:
+      CertificateAuthorityArn:
+        $ref: '#/definitions/Arn'
+        description: 'The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by calling the <a>ListCertificateAuthorities</a> operation. This must be of the form: <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> You can get a private CA''s ARN by running the <a>ListCertificateAuthorities</a> operation.'
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'When paginating results, use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <b>NextToken</b> from the response you just received.'
+      MaxResults:
+        $ref: '#/definitions/MaxResults'
+        description: 'When paginating results, use this parameter to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <b>NextToken</b> element is sent in the response. Use this <b>NextToken</b> value in a subsequent request to retrieve additional items.'
   ListTagsResponse:
     type: object
     properties:
@@ -1219,6 +1428,23 @@ definitions:
         $ref: '#/definitions/String3'
         description: 'Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.'
     description: 'Contains information about the certificate subject. The certificate can be one issued by your private certificate authority (CA) or it can be your private CA certificate. The <b>Subject</b> field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The <b>Subject</b> must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate. The DN must be unique for each entity, but your private CA can issue more than one certificate with the same DN to the same entity. '
+  AccountId:
+    type: string
+    pattern: '[0-9]+'
+    minLength: 12
+    maxLength: 12
+  ActionType:
+    type: string
+    enum:
+      - IssueCertificate
+      - GetCertificate
+      - ListPermissions
+  ActionList:
+    type: array
+    items:
+      $ref: '#/definitions/ActionType'
+    minItems: 1
+    maxItems: 3
   Arn:
     type: string
     pattern: 'arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*'
@@ -1327,7 +1553,7 @@ definitions:
       Subject:
         $ref: '#/definitions/ASN1Subject'
         description: Structure that contains X.500 distinguished name information for your private CA.
-    description: 'Contains configuration information for your private certificate authority (CA). This includes information about the class of public key algorithm and the key pair that your private CA creates when it issues a certificate, the signature algorithm it uses used when issuing certificates, and its X.500 distinguished name. You must specify this information when you call the <a>CreateCertificateAuthority</a> operation. '
+    description: 'Contains configuration information for your private certificate authority (CA). This includes information about the class of public key algorithm and the key pair that your private CA creates when it issues a certificate. It also includes the signature algorithm that it uses when issuing certificates, and its X.500 distinguished name. You must specify this information when you call the <a>CreateCertificateAuthority</a> operation. '
   RevocationConfiguration:
     type: object
     properties:
@@ -1374,6 +1600,11 @@ definitions:
       $ref: '#/definitions/Tag'
     minItems: 1
     maxItems: 50
+  Principal:
+    type: string
+    pattern: '^[^*]+$'
+    minLength: 0
+    maxLength: 128
   Integer1To5000:
     type: integer
     minimum: 1
@@ -1435,6 +1666,33 @@ definitions:
     type: integer
     minimum: 1
     maximum: 1000
+  PermissionList:
+    type: array
+    items:
+      $ref: '#/definitions/Permission'
+    minItems: 0
+  Permission:
+    type: object
+    properties:
+      CertificateAuthorityArn:
+        $ref: '#/definitions/Arn'
+        description: The Amazon Resource Number (ARN) of the private CA from which the permission was issued.
+      CreatedAt:
+        $ref: '#/definitions/TStamp'
+        description: The time at which the permission was created.
+      Principal:
+        $ref: '#/definitions/String'
+        description: 'The AWS service or entity that holds the permission. At this time, the only valid principal is <code>acm.amazonaws.com</code>.'
+      SourceAccount:
+        $ref: '#/definitions/String'
+        description: The ID of the account that assigned the permission.
+      Actions:
+        $ref: '#/definitions/ActionList'
+        description: The private CA operations that can be performed by the designated AWS service.
+      Policy:
+        $ref: '#/definitions/String'
+        description: The name of the policy that is associated with the permission.
+    description: 'Permissions designate which private CA operations can be performed by an AWS service or entity. In order for ACM to automatically renew private certificates, you must give the ACM service principal all available permissions (<code>IssueCertificate</code>, <code>GetCertificate</code>, and <code>ListPermissions</code>). Permissions can be assigned with the <a>CreatePermission</a> operation, removed with the <a>DeletePermission</a> operation, and listed with the <a>ListPermissions</a> operation.'
   PositiveLong:
     type: integer
     minimum: 1

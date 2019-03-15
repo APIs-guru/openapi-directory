@@ -5244,6 +5244,13 @@ definitions:
     type: string
     pattern: .*
     maxLength: 256
+  HyperParameterScalingType:
+    type: string
+    enum:
+      - Auto
+      - Linear
+      - Logarithmic
+      - ReverseLogarithmic
   ContinuousParameterRange:
     type: object
     required:
@@ -5260,6 +5267,9 @@ definitions:
       MaxValue:
         $ref: '#/definitions/ParameterValue'
         description: The maximum value for the hyperparameter. The tuning job uses floating-point values between <code>MinValue</code> value and this value for tuning.
+      ScalingType:
+        $ref: '#/definitions/HyperParameterScalingType'
+        description: '<p>The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see <a href="http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type">Hyperparameter Range Scaling</a>. One of the following values:</p> <dl> <dt>Auto</dt> <dd> <p>Amazon SageMaker hyperparameter tuning chooses the best scale for the hyperparameter.</p> </dd> <dt>Linear</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.</p> </dd> <dt>Logarithmic</dt> <dd> <p>Hyperparemeter tuning searches the values in the hyperparameter range by using a logarithmic scale.</p> <p>Logarithmic scaling works only for ranges that have only values greater than 0.</p> </dd> <dt>ReverseLogarithmic</dt> <dd> <p>Hyperparemeter tuning searches the values in the hyperparameter range by using a reverse logarithmic scale.</p> <p>Reverse logarithmic scaling works only for ranges that are entirely within the range 0&lt;=x&lt;1.0.</p> </dd> </dl>'
     description: A list of continuous hyperparameters to tune.
   ContinuousParameterRangeSpecification:
     type: object
@@ -5416,7 +5426,7 @@ definitions:
     properties:
       Strategy:
         $ref: '#/definitions/HyperParameterTuningJobStrategyType'
-        description: 'Specifies the search strategy for hyperparameters. Currently, the only valid value is <code>Bayesian</code>.'
+        description: 'Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training job it launches. To use the Bayesian search stategy, set this to <code>Bayesian</code>. To randomly search, set it to <code>Random</code>. For information about search strategies, see <a href="http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html">How Hyperparameter Tuning Works</a>.'
       HyperParameterTuningJobObjective:
         $ref: '#/definitions/HyperParameterTuningJobObjective'
         description: The <a>HyperParameterTuningJobObjective</a> object that specifies the objective metric for this tuning job.
@@ -6623,6 +6633,7 @@ definitions:
     type: string
     enum:
       - Bayesian
+      - Random
     description: 'The strategy hyperparameter tuning uses to find the best combination of hyperparameters for your model. Currently, the only supported value is <code>Bayesian</code>.'
   HyperParameterTuningJobObjective:
     type: object
@@ -6774,6 +6785,9 @@ definitions:
       MaxValue:
         $ref: '#/definitions/ParameterValue'
         description: The maximum value of the hyperparameter to search.
+      ScalingType:
+        $ref: '#/definitions/HyperParameterScalingType'
+        description: '<p>The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see <a href="http://docs.aws.amazon.com//sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type">Hyperparameter Range Scaling</a>. One of the following values:</p> <dl> <dt>Auto</dt> <dd> <p>Amazon SageMaker hyperparameter tuning chooses the best scale for the hyperparameter.</p> </dd> <dt>Linear</dt> <dd> <p>Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.</p> </dd> <dt>Logarithmic</dt> <dd> <p>Hyperparemeter tuning searches the values in the hyperparameter range by using a logarithmic scale.</p> <p>Logarithmic scaling works only for ranges that have only values greater than 0.</p> </dd> </dl>'
     description: 'For a hyperparameter of the integer type, specifies the range that a hyperparameter tuning job searches.'
   IntegerParameterRangeSpecification:
     type: object
