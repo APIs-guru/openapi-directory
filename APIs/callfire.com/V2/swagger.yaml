@@ -5990,6 +5990,27 @@ definitions:
         format: int64
         type: integer
     type: object
+  MessageTemplateCategory:
+    description: '~'
+    properties:
+      id:
+        description: '~'
+        format: int64
+        type: integer
+      name:
+        description: '~'
+        type: string
+    type: object
+  MessageTemplateCategoryPage:
+    allOf:
+      - $ref: '#/definitions/Page'
+      - properties:
+          items:
+            items:
+              $ref: '#/definitions/MessageTemplateCategory'
+            type: array
+        type: object
+    description: '~'
   Note:
     description: Represents a note which can be added to a call
     properties:
@@ -6059,7 +6080,6 @@ definitions:
           - PENDING
           - DISABLED
           - ENABLED
-        readOnly: true
         type: string
       labels:
         description: '~'
@@ -6090,7 +6110,6 @@ definitions:
           - ACTIVE
           - RELEASED
           - UNAVAILABLE
-        readOnly: true
         type: string
       textFeatureStatus:
         description: 'A status of a text feature. Available values: DISABLED, ENABLED'
@@ -6099,7 +6118,6 @@ definitions:
           - PENDING
           - DISABLED
           - ENABLED
-        readOnly: true
         type: string
       tollFree:
         description: A  toll-free number

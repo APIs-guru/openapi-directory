@@ -354,6 +354,29 @@ paths:
       summary: Retrieves a AggregateLog resource.
       tags:
         - AggregateLog
+  '/computed-statistics/{id}':
+    get:
+      operationId: getComputedStatisticItem
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: ComputedStatistic resource response
+          schema:
+            $ref: '#/definitions/ComputedStatistic'
+        '404':
+          description: Resource not found
+      summary: Retrieves a ComputedStatistic resource.
+      tags:
+        - ComputedStatistic
   /crawl-urls:
     get:
       operationId: getCrawlUrlCollection
@@ -588,21 +611,6 @@ paths:
           required: true
           type: string
         - in: query
-          name: redirectCode
-          required: false
-          type: integer
-        - collectionFormat: multi
-          in: query
-          items:
-            type: integer
-          name: 'redirectCode[]'
-          required: false
-          type: array
-        - in: query
-          name: source.input
-          required: false
-          type: string
-        - in: query
           name: isEnabled
           required: false
           type: boolean
@@ -614,27 +622,11 @@ paths:
           required: false
           type: array
         - in: query
-          name: target
-          required: false
-          type: string
-        - in: query
           name: 'sort[id]'
           required: false
           type: string
         - in: query
-          name: 'sort[target]'
-          required: false
-          type: string
-        - in: query
           name: 'sort[viewCount]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[source.input]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[redirectCode]'
           required: false
           type: string
         - in: query
@@ -718,6 +710,11 @@ paths:
           name: projectId
           required: true
           type: string
+        - description: The collection page number
+          in: query
+          name: page
+          required: false
+          type: integer
       produces:
         - application/ld+json
         - application/json
@@ -1906,21 +1903,6 @@ paths:
           required: true
           type: string
         - in: query
-          name: redirectCode
-          required: false
-          type: integer
-        - collectionFormat: multi
-          in: query
-          items:
-            type: integer
-          name: 'redirectCode[]'
-          required: false
-          type: array
-        - in: query
-          name: source.input
-          required: false
-          type: string
-        - in: query
           name: isEnabled
           required: false
           type: boolean
@@ -1932,27 +1914,11 @@ paths:
           required: false
           type: array
         - in: query
-          name: target
-          required: false
-          type: string
-        - in: query
           name: 'sort[id]'
           required: false
           type: string
         - in: query
-          name: 'sort[target]'
-          required: false
-          type: string
-        - in: query
           name: 'sort[viewCount]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[source.input]'
-          required: false
-          type: string
-        - in: query
-          name: 'sort[redirectCode]'
           required: false
           type: string
         - in: query
@@ -2002,6 +1968,29 @@ paths:
       summary: Retrieves a Rule resource.
       tags:
         - Rule
+  /stats:
+    get:
+      operationId: getComputedStatisticCollection
+      parameters:
+        - in: query
+          name: projectId
+          required: true
+          type: string
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+        - text/csv
+      responses:
+        '200':
+          description: ComputedStatistic collection response
+          schema:
+            items:
+              $ref: '#/definitions/ComputedStatistic'
+            type: array
+      summary: Retrieves the collection of ComputedStatistic resources.
+      tags:
+        - ComputedStatistic
   /user-organizations:
     post:
       consumes:
@@ -2568,6 +2557,32 @@ definitions:
       target: {}
       viewCount: {}
     type: object
+  ComputedStatistic:
+    description: ''
+    properties:
+      evolution:
+        items:
+          type: string
+        type: array
+      frequency: {}
+      global:
+        items:
+          type: string
+        type: array
+      id: {}
+      publishHistories:
+        items:
+          type: string
+        type: array
+      range:
+        items:
+          type: string
+        type: array
+      stats:
+        items:
+          type: string
+        type: array
+    type: object
   Crawl:
     description: ''
     properties:
@@ -2805,15 +2820,12 @@ definitions:
       successCount:
         readOnly: true
         type: integer
-      typeAsText:
-        type: string
       updatedAt:
         format: date-time
         readOnly: true
         type: string
     required:
       - project
-      - typeAsText
     type: object
   Import-Write:
     description: ''
@@ -2823,12 +2835,9 @@ definitions:
         type: string
       shouldEnable:
         type: boolean
-      typeAsText:
-        type: string
     required:
       - project
       - csvContent
-      - typeAsText
     type: object
   Instance-Read:
     description: ''
@@ -2900,17 +2909,6 @@ definitions:
   Invitation: {}
   Invitation-Read:
     description: ''
-    properties:
-      createdAt:
-        format: date-time
-        readOnly: true
-        type: string
-      email:
-        readOnly: true
-        type: string
-      id:
-        readOnly: true
-        type: string
     type: object
   Invitation-Write:
     description: ''
@@ -3104,25 +3102,9 @@ definitions:
   Organization-List:
     description: ''
     properties:
-      createdAt:
-        format: date-time
-        readOnly: true
-        type: string
-      id:
-        readOnly: true
-        type: string
       name:
         type: string
-      projects:
-        items:
-          $ref: '#/definitions/Project-List'
-        readOnly: true
-        type: array
       slug:
-        readOnly: true
-        type: string
-      updatedAt:
-        format: date-time
         readOnly: true
         type: string
     required:
@@ -3131,32 +3113,14 @@ definitions:
   Organization-Read:
     description: ''
     properties:
-      createdAt:
-        format: date-time
-        readOnly: true
-        type: string
       id:
         readOnly: true
         type: string
       name:
         type: string
-      projects:
-        items:
-          $ref: '#/definitions/Project-Read'
-        readOnly: true
-        type: array
       slug:
         readOnly: true
         type: string
-      updatedAt:
-        format: date-time
-        readOnly: true
-        type: string
-      userOrganizations:
-        items:
-          $ref: '#/definitions/UserOrganization-Read'
-        readOnly: true
-        type: array
     required:
       - name
     type: object
@@ -3213,6 +3177,9 @@ definitions:
           type: string
         type: array
       isEnabled:
+        readOnly: true
+        type: boolean
+      isPublishing:
         readOnly: true
         type: boolean
       logExport:
@@ -3313,30 +3280,20 @@ definitions:
   Project-List:
     description: ''
     properties:
-      complexRulesCount:
-        readOnly: true
-        type: integer
       id:
         readOnly: true
         type: string
       name:
         type: string
+      organization:
+        $ref: '#/definitions/Organization-List'
+        readOnly: true
       slug:
         readOnly: true
         type: string
-      straightRulesCount:
+      token:
         readOnly: true
-        type: integer
-      userProjects:
-        items:
-          $ref: '#/definitions/UserProject-List'
-        readOnly: true
-        type: array
-      usersFlattened:
-        items:
-          $ref: '#/definitions/UserProjectFlattened-List'
-        readOnly: true
-        type: array
+        type: string
     required:
       - name
     type: object
@@ -3346,10 +3303,46 @@ definitions:
       complexRulesCount:
         readOnly: true
         type: integer
+      complexRulesUpdatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      createdAt:
+        format: date-time
+        readOnly: true
+        type: string
+      currentVersion:
+        $ref: '#/definitions/RuleSetVersion-Read'
+        readOnly: true
+      features:
+        items:
+          type: string
+        readOnly: true
+        type: array
       id:
         readOnly: true
         type: string
+      ignoreProjectTypes:
+        items:
+          type: string
+        type: array
+      isPublishing:
+        readOnly: true
+        type: boolean
       name:
+        type: string
+      onboardingCompletedDemos:
+        items:
+          type: string
+        type: array
+      organization:
+        $ref: '#/definitions/Organization-Read'
+        readOnly: true
+      plan:
+        readOnly: true
+        type: integer
+      rulesHash:
+        readOnly: true
         type: string
       slug:
         readOnly: true
@@ -3357,6 +3350,17 @@ definitions:
       straightRulesCount:
         readOnly: true
         type: integer
+      straightRulesUpdatedAt:
+        format: date-time
+        readOnly: true
+        type: string
+      token:
+        readOnly: true
+        type: string
+      updatedAt:
+        format: date-time
+        readOnly: true
+        type: string
       userProjects:
         items:
           $ref: '#/definitions/UserProject-Read'
@@ -3367,6 +3371,9 @@ definitions:
           $ref: '#/definitions/UserProjectFlattened-Read'
         readOnly: true
         type: array
+      workingVersion:
+        $ref: '#/definitions/RuleSetVersion-Read'
+        readOnly: true
     required:
       - name
     type: object
@@ -3442,6 +3449,10 @@ definitions:
   Rule:
     description: ''
     properties:
+      actions:
+        items:
+          type: string
+        type: array
       changes:
         items:
           $ref: '#/definitions/RuleChange'
@@ -3473,23 +3484,34 @@ definitions:
       rank:
         type: integer
       redirectCode:
+        description: BC Break for old agent.
+        readOnly: true
         type: integer
       redirect_code:
+        description: BC Break for old agent.
         readOnly: true
         type: string
       source:
         type: string
       target:
+        description: BC Break for old agent.
+        readOnly: true
         type: string
       updatedAt:
         format: date-time
         type: string
+      valuesToReplace:
+        readOnly: true
       viewCount:
         type: integer
     type: object
   Rule-Read:
     description: ''
     properties:
+      actions:
+        items:
+          type: string
+        type: array
       changes:
         items:
           $ref: '#/definitions/RuleChange-Read'
@@ -3514,11 +3536,7 @@ definitions:
         type: integer
       rank:
         type: integer
-      redirectCode:
-        type: integer
       source:
-        type: string
-      target:
         type: string
       updatedAt:
         format: date-time
@@ -3531,6 +3549,10 @@ definitions:
     properties:
       action:
         type: string
+      actions:
+        items:
+          type: string
+        type: array
       author:
         $ref: '#/definitions/User'
         readOnly: true
@@ -3569,20 +3591,12 @@ definitions:
         type: string
       source:
         type: string
-      statusCode:
-        type: integer
-      target:
-        type: string
-      type:
-        readOnly: true
-        type: string
       version:
         $ref: '#/definitions/RuleSetVersion'
         readOnly: true
     required:
       - action
       - source
-      - statusCode
       - isEnabled
       - rank
     type: object
@@ -3591,6 +3605,10 @@ definitions:
     properties:
       action:
         type: string
+      actions:
+        items:
+          type: string
+        type: array
       author:
         $ref: '#/definitions/User-Read'
         readOnly: true
@@ -3617,16 +3635,13 @@ definitions:
         type: integer
       rank:
         type: integer
-      source:
+      ruleId:
         type: string
-      statusCode:
-        type: integer
-      target:
+      source:
         type: string
     required:
       - action
       - source
-      - statusCode
       - isEnabled
       - rank
     type: object
@@ -3635,6 +3650,10 @@ definitions:
     properties:
       action:
         type: string
+      actions:
+        items:
+          type: string
+        type: array
       examples:
         items:
           type: string
@@ -3655,14 +3674,9 @@ definitions:
         type: string
       source:
         type: string
-      statusCode:
-        type: integer
-      target:
-        type: string
     required:
       - action
       - source
-      - statusCode
       - isEnabled
       - rank
     type: object
@@ -3881,9 +3895,6 @@ definitions:
   User-Read:
     description: ''
     properties:
-      id:
-        readOnly: true
-        type: string
       name:
         type: string
     required:
@@ -3937,6 +3948,9 @@ definitions:
       id:
         readOnly: true
         type: string
+      organization:
+        readOnly: true
+        type: string
       user:
         readOnly: true
         type: string
@@ -3988,22 +4002,6 @@ definitions:
       - project
       - functionalRoles
     type: object
-  UserProject-List:
-    description: ''
-    properties:
-      functionalRoles:
-        items:
-          type: string
-        type: array
-      id:
-        readOnly: true
-        type: string
-      user:
-        type: string
-    required:
-      - user
-      - functionalRoles
-    type: object
   UserProject-Read:
     description: ''
     properties:
@@ -4041,19 +4039,6 @@ definitions:
         readOnly: true
         type: string
       project:
-        type: string
-      user:
-        type: string
-    type: object
-  UserProjectFlattened-List:
-    description: ''
-    properties:
-      functionalRoles:
-        items:
-          type: string
-        type: array
-      id:
-        readOnly: true
         type: string
       user:
         type: string

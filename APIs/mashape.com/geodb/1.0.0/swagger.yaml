@@ -37,6 +37,331 @@ tags:
   - description: Locale Endpoints
     name: Locale
 paths:
+  /v1/geo/adminDivisions:
+    get:
+      consumes:
+        - application/json
+      description: 'Find administrative divisions, filtering by optional criteria. If no criteria are set, you will get back all known divisions.'
+      operationId: findAdminDivisionsUsingGET
+      parameters:
+        - description: 'Only divisions whose names start with this prefix. If languageCode is set, the prefix will be matched on the name as it appears in that language.'
+          in: query
+          name: namePrefix
+          required: false
+          type: string
+        - description: Only divisions in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: countryIds
+          required: false
+          type: string
+        - description: Only divisions NOT in these countries (comma-delimited country codes or WikiData ids)
+          in: query
+          name: excludedCountryIds
+          required: false
+          type: string
+        - description: Only divisions having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: 'Only divisions near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD'
+          in: query
+          name: location
+          required: false
+          type: string
+        - description: The location radius within which to find divisions
+          format: int32
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - default: MI
+          description: 'The unit of distance: MI | KM'
+          in: query
+          name: distanceUnit
+          required: false
+          type: string
+        - description: Only divisions in these time-zones (comma-delimited)
+          in: query
+          name: timeZoneIds
+          required: false
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
+          required: false
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: NONE
+          description: 'Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PopulatedPlacesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find administrative divisions
+      tags:
+        - Geo
+  '/v1/geo/adminDivisions/{divisionId}':
+    get:
+      consumes:
+        - application/json
+      description: 'Get the details for a specific administrative division, including location coordinates, population, and elevation above sea-level (if available).'
+      operationId: getAdminDivisionUsingGET
+      parameters:
+        - description: The division id (either native 'id' or 'wikiDataId')
+          in: path
+          name: divisionId
+          required: true
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PopulatedPlaceResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get administrative division details
+      tags:
+        - Geo
+  '/v1/geo/adminDivisions/{divisionId}/nearbyCities':
+    get:
+      consumes:
+        - application/json
+      description: 'Find cities near the given administrative division, filtering by optional criteria. If no criteria are set, you will get back all known cities.'
+      operationId: findCitiesNearAdminDivisionUsingGET
+      parameters:
+        - description: The division id (either native 'id' or 'wikiDataId')
+          in: path
+          name: divisionId
+          required: true
+          type: string
+        - description: Only cities having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: 'Only cities for these types (comma-delimited): CITY | ADM2'
+          in: query
+          name: types
+          required: false
+          type: string
+        - description: The location radius within which to find cities
+          format: int32
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - default: MI
+          description: 'The unit of distance: MI | KM'
+          in: query
+          name: distanceUnit
+          required: false
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
+          required: false
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: NONE
+          description: 'Whether to include any cities marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PopulatedPlacesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find cities near division
+      tags:
+        - Geo
+  '/v1/geo/adminDivisions/{divisionId}/nearbyDivisions':
+    get:
+      consumes:
+        - application/json
+      description: 'Find divisions near the given origin division, filtering by optional criteria. If no criteria are set, you will get back all known divisions.'
+      operationId: findDivisionsNearAdminDivisionUsingGET
+      parameters:
+        - description: The division id (either native 'id' or 'wikiDataId')
+          in: path
+          name: divisionId
+          required: true
+          type: string
+        - description: Only divisions having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: 'Only divisions for these types (comma-delimited): CITY | ADM2'
+          in: query
+          name: types
+          required: false
+          type: string
+        - description: The location radius within which to find divisions
+          format: int32
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - default: MI
+          description: 'The unit of distance: MI | KM'
+          in: query
+          name: distanceUnit
+          required: false
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
+          required: false
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: NONE
+          description: 'Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PopulatedPlacesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find divisions near division
+      tags:
+        - Geo
   /v1/geo/cities:
     get:
       consumes:
@@ -138,7 +463,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/CitiesResponse'
+            $ref: '#/definitions/PopulatedPlacesResponse'
         '401':
           description: Unauthorized
         '403':
@@ -175,7 +500,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/CityResponse'
+            $ref: '#/definitions/PopulatedPlaceResponse'
         '401':
           description: Unauthorized
         '403':
@@ -329,7 +654,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/CitiesResponse'
+            $ref: '#/definitions/PopulatedPlacesResponse'
         '401':
           description: Unauthorized
         '403':
@@ -642,7 +967,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/CitiesResponse'
+            $ref: '#/definitions/PopulatedPlacesResponse'
         '401':
           description: Unauthorized
         '403':
@@ -733,7 +1058,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/CitiesResponse'
+            $ref: '#/definitions/PopulatedPlacesResponse'
         '401':
           description: Unauthorized
         '403':
@@ -741,6 +1066,92 @@ paths:
         '404':
           description: Not Found
       summary: Find cities near location
+      tags:
+        - Geo
+  '/v1/geo/locations/{locationId}/nearbyDivisions':
+    get:
+      consumes:
+        - application/json
+      description: 'Find administrative divisions near the given location, filtering by optional criteria. If no criteria are set, you will get back all known divisions.'
+      operationId: findDivisionsNearLocationUsingGET
+      parameters:
+        - description: 'Only divisions near this location. Latitude/longitude in ISO-6709 format: ±DD.DDDD±DDD.DDDD'
+          in: path
+          name: locationId
+          required: true
+          type: string
+        - description: Only divisions having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - description: The location radius within which to find divisions
+          format: int32
+          in: query
+          name: radius
+          required: false
+          type: integer
+        - default: MI
+          description: 'The unit of distance: MI | KM'
+          in: query
+          name: distanceUnit
+          required: false
+          type: string
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
+          required: false
+          type: string
+        - default: 5
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = countryCode | elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: NONE
+          description: 'Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PopulatedPlacesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find divisions near location
       tags:
         - Geo
   /v1/locale/currencies:
@@ -963,131 +1374,6 @@ paths:
       tags:
         - Locale
 definitions:
-  CitiesResponse:
-    properties:
-      data:
-        description: A list of CitySummaries
-        items:
-          $ref: '#/definitions/CitySummary'
-        type: array
-      errors:
-        description: A list of WftErrors
-        items:
-          $ref: '#/definitions/WftError'
-        type: array
-      links:
-        description: A list of Links
-        items:
-          $ref: '#/definitions/Link'
-        type: array
-      metadata:
-        $ref: '#/definitions/Metadata'
-    type: object
-  CityDetails:
-    properties:
-      city:
-        description: The city name (varies by languageCode)
-        type: string
-      country:
-        description: The country name (varies by languageCode)
-        type: string
-      countryCode:
-        description: The ISO-3166 country code
-        type: string
-      deleted:
-        description: If this city has been soft-deleted
-        type: boolean
-      elevationMeters:
-        description: The city elevation (meters) above sea level
-        format: int32
-        type: integer
-      id:
-        description: The city GeoDB native id
-        format: int32
-        type: integer
-      latitude:
-        description: The city latittude (-90.0 to 90.0)
-        format: double
-        type: number
-      longitude:
-        description: The city longitude (-180.0 to 180.0)
-        format: double
-        type: number
-      population:
-        description: The city population
-        format: int32
-        type: integer
-      region:
-        description: The region name (varies by languageCode)
-        type: string
-      regionCode:
-        description: The ISO or FIPS region code
-        type: string
-      timezone:
-        description: The city timezone id
-        type: string
-      type:
-        $ref: '#/definitions/CityType'
-        description: The city type
-      wikiDataId:
-        description: The city WikiData id
-        type: string
-    type: object
-  CityResponse:
-    properties:
-      data:
-        $ref: '#/definitions/CityDetails'
-      errors:
-        description: A list of WftErrors
-        items:
-          $ref: '#/definitions/WftError'
-        type: array
-    type: object
-  CitySummary:
-    properties:
-      city:
-        description: The city name (varies by languageCode)
-        type: string
-      country:
-        description: The country name (varies by languageCode)
-        type: string
-      countryCode:
-        description: The ISO-3166 country code
-        type: string
-      distance:
-        description: Included if this is the result of a distance query
-        format: double
-        type: number
-      id:
-        description: The city GeoDB native id
-        format: int32
-        type: integer
-      latitude:
-        description: The city latittude (-90.0 to 90.0)
-        format: double
-        type: number
-      longitude:
-        description: The city longitude (-180.0 to 180.0)
-        format: double
-        type: number
-      region:
-        description: The region name (varies by languageCode)
-        type: string
-      regionCode:
-        description: The ISO or FIPS region code
-        type: string
-      type:
-        $ref: '#/definitions/CityType'
-        description: The city type
-      wikiDataId:
-        description: The city WikiData id
-        type: string
-    type: object
-  CityType:
-    enum:
-      - ADM2
-      - CITY
-    type: string
   CountriesResponse:
     properties:
       data:
@@ -1468,6 +1754,137 @@ definitions:
         format: int64
         type: integer
     type: object
+  PopulatedPlaceDetails:
+    properties:
+      city:
+        description: The city name (varies by languageCode)
+        type: string
+      country:
+        description: The country name (varies by languageCode)
+        type: string
+      countryCode:
+        description: The ISO-3166 country code
+        type: string
+      deleted:
+        description: If this place has been soft-deleted
+        type: boolean
+      elevationMeters:
+        description: The place elevation (meters) above sea level
+        format: int32
+        type: integer
+      id:
+        description: The place GeoDB native id
+        format: int32
+        type: integer
+      latitude:
+        description: The place latittude (-90.0 to 90.0)
+        format: double
+        type: number
+      longitude:
+        description: The place longitude (-180.0 to 180.0)
+        format: double
+        type: number
+      name:
+        description: The place name (varies by languageCode)
+        type: string
+      population:
+        description: The place population
+        format: int32
+        type: integer
+      region:
+        description: The region name (varies by languageCode)
+        type: string
+      regionCode:
+        description: The ISO or FIPS region code
+        type: string
+      timezone:
+        description: The place timezone id
+        type: string
+      type:
+        $ref: '#/definitions/PopulatedPlaceType'
+        description: The place type
+      wikiDataId:
+        description: The place WikiData id
+        type: string
+    type: object
+  PopulatedPlaceResponse:
+    properties:
+      data:
+        $ref: '#/definitions/PopulatedPlaceDetails'
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+    type: object
+  PopulatedPlaceSummary:
+    properties:
+      city:
+        description: The city name (varies by languageCode)
+        type: string
+      country:
+        description: The country name (varies by languageCode)
+        type: string
+      countryCode:
+        description: The ISO-3166 country code
+        type: string
+      distance:
+        description: Included if this is the result of a distance query
+        format: double
+        type: number
+      id:
+        description: The place GeoDB native id
+        format: int32
+        type: integer
+      latitude:
+        description: The place latittude (-90.0 to 90.0)
+        format: double
+        type: number
+      longitude:
+        description: The place longitude (-180.0 to 180.0)
+        format: double
+        type: number
+      name:
+        description: The place name (varies by languageCode)
+        type: string
+      region:
+        description: The region name (varies by languageCode)
+        type: string
+      regionCode:
+        description: The ISO or FIPS region code
+        type: string
+      type:
+        $ref: '#/definitions/PopulatedPlaceType'
+        description: The place type
+      wikiDataId:
+        description: The place WikiData id
+        type: string
+    type: object
+  PopulatedPlaceType:
+    enum:
+      - ADM2
+      - CITY
+    type: string
+  PopulatedPlacesResponse:
+    properties:
+      data:
+        description: A list of PopulatedPlaceSummaries
+        items:
+          $ref: '#/definitions/PopulatedPlaceSummary'
+        type: array
+      errors:
+        description: A list of WftErrors
+        items:
+          $ref: '#/definitions/WftError'
+        type: array
+      links:
+        description: A list of Links
+        items:
+          $ref: '#/definitions/Link'
+        type: array
+      metadata:
+        $ref: '#/definitions/Metadata'
+    type: object
   RegionDetails:
     properties:
       capital:
@@ -1595,4 +2012,5 @@ definitions:
       - INCOMPATIBLE
       - PARAM_INVALID
       - PARAMS_MUTUALLY_EXCLUSIVE
+      - REQUEST_UNPROCESSABLE
     type: string

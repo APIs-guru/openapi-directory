@@ -825,15 +825,15 @@ paths:
         operationName: SignedInUser_ListOwnedObjectsNext
   '/{tenantID}/oauth2PermissionGrants':
     get:
-      description: Queries OAuth2 permissions for the relevant SP ObjectId of an app.
-      operationId: OAuth2_Get
+      description: Queries OAuth2 permissions grants for the relevant SP ObjectId of an app.
+      operationId: OAuth2PermissionGrant_List
       parameters:
         - description: This is the Service Principal ObjectId associated with the app
           in: query
           name: $filter
           required: false
           type: string
-          x-example: clientId+eq+'61ed44c3-5a1d-4639-a215-07f25129c6c3'
+          x-example: clientId+eq+'61ed44c3-5a1d-4639-a215-07f25129c6c3
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/tenantIDInPath'
       produces:
@@ -842,21 +842,24 @@ paths:
         '200':
           description: OK. The operation was successful.
           schema:
-            $ref: '#/definitions/Permissions'
+            $ref: '#/definitions/OAuth2PermissionGrantListResult'
       tags:
-        - OAuth2Permissions_get
+        - OAuth2PermissionGrant_List
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: OAuth2PermissionGrant_ListNext
     post:
       consumes:
         - application/json
       description: Grants OAuth2 permissions for the relevant resource Ids of an app.
-      operationId: OAuth2_Grant
+      operationId: OAuth2PermissionGrant_Create
       parameters:
         - description: The relevant app Service Principal Object Id and the Service Principal Object Id you want to grant.
           in: body
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Permissions'
+            $ref: '#/definitions/OAuth2PermissionGrant'
           x-examples:
             application/json: "{\n\t\"odata.type\": \"Microsoft.DirectoryServices.OAuth2PermissionGrant\",\n\t\"clientId\": \"39afbaa2-4a5c-4f5b-9ee3-2c83f09bbc87\", \n\t\"consentType\": \"AllPrincipals\",\n\t\"principalId\": null,\n\t\"resourceId\": \"d3247842-c517-4520-80a7-332690ae2fe4\",\n\t\"scope\": \"user_impersonation\",\n    \"startTime\": \"0001-01-01T00:00:00\",\n    \"expiryTime\": \"9000-01-01T00:00:00\"\n}"
             description: 'These are the values required to grant permission to a resourceId for an app, only one operation is allowed per request'
@@ -868,9 +871,30 @@ paths:
         '201':
           description: OK. The operation was successful.
           schema:
-            $ref: '#/definitions/Permissions'
+            $ref: '#/definitions/OAuth2PermissionGrant'
       tags:
-        - OAuth2Permissions_Grant
+        - OAuth2PermissionGrant_Create
+  '/{tenantID}/oauth2PermissionGrants/{objectId}':
+    delete:
+      description: Delete a OAuth2 permission grant for the relevant resource Ids of an app.
+      operationId: OAuth2PermissionGrant_Delete
+      parameters:
+        - description: The object ID of a permission grant.
+          in: path
+          name: objectId
+          required: true
+          type: string
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '204':
+          description: No Content
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/GraphError'
+      tags:
+        - OAuth2PermissionGrant_delete
   '/{tenantID}/servicePrincipals':
     get:
       description: Gets a list of service principals from the current tenant.
@@ -1327,8 +1351,17 @@ definitions:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory application information.
     properties:
+      allowGuestsSignIn:
+        description: A property on the application to indicate if the application accepts other IDPs or not or partially accepts.
+        type: boolean
+      allowPassthroughUsers:
+        description: Indicates that the application supports pass through users who have no presence in the resource tenant.
+        type: boolean
       appId:
         description: The application ID.
+        type: string
+      appLogoUrl:
+        description: The url for the application logo image stored in a CDN.
         type: string
       appPermissions:
         description: The application permissions.
@@ -1341,11 +1374,17 @@ definitions:
           $ref: '#/definitions/AppRole'
         type: array
       availableToOtherTenants:
-        description: Whether the application is be available to other tenants.
+        description: Whether the application is available to other tenants.
         type: boolean
       displayName:
         description: The display name of the application.
         type: string
+      errorUrl:
+        description: A URL provided by the author of the application to report errors when using the application.
+        type: string
+      groupMembershipClaims:
+        $ref: '#/definitions/GroupMembershipClaims'
+        description: Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.
       homepage:
         description: The home page of the application.
         type: string
@@ -1354,19 +1393,62 @@ definitions:
         items:
           type: string
         type: array
+      informationalUrls:
+        $ref: '#/definitions/InformationalUrl'
+        description: urls with more informations of the application.
+      isDeviceOnlyAuthSupported:
+        description: Specifies whether this application supports device authentication without a user. The default is false.
+        type: boolean
       keyCredentials:
         description: A collection of KeyCredential objects.
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
+      knownClientApplications:
+        description: Client applications that are tied to this resource application. Consent to any of the known client applications will result in implicit consent to the resource application through a combined consent dialog (showing the OAuth permission scopes required by the client and the resource).
+        items:
+          type: string
+        type: array
+      logoutUrl:
+        description: the url of the logout page
+        type: string
       oauth2AllowImplicitFlow:
         description: Whether to allow implicit grant flow for OAuth2
         type: boolean
+      oauth2AllowUrlPathMatching:
+        description: Specifies whether during a token Request Azure AD will allow path matching of the redirect URI against the applications collection of replyURLs. The default is false.
+        type: boolean
+      oauth2Permissions:
+        description: The collection of OAuth 2.0 permission scopes that the web API (resource) application exposes to client applications. These permission scopes may be granted to client applications during consent.
+        items:
+          $ref: '#/definitions/OAuth2Permission'
+        type: array
+      oauth2RequirePostResponse:
+        description: 'Specifies whether, as part of OAuth 2.0 token requests, Azure AD will allow POST requests, as opposed to GET requests. The default is false, which specifies that only GET requests will be allowed.'
+        type: boolean
+      optionalClaims:
+        $ref: '#/definitions/OptionalClaims'
+      orgRestrictions:
+        description: A list of tenants allowed to access application.
+        items:
+          type: string
+        type: array
       passwordCredentials:
         description: A collection of PasswordCredential objects
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
+      preAuthorizedApplications:
+        description: list of pre-authorized applications.
+        items:
+          $ref: '#/definitions/PreAuthorizedApplication'
+        type: array
+      publicClient:
+        description: Specifies whether this application is a public client (such as an installed application running on a mobile device). Default is false.
+        type: boolean
+      publisherDomain:
+        description: Reliable domain which can be used to identify an application.
+        type: string
       replyUrls:
         description: A collection of reply URLs for the application.
         items:
@@ -1377,12 +1459,33 @@ definitions:
         items:
           $ref: '#/definitions/RequiredResourceAccess'
         type: array
+      samlMetadataUrl:
+        description: The URL to the SAML metadata for the application.
+        type: string
+      signInAudience:
+        description: 'Audience for signing in to the application (AzureADMyOrganization, AzureADAllOrganizations, AzureADAndMicrosoftAccounts).'
+        type: string
+      wwwHomepage:
+        description: The primary Web page.
+        type: string
     type: object
-  ApplicationCreateParameters:
-    additionalProperties:
-      type: object
-    description: Request parameters for creating a new application.
+  ApplicationBase:
+    description: 'Active Directive Application common properties shared among GET, POST and PATCH'
     properties:
+      allowGuestsSignIn:
+        description: A property on the application to indicate if the application accepts other IDPs or not or partially accepts.
+        type: boolean
+      allowPassthroughUsers:
+        description: Indicates that the application supports pass through users who have no presence in the resource tenant.
+        type: boolean
+      appLogoUrl:
+        description: The url for the application logo image stored in a CDN.
+        type: string
+      appPermissions:
+        description: The application permissions.
+        items:
+          type: string
+        type: array
       appRoles:
         description: 'The collection of application roles that an application may declare. These roles can be assigned to users, groups or service principals.'
         items:
@@ -1391,30 +1494,71 @@ definitions:
       availableToOtherTenants:
         description: Whether the application is available to other tenants.
         type: boolean
-      displayName:
-        description: The display name of the application.
+      errorUrl:
+        description: A URL provided by the author of the application to report errors when using the application.
         type: string
+      groupMembershipClaims:
+        $ref: '#/definitions/GroupMembershipClaims'
+        description: Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.
       homepage:
         description: The home page of the application.
         type: string
-      identifierUris:
-        description: A collection of URIs for the application.
-        items:
-          type: string
-        type: array
+      informationalUrls:
+        $ref: '#/definitions/InformationalUrl'
+        description: urls with more informations of the application.
+      isDeviceOnlyAuthSupported:
+        description: Specifies whether this application supports device authentication without a user. The default is false.
+        type: boolean
       keyCredentials:
-        description: The list of KeyCredential objects.
+        description: A collection of KeyCredential objects.
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
+      knownClientApplications:
+        description: Client applications that are tied to this resource application. Consent to any of the known client applications will result in implicit consent to the resource application through a combined consent dialog (showing the OAuth permission scopes required by the client and the resource).
+        items:
+          type: string
+        type: array
+      logoutUrl:
+        description: the url of the logout page
+        type: string
       oauth2AllowImplicitFlow:
         description: Whether to allow implicit grant flow for OAuth2
         type: boolean
+      oauth2AllowUrlPathMatching:
+        description: Specifies whether during a token Request Azure AD will allow path matching of the redirect URI against the applications collection of replyURLs. The default is false.
+        type: boolean
+      oauth2Permissions:
+        description: The collection of OAuth 2.0 permission scopes that the web API (resource) application exposes to client applications. These permission scopes may be granted to client applications during consent.
+        items:
+          $ref: '#/definitions/OAuth2Permission'
+        type: array
+      oauth2RequirePostResponse:
+        description: 'Specifies whether, as part of OAuth 2.0 token requests, Azure AD will allow POST requests, as opposed to GET requests. The default is false, which specifies that only GET requests will be allowed.'
+        type: boolean
+      optionalClaims:
+        $ref: '#/definitions/OptionalClaims'
+      orgRestrictions:
+        description: A list of tenants allowed to access application.
+        items:
+          type: string
+        type: array
       passwordCredentials:
-        description: The list of PasswordCredential objects.
+        description: A collection of PasswordCredential objects
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
+      preAuthorizedApplications:
+        description: list of pre-authorized applications.
+        items:
+          $ref: '#/definitions/PreAuthorizedApplication'
+        type: array
+      publicClient:
+        description: Specifies whether this application is a public client (such as an installed application running on a mobile device). Default is false.
+        type: boolean
+      publisherDomain:
+        description: Reliable domain which can be used to identify an application.
+        type: string
       replyUrls:
         description: A collection of reply URLs for the application.
         items:
@@ -1425,8 +1569,30 @@ definitions:
         items:
           $ref: '#/definitions/RequiredResourceAccess'
         type: array
+      samlMetadataUrl:
+        description: The URL to the SAML metadata for the application.
+        type: string
+      signInAudience:
+        description: 'Audience for signing in to the application (AzureADMyOrganization, AzureADAllOrganizations, AzureADAndMicrosoftAccounts).'
+        type: string
+      wwwHomepage:
+        description: The primary Web page.
+        type: string
+    type: object
+  ApplicationCreateParameters:
+    allOf:
+      - $ref: '#/definitions/ApplicationBase'
+    description: Request parameters for creating a new application.
+    properties:
+      displayName:
+        description: The display name of the application.
+        type: string
+      identifierUris:
+        description: A collection of URIs for the application.
+        items:
+          type: string
+        type: array
     required:
-      - availableToOtherTenants
       - displayName
       - identifierUris
     type: object
@@ -1443,51 +1609,17 @@ definitions:
         type: array
     type: object
   ApplicationUpdateParameters:
-    additionalProperties:
-      type: object
-    description: Request parameters for updating an existing application.
+    allOf:
+      - $ref: '#/definitions/ApplicationBase'
+    description: Request parameters for updating a new application.
     properties:
-      appRoles:
-        description: 'The collection of application roles that an application may declare. These roles can be assigned to users, groups or service principals.'
-        items:
-          $ref: '#/definitions/AppRole'
-        type: array
-      availableToOtherTenants:
-        description: Whether the application is available to other tenants
-        type: boolean
       displayName:
         description: The display name of the application.
-        type: string
-      homepage:
-        description: The home page of the application.
         type: string
       identifierUris:
         description: A collection of URIs for the application.
         items:
           type: string
-        type: array
-      keyCredentials:
-        description: The list of KeyCredential objects.
-        items:
-          $ref: '#/definitions/KeyCredential'
-        type: array
-      oauth2AllowImplicitFlow:
-        description: Whether to allow implicit grant flow for OAuth2
-        type: boolean
-      passwordCredentials:
-        description: The list of PasswordCredential objects.
-        items:
-          $ref: '#/definitions/PasswordCredential'
-        type: array
-      replyUrls:
-        description: A collection of reply URLs for the application.
-        items:
-          type: string
-        type: array
-      requiredResourceAccess:
-        description: Specifies resources that this application requires access to and the set of OAuth permission scopes and application roles that it needs under each of those resources. This pre-configuration of required resource access drives the consent experience.
-        items:
-          $ref: '#/definitions/RequiredResourceAccess'
         type: array
     type: object
   CheckGroupMembershipParameters:
@@ -1684,6 +1816,31 @@ definitions:
           $ref: '#/definitions/ADGroup'
         type: array
     type: object
+  GroupMembershipClaims:
+    description: Configures the groups claim issued in a user or OAuth 2.0 access token that the app expects.
+    enum:
+      - None
+      - SecurityGroup
+      - All
+    x-ms-enum:
+      modelAsString: true
+      name: GroupMembershipClaimTypes
+  InformationalUrl:
+    description: 'Represents a group of URIs that provide terms of service, marketing, support and privacy policy information about an application. The default value for each string is null.'
+    properties:
+      marketing:
+        description: The marketing URI
+        type: string
+      privacy:
+        description: The privacy policy URI
+        type: string
+      support:
+        description: The support URI
+        type: string
+      termsOfService:
+        description: The terms of service URI
+        type: string
+    type: object
   KeyCredential:
     additionalProperties:
       type: object
@@ -1733,6 +1890,90 @@ definitions:
     required:
       - value
     type: object
+  OAuth2Permission:
+    description: Represents an OAuth 2.0 delegated permission scope. The specified OAuth 2.0 delegated permission scopes may be requested by client applications (through the requiredResourceAccess collection on the Application object) when calling a resource application. The oauth2Permissions property of the ServicePrincipal entity and of the Application entity is a collection of OAuth2Permission.
+    properties:
+      adminConsentDescription:
+        description: Permission help text that appears in the admin consent and app assignment experiences.
+        type: string
+      adminConsentDisplayName:
+        description: Display name for the permission that appears in the admin consent and app assignment experiences.
+        type: string
+      id:
+        description: Unique scope permission identifier inside the oauth2Permissions collection.
+        type: string
+      isEnabled:
+        description: 'When creating or updating a permission, this property must be set to true (which is the default). To delete a permission, this property must first be set to false. At that point, in a subsequent call, the permission may be removed. '
+        type: boolean
+      type:
+        description: 'Specifies whether this scope permission can be consented to by an end user, or whether it is a tenant-wide permission that must be consented to by a Company Administrator. Possible values are "User" or "Admin".'
+        type: string
+      userConsentDescription:
+        description: Permission help text that appears in the end user consent experience.
+        type: string
+      userConsentDisplayName:
+        description: Display name for the permission that appears in the end user consent experience.
+        type: string
+      value:
+        description: The value of the scope claim that the resource application should expect in the OAuth 2.0 access token.
+        type: string
+    type: object
+  OAuth2PermissionGrant:
+    example:
+      clientId: clientId
+      consentType: consentType
+      expiryTime: expiryTime
+      odata.type: odata.type
+      principalId: ''
+      resourceId: resourceId
+      scope: scope
+      startTime: startTime
+    properties:
+      clientId:
+        description: The id of the resource's service principal granted consent to impersonate the user when accessing the resource (represented by the resourceId property).
+        type: string
+      consentType:
+        description: Indicates if consent was provided by the administrator (on behalf of the organization) or by an individual.
+        enum:
+          - AllPrincipals
+          - Principal
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ConsentType
+      expiryTime:
+        description: Expiry time for TTL
+        type: string
+      objectId:
+        description: The id of the permission grant
+        type: string
+      odata.type:
+        description: Microsoft.DirectoryServices.OAuth2PermissionGrant
+        type: string
+      principalId:
+        description: 'When consent type is Principal, this property specifies the id of the user that granted consent and applies only for that user.'
+        type: string
+      resourceId:
+        description: Object Id of the resource you want to grant
+        type: string
+      scope:
+        description: 'Specifies the value of the scope claim that the resource application should expect in the OAuth 2.0 access token. For example, User.Read'
+        type: string
+      startTime:
+        description: Start time for TTL
+        type: string
+  OAuth2PermissionGrantListResult:
+    description: Server response for get oauth2 permissions grants
+    properties:
+      odata.nextLink:
+        description: the URL to get the next set of results.
+        type: string
+      value:
+        description: the list of oauth2 permissions grants
+        items:
+          $ref: '#/definitions/OAuth2PermissionGrant'
+        type: array
+    type: object
   OdataError:
     description: Active Directory OData error information.
     properties:
@@ -1744,6 +1985,40 @@ definitions:
         description: Error Message.
         type: object
         x-ms-client-flatten: true
+    type: object
+  OptionalClaim:
+    description: Specifying the claims to be included in a token.
+    properties:
+      additionalProperties:
+        type: object
+      essential:
+        description: Is this a required claim.
+        type: boolean
+      name:
+        description: Claim name.
+        type: string
+      source:
+        description: Claim source.
+        type: string
+    type: object
+  OptionalClaims:
+    description: Specifying the claims to be included in the token.
+    properties:
+      accessToken:
+        description: Optional claims requested to be included in the access token.
+        items:
+          $ref: '#/definitions/OptionalClaim'
+        type: array
+      idToken:
+        description: Optional claims requested to be included in the id token.
+        items:
+          $ref: '#/definitions/OptionalClaim'
+        type: array
+      samlToken:
+        description: Optional claims requested to be included in the saml token.
+        items:
+          $ref: '#/definitions/OptionalClaim'
+        type: array
     type: object
   PasswordCredential:
     additionalProperties:
@@ -1803,41 +2078,44 @@ definitions:
     required:
       - password
     type: object
-  Permissions:
-    example:
-      clientId: clientId
-      consentType: consentType
-      expiryTime: expiryTime
-      odata.type: odata.type
-      principalId: ''
-      resourceId: resourceId
-      scope: scope
-      startTime: startTime
+  PreAuthorizedApplication:
+    description: Contains information about pre authorized client application.
     properties:
-      clientId:
-        description: The objectId of the Service Principal associated with the app
+      appId:
+        description: Represents the application id.
         type: string
-      consentType:
-        description: Typically set to AllPrincipals
-        type: string
-      expiryTime:
-        description: Expiry time for TTL
-        type: string
-      odata.type:
-        description: Microsoft.DirectoryServices.OAuth2PermissionGrant
-        type: string
-      principalId:
-        description: Set to null if AllPrincipals is set
-        type: object
-      resourceId:
-        description: Service Principal Id of the resource you want to grant
-        type: string
-      scope:
-        description: Typically set to user_impersonation
-        type: string
-      startTime:
-        description: Start time for TTL
-        type: string
+      extensions:
+        description: Collection of extensions from the resource application.
+        items:
+          $ref: '#/definitions/PreAuthorizedApplicationExtension'
+        type: array
+      permissions:
+        description: Collection of required app permissions/entitlements from the resource application.
+        items:
+          $ref: '#/definitions/PreAuthorizedApplicationPermission'
+        type: array
+    type: object
+  PreAuthorizedApplicationExtension:
+    description: Representation of an app PreAuthorizedApplicationExtension required by a pre authorized client app.
+    properties:
+      conditions:
+        description: The extension's conditions.
+        items:
+          type: string
+        type: array
+    type: object
+  PreAuthorizedApplicationPermission:
+    description: Contains information about the pre-authorized permissions.
+    properties:
+      accessGrants:
+        description: The list of permissions.
+        items:
+          type: string
+        type: array
+      directAccessGrant:
+        description: Indicates whether the permission set is DirectAccess or impersonation.
+        type: boolean
+    type: object
   RequiredResourceAccess:
     additionalProperties:
       type: object
@@ -1873,9 +2151,27 @@ definitions:
       - $ref: '#/definitions/DirectoryObject'
     description: Active Directory service principal information.
     properties:
+      accountEnabled:
+        description: whether or not the service principal account is enabled
+        type: string
+      alternativeNames:
+        description: alternative names
+        items:
+          type: string
+        type: array
+      appDisplayName:
+        description: The display name exposed by the associated application.
+        readOnly: true
+        type: string
       appId:
         description: The application ID.
         type: string
+      appOwnerTenantId:
+        readOnly: true
+        type: string
+      appRoleAssignmentRequired:
+        description: Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.
+        type: boolean
       appRoles:
         description: 'The collection of application roles that an application may declare. These roles can be assigned to users, groups or service principals.'
         items:
@@ -1884,63 +2180,95 @@ definitions:
       displayName:
         description: The display name of the service principal.
         type: string
-      servicePrincipalNames:
-        description: A collection of service principal names.
-        items:
-          type: string
-        type: array
-    type: object
-  ServicePrincipalCreateParameters:
-    additionalProperties:
-      type: object
-    description: Request parameters for creating a new service principal.
-    properties:
-      accountEnabled:
-        description: Whether the account is enabled
-        type: boolean
-      appId:
-        description: application Id
-        type: string
-      appRoleAssignmentRequired:
-        description: Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.
-        type: boolean
-      displayName:
-        description: The display name for the service principal.
-        type: string
       errorUrl:
+        description: A URL provided by the author of the associated application to report errors when using the application.
         type: string
       homepage:
         description: The URL to the homepage of the associated application.
         type: string
       keyCredentials:
-        description: A collection of KeyCredential objects.
+        description: The collection of key credentials associated with the service principal.
         items:
           $ref: '#/definitions/KeyCredential'
         type: array
+      logoutUrl:
+        description: A URL provided by the author of the associated application to logout
+        type: string
+      oauth2Permissions:
+        description: The OAuth 2.0 permissions exposed by the associated application.
+        items:
+          $ref: '#/definitions/OAuth2Permission'
+        readOnly: true
+        type: array
       passwordCredentials:
-        description: A collection of PasswordCredential objects
+        description: The collection of password credentials associated with the service principal.
         items:
           $ref: '#/definitions/PasswordCredential'
         type: array
+      preferredTokenSigningKeyThumbprint:
+        description: The thumbprint of preferred certificate to sign the token
+        type: string
       publisherName:
-        description: The display name of the tenant in which the associated application is specified.
+        description: The publisher's name of the associated application
         type: string
       replyUrls:
-        description: A collection of reply URLs for the service principal.
+        description: The URLs that user tokens are sent to for sign in with the associated application.  The redirect URIs that the oAuth 2.0 authorization code and access tokens are sent to for the associated application.
         items:
           type: string
         type: array
       samlMetadataUrl:
+        description: The URL to the SAML metadata of the associated application
         type: string
       servicePrincipalNames:
         description: A collection of service principal names.
         items:
           type: string
         type: array
+      servicePrincipalType:
+        description: the type of the service principal
+        type: string
       tags:
+        description: Optional list of tags that you can apply to your service principals. Not nullable.
         items:
           type: string
         type: array
+    type: object
+  ServicePrincipalBase:
+    description: 'Active Directory service principal common properties shared among GET, POST and PATCH'
+    properties:
+      accountEnabled:
+        description: whether or not the service principal account is enabled
+        type: string
+      appRoleAssignmentRequired:
+        description: Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.
+        type: boolean
+      keyCredentials:
+        description: The collection of key credentials associated with the service principal.
+        items:
+          $ref: '#/definitions/KeyCredential'
+        type: array
+      passwordCredentials:
+        description: The collection of password credentials associated with the service principal.
+        items:
+          $ref: '#/definitions/PasswordCredential'
+        type: array
+      servicePrincipalType:
+        description: the type of the service principal
+        type: string
+      tags:
+        description: Optional list of tags that you can apply to your service principals. Not nullable.
+        items:
+          type: string
+        type: array
+    type: object
+  ServicePrincipalCreateParameters:
+    allOf:
+      - $ref: '#/definitions/ServicePrincipalBase'
+    description: Request parameters for creating a new service principal.
+    properties:
+      appId:
+        description: The application ID.
+        type: string
     required:
       - appId
     type: object
@@ -1957,56 +2285,9 @@ definitions:
         type: array
     type: object
   ServicePrincipalUpdateParameters:
-    additionalProperties:
-      type: object
-    description: Request parameters for creating a new service principal.
-    properties:
-      accountEnabled:
-        description: Whether the account is enabled
-        type: boolean
-      appId:
-        description: application Id
-        type: string
-      appRoleAssignmentRequired:
-        description: Specifies whether an AppRoleAssignment to a user or group is required before Azure AD will issue a user or access token to the application.
-        type: boolean
-      displayName:
-        description: The display name for the service principal.
-        type: string
-      errorUrl:
-        type: string
-      homepage:
-        description: The URL to the homepage of the associated application.
-        type: string
-      keyCredentials:
-        description: A collection of KeyCredential objects.
-        items:
-          $ref: '#/definitions/KeyCredential'
-        type: array
-      passwordCredentials:
-        description: A collection of PasswordCredential objects
-        items:
-          $ref: '#/definitions/PasswordCredential'
-        type: array
-      publisherName:
-        description: The display name of the tenant in which the associated application is specified.
-        type: string
-      replyUrls:
-        description: A collection of reply URLs for the service principal.
-        items:
-          type: string
-        type: array
-      samlMetadataUrl:
-        type: string
-      servicePrincipalNames:
-        description: A collection of service principal names.
-        items:
-          type: string
-        type: array
-      tags:
-        items:
-          type: string
-        type: array
+    allOf:
+      - $ref: '#/definitions/ServicePrincipalBase'
+    description: Request parameters for update an existing service principal.
     type: object
   SignInName:
     additionalProperties:
@@ -2285,6 +2566,33 @@ x-ms-paths:
       x-ms-pageable:
         nextLinkName: odata.nextLink
         operationName: Groups_ListNext
+  '/{tenantID}/{nextLink}?OAuth2PermissionGrant_ListNext':
+    get:
+      description: Gets the next page of OAuth2 permission grants
+      operationId: OAuth2PermissionGrant_ListNext
+      parameters:
+        - description: Next link for the list operation.
+          in: path
+          name: nextLink
+          required: true
+          type: string
+          x-ms-skip-url-encoding: true
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+      responses:
+        '200':
+          description: OK. The operation was successful.
+          schema:
+            $ref: '#/definitions/OAuth2PermissionGrantListResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/GraphError'
+      tags:
+        - OAuth2PermissionGrant_ListNext
+      x-ms-pageable:
+        nextLinkName: odata.nextLink
+        operationName: OAuth2PermissionGrant_ListNext
   '/{tenantID}/{nextLink}?Objects_GetObjectsByObjectIdsNext':
     post:
       description: Gets AD group membership for the specified AD object IDs.

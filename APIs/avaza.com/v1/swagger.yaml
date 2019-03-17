@@ -1932,6 +1932,8 @@ definitions:
       ExpenseID:
         format: int64
         type: integer
+      ExpenseReimbursementStatusCode:
+        type: string
       ExpenseReportIDFK:
         format: int64
         type: integer
@@ -1967,6 +1969,8 @@ definitions:
         format: int32
         type: integer
       isChargeable:
+        type: boolean
+      isReimbursable:
         type: boolean
     type: object
   ExpenseList:
@@ -2321,6 +2325,9 @@ definitions:
         type: integer
       isChargeable:
         description: 'aka Billable. Defaults to false if not provided. If set to true, a CustomerIDFK or CustomerName must be provided.'
+        type: boolean
+      isReimbursable:
+        description: Defaults to false if not provided.
         type: boolean
     type: object
   NewInvoice:

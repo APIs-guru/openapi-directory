@@ -753,42 +753,47 @@ definitions:
   AllowanceCharge:
     properties:
       amountExcludingVat:
-        description: 'The amount for the allowance charge, excluding VAT'
+        description: 'The amount for the allowance or charge, excluding VAT'
         title: Amount
         type: number
       reason:
         default: Agreed settlement
-        description: 'The reason for the allowance charge, free text'
+        description: 'The reason for the allowance or charge, free text'
         title: Reason
         type: string
       reasonCode:
-        default: '1'
-        description: 'The reason code for the allowance charge. Uses list http://www.unece.org/trade/untdid/d12a/tred/tred4465.htm , defaults to 1 - Agreed settlement'
+        description: Do not use. Contact Storecove first if you want to use this field.
         title: Reason Code
         type: string
       tax:
-        description: The tax for this allowance charge.
-        properties:
-          amount:
-            description: The amount of VAT. Should equal percentage x amountExcludingVat. A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
-            title: Amount of VAT for the allowance charge
-            type: number
-          country:
-            $ref: '#/definitions/Country'
-          percentage:
-            description: The percentage VAT. This should be a valid VAT percentage in the country at the time of the issueDate of this invoice.
-            title: Percentage VAT
-            type: number
-        required:
-          - amount
-          - percentage
-          - country
+        $ref: '#/definitions/Tax'
+        description: The tax for this allowance or charge.
         title: Tax
-        type: object
     required:
       - amountExcludingVat
       - tax
-    title: Allowance Charge
+    title: Allowance or Charge
+    type: object
+  Attachment:
+    description: A document attachment to the invoice.
+    properties:
+      document:
+        description: 'The base64 encoded version of the document attachment. The total maximum length of all attachments is 2MB, after encoding.'
+        minLength: 5
+        title: Document Attachment
+        type: string
+      mimeType:
+        description: The document attachment mime type. Currently only application/pdf is allowed.
+        enum:
+          - application/pdf
+        title: Mimetype
+        type: string
+      primaryImage:
+        default: false
+        description: Whether or not this document is a visual representation of the invoice data.
+        title: Primary Image
+        type: boolean
+    title: Invoice Attachment
     type: object
   BuyerCustomerParty:
     description: The buyer receiving the invoice.
@@ -1387,12 +1392,11 @@ definitions:
         title: Note
         type: string
       orderReference:
-        description: 'A reference to an order for this invoice, assigned by the buyer.'
+        description: 'A reference to an order for this invoice, assigned by the buyer. Note that this often is a key field, since many receivers of invoices will use this field to automatically match the invoice to an order they placed. Many receivers refuse invoices that cannot be automatically matched, in particular government agencies. So it is highly recommended to fill this field whenever possible.'
         title: Order reference
         type: string
       paymentMeansCode:
-        default: '31'
-        description: 'A code from the UNCL4461 list (http://docs.peppol.eu/poacc/billing/3.0/codelist/UNCL4461/). You should probably omit this or use 31.'
+        description: Do not use. Contact Storecove first if you want to use this field.
         title: Payment Means Code
         type: string
       paymentMeansIban:
@@ -1427,7 +1431,7 @@ definitions:
         description: An array of ubl extensions.
         items:
           type: string
-        title: UBL Extenstions
+        title: UBL Extensions
         type: array
       vatReverseCharge:
         default: false
@@ -2609,24 +2613,9 @@ definitions:
         title: Standard Item Identification Scheme
         type: string
       tax:
+        $ref: '#/definitions/Tax'
         description: The tax for this invoice line.
-        properties:
-          amount:
-            description: The amount of VAT. Should equal percentage x amountExcludingVat. A difference of 5 cents or 1% between the calculated value and the provided value is allowed.
-            title: Amount of VAT
-            type: number
-          country:
-            $ref: '#/definitions/Country'
-          percentage:
-            description: The percentage VAT. This should be a valid VAT percentage in the country at the time of the issueDate of this invoice.
-            title: Percentage VAT
-            type: number
-        required:
-          - amount
-          - percentage
-          - country
         title: Tax
-        type: object
     required:
       - amountExcludingVat
     title: Invoice line
@@ -2677,6 +2666,13 @@ definitions:
   InvoiceSubmission:
     description: 'The invoice you want Storecove to process, with some meta-data.'
     properties:
+      attachments:
+        description: 'An array of attachments. You should be careful providing multiple attachments, as not all receivers are capable of showing them. If you have multiple PDF attachments, consider concatenating them into a single PDF. However, many receivers _can_ process multiple attachments, especially if you have agreed that upfront. In that case, you may provide up to 10 attchments.'
+        items:
+          $ref: '#/definitions/Attachment'
+        maxItems: 10
+        title: Attachments
+        type: array
       document:
         description: The invoice in PDF form. The document should be base64 encoded and the enocded string length should not exceed 2MB (2097152 bytes).
         minLength: 5
@@ -3374,6 +3370,23 @@ definitions:
       contact:
         $ref: '#/definitions/Contact'
     title: SupplierParty
+    type: object
+  Tax:
+    properties:
+      amount:
+        description: The amount of VAT. Should equal percentage x amountExcludingVat.
+        title: Amount of VAT
+        type: number
+      country:
+        $ref: '#/definitions/Country'
+      percentage:
+        description: The percentage VAT. This should be a valid VAT percentage in the country at the time of the issueDate of this invoice.
+        title: Percentage VAT
+        type: number
+    required:
+      - amount
+      - percentage
+      - country
     type: object
   WidgetIdentification:
     description: The identification for the identifier related to the Storecove Destination Configuration widget.

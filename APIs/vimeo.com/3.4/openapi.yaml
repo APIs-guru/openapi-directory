@@ -3867,7 +3867,11 @@ paths:
               type: object
         required: false
       responses:
-        '204':
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/album'
           description: The album was updated with a new thumbnail.
         '403':
           content:
@@ -10662,7 +10666,11 @@ paths:
               type: object
         required: false
       responses:
-        '204':
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/album'
           description: The album was updated with a new thumbnail.
         '403':
           content:

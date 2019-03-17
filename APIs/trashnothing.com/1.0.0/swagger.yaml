@@ -401,6 +401,7 @@ paths:
           type: file
         - description: A client created identifier used to associate a photo or set of photos with a post (a  random number will work - must be <= 32 characters).
           in: formData
+          maxLength: 32
           name: upload_key
           required: true
           type: string
@@ -442,6 +443,52 @@ paths:
         '404':
           description: Photo not found.
       summary: Delete a photo
+      tags:
+        - photos
+  '/photos/{photo_id}/album':
+    get:
+      description: |
+        Every post with photos has a photo album associated with the post.   The photo album for a post can be retrieved by passing the photo_id of any photo that is attached to a post. This makes it easier for users edit the photos attached to their post when they are reposting.
+      operationId: get_photo_album
+      parameters:
+        - in: path
+          name: photo_id
+          required: true
+          type: string
+        - default: 1
+          description: Client device pixel ratio used to determine thumbnail size (default 1.0).
+          in: query
+          name: device_pixel_ratio
+          required: false
+          type: number
+        - description: 'If set to 1, a new upload_key will be returned to allow the user to alter the photos in the album.'
+          in: query
+          name: upload_key
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The album data.
+          schema:
+            properties:
+              photos:
+                items:
+                  $ref: '#/definitions/PhotoResult'
+                type: array
+              upload_key:
+                description: |
+                  An upload_key that can be used to alter the photos in the album. Will be null unless the upload_key parameter is set.
+                type: string
+            type: object
+        '400':
+          description: Invalid photo album.
+        '403':
+          description: The user doesn't have permission to retrieve the photo album.
+        '404':
+          description: Photo album not found.
+      summary: Retrieve a photo album
       tags:
         - photos
   '/photos/{photo_id}/rotate':
@@ -559,7 +606,7 @@ paths:
           required: false
           type: string
         - description: |
-            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returned. If set to 'all', all posts will be returned.
           in: query
           name: satisfied
           required: false
@@ -636,11 +683,15 @@ paths:
           type: string
         - description: A short description of the item(s).
           in: formData
-          name: item
+          maxLength: 30
+          minLength: 2
+          name: title
           required: true
           type: string
         - description: A short location description.
           in: formData
+          maxLength: 30
+          minLength: 2
           name: location
           required: true
           type: string
@@ -655,15 +706,15 @@ paths:
           required: false
           type: integer
         - description: |
-            The latitude corresponding to the location description provided. <br /><br /> NOTE: This should NOT be the users' exact location because we don't want to publicize their exact location unless their location description is their full address.
+            The latitude corresponding to the location description provided. <br /><br /> If latitude and longitude are not provided, an attempt will be made to automatically geocode the location.  If the location is unable to be geocoded, the post will be rejected* and will have to be resubmitted with a latitude and longitude corresponding to the location or resubmitted with a different location that can be automatically geocoded. <br /><br /> NOTE: The latitude and longitude should NOT be the users' exact location because we don't want to publicize their exact location unless their location description is their full address (which is not recommended). <br /><br /> *When a post is rejected because it can't be geocoded, the returned error will have its identifier property set to 'unknown-location'.
           in: formData
           name: latitude
-          required: true
+          required: false
           type: number
         - description: The longitude corresponding to the location description provided. (see the NOTE in latitude description)
           in: formData
           name: longitude
-          required: true
+          required: false
           type: number
         - description: The upload_key used to upload any photos that should be attached to this post.
           in: formData
@@ -689,12 +740,16 @@ paths:
           description: Post submission result.
           schema:
             properties:
+              identifier:
+                description: |
+                  When an error or warning is returned, this will contain a short string representing the type of error or warning that occurred.  Is null on success.
+                type: string
               message:
                 description: Contains text describing the reason a post was not successful.  Is null on success.
                 type: string
               preference_key:
                 description: |
-                  Certain types of warnings can be opted out of.  These warnings will set preference_key to a string that can be  set in the preferences object by the client to opt out of that type of warning in the future (see the description of the preferences parameter for more details).
+                  Certain types of warnings can be opted out of.  These warnings will set preference_key to a string that can be  set in the preferences object by the client to opt out of that type of warning in the future (see the description of the preferences parameter for more details).  Is null for errors, success and warnings that can't be opted out of.
                 type: string
               result:
                 description: |
@@ -703,7 +758,8 @@ paths:
               session:
                 additionalProperties:
                   type: string
-                description: The updated session object that should override the client's copy of the session that was passed in the session parameter.
+                description: |
+                  The updated session object that should override the client's copy of the session that was passed in the session parameter. Is null on success.
                 type: object
             type: object
         '400':
@@ -756,7 +812,7 @@ paths:
 
         **window.TN.submit_post(args, session, preferences, callback)**
 
-        Submits a new post and performs validation checks on the post before it is accepted for submission..
+        Submits a new post and performs validation checks on the post before it is accepted for submission.
 
         Parameters:
 
@@ -764,7 +820,7 @@ paths:
           the following properties:
 
           - type: The type of post.  One of: offer, wanted
-          - item: A short description of the item(s).
+          - title: A short description of the item(s).
           - location: A short location description.
 
           The following properties are optional:
@@ -790,8 +846,10 @@ paths:
           never modified - it is up to the client to initialize, modify and persist the preferences object.
 
         - **callback** is a function used to return the result of the post submission. It is called and passed
-          one argument - an object with three properties {result, message, preference_key}.  The result property
-          is a string that is one of: success, error, warning.
+          one argument - an object with five properties {result, message, preference_key, identifier, session}.
+          The result property is a string that is one of: success, error, warning.  The identifier property is
+          set for errors and warnings and will contain a string that represents the type of error or warning that
+          occurred.
 
           A success result indicates that the post was submitted successfully. Note that posts may not
           appear instantly after submission because the moderators of many groups may have additional
@@ -814,6 +872,17 @@ paths:
             A comma separated list of all the group IDs that the current user is a member of. If the current user is not a member of any groups, simply pass an empty string.
           in: query
           name: group_ids
+          required: true
+          type: string
+        - description: The name of a global function to call once the script is loaded.
+          in: query
+          name: callback
+          required: false
+          type: string
+        - description: |
+            Passing the current users' OAuth2 access token as a GET parameter makes it easier to load this script in a normal HTML <script> tag.
+          in: query
+          name: access_token
           required: true
           type: string
       produces:
@@ -945,7 +1014,7 @@ paths:
           required: false
           type: string
         - description: |
-            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returned. If set to 'all', all posts will be returned.
           in: query
           name: satisfied
           required: false
@@ -1661,7 +1730,7 @@ paths:
           required: false
           type: string
         - description: |
-            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returned. If set to 'all', all posts will be returned.
           in: query
           name: satisfied
           required: false
@@ -1804,7 +1873,7 @@ paths:
           required: false
           type: string
         - description: |
-            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returned. If set to 'all', all posts will be returned.
           in: query
           name: satisfied
           required: false
@@ -2049,7 +2118,7 @@ paths:
           required: false
           type: string
         - description: |
-            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returned. If set to 'all', all posts will be returned.
           in: query
           name: satisfied
           required: false
@@ -2204,7 +2273,7 @@ paths:
           required: false
           type: string
         - description: |
-            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returend. If set to 'all', all posts will be returned.
+            Whether or not to return satisfied offer and wanted posts.  This does not affect posts other than offer and wanted posts. If set to '0' (the default), only posts that are not satisfied are returned. If set to '1', only satisfied posts will be returned. If set to 'all', all posts will be returned.
           in: query
           name: satisfied
           required: false

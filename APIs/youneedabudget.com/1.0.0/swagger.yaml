@@ -78,6 +78,7 @@ paths:
           required: true
           type: string
         - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
           in: query
           name: last_knowledge_of_server
           required: false
@@ -110,6 +111,7 @@ paths:
           required: true
           type: string
         - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
           in: query
           name: last_knowledge_of_server
           required: false
@@ -195,6 +197,7 @@ paths:
           required: false
           type: string
         - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
           in: query
           name: last_knowledge_of_server
           required: false
@@ -227,6 +230,7 @@ paths:
           required: true
           type: string
         - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
           in: query
           name: last_knowledge_of_server
           required: false
@@ -312,6 +316,7 @@ paths:
           required: false
           type: string
         - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
           in: query
           name: last_knowledge_of_server
           required: false
@@ -344,6 +349,7 @@ paths:
           required: true
           type: string
         - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
           in: query
           name: last_knowledge_of_server
           required: false
@@ -548,6 +554,7 @@ paths:
           required: true
           type: string
         - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
           in: query
           name: last_knowledge_of_server
           required: false
@@ -666,6 +673,7 @@ paths:
           required: false
           type: string
         - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
           in: query
           name: last_knowledge_of_server
           required: false
@@ -799,6 +807,7 @@ paths:
           required: false
           type: string
         - description: 'The starting server knowledge.  If provided, only entities that have changed since last_knowledge_of_server will be included.'
+          format: int64
           in: query
           name: last_knowledge_of_server
           required: false
@@ -994,11 +1003,11 @@ definitions:
     properties:
       balance:
         description: The current balance of the account in milliunits format
-        format: '1234000'
+        format: int64
         type: integer
       cleared_balance:
         description: The current cleared balance of the account in milliunits format
-        format: '1234000'
+        format: int64
         type: integer
       closed:
         description: Whether this account is closed or not
@@ -1037,7 +1046,7 @@ definitions:
         type: string
       uncleared_balance:
         description: The current uncleared balance of the account in milliunits format
-        format: '1234000'
+        format: int64
         type: integer
     required:
       - id
@@ -1081,6 +1090,7 @@ definitions:
         type: array
       server_knowledge:
         description: The knowledge of the server
+        format: int64
         type: integer
     required:
       - accounts
@@ -1144,6 +1154,7 @@ definitions:
         $ref: '#/definitions/BudgetDetail'
       server_knowledge:
         description: The knowledge of the server
+        format: int64
         type: integer
     required:
       - budget
@@ -1258,12 +1269,15 @@ definitions:
     properties:
       activity:
         description: Activity amount in milliunits format
+        format: int64
         type: integer
       balance:
         description: Balance in milliunits format
+        format: int64
         type: integer
       budgeted:
         description: Budgeted amount in milliunits format
+        format: int64
         type: integer
       category_group_id:
         format: uuid
@@ -1277,9 +1291,11 @@ definitions:
         type: string
       goal_percentage_complete:
         description: The percentage completion of the goal
+        format: int32
         type: integer
       goal_target:
         description: The goal target amount in milliunits
+        format: int64
         type: integer
       goal_target_month:
         description: 'If the goal type is ''TBD'' (Target Category Balance by Date), this is the target month for the goal to be completed'
@@ -1361,6 +1377,7 @@ definitions:
         type: array
       server_knowledge:
         description: The knowledge of the server
+        format: int64
         type: integer
     required:
       - category_groups
@@ -1386,6 +1403,7 @@ definitions:
       currency_symbol:
         type: string
       decimal_digits:
+        format: int32
         type: integer
       decimal_separator:
         type: string
@@ -1520,6 +1538,7 @@ definitions:
         type: array
       server_knowledge:
         description: The knowledge of the server
+        format: int64
         type: integer
     required:
       - months
@@ -1529,21 +1548,22 @@ definitions:
     properties:
       activity:
         description: 'The total amount in transactions in the month, excluding those categorized to ''Inflow: To be Budgeted'''
-        format: '1234000'
+        format: int64
         type: integer
       age_of_money:
         description: The Age of Money as of the month
+        format: int32
         type: integer
       budgeted:
         description: The total amount budgeted in the month
-        format: '1234000'
+        format: int64
         type: integer
       deleted:
         description: Whether or not the month has been deleted.  Deleted months will only be included in delta requests.
         type: boolean
       income:
         description: 'The total amount in transactions categorized to ''Inflow: To be Budgeted'' in the month'
-        format: '1234000'
+        format: int64
         type: integer
       month:
         format: date
@@ -1552,7 +1572,7 @@ definitions:
         type: string
       to_be_budgeted:
         description: The available amount for 'To be Budgeted'
-        format: '1234000'
+        format: int64
         type: integer
     required:
       - month
@@ -1664,6 +1684,7 @@ definitions:
         type: array
       server_knowledge:
         description: The knowledge of the server
+        format: int64
         type: integer
     required:
       - payees
@@ -1673,6 +1694,7 @@ definitions:
     properties:
       budgeted:
         description: Budgeted amount in milliunits format
+        format: int64
         type: integer
     required:
       - budgeted
@@ -1691,7 +1713,7 @@ definitions:
         type: string
       amount:
         description: The transaction amount in milliunits format
-        format: '1234000'
+        format: int64
         type: integer
       approved:
         description: 'Whether or not the transaction is approved.  If not supplied, transaction will be unapproved by default.'
@@ -1785,7 +1807,7 @@ definitions:
     properties:
       amount:
         description: The scheduled subtransaction amount in milliunits format
-        format: '1234000'
+        format: int64
         type: integer
       category_id:
         format: uuid
@@ -1853,7 +1875,7 @@ definitions:
         type: string
       amount:
         description: The scheduled transaction amount in milliunits format
-        format: '1234000'
+        format: int64
         type: integer
       category_id:
         format: uuid
@@ -1948,7 +1970,7 @@ definitions:
     properties:
       amount:
         description: The subtransaction amount in milliunits format
-        format: '1234000'
+        format: int64
         type: integer
       category_id:
         format: uuid
@@ -2014,7 +2036,7 @@ definitions:
         type: string
       amount:
         description: The transaction amount in milliunits format
-        format: '1234000'
+        format: int64
         type: integer
       approved:
         description: Whether or not the transaction is approved
@@ -2102,6 +2124,7 @@ definitions:
     properties:
       server_knowledge:
         description: The knowledge of the server
+        format: int64
         type: integer
       transactions:
         items:

@@ -17,11 +17,6 @@ info:
       version: '2.0'
   x-providerName: letmc.com
   x-serviceName: diary
-produces:
-  - application/json
-  - text/json
-  - application/xml
-  - text/xml
 securityDefinitions:
   apiKey:
     description: ApiKey Authentication
@@ -64,6 +59,11 @@ paths:
           name: lettings
           required: false
           type: boolean
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
       responses:
         '200':
           description: OK
@@ -90,12 +90,43 @@ paths:
           name: appointmentID
           required: true
           type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
       responses:
         '200':
           description: OK
           schema:
             type: string
       summary: Update an existing appointment using its unique identifier
+      tags:
+        - DiaryController
+    get:
+      consumes: []
+      deprecated: false
+      operationId: DiaryController_GetAppointment
+      parameters:
+        - description: Company short name
+          in: path
+          name: shortName
+          required: true
+          type: string
+        - description: Appointment ID
+          in: query
+          name: appointmentID
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DiaryAppointmentModel'
+      summary: Get an appointment by ID
       tags:
         - DiaryController
     post:
@@ -132,6 +163,11 @@ paths:
           name: lettings
           required: false
           type: boolean
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
       responses:
         '200':
           description: OK
@@ -171,6 +207,11 @@ paths:
           name: lettings
           required: false
           type: boolean
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
       responses:
         '200':
           description: OK
@@ -227,6 +268,11 @@ paths:
           name: count
           required: true
           type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
       responses:
         '200':
           description: OK
@@ -258,6 +304,11 @@ paths:
           name: count
           required: true
           type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
       responses:
         '200':
           description: OK
@@ -490,11 +541,17 @@ definitions:
       ETag:
         description: ETag
         type: string
+      Email:
+        description: Landlord's email address
+        type: string
       Forename:
         description: Forename
         type: string
       OID:
         description: OID
+        type: string
+      PhoneNumber:
+        description: Landlord's phone number
         type: string
       Surname:
         description: Surname
@@ -546,11 +603,17 @@ definitions:
       ETag:
         description: ETag
         type: string
+      Email:
+        description: Tenant's email address
+        type: string
       Forename:
         description: Forename
         type: string
       OID:
         description: OID
+        type: string
+      PhoneNumber:
+        description: Tenant's phone number
         type: string
       Surname:
         description: Surname

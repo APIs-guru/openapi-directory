@@ -3940,6 +3940,10 @@ definitions:
               value: 880-136-7979 x6183
             - primary: false
               value: 919.814.3552 x40123
+          statement:
+            updated_at: '2016-03-16T13:32:57.000Z'
+            updated_by: 5c509cc2f60e34018180b57c
+            value: Enjoying nature.
           updated_at: '2016-03-16T13:32:57.000Z'
         id: 58163112237d84a94035f78b
         links:
@@ -3991,6 +3995,10 @@ definitions:
                 value: 880-136-7979 x6183
               - primary: false
                 value: 919.814.3552 x40123
+            statement:
+              updated_at: '2016-03-16T13:32:57.000Z'
+              updated_by: 5c509cc2f60e34018180b57c
+              value: Enjoying nature.
             updated_at: '2016-03-16T13:32:57.000Z'
           id: 58163112237d84a94035f78b
           links:
@@ -5154,6 +5162,21 @@ definitions:
             items:
               $ref: '#/definitions/PhoneNumber'
             type: array
+          statement:
+            description: A patient's motivation statement.
+            properties:
+              updated_at:
+                example: '2016-06-03T13:15:22.000Z'
+                format: dateTime
+                type: string
+              updated_by:
+                example: 5c509cc2f60e34018180b57c
+                type: string
+              value:
+                example: Enjoying nature.
+                type: string
+            readOnly: true
+            type: object
           updated_at:
             example: '2016-07-11T17:13:57.027Z'
             format: dateTime

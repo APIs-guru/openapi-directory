@@ -369,11 +369,15 @@ definitions:
         $ref: '#/definitions/ReportingReceivershipCaseDetailsModel'
         description: Case Details
       ExitStrategy:
-        $ref: '#/definitions/ReportingReceivershipExitStrategyModel'
         description: Exit Strategy
+        items:
+          $ref: '#/definitions/ReportingReceivershipExitStrategyModel'
+        type: array
       Litigation:
-        $ref: '#/definitions/ReportingReceivershipLitigationModel'
         description: Litigation
+        items:
+          $ref: '#/definitions/ReportingReceivershipLitigationModel'
+        type: array
     type: object
   ReportingReceivershipCaseModelResults:
     description: Results model to store receivership case results.

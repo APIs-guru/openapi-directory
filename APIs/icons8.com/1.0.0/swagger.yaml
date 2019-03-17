@@ -5,6 +5,8 @@ host: api.icons8.com
 basePath: /
 info:
   description: |-
+    # Icons8 API
+
     Icons8 API allows us to search and obtain [our icons](https://icons8.com/web-app).
 
     You're welcome to use our icons to extend the functionality of your web and mobile applications, website templates, and even tattoos.
@@ -28,7 +30,7 @@ info:
     ## Pricing
 
     Our API license starts at $100/month.
-  title: Icons8
+  title: 'Use a [New Version](https://icons8.github.io/icons8-docs/) Instead'
   version: 1.0.0
   x-apisguru-categories:
     - media
@@ -37,13 +39,14 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.31
       format: apiBlueprint
       url: 'https://raw.githubusercontent.com/icons8/api-docs/master/apiary.apib'
       version: 1A
   x-providerName: icons8.com
 produces:
   - application/json
+securityDefinitions: {}
 tags:
   - description: |-
       ## Platform

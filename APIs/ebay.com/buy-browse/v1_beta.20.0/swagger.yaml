@@ -1,0 +1,2731 @@
+swagger: '2.0'
+schemes:
+  - https
+host: api.ebay.com
+basePath: /buy/browse/v1
+info:
+  contact:
+    name: 'eBay Inc,'
+    x-twitter: ebay
+  description: 'The Browse API has the following resources: item_summary: Lets shoppers search for specific items by keyword, GTIN, category, charity, product, or item aspects and refine the results by using filters. &nbsp;(Experimental) search_by_image: Lets shoppers search for specific items by image. You can refine the results by using URI parameters and filters. item: Lets you retrieve the details of a specific item or all the items in an item group, which is an item with variations such as color and size. Lets you check if a product is compatible with the specified item, such as if a specific car is compatible with a specific part. Provides a bridge between the eBay legacy APIs, such as Trading and Finding, and the RESTful APIs, such as Browse, which use different formats for the item IDs enabling you to retrieve the details of the item and the RESTful item ID using a legacy item ID. &nbsp;(Experimental) shopping_cart: Provides the ability for eBay members to see the contents of their eBay cart, and add, remove, and change the quantity of items in their eBay cart.&nbsp;&nbsp;Note: This resource is not available in the eBay API Explorer. The item_summary, search_by_image, and item resource calls require an Application access token. The shopping_cart resource calls require a User access token.'
+  license:
+    name: eBay API License Agreement
+    url: 'https://go.developer.ebay.com/api-license-agreement'
+  title: Browse
+  version: v1_beta.20.0
+  x-apisguru-categories:
+    - ecommerce
+  x-logo:
+    backgroundColor: '#FFFFFF'
+    url: 'https://twitter.com/ebay/profile_image?size=original'
+  x-origin:
+    - format: swagger
+      url: 'https://developer.ebay.com/api-docs/master/buy/browse/openapi/2/buy_browse_v1_beta_oas2.json'
+      version: '2.0'
+  x-providerName: ebay.com
+  x-serviceName: buy-browse
+securityDefinitions:
+  Authorization Code:
+    authorizationUrl: 'https://auth.ebay.com/oauth2/authorize'
+    description: The security definitions for this API. Please check individual operations for applicable scopes.
+    flow: accessCode
+    scopes:
+      'https://api.ebay.com/oauth/api_scope/buy.shopping.cart': ' This scope would allow signed in user to access shopping carts'
+    tokenUrl: 'https://api.ebay.com/identity/v1/oauth2/token'
+    type: oauth2
+  Client Credentials:
+    description: The security definitions for this API. Please check individual operations for applicable scopes.
+    flow: application
+    scopes:
+      'https://api.ebay.com/oauth/api_scope': View public data from eBay
+    tokenUrl: 'https://api.ebay.com/identity/v1/oauth2/token'
+    type: oauth2
+paths:
+  /item/get_item_by_legacy_id:
+    get:
+      description: 'This method is a bridge between the eBay legacy APIs, such as Trading, Shopping, and Finding and the eBay Buy APIs. There are differences between how legacy APIs and RESTful APIs return the identifier of an &quot;item&quot;. There is also a difference in what the item ID represents and in the format of the item ID value returned. This method lets you use the legacy item IDs retrieve the details of a specific item, such as description, price, and other information the buyer needs to make a purchasing decision. It also returns the RESTful item ID, which you can use with all the Buy API methods. For more information about how to use legacy IDs with the Buy APIs, see Legacy API compatibility in the Buying Integration guide. This method returns the item details and requires you to pass in either the item ID of a non-variation item or the item IDs of both the parent and child of an item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the &quot;parent&quot;. All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc. The fieldgroups URI parameter lets you control what is returned in the response. Setting fieldgroups to PRODUCT, adds additional fields to the default response that return information about the product of the item. For more information, see fieldgroups. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/item/get_item_by_legacy_id/ Sandbox URL: https://api.sandbox.ebay.com/buy/browse/v1/item/get_item_by_legacy_id/ Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this method. This header enables eBay Network Partners to pass in their identification in order to be paid for selling eBay items and it is strongly recommended you use contextualLocation to improve the estimated delivery window information. For details see, Request headers in the Buying Integration Guide. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: getItemByLegacyId
+      parameters:
+        - description: 'This field lets you control what is returned in the response. If you do not set this field, the method returns all the details of the item. Note: In this method, the only value supported is PRODUCT. Valid values: PRODUCT - This adds the additionalImages, additionalProductIdentities, aspectGroups, description, gtins, image, and title fields to the response, which describe the item''s product. See Product for more information about these fields.'
+          in: query
+          name: fieldgroups
+          required: false
+          type: string
+        - description: 'Specifies either: The legacy item ID of an item that is not part of a group. The legacy item ID of a group, which is the ID of the &quot;parent&quot; of the group of items. Note: If you pass in a group ID, you must also use the legacy_variation_id field and pass in the legacy ID of the specific item variation (child ID). Legacy IDs are returned by eBay traditional APIs, such as the Trading API or Finding API. The following is an example of using the value of the ItemID field for a specific item from Trading to get the RESTful itemId value. &nbsp;&nbsp;&nbsp; browse/v1/item/get_item_by_legacy_id?legacy_item_id=110039490209 Maximum: 1'
+          in: query
+          name: legacy_item_id
+          required: true
+          type: string
+        - description: 'Specifies the legacy item ID of a specific item in an item group, such as the red shirt size L. Legacy IDs are returned by eBay traditional APIs, such as the Trading API or Finding API. Maximum: 1 Requirement: You must always pass in the legacy_item_id with the legacy_variation_id'
+          in: query
+          name: legacy_variation_id
+          required: false
+          type: string
+        - description: 'Specifics the legacy SKU of the item. SKU are item IDs created by the seller. Legacy SKUs are returned by eBay traditional APIs, such as the Trading API or Finding API. The following is an example of using the value of the ItemID and SKU fields, which were returned by the Trading API, to get the RESTful itemId value. &nbsp;&nbsp;&nbsp; browse/v1/item/get_item_by_legacy_id?legacy_item_id=110039490209&amp;legacy_variation_sku=V-00031-WHM Maximum: 1 Requirement: You must always pass in the legacy_item_id with the legacy_variation_sku'
+          in: query
+          name: legacy_variation_sku
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Item'
+          x-response-codes:
+            errors:
+              '11502':
+                category: APPLICATION
+                description: There was a problem extracting product information for this Item. Please try again.
+                domain: API_BROWSE
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '11003':
+                category: REQUEST
+                description: The specified legacy item Id was not found.
+                domain: API_BROWSE
+              '11004':
+                category: REQUEST
+                description: 'The item is not available for purchase. This can be for many reasons, such as when the listing is being updated by the seller. Wait a few minutes and try the call again.'
+                domain: API_BROWSE
+              '11006':
+                category: REQUEST
+                description: 'The legacy Id is invalid. Use {itemGroupHref} to get the item group details.'
+                domain: API_BROWSE
+              '11009':
+                category: REQUEST
+                description: The legacy variation sku is invalid.
+                domain: API_BROWSE
+              '11010':
+                category: REQUEST
+                description: 'You cannot submit legacy_variation_sku and legacy_variation_id in the same request. For help, see the documentation.'
+                domain: API_BROWSE
+              '11011':
+                category: REQUEST
+                description: 'The marketplace value {marketplaceId} is not supported. The supported values are: {allowedMarketplaces}'
+                domain: API_BROWSE
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '11000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      tags:
+        - item
+  /item/get_items_by_item_group:
+    get:
+      consumes:
+        - application/json
+      description: 'This method retrieves the details of the individual items in an item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. You pass in the item group ID as a URI parameter. You use this method to show the item details of items with multiple aspects, such as color, size, storage capacity, etc. This method returns two main containers; items and commonDescriptions. The items container has an array of containers with the details of each item in the group. The commonDescriptions container has an array of containers for a description and the item IDs of all the items that have this exact description. Because items within an item group often have the same description, this decreases the size of the response. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/item/get_items_by_item_group/ Sandbox URL: https://api.sandbox.ebay.com/buy/browse/v1/item/get_items_by_item_group/ Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this method. This header enables eBay Network Partners to pass in their identification in order to be paid for selling eBay items and it is strongly recommended you use contextualLocation to improve the estimated delivery window information. For details see, Request headers in the Buying Integration Guide. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: getItemsByItemGroup
+      parameters:
+        - description: 'Identifier of the item group to return. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. This ID is returned in the itemGroupHref field of the search and getItem methods. For Example: https://api.ebay.com/buy/browse/v1/item/get_items_by_item_group?item_group_id=351825690866'
+          in: query
+          name: item_group_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Items'
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '11002':
+                category: REQUEST
+                description: The specified item group was not found.
+                domain: API_BROWSE
+              '11005':
+                category: REQUEST
+                description: 'Item Group Id is invalid. Use {itemHref} to get the item details.'
+                domain: API_BROWSE
+              '11008':
+                category: REQUEST
+                description: 'The item group is not available. This can be for many reasons, such as when the listing is being updated by the seller. Wait a few minutes and try the call again.'
+                domain: API_BROWSE
+              '11011':
+                category: REQUEST
+                description: 'The marketplace value {marketplaceId} is not supported. The supported values are: {allowedMarketplaces}'
+                domain: API_BROWSE
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '11000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      tags:
+        - item
+  '/item/{item_id}':
+    get:
+      description: 'This method retrieves the details of a specific item, such as description, price, category, all item aspects, condition, return policies, seller feedback and score, shipping options, shipping costs, estimated delivery, and other information the buyer needs to make a purchasing decision. Note: This method will return FIXED_PRICE (Buy It Now) items and AUCTION items where no bids have been placed. But after a bid has been placed, that item becomes an active auction item and is no longer returned. The Buy APIs are designed to let you create an eBay shopping experience in your app or website. This means you will need to know when something, such as the availability, quantity, etc., has changed in any eBay item you are offering. You can do this easily by setting the fieldgroups URI parameter. This parameter lets you control what is returned in the response. Setting fieldgroups to COMPACT reduces the response to only the five fields that you need in order to check if any item detail has changed. Setting fieldgroups to PRODUCT, adds additional fields to the default response that return information about the product of the item. You can use either COMPACT or PRODUCT but not both. For more information, see fieldgroups. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/item/ Sandbox URL: https://api.sandbox.ebay.com/buy/browse/v1/item/ Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this method. This header enables eBay Network Partners to pass in their identification in order to be paid for selling eBay items and it is strongly recommended you use contextualLocation to improve the estimated delivery window information. For details see, Request headers in the Buying Integration Guide. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: getItem
+      parameters:
+        - description: 'This parameter lets you control what is returned in the response. If you do not set this field, the method returns all the details of the item. Valid values: PRODUCT - This adds the additionalImages, additionalProductIdentities, aspectGroups, description, gtins, image, and title product fields to the response, which describe the product associated with the item. See Product for more information about these fields. COMPACT - This returns only the following fields, which let you quickly check if the availability or price of the item has changed, if the item has been revised by the seller, or if an item''s top-rated plus status has changed for items you have stored. itemId - The identifier of the item. sellerItemRevision - An identifier generated/incremented when a seller revises the item. There are two types of item revisions; seller changes, such as changing the title, and eBay system changes, such as changing the quantity when an item is purchased. This ID is changed only when the seller makes a change to the item. This means you cannot use this value to determine if the quantity has changed. topRatedBuyingExperience - A boolean value indicating if this item is a top-rated plus item. A change in the item''s top rated plus standing is not tracked by the revision ID. See topRatedBuyingExperience for more information. price - This is tracked by the revision ID but is returned here to enable you to quickly verify the price of the item. estimatedAvailabilities - Returns the item availability information, which is based on the item''s quantity. Changes in quantity are not tracked by the revision ID. For Example To check if a stored item''s information is current, do following. Pass in the item ID and set fieldgroups to COMPACT. item/v1|46566502948|0?fieldgroups=COMPACT Do one of the following: If the sellerItemRevision field is returned and you haven''t stored a revision number for this item, record the number and pass in the item ID in the getItem method to get the latest information. If the revision number is different from the value you have stored, update the value and pass in the item ID in the getItem method to get the latest information. If the sellerItemRevision field is not returned or has not changed, where needed, update the item information with the information returned in the response. Maximum value: 1 If more than one values is specified, the first value will be used.'
+          in: query
+          name: fieldgroups
+          required: false
+          type: string
+        - description: 'The eBay RESTful identifier of an item. This ID is returned by the Browse and Feed API methods. RESTful Item ID Format: v1|#|# For example: v1|272394640372|0 or v1|162846450672|461882996982 For more information about item ID for RESTful APIs, see the Legacy API compatibility section of the Buy APIs Overview.'
+          in: path
+          name: item_id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/Item'
+          x-response-codes:
+            errors:
+              '11502':
+                category: APPLICATION
+                description: There was a problem extracting product information for this Item. Please try again.
+                domain: API_BROWSE
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '11001':
+                category: REQUEST
+                description: The specified item Id was not found.
+                domain: API_BROWSE
+              '11004':
+                category: REQUEST
+                description: 'The item is not available for purchase. This can be for many reasons, such as when the listing is being updated by the seller. Wait a few minutes and try the call again.'
+                domain: API_BROWSE
+              '11011':
+                category: REQUEST
+                description: 'The marketplace value {marketplaceId} is not supported. The supported values are: {allowedMarketplaces}'
+                domain: API_BROWSE
+              '11501':
+                category: REQUEST
+                description: 'The ''fieldgroups'' value {fieldgroups} is invalid. The supported fieldgroups are: {supportedFieldgroups}'
+                domain: API_BROWSE
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '11000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      tags:
+        - item
+  '/item/{item_id}/check_compatibility':
+    post:
+      description: 'This method checks if a product is compatible with the specified item. You can use this method to check the compatibility of cars, trucks, and motorcycles with a specific part listed on eBay. For example, to check the compatibility of a part, you pass in the item ID of the part as a URI parameter and specify all the attributes used to define a specific car in the compatibilityProperties container. If the call is successful, the response will be COMPATIBLE, NOT_COMPATIBLE, or UNDETERMINED. See compatibilityStatus for details. To find the attributes and values for a specific marketplace, you can use the compatibility methods in the Taxonomy API. You can use this data to create menus to help buyers specify the product, such as their car. The following table lists the required attributes for the US marketplace that describe motor vechiles. Required compatibilityProperties Attributes (US Marketplace) Cars and Trucks Motorcycles Year Make Model Trim Engine Year Make Model Submodel&nbsp;&nbsp; For an example, see the Samples section. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/item/ Note: This method is supported only on Production. Restrictions For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: checkCompatibility
+      parameters:
+        - description: 'The eBay RESTful identifier of an item (such as a part you want to check). This ID is returned by the Browse and Feed API methods. RESTful Item ID Format: v1|#|# For example: v1|272394640372|0 or v1|162846450672|461882996982 For more information about item ID for RESTful APIs, see the Legacy API compatibility section of the Buy APIs Overview.'
+          in: path
+          name: item_id
+          required: true
+          type: string
+        - description: 'The ID of the eBay marketplace you want to use. Note: This value is case sensitive. For example: &nbsp;&nbsp;X-EBAY-C-MARKETPLACE-ID = EBAY_US For a list of supported sites see, API Restrictions.'
+          in: header
+          name: X-EBAY-C-MARKETPLACE-ID
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/CompatibilityPayload'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CompatibilityResponse'
+          x-response-codes:
+            errors:
+              '11504':
+                category: REQUEST
+                description: 'The following compatibilityProperties (attributes name/value pairs) are missing: {attributes}'
+                domain: API_BROWSE
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '11001':
+                category: REQUEST
+                description: The specified item Id was not found.
+                domain: API_BROWSE
+              '11011':
+                category: REQUEST
+                description: 'The marketplace value {marketplaceId} is not supported. The supported values are: {allowedMarketplaces}'
+                domain: API_BROWSE
+              '11503':
+                category: REQUEST
+                description: 'The request is either empty or incomplete. For help, see the documentation for this call.'
+                domain: API_BROWSE
+              '11505':
+                category: REQUEST
+                description: The item is not valid for compatibility validation.
+                domain: API_BROWSE
+              '11506':
+                category: REQUEST
+                description: 'The ''name'' {compatibilityNames} appears more than once in the request.'
+                domain: API_BROWSE
+              '11507':
+                category: REQUEST
+                description: 'The following name(s) in the request are not supported {attributes}.'
+                domain: API_BROWSE
+        '404':
+          description: Not Found
+        '409':
+          description: Conflict
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '11000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      tags:
+        - item
+  /item_summary/search:
+    get:
+      description: 'This method searches for eBay items by various query parameters and retrieves summaries of the items. You can search by keyword, category, eBay product ID (ePID), or GTIN, charity ID, or a combination of these. Note: Only FIXED_PRICE (Buy It Now) items are returned. However, the method does return items where both FIXED_PRICE and AUCTION are available as a buying option. But after a bid has been placed, that item becomes an active auction item and is no longer returned. This method also supports the following: Filtering by the value of one or multiple fields, such as listing format, item condition, price range, location, and more. For the fields supported by this method, see the filter parameter. Retrieving the refinements (metadata) of an item , such as item aspects (color, brand), condition, category, etc. using the fieldgroups parameter. Filtering by item aspects and other refinements using the aspect_filter parameter. Creating aspects histograms, which enables shoppers to drill down in each refinement narrowing the search results. For details and examples of these capabilities, see Browse API in the Buying Integration Guide. Pagination and sort controls There are pagination controls (limit and offset fields) and sort query parameters that control/sort the data that is returned. By default, the results are sorted by &quot;Best Match&quot;. For more information about Best Match, see the eBay help page Best Match. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/item_summary/ Sandbox URL: https://api.sandbox.ebay.com/buy/browse/v1/item_summary/ Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this method. This header enables eBay Network Partners to pass in their identification in order to be paid for selling eBay items and it is strongly recommended you use contextualLocation to improve the estimated delivery window information. For details see, Request headers in the Buying Integration Guide. Restrictions This method can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: search
+      parameters:
+        - description: 'This field lets you filter by item aspects. The aspect name/value pairs and category, which is required, is used to limit the results to specific aspects of the item. For example, in a clothing category one aspect pair would be Color/Red. For example, the method below uses the category ID for Women''s Clothing. This will return only items for a woman''s red shirt. /buy/browse/v1/item_summary/search?q=shirt&amp;category_ids=15724&amp;aspect_filter=categoryId:15724,Color:{Red} To get a list of the aspects pairs and the category, which is returned in the dominantCategoryId field, set fieldgroups to ASPECT_REFINEMENTS. /buy/browse/v1/item_summary/search?q=shirt&amp;fieldgroups=ASPECT_REFINEMENTS Required: The category ID is required twice; once as a URI parameter and as part of the aspect_filter. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/browse/types/AspectFilter.html'
+          in: query
+          name: aspect_filter
+          required: false
+          type: string
+        - description: 'The category ID is used to limit the results. This field can have one category ID or a comma separated list of IDs. For example: /buy/browse/v1/item_summary/search?category_ids=29792 Note: Currently, you can pass in only one category ID. You can also use any combination of the category_Ids, epid, and q fields. This gives you additional control over the result set. For example, let''s say you are looking of a toy phone. If you search for &quot;phone&quot;, the result set will be mobile phones because this is the &quot;Best Match&quot; for this search. But if you also include the toy category ID, the results will be what you wanted. For example: /buy/browse/v1/item_summary/search?q=phone&amp;category_ids=220 The list of eBay category IDs is not published and category IDs are not the same across all the eBay marketplaces. You can use the following techniques to find a category by site: Use the Category Changes page. Use the Taxonomy API. For details see Get Categories for Buy APIs. Submit the following method to get the dominantCategoryId for an item. /buy/browse/v1/item_summary/search?q=keyword&amp;fieldgroups=ASPECT_REFINEMENTS Note: If a top-level (L1) category is specified, you must also include the q query parameter. Required: The method must have category_ids, epid, gtin, or q (or any combination of these)'
+          in: query
+          name: category_ids
+          required: false
+          type: string
+        - description: 'The charity ID is used to limit the results to only items associated with the specified charity. This field can have one charity ID or a comma separated list of IDs. The method will return all the items associated with the specified charities. For example: /buy/browse/v1/item_summary/search?charity_ids=13-1788491,300108469 The charity ID is the charity''s registration ID, also known as the Employer Identification Number (EIN). In GB, it is the Charity Registration Number (CRN), commonly called &quot;Charity Number&quot;. To find the charities eBay supports, you can search for a charity at Charity Search or go to Charity Shop. To find the charity ID of a specific charity, click on a charity and use the EIN number. For example, the charity ID for American Red Cross, is 530196605. You can also use any combination of the category_Ids and q fields with a charity_Ids to filter the result set. This gives you additional control over the result set. Restriction: This is supported only on the US and GB marketplaces. Maximum: 20 IDs Required: One ID'
+          in: query
+          name: charity_ids
+          required: false
+          type: string
+        - description: 'The ePID is the eBay product identifier of a product from the eBay product catalog. This field limits the results to only items in the specified ePID. The Marketing API getMerchandisedProducts method and the Browse API getItem, getItemByLegacyId, and getItemsByItemGroup calls return the ePID of the product. You can also use the product_summary/search method in the Catalog API to search for the ePID of the product. For example: /buy/browse/v1/item_summary/search?epid=15032 Maximum: 1 Required: The method must have category_ids, epid, gtin, or q (or any combination of these)'
+          in: query
+          name: epid
+          required: false
+          type: string
+        - description: 'This field is a comma separated list of values that lets you control what is returned in the response. The default is MATCHING_ITEMS, which returns the items that match the keyword or category specified. The other values return data that can be used to create histograms or provide additional information. Valid Values: ASPECT_REFINEMENTS - This returns the aspectDistributions container, which has the dominantCategoryId, matchCount, and refinementHref for the various aspects of the items found. For example, if you searched for ''Mustang'', some of the aspect would be Model Year, Exterior Color, Vehicle Mileage, etc. Note: ASPECT_REFINEMENTS are category specific. BUYING_OPTION_REFINEMENTS - This returns the buyingOptionDistributions container, which has the matchCount and refinementHref for AUCTION and FIXED_PRICE (Buy It Now) items. Note: Classified items are not supported and only &quot;Buy It Now&quot; (non-auction) items are returned. CATEGORY_REFINEMENTS - This returns the categoryDistributions container, which has the categories that the item is in. CONDITION_REFINEMENTS - This returns the conditionDistributions container, such as NEW, USED, etc. Within these groups are multiple states of the condition. For example, New can be New without tag, New in box, New without box, etc. EXTENDED - Returns the shortDescription field, which provides condition and item aspect information and the itemLocation.city field. MATCHING_ITEMS - This is meant to be used with one or more of the refinement values above. You use this to return the specified refinements and all the matching items. FULL - This returns all the refinement containers and all the matching items. Code so that your app gracefully handles any future changes to this list. Default: MATCHING_ITEMS'
+          in: query
+          name: fieldgroups
+          required: false
+          type: string
+        - description: 'This field supports multiple field filters that can be used to limit/customize the result set. For example: /buy/browse/v1/item_summary/search?q=shirt&amp;filter=price:[10..50] You can also combine filters. /buy/browse/v1/item_summary/search?q=shirt&amp;filter=price:[10..50],sellers:{rpseller|bigSal} The following are the supported filters. For details and examples for all the filters, see Buy API Field Filters. buyingOptions charityOnly conditionIds conditions deliveryCountry deliveryOptions deliveryPostalCode excludeCategoryIds excludeSellers itemEndDate itemLocationCountry itemStartDate paymentMethods pickupCountry pickupPostalCode pickupRadius pickupRadiusUnit price priceCurrency maxDeliveryCost (free shipping) returnsAccepted sellerAccountTypes sellers For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/browse/types/FilterField.html'
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: 'This field lets you search by the Global Trade Item Number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value. For example: /buy/browse/v1/item_summary/search?gtin=099482432621 Maximum: 1 Required: The method must have category_ids, epid, gtin, or q (or any combination of these)'
+          in: query
+          name: gtin
+          required: false
+          type: string
+        - description: 'The number of items, from the result set, returned in a single page. Default: 50 Maximum number of items per page (limit): 200 Maximum number of items in a result set: 10,000'
+          in: query
+          name: limit
+          required: false
+          type: string
+        - description: 'Specifies the number of items to skip in the result set. This is used with the limit field to control the pagination of the output. If offset is 0 and limit is 10, the method will retrieve items 1-10 from the list of items returned, if offset is 10 and limit is 10, the method will retrieve items 11 thru 20 from the list of items returned. Valid Values: 0-10,000 (inclusive) Default: 0 Maximum number of items returned: 10,000'
+          in: query
+          name: offset
+          required: false
+          type: string
+        - description: 'A string consisting of one or more keywords that are used to search for items on eBay. The keywords are handled as follows: If the keywords are separated by a comma, it is treated as an AND. In the following example, the query returns items that have iphone AND ipad. /buy/browse/v1_beta/item_summary/search?q=iphone,ipad If the keywords are separated by a space, it is treated as an OR. In the following examples, the query returns items that have iphone OR ipad. /buy/browse/v1_beta/item_summary/search?q=iphone&nbsp;ipad /buy/browse/v1_beta/item_summary/search?q=iphone,&nbsp;ipad Restriction: The * wildcard character is not allowed in this field. Required: The method must have category_ids, epid, gtin, or q (or any combination of these)'
+          in: query
+          name: q
+          required: false
+          type: string
+        - description: 'Specifies the order and the field name to use to sort the items. To sort in descending order use - before the field name. Currently, you can only sort by price (in ascending or descending order), or by distance (only applicable if the &quot;pickup&quot; filters are used, and only ascending order is supported). If no sort parameter is submitted, the result set is sorted by &quot;Best Match&quot;. The following are examples of using the sort query parameter. Sort Result sort=price Sorts by price in ascending order (lowest price first) sort=-price Sorts by price in descending order (highest price first) sort=distance Sorts by distance in ascending order (shortest distance first) Default: ascending For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/browse/types/SortField.html'
+          in: query
+          name: sort
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SearchPagedCollection'
+          x-response-codes:
+            errors:
+              '12002':
+                category: REQUEST
+                description: 'The {filterName} value is invalid. For the valid values, refer to the API call documentation.'
+                domain: API_BROWSE
+              '12003':
+                category: REQUEST
+                description: A seller 'username' provided in the request filters is invalid.
+                domain: API_BROWSE
+              '12008':
+                category: REQUEST
+                description: 'The ''sort'' value is invalid. For the valid values, refer to the API call documentation.'
+                domain: API_BROWSE
+              '12009':
+                category: REQUEST
+                description: The 'category_ids' query parameter is invalid.
+                domain: API_BROWSE
+              '12010':
+                category: REQUEST
+                description: 'There are four filters required for local pickup. ''pickupPostalCode'',''pickupCountry'',''pickupRadiusUnit'',''pickupRadius''. One or more is missing or invalid.'
+                domain: API_BROWSE
+              '12011':
+                category: REQUEST
+                description: '''deliveryCountry'' is a mandatory filter to provide a delivery location. ''deliveryPostalCode'' is optional.'
+                domain: API_BROWSE
+              '12012':
+                category: REQUEST
+                description: A valid 'price' filter and a valid 'priceCurrency' filter is necessary to filter based on price.
+                domain: API_BROWSE
+              '12014':
+                category: BUSINESS
+                description: 'The ''sellerAccountTypes'' filter is not supported for the marketplace {marketplaceId}. Valid marketplaces are: {validMarketplaces}'
+                domain: API_BROWSE
+              '12015':
+                category: REQUEST
+                description: The postal code filter value is invalid for the specified country and this filter was ignored.
+                domain: API_BROWSE
+              '12016':
+                category: REQUEST
+                description: 'The ''fieldgroups'' value {fieldgroups} is invalid. For the valid values, refer to the API call reference documentation'
+                domain: API_BROWSE
+              '12017':
+                category: REQUEST
+                description: 'The ''aspect_filter'' query parameter must include a categoryId. For information, see the API call reference documentation.'
+                domain: API_BROWSE
+              '12018':
+                category: REQUEST
+                description: 'The {aspectFilter} aspect_filter value is invalid. For information, see the API call reference documentation.'
+                domain: API_BROWSE
+              '12021':
+                category: REQUEST
+                description: 'The ''epid'' value {epid} is invalid. For information, see the API call reference documentation.'
+                domain: API_BROWSE
+              '12022':
+                category: REQUEST
+                description: 'The ''gtin'' value {gtin} is invalid. For information, see the API call reference documentation.'
+                domain: API_BROWSE
+              '12024':
+                category: REQUEST
+                description: 'The ''charity_ids'' value {charity_id} is invalid. For more information see the API call reference documentation.'
+                domain: API_BROWSE
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '12001':
+                category: REQUEST
+                description: 'The call must have a valid ''q'', ''category_ids'', ''epid'' or ''gtin'' query parameter.'
+                domain: API_BROWSE
+              '12004':
+                category: REQUEST
+                description: The 'offset' value cannot be negative.
+                domain: API_BROWSE
+              '12005':
+                category: REQUEST
+                description: The 'offset' value must be an integer.
+                domain: API_BROWSE
+              '12006':
+                category: REQUEST
+                description: The 'limit' value should be between 1 and 200 (inclusive).
+                domain: API_BROWSE
+              '12007':
+                category: REQUEST
+                description: The 'limit' value must be an integer value.
+                domain: API_BROWSE
+              '12023':
+                category: REQUEST
+                description: This keyword search results in a response that is too large to return. Either change the keyword or add additional query parameters and/or filters.
+                domain: API_BROWSE
+              '12025':
+                category: REQUEST
+                description: The 'charity_ids' field has exceeded the maximum limit of 20.
+                domain: API_BROWSE
+              '12026':
+                category: REQUEST
+                description: 'The ''charity_ids'' field is not supported for the marketplace {marketplaceId}. Valid marketplaces are: {validMarketplaces}.'
+                domain: API_BROWSE
+        '409':
+          description: Conflict
+          x-response-codes:
+            errors:
+              '12013':
+                category: BUSINESS
+                description: Top level category browsing is not allowed. Please provide keywords or more filters for the applied top level category.
+                domain: API_BROWSE
+              '12019':
+                category: BUSINESS
+                description: 'Currently, the {marketplaceId} marketplace is not supported. The supported Marketplaces are: {allowedMarketplaces} .'
+                domain: API_BROWSE
+              '12020':
+                category: BUSINESS
+                description: 'The ''fieldgroups'' value {fieldgroups} is invalid when multiple ''category_ids'' are specified. Either change the call to have only one value in ''category_ids'' or remove the ''fieldgroups''.'
+                domain: API_BROWSE
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '12000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      tags:
+        - item_summary
+  /item_summary/search_by_image:
+    post:
+      consumes:
+        - application/json
+      description: 'This is an Experimental method. This method searches for eBay items based on a image and retrieves summaries of the items. You pass in a Base64 image in the request payload and can refine the search by category, or eBay product ID (ePID), or a combination of these using URI parameters. To get the Base64 image string, you can use sites such as https://codebeautify.org/image-to-base64-converter. This method also supports the following: Filtering by the value of one or multiple fields, such as listing format, item condition, price range, location, and more. For the fields supported by this method, see the filter parameter. Filtering by item aspects using the aspect_filter parameter. For details and examples of these capabilities, see Browse API in the Buying Integration Guide. Pagination and sort controls There are pagination controls (limit and offset fields) and sort query parameters that control/sort the data that is returned. By default, the results are sorted by &quot;Best Match&quot;. For more information about Best Match, see the eBay help page Best Match. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/item_summary/search_by_image/ Sandbox URL: Due to the data available, this method is not supported in the eBay Sandbox. To test your integration, use the Production URL. Request headers You will want to use the X-EBAY-C-ENDUSERCTX request header with this method. This header enables eBay Network Partners to pass in their identification in order to be paid for selling eBay items and it is strongly recommended you use contextualLocation to improve the estimated delivery window information. For details see, Request headers in the Buying Integration Guide. URL Encoding for Parameters Query parameter values need to be URL encoded. For details, see URL encoding query parameter values. For readability, code examples in this document have not been URL encoded. Restrictions This method can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: searchByImage
+      parameters:
+        - description: 'This field lets you filter by item aspects. The aspect name/value pairs and category, which is required, is used to limit the results to specific aspects of the item. For example, in a clothing category one aspect pair would be Color/Red. For example, the method below uses the category ID for Women''s Clothing. This will return only items for a woman''s red shirt. category_ids=15724&amp;aspect_filter=categoryId:15724,Color:{Red} Required: The category ID is required twice; once as a URI parameter and as part of the aspect_filter. For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/browse/types/AspectFilter.html'
+          in: query
+          name: aspect_filter
+          required: false
+          type: string
+        - description: 'The category ID is used to limit the results. This field can have one category ID or a comma separated list of IDs. Note: Currently, you can pass in only one category ID. You can also use any combination of the category_Ids and epid fields. This gives you additional control over the result set. The list of eBay category IDs is not published and category IDs are not the same across all the eBay marketplaces. You can use the following techniques to find a category by site: Use the Category Changes page. Use the Taxonomy API. For details see Get Categories for Buy APIs. Submit the following method to get the dominantCategoryId for an item. /buy/browse/v1/item_summary/search?q=keyword&amp;fieldgroups=ASPECT_REFINEMENTS Required: The method must have category_ids or epid (or any combination of these)'
+          in: query
+          name: category_ids
+          required: false
+          type: string
+        - description: 'The ePID is the eBay product identifier of a product from the eBay product catalog. This field limits the results to only items in the specified ePID. The Marketing API getMerchandisedProducts method and the Browse API getItem, getItemByLegacyId, and getItemsByItemGroup calls return the ePID of the product. You can also use the product_summary/search method in the Catalog API to search for the ePID of the product. Maximum: 1'
+          in: query
+          name: epid
+          required: false
+          type: string
+        - description: 'This field supports multiple field filters that can be used to limit/customize the result set. For example: filter=price:[10..50] You can also combine filters. filter=price:[10..50],sellers:{rpseller|bigSal} The following are the supported filters. For details and examples for all the filters, see Buy API Field Filters. buyingOptions conditionIds conditions deliveryCountry deliveryOptions deliveryPostalCode excludeCategoryIds excludeSellers itemEndDate itemLocationCountry itemStartDate paymentMethods pickupCountry pickupPostalCode pickupRadius pickupRadiusUnit price priceCurrency maxDeliveryCost (free shipping) returnsAccepted sellerAccountTypes sellers For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/browse/types/FilterField.html'
+          in: query
+          name: filter
+          required: false
+          type: string
+        - description: 'The number of items, from the result set, returned in a single page. Default: 50 Maximum number of items per page (limit): 200 Maximum number of items in a result set: 10,000'
+          in: query
+          name: limit
+          required: false
+          type: string
+        - description: 'The number of items to skip in the result set. This is used with the limit field to control the pagination of the output. If offset is 0 and limit is 10, the method will retrieve items 1-10 from the list of items returned, if offset is 10 and limit is 10, the method will retrieve items 11 thru 20 from the list of items returned. Valid Values: 0-10,000 (inclusive) Default: 0 Maximum number of items returned: 10,000'
+          in: query
+          name: offset
+          required: false
+          type: string
+        - description: 'Specifies the order and the field name to use to sort the items. To sort in descending order use - before the field name. Currently, you can only sort by price (in ascending or descending order), or by distance (only applicable if the &quot;pickup&quot; filters are used, and only ascending order is supported). If no sort parameter is submitted, the result set is sorted by &quot;Best Match&quot;. The following are examples of using the sort query parameter. Sort Result sort=price Sorts by price in ascending order (lowest price first) sort=-price Sorts by price in descending order (highest price first) sort=distance Sorts by distance in ascending order (shortest distance first) Default: ascending For implementation help, refer to eBay API documentation at https://developer.ebay.com/devzone/rest/api-ref/browse/types/SortField.html'
+          in: query
+          name: sort
+          required: false
+          type: string
+        - description: The container for the image information fields.
+          in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/SearchByImageRequest'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SearchPagedCollection'
+          x-response-codes:
+            errors:
+              '12002':
+                category: REQUEST
+                description: 'The {filterName} value is invalid. For the valid values, refer to the API call documentation.'
+                domain: API_BROWSE
+              '12003':
+                category: REQUEST
+                description: A seller 'username' provided in the request filters is invalid.
+                domain: API_BROWSE
+              '12008':
+                category: REQUEST
+                description: 'The ''sort'' value is invalid. For the valid values, refer to the API call documentation.'
+                domain: API_BROWSE
+              '12009':
+                category: REQUEST
+                description: The 'category_ids' query parameter is invalid.
+                domain: API_BROWSE
+              '12010':
+                category: REQUEST
+                description: 'There are four filters required for local pickup. ''pickupPostalCode'',''pickupCountry'',''pickupRadiusUnit'',''pickupRadius''. One or more is missing or invalid.'
+                domain: API_BROWSE
+              '12011':
+                category: REQUEST
+                description: '''deliveryCountry'' is a mandatory filter to provide a delivery location. ''deliveryPostalCode'' is optional.'
+                domain: API_BROWSE
+              '12012':
+                category: REQUEST
+                description: A valid 'price' filter and a valid 'priceCurrency' filter is necessary to filter based on price.
+                domain: API_BROWSE
+              '12014':
+                category: BUSINESS
+                description: 'The ''sellerAccountTypes'' filter is not supported for the marketplace {marketplaceId}. Valid marketplaces are: {validMarketplaces}'
+                domain: API_BROWSE
+              '12015':
+                category: REQUEST
+                description: The postal code filter value is invalid for the specified country and this filter was ignored.
+                domain: API_BROWSE
+              '12017':
+                category: REQUEST
+                description: 'The ''aspect_filter'' query parameter must include a categoryId. For information, see the API call reference documentation.'
+                domain: API_BROWSE
+              '12018':
+                category: REQUEST
+                description: 'The {aspectFilter} aspect_filter value is invalid. For information, see the API call reference documentation.'
+                domain: API_BROWSE
+              '12021':
+                category: REQUEST
+                description: 'The ''epid'' value {epid} is invalid. For information, see the API call reference documentation.'
+                domain: API_BROWSE
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '12004':
+                category: REQUEST
+                description: The 'offset' value cannot be negative.
+                domain: API_BROWSE
+              '12005':
+                category: REQUEST
+                description: The 'offset' value must be an integer.
+                domain: API_BROWSE
+              '12006':
+                category: REQUEST
+                description: The 'limit' value should be between 1 and 200 (inclusive).
+                domain: API_BROWSE
+              '12007':
+                category: REQUEST
+                description: The 'limit' value must be an integer value.
+                domain: API_BROWSE
+              '12500':
+                category: REQUEST
+                description: This image search results in a response that is too large to return. Either change the image or add additional query parameters and/or filters.
+                domain: API_BROWSE
+              '12501':
+                category: REQUEST
+                description: 'The image data is empty, is not Base64 encoded, or is invalid.'
+                domain: API_BROWSE
+        '409':
+          description: Conflict
+          x-response-codes:
+            errors:
+              '12013':
+                category: BUSINESS
+                description: Top level category browsing is not allowed. Please provide keywords or more filters for the applied top level category.
+                domain: API_BROWSE
+              '12019':
+                category: BUSINESS
+                description: 'Currently, the {marketplaceId} marketplace is not supported. The supported Marketplaces are: {allowedMarketplaces} .'
+                domain: API_BROWSE
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '12000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Client Credentials:
+            - 'https://api.ebay.com/oauth/api_scope'
+      tags:
+        - search_by_image
+  /shopping_cart/:
+    get:
+      description: 'This is an experimental method. This method retrieves all the items in the eBay member''s cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API. There are no URI parameters or request payload. The response returns the summary details of all the items in the eBay member''s cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API. If the cart is empty, the response is HTTP 204. The quantity and state of an item changes often. If the item becomes &quot;unavailable&quot; such as, when the listing has ended or the item is out of stock, the item will be returned in the unavailableCartItems container. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/shopping_cart/ Sandbox URL: https://api.sandbox.ebay.com/buy/browse/v1/shopping_cart/ Note: This method is not available in the eBay API Explorer. Restrictions This method can be used only for eBay members. For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: getShoppingCart
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RemoteShopcartResponse'
+          x-response-codes:
+            errors:
+              '10004':
+                category: BUSINESS
+                description: 'The item {itemId} is not available for purchase. This can be for several reason such as, the listing has ended or the item is out of stock.'
+                domain: API_BROWSE
+              '10005':
+                category: BUSINESS
+                description: 'The item {itemId} is revised.'
+                domain: API_BROWSE
+              '10006':
+                category: BUSINESS
+                description: 'The item {itemId} in your cart is not available in the quantity specified. The quantity of this item has been changed to the quantity that is currently available. Please review this change before proceeding to checkout.'
+                domain: API_BROWSE
+              '10020':
+                category: BUSINESS
+                description: 'The buyer is blocked from purchasing the item {itemId}.'
+                domain: API_BROWSE
+              '10024':
+                category: BUSINESS
+                description: 'The buyer is blocked from purchasing the item {itemId} because the seller does not ship to the buyer''s location.'
+                domain: API_BROWSE
+              '10025':
+                category: REQUEST
+                description: 'The header ''X-EBAY-C-MARKETPLACE-ID'' is required. The valid Marketplaces are: {supportedValues}.'
+                domain: API_BROWSE
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '10001':
+                category: REQUEST
+                description: 'The X-EBAY-C-MARKETPLACE-ID value is not supported. The supported values are: {supportedValues}.'
+                domain: API_BROWSE
+              '10002':
+                category: REQUEST
+                description: Insufficient permissions to fulfill the request.
+                domain: API_BROWSE
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '10000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Authorization Code:
+            - 'https://api.ebay.com/oauth/api_scope/buy.shopping.cart'
+      tags:
+        - shopping_cart
+  /shopping_cart/add_item:
+    post:
+      description: 'This is an Experimental method. This method creates an eBay cart for the eBay member, if one does not exist, and adds items to that cart. Because a cart never expires, any item added to the cart will remain in the cart until it is removed. To use this method, you must submit a RESTful item ID and the quantity of the item. If the quantity value is greater than the number of available, the quantity value is changed to the number available and a warning is returned. For example, if there are 15 baseballs available and you set the quantity value to 50, the service automatically changes the value of quantity to 15. The response returns all the items in the eBay member''s cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API. The quantity and state of an item changes often. If the item becomes &quot;unavailable&quot; such as, when the listing has ended or the item is out of stock, whether it has just been added to the cart or has been in the cart for some time, the item will be returned in the unavailableCartItems container. Note: There are differences between how legacy APIs, such as Trading and Finding, and RESTful APIs, such as Browse, return the identifier of an &quot;item&quot;. There is also a difference in what the item ID represents and in the format of the item ID value returned. If you have an item ID from one of the legacy APIs, you can use the legacy item ID with the getItemByLegacyId method to retrieve the RESTful ID for that item. For more information about how to use legacy IDs with the Buy APIs, see Legacy API compatibility in the Buying Integration guide. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/shopping_cart/ Sandbox URL: https://api.sandbox.ebay.com/buy/browse/v1/shopping_cart/ Note: This method is not available in the eBay API Explorer. Restrictions This method can be used only for eBay members. You can add only items with a FIXED_PRICE that accept PayPal as a payment. For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: addItem
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/AddCartItemInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RemoteShopcartResponse'
+          x-response-codes:
+            errors:
+              '10004':
+                category: BUSINESS
+                description: 'The item {itemId} is not available for purchase. This can be for several reason such as, the listing has ended or the item is out of stock.'
+                domain: API_BROWSE
+              '10005':
+                category: BUSINESS
+                description: 'The item {itemId} is revised.'
+                domain: API_BROWSE
+              '10006':
+                category: BUSINESS
+                description: 'The item {itemId} in your cart is not available in the quantity specified. The quantity of this item has been changed to the quantity that is currently available. Please review this change before proceeding to checkout.'
+                domain: API_BROWSE
+              '10020':
+                category: BUSINESS
+                description: 'The buyer is blocked from purchasing the item {itemId}.'
+                domain: API_BROWSE
+              '10024':
+                category: BUSINESS
+                description: 'The buyer is blocked from purchasing the item {itemId} because the seller does not ship to the buyer''s location.'
+                domain: API_BROWSE
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '10001':
+                category: REQUEST
+                description: 'The X-EBAY-C-MARKETPLACE-ID value is not supported. The supported values are: {supportedValues}.'
+                domain: API_BROWSE
+              '10002':
+                category: REQUEST
+                description: Insufficient permissions to fulfill the request.
+                domain: API_BROWSE
+              '10007':
+                category: REQUEST
+                description: 'The field: {field} is required. Add the field and resubmit the call.'
+                domain: API_BROWSE
+              '10008':
+                category: REQUEST
+                description: 'The item ID {itemId} is invalid.'
+                domain: API_BROWSE
+              '10009':
+                category: REQUEST
+                description: The quantity value is invalid. The quantity must be greater than 0.
+                domain: API_BROWSE
+              '10010':
+                category: REQUEST
+                description: The item does not exist.
+                domain: API_BROWSE
+              '10025':
+                category: REQUEST
+                description: 'The header ''X-EBAY-C-MARKETPLACE-ID'' is required. The valid Marketplaces are: {supportedValues}.'
+                domain: API_BROWSE
+        '403':
+          description: Insufficient permissions to fulfill the request
+        '409':
+          description: Conflict
+          x-response-codes:
+            errors:
+              '10011':
+                category: BUSINESS
+                description: 'The item {itemId} is already in the shopping cart. To change the quantity of the item, use the updateQuantity call.'
+                domain: API_BROWSE
+              '10016':
+                category: BUSINESS
+                description: 'You have exceeded the maximum number of items in a cart, which is {MaxCartIems}. To add more items, either remove or purchase some of the items in the cart.'
+                domain: API_BROWSE
+              '10017':
+                category: BUSINESS
+                description: The item does not meet the cart criteria and cannot be added to the cart.
+                domain: API_BROWSE
+              '10018':
+                category: BUSINESS
+                description: There is a limit on the quantity of this item that can be purchased. The quantity specified exceeds this limit.
+                domain: API_BROWSE
+              '10019':
+                category: BUSINESS
+                description: The buyer is blocked from purchasing the item you are trying to add to the cart.
+                domain: API_BROWSE
+              '10021':
+                category: BUSINESS
+                description: The item you are trying to add is not available in the quantity specified. Please adjust the quantity and try again.
+                domain: API_BROWSE
+              '10022':
+                category: BUSINESS
+                description: 'The item you are trying to add is not available for purchase. This can be for several reason such as, the listing has ended or the item is out of stock.'
+                domain: API_BROWSE
+              '10023':
+                category: BUSINESS
+                description: The buyer is blocked from purchasing the item because the seller does not ship to the buyer's location.
+                domain: API_BROWSE
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '10000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Authorization Code:
+            - 'https://api.ebay.com/oauth/api_scope/buy.shopping.cart'
+      tags:
+        - shopping_cart
+  /shopping_cart/remove_item:
+    post:
+      description: 'This is an experimental method. This method removes a specific item from the eBay member''s cart. You specify the ID of the item in the cart (cartItemId) that you want to remove. The response returns all the items in the eBay member''s cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API. If you remove the last item in the cart, the response is HTTP 204. The quantity and state of an item changes often. If the item becomes &quot;unavailable&quot; such as, when the listing has ended or the item is out of stock, the item will be returned in the unavailableCartItems container. Note: The cartItemId is not the same as the item ID. The cartItemId is the identifier of a specific item in the cart and is generated when the item was added to the cart. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/shopping_cart/ Sandbox URL: https://api.sandbox.ebay.com/buy/browse/v1/shopping_cart/ Note: This method is not available in the eBay API Explorer. Restrictions This method can be used only for eBay members. For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: removeItem
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/RemoveCartItemInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RemoteShopcartResponse'
+          x-response-codes:
+            errors:
+              '10004':
+                category: BUSINESS
+                description: 'The item {itemId} is not available for purchase. This can be for several reason such as, the listing has ended or the item is out of stock.'
+                domain: API_BROWSE
+              '10005':
+                category: BUSINESS
+                description: 'The item {itemId} is revised.'
+                domain: API_BROWSE
+              '10006':
+                category: BUSINESS
+                description: 'The item {itemId} in your cart is not available in the quantity specified. The quantity of this item has been changed to the quantity that is currently available. Please review this change before proceeding to checkout..'
+                domain: API_BROWSE
+              '10020':
+                category: BUSINESS
+                description: 'The buyer is blocked from purchasing the item {itemId}.'
+                domain: API_BROWSE
+              '10024':
+                category: BUSINESS
+                description: 'The buyer is blocked from purchasing the item {itemId} because the seller does not ship to the buyer''s location.'
+                domain: API_BROWSE
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '10001':
+                category: REQUEST
+                description: 'The X-EBAY-C-MARKETPLACE-ID value is not supported. The supported values are: {supportedValues}.'
+                domain: API_BROWSE
+              '10002':
+                category: REQUEST
+                description: Insufficient permissions to fulfill the request.
+                domain: API_BROWSE
+              '10007':
+                category: REQUEST
+                description: 'The field: {field} is required. Add the field and resubmit the call.'
+                domain: API_BROWSE
+              '10012':
+                category: REQUEST
+                description: 'The value of ''cartItemId'' {cartItemId} is invalid.'
+                domain: API_BROWSE
+              '10025':
+                category: REQUEST
+                description: 'The header ''X-EBAY-C-MARKETPLACE-ID'' is required. The valid Marketplaces are: {supportedValues}.'
+                domain: API_BROWSE
+        '403':
+          description: Insufficient permissions to fulfill the request
+        '409':
+          description: Conflict
+          x-response-codes:
+            errors:
+              '10013':
+                category: BUSINESS
+                description: The item is not in your cart.
+                domain: API_BROWSE
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '10000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Authorization Code:
+            - 'https://api.ebay.com/oauth/api_scope/buy.shopping.cart'
+      tags:
+        - shopping_cart
+  /shopping_cart/update_quantity:
+    post:
+      description: 'This is an experimental method. This method updates the quantity value of a specific item in the eBay member''s cart. You specify the ID of the item in the cart (cartItemId) and the new value for the quantity. If the quantity value is greater than the number of available, the quantity value is changed to the number available and a warning is returned. For example, if there are 15 baseballs available and you set the quantity value to 50, the service automatically changes the value of quantity to 15. The response returns all the items in the eBay member''s cart; items added to the cart while on ebay.com as well as items added to the cart using the Browse API. The quantity and state of an item changes often. If the item becomes &quot;unavailable&quot; such as, the listing has ended or the item is out of stock, the item will be returned in the unavailableCartItems container. Note: The cartItemId is not the same as the item ID. The cartItemId is the identifier of a specific item in the cart and is generated when the item was added to the cart. URLs for this method Production URL: https://api.ebay.com/buy/browse/v1/shopping_cart/ Sandbox URL: https://api.sandbox.ebay.com/buy/browse/v1/shopping_cart/ Note: This method is not available in the eBay API Explorer. Restrictions This method can be used only for eBay members. For a list of supported sites and other restrictions, see API Restrictions.'
+      operationId: updateQuantity
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/UpdateCartItemInput'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RemoteShopcartResponse'
+          x-response-codes:
+            errors:
+              '10004':
+                category: BUSINESS
+                description: 'The item {itemId} is not available for purchase. This can be for several reason such as, the listing has ended or the item is out of stock.'
+                domain: API_BROWSE
+              '10005':
+                category: BUSINESS
+                description: 'The item {itemId} is revised.'
+                domain: API_BROWSE
+              '10006':
+                category: BUSINESS
+                description: 'The item {itemId} in your cart is not available in the quantity specified. The quantity of this item has been changed to the quantity that is currently available. Please review this change before proceeding to checkout..'
+                domain: API_BROWSE
+              '10020':
+                category: BUSINESS
+                description: 'The buyer is blocked from purchasing the item {itemId}.'
+                domain: API_BROWSE
+              '10024':
+                category: BUSINESS
+                description: 'The buyer is blocked from purchasing the item {itemId} because the seller does not ship to the buyer''s location.'
+                domain: API_BROWSE
+        '400':
+          description: Bad Request
+          x-response-codes:
+            errors:
+              '10001':
+                category: REQUEST
+                description: 'The X-EBAY-C-MARKETPLACE-ID value is not supported. The supported values are: {supportedValues}.'
+                domain: API_BROWSE
+              '10002':
+                category: REQUEST
+                description: Insufficient permissions to fulfill the request.
+                domain: API_BROWSE
+              '10007':
+                category: REQUEST
+                description: 'The field: {field} is required. Add the field and resubmit the call.'
+                domain: API_BROWSE
+              '10009':
+                category: REQUEST
+                description: The quantity value is invalid. The quantity must be greater than 0.
+                domain: API_BROWSE
+              '10012':
+                category: REQUEST
+                description: 'The value of ''cartItemId'' {cartItemId} is invalid.'
+                domain: API_BROWSE
+              '10025':
+                category: REQUEST
+                description: 'The header ''X-EBAY-C-MARKETPLACE-ID'' is required. The valid Marketplaces are: {supportedValues}.'
+                domain: API_BROWSE
+        '403':
+          description: Insufficient permissions to fulfill the request
+        '409':
+          description: Conflict
+          x-response-codes:
+            errors:
+              '10013':
+                category: BUSINESS
+                description: The item is not in your cart.
+                domain: API_BROWSE
+        '500':
+          description: Internal Server Error
+          x-response-codes:
+            errors:
+              '10000':
+                category: APPLICATION
+                description: There was a problem with an eBay internal system or process. Contact eBay developer support for assistance.
+                domain: API_BROWSE
+      security:
+        - Authorization Code:
+            - 'https://api.ebay.com/oauth/api_scope/buy.shopping.cart'
+      tags:
+        - shopping_cart
+definitions:
+  AddCartItemInput:
+    description: The type that defines the fields for the <b>addItems</b> request.
+    properties:
+      itemId:
+        description: 'The eBay RESTful identifier of the item you want added to the cart. RESTful Item ID Format: v1|#|# For example: v1|272394640372|0 v1|162846450672|461882996982 For more information about item ID for RESTful APIs, see the Legacy API compatibility section of the Buy APIs Overview. Maximum number of items in a cart: 100'
+        type: string
+      quantity:
+        description: 'The number of this item the buyer wants to purchase. If this value is greater than the number available, the service will change this value to the number available. If this happens, a warning is returned. Maximum: number available'
+        type: integer
+    type: object
+  AdditionalProductIdentity:
+    description: The type that defines the array of product identifiers associated with the item. This container is returned if the seller has associated the eBay Product Identifier (ePID) with the item and in the request <b> fieldgroups</b> is set to <code>PRODUCT</code>.
+    properties:
+      productIdentity:
+        description: 'An array of the product identifier/value pairs for the product associated with the item. This is returned if the seller has associated the eBay Product Identifier (ePID) with the item and the request has fieldgroups set to PRODUCT. The following table shows what is returned, based on the item information provided by the seller, when the fieldgroups set to PRODUCT. ePID Provided Product&nbsp;ID(s) Provided Response No No The AdditionalProductIdentity container is not returned. No Yes The AdditionalProductIdentity container is not returned but the product identifiers specified by the seller are returned in the localizedAspects container. Yes No The AdditionalProductIdentity container is returned listing the product identifiers of the product. Yes Yes The AdditionalProductIdentity container is returned listing all the product identifiers of the product and the product identifiers specified by the seller are returned in the localizedAspects container.'
+        items:
+          $ref: '#/definitions/ProductIdentity'
+        type: array
+    type: object
+  Address:
+    description: The type that defines the fields for an address.
+    properties:
+      addressLine1:
+        description: The first line of the street address.
+        type: string
+      addressLine2:
+        description: 'The second line of the street address. This field is not always used, but can be used for ''Suite Number'' or ''Apt Number''.'
+        type: string
+      city:
+        description: The city of the address.
+        type: string
+      country:
+        $ref: '#/definitions/CountryCodeEnum'
+      county:
+        description: The county of the address.
+        type: string
+      postalCode:
+        description: The postal code of the address.
+        type: string
+      stateOrProvince:
+        description: The state or province of the address.
+        type: string
+    type: object
+  Amount:
+    description: The type that defines the fields for a monetary value.
+    properties:
+      currency:
+        $ref: '#/definitions/CurrencyCodeEnum'
+      value:
+        description: The dollar value of the currency specified in the currency field. The value of currency defaults to the standard currency used by the country of the eBay site offering the item.
+        type: string
+    type: object
+  Aspect:
+    description: 'The type that defines the fields for the name/value pairs for the aspects of the product. For example: BRAND/Apple'
+    properties:
+      localizedName:
+        description: 'The text representing the name of the aspect for the name/value pair, such as Brand.'
+        type: string
+      localizedValues:
+        description: 'The text representing the value of the aspect for the name/value pair, such as Apple.'
+        items:
+          type: string
+        type: array
+    type: object
+  AspectDistribution:
+    description: 'The type that define the fields for the aspect information. Aspects are the variations of an item, such as color, size, etc.'
+    properties:
+      aspectValueDistributions:
+        description: An array of containers for the various values of the aspect and the match count and a HATEOAS reference ( refinementHref) for this aspect.
+        items:
+          $ref: '#/definitions/AspectValueDistribution'
+        type: array
+      localizedAspectName:
+        description: 'Name of an aspect, such as Brand, Color, etc.'
+        type: string
+    type: object
+  AspectFilter:
+    description: This is the type that defines the fields for the aspect filter.
+    properties:
+      categoryId:
+        description: The ID of the category. This limits the aspects filtering to this category.
+        type: string
+      filters:
+        description: 'This query parameter supports multiple field filters that can be used to limit/customize the result set. For details and examples for all the filters, see Buy API Field Filters.'
+        items:
+          $ref: '#/definitions/FilterField'
+        type: array
+    type: object
+  AspectGroup:
+    properties:
+      aspects:
+        description: 'An array of the name/value pairs for the aspects of the product. For example: BRAND/Apple'
+        items:
+          $ref: '#/definitions/Aspect'
+        type: array
+      localizedGroupName:
+        description: 'The name of a group of aspects. In the following example, Product Identifiers and Process are product aspect group names. Under the group name are the product aspect name/value pairs. Product Identifiers &nbsp;&nbsp;&nbsp;Brand/Apple &nbsp;&nbsp;&nbsp;Product Family/iMac Processor &nbsp;&nbsp;&nbsp;Processor Type/Intel &nbsp;&nbsp;&nbsp;Processor Speed/3.10'
+        type: string
+    type: object
+  AspectValueDistribution:
+    description: The container that defines the fields for the conditions refinements. This container is returned when <b> fieldgroups</b> is set to <code>ASPECT_REFINEMENTS</code> or <code>FULL</code> in the request.
+    properties:
+      localizedAspectValue:
+        description: 'The value of an aspect. For example, Red is a value for the aspect Color.'
+        type: string
+      matchCount:
+        description: The number of items with this aspect.
+        type: integer
+      refinementHref:
+        description: A HATEOAS reference for this aspect.
+        type: string
+    type: object
+  AttributeNameValue:
+    description: 'The type the defines attribute name/value pair fields that specify a product. The type of data depends on the context. For example, if you were using this to specify a specific vehicle, the attribute names would be Make, Model, Year, etc.'
+    properties:
+      name:
+        description: 'The name of the attribute, such as Make, Model, Year, etc.'
+        type: string
+      value:
+        description: 'The value for the name attribute, such as BMW, R1200GS, 2011, etc.'
+        type: string
+    type: object
+  AvailabilityStatusEnum:
+    description: An enumerated type for the values that represent the inventory status of an item.
+    enum:
+      - IN_STOCK
+      - LIMITED_STOCK
+      - OUT_OF_STOCK
+    type: object
+  AvailabilityThresholdEnum:
+    description: 'An enumerated type for the values that represent the availability of an item based on a <a href="#display-item-quantity">quantity threshold</a> set by the seller. <br /><br />Code so that your app gracefully handles any future changes to this list.'
+    enum:
+      - MORE_THAN
+    type: object
+  BuyingOptionDistribution:
+    description: The container that defines the fields for the buying options refinements. This container is returned when <b> fieldgroups</b> is set to <code>BUYING_OPTION_REFINEMENTS</code> or <code>FULL</code> in the request.
+    properties:
+      buyingOption:
+        description: 'Container that returns the buying option type. This will be AUCTION or FIXED_PRICE or both. For details, see buyingOptions.'
+        type: string
+      matchCount:
+        description: The number of items having this buying option.
+        type: integer
+      refinementHref:
+        description: The HATEOAS reference for this buying option.
+        type: string
+    type: object
+  CartItem:
+    description: The type that defines the fields for the individual items in a cart.
+    properties:
+      cartItemId:
+        description: The identifier for the item being added to the cart. This is generated when the item is added to the cart.
+        type: string
+      cartItemSubtotal:
+        $ref: '#/definitions/Amount'
+      image:
+        $ref: '#/definitions/Image'
+      itemId:
+        description: 'The RESTful identifier of the item. This identifier is generated when the item was listed. RESTful Item ID Format: v1|#|# For example: v1|272394640372|0 v1|162846450672|461882996982'
+        type: string
+      itemWebUrl:
+        description: The URL of the eBay view item page for the item.
+        type: string
+      price:
+        $ref: '#/definitions/Price'
+      quantity:
+        description: The number of this item the buyer wants to purchase.
+        type: integer
+      title:
+        description: The title of the item. This can be written by the seller or come from the eBay product catalog.
+        type: string
+    type: object
+  Category:
+    description: 'This type is used by the <b> categories</b>  container in the response of the <b> search</b>  method, and contains the primary item category ID of the item, as well as the secondary item category if the item was listed in two categories.'
+    properties:
+      categoryId:
+        description: 'The unique identifier of the primary item category of the item, as well as the secondary item category if item was listed in two categories.'
+        type: string
+    type: object
+  CategoryDistribution:
+    description: The container that defines the fields for the category refinements. This container is returned when <b> fieldgroups</b> is set to <code>CATEGORY_REFINEMENTS</code> or <code>FULL</code> in the request.
+    properties:
+      categoryId:
+        description: The identifier of the category.
+        type: string
+      categoryName:
+        description: 'The name of the category, such as Baby &amp; Toddler Clothing.'
+        type: string
+      matchCount:
+        description: The number of items in this category.
+        type: integer
+      refinementHref:
+        description: The HATEOAS reference of this category.
+        type: string
+    type: object
+  CommonDescriptions:
+    description: 'The type that defines the fields for the item IDs that all use a common description.  Often the item variations within an item group all have the same description. Instead of repeating this description in the item details of each item, a description that is shared by at least one other item is returned in this container. If the description is unique, it is returned in the <b> items.description</b> field.'
+    properties:
+      description:
+        description: The item description that is used by more than one of the item variations.
+        type: string
+      itemIds:
+        description: A list of item IDs that have this description.
+        items:
+          type: string
+        type: array
+    type: object
+  CompatibilityPayload:
+    properties:
+      compatibilityProperties:
+        description: 'An array of attribute name/value pairs used to define a specific product. For example: If you wanted to specify a specific car, one of the name/value pairs would be &quot;name&quot; : &quot;Year&quot;, &quot;value&quot; : &quot;2019&quot; For a list of the attributes required for Cars and Trucks and Motorcycles see Required Attributes.'
+        items:
+          $ref: '#/definitions/AttributeNameValue'
+        type: array
+    type: object
+  CompatibilityResponse:
+    description: 'The type that defines the response fields for <b>checkCompatibility</b>.  '
+    properties:
+      compatibilityStatus:
+        $ref: '#/definitions/CompatibilityStatus'
+      warnings:
+        items:
+          $ref: '#/definitions/ErrorDetailV3'
+        type: array
+    type: object
+  CompatibilityStatus:
+    description: An enumerated type for the values that represent if an item is compatible with the specified product.
+    enum:
+      - COMPATIBLE
+      - NOT_COMPATIBLE
+      - UNDETERMINED
+    type: object
+  ConditionDistribution:
+    description: The container that defines the fields for the conditions refinements. This container is returned when <b> fieldgroups</b> is set to <code>CONDITION_REFINEMENTS</code> or <code>FULL</code> in the request.
+    properties:
+      condition:
+        description: 'The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      conditionId:
+        description: 'The identifier of the condition. For example, 1000 is the identifier for NEW.'
+        type: string
+      matchCount:
+        description: The number of items having the condition.
+        type: integer
+      refinementHref:
+        description: The HATEOAS reference of this condition.
+        type: string
+    type: object
+  ConvertedAmount:
+    description: 'This type defines the monetary value of an amount. It can provide the amount in both the currency used on the eBay site where an item is being offered and the conversion of that value into another currency, if applicable.'
+    properties:
+      convertedFromCurrency:
+        $ref: '#/definitions/CurrencyCodeEnum'
+      convertedFromValue:
+        description: 'The monetary amount before any conversion is performed, in the currency specified by the convertedFromCurrency field. This value is required or returned only if currency conversion/localization is required. The value field contains the converted amount of this value, in the currency specified by the currency field.'
+        type: string
+      currency:
+        $ref: '#/definitions/CurrencyCodeEnum'
+      value:
+        description: 'The monetary amount, in the currency specified by the currency field. If currency conversion/localization is required, this value is the converted amount, and the convertedFromValue field contains the amount in the original currency.'
+        type: string
+    type: object
+  CountryCodeEnum:
+    description: 'An enumerated type for the values that represent the two-letter <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> standard code representing a country.'
+    enum:
+      - AD
+      - AE
+      - AF
+      - AG
+      - AI
+      - AL
+      - AM
+      - AN
+      - AO
+      - AQ
+      - AR
+      - AS
+      - AT
+      - AU
+      - AW
+      - AX
+      - AZ
+      - BA
+      - BB
+      - BD
+      - BE
+      - BF
+      - BG
+      - BH
+      - BI
+      - BJ
+      - BL
+      - BM
+      - BN
+      - BO
+      - BQ
+      - BR
+      - BS
+      - BT
+      - BV
+      - BW
+      - BY
+      - BZ
+      - CA
+      - CC
+      - CD
+      - CF
+      - CG
+      - CH
+      - CI
+      - CK
+      - CL
+      - CM
+      - CN
+      - CO
+      - CR
+      - CU
+      - CV
+      - CW
+      - CX
+      - CY
+      - CZ
+      - DE
+      - DJ
+      - DK
+      - DM
+      - DO
+      - DZ
+      - EC
+      - EE
+      - EG
+      - EH
+      - ER
+      - ES
+      - ET
+      - FI
+      - FJ
+      - FK
+      - FM
+      - FO
+      - FR
+      - GA
+      - GB
+      - GD
+      - GE
+      - GF
+      - GG
+      - GH
+      - GI
+      - GL
+      - GM
+      - GN
+      - GP
+      - GQ
+      - GR
+      - GS
+      - GT
+      - GU
+      - GW
+      - GY
+      - HK
+      - HM
+      - HN
+      - HR
+      - HT
+      - HU
+      - ID
+      - IE
+      - IL
+      - IM
+      - IN
+      - IO
+      - IQ
+      - IR
+      - IS
+      - IT
+      - JE
+      - JM
+      - JO
+      - JP
+      - KE
+      - KG
+      - KH
+      - KI
+      - KM
+      - KN
+      - KP
+      - KR
+      - KW
+      - KY
+      - KZ
+      - LA
+      - LB
+      - LC
+      - LI
+      - LK
+      - LR
+      - LS
+      - LT
+      - LU
+      - LV
+      - LY
+      - MA
+      - MC
+      - MD
+      - ME
+      - MF
+      - MG
+      - MH
+      - MK
+      - ML
+      - MM
+      - MN
+      - MO
+      - MP
+      - MQ
+      - MR
+      - MS
+      - MT
+      - MU
+      - MV
+      - MW
+      - MX
+      - MY
+      - MZ
+      - NA
+      - NC
+      - NE
+      - NF
+      - NG
+      - NI
+      - NL
+      - 'NO'
+      - NP
+      - NR
+      - NU
+      - NZ
+      - OM
+      - PA
+      - PE
+      - PF
+      - PG
+      - PH
+      - PK
+      - PL
+      - PM
+      - PN
+      - PR
+      - PS
+      - PT
+      - PW
+      - PY
+      - QA
+      - RE
+      - RO
+      - RS
+      - RU
+      - RW
+      - SA
+      - SB
+      - SC
+      - SD
+      - SE
+      - SG
+      - SH
+      - SI
+      - SJ
+      - SK
+      - SL
+      - SM
+      - SN
+      - SO
+      - SR
+      - ST
+      - SV
+      - SX
+      - SY
+      - SZ
+      - TC
+      - TD
+      - TF
+      - TG
+      - TH
+      - TJ
+      - TK
+      - TL
+      - TM
+      - TN
+      - TO
+      - TR
+      - TT
+      - TV
+      - TW
+      - TZ
+      - UA
+      - UG
+      - UM
+      - US
+      - UY
+      - UZ
+      - VA
+      - VC
+      - VE
+      - VG
+      - VI
+      - VN
+      - VU
+      - WF
+      - WS
+      - YE
+      - YT
+      - ZA
+      - ZM
+      - ZW
+    type: object
+  CurrencyCodeEnum:
+    description: 'An enumerated type for the values that represent the three letter <a href="https://www.iso.org/iso-4217-currency-codes.html" target="_blank">ISO 4217</a> code representing a world currency. '
+    enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHF
+      - CLP
+      - CNY
+      - COP
+      - CRC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LTL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - STD
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XCD
+      - XOF
+      - XPF
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    type: object
+  DeliveryOptionsEnum:
+    description: 'The type that defines the values that represent how the item can be delivered. <br /><br />Code so that your app gracefully handles any future changes to this list. <br /><br />Code so that your app gracefully handles any future changes to this list.  '
+    enum:
+      - SHIP_TO_HOME
+      - SELLER_ARRANGED_LOCAL_PICKUP
+      - IN_STORE_PICKUP
+      - PICKUP_DROP_OFF
+      - DIGITAL_DELIVERY
+    type: object
+  ErrorDetailV3:
+    description: The type that defines the fields that can be returned in an error.
+    properties:
+      category:
+        description: 'This string value indicates the error category. There are three categories of errors: request errors, application errors, and system errors.'
+        type: string
+      domain:
+        description: The name of the primary system where the error occurred. This is relevant for application errors.
+        type: string
+      errorId:
+        description: A unique code that identifies the particular error or warning that occurred. Your application can use error codes as identifiers in your customized error-handling algorithms.
+        type: integer
+      inputRefIds:
+        description: 'An array of reference IDs that identify the specific request elements most closely associated to the error or warning, if any.'
+        items:
+          type: string
+        type: array
+      longMessage:
+        description: 'A detailed description of the condition that caused the error or warning, and information on what to do to correct the problem.'
+        type: string
+      message:
+        description: A description of the condition that caused the error or warning.
+        type: string
+      outputRefIds:
+        description: 'An array of reference IDs that identify the specific response elements most closely associated to the error or warning, if any.'
+        items:
+          type: string
+        type: array
+      parameters:
+        description: An array of warning and error messages that return one or more variables contextual information about the error or warning. This is often the field or value that triggered the error or warning.
+        items:
+          $ref: '#/definitions/ErrorParameterV3'
+        type: array
+      subdomain:
+        description: The name of the subdomain in which the error or warning occurred.
+        type: string
+    type: object
+  ErrorParameterV3:
+    description: An array of name/value pairs that provide more details regarding error condition.
+    properties:
+      name:
+        description: This is the name of input field that caused an issue with the call request.
+        type: string
+      value:
+        description: This is the actual value that was passed in for the element specified in the name field.
+        type: string
+    type: object
+  EstimatedAvailability:
+    description: The type that defines the fields for the estimated item availability information.
+    properties:
+      availabilityThreshold:
+        description: 'This field is return only when the seller sets their ''display item quantity'' preference to Display &quot;More than 10 available&quot; in your listing (if applicable). The value of this field will be &quot;10&quot;, which is the threshold value. Code so that your app gracefully handles any future changes to this value.'
+        type: integer
+      availabilityThresholdType:
+        $ref: '#/definitions/AvailabilityThresholdEnum'
+      deliveryOptions:
+        description: An array of available delivery options. Code so that your app gracefully handles any future changes to this list.
+        items:
+          $ref: '#/definitions/DeliveryOptionsEnum'
+        type: array
+      estimatedAvailabilityStatus:
+        $ref: '#/definitions/AvailabilityStatusEnum'
+      estimatedAvailableQuantity:
+        description: 'The estimated number of this item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, the estimated availability of the item is returned.'
+        type: integer
+      estimatedSoldQuantity:
+        description: The estimated number of this item that have been sold.
+        type: integer
+    type: object
+  FilterField:
+    description: The type that enables the service to filter result sets by field values. See <a href="/api-docs/buy/static/ref-buy-browse-filters.html">Buy API Field Filters</a> for the list and examples of the supported filters.
+    properties:
+      field:
+        description: Provides a way to specify the field for the filter.
+        type: string
+      negated:
+        description: 'Note: Currently this filter is not supported.'
+        type: boolean
+      range:
+        $ref: '#/definitions/RangeValue'
+      set:
+        description: Provides a way to specify a &quot;list of values&quot; for the filter.
+        items:
+          type: string
+        type: array
+      value:
+        description: Provides a way to specify the value of the field.
+        type: string
+    type: object
+  Image:
+    description: 'Type the defines the details of an image, such as size and image URL. Currently only <b> imageUrl</b> is  populated. The <b> height</b> and <b> width</b> were added for future use.'
+    properties:
+      height:
+        description: Reserved for future use.
+        type: integer
+      imageUrl:
+        description: The URL of the image.
+        type: string
+      width:
+        description: Reserved for future use.
+        type: integer
+    type: object
+  Item:
+    description: Type that defines the fields for the item details for a specific item.
+    properties:
+      additionalImages:
+        description: An array of containers with the URLs for the images that are in addition to the primary image. The primary image is returned in the image.imageUrl field.
+        items:
+          $ref: '#/definitions/Image'
+        type: array
+      adultOnly:
+        description: 'This indicates if the item is for adults only. For more information about adult-only items on eBay, see Adult items policy for sellers and Adult-Only items on eBay for buyers.'
+        type: boolean
+      ageGroup:
+        description: '(Primary Item Aspect) The age group for which the product is recommended. For example, newborn, infant, toddler, kids, adult, etc. All the item aspects, including this aspect, are returned in the localizedAspects container.'
+        type: string
+      bidCount:
+        description: This integer value indicates the total number of bids that have been placed against an auction item. This field is returned only for auction items.
+        type: integer
+      brand:
+        description: '(Primary Item Aspect) The name brand of the item, such as Nike, Apple, etc. All the item aspects, including this aspect, are returned in the localizedAspects container.'
+        type: string
+      buyingOptions:
+        description: 'A comma separated list of the purchase options available for the item, such as FIXED_PRICE, AUCTION. FIXED_PRICE - Returned for fixed-price items (non-auction) AUCTION - Returned for auction items without Buy It Now feature FIXED_PRICE and AUCTION - Returned for auction items enabled with the Buy It Now feature Code so that your app gracefully handles any future changes to this list.'
+        items:
+          type: string
+        type: array
+      categoryId:
+        description: The ID of the leaf category for this item. A left category is the lowest level in the category tree. This category has no children.
+        type: string
+      categoryPath:
+        description: 'Text that shows the category hierarchy of the item. For example: Computers/Tablets &amp; Networking, Laptops &amp; Netbooks, PC Laptops &amp; Netbooks'
+        type: string
+      color:
+        description: '(Primary Item Aspect) Text describing the color of the item. All the item aspects, including this aspect, are returned in the localizedAspects container.'
+        type: string
+      condition:
+        description: 'The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      conditionId:
+        description: 'The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      currentBidPrice:
+        $ref: '#/definitions/ConvertedAmount'
+      description:
+        description: The full description of the item that was created by the seller. This can be plain text or rich content.
+        type: string
+      enabledForGuestCheckout:
+        description: 'Indicates if the item can be purchased using Guest Checkout in the Order API. You can use this flag to exclude items from your inventory that are not eligible for Guest Checkout, such as gift cards.'
+        type: boolean
+      energyEfficiencyClass:
+        description: 'Indicates the European energy efficiency rating (EEK) of the item. This field is returned only if the seller specified the energy efficiency rating. The rating is a set of energy efficiency classes from A to G, where ''A'' is the most energy efficient and ''G'' is the least efficient. This rating helps buyers choose between various models. When the manufacturer''s specifications for this item are available, the link to this information is returned in the productFicheWebUrl field.'
+        type: string
+      epid:
+        description: An EPID is the eBay product identifier of a product from the eBay product catalog. This indicates the product in which the item belongs.
+        type: string
+      estimatedAvailabilities:
+        description: 'The estimated number of this item that are available for purchase. Because the quantity of an item can change several times within a second, it is impossible to return the exact quantity. So instead of returning quantity, the estimated availability of the item is returned.'
+        items:
+          $ref: '#/definitions/EstimatedAvailability'
+        type: array
+      gender:
+        description: '(Primary Item Aspect) The gender for the item. This is used for items that could vary by gender, such as clothing. For example: male, female, or unisex. All the item aspects, including this aspect, are returned in the localizedAspects container.'
+        type: string
+      gtin:
+        description: 'The unique Global Trade Item number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value.'
+        type: string
+      image:
+        $ref: '#/definitions/Image'
+      inferredEpid:
+        description: 'The ePID (eBay Product ID of a product from the eBay product catalog) for the item, which has been programmatically determined by eBay using the item''s title, aspects, and other data. If the seller provided an ePID for the item, the seller''s value is returned in the epid field. Note: This field is returned only for authorized Partners.'
+        type: string
+      itemAffiliateWebUrl:
+        description: 'The URL of the View Item page of the item, which includes the affiliate tracking ID. This field is only returned if the eBay partner enables affiliate tracking for the item by including the X-EBAY-C-ENDUSERCTX request header in the method.'
+        type: string
+      itemEndDate:
+        description: 'The date and time up to which the items can be purchased. This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer.'
+        type: string
+      itemId:
+        description: The unique RESTful identifier of the item.
+        type: string
+      itemLocation:
+        $ref: '#/definitions/Address'
+      itemWebUrl:
+        description: The URL of the View Item page of the item. This enables you to include a &quot;Report Item on eBay&quot; link that takes the buyer to the View Item page on eBay. From there they can report any issues regarding this item to eBay.
+        type: string
+      localizedAspects:
+        description: An array of containers for the complete list of the name/value pairs that describe the variation of the item.
+        items:
+          $ref: '#/definitions/TypedNameValue'
+        type: array
+      marketingPrice:
+        $ref: '#/definitions/MarketingPrice'
+      material:
+        description: '(Primary Item Aspect) Text describing what the item is made of. For example, silk. All the item aspects, including this aspect, are returned in the localizedAspects container.'
+        type: string
+      minimumPriceToBid:
+        $ref: '#/definitions/ConvertedAmount'
+      mpn:
+        description: 'The manufacturer''s part number, which is a unique number that identifies a specific product. To identify the product, this is always used along with brand.'
+        type: string
+      pattern:
+        description: '(Primary Item Aspect) Text describing the pattern used on the item. For example, paisley. All the item aspects, including this aspect, are returned in the localizedAspects container.'
+        type: string
+      price:
+        $ref: '#/definitions/ConvertedAmount'
+      priceDisplayCondition:
+        $ref: '#/definitions/PriceDisplayConditionEnum'
+      primaryItemGroup:
+        $ref: '#/definitions/ItemGroupSummary'
+      primaryProductReviewRating:
+        $ref: '#/definitions/ReviewRating'
+      product:
+        $ref: '#/definitions/Product'
+      productFicheWebUrl:
+        description: 'The URL of a page containing the manufacturer''s specification of this item, which helps buyers make a purchasing decision. This information is available only for items that include the European energy efficiency rating (EEK) but is not available for all items with an EEK rating. This field is returned only if this information is available. The EEK rating of the item is returned in the energyEfficiencyClass field.'
+        type: string
+      quantityLimitPerBuyer:
+        description: The maximum number for a specific item that one buyer can purchase.
+        type: integer
+      reservePriceMet:
+        description: 'This indicates if the reserve price of the item has been met. A reserve price is set by the seller and is the minimum amount the seller is willing to sell the item for. If the highest bid is not equal to or higher than the reserve price when the auction ends, the listing ends and the item is not sold. Note: This is returned only for auctions that have a reserve price.'
+        type: boolean
+      returnTerms:
+        $ref: '#/definitions/ItemReturnTerms'
+      seller:
+        $ref: '#/definitions/SellerDetail'
+      sellerItemRevision:
+        description: 'An identifier generated/incremented when a seller revises the item. There are two types of item revisions; seller changes, such as changing the title, and eBay system changes, such as changing the quantity when an item is purchased. This ID is changed only when the seller makes a change to the item. This means you cannot use this value to determine if the quantity has changed.'
+        type: string
+      shipToLocations:
+        $ref: '#/definitions/ShipToLocations'
+      shippingOptions:
+        description: 'An array of shipping options containers that have the details about cost, carrier, etc. of one shipping option.'
+        items:
+          $ref: '#/definitions/ShippingOption'
+        type: array
+      shortDescription:
+        description: 'This text string is derived from the item condition and the item aspects (such as size, color, capacity, model, brand, etc.).'
+        type: string
+      size:
+        description: '(Primary Item Aspect) The size of the item. For example, ''7'' for a size 7 shoe. All the item aspects, including this aspect, are returned in the localizedAspects container.'
+        type: string
+      sizeSystem:
+        description: '(Primary Item Aspect) The sizing system of the country. All the item aspects, including this aspect, are returned in the localizedAspects container. Valid Values: &nbsp;&nbsp;US &nbsp;&nbsp;UK &nbsp;&nbsp;EU &nbsp;&nbsp;DE &nbsp;&nbsp;FR &nbsp;&nbsp;JP &nbsp;&nbsp;CN (China) &nbsp;&nbsp;IT &nbsp;&nbsp;BR &nbsp;&nbsp;MEX &nbsp;&nbsp;AU Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      sizeType:
+        description: '(Primary Item Aspect) Text describing a size group in which the item would be included, such as regular, petite, plus, big-and-tall or maternity. All the item aspects, including this aspect, are returned in the localizedAspects container.'
+        type: string
+      subtitle:
+        description: An additional shorten title for the item that is created by the seller.
+        type: string
+      taxes:
+        description: The container for the tax information for the item.
+        items:
+          $ref: '#/definitions/Taxes'
+        type: array
+      title:
+        description: 'The seller-created title of the item. Maximum Length: 80 characters'
+        type: string
+      topRatedBuyingExperience:
+        description: 'Indicates if the item a top-rated plus item. There are three benefits of a top-rated plus item; a minimum 30-day money-back return policy, shipping the items in 1 business day with tracking provided, and the added comfort of knowing this item is from experienced sellers with the highest buyer ratings. See the Top Rated Plus Items and Becoming a Top Rated Seller and qualifying for Top Rated Plus help topics for more information.'
+        type: boolean
+      uniqueBidderCount:
+        description: This integer value indicates the number of different eBay users who have placed one or more bids on an auction item. This field is only applicable to auction items.
+        type: integer
+      unitPrice:
+        $ref: '#/definitions/ConvertedAmount'
+      unitPricingMeasure:
+        description: 'The designation, such as size, weight, volume, count, etc., that was used to specify the quantity of the item. This helps buyers compare prices. For example, the following tells the buyer that the item is 7.99 per 100 grams. &quot;unitPricingMeasure&quot;: &quot;100g&quot;, &quot;unitPrice&quot;: { &nbsp;&nbsp;&quot;value&quot;: &quot;7.99&quot;, &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;'
+        type: string
+      warnings:
+        description: An array of warning messages. These type of errors do not prevent the method from executing but should be checked.
+        items:
+          $ref: '#/definitions/ErrorDetailV3'
+        type: array
+    type: object
+  ItemGroupSummary:
+    description: 'The type that defines the fields for the details of each item in an item group. An item group is  an item that has various aspect differences, such as color, size, storage capacity, etc. When an item group is created, one of the item variations, such as the red shirt size L, is chosen as the "parent". All the other items in the group are the children, such as the blue shirt size L, red shirt size M, etc. <br /><br /><span class="tablenote"><b> Note: </b> This container is returned only if the <b> item_id</b> in the request is an item group (parent ID of an item with variations).</span>'
+    properties:
+      itemGroupAdditionalImages:
+        description: An array of containers with the URLs for images that are in addition to the primary image of the item group. The primary image is returned in the itemGroupImage field.
+        items:
+          $ref: '#/definitions/Image'
+        type: array
+      itemGroupHref:
+        description: 'The HATEOAS reference of the parent page of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc.'
+        type: string
+      itemGroupId:
+        description: 'The unique identifier for the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc.'
+        type: string
+      itemGroupImage:
+        $ref: '#/definitions/Image'
+      itemGroupTitle:
+        description: 'The title of the item that appears on the item group page. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc.'
+        type: string
+      itemGroupType:
+        $ref: '#/definitions/ItemGroupTypeEnum'
+    type: object
+  ItemGroupTypeEnum:
+    description: 'An enumerated type for the values that represent the type of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. <br /><br />Code so that your app gracefully handles any future changes to this list.'
+    enum:
+      - SELLER_DEFINED_VARIATIONS
+    type: object
+  ItemLocationImpl:
+    description: 'The type that defines the fields for the location of an item, such as information typically used for an address, including postal code, county, state/province, street address, city, and country (2-digit ISO code).'
+    properties:
+      addressLine1:
+        description: The first line of the street address.
+        type: string
+      addressLine2:
+        description: The second line of the street address. This field may contain such values as an apartment or suite number.
+        type: string
+      city:
+        description: 'The city in which the item is located. Restriction: This field is populated in the search method response only when fieldgroups = EXTENDED.'
+        type: string
+      country:
+        $ref: '#/definitions/CountryCodeEnum'
+      county:
+        description: The county in which the item is located.
+        type: string
+      postalCode:
+        description: The postal code (or zip code in US) where the item is located.
+        type: string
+      stateOrProvince:
+        description: The state or province in which the item is located.
+        type: string
+    type: object
+  ItemReturnTerms:
+    description: The type that defines the fields for the seller's return policy.
+    properties:
+      extendedHolidayReturnsOffered:
+        description: 'Indicates if the seller has enabled the Extended Holiday Returns feature on the item. Extended Holiday Returns are only applicable during the US holiday season, and gives buyers extra time to return an item. This ''extra time'' will typically extend beyond what is set through the returnPeriod value.'
+        type: boolean
+      refundMethod:
+        $ref: '#/definitions/RefundMethodEnum'
+      restockingFeePercentage:
+        description: 'This string field indicates the restocking fee percentage that the seller has set on the item. Sellers have the option of setting no restocking fee for an item, or they can set the percentage to 10, 15, or 20 percent. So, if the cost of the item was $100, and the restocking percentage was 20 percent, the buyer would be charged $20 to return that item, so instead of receiving a $100 refund, they would receive $80 due to the restocking fee.'
+        type: string
+      returnInstructions:
+        description: Text written by the seller describing what the buyer needs to do in order to return the item.
+        type: string
+      returnMethod:
+        $ref: '#/definitions/ReturnMethodEnum'
+      returnPeriod:
+        $ref: '#/definitions/TimeDuration'
+      returnShippingCostPayer:
+        $ref: '#/definitions/ReturnShippingCostPayerEnum'
+      returnsAccepted:
+        description: Indicates whether the seller accepts returns for the item.
+        type: boolean
+    type: object
+  ItemSummary:
+    description: The type that defines the item details for a specific item.
+    properties:
+      additionalImages:
+        description: An array of containers with the URLs for the images that are in addition to the primary image. The primary image is returned in the image.imageUrl field.
+        items:
+          $ref: '#/definitions/Image'
+        type: array
+      adultOnly:
+        description: 'This indicates if the item is for adults only. For more information about adult-only items on eBay, see Adult items policy for sellers and Adult-Only items on eBay for buyers.'
+        type: boolean
+      bidCount:
+        description: This integer value indicates the total number of bids that have been placed for an auction item. This field is only returned for auction items.
+        type: integer
+      buyingOptions:
+        description: 'A comma separated list of the purchase options available for the item, such as FIXED_PRICE, AUCTION. FIXED_PRICE - Returned for fixed-price items (non-auction) AUCTION - Returned for auction items without Buy It Now feature FIXED_PRICE and AUCTION - Returned for auction items enabled with the Buy It Now feature Code so that your app gracefully handles any future changes to this list.'
+        items:
+          type: string
+        type: array
+      categories:
+        description: This container returns the primary category ID of the item (as well as the secondary category if the item was listed in two categories).
+        items:
+          $ref: '#/definitions/Category'
+        type: array
+      condition:
+        description: 'The text describing the condition of the item, such as New or Used. For a list of condition names, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      conditionId:
+        description: 'The identifier of the condition of the item. For example, 1000 is the identifier for NEW. For a list of condition names and IDs, see Item Condition IDs and Names. Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      currentBidPrice:
+        $ref: '#/definitions/ConvertedAmount'
+      distanceFromPickupLocation:
+        $ref: '#/definitions/TargetLocation'
+      energyEfficiencyClass:
+        description: 'This indicates the energy efficiency rating of the item. Energy efficiency ratings apply to products listed by commercial vendors in electronics categories only. Currently, this field is only applicable for the Germany site, and is only returned if the seller specified the energy efficiency rating through item specifics at listing time. Rating values include A+++, A++, A+, A, B, C, D, E, F, and G.'
+        type: string
+      epid:
+        description: An ePID is the eBay product identifier of a product from the eBay product catalog. This indicates the product in which the item belongs.
+        type: string
+      image:
+        $ref: '#/definitions/Image'
+      itemAffiliateWebUrl:
+        description: 'The URL to the View Item page of the item, which includes the affiliate tracking ID. This field is only returned if the seller enables affiliate tracking for the item by including the X-EBAY-C-ENDUSERCTX request header in the method.'
+        type: string
+      itemGroupHref:
+        description: 'The HATEOAS reference of the parent page of the item group. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. Note: This field is returned only for item groups.'
+        type: string
+      itemGroupType:
+        description: 'The indicates the item group type. An item group is an item that has various aspect differences, such as color, size, storage capacity, etc. Currently only SELLER_DEFINED_VARIATIONS is supported and indicates this is an item group created by the seller. Note: This field is returned only for item groups. Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      itemHref:
+        description: 'The URI for the Browse API getItem method, which can be used to retrieve more details about items in the search results.'
+        type: string
+      itemId:
+        description: The unique RESTful identifier of the item.
+        type: string
+      itemLocation:
+        $ref: '#/definitions/ItemLocationImpl'
+      itemWebUrl:
+        description: The URL to the View Item page of the item. This enables you to include a &quot;Report Item on eBay&quot; hyperlink that takes the buyer to the View Item page on eBay. From there they can report any issues regarding this item to eBay.
+        type: string
+      marketingPrice:
+        $ref: '#/definitions/MarketingPrice'
+      pickupOptions:
+        description: This container returns the local pickup options available to the buyer. This container is only returned if the user is searching for local pickup items and set the local pickup filters in the method request.
+        items:
+          $ref: '#/definitions/PickupOptionSummary'
+        type: array
+      price:
+        $ref: '#/definitions/ConvertedAmount'
+      seller:
+        $ref: '#/definitions/Seller'
+      shippingOptions:
+        description: This container returns the shipping options available to ship the item.
+        items:
+          $ref: '#/definitions/ShippingOptionSummary'
+        type: array
+      shortDescription:
+        description: 'This text string is derived from the item condition and the item aspects (such as size, color, capacity, model, brand, etc.). Sometimes the title doesn''t give enough information but the description is too big. Surfacing the shortDescription can often provide buyers with the additional information that could help them make a buying decision. For example: &quot;title&quot;: &quot;Petrel U42W FPV Drone RC Quadcopter w/HD Camera Live Video One Key Off / Landing&quot;, &quot;shortDescription&quot;: &quot;1 U42W Quadcopter. Syma X5SW-V3 Wifi FPV RC Drone Quadcopter 2.4Ghz 6-Axis Gyro with Headless Mode. Syma X20 Pocket Drone 2.4Ghz Mini RC Quadcopter Headless Mode Altitude Hold. One Key Take Off / Landing function: allow beginner to easy to fly the drone without any skill.&quot;, Restriction: This field is returned by the search method only when fieldgroups = EXTENDED.'
+        type: string
+      thumbnailImages:
+        description: An array of thumbnail images for the item.
+        items:
+          $ref: '#/definitions/Image'
+        type: array
+      title:
+        description: 'The seller-created title of the item. Maximum Length: 80 characters'
+        type: string
+      unitPrice:
+        $ref: '#/definitions/ConvertedAmount'
+      unitPricingMeasure:
+        description: 'The designation, such as size, weight, volume, count, etc., that was used to specify the quantity of the item. This helps buyers compare prices. For example, the following tells the buyer that the item is 7.99 per 100 grams. &quot;unitPricingMeasure&quot;: &quot;100g&quot;, &quot;unitPrice&quot;: { &nbsp;&nbsp;&quot;value&quot;: &quot;7.99&quot;, &nbsp;&nbsp;&quot;currency&quot;: &quot;GBP&quot;'
+        type: string
+    type: object
+  Items:
+    description: The type that defines the fields for the item details.
+    properties:
+      commonDescriptions:
+        description: 'An array of containers for a description and the item IDs of all the items that have this exact description. Often the item variations within an item group all have the same description. Instead of repeating this description in the item details of each item, an description that is shared by at one other item is returned in this container. If the description is unique, it is returned in the items.description field.'
+        items:
+          $ref: '#/definitions/CommonDescriptions'
+        type: array
+      items:
+        description: 'An array of containers for all the item variations details, excluding the description.'
+        items:
+          $ref: '#/definitions/Item'
+        type: array
+    type: object
+  LegalAddress:
+    description: Type that defines the fields for the seller's address.
+    properties:
+      addressLine1:
+        description: The first line of the street address.
+        type: string
+      addressLine2:
+        description: 'The second line of the street address. This field is not always used, but can be used for ''Suite Number'' or ''Apt Number''.'
+        type: string
+      city:
+        description: The city of the address.
+        type: string
+      country:
+        $ref: '#/definitions/CountryCodeEnum'
+      countryName:
+        description: The name of the country of the address.
+        type: string
+      county:
+        description: The name of the county of the address.
+        type: string
+      postalCode:
+        description: The postal code of the address.
+        type: string
+      stateOrProvince:
+        description: The state or province of the address.
+        type: string
+    type: object
+  MarketingPrice:
+    description: The type that defines the fields that describe a seller discount.
+    properties:
+      discountAmount:
+        $ref: '#/definitions/ConvertedAmount'
+      discountPercentage:
+        description: This field expresses the percentage of the seller discount based on the value in the originalPrice container.
+        type: string
+      originalPrice:
+        $ref: '#/definitions/ConvertedAmount'
+    type: object
+  PickupOptionSummary:
+    description: The type that defines the fields for the local pickup options that are available for the item. It is used by the <b>  pickupOptions</b>  container.
+    properties:
+      pickupLocationType:
+        description: This container returns the local pickup options available to the buyer. Possible values are ARRANGED_LOCATION and STORE.
+        type: string
+    type: object
+  Price:
+    description: The type that defines the fields for the monetary value and currency of the price of the item.
+    properties:
+      convertedFromCurrency:
+        $ref: '#/definitions/CurrencyCodeEnum'
+      convertedFromValue:
+        description: 'The monetary amount before any conversion is performed, in the currency specified by the convertedFromCurrency field. This value is the pre-conversion amount. The value field contains the converted amount of this value, in the currency specified by the currency field.'
+        type: string
+      currency:
+        $ref: '#/definitions/CurrencyCodeEnum'
+      value:
+        description: 'The dollar value of the currency specified in the currency field. The value of currency defaults to the standard currency used by the country of the eBay site offering the item. If currency conversion/localization was performed, this is the post-conversion amount. Default: The currency of the user''s country.'
+        type: string
+    type: object
+  PriceDisplayConditionEnum:
+    description: 'An enumerated type for the values that represent when in the buying flow the item''s price can appear for minimum advertised price (MAP) items, which is the lowest price a retailer can advertise/show for this item. These enumeration values indicate when the MAP can appear in the buying flow; any time, after the item has been added to the cart, or on the checkout page. <br /><br />Code so that your app gracefully handles any future changes to this list.'
+    enum:
+      - ONLY_SHOW_WHEN_ADDED_IN_CART
+      - ALWAYS_SHOW
+    type: object
+  Product:
+    description: The type that defines the fields for the product information of the item.
+    properties:
+      additionalImages:
+        description: An array of containers with the URLs for the product images that are in addition to the primary image.
+        items:
+          $ref: '#/definitions/Image'
+        type: array
+      additionalProductIdentities:
+        description: An array of product identifiers associated with the item. This container is returned if the seller has associated the eBay Product Identifier (ePID) with the item and in the request fieldgroups is set to PRODUCT.
+        items:
+          $ref: '#/definitions/AdditionalProductIdentity'
+        type: array
+      aspectGroups:
+        description: An array of containers for the product aspects. Each group contains the aspect group name and the aspect name/value pairs.
+        items:
+          $ref: '#/definitions/AspectGroup'
+        type: array
+      brand:
+        description: 'The brand associated with product. To identify the product, this is always used along with MPN (manufacturer part number).'
+        type: string
+      description:
+        description: 'The rich description of an eBay product, which might contain HTML.'
+        type: string
+      gtins:
+        description: 'An array of all the possible GTINs values associated with the product. A GTIN is a unique Global Trade Item number of the item as defined by http://www.gtin.info. This can be a UPC (Universal Product Code), EAN (European Article Number), or an ISBN (International Standard Book Number) value.'
+        items:
+          type: string
+        type: array
+      image:
+        $ref: '#/definitions/Image'
+      mpns:
+        description: 'An array of all possible MPN values associated with the product. A MPNs is manufacturer part number of the product. To identify the product, this is always used along with brand.'
+        items:
+          type: string
+        type: array
+      title:
+        description: The title of the product.
+        type: string
+    type: object
+  ProductIdentity:
+    description: The type that defines the fields for the product identifier type/value pairs of product associated with an item.
+    properties:
+      identifierType:
+        description: 'The type of product identifier, such as UPC and EAN.'
+        type: string
+      identifierValue:
+        description: The product identifier value.
+        type: string
+    type: object
+  RangeValue:
+    description: The type that defines the fields to support filtering by a range of values.
+    properties:
+      end:
+        description: Specifies the end or upper limit of the range. This can be empty which equates to greater than or equal to the start or lower limit.
+        type: string
+      exclusiveEnd:
+        description: 'Specifies whether the end value is to be included in the range. For example, if end was 100, and exclusiveEnd was true, the end range would be &lt; 100. But if it was set to false, it would be &lt;= 100.'
+        type: boolean
+      exclusiveStart:
+        description: 'Specifies whether the start value is to be included in the range. For example, if start was 60, and exclusiveStart was true, the start range would be &gt; 60. But if it was set to false, it would be &gt;= 60.'
+        type: boolean
+      range:
+        description: Specifies whether the filter is for a range of values.
+        type: boolean
+      start:
+        description: Specifies the start or lower limit of the range. This can be empty which equates to lesser than or equal to the end or upper limit.
+        type: string
+    type: object
+  RatingHistogram:
+    description: The type that defines the fields for product ratings. Only products that are in the eBay product catalog can be reviewed and rated.
+    properties:
+      count:
+        description: The total number of user ratings that the product has received.
+        type: integer
+      rating:
+        description: 'This is the average rating for the product. As part of a product review, users rate the product. Products are rated from one star (terrible) to five stars (excellent), with each star having a corresponding point value - one star gets 1 point, two stars get 2 points, and so on. If a product had one four-star rating and one five-star rating, its average rating would be 4.5, and this is the value that would appear in this field.'
+        type: string
+    type: object
+  Refinement:
+    description: 'This type defines the fields for the various refinements of an item. You can use the information in this container to create histograms, which help shoppers choose exactly what they want.'
+    properties:
+      aspectDistributions:
+        description: A array of containers for the all the aspect refinements.
+        items:
+          $ref: '#/definitions/AspectDistribution'
+        type: array
+      buyingOptionDistributions:
+        description: A array of containers for the all the buying option refinements.
+        items:
+          $ref: '#/definitions/BuyingOptionDistribution'
+        type: array
+      categoryDistributions:
+        description: A array of containers for the all the category refinements.
+        items:
+          $ref: '#/definitions/CategoryDistribution'
+        type: array
+      conditionDistributions:
+        description: A array of containers for the all the condition refinements.
+        items:
+          $ref: '#/definitions/ConditionDistribution'
+        type: array
+      dominantCategoryId:
+        description: The identifier of the category that most of the items are part of.
+        type: string
+    type: object
+  RefundMethodEnum:
+    description: An enumerated type for the values that represent how a refund is given to the buyer when an item is returned. <br /><br />Code so that your app gracefully handles any future changes to this list.
+    enum:
+      - MONEY_BACK
+      - MERCHANDISE_CREDIT
+    type: object
+  Region:
+    description: The type that defines information for a region.
+    properties:
+      regionName:
+        description: 'A free-form text string that indicates the name of the region. This value can be the name of a world region (such as the &quot;Middle East&quot; or &quot;Southeast Asia&quot;), a country, or a domestic region within a country (such as &quot;Alaska/Hawaii&quot; or &quot;US Protectorates&quot;) depending on the value of regionType. This value should be WORLDWIDE if the regionType value is WORLDWIDE.'
+        type: string
+      regionType:
+        $ref: '#/definitions/RegionTypeEnum'
+    type: object
+  RegionTypeEnum:
+    description: An enumerated type for the values that represent geographic regions. <br /><br />Code so that your app gracefully handles any future changes to this list.  <br /><br />Code so that your app gracefully handles any future changes to this list.
+    enum:
+      - COUNTRY_REGION
+      - STATE_OR_PROVINCE
+      - COUNTRY
+      - WORLD_REGION
+      - WORLDWIDE
+    type: object
+  RemoteShopcartResponse:
+    description: The type that defines the fields and containers for the member's eBay cart information.
+    properties:
+      cartItems:
+        description: An array of the items in the member's eBay cart.
+        items:
+          $ref: '#/definitions/CartItem'
+        type: array
+      cartSubtotal:
+        $ref: '#/definitions/Amount'
+      cartWebUrl:
+        description: The URL of the member's eBay cart.
+        type: string
+      unavailableCartItems:
+        description: 'An array of items in the cart that are unavailable. This can be for a variety of reasons such as, when the listing has ended or the item is out of stock. Because a cart never expires, these items will remain in the cart until they are removed.'
+        items:
+          $ref: '#/definitions/CartItem'
+        type: array
+      warnings:
+        description: An array of warning messages. These type of errors do not prevent the call from executing but should be checked.
+        items:
+          $ref: '#/definitions/ErrorDetailV3'
+        type: array
+    type: object
+  RemoveCartItemInput:
+    description: The type that defines the fields for the <b>removeItem</b> request.
+    properties:
+      cartItemId:
+        description: The identifier of the item in the cart to be removed. This ID is generated when the item was added to the cart.
+        type: string
+    type: object
+  ReturnMethodEnum:
+    description: An enumerated type for the values that represent the alternative methods for a full refund when an item is returned. <br /><br />Code so that your app gracefully handles any future changes to this list.
+    enum:
+      - REPLACEMENT
+      - EXCHANGE
+    type: object
+  ReturnShippingCostPayerEnum:
+    description: An enumerated type for the values that represent who will pay the return shipping costs.
+    enum:
+      - SELLER
+      - BUYER
+    type: object
+  ReviewRating:
+    description: The type that defines the fields for the rating of a product review.
+    properties:
+      averageRating:
+        description: The average rating given to a product based on customer reviews.
+        type: string
+      ratingHistograms:
+        description: An array of containers for the product rating histograms that shows the review counts and the product rating.
+        items:
+          $ref: '#/definitions/RatingHistogram'
+        type: array
+      reviewCount:
+        description: The total number of reviews for the item.
+        type: integer
+    type: object
+  SearchByImageRequest:
+    description: The type that defines the fields for the image information.
+    properties:
+      image:
+        description: The Base64 string of the image.
+        type: string
+    type: object
+  SearchPagedCollection:
+    description: 'The type that defines the fields for a paginated result set. The response consists of 0 or more sequenced <em> result sets</em> where each result sets has 0 or more items. '
+    properties:
+      href:
+        description: 'The URI of the current page of results. The following example of the search method returns items 1 thru 5 from the list of items found. https://api.ebay.com/buy/v1/item_summary/search?q=shirt&amp;limit=5&amp;offset=0.'
+        type: string
+      itemSummaries:
+        description: An array of items in one result set. The items are sorted according to the sorting method specified in the request.
+        items:
+          $ref: '#/definitions/ItemSummary'
+        type: array
+      limit:
+        description: 'The value of the limit parameter submitted in the request, which is the maximum number of items to return on a page, from the result set. A result set is the complete set of items returned by the method.'
+        type: integer
+      next:
+        description: 'The URI for the next page of results. This value is returned if there is an additional page of results to return from the result set. The following example of the search method returns items 5 thru 10 from the list of items found. https://api.ebay.com/buy/v1/item_summary/search?query=t-shirts&amp;limit=5&amp;offset=10'
+        type: string
+      offset:
+        description: 'This value indicates the offset used for current page of items being returned. Assume the initial request used an offset of 0 and a limit of 3. Then in the first page of results, this value would be 0, and items 1-3 are returned. For the second page, this value is 3 and so on.'
+        type: integer
+      prev:
+        description: 'The URI for the previous page of results. This is returned if there is a previous page of results from the result set. The following example of the search method returns items 1 thru 5 from the list of items found, which would be the first set of items returned. https://api.ebay.com/buy/v1/item_summary/search?query=t-shirts&amp;limit=5&amp;offset=0'
+        type: string
+      refinement:
+        $ref: '#/definitions/Refinement'
+      total:
+        description: The total number of items that match the input criteria.
+        type: integer
+      warnings:
+        description: The container with all the warnings for the request.
+        items:
+          $ref: '#/definitions/ErrorDetailV3'
+        type: array
+    type: object
+  Seller:
+    description: The type that defines the fields for basic information about the seller of the item returned by the <b> item_summary</b> resource.
+    properties:
+      feedbackPercentage:
+        description: The percentage of the total positive feedback.
+        type: string
+      feedbackScore:
+        description: The feedback score of the seller. This value is based on the ratings from eBay members that bought items from this seller.
+        type: integer
+      sellerAccountType:
+        description: 'Indicates if the seller is a business or an individual. This is determined when the seller registers with eBay. If they register for a business account, this value will be BUSINESS. If they register for a private account, this value will be INDIVIDUAL. This designation is required by the tax laws in some countries. This field is returned only on the following sites. EBAY_AT, EBAY_BE, EBAY_CH, EBAY_DE, EBAY_ES, EBAY_FR, EBAY_GB, EBAY_IE, EBAY_IT, EBAY_PL Valid values: BUSINESS INDIVIDUALCode so that your app gracefully handles any future changes to this list.'
+        type: string
+      username:
+        description: The user name created by the seller for use on eBay.
+        type: string
+    type: object
+  SellerDetail:
+    description: The type that defines the fields for basic and detailed information about the seller of the item returned by the <b> item</b> resource.
+    properties:
+      feedbackPercentage:
+        description: The percentage of the total positive feedback.
+        type: string
+      feedbackScore:
+        description: The feedback score of the seller. This value is based on the ratings from eBay members that bought items from this seller.
+        type: integer
+      sellerAccountType:
+        description: 'Indicates if the seller is a business or an individual. This is determined when the seller registers with eBay. If they register for a business account, this value will be BUSINESS. If they register for a private account, this value will be INDIVIDUAL. This designation is required by the tax laws in some countries. This field is returned only on the following sites. EBAY_AT&nbsp;&nbsp;&nbsp;EBAY_BE&nbsp;&nbsp;&nbsp;EBAY_CH&nbsp;&nbsp;&nbsp;EBAY_DE&nbsp;&nbsp;&nbsp;EBAY_ES&nbsp;&nbsp;&nbsp;EBAY_FR&nbsp;&nbsp;&nbsp;EBAY_GB&nbsp;&nbsp;&nbsp;EBAY_IE&nbsp;&nbsp;&nbsp;EBAY_IT&nbsp;&nbsp;&nbsp;EBAY_PL Valid values: BUSINESS INDIVIDUALCode so that your app gracefully handles any future changes to this list.'
+        type: string
+      sellerLegalInfo:
+        $ref: '#/definitions/SellerLegalInfo'
+      username:
+        description: The user name created by the seller for use on eBay.
+        type: string
+    type: object
+  SellerLegalInfo:
+    description: The type that defines the fields for the contact information for a seller.
+    properties:
+      email:
+        description: The seller's business email address.
+        type: string
+      fax:
+        description: The seller' business fax number.
+        type: string
+      imprint:
+        description: 'This is a free-form string created by the seller. This is information often found on business cards, such as address. This is information used by some countries.'
+        type: string
+      legalContactFirstName:
+        description: The seller's first name.
+        type: string
+      legalContactLastName:
+        description: The seller's last name.
+        type: string
+      name:
+        description: The name of the seller's business.
+        type: string
+      phone:
+        description: The seller's business phone number.
+        type: string
+      registrationNumber:
+        description: The seller's registration number. This is information used by some countries.
+        type: string
+      sellerProvidedLegalAddress:
+        $ref: '#/definitions/LegalAddress'
+      termsOfService:
+        description: 'This is a free-form string created by the seller. This is the seller''s terms or condition, which is in addition to the seller''s return policies.'
+        type: string
+      vatDetails:
+        description: An array of the seller's VAT (value added tax) IDs and the issuing country. VAT is a tax added by some European countries.
+        items:
+          $ref: '#/definitions/VatDetail'
+        type: array
+    type: object
+  ShipToLocation:
+    description: The type that defines the fields for the country and postal code of where an item is to be shipped.
+    properties:
+      country:
+        $ref: '#/definitions/CountryCodeEnum'
+      postalCode:
+        description: The zip code (postal code) for where the item is to be shipped.
+        type: string
+    type: object
+  ShipToLocations:
+    description: The type that defines the fields that include and exclude geographic regions affecting where the item can be shipped. The seller defines these regions when listing the item.
+    properties:
+      regionExcluded:
+        description: A array of containers for regions that are specifically excluded from a region set. You can use this to exclude a specific regionName from a regionType that you specifically include.
+        items:
+          $ref: '#/definitions/Region'
+        type: array
+      regionIncluded:
+        description: A array of containers for regions that are specifically included in a region set. You can use this to exclude a specific regionName from a regionType that you specifically include.
+        items:
+          $ref: '#/definitions/Region'
+        type: array
+    type: object
+  ShippingOption:
+    description: The type that defines the fields for the details of a shipping provider.
+    properties:
+      additionalShippingCostPerUnit:
+        $ref: '#/definitions/ConvertedAmount'
+      cutOffDateUsedForEstimate:
+        description: 'The deadline date that the item must be purchased by in order to be received by the buyer within the delivery window ( maxEstimatedDeliveryDate and minEstimatedDeliveryDate fields). This field is returned only for items that are eligible for ''Same Day Handling''. For these items, the value of this field is what is displayed in the Delivery line on the View Item page. This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer.'
+        type: string
+      maxEstimatedDeliveryDate:
+        description: 'The end date of the delivery window (latest projected delivery date). This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer. Note: For the best accuracy, always include the location of where the item is be shipped in the contextualLocation values of the X-EBAY-C-ENDUSERCTX request header.'
+        type: string
+      minEstimatedDeliveryDate:
+        description: 'The start date of the delivery window (earliest projected delivery date). This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer. Note: For the best accuracy, always include the location of where the item is be shipped in the contextualLocation values of the X-EBAY-C-ENDUSERCTX request header.'
+        type: string
+      quantityUsedForEstimate:
+        description: The number of items used when calculating the estimation information.
+        type: integer
+      shipToLocationUsedForEstimate:
+        $ref: '#/definitions/ShipToLocation'
+      shippingCarrierCode:
+        description: 'A name of the shipping provider, such as FedEx, or USPS.'
+        type: string
+      shippingCost:
+        $ref: '#/definitions/ConvertedAmount'
+      shippingCostType:
+        description: 'Indicates the class of the shipping cost. Valid Values: FIXED or CALCULATED. Code so that your app gracefully handles any future changes to this list.'
+        type: string
+      shippingServiceCode:
+        description: 'The type of shipping service. For example, USPS First Class.'
+        type: string
+      trademarkSymbol:
+        description: 'Any trademark symbol, such as &trade; or &reg;, that needs to be shown in superscript next to the shipping service name.'
+        type: string
+      type:
+        description: 'The type of a shipping option, such as EXPEDITED, ONE_DAY, STANDARD, ECONOMY, PICKUP, etc.'
+        type: string
+    type: object
+  ShippingOptionSummary:
+    description: The type that defines the fields for the shipping information.
+    properties:
+      maxEstimatedDeliveryDate:
+        description: 'The end date of the delivery window (latest projected delivery date). This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer. Note: For the best accuracy, always include the contextualLocation values in the X-EBAY-C-ENDUSERCTX request header.'
+        type: string
+      minEstimatedDeliveryDate:
+        description: 'The start date of the delivery window (earliest projected delivery date). This value is returned in UTC format (yyyy-MM-ddThh:mm:ss.sssZ), which you can convert into the local time of the buyer. Note: For the best accuracy, always include the contextualLocation values in the X-EBAY-C-ENDUSERCTX request header.'
+        type: string
+      shippingCost:
+        $ref: '#/definitions/ConvertedAmount'
+      shippingCostType:
+        description: This field indicates the type of shipping used to ship the item. Possible values are FIXED (flat-rate shipping) and CALCULATED (shipping cost calculated based on item and buyer location).
+        type: string
+    type: object
+  SortField:
+    description: The type that defines the fields that control how items in result sets are sorted.
+    properties:
+      ascending:
+        description: Indicates if the results are sorted in ascending (smallest to greatest) order.
+        type: boolean
+      field:
+        description: 'Specifies the name of a field in which to sort items using the value of that field. For example, if the field name was amount, the items would be sorted by the amount, or cost of the item.'
+        type: string
+    type: object
+  TargetLocation:
+    description: 'The type that defines the fields for the distance between the item location and the buyer''s location. '
+    properties:
+      unitOfMeasure:
+        description: This value shows the unit of measurement used to measure the distance between the location of the item and the buyer's location. This value is typically mi or km.
+        type: string
+      value:
+        description: This value indicates the distance (measured in the measurement unit in the unitOfMeasure field) between the item location and the buyer's location.
+        type: string
+    type: object
+  TaxJurisdiction:
+    description: The type that defines the fields for the tax jurisdiction details.
+    properties:
+      region:
+        $ref: '#/definitions/Region'
+      taxJurisdictionId:
+        description: The identifier of the tax jurisdiction.
+        type: string
+    type: object
+  TaxType:
+    description: An enumerated type for the values that represent the type of tax. <br /><br />Code so that your app gracefully handles any future changes to this list.
+    enum:
+      - STATE_SALES_TAX
+      - VAT
+      - PROVINCE_SALES_TAX
+      - REGION
+    type: object
+  Taxes:
+    description: The type that defines the tax fields.
+    properties:
+      ebayCollectAndRemitTax:
+        description: 'This field is only returned if true, and indicates that eBay will collect tax (sales tax, Goods and Services tax, or VAT) for at least one line item in the order, and remit the tax to the taxing authority of the buyer''s residence.'
+        type: boolean
+      includedInPrice:
+        description: Indicates if tax was applied for the cost of the item.
+        type: boolean
+      shippingAndHandlingTaxed:
+        description: Indicates if tax is applied for the shipping cost.
+        type: boolean
+      taxJurisdiction:
+        $ref: '#/definitions/TaxJurisdiction'
+      taxPercentage:
+        description: The percentage of tax.
+        type: string
+      taxType:
+        $ref: '#/definitions/TaxType'
+    type: object
+  TimeDuration:
+    description: The type that defines the fields for a period of time in the time-measurement units supplied.
+    properties:
+      unit:
+        $ref: '#/definitions/TimeDurationUnitEnum'
+      value:
+        description: 'Retrieves the duration of the time span (no units).The value in this field indicates the number of years, months, days, hours, or minutes in the defined period.'
+        type: integer
+    type: object
+  TimeDurationUnitEnum:
+    description: An enumerated type that defines the values that represent the period of time being used.
+    enum:
+      - YEAR
+      - MONTH
+      - DAY
+      - HOUR
+      - CALENDAR_DAY
+      - BUSINESS_DAY
+      - MINUTE
+      - SECOND
+      - MILLISECOND
+    type: object
+  TypedNameValue:
+    description: The type that defines the fields for the name/value pairs for item aspects.
+    properties:
+      name:
+        description: 'The text representing the name of the aspect for the name/value pair, such as Color.'
+        type: string
+      type:
+        $ref: '#/definitions/ValueTypeEnum'
+      value:
+        description: 'The value of the aspect for the name/value pair, such as Red.'
+        type: string
+    type: object
+  UpdateCartItemInput:
+    description: The type that defines the fields for the <b>updateQuantity</b> request.
+    properties:
+      cartItemId:
+        description: The identifier of the item in the cart to be updated. This ID is generated when the item was added to the cart.
+        type: string
+      quantity:
+        description: The new quantity for the item that is being updated.
+        type: integer
+    type: object
+  ValueTypeEnum:
+    description: An enumerated type for the values that represent the data type of value being returned for the item aspects.
+    enum:
+      - STRING
+      - STRING_ARRAY
+    type: object
+  VatDetail:
+    description: The type the defines the fields for the VAT (value add tax) information.
+    properties:
+      issuingCountry:
+        $ref: '#/definitions/CountryCodeEnum'
+      vatId:
+        description: The seller's VAT (value added tax) ID. VAT is a tax added by some European countries.
+        type: string
+    type: object
