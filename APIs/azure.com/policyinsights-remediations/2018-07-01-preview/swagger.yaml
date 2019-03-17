@@ -38,6 +38,7 @@ parameters:
     name: api-version
     required: true
     type: string
+    x-ms-parameter-location: client
   filterParameter:
     description: OData filter expression.
     in: query

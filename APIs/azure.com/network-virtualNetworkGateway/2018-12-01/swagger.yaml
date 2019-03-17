@@ -2458,6 +2458,14 @@ definitions:
         description: Tunnel name.
         readOnly: true
         type: string
+  VirtualNetworkConnectionGatewayReference:
+    description: A reference to VirtualNetworkGateway or LocalNetworkGateway resource.
+    properties:
+      id:
+        description: The ID of VirtualNetworkGateway or LocalNetworkGateway resource.
+        type: string
+    required:
+      - id
   VirtualNetworkGateway:
     allOf:
       - description: Common resource representation.
@@ -2617,7 +2625,7 @@ definitions:
           $ref: '#/definitions/IpsecPolicy'
         type: array
       localNetworkGateway2:
-        $ref: '#/definitions/virtualNetworkConnectionGatewayReference'
+        $ref: '#/definitions/VirtualNetworkConnectionGatewayReference'
         description: The reference to local network gateway resource.
       peer:
         description: Reference to another subresource.
@@ -2650,10 +2658,10 @@ definitions:
         description: Enable policy-based traffic selectors.
         type: boolean
       virtualNetworkGateway1:
-        $ref: '#/definitions/virtualNetworkConnectionGatewayReference'
+        $ref: '#/definitions/VirtualNetworkConnectionGatewayReference'
         description: The reference to virtual network gateway resource.
       virtualNetworkGateway2:
-        $ref: '#/definitions/virtualNetworkConnectionGatewayReference'
+        $ref: '#/definitions/VirtualNetworkConnectionGatewayReference'
         description: The reference to virtual network gateway resource.
     required:
       - virtualNetworkGateway1
@@ -3198,11 +3206,3 @@ definitions:
       vendor:
         description: The vendor for the vpn device.
         type: string
-  virtualNetworkConnectionGatewayReference:
-    description: A reference to VirtualNetworkGateway or LocalNetworkGateway resource.
-    properties:
-      id:
-        description: The ID of VirtualNetworkGateway or LocalNetworkGateway resource.
-        type: string
-    required:
-      - id

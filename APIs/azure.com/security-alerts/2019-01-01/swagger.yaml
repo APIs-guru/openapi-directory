@@ -147,6 +147,7 @@ paths:
                         - reason: Some computer reason
                           type: Computer
                       confidenceScore: 0.8
+                      correlationKey: Rkso6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s9Jk=
                       description: 'Process was detected running on the host and is considered to be suspicious, verify that the user run it'
                       detectedTimeUtc: '2018-05-01T19:50:47.083633Z'
                       entities:
@@ -197,6 +198,7 @@ paths:
                         - reason: cmd.exe appeared in multiple alerts of the same type
                           type: Process
                       confidenceScore: 0.3
+                      correlationKey: 4hnro6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s96++
                       description: "The process ‘%{process name}’ was observed executing from an uncommon location.\r\n\r\nFiles with the .scr extensions are screen saver files and are normally reside and execute from the Windows system directory."
                       detectedTimeUtc: '2018-05-07T13:51:45.0045913Z'
                       entities:
@@ -327,6 +329,7 @@ paths:
                         - reason: Some computer reason
                           type: Computer
                       confidenceScore: 0.8
+                      correlationKey: Rkso6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s9Jk=
                       description: 'Process was detected running on the host and is considered to be suspicious, verify that the user run it'
                       detectedTimeUtc: '2018-05-01T19:50:47.083633Z'
                       entities:
@@ -377,6 +380,7 @@ paths:
                         - reason: cmd.exe appeared in multiple alerts of the same type
                           type: Process
                       confidenceScore: 0.3
+                      correlationKey: 4hno6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0srk4
                       description: "The process ‘%{process name}’ was observed executing from an uncommon location.\r\n\r\nFiles with the .scr extensions are screen saver files and are normally reside and execute from the Windows system directory."
                       detectedTimeUtc: '2018-05-07T13:51:45.0045913Z'
                       entities:
@@ -507,6 +511,7 @@ paths:
                     - reason: Some computer reason
                       type: Computer
                   confidenceScore: 0.8
+                  correlationKey: Rkso6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s9Jk=
                   description: 'Process was detected running on the host and is considered to be suspicious, verify that the user run it'
                   detectedTimeUtc: '2018-05-01T19:50:47.083633Z'
                   entities:
@@ -681,6 +686,7 @@ paths:
                         - reason: Some computer reason
                           type: Computer
                       confidenceScore: 0.8
+                      correlationKey: Rkso6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s9Jk=
                       description: 'Process was detected running on the host and is considered to be suspicious, verify that the user run it'
                       detectedTimeUtc: '2018-05-01T19:50:47.083633Z'
                       entities:
@@ -805,6 +811,7 @@ paths:
                         - reason: Some computer reason
                           type: Computer
                       confidenceScore: 0.8
+                      correlationKey: Rkso6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s9Jk=
                       description: 'Process was detected running on the host and is considered to be suspicious, verify that the user run it'
                       detectedTimeUtc: '2018-05-01T19:50:47.083633Z'
                       entities:
@@ -927,6 +934,7 @@ paths:
                     - reason: Some computer reason
                       type: Computer
                   confidenceScore: 0.8
+                  correlationKey: Rkso6LFWxzCll5tqrk4hnrBJ+MY1BX806W6q6+0s9Jk=
                   description: 'Process was detected running on the host and is considered to be suspicious, verify that the user run it'
                   detectedTimeUtc: '2018-05-01T19:50:47.083633Z'
                   entities:
@@ -1130,6 +1138,10 @@ definitions:
         minimum: 0
         readOnly: true
         type: number
+      correlationKey:
+        description: Alerts with the same CorrelationKey will be grouped together in Ibiza.
+        readOnly: true
+        type: string
       description:
         description: Description of the incident and what it means
         readOnly: true

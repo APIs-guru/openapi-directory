@@ -1274,7 +1274,6 @@ paths:
           parameters:
             api-version: '2018-12-01'
             circuitName: ExpressRouteARMCircuitA
-            connectionName: circuitConnectionUSAUS
             peeringName: AzurePrivatePeering
             resourceGroupName: rg1
             subscriptionId: subid1
@@ -1529,6 +1528,150 @@ paths:
                     id: /subscriptions/subid2/resourceGroups/dedharcktpeer/providers/Microsoft.Network/expressRouteCircuits/dedharcktremote/peerings/AzurePrivatePeering
                   provisioningState: Succeeded
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections':
+    get:
+      description: Gets all global reach peer connections associated with a private peering in an express route circuit.
+      operationId: PeerExpressRouteCircuitConnections_List
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the circuit.
+          in: path
+          name: circuitName
+          required: true
+          type: string
+        - description: The name of the peering.
+          in: path
+          name: peeringName
+          required: true
+          type: string
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request successful. The operation returns a list of PeerExpressRouteCircuitConnections resources.
+          schema:
+            $ref: '#/definitions/PeerExpressRouteCircuitConnectionListResult'
+      tags:
+        - PeerExpressRouteCircuitConnections
+      x-ms-examples:
+        List Peer ExpressRouteCircuit Connection:
+          parameters:
+            api-version: '2018-12-01'
+            circuitName: ExpressRouteARMCircuitA
+            peeringName: AzurePrivatePeering
+            resourceGroupName: rg1
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                value:
+                  - etag: W/"6ffbbb06-da20-44ca-a34f-280c4653b1e9"
+                    id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering/peerConnections/60aee347-e889-4a42-8c1b-0aae8b1e4013
+                    name: 60aee347-e889-4a42-8c1b-0aae8b1e4013
+                    properties:
+                      addressPrefix: 20.0.0.0/29
+                      authResourceGuid: ''
+                      circuitConnectionStatus: Connected
+                      connectionName: circuitConnectionWestusEastus
+                      expressRouteCircuitPeering:
+                        id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering
+                      peerExpressRouteCircuitPeering:
+                        id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitB/peerings/AzurePrivatePeering
+                      provisioningState: Succeeded
+                  - etag: W/"6ffbbb06-da20-44ca-a34f-280c4653b1e9"
+                    id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering/peerConnections/c8b17193-8dd3-4f61-866d-8cdd2e2e268e
+                    name: c8b17193-8dd3-4f61-866d-8cdd2e2e268e
+                    properties:
+                      addressPrefix: 30.0.0.0/29
+                      authResourceGuid: 64283012-d377-421d-8398-f6aeb2ac7ea0
+                      circuitConnectionStatus: Connected
+                      connectionName: circuitConnectionCentralusEastus
+                      expressRouteCircuitPeering:
+                        id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering
+                      peerExpressRouteCircuitPeering:
+                        id: /subscriptions/subid2/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitC/peerings/AzurePrivatePeering
+                      provisioningState: Succeeded
+      x-ms-pageable:
+        nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections/{connectionName}':
+    get:
+      description: Gets the specified Peer Express Route Circuit Connection from the specified express route circuit.
+      operationId: PeerExpressRouteCircuitConnections_Get
+      parameters:
+        - description: The name of the resource group.
+          in: path
+          name: resourceGroupName
+          required: true
+          type: string
+        - description: The name of the express route circuit.
+          in: path
+          name: circuitName
+          required: true
+          type: string
+        - description: The name of the peering.
+          in: path
+          name: peeringName
+          required: true
+          type: string
+        - description: The name of the peer express route circuit connection.
+          in: path
+          name: connectionName
+          required: true
+          type: string
+        - description: Client API version.
+          in: query
+          name: api-version
+          required: true
+          type: string
+        - description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+          in: path
+          name: subscriptionId
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Request successful. The operation returns the resulting Peer Express Route Circuit Connection resource.
+          schema:
+            $ref: '#/definitions/PeerExpressRouteCircuitConnection'
+      tags:
+        - PeerExpressRouteCircuitConnections
+      x-ms-examples:
+        PeerExpressRouteCircuitConnectionGet:
+          parameters:
+            api-version: '2018-12-01'
+            circuitName: ExpressRouteARMCircuitA
+            connectionName: 60aee347-e889-4a42-8c1b-0aae8b1e4013
+            peeringName: AzurePrivatePeering
+            resourceGroupName: rg1
+            subscriptionId: subid1
+          responses:
+            '200':
+              body:
+                etag: W/"6ffbbb06-da20-44ca-a34f-280c4653b1e9"
+                id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering/peerConnections/60aee347-e889-4a42-8c1b-0aae8b1e4013
+                name: 60aee347-e889-4a42-8c1b-0aae8b1e4013
+                properties:
+                  addressPrefix: 20.0.0.0/29
+                  authResourceGuid: ''
+                  circuitConnectionStatus: Connected
+                  connectionName: circuitConnectionWestusEastus
+                  expressRouteCircuitPeering:
+                    id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitA/peerings/AzurePrivatePeering
+                  peerExpressRouteCircuitPeering:
+                    id: /subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/ExpressRouteARMCircuitB/peerings/AzurePrivatePeering
+                  provisioningState: Succeeded
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}':
     post:
       description: Gets the currently advertised routes table associated with the express route circuit in a resource group.
@@ -1899,7 +2042,7 @@ definitions:
             type: string
             x-ms-enum:
               modelAsString: true
-              name: circuitConnectionStatus
+              name: CircuitConnectionStatus
           expressRouteCircuitPeering:
             description: Reference to another subresource.
             properties:
@@ -1947,7 +2090,7 @@ definitions:
         type: string
         x-ms-enum:
           modelAsString: true
-          name: circuitConnectionStatus
+          name: CircuitConnectionStatus
       expressRouteCircuitPeering:
         description: Reference to another subresource.
         properties:
@@ -2086,7 +2229,7 @@ definitions:
                   type: string
                   x-ms-enum:
                     modelAsString: true
-                    name: circuitConnectionStatus
+                    name: CircuitConnectionStatus
                 expressRouteCircuitPeering:
                   description: Reference to another subresource.
                   properties:
@@ -2163,6 +2306,67 @@ definitions:
         maximum: 4294967295
         minimum: 1
         type: integer
+      peeredConnections:
+        description: The list of peered circuit connections associated with Azure Private Peering for this circuit.
+        items:
+          allOf:
+            - description: Reference to another subresource.
+              properties:
+                id:
+                  description: Resource ID.
+                  type: string
+              x-ms-azure-resource: true
+          description: Peer Express Route Circuit Connection in an ExpressRouteCircuitPeering resource.
+          properties:
+            etag:
+              description: A unique read-only string that changes whenever the resource is updated.
+              readOnly: true
+              type: string
+            name:
+              description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource.
+              type: string
+            properties:
+              properties:
+                addressPrefix:
+                  description: /29 IP address space to carve out Customer addresses for tunnels.
+                  type: string
+                authResourceGuid:
+                  description: The resource guid of the authorization used for the express route circuit connection.
+                  type: string
+                circuitConnectionStatus:
+                  description: 'Express Route Circuit Connection State. Possible values are: ''Connected'' and ''Disconnected''.'
+                  enum:
+                    - Connected
+                    - Connecting
+                    - Disconnected
+                  readOnly: true
+                  type: string
+                  x-ms-enum:
+                    modelAsString: true
+                    name: circuitConnectionStatus
+                connectionName:
+                  description: The name of the express route circuit connection resource.
+                  type: string
+                expressRouteCircuitPeering:
+                  description: Reference to another subresource.
+                  properties:
+                    id:
+                      description: Resource ID.
+                      type: string
+                  x-ms-azure-resource: true
+                peerExpressRouteCircuitPeering:
+                  description: Reference to another subresource.
+                  properties:
+                    id:
+                      description: Resource ID.
+                      type: string
+                  x-ms-azure-resource: true
+                provisioningState:
+                  description: 'Provisioning state of the peer express route circuit connection resource. Possible values are: ''Succeeded'', ''Updating'', ''Deleting'', and ''Failed''.'
+                  readOnly: true
+                  type: string
+        readOnly: true
+        type: array
       peeringType:
         description: 'The PeeringType. Possible values are: ''AzurePublicPeering'', ''AzurePrivatePeering'', and ''MicrosoftPeering''.'
         enum:
@@ -2256,6 +2460,9 @@ definitions:
       gatewayManagerEtag:
         description: The GatewayManager Etag.
         type: string
+      globalReachEnabled:
+        description: Flag denoting Global reach status.
+        type: boolean
       peerings:
         description: The list of peerings.
         items:
@@ -2357,11 +2564,12 @@ definitions:
         description: The name of the SKU.
         type: string
       tier:
-        description: 'The tier of the SKU. Possible values are ''Standard'', ''Premium'' or ''Basic''.'
+        description: 'The tier of the SKU. Possible values are ''Standard'', ''Premium'' or ''Local''.'
         enum:
           - Standard
           - Premium
           - Basic
+          - Local
         type: string
         x-ms-enum:
           modelAsString: true
@@ -2559,3 +2767,111 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: ExpressRouteCircuitPeeringState
+  PeerExpressRouteCircuitConnection:
+    allOf:
+      - description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+    description: Peer Express Route Circuit Connection in an ExpressRouteCircuitPeering resource.
+    properties:
+      etag:
+        description: A unique read-only string that changes whenever the resource is updated.
+        readOnly: true
+        type: string
+      name:
+        description: Gets name of the resource that is unique within a resource group. This name can be used to access the resource.
+        type: string
+      properties:
+        properties:
+          addressPrefix:
+            description: /29 IP address space to carve out Customer addresses for tunnels.
+            type: string
+          authResourceGuid:
+            description: The resource guid of the authorization used for the express route circuit connection.
+            type: string
+          circuitConnectionStatus:
+            description: 'Express Route Circuit Connection State. Possible values are: ''Connected'' and ''Disconnected''.'
+            enum:
+              - Connected
+              - Connecting
+              - Disconnected
+            readOnly: true
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: circuitConnectionStatus
+          connectionName:
+            description: The name of the express route circuit connection resource.
+            type: string
+          expressRouteCircuitPeering:
+            description: Reference to another subresource.
+            properties:
+              id:
+                description: Resource ID.
+                type: string
+            x-ms-azure-resource: true
+          peerExpressRouteCircuitPeering:
+            description: Reference to another subresource.
+            properties:
+              id:
+                description: Resource ID.
+                type: string
+            x-ms-azure-resource: true
+          provisioningState:
+            description: 'Provisioning state of the peer express route circuit connection resource. Possible values are: ''Succeeded'', ''Updating'', ''Deleting'', and ''Failed''.'
+            readOnly: true
+            type: string
+  PeerExpressRouteCircuitConnectionListResult:
+    description: Response for ListPeeredConnections API service call retrieves all global reach peer circuit connections that belongs to a Private Peering for an ExpressRouteCircuit.
+    properties:
+      nextLink:
+        description: The URL to get the next set of results.
+        type: string
+      value:
+        description: The global reach peer circuit connection associated with Private Peering in an ExpressRoute Circuit.
+        items:
+          $ref: '#/definitions/PeerExpressRouteCircuitConnection'
+        type: array
+  PeerExpressRouteCircuitConnectionPropertiesFormat:
+    properties:
+      addressPrefix:
+        description: /29 IP address space to carve out Customer addresses for tunnels.
+        type: string
+      authResourceGuid:
+        description: The resource guid of the authorization used for the express route circuit connection.
+        type: string
+      circuitConnectionStatus:
+        description: 'Express Route Circuit Connection State. Possible values are: ''Connected'' and ''Disconnected''.'
+        enum:
+          - Connected
+          - Connecting
+          - Disconnected
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: circuitConnectionStatus
+      connectionName:
+        description: The name of the express route circuit connection resource.
+        type: string
+      expressRouteCircuitPeering:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      peerExpressRouteCircuitPeering:
+        description: Reference to another subresource.
+        properties:
+          id:
+            description: Resource ID.
+            type: string
+        x-ms-azure-resource: true
+      provisioningState:
+        description: 'Provisioning state of the peer express route circuit connection resource. Possible values are: ''Succeeded'', ''Updating'', ''Deleting'', and ''Failed''.'
+        readOnly: true
+        type: string

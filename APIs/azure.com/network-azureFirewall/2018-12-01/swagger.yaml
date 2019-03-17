@@ -776,8 +776,17 @@ definitions:
         minimum: 100
         type: integer
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       rules:
         description: Collection of rules used by a application rule collection.
         items:
@@ -834,8 +843,17 @@ definitions:
         readOnly: true
         type: string
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       publicIPAddress:
         description: Reference to another subresource.
         properties:
@@ -946,8 +964,17 @@ definitions:
         minimum: 100
         type: integer
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       rules:
         description: Collection of rules used by a NAT rule collection.
         items:
@@ -1017,8 +1044,17 @@ definitions:
         minimum: 100
         type: integer
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       rules:
         description: Collection of rules used by a network rule collection.
         items:
@@ -1059,8 +1095,17 @@ definitions:
           $ref: '#/definitions/AzureFirewallNetworkRuleCollection'
         type: array
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       threatIntelMode:
         $ref: '#/definitions/AzureFirewallThreatIntelMode'
         description: The operation mode for Threat Intelligence.
@@ -1090,15 +1135,3 @@ definitions:
     x-ms-enum:
       modelAsString: true
       name: AzureFirewallThreatIntelMode
-  ProvisioningState:
-    description: The current provisioning state.
-    enum:
-      - Succeeded
-      - Updating
-      - Deleting
-      - Failed
-    readOnly: true
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: ProvisioningState

@@ -56,6 +56,13 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
+  billingProfileIdParameter:
+    description: Azure Billing Profile ID.
+    in: path
+    name: billingProfileId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   budgetNameParameter:
     description: Budget Name.
     in: path
@@ -97,6 +104,13 @@ parameters:
           name: MonthlyGrain
           value: monthly
     x-ms-parameter-location: method
+  invoiceSectionIdParameter:
+    description: Azure Invoice Section ID.
+    in: path
+    name: invoiceSectionId
+    required: true
+    type: string
+    x-ms-parameter-location: method
   managementGroupIdParameter:
     description: Azure Management Group ID.
     in: path
@@ -126,7 +140,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
   scopeBudgetParameter:
-    description: 'The scope associated with budget operations. This includes ''/subscriptions/{subscriptionId}/'' for subscription scope, ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'' for resourceGroup scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}'' for Billing Account scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'' for Department scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'' for EnrollmentAccount scope and ''/providers/Microsoft.Management/managementGroups/{managementGroupId}'' for Management Group scope..'
+    description: 'The scope associated with budget operations. This includes ''/subscriptions/{subscriptionId}/'' for subscription scope, ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}'' for resourceGroup scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}'' for Billing Account scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}'' for Department scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}'' for EnrollmentAccount scope, ''/providers/Microsoft.Management/managementGroups/{managementGroupId}'' for Management Group scope, ''/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}'' for billingProfile scope, ''providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}'' for invoiceSection scope.'
     in: path
     name: scope
     required: true

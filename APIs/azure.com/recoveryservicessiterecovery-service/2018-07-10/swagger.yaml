@@ -8510,6 +8510,12 @@ definitions:
       recoveryAvailabilitySetId:
         description: The recovery availability set Id.
         type: string
+      recoveryAvailabilityZone:
+        description: The recovery availability zone.
+        type: string
+      recoveryAzureNetworkId:
+        description: The recovery Azure virtual network ARM id.
+        type: string
       recoveryBootDiagStorageAccountId:
         description: The boot diagnostic storage account.
         type: string
@@ -8521,6 +8527,9 @@ definitions:
         type: string
       recoveryResourceGroupId:
         description: The recovery resource group Id. Valid for V2 scenarios.
+        type: string
+      recoverySubnetName:
+        description: The recovery subnet name.
         type: string
       vmDisks:
         description: The list of vm disk details.
@@ -8810,6 +8819,11 @@ definitions:
       - $ref: '#/definitions/ProviderSpecificRecoveryPointDetails'
     description: A2A provider specific recovery point details.
     properties:
+      disks:
+        description: List of disk ids representing a recovery point.
+        items:
+          type: string
+        type: array
       recoveryPointSyncType:
         description: A value indicating whether the recovery point is multi VM consistent.
         enum:
@@ -8906,6 +8920,9 @@ definitions:
         type: array
       recoveryAvailabilitySet:
         description: The recovery availability set.
+        type: string
+      recoveryAvailabilityZone:
+        description: The recovery availability zone.
         type: string
       recoveryAzureResourceGroupId:
         description: The recovery resource group.

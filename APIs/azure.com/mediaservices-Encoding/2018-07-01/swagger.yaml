@@ -1219,7 +1219,7 @@ definitions:
     description: 'The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription. Currently, the preset supports processing of content with a single audio track.'
     properties:
       audioLanguage:
-        description: 'The language for the audio payload in the input using the BCP-47 format of ''language tag-region'' (e.g: ''en-US''). The list of supported languages are, ''en-US'', ''en-GB'', ''es-ES'', ''es-MX'', ''fr-FR'', ''it-IT'', ''ja-JP'', ''pt-BR'', ''zh-CN'', ''de-DE'', ''ar-EG'', ''ru-RU'', ''hi-IN''. If not specified, automatic language detection would be employed. This feature currently supports English, Chinese, French, German, Italian, Japanese, Spanish, Russian, and Portuguese. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to English.'
+        description: 'The language for the audio payload in the input using the BCP-47 format of ''language tag-region'' (e.g: ''en-US'').  The list of supported languages are English (''en-US'' and ''en-GB''), Spanish (''es-ES'' and ''es-MX''), French (''fr-FR''), Italian (''it-IT''), Japanese (''ja-JP''), Portuguese (''pt-BR''), Chinese (''zh-CN''), German (''de-DE''), Arabic (''ar-EG''), Russian (''ru-RU''), Hindi (''hi-IN''), and Korean (''ko-KR''). If you know the language of your content, it is recommended that you specify it. If the language isn''t specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. This language detection feature currently supports English, Chinese, French, German, Italian, Japanese, Spanish, Russian, and Portuguese. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to ''en-US''."'
         type: string
     type: object
     x-ms-discriminator-value: '#Microsoft.Media.AudioAnalyzerPreset'
@@ -1333,6 +1333,25 @@ definitions:
             - description: Apply bottom field first processing of input video.
               value: BottomFieldFirst
     type: object
+  FaceDetectorPreset:
+    allOf:
+      - $ref: '#/definitions/Preset'
+    description: Describes all the settings to be used when analyzing a video in order to detect all the faces present.
+    properties:
+      resolution:
+        description: 'Specifies the maximum resolution at which your video is analyzed. The default behavior is "SourceResolution," which will keep the input video at its original resolution when analyzed. Using "StandardDefinition" will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to "StandardDefinition" will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected.'
+        enum:
+          - SourceResolution
+          - StandardDefinition
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: AnalysisResolution
+          values:
+            - value: SourceResolution
+            - value: StandardDefinition
+    type: object
+    x-ms-discriminator-value: '#Microsoft.Media.FaceDetectorPreset'
   Filters:
     description: 'Describes all the filtering operations, such as de-interlacing, rotation etc. that are to be applied to the input media before encoding.'
     properties:
@@ -1386,6 +1405,7 @@ definitions:
         type: string
     required:
       - '@odata.type'
+      - filenamePattern
     type: object
   H264Layer:
     allOf:
@@ -1491,6 +1511,8 @@ definitions:
       step:
         description: 'The intervals at which thumbnails are generated. The value can be in absolute timestamp (ISO 8601, e.g: PT05S for one image every 5 seconds), or a frame count (For example, 30 for every 30 frames), or a relative value (For example, 1%).'
         type: string
+    required:
+      - start
     type: object
     x-ms-discriminator-value: '#Microsoft.Media.Image'
   ImageFormat:
@@ -1670,7 +1692,7 @@ definitions:
     description: Represents input files for a Job.
     properties:
       files:
-        description: List of files. Required for JobInputHttp.
+        description: List of files. Required for JobInputHttp. Maximum of 4000 characters each.
         items:
           type: string
         type: array
@@ -1685,7 +1707,7 @@ definitions:
     description: Represents HTTPS job input.
     properties:
       baseUri:
-        description: 'Base URI for HTTPS job input. It will be concatenated with provided file names.   If no base uri is given, then the provided file list is assumed to be fully qualified uris.'
+        description: 'Base URI for HTTPS job input. It will be concatenated with provided file names. If no base uri is given, then the provided file list is assumed to be fully qualified uris. Maximum length of 4000 characters.'
         type: string
     type: object
     x-ms-discriminator-value: '#Microsoft.Media.JobInputHttp'
@@ -1773,7 +1795,7 @@ definitions:
       correlationData:
         additionalProperties:
           type: string
-        description: Customer provided correlation data that will be returned in Job and JobOutput state events.
+        description: 'Customer provided key, value pairs that will be returned in Job and JobOutput state events.'
         type: object
       created:
         description: 'The UTC date and time when the Job was created, in ''YYYY-MM-DDThh:mm:ssZ'' format.'
@@ -1944,6 +1966,8 @@ definitions:
         items:
           type: string
         type: array
+    required:
+      - labels
     type: object
   Overlay:
     description: 'Base type for all overlays - image, audio or video.'
@@ -1977,6 +2001,7 @@ definitions:
         type: string
     required:
       - '@odata.type'
+      - inputLabel
     type: object
   PngFormat:
     allOf:
@@ -2048,6 +2073,9 @@ definitions:
         items:
           $ref: '#/definitions/Format'
         type: array
+    required:
+      - codecs
+      - formats
     type: object
     x-ms-discriminator-value: '#Microsoft.Media.StandardEncoderPreset'
   Transform:
@@ -2240,6 +2268,8 @@ definitions:
         description: 'The number of slices to be used when encoding this layer. If not specified, default is zero, which means that encoder will use a single slice for each frame.'
         format: int32
         type: integer
+    required:
+      - bitrate
     type: object
     x-ms-discriminator-value: '#Microsoft.Media.VideoLayer'
   VideoOverlay:

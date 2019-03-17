@@ -1385,66 +1385,8 @@ paths:
                 id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice
                 name: testedgedevice
                 properties:
-                  integrityKey: Test-integrity-key
-                  resourceKey: '3482840729935603111'
-                type: Microsoft.DataBoxEdge/dataBoxEdgeDevices
-    put:
-      description: Creates or updates the additional information of a the data box edge/gateway device.
-      operationId: Devices_CreateOrUpdateExtendedInfo
-      parameters:
-        - description: The device name.
-          in: path
-          name: deviceName
-          required: true
-          type: string
-        - description: The additional information.
-          in: body
-          name: parameters
-          required: true
-          schema:
-            $ref: '#/definitions/DataBoxEdgeDeviceExtendedInfo'
-        - $ref: '#/parameters/subscriptionIdParameter'
-        - $ref: '#/parameters/resourceGroupNameParameter'
-        - $ref: '#/parameters/apiVersionParameter'
-      responses:
-        '200':
-          description: Successfully created/updated the additional information on the device.
-          schema:
-            $ref: '#/definitions/DataBoxEdgeDeviceExtendedInfo'
-        default:
-          description: Error response describing why the operation failed.
-          schema:
-            $ref: '#/definitions/CloudError'
-      tags:
-        - Devices
-      x-ms-examples:
-        ExtendedInfoPut:
-          parameters:
-            Content-Length:
-              - '200'
-            Content-Type:
-              - application/json; charset=utf-8
-            accept-language:
-              - en-US
-            api-version: '2019-03-01'
-            deviceName: testedgedevice
-            parameters:
-              id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice
-              name: testedgedevice
-              properties:
-                integrityKey: Test-integrity-key
-              type: Microsoft.DataBoxEdge/dataBoxEdgeDevices
-            resourceGroupName: GroupForEdgeAutomation
-            subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
-            x-ms-client-request-id:
-              - a93b39a3-1ff4-42b8-a56f-43368d47e37a
-          responses:
-            '200':
-              body:
-                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice
-                name: testedgedevice
-                properties:
-                  integrityKey: Test-integrity-key
+                  encryptionKey: <encryptionkey>
+                  encryptionKeyThumbprint: <encryptionthumbprint>
                   resourceKey: '3482840729935603111'
                 type: Microsoft.DataBoxEdge/dataBoxEdgeDevices
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/installUpdates':
@@ -1849,7 +1791,7 @@ paths:
     put:
       operationId: Orders_CreateOrUpdate
       parameters:
-        - description: The order details of a device.
+        - description: The device name.
           in: path
           name: deviceName
           required: true
@@ -2356,14 +2298,14 @@ paths:
             '200':
               body:
                 value:
-                  - id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/shares/testShare1234SMB
-                    name: testShare1234SMB
+                  - id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/shares/smbshare
+                    name: smbshare
                     properties:
                       accessProtocol: SMB
                       azureContainerInfo:
                         containerName: testContainerSMB
                         dataFormat: BlockBlob
-                        storageAccountCredentialId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/EAuToWIN-2FO5M5SFCEN1218180610041/storageAccountCredentials/sac1218180610052
+                        storageAccountCredentialId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/storageAccountCredentials/sac1
                       clientAccessRights: []
                       dataPolicy: Cloud
                       description: ''
@@ -2415,7 +2357,7 @@ paths:
               - en-US
             api-version: '2019-03-01'
             deviceName: testedgedevice
-            name: testShare1234SMB
+            name: smbshare
             resourceGroupName: GroupForEdgeAutomation
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
             x-ms-client-request-id:
@@ -2462,7 +2404,7 @@ paths:
               - en-US
             api-version: '2019-03-01'
             deviceName: testedgedevice
-            name: testShare1234SMB
+            name: smbshare
             resourceGroupName: GroupForEdgeAutomation
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
             x-ms-client-request-id:
@@ -2470,14 +2412,14 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/shares/testShare1234SMB
-                name: testShare1234SMB
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/shares/smbshare
+                name: smbshare
                 properties:
                   accessProtocol: SMB
                   azureContainerInfo:
                     containerName: testContainerSMB
                     dataFormat: BlockBlob
-                    storageAccountCredentialId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/EAuToWIN-2FO5M5SFCEN1218180610041/storageAccountCredentials/sac1218180610052
+                    storageAccountCredentialId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/storageAccountCredentials/sac1
                   clientAccessRights: []
                   dataPolicy: Cloud
                   description: ''
@@ -2536,16 +2478,16 @@ paths:
               - en-US
             api-version: '2019-03-01'
             deviceName: testedgedevice
-            name: testShare1234SMB
+            name: smbshare
             resourceGroupName: GroupForEdgeAutomation
             share:
-              name: testShare1234SMB
+              name: smbshare
               properties:
                 accessProtocol: SMB
                 azureContainerInfo:
                   containerName: testContainerSMB
                   dataFormat: BlockBlob
-                  storageAccountCredentialId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/EAuToWIN-2FO5M5SFCEN1218180610041/storageAccountCredentials/sac1218180610052
+                  storageAccountCredentialId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/storageAccountCredentials/sac1
                 dataPolicy: Cloud
                 description: ''
                 monitoringStatus: Enabled
@@ -2559,14 +2501,14 @@ paths:
           responses:
             '200':
               body:
-                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/shares/testShare1234SMB
-                name: testShare1234SMB
+                id: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/shares/smbshare
+                name: smbshare
                 properties:
                   accessProtocol: SMB
                   azureContainerInfo:
                     containerName: testContainerSMB
                     dataFormat: BlockBlob
-                    storageAccountCredentialId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/EAuToWIN-2FO5M5SFCEN1218180610041/storageAccountCredentials/sac1218180610052
+                    storageAccountCredentialId: /subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/storageAccountCredentials/sac1
                   clientAccessRights: []
                   dataPolicy: Cloud
                   description: ''
@@ -2621,7 +2563,7 @@ paths:
               - en-US
             api-version: '2019-03-01'
             deviceName: testedgedevice
-            name: testShare1
+            name: smbshare
             resourceGroupName: GroupForEdgeAutomation
             subscriptionId: 4385cf00-2d3a-425a-832f-f4285b1c9dce
             x-ms-client-request-id:
@@ -2880,6 +2822,11 @@ paths:
         - $ref: '#/parameters/subscriptionIdParameter'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
+        - description: Specify $filter='CustomContextTag eq <tag>' to filter on custom context tag property
+          in: query
+          name: $expand
+          required: false
+          type: string
       responses:
         '200':
           description: List all the triggers configured in the device
@@ -3790,20 +3737,15 @@ definitions:
     description: The properties of the Data Box Edge/Gateway device extended info.
     properties:
       encryptionKey:
-        description: The Channel Integrity Key (CIK) of the device.
+        description: The public part of the encryption certificate. Client uses this to encrypt any secret.
         type: string
       encryptionKeyThumbprint:
-        description: The certificate thumbprint that was used to encrypt the Channel Integrity Key (CIK).
-        type: string
-      integrityKey:
-        description: The Channel Integrity Key (CIK) of the device.
+        description: The digital signature of encrypted certificate.
         type: string
       resourceKey:
         description: The Resource ID of the Resource.
         readOnly: true
         type: string
-    required:
-      - integrityKey
     type: object
   DataBoxEdgeDeviceList:
     description: The collection of Data Box Edge/Gateway devices.
@@ -4688,7 +4630,7 @@ definitions:
         description: 'Periodic frequency at which timer event needs to be raised. Supports daily, hourly, minutes, and seconds.'
         type: string
       startTime:
-        description: The time of the day that results in a valid trigger. Schedule is computed with reference to the time specified.
+        description: The time of the day that results in a valid trigger. Schedule is computed with reference to the time specified up to seconds. If timezone is not specified the time will considered to be in device timezone. The value will always be returned as UTC time.
         format: date-time
         type: string
       topic:

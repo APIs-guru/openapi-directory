@@ -1230,6 +1230,7 @@ definitions:
         type: integer
       name:
         description: Unique name of the agent pool profile in the context of the subscription and resource group.
+        pattern: '^[a-z][a-z0-9]{0,11}$'
         type: string
       osDiskSizeGB:
         $ref: '#/definitions/ContainerServiceOSDisk'

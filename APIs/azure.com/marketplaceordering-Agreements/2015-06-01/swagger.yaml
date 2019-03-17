@@ -100,6 +100,162 @@ paths:
         - Operations
       x-ms-pageable:
         nextLinkName: nextLink
+  '/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements':
+    get:
+      description: List marketplace agreements in the subscription.
+      operationId: MarketplaceAgreements_List
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Terms returned successfully
+          schema:
+            items:
+              $ref: '#/definitions/AgreementTerms'
+            type: array
+      x-ms-examples:
+        SetMarketplaceTerms:
+          parameters:
+            api-version: '2016-04-01'
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                - id: id
+                  name: planid
+                  properties:
+                    accepted: true
+                    licenseTextLink: test.licenseLink
+                    plan: planid
+                    privacyPolicyLink: test.privacyPolicyLink
+                    product: offid
+                    publisher: pubid
+                    retrieveDatetime: '2017-08-15T11:33:07.12132Z'
+                    signature: ASDFSDAFWEFASDGWERLWER
+                  type: Microsoft.MarketplaceOrdering/offertypes
+  '/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}':
+    get:
+      description: Get marketplace agreement.
+      operationId: MarketplaceAgreements_GetAgreement
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/PublishersParameter'
+        - $ref: '#/parameters/OffersParameter'
+        - $ref: '#/parameters/PlansParameter'
+      responses:
+        '200':
+          description: Terms returned successfully
+          schema:
+            $ref: '#/definitions/AgreementTerms'
+      x-ms-examples:
+        SetMarketplaceTerms:
+          parameters:
+            api-version: '2016-04-01'
+            offerId: offid
+            planId: planid
+            publisherId: pubid
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: id
+                name: planid
+                properties:
+                  accepted: true
+                  licenseTextLink: test.licenseLink
+                  plan: planid
+                  privacyPolicyLink: test.privacyPolicyLink
+                  product: offid
+                  publisher: pubid
+                  retrieveDatetime: '2017-08-15T11:33:07.12132Z'
+                  signature: ASDFSDAFWEFASDGWERLWER
+                type: Microsoft.MarketplaceOrdering/offertypes
+  '/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel':
+    put:
+      description: Cancel marketplace terms.
+      operationId: MarketplaceAgreements_Cancel
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/PublishersParameter'
+        - $ref: '#/parameters/OffersParameter'
+        - $ref: '#/parameters/PlansParameter'
+      responses:
+        '200':
+          description: OK. The request was successfully processed and the terms were rejected.
+          schema:
+            $ref: '#/definitions/AgreementTerms'
+        default:
+          description: Microsoft.MarketplaceOrdering error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        SetMarketplaceTerms:
+          parameters:
+            api-version: '2016-04-01'
+            offerId: offid
+            planId: planid
+            publisherId: pubid
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: id
+                name: planid
+                properties:
+                  accepted: false
+                  licenseTextLink: test.licenseLink
+                  plan: planid
+                  privacyPolicyLink: test.privacyPolicyLink
+                  product: offid
+                  publisher: pubid
+                  retrieveDatetime: '2017-08-15T11:33:07.12132Z'
+                  signature: ASDFSDAFWEFASDGWERLWER
+                type: Microsoft.MarketplaceOrdering/offertypes
+  '/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign':
+    put:
+      description: Sign marketplace terms.
+      operationId: MarketplaceAgreements_Sign
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/PublishersParameter'
+        - $ref: '#/parameters/OffersParameter'
+        - $ref: '#/parameters/PlansParameter'
+      responses:
+        '200':
+          description: OK. The request was successfully processed and the terms were accepted.
+          schema:
+            $ref: '#/definitions/AgreementTerms'
+        default:
+          description: Microsoft.MarketplaceOrdering error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      x-ms-examples:
+        SetMarketplaceTerms:
+          parameters:
+            api-version: '2016-04-01'
+            offerId: offid
+            planId: planid
+            publisherId: pubid
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: id
+                name: planid
+                properties:
+                  accepted: true
+                  licenseTextLink: test.licenseLink
+                  plan: planid
+                  privacyPolicyLink: test.privacyPolicyLink
+                  product: offid
+                  publisher: pubid
+                  retrieveDatetime: '2017-08-15T11:33:07.12132Z'
+                  signature: ASDFSDAFWEFASDGWERLWER
+                type: Microsoft.MarketplaceOrdering/offertypes
   '/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/offerTypes/{offerType}/publishers/{publisherId}/offers/{offerId}/plans/{planId}/agreements/current':
     get:
       description: Get marketplace terms.

@@ -401,6 +401,36 @@ paths:
                 tags:
                   app-name: My e-commerce app
                 type: Microsoft.Search/searchServices
+        SearchUpdateServiceToRemoveIdentity:
+          parameters:
+            api-version: '2015-08-19'
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            service:
+              identity:
+                type: None
+              sku:
+                name: standard
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                identity:
+                  type: None
+                location: westus
+                name: mysearchservice
+                properties:
+                  hostingMode: default
+                  partitionCount: 1
+                  provisioningState: succeeded
+                  replicaCount: 3
+                  status: running
+                  statusDetails: ''
+                sku:
+                  name: standard
+                tags: {}
+                type: Microsoft.Search/searchServices
     put:
       description: 'Creates or updates a Search service in the given resource group. If the Search service already exists, all properties will be updated with the given values.'
       externalDocs:
@@ -475,6 +505,67 @@ paths:
             '201':
               body:
                 id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                location: westus
+                name: mysearchservice
+                properties:
+                  hostingMode: default
+                  partitionCount: 1
+                  provisioningState: provisioning
+                  replicaCount: 3
+                  status: provisioning
+                  statusDetails: ''
+                sku:
+                  name: standard
+                tags:
+                  app-name: My e-commerce app
+                type: Microsoft.Search/searchServices
+        SearchCreateOrUpdateServiceWithIdentity:
+          parameters:
+            api-version: '2015-08-19'
+            resourceGroupName: rg1
+            searchServiceName: mysearchservice
+            service:
+              identity:
+                type: SystemAssigned
+              location: westus
+              properties:
+                hostingMode: default
+                partitionCount: 1
+                replicaCount: 3
+              sku:
+                name: standard
+              tags:
+                app-name: My e-commerce app
+            subscriptionId: subid
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                identity:
+                  principalId: 9d1e1f18-2122-4988-a11c-878782e40a5c
+                  tenantId: f686d426-8d16-42db-81b7-ab578e110ccd
+                  type: SystemAssigned
+                location: westus
+                name: mysearchservice
+                properties:
+                  hostingMode: default
+                  partitionCount: 1
+                  provisioningState: provisioning
+                  replicaCount: 3
+                  status: provisioning
+                  statusDetails: ''
+                sku:
+                  name: standard
+                tags:
+                  app-name: My e-commerce app
+                type: Microsoft.Search/searchServices
+            '201':
+              body:
+                id: /subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice
+                identity:
+                  principalId: 9d1e1f18-2122-4988-a11c-878782e40a5c
+                  tenantId: f686d426-8d16-42db-81b7-ab578e110ccd
+                  type: SystemAssigned
                 location: westus
                 name: mysearchservice
                 properties:
@@ -788,6 +879,7 @@ definitions:
       type:
         description: The identity type.
         enum:
+          - None
           - SystemAssigned
         type: string
         x-ms-enum:

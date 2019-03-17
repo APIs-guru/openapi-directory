@@ -105,6 +105,77 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies':
+    get:
+      description: Get the server's threat detection policies.
+      operationId: ServerSecurityAlertPolicies_ListByServer
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the server threat detection policies.
+          schema:
+            $ref: '#/definitions/LogicalServerSecurityAlertPolicyListResult'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.
+
+             * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.
+
+             * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.
+
+             * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.
+
+             * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress
+
+             * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 500 DatabaseIsUnavailable - Loading failed. Please try again later.
+
+             * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings
+      tags:
+        - ServerSecurityAlertPolicies
+      x-ms-examples:
+        List the server's threat detection policies:
+          parameters:
+            api-version: 2017-03-01-preview
+            resourceGroupName: securityalert-4799
+            serverName: securityalert-6440
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-4799/providers/Microsoft.Sql/servers/securityalert-6440/securityAlertPolicies
+                    name: Default
+                    properties:
+                      disabledAlerts:
+                        - Access_Anomaly
+                      emailAccountAdmins: true
+                      emailAddresses:
+                        - test@microsoft.com;user@microsoft.com
+                      retentionDays: 0
+                      state: Disabled
+                      storageAccountAccessKey: ''
+                      storageEndpoint: 'https://mystorage.blob.core.windows.net'
+                    type: Microsoft.Sql/servers/securityAlertPolicies
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/securityAlertPolicies/{securityAlertPolicyName}':
     get:
       description: Get a server's security alert policy.
@@ -316,9 +387,28 @@ paths:
             '202': {}
       x-ms-long-running-operation: true
 definitions:
+  LogicalServerSecurityAlertPolicyListResult:
+    description: A list of the server's security alert policies.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: Array of results.
+        items:
+          $ref: '#/definitions/ServerSecurityAlertPolicy'
+        readOnly: true
+        type: array
+    type: object
   SecurityAlertPolicyProperties:
     description: Properties of a security alert policy.
     properties:
+      creationTime:
+        description: Specifies the UTC creation time of the policy.
+        format: date-time
+        readOnly: true
+        type: string
       disabledAlerts:
         description: 'Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action'
         items:
@@ -337,7 +427,7 @@ definitions:
         format: int32
         type: integer
       state:
-        description: 'Specifies the state of the policy, whether it is enabled or disabled.'
+        description: 'Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.'
         enum:
           - New
           - Enabled

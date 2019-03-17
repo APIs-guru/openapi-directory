@@ -441,15 +441,6 @@ paths:
                 type: Microsoft.Network/publicIPPrefixes
       x-ms-long-running-operation: true
 definitions:
-  IpTag:
-    description: Contains the IpTag associated with the object
-    properties:
-      ipTagType:
-        description: 'Gets or sets the ipTag type: Example FirstPartyUsage.'
-        type: string
-      tag:
-        description: 'Gets or sets value of the IpTag associated with the public IP. Example SQL, Storage etc'
-        type: string
   PublicIPPrefix:
     allOf:
       - description: Common resource representation.
@@ -511,7 +502,14 @@ definitions:
       ipTags:
         description: The list of tags associated with the public IP prefix.
         items:
-          $ref: '#/definitions/IpTag'
+          description: Contains the IpTag associated with the object
+          properties:
+            ipTagType:
+              description: 'Gets or sets the ipTag type: Example FirstPartyUsage.'
+              type: string
+            tag:
+              description: 'Gets or sets value of the IpTag associated with the public IP. Example SQL, Storage etc'
+              type: string
         type: array
       prefixLength:
         description: The Length of the Public IP Prefix.

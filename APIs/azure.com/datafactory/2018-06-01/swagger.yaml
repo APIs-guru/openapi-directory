@@ -5984,7 +5984,7 @@ definitions:
         discriminator: type
         properties:
           annotations:
-            description: List of tags that can be used for describing the Dataset.
+            description: List of tags that can be used for describing the linked service.
             items:
               type: object
             type: array
@@ -6528,6 +6528,11 @@ definitions:
             description: Azure data factory nested object which contains information about creating pipeline run
             discriminator: type
             properties:
+              annotations:
+                description: List of tags that can be used for describing the trigger.
+                items:
+                  type: object
+                type: array
               description:
                 description: Trigger description.
                 type: string
@@ -6825,6 +6830,11 @@ definitions:
         description: Azure data factory nested object which contains information about creating pipeline run
         discriminator: type
         properties:
+          annotations:
+            description: List of tags that can be used for describing the trigger.
+            items:
+              type: object
+            type: array
           description:
             description: Trigger description.
             type: string

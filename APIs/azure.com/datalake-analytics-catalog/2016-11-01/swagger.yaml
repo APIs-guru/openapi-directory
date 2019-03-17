@@ -2010,6 +2010,7 @@ paths:
                     parentId: 9d2d7abd-c641-4ddb-88ab-90cafdfe1c1b
                     rowCount: 1
                     size: 33786
+                    streamPath: catalog/database/86bf2a20-b511-48c8-91c5-1f73c4c0ec74/schema/b83d3be1-9e11-40b7-85f9-ad823efe2414/table/1e666ab1-d6f0-4990-8180-1a6160caf405/91193f18-06dd-47a2-96fa-2cca3b4777e1.ss
       x-ms-odata: '#/definitions/USqlTableFragment'
       x-ms-pageable:
         nextLinkName: nextLink
@@ -3702,6 +3703,9 @@ definitions:
         description: the data size of the table fragment in bytes.
         format: int64
         type: integer
+      streamPath:
+        description: the relative path for the table fragment location.
+        type: string
   USqlTableFragmentList:
     allOf:
       - $ref: '#/definitions/CatalogItemList'

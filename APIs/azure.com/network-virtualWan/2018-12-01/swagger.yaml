@@ -4259,6 +4259,15 @@ paths:
                 type: Microsoft.Network/vpnSites
       x-ms-long-running-operation: true
 definitions:
+  Access:
+    description: Access to be allowed or denied.
+    enum:
+      - Allow
+      - Deny
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: Access
   DeviceProperties:
     description: List of properties of the device.
     properties:
@@ -4316,8 +4325,17 @@ definitions:
         description: Enable internet security
         type: boolean
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       remoteVirtualNetwork:
         description: Reference to another subresource.
         properties:
@@ -4436,7 +4454,7 @@ definitions:
     type: string
     x-ms-enum:
       modelAsString: true
-      name: officeTrafficCategory
+      name: OfficeTrafficCategory
   P2SVpnGateway:
     allOf:
       - description: Common resource representation.
@@ -4483,8 +4501,17 @@ definitions:
             type: string
         x-ms-azure-resource: true
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       virtualHub:
         description: Reference to another subresource.
         properties:
@@ -4828,7 +4855,7 @@ definitions:
             - pfsGroup
         type: array
       vpnProtocols:
-        description: vpnProtocols for the P2SVpnServerConfiguration.
+        description: VPN protocols for the P2SVpnServerConfiguration.
         items:
           description: VPN protocol enabled for the P2SVpnServerConfiguration.
           enum:
@@ -4839,18 +4866,6 @@ definitions:
             modelAsString: true
             name: VpnGatewayTunnelingProtocol
         type: array
-  ProvisioningState:
-    description: The current provisioning state.
-    enum:
-      - Succeeded
-      - Updating
-      - Deleting
-      - Failed
-    readOnly: true
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: ProvisioningState
   TunnelConnectionStatus:
     description: The current state of the tunnel.
     enum:
@@ -4862,7 +4877,7 @@ definitions:
     type: string
     x-ms-enum:
       modelAsString: true
-      name: tunnelConnectionStatus
+      name: TunnelConnectionStatus
   VirtualHub:
     allOf:
       - description: Common resource representation.
@@ -4919,13 +4934,22 @@ definitions:
             type: string
         x-ms-azure-resource: true
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       routeTable:
         $ref: '#/definitions/VirtualHubRouteTable'
         description: The routeTable associated with this virtual hub.
       virtualNetworkConnections:
-        description: list of all vnet connections with this VirtualHub.
+        description: List of all vnet connections with this VirtualHub.
         items:
           $ref: '#/definitions/HubVirtualNetworkConnection'
         type: array
@@ -4947,7 +4971,7 @@ definitions:
     description: VirtualHub route
     properties:
       addressPrefixes:
-        description: list of all addressPrefixes.
+        description: List of all addressPrefixes.
         items:
           type: string
         type: array
@@ -4958,7 +4982,7 @@ definitions:
     description: VirtualHub route table
     properties:
       routes:
-        description: list of all routes.
+        description: List of all routes.
         items:
           $ref: '#/definitions/VirtualHubRoute'
         type: array
@@ -5013,13 +5037,22 @@ definitions:
         $ref: '#/definitions/OfficeTrafficCategory'
         description: The office local breakout category.
       p2SVpnServerConfigurations:
-        description: list of all P2SVpnServerConfigurations associated with the virtual wan.
+        description: List of all P2SVpnServerConfigurations associated with the virtual wan.
         items:
           $ref: '#/definitions/P2SVpnServerConfiguration'
         type: array
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       securityProviderName:
         description: The Security Provider name.
         type: string
@@ -5065,7 +5098,7 @@ definitions:
     type: string
     x-ms-enum:
       modelAsString: true
-      name: virtualWanSecurityProviderType
+      name: VirtualWanSecurityProviderType
   VirtualWanSecurityProviders:
     description: Collection of SecurityProviders.
     properties:
@@ -5255,8 +5288,17 @@ definitions:
             - pfsGroup
         type: array
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       remoteVpnSite:
         description: Reference to another subresource.
         properties:
@@ -5265,7 +5307,7 @@ definitions:
             type: string
         x-ms-azure-resource: true
       routingWeight:
-        description: routing weight for vpn connection.
+        description: Routing weight for vpn connection.
         format: int32
         type: integer
       sharedKey:
@@ -5291,7 +5333,7 @@ definitions:
     type: string
     x-ms-enum:
       modelAsString: true
-      name: vpnConnectionStatus
+      name: VpnConnectionStatus
   VpnGateway:
     allOf:
       - description: Common resource representation.
@@ -5345,13 +5387,22 @@ definitions:
             format: int32
             type: integer
       connections:
-        description: list of all vpn connections to the gateway.
+        description: List of all vpn connections to the gateway.
         items:
           $ref: '#/definitions/VpnConnection'
         type: array
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       virtualHub:
         description: Reference to another subresource.
         properties:
@@ -5446,8 +5497,17 @@ definitions:
         description: IsSecuritySite flag
         type: boolean
       provisioningState:
-        $ref: '#/definitions/ProvisioningState'
-        description: The provisioning state of the resource.
+        description: The current provisioning state.
+        enum:
+          - Succeeded
+          - Updating
+          - Deleting
+          - Failed
+        readOnly: true
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ProvisioningState
       siteKey:
         description: The key for vpn-site that can be used for connections.
         type: string
@@ -5458,15 +5518,3 @@ definitions:
             description: Resource ID.
             type: string
         x-ms-azure-resource: true
-  access:
-    description: Access to be allowed or denied.
-    enum:
-      - Allow
-      - Deny
-    type: string
-    x-ms-enum:
-      modelAsString: true
-      name: access
-  disableVpnEncryption:
-    description: Vpn encryption to be disabled or not.
-    type: boolean

@@ -1200,7 +1200,7 @@ definitions:
         $ref: '#/definitions/StreamingPolicyContentKeys'
         description: Representing default content key for each encryption scheme and separate content keys for specific tracks
       customKeyAcquisitionUrlTemplate:
-        description: KeyAcquisitionUrlTemplate is used to point to user specified service to delivery content keys
+        description: 'Template for the URL of the custom service delivering keys to end user players.  Not required when using Azure Media Services for issuing keys.  The template supports replaceable tokens that the service will update at runtime with the value specific to the request.  The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested.'
         type: string
       enabledProtocols:
         $ref: '#/definitions/EnabledProtocols'
@@ -1363,6 +1363,11 @@ definitions:
         description: The end time of the Streaming Locator.
         format: date-time
         type: string
+      filters:
+        description: A list of asset or account filters which apply to this streaming locator
+        items:
+          type: string
+        type: array
       startTime:
         description: The start time of the Streaming Locator.
         format: date-time
@@ -1501,7 +1506,7 @@ definitions:
         description: All license to be persistent or not
         type: boolean
       customLicenseAcquisitionUrlTemplate:
-        description: The template for a customer service to deliver keys to end users.  Not needed when using Azure Media Services for issuing keys.
+        description: 'Template for the URL of the custom service delivering licenses to end user players.  Not required when using Azure Media Services for issuing licenses.  The template supports replaceable tokens that the service will update at runtime with the value specific to the request.  The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested.'
         type: string
     required:
       - allowPersistentLicense
@@ -1510,7 +1515,7 @@ definitions:
     description: Class to specify configurations of PlayReady in Streaming Policy
     properties:
       customLicenseAcquisitionUrlTemplate:
-        description: The template for a customer service to deliver keys to end users.  Not needed when using Azure Media Services for issuing keys.
+        description: 'Template for the URL of the custom service delivering licenses to end user players.  Not required when using Azure Media Services for issuing licenses.  The template supports replaceable tokens that the service will update at runtime with the value specific to the request.  The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested.'
         type: string
       playReadyCustomAttributes:
         description: Custom attributes for PlayReady
@@ -1545,7 +1550,7 @@ definitions:
     description: Class to specify configurations of Widevine in Streaming Policy
     properties:
       customLicenseAcquisitionUrlTemplate:
-        description: The template for a customer service to deliver keys to end users.  Not needed when using Azure Media Services for issuing keys.
+        description: 'Template for the URL of the custom service delivering licenses to end user players.  Not required when using Azure Media Services for issuing licenses.  The template supports replaceable tokens that the service will update at runtime with the value specific to the request.  The currently supported token values are {AlternativeMediaId}, which is replaced with the value of StreamingLocatorId.AlternativeMediaId, and {ContentKeyId}, which is replaced with the value of identifier of the key being requested.'
         type: string
     type: object
   TrackPropertyCondition:

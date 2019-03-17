@@ -618,6 +618,8 @@ paths:
                   administratorLogin: testuser
                   earliestRestoreDate: '2018-03-04T21:00:58.9243541+00:00'
                   fullyQualifiedDomainName: pgtestsvc1.postgres.database.azure.com
+                  masterServerId: ''
+                  replicationRole: ''
                   sslEnforcement: Enabled
                   storageProfile:
                     backupRetentionDays: 10
@@ -863,6 +865,74 @@ paths:
                   ElasticServer: '1'
                 type: Microsoft.DBforPostgreSQL/servers
             '202': {}
+        Create a replica server:
+          parameters:
+            api-version: '2017-12-01'
+            parameters:
+              location: westcentralus
+              properties:
+                createMode: Replica
+                sourceServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-master
+              sku:
+                capacity: 2
+                family: Gen5
+                name: GP_Gen5_2
+                tier: GeneralPurpose
+            resourceGroupName: TestGroup_WestCentralUS
+            serverName: testserver-replica1
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-replica1
+                location: westcentralus
+                name: testserver-replica1
+                properties:
+                  administratorLogin: postgres
+                  earliestRestoreDate: '2018-06-20T00:17:56.677+00:00'
+                  fullyQualifiedDomainName: testserver-replica1.postgres.database.azure.com
+                  masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-master
+                  replicaCapacity: 0
+                  replicationRole: Replica
+                  sslEnforcement: Disabled
+                  storageProfile:
+                    backupRetentionDays: 7
+                    geoRedundantBackup: Disabled
+                    storageMB: 2048000
+                  userVisibleState: Ready
+                  version: '9.6'
+                sku:
+                  capacity: 2
+                  family: Gen4
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                type: Microsoft.DBforPostgreSQL/servers
+            '201':
+              body:
+                id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-replica1
+                location: westcentralus
+                name: testserver-replica1
+                properties:
+                  administratorLogin: postgres
+                  earliestRestoreDate: '2018-06-20T00:17:56.677+00:00'
+                  fullyQualifiedDomainName: testserver-replica1.postgres.database.azure.com
+                  masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-master
+                  replicaCapacity: 0
+                  replicationRole: Replica
+                  sslEnforcement: Disabled
+                  storageProfile:
+                    backupRetentionDays: 7
+                    geoRedundantBackup: Disabled
+                    storageMB: 2048000
+                  userVisibleState: Ready
+                  version: '9.6'
+                sku:
+                  capacity: 2
+                  family: Gen5
+                  name: GP_Gen5_2
+                  tier: GeneralPurpose
+                type: Microsoft.DBforPostgreSQL/servers
+            '202': {}
         'Create a server as a geo restore ':
           parameters:
             api-version: '2017-12-01'
@@ -932,6 +1002,149 @@ paths:
                 type: Microsoft.DBforPostgreSQL/servers
             '202': {}
       x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/Replicas':
+    get:
+      description: List all the replicas for a given server.
+      operationId: Replicas_ListByServer
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/ServerNameParameter'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/ServerListResult'
+      tags:
+        - Replicas
+      x-ms-examples:
+        ReplicasListByServer:
+          parameters:
+            api-version: '2017-12-01'
+            resourceGroupName: TestGroup_WestCentralUS
+            serverName: testserver-master
+            subscriptionId: ffffffff-ffff-ffff-ffff-ffffffffffff
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-replica1
+                    location: westcentralus
+                    name: testserver-replica1
+                    properties:
+                      administratorLogin: postgres
+                      earliestRestoreDate: '2018-06-12T00:05:03.2695756+00:00'
+                      fullyQualifiedDomainName: testserver-replica1.postgres.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-master
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Disabled
+                      storageProfile:
+                        backupRetentionDays: 7
+                        geoRedundantBackup: Disabled
+                        storageMB: 2048000
+                      userVisibleState: Ready
+                      version: '9.6'
+                    sku:
+                      capacity: 16
+                      family: Gen4
+                      name: GP_Gen4_16
+                      tier: GeneralPurpose
+                    type: Microsoft.DBforPostgreSQL/servers
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-replica2
+                    location: westcentralus
+                    name: testserver-replica2
+                    properties:
+                      administratorLogin: postgres
+                      earliestRestoreDate: '2018-06-12T00:05:03.2695756+00:00'
+                      fullyQualifiedDomainName: testserver-replica2.postgres.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-master
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Disabled
+                      storageProfile:
+                        backupRetentionDays: 7
+                        geoRedundantBackup: Disabled
+                        storageMB: 2048000
+                      userVisibleState: Ready
+                      version: '9.6'
+                    sku:
+                      capacity: 16
+                      family: Gen4
+                      name: GP_Gen4_16
+                      tier: GeneralPurpose
+                    type: Microsoft.DBforPostgreSQL/servers
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-replica3
+                    location: westcentralus
+                    name: testserver-replica3
+                    properties:
+                      administratorLogin: postgres
+                      earliestRestoreDate: '2018-06-12T00:05:03.2695756+00:00'
+                      fullyQualifiedDomainName: testserver-replica3.postgres.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-master
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Disabled
+                      storageProfile:
+                        backupRetentionDays: 7
+                        geoRedundantBackup: Disabled
+                        storageMB: 2048000
+                      userVisibleState: Ready
+                      version: '9.6'
+                    sku:
+                      capacity: 16
+                      family: Gen4
+                      name: GP_Gen4_16
+                      tier: GeneralPurpose
+                    type: Microsoft.DBforPostgreSQL/servers
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-replica4
+                    location: westcentralus
+                    name: testserver-replica4
+                    properties:
+                      administratorLogin: postgres
+                      earliestRestoreDate: '2018-06-12T00:05:03.2695756+00:00'
+                      fullyQualifiedDomainName: testserver-replica4.postgres.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-master
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Disabled
+                      storageProfile:
+                        backupRetentionDays: 7
+                        geoRedundantBackup: Disabled
+                        storageMB: 2048000
+                      userVisibleState: Ready
+                      version: '9.6'
+                    sku:
+                      capacity: 16
+                      family: Gen4
+                      name: GP_Gen4_16
+                      tier: GeneralPurpose
+                    type: Microsoft.DBforPostgreSQL/servers
+                  - id: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-replica5
+                    location: westcentralus
+                    name: testserver-replica5
+                    properties:
+                      administratorLogin: postgres
+                      earliestRestoreDate: '2018-06-12T00:05:03.2695756+00:00'
+                      fullyQualifiedDomainName: testserver-replica5.postgres.database.azure.com
+                      masterServerId: /subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup_WestCentralUS/providers/Microsoft.DBforPostgreSQL/servers/testserver-master
+                      replicaCapacity: 0
+                      replicationRole: Replica
+                      sslEnforcement: Disabled
+                      storageProfile:
+                        backupRetentionDays: 7
+                        geoRedundantBackup: Disabled
+                        storageMB: 2048000
+                      userVisibleState: Ready
+                      version: '9.6'
+                    sku:
+                      capacity: 16
+                      family: Gen4
+                      name: GP_Gen4_16
+                      tier: GeneralPurpose
+                    type: Microsoft.DBforPostgreSQL/servers
+      x-ms-pageable: {}
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/servers/{serverName}/configurations':
     get:
       description: List all the configurations in a given server.
@@ -3049,6 +3262,17 @@ definitions:
       fullyQualifiedDomainName:
         description: The fully qualified domain name of a server.
         type: string
+      masterServerId:
+        description: The master server id of a replica server.
+        type: string
+      replicaCapacity:
+        description: The maximum number of replicas that a master server can have.
+        format: int32
+        minimum: 0
+        type: integer
+      replicationRole:
+        description: The replication role of the server.
+        type: string
       sslEnforcement:
         $ref: '#/definitions/SslEnforcement'
         description: Enable ssl enforcement or not when connect to server.
@@ -3078,6 +3302,7 @@ definitions:
           - Default
           - PointInTimeRestore
           - GeoRestore
+          - Replica
         type: string
         x-ms-enum:
           modelAsString: true
@@ -3120,6 +3345,17 @@ definitions:
     required:
       - sourceServerId
     x-ms-discriminator-value: GeoRestore
+  ServerPropertiesForReplica:
+    allOf:
+      - $ref: '#/definitions/ServerPropertiesForCreate'
+    description: The properties to create a new replica.
+    properties:
+      sourceServerId:
+        description: The master server id to create replica from.
+        type: string
+    required:
+      - sourceServerId
+    x-ms-discriminator-value: Replica
   ServerPropertiesForRestore:
     allOf:
       - $ref: '#/definitions/ServerPropertiesForCreate'

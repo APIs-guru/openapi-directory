@@ -123,6 +123,18 @@ definitions:
           type: object
         description: 'The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: ''/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}''.'
         type: object
+  ProvisioningState:
+    description: The current provisioning state.
+    enum:
+      - Succeeded
+      - Updating
+      - Deleting
+      - Failed
+    readOnly: true
+    type: string
+    x-ms-enum:
+      modelAsString: true
+      name: ProvisioningState
   Resource:
     description: Common resource representation.
     properties:

@@ -105,6 +105,90 @@ parameters:
     type: string
     x-ms-parameter-location: method
 paths:
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies':
+    get:
+      description: Gets a list of managed database's security alert policies.
+      operationId: ManagedDatabaseSecurityAlertPolicies_ListByDatabase
+      parameters:
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - description: The name of the managed instance.
+          in: path
+          name: managedInstanceName
+          required: true
+          type: string
+        - description: The name of the managed database for which the security alert policies are defined.
+          in: path
+          name: databaseName
+          required: true
+          type: string
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+      responses:
+        '200':
+          description: Successfully retrieved the managed database security alert policies.
+          schema:
+            $ref: '#/definitions/ManagedDatabaseSecurityAlertPolicyListResult'
+        default:
+          description: |-
+            *** Error Responses: ***
+
+             * 400 SecurityAlertPoliciesInvalidStorageAccountName - The provided storage account is not valid or does not exist.
+
+             * 400 SecurityAlertPoliciesInvalidStorageAccountCredentials - The provided storage account access key is not valid.
+
+             * 400 InvalidServerSecurityAlertPolicyCreateRequest - The create server Threat Detection security alert policy request does not exist or has no properties object.
+
+             * 400 DataSecurityInvalidUserSuppliedParameter - An invalid parameter value was provided by the client.
+
+             * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 400 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 404 SubscriptionDoesNotHaveServer - The requested server was not found
+
+             * 404 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 409 ServerSecurityAlertPolicyInProgress - Set server security alert policy is already in progress
+
+             * 409 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 500 DatabaseIsUnavailable - Loading failed. Please try again later.
+
+             * 500 UpsertServerSecurityAlertPolicyFailed - An error has occurred while saving Threat detection settings, please try again later
+
+             * 500 GetServerSecurityAlertPolicyFailed - Failed to get Threat Detection settings
+      tags:
+        - ManagedDatabaseSecurityAlertPolicies
+      x-ms-examples:
+        Get a list of the database's threat detection policies.:
+          parameters:
+            api-version: 2017-03-01=preview
+            databaseName: testdb
+            managedInstanceName: securityalert-2080
+            resourceGroupName: securityalert-6852
+            subscriptionId: 00000000-1111-2222-3333-444444444444
+          responses:
+            '200':
+              body:
+                value:
+                  - id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/securityalert-6852/providers/Microsoft.Sql/managedInstances/securityalert-2080/databases/testdb
+                    kind: V12
+                    location: Japan East
+                    name: default
+                    properties:
+                      disabledAlerts:
+                        - Usage_Anomaly
+                      emailAccountAdmins: 'true'
+                      emailAddresses:
+                        - test@microsoft.com
+                        - user@microsoft.com
+                      retentionDays: 0
+                      state: Enabled
+                      storageAccountAccessKey: ''
+                      storageEndpoint: ''
+                    type: Microsoft.Sql/managedInstances/databases/securityAlertPolicies
+      x-ms-pageable:
+        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/securityAlertPolicies/{securityAlertPolicyName}':
     get:
       description: Gets a managed database's security alert policy.
@@ -371,6 +455,20 @@ definitions:
         description: Resource properties.
         x-ms-client-flatten: true
     type: object
+  ManagedDatabaseSecurityAlertPolicyListResult:
+    description: A list of the managed database's security alert policies.
+    properties:
+      nextLink:
+        description: Link to retrieve next page of results.
+        readOnly: true
+        type: string
+      value:
+        description: Array of results.
+        items:
+          $ref: '#/definitions/ManagedDatabaseSecurityAlertPolicy'
+        readOnly: true
+        type: array
+    type: object
   SecurityAlertPolicyProperties:
     description: Properties of a security alert policy.
     properties:
@@ -397,7 +495,7 @@ definitions:
         format: int32
         type: integer
       state:
-        description: 'Specifies the state of the policy, whether it is enabled or disabled.'
+        description: 'Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database.'
         enum:
           - New
           - Enabled

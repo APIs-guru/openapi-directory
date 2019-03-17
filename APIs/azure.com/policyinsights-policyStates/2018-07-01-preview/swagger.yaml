@@ -34,7 +34,7 @@ security:
       - user_impersonation
 parameters:
   apiVersionParameter:
-    description: API version to use with the client requests.
+    description: Client Api Version.
     in: query
     name: api-version
     required: true
@@ -192,7 +192,7 @@ parameters:
     x-ms-parameter-grouping:
       name: QueryOptions
     x-ms-parameter-location: method
-  subscriptionIdParameter:
+  subscriptionId:
     description: Microsoft Azure subscription ID.
     in: path
     name: subscriptionId
@@ -409,7 +409,7 @@ paths:
       operationId: PolicyStates_ListQueryResultsForSubscription
       parameters:
         - $ref: '#/parameters/policyStatesResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/topParameter'
         - $ref: '#/parameters/orderByParameter'
@@ -690,7 +690,7 @@ paths:
       operationId: PolicyStates_SummarizeForSubscription
       parameters:
         - $ref: '#/parameters/policyStatesSummaryResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/topParameter'
         - $ref: '#/parameters/fromParameter'
@@ -808,7 +808,7 @@ paths:
       operationId: PolicyStates_ListQueryResultsForSubscriptionLevelPolicyAssignment
       parameters:
         - $ref: '#/parameters/policyStatesResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/authorizationNamespaceParameter'
         - $ref: '#/parameters/policyAssignmentNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
@@ -902,7 +902,7 @@ paths:
       operationId: PolicyStates_SummarizeForSubscriptionLevelPolicyAssignment
       parameters:
         - $ref: '#/parameters/policyStatesSummaryResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/authorizationNamespaceParameter'
         - $ref: '#/parameters/policyAssignmentNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
@@ -977,7 +977,7 @@ paths:
       operationId: PolicyStates_ListQueryResultsForPolicyDefinition
       parameters:
         - $ref: '#/parameters/policyStatesResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/authorizationNamespaceParameter'
         - $ref: '#/parameters/policyDefinitionNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
@@ -1071,7 +1071,7 @@ paths:
       operationId: PolicyStates_SummarizeForPolicyDefinition
       parameters:
         - $ref: '#/parameters/policyStatesSummaryResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/authorizationNamespaceParameter'
         - $ref: '#/parameters/policyDefinitionNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
@@ -1167,7 +1167,7 @@ paths:
       operationId: PolicyStates_ListQueryResultsForPolicySetDefinition
       parameters:
         - $ref: '#/parameters/policyStatesResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/authorizationNamespaceParameter'
         - $ref: '#/parameters/policySetDefinitionNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
@@ -1261,7 +1261,7 @@ paths:
       operationId: PolicyStates_SummarizeForPolicySetDefinition
       parameters:
         - $ref: '#/parameters/policyStatesSummaryResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/authorizationNamespaceParameter'
         - $ref: '#/parameters/policySetDefinitionNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
@@ -1309,7 +1309,7 @@ paths:
       operationId: PolicyStates_ListQueryResultsForResourceGroup
       parameters:
         - $ref: '#/parameters/policyStatesResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/topParameter'
@@ -1401,7 +1401,7 @@ paths:
       operationId: PolicyStates_SummarizeForResourceGroup
       parameters:
         - $ref: '#/parameters/policyStatesSummaryResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/topParameter'
@@ -1469,7 +1469,7 @@ paths:
       operationId: PolicyStates_ListQueryResultsForResourceGroupLevelPolicyAssignment
       parameters:
         - $ref: '#/parameters/policyStatesResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/authorizationNamespaceParameter'
         - $ref: '#/parameters/policyAssignmentNameParameter'
@@ -1565,7 +1565,7 @@ paths:
       operationId: PolicyStates_SummarizeForResourceGroupLevelPolicyAssignment
       parameters:
         - $ref: '#/parameters/policyStatesSummaryResourceParameter'
-        - $ref: '#/parameters/subscriptionIdParameter'
+        - $ref: '#/parameters/subscriptionId'
         - $ref: '#/parameters/resourceGroupNameParameter'
         - $ref: '#/parameters/authorizationNamespaceParameter'
         - $ref: '#/parameters/policyAssignmentNameParameter'
