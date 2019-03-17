@@ -109,13 +109,13 @@ tags:
 paths:
   '/v1alpha/{name}':
     delete:
-      description: Deletes an SSH public key.
-      operationId: oslogin.users.sshPublicKeys.delete
+      description: Deletes a POSIX account.
+      operationId: oslogin.users.projects.delete
       parameters:
         - description: |-
-            The fingerprint of the public key to update. Public keys are identified by
-            their SHA-256 fingerprint. The fingerprint of the public key is in format
-            `users/{user}/sshPublicKeys/{fingerprint}`.
+            A reference to the POSIX account to update. POSIX accounts are identified
+            by the project ID they are associated with. A reference to the POSIX
+            account is in format `users/{user}/projects/{project}`.
           in: path
           name: name
           required: true

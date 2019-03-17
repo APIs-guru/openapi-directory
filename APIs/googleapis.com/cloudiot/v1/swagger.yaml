@@ -441,10 +441,6 @@ paths:
             associated. The device ID can be numeric (`num_id`) or the user-defined
             string (`id`). For example, if `456` is specified, returns only the
             gateways to which the device with `num_id` 456 is bound.
-          enum:
-            - GATEWAY_TYPE_UNSPECIFIED
-            - GATEWAY
-            - NON_GATEWAY
           in: query
           name: gatewayListOptions.associationsDeviceId
           type: string
@@ -473,8 +469,6 @@ paths:
             objects than requested. A non-empty `next_page_token` in the response
             indicates that more data is available.
           in: query
-          items:
-            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -890,7 +884,7 @@ definitions:
              For example, `admins@example.com`.
 
 
-          * `domain:{domain}`: A Google Apps domain name that represents all the
+          * `domain:{domain}`: The G Suite domain (primary) that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
         items:
@@ -1528,17 +1522,17 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

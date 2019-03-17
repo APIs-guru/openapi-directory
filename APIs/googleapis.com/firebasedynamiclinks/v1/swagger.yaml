@@ -501,8 +501,9 @@ definitions:
       dynamicLinkDomain:
         description: |-
           Dynamic Links domain that the project owns, e.g. abcd.app.goo.gl
-          [Learn more](https://firebase.google.com/docs/dynamic-links/android/receive)
-          on how to set up Dynamic Link domain associated with your Firebase project.
+          [Learn
+          more](https://firebase.google.com/docs/dynamic-links/android/receive) on
+          how to set up Dynamic Link domain associated with your Firebase project.
 
           Required if missing domain_uri_prefix.
         type: string
@@ -776,13 +777,15 @@ definitions:
   GooglePlayAnalytics:
     description: |-
       Parameters for Google Play Campaign Measurements.
-      [Learn more](https://developers.google.com/analytics/devguides/collection/android/v4/campaigns#campaign-params)
+      [Learn
+      more](https://developers.google.com/analytics/devguides/collection/android/v4/campaigns#campaign-params)
     properties:
       gclid:
         description: |-
-          [AdWords autotagging parameter](https://support.google.com/analytics/answer/1033981?hl=en);
-          used to measure Google AdWords ads. This value is generated dynamically
-          and should never be modified.
+          [AdWords autotagging
+          parameter](https://support.google.com/analytics/answer/1033981?hl=en); used
+          to measure Google AdWords ads. This value is generated dynamically and
+          should never be modified.
         type: string
       utmCampaign:
         description: |-

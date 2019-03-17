@@ -156,7 +156,8 @@ paths:
           description: |-
             A list of the full names of the assets. For example:
             `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
-            See [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+            See [Resource
+            Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
             for more info.
 
             The request becomes a no-op if the asset name list is empty, and the max
@@ -187,15 +188,9 @@ paths:
             End time of the time window (inclusive).
             Current timestamp if not specified.
           in: query
-          items:
-            type: string
           name: readTimeWindow.endTime
           type: string
         - description: Start time of the time window (exclusive).
-          enum:
-            - CONTENT_TYPE_UNSPECIFIED
-            - RESOURCE
-            - IAM_POLICY
           in: query
           name: readTimeWindow.startTime
           type: string
@@ -278,12 +273,14 @@ definitions:
       iamPolicy:
         $ref: '#/definitions/Policy'
         description: |-
-          Representation of the actual Cloud IAM policy set on a cloud resource. For each
-          resource, there must be at most one Cloud IAM policy set on it.
+          Representation of the actual Cloud IAM policy set on a cloud resource. For
+          each resource, there must be at most one Cloud IAM policy set on it.
       name:
         description: |-
-          The full name of the asset. For example: `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
-          See [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+          The full name of the asset. For example:
+          `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
+          See [Resource
+          Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
           for more information.
         type: string
       resource:
@@ -436,7 +433,7 @@ definitions:
              For example, `admins@example.com`.
 
 
-          * `domain:{domain}`: A Google Apps domain name that represents all the
+          * `domain:{domain}`: The G Suite domain (primary) that represents all the
              users of that domain. For example, `google.com` or `example.com`.
 
         items:
@@ -686,12 +683,14 @@ definitions:
       parent:
         description: |-
           The full name of the immediate parent of this resource. See
-          [Resource Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
+          [Resource
+          Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
           for more information.
 
           For GCP assets, it is the parent resource defined in the [Cloud IAM policy
           hierarchy](https://cloud.google.com/iam/docs/overview#policy_hierarchy).
-          For example: `"//cloudresourcemanager.googleapis.com/projects/my_project_123"`.
+          For example:
+          `"//cloudresourcemanager.googleapis.com/projects/my_project_123"`.
 
           For third-party assets, it is up to the users to define.
         type: string
@@ -709,17 +708,17 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

@@ -806,7 +806,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/accountstatuses/{accountId}':
     get:
-      description: Retrieves the status of a Merchant Center account. Multi-client accounts can only call this method for sub-accounts.
+      description: Retrieves the status of a Merchant Center account. No itemLevelIssues are returned for multi-client accounts.
       operationId: content.accountstatuses.get
       parameters:
         - description: The ID of the account.
@@ -1303,7 +1303,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The REST id of the product for which to update price and availability.
+        - description: The REST ID of the product for which to update price and availability.
           in: path
           name: productId
           required: true
@@ -2696,7 +2696,7 @@ paths:
         - orders
   '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
     get:
-      description: Retrieves an order using merchant order id.
+      description: Retrieves an order using merchant order ID.
       operationId: content.orders.getbymerchantorderid
       parameters:
         - description: The ID of the account that manages the order. This cannot be a multi-client account.
@@ -2704,7 +2704,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The merchant order id to be looked for.
+        - description: The merchant order ID to be looked for.
           in: path
           name: merchantOrderId
           required: true
@@ -3024,7 +3024,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The REST id of the product.
+        - description: The REST ID of the product.
           in: path
           name: productId
           required: true
@@ -3046,7 +3046,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The REST id of the product.
+        - description: The REST ID of the product.
           in: path
           name: productId
           required: true
@@ -3141,7 +3141,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The REST id of the product.
+        - description: The REST ID of the product.
           in: path
           name: productId
           required: true
@@ -3630,7 +3630,7 @@ definitions:
           $ref: '#/definitions/AccountStatusAccountLevelIssue'
         type: array
       dataQualityIssues:
-        description: A list of data quality issues.
+        description: DEPRECATED - never populated.
         items:
           $ref: '#/definitions/AccountStatusDataQualityIssue'
         type: array
@@ -3674,59 +3674,42 @@ definitions:
   AccountStatusDataQualityIssue:
     properties:
       country:
-        description: Country for which this issue is reported.
         type: string
       destination:
-        description: The destination the issue applies to.
         type: string
       detail:
-        description: A more detailed description of the issue.
         type: string
       displayedValue:
-        description: Actual value displayed on the landing page.
         type: string
       exampleItems:
-        description: Example items featuring the issue.
         items:
           $ref: '#/definitions/AccountStatusExampleItem'
         type: array
       id:
-        description: Issue identifier.
         type: string
       lastChecked:
-        description: Last time the account was checked for this issue.
         type: string
       location:
-        description: The attribute name that is relevant for the issue.
         type: string
       numItems:
-        description: Number of items in the account found to have the said issue.
         format: uint32
         type: integer
       severity:
-        description: Severity of the problem.
         type: string
       submittedValue:
-        description: Submitted value that causes the issue.
         type: string
     type: object
   AccountStatusExampleItem:
-    description: 'An example of an item that has poor data quality. An item value on the landing page differs from what is submitted, or conflicts with a policy.'
     properties:
       itemId:
-        description: Unique item ID as specified in the uploaded product data.
         type: string
       link:
-        description: Landing page of the item.
         type: string
       submittedValue:
-        description: The item value that was submitted.
         type: string
       title:
-        description: Title of the item.
         type: string
       valueOnLandingPage:
-        description: The actual value on the landing page.
         type: string
     type: object
   AccountStatusItemLevelIssue:
@@ -3820,7 +3803,7 @@ definitions:
         description: Country code in which tax is applicable.
         type: string
       locationId:
-        description: 'State (or province) is which the tax is applicable, described by its location id (also called criteria id).'
+        description: 'State (or province) is which the tax is applicable, described by its location ID (also called criteria ID).'
         format: uint64
         type: string
       ratePercent:
@@ -5250,7 +5233,7 @@ definitions:
         description: Whether the order was acknowledged.
         type: boolean
       channelType:
-        description: 'The channel type of the order: "purchaseOnGoogle" or "googleExpress".'
+        description: Deprecated.
         type: string
       customer:
         $ref: '#/definitions/OrderCustomer'
@@ -5289,7 +5272,7 @@ definitions:
         description: 'The date when the order was placed, in ISO 8601 format.'
         type: string
       promotions:
-        description: Deprecated. Ignored if provided for createTestOrder. The details of the merchant provided promotions applied to the order. More details about the program are here.
+        description: The details of the merchant provided promotions applied to the order. More details about the program are here.
         items:
           $ref: '#/definitions/OrderLegacyPromotion'
         type: array
@@ -5398,7 +5381,7 @@ definitions:
         description: 'Timestamp when last time marketing preference was updated. Could be empty, if user wasn''t offered a selection yet.'
         type: string
       marketingEmailAddress:
-        description: Email address that can be used for marketing purposes. This field is only filled when explicitMarketingPreference is equal to 'granted'.
+        description: Email address that can be used for marketing purposes. The field may be empty even if explicitMarketingPreference is 'granted'. This happens when retrieving an old order from the customer who deleted their account.
         type: string
     type: object
   OrderDeliveryDetails:
@@ -5567,7 +5550,7 @@ definitions:
         description: The title of the product.
         type: string
       variantAttributes:
-        description: 'Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes <a href="'
+        description: 'Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes here.'
         items:
           $ref: '#/definitions/OrderLineItemProductVariantAttribute'
         type: array
@@ -5731,10 +5714,10 @@ definitions:
         format: uint64
         type: string
       merchantOrderId:
-        description: Merchant-provided id of the order.
+        description: Merchant-provided ID of the order.
         type: string
       orderId:
-        description: The id of the order.
+        description: The ID of the order.
         type: string
       productAmount:
         $ref: '#/definitions/Amount'
@@ -7333,8 +7316,8 @@ definitions:
         type: string
       id:
         description: |-
-          The REST id of the product. Content API methods that operate on products take this as their productId parameter.
-          The REST id for a product is of the form channel:contentLanguage:targetCountry:offerId.
+          The REST ID of the product. Content API methods that operate on products take this as their productId parameter.
+          The REST ID for a product is of the form channel:contentLanguage:targetCountry:offerId.
         type: string
       identifierExists:
         description: 'False when the item does not have unique product identifiers appropriate to its category, such as GTIN, MPN, and brand. Required according to the Unique Product Identifier Rules for all target countries except for Canada.'
@@ -7391,7 +7374,7 @@ definitions:
       offerId:
         description: |-
           A unique identifier for the item. Leading and trailing whitespaces are stripped and multiple whitespaces are replaced by a single whitespace upon submission. Only valid unicode characters are accepted. See the products feed specification for details.
-          Note: Content API methods that operate on products take the REST id of the product, not this identifier.
+          Note: Content API methods that operate on products take the REST ID of the product, not this identifier.
         type: string
       onlineOnly:
         description: Deprecated. Whether an item is available for purchase only online.
@@ -7524,7 +7507,7 @@ definitions:
         description: 'The location where the shipping is applicable, represented by a location group name.'
         type: string
       locationId:
-        description: The numeric id of a location that the shipping rate applies to as defined in the AdWords API.
+        description: The numeric ID of a location that the shipping rate applies to as defined in the AdWords API.
         format: int64
         type: string
       postalCode:
@@ -7561,13 +7544,13 @@ definitions:
         type: number
     type: object
   ProductStatus:
-    description: 'The status of a product, i.e., information about a product computed asynchronously by the data quality analysis.'
+    description: 'The status of a product, i.e., information about a product computed asynchronously.'
     properties:
       creationDate:
         description: 'Date on which the item has been created, in ISO 8601 format.'
         type: string
       dataQualityIssues:
-        description: A list of data quality issues associated with the product.
+        description: DEPRECATED - never populated
         items:
           $ref: '#/definitions/ProductStatusDataQualityIssue'
         type: array
@@ -7598,7 +7581,7 @@ definitions:
         $ref: '#/definitions/Product'
         description: Product data after applying all the join inputs.
       productId:
-        description: The id of the product for which status is reported.
+        description: The ID of the product for which status is reported.
         type: string
       title:
         description: The title of the product.
@@ -7607,31 +7590,22 @@ definitions:
   ProductStatusDataQualityIssue:
     properties:
       destination:
-        description: The destination the issue applies to.
         type: string
       detail:
-        description: A more detailed error string.
         type: string
       fetchStatus:
-        description: The fetch status for landing_page_errors.
         type: string
       id:
-        description: The id of the data quality issue.
         type: string
       location:
-        description: The attribute name that is relevant for the issue.
         type: string
       severity:
-        description: The severity of the data quality issue.
         type: string
       timestamp:
-        description: The time stamp of the data quality issue.
         type: string
       valueOnLandingPage:
-        description: The value of that attribute that was found on the landing page
         type: string
       valueProvided:
-        description: The value the attribute had at time of evaluation.
         type: string
     type: object
   ProductStatusDestinationStatus:
@@ -7682,7 +7656,7 @@ definitions:
         description: 'The country within which the item is taxed, specified as a CLDR territory code.'
         type: string
       locationId:
-        description: The numeric id of a location that the tax rate applies to as defined in the AdWords API.
+        description: The numeric ID of a location that the tax rate applies to as defined in the AdWords API.
         format: int64
         type: string
       postalCode:
@@ -8163,7 +8137,7 @@ definitions:
         description: Identifier of one of the predefined delivery addresses for the delivery.
         type: string
       promotions:
-        description: Deprecated. The details of the merchant provided promotions applied to the order. More details about the program are here.
+        description: Deprecated. Ignored if provided.
         items:
           $ref: '#/definitions/OrderLegacyPromotion'
         type: array
@@ -8180,7 +8154,7 @@ definitions:
   TestOrderCustomer:
     properties:
       email:
-        description: Deprecated.
+        description: Email address of the customer.
         type: string
       explicitMarketingPreference:
         description: Deprecated. Please use marketingRightsInfo instead.
@@ -8226,7 +8200,7 @@ definitions:
         description: Brand of the item.
         type: string
       channel:
-        description: The item's channel.
+        description: Deprecated.
         type: string
       condition:
         description: Condition or state of the item.

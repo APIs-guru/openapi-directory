@@ -132,12 +132,12 @@ paths:
       tags:
         - projects
     get:
-      description: Gets the metadata and configuration for a Field.
-      operationId: firestore.projects.databases.collectionGroups.fields.get
+      description: Gets a composite index.
+      operationId: firestore.projects.databases.collectionGroups.indexes.get
       parameters:
         - description: |-
             A name of the form
-            `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/fields/{field_id}`
+            `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`
           in: path
           name: name
           required: true
@@ -147,7 +147,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleFirestoreAdminV1beta2Field'
+            $ref: '#/definitions/GoogleFirestoreAdminV1beta2Index'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

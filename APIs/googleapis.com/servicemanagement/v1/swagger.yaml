@@ -1286,7 +1286,8 @@ definitions:
   AuthProvider:
     description: |-
       Configuration for an anthentication provider, including support for
-      [JSON Web Token (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
+      [JSON Web Token
+      (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
     properties:
       audiences:
         description: |-
@@ -1328,12 +1329,15 @@ definitions:
       jwksUri:
         description: |-
           URL of the provider's public key set to validate signature of the JWT. See
-          [OpenID Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
+          [OpenID
+          Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata).
           Optional if the key set document:
            - can be retrieved from
-             [OpenID Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html
-             of the issuer.
-           - can be inferred from the email domain of the issuer (e.g. a Google service account).
+             [OpenID
+             Discovery](https://openid.net/specs/openid-connect-discovery-1_0.html of
+             the issuer.
+           - can be inferred from the email domain of the issuer (e.g. a Google
+           service account).
 
           Example: https://www.googleapis.com/oauth2/v1/certs
         type: string
@@ -1341,7 +1345,8 @@ definitions:
   AuthRequirement:
     description: |-
       User-defined authentication requirements, including support for
-      [JSON Web Token (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
+      [JSON Web Token
+      (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
     properties:
       audiences:
         description: |-
@@ -1648,8 +1653,9 @@ definitions:
           used for the index (usually selector, name, or id). For maps, the term
           'key' is used. If the field has no unique identifier, the numeric index
           is used.
-          Examples:
-          - visibility.rules[selector=="google.LibraryService.CreateBook"].restriction
+          ## Examples:
+
+          visibility.rules[selector=="google.LibraryService.CreateBook"].restriction
           - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
           - logging.producer_destinations[0]
         type: string
@@ -2000,8 +2006,8 @@ definitions:
     properties:
       deprecationDescription:
         description: |-
-          Deprecation description of the selected element(s). It can be provided if an
-          element is marked as `deprecated`.
+          Deprecation description of the selected element(s). It can be provided if
+          an element is marked as `deprecated`.
         type: string
       description:
         description: Description of the selected API(s).
@@ -2081,9 +2087,10 @@ definitions:
       target:
         description: |-
           The specification of an Internet routable address of API frontend that will
-          handle requests to this [API Endpoint](https://cloud.google.com/apis/design/glossary).
-          It should be either a valid IPv4 address or a fully-qualified domain name.
-          For example, "8.8.8.8" or "myservice.appspot.com".
+          handle requests to this [API
+          Endpoint](https://cloud.google.com/apis/design/glossary). It should be
+          either a valid IPv4 address or a fully-qualified domain name. For example,
+          "8.8.8.8" or "myservice.appspot.com".
         type: string
     type: object
   Enum:
@@ -3389,8 +3396,8 @@ definitions:
     properties:
       content:
         description: |-
-          The Markdown content of the page. You can use <code>&#40;== include {path} ==&#41;</code>
-          to include content from a Markdown file.
+          The Markdown content of the page. You can use <code>&#40;== include {path}
+          ==&#41;</code> to include content from a Markdown file.
         type: string
       name:
         description: |-
@@ -3880,17 +3887,17 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

@@ -20325,6 +20325,11 @@ definitions:
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
+      customRequestHeaders:
+        description: Headers that the HTTP/S load balancer should add to proxied requests.
+        items:
+          type: string
+        type: array
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
@@ -20392,6 +20397,7 @@ definitions:
           For internal load balancing, the possible values are TCP and UDP, and the default is TCP.
         enum:
           - HTTP
+          - HTTP2
           - HTTPS
           - SSL
           - TCP
@@ -20689,7 +20695,7 @@ definitions:
 
 
 
-          * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.
+          * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`.
         items:
           type: string
         type: array
@@ -21072,8 +21078,9 @@ definitions:
         description: The URL of the suggested replacement for a deprecated resource. The suggested replacement resource must be the same kind of resource as the deprecated resource.
         type: string
       state:
-        description: 'The deprecation state of this resource. This can be DEPRECATED, OBSOLETE, or DELETED. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.'
+        description: 'The deprecation state of this resource. This can be ACTIVE DEPRECATED, OBSOLETE, or DELETED. Operations which communicate the end of life date for an image, can use ACTIVE. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.'
         enum:
+          - ACTIVE
           - DELETED
           - DEPRECATED
           - OBSOLETE
@@ -22353,6 +22360,31 @@ definitions:
           - WINDOWS
         type: string
     type: object
+  HTTP2HealthCheck:
+    properties:
+      host:
+        description: 'The value of the host header in the HTTP/2 health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.'
+        type: string
+      port:
+        description: The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
+        format: int32
+        type: integer
+      portName:
+        description: 'Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.'
+        type: string
+      proxyHeader:
+        description: 'Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.'
+        enum:
+          - NONE
+          - PROXY_V1
+        type: string
+      requestPath:
+        description: The request path of the HTTP/2 health check request. The default value is /.
+        type: string
+      response:
+        description: 'The string to match anywhere in the first 1024 bytes of the response body. If left empty (the default value), the status code determines health. The response data can only be ASCII.'
+        type: string
+    type: object
   HTTPHealthCheck:
     properties:
       host:
@@ -22420,6 +22452,8 @@ definitions:
         description: A so-far unhealthy instance will be marked healthy after this many consecutive successes. The default value is 2.
         format: int32
         type: integer
+      http2HealthCheck:
+        $ref: '#/definitions/HTTP2HealthCheck'
       httpHealthCheck:
         $ref: '#/definitions/HTTPHealthCheck'
       httpsHealthCheck:
@@ -22451,6 +22485,7 @@ definitions:
         description: 'Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS. If not specified, the default is TCP. Exactly one of the protocol-specific health check field must be specified, which must match type field.'
         enum:
           - HTTP
+          - HTTP2
           - HTTPS
           - INVALID
           - SSL
@@ -23134,6 +23169,7 @@ definitions:
         description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, STOPPED, SUSPENDING, SUSPENDED, and TERMINATED.'
         enum:
           - PROVISIONING
+          - REPAIRING
           - RUNNING
           - STAGING
           - STOPPED
@@ -24349,6 +24385,7 @@ definitions:
         description: '[Output Only] The status of the instance.'
         enum:
           - PROVISIONING
+          - REPAIRING
           - RUNNING
           - STAGING
           - STOPPED
@@ -25787,6 +25824,7 @@ definitions:
         description: '[Output Only] The status of the instance. This field is empty when the instance does not exist.'
         enum:
           - PROVISIONING
+          - REPAIRING
           - RUNNING
           - STAGING
           - STOPPED
@@ -28785,7 +28823,7 @@ definitions:
         type: string
     type: object
   RouterStatusNatStatus:
-    description: Status of a NAT contained in this router.
+    description: 'Status of a NAT contained in this router. Next tag: 9'
     properties:
       autoAllocatedNatIps:
         description: 'A list of IPs auto-allocated for NAT. Example: ["1.1.1.1", "129.2.16.89"]'
@@ -31013,7 +31051,7 @@ definitions:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       forwardingRules:
-        description: '[Output Only] A list of URLs to the ForwardingRule resources. ForwardingRules are created using compute.forwardingRules.insert and associated to a VPN gateway.'
+        description: '[Output Only] A list of URLs to the ForwardingRule resources. ForwardingRules are created using compute.forwardingRules.insert and associated with a VPN gateway.'
         items:
           type: string
         type: array
@@ -31039,7 +31077,7 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       status:
-        description: '[Output Only] The status of the VPN gateway.'
+        description: '[Output Only] The status of the VPN gateway, which can be one of the following: CREATING, READY, FAILED, or DELETING.'
         enum:
           - CREATING
           - DELETING
@@ -31047,7 +31085,7 @@ definitions:
           - READY
         type: string
       tunnels:
-        description: '[Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are created using compute.vpntunnels.insert method and associated to a VPN gateway.'
+        description: '[Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are created using the compute.vpntunnels.insert method and associated with a VPN gateway.'
         items:
           type: string
         type: array
@@ -31195,7 +31233,7 @@ definitions:
   TargetVpnGatewaysScopedList:
     properties:
       targetVpnGateways:
-        description: '[Output Only] A list of target vpn gateways contained in this scope.'
+        description: '[Output Only] A list of target VPN gateways contained in this scope.'
         items:
           $ref: '#/definitions/TargetVpnGateway'
         type: array
@@ -31671,7 +31709,7 @@ definitions:
         format: uint64
         type: string
       ikeVersion:
-        description: IKE protocol version to use when establishing the VPN tunnel with peer VPN gateway. Acceptable IKE versions are 1 or 2. Default version is 2.
+        description: IKE protocol version to use when establishing the VPN tunnel with the peer VPN gateway. Acceptable IKE versions are 1 or 2. The default version is 2.
         format: int32
         type: integer
       kind:
@@ -31679,7 +31717,7 @@ definitions:
         description: '[Output Only] Type of resource. Always compute#vpnTunnel for VPN tunnels.'
         type: string
       localTrafficSelector:
-        description: 'Local traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
+        description: 'Local traffic selector to use when establishing the VPN tunnel with the peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges must be disjoint. Only IPv4 is supported.'
         items:
           type: string
         type: array
@@ -31694,12 +31732,12 @@ definitions:
         description: '[Output Only] URL of the region where the VPN tunnel resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       remoteTrafficSelector:
-        description: 'Remote traffic selectors to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
+        description: 'Remote traffic selectors to use when establishing the VPN tunnel with the peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
         items:
           type: string
         type: array
       router:
-        description: URL of router resource to be used for dynamic routing.
+        description: URL of the router resource to be used for dynamic routing.
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -31711,7 +31749,17 @@ definitions:
         description: Hash of the shared secret.
         type: string
       status:
-        description: '[Output Only] The status of the VPN tunnel.'
+        description: |-
+          [Output Only] The status of the VPN tunnel, which can be one of the following: 
+          - PROVISIONING: Resource is being allocated for the VPN tunnel. 
+          - WAITING_FOR_FULL_CONFIG: Waiting to receive all VPN-related configs from the user. Network, TargetVpnGateway, VpnTunnel, ForwardingRule, and Route resources are needed to setup the VPN tunnel. 
+          - FIRST_HANDSHAKE: Successful first handshake with the peer VPN. 
+          - ESTABLISHED: Secure session is successfully established with the peer VPN. 
+          - NETWORK_ERROR: Deprecated, replaced by NO_INCOMING_PACKETS 
+          - AUTHORIZATION_ERROR: Auth error (for example, bad shared secret). 
+          - NEGOTIATION_FAILURE: Handshake failed. 
+          - DEPROVISIONING: Resources are being deallocated for the VPN tunnel. 
+          - FAILED: Tunnel creation has failed and the tunnel is not ready to be used.
         enum:
           - ALLOCATING_RESOURCES
           - AUTHORIZATION_ERROR
@@ -31738,7 +31786,7 @@ definitions:
       items:
         additionalProperties:
           $ref: '#/definitions/VpnTunnelsScopedList'
-          description: Name of the scope containing this set of vpn tunnels.
+          description: Name of the scope containing this set of VPN tunnels.
         description: A list of VpnTunnelsScopedList resources.
         type: object
       kind:
@@ -31873,7 +31921,7 @@ definitions:
   VpnTunnelsScopedList:
     properties:
       vpnTunnels:
-        description: A list of vpn tunnels contained in this scope.
+        description: A list of VPN tunnels contained in this scope.
         items:
           $ref: '#/definitions/VpnTunnel'
         type: array

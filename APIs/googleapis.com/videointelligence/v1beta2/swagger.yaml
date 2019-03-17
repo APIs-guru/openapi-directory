@@ -774,6 +774,16 @@ definitions:
   GoogleCloudVideointelligenceV1beta2_LabelDetectionConfig:
     description: Config for LABEL_DETECTION.
     properties:
+      frameConfidenceThreshold:
+        description: |-
+          The confidence threshold we perform filtering on the labels from
+          frame-level detection. If not set, it is set to 0.4 by default. The valid
+          range for this threshold is [0.1, 0.9]. Any value set outside of this
+          range will be clipped.
+          Note: for best results please follow the default threshold. We will update
+          the default threshold everytime when we release a new model.
+        format: float
+        type: number
       labelDetectionMode:
         description: |-
           What labels should be detected with LABEL_DETECTION, in addition to
@@ -797,6 +807,16 @@ definitions:
           When set to true, might improve detection accuracy for moving objects.
           Should be used with `SHOT_AND_FRAME_MODE` enabled.
         type: boolean
+      videoConfidenceThreshold:
+        description: |-
+          The confidence threshold we perform filtering on the labels from
+          video-level and shot-level detections. If not set, it is set to 0.3 by
+          default. The valid range for this threshold is [0.1, 0.9]. Any value set
+          outside of this range will be clipped.
+          Note: for best results please follow the default threshold. We will update
+          the default threshold everytime when we release a new model.
+        format: float
+        type: number
     type: object
   GoogleCloudVideointelligenceV1beta2_LabelFrame:
     description: Video frame level annotation results for label detection.
@@ -2246,7 +2266,7 @@ definitions:
         description: The word corresponding to this set of information.
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_AnnotateVideoProgress:
+  GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoProgress:
     description: |-
       Video annotation progress. Included in the `metadata`
       field of the `Operation` returned by the `GetOperation`
@@ -2255,10 +2275,10 @@ definitions:
       annotationProgress:
         description: Progress metadata for all videos specified in `AnnotateVideoRequest`.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_VideoAnnotationProgress'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress'
         type: array
     type: object
-  GoogleCloudVideointelligenceV2beta1_AnnotateVideoResponse:
+  GoogleCloudVideointelligenceV1p3beta1_AnnotateVideoResponse:
     description: |-
       Video annotation response. Included in the `response`
       field of the `Operation` returned by the `GetOperation`
@@ -2267,10 +2287,10 @@ definitions:
       annotationResults:
         description: Annotation results for all videos specified in `AnnotateVideoRequest`.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_VideoAnnotationResults'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults'
         type: array
     type: object
-  GoogleCloudVideointelligenceV2beta1_Entity:
+  GoogleCloudVideointelligenceV1p3beta1_Entity:
     description: Detected entity from video analysis.
     properties:
       description:
@@ -2286,7 +2306,7 @@ definitions:
         description: Language code for `description` in BCP-47 format.
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_ExplicitContentAnnotation:
+  GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation:
     description: |-
       Explicit content annotation (based on per-frame visual signals only).
       If no explicit content has been detected in a frame, no annotations are
@@ -2295,10 +2315,10 @@ definitions:
       frames:
         description: All video frames where explicit content was detected.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_ExplicitContentFrame'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame'
         type: array
     type: object
-  GoogleCloudVideointelligenceV2beta1_ExplicitContentFrame:
+  GoogleCloudVideointelligenceV1p3beta1_ExplicitContentFrame:
     description: Video frame level annotation results for explicit content.
     properties:
       pornographyLikelihood:
@@ -2318,7 +2338,7 @@ definitions:
         format: google-duration
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_LabelAnnotation:
+  GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation:
     description: Label annotation.
     properties:
       categoryEntities:
@@ -2328,23 +2348,23 @@ definitions:
           cases there might be more than one categories e.g. `Terrier` could also be
           a `pet`.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_Entity'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_Entity'
         type: array
       entity:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_Entity'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_Entity'
         description: Detected entity.
       frames:
         description: All video frames where a label was detected.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_LabelFrame'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelFrame'
         type: array
       segments:
         description: All video segments where a label was detected.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_LabelSegment'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelSegment'
         type: array
     type: object
-  GoogleCloudVideointelligenceV2beta1_LabelFrame:
+  GoogleCloudVideointelligenceV1p3beta1_LabelFrame:
     description: Video frame level annotation results for label detection.
     properties:
       confidence:
@@ -2358,7 +2378,7 @@ definitions:
         format: google-duration
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_LabelSegment:
+  GoogleCloudVideointelligenceV1p3beta1_LabelSegment:
     description: Video segment level annotation results for label detection.
     properties:
       confidence:
@@ -2366,10 +2386,10 @@ definitions:
         format: float
         type: number
       segment:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_VideoSegment'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
         description: Video segment where a label was detected.
     type: object
-  GoogleCloudVideointelligenceV2beta1_NormalizedBoundingBox:
+  GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox:
     description: |-
       Normalized bounding box.
       The normalized vertex coordinates are relative to the original image.
@@ -2392,7 +2412,7 @@ definitions:
         format: float
         type: number
     type: object
-  GoogleCloudVideointelligenceV2beta1_NormalizedBoundingPoly:
+  GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly:
     description: |-
       Normalized bounding polygon for text (that might not be aligned with axis).
       Contains list of the corner points in clockwise order starting from
@@ -2415,10 +2435,10 @@ definitions:
       vertices:
         description: Normalized vertices of the bounding polygon.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_NormalizedVertex'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex'
         type: array
     type: object
-  GoogleCloudVideointelligenceV2beta1_NormalizedVertex:
+  GoogleCloudVideointelligenceV1p3beta1_NormalizedVertex:
     description: |-
       A vertex represents a 2D point in the image.
       NOTE: the normalized vertex coordinates are relative to the original image
@@ -2433,7 +2453,7 @@ definitions:
         format: float
         type: number
     type: object
-  GoogleCloudVideointelligenceV2beta1_ObjectTrackingAnnotation:
+  GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation:
     description: Annotations corresponding to one tracked object.
     properties:
       confidence:
@@ -2441,7 +2461,7 @@ definitions:
         format: float
         type: number
       entity:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_Entity'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_Entity'
         description: Entity to specify the object category that this track is labeled as.
       frames:
         description: |-
@@ -2450,10 +2470,10 @@ definitions:
           messages in frames.
           Streaming mode: it can only be one ObjectTrackingFrame message in frames.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_ObjectTrackingFrame'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame'
         type: array
       segment:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_VideoSegment'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
         description: |-
           Non-streaming batch mode ONLY.
           Each object track corresponds to one video segment where it appears.
@@ -2468,20 +2488,20 @@ definitions:
         format: int64
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_ObjectTrackingFrame:
+  GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingFrame:
     description: |-
       Video frame level annotations for object detection and tracking. This field
       stores per frame location, time offset, and confidence.
     properties:
       normalizedBoundingBox:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_NormalizedBoundingBox'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox'
         description: The normalized bounding box location of this object track for the frame.
       timeOffset:
         description: The timestamp of the frame in microseconds.
         format: google-duration
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_SpeechRecognitionAlternative:
+  GoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative:
     description: Alternative hypotheses (a.k.a. n-best list).
     properties:
       confidence:
@@ -2500,10 +2520,10 @@ definitions:
       words:
         description: A list of word-specific information for each recognized word.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_WordInfo'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_WordInfo'
         type: array
     type: object
-  GoogleCloudVideointelligenceV2beta1_SpeechTranscription:
+  GoogleCloudVideointelligenceV1p3beta1_SpeechTranscription:
     description: A speech recognition result corresponding to a portion of the audio.
     properties:
       alternatives:
@@ -2513,7 +2533,7 @@ definitions:
           accuracy, with the top (first) alternative being the most probable, as
           ranked by the recognizer.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_SpeechRecognitionAlternative'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_SpeechRecognitionAlternative'
         type: array
       languageCode:
         description: |-
@@ -2523,14 +2543,14 @@ definitions:
           likelihood of being spoken in the audio.
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_StreamingAnnotateVideoResponse:
+  GoogleCloudVideointelligenceV1p3beta1_StreamingAnnotateVideoResponse:
     description: |-
       `StreamingAnnotateVideoResponse` is the only message returned to the client
       by `StreamingAnnotateVideo`. A series of zero or more
       `StreamingAnnotateVideoResponse` messages are streamed back to the client.
     properties:
       annotationResults:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_StreamingVideoAnnotationResults'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults'
         description: Streaming annotation results.
       annotationResultsUri:
         description: |-
@@ -2545,31 +2565,31 @@ definitions:
           If set, returns a google.rpc.Status message that
           specifies the error for the operation.
     type: object
-  GoogleCloudVideointelligenceV2beta1_StreamingVideoAnnotationResults:
+  GoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults:
     description: |-
       Streaming annotation results corresponding to a portion of the video
       that is currently being processed.
     properties:
       explicitAnnotation:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_ExplicitContentAnnotation'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation'
         description: Explicit content annotation results.
       labelAnnotations:
         description: Label annotation results.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_LabelAnnotation'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation'
         type: array
       objectAnnotations:
         description: Object tracking results.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_ObjectTrackingAnnotation'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation'
         type: array
       shotAnnotations:
         description: Shot annotation results. Each shot is represented as a video segment.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_VideoSegment'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
         type: array
     type: object
-  GoogleCloudVideointelligenceV2beta1_TextAnnotation:
+  GoogleCloudVideointelligenceV1p3beta1_TextAnnotation:
     description: |-
       Annotations related to one detected OCR text snippet. This will contain the
       corresponding text, confidence value, and frame level information for each
@@ -2578,27 +2598,27 @@ definitions:
       segments:
         description: All video segments where OCR detected text appears.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_TextSegment'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_TextSegment'
         type: array
       text:
         description: The detected text.
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_TextFrame:
+  GoogleCloudVideointelligenceV1p3beta1_TextFrame:
     description: |-
       Video frame level annotation results for text annotation (OCR).
       Contains information regarding timestamp and bounding box locations for the
       frames containing detected OCR text snippets.
     properties:
       rotatedBoundingBox:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_NormalizedBoundingPoly'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingPoly'
         description: Bounding polygon of the detected text for this frame.
       timeOffset:
         description: Timestamp of this frame.
         format: google-duration
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_TextSegment:
+  GoogleCloudVideointelligenceV1p3beta1_TextSegment:
     description: Video segment level annotation results for text detection.
     properties:
       confidence:
@@ -2610,13 +2630,13 @@ definitions:
       frames:
         description: Information related to the frames where OCR detected text appears.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_TextFrame'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_TextFrame'
         type: array
       segment:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_VideoSegment'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
         description: Video segment where a text snippet was detected.
     type: object
-  GoogleCloudVideointelligenceV2beta1_VideoAnnotationProgress:
+  GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationProgress:
     description: Annotation progress for a single video.
     properties:
       inputUri:
@@ -2639,7 +2659,7 @@ definitions:
         format: google-datetime
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_VideoAnnotationResults:
+  GoogleCloudVideointelligenceV1p3beta1_VideoAnnotationResults:
     description: Annotation results for a single video.
     properties:
       error:
@@ -2648,14 +2668,14 @@ definitions:
           If set, indicates an error. Note that for a single `AnnotateVideoRequest`
           some videos may succeed and some may fail.
       explicitAnnotation:
-        $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_ExplicitContentAnnotation'
+        $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation'
         description: Explicit content annotation.
       frameLabelAnnotations:
         description: |-
           Label annotations on frame level.
           There is exactly one element for each unique label.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_LabelAnnotation'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation'
         type: array
       inputUri:
         description: |-
@@ -2665,31 +2685,31 @@ definitions:
       objectAnnotations:
         description: Annotations for list of objects detected and tracked in video.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_ObjectTrackingAnnotation'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_ObjectTrackingAnnotation'
         type: array
       segmentLabelAnnotations:
         description: |-
           Label annotations on video level or user specified segment level.
           There is exactly one element for each unique label.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_LabelAnnotation'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation'
         type: array
       shotAnnotations:
         description: Shot annotations. Each shot is represented as a video segment.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_VideoSegment'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_VideoSegment'
         type: array
       shotLabelAnnotations:
         description: |-
           Label annotations on shot level.
           There is exactly one element for each unique label.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_LabelAnnotation'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation'
         type: array
       speechTranscriptions:
         description: Speech transcription.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_SpeechTranscription'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_SpeechTranscription'
         type: array
       textAnnotations:
         description: |-
@@ -2697,10 +2717,10 @@ definitions:
           Annotations for list of detected text snippets. Each will have list of
           frame information associated with it.
         items:
-          $ref: '#/definitions/GoogleCloudVideointelligenceV2beta1_TextAnnotation'
+          $ref: '#/definitions/GoogleCloudVideointelligenceV1p3beta1_TextAnnotation'
         type: array
     type: object
-  GoogleCloudVideointelligenceV2beta1_VideoSegment:
+  GoogleCloudVideointelligenceV1p3beta1_VideoSegment:
     description: Video segment.
     properties:
       endTimeOffset:
@@ -2716,7 +2736,7 @@ definitions:
         format: google-duration
         type: string
     type: object
-  GoogleCloudVideointelligenceV2beta1_WordInfo:
+  GoogleCloudVideointelligenceV1p3beta1_WordInfo:
     description: |-
       Word-specific information for recognized words. Word information is only
       included in the response when certain request parameters are set, such
@@ -2805,17 +2825,17 @@ definitions:
     type: object
   GoogleRpc_Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

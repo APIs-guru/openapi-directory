@@ -152,15 +152,14 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes a stored infoType.
-        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-        learn more.
-      operationId: dlp.organizations.storedInfoTypes.delete
+        Deletes an InspectTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+      operationId: dlp.projects.inspectTemplates.delete
       parameters:
         - description: |-
-            Resource name of the organization and storedInfoType to be deleted, for
-            example `organizations/433245324/storedInfoTypes/432452342` or
-            projects/project-id/storedInfoTypes/432452342.
+            Resource name of the organization and inspectTemplate to be deleted, for
+            example `organizations/433245324/inspectTemplates/432452342` or
+            projects/project-id/inspectTemplates/432452342.
           in: path
           name: name
           required: true
@@ -175,18 +174,17 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     get:
       description: |-
-        Gets a stored infoType.
-        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-        learn more.
-      operationId: dlp.organizations.storedInfoTypes.get
+        Gets an InspectTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+      operationId: dlp.projects.inspectTemplates.get
       parameters:
         - description: |-
-            Resource name of the organization and storedInfoType to be read, for
-            example `organizations/433245324/storedInfoTypes/432452342` or
-            projects/project-id/storedInfoTypes/432452342.
+            Resource name of the organization and inspectTemplate to be read, for
+            example `organizations/433245324/inspectTemplates/432452342` or
+            projects/project-id/inspectTemplates/432452342.
           in: path
           name: name
           required: true
@@ -196,12 +194,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
+            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -216,20 +214,18 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the stored infoType by creating a new version. The existing version
-        will continue to be used until the new version is ready.
-        See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
-        learn more.
-      operationId: dlp.organizations.storedInfoTypes.patch
+        Updates the InspectTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
+      operationId: dlp.projects.inspectTemplates.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateStoredInfoTypeRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateInspectTemplateRequest'
         - description: |-
-            Resource name of organization and storedInfoType to be updated, for
-            example `organizations/433245324/storedInfoTypes/432452342` or
-            projects/project-id/storedInfoTypes/432452342.
+            Resource name of organization and inspectTemplate to be updated, for
+            example `organizations/433245324/inspectTemplates/432452342` or
+            projects/project-id/inspectTemplates/432452342.
           in: path
           name: name
           required: true
@@ -239,12 +235,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2StoredInfoType'
+            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{name}:activate':
     parameters:
       - $ref: '#/parameters/$.xgafv'
@@ -466,7 +462,7 @@ paths:
         Lists DeidentifyTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.list
+      operationId: dlp.projects.deidentifyTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -514,7 +510,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -533,7 +529,7 @@ paths:
         for de-identifying content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
         more.
-      operationId: dlp.organizations.deidentifyTemplates.create
+      operationId: dlp.projects.deidentifyTemplates.create
       parameters:
         - in: body
           name: body
@@ -556,7 +552,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/dlpJobs':
     get:
       description: |-
@@ -734,7 +730,7 @@ paths:
       description: |-
         Lists InspectTemplates.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.list
+      operationId: dlp.projects.inspectTemplates.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -782,7 +778,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -800,7 +796,7 @@ paths:
         Creates an InspectTemplate for re-using frequently used configuration
         for inspecting content, images, and storage.
         See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.organizations.inspectTemplates.create
+      operationId: dlp.projects.inspectTemplates.create
       parameters:
         - in: body
           name: body
@@ -823,7 +819,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
   '/v2/{parent}/jobTriggers':
     get:
       description: |-
@@ -950,7 +946,7 @@ paths:
         Lists stored infoTypes.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.list
+      operationId: dlp.projects.storedInfoTypes.list
       parameters:
         - description: |-
             Optional comma separated list of fields to order by,
@@ -999,7 +995,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -1017,7 +1013,7 @@ paths:
         Creates a pre-built stored infoType to be used for inspection.
         See https://cloud.google.com/dlp/docs/creating-stored-infotypes to
         learn more.
-      operationId: dlp.organizations.storedInfoTypes.create
+      operationId: dlp.projects.storedInfoTypes.create
       parameters:
         - in: body
           name: body
@@ -1040,7 +1036,7 @@ paths:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - organizations
+        - projects
 definitions:
   GooglePrivacyDlpV2Action:
     description: |-
@@ -1646,7 +1642,7 @@ definitions:
         description: |-
           The template id can contain uppercase and lowercase letters,
           numbers, and hyphens; that is, it must match the regular
-          expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           characters. Can be empty to allow the system to generate one.
         type: string
     type: object
@@ -1662,7 +1658,7 @@ definitions:
         description: |-
           The job id can contain uppercase and lowercase letters,
           numbers, and hyphens; that is, it must match the regular
-          expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           characters. Can be empty to allow the system to generate one.
         type: string
       riskJob:
@@ -1678,7 +1674,7 @@ definitions:
         description: |-
           The template id can contain uppercase and lowercase letters,
           numbers, and hyphens; that is, it must match the regular
-          expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           characters. Can be empty to allow the system to generate one.
         type: string
     type: object
@@ -1692,7 +1688,7 @@ definitions:
         description: |-
           The trigger id can contain uppercase and lowercase letters,
           numbers, and hyphens; that is, it must match the regular
-          expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           characters. Can be empty to allow the system to generate one.
         type: string
     type: object
@@ -1706,7 +1702,7 @@ definitions:
         description: |-
           The storedInfoType ID can contain uppercase and lowercase letters,
           numbers, and hyphens; that is, it must match the regular
-          expression: `[a-zA-Z\\d-]+`. The maximum length is 100
+          expression: `[a-zA-Z\\d-_]+`. The maximum length is 100
           characters. Can be empty to allow the system to generate one.
         type: string
     type: object
@@ -1741,16 +1737,9 @@ definitions:
     type: object
   GooglePrivacyDlpV2CryptoReplaceFfxFpeConfig:
     description: |-
-      Replaces an identifier with a surrogate using FPE with the FFX
-      mode of operation; however when used in the `ReidentifyContent` API method,
-      it serves the opposite function by reversing the surrogate back into
-      the original identifier.
-      The identifier must be encoded as ASCII.
-      For a given crypto key and context, the same identifier will be
-      replaced with the same surrogate.
-      Identifiers must be at least two characters long.
-      In the case that the identifier is the empty string, it will be skipped.
-      See https://cloud.google.com/dlp/docs/pseudonymization to learn more.
+      Note: We recommend using  CryptoDeterministicConfig for all use cases which
+      do not require preserving the input alphabet space and size, plus warrant
+      referential integrity.
     properties:
       commonAlphabet:
         enum:
@@ -3154,6 +3143,7 @@ definitions:
   GooglePrivacyDlpV2KmsWrappedCryptoKey:
     description: |-
       Include to use an existing data crypto key wrapped by KMS.
+      The wrapped key must be a 128/192/256 bit key.
       Authorization requires the following IAM permissions when sending a request
       to perform a crypto transformation using a kms-wrapped crypto key:
       dlp.kms.encrypt
@@ -3859,6 +3849,7 @@ definitions:
           this run.
     type: object
   GooglePrivacyDlpV2Result:
+    description: All result fields mentioned below are updated while the job is processing.
     properties:
       infoTypeStats:
         description: |-
@@ -4213,7 +4204,7 @@ definitions:
     type: object
   GooglePrivacyDlpV2TransformationSummary:
     description: |-
-      Summary of a single tranformation.
+      Summary of a single transformation.
       Only one of 'transformation', 'field_transformation', or 'record_suppress'
       will be set.
     properties:
@@ -4274,7 +4265,7 @@ definitions:
       leaking the key. Choose another type of key if possible.
     properties:
       key:
-        description: 'The AES 128/192/256 bit key. [required]'
+        description: 'A 128/192/256 bit key. [required]'
         format: byte
         type: string
     type: object
@@ -4401,17 +4392,17 @@ definitions:
     type: object
   GoogleRpcStatus:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

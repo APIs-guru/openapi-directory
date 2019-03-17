@@ -698,7 +698,7 @@ paths:
       - $ref: '#/parameters/userIp'
   '/{merchantId}/accountstatuses/{accountId}':
     get:
-      description: Retrieves the status of a Merchant Center account. Multi-client accounts can only call this method for sub-accounts.
+      description: Retrieves the status of a Merchant Center account. No itemLevelIssues are returned for multi-client accounts.
       operationId: content.accountstatuses.get
       parameters:
         - description: The ID of the account.
@@ -2200,7 +2200,7 @@ paths:
         - orders
   '/{merchantId}/ordersbymerchantid/{merchantOrderId}':
     get:
-      description: Retrieves an order using merchant order id.
+      description: Retrieves an order using merchant order ID.
       operationId: content.orders.getbymerchantorderid
       parameters:
         - description: The ID of the account that manages the order. This cannot be a multi-client account.
@@ -2208,7 +2208,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The merchant order id to be looked for.
+        - description: The merchant order ID to be looked for.
           in: path
           name: merchantOrderId
           required: true
@@ -2500,7 +2500,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The REST id of the product.
+        - description: The REST ID of the product.
           in: path
           name: productId
           required: true
@@ -2522,7 +2522,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The REST id of the product.
+        - description: The REST ID of the product.
           in: path
           name: productId
           required: true
@@ -2567,7 +2567,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The REST id of the product for which to update the regional inventory.
+        - description: The REST ID of the product for which to update the regional inventory.
           in: path
           name: productId
           required: true
@@ -2642,7 +2642,7 @@ paths:
           name: merchantId
           required: true
           type: string
-        - description: The REST id of the product.
+        - description: The REST ID of the product.
           in: path
           name: productId
           required: true
@@ -3219,7 +3219,7 @@ definitions:
         description: Country code in which tax is applicable.
         type: string
       locationId:
-        description: 'State (or province) is which the tax is applicable, described by its location id (also called criteria id).'
+        description: 'State (or province) is which the tax is applicable, described by its location ID (also called criteria ID).'
         format: uint64
         type: string
       ratePercent:
@@ -4435,9 +4435,6 @@ definitions:
       billingAddress:
         $ref: '#/definitions/OrderAddress'
         description: The billing address.
-      channelType:
-        description: 'The channel type of the order: "purchaseOnGoogle" or "googleExpress".'
-        type: string
       customer:
         $ref: '#/definitions/OrderCustomer'
         description: The details of the customer who placed the order.
@@ -4559,9 +4556,6 @@ definitions:
     type: object
   OrderCustomer:
     properties:
-      email:
-        description: Deprecated.
-        type: string
       fullName:
         description: Full name of the customer.
         type: string
@@ -4578,7 +4572,7 @@ definitions:
         description: 'Timestamp when last time marketing preference was updated. Could be empty, if user wasn''t offered a selection yet.'
         type: string
       marketingEmailAddress:
-        description: Email address that can be used for marketing purposes. This field is only filled when explicitMarketingPreference is equal to 'granted'.
+        description: Email address that can be used for marketing purposes. The field may be empty even if explicitMarketingPreference is 'granted'. This happens when retrieving an old order from the customer who deleted their account.
         type: string
     type: object
   OrderDeliveryDetails:
@@ -4655,9 +4649,6 @@ definitions:
       brand:
         description: Brand of the item.
         type: string
-      channel:
-        description: The item's channel (online or local).
-        type: string
       condition:
         description: Condition or state of the item.
         type: string
@@ -4700,7 +4691,7 @@ definitions:
         description: The title of the product.
         type: string
       variantAttributes:
-        description: 'Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes <a href="'
+        description: 'Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes here.'
         items:
           $ref: '#/definitions/OrderLineItemProductVariantAttribute'
         type: array
@@ -4879,10 +4870,10 @@ definitions:
         format: uint64
         type: string
       merchantOrderId:
-        description: Merchant-provided id of the order.
+        description: Merchant-provided ID of the order.
         type: string
       orderId:
-        description: The id of the order.
+        description: The ID of the order.
         type: string
       productAmount:
         $ref: '#/definitions/ProductAmount'
@@ -5986,8 +5977,8 @@ definitions:
         type: string
       id:
         description: |-
-          The REST id of the product. Content API methods that operate on products take this as their productId parameter.
-          The REST id for a product is of the form channel:contentLanguage:targetCountry:offerId.
+          The REST ID of the product. Content API methods that operate on products take this as their productId parameter.
+          The REST ID for a product is of the form channel:contentLanguage:targetCountry:offerId.
         type: string
       identifierExists:
         description: 'False when the item does not have unique product identifiers appropriate to its category, such as GTIN, MPN, and brand. Required according to the Unique Product Identifier Rules for all target countries except for Canada.'
@@ -6049,7 +6040,7 @@ definitions:
       offerId:
         description: |-
           A unique identifier for the item. Leading and trailing whitespaces are stripped and multiple whitespaces are replaced by a single whitespace upon submission. Only valid unicode characters are accepted. See the products feed specification for details.
-          Note: Content API methods that operate on products take the REST id of the product, not this identifier.
+          Note: Content API methods that operate on products take the REST ID of the product, not this identifier.
         type: string
       pattern:
         description: The item's pattern (e.g. polka dots).
@@ -6150,7 +6141,7 @@ definitions:
         description: 'The location where the shipping is applicable, represented by a location group name.'
         type: string
       locationId:
-        description: The numeric id of a location that the shipping rate applies to as defined in the AdWords API.
+        description: The numeric ID of a location that the shipping rate applies to as defined in the AdWords API.
         format: int64
         type: string
       postalCode:
@@ -6187,7 +6178,7 @@ definitions:
         type: number
     type: object
   ProductStatus:
-    description: 'The status of a product, i.e., information about a product computed asynchronously by the data quality analysis.'
+    description: 'The status of a product, i.e., information about a product computed asynchronously.'
     properties:
       creationDate:
         description: 'Date on which the item has been created, in ISO 8601 format.'
@@ -6216,7 +6207,7 @@ definitions:
         description: The link to the product.
         type: string
       productId:
-        description: The id of the product for which status is reported.
+        description: The ID of the product for which status is reported.
         type: string
       title:
         description: The title of the product.
@@ -6263,7 +6254,7 @@ definitions:
         description: 'The country within which the item is taxed, specified as a CLDR territory code.'
         type: string
       locationId:
-        description: The numeric id of a location that the tax rate applies to as defined in the AdWords API.
+        description: The numeric ID of a location that the tax rate applies to as defined in the AdWords API.
         format: int64
         type: string
       postalCode:
@@ -6501,7 +6492,7 @@ definitions:
         $ref: '#/definitions/Price'
         description: The price of the product.
       regionId:
-        description: The id (name) of the region.
+        description: The ID (name) of the region.
         type: string
       salePrice:
         $ref: '#/definitions/Price'
@@ -6796,9 +6787,6 @@ definitions:
     type: object
   TestOrder:
     properties:
-      customer:
-        $ref: '#/definitions/TestOrderCustomer'
-        description: The details of the customer who placed the order.
       enableOrderinvoices:
         description: Whether the orderinvoices service should support this order.
         type: boolean
@@ -6820,6 +6808,9 @@ definitions:
       predefinedDeliveryAddress:
         description: Identifier of one of the predefined delivery addresses for the delivery.
         type: string
+      predefinedEmail:
+        description: Email address of the customer.
+        type: string
       promotions:
         description: Promotions associated with the order.
         items:
@@ -6830,27 +6821,6 @@ definitions:
         description: 'The price of shipping for all items. Shipping tax is automatically calculated for MFL orders. For non-MFL orders, tax settings from Merchant Center are applied. Note that shipping is not taxed in certain states.'
       shippingOption:
         description: The requested shipping option.
-        type: string
-    type: object
-  TestOrderCustomer:
-    properties:
-      email:
-        description: Deprecated.
-        type: string
-      fullName:
-        description: Full name of the customer.
-        type: string
-      marketingRightsInfo:
-        $ref: '#/definitions/TestOrderCustomerMarketingRightsInfo'
-        description: Customer's marketing preferences.
-    type: object
-  TestOrderCustomerMarketingRightsInfo:
-    properties:
-      explicitMarketingPreference:
-        description: 'Last know user use selection regards marketing preferences. In certain cases selection might not be known, so this field would be empty.'
-        type: string
-      lastUpdatedTimestamp:
-        description: 'Timestamp when last time marketing preference was updated. Could be empty, if user wasn''t offered a selection yet.'
         type: string
     type: object
   TestOrderLineItem:
@@ -6873,9 +6843,6 @@ definitions:
     properties:
       brand:
         description: Brand of the item.
-        type: string
-      channel:
-        description: The item's channel.
         type: string
       condition:
         description: Condition or state of the item.

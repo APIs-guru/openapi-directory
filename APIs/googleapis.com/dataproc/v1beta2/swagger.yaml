@@ -654,10 +654,10 @@ paths:
         - projects
   '/v1beta2/{name}':
     delete:
-      description: Deletes an autoscaling policy. It is an error to delete an autoscaling policy that is in use by one or more clusters.
-      operationId: dataproc.projects.locations.autoscalingPolicies.delete
+      description: 'Deletes a long-running operation. This method indicates that the client is no longer interested in the operation result. It does not cancel the operation. If the server doesn''t support this method, it returns google.rpc.Code.UNIMPLEMENTED.'
+      operationId: dataproc.projects.regions.operations.delete
       parameters:
-        - description: 'Required. The "resource name" of the autoscaling policy, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}.'
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -678,24 +678,32 @@ paths:
       tags:
         - projects
     get:
-      description: Retrieves autoscaling policy.
-      operationId: dataproc.projects.locations.autoscalingPolicies.get
+      description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns UNIMPLEMENTED.NOTE: the name binding allows API services to override the binding to use different resource name schemes, such as users/*/operations. To override the binding, API services can add a binding such as "/v1/{name=users/*}/operations" to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.'
+      operationId: dataproc.projects.regions.operations.list
       parameters:
-        - description: 'Required. The "resource name" of the autoscaling policy, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}.'
+        - description: The standard list filter.
+          in: query
+          name: filter
+          type: string
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. The version of workflow template to retrieve. Only previously instatiated versions can be retrieved.If unspecified, retrieves the current version.'
+        - description: The standard list page size.
           in: query
-          name: version
+          name: pageSize
           type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          type: string
       responses:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/AutoscalingPolicy'
+            $ref: '#/definitions/ListOperationsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -714,14 +722,14 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     put:
-      description: 'Updates (replaces) autoscaling policy.Disabled check for update_mask, because all updates will be full replacements.'
-      operationId: dataproc.projects.locations.autoscalingPolicies.update
+      description: Updates (replaces) workflow template. The updated template must contain version that matches the current server version.
+      operationId: dataproc.projects.regions.workflowTemplates.update
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/AutoscalingPolicy'
-        - description: 'Output only. The "resource name" of the policy, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/autoscalingPolicies/{policy_id}.'
+            $ref: '#/definitions/WorkflowTemplate'
+        - description: 'Output only. The "resource name" of the template, as described in https://cloud.google.com/apis/design/resource_names of the form projects/{project_id}/regions/{region}/workflowTemplates/{template_id}'
           in: path
           name: name
           required: true
@@ -731,7 +739,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/AutoscalingPolicy'
+            $ref: '#/definitions/WorkflowTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -785,7 +793,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.locations.workflowTemplates.instantiate
+      operationId: dataproc.projects.regions.workflowTemplates.instantiate
       parameters:
         - in: body
           name: body
@@ -810,7 +818,7 @@ paths:
   '/v1beta2/{parent}/autoscalingPolicies':
     get:
       description: Lists autoscaling policies in the project.
-      operationId: dataproc.projects.locations.autoscalingPolicies.list
+      operationId: dataproc.projects.regions.autoscalingPolicies.list
       parameters:
         - description: Optional. The maximum number of results to return in each response.
           in: query
@@ -850,7 +858,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates new autoscaling policy.
-      operationId: dataproc.projects.locations.autoscalingPolicies.create
+      operationId: dataproc.projects.regions.autoscalingPolicies.create
       parameters:
         - in: body
           name: body
@@ -875,7 +883,7 @@ paths:
   '/v1beta2/{parent}/workflowTemplates':
     get:
       description: Lists workflows that match the specified filter in the request.
-      operationId: dataproc.projects.locations.workflowTemplates.list
+      operationId: dataproc.projects.regions.workflowTemplates.list
       parameters:
         - description: Optional. The maximum number of results to return in each response.
           in: query
@@ -915,7 +923,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Creates new workflow template.
-      operationId: dataproc.projects.locations.workflowTemplates.create
+      operationId: dataproc.projects.regions.workflowTemplates.create
       parameters:
         - in: body
           name: body
@@ -952,7 +960,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Instantiates a template and begins execution.This method is equivalent to executing the sequence CreateWorkflowTemplate, InstantiateWorkflowTemplate, DeleteWorkflowTemplate.The returned Operation can be used to track execution of workflow by polling operations.get. The Operation will complete when entire workflow is finished.The running workflow can be aborted via operations.cancel. This will cause any inflight jobs to be cancelled and workflow-owned clusters to be deleted.The Operation.metadata will be WorkflowMetadata.On successful completion, Operation.response will be Empty.'
-      operationId: dataproc.projects.locations.workflowTemplates.instantiateInline
+      operationId: dataproc.projects.regions.workflowTemplates.instantiateInline
       parameters:
         - in: body
           name: body
@@ -985,7 +993,7 @@ paths:
   '/v1beta2/{resource}:getIamPolicy':
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
-      operationId: dataproc.projects.locations.autoscalingPolicies.getIamPolicy
+      operationId: dataproc.projects.regions.operations.getIamPolicy
       parameters:
         - description: 'REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.'
           in: path
@@ -1054,7 +1062,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: dataproc.projects.locations.autoscalingPolicies.setIamPolicy
+      operationId: dataproc.projects.regions.operations.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -1091,7 +1099,7 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a NOT_FOUND error.Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
-      operationId: dataproc.projects.locations.autoscalingPolicies.testIamPermissions
+      operationId: dataproc.projects.regions.operations.testIamPermissions
       parameters:
         - in: body
           name: body
@@ -1167,7 +1175,7 @@ definitions:
         type: string
       secondaryWorkerConfig:
         $ref: '#/definitions/InstanceGroupAutoscalingPolicyConfig'
-        description: Required. Describes how the autoscaler will operate for secondary workers.
+        description: Optional. Describes how the autoscaler will operate for secondary workers.
       workerConfig:
         $ref: '#/definitions/InstanceGroupAutoscalingPolicyConfig'
         description: Required. Describes how the autoscaler will operate for primary workers.
@@ -1176,7 +1184,7 @@ definitions:
     description: Basic algorithm for autoscaling.
     properties:
       cooldownPeriod:
-        description: 'Optional. Cooldown period in between scaling. Note that a cooldown period begins after a scaling operation has completed.Default: 120s.'
+        description: 'Optional. Duration between scaling events. A scaling period starts after the update operation from the previous event has completed.Bounds: 2m, 1d. Default: 2m.'
         format: google-duration
         type: string
       yarnConfig:
@@ -1187,23 +1195,23 @@ definitions:
     description: Basic autoscaling configurations for YARN.
     properties:
       gracefulDecommissionTimeout:
-        description: 'Optional. Timeout used during an autoscaling event (cluster update) between 0 seconds (no graceful decommission) and 1 day.Default: 0s.'
+        description: 'Required. Timeout for YARN graceful decommissioning of Node Managers. Specifies the duration to wait for jobs to complete before forcefully removing workers (and potentially interrupting jobs). Only applicable to downscaling operations.Bounds: 0s, 1d.'
         format: google-duration
         type: string
       scaleDownFactor:
-        description: 'Optional. Fraction of suggested decrease in workers to scale down by between 0 and 1. Suggested decrease when scaling down is determined by the amount of average available memory since the last cooldown period.Default: 1.0.'
+        description: 'Required. Fraction of average pending memory in the last cooldown period for which to remove workers. A scale-down factor of 1 will result in scaling down so that there is no available memory remaining after the update (more aggressive scaling). A scale-down factor of 0 disables removing workers, which can be beneficial for autoscaling a single job.Bounds: 0.0, 1.0.'
         format: double
         type: number
       scaleDownMinWorkerFraction:
-        description: 'Optional. Minimum workers as a fraction of the current cluster size to to scale down by between 0 and 1.Default: 0.0.'
+        description: 'Optional. Minimum scale-down threshold as a fraction of total cluster size before scaling occurs. For example, in a 20-worker cluster, a threshold of 0.1 means the autoscaler must recommend at least a 2 worker scale-down for the cluster to scale. A threshold of 0 means the autoscaler will scale down on any recommended change.Bounds: 0.0, 1.0. Default: 0.0.'
         format: double
         type: number
       scaleUpFactor:
-        description: Required. Fraction of suggested increase in workers to scale up by between 0 and 1. Suggested increase when scaling up is determined by the amount of average pending memory since the last cooldown period.
+        description: 'Required. Fraction of average pending memory in the last cooldown period for which to add workers. A scale-up factor of 1.0 will result in scaling up so that there is no pending memory remaining after the update (more aggressive scaling). A scale-up factor closer to 0 will result in a smaller magnitude of scaling up (less aggressive scaling).Bounds: 0.0, 1.0.'
         format: double
         type: number
       scaleUpMinWorkerFraction:
-        description: 'Optional. Minimum workers as a fraction of the current cluster size to to scale up by between 0 and 1.Default: 0.0.'
+        description: 'Optional. Minimum scale-up threshold as a fraction of total cluster size before scaling occurs. For example, in a 20-worker cluster, a threshold of 0.1 means the autoscaler must recommend at least a 2-worker scale-up for the cluster to scale. A threshold of 0 means the autoscaler will scale up on any recommended change.Bounds: 0.0, 1.0. Default: 0.0.'
         format: double
         type: number
     type: object
@@ -1272,14 +1280,17 @@ definitions:
         $ref: '#/definitions/AutoscalingConfig'
         description: Optional. Autoscaling config for the policy associated with the cluster. Cluster does not autoscale if this field is unset.
       configBucket:
-        description: 'Optional. A Cloud Storage staging bucket used for sharing generated SSH keys and config. If you do not specify a staging bucket, Cloud Dataproc will determine an appropriate Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then it will create and manage this project-level, per-location bucket for you.'
+        description: 'Optional. A Google Cloud Storage bucket used to stage job dependencies, config files, and job driver console output. If you do not specify a staging bucket, Cloud Dataproc will determine a Cloud Storage location (US, ASIA, or EU) for your cluster''s staging bucket according to the Google Compute Engine zone where your cluster is deployed, and then create and manage this project-level, per-location bucket (see Cloud Dataproc staging bucket).'
         type: string
       encryptionConfig:
         $ref: '#/definitions/EncryptionConfig'
         description: Optional. Encryption settings for the cluster.
+      endpointConfig:
+        $ref: '#/definitions/EndpointConfig'
+        description: Optional. Port/endpoint configuration for this cluster
       gceClusterConfig:
         $ref: '#/definitions/GceClusterConfig'
-        description: Required. The shared Compute Engine config settings for all instances in a cluster.
+        description: Optional. The shared Compute Engine config settings for all instances in a cluster.
       initializationActions:
         description: |
           Optional. Commands to execute on each node after config is completed. By default, executables are run on master and all worker nodes. You can test a node's <code>role</code> metadata to run an executable on a master or worker node, as shown below using curl (you can also use wget):
@@ -1301,6 +1312,9 @@ definitions:
       secondaryWorkerConfig:
         $ref: '#/definitions/InstanceGroupConfig'
         description: Optional. The Compute Engine config settings for additional worker instances in a cluster.
+      securityConfig:
+        $ref: '#/definitions/SecurityConfig'
+        description: Optional. Security related configuration.
       softwareConfig:
         $ref: '#/definitions/SoftwareConfig'
         description: Optional. The config settings for software inside the cluster.
@@ -1475,6 +1489,18 @@ definitions:
         description: Optional. The Cloud KMS key name to use for PD disk encryption for all instances in the cluster.
         type: string
     type: object
+  EndpointConfig:
+    description: Endpoint config for this cluster
+    properties:
+      enableHttpPortAccess:
+        description: 'Optional. If true, enable http access to specific ports on the cluster from external sources. Defaults to false.'
+        type: boolean
+      httpPorts:
+        additionalProperties:
+          type: string
+        description: Output only. The map of port descriptions to URLs. Will only be populated if enable_http_port_access is true.
+        type: object
+    type: object
   Expr:
     description: |
       Represents an expression text. Example:
@@ -1629,15 +1655,15 @@ definitions:
     description: 'Configuration for the size bounds of an instance group, including its proportional size to other groups.'
     properties:
       maxInstances:
-        description: Required. Maximum number of instances for this group. Must be >= min_instances.
+        description: 'Optional. Maximum number of instances for this group. Required for primary workers. Note that by default, clusters will not use secondary workers.Primary workers - Bounds: [min_instances, ). Secondary workers - Bounds: [min_instances, ). Default: 0.'
         format: int32
         type: integer
       minInstances:
-        description: 'Optional. Minimum number of instances for this group.Default for primary workers is 2, default for secondary workers is 0.'
+        description: 'Optional. Minimum number of instances for this group.Primary workers - Bounds: 2, max_instances. Default: 2. Secondary workers - Bounds: 0, max_instances. Default: 0.'
         format: int32
         type: integer
       weight:
-        description: 'Optional. Weight for instance group. Determines fraction of total workers in cluster that will be composed of instances from this instance group (e.g. if primary workers have weight 2 and secondary workers have weight 1, then the cluster should have approximately 2 primary workers to each secondary worker. Cluster may not reach these exact weights if constrained by min/max bounds or other autoscaling configurations.Default 1. Note that all groups have equal an equal weight by default, so the cluster will attempt to maintain an equal number of workers in each group within configured size bounds per group.'
+        description: 'Optional. Weight for instance group. Determines fraction of total workers in cluster that will be composed of instances from this instance group (e.g. if primary workers have weight 2 and secondary workers have weight 1, then the cluster should have approximately 2 primary workers to each secondary worker. Cluster may not reach these exact weights if constrained by min/max bounds or other autoscaling configurations.Note that all groups have an equal weight by default, so the cluster will attempt to maintain an equal number of workers in each group within configured size bounds per group. The cluster may not reach this balance of weights if not allowed by worker-count bounds. For example, if max_instances for secondary workers is 0, only primary workers will be added. The cluster can also be out of balance when created.Default: 1.'
         format: int32
         type: integer
     type: object
@@ -1729,6 +1755,9 @@ definitions:
       placement:
         $ref: '#/definitions/JobPlacement'
         description: 'Required. Job information, including how, when, and where to run the job.'
+      prestoJob:
+        $ref: '#/definitions/PrestoJob'
+        description: Job is a Presto job
       pysparkJob:
         $ref: '#/definitions/PySparkJob'
         description: Job is a Pyspark job.
@@ -1823,6 +1852,53 @@ definitions:
           - SUBMITTED
           - QUEUED
           - STALE_STATUS
+        type: string
+    type: object
+  KerberosConfig:
+    description: Specifies Kerberos related configuration.
+    properties:
+      crossRealmTrustAdminServer:
+        description: Optional. The admin server (IP or hostname) for the remote trusted realm in a cross realm trust relationship.
+        type: string
+      crossRealmTrustKdc:
+        description: Optional. The KDC (IP or hostname) for the remote trusted realm in a cross realm trust relationship.
+        type: string
+      crossRealmTrustRealm:
+        description: 'Optional. The remote realm the Dataproc on-cluster KDC will trust, should the user enable cross realm trust.'
+        type: string
+      crossRealmTrustSharedPasswordUri:
+        description: 'Optional. The GCS uri of a KMS encrypted file containing the shared password between the on-cluster Kerberos realm and the remote trusted realm, in a cross realm trust relationship.'
+        type: string
+      enableKerberos:
+        description: Optional. Flag to indicate whether to Kerberize the cluster.
+        type: boolean
+      kdcDbKeyUri:
+        description: Optional. The GCS uri of a KMS encrypted file containing the master key of the KDC database.
+        type: string
+      keyPasswordUri:
+        description: 'Optional. The GCS uri of a KMS encrypted file containing the password to the user provided key. For the self-signed certificate, this password is generated by Dataproc.'
+        type: string
+      keystorePasswordUri:
+        description: 'Optional. The GCS uri of a KMS encrypted file containing the password to the user provided keystore. For the self-signed certificate, this password is generated by Dataproc.'
+        type: string
+      keystoreUri:
+        description: 'Optional. The GCS uri of the keystore file used for SSL encryption. If not provided, Dataproc will provide a self-signed certificate.'
+        type: string
+      kmsKeyUri:
+        description: Required. The uri of the KMS key used to encrypt various sensitive files.
+        type: string
+      rootPrincipalPasswordUri:
+        description: Required. The GCS uri of a KMS encrypted file containing the root principal password.
+        type: string
+      tgtLifetimeHours:
+        description: 'Optional. The lifetime of the ticket granting ticket, in hours. If not specified, or user specifies 0, then default value 10 will be used.'
+        format: int32
+        type: integer
+      truststorePasswordUri:
+        description: 'Optional. The GCS uri of a KMS encrypted file containing the password to the user provided truststore. For the self-signed certificate, this password is generated by Dataproc.'
+        type: string
+      truststoreUri:
+        description: 'Optional. The GCS uri of the truststore file used for SSL encryption. If not provided, Dataproc will provide a self-signed certificate.'
         type: string
     type: object
   LifecycleConfig:
@@ -2105,6 +2181,35 @@ definitions:
         format: int32
         type: integer
     type: object
+  PrestoJob:
+    description: 'A Cloud Dataproc job for running Presto (https://prestosql.io/) queries'
+    properties:
+      clientTags:
+        description: Optional. Presto client tags to attach to this query
+        items:
+          type: string
+        type: array
+      continueOnFailure:
+        description: Optional. Whether to continue executing queries if a query fails. The default value is false. Setting to true can be useful when executing independent parallel queries.
+        type: boolean
+      loggingConfig:
+        $ref: '#/definitions/LoggingConfig'
+        description: Optional. The runtime log config for job execution.
+      outputFormat:
+        description: Optional. The format in which query output will be displayed. See the Presto documentation for supported output formats
+        type: string
+      properties:
+        additionalProperties:
+          type: string
+        description: 'Optional. A mapping of property names to values. Used to set Presto session properties (https://prestodb.io/docs/current/sql/set-session.html) Equivalent to using the --session flag in the Presto CLI'
+        type: object
+      queryFileUri:
+        description: The HCFS URI of the script that contains SQL queries.
+        type: string
+      queryList:
+        $ref: '#/definitions/QueryList'
+        description: A list of queries.
+    type: object
   PySparkJob:
     description: 'A Cloud Dataproc job for running Apache PySpark (https://spark.apache.org/docs/0.9.0/python-programming-guide.html) applications on YARN.'
     properties:
@@ -2173,6 +2278,13 @@ definitions:
           type: string
         type: array
     type: object
+  SecurityConfig:
+    description: 'Security related configuration, including encryption, Kerberos, etc.'
+    properties:
+      kerberosConfig:
+        $ref: '#/definitions/KerberosConfig'
+        description: Kerberos related configuration.
+    type: object
   SetIamPolicyRequest:
     description: Request message for SetIamPolicy method.
     properties:
@@ -2197,13 +2309,15 @@ definitions:
             - KERBEROS
             - PRESTO
             - ZEPPELIN
+            - ZOOKEEPER
+            - DRUID
           type: string
         type: array
       properties:
         additionalProperties:
           type: string
         description: |-
-          Optional. The properties to set on daemon config files.Property keys are specified in prefix:property format, such as core:fs.defaultFS. The following are supported prefixes and their mappings:
+          Optional. The properties to set on daemon config files.Property keys are specified in prefix:property format, for example core:hadoop.tmp.dir. The following are supported prefixes and their mappings:
           capacity-scheduler: capacity-scheduler.xml
           core: core-site.xml
           distcp: distcp-default.xml

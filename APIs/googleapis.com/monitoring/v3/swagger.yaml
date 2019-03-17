@@ -149,19 +149,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes an uptime check configuration. Note that this method will fail if the uptime check configuration is referenced by an alert policy or other dependent configs that would be rendered invalid by the deletion.
-      operationId: monitoring.projects.uptimeCheckConfigs.delete
+      description: Deletes an existing group.
+      operationId: monitoring.projects.groups.delete
       parameters:
-        - description: 'If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, channels that are still referenced by an existing alerting policy will fail to be deleted in a delete operation.'
-          in: query
-          name: force
-          type: boolean
-        - description: 'The uptime check configuration to delete. The format  is projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
+        - description: 'The group to delete. The format is "projects/{project_id_or_number}/groups/{group_id}".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
+        - description: 'If this field is true, then the request means to delete a group with all its descendants. Otherwise, the request means to delete a group only when it has no descendants. The default value is false.'
+          in: query
+          name: recursive
+          type: boolean
       responses:
         '200':
           description: Successful response
@@ -175,10 +175,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single uptime check configuration.
-      operationId: monitoring.projects.uptimeCheckConfigs.get
+      description: Gets a single group.
+      operationId: monitoring.projects.groups.get
       parameters:
-        - description: 'The uptime check configuration to retrieve. The format  is projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].'
+        - description: 'The group to retrieve. The format is "projects/{project_id_or_number}/groups/{group_id}".'
           in: path
           name: name
           required: true
@@ -188,7 +188,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/UptimeCheckConfig'
+            $ref: '#/definitions/Group'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -1481,7 +1481,7 @@ definitions:
     description: 'Exemplars are example points that may be used to annotate aggregated distribution values. They are metadata that gives information about a particular value added to a Distribution bucket, such as a trace ID that was active when a value was added. They may contain further information, such as a example values and timestamps, origin, etc.'
     properties:
       attachments:
-        description: 'Contextual information about the example value. Examples are:Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.TraceLiteral string: type.googleapis.com/google.protobuf.StringValueLabels dropped during aggregation:  type.googleapis.com/google.monitoring.v3.DroppedLabelsThere may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system.'
+        description: 'Contextual information about the example value. Examples are:Trace: type.googleapis.com/google.monitoring.v3.SpanContextLiteral string: type.googleapis.com/google.protobuf.StringValueLabels dropped during aggregation:  type.googleapis.com/google.monitoring.v3.DroppedLabelsThere may be only a single attachment of any given message type in a single exemplar, and this is enforced by the system.'
         items:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
@@ -1638,7 +1638,7 @@ definitions:
         description: 'Boolean specifiying whether to encrypt the header information. Encryption should be specified for any headers related to authentication that you do not wish to be seen when retrieving the configuration. The server will be responsible for encrypting the headers. On Get/List calls, if mask_headers is set to True then the headers will be obscured with ******.'
         type: boolean
       path:
-        description: The path to the page to run the check against. Will be combined with the host (specified within the MonitoredResource) and port to construct the full URL. Optional (defaults to "/").
+        description: 'The path to the page to run the check against. Will be combined with the host (specified within the MonitoredResource) and port to construct the full URL. Optional (defaults to "/"). If the provided path does not begin with "/", it will be prepended automatically.'
         type: string
       port:
         description: 'The port to the page to run the check against. Will be combined with host (specified within the MonitoredResource) and path to construct the full URL. Optional (defaults to 80 without SSL, or 443 with SSL).'

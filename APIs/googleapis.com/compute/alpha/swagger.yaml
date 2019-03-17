@@ -466,6 +466,40 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+    patch:
+      description: Patches the specified policy with the data included in the request.
+      operationId: compute.organizationSecurityPolicies.patch
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SecurityPolicy'
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the security policy to update.
+          in: path
+          name: securityPolicy
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - organizationSecurityPolicies
   '/locations/global/securityPolicies/{securityPolicy}/addAssociation':
     parameters:
       - $ref: '#/parameters/alt'
@@ -22345,59 +22379,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - allocations
-  '/{project}/zones/{zone}/allocations/{allocation}/updateResourceShape':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Updates the shape of an allocation.
-      operationId: compute.allocations.updateResourceShape
-      parameters:
-        - description: Name of the allocation to update.
-          in: path
-          name: allocation
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AllocationsUpdateResourceShapeRequest'
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: |-
-            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-
-            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-
-            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-      tags:
-        - allocations
   '/{project}/zones/{zone}/allocations/{resource}/getIamPolicy':
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -29599,7 +29580,7 @@ definitions:
     description: Allocation resource
     properties:
       commitment:
-        description: Full or partial url for commitment in which this allocation is to be created. This field is ignored when allocations are created during committment creation.
+        description: '[OutputOnly] Full or partial url for parent commitment for allocations which are tied to a commitment.'
         type: string
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
@@ -29905,18 +29886,6 @@ definitions:
             description: '[Output Only] A human-readable description of the warning code.'
             type: string
         type: object
-    type: object
-  AllocationsUpdateResourceShapeRequest:
-    properties:
-      count:
-        description: Number of allocated resources which are to be updated with minimum = 1 and maximum = 100.
-        format: int32
-        type: integer
-      destinationAllocation:
-        description: 'The name of destination allocation where the modified machines are added. If existing, its machine spec must match the modified machine spec. If non existing, new allocation with this name and modified machine spec is created automatically.'
-        type: string
-      updatedResourceProperties:
-        $ref: '#/definitions/AllocationSpecificSKUAllocationAllocatedInstanceProperties'
     type: object
   AttachedDisk:
     description: An instance-attached disk resource.
@@ -31358,7 +31327,7 @@ definitions:
 
 
 
-          * `domain:{domain}`: A Google Apps domain name that represents all the users of that domain. For example, `google.com` or `example.com`.
+          * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`.
         items:
           type: string
         type: array
@@ -31925,8 +31894,9 @@ definitions:
         description: The URL of the suggested replacement for a deprecated resource. The suggested replacement resource must be the same kind of resource as the deprecated resource.
         type: string
       state:
-        description: 'The deprecation state of this resource. This can be DEPRECATED, OBSOLETE, or DELETED. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.'
+        description: 'The deprecation state of this resource. This can be ACTIVE DEPRECATED, OBSOLETE, or DELETED. Operations which communicate the end of life date for an image, can use ACTIVE. Operations which create a new resource using a DEPRECATED resource will return successfully, but with a warning indicating the deprecated resource and recommending its replacement. Operations which use OBSOLETE or DELETED resources will be rejected and result in an error.'
         enum:
+          - ACTIVE
           - DELETED
           - DEPRECATED
           - OBSOLETE
@@ -35126,6 +35096,7 @@ definitions:
         description: '[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, STOPPED, SUSPENDING, SUSPENDED, and TERMINATED.'
         enum:
           - PROVISIONING
+          - REPAIRING
           - RUNNING
           - STAGING
           - STOPPED
@@ -35784,6 +35755,12 @@ definitions:
           - REFRESH
           - REPLACE
           - RESTART
+        type: string
+      replacementMethod:
+        description: What action should be used to replace instances. See minimal_action.REPLACE
+        enum:
+          - RECREATE
+          - SUBSTITUTE
         type: string
       type:
         enum:
@@ -36575,6 +36552,7 @@ definitions:
         description: '[Output Only] The status of the instance.'
         enum:
           - PROVISIONING
+          - REPAIRING
           - RUNNING
           - STAGING
           - STOPPED
@@ -38448,6 +38426,7 @@ definitions:
         description: '[Output Only] The status of the instance. This field is empty when the instance does not exist.'
         enum:
           - PROVISIONING
+          - REPAIRING
           - RUNNING
           - STAGING
           - STOPPED
@@ -42104,6 +42083,9 @@ definitions:
         type: string
       description:
         type: string
+      groupPlacementPolicy:
+        $ref: '#/definitions/ResourcePolicyGroupPlacementPolicy'
+        description: Resource policy for instacnes for placement configuration.
       id:
         description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
         format: uint64
@@ -42217,6 +42199,28 @@ definitions:
       startTime:
         description: 'Time within the window to start the operations. It must be in format "HH:MM", where HH : [00-23] and MM : [00-00] GMT.'
         type: string
+    type: object
+  ResourcePolicyGroupPlacementPolicy:
+    description: A GroupPlacementPolicy specifies resource placement configuration. It specifies the failure bucket separation as well as network locality
+    properties:
+      locality:
+        description: Specifies network locality
+        enum:
+          - BEST_EFFORT
+          - STRICT
+          - UNSPECIFIED_LOCALITY
+        type: string
+      style:
+        description: Specifies instances to hosts placement relationship
+        enum:
+          - COMPACT
+          - FULLY_SPREAD
+          - UNSPECIFIED_PLACEMENT_TYPE
+        type: string
+      vmCount:
+        description: Number of vms in this placement group
+        format: int32
+        type: integer
     type: object
   ResourcePolicyHourlyCycle:
     description: Time window specified for hourly operations.
@@ -43008,9 +43012,6 @@ definitions:
       enable:
         description: Indicates whether or not to export logs. This is false by default.
         type: boolean
-      enabled:
-        description: 'Indicates whether or not to export logs. This is false by default. [Deprecated] Use ''enable'' instead.'
-        type: boolean
       filter:
         description: 'Specifies the desired filtering of logs on this NAT. If unspecified, logs are exported for all connections handled by this NAT.'
         enum:
@@ -43105,7 +43106,7 @@ definitions:
         type: string
     type: object
   RouterStatusNatStatus:
-    description: Status of a NAT contained in this router.
+    description: 'Status of a NAT contained in this router. Next tag: 9'
     properties:
       autoAllocatedNatIps:
         description: 'A list of IPs auto-allocated for NAT. Example: ["1.1.1.1", "129.2.16.89"]'
@@ -46459,7 +46460,7 @@ definitions:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
       forwardingRules:
-        description: '[Output Only] A list of URLs to the ForwardingRule resources. ForwardingRules are created using compute.forwardingRules.insert and associated to a VPN gateway.'
+        description: '[Output Only] A list of URLs to the ForwardingRule resources. ForwardingRules are created using compute.forwardingRules.insert and associated with a VPN gateway.'
         items:
           type: string
         type: array
@@ -46497,7 +46498,7 @@ definitions:
         description: '[Output Only] Server-defined URL for the resource.'
         type: string
       status:
-        description: '[Output Only] The status of the VPN gateway.'
+        description: '[Output Only] The status of the VPN gateway, which can be one of the following: CREATING, READY, FAILED, or DELETING.'
         enum:
           - CREATING
           - DELETING
@@ -46505,7 +46506,7 @@ definitions:
           - READY
         type: string
       tunnels:
-        description: '[Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are created using compute.vpntunnels.insert method and associated to a VPN gateway.'
+        description: '[Output Only] A list of URLs to VpnTunnel resources. VpnTunnels are created using the compute.vpntunnels.insert method and associated with a VPN gateway.'
         items:
           type: string
         type: array
@@ -46653,7 +46654,7 @@ definitions:
   TargetVpnGatewaysScopedList:
     properties:
       targetVpnGateways:
-        description: '[Output Only] A list of target vpn gateways contained in this scope.'
+        description: '[Output Only] A list of target VPN gateways contained in this scope.'
         items:
           $ref: '#/definitions/TargetVpnGateway'
         type: array
@@ -47619,7 +47620,7 @@ definitions:
         format: uint64
         type: string
       ikeVersion:
-        description: IKE protocol version to use when establishing the VPN tunnel with peer VPN gateway. Acceptable IKE versions are 1 or 2. Default version is 2.
+        description: IKE protocol version to use when establishing the VPN tunnel with the peer VPN gateway. Acceptable IKE versions are 1 or 2. The default version is 2.
         format: int32
         type: integer
       kind:
@@ -47639,7 +47640,7 @@ definitions:
         description: Labels to apply to this VpnTunnel. These can be later modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         type: object
       localTrafficSelector:
-        description: 'Local traffic selector to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
+        description: 'Local traffic selector to use when establishing the VPN tunnel with the peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges must be disjoint. Only IPv4 is supported.'
         items:
           type: string
         type: array
@@ -47664,12 +47665,12 @@ definitions:
         description: '[Output Only] URL of the region where the VPN tunnel resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.'
         type: string
       remoteTrafficSelector:
-        description: 'Remote traffic selectors to use when establishing the VPN tunnel with peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
+        description: 'Remote traffic selectors to use when establishing the VPN tunnel with the peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges should be disjoint. Only IPv4 is supported.'
         items:
           type: string
         type: array
       router:
-        description: URL of router resource to be used for dynamic routing.
+        description: URL of the router resource to be used for dynamic routing.
         type: string
       selfLink:
         description: '[Output Only] Server-defined URL for the resource.'
@@ -47681,7 +47682,17 @@ definitions:
         description: Hash of the shared secret.
         type: string
       status:
-        description: '[Output Only] The status of the VPN tunnel.'
+        description: |-
+          [Output Only] The status of the VPN tunnel, which can be one of the following: 
+          - PROVISIONING: Resource is being allocated for the VPN tunnel. 
+          - WAITING_FOR_FULL_CONFIG: Waiting to receive all VPN-related configs from the user. Network, TargetVpnGateway, VpnTunnel, ForwardingRule, and Route resources are needed to setup the VPN tunnel. 
+          - FIRST_HANDSHAKE: Successful first handshake with the peer VPN. 
+          - ESTABLISHED: Secure session is successfully established with the peer VPN. 
+          - NETWORK_ERROR: Deprecated, replaced by NO_INCOMING_PACKETS 
+          - AUTHORIZATION_ERROR: Auth error (for example, bad shared secret). 
+          - NEGOTIATION_FAILURE: Handshake failed. 
+          - DEPROVISIONING: Resources are being deallocated for the VPN tunnel. 
+          - FAILED: Tunnel creation has failed and the tunnel is not ready to be used.
         enum:
           - ALLOCATING_RESOURCES
           - AUTHORIZATION_ERROR
@@ -47715,7 +47726,7 @@ definitions:
       items:
         additionalProperties:
           $ref: '#/definitions/VpnTunnelsScopedList'
-          description: Name of the scope containing this set of vpn tunnels.
+          description: Name of the scope containing this set of VPN tunnels.
         description: A list of VpnTunnelsScopedList resources.
         type: object
       kind:
@@ -47850,7 +47861,7 @@ definitions:
   VpnTunnelsScopedList:
     properties:
       vpnTunnels:
-        description: A list of vpn tunnels contained in this scope.
+        description: A list of VPN tunnels contained in this scope.
         items:
           $ref: '#/definitions/VpnTunnel'
         type: array

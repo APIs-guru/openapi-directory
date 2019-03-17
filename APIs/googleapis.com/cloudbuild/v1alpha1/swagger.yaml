@@ -105,7 +105,7 @@ paths:
   '/v1alpha1/{name}':
     delete:
       description: |-
-        Deletes a `WorkerPool` by its project ID and WorkerPool ID.
+        Deletes a `WorkerPool` by its project ID and WorkerPool name.
 
         This API is experimental.
       operationId: cloudbuild.projects.workerPools.delete
@@ -838,6 +838,9 @@ definitions:
       artifactManifest:
         description: Path to the artifact manifest. Only populated when artifacts are uploaded.
         type: string
+      artifactTiming:
+        $ref: '#/definitions/TimeSpan'
+        description: Time to push all non-container artifacts.
       buildStepImages:
         description: |-
           List of build step digests, in the order corresponding to build step

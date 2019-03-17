@@ -199,16 +199,23 @@ paths:
         - operations
     get:
       description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: remotebuildexecution.projects.operations.get
+        Lists operations that match the specified filter in the request. If the
+        server doesn't support this method, it returns `UNIMPLEMENTED`.
+
+        NOTE: the `name` binding allows API services to override the binding
+        to use different resource name schemes, such as `users/*/operations`. To
+        override the binding, API services can add a binding such as
+        `"/v1/{name=users/*}/operations"` to their service configuration.
+        For backwards compatibility, the default name includes the operations
+        collection id, however overriding users must ensure the name binding
+        is the parent resource, without the operations collection id.
+      operationId: remotebuildexecution.operations.list
       parameters:
         - description: The standard list filter.
           in: query
           name: filter
           type: string
-        - description: The name of the operation resource.
+        - description: The name of the operation's parent resource.
           in: path
           name: name
           required: true
@@ -226,12 +233,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GoogleLongrunningOperation'
+            $ref: '#/definitions/GoogleLongrunningListOperationsResponse'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - projects
+        - operations
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'
@@ -2212,6 +2219,12 @@ definitions:
         items:
           $ref: '#/definitions/GoogleDevtoolsRemoteworkersV1test2Blob'
         type: array
+      workingDirectory:
+        description: |-
+          Directory from which a command is executed. It is a relative directory
+          with respect to the bot's working directory (i.e., "./"). If it is
+          non-empty, then it must exist under "./". Otherwise, "./" will be used.
+        type: string
     type: object
   GoogleDevtoolsRemoteworkersV1test2CommandTaskInputsEnvironmentVariable:
     description: An environment variable required by this task.
@@ -2444,17 +2457,17 @@ definitions:
     type: object
   GoogleRpcStatus:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

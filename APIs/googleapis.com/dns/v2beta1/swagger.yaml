@@ -842,6 +842,13 @@ definitions:
         items:
           type: string
         type: array
+      privateVisibilityConfig:
+        $ref: '#/definitions/ManagedZonePrivateVisibilityConfig'
+      visibility:
+        enum:
+          - PRIVATE
+          - PUBLIC
+        type: string
     type: object
   ManagedZoneDnsSecConfig:
     properties:
@@ -879,6 +886,26 @@ definitions:
         items:
           $ref: '#/definitions/Operation'
         type: array
+    type: object
+  ManagedZonePrivateVisibilityConfig:
+    properties:
+      kind:
+        default: 'dns#managedZonePrivateVisibilityConfig'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dns#managedZonePrivateVisibilityConfig".'
+        type: string
+      networks:
+        items:
+          $ref: '#/definitions/ManagedZonePrivateVisibilityConfigNetwork'
+        type: array
+    type: object
+  ManagedZonePrivateVisibilityConfigNetwork:
+    properties:
+      kind:
+        default: 'dns#managedZonePrivateVisibilityConfigNetwork'
+        description: 'Identifies what kind of resource this is. Value: the fixed string "dns#managedZonePrivateVisibilityConfigNetwork".'
+        type: string
+      networkUrl:
+        type: string
     type: object
   ManagedZonesListResponse:
     properties:
@@ -957,6 +984,12 @@ definitions:
         description: 'Identifies what kind of resource this is. Value: the fixed string "dns#quota".'
         type: string
       managedZones:
+        format: int32
+        type: integer
+      managedZonesPerNetwork:
+        format: int32
+        type: integer
+      networksPerManagedZone:
         format: int32
         type: integer
       resourceRecordsPerRrset:

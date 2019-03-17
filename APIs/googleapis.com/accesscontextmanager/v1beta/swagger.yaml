@@ -595,6 +595,13 @@ definitions:
           its non-empty fields, each field must be false for the Condition overall to
           be satisfied. Defaults to false.
         type: boolean
+      regions:
+        description: |-
+          The request must originate from one of the provided countries/regions.
+          Must be valid ISO 3166-1 alpha-2 codes.
+        items:
+          type: string
+        type: array
       requiredAccessLevels:
         description: |-
           A list of other access levels defined in the same `Policy`, referenced by
@@ -645,6 +652,12 @@ definitions:
         items:
           $ref: '#/definitions/OsConstraint'
         type: array
+      requireAdminApproval:
+        description: Whether the device needs to be approved by the customer admin.
+        type: boolean
+      requireCorpOwned:
+        description: Whether the device needs to be corp owned.
+        type: boolean
       requireScreenlock:
         description: |-
           Whether or not screenlock is required for the DevicePolicy to be true.
@@ -753,9 +766,14 @@ definitions:
           - DESKTOP_WINDOWS
           - DESKTOP_LINUX
           - DESKTOP_CHROME_OS
-          - ANDROID
-          - IOS
         type: string
+      requireVerifiedChromeOs:
+        description: |-
+          Only allows requests from devices with a verified Chrome OS.
+          Verifications includes requirements that the device is enterprise-managed,
+          conformant to Dasher domain policies, and the caller has permission to call
+          the API targeted by the request.
+        type: boolean
     type: object
   ServicePerimeter:
     description: |-
@@ -837,53 +855,37 @@ definitions:
         type: array
       restrictedServices:
         description: |-
-          GCP services that are subject to the Service Perimeter restrictions. May
-          contain a list of services or a single wildcard "*". For example, if
+          GCP services that are subject to the Service Perimeter restrictions. Must
+          contain a list of services. For example, if
           `storage.googleapis.com` is specified, access to the storage buckets
           inside the perimeter must meet the perimeter's access restrictions.
-
-          Wildcard means that unless explicitly specified by "unrestricted_services"
-          list, any service is treated as restricted. One of the fields
-          "restricted_services", "unrestricted_services" must contain a wildcard "*",
-          otherwise the Service Perimeter specification is invalid. It also means
-          that both field being empty is invalid as well. "restricted_services" can
-          be empty if and only if "unrestricted_services" list contains a "*"
-          wildcard.
         items:
           type: string
         type: array
       unrestrictedServices:
         description: |-
-          GCP services that are not subject to the Service Perimeter restrictions.
-          May contain a list of services or a single wildcard "*". For example, if
-          `logging.googleapis.com` is unrestricted, users can access logs inside the
-          perimeter as if the perimeter doesn't exist, and it also means VMs inside
-          the perimeter can access logs outside the perimeter.
+          GCP services that are not subject to the Service Perimeter
+          restrictions. Deprecated. Must be set to a single wildcard "*".
 
           The wildcard means that unless explicitly specified by
-          "restricted_services" list, any service is treated as unrestricted. One of
-          the fields "restricted_services", "unrestricted_services" must contain a
-          wildcard "*", otherwise the Service Perimeter specification is invalid. It
-          also means that both field being empty is invalid as well.
-          "unrestricted_services" can be empty if and only if "restricted_services"
-          list contains a "*" wildcard.
+          "restricted_services" list, any service is treated as unrestricted.
         items:
           type: string
         type: array
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

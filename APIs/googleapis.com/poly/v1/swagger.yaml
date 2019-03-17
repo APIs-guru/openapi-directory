@@ -472,12 +472,14 @@ definitions:
         description: |-
           The MIME content-type, such as `image/png`.
           For more information, see
-          [MIME types](//developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
+          [MIME
+          types](//developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
         type: string
       relativePath:
         description: |-
-          The path of the resource file relative to the root file.
-          For root or thumbnail files, this is just the filename.
+          The path of the resource file relative to the
+          root file. For root or thumbnail files,
+          this is just the filename.
         type: string
       url:
         description: The URL where the file data can be retrieved.
@@ -511,8 +513,8 @@ definitions:
         $ref: '#/definitions/File'
         description: |-
           The root of the file hierarchy. This will always be populated.
-          For some format_types - such as `TILT`, which are self-contained -
-          this is all of the data.
+          For some format_types - such as `TILT`, which are
+          self-contained - this is all of the data.
 
           Other types - such as `OBJ` - often reference other data elements.
           These are contained in the resources field.

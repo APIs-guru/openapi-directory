@@ -1095,6 +1095,11 @@ definitions:
           Path, from the source root, to a file whose contents is used for the
           template.
         type: string
+      github:
+        $ref: '#/definitions/GitHubEventsConfig'
+        description: |-
+          GitHubEventsConfig describes the configuration of a trigger that creates
+          a build whenever a GitHub event is received.
       id:
         description: Output only. Unique identifier of the trigger.
         type: string
@@ -1162,6 +1167,12 @@ definitions:
     description: The request message for Operations.CancelOperation.
     properties: {}
     type: object
+  CheckSuiteFilter:
+    description: |-
+      A CheckSuiteFilter is a filter that indicates that we should build on all
+      check suite events.
+    properties: {}
+    type: object
   Empty:
     description: |-
       A generic empty message that you can re-use to avoid defining duplicated
@@ -1185,6 +1196,35 @@ definitions:
         items:
           $ref: '#/definitions/Hash'
         type: array
+    type: object
+  GitHubEventsConfig:
+    description: |-
+      GitHubEventsConfig describes the configuration of a trigger that creates a
+      build whenever a GitHub event is received.
+
+      This message is experimental.
+    properties:
+      checkSuite:
+        $ref: '#/definitions/CheckSuiteFilter'
+        description: |-
+          Output only. Indicates that a build was generated from a check suite
+          event.
+      installationId:
+        description: The installationID that emmits the GitHub event.
+        format: int64
+        type: string
+      name:
+        description: Name of the repository.
+        type: string
+      owner:
+        description: Owner of the repository.
+        type: string
+      pullRequest:
+        $ref: '#/definitions/PullRequestFilter'
+        description: filter to match changes in pull requests.
+      push:
+        $ref: '#/definitions/PushFilter'
+        description: 'filter to match changes in refs like branches, tags.'
     type: object
   Hash:
     description: Container message for hash values.
@@ -1277,6 +1317,45 @@ definitions:
           `TakeSnapshotResponse`.
         type: object
     type: object
+  PullRequestFilter:
+    description: |-
+      PullRequestFilter contains filter properties for matching GitHub Pull
+      Requests.
+    properties:
+      branch:
+        description: |-
+          Regex of branches to match.
+
+          The syntax of the regular expressions accepted is the syntax accepted by
+          RE2 and described at https://github.com/google/re2/wiki/Syntax
+        type: string
+      commentControl:
+        description: |-
+          Whether to block builds on a "/gcbrun" comment from a repository owner or
+          collaborator.
+        enum:
+          - COMMENTS_DISABLED
+          - COMMENTS_ENABLED
+        type: string
+    type: object
+  PushFilter:
+    description: Push contains filter properties for matching GitHub git pushes.
+    properties:
+      branch:
+        description: |-
+          Regexes of branches to match.
+
+          The syntax of the regular expressions accepted is the syntax accepted by
+          RE2 and described at https://github.com/google/re2/wiki/Syntax
+        type: string
+      tag:
+        description: |-
+          Regexes of tags to match.
+
+          The syntax of the regular expressions accepted is the syntax accepted by
+          RE2 and described at https://github.com/google/re2/wiki/Syntax
+        type: string
+    type: object
   RepoSource:
     description: Location of the source in a Google Cloud Source Repository.
     properties:
@@ -1313,6 +1392,9 @@ definitions:
       artifactManifest:
         description: Path to the artifact manifest. Only populated when artifacts are uploaded.
         type: string
+      artifactTiming:
+        $ref: '#/definitions/TimeSpan'
+        description: Time to push all non-container artifacts.
       buildStepImages:
         description: |-
           List of build step digests, in the order corresponding to build step
@@ -1412,17 +1494,17 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

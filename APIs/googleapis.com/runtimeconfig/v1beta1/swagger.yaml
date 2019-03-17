@@ -1052,17 +1052,17 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing
@@ -1179,9 +1179,9 @@ definitions:
         type: string
       state:
         description: |-
-          Output only. The current state of the variable. The variable state indicates
-          the outcome of the `variables().watch` call and is visible through the
-          `get` and `list` calls.
+          Output only. The current state of the variable. The variable state
+          indicates the outcome of the `variables().watch` call and is visible
+          through the `get` and `list` calls.
         enum:
           - VARIABLE_STATE_UNSPECIFIED
           - UPDATED
@@ -1211,10 +1211,10 @@ definitions:
     type: object
   Waiter:
     description: |-
-      A Waiter resource waits for some end condition within a RuntimeConfig resource
-      to be met before it returns. For example, assume you have a distributed
-      system where each node writes to a Variable resource indicating the node's
-      readiness as part of the startup process.
+      A Waiter resource waits for some end condition within a RuntimeConfig
+      resource to be met before it returns. For example, assume you have a
+      distributed system where each node writes to a Variable resource indicating
+      the node's readiness as part of the startup process.
 
       You then configure a Waiter resource with the success condition set to wait
       until some number of nodes have checked in. Afterwards, your application
@@ -1224,7 +1224,8 @@ definitions:
       Once created, a Waiter resource is immutable.
 
       To learn more about using waiters, read the
-      [Creating a Waiter](/deployment-manager/runtime-configurator/creating-a-waiter)
+      [Creating a
+      Waiter](/deployment-manager/runtime-configurator/creating-a-waiter)
       documentation.
     properties:
       createTime:
@@ -1272,9 +1273,9 @@ definitions:
         $ref: '#/definitions/EndCondition'
         description: |-
           [Required] The success condition. If this condition is met, `done` will be
-          set to `true` and the `error` value will remain unset. The failure condition
-          takes precedence over the success condition. If both conditions are met, a
-          failure will be indicated.
+          set to `true` and the `error` value will remain unset. The failure
+          condition takes precedence over the success condition. If both conditions
+          are met, a failure will be indicated.
       timeout:
         description: |-
           [Required] Specifies the timeout of the waiter in seconds, beginning from
