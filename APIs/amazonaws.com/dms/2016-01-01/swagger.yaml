@@ -3,7 +3,7 @@ info:
   version: '2016-01-01'
   x-release: v4
   title: AWS Database Migration Service
-  description: '<fullname>AWS Database Migration Service</fullname> <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to MySQL or SQL Server to PostgreSQL.</p> <p>For more information about AWS DMS, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html">What Is AWS Database Migration Service?</a> in the <i>AWS Database Migration User Guide.</i> </p>'
+  description: '<fullname>AWS Database Migration Service</fullname> <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to MySQL or SQL Server to PostgreSQL.</p> <p>For more information about AWS DMS, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html">What Is AWS Database Migration Service?</a> in the <i>AWS Database Migration User Guide.</i> </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -128,6 +128,35 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#ApplyPendingMaintenanceAction':
+    post:
+      operationId: ApplyPendingMaintenanceAction
+      description: 'Applies a pending maintenance action to a resource (for example, to a replication instance).'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ApplyPendingMaintenanceActionResponse'
+        '480':
+          description: ResourceNotFoundFault
+          schema:
+            $ref: '#/definitions/ResourceNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ApplyPendingMaintenanceActionMessage'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
   '/#CreateEndpoint':
     post:
       operationId: CreateEndpoint
@@ -180,7 +209,7 @@ paths:
   '/#CreateEventSubscription':
     post:
       operationId: CreateEventSubscription
-      description: '<p> Creates an AWS DMS event notification subscription. </p> <p>You can specify the type of source (<code>SourceType</code>) you want to be notified of, provide a list of AWS DMS source IDs (<code>SourceIds</code>) that triggers the events, and provide a list of event categories (<code>EventCategories</code>) for events you want to be notified of. If you specify both the <code>SourceType</code> and <code>SourceIds</code>, such as <code>SourceType = replication-instance</code> and <code>SourceIdentifier = my-replinstance</code>, you will be notified of all the replication instance events for the specified source. If you specify a <code>SourceType</code> but don''t specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your AWS DMS sources. If you don''t specify either <code>SourceType</code> nor <code>SourceIdentifier</code>, you will be notified of events generated from all AWS DMS sources belonging to your customer account.</p> <p>For more information about AWS DMS events, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> </p>'
+      description: '<p> Creates an AWS DMS event notification subscription. </p> <p>You can specify the type of source (<code>SourceType</code>) you want to be notified of, provide a list of AWS DMS source IDs (<code>SourceIds</code>) that triggers the events, and provide a list of event categories (<code>EventCategories</code>) for events you want to be notified of. If you specify both the <code>SourceType</code> and <code>SourceIds</code>, such as <code>SourceType = replication-instance</code> and <code>SourceIdentifier = my-replinstance</code>, you will be notified of all the replication instance events for the specified source. If you specify a <code>SourceType</code> but don''t specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your AWS DMS sources. If you don''t specify either <code>SourceType</code> nor <code>SourceIdentifier</code>, you will be notified of events generated from all AWS DMS sources belonging to your customer account.</p> <p>For more information about AWS DMS events, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -191,21 +220,41 @@ paths:
           schema:
             $ref: '#/definitions/ResourceQuotaExceededFault'
         '481':
-          description: ResourceAlreadyExistsFault
-          schema:
-            $ref: '#/definitions/ResourceAlreadyExistsFault'
-        '482':
-          description: SNSInvalidTopicFault
-          schema:
-            $ref: '#/definitions/SNSInvalidTopicFault'
-        '483':
-          description: SNSNoAuthorizationFault
-          schema:
-            $ref: '#/definitions/SNSNoAuthorizationFault'
-        '484':
           description: ResourceNotFoundFault
           schema:
             $ref: '#/definitions/ResourceNotFoundFault'
+        '482':
+          description: ResourceAlreadyExistsFault
+          schema:
+            $ref: '#/definitions/ResourceAlreadyExistsFault'
+        '483':
+          description: SNSInvalidTopicFault
+          schema:
+            $ref: '#/definitions/SNSInvalidTopicFault'
+        '484':
+          description: SNSNoAuthorizationFault
+          schema:
+            $ref: '#/definitions/SNSNoAuthorizationFault'
+        '485':
+          description: KMSAccessDeniedFault
+          schema:
+            $ref: '#/definitions/KMSAccessDeniedFault'
+        '486':
+          description: KMSDisabledFault
+          schema:
+            $ref: '#/definitions/KMSDisabledFault'
+        '487':
+          description: KMSInvalidStateFault
+          schema:
+            $ref: '#/definitions/KMSInvalidStateFault'
+        '488':
+          description: KMSNotFoundFault
+          schema:
+            $ref: '#/definitions/KMSNotFoundFault'
+        '489':
+          description: KMSThrottlingFault
+          schema:
+            $ref: '#/definitions/KMSThrottlingFault'
       parameters:
         - name: body
           in: body
@@ -763,7 +812,7 @@ paths:
   '/#DescribeEventCategories':
     post:
       operationId: DescribeEventCategories
-      description: 'Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> '
+      description: 'Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> '
       responses:
         '200':
           description: Success
@@ -827,7 +876,7 @@ paths:
   '/#DescribeEvents':
     post:
       operationId: DescribeEvents
-      description: ' Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration User Guide.</i> '
+      description: ' Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration User Guide.</i> '
       responses:
         '200':
           description: Success
@@ -874,6 +923,45 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/DescribeOrderableReplicationInstancesMessage'
+        - name: MaxRecords
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: Marker
+          type: string
+          in: query
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#DescribePendingMaintenanceActions':
+    post:
+      operationId: DescribePendingMaintenanceActions
+      description: For internal use only
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/DescribePendingMaintenanceActionsResponse'
+        '480':
+          description: ResourceNotFoundFault
+          schema:
+            $ref: '#/definitions/ResourceNotFoundFault'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DescribePendingMaintenanceActionsMessage'
         - name: MaxRecords
           type: string
           in: query
@@ -1348,6 +1436,26 @@ paths:
           description: SNSNoAuthorizationFault
           schema:
             $ref: '#/definitions/SNSNoAuthorizationFault'
+        '484':
+          description: KMSAccessDeniedFault
+          schema:
+            $ref: '#/definitions/KMSAccessDeniedFault'
+        '485':
+          description: KMSDisabledFault
+          schema:
+            $ref: '#/definitions/KMSDisabledFault'
+        '486':
+          description: KMSInvalidStateFault
+          schema:
+            $ref: '#/definitions/KMSInvalidStateFault'
+        '487':
+          description: KMSNotFoundFault
+          schema:
+            $ref: '#/definitions/KMSNotFoundFault'
+        '488':
+          description: KMSThrottlingFault
+          schema:
+            $ref: '#/definitions/KMSThrottlingFault'
       parameters:
         - name: body
           in: body
@@ -1374,26 +1482,30 @@ paths:
           schema:
             $ref: '#/definitions/ModifyReplicationInstanceResponse'
         '480':
+          description: AccessDeniedFault
+          schema:
+            $ref: '#/definitions/AccessDeniedFault'
+        '481':
           description: InvalidResourceStateFault
           schema:
             $ref: '#/definitions/InvalidResourceStateFault'
-        '481':
+        '482':
           description: ResourceAlreadyExistsFault
           schema:
             $ref: '#/definitions/ResourceAlreadyExistsFault'
-        '482':
+        '483':
           description: ResourceNotFoundFault
           schema:
             $ref: '#/definitions/ResourceNotFoundFault'
-        '483':
+        '484':
           description: InsufficientResourceCapacityFault
           schema:
             $ref: '#/definitions/InsufficientResourceCapacityFault'
-        '484':
+        '485':
           description: StorageQuotaExceededFault
           schema:
             $ref: '#/definitions/StorageQuotaExceededFault'
-        '485':
+        '486':
           description: UpgradeDependencyFailureFault
           schema:
             $ref: '#/definitions/UpgradeDependencyFailureFault'
@@ -1465,7 +1577,7 @@ paths:
   '/#ModifyReplicationTask':
     post:
       operationId: ModifyReplicationTask
-      description: '<p>Modifies the specified replication task.</p> <p>You can''t modify the task endpoints. The task must be stopped before you can modify it. </p> <p>For more information about AWS DMS tasks, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html">Working with Migration Tasks</a> in the <i>AWS Database Migration Service User Guide</i>.</p>'
+      description: '<p>Modifies the specified replication task.</p> <p>You can''t modify the task endpoints. The task must be stopped before you can modify it. </p> <p>For more information about AWS DMS tasks, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html">Working with Migration Tasks</a> in the <i>AWS Database Migration Service User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1642,7 +1754,7 @@ paths:
   '/#StartReplicationTask':
     post:
       operationId: StartReplicationTask
-      description: '<p>Starts the replication task.</p> <p>For more information about AWS DMS tasks, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html">Working with Migration Tasks </a> in the <i>AWS Database Migration Service User Guide.</i> </p>'
+      description: '<p>Starts the replication task.</p> <p>For more information about AWS DMS tasks, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html">Working with Migration Tasks </a> in the <i>AWS Database Migration Service User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -1808,6 +1920,30 @@ definitions:
         description: The tag to be assigned to the DMS resource.
     description: <p/>
   ResourceNotFoundFault: {}
+  ApplyPendingMaintenanceActionResponse:
+    type: object
+    properties:
+      ResourcePendingMaintenanceActions:
+        $ref: '#/definitions/ResourcePendingMaintenanceActions'
+        description: The AWS DMS resource that the pending maintenance action will be applied to.
+    description: <p/>
+  ApplyPendingMaintenanceActionMessage:
+    type: object
+    required:
+      - ReplicationInstanceArn
+      - ApplyAction
+      - OptInType
+    properties:
+      ReplicationInstanceArn:
+        $ref: '#/definitions/String'
+        description: The Amazon Resource Name (ARN) of the AWS DMS resource that the pending maintenance action applies to.
+      ApplyAction:
+        $ref: '#/definitions/String'
+        description: The pending maintenance action to apply to this resource.
+      OptInType:
+        $ref: '#/definitions/String'
+        description: '<p>A value that specifies the type of opt-in request, or undoes an opt-in request. An opt-in request of type <code>immediate</code> cannot be undone.</p> <p>Valid values:</p> <ul> <li> <p> <code>immediate</code> - Apply the maintenance action immediately.</p> </li> <li> <p> <code>next-maintenance</code> - Apply the maintenance action during the next maintenance window for the resource.</p> </li> <li> <p> <code>undo-opt-in</code> - Cancel any existing <code>next-maintenance</code> opt-in requests.</p> </li> </ul>'
+    description: <p/>
   CreateEndpointResponse:
     type: object
     example:
@@ -1896,22 +2032,24 @@ definitions:
         description: 'The external table definition. '
       DynamoDbSettings:
         $ref: '#/definitions/DynamoDbSettings'
-        description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> '
       S3Settings:
         $ref: '#/definitions/S3Settings'
-        description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring">Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring">Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
       DmsTransferSettings:
         $ref: '#/definitions/DmsTransferSettings'
         description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible attributes include the following:</p> <ul> <li> <p> <code>serviceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p> <code>bucketName</code> - The name of the S3 bucket to use.</p> </li> <li> <p> <code>compressionType</code> - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep the files uncompressed, don''t use this value. </p> </li> </ul> <p>Shorthand syntax for these attributes is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code> </p> <p>JSON syntax for these attributes is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </code> </p>'
       MongoDbSettings:
         $ref: '#/definitions/MongoDbSettings'
-        description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
       KinesisSettings:
         $ref: '#/definitions/KinesisSettings'
-        description: 'Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping ">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
+        description: 'Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping ">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
       ElasticsearchSettings:
         $ref: '#/definitions/ElasticsearchSettings'
-        description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
+        description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
+      RedshiftSettings:
+        $ref: '#/definitions/RedshiftSettings'
     description: <p/>
   KMSKeyNotAccessibleFault: {}
   ResourceAlreadyExistsFault: {}
@@ -1942,7 +2080,7 @@ definitions:
         description: '<p> The type of AWS DMS resource that generates the events. For example, if you want to be notified of events generated by a replication instance, you set this parameter to <code>replication-instance</code>. If this value is not specified, all events are returned. </p> <p>Valid values: replication-instance | migration-task</p>'
       EventCategories:
         $ref: '#/definitions/EventCategoriesList'
-        description: ' A list of event categories for a source type that you want to subscribe to. You can see a list of the categories for a given source type by calling the <code>DescribeEventCategories</code> action or in the topic <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        description: ' A list of event categories for a source type that you want to subscribe to. You can see a list of the categories for a given source type by calling the <code>DescribeEventCategories</code> action or in the topic <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html">Working with Events and Notifications</a> in the <i>AWS Database Migration Service User Guide.</i> '
       SourceIds:
         $ref: '#/definitions/SourceIdsList'
         description: ' The list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it cannot end with a hyphen or contain two consecutive hyphens. '
@@ -1955,6 +2093,11 @@ definitions:
     description: <p/>
   SNSInvalidTopicFault: {}
   SNSNoAuthorizationFault: {}
+  KMSAccessDeniedFault: {}
+  KMSDisabledFault: {}
+  KMSInvalidStateFault: {}
+  KMSNotFoundFault: {}
+  KMSThrottlingFault: {}
   CreateReplicationInstanceResponse:
     type: object
     example:
@@ -2165,7 +2308,7 @@ definitions:
         description: '<p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with "file://". When working with the DMS API, provide the JSON as the parameter value.</p> <p>For example, --table-mappings file://mappingfile.json</p>'
       ReplicationTaskSettings:
         $ref: '#/definitions/String'
-        description: 'Settings for the task, such as target metadata settings. For a complete list of task settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Task Settings for AWS Database Migration Service Tasks</a> in the <i>AWS Database Migration User Guide.</i> '
+        description: 'Settings for the task, such as target metadata settings. For a complete list of task settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html">Task Settings for AWS Database Migration Service Tasks</a> in the <i>AWS Database Migration User Guide.</i> '
       CdcStartTime:
         $ref: '#/definitions/TStamp'
         description: '<p>Indicates the start time for a change data capture (CDC) operation. Use either CdcStartTime or CdcStartPosition to specify when you want a CDC operation to start. Specifying both values results in an error.</p> <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>'
@@ -2613,6 +2756,32 @@ definitions:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     description: <p/>
+  DescribePendingMaintenanceActionsResponse:
+    type: object
+    properties:
+      PendingMaintenanceActions:
+        $ref: '#/definitions/PendingMaintenanceActions'
+        description: The pending maintenance action.
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+    description: <p/>
+  DescribePendingMaintenanceActionsMessage:
+    type: object
+    properties:
+      ReplicationInstanceArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the replication instance.
+      Filters:
+        $ref: '#/definitions/FilterList'
+        description: <p/>
+      Marker:
+        $ref: '#/definitions/String'
+        description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+      MaxRecords:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+    description: <p/>
   DescribeRefreshSchemasStatusResponse:
     type: object
     example:
@@ -2786,6 +2955,9 @@ definitions:
       Marker:
         $ref: '#/definitions/String'
         description: ' An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+      WithoutSettings:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Set this flag to avoid returning setting information. Use this to reduce overhead when settings are too large. Choose TRUE to use this flag, otherwise choose FALSE (default).'
     description: <p/>
   DescribeSchemasResponse:
     type: object
@@ -2978,22 +3150,24 @@ definitions:
         description: The external table definition.
       DynamoDbSettings:
         $ref: '#/definitions/DynamoDbSettings'
-        description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        description: 'Settings in JSON format for the target Amazon DynamoDB endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html">Using Object Mapping to Migrate Data to DynamoDB</a> in the <i>AWS Database Migration Service User Guide.</i> '
       S3Settings:
         $ref: '#/definitions/S3Settings'
-        description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring">Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        description: 'Settings in JSON format for the target Amazon S3 endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring">Extra Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
       DmsTransferSettings:
         $ref: '#/definitions/DmsTransferSettings'
         description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Attributes include the following:</p> <ul> <li> <p>serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p>BucketName - The name of the S3 bucket to use.</p> </li> <li> <p>compressionType - An optional parameter to use GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed.</p> </li> </ul> <p>Shorthand syntax: ServiceAccessRoleArn=string ,BucketName=string,CompressionType=string</p> <p>JSON syntax:</p> <p> { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </p>'
       MongoDbSettings:
         $ref: '#/definitions/MongoDbSettings'
-        description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        description: 'Settings in JSON format for the source MongoDB endpoint. For more information about the available settings, see the configuration properties section in <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html"> Using MongoDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
       KinesisSettings:
         $ref: '#/definitions/KinesisSettings'
-        description: 'Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping ">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
+        description: 'Settings in JSON format for the target Amazon Kinesis Data Streams endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping ">Using Object Mapping to Migrate Data to a Kinesis Data Stream</a> in the <i>AWS Database Migration User Guide.</i> '
       ElasticsearchSettings:
         $ref: '#/definitions/ElasticsearchSettings'
-        description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
+        description: 'Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in the <i>AWS Database Migration User Guide.</i> '
+      RedshiftSettings:
+        $ref: '#/definitions/RedshiftSettings'
     description: <p/>
   ModifyEventSubscriptionResponse:
     type: object
@@ -3409,6 +3583,16 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Tag'
+  ResourcePendingMaintenanceActions:
+    type: object
+    properties:
+      ResourceIdentifier:
+        $ref: '#/definitions/String'
+        description: 'The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance action applies to. For information about creating an ARN, see <a href="https://docs.aws.amazon.com/dms/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN"> Constructing an Amazon Resource Name (ARN)</a> in the DMS documentation.'
+      PendingMaintenanceActionDetails:
+        $ref: '#/definitions/PendingMaintenanceActionDetails'
+        description: Detailed information about the pending maintenance action.
+    description: <p/>
   AuthMechanismValue:
     type: string
     enum:
@@ -3427,6 +3611,10 @@ definitions:
         $ref: '#/definitions/String'
         description: The name of the availability zone.
     description: <p/>
+  AvailabilityZonesList:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   Boolean:
     type: boolean
   BooleanOptional:
@@ -3542,20 +3730,50 @@ definitions:
         description: ' The external table definition. '
       CsvRowDelimiter:
         $ref: '#/definitions/String'
-        description: ' The delimiter used to separate rows in the source files. The default is a carriage return (\n). '
+        description: ' The delimiter used to separate rows in the source files. The default is a carriage return (<code>\n</code>). '
       CsvDelimiter:
         $ref: '#/definitions/String'
         description: ' The delimiter used to separate columns in the source files. The default is a comma. '
       BucketFolder:
         $ref: '#/definitions/String'
-        description: ' An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path &lt;bucketFolder&gt;/&lt;schema_name&gt;/&lt;table_name&gt;/. If this parameter is not specified, then the path used is &lt;schema_name&gt;/&lt;table_name&gt;/. '
+        description: ' An optional parameter to set a folder name in the S3 bucket. If provided, tables are created in the path <code>&lt;bucketFolder&gt;/&lt;schema_name&gt;/&lt;table_name&gt;/</code>. If this parameter is not specified, then the path used is <code>&lt;schema_name&gt;/&lt;table_name&gt;/</code>. '
       BucketName:
         $ref: '#/definitions/String'
         description: ' The name of the S3 bucket. '
       CompressionType:
         $ref: '#/definitions/CompressionTypeValue'
-        description: ' An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. '
-    description: <p/>
+        description: ' An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. Applies to both CSV and PARQUET data formats. '
+      EncryptionMode:
+        $ref: '#/definitions/EncryptionModeValue'
+        description: '<p>The type of server side encryption you want to use for your data. This is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either <code>SSE_S3</code> (default) or <code>SSE_KMS</code>. To use <code>SSE_S3</code>, you need an IAM role with permission to allow <code>"arn:aws:s3:::dms-*"</code> to use the following actions:</p> <ul> <li> <p>s3:CreateBucket</p> </li> <li> <p>s3:ListBucket</p> </li> <li> <p>s3:DeleteBucket</p> </li> <li> <p>s3:GetBucketLocation</p> </li> <li> <p>s3:GetObject</p> </li> <li> <p>s3:PutObject</p> </li> <li> <p>s3:DeleteObject</p> </li> <li> <p>s3:GetObjectVersion</p> </li> <li> <p>s3:GetBucketPolicy</p> </li> <li> <p>s3:PutBucketPolicy</p> </li> <li> <p>s3:DeleteBucketPolicy</p> </li> </ul>'
+      ServerSideEncryptionKmsKeyId:
+        $ref: '#/definitions/String'
+        description: '<p>If you are using SSE_KMS for the <code>EncryptionMode</code>, provide the KMS Key ID. The key you use needs an attached policy that enables IAM user permissions and allows use of the key.</p> <p>Here is a CLI example: <code>aws dms create-endpoint --endpoint-identifier &lt;value&gt; --endpoint-type target --engine-name s3 --s3-settings ServiceAccessRoleArn=&lt;value&gt;,BucketFolder=&lt;value&gt;,BucketName=&lt;value&gt;,EncryptionMode=SSE_KMS,ServerSideEncryptionKmsKeyId=&lt;value&gt; </code> </p>'
+      DataFormat:
+        $ref: '#/definitions/DataFormatValue'
+        description: '<p>The format of the data which you want to use for output. You can choose one of the following: </p> <ul> <li> <p> <code>CSV</code> : This is a row-based format with comma-separated values. </p> </li> <li> <p> <code>PARQUET</code> : Apache Parquet is a columnar storage format that features efficient compression and provides faster query response. </p> </li> </ul>'
+      EncodingType:
+        $ref: '#/definitions/EncodingTypeValue'
+        description: '<p>The type of encoding you are using: <code>RLE_DICTIONARY</code> (default), <code>PLAIN</code>, or <code>PLAIN_DICTIONARY</code>.</p> <ul> <li> <p> <code>RLE_DICTIONARY</code> uses a combination of bit-packing and run-length encoding to store repeated values more efficiently.</p> </li> <li> <p> <code>PLAIN</code> does not use encoding at all. Values are stored as they are.</p> </li> <li> <p> <code>PLAIN_DICTIONARY</code> builds a dictionary of the values encountered in a given column. The dictionary is stored in a dictionary page for each column chunk.</p> </li> </ul>'
+      DictPageSizeLimit:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The maximum size of an encoded dictionary page of a column. If the dictionary page exceeds this, this column is stored using an encoding type of <code>PLAIN</code>. Defaults to 1024 * 1024 bytes (1MiB), the maximum size of a dictionary page before it reverts to <code>PLAIN</code> encoding. For <code>PARQUET</code> format only. '
+      RowGroupLength:
+        $ref: '#/definitions/IntegerOptional'
+        description: '<p>The number of rows in a row group. A smaller row group size provides faster reads. But as the number of row groups grows, the slower writes become. Defaults to 10,000 (ten thousand) rows. For <code>PARQUET</code> format only. </p> <p>If you choose a value larger than the maximum, <code>RowGroupLength</code> is set to the max row group length in bytes (64 * 1024 * 1024). </p>'
+      DataPageSize:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The size of one data page in bytes. Defaults to 1024 * 1024 bytes (1MiB). For <code>PARQUET</code> format only. '
+      ParquetVersion:
+        $ref: '#/definitions/ParquetVersionValue'
+        description: 'The version of Apache Parquet format you want to use: <code>PARQUET_1_0</code> (default) or <code>PARQUET_2_0</code>.'
+      EnableStatistics:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Enables statistics for Parquet pages and rowGroups. Choose <code>TRUE</code> to enable statistics, choose <code>FALSE</code> to disable. Statistics include <code>NULL</code>, <code>DISTINCT</code>, <code>MAX</code>, and <code>MIN</code> values. Defaults to <code>TRUE</code>. For <code>PARQUET</code> format only.'
+      CdcInsertsOnly:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Option to write only <code>INSERT</code> operations to the comma-separated value (CSV) output files. By default, the first field in a CSV record contains the letter <code>I</code> (insert), <code>U</code> (update) or <code>D</code> (delete) to indicate whether the row was inserted, updated, or deleted at the source database. If <code>cdcInsertsOnly</code> is set to true, then only <code>INSERT</code>s are recorded in the CSV file, without the <code>I</code> annotation on each line. Valid values are <code>TRUE</code> and <code>FALSE</code>.'
+    description: 'Settings for exporting data to Amazon S3. '
   DmsTransferSettings:
     type: object
     properties:
@@ -3638,6 +3856,85 @@ definitions:
         $ref: '#/definitions/IntegerOptional'
         description: The maximum number of seconds that DMS retries failed API requests to the Elasticsearch cluster.
     description: <p/>
+  RedshiftSettings:
+    type: object
+    properties:
+      AcceptAnyDate:
+        $ref: '#/definitions/BooleanOptional'
+        description: '<p>Allows any date format, including invalid formats such as 00/00/00 00:00:00, to be loaded without generating an error. You can choose TRUE or FALSE (default).</p> <p>This parameter applies only to TIMESTAMP and DATE columns. Always use ACCEPTANYDATE with the DATEFORMAT parameter. If the date format for the data does not match the DATEFORMAT specification, Amazon Redshift inserts a NULL value into that field. </p>'
+      AfterConnectScript:
+        $ref: '#/definitions/String'
+        description: 'Code to run after connecting. This should be the code, not a filename.'
+      BucketFolder:
+        $ref: '#/definitions/String'
+        description: 'The location where the CSV files are stored before being uploaded to the S3 bucket. '
+      BucketName:
+        $ref: '#/definitions/String'
+        description: The name of the S3 bucket you want to use
+      ConnectionTimeout:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'Sets the amount of time to wait (in milliseconds) before timing out, beginning from when you initially establish a connection.'
+      DatabaseName:
+        $ref: '#/definitions/String'
+        description: The name of the Amazon Redshift data warehouse (service) you are working with.
+      DateFormat:
+        $ref: '#/definitions/String'
+        description: '<p>The date format you are using. Valid values are <code>auto</code> (case-sensitive), your date format string enclosed in quotes, or NULL. If this is left unset (NULL), it defaults to a format of ''YYYY-MM-DD''. Using <code>auto</code> recognizes most strings, even some that are not supported when you use a date format string. </p> <p>If your date and time values use formats different from each other, set this to <code>auto</code>. </p>'
+      EmptyAsNull:
+        $ref: '#/definitions/BooleanOptional'
+        description: Specifies whether AWS DMS should migrate empty CHAR and VARCHAR fields as NULL. A value of TRUE sets empty CHAR and VARCHAR fields to null. The default is FALSE.
+      EncryptionMode:
+        $ref: '#/definitions/EncryptionModeValue'
+        description: 'The type of server side encryption you want to use for your data. This is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (default) or SSE_KMS. To use SSE_S3, create an IAM role with a policy that allows <code>"arn:aws:s3:::*"</code> to use the following actions: <code>"s3:PutObject", "s3:ListBucket"</code>.'
+      FileTransferUploadStreams:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the number of threads used to upload a single file. This accepts a value between 1 and 64. It defaults to 10.
+      LoadTimeout:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'Sets the amount of time to wait (in milliseconds) before timing out, beginning from when you begin loading.'
+      MaxFileSize:
+        $ref: '#/definitions/IntegerOptional'
+        description: Specifies the maximum size (in KB) of any CSV file used to transfer data to Amazon Redshift. This accepts a value between 1 and 1048576. It defaults to 32768 KB (32 MB).
+      Password:
+        $ref: '#/definitions/SecretString'
+        description: The password for the user named in the username property.
+      Port:
+        $ref: '#/definitions/IntegerOptional'
+        description: The port number for Amazon Redshift. The default value is 5439.
+      RemoveQuotes:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Removes surrounding quotation marks from strings in the incoming data. All characters within the quotation marks, including delimiters, are retained. Choose TRUE to remove quotation marks. The default is FALSE.'
+      ReplaceInvalidChars:
+        $ref: '#/definitions/String'
+        description: A list of chars you want to replace. Use with <code>ReplaceChars</code>.
+      ReplaceChars:
+        $ref: '#/definitions/String'
+        description: 'Replaces invalid characters specified in <code>ReplaceInvalidChars</code>, substituting the specified value instead. The default is "?".'
+      ServerName:
+        $ref: '#/definitions/String'
+        description: The name of the Amazon Redshift cluster you are using.
+      ServiceAccessRoleArn:
+        $ref: '#/definitions/String'
+        description: The ARN of the role that has access to the Redshift service.
+      ServerSideEncryptionKmsKeyId:
+        $ref: '#/definitions/String'
+        description: 'If you are using SSE_KMS for the <code>EncryptionMode</code>, provide the KMS Key ID. The key you use needs an attached policy that enables IAM user permissions and allows use of the key.'
+      TimeFormat:
+        $ref: '#/definitions/String'
+        description: '<p>The time format you want to use. Valid values are <code>auto</code> (case-sensitive), ''timeformat_string'', ''epochsecs'', or ''epochmillisecs''. It defaults to 10. Using <code>auto</code> recognizes most strings, even some that are not supported when you use a time format string. </p> <p>If your date and time values use formats different from each other, set this to <code>auto</code>. </p>'
+      TrimBlanks:
+        $ref: '#/definitions/BooleanOptional'
+        description: Removes the trailing white space characters from a VARCHAR string. This parameter applies only to columns with a VARCHAR data type. Choose TRUE to remove unneeded white space. The default is FALSE.
+      TruncateColumns:
+        $ref: '#/definitions/BooleanOptional'
+        description: 'Truncates data in columns to the appropriate number of characters, so that it fits in the column. Applies only to columns with a VARCHAR or CHAR data type, and rows with a size of 4 MB or less. Choose TRUE to truncate data. The default is FALSE.'
+      Username:
+        $ref: '#/definitions/String'
+        description: An Amazon Redshift user name for a registered user.
+      WriteBufferSize:
+        $ref: '#/definitions/IntegerOptional'
+        description: 'The size of the write buffer to use in rows. Valid values range from 1 to 2048. Defaults to 1024. Use this setting to tune performance. '
+    description: <p/>
   Endpoint:
     type: object
     properties:
@@ -3700,7 +3997,7 @@ definitions:
         description: 'The settings for the S3 target endpoint. For more information, see the <code>S3Settings</code> structure.'
       DmsTransferSettings:
         $ref: '#/definitions/DmsTransferSettings'
-        description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible attributes include the following:</p> <ul> <li> <p> <code>serviceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p> <code>bucketName</code> - The name of the S3 bucket to use.</p> </li> <li> <p> <code>compressionType</code> - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep the files uncompressed, don''t use this value. </p> </li> </ul> <p>Shorthand syntax for these attributes is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code> </p> <p>JSON syntax for these attributes is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </code> </p>'
+        description: '<p>The settings in JSON format for the DMS transfer type of source endpoint. </p> <p>Possible attributes include the following:</p> <ul> <li> <p> <code>serviceAccessRoleArn</code> - The IAM role that has permission to access the Amazon S3 bucket.</p> </li> <li> <p> <code>bucketName</code> - The name of the S3 bucket to use.</p> </li> <li> <p> <code>compressionType</code> - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep the files uncompressed, don''t use this value.</p> </li> </ul> <p>Shorthand syntax for these attributes is as follows: <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code> </p> <p>JSON syntax for these attributes is as follows: <code>{ "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" } </code> </p>'
       MongoDbSettings:
         $ref: '#/definitions/MongoDbSettings'
         description: 'The settings for the MongoDB source endpoint. For more information, see the <code>MongoDbSettings</code> structure.'
@@ -3710,6 +4007,9 @@ definitions:
       ElasticsearchSettings:
         $ref: '#/definitions/ElasticsearchSettings'
         description: 'The settings for the Elasticsearch source endpoint. For more information, see the <code>ElasticsearchSettings</code> structure.'
+      RedshiftSettings:
+        $ref: '#/definitions/RedshiftSettings'
+        description: Settings for the Amazon Redshift endpoint
     description: <p/>
   EventCategoriesList:
     type: array
@@ -3911,6 +4211,11 @@ definitions:
         $ref: '#/definitions/ReplicationTaskStats'
         description: 'The statistics for the task, including elapsed time, tables loaded, and table errors.'
     description: <p/>
+  DataFormatValue:
+    type: string
+    enum:
+      - csv
+      - parquet
   FilterList:
     type: array
     items:
@@ -3943,6 +4248,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/OrderableReplicationInstance'
+  PendingMaintenanceActions:
+    type: array
+    items:
+      $ref: '#/definitions/ResourcePendingMaintenanceActions'
   RefreshSchemasStatus:
     type: object
     properties:
@@ -3990,6 +4299,17 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/TableStatistics'
+  EncodingTypeValue:
+    type: string
+    enum:
+      - plain
+      - plain-dictionary
+      - rle-dictionary
+  EncryptionModeValue:
+    type: string
+    enum:
+      - sse-s3
+      - sse-kms
   Event:
     type: object
     properties:
@@ -4075,7 +4395,41 @@ definitions:
       IncludedAllocatedStorage:
         $ref: '#/definitions/Integer'
         description: The amount of storage (in gigabytes) that is allocated for the replication instance.
+      AvailabilityZones:
+        $ref: '#/definitions/AvailabilityZonesList'
+        description: List of availability zones for this replication instance.
     description: <p/>
+  ParquetVersionValue:
+    type: string
+    enum:
+      - parquet-1-0
+      - parquet-2-0
+  PendingMaintenanceAction:
+    type: object
+    properties:
+      Action:
+        $ref: '#/definitions/String'
+        description: The type of pending maintenance action that is available for the resource.
+      AutoAppliedAfterDate:
+        $ref: '#/definitions/TStamp'
+        description: 'The date of the maintenance window when the action will be applied. The maintenance action will be applied to the resource during its first maintenance window after this date. If this date is specified, any <code>next-maintenance</code> opt-in requests are ignored.'
+      ForcedApplyDate:
+        $ref: '#/definitions/TStamp'
+        description: 'The date when the maintenance action will be automatically applied. The maintenance action will be applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any <code>immediate</code> opt-in requests are ignored.'
+      OptInStatus:
+        $ref: '#/definitions/String'
+        description: Indicates the type of opt-in request that has been received for the resource.
+      CurrentApplyDate:
+        $ref: '#/definitions/TStamp'
+        description: 'The effective date when the pending maintenance action will be applied to the resource. This date takes into account opt-in requests received from the <code>ApplyPendingMaintenanceAction</code> API, the <code>AutoAppliedAfterDate</code>, and the <code>ForcedApplyDate</code>. This value is blank if an opt-in request has not been received and nothing has been specified as <code>AutoAppliedAfterDate</code> or <code>ForcedApplyDate</code>.'
+      Description:
+        $ref: '#/definitions/String'
+        description: A description providing more detail about the maintenance action.
+    description: <p/>
+  PendingMaintenanceActionDetails:
+    type: array
+    items:
+      $ref: '#/definitions/PendingMaintenanceAction'
   RefreshSchemasStatusTypeValue:
     type: string
     enum:

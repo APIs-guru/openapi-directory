@@ -22258,6 +22258,9 @@ definitions:
       Public:
         $ref: '#/definitions/Boolean'
         description: Indicates whether the AFI is public.
+      DataRetentionSupport:
+        $ref: '#/definitions/Boolean'
+        description: Indicates whether data retention support is enabled for the AFI.
     description: Describes an Amazon FPGA image (AFI).
   LoadPermissionList:
     type: array
