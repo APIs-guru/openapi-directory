@@ -686,7 +686,7 @@ paths:
   '/#DescribeConfigurationAggregatorSourcesStatus':
     post:
       operationId: DescribeConfigurationAggregatorSourcesStatus
-      description: ' Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. '
+      description: 'Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. '
       responses:
         '200':
           description: Success
@@ -1820,6 +1820,43 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/PutRetentionConfigurationRequest'
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/#SelectResourceConfig':
+    post:
+      operationId: SelectResourceConfig
+      description: '<p>Accepts a structured query language (SQL) <code>SELECT</code> command, performs the corresponding search, and returns resource configurations matching the properties.</p> <p>For more information about query components, see the <a href="https://docs.aws.amazon.com/config/latest/developerguide/query-components.html"> <b>Query Components</b> </a> section in the AWS Config Developer Guide.</p>'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SelectResourceConfigResponse'
+        '480':
+          description: InvalidExpressionException
+          schema:
+            $ref: '#/definitions/InvalidExpressionException'
+        '481':
+          description: InvalidLimitException
+          schema:
+            $ref: '#/definitions/InvalidLimitException'
+        '482':
+          description: InvalidNextTokenException
+          schema:
+            $ref: '#/definitions/InvalidNextTokenException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SelectResourceConfigRequest'
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -2997,6 +3034,33 @@ definitions:
         $ref: '#/definitions/RetentionPeriodInDays'
         description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
   MaxNumberOfRetentionConfigurationsExceededException: {}
+  SelectResourceConfigResponse:
+    type: object
+    properties:
+      Results:
+        $ref: '#/definitions/Results'
+        description: Returns the results for the SQL query.
+      QueryInfo:
+        $ref: '#/definitions/QueryInfo'
+        description: Returns the <code>QueryInfo</code> object.
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response. '
+  SelectResourceConfigRequest:
+    type: object
+    required:
+      - Expression
+    properties:
+      Expression:
+        $ref: '#/definitions/Expression'
+        description: The SQL query <code>SELECT</code> command.
+      Limit:
+        $ref: '#/definitions/Limit'
+        description: 'The maximum number of query results returned on each page. '
+      NextToken:
+        $ref: '#/definitions/NextToken'
+        description: 'The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response. '
+  InvalidExpressionException: {}
   StartConfigRulesEvaluationResponse:
     type: object
     properties: {}
@@ -4195,6 +4259,10 @@ definitions:
     type: string
     enum:
       - aws.config
+  Expression:
+    type: string
+    minLength: 1
+    maxLength: 4096
   FailedRemediationBatch:
     type: object
     properties:
@@ -4209,6 +4277,19 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/FailedRemediationBatch'
+  FieldName:
+    type: string
+  FieldInfo:
+    type: object
+    properties:
+      Name:
+        $ref: '#/definitions/FieldName'
+        description: Name of the field.
+    description: Details about the fields such as name of the field.
+  FieldInfoList:
+    type: array
+    items:
+      $ref: '#/definitions/FieldInfo'
   ResourceCountFilters:
     type: object
     properties:
@@ -4333,6 +4414,13 @@ definitions:
         $ref: '#/definitions/RetentionPeriodInDays'
         description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
     description: An object with the name of the retention configuration and the retention period in days. The object stores the configuration for data retention in AWS Config.
+  QueryInfo:
+    type: object
+    properties:
+      SelectFields:
+        $ref: '#/definitions/FieldInfoList'
+        description: Returns a <code>FieldInfo</code> object.
+    description: Details about the query.
   ResourceTypeList:
     type: array
     items:
@@ -4528,6 +4616,10 @@ definitions:
     type: string
     enum:
       - RESOURCE_ID
+  Results:
+    type: array
+    items:
+      $ref: '#/definitions/String'
   StringWithCharLimit128:
     type: string
     minLength: 1
