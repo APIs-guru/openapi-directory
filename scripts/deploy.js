@@ -22,6 +22,7 @@ sh.set('-e');
 sh.set('-v');
 
 sh.mkdir('deploy');
+sh.touch('deploy/.nojekyll');
 sh.cp('resources/index.html', 'deploy/');
 sh.mkdir('deploy/v2');
 
