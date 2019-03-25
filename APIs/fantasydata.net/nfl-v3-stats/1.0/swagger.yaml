@@ -2509,8 +2509,6 @@ definitions:
         type: integer
       PlayerID:
         type: integer
-      RemovedByOperator:
-        type: boolean
       SlateGameID:
         type: integer
       SlateID:
@@ -7103,3 +7101,8 @@ definitions:
         type: string
       Week:
         type: integer
+x-servers:
+  - url: 'http://api.fantasydata.net'
+  - url: 'https://api.fantasydata.net'
+  - url: 'http://fantasydata-northcentralus-01.regional.azure-api.net'
+  - url: 'https://fantasydata-northcentralus-01.regional.azure-api.net'

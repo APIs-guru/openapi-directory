@@ -493,6 +493,19 @@ paths:
       summary: '[USES 20 UNITS] Infer the likely ethnicity/diaspora of up to 1000 personal names, given a country of residence ISO2 code (ex. US, CA, AU, NZ etc.)'
       tags:
         - personal
+  /api2/json/flush:
+    get:
+      operationId: flush
+      responses:
+        '200':
+          description: Shutdown AI.
+        '401':
+          description: Missing or incorrect API Key
+      security:
+        - api_key: []
+      summary: Flush counters.
+      tags:
+        - admin
   '/api2/json/gender/{firstName}/{lastName}':
     get:
       operationId: gender
@@ -1115,6 +1128,51 @@ paths:
       security:
         - api_key: []
       summary: '[USES 11 UNITS] Infer the likely country and phone prefix, of up to 1000 personal names, with a local context (ISO2 country of residence).'
+      tags:
+        - social
+  '/api2/json/phoneCodeGeoFeedbackLoop/{firstName}/{lastName}/{phoneNumber}/{phoneNumberE164}/{countryIso2}':
+    get:
+      operationId: phoneCodeGeoFeedbackLoop
+      parameters:
+        - in: path
+          name: firstName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: lastName
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: phoneNumber
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: phoneNumberE164
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: countryIso2
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FirstLastNamePhoneCodedOut'
+          description: A name with country and phone code.
+        '401':
+          description: Missing or incorrect API Key
+        '403':
+          description: API Limit Reached or API Key Disabled
+      security:
+        - api_key: []
+      summary: '[CREDITS 1 UNIT] Feedback loop to better infer the likely phone prefix, given a personal name and formatted / unformatted phone number, with a local context (ISO2 country of residence).'
       tags:
         - social
   '/api2/json/procureKey/{token}':
@@ -2172,6 +2230,14 @@ components:
       type: object
       xml:
         name: ExpectedClassMetricsOut
+    FeedbackLoopOut:
+      properties:
+        feedbackCredits:
+          format: int64
+          type: integer
+      type: object
+      xml:
+        name: FeedbackLoopOut
     FirstLastNameDiasporaedOut:
       description: 'Represents the output of inferring the LIKELY ethnicity from a personal name, given an country of residence.'
       properties:

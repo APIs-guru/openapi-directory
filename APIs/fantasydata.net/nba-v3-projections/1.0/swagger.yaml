@@ -28,7 +28,7 @@ securityDefinitions:
     type: apiKey
   apiKeyQuery:
     in: query
-    name: subscription-key
+    name: key
     type: apiKey
 security:
   - apiKeyHeader: []
@@ -637,3 +637,8 @@ definitions:
         type: integer
       QuarterID:
         type: integer
+x-servers:
+  - url: 'http://api.fantasydata.net'
+  - url: 'https://api.fantasydata.net'
+  - url: 'http://fantasydata-northcentralus-01.regional.azure-api.net'
+  - url: 'https://fantasydata-northcentralus-01.regional.azure-api.net'

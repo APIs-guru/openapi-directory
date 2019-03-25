@@ -3144,9 +3144,11 @@ definitions:
         format: date-time
         readOnly: true
         type: string
-      crawling:
+      configuration:
+        items:
+          type: string
         readOnly: true
-        type: boolean
+        type: array
       createdAt:
         format: date-time
         readOnly: true
@@ -3154,18 +3156,6 @@ definitions:
       currentVersion:
         $ref: '#/definitions/RuleSetVersion'
         readOnly: true
-      feature:
-        items:
-          type: string
-        readOnly: true
-        type: array
-      featureValue:
-        readOnly: true
-      features:
-        items:
-          type: string
-        readOnly: true
-        type: array
       hasLegacyRuleSystem:
         readOnly: true
         type: boolean
@@ -3180,12 +3170,6 @@ definitions:
         readOnly: true
         type: boolean
       isPublishing:
-        readOnly: true
-        type: boolean
-      logExport:
-        readOnly: true
-        type: boolean
-      matchStatusOnResponse:
         readOnly: true
         type: boolean
       name:
@@ -3211,6 +3195,9 @@ definitions:
           $ref: '#/definitions/Rule'
         readOnly: true
         type: array
+      rulesCountWithNext:
+        readOnly: true
+        type: integer
       rulesHash:
         readOnly: true
         type: string
@@ -3307,6 +3294,11 @@ definitions:
         format: date-time
         readOnly: true
         type: string
+      configuration:
+        items:
+          type: string
+        readOnly: true
+        type: array
       createdAt:
         format: date-time
         readOnly: true
@@ -3314,11 +3306,6 @@ definitions:
       currentVersion:
         $ref: '#/definitions/RuleSetVersion-Read'
         readOnly: true
-      features:
-        items:
-          type: string
-        readOnly: true
-        type: array
       id:
         readOnly: true
         type: string
@@ -3714,6 +3701,8 @@ definitions:
       lastChange:
         $ref: '#/definitions/RuleChange'
         readOnly: true
+      mergedRulesCount:
+        type: integer
       name:
         type: string
       nexts:
@@ -3755,6 +3744,8 @@ definitions:
         type: string
       isSnapshot:
         type: boolean
+      mergedRulesCount:
+        type: integer
       name:
         type: string
       publishedAt:

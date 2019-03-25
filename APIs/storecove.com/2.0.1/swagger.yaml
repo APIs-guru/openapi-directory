@@ -778,9 +778,14 @@ definitions:
     description: A document attachment to the invoice.
     properties:
       document:
-        description: 'The base64 encoded version of the document attachment. The total maximum length of all attachments is 2MB, after encoding.'
+        description: 'The base64 encoded version of the document attachment. The total maximum length of all attachments is 10MB, after encoding.'
         minLength: 5
         title: Document Attachment
+        type: string
+      filename:
+        description: The name of the file attachment.
+        pattern: '^[a-zA-Z0-9]([a-zA-Z0-9._-]*[a-zA-Z0-9])?\.[a-zA-Z0-9_-]+$'
+        title: Filename
         type: string
       mimeType:
         description: The document attachment mime type. Currently only application/pdf is allowed.
@@ -793,6 +798,9 @@ definitions:
         description: Whether or not this document is a visual representation of the invoice data.
         title: Primary Image
         type: boolean
+    required:
+      - document
+      - mimeType
     title: Invoice Attachment
     type: object
   BuyerCustomerParty:
@@ -1407,6 +1415,10 @@ definitions:
         description: The payment id that you will use to match the payment against the invoice.
         title: Payment Id
         type: string
+      prepaidAmount:
+        description: The amount already paid.
+        title: Prepaid Amount
+        type: number
       projectReference:
         description: Information about the project this invoice relates to.
         title: Project Reference

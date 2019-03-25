@@ -308,7 +308,7 @@ paths:
           name: interval
           required: false
           type: string
-        - description: if true use historical currency rates otherwise current currency rates. Defaults to false.
+        - description: if true use historical currency rates otherwise current currency rates. Defaults to true.
           in: query
           name: historicalfx
           required: false
@@ -468,7 +468,7 @@ paths:
           name: interval
           required: false
           type: string
-        - description: if true use historical currency rates otherwise current currency rates. Defaults to false.
+        - description: if true use historical currency rates otherwise current currency rates. Defaults to true.
           in: query
           name: historicalfx
           required: false
@@ -750,6 +750,11 @@ paths:
           description: apply global and per-tenant spot price adjustments. Defaults to true.
           in: query
           name: adjust
+          required: false
+          type: boolean
+        - default: true
+          in: query
+          name: allowSourceOverride
           required: false
           type: boolean
         - default: '1'

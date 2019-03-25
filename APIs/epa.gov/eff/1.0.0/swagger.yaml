@@ -38,31 +38,92 @@ info:
   x-providerName: epa.gov
   x-serviceName: eff
 consumes:
-  - application/json
-  - application/xml
+  - application/x-www-form-urlencoded
 produces:
   - application/json
   - application/xml
 parameters:
-  callback:
+  f.callback:
+    description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
+    in: formData
+    name: callback
+    required: false
+    type: string
+  f.end_date:
+    description: 'The end date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with start_date. If start_date and end_date are not specified, the service will return the last three years of data.'
+    in: formData
+    name: end_date
+    required: false
+    type: string
+  f.outfall:
+    description: 'Three-character code that identifies the point of discharge (e.g., pipe or outfall) for a facility. A single NPDES ID may have multiple points of discharge.'
+    in: formData
+    name: outfall
+    required: false
+    type: string
+  f.output:
+    description: |-
+      Output Format Flag.  Enter one of the following keywords:
+      - JSON = Data model formatted as Javascript Object Notation (default).
+      - JSONP = Data model formatted as Javascript Object Notation with Padding.  
+      - XML = Data model formatted as Extensible Markup Language.
+    enum:
+      - JSONP
+      - JSON
+      - XML
+    in: formData
+    name: output
+    required: false
+    type: string
+  f.p_id:
+    description: Identifier for the service.
+    in: formData
+    name: p_id
+    required: true
+    type: string
+  f.parameter_code:
+    description: Five-digit numeric code identifying the parameter. See Parameter Lookup documentation for a complete list of codes.
+    in: formData
+    name: parameter_code
+    required: false
+    type: string
+  f.search_code:
+    description: Enter a partial or complete code value.
+    in: formData
+    name: search_code
+    required: false
+    type: string
+  f.search_term:
+    description: Enter a partial or complete search phrase or word.
+    in: formData
+    name: search_term
+    required: false
+    type: string
+  f.start_date:
+    description: 'The start date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with end_date. If start_date and end_date are not specified, the service will return the last three years of data.'
+    in: formData
+    name: start_date
+    required: false
+    type: string
+  q.callback:
     description: JSONP Callback.  For use with JSONP and GEOJSONP output only.  Enter a name of the function in which to wrap the JSON response.
     in: query
     name: callback
     required: false
     type: string
-  end_date:
+  q.end_date:
     description: 'The end date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with start_date. If start_date and end_date are not specified, the service will return the last three years of data.'
     in: query
     name: end_date
     required: false
     type: string
-  outfall:
+  q.outfall:
     description: 'Three-character code that identifies the point of discharge (e.g., pipe or outfall) for a facility. A single NPDES ID may have multiple points of discharge.'
     in: query
     name: outfall
     required: false
     type: string
-  output:
+  q.output:
     description: |-
       Output Format Flag.  Enter one of the following keywords:
       - JSON = Data model formatted as Javascript Object Notation (default).
@@ -76,31 +137,31 @@ parameters:
     name: output
     required: false
     type: string
-  p_id:
+  q.p_id:
     description: Identifier for the service.
     in: query
     name: p_id
     required: true
     type: string
-  parameter_code:
+  q.parameter_code:
     description: Five-digit numeric code identifying the parameter. See Parameter Lookup documentation for a complete list of codes.
     in: query
     name: parameter_code
     required: false
     type: string
-  search_code:
+  q.search_code:
     description: Enter a partial or complete code value.
     in: query
     name: search_code
     required: false
     type: string
-  search_term:
+  q.search_term:
     description: Enter a partial or complete search phrase or word.
     in: query
     name: search_term
     required: false
     type: string
-  start_date:
+  q.start_date:
     description: 'The start date (mm/dd/yyyy) for the date range of interest. Must be used in conjunction with end_date. If start_date and end_date are not specified, the service will return the last three years of data.'
     in: query
     name: start_date
@@ -111,11 +172,11 @@ paths:
     get:
       description: Downloads tabular Discharge Monitoring Report (DMR) and compliance data for one NPDES permit as a CSV.
       parameters:
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/outfall'
-        - $ref: '#/parameters/parameter_code'
-        - $ref: '#/parameters/start_date'
-        - $ref: '#/parameters/end_date'
+        - $ref: '#/parameters/q.p_id'
+        - $ref: '#/parameters/q.outfall'
+        - $ref: '#/parameters/q.parameter_code'
+        - $ref: '#/parameters/q.start_date'
+        - $ref: '#/parameters/q.end_date'
       responses:
         '200':
           description: Returns an object with summary effluent information
@@ -127,11 +188,11 @@ paths:
     post:
       description: Downloads tabular Discharge Monitoring Report (DMR) and compliance data for one NPDES permit as a CSV.
       parameters:
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/outfall'
-        - $ref: '#/parameters/parameter_code'
-        - $ref: '#/parameters/start_date'
-        - $ref: '#/parameters/end_date'
+        - $ref: '#/parameters/f.p_id'
+        - $ref: '#/parameters/f.outfall'
+        - $ref: '#/parameters/f.parameter_code'
+        - $ref: '#/parameters/f.start_date'
+        - $ref: '#/parameters/f.end_date'
       responses:
         '200':
           description: Returns an object with summary effluent information
@@ -146,13 +207,13 @@ paths:
         Discharge Monitoring Report (DMR) data supporting each effluent chart for one NPDES permit. Includes Discharge Monitoring Reports and NPDES Violations. 
 
       parameters:
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/outfall'
-        - $ref: '#/parameters/parameter_code'
-        - $ref: '#/parameters/start_date'
-        - $ref: '#/parameters/end_date'
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/q.p_id'
+        - $ref: '#/parameters/q.outfall'
+        - $ref: '#/parameters/q.parameter_code'
+        - $ref: '#/parameters/q.start_date'
+        - $ref: '#/parameters/q.end_date'
+        - $ref: '#/parameters/q.output'
+        - $ref: '#/parameters/q.callback'
       responses:
         '200':
           description: Returns an object with detailed effluent information
@@ -174,13 +235,13 @@ paths:
         Discharge Monitoring Report (DMR) data supporting each effluent chart for one NPDES permit. Includes Discharge Monitoring Reports and NPDES Violations. 
 
       parameters:
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/outfall'
-        - $ref: '#/parameters/parameter_code'
-        - $ref: '#/parameters/start_date'
-        - $ref: '#/parameters/end_date'
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/callback'
+        - $ref: '#/parameters/f.p_id'
+        - $ref: '#/parameters/f.outfall'
+        - $ref: '#/parameters/f.parameter_code'
+        - $ref: '#/parameters/f.start_date'
+        - $ref: '#/parameters/f.end_date'
+        - $ref: '#/parameters/f.output'
+        - $ref: '#/parameters/f.callback'
       responses:
         '200':
           description: Returns an object with detailed effluent information
@@ -201,11 +262,11 @@ paths:
     get:
       description: Summary of compliance status each outfall and parameter for one NPDES permit. Provides the current compliance status and overall compliance status for the date range of interest. This service supports the Summary Matrix on the Effluent Charts.
       parameters:
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/callback'
-        - $ref: '#/parameters/start_date'
-        - $ref: '#/parameters/end_date'
+        - $ref: '#/parameters/q.p_id'
+        - $ref: '#/parameters/q.output'
+        - $ref: '#/parameters/q.callback'
+        - $ref: '#/parameters/q.start_date'
+        - $ref: '#/parameters/q.end_date'
       responses:
         '200':
           description: Returns an object with summary effluent information
@@ -225,11 +286,11 @@ paths:
     post:
       description: Summary of compliance status each outfall and parameter for one NPDES permit. Provides the current compliance status and overall compliance status for the date range of interest. This service supports the Summary Matrix on the Effluent Charts.
       parameters:
-        - $ref: '#/parameters/p_id'
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/callback'
-        - $ref: '#/parameters/start_date'
-        - $ref: '#/parameters/end_date'
+        - $ref: '#/parameters/f.p_id'
+        - $ref: '#/parameters/f.output'
+        - $ref: '#/parameters/f.callback'
+        - $ref: '#/parameters/f.start_date'
+        - $ref: '#/parameters/f.end_date'
       responses:
         '200':
           description: Returns an object with summary effluent information
@@ -250,10 +311,10 @@ paths:
     get:
       description: Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.
       parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/callback'
-        - $ref: '#/parameters/search_term'
-        - $ref: '#/parameters/search_code'
+        - $ref: '#/parameters/q.output'
+        - $ref: '#/parameters/q.callback'
+        - $ref: '#/parameters/q.search_term'
+        - $ref: '#/parameters/q.search_code'
       responses:
         '200':
           description: |-
@@ -275,10 +336,10 @@ paths:
     post:
       description: Look up Clean Water Act parameter codes and descriptions in the Integrated Compliance Information System - National Pollutant Discharge Elimination System (ICIS-NPDES) by code or term.
       parameters:
-        - $ref: '#/parameters/output'
-        - $ref: '#/parameters/callback'
-        - $ref: '#/parameters/search_term'
-        - $ref: '#/parameters/search_code'
+        - $ref: '#/parameters/f.output'
+        - $ref: '#/parameters/f.callback'
+        - $ref: '#/parameters/f.search_term'
+        - $ref: '#/parameters/f.search_code'
       responses:
         '200':
           description: |-

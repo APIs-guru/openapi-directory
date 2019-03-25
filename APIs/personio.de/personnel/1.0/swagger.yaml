@@ -158,6 +158,41 @@ paths:
               success: false
           schema:
             $ref: '#/definitions/ErrorResponse'
+    patch:
+      description: 'This endpoint is responsible for updating attendance data for the company employees. Attributes are not required and if not specified, the current value will be used. It is not possible to change the employee id.'
+      parameters:
+        - description: ID of the attendance period to update
+          format: int32
+          in: path
+          name: id
+          required: true
+          type: integer
+        - description: attendance period data to update
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateAttendancePeriodRequest'
+      responses:
+        '200':
+          description: Success response
+          examples:
+            application/json:
+              data:
+                message: The attendance period was updated.
+              success: true
+          schema:
+            $ref: '#/definitions/Response'
+        '404':
+          description: Not found response
+          examples:
+            application/json:
+              error:
+                code: 404
+                message: The attendance period was not found.
+              success: false
+          schema:
+            $ref: '#/definitions/ErrorResponse'
   /company/employees:
     get:
       description: List Employees
@@ -1263,6 +1298,34 @@ definitions:
           - TimeOffType
         type: string
     title: Type of time-off resource
+    type: object
+  UpdateAttendancePeriodRequest:
+    example:
+      break: 35
+      date: '2019-03-17'
+      end_time: '12:00'
+      start_time: '9:00'
+    properties:
+      break:
+        description: Break in minutes
+        format: int32
+        type: integer
+      comment:
+        description: Optional comment
+        type: string
+      date:
+        description: Attendance date as YYYY-MM-DD
+        format: date
+        type: string
+      end_time:
+        description: 'End time as HH:MM'
+        pattern: '^\d\d:\d\d$'
+        type: string
+      start_time:
+        description: 'Start time as HH:MM'
+        pattern: '^\d\d:\d\d$'
+        type: string
+    title: Update an existing attendance period
     type: object
   WorkSchedule:
     allOf:

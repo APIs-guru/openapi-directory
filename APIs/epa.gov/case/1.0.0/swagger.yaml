@@ -2752,12 +2752,15 @@ definitions:
         example: Facility
         title: Type
         type: string
+      VALUE:
+        type: string
     required:
       - LAT
       - LON
       - ICON
       - TYPE
       - NAME
+      - VALUE
       - PUV
     type: object
     xml:

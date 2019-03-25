@@ -876,6 +876,8 @@ definitions:
         type: integer
       DivisionWins:
         type: integer
+      GlobalTeamID:
+        type: integer
       Key:
         type: string
       Losses:
@@ -1150,3 +1152,8 @@ definitions:
         type: string
       Wins:
         type: integer
+x-servers:
+  - url: 'http://api.fantasydata.net'
+  - url: 'https://api.fantasydata.net'
+  - url: 'http://fantasydata-northcentralus-01.regional.azure-api.net'
+  - url: 'https://fantasydata-northcentralus-01.regional.azure-api.net'

@@ -275,7 +275,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: 'Find divisions near the given origin division, filtering by optional criteria. If no criteria are set, you will get back all known divisions.'
+      description: 'Find administrative divisions near the given origin division, filtering by optional criteria. If no criteria are set, you will get back all known divisions.'
       operationId: findDivisionsNearAdminDivisionUsingGET
       parameters:
         - description: The division id (either native 'id' or 'wikiDataId')
@@ -891,6 +891,85 @@ paths:
         '404':
           description: Not Found
       summary: Get region details
+      tags:
+        - Geo
+  '/v1/geo/countries/{countryId}/regions/{regionCode}/adminDivisions':
+    get:
+      consumes:
+        - application/json
+      description: Get the administrative divisions in a specific country region. The country and region info is omitted in the response.
+      operationId: findRegionDivisionsUsingGET
+      parameters:
+        - description: An ISO-3166 country code or WikiData id
+          in: path
+          name: countryId
+          required: true
+          type: string
+        - description: An ISO-3166 or FIPS region code
+          in: path
+          name: regionCode
+          required: true
+          type: string
+        - description: Only divisions having at least this population
+          format: int32
+          in: query
+          name: minPopulation
+          required: false
+          type: integer
+        - default: false
+          description: Display results using ASCII characters
+          in: query
+          name: asciiMode
+          required: false
+          type: boolean
+        - description: Display results in this language
+          in: query
+          name: languageCode
+          required: false
+          type: string
+        - default: 10
+          description: The maximum number of results to retrieve
+          format: int32
+          in: query
+          name: limit
+          required: false
+          type: integer
+        - default: 0
+          description: The zero-ary offset index into the results
+          format: int32
+          in: query
+          name: offset
+          required: false
+          type: integer
+        - description: 'How to sort the results. Format: ±SORT_FIELD,±SORT_FIELD where SORT_FIELD = elevation | name | population'
+          in: query
+          name: sort
+          required: false
+          type: string
+        - default: NONE
+          description: 'Whether to include any divisions marked deleted: ALL | SINCE_YESTERDAY | SINCE_LAST_WEEK | NONE'
+          in: query
+          name: includeDeleted
+          required: false
+          type: string
+        - default: true
+          description: Include HATEOAS-style links in results
+          in: query
+          name: hateoasMode
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PopulatedPlacesResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find country region administrative divisions
       tags:
         - Geo
   '/v1/geo/countries/{countryId}/regions/{regionCode}/cities':
