@@ -34,10 +34,9 @@ securityDefinitions:
     description: Oauth 2.0 authentication
     flow: implicit
     scopes:
-      'https://www.googleapis.com/auth/plus.login': 'View your basic profile info, including your age range and language'
       'https://www.googleapis.com/auth/plus.me': Know who you are on Google
       'https://www.googleapis.com/auth/userinfo.email': View your email address
-      'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publically available'
+      'https://www.googleapis.com/auth/userinfo.profile': 'See your personal info, including any personal info you''ve made publicly available'
     type: oauth2
 parameters:
   alt:
@@ -82,38 +81,6 @@ parameters:
 tags:
   - name: userinfo
 paths:
-  /oauth2/v1/certs:
-    get:
-      operationId: oauth2.getCertForOpenIdConnect
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/X509'
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  /oauth2/v1/raw_public_keys:
-    get:
-      operationId: oauth2.getCertForOpenIdConnectRaw
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Raw'
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
   /oauth2/v1/tokeninfo:
     parameters:
       - $ref: '#/parameters/alt'
@@ -151,8 +118,6 @@ paths:
             $ref: '#/definitions/Userinfoplus'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-        - Oauth2:
             - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -160,72 +125,6 @@ paths:
             - 'https://www.googleapis.com/auth/userinfo.profile'
       tags:
         - userinfo
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/service_accounts/v1/jwk/{robotEmail}':
-    get:
-      operationId: oauth2.getRobotJwk
-      parameters:
-        - description: The email of robot account.
-          in: path
-          name: robotEmail
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Jwk'
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/service_accounts/v1/metadata/raw/{robotEmail}':
-    get:
-      operationId: oauth2.getRobotMetadataRaw
-      parameters:
-        - description: The email of robot account.
-          in: path
-          name: robotEmail
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Raw'
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/service_accounts/v1/metadata/x509/{robotEmail}':
-    get:
-      operationId: oauth2.getRobotMetadataX509
-      parameters:
-        - description: The email of robot account.
-          in: path
-          name: robotEmail
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/X509'
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -245,8 +144,6 @@ paths:
             $ref: '#/definitions/Userinfoplus'
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/plus.login'
-        - Oauth2:
             - 'https://www.googleapis.com/auth/plus.me'
         - Oauth2:
             - 'https://www.googleapis.com/auth/userinfo.email'
@@ -263,46 +160,6 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
 definitions:
-  Jwk:
-    properties:
-      keys:
-        items:
-          properties:
-            alg:
-              default: RS256
-              type: string
-            e:
-              type: string
-            kid:
-              type: string
-            kty:
-              default: RSA
-              type: string
-            'n':
-              type: string
-            use:
-              default: sig
-              type: string
-          type: object
-        type: array
-    type: object
-  Raw:
-    properties:
-      keyvalues:
-        items:
-          properties:
-            algorithm:
-              default: RSA
-              type: string
-            exponent:
-              type: string
-            keyid:
-              type: string
-            modulus:
-              type: string
-          type: object
-        type: array
-    type: object
   Tokeninfo:
     properties:
       access_type:
@@ -380,8 +237,4 @@ definitions:
         default: true
         description: Boolean flag which is true if the email address is verified. Always verified because we only return the user's primary email address.
         type: boolean
-    type: object
-  X509:
-    additionalProperties:
-      type: string
     type: object

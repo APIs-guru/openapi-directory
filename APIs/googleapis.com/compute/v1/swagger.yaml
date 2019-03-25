@@ -16745,6 +16745,48 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/getShieldedInstanceIdentity':
+    get:
+      description: Returns the Shielded Instance Identity of an instance
+      operationId: compute.instances.getShieldedInstanceIdentity
+      parameters:
+        - description: Name or id of the instance scoping this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ShieldedInstanceIdentity'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - instances
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/zones/{zone}/instances/{instance}/referrers':
     get:
       description: 'Retrieves the list of referrers to instances contained within the specified zone. For more information, read Viewing Referrers to VM Instances.'
@@ -17349,6 +17391,59 @@ paths:
             - 'https://www.googleapis.com/auth/compute'
       tags:
         - instances
+  '/{project}/zones/{zone}/instances/{instance}/setShieldedInstanceIntegrityPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Sets the Shielded Instance integrity policy for an instance. You can only use this method on a running instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+      operationId: compute.instances.setShieldedInstanceIntegrityPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ShieldedInstanceIntegrityPolicy'
+        - description: Name or id of the instance scoping this request.
+          in: path
+          name: instance
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
   '/{project}/zones/{zone}/instances/{instance}/setTags':
     parameters:
       - $ref: '#/parameters/alt'
@@ -17676,6 +17771,59 @@ paths:
         - description: The name of the network interface to update.
           in: query
           name: networkInterface
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instances
+  '/{project}/zones/{zone}/instances/{instance}/updateShieldedInstanceConfig':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Updates the Shielded Instance config for an instance. You can only use this method on a stopped instance. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+      operationId: compute.instances.updateShieldedInstanceConfig
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ShieldedInstanceConfig'
+        - description: Name or id of the instance scoping this request.
+          in: path
+          name: instance
           required: true
           type: string
         - description: Project ID for this request.
@@ -23162,6 +23310,10 @@ definitions:
         items:
           $ref: '#/definitions/ServiceAccount'
         type: array
+      shieldedInstanceConfig:
+        $ref: '#/definitions/ShieldedInstanceConfig'
+      shieldedInstanceIntegrityPolicy:
+        $ref: '#/definitions/ShieldedInstanceIntegrityPolicy'
       startRestricted:
         description: '[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity.'
         type: boolean
@@ -27528,6 +27680,7 @@ definitions:
           - CPUS
           - CPUS_ALL_REGIONS
           - DISKS_TOTAL_GB
+          - EXTERNAL_VPN_GATEWAYS
           - FIREWALLS
           - FORWARDING_RULES
           - GLOBAL_INTERNAL_ADDRESSES
@@ -29215,6 +29368,50 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  ShieldedInstanceConfig:
+    description: A set of Shielded Instance options.
+    properties:
+      enableIntegrityMonitoring:
+        description: Defines whether the instance has integrity monitoring enabled.
+        type: boolean
+      enableSecureBoot:
+        description: Defines whether the instance has Secure Boot enabled.
+        type: boolean
+      enableVtpm:
+        description: Defines whether the instance has the vTPM enabled.
+        type: boolean
+    type: object
+  ShieldedInstanceIdentity:
+    description: A shielded Instance identity entry.
+    properties:
+      encryptionKey:
+        $ref: '#/definitions/ShieldedInstanceIdentityEntry'
+        description: An Endorsement Key (EK) issued to the Shielded Instance's vTPM.
+      kind:
+        default: 'compute#shieldedInstanceIdentity'
+        description: '[Output Only] Type of the resource. Always compute#shieldedInstanceIdentity for shielded Instance identity entry.'
+        type: string
+      signingKey:
+        $ref: '#/definitions/ShieldedInstanceIdentityEntry'
+        description: An Attestation Key (AK) issued to the Shielded Instance's vTPM.
+    type: object
+  ShieldedInstanceIdentityEntry:
+    description: A Shielded Instance Identity Entry.
+    properties:
+      ekCert:
+        description: A PEM-encoded X.509 certificate. This field can be empty.
+        type: string
+      ekPub:
+        description: A PEM-encoded public key.
+        type: string
+    type: object
+  ShieldedInstanceIntegrityPolicy:
+    description: The policy describes the baseline against which Instance boot integrity is measured.
+    properties:
+      updateAutoLearnPolicy:
+        description: Updates the integrity policy baseline using the measurements from the VM instance's most recent boot.
+        type: boolean
     type: object
   SignedUrlKey:
     description: Represents a customer-supplied Signing Key used by Cloud CDN Signed URLs

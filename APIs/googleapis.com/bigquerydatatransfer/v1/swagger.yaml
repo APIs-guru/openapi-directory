@@ -393,6 +393,15 @@ paths:
       parameters:
         - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
+          items:
+            enum:
+              - TRANSFER_STATE_UNSPECIFIED
+              - PENDING
+              - RUNNING
+              - SUCCEEDED
+              - FAILED
+              - CANCELLED
+            type: string
           name: pageSize
           type: integer
         - description: |-
@@ -401,6 +410,9 @@ paths:
             results, `ListTransferRunsResponse` outputs
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
+          enum:
+            - RUN_ATTEMPT_UNSPECIFIED
+            - LATEST
           in: query
           name: pageToken
           type: string
@@ -418,22 +430,10 @@ paths:
             - RUN_ATTEMPT_UNSPECIFIED
             - LATEST
           in: query
-          items:
-            enum:
-              - TRANSFER_STATE_UNSPECIFIED
-              - PENDING
-              - RUNNING
-              - SUCCEEDED
-              - FAILED
-              - CANCELLED
-            type: string
           name: runAttempt
           type: string
         - collectionFormat: multi
           description: 'When specified, only transfer runs with requested states are returned.'
-          enum:
-            - RUN_ATTEMPT_UNSPECIFIED
-            - LATEST
           in: query
           items:
             enum:
@@ -495,6 +495,8 @@ paths:
             a `next_page` token, which can be used as the
             `page_token` value to request the next page of list results.
           in: query
+          items:
+            type: string
           name: pageToken
           type: string
         - description: |-
@@ -610,13 +612,6 @@ paths:
           type: array
         - description: Page size. The default page size is the maximum value of 1000 results.
           in: query
-          items:
-            enum:
-              - MESSAGE_SEVERITY_UNSPECIFIED
-              - INFO
-              - WARNING
-              - ERROR
-            type: string
           name: pageSize
           type: integer
         - description: |-

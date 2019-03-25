@@ -82,7 +82,6 @@ parameters:
 tags:
   - name: acceleratorTypes
   - name: addresses
-  - name: allocations
   - name: autoscalers
   - name: backendBuckets
   - name: backendServices
@@ -123,6 +122,7 @@ tags:
   - name: regionInstanceGroups
   - name: regionOperations
   - name: regions
+  - name: reservations
   - name: resourcePolicies
   - name: routers
   - name: routes
@@ -292,68 +292,6 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - addresses
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{project}/aggregated/allocations':
-    get:
-      description: Retrieves an aggregated list of allocations.
-      operationId: compute.allocations.aggregatedList
-      parameters:
-        - description: |-
-            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
-
-            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
-
-            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-
-            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
-          in: query
-          name: filter
-          type: string
-        - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
-          in: query
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: |-
-            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-
-            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-
-            Currently, only sorting by name or creationTimestamp desc is supported.
-          in: query
-          name: orderBy
-          type: string
-        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
-          in: query
-          name: pageToken
-          type: string
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AllocationAggregatedList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - allocations
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -1346,6 +1284,68 @@ paths:
             - 'https://www.googleapis.com/auth/compute.readonly'
       tags:
         - globalOperations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/aggregated/reservations':
+    get:
+      description: Retrieves an aggregated list of reservations.
+      operationId: compute.reservations.aggregatedList
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ReservationAggregatedList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - reservations
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -11484,7 +11484,7 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-  '/{project}/regions/{region}/commitments/{commitment}/updateAllocations':
+  '/{project}/regions/{region}/commitments/{commitment}/updateReservations':
     parameters:
       - $ref: '#/parameters/alt'
       - $ref: '#/parameters/fields'
@@ -11494,14 +11494,14 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Update the shape of allocations for GPUS/Local SSDs of allocations within the commitments.
-      operationId: compute.regionCommitments.updateAllocations
+      description: Update the shape of reservations for GPUS/Local SSDs of reservations within the commitments.
+      operationId: compute.regionCommitments.updateReservations
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/RegionCommitmentsUpdateAllocationsRequest'
-        - description: Name of the commitment of which the allocation's capacities are being updated.
+            $ref: '#/definitions/RegionCommitmentsUpdateReservationsRequest'
+        - description: Name of the commitment of which the reservation's capacities are being updated.
           in: path
           name: commitment
           required: true
@@ -12943,6 +12943,50 @@ paths:
             The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
           in: query
           name: requestId
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - regionInstanceGroupManagers
+  '/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/applyUpdatesToInstances':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Apply updates to selected instances the managed instance group.
+      operationId: compute.regionInstanceGroupManagers.applyUpdatesToInstances
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RegionInstanceGroupManagersApplyUpdatesRequest'
+        - description: 'The name of the managed instance group, should conform to RFC1035.'
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: 'Name of the region scoping this request, should conform to RFC1035.'
+          in: path
+          name: region
+          required: true
           type: string
       responses:
         '200':
@@ -16745,6 +16789,48 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/regions/{region}/vpnGateways/{vpnGateway}/getStatus':
+    get:
+      description: Returns the status for the specified VPN gateway.
+      operationId: compute.vpnGateways.getStatus
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the region for this request.
+          in: path
+          name: region
+          required: true
+          type: string
+        - description: Name of the VPN gateway to return.
+          in: path
+          name: vpnGateway
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/VpnGatewaysGetStatusResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - vpnGateways
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
   '/{project}/regions/{region}/vpnTunnels':
     get:
       description: Retrieves a list of VpnTunnel resources contained in the specified project and region.
@@ -17519,379 +17605,6 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
-  '/{project}/zones/{zone}/allocations':
-    get:
-      description: A list all the allocations that have been configured for the specified project in specified zone.
-      operationId: compute.allocations.list
-      parameters:
-        - description: |-
-            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
-
-            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
-
-            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-
-            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
-          in: query
-          name: filter
-          type: string
-        - default: 500
-          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
-          in: query
-          minimum: 0
-          name: maxResults
-          type: integer
-        - description: |-
-            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-
-            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-
-            Currently, only sorting by name or creationTimestamp desc is supported.
-          in: query
-          name: orderBy
-          type: string
-        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
-          in: query
-          name: pageToken
-          type: string
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/AllocationList'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - allocations
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Creates a new allocation.
-      operationId: compute.allocations.insert
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/Allocation'
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: |-
-            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-
-            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-
-            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-      tags:
-        - allocations
-  '/{project}/zones/{zone}/allocations/{allocation}':
-    delete:
-      description: Deletes the specified allocation.
-      operationId: compute.allocations.delete
-      parameters:
-        - description: Name of the allocation to delete.
-          in: path
-          name: allocation
-          required: true
-          type: string
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: |-
-            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-
-            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-
-            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-      tags:
-        - allocations
-    get:
-      description: Retrieves all information of the specified allocation.
-      operationId: compute.allocations.get
-      parameters:
-        - description: Name of the allocation to retrieve.
-          in: path
-          name: allocation
-          required: true
-          type: string
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Allocation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - allocations
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{project}/zones/{zone}/allocations/{allocation}/resize':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Resizes the allocation (applicable to standalone allocations only)
-      operationId: compute.allocations.resize
-      parameters:
-        - description: Name of the allocation to update.
-          in: path
-          name: allocation
-          required: true
-          type: string
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/AllocationsResizeRequest'
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: |-
-            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-
-            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-
-            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-          in: query
-          name: requestId
-          type: string
-        - description: Name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Operation'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-      tags:
-        - allocations
-  '/{project}/zones/{zone}/allocations/{resource}/getIamPolicy':
-    get:
-      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-      operationId: compute.allocations.getIamPolicy
-      parameters:
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Policy'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - allocations
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-  '/{project}/zones/{zone}/allocations/{resource}/setIamPolicy':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Sets the access control policy on the specified resource. Replaces any existing policy.
-      operationId: compute.allocations.setIamPolicy
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/ZoneSetPolicyRequest'
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/Policy'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-      tags:
-        - allocations
-  '/{project}/zones/{zone}/allocations/{resource}/testIamPermissions':
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Returns permissions that a caller has on the specified resource.
-      operationId: compute.allocations.testIamPermissions
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/TestPermissionsRequest'
-        - description: Project ID for this request.
-          in: path
-          name: project
-          required: true
-          type: string
-        - description: Name or id of the resource for this request.
-          in: path
-          name: resource
-          required: true
-          type: string
-        - description: The name of the zone for this request.
-          in: path
-          name: zone
-          required: true
-          type: string
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/TestPermissionsResponse'
-      security:
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute'
-        - Oauth2:
-            - 'https://www.googleapis.com/auth/compute.readonly'
-      tags:
-        - allocations
   '/{project}/zones/{zone}/autoscalers':
     get:
       description: Retrieves a list of autoscalers contained within the specified zone.
@@ -19234,6 +18947,50 @@ paths:
           name: requestId
           type: string
         - description: The name of the zone where the managed instance group is located.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - instanceGroupManagers
+  '/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/applyUpdatesToInstances':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Apply changes to selected instances on the managed instance group. This method can be used to apply new overrides and/or new versions.
+      operationId: compute.instanceGroupManagers.applyUpdatesToInstances
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/InstanceGroupManagersApplyUpdatesRequest'
+        - description: 'The name of the managed instance group, should conform to RFC1035.'
+          in: path
+          name: instanceGroupManager
+          required: true
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: The name of the zone where the managed instance group is located. Should conform to RFC1035.
           in: path
           name: zone
           required: true
@@ -23645,6 +23402,379 @@ paths:
       - $ref: '#/parameters/prettyPrint'
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/reservations':
+    get:
+      description: A list all the reservations that have been configured for the specified project in specified zone.
+      operationId: compute.reservations.list
+      parameters:
+        - description: |-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either =, !=, >, or <.
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named example-instance by specifying name != example-instance.
+
+            You can also filter nested fields. For example, you could specify scheduling.automaticRestart = false to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example, (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake"). By default, each expression is an AND expression. However, you can include AND and OR expressions explicitly. For example, (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true).
+          in: query
+          name: filter
+          type: string
+        - default: 500
+          description: 'The maximum number of results per page that should be returned. If the number of available results is larger than maxResults, Compute Engine returns a nextPageToken that can be used to get the next page of results in subsequent list requests. Acceptable values are 0 to 500, inclusive. (Default: 500)'
+          in: query
+          minimum: 0
+          name: maxResults
+          type: integer
+        - description: |-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+            You can also sort results in descending order based on the creation timestamp using orderBy="creationTimestamp desc". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+            Currently, only sorting by name or creationTimestamp desc is supported.
+          in: query
+          name: orderBy
+          type: string
+        - description: Specifies a page token to use. Set pageToken to the nextPageToken returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          type: string
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ReservationList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - reservations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Creates a new reservation.
+      operationId: compute.reservations.insert
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Reservation'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - reservations
+  '/{project}/zones/{zone}/reservations/{reservation}':
+    delete:
+      description: Deletes the specified reservation.
+      operationId: compute.reservations.delete
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the reservation to delete.
+          in: path
+          name: reservation
+          required: true
+          type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - reservations
+    get:
+      description: Retrieves all information of the specified reservation.
+      operationId: compute.reservations.get
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name of the reservation to retrieve.
+          in: path
+          name: reservation
+          required: true
+          type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Reservation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - reservations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/reservations/{reservation}/resize':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Resizes the reservation (applicable to standalone reservations only)
+      operationId: compute.reservations.resize
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReservationsResizeRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: |-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          type: string
+        - description: Name of the reservation to update.
+          in: path
+          name: reservation
+          required: true
+          type: string
+        - description: Name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - reservations
+  '/{project}/zones/{zone}/reservations/{resource}/getIamPolicy':
+    get:
+      description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+      operationId: compute.reservations.getIamPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - reservations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/reservations/{resource}/setIamPolicy':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Sets the access control policy on the specified resource. Replaces any existing policy.
+      operationId: compute.reservations.setIamPolicy
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ZoneSetPolicyRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Policy'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - reservations
+  '/{project}/zones/{zone}/reservations/{resource}/testIamPermissions':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Returns permissions that a caller has on the specified resource.
+      operationId: compute.reservations.testIamPermissions
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TestPermissionsRequest'
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Name or id of the resource for this request.
+          in: path
+          name: resource
+          required: true
+          type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/TestPermissionsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - reservations
   '/{project}/zones/{zone}/targetInstances':
     get:
       description: Retrieves a list of TargetInstance resources available to the specified project and zone.
@@ -24461,238 +24591,7 @@ definitions:
         description: 'Optional subnetwork secondary range name specifying the secondary range from which to allocate the IP CIDR range for this alias IP range. If left unspecified, the primary range of the subnetwork will be used.'
         type: string
     type: object
-  Allocation:
-    description: Allocation resource
-    properties:
-      commitment:
-        description: '[OutputOnly] Full or partial url for parent commitment for allocations which are tied to a commitment.'
-        type: string
-      creationTimestamp:
-        description: '[Output Only] Creation timestamp in RFC3339 text format.'
-        type: string
-      description:
-        description: An optional description of this resource. Provide this property when you create the resource.
-        type: string
-      id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
-        format: uint64
-        type: string
-      kind:
-        default: 'compute#allocation'
-        description: '[Output Only] Type of the resource. Always compute#allocations for allocations.'
-        type: string
-      name:
-        description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
-        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
-        type: string
-      selfLink:
-        description: '[Output Only] Server-defined fully-qualified URL for this resource.'
-        type: string
-      specificAllocation:
-        $ref: '#/definitions/AllocationSpecificSKUAllocation'
-        description: Allocation for instances with specific machine shapes.
-      specificAllocationRequired:
-        description: 'Indicates whether the allocation can be consumed by VMs with "any allocation" defined. If the field is set, then only VMs that target the allocation by name using --allocation-affinity can consume this allocation.'
-        type: boolean
-      zone:
-        description: 'Zone in which the allocation resides, must be provided if allocation is created with commitment creation.'
-        type: string
-    type: object
-  AllocationAffinity:
-    description: AllocationAffinity is the configuration of desired allocation which this instance could take capacity from.
-    properties:
-      consumeAllocationType:
-        enum:
-          - ANY_ALLOCATION
-          - NO_ALLOCATION
-          - SPECIFIC_ALLOCATION
-          - UNSPECIFIED
-        type: string
-      key:
-        description: Corresponds to the label key of allocation resource.
-        type: string
-      values:
-        description: Corresponds to the label values of allocation resource.
-        items:
-          type: string
-        type: array
-    type: object
-  AllocationAggregatedList:
-    description: Contains a list of allocations.
-    properties:
-      id:
-        description: '[Output Only] Unique identifier for the resource; defined by the server.'
-        type: string
-      items:
-        additionalProperties:
-          $ref: '#/definitions/AllocationsScopedList'
-          description: Name of the scope containing this set of allocations.
-        description: A list of Allocation resources.
-        type: object
-      kind:
-        default: 'compute#allocationAggregatedList'
-        description: Type of resource.
-        type: string
-      nextPageToken:
-        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
-        type: string
-      selfLink:
-        description: '[Output Only] Server-defined URL for this resource.'
-        type: string
-      warning:
-        description: '[Output Only] Informational warning message.'
-        properties:
-          code:
-            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
-            enum:
-              - CLEANUP_FAILED
-              - DEPRECATED_RESOURCE_USED
-              - DEPRECATED_TYPE_USED
-              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
-              - EXPERIMENTAL_TYPE_USED
-              - EXTERNAL_API_WARNING
-              - FIELD_VALUE_OVERRIDEN
-              - INJECTED_KERNELS_DEPRECATED
-              - MISSING_TYPE_DEPENDENCY
-              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
-              - NEXT_HOP_CANNOT_IP_FORWARD
-              - NEXT_HOP_INSTANCE_NOT_FOUND
-              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
-              - NEXT_HOP_NOT_RUNNING
-              - NOT_CRITICAL_ERROR
-              - NO_RESULTS_ON_PAGE
-              - REQUIRED_TOS_AGREEMENT
-              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
-              - RESOURCE_NOT_DELETED
-              - SCHEMA_VALIDATION_IGNORED
-              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
-              - UNDECLARED_PROPERTIES
-              - UNREACHABLE
-            type: string
-          data:
-            description: |-
-              [Output Only] Metadata about this warning in key: value format. For example:
-              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
-            items:
-              properties:
-                key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
-                  type: string
-                value:
-                  description: '[Output Only] A warning data value corresponding to the key.'
-                  type: string
-              type: object
-            type: array
-          message:
-            description: '[Output Only] A human-readable description of the warning code.'
-            type: string
-        type: object
-    type: object
-  AllocationList:
-    properties:
-      id:
-        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
-        type: string
-      items:
-        description: '[Output Only] A list of Allocation resources.'
-        items:
-          $ref: '#/definitions/Allocation'
-        type: array
-      kind:
-        default: 'compute#allocationList'
-        description: '[Output Only] Type of resource.Always compute#allocationsList for listsof allocations'
-        type: string
-      nextPageToken:
-        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
-        type: string
-      selfLink:
-        description: '[Output Only] Server-defined URL for this resource.'
-        type: string
-      warning:
-        description: '[Output Only] Informational warning message.'
-        properties:
-          code:
-            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
-            enum:
-              - CLEANUP_FAILED
-              - DEPRECATED_RESOURCE_USED
-              - DEPRECATED_TYPE_USED
-              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
-              - EXPERIMENTAL_TYPE_USED
-              - EXTERNAL_API_WARNING
-              - FIELD_VALUE_OVERRIDEN
-              - INJECTED_KERNELS_DEPRECATED
-              - MISSING_TYPE_DEPENDENCY
-              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
-              - NEXT_HOP_CANNOT_IP_FORWARD
-              - NEXT_HOP_INSTANCE_NOT_FOUND
-              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
-              - NEXT_HOP_NOT_RUNNING
-              - NOT_CRITICAL_ERROR
-              - NO_RESULTS_ON_PAGE
-              - REQUIRED_TOS_AGREEMENT
-              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
-              - RESOURCE_NOT_DELETED
-              - SCHEMA_VALIDATION_IGNORED
-              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
-              - UNDECLARED_PROPERTIES
-              - UNREACHABLE
-            type: string
-          data:
-            description: |-
-              [Output Only] Metadata about this warning in key: value format. For example:
-              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
-            items:
-              properties:
-                key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
-                  type: string
-                value:
-                  description: '[Output Only] A warning data value corresponding to the key.'
-                  type: string
-              type: object
-            type: array
-          message:
-            description: '[Output Only] A human-readable description of the warning code.'
-            type: string
-        type: object
-    type: object
-  AllocationSpecificSKUAllocation:
-    description: This allocation type allows to pre allocate specific instance configuration.
-    properties:
-      count:
-        description: Specifies number of resources that are allocated.
-        format: int64
-        type: string
-      inUseCount:
-        description: '[OutputOnly] Indicates how many resource are in use.'
-        format: int64
-        type: string
-      instanceProperties:
-        $ref: '#/definitions/AllocationSpecificSKUAllocationAllocatedInstanceProperties'
-        description: The instance properties for this specific sku allocation.
-    type: object
-  AllocationSpecificSKUAllocationAllocatedInstanceProperties:
-    description: Properties of the SKU instances being reserved.
-    properties:
-      guestAccelerators:
-        description: Specifies accelerator type and count.
-        items:
-          $ref: '#/definitions/AcceleratorConfig'
-        type: array
-      localSsds:
-        description: Specifies amount of local ssd to reserve with each instance. The type of disk is local-ssd.
-        items:
-          $ref: '#/definitions/AllocationSpecificSKUAllocationAllocatedInstancePropertiesAllocatedDisk'
-        type: array
-      machineType:
-        description: Specifies type of machine (name only) which has fixed number of vCPUs and fixed amount of memory. This also includes specifying custom machine type following custom-NUMBER_OF_CPUS-AMOUNT_OF_MEMORY pattern.
-        type: string
-      minCpuPlatform:
-        description: Minimum cpu platform the allocation.
-        type: string
-    type: object
-  AllocationSpecificSKUAllocationAllocatedInstancePropertiesAllocatedDisk:
+  AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk:
     properties:
       diskSizeGb:
         description: Specifies the size of the disk in base-2 GB.
@@ -24705,68 +24604,40 @@ definitions:
           - SCSI
         type: string
     type: object
-  AllocationsResizeRequest:
+  AllocationSpecificSKUAllocationReservedInstanceProperties:
+    description: Properties of the SKU instances being reserved.
     properties:
-      specificSkuCount:
-        description: Number of allocated resources can be resized with minimum = 1 and maximum = 1000.
-        format: int64
+      guestAccelerators:
+        description: Specifies accelerator type and count.
+        items:
+          $ref: '#/definitions/AcceleratorConfig'
+        type: array
+      localSsds:
+        description: Specifies amount of local ssd to reserve with each instance. The type of disk is local-ssd.
+        items:
+          $ref: '#/definitions/AllocationSpecificSKUAllocationAllocatedInstancePropertiesReservedDisk'
+        type: array
+      machineType:
+        description: Specifies type of machine (name only) which has fixed number of vCPUs and fixed amount of memory. This also includes specifying custom machine type following custom-NUMBER_OF_CPUS-AMOUNT_OF_MEMORY pattern.
+        type: string
+      minCpuPlatform:
+        description: Minimum cpu platform the reservation.
         type: string
     type: object
-  AllocationsScopedList:
+  AllocationSpecificSKUReservation:
+    description: This reservation type allows to pre allocate specific instance configuration.
     properties:
-      allocations:
-        description: A list of allocations contained in this scope.
-        items:
-          $ref: '#/definitions/Allocation'
-        type: array
-      warning:
-        description: Informational warning which replaces the list of allocations when the list is empty.
-        properties:
-          code:
-            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
-            enum:
-              - CLEANUP_FAILED
-              - DEPRECATED_RESOURCE_USED
-              - DEPRECATED_TYPE_USED
-              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
-              - EXPERIMENTAL_TYPE_USED
-              - EXTERNAL_API_WARNING
-              - FIELD_VALUE_OVERRIDEN
-              - INJECTED_KERNELS_DEPRECATED
-              - MISSING_TYPE_DEPENDENCY
-              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
-              - NEXT_HOP_CANNOT_IP_FORWARD
-              - NEXT_HOP_INSTANCE_NOT_FOUND
-              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
-              - NEXT_HOP_NOT_RUNNING
-              - NOT_CRITICAL_ERROR
-              - NO_RESULTS_ON_PAGE
-              - REQUIRED_TOS_AGREEMENT
-              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
-              - RESOURCE_NOT_DELETED
-              - SCHEMA_VALIDATION_IGNORED
-              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
-              - UNDECLARED_PROPERTIES
-              - UNREACHABLE
-            type: string
-          data:
-            description: |-
-              [Output Only] Metadata about this warning in key: value format. For example:
-              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
-            items:
-              properties:
-                key:
-                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
-                  type: string
-                value:
-                  description: '[Output Only] A warning data value corresponding to the key.'
-                  type: string
-              type: object
-            type: array
-          message:
-            description: '[Output Only] A human-readable description of the warning code.'
-            type: string
-        type: object
+      count:
+        description: Specifies number of resources that are allocated.
+        format: int64
+        type: string
+      inUseCount:
+        description: '[OutputOnly] Indicates how many resource are in use.'
+        format: int64
+        type: string
+      instanceProperties:
+        $ref: '#/definitions/AllocationSpecificSKUAllocationReservedInstanceProperties'
+        description: The instance properties for this specific sku reservation.
     type: object
   AttachedDisk:
     description: An instance-attached disk resource.
@@ -25372,6 +25243,9 @@ definitions:
       description:
         description: An optional description of this resource. Provide this property when you create the resource.
         type: string
+      failover:
+        description: This field designates whether this is a failover backend. More than one failover backend can be configured for a given BackendService.
+        type: boolean
       group:
         description: |-
           The fully-qualified URL of an Instance Group or Network Endpoint Group resource. In case of instance group this defines the list of instances that serve traffic. Member virtual machine instances from each instance group must live in the same zone as the instance group itself. No two backends in a backend service are allowed to use same Instance Group resource.
@@ -25588,6 +25462,8 @@ definitions:
 
           When the load balancing scheme is INTERNAL, this field is not used.
         type: boolean
+      failoverPolicy:
+        $ref: '#/definitions/BackendServiceFailoverPolicy'
       fingerprint:
         description: |-
           Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a BackendService. An up-to-date fingerprint must be provided in order to update the BackendService, otherwise the request will fail with error 412 conditionNotMet.
@@ -25772,6 +25648,32 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  BackendServiceFailoverPolicy:
+    properties:
+      disableConnectionDrainOnFailover:
+        description: |-
+          On failover or failback, this field indicates whether connection drain will be honored. Setting this to true has the following effect: connections to the old active pool are not drained. Connections to the new active pool use the timeout of 10 min (currently fixed). Setting to false has the following effect: both old and new connections will have a drain timeout of 10 min.
+
+          This can be set to true only if the protocol is TCP.
+
+          The default is false.
+        type: boolean
+      dropTrafficIfUnhealthy:
+        description: |-
+          This option is used only when no healthy VMs are detected in the primary and backup instance groups. When set to true, traffic is dropped. When set to false, new connections are sent across all VMs in the primary group.
+
+          The default is false.
+        type: boolean
+      failoverRatio:
+        description: |-
+          The value of the field must be in [0, 1]. If the ratio of the healthy VMs in the primary backend is at or below this number, traffic arriving at the load-balanced IP will be directed to the failover backend.
+
+          In case where 'failoverRatio' is not set or all the VMs in the backup backend are unhealthy, the traffic will be directed back to the primary backend in the "force" mode, where traffic will be spread to the healthy VMs with the best effort, or to all VMs when no VM is healthy.
+
+          This field is only used with l4 load balancing.
+        format: float
+        type: number
     type: object
   BackendServiceGroupHealth:
     properties:
@@ -26009,11 +25911,6 @@ definitions:
 
       Committed use discounts are subject to Google Cloud Platform's Service Specific Terms. By purchasing a committed use discount, you agree to these terms. Committed use discounts will not renew, so you must purchase a new commitment to continue receiving discounts. (== resource_for beta.commitments ==) (== resource_for v1.commitments ==)
     properties:
-      allocations:
-        description: List of allocations for this commitment.
-        items:
-          $ref: '#/definitions/Allocation'
-        type: array
       creationTimestamp:
         description: '[Output Only] Creation timestamp in RFC3339 text format.'
         type: string
@@ -26045,6 +25942,11 @@ definitions:
       region:
         description: '[Output Only] URL of the region where this commitment may be used.'
         type: string
+      reservations:
+        description: List of reservations for this commitment.
+        items:
+          $ref: '#/definitions/Reservation'
+        type: array
       resources:
         description: A list of commitment amounts for particular resources. Note that VCPU and MEMORY resource commitments must occur together.
         items:
@@ -28774,9 +28676,6 @@ definitions:
   Instance:
     description: An Instance resource. (== resource_for beta.instances ==) (== resource_for v1.instances ==)
     properties:
-      allocationAffinity:
-        $ref: '#/definitions/AllocationAffinity'
-        description: The configuration of desired allocations which this Instance could consume capacity from.
       canIpForward:
         description: 'Allows this instance to send and receive packets with non-matching destination or source IPs. This is required if you plan to use this instance to forward routes. For more information, see Enabling IP Forwarding.'
         type: boolean
@@ -28856,6 +28755,9 @@ definitions:
         items:
           $ref: '#/definitions/NetworkInterface'
         type: array
+      reservationAffinity:
+        $ref: '#/definitions/ReservationAffinity'
+        description: The configuration of desired allocations which this Instance could consume capacity from.
       scheduling:
         $ref: '#/definitions/Scheduling'
         description: Sets the scheduling options for this instance.
@@ -29551,6 +29453,27 @@ definitions:
           type: string
         type: array
     type: object
+  InstanceGroupManagersApplyUpdatesRequest:
+    description: InstanceGroupManagers.applyUpdatesToInstances
+    properties:
+      instances:
+        description: 'The list of URLs of one or more instances for which we want to apply updates on this managed instance group. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].'
+        items:
+          type: string
+        type: array
+      minimalAction:
+        description: The minimal action that should be perfomed on the instances. By default NONE.
+        enum:
+          - REPLACE
+          - RESTART
+        type: string
+      mostDisruptiveAllowedAction:
+        description: The most disruptive action that allowed to be performed on the instances. By default REPLACE.
+        enum:
+          - REPLACE
+          - RESTART
+        type: string
+    type: object
   InstanceGroupManagersDeleteInstancesRequest:
     properties:
       instances:
@@ -29998,9 +29921,6 @@ definitions:
   InstanceProperties:
     description: ''
     properties:
-      allocationAffinity:
-        $ref: '#/definitions/AllocationAffinity'
-        description: The configuration of desired allocations which this Instance could consume capacity from.
       canIpForward:
         description: 'Enables instances created based on this template to send packets with source IP addresses other than their own and receive packets with destination IP addresses other than their own. If these instances will be used as an IP gateway or it will be set as the next-hop in a Route resource, specify true. If unsure, leave this set to false. See the Enable IP forwarding documentation for more information.'
         type: boolean
@@ -30039,6 +29959,9 @@ definitions:
         items:
           $ref: '#/definitions/NetworkInterface'
         type: array
+      reservationAffinity:
+        $ref: '#/definitions/ReservationAffinity'
+        description: The configuration of desired reservations which this Instance could consume capacity from.
       scheduling:
         $ref: '#/definitions/Scheduling'
         description: Specifies the scheduling options for the instances that are created from this template.
@@ -30389,6 +30312,7 @@ definitions:
       linkType:
         description: 'Type of link requested. This field indicates speed of each of the links in the bundle, not the entire bundle.'
         enum:
+          - LINK_TYPE_ETHERNET_100G_LR
           - LINK_TYPE_ETHERNET_10G_LR
         type: string
       location:
@@ -33760,6 +33684,7 @@ definitions:
           - CPUS
           - CPUS_ALL_REGIONS
           - DISKS_TOTAL_GB
+          - EXTERNAL_VPN_GATEWAYS
           - FIREWALLS
           - FORWARDING_RULES
           - GLOBAL_INTERNAL_ADDRESSES
@@ -33961,12 +33886,12 @@ definitions:
             type: string
         type: object
     type: object
-  RegionCommitmentsUpdateAllocationsRequest:
+  RegionCommitmentsUpdateReservationsRequest:
     properties:
-      allocations:
-        description: List of allocations for the capacity move of VMs with accelerators and local ssds.
+      reservations:
+        description: List of reservations for the capacity move of VMs with accelerators and local ssds.
         items:
-          $ref: '#/definitions/Allocation'
+          $ref: '#/definitions/Reservation'
         type: array
     type: object
   RegionDiskTypeList:
@@ -34208,6 +34133,27 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  RegionInstanceGroupManagersApplyUpdatesRequest:
+    description: InstanceGroupManagers.applyUpdatesToInstances
+    properties:
+      instances:
+        description: The list of instances for which we want to apply changes on this managed instance group.
+        items:
+          type: string
+        type: array
+      minimalAction:
+        description: The minimal action that should be perfomed on the instances. By default NONE.
+        enum:
+          - REPLACE
+          - RESTART
+        type: string
+      mostDisruptiveAllowedAction:
+        description: The most disruptive action that allowed to be performed on the instances. By default REPLACE.
+        enum:
+          - REPLACE
+          - RESTART
+        type: string
     type: object
   RegionInstanceGroupManagersDeleteInstancesRequest:
     properties:
@@ -34452,6 +34398,265 @@ definitions:
         $ref: '#/definitions/Policy'
         description: 'REQUIRED: The complete policy to be applied to the ''resource''. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them.'
     type: object
+  Reservation:
+    description: Reservation resource
+    properties:
+      commitment:
+        description: '[OutputOnly] Full or partial url for parent commitment for reservations which are tied to a commitment.'
+        type: string
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional description of this resource. Provide this property when you create the resource.
+        type: string
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#reservation'
+        description: '[Output Only] Type of the resource. Always compute#reservations for reservations.'
+        type: string
+      name:
+        description: 'The name of the resource, provided by the client when initially creating the resource. The resource name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.'
+        pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined fully-qualified URL for this resource.'
+        type: string
+      specificReservation:
+        $ref: '#/definitions/AllocationSpecificSKUReservation'
+        description: Reservation for instances with specific machine shapes.
+      specificReservationRequired:
+        description: 'Indicates whether the reservation can be consumed by VMs with "any reservation" defined. If the field is set, then only VMs that target the reservation by name using --reservation-affinity can consume this reservation.'
+        type: boolean
+      zone:
+        description: 'Zone in which the reservation resides, must be provided if reservation is created with commitment creation.'
+        type: string
+    type: object
+  ReservationAffinity:
+    description: AllocationAffinity is the configuration of desired allocation which this instance could take capacity from.
+    properties:
+      consumeReservationType:
+        enum:
+          - ANY_RESERVATION
+          - NO_RESERVATION
+          - SPECIFIC_RESERVATION
+          - UNSPECIFIED
+        type: string
+      key:
+        description: Corresponds to the label key of reservation resource.
+        type: string
+      values:
+        description: Corresponds to the label values of reservation resource.
+        items:
+          type: string
+        type: array
+    type: object
+  ReservationAggregatedList:
+    description: Contains a list of reservations.
+    properties:
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        type: string
+      items:
+        additionalProperties:
+          $ref: '#/definitions/ReservationsScopedList'
+          description: Name of the scope containing this set of reservations.
+        description: A list of Allocation resources.
+        type: object
+      kind:
+        default: 'compute#reservationAggregatedList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  ReservationList:
+    properties:
+      id:
+        description: '[Output Only] The unique identifier for the resource. This identifier is defined by the server.'
+        type: string
+      items:
+        description: '[Output Only] A list of Allocation resources.'
+        items:
+          $ref: '#/definitions/Reservation'
+        type: array
+      kind:
+        default: 'compute#reservationList'
+        description: '[Output Only] Type of resource.Always compute#reservationsList for listsof reservations'
+        type: string
+      nextPageToken:
+        description: '[Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.'
+        type: string
+      selfLink:
+        description: '[Output Only] Server-defined URL for this resource.'
+        type: string
+      warning:
+        description: '[Output Only] Informational warning message.'
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
+  ReservationsResizeRequest:
+    properties:
+      specificSkuCount:
+        description: Number of allocated resources can be resized with minimum = 1 and maximum = 1000.
+        format: int64
+        type: string
+    type: object
+  ReservationsScopedList:
+    properties:
+      reservations:
+        description: A list of reservations contained in this scope.
+        items:
+          $ref: '#/definitions/Reservation'
+        type: array
+      warning:
+        description: Informational warning which replaces the list of reservations when the list is empty.
+        properties:
+          code:
+            description: '[Output Only] A warning code, if applicable. For example, Compute Engine returns NO_RESULTS_ON_PAGE if there are no results in the response.'
+            enum:
+              - CLEANUP_FAILED
+              - DEPRECATED_RESOURCE_USED
+              - DEPRECATED_TYPE_USED
+              - DISK_SIZE_LARGER_THAN_IMAGE_SIZE
+              - EXPERIMENTAL_TYPE_USED
+              - EXTERNAL_API_WARNING
+              - FIELD_VALUE_OVERRIDEN
+              - INJECTED_KERNELS_DEPRECATED
+              - MISSING_TYPE_DEPENDENCY
+              - NEXT_HOP_ADDRESS_NOT_ASSIGNED
+              - NEXT_HOP_CANNOT_IP_FORWARD
+              - NEXT_HOP_INSTANCE_NOT_FOUND
+              - NEXT_HOP_INSTANCE_NOT_ON_NETWORK
+              - NEXT_HOP_NOT_RUNNING
+              - NOT_CRITICAL_ERROR
+              - NO_RESULTS_ON_PAGE
+              - REQUIRED_TOS_AGREEMENT
+              - RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING
+              - RESOURCE_NOT_DELETED
+              - SCHEMA_VALIDATION_IGNORED
+              - SINGLE_INSTANCE_PROPERTY_TEMPLATE
+              - UNDECLARED_PROPERTIES
+              - UNREACHABLE
+            type: string
+          data:
+            description: |-
+              [Output Only] Metadata about this warning in key: value format. For example:
+              "data": [ { "key": "scope", "value": "zones/us-east1-d" }
+            items:
+              properties:
+                key:
+                  description: '[Output Only] A key that provides more detail on the warning being returned. For example, for warnings where there are no results in a list request for a particular zone, this key might be scope and the key value might be the zone name. Other examples might be a key indicating a deprecated resource and a suggested replacement, or a warning about invalid network settings (for example, if an instance attempts to perform IP forwarding but is not enabled for IP forwarding).'
+                  type: string
+                value:
+                  description: '[Output Only] A warning data value corresponding to the key.'
+                  type: string
+              type: object
+            type: array
+          message:
+            description: '[Output Only] A human-readable description of the warning code.'
+            type: string
+        type: object
+    type: object
   ResourceCommitment:
     description: Commitment for a particular resource (a Commitment is composed of one or more of these).
     properties:
@@ -34639,14 +34844,14 @@ definitions:
     description: Time window specified for daily operations.
     properties:
       daysInCycle:
-        description: Allows to define schedule that runs every nth day of the month.
+        description: Defines a schedule that runs every nth day of the month.
         format: int32
         type: integer
       duration:
-        description: '[Output only] Duration of the time window, automatically chosen to be smallest possible in the given scenario.'
+        description: '[Output only] A predetermined duration for the window, automatically chosen to be the smallest possible in the given scenario.'
         type: string
       startTime:
-        description: 'Time within the window to start the operations. It must be in format "HH:MM", where HH : [00-23] and MM : [00-00] GMT.'
+        description: 'Start time of the window. This must be in UTC format that resolves to one of 00:00, 04:00, 08:00, 12:00, 16:00, or 20:00. For example, both 13:00-5 and 08:00 are valid.'
         type: string
     type: object
   ResourcePolicyHourlyCycle:
@@ -38805,6 +39010,62 @@ definitions:
             type: string
         type: object
     type: object
+  VpnGatewayStatus:
+    properties:
+      vpnConnections:
+        description: List of VPN connection for this VpnGateway.
+        items:
+          $ref: '#/definitions/VpnGatewayStatusVpnConnection'
+        type: array
+    type: object
+  VpnGatewayStatusHighAvailabilityRequirementState:
+    description: Describes the high availability requirement state for the VPN connection between this Cloud VPN gateway and a peer gateway.
+    properties:
+      state:
+        description: 'Indicates the high availability requirement state for the VPN connection. Valid values are CONNECTION_REDUNDANCY_MET, CONNECTION_REDUNDANCY_NOT_MET.'
+        enum:
+          - CONNECTION_REDUNDANCY_MET
+          - CONNECTION_REDUNDANCY_NOT_MET
+        type: string
+      unsatisfiedReason:
+        description: Indicates the reason why the VPN connection does not meet the high availability redundancy criteria/requirement. Valid values is INCOMPLETE_TUNNELS_COVERAGE.
+        enum:
+          - INCOMPLETE_TUNNELS_COVERAGE
+        type: string
+    type: object
+  VpnGatewayStatusTunnel:
+    description: Contains some information about a VPN tunnel.
+    properties:
+      localGatewayInterface:
+        description: The VPN gateway interface this VPN tunnel is associated with.
+        format: uint32
+        type: integer
+      peerGatewayInterface:
+        description: 'The peer gateway interface this VPN tunnel is connected to, the peer gateway could either be an external VPN gateway or GCP VPN gateway.'
+        format: uint32
+        type: integer
+      tunnelUrl:
+        description: URL reference to the VPN tunnel.
+        type: string
+    type: object
+  VpnGatewayStatusVpnConnection:
+    description: A VPN connection contains all VPN tunnels connected from this VpnGateway to the same peer gateway. The peer gateway could either be a external VPN gateway or GCP VPN gateway.
+    properties:
+      peerExternalGateway:
+        description: URL reference to the peer external VPN gateways to which the VPN tunnels in this VPN connection are connected. This field is mutually exclusive with peer_gcp_gateway.
+        type: string
+      peerGcpGateway:
+        description: URL reference to the peer side VPN gateways to which the VPN tunnels in this VPN connection are connected. This field is mutually exclusive with peer_gcp_gateway.
+        type: string
+      state:
+        $ref: '#/definitions/VpnGatewayStatusHighAvailabilityRequirementState'
+        description: HighAvailabilityRequirementState for the VPN connection.
+      tunnels:
+        description: List of VPN tunnels that are in this VPN connection.
+        items:
+          $ref: '#/definitions/VpnGatewayStatusTunnel'
+        type: array
+    type: object
   VpnGatewayVpnGatewayInterface:
     description: A VPN gateway interface.
     properties:
@@ -38815,6 +39076,11 @@ definitions:
       ipAddress:
         description: The external IP address for this VPN gateway interface.
         type: string
+    type: object
+  VpnGatewaysGetStatusResponse:
+    properties:
+      result:
+        $ref: '#/definitions/VpnGatewayStatus'
     type: object
   VpnGatewaysScopedList:
     properties:

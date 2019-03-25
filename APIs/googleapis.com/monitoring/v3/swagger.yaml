@@ -149,19 +149,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
   '/v3/{name}':
     delete:
-      description: Deletes an existing group.
-      operationId: monitoring.projects.groups.delete
+      description: Deletes a metric descriptor. Only user-created custom metrics can be deleted.
+      operationId: monitoring.projects.metricDescriptors.delete
       parameters:
-        - description: 'The group to delete. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+        - description: 'If true, the notification channel will be deleted regardless of its use in alert policies (the policies will be updated to remove the channel). If false, channels that are still referenced by an existing alerting policy will fail to be deleted in a delete operation.'
+          in: query
+          name: force
+          type: boolean
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example of {metric_id} is: "custom.googleapis.com/my_test_metric".'
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'If this field is true, then the request means to delete a group with all its descendants. Otherwise, the request means to delete a group only when it has no descendants. The default value is false.'
-          in: query
-          name: recursive
-          type: boolean
       responses:
         '200':
           description: Successful response
@@ -175,10 +175,10 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a single group.
-      operationId: monitoring.projects.groups.get
+      description: Gets a single metric descriptor. This method does not require a Stackdriver account.
+      operationId: monitoring.projects.metricDescriptors.get
       parameters:
-        - description: 'The group to retrieve. The format is "projects/{project_id_or_number}/groups/{group_id}".'
+        - description: 'The metric descriptor on which to execute the request. The format is "projects/{project_id_or_number}/metricDescriptors/{metric_id}". An example value of {metric_id} is "compute.googleapis.com/instance/disk/read_bytes_count".'
           in: path
           name: name
           required: true
@@ -188,7 +188,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Group'
+            $ref: '#/definitions/MetricDescriptor'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -213,20 +213,26 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/upload_protocol'
     patch:
-      description: Updates an uptime check configuration. You can either replace the entire configuration with a new one or replace only certain fields in the current configuration by specifying the fields to be updated via "updateMask". Returns the updated configuration.
-      operationId: monitoring.projects.uptimeCheckConfigs.patch
+      description: Updates an alerting policy. You can either replace the entire policy with a new one or replace only certain fields in the current alerting policy by specifying the fields to be updated via updateMask. Returns the updated alerting policy.
+      operationId: monitoring.projects.alertPolicies.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/UptimeCheckConfig'
-        - description: 'A unique resource name for this UptimeCheckConfig. The format is:projects/[PROJECT_ID]/uptimeCheckConfigs/[UPTIME_CHECK_ID].This field should be omitted when creating the uptime check configuration; on create, the resource name is assigned by the server and included in the response.'
+            $ref: '#/definitions/AlertPolicy'
+        - description: |-
+            Required if the policy exists. The resource name for this policy. The syntax is:
+            projects/[PROJECT_ID]/alertPolicies/[ALERT_POLICY_ID]
+            [ALERT_POLICY_ID] is assigned by Stackdriver Monitoring when the policy is created. When calling the alertPolicies.create method, do not include the name field in the alerting policy passed as part of the request.
           in: path
           name: name
           required: true
           type: string
           x-reservedExpansion: true
-        - description: 'Optional. If present, only the listed fields in the current uptime check configuration are updated with values from the new configuration. If this field is empty, then the current configuration is completely replaced with the new configuration.'
+        - description: |-
+            Optional. A list of alerting policy field names. If this field is not empty, each listed field in the existing alerting policy is set to the value of the corresponding field in the supplied policy (alert_policy), or to the field's default value if the field is not in the supplied alerting policy. Fields not listed retain their previous value.Examples of valid field masks include display_name, documentation, documentation.content, documentation.mime_type, user_labels, user_label.nameofkey, enabled, conditions, combiner, etc.If this field is empty, then the supplied alerting policy replaces the existing policy. It is the same as deleting the existing policy and adding the supplied policy, except for the following:
+            The new policy will have the same [ALERT_POLICY_ID] as the former policy. This gives you continuity with the former policy in your notifications and incidents.
+            Conditions in the new policy will keep their former [CONDITION_ID] if the supplied condition includes the name field with that [CONDITION_ID]. If the supplied condition omits the name field, then a new [CONDITION_ID] is created.
           in: query
           name: updateMask
           type: string
@@ -234,7 +240,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/UptimeCheckConfig'
+            $ref: '#/definitions/AlertPolicy'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -2097,7 +2103,7 @@ definitions:
     description: 'A NotificationChannel is a medium through which an alert is delivered when a policy violation is detected. Examples of channels include email, SMS, and third-party messaging applications. Fields containing sensitive information like authentication tokens or contact info are only partially populated on retrieval.'
     properties:
       description:
-        description: 'An optional human-readable description of this notification channel. This description may provide additional details, beyond the display name, for the channel. This may not exceeed 1024 Unicode characters.'
+        description: 'An optional human-readable description of this notification channel. This description may provide additional details, beyond the display name, for the channel. This may not exceed 1024 Unicode characters.'
         type: string
       displayName:
         description: 'An optional human-readable name for this notification channel. It is recommended that you specify a non-empty and unique name in order to make it easier to identify the channels in your project, though this is not enforced. The display name is limited to 512 Unicode characters.'

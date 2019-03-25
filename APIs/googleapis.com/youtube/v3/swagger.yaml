@@ -20,7 +20,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest'
       version: v1
@@ -3216,9 +3216,11 @@ paths:
         - video/rtp-enc-aescm128
         - video/rtploopback
         - video/rtx
+        - video/smpte291
         - video/smpte292m
         - video/ulpfec
         - video/vc1
+        - video/vc2
         - video/vnd.cctv
         - video/vnd.dece.hd
         - video/vnd.dece.mobile
@@ -3243,6 +3245,7 @@ paths:
         - video/vnd.mpegurl
         - video/vnd.ms-playready.media.pyv
         - video/vnd.nokia.interleaved-multimedia
+        - video/vnd.nokia.mp4vr
         - video/vnd.nokia.videovoip
         - video/vnd.objectvideo
         - video/vnd.radgamettools.bink

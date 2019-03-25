@@ -1976,6 +1976,9 @@ definitions:
       splitHealthChecks:
         description: 'Boolean value indicating if split health checks should be used instead of the legacy health checks. At an app.yaml level, this means defaulting to ''readiness_check'' and ''liveness_check'' values instead of ''health_check'' ones. Once the legacy ''health_check'' behavior is deprecated, and this value is always true, this setting can be removed.'
         type: boolean
+      useContainerOptimizedOs:
+        description: 'If true, use Container-Optimized OS (https://cloud.google.com/container-optimized-os/) base image for VMs, rather than a base Debian image.'
+        type: boolean
     type: object
   FileInfo:
     description: Single source file that is part of the version to be deployed. Each source file that is deployed must be specified separately.
@@ -2906,6 +2909,9 @@ definitions:
       vm:
         description: Whether to deploy this version in a container on a virtual machine.
         type: boolean
+      vpcAccessConnector:
+        $ref: '#/definitions/VpcAccessConnector'
+        description: Enables VPC connectivity for standard apps.
       zones:
         description: The Google Compute Engine zones that are supported by this version in the App Engine flexible environment. Deprecated.
         items:
@@ -2924,6 +2930,13 @@ definitions:
         type: number
       volumeType:
         description: 'Underlying volume type, e.g. ''tmpfs''.'
+        type: string
+    type: object
+  VpcAccessConnector:
+    description: VPC access connector specification.
+    properties:
+      name:
+        description: Full Serverless VPC Access Connector name e.g. /projects/my-project/locations/us-central1/connectors/c1.
         type: string
     type: object
   ZipInfo:

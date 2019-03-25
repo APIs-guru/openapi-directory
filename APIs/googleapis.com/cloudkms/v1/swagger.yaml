@@ -863,7 +863,7 @@ paths:
         Gets the access control policy for a resource.
         Returns an empty policy if the resource exists and does not have a policy
         set.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.getIamPolicy
+      operationId: cloudkms.projects.locations.keyRings.importJobs.getIamPolicy
       parameters:
         - description: |-
             REQUIRED: The resource for which the policy is being requested.
@@ -914,7 +914,7 @@ paths:
       description: |-
         Sets the access control policy on the specified resource. Replaces any
         existing policy.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.setIamPolicy
+      operationId: cloudkms.projects.locations.keyRings.importJobs.setIamPolicy
       parameters:
         - in: body
           name: body
@@ -962,7 +962,7 @@ paths:
         Note: This operation is designed to be used for building permission-aware
         UIs and command-line tools, not for authorization checking. This operation
         may "fail open" without warning.
-      operationId: cloudkms.projects.locations.keyRings.cryptoKeys.testIamPermissions
+      operationId: cloudkms.projects.locations.keyRings.importJobs.testIamPermissions
       parameters:
         - in: body
           name: body

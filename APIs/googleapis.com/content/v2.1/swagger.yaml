@@ -206,6 +206,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
+      description: 'Deletes, fetches, gets, inserts and updates multiple datafeeds in a single request.'
       operationId: content.datafeeds.custombatch
       parameters:
         - in: body
@@ -232,6 +233,7 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
+      description: Gets multiple Merchant Center datafeed statuses in a single request.
       operationId: content.datafeedstatuses.custombatch
       parameters:
         - in: body
@@ -1875,7 +1877,9 @@ paths:
       - $ref: '#/parameters/quotaUser'
       - $ref: '#/parameters/userIp'
     post:
-      description: Notifies that item return and refund was handled directly by merchant outside of Google payments processing (e.g. cash refund done in store).
+      description: |-
+        Notifies that item return and refund was handled directly by merchant outside of Google payments processing (e.g. cash refund done in store).
+        Note: We recommend calling the returnrefundlineitem method to refund in-store returns. We will issue the refund directly to the customer. This helps to prevent possible differences arising between merchant and Google transaction records. We also recommend having the point of sale system communicate with Google to ensure that customers do not receive a double refund by first refunding via Google then via an in-store return.
       operationId: content.orders.instorerefundlineitem
       parameters:
         - in: body
@@ -4980,7 +4984,7 @@ definitions:
         description: '[required] The ID of the operation, unique across all operations for a given order.'
         type: string
       shipmentGroupId:
-        description: '[required] ID of the shipment group.'
+        description: '[required] ID of the shipment group. It is assigned by the merchant in the shipLineItems method and is used to group multiple line items that have the same kind of shipping charges.'
         type: string
     type: object
   OrderinvoicesCreateChargeInvoiceResponse:
@@ -5442,7 +5446,10 @@ definitions:
   OrdersUpdateLineItemShippingDetailsRequest:
     properties:
       deliverByDate:
-        description: 'Updated delivery by date, in ISO 8601 format. If not specified only ship by date is updated.'
+        description: |-
+          Updated delivery by date, in ISO 8601 format. If not specified only ship by date is updated.
+
+          Provided date should be within 1 year timeframe and can not be a date in the past.
         type: string
       lineItemId:
         description: The ID of the line item to set metadata. Either lineItemId or productId is required.
@@ -5454,7 +5461,10 @@ definitions:
         description: The ID of the product to set metadata. This is the REST ID used in the products service. Either lineItemId or productId is required.
         type: string
       shipByDate:
-        description: 'Updated ship by date, in ISO 8601 format. If not specified only deliver by date is updated.'
+        description: |-
+          Updated ship by date, in ISO 8601 format. If not specified only deliver by date is updated.
+
+          Provided date should be within 1 year timeframe and can not be a date in the past.
         type: string
     type: object
   OrdersUpdateLineItemShippingDetailsResponse:
@@ -6626,7 +6636,7 @@ definitions:
           $ref: '#/definitions/ShipmentInvoiceLineItemInvoice'
         type: array
       shipmentGroupId:
-        description: '[required] ID of the shipment group.'
+        description: '[required] ID of the shipment group. It is assigned by the merchant in the shipLineItems method and is used to group multiple line items that have the same kind of shipping charges.'
         type: string
     type: object
   ShipmentInvoiceLineItemInvoice:
@@ -6638,7 +6648,7 @@ definitions:
         description: ID of the product. This is the REST ID used in the products service. Either lineItemId or productId must be set.
         type: string
       shipmentUnitIds:
-        description: '[required] Unit IDs to define specific units within the line item.'
+        description: '[required] The shipment unit ID is assigned by the merchant and defines individual quantities within a line item. The same ID can be assigned to units that are the same while units that differ must be assigned a different ID (for example: free or promotional units).'
         items:
           type: string
         type: array

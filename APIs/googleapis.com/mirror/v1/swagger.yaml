@@ -17,7 +17,7 @@ info:
   x-origin:
     - converter:
         url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.18
+        version: 2.7.31
       format: google
       url: 'https://www.googleapis.com/discovery/v1/apis/mirror/v1/rest'
       version: v1
@@ -489,6 +489,7 @@ paths:
         - audio/32kadpcm
         - audio/3gpp
         - audio/3gpp2
+        - audio/aac
         - audio/ac3
         - audio/adpcm
         - audio/amr
@@ -593,9 +594,11 @@ paths:
         - audio/t140c
         - audio/t38
         - audio/telephone-event
+        - audio/tetra_acelp
         - audio/tone
         - audio/uemclip
         - audio/ulpfec
+        - audio/usac
         - audio/vdvi
         - audio/vmr-wb
         - audio/vnd.3gpp.iufp
@@ -620,6 +623,7 @@ paths:
         - audio/vnd.dra
         - audio/vnd.dts
         - audio/vnd.dts.hd
+        - audio/vnd.dts.uhd
         - audio/vnd.dvb.file
         - audio/vnd.everad.plj
         - audio/vnd.hns.audio
@@ -659,7 +663,10 @@ paths:
         - audio/x-tta
         - audio/x-wav
         - audio/xm
+        - image/aces
         - image/apng
+        - image/avci
+        - image/avcs
         - image/bmp
         - image/cgm
         - image/dicom-rle
@@ -667,6 +674,10 @@ paths:
         - image/fits
         - image/g3fax
         - image/gif
+        - image/heic
+        - image/heic-sequence
+        - image/heif
+        - image/heif-sequence
         - image/ief
         - image/jls
         - image/jp2
@@ -777,9 +788,11 @@ paths:
         - video/rtp-enc-aescm128
         - video/rtploopback
         - video/rtx
+        - video/smpte291
         - video/smpte292m
         - video/ulpfec
         - video/vc1
+        - video/vc2
         - video/vnd.cctv
         - video/vnd.dece.hd
         - video/vnd.dece.mobile
@@ -804,6 +817,7 @@ paths:
         - video/vnd.mpegurl
         - video/vnd.ms-playready.media.pyv
         - video/vnd.nokia.interleaved-multimedia
+        - video/vnd.nokia.mp4vr
         - video/vnd.nokia.videovoip
         - video/vnd.objectvideo
         - video/vnd.radgamettools.bink
@@ -930,6 +944,7 @@ paths:
         - audio/32kadpcm
         - audio/3gpp
         - audio/3gpp2
+        - audio/aac
         - audio/ac3
         - audio/adpcm
         - audio/amr
@@ -1034,9 +1049,11 @@ paths:
         - audio/t140c
         - audio/t38
         - audio/telephone-event
+        - audio/tetra_acelp
         - audio/tone
         - audio/uemclip
         - audio/ulpfec
+        - audio/usac
         - audio/vdvi
         - audio/vmr-wb
         - audio/vnd.3gpp.iufp
@@ -1061,6 +1078,7 @@ paths:
         - audio/vnd.dra
         - audio/vnd.dts
         - audio/vnd.dts.hd
+        - audio/vnd.dts.uhd
         - audio/vnd.dvb.file
         - audio/vnd.everad.plj
         - audio/vnd.hns.audio
@@ -1100,7 +1118,10 @@ paths:
         - audio/x-tta
         - audio/x-wav
         - audio/xm
+        - image/aces
         - image/apng
+        - image/avci
+        - image/avcs
         - image/bmp
         - image/cgm
         - image/dicom-rle
@@ -1108,6 +1129,10 @@ paths:
         - image/fits
         - image/g3fax
         - image/gif
+        - image/heic
+        - image/heic-sequence
+        - image/heif
+        - image/heif-sequence
         - image/ief
         - image/jls
         - image/jp2
@@ -1218,9 +1243,11 @@ paths:
         - video/rtp-enc-aescm128
         - video/rtploopback
         - video/rtx
+        - video/smpte291
         - video/smpte292m
         - video/ulpfec
         - video/vc1
+        - video/vc2
         - video/vnd.cctv
         - video/vnd.dece.hd
         - video/vnd.dece.mobile
@@ -1245,6 +1272,7 @@ paths:
         - video/vnd.mpegurl
         - video/vnd.ms-playready.media.pyv
         - video/vnd.nokia.interleaved-multimedia
+        - video/vnd.nokia.mp4vr
         - video/vnd.nokia.videovoip
         - video/vnd.objectvideo
         - video/vnd.radgamettools.bink
@@ -1330,6 +1358,7 @@ paths:
         - audio/32kadpcm
         - audio/3gpp
         - audio/3gpp2
+        - audio/aac
         - audio/ac3
         - audio/adpcm
         - audio/amr
@@ -1434,9 +1463,11 @@ paths:
         - audio/t140c
         - audio/t38
         - audio/telephone-event
+        - audio/tetra_acelp
         - audio/tone
         - audio/uemclip
         - audio/ulpfec
+        - audio/usac
         - audio/vdvi
         - audio/vmr-wb
         - audio/vnd.3gpp.iufp
@@ -1461,6 +1492,7 @@ paths:
         - audio/vnd.dra
         - audio/vnd.dts
         - audio/vnd.dts.hd
+        - audio/vnd.dts.uhd
         - audio/vnd.dvb.file
         - audio/vnd.everad.plj
         - audio/vnd.hns.audio
@@ -1500,7 +1532,10 @@ paths:
         - audio/x-tta
         - audio/x-wav
         - audio/xm
+        - image/aces
         - image/apng
+        - image/avci
+        - image/avcs
         - image/bmp
         - image/cgm
         - image/dicom-rle
@@ -1508,6 +1543,10 @@ paths:
         - image/fits
         - image/g3fax
         - image/gif
+        - image/heic
+        - image/heic-sequence
+        - image/heif
+        - image/heif-sequence
         - image/ief
         - image/jls
         - image/jp2
@@ -1618,9 +1657,11 @@ paths:
         - video/rtp-enc-aescm128
         - video/rtploopback
         - video/rtx
+        - video/smpte291
         - video/smpte292m
         - video/ulpfec
         - video/vc1
+        - video/vc2
         - video/vnd.cctv
         - video/vnd.dece.hd
         - video/vnd.dece.mobile
@@ -1645,6 +1686,7 @@ paths:
         - video/vnd.mpegurl
         - video/vnd.ms-playready.media.pyv
         - video/vnd.nokia.interleaved-multimedia
+        - video/vnd.nokia.mp4vr
         - video/vnd.nokia.videovoip
         - video/vnd.objectvideo
         - video/vnd.radgamettools.bink

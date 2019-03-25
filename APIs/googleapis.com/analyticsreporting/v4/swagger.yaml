@@ -104,6 +104,7 @@ parameters:
     type: string
 tags:
   - name: reports
+  - name: userActivity
 paths:
   '/v4/reports:batchGet':
     parameters:
@@ -138,7 +139,137 @@ paths:
             - 'https://www.googleapis.com/auth/analytics.readonly'
       tags:
         - reports
+  '/v4/userActivity:search':
+    parameters:
+      - $ref: '#/parameters/$.xgafv'
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/upload_protocol'
+    post:
+      description: Returns User Activity data.
+      operationId: analyticsreporting.userActivity.search
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/SearchUserActivityRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/SearchUserActivityResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics'
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - userActivity
 definitions:
+  Activity:
+    description: |-
+      An Activity represents data for an activity of a user. Note that an
+      Activity is different from a hit.
+      A hit might result in multiple Activity's. For example, if a hit
+      includes a transaction and a goal completion, there will be two
+      Activity protos for this hit, one for ECOMMERCE and one for GOAL.
+      Conversely, multiple hits can also construct one Activity. In classic
+      e-commerce, data for one transaction might be sent through multiple hits.
+      These hits will be merged into one ECOMMERCE Activity.
+    properties:
+      activityTime:
+        description: Timestamp of the activity.
+        format: google-datetime
+        type: string
+      activityType:
+        description: Type of this activity.
+        enum:
+          - ACTIVITY_TYPE_UNSPECIFIED
+          - PAGEVIEW
+          - SCREENVIEW
+          - GOAL
+          - ECOMMERCE
+          - EVENT
+        type: string
+      appview:
+        $ref: '#/definitions/ScreenviewData'
+        description: This will be set if `activity_type` equals `SCREEN_VIEW`.
+      campaign:
+        description: |-
+          For manual campaign tracking, it is the value of the utm_campaign campaign
+          tracking parameter. For AdWords autotagging, it is the name(s) of the
+          online ad campaign(s) you use for the property. If you use neither, its
+          value is (not set).
+        type: string
+      channelGrouping:
+        description: |-
+          The Channel Group associated with an end user's session for this View
+          (defined by the View's Channel Groupings).
+        type: string
+      customDimension:
+        description: A list of all custom dimensions associated with this activity.
+        items:
+          $ref: '#/definitions/CustomDimension'
+        type: array
+      ecommerce:
+        $ref: '#/definitions/EcommerceData'
+        description: This will be set if `activity_type` equals `ECOMMERCE`.
+      event:
+        $ref: '#/definitions/EventData'
+        description: |-
+          This field contains all the details pertaining to an event and will be
+          set if `activity_type` equals `EVENT`.
+      goals:
+        $ref: '#/definitions/GoalSetData'
+        description: |-
+          This field contains a list of all the goals that were reached in this
+          activity when `activity_type` equals `GOAL`.
+      hostname:
+        description: The hostname from which the tracking request was made.
+        type: string
+      keyword:
+        description: |-
+          For manual campaign tracking, it is the value of the utm_term campaign
+          tracking parameter. For AdWords traffic, it contains the best matching
+          targeting criteria. For the display network, where multiple targeting
+          criteria could have caused the ad to show up, it returns the best matching
+          targeting criteria as selected by Ads. This could be display_keyword, site
+          placement, boomuserlist, user_interest, age, or gender. Otherwise its value
+          is (not set).
+        type: string
+      landingPagePath:
+        description: 'The first page in users'' sessions, or the landing page.'
+        type: string
+      medium:
+        description: |-
+          The type of referrals. For manual campaign tracking, it is the value of the
+          utm_medium campaign tracking parameter. For AdWords autotagging, it is cpc.
+          If users came from a search engine detected by Google Analytics, it is
+          organic. If the referrer is not a search engine, it is referral. If users
+          came directly to the property and document.referrer is empty, its value is
+          (none).
+        type: string
+      pageview:
+        $ref: '#/definitions/PageviewData'
+        description: |-
+          This will be set if `activity_type` equals `PAGEVIEW`. This field
+          contains all the details about the visitor and the page that was visited.
+      source:
+        description: |-
+          The source of referrals. For manual campaign tracking, it is the value of
+          the utm_source campaign tracking parameter. For AdWords autotagging, it is
+          google. If you use neither, it is the domain of the source
+          (e.g., document.referrer) referring the users. It may also contain a port
+          address. If users arrived without a referrer, its value is (direct).
+        type: string
+    type: object
   Cohort:
     description: |-
       Defines a cohort. A cohort is a group of users who share a common
@@ -240,6 +371,19 @@ definitions:
       metricHeader:
         $ref: '#/definitions/MetricHeader'
         description: Metric headers for the metrics in the response.
+    type: object
+  CustomDimension:
+    description: Custom dimension.
+    properties:
+      index:
+        description: Slot number of custom dimension.
+        format: int32
+        type: integer
+      value:
+        description: |-
+          Value of the custom dimension. Default value (i.e. empty string) indicates
+          clearing sesion/visitor scope custom dimension value.
+        type: string
     type: object
   DateRange:
     description: |-
@@ -393,6 +537,59 @@ definitions:
         $ref: '#/definitions/SegmentDefinition'
         description: User Segment to select users to include in the segment.
     type: object
+  EcommerceData:
+    description: E-commerce details associated with the user activity.
+    properties:
+      actionType:
+        description: Action associated with this e-commerce action.
+        enum:
+          - UNKNOWN
+          - CLICK
+          - DETAILS_VIEW
+          - ADD_TO_CART
+          - REMOVE_FROM_CART
+          - CHECKOUT
+          - PAYMENT
+          - REFUND
+          - CHECKOUT_OPTION
+        type: string
+      ecommerceType:
+        description: The type of this e-commerce activity.
+        enum:
+          - ECOMMERCE_TYPE_UNSPECIFIED
+          - CLASSIC
+          - ENHANCED
+        type: string
+      products:
+        description: Details of the products in this transaction.
+        items:
+          $ref: '#/definitions/ProductData'
+        type: array
+      transaction:
+        $ref: '#/definitions/TransactionData'
+        description: Transaction details of this e-commerce action.
+    type: object
+  EventData:
+    description: Represents all the details pertaining to an event.
+    properties:
+      eventAction:
+        description: 'Type of interaction with the object. Eg: ''play''.'
+        type: string
+      eventCategory:
+        description: 'The object on the page that was interacted with. Eg: ''Video''.'
+        type: string
+      eventCount:
+        description: Number of such events in this activity.
+        format: int64
+        type: string
+      eventLabel:
+        description: Label attached with the event.
+        type: string
+      eventValue:
+        description: Numeric value associated with the event.
+        format: int64
+        type: string
+    type: object
   GetReportsRequest:
     description: The batch request containing multiple report request.
     properties:
@@ -435,6 +632,46 @@ definitions:
       resourceQuotasRemaining:
         $ref: '#/definitions/ResourceQuotasRemaining'
         description: The amount of resource quota remaining for the property.
+    type: object
+  GoalData:
+    description: Represents all the details pertaining to a goal.
+    properties:
+      goalCompletionLocation:
+        description: URL of the page where this goal was completed.
+        type: string
+      goalCompletions:
+        description: Total number of goal completions in this activity.
+        format: int64
+        type: string
+      goalIndex:
+        description: This identifies the goal as configured for the profile.
+        format: int32
+        type: integer
+      goalName:
+        description: Name of the goal.
+        type: string
+      goalPreviousStep1:
+        description: URL of the page one step prior to the goal completion.
+        type: string
+      goalPreviousStep2:
+        description: URL of the page two steps prior to the goal completion.
+        type: string
+      goalPreviousStep3:
+        description: URL of the page three steps prior to the goal completion.
+        type: string
+      goalValue:
+        description: Value in this goal.
+        format: double
+        type: number
+    type: object
+  GoalSetData:
+    description: Represents a set of goals that were reached in an activity.
+    properties:
+      goals:
+        description: All the goals that were reached in the current activity.
+        items:
+          $ref: '#/definitions/GoalData'
+        type: array
     type: object
   Metric:
     description: |-
@@ -597,6 +834,16 @@ definitions:
           - DESCENDING
         type: string
     type: object
+  PageviewData:
+    description: Represents details collected when the visitor views a page.
+    properties:
+      pagePath:
+        description: The URL of the page that the visitor viewed.
+        type: string
+      pageTitle:
+        description: The title of the page that the visitor viewed.
+        type: string
+    type: object
   Pivot:
     description: |-
       The Pivot describes the pivot section in the request.
@@ -694,6 +941,26 @@ definitions:
         items:
           type: string
         type: array
+    type: object
+  ProductData:
+    description: Details of the products in an e-commerce transaction.
+    properties:
+      itemRevenue:
+        description: The total revenue from purchased product items.
+        format: double
+        type: number
+      productName:
+        description: |-
+          The product name, supplied by the e-commerce tracking application, for
+          the purchased items.
+        type: string
+      productQuantity:
+        description: Total number of this product units in the transaction.
+        format: int64
+        type: string
+      productSku:
+        description: Unique code that represents the product.
+        type: string
     type: object
   Report:
     description: The data response corresponding to the request.
@@ -965,6 +1232,102 @@ definitions:
         format: int32
         type: integer
     type: object
+  ScreenviewData:
+    properties:
+      appName:
+        description: The application name.
+        type: string
+      mobileDeviceBranding:
+        description: 'Mobile manufacturer or branded name. Eg: "Google", "Apple" etc.'
+        type: string
+      mobileDeviceModel:
+        description: 'Mobile device model. Eg: "Pixel", "iPhone" etc.'
+        type: string
+      screenName:
+        description: The name of the screen.
+        type: string
+    type: object
+  SearchUserActivityRequest:
+    description: 'The request to fetch User Report from Reporting API `userActivity:get` call.'
+    properties:
+      activityTypes:
+        description: |-
+          Set of all activity types being requested. Only acvities matching these
+          types will be returned in the response. If empty, all activies will be
+          returned.
+        items:
+          enum:
+            - ACTIVITY_TYPE_UNSPECIFIED
+            - PAGEVIEW
+            - SCREENVIEW
+            - GOAL
+            - ECOMMERCE
+            - EVENT
+          type: string
+        type: array
+      dateRange:
+        $ref: '#/definitions/DateRange'
+        description: |-
+          Date range for which to retrieve the user activity. If a date range is not
+          provided, the default date range is (startDate: current date - 7 days,
+          endDate: current date - 1 day).
+      pageSize:
+        description: |-
+          Page size is for paging and specifies the maximum number of returned rows.
+          Page size should be > 0. If the value is 0 or if the field isn't specified,
+          the request returns the default of 1000 rows per page.
+        format: int32
+        type: integer
+      pageToken:
+        description: |-
+          A continuation token to get the next page of the results. Adding this to
+          the request will return the rows after the pageToken. The pageToken should
+          be the value returned in the nextPageToken parameter in the response to
+          the [SearchUserActivityRequest](#SearchUserActivityRequest) request.
+        type: string
+      user:
+        $ref: '#/definitions/User'
+        description: |-
+          Required. Unique user Id to query for. Every
+          [SearchUserActivityRequest](#SearchUserActivityRequest) must contain this
+          field.
+      viewId:
+        description: |-
+          Required. The Analytics
+          [view ID](https://support.google.com/analytics/answer/1009618)
+          from which to retrieve data. Every
+          [SearchUserActivityRequest](#SearchUserActivityRequest) must contain the
+          `viewId`.
+        type: string
+    type: object
+  SearchUserActivityResponse:
+    description: 'The response from `userActivity:get` call.'
+    properties:
+      nextPageToken:
+        description: |-
+          This token should be passed to
+          [SearchUserActivityRequest](#SearchUserActivityRequest) to retrieve the
+          next page.
+        type: string
+      sampleRate:
+        description: |-
+          This field represents the
+          [sampling rate](https://support.google.com/analytics/answer/2637192) for
+          the given request and is a number between 0.0 to 1.0. See
+          [developer guide](/analytics/devguides/reporting/core/v4/basics#sampling)
+          for details.
+        format: double
+        type: number
+      sessions:
+        description: 'Each record represents a session (device details, duration, etc).'
+        items:
+          $ref: '#/definitions/UserActivitySession'
+        type: array
+      totalRows:
+        description: Total rows returned by this query (across different pages).
+        format: int32
+        type: integer
+    type: object
   Segment:
     description: |-
       The segment definition, if the report needs to be segmented.
@@ -1172,4 +1535,72 @@ definitions:
         items:
           $ref: '#/definitions/OrFiltersForSegment'
         type: array
+    type: object
+  TransactionData:
+    description: |-
+      Represents details collected when the visitor performs a transaction on the
+      page.
+    properties:
+      transactionId:
+        description: |-
+          The transaction ID, supplied by the e-commerce tracking method, for the
+          purchase in the shopping cart.
+        type: string
+      transactionRevenue:
+        description: The total sale revenue (excluding shipping and tax) of the transaction.
+        format: double
+        type: number
+      transactionShipping:
+        description: Total cost of shipping.
+        format: double
+        type: number
+      transactionTax:
+        description: Total tax for the transaction.
+        format: double
+        type: number
+    type: object
+  User:
+    description: Contains information to identify a particular user uniquely.
+    properties:
+      type:
+        description: |-
+          Type of the user in the request. The field `userId` is associated with this
+          type.
+        enum:
+          - USER_ID_TYPE_UNSPECIFIED
+          - USER_ID
+          - CLIENT_ID
+        type: string
+      userId:
+        description: Unique Id of the user for which the data is being requested.
+        type: string
+    type: object
+  UserActivitySession:
+    description: |-
+      This represents a user session performed on a specific device at a certain
+      time over a period of time.
+    properties:
+      activities:
+        description: Represents a detailed view into each of the activity in this session.
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      dataSource:
+        description: |-
+          The data source of a hit. By default, hits sent from analytics.js are
+          reported as "web" and hits sent from the mobile SDKs are reported as "app".
+          These values can be overridden in the Measurement Protocol.
+        type: string
+      deviceCategory:
+        description: 'The type of device used: "mobile", "tablet" etc.'
+        type: string
+      platform:
+        description: 'Platform on which the activity happened: "android", "ios" etc.'
+        type: string
+      sessionDate:
+        description: Date of this session in ISO-8601 format.
+        type: string
+      sessionId:
+        description: Unique ID of the session.
+        type: string
     type: object

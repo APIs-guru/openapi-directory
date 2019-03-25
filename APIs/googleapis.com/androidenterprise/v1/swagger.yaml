@@ -3829,6 +3829,9 @@ definitions:
       autoInstallPolicy:
         $ref: '#/definitions/AutoInstallPolicy'
         description: The auto-install policy for the product.
+      managedConfiguration:
+        $ref: '#/definitions/ManagedConfiguration'
+        description: The managed configuration for the product.
       productId:
         description: 'The ID of the product. For example, "app:com.google.android.gm".'
         type: string

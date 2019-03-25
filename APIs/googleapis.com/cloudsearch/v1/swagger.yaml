@@ -887,8 +887,8 @@ paths:
           schema:
             $ref: '#/definitions/StartUploadItemRequest'
         - description: |-
-            Name of the Data Source to start a resumable upload.
-            Format: datasources/{source_id}
+            Name of the Item to start a resumable upload.
+            Format: datasources/{source_id}/items/{item_id}.
           in: path
           name: name
           required: true
@@ -1386,7 +1386,10 @@ paths:
         - settings
   /v1/stats/index:
     get:
-      description: Gets indexed item statistics aggreggated across all data sources.
+      description: |-
+        Gets indexed item statistics aggreggated across all data sources. This
+        API only returns statistics for previous dates; it doesn't return
+        statistics for the current day.
       operationId: cloudsearch.stats.getIndex
       parameters:
         - description: Day of month. Must be from 1 to 31 and valid for the year and month.
@@ -1611,10 +1614,9 @@ definitions:
     type: object
   DataSource:
     description: |-
-      Frontend protos implement autoconverters for this message type. If you add
-      fields to this proto, please add corresponding fields to the frontend proto
-      with the same names.
-      LINT.IfChange
+      Datasource is a logical namespace for items to be indexed.
+      All items must belong to a datasource.  This is the prerequisite before
+      items can be indexed into Cloud Search.
     properties:
       disableModifications:
         description: |-
@@ -1654,7 +1656,9 @@ definitions:
           <br />The name is ignored when creating a datasource.
         type: string
       operationIds:
-        description: IDs of the Long Running Operations (LROs) currently running for this schema.
+        description: |-
+          IDs of the Long Running Operations (LROs) currently running for this
+          schema.
         items:
           type: string
         type: array
@@ -2040,14 +2044,17 @@ definitions:
       FacetBucket is currently used only for returning the response object.
     properties:
       count:
-        description: Number of results that match the bucket value.
+        description: |-
+          Number of results that match the bucket value. Counts are only returned
+          for searches when count accuracy is ensured. Can be empty.
         format: int32
         type: integer
       percentage:
         description: |-
           Percent of results that match the bucket value. This value is between
-          (0-100].
-          This may not be accurate and is a best effort estimate.
+          (0-100]. Percentages are returned for all searches, but are an estimate.
+          Because percentages are always returned, you should render percentages
+          instead of counts.
         format: int32
         type: integer
       value:
@@ -2058,6 +2065,13 @@ definitions:
       Specifies operators to return facet results for. There will be one
       FacetResult for every source_name/object_type/operator_name combination.
     properties:
+      numFacetBuckets:
+        description: |-
+          Maximum number of facet buckets that should be returned for this facet.
+          Defaults to 10.
+          Maximum value is 100.
+        format: int32
+        type: integer
       objectType:
         description: |-
           If object_type is set, only those objects of that type will be used to
@@ -2078,7 +2092,7 @@ definitions:
     description: Source specific facet response
     properties:
       buckets:
-        description: FacetBuckets for values in response containing atleast a single result.
+        description: FacetBuckets for values in response containing at least a single result.
         items:
           $ref: '#/definitions/FacetBucket'
         type: array
@@ -3651,7 +3665,8 @@ definitions:
       disableFreshness:
         description: |-
           Whether to use freshness as a ranking signal. By default, freshness is used
-          as a ranking signal.
+          as a ranking signal. Note that this setting is not available in the Admin
+          UI.
         type: boolean
       disablePersonalization:
         description: |-
@@ -3861,7 +3876,9 @@ definitions:
         description: Title of the search result.
         type: string
       url:
-        description: The URL of the result.
+        description: |-
+          The URL of the search result. The URL contains a Google redirect to the
+          actual item.
         type: string
     type: object
   Snippet:
@@ -4019,17 +4036,17 @@ definitions:
     type: object
   Status:
     description: |-
-      The `Status` type defines a logical error model that is suitable for different
-      programming environments, including REST APIs and RPC APIs. It is used by
-      [gRPC](https://github.com/grpc). The error model is designed to be:
+      The `Status` type defines a logical error model that is suitable for
+      different programming environments, including REST APIs and RPC APIs. It is
+      used by [gRPC](https://github.com/grpc). The error model is designed to be:
 
       - Simple to use and understand for most users
       - Flexible enough to meet unexpected needs
 
       # Overview
 
-      The `Status` message contains three pieces of data: error code, error message,
-      and error details. The error code should be an enum value of
+      The `Status` message contains three pieces of data: error code, error
+      message, and error details. The error code should be an enum value of
       google.rpc.Code, but it may accept additional error codes if needed.  The
       error message should be a developer-facing English message that helps
       developers *understand* and *resolve* the error. If a localized user-facing

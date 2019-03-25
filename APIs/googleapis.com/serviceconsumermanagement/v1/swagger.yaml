@@ -106,12 +106,13 @@ paths:
   '/v1/{name}':
     delete:
       description: |-
-        Delete a tenancy unit.  Before the tenancy unit is deleted, there should be
-        no tenant resources in it not in DELETED state.
-        Operation<response: Empty>.
-      operationId: serviceconsumermanagement.services.tenancyUnits.delete
+        Deletes a long-running operation. This method indicates that the client is
+        no longer interested in the operation result. It does not cancel the
+        operation. If the server doesn't support this method, it returns
+        `google.rpc.Code.UNIMPLEMENTED`.
+      operationId: serviceconsumermanagement.operations.delete
       parameters:
-        - description: Name of the tenancy unit to be deleted.
+        - description: The name of the operation resource to be deleted.
           in: path
           name: name
           required: true
@@ -121,12 +122,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/Empty'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - services
+        - operations
     get:
       description: |-
         Gets the latest state of a long-running operation.  Clients can use this
@@ -177,20 +178,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Apply configuration to an existing tenant project.
-        This project must exist in active state and have the original owner
-        account. Caller must have the permission to add a project to the given
-        tenancy unit. Configuration will be applied, but any existing settings on
-        the project will not be modified.
-        Specified policy bindings will be applied. Existing binding will not be
-        modified.
-        Specified services will be activated.   No service will be deactivated.
-        New billing configuration will be applied if specified.
-        Omit billing configuration to keep the existing one.
-        Service account in the project will be created if previously non existing.
-        Specified folder will be ignored, moving tenant project to a different
-        folder is not supported.
-        Operation fails if any of the steps fail, but no rollback of already
+        Apply a configuration to an existing tenant project.
+        This project must exist in an active state and have the original owner
+        account. The caller must have permission to add a project to the given
+        tenancy unit. The configuration is applied, but any existing settings on
+        the project aren't modified.
+        Specified policy bindings are applied. Existing bindings aren't modified.
+        Specified services are activated. No service is deactivated.
+        If specified, new billing configuration is applied.
+        Omit a billing configuration to keep the existing one.
+        A service account in the project is created if previously non existed.
+        The specified folder is ignored, as moving a tenant project to a different
+        folder isn't supported.
+        The operation fails if any of the steps fail, but no rollback of already
         applied configuration changes is attempted.
         Operation<response: Empty>.
       operationId: serviceconsumermanagement.services.tenancyUnits.applyProjectConfig
@@ -231,15 +231,15 @@ paths:
     post:
       description: |-
         Attach an existing project to the tenancy unit as a new tenant
-        resource. The project could be either the tenant project reserved by
-        calling AddTenantProject under tenancy unit for the producer project of
-        service, or from outside.
-        Caller will be checked against the permission as if calling
-        AddTenantProject on the same consumer.
+        resource. The project could either be the tenant project reserved by
+        calling `AddTenantProject` under a tenancy unit of a service producer's
+        project of a managed service, or from a separate project.
+        The caller is checked against a set of permissions as if calling
+        `AddTenantProject` on the same service consumer.
         To trigger the attachement, the targeted tenant project must be in a
-        folder. Please also make sure ServiceConsumerManagement service account is
-        the owner of that project. Note that these two requirements are already met
-        if the project is reserved through AddTenantProject.
+        folder. Make sure the ServiceConsumerManagement service account is
+        the owner of that project. These two requirements are already met
+        if the project is reserved by calling `AddTenantProject`.
         Operation<response: Empty>.
       operationId: serviceconsumermanagement.services.tenancyUnits.attachProject
       parameters:
@@ -247,7 +247,7 @@ paths:
           name: body
           schema:
             $ref: '#/definitions/AttachTenantProjectRequest'
-        - description: Name of the tenancy unit that project will be attached to.
+        - description: Name of the tenancy unit that the project will be attached to.
           in: path
           name: name
           required: true
@@ -325,13 +325,12 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     post:
       description: |-
-        Removes specified project resource identified by tenant resource tag.
-        It will remove project lien with 'TenantManager' origin if that was added.
-        It will then attempt to delete the project. If that operation fails, this
-        method fails.
-        Calls to remove already removed or non-existent tenant project
-        will succeed.
-        After the project has been deleted, or if was already in DELETED state,
+        Removes the specified project resource identified by a tenant resource tag.
+        The method removes the project lien with 'TenantManager' origin if that
+        was added. It then attempts to delete the project. If that operation
+        fails, this method also fails.
+        Calls to remove already removed or non-existent tenant project succeed.
+        After the project has been deleted, or if was already in a DELETED state,
         resource metadata is permanently removed from the tenancy unit.
         Operation<response: Empty>.
       operationId: serviceconsumermanagement.services.tenancyUnits.removeProject
@@ -361,10 +360,11 @@ paths:
   '/v1/{parent}/tenancyUnits':
     get:
       description: |-
-        Find the tenancy unit for a service and consumer.
-        This method should not be used in producers' runtime path, for example
-        finding the tenant project number when creating VMs. Producers should
-        persist the tenant project information after the project is created.
+        Find the tenancy unit for a managed service and service consumer.
+        This method shouldn't be used in a service producer's runtime path, for
+        example to find the tenant project number when creating VMs. Service
+        producers must persist the tenant project's information after the project
+        is created.
       operationId: serviceconsumermanagement.services.tenancyUnits.list
       parameters:
         - description: Filter expression over tenancy resources field. Optional.
@@ -383,12 +383,12 @@ paths:
           name: pageToken
           type: string
         - description: |-
-            Service and consumer. Required.
+            Managed service and service consumer. Required.
             services/{service}/{collection id}/{resource id}
             {collection id} is the cloud resource collection type representing the
             service consumer, for example 'projects', or 'organizations'.
             {resource id} is the consumer numeric id, such as project number: '123456'.
-            {service} the name of a service, for example 'service.googleapis.com'.
+            {service} the name of a service, such as 'service.googleapis.com'.
           in: path
           name: parent
           required: true
@@ -429,8 +429,8 @@ paths:
             {collection id} is the cloud resource collection type representing the
             service consumer, for example 'projects', or 'organizations'.
             {resource id} is the consumer numeric id, such as project number: '123456'.
-            {service} the name of a service, for example 'service.googleapis.com'.
-            Enabled service binding using the new tenancy unit.
+            {service} the name of a managed service, such as 'service.googleapis.com'.
+            Enables service binding using the new tenancy unit.
           in: path
           name: parent
           required: true
@@ -462,10 +462,10 @@ paths:
     post:
       description: |-
         Add a new tenant project to the tenancy unit.
-        There can be at most 512 tenant projects in a tenancy unit.
+        There can be a maximum of 512 tenant projects in a tenancy unit.
         If there are previously failed `AddTenantProject` calls, you might need to
-        call `RemoveTenantProject` first to clean them before you can make another
-        `AddTenantProject` with the same tag.
+        call `RemoveTenantProject` first to resolve them before you can make
+        another call to `AddTenantProject` with the same tag.
         Operation<response: Empty>.
       operationId: serviceconsumermanagement.services.tenancyUnits.addProject
       parameters:
@@ -491,14 +491,13 @@ paths:
         - services
   '/v1/{parent}:search':
     get:
-      description: Search tenancy units for a service.
+      description: Search tenancy units for a managed service.
       operationId: serviceconsumermanagement.services.search
       parameters:
         - description: |-
             The maximum number of results returned by this request. Currently, the
-            default maximum is set to 1000. If page_size is not provided or the size
-            provided is a number larger than 1000, it will be automatically set to
-            1000.
+            default maximum is set to 1000. If `page_size` isn't provided or the size
+            provided is a number larger than 1000, it's automatically set to 1000.
 
             Optional.
           in: query
@@ -529,9 +528,9 @@ paths:
             `tenant_resources.tag` and `tenant_resources.resource`.
 
             For example, to search tenancy units that contain at least one tenant
-            resource with given tag 'xyz', use query `tenant_resources.tag=xyz`.
+            resource with a given tag 'xyz', use the query `tenant_resources.tag=xyz`.
             To search tenancy units that contain at least one tenant resource with
-            given resource name 'projects/123456', use query
+            a given resource name 'projects/123456', use the query
             `tenant_resources.resource=projects/123456`.
 
             Multiple expressions can be joined with `AND`s. Tenancy units must match
@@ -573,7 +572,7 @@ definitions:
       projectConfig:
         $ref: '#/definitions/TenantProjectConfig'
         description: |-
-          Configuration of the new tenant project that will be added to tenancy unit
+          Configuration of the new tenant project to be added to tenancy unit
           resources.
       tag:
         description: Tag of the added project. Must be less than 128 characters. Required.
@@ -667,9 +666,10 @@ definitions:
         type: string
       reservedResource:
         description: |-
-          When attaching a reserved project already in Tenancy Units, this is the
-          tag of tenant resource under the tenancy unit for the service's producer
-          project. The reserved tenant resource must be in active state.
+          When attaching a reserved project already in tenancy units, this is the
+          tag of a tenant resource under the tenancy unit for the managed service's
+          service producer project. The reserved tenant resource must be in an
+          active state.
         type: string
       tag:
         description: |-
@@ -937,7 +937,7 @@ definitions:
         type: array
     type: object
   BillingConfig:
-    description: Describes billing configuration for a new tenant project.
+    description: Describes the billing configuration for a new tenant project.
     properties:
       billingAccount:
         description: |-
@@ -1064,17 +1064,18 @@ definitions:
         type: string
     type: object
   CreateTenancyUnitRequest:
-    description: Request to create a tenancy unit for a consumer of a service.
+    description: Request to create a tenancy unit for a service consumer of a managed service.
     properties:
       tenancyUnitId:
         description: |-
-          Optional producer provided identifier of the tenancy unit.
+          Optional service producer-provided identifier of the tenancy unit.
           Must be no longer than 40 characters and preferably URI friendly.
-          If it is not provided, a UID for the tenancy unit will be auto generated.
-          It must be unique across a service.
-          If the tenancy unit already exists for the service and consumer pair,
-          `CreateTenancyUnit` will return the existing tenancy unit if the provided
-          identifier is identical or empty, otherwise the call will fail.
+          If it isn't provided, a UID for the tenancy unit is automatically
+          generated. The identifier must be unique across a managed service.
+          If the tenancy unit already exists for the managed service and service
+          consumer pair, calling `CreateTenancyUnit` returns the existing tenancy
+          unit if the provided identifier is identical or empty, otherwise the call
+          fails.
         type: string
     type: object
   CustomError:
@@ -2503,7 +2504,7 @@ definitions:
       members:
         description: |-
           Uses the same format as in IAM policy.
-          `member` must include both prefix and ID. For example, `user:{emailId}`,
+          `member` must include both a prefix and ID. For example, `user:{emailId}`,
           `serviceAccount:{emailId}`, `group:{emailId}`.
         items:
           type: string
@@ -2634,7 +2635,7 @@ definitions:
         type: object
     type: object
   RemoveTenantProjectRequest:
-    description: Request message to remove tenant project resource from the tenancy unit.
+    description: Request message to remove a tenant project resource from the tenancy unit.
     properties:
       tag:
         description: Tag of the resource within the tenancy unit.
@@ -2822,16 +2823,16 @@ definitions:
         description: Configuration controlling usage of this service.
     type: object
   ServiceAccountConfig:
-    description: Describes service account configuration for the tenant project.
+    description: Describes the service account configuration for the tenant project.
     properties:
       accountId:
         description: |-
           ID of the IAM service account to be created in tenant project.
-          The email format of the service account will be
+          The email format of the service account is
           "<account-id>@<tenant-project-id>.iam.gserviceaccount.com".
-          This account id has to be unique within tenant project and producers
-          have to guarantee it. And it must be 6-30 characters long, and matches the
-          regular expression `[a-z]([-a-z0-9]*[a-z0-9])`.
+          This account ID must be unique within tenant project and service
+          producers have to guarantee it. The ID must be 6-30 characters long, and
+          match the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])`.
         type: string
       tenantProjectRoles:
         description: Roles for the associated service account for the tenant project.
@@ -3042,7 +3043,8 @@ definitions:
         type: string
       service:
         description: |-
-          @OutputOnly Google Cloud API name of the service owning this tenancy unit.
+          Output only. Google Cloud API name of the managed service owning this
+          tenancy unit.
           For example 'serviceconsumermanagement.googleapis.com'.
         type: string
       tenantResources:
@@ -3056,18 +3058,17 @@ definitions:
   TenantProjectConfig:
     description: |-
       This structure defines a tenant project to be added to the specified tenancy
-      unit and its initial configuration and properties. A project lien will be
-      created for the tenant project to prevent the tenant project from being
-      deleted accidentally. The lien will be deleted as part of tenant project
-      removal.
+      unit and its initial configuration and properties. A project lien is created
+      for the tenant project to prevent the tenant project from being deleted
+      accidentally. The lien is deleted as part of tenant project removal.
     properties:
       billingConfig:
         $ref: '#/definitions/BillingConfig'
-        description: Billing account properties.  Billing account must be specified.
+        description: Billing account properties. The billing account must be specified.
       folder:
         description: |-
           Folder where project in this tenancy unit must be located
-          This folder must have been previously created with proper
+          This folder must have been previously created with the required
           permissions for the caller to create and configure a project in it.
           Valid folder resource names have the format `folders/{folder_number}`
           (for example, `folders/123456`).
@@ -3075,16 +3076,16 @@ definitions:
       labels:
         additionalProperties:
           type: string
-        description: Labels that will be applied to this project.
+        description: Labels that are applied to this project.
         type: object
       serviceAccountConfig:
         $ref: '#/definitions/ServiceAccountConfig'
-        description: Configuration for IAM service account on tenant project.
+        description: Configuration for the IAM service account on the tenant project.
       services:
         description: |-
-          Google Cloud API names of services that will be activated on this project
-          during provisioning.  If any of these services can not be activated,
-          request will fail.
+          Google Cloud API names of services that are activated on this project
+          during provisioning.  If any of these services can't be activated,
+          the request fails.
           For example: 'compute.googleapis.com','cloudfunctions.googleapis.com'
         items:
           type: string
@@ -3104,8 +3105,8 @@ definitions:
           'roles/owner' role granted to the Service Consumer Management service
           account.
           At least one binding must have the role `roles/owner`. Among the list of
-          members for `roles/owner`, at least one of them must be either `user` or
-          `group` type.
+          members for `roles/owner`, at least one of them must be either the `user`
+          or `group` type.
         items:
           $ref: '#/definitions/PolicyBinding'
         type: array

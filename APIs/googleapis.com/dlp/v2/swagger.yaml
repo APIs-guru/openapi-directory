@@ -152,14 +152,15 @@ paths:
   '/v2/{name}':
     delete:
       description: |-
-        Deletes an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.delete
+        Deletes a DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.delete
       parameters:
         - description: |-
-            Resource name of the organization and inspectTemplate to be deleted, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of the organization and deidentify template to be deleted,
+            for example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -177,14 +178,15 @@ paths:
         - projects
     get:
       description: |-
-        Gets an InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.get
+        Gets a DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.get
       parameters:
         - description: |-
-            Resource name of the organization and inspectTemplate to be read, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of the organization and deidentify template to be read, for
+            example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -194,7 +196,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
@@ -214,18 +216,19 @@ paths:
       - $ref: '#/parameters/upload_protocol'
     patch:
       description: |-
-        Updates the InspectTemplate.
-        See https://cloud.google.com/dlp/docs/creating-templates to learn more.
-      operationId: dlp.projects.inspectTemplates.patch
+        Updates the DeidentifyTemplate.
+        See https://cloud.google.com/dlp/docs/creating-templates-deid to learn
+        more.
+      operationId: dlp.projects.deidentifyTemplates.patch
       parameters:
         - in: body
           name: body
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2UpdateInspectTemplateRequest'
+            $ref: '#/definitions/GooglePrivacyDlpV2UpdateDeidentifyTemplateRequest'
         - description: |-
-            Resource name of organization and inspectTemplate to be updated, for
-            example `organizations/433245324/inspectTemplates/432452342` or
-            projects/project-id/inspectTemplates/432452342.
+            Resource name of organization and deidentify template to be updated, for
+            example `organizations/433245324/deidentifyTemplates/432452342` or
+            projects/project-id/deidentifyTemplates/432452342.
           in: path
           name: name
           required: true
@@ -235,7 +238,7 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/GooglePrivacyDlpV2InspectTemplate'
+            $ref: '#/definitions/GooglePrivacyDlpV2DeidentifyTemplate'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'

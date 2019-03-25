@@ -224,13 +224,10 @@ paths:
       tags:
         - projects
     get:
-      description: |-
-        Gets the latest state of a long-running operation.  Clients can use this
-        method to poll the operation result at intervals as recommended by the API
-        service.
-      operationId: cloudfunctions.operations.get
+      description: Returns a function with the given name from the requested project.
+      operationId: cloudfunctions.projects.locations.functions.get
       parameters:
-        - description: The name of the operation resource.
+        - description: The name of the function which details should be obtained.
           in: path
           name: name
           required: true
@@ -240,12 +237,12 @@ paths:
         '200':
           description: Successful response
           schema:
-            $ref: '#/definitions/Operation'
+            $ref: '#/definitions/CloudFunction'
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
       tags:
-        - operations
+        - projects
     parameters:
       - $ref: '#/parameters/$.xgafv'
       - $ref: '#/parameters/access_token'

@@ -434,6 +434,8 @@ paths:
             fields `id` and `num_id` are always returned, along with any
             other fields specified.
           in: query
+          items:
+            type: string
           name: fieldMask
           type: string
         - description: |-
@@ -450,6 +452,8 @@ paths:
             (`id`). For example, if `123` is specified, only devices bound to the
             gateway with `num_id` 123 are returned.
           in: query
+          items:
+            type: string
           name: gatewayListOptions.associationsGatewayId
           type: string
         - description: |-
@@ -468,6 +472,10 @@ paths:
             is zero, the service will select a default size. A call may return fewer
             objects than requested. A non-empty `next_page_token` in the response
             indicates that more data is available.
+          enum:
+            - GATEWAY_TYPE_UNSPECIFIED
+            - GATEWAY
+            - NON_GATEWAY
           in: query
           name: pageSize
           type: integer
