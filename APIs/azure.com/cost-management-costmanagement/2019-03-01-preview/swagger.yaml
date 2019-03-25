@@ -35,19 +35,6 @@ security:
   - azure_auth:
       - user_impersonation
 parameters:
-  EntityViewParameter:
-    description: The view parameter allows clients to filter the type of data that is returned by the getEntities call.
-    enum:
-      - FullHierarchy
-      - GroupsOnly
-      - SubscriptionsOnly
-      - ExternalSubscriptionsOnly
-      - Audit
-    in: query
-    name: $view
-    required: false
-    type: string
-    x-ms-parameter-location: method
   apiVersionParameter:
     description: Version of the API to be used with the client request. The current version is 2019-03-01-preview
     in: query
@@ -1329,7 +1316,7 @@ paths:
               body:
                 value:
                   - eTag: null
-                    id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showback/testRule
+                    id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showbackRules/testRule
                     name: testRule
                     properties:
                       assignedScopes: null
@@ -1340,13 +1327,11 @@ paths:
                         AHUBenefits: true
                         markup: null
                         pricesheet: Pay-As-You-Go (0003P)
-                      id: testRule
                       modificationTime: '0001-01-01T00:00:00'
-                      modificationUserName: null
                       ruleType: CustomPrice
                       status: NotActive
                       version: 1
-                    type: Microsoft.CostManagement/showback
+                    type: Microsoft.CostManagement/showbackRules
   '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}':
     get:
       description: Gets the showback rule by rule name.
@@ -1373,12 +1358,12 @@ paths:
           parameters:
             api-version: 2019-03-01-preview
             billingAccountId: '100'
-            ruleId: testRule
+            ruleName: testRule
           responses:
             '200':
               body:
                 eTag: null
-                id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showback/testRule
+                id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showbackRules/testRule
                 name: testRule
                 properties:
                   assignedScopes: null
@@ -1389,13 +1374,11 @@ paths:
                     AHUBenefits: true
                     markup: null
                     pricesheet: Pay-As-You-Go (0003P)
-                  id: testRule
                   modificationTime: '0001-01-01T00:00:00'
-                  modificationUserName: null
                   ruleType: CustomPrice
                   status: NotActive
                   version: 1
-                type: Microsoft.CostManagement/showback
+                type: Microsoft.CostManagement/showbackRules
     put:
       description: Create/Update showback rule for billing account.
       operationId: ShowbackRule_CreateUpdateRule
@@ -1405,7 +1388,7 @@ paths:
         - $ref: '#/parameters/ruleNameParameter'
         - description: Showback rule to create or update.
           in: body
-          name: parameters
+          name: showbackRule
           required: true
           schema:
             $ref: '#/definitions/ShowbackRuleProperties'
@@ -1425,29 +1408,44 @@ paths:
           parameters:
             api-version: 2019-03-01-preview
             billingAccountId: '100'
-            ruleId: testRule
+            ruleName: testRule
+            showbackRule:
+              properties:
+                assignedScopes:
+                  - childScope: null
+                    entityId: 292105a9-680d-48cf-bdad-1d023104d69f
+                    entityType: Enrollment
+                description: Welcome to Showback demo
+                details:
+                  AHUBenefits: true
+                  markup:
+                    - filters: []
+                      percentage: 1.1
+                  pricesheet: Pay-As-You-Go (0003P)
+                name: demo
+                ruleType: CustomPrice
+                status: Active
           responses:
             '200':
               body:
                 eTag: null
-                id: providers/Microsoft.Billing/billingAccounts/100/providers/Microsoft.CostManagement/showback/testRule
-                name: testRule
+                id: providers/Microsoft.Billing/billingAccounts/71824150/providers/Microsoft.CostManagement/showbackRules/demo
+                name: demo
                 properties:
-                  assignedScopes: null
                   creationTime: '2019-01-16T09:18:20.8665509Z'
                   deprecationTime: '0001-01-01T00:00:00'
-                  description: This is a testRule
+                  description: Welcome to Showback demo
                   details:
                     AHUBenefits: true
-                    markup: null
+                    markup:
+                      - filters: []
+                        percentage: 1.1
                     pricesheet: Pay-As-You-Go (0003P)
-                  id: testRule
                   modificationTime: '0001-01-01T00:00:00'
-                  modificationUserName: null
                   ruleType: CustomPrice
                   status: NotActive
-                  version: 1
-                type: Microsoft.CostManagement/showback
+                  version: 999
+                type: Microsoft.CostManagement/showbackRules
   /providers/Microsoft.CostManagement/cloudConnectors:
     get:
       description: List all cloud connector definitions
@@ -1475,9 +1473,9 @@ paths:
             '200':
               body:
                 value:
-                  - id: /providers/Microsoft.CostManagement/cloudConnectors/12345678-9012-3456-7890-111111111111
+                  - id: /providers/Microsoft.CostManagement/cloudConnectors/aws-123456789012
                     kind: aws
-                    name: 12345678-9012-3456-7890-111111111111
+                    name: aws-123456789012
                     properties:
                       billingModel: autoUpgrade
                       createdOn: '2018-05-15T13:25:48Z'
@@ -1485,25 +1483,28 @@ paths:
                       daysTrialRemaining: 62
                       defaultManagementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
                       displayName: AWS-Consolidated-1
+                      externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
                       modifiedOn: '2018-05-23T09:21:11Z'
-                      providerAccountId: '123456789012'
+                      providerBillingAccountDisplayName: MyCompany Consolidated
+                      providerBillingAccountId: '123456789012'
                       reportId: HourlyWithResources
                       status: active
                       subscriptionId: 22222222-3333-4444-1111-777777777777
                     type: Microsoft.CostManagement/cloudConnectors
-                  - id: /providers/Microsoft.CostManagement/cloudConnectors/11111111-2222-3333-4444-555555555555
+                  - id: /providers/Microsoft.CostManagement/cloudConnectors/aws-100000000007
                     kind: aws
-                    name: 11111111-2222-3333-4444-555555555555
+                    name: aws-100000000007
                     properties:
                       billingModel: premium
                       createdOn: '2018-06-16T11:23:44Z'
                       credentialsKey: 'arn:aws:iam::100000000007:role/AzureCostManagementRole'
                       defaultManagementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
                       displayName: AWS-Consolidated-2
+                      externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-100000000007
                       modifiedOn: '2018-06-21T17:33:28Z'
-                      providerAccountId: '100000000007'
+                      providerBillingAccountId: '100000000007'
                       reportId: CURHourlyWithResources
-                      status: suspended
+                      status: active
                       subscriptionId: 22222222-3333-4444-1111-777777777777
                     type: Microsoft.CostManagement/cloudConnectors
       x-ms-pageable: {}
@@ -1529,7 +1530,7 @@ paths:
         CloudConnector_Delete:
           parameters:
             api-version: 2019-03-01-preview
-            connectorName: 12345678-9012-3456-7890-111111111111
+            connectorName: aws-123456789012
           responses:
             '200': {}
     get:
@@ -1560,13 +1561,13 @@ paths:
         CloudConnector_Get:
           parameters:
             api-version: 2019-03-01-preview
-            connectorName: 12345678-9012-3456-7890-111111111111
+            connectorName: aws-123456789012
           responses:
             '200':
               body:
-                id: /providers/Microsoft.CostManagement/cloudConnectors/12345678-9012-3456-7890-111111111111
+                id: /providers/Microsoft.CostManagement/cloudConnectors/aws-123456789012
                 kind: aws
-                name: 12345678-9012-3456-7890-111111111111
+                name: aws-123456789012
                 properties:
                   billingModel: autoUpgrade
                   createdOn: '2018-05-15T13:25:48Z'
@@ -1574,8 +1575,10 @@ paths:
                   daysTrialRemaining: 62
                   defaultManagementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
                   displayName: AWS-Consolidated-1
+                  externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
                   modifiedOn: '2018-05-23T09:21:11Z'
-                  providerAccountId: '123456789012'
+                  providerBillingAccountDisplayName: MyCompany Consolidated
+                  providerBillingAccountId: '123456789012'
                   reportId: HourlyWithResources
                   status: active
                   subscriptionId: 22222222-3333-4444-1111-777777777777
@@ -1584,13 +1587,13 @@ paths:
           parameters:
             $expand: collectionInfo
             api-version: 2019-03-01-preview
-            connectorName: 12345678-9012-3456-7890-111111111111
+            connectorName: aws-123456789012
           responses:
             '200':
               body:
-                id: /providers/Microsoft.CostManagement/cloudConnectors/12345678-9012-3456-7890-111111111111
+                id: /providers/Microsoft.CostManagement/cloudConnectors/aws-123456789012
                 kind: aws
-                name: 12345678-9012-3456-7890-111111111111
+                name: aws-123456789012
                 properties:
                   billingModel: autoUpgrade
                   collectionInfo:
@@ -1607,10 +1610,12 @@ paths:
                   daysTrialRemaining: 62
                   defaultManagementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
                   displayName: AWS-Consolidated-1
+                  externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
                   modifiedOn: '2018-05-23T09:21:11Z'
-                  providerAccountId: '123456789012'
+                  providerBillingAccountDisplayName: MyCompany Consolidated
+                  providerBillingAccountId: '123456789012'
                   reportId: HourlyWithResources
-                  status: active
+                  status: warning
                   subscriptionId: 22222222-3333-4444-1111-777777777777
                 type: Microsoft.CostManagement/cloudConnectors
     patch:
@@ -1639,19 +1644,17 @@ paths:
       tags:
         - CloudConnectors
       x-ms-examples:
-        CloudConnector_Patch:
+        CloudConnector_Update:
           parameters:
             api-version: 2019-03-01-preview
-            connector:
-              properties:
-                displayName: AWS-Consolidated-3
-            connectorName: 12345678-9012-3456-7890-111111111111
+            connector: {}
+            connectorName: aws-123456789012
           responses:
             '200':
               body:
-                id: /providers/Microsoft.CostManagement/cloudConnectors/12345678-9012-3456-7890-111111111111
+                id: /providers/Microsoft.CostManagement/cloudConnectors/aws-123456789012
                 kind: aws
-                name: 12345678-9012-3456-7890-111111111111
+                name: aws-123456789012
                 properties:
                   billingModel: autoUpgrade
                   createdOn: '2018-05-15T13:25:48Z'
@@ -1659,7 +1662,9 @@ paths:
                   daysTrialRemaining: 62
                   defaultManagementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
                   displayName: AWS-Consolidated-3
+                  externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
                   modifiedOn: '2018-05-23T09:21:11Z'
+                  providerBillingAccountId: '123456789012'
                   reportId: HourlyWithResources
                   status: active
                   subscriptionId: 22222222-3333-4444-1111-777777777777
@@ -1703,30 +1708,13 @@ paths:
                 credentialsSecret: external-id
                 displayName: AWS-Consolidated-1
                 reportId: HourlyWithResources
-                status: active
-            connectorName: 12345678-9012-3456-7890-111111111111
+            connectorName: aws-123456789012
           responses:
             '200':
               body:
-                id: /providers/Microsoft.CostManagement/cloudConnectors/12345678-9012-3456-7890-111111111111
+                id: /providers/Microsoft.CostManagement/cloudConnectors/aws-123456789012
                 kind: aws
-                name: 12345678-9012-3456-7890-111111111111
-                properties:
-                  billingModel: autoUpgrade
-                  createdOn: '2018-05-15T13:25:48Z'
-                  credentialsKey: 'arn:aws:iam::123456789012:role/AzureCostManagementRole'
-                  daysTrialRemaining: 62
-                  displayName: AWS-Consolidated-1
-                  modifiedOn: '2018-05-23T09:21:11Z'
-                  reportId: HourlyWithResources
-                  status: active
-                  subscriptionId: 22222222-3333-4444-1111-777777777777
-                type: Microsoft.CostManagement/cloudConnectors
-            '201':
-              body:
-                id: /providers/Microsoft.CostManagement/cloudConnectors/12345678-9012-3456-7890-111111111111
-                kind: aws
-                name: 12345678-9012-3456-7890-111111111111
+                name: aws-123456789012
                 properties:
                   billingModel: autoUpgrade
                   createdOn: '2018-05-15T13:25:48Z'
@@ -1734,7 +1722,28 @@ paths:
                   daysTrialRemaining: 62
                   defaultManagementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
                   displayName: AWS-Consolidated-1
+                  externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
                   modifiedOn: '2018-05-23T09:21:11Z'
+                  providerBillingAccountId: '123456789012'
+                  reportId: HourlyWithResources
+                  status: active
+                  subscriptionId: 22222222-3333-4444-1111-777777777777
+                type: Microsoft.CostManagement/cloudConnectors
+            '201':
+              body:
+                id: /providers/Microsoft.CostManagement/cloudConnectors/aws-123456789012
+                kind: aws
+                name: aws-123456789012
+                properties:
+                  billingModel: autoUpgrade
+                  createdOn: '2018-05-15T13:25:48Z'
+                  credentialsKey: 'arn:aws:iam::123456789012:role/AzureCostManagementRole'
+                  daysTrialRemaining: 62
+                  defaultManagementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
+                  displayName: AWS-Consolidated-1
+                  externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
+                  modifiedOn: '2018-05-23T09:21:11Z'
+                  providerBillingAccountId: '123456789012'
                   reportId: HourlyWithResources
                   status: active
                   subscriptionId: 22222222-3333-4444-1111-777777777777
@@ -1771,14 +1780,16 @@ paths:
                     name: aws-123456789012
                     properties:
                       connectorId: /providers/Microsoft.CostManagement/cloudConnectors/12345678-9012-3456-7890-111111111111
-                      displayName: Contoso Consolidated
+                      displayName: MyCompany Consolidated
+                      providerBillingAccountId: '123456789012'
                     type: Microsoft.CostManagement/externalBillingAccounts
                   - id: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-112233445566
                     kind: aws
                     name: aws-112233445566
                     properties:
                       connectorId: /providers/Microsoft.CostManagement/cloudConnectors/11111111-2222-3333-4444-555555555555
-                      displayName: Contoso Consolidated2
+                      displayName: MyCompany Consolidated2
+                      providerBillingAccountId: '112233445566'
                     type: Microsoft.CostManagement/externalBillingAccounts
       x-ms-pageable: {}
   '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}':
@@ -1790,6 +1801,11 @@ paths:
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/externalBillingAccountNameParameter'
+        - description: 'May be used to expand the collectionInfo property. By default, collectionInfo is not included.'
+          in: query
+          name: $expand
+          required: false
+          type: string
       responses:
         '200':
           description: OK. The request has succeeded.
@@ -1813,8 +1829,28 @@ paths:
                 kind: aws
                 name: aws-123456789012
                 properties:
-                  connectorId: /providers/Microsoft.CostManagement/cloudConnectors/12345678-9012-3456-7890-111111111111
-                  displayName: Contoso Consolidated
+                  connectorId: /providers/Microsoft.CostManagement/cloudConnectors/aws-123456789012
+                  displayName: MyCompany Consolidated
+                  providerBillingAccountId: '123456789012'
+                type: Microsoft.CostManagement/externalBillingAccounts
+        ExternalBillingAccount_Get_Expand:
+          parameters:
+            $expand: collectionInfo
+            api-version: 2019-03-01-preview
+            externalBillingAccountName: aws-123456789012
+          responses:
+            '200':
+              body:
+                id: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
+                kind: aws
+                name: aws-123456789012
+                properties:
+                  collectionInfo:
+                    lastUpdated: '2018-06-12T17:25:28Z'
+                    sourceLastUpdated: '2018-06-12T16:41:28Z'
+                  connectorId: /providers/Microsoft.CostManagement/cloudConnectors/aws-123456789012
+                  displayName: MyCompany Consolidated
+                  providerBillingAccountId: '123456789012'
                 type: Microsoft.CostManagement/externalBillingAccounts
   '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/externalSubscriptions':
     get:
@@ -1852,6 +1888,8 @@ paths:
                       displayName: MyUsageAccount1
                       externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
                       managementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
+                      providerAccountId: '654321654321'
+                      providerBillingAccountId: '123456789012'
                     type: Microsoft.CostManagement/externalSubscriptions
       x-ms-pageable: {}
   /providers/Microsoft.CostManagement/externalSubscriptions:
@@ -1888,6 +1926,8 @@ paths:
                       displayName: MyUsageAccount1
                       externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
                       managementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
+                      providerAccountId: '654321654321'
+                      providerBillingAccountId: '123456789012'
                     type: Microsoft.CostManagement/externalSubscriptions
                   - id: /providers/Microsoft.CostManagement/externalSubscriptions/aws-110011001100
                     kind: aws
@@ -1896,6 +1936,8 @@ paths:
                       displayName: MyUsageAccount2
                       externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-112233445566
                       managementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
+                      providerAccountId: '110011001100'
+                      providerBillingAccountId: '112233445566'
                     type: Microsoft.CostManagement/externalSubscriptions
       x-ms-pageable: {}
   '/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}':
@@ -1907,6 +1949,11 @@ paths:
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/externalSubscriptionNameParameter'
+        - description: 'May be used to expand the collectionInfo property. By default, collectionInfo is not included.'
+          in: query
+          name: $expand
+          required: false
+          type: string
       responses:
         '200':
           description: OK. The request has succeeded.
@@ -1933,6 +1980,29 @@ paths:
                   displayName: MyUsageAccount1
                   externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
                   managementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
+                  providerAccountId: '654321654321'
+                  providerBillingAccountId: '123456789012'
+                type: Microsoft.CostManagement/externalSubscriptions
+        ExternalSubscription_Get_Expand:
+          parameters:
+            $expand: collectionInfo
+            api-version: 2019-03-01-preview
+            externalSubscriptionName: aws-654321654321
+          responses:
+            '200':
+              body:
+                id: /providers/Microsoft.CostManagement/externalSubscriptions/aws-654321654321
+                kind: aws
+                name: aws-654321654321
+                properties:
+                  collectionInfo:
+                    lastUpdated: '2018-06-12T17:25:28Z'
+                    sourceLastUpdated: '2018-06-12T16:41:28Z'
+                  displayName: MyUsageAccount1
+                  externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
+                  managementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
+                  providerAccountId: '654321654321'
+                  providerBillingAccountId: '123456789012'
                 type: Microsoft.CostManagement/externalSubscriptions
   /providers/Microsoft.CostManagement/operations:
     get:
@@ -1958,7 +2028,7 @@ paths:
       description: Lists the usage data for management group.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
-      operationId: Forecast_UsageByManagmentGroup
+      operationId: Forecast_UsageByManagementGroup
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/managementGroupIdParameter'
@@ -2057,7 +2127,7 @@ paths:
       description: Lists the usage data for management group.
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
-      operationId: Query_UsageByManagmentGroup
+      operationId: Query_UsageByManagementGroup
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/managementGroupIdParameter'
@@ -2338,6 +2408,11 @@ paths:
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/managementGroupIdParameter'
+        - description: 'The $recurse=true query string parameter allows returning externalSubscriptions associated with the specified managementGroup, or any of its descendants.'
+          in: query
+          name: $recurse
+          required: false
+          type: boolean
       responses:
         '200':
           description: OK. The request has succeeded.
@@ -2358,27 +2433,31 @@ paths:
             '200':
               body:
                 value:
-                  - id: /providers/Microsoft.CostManagement/externalSubscription/aws-654321654321
+                  - id: /providers/Microsoft.CostManagement/externalSubscriptions/aws-654321654321
                     name: aws-654321654321
                     properties:
                       displayName: MyUsageAccount1
                       externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012
                       managementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
-                    type: Microsoft.CostManagement/externalSubscription
-                  - id: /providers/Microsoft.CostManagement/externalSubscription/aws-110011001100
+                      providerAccountId: '654321654321'
+                      providerBillingAccountId: '123456789012'
+                    type: Microsoft.CostManagement/externalSubscriptions
+                  - id: /providers/Microsoft.CostManagement/externalSubscriptions/aws-110011001100
                     name: aws-110011001100
                     properties:
                       displayName: MyUsageAccount2
                       externalBillingAccountId: /providers/Microsoft.CostManagement/externalBillingAccounts/aws-112233445566
                       managementGroupId: /providers/Microsoft.Management/managementGroups/XYZ
-                    type: Microsoft.CostManagement/externalSubscription
+                      providerAccountId: '110011001100'
+                      providerBillingAccountId: '112233445566'
+                    type: Microsoft.CostManagement/externalSubscriptions
       x-ms-pageable: {}
   '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}':
     put:
-      description: Associates ExternalSubscription with the management group
+      description: Updates the management group of an ExternalSubscription
       externalDocs:
         url: 'https://docs.microsoft.com/en-us/rest/api/costmanagement/'
-      operationId: ExternalSubscription_UpdateByManagementGroup
+      operationId: ExternalSubscription_UpdateManagementGroup
       parameters:
         - $ref: '#/parameters/apiVersionParameter'
         - $ref: '#/parameters/managementGroupIdParameter'
@@ -2400,99 +2479,6 @@ paths:
             managementGroupId: XYZ
           responses:
             '204': {}
-  '/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/getEntities':
-    post:
-      description: 'List all entities (Management Groups, Subscriptions, ExternalSubscriptions, etc.) focusing on a particular group for the authenticated user.'
-      operationId: Entities_ListByManagementGroup
-      parameters:
-        - $ref: '#/parameters/apiVersionParameter'
-        - $ref: '#/parameters/managementGroupIdParameter'
-        - $ref: '#/parameters/EntityViewParameter'
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/EntityListResult'
-        default:
-          description: Error
-          schema:
-            $ref: '#/definitions/ErrorResponse'
-      tags:
-        - Entities
-      x-ms-examples:
-        GetEntities:
-          parameters:
-            api-version: 2019-03-01-preview
-            managementGroupId: XYZ
-          responses:
-            '200':
-              body:
-                nextLink: null
-                value:
-                  - id: /providers/Microsoft.Management/managementGroups/XYZ
-                    name: XYZ
-                    properties:
-                      displayName: XYZ Department
-                      inheritedPermissions: view
-                      numberOfChildGroups: 0
-                      numberOfChildren: 0
-                      numberOfDescendants: 0
-                      parent:
-                        id: /providers/Microsoft.Management/managementGroups/Engineering
-                      parentDisplayNameChain:
-                        - 20000000-0000-0000-0000-000000000000
-                        - Engineering
-                      parentNameChain:
-                        - 20000000-0000-0000-0000-000000000000
-                        - Engineering
-                      permissions: noaccess
-                      tenantId: 20000000-0000-0000-0000-000000000000
-                    type: /providers/Microsoft.Management/managementGroups
-                  - id: /subscriptions/88888888-3333-6666-1111-444444444444
-                    name: 88888888-3333-6666-1111-444444444444
-                    properties:
-                      displayName: XYZ Subscription
-                      inheritedPermissions: view
-                      numberOfChildGroups: 0
-                      numberOfChildren: 0
-                      numberOfDescendants: 0
-                      parent:
-                        id: /providers/Microsoft.Management/managementGroups/XYZ
-                      parentDisplayNameChain:
-                        - 20000000-0000-0000-0000-000000000000
-                        - Engineering
-                        - XYZ Department
-                      parentNameChain:
-                        - 20000000-0000-0000-0000-000000000000
-                        - Engineering
-                        - XYZ
-                      permissions: noaccess
-                      tenantId: 20000000-0000-0000-0000-000000000000
-                    type: /subscriptions
-                  - id: /providers/Microsoft.CostManagement/externalSubscriptions/aws-654321654321
-                    kind: aws
-                    name: aws-654321654321
-                    properties:
-                      displayName: XYZ UsageAccount
-                      inheritedPermissions: view
-                      numberOfChildGroups: 0
-                      numberOfChildren: 0
-                      numberOfDescendants: 0
-                      parent:
-                        id: /providers/Microsoft.Management/managementGroups/XYZ
-                      parentDisplayNameChain:
-                        - 20000000-0000-0000-0000-000000000000
-                        - Engineering
-                        - XYZ Department
-                      parentNameChain:
-                        - 20000000-0000-0000-0000-000000000000
-                        - Engineering
-                        - XYZ
-                      permissions: noaccess
-                      tenantId: 20000000-0000-0000-0000-000000000000
-                    type: Microsoft.CostManagement/externalSubscriptions
-      x-ms-pageable:
-        nextLinkName: nextLink
   '/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Forecast':
     post:
       description: Forecast the usage data for subscriptionId.
@@ -3172,6 +3158,12 @@ definitions:
           - read
           - create
           - update
+      externalBillingAccountId:
+        description: Associated ExternalBillingAccountId
+        readOnly: true
+        type: string
+        x-ms-mutability:
+          - read
       modifiedOn:
         description: Connector last modified datetime
         format: date-time
@@ -3179,8 +3171,14 @@ definitions:
         type: string
         x-ms-mutability:
           - read
-      providerAccountId:
-        description: Connector providerAccountId (determined from credentials)
+      providerBillingAccountDisplayName:
+        description: The display name of the providerBillingAccountId as defined on the external provider
+        readOnly: true
+        type: string
+        x-ms-mutability:
+          - read
+      providerBillingAccountId:
+        description: 'Connector providerBillingAccountId, determined from credentials (eg AWS Consolidated account number)'
         readOnly: true
         type: string
         x-ms-mutability:
@@ -3197,15 +3195,15 @@ definitions:
         enum:
           - active
           - error
-          - suspended
+          - expired
+          - warning
+        readOnly: true
         type: string
         x-ms-enum:
           modelAsString: true
           name: ConnectorStatus
         x-ms-mutability:
           - read
-          - create
-          - update
       subscriptionId:
         description: Billing SubscriptionId
         type: string
@@ -3338,105 +3336,6 @@ definitions:
         readOnly: true
         type: array
     type: object
-  EntityInfo:
-    description: The entity.
-    properties:
-      id:
-        description: 'The fully qualified ID for the entity.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000'
-        readOnly: true
-        type: string
-        x-nullable: true
-      kind:
-        description: The kind of the resource
-        readOnly: true
-        type: string
-        x-nullable: true
-      name:
-        description: 'The name of the entity. For example, 00000000-0000-0000-0000-000000000000'
-        readOnly: true
-        type: string
-      properties:
-        $ref: '#/definitions/EntityInfoProperties'
-        title: Properties
-        x-ms-client-flatten: true
-        x-nullable: true
-      type:
-        description: 'The type of the resource. For example, /providers/Microsoft.Management/managementGroups'
-        readOnly: true
-        type: string
-        x-nullable: true
-  EntityInfoProperties:
-    description: The generic properties of an entity.
-    properties:
-      displayName:
-        description: The friendly name of the management group.
-        type: string
-        x-nullable: true
-      inheritedPermissions:
-        $ref: '#/definitions/Permissions'
-        title: Inherited Permissions
-        x-nullable: true
-      numberOfChildGroups:
-        description: Number of child groups is the number of Groups that are exactly one level underneath the current Group.
-        title: Number of Child Groups
-        type: integer
-        x-nullable: true
-      numberOfChildren:
-        description: Number of children is the number of Groups and Subscriptions that are exactly one level underneath the current Group.
-        title: Number of Children
-        type: integer
-        x-nullable: true
-      numberOfDescendants:
-        title: Number of Descendants
-        type: integer
-        x-nullable: true
-      parent:
-        $ref: '#/definitions/EntityParentGroupInfo'
-        title: Parent
-        x-nullable: true
-      parentDisplayNameChain:
-        description: The parent display name chain from the root group to the immediate parent
-        items:
-          type: string
-        type: array
-        x-nullable: true
-      parentNameChain:
-        description: The parent name chain from the root group to the immediate parent
-        items:
-          type: string
-        type: array
-        x-nullable: true
-      permissions:
-        $ref: '#/definitions/Permissions'
-        title: Permissions
-        x-nullable: true
-      tenantId:
-        description: 'The AAD Tenant ID associated with the entity. For example, 00000000-0000-0000-0000-000000000000'
-        type: string
-        x-nullable: true
-    type: object
-  EntityListResult:
-    description: Describes the result of the request to view entities.
-    properties:
-      count:
-        description: Total count of records that match the filter
-        readOnly: true
-        type: integer
-      nextLink:
-        description: The URL to use for getting the next set of results.
-        readOnly: true
-        type: string
-      value:
-        description: The list of entities.
-        items:
-          $ref: '#/definitions/EntityInfo'
-        type: array
-  EntityParentGroupInfo:
-    description: (Optional) The ID of the parent management group.
-    properties:
-      id:
-        description: 'The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000'
-        type: string
   ErrorBase:
     description: The details of the error.
     properties:
@@ -3515,6 +3414,11 @@ definitions:
   ExternalBillingAccountProperties:
     description: The properties of a ExternalBillingAccount
     properties:
+      collectionInfo:
+        $ref: '#/definitions/ConnectorCollectionInfo'
+        description: Collection information
+        readOnly: true
+        x-nullable: true
       connectorId:
         description: Underlying ConnectorId
         readOnly: true
@@ -3523,6 +3427,12 @@ definitions:
           - read
       displayName:
         description: ExternalBillingAccount DisplayName
+        readOnly: true
+        type: string
+        x-ms-mutability:
+          - read
+      providerBillingAccountId:
+        description: Provider BillingAccountId (eg AWS Consolidated Account number)
         readOnly: true
         type: string
         x-ms-mutability:
@@ -3562,9 +3472,22 @@ definitions:
           $ref: '#/definitions/ExternalSubscriptionDefinition'
         readOnly: true
         type: array
+  ExternalSubscriptionIdListRequest:
+    description: The list of ExternalSubscriptionIds operation request.
+    properties:
+      value:
+        description: The list of ExternalSubscriptionIds.
+        items:
+          type: string
+        type: array
   ExternalSubscriptionProperties:
     description: The properties of a ExternalSubscription
     properties:
+      collectionInfo:
+        $ref: '#/definitions/ConnectorCollectionInfo'
+        description: Collection information
+        readOnly: true
+        x-nullable: true
       displayName:
         description: ExternalSubscription DisplayName
         readOnly: true
@@ -3579,6 +3502,18 @@ definitions:
           - read
       managementGroupId:
         description: Assigned ManagementGroupId
+        readOnly: true
+        type: string
+        x-ms-mutability:
+          - read
+      providerAccountId:
+        description: Provider AccountId (eg AWS Linked Account number)
+        readOnly: true
+        type: string
+        x-ms-mutability:
+          - read
+      providerBillingAccountId:
+        description: Provider BillingAccountId (eg AWS Consolidated Account number)
         readOnly: true
         type: string
         x-ms-mutability:
@@ -3626,14 +3561,6 @@ definitions:
           $ref: '#/definitions/Operation'
         readOnly: true
         type: array
-  Permissions:
-    description: The users specific permissions to this item.
-    enum:
-      - noaccess
-      - view
-      - edit
-      - delete
-    type: string
   Query:
     allOf:
       - $ref: '#/definitions/Resource'
@@ -3987,8 +3914,4 @@ definitions:
         x-ms-enum:
           modelAsString: true
           name: ShowbackRulesKind
-          values:
-            - value: CustomPrice
-            - value: CustomCharge
-            - value: CostAllocation
     type: object

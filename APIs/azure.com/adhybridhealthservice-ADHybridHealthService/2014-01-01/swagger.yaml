@@ -4259,6 +4259,54 @@ paths:
                     schemaXml: SampleSchemaXML
                     version: 12
       x-ms-pageable: {}
+  '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/metrics/{metricName}':
+    get:
+      description: Gets the list of connectors and run profile names.
+      operationId: serviceMembers_getConnectorMetadata
+      parameters:
+        - description: The name of the service.
+          in: path
+          name: serviceName
+          required: true
+          type: string
+        - description: The service member id.
+          format: uuid
+          in: path
+          name: serviceMemberId
+          required: true
+          type: string
+        - description: The name of the metric.
+          in: path
+          name: metricName
+          required: true
+          type: string
+        - $ref: '#/parameters/apiVersionParameter'
+      responses:
+        '200':
+          description: Gets the list of connectors and run profile names for the given service and service member.
+          schema:
+            $ref: '#/definitions/ConnectorMetadata'
+      tags:
+        - Metrics
+      x-ms-examples:
+        serviceMembers_getConnectorMetadata:
+          parameters:
+            api-version: '2014-01-01'
+            serviceMemberId: SampleServiceMemberId
+            serviceName: sampleServiceName
+          responses:
+            '200':
+              body:
+                value:
+                  - connectors:
+                      - connectorDisplayName: adhsdfus1runner.adhs.com
+                        connectorId: 3efbb72d-5047-4816-a7dd-73fefe16a2f3
+                      - connectorDisplayName: dfadhybridhealth.dfdomain.net - AAD
+                        connectorId: b891884f-051e-4a83-95af-2544101c9083
+                    runProfileNames:
+                      - Export
+                      - ApplyRules
+                      - DeltaImport
   '/providers/Microsoft.ADHybridHealthService/services/{serviceName}/servicemembers/{serviceMemberId}/metrics/{metricName}/groups/{groupName}':
     get:
       description: Gets the server related metrics for a given metric and group combination.
@@ -5076,6 +5124,30 @@ definitions:
         items:
           $ref: '#/definitions/ConnectorConnectionError'
         type: array
+    type: object
+  ConnectorMetadata:
+    description: Gets the list of connectors and run profile names.
+    properties:
+      connectors:
+        description: The list of connectors.
+        items:
+          $ref: '#/definitions/ConnectorMetadataDetails'
+        type: array
+      runProfileNames:
+        description: The list of run profile names.
+        items:
+          type: string
+        type: array
+    type: object
+  ConnectorMetadataDetails:
+    description: Details of the connector.
+    properties:
+      connectorDisplayName:
+        description: The Connector Display Name
+        type: string
+      connectorId:
+        description: The Connector Id.
+        type: string
     type: object
   ConnectorObjectError:
     description: The connector object error.

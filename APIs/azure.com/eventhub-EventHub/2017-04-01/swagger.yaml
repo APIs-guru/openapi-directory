@@ -3924,6 +3924,147 @@ paths:
                   updatedAt: '2018-04-10T17:55:54.4048325Z'
                 tags: null
                 type: Microsoft.EventHub/MessagingSKUPlan
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets/default':
+    get:
+      description: Gets NetworkRuleSet for a Namespace.
+      operationId: Namespaces_GetNetworkRuleSet
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+      responses:
+        '200':
+          description: Namespace NetworkRuleSet successfully returned.
+          schema:
+            $ref: '#/definitions/NetworkRuleSet'
+        default:
+          description: EventHub error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        NameSpaceNetworkRuleSetGet:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-6019
+            resourceGroupName: ResourceGroup
+            subscriptionId: Subscription
+          responses:
+            '200':
+              body:
+                id: /subscriptions/subscriptionid/resourceGroups/resourcegroupid/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9659/networkrulesets/default
+                name: default
+                properties:
+                  defaultAction: Deny
+                  ipRules:
+                    - action: Allow
+                      ipMask: 1.1.1.1
+                    - action: Allow
+                      ipMask: 1.1.1.2
+                    - action: Allow
+                      ipMask: 1.1.1.3
+                    - action: Allow
+                      ipMask: 1.1.1.4
+                    - action: Allow
+                      ipMask: 1.1.1.5
+                  virtualNetworkRules:
+                    - ignoreMissingVnetServiceEndpoint: true
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+                type: Microsoft.EventHub/Namespaces/NetworkRuleSet
+    put:
+      description: Create or update NetworkRuleSet for a Namespace.
+      operationId: Namespaces_CreateOrUpdateNetworkRuleSet
+      parameters:
+        - $ref: '#/parameters/ResourceGroupNameParameter'
+        - $ref: '#/parameters/NamespaceNameParameter'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - description: The Namespace IpFilterRule.
+          in: body
+          name: parameters
+          required: true
+          schema:
+            $ref: '#/definitions/NetworkRuleSet'
+      responses:
+        '200':
+          description: Namespace NetworkRuleSet successfully returned.
+          schema:
+            $ref: '#/definitions/NetworkRuleSet'
+        default:
+          description: EventHub error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+      tags:
+        - Namespaces
+      x-ms-examples:
+        NameSpaceNetworkRuleSetCreate:
+          parameters:
+            api-version: '2017-04-01'
+            namespaceName: sdk-Namespace-6019
+            parameters:
+              properties:
+                defaultAction: Deny
+                ipRules:
+                  - action: Allow
+                    ipMask: 1.1.1.1
+                  - action: Allow
+                    ipMask: 1.1.1.2
+                  - action: Allow
+                    ipMask: 1.1.1.3
+                  - action: Allow
+                    ipMask: 1.1.1.4
+                  - action: Allow
+                    ipMask: 1.1.1.5
+                virtualNetworkRules:
+                  - ignoreMissingVnetServiceEndpoint: true
+                    subnet:
+                      id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                  - ignoreMissingVnetServiceEndpoint: false
+                    subnet:
+                      id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                  - ignoreMissingVnetServiceEndpoint: false
+                    subnet:
+                      id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+            resourceGroupName: ResourceGroup
+            subscriptionId: Subscription
+          responses:
+            '200':
+              body:
+                id: /subscriptions/854d368f-1828-428f-8f3c-f2affa9b2f7d/resourceGroups/resourcegroupid/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9659/networkrulesets/default
+                name: default
+                properties:
+                  defaultAction: Deny
+                  ipRules:
+                    - action: Allow
+                      ipMask: 1.1.1.1
+                    - action: Allow
+                      ipMask: 1.1.1.2
+                    - action: Allow
+                      ipMask: 1.1.1.3
+                    - action: Allow
+                      ipMask: 1.1.1.4
+                    - action: Allow
+                      ipMask: 1.1.1.5
+                  virtualNetworkRules:
+                    - ignoreMissingVnetServiceEndpoint: true
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3
+                    - ignoreMissingVnetServiceEndpoint: false
+                      subnet:
+                        id: /subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6
+                type: Microsoft.EventHub/Namespaces/NetworkRuleSet
 definitions:
   AccessKeys:
     description: Namespace/EventHub Connection String
@@ -4337,6 +4478,60 @@ definitions:
         items:
           $ref: '#/definitions/MessagingRegions'
         type: array
+  NWRuleSetIpRules:
+    description: Description of NetWorkRuleSet - IpRules resource.
+    properties:
+      action:
+        default: Allow
+        description: The IP Filter Action
+        enum:
+          - Allow
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: NetworkRuleIPAction
+      ipMask:
+        description: IP Mask
+        type: string
+    x-ms-client-flatten: true
+  NWRuleSetVirtualNetworkRules:
+    description: Description of VirtualNetworkRules - NetworkRules resource.
+    properties:
+      ignoreMissingVnetServiceEndpoint:
+        description: Value that indicates whether to ignore missing VNet Service Endpoint
+        type: boolean
+      subnet:
+        $ref: '#/definitions/Subnet'
+        description: Subnet properties
+    x-ms-client-flatten: true
+  NetworkRuleSet:
+    allOf:
+      - $ref: '#/definitions/Resource'
+    description: Description of NetworkRuleSet resource.
+    properties:
+      properties:
+        description: NetworkRuleSet properties
+        properties:
+          defaultAction:
+            description: Default Action for Network Rule Set
+            enum:
+              - Allow
+              - Deny
+            type: string
+            x-ms-enum:
+              modelAsString: true
+              name: DefaultAction
+          ipRules:
+            description: List of IpRules
+            items:
+              $ref: '#/definitions/NWRuleSetIpRules'
+            type: array
+          virtualNetworkRules:
+            description: List VirtualNetwork Rules
+            items:
+              $ref: '#/definitions/NWRuleSetVirtualNetworkRules'
+            type: array
+        x-ms-client-flatten: true
   Operation:
     description: A Event Hub REST API operation
     properties:
@@ -4436,6 +4631,14 @@ definitions:
     required:
       - name
     type: object
+  Subnet:
+    description: Properties supplied for Subnet
+    properties:
+      id:
+        description: Resource ID of Virtual Network Subnet
+        type: string
+    required:
+      - id
   TrackedResource:
     allOf:
       - $ref: '#/definitions/Resource'

@@ -173,7 +173,7 @@ paths:
                   signature: ASDFSDAFWEFASDGWERLWER
                 type: Microsoft.MarketplaceOrdering/offertypes
   '/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/cancel':
-    put:
+    post:
       description: Cancel marketplace terms.
       operationId: MarketplaceAgreements_Cancel
       parameters:
@@ -215,7 +215,7 @@ paths:
                   signature: ASDFSDAFWEFASDGWERLWER
                 type: Microsoft.MarketplaceOrdering/offertypes
   '/subscriptions/{subscriptionId}/providers/Microsoft.MarketplaceOrdering/agreements/{publisherId}/offers/{offerId}/plans/{planId}/sign':
-    put:
+    post:
       description: Sign marketplace terms.
       operationId: MarketplaceAgreements_Sign
       parameters:

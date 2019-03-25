@@ -80,7 +80,7 @@ paths:
       tags:
         - SignalR
       x-ms-examples:
-        ListOperations:
+        Operations_List:
           parameters:
             api-version: '2018-10-01'
           responses:
@@ -112,7 +112,7 @@ paths:
       tags:
         - SignalR
       x-ms-examples:
-        ListBySubscription:
+        SignalR_ListBySubscription:
           parameters:
             api-version: '2018-10-01'
             subscriptionId: 00000000-0000-0000-0000-000000000000
@@ -167,7 +167,7 @@ paths:
       tags:
         - SignalR
       x-ms-examples:
-        CheckNameAvailability:
+        SignalR_CheckNameAvailability:
           parameters:
             api-version: '2018-10-01'
             location: eastus
@@ -201,7 +201,7 @@ paths:
       tags:
         - SignalR
       x-ms-examples:
-        ListUsagesByLocation:
+        Usages_List:
           parameters:
             api-version: '2018-10-01'
             location: eastus
@@ -243,7 +243,7 @@ paths:
       tags:
         - SignalR
       x-ms-examples:
-        ListByResourceGroup:
+        SignalR_ListByResourceGroup:
           parameters:
             api-version: '2018-10-01'
             resourceGroupName: myResourceGroup
@@ -273,7 +273,78 @@ paths:
                     type: Microsoft.SignalRService/SignalR
       x-ms-pageable:
         nextLinkName: nextLink
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/listKeys':
+    post:
+      description: Get the access keys of the SignalR resource.
+      operationId: SignalR_ListKeys
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/SignalRServiceName'
+      responses:
+        '200':
+          description: Success. The response describes SignalR service access keys.
+          schema:
+            $ref: '#/definitions/SignalRKeys'
+      tags:
+        - SignalR
+      x-ms-examples:
+        SignalR_ListKeys:
+          parameters:
+            api-version: '2018-10-01'
+            resourceGroupName: myResourceGroup
+            resourceName: mySignalRService
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '200':
+              body:
+                primaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=primaryAccessKey;Version=1.0'
+                primaryKey: primaryAccessKey
+                secondaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=secondaryAccessKey;Version=1.0'
+                secondaryKey: secondaryAccessKey
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/regenerateKey':
+    post:
+      description: Regenerate SignalR service access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.
+      operationId: SignalR_RegenerateKey
+      parameters:
+        - description: Parameter that describes the Regenerate Key Operation.
+          in: body
+          name: parameters
+          required: false
+          schema:
+            $ref: '#/definitions/RegenerateKeyParameters'
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/SubscriptionIdParameter'
+        - $ref: '#/parameters/ResourceGroupParameter'
+        - $ref: '#/parameters/SignalRServiceName'
+      responses:
+        '201':
+          description: Created and an async operation is executing in background to make the new key to take effect. The response contains new keys and a Location header to query the async operation result.
+          schema:
+            $ref: '#/definitions/SignalRKeys'
+      tags:
+        - SignalR
+      x-ms-examples:
+        SignalR_RegenerateKey:
+          parameters:
+            api-version: '2018-10-01'
+            parameters:
+              keyType: Primary
+            resourceGroupName: myResourceGroup
+            resourceName: mySignalRService
+            subscriptionId: 00000000-0000-0000-0000-000000000000
+          responses:
+            '201':
+              body:
+                primaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=primaryAccessKey;Version=1.0;'
+                primaryKey: primaryAccessKey
+                secondaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=secondaryAccessKey;Version=1.0;'
+                secondaryKey: secondaryAccessKey
+              headers:
+                Location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...'
+      x-ms-long-running-operation: true
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}':
     delete:
       description: Operation to delete a SignalR service.
       operationId: SignalR_Delete
@@ -290,7 +361,7 @@ paths:
       tags:
         - SignalR
       x-ms-examples:
-        Delete:
+        SignalR_Delete:
           parameters:
             api-version: '2018-10-01'
             resourceGroupName: myResourceGroup
@@ -312,13 +383,13 @@ paths:
         - $ref: '#/parameters/SignalRServiceName'
       responses:
         '200':
-          description: Success. The response describe the corresponding SignalR service.
+          description: Success. The response describes the corresponding SignalR service.
           schema:
             $ref: '#/definitions/SignalRResource'
       tags:
         - SignalR
       x-ms-examples:
-        Get:
+        SignalR_Get:
           parameters:
             api-version: '2018-10-01'
             resourceGroupName: myResourceGroup
@@ -370,7 +441,7 @@ paths:
       tags:
         - SignalR
       x-ms-examples:
-        Update:
+        SignalR_Update:
           parameters:
             api-version: '2018-10-01'
             parameters:
@@ -431,11 +502,11 @@ paths:
           schema:
             $ref: '#/definitions/SignalRResource'
         '202':
-          description: Accepted. The response indicates the exiting SignalR service is now updating  and contains a Location header to query the operation result..
+          description: Accepted. The response indicates the exiting SignalR service is now updating and contains a Location header to query the operation result..
       tags:
         - SignalR
       x-ms-examples:
-        CreateOrUpdate:
+        SignalR_CreateOrUpdate:
           parameters:
             api-version: '2018-10-01'
             parameters:
@@ -479,76 +550,34 @@ paths:
               headers:
                 Location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...'
       x-ms-long-running-operation: true
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/listKeys':
+  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/restart':
     post:
-      description: Get the access keys of the SignalR resource.
-      operationId: SignalR_ListKeys
+      description: Operation to restart a SignalR service.
+      operationId: SignalR_Restart
       parameters:
         - $ref: '#/parameters/ApiVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
         - $ref: '#/parameters/ResourceGroupParameter'
         - $ref: '#/parameters/SignalRServiceName'
       responses:
-        '200':
-          description: Success. The response describes SignalR service access keys.
-          schema:
-            $ref: '#/definitions/SignalRKeys'
+        '202':
+          description: Accepted. The response indicates the restart operation is performed in the background.
+        '204':
+          description: Success. The response indicates the operation is successful and no content will be returned.
       tags:
         - SignalR
       x-ms-examples:
-        ListKeys:
+        SignalR_Restart:
           parameters:
             api-version: '2018-10-01'
             resourceGroupName: myResourceGroup
             resourceName: mySignalRService
             subscriptionId: 00000000-0000-0000-0000-000000000000
           responses:
-            '200':
-              body:
-                primaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=primaryAccessKey;Version=1.0'
-                primaryKey: primaryAccessKey
-                secondaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=secondaryAccessKey;Version=1.0'
-                secondaryKey: secondaryAccessKey
-  '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}/regenerateKey':
-    post:
-      description: Regenerate SignalR service access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.
-      operationId: SignalR_RegenerateKey
-      parameters:
-        - description: Parameter that describes the Regenerate Key Operation.
-          in: body
-          name: parameters
-          required: false
-          schema:
-            $ref: '#/definitions/RegenerateKeyParameters'
-        - $ref: '#/parameters/ApiVersionParameter'
-        - $ref: '#/parameters/SubscriptionIdParameter'
-        - $ref: '#/parameters/ResourceGroupParameter'
-        - $ref: '#/parameters/SignalRServiceName'
-      responses:
-        '201':
-          description: Created and an async operation is executing in background to make the new key to take effect. The response contains new keys and a Location header to query the async operation result.
-          schema:
-            $ref: '#/definitions/SignalRKeys'
-      tags:
-        - SignalR
-      x-ms-examples:
-        RegenerateKey:
-          parameters:
-            api-version: '2018-10-01'
-            parameters:
-              keyType: Primary
-            resourceGroupName: myResourceGroup
-            resourceName: mySignalRService
-            subscriptionId: 00000000-0000-0000-0000-000000000000
-          responses:
-            '201':
-              body:
-                primaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=primaryAccessKey;'
-                primaryKey: primaryAccessKey
-                secondaryConnectionString: 'Endpoint=https://yourServiceName.service.signalr.net;AccessKey=secondaryAccessKey;'
-                secondaryKey: secondaryAccessKey
+            '202':
               headers:
                 Location: 'https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToOperationResult...'
+            '204': {}
       x-ms-long-running-operation: true
 definitions:
   Dimension:
@@ -722,7 +751,7 @@ definitions:
         description: 'Optional, string. When the name field is the combination of tier and some other value, this would be the standalone code.'
         type: string
       tier:
-        description: 'Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead for Basic tier.'
+        description: 'Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead.'
         enum:
           - Free
           - Basic
@@ -809,12 +838,12 @@ definitions:
           modelAsString: true
           name: ProvisioningState
       publicPort:
-        description: The publicly accessibly port of the SignalR service which is designed for browser/client side usage.
+        description: The publicly accessible port of the SignalR service which is designed for browser/client side usage.
         format: int32
         readOnly: true
         type: integer
       serverPort:
-        description: The publicly accessibly port of the SignalR service which is designed for customer server side usage.
+        description: The publicly accessible port of the SignalR service which is designed for customer server side usage.
         format: int32
         readOnly: true
         type: integer

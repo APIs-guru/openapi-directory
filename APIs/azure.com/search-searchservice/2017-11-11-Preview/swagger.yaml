@@ -127,7 +127,7 @@ paths:
                       softDeleteMarkerValue: 'true'
                     description: My Cosmos DB data source.
                     name: mydocdbdatasource
-                    type: documentdb
+                    type: cosmosdb
                   - container:
                       name: mycontainer
                     credentials:
@@ -178,7 +178,7 @@ paths:
                 softDeleteMarkerValue: 'true'
               description: My Cosmos DB data source.
               name: mydocdbdatasource
-              type: documentdb
+              type: cosmosdb
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
           responses:
@@ -198,7 +198,7 @@ paths:
                   softDeleteMarkerValue: 'true'
                 description: My Cosmos DB data source.
                 name: mydocdbdatasource
-                type: documentdb
+                type: cosmosdb
       x-ms-request-id: request-id
   '/datasources(''{dataSourceName}'')':
     delete:
@@ -278,7 +278,7 @@ paths:
                   softDeleteMarkerValue: 'true'
                 description: My Cosmos DB data source.
                 name: mydocdbdatasource
-                type: documentdb
+                type: cosmosdb
       x-ms-request-id: request-id
     put:
       description: Creates a new Azure Search datasource or updates a datasource if it already exists.
@@ -333,7 +333,7 @@ paths:
                 softDeleteMarkerValue: 'true'
               description: My Cosmos DB data source.
               name: mydocdbdatasource
-              type: documentdb
+              type: cosmosdb
             dataSourceName: mydatasource
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -354,7 +354,7 @@ paths:
                   softDeleteMarkerValue: 'true'
                 description: My Cosmos DB data source.
                 name: mydocdbdatasource
-                type: documentdb
+                type: cosmosdb
             '201':
               body:
                 container:
@@ -371,7 +371,7 @@ paths:
                   softDeleteMarkerValue: 'true'
                 description: My Cosmos DB data source.
                 name: mydocdbdatasource
-                type: documentdb
+                type: cosmosdb
       x-ms-request-id: request-id
   /indexers:
     get:
@@ -754,8 +754,6 @@ paths:
                     errors:
                       - errorMessage: Document key cannot be missing or empty.
                         key: ''
-                        status: false
-                        statusCode: 400
                     finalTrackingState: null
                     initialTrackingState: null
                     itemsFailed: 1
@@ -2049,7 +2047,7 @@ paths:
             api-version: 2017-11-11-Preview
             indexName: hotels
             request:
-              analyzer: standard
+              analyzer: standard.lucene
               text: Text to analyze
             searchDnsSuffix: search.windows.net
             searchServiceName: myservice
@@ -2887,6 +2885,7 @@ definitions:
         description: An optional list of character filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter.
         items:
           $ref: '#/definitions/CharFilterName'
+          x-nullable: false
         type: array
       text:
         description: The text to break into tokens.
@@ -2895,6 +2894,7 @@ definitions:
         description: An optional list of token filters to use when breaking the given text. This parameter can only be set when using the tokenizer parameter.
         items:
           $ref: '#/definitions/TokenFilterName'
+          x-nullable: false
         type: array
       tokenizer:
         $ref: '#/definitions/TokenizerName'
@@ -2925,12 +2925,106 @@ definitions:
       - name
   AnalyzerName:
     description: Defines the names of all text analyzers supported by Azure Search.
+    enum:
+      - ar.microsoft
+      - ar.lucene
+      - hy.lucene
+      - bn.microsoft
+      - eu.lucene
+      - bg.microsoft
+      - bg.lucene
+      - ca.microsoft
+      - ca.lucene
+      - zh-Hans.microsoft
+      - zh-Hans.lucene
+      - zh-Hant.microsoft
+      - zh-Hant.lucene
+      - hr.microsoft
+      - cs.microsoft
+      - cs.lucene
+      - da.microsoft
+      - da.lucene
+      - nl.microsoft
+      - nl.lucene
+      - en.microsoft
+      - en.lucene
+      - et.microsoft
+      - fi.microsoft
+      - fi.lucene
+      - fr.microsoft
+      - fr.lucene
+      - gl.lucene
+      - de.microsoft
+      - de.lucene
+      - el.microsoft
+      - el.lucene
+      - gu.microsoft
+      - he.microsoft
+      - hi.microsoft
+      - hi.lucene
+      - hu.microsoft
+      - hu.lucene
+      - is.microsoft
+      - id.microsoft
+      - id.lucene
+      - ga.lucene
+      - it.microsoft
+      - it.lucene
+      - ja.microsoft
+      - ja.lucene
+      - kn.microsoft
+      - ko.microsoft
+      - ko.lucene
+      - lv.microsoft
+      - lv.lucene
+      - lt.microsoft
+      - ml.microsoft
+      - ms.microsoft
+      - mr.microsoft
+      - nb.microsoft
+      - no.lucene
+      - fa.lucene
+      - pl.microsoft
+      - pl.lucene
+      - pt-BR.microsoft
+      - pt-BR.lucene
+      - pt-PT.microsoft
+      - pt-PT.lucene
+      - pa.microsoft
+      - ro.microsoft
+      - ro.lucene
+      - ru.microsoft
+      - ru.lucene
+      - sr-cyrillic.microsoft
+      - sr-latin.microsoft
+      - sk.microsoft
+      - sl.microsoft
+      - es.microsoft
+      - es.lucene
+      - sv.microsoft
+      - sv.lucene
+      - ta.microsoft
+      - te.microsoft
+      - th.microsoft
+      - th.lucene
+      - tr.microsoft
+      - tr.lucene
+      - uk.microsoft
+      - ur.microsoft
+      - vi.microsoft
+      - standard.lucene
+      - standardasciifolding.lucene
+      - keyword
+      - pattern
+      - simple
+      - stop
+      - whitespace
     externalDocs:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Language-support'
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: AnalyzerName
   AsciiFoldingTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -2961,12 +3055,14 @@ definitions:
       - name
   CharFilterName:
     description: Defines the names of all character filters supported by Azure Search.
+    enum:
+      - html_strip
     externalDocs:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search'
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: CharFilterName
   CjkBigramTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -3079,11 +3175,13 @@ definitions:
         description: 'A list of character filters used to prepare input text before it is processed by the tokenizer. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed.'
         items:
           $ref: '#/definitions/CharFilterName'
+          x-nullable: false
         type: array
       tokenFilters:
         description: 'A list of token filters used to filter out or modify the tokens generated by a tokenizer. For example, you can specify a lowercase filter that converts all characters to lowercase. The filters are run in the order in which they are listed.'
         items:
           $ref: '#/definitions/TokenFilterName'
+          x-nullable: false
         type: array
       tokenizer:
         $ref: '#/definitions/TokenizerName'
@@ -3161,6 +3259,8 @@ definitions:
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Create-Data-Source'
         type: string
+        x-ms-mutability:
+          - create
     required:
       - connectionString
   DataSourceListResult:
@@ -3175,16 +3275,29 @@ definitions:
         x-ms-client-name: DataSources
   DataSourceType:
     description: Defines the type of an Azure Search datasource.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    enum:
+      - azuresql
+      - cosmosdb
+      - azureblob
+      - azuretable
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: DataSourceType
   DataType:
     description: Defines the data type of a field in an Azure Search index.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    enum:
+      - Edm.String
+      - Edm.Int32
+      - Edm.Int64
+      - Edm.Double
+      - Edm.Boolean
+      - Edm.DateTimeOffset
+      - Edm.GeographyPoint
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: DataType
   DefaultCognitiveServices:
     allOf:
       - $ref: '#/definitions/CognitiveServices'
@@ -3386,10 +3499,16 @@ definitions:
     x-ms-discriminator-value: '#Microsoft.Skills.Text.EntityRecognitionSkill'
   EntityRecognitionSkillLanguage:
     description: The language codes supported for input text by EntityRecognitionSkill.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    enum:
+      - de
+      - en
+      - es
+      - fr
+      - it
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: EntityRecognitionSkillLanguage
   Field:
     description: 'Represents a field in an index definition in Azure Search, which describes the name, data type, and search behavior of a field.'
     externalDocs:
@@ -3397,29 +3516,24 @@ definitions:
     properties:
       analyzer:
         $ref: '#/definitions/AnalyzerName'
-        description: 'The name of the analyzer to use for the field at search time and indexing time. This option can be used only with searchable fields and it can''t be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field.'
+        description: 'The name of the language analyzer to use for the field. This option can be used only with searchable fields and it can''t be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field.'
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Language-support'
       facetable:
-        description: A value indicating whether it is possible to facet on this field. Not valid for geo-point fields. Default is false.
+        description: 'A value indicating whether to enable the field to be referenced in facet queries. Typically used in a presentation of search results that includes hit count by category (for example, search for digital cameras and see hits by brand, by megapixels, by price, and so on). This option cannot be used with fields of type Edm.GeographyPoint. All other fields are facetable by default.'
         type: boolean
-        x-ms-client-name: isFacetable
-        x-nullable: false
       filterable:
-        description: A value indicating whether the field can be used in filter expressions. Default is false.
+        description: 'A value indicating whether to enable the field to be referenced in $filter queries. filterable differs from searchable in how strings are handled. Fields of type Edm.String or Collection(Edm.String) that are filterable do not undergo word-breaking, so comparisons are for exact matches only. For example, if you set such a field f to "sunny day", $filter=f eq ''sunny'' will find no matches, but $filter=f eq ''sunny day'' will. All fields are filterable by default.'
         type: boolean
-        x-ms-client-name: isFilterable
-        x-nullable: false
       indexAnalyzer:
         $ref: '#/definitions/AnalyzerName'
         description: 'The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option. Once the analyzer is chosen, it cannot be changed for the field.'
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Language-support'
       key:
-        description: A value indicating whether the field is the key of the index. Valid only for string fields. Every index must have exactly one key field.
+        default: false
+        description: A value indicating whether the field uniquely identifies documents in the index. Exactly one field in each index must be chosen as the key field and it must be of type Edm.String. Key fields can be used to look up documents directly and update or delete specific documents. Default is false.
         type: boolean
-        x-ms-client-name: isKey
-        x-nullable: false
       name:
         description: The name of the field.
         externalDocs:
@@ -3427,27 +3541,21 @@ definitions:
         type: string
       retrievable:
         default: true
-        description: A value indicating whether the field can be returned in a search result. Default is true.
+        description: 'A value indicating whether the field can be returned in a search result. This is useful when you want to use a field (for example, margin) as a filter, sorting, or scoring mechanism but do not want the field to be visible to the end user. This property must be true for key fields. This property can be changed on existing fields. Enabling this property does not cause any increase in index storage requirements. All fields are retrievable by default.'
         type: boolean
-        x-ms-client-name: isRetrievable
-        x-nullable: false
       searchAnalyzer:
         $ref: '#/definitions/AnalyzerName'
         description: The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This analyzer can be updated on an existing field.
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Language-support'
       searchable:
-        description: A value indicating whether the field is included in full-text searches. Valid only for string or string collection fields. Default is false.
+        description: 'A value indicating whether the field is full-text search-able. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like "sunny day", internally it will be split into the individual tokens "sunny" and "day". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. Fields of other types are not searchable. Note: searchable fields consume extra space in your index since Azure Search will store an additional tokenized version of the field value for full-text searches. If you want to save space in your index and you don''t need a field to be included in searches, set searchable to false.'
         type: boolean
-        x-ms-client-name: isSearchable
-        x-nullable: false
       sortable:
-        description: A value indicating whether the field can be used in orderby expressions. Not valid for string collection fields. Default is false.
+        description: 'A value indicating whether to enable the field to be referenced in $orderby expressions. By default Azure Search sorts results by score, but in many experiences users will want to sort by fields in the documents. Fields of type Collection(Edm.String) cannot be sortable. All other fields are sortable by default.'
         type: boolean
-        x-ms-client-name: isSortable
-        x-nullable: false
       synonymMaps:
-        description: A list of synonym maps to apply in query expansion. Only one synonym map is allowed in the list currently. Synonym maps must be uploaded first to be referenced. This option can be used only with searchable fields.
+        description: A list of synonym map names that associates synonym maps with the field. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields.
         externalDocs:
           url: 'https://docs.microsoft.com/rest/api/searchservice/Synonym-Map-operations'
         items:
@@ -3456,10 +3564,11 @@ definitions:
       type:
         $ref: '#/definitions/DataType'
         description: The data type of the field.
+        externalDocs:
+          url: 'https://docs.microsoft.com/rest/api/searchservice/supported-data-types'
     required:
       - name
       - type
-    x-ms-external: true
   FieldMapping:
     description: Defines a mapping between a field in a data source and a target field in an index.
     externalDocs:
@@ -3550,10 +3659,13 @@ definitions:
     x-ms-discriminator-value: '#Microsoft.Skills.Vision.ImageAnalysisSkill'
   ImageAnalysisSkillLanguage:
     description: The language codes supported for input by ImageAnalysisSkill.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    enum:
+      - en
+      - zh
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: ImageAnalysisSkillLanguage
   ImageDetail:
     description: A string indicating which domain-specific details to return.
     enum:
@@ -3922,10 +4034,27 @@ definitions:
     x-ms-discriminator-value: '#Microsoft.Skills.Text.KeyPhraseExtractionSkill'
   KeyPhraseExtractionSkillLanguage:
     description: The language codes supported for input text by KeyPhraseExtractionSkill.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    enum:
+      - da
+      - nl
+      - en
+      - fi
+      - fr
+      - de
+      - it
+      - ja
+      - ko
+      - 'no'
+      - pl
+      - pt-PT
+      - pt-BR
+      - ru
+      - es
+      - sv
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: KeyPhraseExtractionSkillLanguage
   KeywordMarkerTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'
@@ -4317,10 +4446,25 @@ definitions:
     x-ms-external: true
   NamedEntityRecognitionSkillLanguage:
     description: The language codes supported for input text by NamedEntityRecognitionSkill.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    enum:
+      - ar
+      - cs
+      - da
+      - de
+      - en
+      - es
+      - fi
+      - fr
+      - he
+      - hu
+      - it
+      - ko
+      - pt-br
+      - pt
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: NamedEntityRecognitionSkillLanguage
   OcrSkill:
     allOf:
       - $ref: '#/definitions/Skill'
@@ -4342,10 +4486,37 @@ definitions:
     x-ms-discriminator-value: '#Microsoft.Skills.Vision.OcrSkill'
   OcrSkillLanguage:
     description: The language codes supported for input by OcrSkill.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    enum:
+      - zh-Hans
+      - zh-Hant
+      - cs
+      - da
+      - nl
+      - en
+      - fi
+      - fr
+      - de
+      - el
+      - hu
+      - it
+      - ja
+      - ko
+      - nb
+      - pl
+      - pt
+      - ru
+      - es
+      - sv
+      - tr
+      - ar
+      - ro
+      - sr-Cyrl
+      - sr-Latn
+      - sk
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: OcrSkillLanguage
   OutputFieldMappingEntry:
     description: Output field mapping for a skill.
     externalDocs:
@@ -4564,12 +4735,21 @@ definitions:
     x-ms-discriminator-value: '#Microsoft.Azure.Search.PhoneticTokenFilter'
   RegexFlags:
     description: Defines flags that can be combined to control how regular expressions are used in the pattern analyzer and pattern tokenizer.
+    enum:
+      - CANON_EQ
+      - CASE_INSENSITIVE
+      - COMMENTS
+      - DOTALL
+      - LITERAL
+      - MULTILINE
+      - UNICODE_CASE
+      - UNIX_LINES
     externalDocs:
       url: 'http://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html#field_summary'
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: RegexFlags
   ResourceCounter:
     description: Represents a resource's usage and quota.
     properties:
@@ -4663,10 +4843,26 @@ definitions:
     x-ms-discriminator-value: '#Microsoft.Skills.Text.SentimentSkill'
   SentimentSkillLanguage:
     description: The language codes supported for input text by SentimentSkill.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    enum:
+      - da
+      - nl
+      - en
+      - fi
+      - fr
+      - de
+      - el
+      - it
+      - 'no'
+      - pl
+      - pt-PT
+      - ru
+      - es
+      - sv
+      - tr
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: SentimentSkillLanguage
   ServiceCounters:
     description: Represents service-level resource counters and quotas.
     properties:
@@ -4773,7 +4969,7 @@ definitions:
       '@odata.type':
         type: string
       context:
-        description: 'Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content).'
+        description: 'Represents the level at which operations take place, such as the document root or document content (for example, /document or /document/content). The default is /document.'
         type: string
       description:
         description: 'The description of the skill which describes the inputs, outputs, and usage of the skill.'
@@ -4790,8 +4986,6 @@ definitions:
         type: array
     required:
       - '@odata.type'
-      - description
-      - context
       - inputs
       - outputs
   Skillset:
@@ -4907,10 +5101,20 @@ definitions:
     x-ms-discriminator-value: '#Microsoft.Skills.Text.SplitSkill'
   SplitSkillLanguage:
     description: The language codes supported for input text by SplitSkill.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    enum:
+      - da
+      - de
+      - en
+      - es
+      - fi
+      - fr
+      - it
+      - ko
+      - pt
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: SplitSkillLanguage
   SqlIntegratedChangeTrackingPolicy:
     allOf:
       - $ref: '#/definitions/DataChangeDetectionPolicy'
@@ -5160,8 +5364,13 @@ definitions:
         type: string
         x-ms-client-name: ETag
       format:
-        $ref: '#/definitions/SynonymMapFormat'
         description: The format of the synonym map. Only the 'solr' format is currently supported.
+        enum:
+          - solr
+        type: string
+        x-ms-enum:
+          modelAsString: false
+          name: SynonymMapFormat
       name:
         description: The name of the synonym map.
         externalDocs:
@@ -5176,12 +5385,6 @@ definitions:
       - name
       - format
       - synonyms
-  SynonymMapFormat:
-    description: The format of the synonym map. Only the 'solr' format is currently supported.
-    properties:
-      name:
-        type: string
-    x-ms-external: true
   SynonymMapListResult:
     description: 'Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps.'
     properties:
@@ -5297,12 +5500,47 @@ definitions:
       - name
   TokenFilterName:
     description: Defines the names of all token filters supported by Azure Search.
+    enum:
+      - arabic_normalization
+      - apostrophe
+      - asciifolding
+      - cjk_bigram
+      - cjk_width
+      - classic
+      - common_grams
+      - edgeNGram_v2
+      - elision
+      - german_normalization
+      - hindi_normalization
+      - indic_normalization
+      - keyword_repeat
+      - kstem
+      - length
+      - limit
+      - lowercase
+      - nGram_v2
+      - persian_normalization
+      - phonetic
+      - porter_stem
+      - reverse
+      - scandinavian_normalization
+      - scandinavian_folding
+      - shingle
+      - snowball
+      - sorani_normalization
+      - stemmer
+      - stopwords
+      - trim
+      - truncate
+      - unique
+      - uppercase
+      - word_delimiter
     externalDocs:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search'
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: TokenFilterName
   TokenInfo:
     description: Information about a token returned by an analyzer.
     properties:
@@ -5343,12 +5581,26 @@ definitions:
       - name
   TokenizerName:
     description: Defines the names of all tokenizers supported by Azure Search.
+    enum:
+      - classic
+      - edgeNGram
+      - keyword_v2
+      - letter
+      - lowercase
+      - microsoft_language_tokenizer
+      - microsoft_language_stemming_tokenizer
+      - nGram
+      - path_hierarchy_v2
+      - pattern
+      - standard_v2
+      - uax_url_email
+      - whitespace
     externalDocs:
       url: 'https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search'
-    properties:
-      name:
-        type: string
-    x-ms-external: true
+    type: string
+    x-ms-enum:
+      modelAsString: false
+      name: TokenizerName
   TruncateTokenFilter:
     allOf:
       - $ref: '#/definitions/TokenFilter'

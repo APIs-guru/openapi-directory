@@ -35,7 +35,7 @@ parameters:
     type: string
     x-ms-parameter-location: method
   BearerAuthPath:
-    description: The bearer authorization header to use; containing the user's ARM token used to validate azure accounts information.
+    description: The bearer authorization header to use; containing the user's ARM token used to validate Azure accounts information.
     in: header
     name: Authorization
     required: true
@@ -49,14 +49,6 @@ parameters:
     required: true
     type: string
     x-ms-parameter-location: method
-  Endpoint:
-    description: 'Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).'
-    in: path
-    name: Endpoint
-    required: true
-    type: string
-    x-ms-parameter-location: client
-    x-ms-skip-url-encoding: true
   ForcePath:
     default: false
     description: A flag to indicate whether to force an operation.
@@ -90,7 +82,6 @@ parameters:
     x-ms-parameter-location: method
   SlotNameInPath:
     description: The publishing slot name.
-    format: uuid
     in: path
     name: slotName
     required: true
@@ -115,7 +106,7 @@ parameters:
 paths:
   /apps/:
     get:
-      description: Lists all of the user applications.
+      description: Lists all of the user's applications.
       operationId: Apps_List
       parameters:
         - $ref: '#/parameters/SkipInPath'
@@ -165,7 +156,7 @@ paths:
       description: Creates a new LUIS app.
       operationId: Apps_Add
       parameters:
-        - description: 'A model containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. Default value for the version ID is 0.1. Note: the culture cannot be changed after the app is created.'
+        - description: 'An application containing Name, Description (optional), Culture, Usage Scenario (optional), Domain (optional) and initial version ID (optional) of the application. Default value for the version ID is "0.1". Note: the culture cannot be changed after the app is created.'
           in: body
           name: applicationCreateObject
           required: true
@@ -232,7 +223,7 @@ paths:
               headers: {}
   /apps/cultures:
     get:
-      description: Gets the supported application cultures.
+      description: 'Gets a list of supported cultures. Cultures are equivalent to the written language and locale. For example,"en-us" represents the U.S. variation of English.'
       operationId: Apps_ListSupportedCultures
       produces:
         - application/json
@@ -338,7 +329,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a prebuilt domain along with its models as a new application.
+      description: Adds a prebuilt domain along with its intent and entity models as a new application.
       operationId: Apps_AddCustomPrebuiltDomain
       parameters:
         - description: A prebuilt domain create object containing the name and culture of the domain.
@@ -374,7 +365,7 @@ paths:
                 location: 'https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/customprebuiltdomains/00000000-0000-0000-0000-000000000000'
   '/apps/customprebuiltdomains/{culture}':
     get:
-      description: Gets all the available custom prebuilt domains for a specific culture.
+      description: Gets all the available prebuilt domains for a specific culture.
       operationId: Apps_ListAvailableCustomPrebuiltDomainsForCulture
       parameters:
         - description: Culture.
@@ -386,7 +377,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Returns a list of all domains and their intents/entities representation for a specific culture.
+          description: Returns a list of all domains and their intents and entities for a specific culture.
           schema:
             $ref: '#/definitions/PrebuiltDomainsList'
         default:
@@ -494,10 +485,10 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Imports an application to LUIS, the application''s structure should be included in the request body.'
+      description: 'Imports an application to LUIS, the application''s structure is included in the request body.'
       operationId: Apps_Import
       parameters:
-        - description: 'The application name to create. If not specified, the application name will be read from the imported object.'
+        - description: 'The application name to create. If not specified, the application name will be read from the imported object. If the application name already exists, an error is returned.'
           in: query
           name: appName
           type: string
@@ -838,12 +829,12 @@ paths:
     delete:
       consumes:
         - application/json
-      description: Removes assigned azure account from the application.
+      description: Removes assigned Azure account from the application.
       operationId: AzureAccounts_RemoveFromApp
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/BearerAuthPath'
-        - description: The azure account information object.
+        - description: The Azure account information object.
           in: body
           name: azureAccountInfoObject
           schema:
@@ -859,7 +850,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: apps - Removes an assigned LUIS azure account from an application
+      summary: apps - Removes an assigned LUIS Azure account from an application
       x-ms-examples:
         Successful delete assigned azure account request:
           parameters:
@@ -878,7 +869,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets the LUIS azure accounts assigned to the application for the user using his ARM token.
+      description: Gets the LUIS Azure accounts assigned to the application for the user using his ARM token.
       operationId: AzureAccounts_GetAssigned
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -894,7 +885,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: apps - Get LUIS azure accounts assigned to the application
+      summary: apps - Get LUIS Azure accounts assigned to the application
       x-ms-examples:
         Successful Get assigned azure accounts request:
           parameters:
@@ -912,12 +903,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: Assigns an azure account to the application.
+      description: Assigns an Azure account to the application.
       operationId: AzureAccounts_AssignToApp
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/BearerAuthPath'
-        - description: The azure account information object.
+        - description: The Azure account information object.
           in: body
           name: azureAccountInfoObject
           schema:
@@ -933,7 +924,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: apps - Assign a LUIS azure account to an application
+      summary: apps - Assign a LUIS Azure account to an application
       x-ms-examples:
         Successful Assign azure account request:
           parameters:
@@ -1091,11 +1082,11 @@ paths:
     put:
       consumes:
         - application/json
-      description: 'Replaces the current users access list with the one sent in the body. If an empty list is sent, all access to other users will be removed.'
+      description: 'Replaces the current user access list with the new list sent in the body. If an empty list is sent, all access to other users will be removed.'
       operationId: Permissions_Update
       parameters:
         - $ref: '#/parameters/AppIdInPath'
-        - description: A model containing a list of user's email addresses.
+        - description: A model containing a list of user email addresses.
           in: body
           name: collaborators
           required: true
@@ -1187,7 +1178,7 @@ paths:
               headers: {}
   '/apps/{appId}/publishsettings':
     get:
-      description: Get the application publish settings.
+      description: Get the application publish settings including 'UseAllTrainingData'.
       operationId: Apps_GetPublishSettings
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -1219,7 +1210,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: Updates the application publish settings.
+      description: Updates the application publish settings including 'UseAllTrainingData'.
       operationId: Apps_UpdatePublishSettings
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -1258,7 +1249,7 @@ paths:
               headers: {}
   '/apps/{appId}/querylogs':
     get:
-      description: Gets the query logs of the past month for the application.
+      description: Gets the logs of the past month's endpoint queries for the application.
       operationId: Apps_DownloadQueryLogs
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -1288,7 +1279,7 @@ paths:
                 Content-Type: application/octet-stream
   '/apps/{appId}/settings':
     get:
-      description: Get the application settings.
+      description: Get the application settings including 'UseAllTrainingData'.
       operationId: Apps_GetSettings
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -1318,7 +1309,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: Updates the application settings.
+      description: Updates the application settings including 'UseAllTrainingData'.
       operationId: Apps_UpdateSettings
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -1355,7 +1346,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions':
     get:
-      description: Gets the application versions info.
+      description: Gets a list of versions for this application ID.
       operationId: Versions_List
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -1638,7 +1629,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets the version info.
+      description: 'Gets the version information such as date created, last modified date, endpoint URL, count of intents and entities, training and publishing status.'
       operationId: Versions_Get
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -1724,7 +1715,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Creates a new version using the current snapshot of the selected application version.
+      description: Creates a new version from the selected version.
       operationId: Versions_Clone
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -1732,13 +1723,14 @@ paths:
         - description: A model containing the new version ID.
           in: body
           name: versionCloneObject
+          required: true
           schema:
             $ref: '#/definitions/TaskUpdateObject'
       produces:
         - application/json
       responses:
         '201':
-          description: The version ID of the created task.
+          description: The new version ID.
           schema:
             type: string
         default:
@@ -1760,7 +1752,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/closedlists':
     get:
-      description: Gets information about the closedlist models.
+      description: Gets information about all the list entity models in a version of the application.
       operationId: Model_ListClosedLists
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -1771,7 +1763,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: A list of closedlist entity model infos.
+          description: A list of list entity model infos.
           schema:
             $ref: '#/definitions/ClosedListEntityExtractorsList'
         default:
@@ -1821,12 +1813,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a closed list model to the application.
+      description: Adds a list entity model to a version of the application.
       operationId: Model_AddClosedList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: A model containing the name and words for the new closed list entity extractor.
+        - description: A model containing the name and words for the new list entity extractor.
           in: body
           name: closedListModelCreateObject
           required: true
@@ -1874,12 +1866,12 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}':
     delete:
-      description: Deletes a closed list model from the application.
+      description: Deletes a list entity model from a version of the application.
       operationId: Model_DeleteClosedList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The closed list model ID.
+        - description: The list entity model ID.
           format: uuid
           in: path
           name: clEntityId
@@ -1889,7 +1881,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Successfully delete Closed List from application.
+          description: Successfully delete list entity from a version of application.
           schema:
             $ref: '#/definitions/OperationStatus'
         default:
@@ -1911,12 +1903,12 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets information of a closed list model.
+      description: Gets information about a list entity in a version of the application.
       operationId: Model_GetClosedList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The closed list model ID.
+        - description: The list model ID.
           format: uuid
           in: path
           name: clEntityId
@@ -1926,7 +1918,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: The closed list model info.
+          description: The list model info.
           schema:
             $ref: '#/definitions/ClosedListEntityExtractor'
         default:
@@ -1975,12 +1967,12 @@ paths:
     patch:
       consumes:
         - application/json
-      description: Adds a batch of sublists to an existing closedlist.
+      description: Adds a batch of sublists to an existing list entity in a version of the application.
       operationId: Model_PatchClosedList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The closed list model ID.
+        - description: The list entity model ID.
           format: uuid
           in: path
           name: clEntityId
@@ -1996,7 +1988,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Successfully added sublists to Closed List.
+          description: Successfully added sublists to the list entity.
           schema:
             $ref: '#/definitions/OperationStatus'
         default:
@@ -2026,18 +2018,18 @@ paths:
     put:
       consumes:
         - application/json
-      description: Updates the closed list model.
+      description: Updates the list entity in a version of the application.
       operationId: Model_UpdateClosedList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The closed list model ID.
+        - description: The list model ID.
           format: uuid
           in: path
           name: clEntityId
           required: true
           type: string
-        - description: The new entity name and words list.
+        - description: The new list entity name and words list.
           in: body
           name: closedListModelUpdateObject
           required: true
@@ -2047,7 +2039,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Successfully updated Closed List name and words list.
+          description: Successfully updated list entity name and words list.
           schema:
             $ref: '#/definitions/OperationStatus'
         default:
@@ -2079,12 +2071,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a list to an existing closed list.
+      description: Adds a sublist to an existing list entity in a version of the application.
       operationId: Model_AddSubList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The closed list entity extractor ID.
+        - description: The list entity extractor ID.
           format: uuid
           in: path
           name: clEntityId
@@ -2100,8 +2092,9 @@ paths:
         - application/json
       responses:
         '201':
-          description: The ID of the newly created list.
+          description: The ID of the newly created sublist.
           schema:
+            format: int64
             type: integer
         default:
           description: Error Response.
@@ -2127,18 +2120,19 @@ paths:
                 Location: 'https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/86226c53-b7a6-416f-876b-226b2b5ab07b/versions/0.1/closedlists/28027e3b-8356-4cdf-b395-24afb94e9469/sublists/6134877'
   '/apps/{appId}/versions/{versionId}/closedlists/{clEntityId}/sublists/{subListId}':
     delete:
-      description: Deletes a sublist of a specific closed list model.
+      description: Deletes a sublist of a specific list entity model from a version of the application.
       operationId: Model_DeleteSubList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The closed list entity extractor ID.
+        - description: The list entity extractor ID.
           format: uuid
           in: path
           name: clEntityId
           required: true
           type: string
         - description: The sublist ID.
+          format: int64
           in: path
           name: subListId
           required: true
@@ -2172,18 +2166,19 @@ paths:
     put:
       consumes:
         - application/json
-      description: Updates one of the closed list's sublists.
+      description: Updates one of the list entity's sublists in a version of the application.
       operationId: Model_UpdateSubList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The closed list entity extractor ID.
+        - description: The list entity extractor ID.
           format: uuid
           in: path
           name: clEntityId
           required: true
           type: string
         - description: The sublist ID.
+          format: int64
           in: path
           name: subListId
           required: true
@@ -2227,7 +2222,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/closedlists/{entityId}/roles':
     get:
-      operationId: Model_GetClosedListEntityRoles
+      operationId: Model_ListClosedListEntityRoles
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -2248,7 +2243,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get All Entity Roles for a given entity
+      summary: Get all roles for a list entity in a version of the application.
       x-ms-examples:
         Successful Get Closed List Entity Roles request:
           parameters:
@@ -2296,7 +2291,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Create an entity role for an entity in the application.
+      summary: Create a role for a list entity in a version of the application.
       x-ms-examples:
         Successful Create Closed List Entity Role request:
           parameters:
@@ -2341,7 +2336,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Delete an entity role.
+      summary: Delete a role for a given list entity in a version of the application.
       x-ms-examples:
         Successful Delete Prebuilt Entity Role request:
           parameters:
@@ -2385,7 +2380,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get one entity role for a given entity
+      summary: Get one role for a given list entity in a version of the application.
       x-ms-examples:
         Successful Get Closed List Entity Role request:
           parameters:
@@ -2437,7 +2432,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Update an entity role for a given entity
+      summary: Update a role for a given list entity in a version of the application.
       x-ms-examples:
         Successful Update Closed List Entity Extractor Role request:
           parameters:
@@ -2457,7 +2452,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/compositeentities':
     get:
-      description: Gets information about the composite entity models.
+      description: Gets information about all the composite entity models in a version of the application.
       operationId: Model_ListCompositeEntities
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -2505,7 +2500,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a composite entity extractor to the application.
+      description: Adds a composite entity extractor to a version of the application.
       operationId: Model_AddCompositeEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -2546,7 +2541,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}':
     delete:
-      description: Deletes a composite entity extractor from the application.
+      description: Deletes a composite entity from a version of the application.
       operationId: Model_DeleteCompositeEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -2578,7 +2573,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets information about the composite entity model.
+      description: Gets information about a composite entity in a version of the application.
       operationId: Model_GetCompositeEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -2624,7 +2619,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: Updates the composite entity extractor.
+      description: Updates a composite entity in a version of the application.
       operationId: Model_UpdateCompositeEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -2667,7 +2662,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Creates a single child in an existing composite entity model.
+      description: Creates a single child in an existing composite entity model in a version of the application.
       operationId: Model_AddCompositeEntityChild
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -2710,7 +2705,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/children/{cChildId}':
     delete:
-      description: Deletes a composite entity extractor child from the application.
+      description: Deletes a composite entity extractor child from a version of the application.
       operationId: Model_DeleteCompositeEntityChild
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -2750,7 +2745,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/compositeentities/{cEntityId}/roles':
     get:
-      operationId: Model_GetCompositeEntityRoles
+      operationId: Model_ListCompositeEntityRoles
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -2766,7 +2761,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get All Entity Roles for a given entity
+      summary: Get all roles for a composite entity in a version of the application
       x-ms-examples:
         Successful Get Composite Entity Roles request:
           parameters:
@@ -2809,7 +2804,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Create an entity role for an entity in the application.
+      summary: Create a role for a composite entity in a version of the application.
       x-ms-examples:
         Successful Create Composite Entity Role request:
           parameters:
@@ -2849,7 +2844,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Delete an entity role.
+      summary: Delete a role for a given composite entity in a version of the application.
       x-ms-examples:
         Successful Delete Composite Entity Role request:
           parameters:
@@ -2888,7 +2883,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get one entity role for a given entity
+      summary: Get one role for a given composite entity in a version of the application
       x-ms-examples:
         Successful Get Composite Entity Role request:
           parameters:
@@ -2935,7 +2930,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Update an entity role for a given entity
+      summary: Update a role for a given composite entity in a version of the application
       x-ms-examples:
         Successful Update Composite Entity Extractor Role request:
           parameters:
@@ -2957,7 +2952,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a customizable prebuilt domain along with all of its models to this application.
+      description: Adds a customizable prebuilt domain along with all of its intent and entity models in a version of the application.
       operationId: Model_AddCustomPrebuiltDomain
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -2972,7 +2967,7 @@ paths:
         - application/json
       responses:
         '201':
-          description: An array of the created custom prebuilt domain model Ids.
+          description: An array of the created customizable prebuilt domain intent and entity model Ids.
           schema:
             $ref: '#/definitions/GuidList'
         default:
@@ -2998,7 +2993,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/customprebuiltdomains/{domainName}':
     delete:
-      description: Deletes a prebuilt domain's models from the application.
+      description: Deletes a prebuilt domain's models in a version of the application.
       operationId: Model_DeleteCustomPrebuiltDomain
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -3035,7 +3030,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/customprebuiltentities':
     get:
-      description: Gets all custom prebuilt entities information of this application.
+      description: Gets all prebuilt entities used in a version of the application.
       operationId: Model_ListCustomPrebuiltEntities
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -3044,7 +3039,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Returns a list of all custom prebuilt entities and their representations.
+          description: Returns a list of all prebuilt entities and their representations.
           schema:
             $ref: '#/definitions/EntityExtractorsList'
         default:
@@ -3076,12 +3071,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a custom prebuilt entity model to the application.
+      description: Adds a prebuilt entity model to a version of the application.
       operationId: Model_AddCustomPrebuiltEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: A model object containing the name of the custom prebuilt entity and the name of the domain to which this model belongs.
+        - description: A model object containing the name of the prebuilt entity and the name of the domain to which this model belongs.
           in: body
           name: prebuiltDomainModelCreateObject
           required: true
@@ -3091,7 +3086,7 @@ paths:
         - application/json
       responses:
         '201':
-          description: The ID of the created model.
+          description: The ID of the created prebuilt model.
           schema:
             $ref: '#/definitions/GuidResponse'
           x-nullable: false
@@ -3115,7 +3110,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/customprebuiltentities/{entityId}/roles':
     get:
-      operationId: Model_GetCustomPrebuiltEntityRoles
+      operationId: Model_ListCustomPrebuiltEntityRoles
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -3136,7 +3131,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get All Entity Roles for a given entity
+      summary: Get all roles for a prebuilt entity in a version of the application
       x-ms-examples:
         Successful Get Custom Prebuilt Entity Roles request:
           parameters:
@@ -3184,7 +3179,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Create an entity role for an entity in the application.
+      summary: Create a role for a prebuilt entity in a version of the application.
       x-ms-examples:
         Successful Create Custom Prebuilt Entity Role request:
           parameters:
@@ -3229,7 +3224,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Delete an entity role.
+      summary: Delete a role for a given prebuilt entity in a version of the application.
       x-ms-examples:
         Successful Delete Custom Prebuilt Entity Role request:
           parameters:
@@ -3273,7 +3268,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get one entity role for a given entity
+      summary: Get one role for a given prebuilt entity in a version of the application.
       x-ms-examples:
         Successful Get Custom Prebuilt Domain Entity Role request:
           parameters:
@@ -3325,7 +3320,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Update an entity role for a given entity
+      summary: Update a role for a given prebuilt entity in a version of the application.
       x-ms-examples:
         Successful Update Custom Prebuilt Entity Extractor Role request:
           parameters:
@@ -3345,7 +3340,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/customprebuiltintents':
     get:
-      description: Gets custom prebuilt intents information of this application.
+      description: Gets information about customizable prebuilt intents added to a version of the application.
       operationId: Model_ListCustomPrebuiltIntents
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -3354,7 +3349,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Returns a list of all custom prebuilt intents and their representations.
+          description: Returns a list of all customizable prebuilt intents and their representations in a version of the application.
           schema:
             $ref: '#/definitions/IntentClassifiersList'
         default:
@@ -3381,12 +3376,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a custom prebuilt intent model to the application.
+      description: Adds a customizable prebuilt intent model to a version of the application.
       operationId: Model_AddCustomPrebuiltIntent
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: A model object containing the name of the custom prebuilt intent and the name of the domain to which this model belongs.
+        - description: A model object containing the name of the customizable prebuilt intent and the name of the domain to which this model belongs.
           in: body
           name: prebuiltDomainModelCreateObject
           required: true
@@ -3396,7 +3391,7 @@ paths:
         - application/json
       responses:
         '201':
-          description: The ID of the created model.
+          description: The ID of the created intent model.
           schema:
             $ref: '#/definitions/GuidResponse'
           x-nullable: false
@@ -3420,7 +3415,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/customprebuiltmodels':
     get:
-      description: Gets all custom prebuilt models information of this application.
+      description: Gets all prebuilt intent and entity model information used in a version of this application.
       operationId: Model_ListCustomPrebuiltModels
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -3429,7 +3424,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Returns a list of all custom prebuilt models and their representations.
+          description: Returns a list of all prebuilt models and their representations.
           schema:
             $ref: '#/definitions/CustomPrebuiltModelList'
         default:
@@ -3466,7 +3461,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/entities':
     get:
-      description: Gets information about the entity models.
+      description: Gets information about all the simple entity models in a version of the application.
       operationId: Model_ListEntities
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -3520,7 +3515,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a simple entity extractor to the application.
+      description: Adds a simple entity extractor to a version of the application.
       operationId: Model_AddEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -3559,7 +3554,7 @@ paths:
                 Location: 'https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/86226c53-b7a6-416f-876b-226b2b5ab07b/versions/0.1/entities/7e838199-a5db-47a6-8931-d79f1729a922'
   '/apps/{appId}/versions/{versionId}/entities/{entityId}':
     delete:
-      description: Deletes an entity extractor from the application.
+      description: Deletes an entity from a version of the application.
       operationId: Model_DeleteEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -3596,7 +3591,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets information about the entity model.
+      description: Gets information about an entity model in a version of the application.
       operationId: Model_GetEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -3642,7 +3637,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: Updates the name of an entity extractor.
+      description: Updates the name of an entity in a version of the application.
       operationId: Model_UpdateEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -3688,7 +3683,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/entities/{entityId}/roles':
     get:
-      operationId: Model_GetEntityRoles
+      operationId: Model_ListEntityRoles
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -3709,7 +3704,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get All Entity Roles for a given entity
+      summary: Get all roles for an entity in a version of the application
       x-ms-examples:
         Successful Get Entity Roles request:
           parameters:
@@ -3757,7 +3752,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Create an entity role for an entity in the application.
+      summary: Create an entity role in a version of the application.
       x-ms-examples:
         Successful Create Entity Role request:
           parameters:
@@ -3802,7 +3797,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Delete an entity role.
+      summary: Delete an entity role in a version of the application.
       x-ms-examples:
         Successful Delete Entity Extractor Role request:
           parameters:
@@ -3846,7 +3841,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get one entity role for a given entity
+      summary: Get one role for a given entity in a version of the application
       x-ms-examples:
         Successful Get Entity Extractor Role request:
           parameters:
@@ -3898,7 +3893,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Update an entity role for a given entity
+      summary: Update a role for a given entity in a version of the application.
       x-ms-examples:
         Successful Update Entity Extractor Role request:
           parameters:
@@ -3918,8 +3913,8 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/entities/{entityId}/suggest':
     get:
-      description: Get suggestion examples that would improve the accuracy of the entity model.
-      operationId: Model_GetEntitySuggestions
+      description: Get suggested example utterances that would improve the accuracy of the entity model in a version of the application.
+      operationId: Model_ListEntitySuggestions
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -3934,7 +3929,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: 'If there''s no trained model, nothing is returned in the response. If there''s a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions. If there''s a trained model but the active learning algorithm didn''t find any relevant queries, an empty list is returned in the response.'
+          description: 'If there''s no trained entity model, nothing is returned in the response. If there''s a trained model and active learning finds any relevant queries, they are returned with the entity model predictions. If there''s a trained model but active learning didn''t find any relevant queries, an empty list is returned in the response.'
           schema:
             $ref: '#/definitions/EntitiesSuggestionExamples'
         default:
@@ -5438,12 +5433,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a labeled example to the application.
+      description: Adds a labeled example utterance in a version of the application.
       operationId: Examples_Add
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: An example label with the expected intent and entities.
+        - description: A labeled example utterance with the expected intent and entities.
           in: body
           name: exampleLabelObject
           required: true
@@ -5453,7 +5448,7 @@ paths:
         - application/json
       responses:
         '201':
-          description: The ID of the created example.
+          description: The ID of the created example utterance.
           schema:
             $ref: '#/definitions/LabelExampleResponse'
         default:
@@ -5482,7 +5477,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/examples':
     get:
-      description: Returns examples to be reviewed.
+      description: Returns example utterances to be reviewed from a version of the application.
       operationId: Examples_List
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -5493,7 +5488,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: A list of predictions and label pairs for every example in the application.
+          description: A list of predictions and label pairs for every example utterance in the application.
           schema:
             $ref: '#/definitions/LabeledUtterances'
         default:
@@ -5576,12 +5571,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a batch of labeled examples to the application.
+      description: Adds a batch of labeled example utterances to a version of the application.
       operationId: Examples_Batch
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: Array of examples.
+        - description: Array of example utterances.
           in: body
           name: exampleLabelObjectArray
           required: true
@@ -5591,11 +5586,11 @@ paths:
         - application/json
       responses:
         '201':
-          description: A string array determining which labels were added successfully.
+          description: A string array determining which labeled example utterances were added successfully.
           schema:
             $ref: '#/definitions/BatchLabelExampleResponse'
         '207':
-          description: Indicates that the request was partially successful. The response contains a string array indicating the status of each of the added labels.
+          description: Indicates that the request was partially successful. The response contains a string array indicating the status of each of the added labeled example utterances.
           schema:
             $ref: '#/definitions/BatchLabelExampleResponse'
         default:
@@ -5647,7 +5642,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/examples/{exampleId}':
     delete:
-      description: Deletes the labeled example with the specified ID.
+      description: Deletes the labeled example utterances with the specified ID from a version of the application.
       operationId: Examples_Delete
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -5661,7 +5656,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: Successfully deleted example label.
+          description: Successfully deleted example utterance.
           schema:
             $ref: '#/definitions/OperationStatus'
         default:
@@ -5876,7 +5871,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/features':
     get:
-      description: Gets all the extraction features for the specified application version.
+      description: Gets all the extraction phraselist and pattern features in a version of the application.
       operationId: Features_List
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -5925,7 +5920,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/hierarchicalentities':
     get:
-      description: Gets information about the hierarchical entity models.
+      description: Gets information about all the hierarchical entity models in a version of the application.
       operationId: Model_ListHierarchicalEntities
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -5973,7 +5968,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a hierarchical entity extractor to the application version.
+      description: Adds a hierarchical entity extractor to a version of the application.
       operationId: Model_AddHierarchicalEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6014,7 +6009,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}':
     delete:
-      description: Deletes a hierarchical entity extractor from the application version.
+      description: Deletes a hierarchical entity from a version of the application.
       operationId: Model_DeleteHierarchicalEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6046,7 +6041,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets information about the hierarchical entity model.
+      description: Gets information about a hierarchical entity in a version of the application.
       operationId: Model_GetHierarchicalEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6092,7 +6087,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: Updates the name and children of a hierarchical entity model.
+      description: Updates the name and children of a hierarchical entity model in a version of the application.
       operationId: Model_UpdateHierarchicalEntity
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6137,7 +6132,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Creates a single child in an existing hierarchical entity model.
+      description: Creates a single child in an existing hierarchical entity model in a version of the application.
       operationId: Model_AddHierarchicalEntityChild
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6180,7 +6175,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/children/{hChildId}':
     delete:
-      description: Deletes a hierarchical entity extractor child from the application.
+      description: Deletes a hierarchical entity extractor child in a version of the application.
       operationId: Model_DeleteHierarchicalEntityChild
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6219,7 +6214,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets information about the hierarchical entity child model.
+      description: Gets information about the child's model contained in an hierarchical entity child model in a version of the application.
       operationId: Model_GetHierarchicalEntityChild
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6262,7 +6257,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: Renames a single child in an existing hierarchical entity model.
+      description: Renames a single child in an existing hierarchical entity model in a version of the application.
       operationId: Model_UpdateHierarchicalEntityChild
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6313,7 +6308,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}/roles':
     get:
-      operationId: Model_GetHierarchicalEntityRoles
+      operationId: Model_ListHierarchicalEntityRoles
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -6329,7 +6324,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get All Entity Roles for a given entity
+      summary: Get all roles for a hierarchical entity in a version of the application
       x-ms-examples:
         Successful Get Hierarchical Entity Roles request:
           parameters:
@@ -6372,7 +6367,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Create an entity role for an entity in the application.
+      summary: Create a role for an hierarchical entity in a version of the application.
       x-ms-examples:
         Successful Create Hierarchical Entity Role request:
           parameters:
@@ -6412,7 +6407,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Delete an entity role.
+      summary: Delete a role for a given hierarchical role in a version of the application.
       x-ms-examples:
         Successful Delete Hierarchical Entity Role request:
           parameters:
@@ -6451,7 +6446,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get one entity role for a given entity
+      summary: Get one role for a given hierarchical entity in a version of the application.
       x-ms-examples:
         Successful Get Hierarchical Entity Role request:
           parameters:
@@ -6498,7 +6493,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Update an entity role for a given entity
+      summary: Update a role for a given hierarchical entity in a version of the application.
       x-ms-examples:
         Successful Update Hierarchical Entity Extractor Role request:
           parameters:
@@ -6518,7 +6513,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/intents':
     get:
-      description: Gets information about the intent models.
+      description: Gets information about the intent models in a version of the application.
       operationId: Model_ListIntents
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6566,12 +6561,12 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds an intent classifier to the application.
+      description: Adds an intent to a version of the application.
       operationId: Model_AddIntent
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: A model object containing the name of the new intent classifier.
+        - description: A model object containing the name of the new intent.
           in: body
           name: intentCreateObject
           required: true
@@ -6581,7 +6576,7 @@ paths:
         - application/json
       responses:
         '201':
-          description: The ID of the created model.
+          description: The ID of the created intent model.
           schema:
             $ref: '#/definitions/GuidResponse'
           x-nullable: false
@@ -6600,14 +6595,14 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/intents/{intentId}':
     delete:
-      description: Deletes an intent classifier from the application.
+      description: Deletes an intent from a version of the application.
       operationId: Model_DeleteIntent
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
         - $ref: '#/parameters/IntentIdInPath'
         - default: false
-          description: Also delete the intent's utterances (true). Or move the utterances to the None intent (false - the default value).
+          description: 'If true, deletes the intent''s example utterances. If false, moves the example utterances to the None intent. The default value is false.'
           in: query
           name: deleteUtterances
           type: boolean
@@ -6637,7 +6632,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets information about the intent model.
+      description: Gets information about the intent model in a version of the application.
       operationId: Model_GetIntent
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6673,13 +6668,13 @@ paths:
     put:
       consumes:
         - application/json
-      description: Updates the name of an intent classifier.
+      description: Updates the name of an intent in a version of the application.
       operationId: Model_UpdateIntent
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
         - $ref: '#/parameters/IntentIdInPath'
-        - description: A model object containing the new intent classifier name.
+        - description: A model object containing the new intent name.
           in: body
           name: modelUpdateObject
           required: true
@@ -6714,7 +6709,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/intents/{intentId}/patternrules':
     get:
-      operationId: Pattern_GetIntentPatterns
+      operationId: Pattern_ListIntentPatterns
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -6732,7 +6727,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Returns patterns to be retrieved for the specific intent.
+      summary: Returns patterns for the specific intent in a version of the application.
       x-ms-examples:
         Successful Get Intent Patterns request:
           parameters:
@@ -6755,8 +6750,8 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/intents/{intentId}/suggest':
     get:
-      description: Suggests examples that would improve the accuracy of the intent model.
-      operationId: Model_GetIntentSuggestions
+      description: Suggests example utterances that would improve the accuracy of the intent model in a version of the application.
+      operationId: Model_ListIntentSuggestions
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -6766,7 +6761,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: 'If there''s no trained model, nothing is returned in the response. If there''s a trained model and the active learning algorithm finds any relevant queries, they are returned with the model predictions. If there''s a trained model but the active learning algorithm didn''t find any relevant queries, an empty list is returned in the response.'
+          description: 'If there''s no trained intent model, nothing is returned in the response. If there''s a trained model and active learning finds any relevant queries, they are returned with the intent model predictions. If there''s a trained model but active learning didn''t find any relevant queries, an empty list is returned in the response.'
           schema:
             $ref: '#/definitions/IntentsSuggestionExamples'
         default:
@@ -6896,7 +6891,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/listprebuilts':
     get:
-      description: Gets all the available prebuilt entity extractors for the application.
+      description: Gets all the available prebuilt entities in a version of the application.
       operationId: Model_ListPrebuiltEntities
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -6942,7 +6937,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/models':
     get:
-      description: Gets information about the application version models.
+      description: Gets information about all the intent and entity models in a version of the application.
       operationId: Model_ListModels
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -7073,7 +7068,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/models/{modelId}/examples':
     get:
-      description: Gets the utterances for the given model in the given app version.
+      description: Gets the example utterances for the given intent or entity model in a version of the application.
       operationId: Model_Examples
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -7090,7 +7085,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: A list of examples for the model.
+          description: A list of example utterances for the model.
           schema:
             $ref: '#/definitions/ExamplesPerModelResponseObject'
         default:
@@ -7117,7 +7112,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/patternanyentities':
     get:
-      operationId: Model_GetPatternAnyEntityInfos
+      operationId: Model_ListPatternAnyEntityInfos
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -7134,7 +7129,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get information about the Pattern.Any entity models.
+      summary: Get information about the Pattern.Any entity models in a version of the application.
       x-ms-examples:
         Successful Create Regex Entity Model request:
           parameters:
@@ -7193,7 +7188,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Adds a pattern.any entity extractor to the application.
+      summary: Adds a pattern.any entity extractor to a version of the application.
       x-ms-examples:
         Successful Create Regex Entity Model request:
           parameters:
@@ -7233,7 +7228,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Deletes a Pattern.Any entity extractor from the application.
+      summary: Deletes a Pattern.Any entity extractor from a version of the application.
       x-ms-examples:
         Successful Delete Pattern.Any Entity request:
           parameters:
@@ -7263,14 +7258,14 @@ paths:
         - application/json
       responses:
         '200':
-          description: A regex entity model info.
+          description: A regular expression entity model info.
           schema:
             $ref: '#/definitions/PatternAnyEntityExtractor'
         default:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Gets information about the application version's Pattern.Any model.
+      summary: Gets information about the Pattern.Any model in a version of the application.
       x-ms-examples:
         Successful Get Pattern.Any Entity request:
           parameters:
@@ -7327,7 +7322,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Updates the name and explicit list of a Pattern.Any entity model.
+      summary: Updates the name and explicit (exception) list of a Pattern.Any entity model in a version of the application.
       x-ms-examples:
         Successful Update Pattern.Any Entity request:
           parameters:
@@ -7370,7 +7365,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get the explicit list of the pattern.any entity.
+      summary: Get the explicit (exception) list of the pattern.any entity in a version of the application.
       x-ms-examples:
         Successful Get Explicit List request:
           parameters:
@@ -7417,7 +7412,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Add a new item to the explicit list for the Pattern.Any entity.
+      summary: Add a new exception to the explicit list for the Pattern.Any entity in a version of the application.
       x-ms-examples:
         Successful Create Custom Prebuilt Entity Role request:
           parameters:
@@ -7462,7 +7457,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Delete the explicit list item from the Pattern.any explicit list.
+      summary: Delete an item from the explicit (exception) list for a Pattern.any entity in a version of the application.
       x-ms-examples:
         Successful Delete Pattern.Any Explicit List Item request:
           parameters:
@@ -7506,7 +7501,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get the explicit list of the pattern.any entity.
+      summary: Get the explicit (exception) list of the pattern.any entity in a version of the application.
       x-ms-examples:
         Successful Get Pattern.Any Explicit List Item request:
           parameters:
@@ -7558,7 +7553,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Updates an explicit list item for a Pattern.Any entity.
+      summary: Updates an explicit (exception) list item for a Pattern.Any entity in a version of the application.
       x-ms-examples:
         Successful Update Pattern.Any Entity Explicit List Item request:
           parameters:
@@ -7578,7 +7573,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/patternanyentities/{entityId}/roles':
     get:
-      operationId: Model_GetPatternAnyEntityRoles
+      operationId: Model_ListPatternAnyEntityRoles
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -7599,7 +7594,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get All Entity Roles for a given entity
+      summary: Get all roles for a Pattern.any entity in a version of the application
       x-ms-examples:
         Successful Get Pattern.Any Entity Roles request:
           parameters:
@@ -7647,7 +7642,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Create an entity role for an entity in the application.
+      summary: Create a role for an Pattern.any entity in a version of the application.
       x-ms-examples:
         Successful Create Pattern.Any Entity Role request:
           parameters:
@@ -7692,7 +7687,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Delete an entity role.
+      summary: Delete a role for a given Pattern.any entity in a version of the application.
       x-ms-examples:
         Successful Delete Pattern.Any Entity Role request:
           parameters:
@@ -7736,7 +7731,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get one entity role for a given entity
+      summary: Get one role for a given Pattern.any entity in a version of the application.
       x-ms-examples:
         Successful Get Pattern.Any Entity Role request:
           parameters:
@@ -7788,7 +7783,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Update an entity role for a given entity
+      summary: Update a role for a given Pattern.any entity in a version of the application.
       x-ms-examples:
         Successful Update Pattern.Any Entity Extractor Role request:
           parameters:
@@ -7831,7 +7826,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Adds one pattern to the specified application.
+      summary: Adds a pattern to a version of the application.
       x-ms-examples:
         Successful Add Pattern request:
           parameters:
@@ -7877,7 +7872,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Deletes the patterns with the specified IDs.
+      summary: Deletes a list of patterns in a version of the application.
       x-ms-examples:
         Successful Batch Delete Patterns request:
           parameters:
@@ -7895,7 +7890,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      operationId: Pattern_GetPatterns
+      operationId: Pattern_ListPatterns
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -7912,7 +7907,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Returns an application version's patterns.
+      summary: Gets patterns in a version of the application.
       x-ms-examples:
         Successful Get Application Version Patterns request:
           parameters:
@@ -7958,7 +7953,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Adds a batch of patterns to the specified application.
+      summary: Adds a batch of patterns in a version of the application.
       x-ms-examples:
         Successful Batch Add Patterns request:
           parameters:
@@ -8007,7 +8002,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Updates patterns
+      summary: Updates patterns in a version of the application.
       x-ms-examples:
         Successful Batch Update Patterns request:
           parameters:
@@ -8055,7 +8050,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Deletes the pattern with the specified ID.
+      summary: Deletes the pattern with the specified ID from a version of the application..
       x-ms-examples:
         Successful Delete Pattern request:
           parameters:
@@ -8100,7 +8095,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Updates a pattern
+      summary: Updates a pattern in a version of the application.
       x-ms-examples:
         Successful Update Pattern request:
           parameters:
@@ -8123,7 +8118,7 @@ paths:
     get:
       deprecated: true
       description: '[DEPRECATED NOTICE: This operation will soon be removed] Gets all the pattern features.'
-      operationId: Features_GetApplicationVersionPatternFeatures
+      operationId: Features_ListApplicationVersionPatternFeatures
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -8159,7 +8154,7 @@ paths:
       consumes:
         - application/json
       deprecated: true
-      description: '[DEPRECATED NOTICE: This operation will soon be removed] Creates a new pattern feature.'
+      description: '[DEPRECATED NOTICE: This operation will soon be removed] Creates a new pattern feature in a version of the application.'
       operationId: Features_CreatePatternFeature
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8198,7 +8193,7 @@ paths:
   '/apps/{appId}/versions/{versionId}/patterns/{patternId}':
     delete:
       deprecated: true
-      description: '[DEPRECATED NOTICE: This operation will soon be removed] Deletes a pattern feature.'
+      description: '[DEPRECATED NOTICE: This operation will soon be removed] Deletes a pattern feature in a version of the application.'
       operationId: Features_DeletePatternFeature
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8235,7 +8230,7 @@ paths:
               headers: {}
     get:
       deprecated: true
-      description: '[DEPRECATED NOTICE: This operation will soon be removed] Gets the specified pattern feature''s info.'
+      description: '[DEPRECATED NOTICE: This operation will soon be removed] Gets the specified pattern feature''s info in a version of the application.'
       operationId: Features_GetPatternFeatureInfo
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8276,7 +8271,7 @@ paths:
       consumes:
         - application/json
       deprecated: true
-      description: '[DEPRECATED NOTICE: This operation will soon be removed] Updates the pattern, the name and the state of the pattern feature.'
+      description: '[DEPRECATED NOTICE: This operation will soon be removed] Updates the pattern, the name and the state of the pattern feature in a version of the application.'
       operationId: Features_UpdatePatternFeature
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8322,7 +8317,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/phraselists':
     get:
-      description: Gets all the phraselist features.
+      description: Gets all the phraselist features in a version of the application.
       operationId: Features_ListPhraseLists
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8364,7 +8359,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Creates a new phraselist feature.
+      description: Creates a new phraselist feature in a version of the application.
       operationId: Features_AddPhraseList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8403,7 +8398,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/phraselists/{phraselistId}':
     delete:
-      description: Deletes a phraselist feature.
+      description: Deletes a phraselist feature from a version of the application.
       operationId: Features_DeletePhraseList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8439,7 +8434,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets phraselist feature info.
+      description: Gets phraselist feature info in a version of the application.
       operationId: Features_GetPhraseList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8480,7 +8475,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: 'Updates the phrases, the state and the name of the phraselist feature.'
+      description: 'Updates the phrases, the state and the name of the phraselist feature in a version of the application.'
       operationId: Features_UpdatePhraseList
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8527,7 +8522,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/prebuilts':
     get:
-      description: Gets information about the prebuilt entity models.
+      description: Gets information about all the prebuilt entities in a version of the application.
       operationId: Model_ListPrebuilts
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8570,7 +8565,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: Adds a list of prebuilt entity extractors to the application.
+      description: Adds a list of prebuilt entities to a version of the application.
       operationId: Model_AddPrebuilt
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8611,7 +8606,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/prebuilts/{entityId}/roles':
     get:
-      operationId: Model_GetPrebuiltEntityRoles
+      operationId: Model_ListPrebuiltEntityRoles
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -8632,7 +8627,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get All Entity Roles for a given entity
+      summary: Get a prebuilt entity's roles in a version of the application.
       x-ms-examples:
         Successful Get Prebuilt Entity Roles request:
           parameters:
@@ -8680,7 +8675,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Create an entity role for an entity in the application.
+      summary: Create a role for a prebuilt entity in a version of the application.
       x-ms-examples:
         Successful Create Prebuilt Entity Role request:
           parameters:
@@ -8725,7 +8720,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Delete an entity role.
+      summary: Delete a role in a prebuilt entity in a version of the application.
       x-ms-examples:
         Successful Delete Prebuilt Entity Role request:
           parameters:
@@ -8769,7 +8764,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get one entity role for a given entity
+      summary: Get one role for a given prebuilt entity in a version of the application
       x-ms-examples:
         Successful Get Prebuilt Entity Role request:
           parameters:
@@ -8821,7 +8816,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Update an entity role for a given entity
+      summary: Update a role for a given prebuilt entity in a version of the application
       x-ms-examples:
         Successful Update Prebuilt Entity Extractor Role request:
           parameters:
@@ -8841,7 +8836,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/prebuilts/{prebuiltId}':
     delete:
-      description: Deletes a prebuilt entity extractor from the application.
+      description: Deletes a prebuilt entity extractor from a version of the application.
       operationId: Model_DeletePrebuilt
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8878,7 +8873,7 @@ paths:
                 message: Operation Successful
               headers: {}
     get:
-      description: Gets information about the prebuilt entity model.
+      description: Gets information about a prebuilt entity model in a version of the application.
       operationId: Model_GetPrebuilt
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -8923,7 +8918,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/regexentities':
     get:
-      operationId: Model_GetRegexEntityInfos
+      operationId: Model_ListRegexEntityInfos
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -8933,14 +8928,14 @@ paths:
         - application/json
       responses:
         '200':
-          description: A list of regex entity model infos.
+          description: A list of regular expression entity model infos.
           schema:
             $ref: '#/definitions/RegexEntityExtractorList'
         default:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Gets information about the regex entity models.
+      summary: Gets information about the regular expression entity models in a version of the application.
       x-ms-examples:
         Successful Get Regex Entity Models request:
           parameters:
@@ -8977,7 +8972,7 @@ paths:
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: A model object containing the name and regex pattern for the new regex entity extractor.
+        - description: A model object containing the name and regex pattern for the new regular expression entity extractor.
           in: body
           name: regexEntityExtractorCreateObj
           required: true
@@ -8995,7 +8990,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Adds a regex entity model to the application version.
+      summary: Adds a regular expression entity model to a version of the application.
       x-ms-examples:
         Successful Create Regex Entity Model request:
           parameters:
@@ -9012,7 +9007,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/regexentities/{entityId}/roles':
     get:
-      operationId: Model_GetRegexEntityRoles
+      operationId: Model_ListRegexEntityRoles
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
@@ -9033,7 +9028,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get All Entity Roles for a given entity
+      summary: Get all roles for a regular expression entity in a version of the application.
       x-ms-examples:
         Successful Get Regex Entity Roles request:
           parameters:
@@ -9081,7 +9076,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Create an entity role for an entity in the application.
+      summary: Create a role for an regular expression entity in a version of the application.
       x-ms-examples:
         Successful Create Regex Entity Role request:
           parameters:
@@ -9126,7 +9121,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Delete an entity role.
+      summary: Delete a role for a given regular expression in a version of the application.
       x-ms-examples:
         Successful Delete Regex Entity Role request:
           parameters:
@@ -9170,7 +9165,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Get one entity role for a given entity
+      summary: Get one role for a given regular expression entity in a version of the application.
       x-ms-examples:
         Successful Get Regex Entity Role request:
           parameters:
@@ -9222,7 +9217,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Update an entity role for a given entity
+      summary: Update a role for a given regular expression entity in a version of the application
       x-ms-examples:
         Successful Update Regex Entity Extractor Role request:
           parameters:
@@ -9246,7 +9241,7 @@ paths:
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The regex entity extractor ID.
+        - description: The regular expression entity extractor ID.
           format: uuid
           in: path
           name: regexEntityId
@@ -9263,7 +9258,7 @@ paths:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Deletes a regex entity model from the application.
+      summary: Deletes a regular expression entity from a version of the application.
       x-ms-examples:
         Successful Delete Regex Entity request:
           parameters:
@@ -9283,7 +9278,7 @@ paths:
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The regex entity model ID.
+        - description: The regular expression entity model ID.
           format: uuid
           in: path
           name: regexEntityId
@@ -9293,14 +9288,14 @@ paths:
         - application/json
       responses:
         '200':
-          description: A regex entity model info.
+          description: A regular expression entity model info.
           schema:
             $ref: '#/definitions/RegexEntityExtractor'
         default:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Gets information of a regex entity model.
+      summary: Gets information about a regular expression entity in a version of the application.
       x-ms-examples:
         Successful Get Regex Entity request:
           parameters:
@@ -9330,7 +9325,7 @@ paths:
       parameters:
         - $ref: '#/parameters/AppIdInPath'
         - $ref: '#/parameters/VersionIdInPath'
-        - description: The regex entity extractor ID.
+        - description: The regular expression entity extractor ID.
           format: uuid
           in: path
           name: regexEntityId
@@ -9346,14 +9341,14 @@ paths:
         - application/json
       responses:
         '200':
-          description: Successfully updated the regex entity extractor.
+          description: Successfully updated the regular expression entity extractor.
           schema:
             $ref: '#/definitions/OperationStatus'
         default:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: Updates the regex entity model .
+      summary: Updates the regular expression entity in a version of the application.
       x-ms-examples:
         Successful Update Regex Entity request:
           parameters:
@@ -9373,7 +9368,7 @@ paths:
               headers: {}
   '/apps/{appId}/versions/{versionId}/settings':
     get:
-      description: Gets the application version settings.
+      description: Gets the settings in a version of the application.
       operationId: Settings_List
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -9407,7 +9402,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: Updates the application version settings.
+      description: Updates the settings in a version of the application.
       operationId: Settings_Update
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -9417,7 +9412,9 @@ paths:
           name: listOfAppVersionSettingObject
           required: true
           schema:
-            $ref: '#/definitions/AppVersionSettingObject'
+            items:
+              $ref: '#/definitions/AppVersionSettingObject'
+            type: array
       produces:
         - application/json
       responses:
@@ -9449,7 +9446,7 @@ paths:
     delete:
       consumes:
         - application/json
-      description: Deleted an unlabelled utterance.
+      description: Deleted an unlabelled utterance in a version of the application.
       operationId: Versions_DeleteUnlabelledUtterance
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -9497,7 +9494,7 @@ paths:
         - JSON
       responses:
         '200':
-          description: 'A successful response provides an array of training status details for a LUIS app that you submitted for training. Each element in the response array provides training status for a model (intent or entity) in the LUIS app. Note: Training status is not provided for prebuilt entities because they are pretrained. The "modelId" property identifies which intent or entity the training status corresponds to. To get the name and type of each model, use the models API which has a request URL in this format: https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/models The details property for each model can contain the following fields: "statusId": An integer from 0 to 3 that corresponds to the value of the status field. "status": A string with one of the following values: "Success", "UpToDate", "InProgress", "Fail". If the status is "Fail", the "failureReason" property provides the reason for failure. "exampleCount": The number of examples used for training. In the case of the None intent or prebuilt domain intents and entities, this number includes example provided internally by the system as well as examples you added to your LUIS app. "failureReason": A string that indicates the reason training failed.  The value "FewLabels" means that no labeled examples were provided for training. "trainingDateTime": A string indicating the time the model was last trained. The value uses the ISO 8601 format for representing times in UTC (Coordinated Universal Time) with a UTC designator ("Z"), for example: "2017-08-10T01:08:34Z".'
+          description: 'A successful response provides an array of training status details for a LUIS app that you submitted for training. Each element in the response array provides training status for a model (intent or entity) in the LUIS app. Note: Training status is not provided for prebuilt entities because they are pretrained. The "modelId" property identifies which intent or entity the training status corresponds to. To get the name and type of each model, use the models API which has a request URL in this format: https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/models The details property for each model can contain the following fields: "statusId": An integer from 0 to 3 that corresponds to the value of the status field. "status": A string with one of the following values: "Success", "UpToDate", "InProgress", "Fail". If the status is "Fail", the "failureReason" property provides the reason for failure. "exampleCount": The number of examples used for training. In the case of the None intent or prebuilt domain intents and entities, this number includes example provided internally by the system as well as examples you added to your LUIS app. "failureReason": A string that indicates the reason training failed.  The value "FewLabels" means that no labeled example utterances were provided for training. "trainingDateTime": A string indicating the time the model was last trained. The value uses the ISO 8601 format for representing times in UTC (Coordinated Universal Time) with a UTC designator ("Z"), for example: "2017-08-10T01:08:34Z".'
           schema:
             $ref: '#/definitions/ModelTrainingInfoList'
         default:
@@ -9580,22 +9577,22 @@ paths:
               headers: {}
   /azureaccounts:
     get:
-      description: Gets the LUIS azure accounts for the user using his ARM token.
-      operationId: AzureAccounts_GetUserLUISAccounts
+      description: Gets the LUIS Azure accounts for the user using his ARM token.
+      operationId: AzureAccounts_ListUserLUISAccounts
       parameters:
         - $ref: '#/parameters/BearerAuthPath'
       produces:
         - application/json
       responses:
         '200':
-          description: A list of azure account information objects.
+          description: A list of Azure account information objects.
           schema:
             $ref: '#/definitions/AzureAccountInfoList'
         default:
           description: Error Response.
           schema:
             $ref: '#/definitions/ErrorResponse'
-      summary: user - Get LUIS azure accounts
+      summary: user - Get LUIS Azure accounts
       x-ms-examples:
         Successful Get azure accounts request:
           parameters:
@@ -9611,7 +9608,7 @@ paths:
               headers: {}
   '/package/{appId}/slot/{slotName}/gzip':
     get:
-      description: Packages published LUIS application as GZip.
+      description: Packages a published LUIS application as a GZip file to be used in the LUIS container.
       operationId: Apps_PackagePublishedApplicationAsGzip
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -9644,7 +9641,7 @@ paths:
               headers: {}
   '/package/{appId}/versions/{versionId}/gzip':
     get:
-      description: Packages trained LUIS application as GZip.
+      description: Packages trained LUIS application as GZip file to be used in the LUIS container.
       operationId: Apps_PackageTrainedApplicationAsGzip
       parameters:
         - $ref: '#/parameters/AppIdInPath'
@@ -9721,13 +9718,13 @@ definitions:
         description: The version's creation timestamp.
         type: string
       culture:
-        description: 'The culture of the application. E.g.: en-us.'
+        description: 'The culture of the application. For example, "en-us".'
         type: string
       description:
         description: The description of the application.
         type: string
       domain:
-        description: 'The domain for the new application. Optional. E.g.: Comics.'
+        description: 'The domain for the new application. Optional. For example, Comics.'
         type: string
       endpointHitsCount:
         description: Number of calls made to this endpoint.
@@ -9743,7 +9740,7 @@ definitions:
         description: The name of the application.
         type: string
       usageScenario:
-        description: 'Defines the scenario for the new application. Optional. E.g.: IoT.'
+        description: 'Defines the scenario for the new application. Optional. For example, IoT.'
         type: string
       versionsCount:
         description: Amount of model versions within the application.
@@ -9766,6 +9763,7 @@ definitions:
       public:
         description: Setting your application as public allows other people to use your application's endpoint using their own keys.
         type: boolean
+        x-ms-client-name: isPublic
         x-nullable: false
     type: object
   ApplicationSettings:
@@ -9776,7 +9774,7 @@ definitions:
         format: uuid
         type: string
       public:
-        description: Setting your application as public allows other people to use your application's endpoint using their own keys.
+        description: Setting your application as public allows other people to use your application's endpoint using their own keys for billing purposes.
         type: boolean
         x-ms-client-name: isPublic
         x-nullable: false
@@ -9853,16 +9851,16 @@ definitions:
       $ref: '#/definitions/AzureAccountInfoObject'
     type: array
   AzureAccountInfoObject:
-    description: Defines the azure account information object.
+    description: Defines the Azure account information object.
     properties:
       accountName:
-        description: The azure account name.
+        description: The Azure account name.
         type: string
       azureSubscriptionId:
-        description: The id for the azure subscription.
+        description: The id for the Azure subscription.
         type: string
       resourceGroup:
-        description: The azure resource group name.
+        description: The Azure resource group name.
         type: string
     required:
       - azureSubscriptionId
@@ -9870,7 +9868,7 @@ definitions:
       - accountName
     type: object
   BatchLabelExample:
-    description: Response when adding a batch of labeled examples.
+    description: Response when adding a batch of labeled example utterances.
     properties:
       error:
         $ref: '#/definitions/OperationStatus'
@@ -9880,7 +9878,7 @@ definitions:
         $ref: '#/definitions/LabelExampleResponse'
     type: object
   BatchLabelExampleResponse:
-    description: Response when adding a batch of labeled examples.
+    description: Response when adding a batch of labeled example utterances.
     items:
       $ref: '#/definitions/BatchLabelExample'
     type: array
@@ -9898,17 +9896,17 @@ definitions:
       - id
     type: object
   ClosedList:
-    description: Exported Model - A Closed List.
+    description: Exported Model - A list entity.
     properties:
       name:
-        description: Name of the closed list feature.
+        description: Name of the list entity.
         type: string
       roles:
         items:
           type: string
         type: array
       subLists:
-        description: Sublists for the feature.
+        description: Sublists for the list entity.
         items:
           $ref: '#/definitions/SubClosedList'
           type: object
@@ -9918,25 +9916,25 @@ definitions:
     allOf:
       - $ref: '#/definitions/ModelInfo'
       - $ref: '#/definitions/EntityModelInfo'
-    description: Closed List Entity Extractor.
+    description: List Entity Extractor.
     properties:
       subLists:
-        description: List of sub-lists.
+        description: List of sublists.
         items:
           $ref: '#/definitions/SubClosedListResponse'
         type: array
     type: object
-    x-ms-discriminator-value: Closed List Entity Extractor
+    x-ms-discriminator-value: List Entity Extractor
   ClosedListEntityExtractorsList:
-    description: List of Closed List Entity Extractors.
+    description: List of List Entity Extractors.
     items:
       $ref: '#/definitions/ClosedListEntityExtractor'
     type: array
   ClosedListModelCreateObject:
-    description: Object model for creating a closed list.
+    description: Object model for creating a list entity.
     properties:
       name:
-        description: Name of the closed list feature.
+        description: Name of the list entity.
         type: string
       subLists:
         description: Sublists for the feature.
@@ -9946,7 +9944,7 @@ definitions:
         type: array
     type: object
   ClosedListModelPatchObject:
-    description: Object model for adding a batch of sublists to an existing closedlist.
+    description: Object model for adding a batch of sublists to an existing list entity.
     properties:
       subLists:
         description: Sublists to add.
@@ -9956,10 +9954,10 @@ definitions:
         type: array
     type: object
   ClosedListModelUpdateObject:
-    description: Object model for updating a closed list.
+    description: Object model for updating a list entity.
     properties:
       name:
-        description: The new name of the closed list feature.
+        description: The new name of the list entity.
         type: string
       subLists:
         description: The new sublists for the feature.
@@ -9995,7 +9993,7 @@ definitions:
       $ref: '#/definitions/CompositeEntityExtractor'
     type: array
   CompositeEntityModel:
-    description: A composite entity.
+    description: A composite entity extractor.
     properties:
       children:
         description: Child entities.
@@ -10074,7 +10072,7 @@ definitions:
           $ref: '#/definitions/IntentPrediction'
         type: array
       text:
-        description: 'The utterance. E.g.: what''s the weather like in seattle?'
+        description: 'The utterance. For example, "What''s the weather like in seattle?"'
         type: string
       tokenizedText:
         description: The utterance tokenized.
@@ -10208,19 +10206,19 @@ definitions:
         type: string
     type: object
   ExampleLabelObject:
-    description: A labeled example.
+    description: A labeled example utterance.
     properties:
       entityLabels:
-        description: The identified entities within the utterance.
+        description: The identified entities within the example utterance.
         items:
           $ref: '#/definitions/EntityLabelObject'
           type: object
         type: array
       intentName:
-        description: The identified intent representing the utterance.
+        description: The identified intent representing the example utterance.
         type: string
       text:
-        description: The sample's utterance.
+        description: The example utterance.
         type: string
     type: object
   ExampleLabelObjectArray:
@@ -10230,12 +10228,12 @@ definitions:
       type: object
     type: array
   ExamplesPerModelResponseObject:
-    description: A list of examples per model.
+    description: A list of example utterances per model.
     items:
       $ref: '#/definitions/LabelTextObject'
     type: array
   ExplicitListItem:
-    description: Explicit list item
+    description: Explicit (exception) list item
     properties:
       explicitListItem:
         description: The explicit list item value.
@@ -10246,7 +10244,7 @@ definitions:
         type: integer
     type: object
   ExplicitListItemCreateObject:
-    description: Object model for creating an explicit list item.
+    description: Object model for creating an explicit (exception) list item.
     properties:
       explicitListItem:
         description: The explicit list item.
@@ -10257,12 +10255,12 @@ definitions:
     type: integer
     x-nullable: false
   ExplicitListItemList:
-    description: List of explicit list items
+    description: List of explicit (exception) list items
     items:
       $ref: '#/definitions/ExplicitListItem'
     type: array
   ExplicitListItemUpdateObject:
-    description: Model object for updating an explicit list item.
+    description: Model object for updating an explicit (exception) list item.
     properties:
       explicitListItem:
         description: The explicit list item.
@@ -10332,7 +10330,7 @@ definitions:
       $ref: '#/definitions/HierarchicalEntityExtractor'
     type: array
   HierarchicalEntityModel:
-    description: A Hierarchical Entity Extractor.
+    description: A hierarchical entity extractor.
     properties:
       children:
         description: Child entities.
@@ -10401,10 +10399,10 @@ definitions:
           $ref: '#/definitions/IntentPrediction'
         type: array
       text:
-        description: 'The utterance. E.g.: what''s the weather like in seattle?'
+        description: 'The utterance. For example, "What''s the weather like in seattle?"'
         type: string
       tokenizedText:
-        description: The utterance tokenized.
+        description: The tokenized utterance.
         items:
           type: string
         type: array
@@ -10438,7 +10436,7 @@ definitions:
         description: Indicates if the feature is enabled.
         type: boolean
       mode:
-        description: 'An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.'
+        description: 'An interchangeable phrase list feature serves as a list of synonyms for training. A non-exchangeable phrase list serves as separate features for training. So, if your non-interchangeable phrase list contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-interchangeable phrase list as an additional bag of words to add to LUIS existing vocabulary features. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t.  Default value is true.'
         type: boolean
       name:
         description: The Phraselist name.
@@ -10477,17 +10475,17 @@ definitions:
         type: string
     type: object
   LabelExampleResponse:
-    description: Response when adding a labeled example.
+    description: Response when adding a labeled example utterance.
     properties:
       ExampleId:
         description: The newly created sample ID.
         type: integer
       UtteranceText:
-        description: The sample's utterance.
+        description: The example utterance.
         type: string
     type: object
   LabelTextObject:
-    description: An object containing the example's text.
+    description: An object containing the example utterance's text.
     properties:
       id:
         description: The ID of the Label.
@@ -10521,7 +10519,7 @@ definitions:
           $ref: '#/definitions/IntentPrediction'
         type: array
       text:
-        description: 'The utterance. E.g.: what''s the weather like in seattle?'
+        description: 'The utterance. For example, "What''s the weather like in seattle?"'
         type: string
       tokenizedText:
         description: The utterance tokenized.
@@ -10539,7 +10537,7 @@ definitions:
     description: Exported Model - An exported LUIS Application.
     properties:
       closedLists:
-        description: List of closed lists.
+        description: List of list entities.
         items:
           $ref: '#/definitions/ClosedList'
           type: object
@@ -10608,7 +10606,7 @@ definitions:
           type: object
         type: array
       utterances:
-        description: List of sample utterances.
+        description: List of example utterances.
         items:
           $ref: '#/definitions/JSONUtterance'
           type: object
@@ -10920,7 +10918,7 @@ definitions:
     properties:
       isExchangeable:
         default: true
-        description: 'An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.'
+        description: 'An interchangeable phrase list feature serves as a list of synonyms for training. A non-exchangeable phrase list serves as separate features for training. So, if your non-interchangeable phrase list contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-interchangeable phrase list as an additional bag of words to add to LUIS existing vocabulary features. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t.  Default value is true.'
         type: boolean
       name:
         description: The Phraselist name.
@@ -11070,17 +11068,17 @@ definitions:
         format: uuid
         type: string
       sentimentAnalysis:
-        description: Setting sentiment analysis as true returns the Sentiment of the input utterance along with the response
+        description: Setting sentiment analysis as true returns the sentiment of the input utterance along with the response
         type: boolean
         x-ms-client-name: IsSentimentAnalysisEnabled
         x-nullable: false
       speech:
-        description: Setting speech as public enables speech priming in your app
+        description: Enables speech priming in your app
         type: boolean
         x-ms-client-name: IsSpeechEnabled
         x-nullable: false
       spellChecker:
-        description: Setting spell checker as public enables spell checking the input utterance.
+        description: Enables spell checking of the utterance.
         type: boolean
         x-ms-client-name: IsSpellCheckerEnabled
         x-nullable: false
@@ -11097,11 +11095,11 @@ definitions:
       - Hierarchical Entity Extractor
       - Hierarchical Child Entity Extractor
       - Composite Entity Extractor
-      - Closed List Entity Extractor
+      - List Entity Extractor
       - Prebuilt Entity Extractor
       - Intent Classifier
       - Pattern.Any Entity Extractor
-      - Regex Entity Extractor
+      - Regular Expression Entity Extractor
     type: string
   RegexEntity:
     description: Regular Expression Entity Extractor.
@@ -11119,40 +11117,40 @@ definitions:
     allOf:
       - $ref: '#/definitions/ModelInfo'
       - $ref: '#/definitions/EntityModelInfo'
-    description: Regex Entity Extractor.
+    description: Regular Expression Entity Extractor.
     properties:
       regexPattern:
-        description: The Regex entity pattern.
+        description: The Regular Expression entity pattern.
         type: string
     type: object
     x-ms-discriminator-value: Regex Entity Extractor
   RegexEntityExtractorList:
-    description: List of Regex Entity Extractors.
+    description: List of Regular Expression Entity Extractors.
     items:
       $ref: '#/definitions/RegexEntityExtractor'
     type: array
   RegexModelCreateObject:
-    description: Model object for creating a regex entity model.
+    description: Model object for creating a regular expression entity model.
     properties:
       name:
         description: The model name.
         type: string
       regexPattern:
-        description: The regex entity pattern.
+        description: The regular expression entity pattern.
         type: string
     type: object
   RegexModelUpdateObject:
-    description: Model object for updating a regex entity model.
+    description: Model object for updating a regular expression entity model.
     properties:
       name:
         description: The model name.
         type: string
       regexPattern:
-        description: The regex entity pattern.
+        description: The regular expression entity pattern.
         type: string
     type: object
   SubClosedList:
-    description: Sublist of items for a Closed list.
+    description: Sublist of items for a list entity.
     properties:
       canonicalForm:
         description: The standard form that the list represents.
@@ -11166,7 +11164,7 @@ definitions:
   SubClosedListResponse:
     allOf:
       - $ref: '#/definitions/SubClosedList'
-    description: Sublist of items for a Closed list.
+    description: Sublist of items for a list entity.
     properties:
       id:
         description: The sublist ID
@@ -11265,7 +11263,7 @@ definitions:
     description: The new version ID returned by when importing a model version.
     type: string
   WordListBaseUpdateObject:
-    description: Object model for updating one of the closed list's sublists.
+    description: Object model for updating one of the list entity's sublists.
     properties:
       canonicalForm:
         description: The standard form that the list represents.
@@ -11277,7 +11275,7 @@ definitions:
         type: array
     type: object
   WordListObject:
-    description: Sublist of items for a Closed list.
+    description: Sublist of items for a list entity.
     properties:
       canonicalForm:
         description: The standard form that the list represents.
@@ -11289,7 +11287,42 @@ definitions:
         type: array
     type: object
 x-ms-parameterized-host:
-  hostTemplate: '{Endpoint}/luis/api/v2.0'
+  hostTemplate: '{AzureRegion}.api.cognitive.microsoft.{AzureCloud}/luis/api/v2.0'
   parameters:
-    - $ref: '#/parameters/Endpoint'
-  useSchemePrefix: false
+    - description: Supported Azure regions for Cognitive Services endpoints
+      enum:
+        - westus
+        - westeurope
+        - southeastasia
+        - eastus2
+        - westcentralus
+        - westus2
+        - eastus
+        - southcentralus
+        - northeurope
+        - eastasia
+        - australiaeast
+        - brazilsouth
+        - virginia
+      in: path
+      name: AzureRegion
+      required: true
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: AzureRegions
+      x-ms-parameter-location: client
+      x-ms-skip-url-encoding: true
+    - description: Supported Azure Clouds for Cognitive Services endpoints
+      enum:
+        - com
+        - us
+      in: path
+      name: AzureCloud
+      required: true
+      type: string
+      x-ms-enum:
+        modelAsString: false
+        name: AzureClouds
+      x-ms-parameter-location: client
+      x-ms-skip-url-encoding: true

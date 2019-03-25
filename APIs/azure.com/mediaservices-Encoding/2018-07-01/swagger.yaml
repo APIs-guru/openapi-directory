@@ -1219,7 +1219,7 @@ definitions:
     description: 'The Audio Analyzer preset applies a pre-defined set of AI-based analysis operations, including speech transcription. Currently, the preset supports processing of content with a single audio track.'
     properties:
       audioLanguage:
-        description: 'The language for the audio payload in the input using the BCP-47 format of ''language tag-region'' (e.g: ''en-US'').  The list of supported languages are English (''en-US'' and ''en-GB''), Spanish (''es-ES'' and ''es-MX''), French (''fr-FR''), Italian (''it-IT''), Japanese (''ja-JP''), Portuguese (''pt-BR''), Chinese (''zh-CN''), German (''de-DE''), Arabic (''ar-EG''), Russian (''ru-RU''), Hindi (''hi-IN''), and Korean (''ko-KR''). If you know the language of your content, it is recommended that you specify it. If the language isn''t specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. This language detection feature currently supports English, Chinese, French, German, Italian, Japanese, Spanish, Russian, and Portuguese. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to ''en-US''."'
+        description: 'The language for the audio payload in the input using the BCP-47 format of ''language tag-region'' (e.g: ''en-US'').  The list of supported languages are English (''en-US'' and ''en-GB''), Spanish (''es-ES'' and ''es-MX''), French (''fr-FR''), Italian (''it-IT''), Japanese (''ja-JP''), Portuguese (''pt-BR''), Chinese (''zh-CN''), German (''de-DE''), Arabic (''ar-EG'' and ''ar-SY''), Russian (''ru-RU''), Hindi (''hi-IN''), and Korean (''ko-KR''). If you know the language of your content, it is recommended that you specify it. If the language isn''t specified or set to null, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. This language detection feature currently supports English, Chinese, French, German, Italian, Japanese, Spanish, Russian, and Portuguese. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernable speech. If automatic detection fails to find the language, transcription would fallback to ''en-US''."'
         type: string
     type: object
     x-ms-discriminator-value: '#Microsoft.Media.AudioAnalyzerPreset'
@@ -1243,6 +1243,7 @@ definitions:
           - H264SingleBitrate1080p
           - AdaptiveStreaming
           - AACGoodQualityAudio
+          - ContentAwareEncodingExperimental
           - H264MultipleBitrate1080p
           - H264MultipleBitrate720p
           - H264MultipleBitrateSD
@@ -1261,6 +1262,8 @@ definitions:
               value: AdaptiveStreaming
             - description: Produces a single MP4 file containing only stereo audio encoded at 192 kbps.
               value: AACGoodQualityAudio
+            - description: 'Exposes an experimental preset for content-aware encoding. Given any input content, the service attempts to automatically determine the optimal number of layers, appropriate bitrate and resolution settings for delivery by adaptive streaming. The underlying algorithms will continue to evolve over time. The output will contain MP4 files with video and audio interleaved.'
+              value: ContentAwareEncodingExperimental
             - description: 'Produces a set of 8 GOP-aligned MP4 files, ranging from 6000 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 1080p and goes down to 360p.'
               value: H264MultipleBitrate1080p
             - description: 'Produces a set of 6 GOP-aligned MP4 files, ranging from 3400 kbps to 400 kbps, and stereo AAC audio. Resolution starts at 720p and goes down to 360p.'
@@ -1431,10 +1434,10 @@ definitions:
             - description: Context Adaptive Variable Length Coder (CAVLC) entropy encoding.
               value: Cavlc
       level:
-        description: 'Which level of the H.264 standard should be used when encoding this layer. The value can be Auto, or a number that matches the H.264 profile. If not specified, the default is Auto, which lets the encoder choose the Level that is appropriate for this layer.'
+        description: 'We currently support Level up to 6.2. The value can be Auto, or a number that matches the H.264 profile. If not specified, the default is Auto, which lets the encoder choose the Level that is appropriate for this layer.'
         type: string
       profile:
-        description: Which profile of the H.264 standard should be used when encoding this layer. Default is Auto.
+        description: 'We currently support Baseline, Main, High, High422, High444. Default is Auto.'
         enum:
           - Auto
           - Baseline

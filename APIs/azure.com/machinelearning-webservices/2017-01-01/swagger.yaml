@@ -430,7 +430,7 @@ paths:
           name: patchPayload
           required: true
           schema:
-            $ref: '#/definitions/WebService'
+            $ref: '#/definitions/PatchedWebService'
         - $ref: '#/parameters/APIVersionParameter'
         - $ref: '#/parameters/SubscriptionIdParameter'
       responses:
@@ -1483,6 +1483,40 @@ definitions:
         items:
           $ref: '#/definitions/WebService'
         type: array
+    type: object
+  PatchedResource:
+    description: Azure resource.
+    properties:
+      id:
+        description: Specifies the resource ID.
+        readOnly: true
+        type: string
+      location:
+        description: Specifies the location of the resource.
+        readOnly: true
+        type: string
+      name:
+        description: Specifies the name of the resource.
+        readOnly: true
+        type: string
+      tags:
+        additionalProperties:
+          type: string
+        description: Contains resource tags defined as key/value pairs.
+        type: object
+      type:
+        description: Specifies the type of the resource.
+        readOnly: true
+        type: string
+    x-ms-azure-resource: true
+  PatchedWebService:
+    allOf:
+      - $ref: '#/definitions/PatchedResource'
+    description: Instance of an Patched Azure ML web service resource.
+    properties:
+      properties:
+        $ref: '#/definitions/WebServiceProperties'
+        description: Contains the property payload that describes the web service.
     type: object
   RealtimeConfiguration:
     description: Holds the available configuration options for an Azure ML web service endpoint.

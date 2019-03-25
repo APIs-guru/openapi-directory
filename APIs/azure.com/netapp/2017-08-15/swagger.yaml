@@ -133,7 +133,7 @@ paths:
         Accounts_List:
           parameters:
             api-version: '2017-08-15'
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '200':
@@ -167,7 +167,7 @@ paths:
           parameters:
             accountName: accountName
             api-version: '2017-08-15'
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '202': {}
@@ -192,7 +192,7 @@ paths:
           parameters:
             accountName: accountName
             api-version: '2017-08-15'
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '200':
@@ -232,14 +232,14 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             body: {}
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '200':
               body:
                 location: eastus
                 properties:
-                  provisioningState: Created
+                  provisioningState: Succeeded
     put:
       description: Create or update a NetApp account
       operationId: Accounts_CreateOrUpdate
@@ -251,6 +251,10 @@ paths:
           schema:
             $ref: '#/definitions/netAppAccount'
       responses:
+        '200':
+          description: OK - account updated
+          schema:
+            $ref: '#/definitions/netAppAccount'
         '201':
           description: Account created
           schema:
@@ -269,14 +273,19 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             body: {}
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
+            '200':
+              body:
+                location: eastus
+                properties:
+                  provisioningState: Succeeded
             '201':
               body:
                 location: eastus
                 properties:
-                  provisioningState: Created
+                  provisioningState: Succeeded
             '202': {}
       x-ms-long-running-operation: true
   '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools':
@@ -299,7 +308,7 @@ paths:
           parameters:
             accountName: accountName
             api-version: '2017-08-15'
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '200':
@@ -338,7 +347,7 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '202': {}
@@ -364,7 +373,7 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '200':
@@ -409,7 +418,7 @@ paths:
             api-version: '2017-08-15'
             body: {}
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '200':
@@ -454,7 +463,7 @@ paths:
             api-version: '2017-08-15'
             body: {}
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '200':
@@ -496,7 +505,7 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
           responses:
             '200':
@@ -538,7 +547,7 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
             volumeName: volumeName
           responses:
@@ -565,7 +574,7 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
             volumeName: volumeName
           responses:
@@ -614,7 +623,7 @@ paths:
             api-version: '2017-08-15'
             body: {}
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
             volumeName: volumeName
           responses:
@@ -661,7 +670,7 @@ paths:
             api-version: '2017-08-15'
             body: {}
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
             volumeName: volumeName
           responses:
@@ -708,7 +717,7 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
             volumeName: volumeName
           responses:
@@ -724,8 +733,9 @@ paths:
                       mountTargetId: 9760acf5-4638-11e7-9bdb-020073ca3333
                       netmask: 255.255.255.0
                       provisioningState: Created
+                      smbServerFqdn: fullyqualified.domainname.com
                       startIp: 1.2.3.4
-                      vlanId: 1337
+                      subnet: 1.2.3.4
       x-ms-pageable: {}
     parameters:
       - $ref: '#/parameters/SubscriptionId'
@@ -755,7 +765,7 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             subscriptionId: subscriptionId
             volumeName: volumeName
           responses:
@@ -781,6 +791,8 @@ paths:
       description: Delete snapshot
       operationId: Snapshots_Delete
       responses:
+        '200':
+          description: OK
         '202':
           description: Accepted -- Create or update request accepted; operation will complete asynchronously
         '204':
@@ -797,11 +809,12 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             snapshotName: snapshotName
             subscriptionId: subscriptionId
             volumeName: volumeName
           responses:
+            '200': {}
             '202': {}
             '204': {}
       x-ms-long-running-operation: true
@@ -825,7 +838,7 @@ paths:
             accountName: accountName
             api-version: '2017-08-15'
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             snapshotName: snapshotName
             subscriptionId: subscriptionId
             volumeName: volumeName
@@ -874,7 +887,7 @@ paths:
             api-version: '2017-08-15'
             body: {}
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             snapshotName: snapshotName
             subscriptionId: subscriptionId
             volumeName: volumeName
@@ -917,7 +930,7 @@ paths:
             api-version: '2017-08-15'
             body: {}
             poolName: poolName
-            resourceGroup: resourceGroup
+            resourceGroupName: resourceGroup
             snapshotName: snapshotName
             subscriptionId: subscriptionId
             volumeName: volumeName
@@ -1028,9 +1041,42 @@ definitions:
   accountProperties:
     description: NetApp account properties
     properties:
+      activeDirectories:
+        description: Active Directories
+        items:
+          $ref: '#/definitions/activeDirectory'
+        type: array
       provisioningState:
         description: Azure lifecycle management
         readOnly: true
+        type: string
+    type: object
+  activeDirectory:
+    description: Active Directory
+    properties:
+      activeDirectoryId:
+        description: Id of the Active Directory
+        type: string
+      dNS:
+        description: Comma separated list of DNS server IP addresses for the Active Directory domain
+        type: string
+      domain:
+        description: Name of the Active Directory domain
+        type: string
+      organizationalUnit:
+        description: The Organizational Unit (OU) within the Windows Active Directory
+        type: string
+      password:
+        description: Plain text password of Active Directory domain administrator
+        type: string
+      sMBServerName:
+        description: NetBIOS name of the SMB server. This name will be registered as a computer account in the AD and used to mount volumes
+        type: string
+      status:
+        description: Status of the Active Directory
+        type: string
+      username:
+        description: Username of Active Directory domain administrator
         type: string
     type: object
   capacityPool:
@@ -1078,9 +1124,28 @@ definitions:
   capacityPoolPatch:
     description: Capacity pool patch resource
     properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/poolPatchProperties'
+        description: Capacity pool properties
+        x-ms-client-flatten: true
       tags:
         $ref: '#/definitions/resourceTags'
         description: Resource tags
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
     type: object
     x-ms-azure-resource: true
   error:
@@ -1097,6 +1162,31 @@ definitions:
     required:
       - code
       - message
+    type: object
+  exportPolicyRule:
+    description: Volume Export Policy Rule
+    properties:
+      allowedClients:
+        description: 'Client ingress specification as comma separated string with IPv4 CIDRs, IPv4 host addresses and host names'
+        type: string
+      cifs:
+        description: Allows CIFS protocol
+        type: boolean
+      nfsv3:
+        description: Allows NFSv3 protocol
+        type: boolean
+      nfsv4:
+        description: Allows NFSv4 protocol
+        type: boolean
+      ruleIndex:
+        description: Order index
+        type: integer
+      unixReadOnly:
+        description: Read only access
+        type: boolean
+      unixReadWrite:
+        description: Read and write access
+        type: boolean
     type: object
   mountTarget:
     description: Mount Target
@@ -1139,7 +1229,7 @@ definitions:
       endIp:
         description: The end of IPv4 address range to use when creating a new mount target
         example: 1.2.3.4
-        title: startIp
+        title: endIp
         type: string
       fileSystemId:
         description: UUID v4 used to identify the MountTarget
@@ -1178,16 +1268,21 @@ definitions:
         description: Azure lifecycle management
         readOnly: true
         type: string
+      smbServerFqdn:
+        description: 'The SMB server''s Fully Qualified Domain Name, FQDN'
+        example: fullyqualified.domainname.com
+        title: smbServerFQDN
+        type: string
       startIp:
         description: The start of IPv4 address range to use when creating a new mount target
         example: 1.2.3.4
         title: startIp
         type: string
-      vlanId:
-        description: Vlan Id
-        example: 1337
-        title: vlanid
-        type: integer
+      subnet:
+        description: The subnet
+        example: 1.2.3.4
+        title: subnet
+        type: string
     required:
       - fileSystemId
     type: object
@@ -1236,11 +1331,62 @@ definitions:
   netAppAccountPatch:
     description: NetApp account patch resource
     properties:
+      id:
+        description: Resource Id
+        readOnly: true
+        type: string
+      location:
+        description: Resource location
+        type: string
+      name:
+        description: Resource name
+        readOnly: true
+        type: string
+      properties:
+        $ref: '#/definitions/accountProperties'
+        description: NetApp Account properties
+        x-ms-client-flatten: true
       tags:
         $ref: '#/definitions/resourceTags'
         description: Resource tags
+      type:
+        description: Resource type
+        readOnly: true
+        type: string
     type: object
     x-ms-azure-resource: true
+  poolPatchProperties:
+    description: Patchable pool properties
+    properties:
+      serviceLevel:
+        default: Premium
+        description: The service level of the file system
+        enum:
+          - Standard
+          - Premium
+          - Ultra
+        example: Ultra
+        title: serviceLevel
+        type: string
+        x-ms-enum:
+          modelAsString: true
+          name: ServiceLevel
+          values:
+            - description: Standard service level
+              value: Standard
+            - description: Premium service level
+              value: Premium
+            - description: Ultra service level
+              value: Ultra
+      size:
+        default: 4398046511104
+        description: Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).
+        format: int64
+        maximum: 549755813888000
+        minimum: 4398046511104
+        title: size
+        type: integer
+    type: object
   poolProperties:
     description: Pool properties
     properties:
@@ -1263,8 +1409,8 @@ definitions:
         enum:
           - Standard
           - Premium
-          - Extreme
-        example: Extreme
+          - Ultra
+        example: Ultra
         title: serviceLevel
         type: string
         x-ms-enum:
@@ -1275,8 +1421,8 @@ definitions:
               value: Standard
             - description: Premium service level
               value: Premium
-            - description: Extreme service level
-              value: Extreme
+            - description: Ultra service level
+              value: Ultra
       size:
         default: 4398046511104
         description: Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).
@@ -1447,14 +1593,21 @@ definitions:
   volumePatchProperties:
     description: Patchable volume properties
     properties:
+      exportPolicy:
+        description: Export policy rule
+        properties:
+          rules:
+            items:
+              $ref: '#/definitions/exportPolicyRule'
+            type: array
       serviceLevel:
         default: Premium
         description: The service level of the file system
         enum:
           - Standard
           - Premium
-          - Extreme
-        example: Extreme
+          - Ultra
+        example: Ultra
         title: serviceLevel
         type: string
         x-ms-enum:
@@ -1465,8 +1618,8 @@ definitions:
               value: Standard
             - description: Premium service level
               value: Premium
-            - description: Extreme service level
-              value: Extreme
+            - description: Ultra service level
+              value: Ultra
       usageThreshold:
         default: 107374182400
         description: Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB.
@@ -1487,6 +1640,13 @@ definitions:
         minimum: 16
         title: Creation Token or File Path
         type: string
+      exportPolicy:
+        description: Export policy rule
+        properties:
+          rules:
+            items:
+              $ref: '#/definitions/exportPolicyRule'
+            type: array
       fileSystemId:
         description: Unique FileSystem Identifier.
         example: 9760acf5-4638-11e7-9bdb-020073ca7778
@@ -1506,8 +1666,8 @@ definitions:
         enum:
           - Standard
           - Premium
-          - Extreme
-        example: Extreme
+          - Ultra
+        example: Ultra
         title: serviceLevel
         type: string
         x-ms-enum:
@@ -1518,8 +1678,8 @@ definitions:
               value: Standard
             - description: Premium service level
               value: Premium
-            - description: Extreme service level
-              value: Extreme
+            - description: Ultra service level
+              value: Ultra
       subnetId:
         description: The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes
         type: string

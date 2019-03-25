@@ -2084,6 +2084,9 @@ definitions:
       mediaType:
         description: The MIME type of the referenced object.
         type: string
+      name:
+        description: The name of the artifact.
+        type: string
       repository:
         description: The repository name.
         type: string
@@ -2096,6 +2099,9 @@ definitions:
         type: string
       url:
         description: The direct URL to the content.
+        type: string
+      version:
+        description: The version of the artifact.
         type: string
     type: object
   TrustPolicy:

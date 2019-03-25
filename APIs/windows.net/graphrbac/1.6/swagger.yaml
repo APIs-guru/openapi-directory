@@ -1140,6 +1140,29 @@ paths:
             $ref: '#/definitions/GraphError'
       tags:
         - ServicePrincipalPasswordCredentials
+  '/{tenantID}/servicePrincipalsByAppId/{applicationID}/objectId':
+    get:
+      description: Gets an object id for a given application id from the current tenant.
+      operationId: Applications_GetServicePrincipalsIdByAppId
+      parameters:
+        - $ref: '#/parameters/ApiVersionParameter'
+        - $ref: '#/parameters/tenantIDInPath'
+        - description: The application ID.
+          in: path
+          name: applicationID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK. The operation was successful.
+          schema:
+            $ref: '#/definitions/ServicePrincipalObjectResult'
+        default:
+          description: Error response describing why the operation failed.
+          schema:
+            $ref: '#/definitions/GraphError'
+      tags:
+        - ServicePrincipalsByAppId
   '/{tenantID}/users':
     get:
       description: Gets list of users for the current tenant.
@@ -1395,7 +1418,7 @@ definitions:
         type: array
       informationalUrls:
         $ref: '#/definitions/InformationalUrl'
-        description: urls with more informations of the application.
+        description: URLs with more information about the application.
       isDeviceOnlyAuthSupported:
         description: Specifies whether this application supports device authentication without a user. The default is false.
         type: boolean
@@ -1505,7 +1528,7 @@ definitions:
         type: string
       informationalUrls:
         $ref: '#/definitions/InformationalUrl'
-        description: urls with more informations of the application.
+        description: URLs with more information about the application.
       isDeviceOnlyAuthSupported:
         description: Specifies whether this application supports device authentication without a user. The default is false.
         type: boolean
@@ -1594,7 +1617,6 @@ definitions:
         type: array
     required:
       - displayName
-      - identifierUris
     type: object
   ApplicationListResult:
     description: Application list operation result.
@@ -2283,6 +2305,16 @@ definitions:
         items:
           $ref: '#/definitions/ServicePrincipal'
         type: array
+    type: object
+  ServicePrincipalObjectResult:
+    description: Service Principal Object Result.
+    properties:
+      odata.metadata:
+        description: The URL representing edm equivalent.
+        type: string
+      value:
+        description: The Object ID of the service principal with the specified application ID.
+        type: string
     type: object
   ServicePrincipalUpdateParameters:
     allOf:
