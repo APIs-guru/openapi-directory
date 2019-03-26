@@ -3,7 +3,7 @@ info:
   version: '2018-06-29'
   x-release: v4
   title: AWS RoboMaker
-  description: his section provides documentation for the AWS RoboMaker API operations.
+  description: This section provides documentation for the AWS RoboMaker API operations.
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -184,7 +184,7 @@ paths:
   /createDeploymentJob:
     post:
       operationId: CreateDeploymentJob
-      description: '<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html">Creating a Robot Application Version</a>. </p>'
+      description: '<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>'
       responses:
         '200':
           description: Success
@@ -511,7 +511,7 @@ paths:
   /createSimulationJob:
     post:
       operationId: CreateSimulationJob
-      description: Creates a simulation job.
+      description: '<p>Creates a simulation job.</p> <note> <p>After 90 days, simulation jobs expire and will be deleted. They will no longer be accessible. </p> </note>'
       responses:
         '200':
           description: Success
@@ -995,7 +995,7 @@ paths:
   /listDeploymentJobs:
     post:
       operationId: ListDeploymentJobs
-      description: Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.
+      description: <p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. </p> <note> <p> </p> </note>
       responses:
         '200':
           description: Success
@@ -1023,6 +1023,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListDeploymentJobsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1036,7 +1046,7 @@ paths:
   /listFleets:
     post:
       operationId: ListFleets
-      description: Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.
+      description: 'Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. '
       responses:
         '200':
           description: Success
@@ -1064,6 +1074,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListFleetsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1101,6 +1121,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListRobotApplicationsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1142,6 +1172,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListRobotsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1155,7 +1195,7 @@ paths:
   /listSimulationApplications:
     post:
       operationId: ListSimulationApplications
-      description: Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.
+      description: 'Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications. '
       responses:
         '200':
           description: Success
@@ -1179,6 +1219,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListSimulationApplicationsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1192,7 +1242,7 @@ paths:
   /listSimulationJobs:
     post:
       operationId: ListSimulationJobs
-      description: Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.
+      description: 'Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs. '
       responses:
         '200':
           description: Success
@@ -1216,6 +1266,16 @@ paths:
           required: true
           schema:
             $ref: '#/definitions/ListSimulationJobsRequest'
+        - name: maxResults
+          type: string
+          in: query
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          type: string
+          in: query
+          description: Pagination token
+          required: false
     parameters:
       - $ref: '#/parameters/Action'
       - $ref: '#/parameters/Version'
@@ -1307,7 +1367,7 @@ paths:
           required: true
     delete:
       operationId: UntagResource
-      description: '<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href="https://docs.aws.amazon.com/robomaker/latest/dg//API_Reference.htmlAPI_TagResource.html"> <code>TagResource</code> </a>. </p>'
+      description: '<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href="https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html"> <code>TagResource</code> </a>. </p>'
       responses:
         '200':
           description: Success
@@ -1935,7 +1995,7 @@ definitions:
         description: Simulation job output files location.
       maxJobDurationInSeconds:
         $ref: '#/definitions/JobDuration'
-        description: 'The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less. '
+        description: 'The maximum simulation job duration in seconds. '
       simulationTimeMillis:
         $ref: '#/definitions/SimulationTimeMillis'
         description: The simulation job execution duration in milliseconds.
@@ -2330,7 +2390,7 @@ definitions:
     properties:
       filters:
         $ref: '#/definitions/Filters'
-        description: Optional filters to limit results.
+        description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>'
       nextToken:
         $ref: '#/definitions/PaginationToken'
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
@@ -2357,7 +2417,7 @@ definitions:
         description: 'The maximum number of deployment job results returned by <code>ListFleets</code> in paginated output. When this parameter is used, <code>ListFleets</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListFleets</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
-        description: Optional filters to limit results.
+        description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
   ListRobotApplicationsResponse:
     type: object
     properties:
@@ -2378,10 +2438,10 @@ definitions:
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
-        description: Optional filters to limit results.
+        description: '<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
   ListRobotsResponse:
     type: object
     properties:
@@ -2399,10 +2459,10 @@ definitions:
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListRobots</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
-        description: Optional filters to limit results.
+        description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>'
   ListSimulationApplicationsResponse:
     type: object
     properties:
@@ -2423,10 +2483,10 @@ definitions:
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
-        description: Optional list of filters to limit results. The only valid filter name is <code>name</code>.
+        description: '<p>Optional list of filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>'
   ListSimulationJobsResponse:
     type: object
     required:
@@ -2446,10 +2506,10 @@ definitions:
         description: <p>The <code>nextToken</code> value returned from a previous paginated <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. </p> <note> <p>This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes.</p> </note>
       maxResults:
         $ref: '#/definitions/MaxResults'
-        description: 'The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
+        description: 'The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. '
       filters:
         $ref: '#/definitions/Filters'
-        description: Optional filters to limit results.
+        description: '<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and <code>robotApplicationName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Preparing</code> or the status <code>Running</code>.</p>'
   ListTagsForResourceResponse:
     type: object
     properties:
@@ -2675,6 +2735,11 @@ definitions:
     pattern: '[a-zA-Z0-9_\-=]*'
     minLength: 1
     maxLength: 64
+  Command:
+    type: string
+    pattern: '[a-zA-Z0-9_.\-]*'
+    minLength: 1
+    maxLength: 1024
   DeploymentConfig:
     type: object
     properties:
@@ -2716,8 +2781,11 @@ definitions:
     type: string
     enum:
       - ResourceNotFound
+      - EnvironmentSetupError
+      - EtagMismatch
       - FailureThresholdBreached
       - RobotDeploymentNoResponse
+      - RobotAgentConnectionTimeout
       - GreengrassDeploymentFailed
       - MissingRobotArchitecture
       - MissingRobotApplicationArchitecture
@@ -2903,16 +2971,16 @@ definitions:
       - launchFile
     properties:
       packageName:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/Command'
         description: The package name.
       preLaunchFile:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/Path'
         description: The deployment pre-launch file. This file will be executed prior to the launch file.
       launchFile:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/Command'
         description: The launch file name.
       postLaunchFile:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/Path'
         description: The deployment post-launch file. This file will be executed after the launch file.
       environmentVariables:
         $ref: '#/definitions/EnvironmentVariableMap'
@@ -2973,6 +3041,10 @@ definitions:
       $ref: '#/definitions/DeploymentJob'
     minItems: 0
     maxItems: 200
+  Path:
+    type: string
+    minLength: 1
+    maxLength: 1024
   EnvironmentVariableMap:
     type: array
     minItems: 0
@@ -3063,6 +3135,8 @@ definitions:
       $ref: '#/definitions/Fleet'
     minItems: 0
     maxItems: 200
+  GenericInteger:
+    type: integer
   LaunchConfig:
     type: object
     required:
@@ -3070,10 +3144,10 @@ definitions:
       - launchFile
     properties:
       packageName:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/Command'
         description: The package name.
       launchFile:
-        $ref: '#/definitions/GenericString'
+        $ref: '#/definitions/Command'
         description: The launch file name.
       environmentVariables:
         $ref: '#/definitions/EnvironmentVariableMap'
@@ -3117,12 +3191,32 @@ definitions:
     pattern: .*
     minLength: 1
     maxLength: 1024
+  PercentDone:
+    type: number
+    format: float
+    minimum: 0
+    maximum: 100
+  RobotDeploymentStep:
+    type: string
+    enum:
+      - Validating
+      - DownloadingExtracting
+      - ExecutingPreLaunch
+      - Launching
+      - ExecutingPostLaunch
+      - Finished
   ProgressDetail:
     type: object
     properties:
       currentProgress:
-        $ref: '#/definitions/GenericString'
-        description: The current progress status.
+        $ref: '#/definitions/RobotDeploymentStep'
+        description: <p>The current progress status.</p> <dl> <dt>Validating</dt> <dd> <p>Validating the deployment.</p> </dd> <dt>Downloading/Extracting</dt> <dd> <p>Downloading and extracting the bundle on the robot.</p> </dd> <dt>Executing pre-launch script(s)</dt> <dd> <p>Executing pre-launch script(s) if provided.</p> </dd> <dt>Launching</dt> <dd> <p>Launching the robot application.</p> </dd> <dt>Executing post-launch script(s)</dt> <dd> <p>Executing post-launch script(s) if provided.</p> </dd> <dt>Finished</dt> <dd> <p>Deployment is complete.</p> </dd> </dl>
+      percentDone:
+        $ref: '#/definitions/PercentDone'
+        description: Precentage of the step that is done. This currently only applies to the <code>Downloading/Extracting</code> step of the deployment. It is empty for other steps.
+      estimatedTimeRemainingSeconds:
+        $ref: '#/definitions/GenericInteger'
+        description: Estimated amount of time in seconds remaining in the step. This currently only applies to the <code>Downloading/Extracting</code> step of the deployment. It is empty for other steps.
       targetResource:
         $ref: '#/definitions/GenericString'
         description: The Amazon Resource Name (ARN) of the deployment job.
@@ -3362,7 +3456,7 @@ definitions:
       - Gazebo
   SimulationSoftwareSuiteVersionType:
     type: string
-    pattern: '7'
+    pattern: 7|9
   Source:
     type: object
     properties:

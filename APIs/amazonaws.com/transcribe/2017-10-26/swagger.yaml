@@ -500,7 +500,6 @@ definitions:
     required:
       - VocabularyName
       - LanguageCode
-      - Phrases
     properties:
       VocabularyName:
         $ref: '#/definitions/VocabularyName'
@@ -511,6 +510,9 @@ definitions:
       Phrases:
         $ref: '#/definitions/Phrases'
         description: 'An array of strings that contains the vocabulary entries. '
+      VocabularyFileUri:
+        $ref: '#/definitions/Uri'
+        description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p> <code> https://s3-&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt</code> </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom Vocabularies</a>.</p>'
   BadRequestException: {}
   LimitExceededException: {}
   InternalFailureException: {}
@@ -684,7 +686,6 @@ definitions:
     required:
       - VocabularyName
       - LanguageCode
-      - Phrases
     properties:
       VocabularyName:
         $ref: '#/definitions/VocabularyName'
@@ -695,6 +696,9 @@ definitions:
       Phrases:
         $ref: '#/definitions/Phrases'
         description: An array of strings containing the vocabulary entries.
+      VocabularyFileUri:
+        $ref: '#/definitions/Uri'
+        description: '<p>The S3 location of the text file that contains the definition of the custom vocabulary. The URI must be in the same region as the API endpoint that you are calling. The general form is </p> <p> <code> https://s3-&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-east-1.amazonaws.com/examplebucket/vocab.txt</code> </p> <p>For more information about S3 object names, see <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p> <p>For more information about custom vocabularies, see <a href="http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary">Custom Vocabularies</a>.</p>'
   Boolean:
     type: boolean
   VocabularyName:
@@ -719,6 +723,10 @@ definitions:
     type: array
     items:
       $ref: '#/definitions/Phrase'
+  Uri:
+    type: string
+    minLength: 1
+    maxLength: 2000
   VocabularyState:
     type: string
     enum:
@@ -772,10 +780,6 @@ definitions:
         $ref: '#/definitions/Settings'
         description: 'Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.'
     description: 'Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. '
-  Uri:
-    type: string
-    minLength: 1
-    maxLength: 2000
   TranscriptionJobStatus:
     type: string
     enum:

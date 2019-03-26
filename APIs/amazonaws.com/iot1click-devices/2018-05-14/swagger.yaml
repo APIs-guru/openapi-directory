@@ -35,6 +35,7 @@ externalDocs:
   url: 'https://docs.aws.amazon.com/iot1click/'
 host: devices.iot1click.amazonaws.com
 basePath: /
+x-hasEquivalentPaths: true
 schemes:
   - https
   - http
@@ -459,6 +460,99 @@ paths:
       - $ref: '#/parameters/X-Amz-Security-Token'
       - $ref: '#/parameters/X-Amz-Signature'
       - $ref: '#/parameters/X-Amz-SignedHeaders'
+  '/tags/{resource-arn}':
+    get:
+      operationId: ListTagsForResource
+      description: List all tags on an AWS IoT 1-Click resource.
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ListTagsForResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
+    parameters:
+      - $ref: '#/parameters/Action'
+      - $ref: '#/parameters/Version'
+      - $ref: '#/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/parameters/X-Amz-Date'
+      - $ref: '#/parameters/X-Amz-Algorithm'
+      - $ref: '#/parameters/X-Amz-Credential'
+      - $ref: '#/parameters/X-Amz-Security-Token'
+      - $ref: '#/parameters/X-Amz-Signature'
+      - $ref: '#/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Associate a set of tags with an AWS IoT 1-Click resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/TagResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
+    delete:
+      operationId: UntagResource
+      description: Removes the association of tags from an AWS IoT 1-Click resource.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          schema:
+            $ref: '#/definitions/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          schema:
+            $ref: '#/definitions/InvalidRequestException'
+        '482':
+          description: InternalFailureException
+          schema:
+            $ref: '#/definitions/InternalFailureException'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/UntagResourceRequest'
+        - name: resource-arn
+          type: string
+          in: path
+          required: true
   '/devices/{deviceId}/unclaim':
     put:
       operationId: UnclaimDevice
@@ -558,33 +652,9 @@ definitions:
   ClaimDevicesByClaimCodeRequest:
     type: object
     properties: {}
-  InvalidRequestException:
-    type: object
-    properties:
-      Code:
-        $ref: '#/definitions/__string'
-        description: '400'
-      Message:
-        $ref: '#/definitions/__string'
-        description: The 400 error message returned by the web server.
-  InternalFailureException:
-    type: object
-    properties:
-      Code:
-        $ref: '#/definitions/__string'
-        description: '500'
-      Message:
-        $ref: '#/definitions/__string'
-        description: The 500 error message returned by the web server.
-  ForbiddenException:
-    type: object
-    properties:
-      Code:
-        $ref: '#/definitions/__string'
-        description: '403'
-      Message:
-        $ref: '#/definitions/__string'
-        description: The 403 error message returned by the web server.
+  InvalidRequestException: {}
+  InternalFailureException: {}
+  ForbiddenException: {}
   DescribeDeviceResponse:
     type: object
     properties:
@@ -594,15 +664,7 @@ definitions:
   DescribeDeviceRequest:
     type: object
     properties: {}
-  ResourceNotFoundException:
-    type: object
-    properties:
-      Code:
-        $ref: '#/definitions/__string'
-        description: '404'
-      Message:
-        $ref: '#/definitions/__string'
-        description: The requested device could not be found.
+  ResourceNotFoundException: {}
   FinalizeDeviceClaimResponse:
     type: object
     properties:
@@ -611,25 +673,12 @@ definitions:
         description: The device's final claim state.
   FinalizeDeviceClaimRequest:
     type: object
-    properties: {}
-  PreconditionFailedException:
-    type: object
     properties:
-      Code:
-        $ref: '#/definitions/__string'
-        description: '412'
-      Message:
-        $ref: '#/definitions/__string'
-        description: An error message explaining the error or its remedy.
-  ResourceConflictException:
-    type: object
-    properties:
-      Code:
-        $ref: '#/definitions/__string'
-        description: '409'
-      Message:
-        $ref: '#/definitions/__string'
-        description: An error message explaining the error or its remedy.
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags to be assigned to the AWS IoT 1-Click device.
+  PreconditionFailedException: {}
+  ResourceConflictException: {}
   GetDeviceMethodsResponse:
     type: object
     properties:
@@ -663,17 +712,7 @@ definitions:
       DeviceMethodParameters:
         $ref: '#/definitions/__string'
         description: A JSON encoded string containing the device method request parameters.
-  RangeNotSatisfiableException:
-    type: object
-    properties:
-      Code:
-        $ref: '#/definitions/__string'
-        description: '416'
-      Message:
-        $ref: '#/definitions/__string'
-        description: |-
-          The requested number of results specified by nextToken cannot be
-           satisfied.
+  RangeNotSatisfiableException: {}
   ListDeviceEventsResponse:
     type: object
     properties:
@@ -700,6 +739,23 @@ definitions:
   ListDevicesRequest:
     type: object
     properties: {}
+  ListTagsForResourceResponse:
+    type: object
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags currently associated with the AWS IoT 1-Click resource.
+  ListTagsForResourceRequest:
+    type: object
+    properties: {}
+  TagResourceRequest:
+    type: object
+    required:
+      - Tags
+    properties:
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags to be assigned to the AWS IoT 1-Click resource.
   UnclaimDeviceResponse:
     type: object
     properties:
@@ -707,6 +763,9 @@ definitions:
         $ref: '#/definitions/__string'
         description: The device's final claim state.
   UnclaimDeviceRequest:
+    type: object
+    properties: {}
+  UntagResourceRequest:
     type: object
     properties: {}
   UpdateDeviceStateResponse:
@@ -734,6 +793,9 @@ definitions:
   DeviceDescription:
     type: object
     properties:
+      Arn:
+        $ref: '#/definitions/__string'
+        description: The ARN of the device.
       Attributes:
         $ref: '#/definitions/DeviceAttributes'
         description: |-
@@ -753,6 +815,9 @@ definitions:
       Type:
         $ref: '#/definitions/__string'
         description: 'The type of the device, such as "button".'
+      Tags:
+        $ref: '#/definitions/__mapOf__string'
+        description: The tags currently associated with the AWS IoT 1-Click device.
   Device:
     type: object
     properties:
@@ -777,17 +842,20 @@ definitions:
           $ref: '#/definitions/__string'
         value:
           $ref: '#/definitions/__string'
-  DeviceClaimResponse:
-    type: object
-    properties:
-      State:
-        $ref: '#/definitions/__string'
-        description: The device's final claim state.
   __boolean:
     type: boolean
   __doubleMin0Max100:
     type: number
     format: double
+  __mapOf__string:
+    type: array
+    items:
+      type: object
+      properties:
+        key:
+          $ref: '#/definitions/__string'
+        value:
+          $ref: '#/definitions/__string'
   DeviceEvent:
     type: object
     properties:
@@ -797,21 +865,6 @@ definitions:
       StdEvent:
         $ref: '#/definitions/__string'
         description: A serialized JSON object representing the device-type specific event.
-  __listOfDeviceEvent:
-    type: array
-    items:
-      $ref: '#/definitions/DeviceEvent'
-  DeviceEventsResponse:
-    type: object
-    properties:
-      Events:
-        $ref: '#/definitions/__listOfDeviceEvent'
-        description: |-
-          An array of zero or more elements describing the event(s) associated with the
-           device.
-      NextToken:
-        $ref: '#/definitions/__string'
-        description: The token to retrieve the next set of results.
   DeviceMethod:
     type: object
     properties:
@@ -821,10 +874,6 @@ definitions:
       MethodName:
         $ref: '#/definitions/__string'
         description: The name of the method applicable to the deviceType.
-  Empty:
-    type: object
-    properties: {}
-    description: 'On success, an empty object is returned.'
   __listOfDeviceMethod:
     type: array
     items:
@@ -836,15 +885,15 @@ definitions:
     type: integer
     minimum: 1
     maximum: 250
+  __listOfDeviceEvent:
+    type: array
+    items:
+      $ref: '#/definitions/DeviceEvent'
   __listOfDeviceDescription:
     type: array
     items:
       $ref: '#/definitions/DeviceDescription'
-  __double:
-    type: number
-    format: double
-  __long:
-    type: integer
-  __timestampUnix:
-    type: string
-    format: date-time
+  __listOf__string:
+    type: array
+    items:
+      $ref: '#/definitions/__string'
